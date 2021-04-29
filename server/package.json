@@ -1,0 +1,21 @@
+{
+  "name": "server",
+  "version": "0.1.0",
+  "description": "Squeaky Server",
+  "main": "src/server.ts",
+  "repository": "git@github.com:squeaky-ai/squeaky.git",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "ts-node src/server.ts",
+    "build": "tsc",
+    "start": "node build/server.js"
+  },
+  "dependencies": {
+    "apollo-server": "^2.23.0",
+    "graphql": "^15.5.0"
+  },
+  "devDependencies": {
+    "ts-node": "^9.1.1"
+  }
+}
