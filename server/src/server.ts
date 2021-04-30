@@ -1,7 +1,8 @@
-import { ApolloServer } from 'apollo-server';
+import { ApolloServer, Config } from 'apollo-server';
 
 import * as database from './config/database';
 
+import { context } from './context';
 import { typeDefs } from './schema';
 import { resolvers } from './resolvers';
 
@@ -14,10 +15,11 @@ const dataSources = () => ({
 });
 
 // Export this so it can be pulled into the test client
-export const config = { 
+export const config: Config = { 
   typeDefs, 
   resolvers,
   dataSources,
+  context,
 };
 
 const server = new ApolloServer(config);

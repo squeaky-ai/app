@@ -15,9 +15,13 @@ export const typeDefs = gql`
     updatedAt: String
   }
 
-  type AuthenticationResponse {
-    jwt: String
+  type AuthRequestResponse {
     emailSentAt: String
+    validation: String
+  }
+
+  type AuthVerifyResponse {
+    jwt: String
     validation: String
   }
 
@@ -26,7 +30,7 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    authRequest(email: String!, authType: AuthType!): AuthenticationResponse!
-    authVerification(email: String!, token: String!): AuthenticationResponse!
+    authRequest(email: String!, authType: AuthType!): AuthRequestResponse!
+    authVerify(email: String!, token: String!): AuthVerifyResponse!
   }
 `;

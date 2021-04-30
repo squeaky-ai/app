@@ -2,9 +2,10 @@ import Chance from 'chance';
 import { Connection } from 'typeorm';
 import { ApolloServer } from 'apollo-server';
 import { createTestClient } from 'apollo-server-testing';
-import * as database from '../../src/config/database';
 import { config } from '../../src/server';
 import { User } from '../../src/entity/user';
+import { Base } from '../../src/lib/email/base';
+import * as database from '../../src/config/database';
 
 const chance = Chance();
 const server = new ApolloServer(config);
@@ -51,21 +52,17 @@ describe('[mutation] authRequest', () => {
 
   describe('when the auth type is `SIGNUP`', () => {
     describe('and the user does not have an account', () => {
-      it('returns the expected response', async () => {
-        const mockDate = new Date();
+      it('sends the email token and responds with the timestamp', async () => {
+        const mockEmailSend = jest.fn();
 
-        jest
-          .spyOn(global, 'Date')
-          .mockImplementation(() => mockDate as any);
+        Base.prototype.send = mockEmailSend;
 
-        const variables = { email: chance.email(), authType: 'LOGIN' };
+        const variables = { email: 'lewismonteith@gmail.com', authType: 'LOGIN' };
         const res = await mutate({ mutation: MUTATION, variables });
 
-        expect(res.data.authRequest).toEqual({
-          jwt: null,
-          emailSentAt: mockDate.toISOString(),
-          validation: null,
-        });
+        expect(res.data.authRequest.emailSentAt).toBeDefined();
+
+        expect(mockEmailSend).toHaveBeenCalled();
       });
     });
 

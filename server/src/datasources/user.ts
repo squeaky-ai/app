@@ -1,7 +1,17 @@
-import { DataSource } from 'apollo-datasource';
+import { DataSource, DataSourceConfig } from 'apollo-datasource';
+
+declare module 'apollo-datasource' {
+  interface DataSource<TContext = any> {
+    context: TContext
+  }
+}
 
 export class UserAPI extends DataSource {
+  public initialize(config: DataSourceConfig<any>) {
+    this.context = config.context;
+  }
+
   public async get() {
-    return null;
+    return this.context.user;
   }
 }

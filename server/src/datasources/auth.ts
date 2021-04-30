@@ -33,12 +33,12 @@ export class AuthAPI extends DataSource {
 
     const user = await User.findOne({ email });
 
-    if (user && authType === 'LOGIN') {
+    if (user && authType === 'SIGNUP') {
       response.validation = 'User already has an account';
       return response;
     }
 
-    if (!user && authType === 'SIGNUP') {
+    if (!user && authType === 'LOGIN') {
       response.validation = 'User does not have an account';
       return response;
     }
