@@ -11,7 +11,7 @@ export class Jwt {
   public static generate(id: number): string {
     const options: SignOptions = {
       algorithm: 'HS256',
-      expiresIn: '1 month',
+      expiresIn: '30d',
     };
 
     return jwt.sign({ id }, 'TODO', options);

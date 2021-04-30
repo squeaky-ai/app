@@ -1,7 +1,7 @@
 import { DataSource } from 'apollo-datasource';
 import { User } from '../entity/user';
 import { Jwt } from '../lib/auth/jwt'; 
-import { Tokens } from '../lib/auth/token';
+import { Tokens } from '../lib/auth/tokens';
 import { EmailFactory } from '../lib/email/factory';
 import { EmailTypes } from '../lib/email/enums';
 
