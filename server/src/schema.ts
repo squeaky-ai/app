@@ -27,6 +27,6 @@ export const typeDefs = gql`
 
   type Mutation {
     authRequest(email: String!, authType: AuthType!): AuthenticationResponse!
-    authVerification(email: String!, token: String! authType: AuthType!): AuthenticationResponse!
+    authVerification(email: String!, token: String!): AuthenticationResponse!
   }
 `;

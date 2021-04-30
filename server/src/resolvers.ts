@@ -17,8 +17,8 @@ export const resolvers = {
     /**
      * Verify that the one-time-password matches what we have stored
      */
-    authVerification: (_parent: any, { email, token, authType }: any, { dataSources }: any) => {
-      return dataSources.authAPI.verify(email, token, authType);
+    authVerification: (_parent: any, { email, token }: any, { dataSources }: any) => {
+      return dataSources.authAPI.verify(email, token);
     },
   }
 };
