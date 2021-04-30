@@ -9,13 +9,23 @@
   "scripts": {
     "dev": "ts-node src/server.ts",
     "build": "tsc",
-    "start": "node build/server.js"
+    "start": "node build/server.js",
+    "test": "jest"
   },
   "dependencies": {
+    "apollo-datasource": "^0.8.0",
     "apollo-server": "^2.23.0",
-    "graphql": "^15.5.0"
+    "graphql": "^15.5.0",
+    "pg": "^8.6.0",
+    "typeorm": "^0.2.32"
   },
   "devDependencies": {
+    "@types/chance": "^1.1.1",
+    "@types/jest": "^26.0.23",
+    "apollo-server-testing": "^2.23.0",
+    "chance": "^1.1.7",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.5.5",
     "ts-node": "^9.1.1"
   }
 }

@@ -1,14 +1,33 @@
-import fs from 'fs';
 import { ApolloServer } from 'apollo-server';
+
+import * as database from './config/database';
+
+import { typeDefs } from './schema';
 import { resolvers } from './resolvers';
 
-const typeDefs = fs.readFileSync(__dirname + '/schema.graphql').toString();
+import { AuthAPI } from './datasources/auth';
+import { UserAPI } from './datasources/user';
 
-const server = new ApolloServer({ 
+const dataSources = () => ({
+  authAPI: new AuthAPI(),
+  userAPI: new UserAPI(),
+});
+
+// Export this so it can be pulled into the test client
+export const config = { 
   typeDefs, 
   resolvers,
-});
+  dataSources,
+};
 
-server.listen().then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`);
-});
+const server = new ApolloServer(config);
+
+// Only start the server when it is not under test, otherwise 
+// Jest will need to start/stop the server for every test
+if (process.env.NODE_ENV !== 'test') {
+  server.listen().then(async ({ url }) => {
+    await database.init();
+
+    console.log(`🚀  Server ready at ${url}`);
+  });
+}
