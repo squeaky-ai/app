@@ -1,16 +1,13 @@
 import path from 'path';
 import { Connection, createConnection } from 'typeorm';
+import { config } from './config';
 
 const ENTITY_PATH = path.join(__dirname, '..', 'entity');
 
 export async function init(): Promise<Connection> {
   return createConnection({
     type: 'postgres',
-    host: 'localhost',
-    port: 5432,
-    username: 'squeaky',
-    password: 'squeaky',
-    database: 'squeaky',
+    url: config.DATABASE_URL,
     synchronize: true,
     entities: [`${ENTITY_PATH}/*`],
   });

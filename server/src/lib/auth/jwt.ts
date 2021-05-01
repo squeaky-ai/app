@@ -1,4 +1,5 @@
 import jwt, { SignOptions } from 'jsonwebtoken';
+import { config } from '../../config/config';
 
 interface Token {
   id: number;
@@ -20,7 +21,7 @@ export class Jwt {
 
     const token: Token = { id };
 
-    return jwt.sign(token, 'TODO', options);
+    return jwt.sign(token, config.SECRET_KEY_BASE, options);
   }
 
   /**
@@ -32,7 +33,7 @@ export class Jwt {
    */
   public static verify(value: string): number | null {
     try {
-      const token = jwt.verify(value, 'TODO') as Token;
+      const token = jwt.verify(value, config.SECRET_KEY_BASE) as Token;
       return token.id;
     } catch {
       return null;
