@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Site < ApplicationRecord
-  validates_uniqueness_of :url
+  validates :url, uniqueness: { message: 'This site is already registered' }
 
   has_many :memberships
   has_many :users, through: :memberships

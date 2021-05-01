@@ -10,8 +10,16 @@ module Types
       description 'Get the user from the Bearer token'
     end
 
+    field :sites, [SiteType], null: false do
+      description 'Get a list of sites for the user'
+    end
+
     def user
       context[:current_user]
+    end
+
+    def sites
+      context[:current_user].sites
     end
   end
 end
