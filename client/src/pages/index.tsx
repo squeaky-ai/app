@@ -1,5 +1,11 @@
+import { NextPage } from 'next';
 import React from 'react';
+import styled from 'styled-components';
 
-export default function Home(): JSX.Element {
-  return <h1>Hello world</h1>;
-}
+const Home: NextPage = () => {
+  const TestStyledComponent = styled.h1``;
+
+  return <TestStyledComponent>Hello World!</TestStyledComponent>;
+};
+
+export default Home;
