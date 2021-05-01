@@ -9,7 +9,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "yarn lint:ts && yarn lint:es",
+    "lint:es": "yarn eslint . --fix",
+    "lint:ts": "tsc --noEmit"
   },
   "dependencies": {
     "next": "^10.2.0",
@@ -18,6 +21,18 @@
   },
   "devDependencies": {
     "@types/react": "^17.0.4",
+    "@typescript-eslint/eslint-plugin": "^4.1.0",
+    "@typescript-eslint/parser": "^4.1.0",
+    "eslint": "^7.7.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-import-resolver-typescript": "^2.3.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-react-hooks": "^4.1.2",
+    "eslint-plugin-unused-imports": "^1.1.0",
+    "prettier": "^2.2.1",
     "typescript": "^4.2.4"
   }
 }

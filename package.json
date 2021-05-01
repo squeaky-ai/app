@@ -1,4 +1,10 @@
 {
   "private": true,
-  "workspaces": ["client"]
+  "workspaces": [
+    "client"
+  ],
+  "scripts": {
+    "dev": "yarn workspace client dev",
+    "lint": "yarn workspace client lint"
+  }
 }
