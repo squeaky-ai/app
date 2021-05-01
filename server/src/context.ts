@@ -2,11 +2,22 @@ import { Request } from 'express';
 import { Jwt } from './lib/auth/jwt';
 import { User } from './entity/user';
 
-interface Context {
+import { AuthAPI } from './datasources/auth';
+import { UserAPI } from './datasources/user';
+
+interface RequestContext {
   req: Request;
 }
 
-export const context = async ({ req }: Context) => {
+export interface Context {
+  user: User | null;
+  dataSources: {
+    authAPI: AuthAPI,
+    userAPI: UserAPI,
+  }
+}
+
+export const context = async ({ req }: RequestContext) => {
   const { operationName } = req.body;
   // This occurs in the playground as it polls for
   // the schema, there is nothing here to auth

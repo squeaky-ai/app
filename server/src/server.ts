@@ -1,25 +1,32 @@
-import { ApolloServer, Config } from 'apollo-server';
+import { ApolloServer, Config, IResolvers } from 'apollo-server';
 
 import * as database from './config/database';
 
 import { context } from './context';
 import { typeDefs } from './schema';
-import { resolvers } from './resolvers';
 
 import { AuthAPI } from './datasources/auth';
 import { UserAPI } from './datasources/user';
+
+import { authResolvers } from './resolvers/auth';
+import { userResolvers } from './resolvers/user';
 
 const dataSources = () => ({
   authAPI: new AuthAPI(),
   userAPI: new UserAPI(),
 });
 
+const resolvers: IResolvers[] = [
+  authResolvers, 
+  userResolvers,
+];
+
 // Export this so it can be pulled into the test client
 export const config: Config = { 
-  typeDefs, 
-  resolvers,
   dataSources,
   context,
+  resolvers,
+  typeDefs,
 };
 
 const server = new ApolloServer(config);
