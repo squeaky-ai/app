@@ -24,7 +24,7 @@ module Mutations
     end
 
     def ready?(_args)
-      raise GraphQL::ExecutionError, 'Unauthorized' unless context[:current_user]
+      raise Errors::Unauthorized unless context[:current_user]
 
       true
     end
@@ -33,9 +33,9 @@ module Mutations
 
     def uri(url)
       uri = URI(url)
-      # This is quite important! The last thing we want 
+      # This is quite important! The last thing we want
       # is nil://nil being in there and being unique!
-      raise GraphQL::ExecutionError, 'Invalid URI' unless uri.scheme && uri.host
+      raise Errors::SiteInvalidUri unless uri.scheme && uri.host
 
       "#{uri.scheme}://#{uri.host.downcase}"
     end

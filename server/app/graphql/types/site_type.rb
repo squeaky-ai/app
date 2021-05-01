@@ -9,6 +9,8 @@ module Types
     field :url, String, null: false
     field :avatar, String, null: true
     field :plan, Integer, null: false
+    field :uuid, String, null: false
+    field :verified_at, String, null: true
     field :memberships, [MembershipType], null: false
     field :created_at, String, null: false
     field :updated_at, String, null: true

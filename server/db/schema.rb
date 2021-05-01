@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 2021_05_01_133535) do
     t.string "name"
     t.string "url"
     t.string "avatar"
+    t.string "uuid", null: false
     t.integer "plan", null: false
     t.datetime "verified_at"
     t.datetime "created_at", precision: 6, null: false

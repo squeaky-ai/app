@@ -7,4 +7,8 @@ class User < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}".strip
   end
+
+  def admin_for?(site)
+    site.admins.find { |a| a.user.id == id }
+  end
 end

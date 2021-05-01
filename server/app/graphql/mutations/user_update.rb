@@ -17,7 +17,7 @@ module Mutations
     end
 
     def ready?(_args)
-      raise GraphQL::ExecutionError, 'Unauthorized' unless context[:current_user]
+      raise Errors::Unauthorized unless context[:current_user]
 
       true
     end

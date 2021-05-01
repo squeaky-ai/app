@@ -9,23 +9,19 @@ module Mutations
     argument :email, String, required: true
     argument :auth_type, Types::AuthType, required: true
 
-    field :email_sent_at, String, null: true
-    field :validation_message, String, null: true
+    field :email_sent_at, String, null: false
 
     def resolve(email:, auth_type:)
       user = User.find_by(email: email)
 
-      return { validation_message: 'User already has an account' } if user && auth_type == 'SIGNUP'
+      raise Errors::UserAccountExists if user && auth_type == 'SIGNUP'
 
-      return { validation_message: 'User does not have an account' } if !user && auth_type == 'LOGIN'
+      raise Errors::UserAccountNotExists if !user && auth_type == 'LOGIN'
 
       one_time_password = OneTimePassword.new(email).create!
       send_mail!(auth_type, email, one_time_password)
 
-      {
-        email_sent_at: DateTime.now.iso8601,
-        validation_message: nil
-      }
+      { email_sent_at: DateTime.now.iso8601 }
     end
 
     private
