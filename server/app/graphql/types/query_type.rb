@@ -11,7 +11,7 @@ module Types
     end
 
     def user
-      nil
+      context[:current_user]
     end
   end
 end
