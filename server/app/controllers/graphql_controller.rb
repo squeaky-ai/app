@@ -56,7 +56,12 @@ class GraphqlController < ApplicationController
 
     return unless bearer
 
-    token = JsonWebToken.decode(bearer)
-    User.find(token[:id])
+    begin
+      token = JsonWebToken.decode(bearer)
+      User.find(token[:id])
+    rescue StandardError => e
+      logger.error e
+      nil
+    end
   end
 end

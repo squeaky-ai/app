@@ -30,9 +30,10 @@ class Mutations::AuthRequest < Mutations::BaseMutation
   private
 
   def send_mail!(auth_type, email, token)
-    if auth_type == 'SIGNUP'
+    case auth_type
+    when 'LOGIN'
       AuthTokenMailer.login(email, token).deliver_now
-    else
+    when 'SIGNUP'
       AuthTokenMailer.signup(email, token).deliver_now
     end
   end
