@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'uri'
 require 'securerandom'
 
 class Site < ApplicationRecord
@@ -18,5 +19,12 @@ class Site < ApplicationRecord
 
   def admins
     memberships.filter { |m| m.role < 2 }
+  end
+
+  def self.format_uri(url)
+    uri = URI(url)
+    return nil unless uri.scheme && uri.host
+
+    "#{uri.scheme}://#{uri.host.downcase}"
   end
 end
