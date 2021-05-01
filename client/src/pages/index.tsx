@@ -1,7 +1,7 @@
+import { NextPage } from 'next';
 import React from 'react';
+import Heading from 'components/Heading';
 
-export default function Home(): JSX.Element {
-  return (
-    <h1>Hello world</h1>
-  );
-}
+const Home: NextPage = () => <Heading>Hello World!</Heading>;
+
+export default Home;

@@ -1,0 +1,6 @@
+*.config.js
+next-env.d.ts
+server
+node_modules
+lib
+out
