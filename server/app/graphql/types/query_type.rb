@@ -14,7 +14,7 @@ module Types
       argument :id, ID, required: true
     end
 
-    field :sites, [SiteType], null: false do
+    field :sites, [SiteType, { null: true }], null: false do
       description 'Get a list of sites for the user'
     end
 
