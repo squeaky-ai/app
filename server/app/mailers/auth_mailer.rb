@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AuthTokenMailer < ApplicationMailer
+class AuthMailer < ApplicationMailer
   def login(email, token)
     @token = token
     mail(to: email, subject: 'Log in to Squeaky.ai')

@@ -15,7 +15,6 @@ module Mutations
       user = User.find_by(email: email)
 
       raise Errors::UserAccountExists if user && auth_type == 'SIGNUP'
-
       raise Errors::UserAccountNotExists if !user && auth_type == 'LOGIN'
 
       one_time_password = OneTimePassword.new(email).create!
@@ -29,9 +28,9 @@ module Mutations
     def send_mail!(auth_type, email, token)
       case auth_type
       when 'LOGIN'
-        AuthTokenMailer.login(email, token).deliver_now
+        AuthMailer.login(email, token).deliver_now
       when 'SIGNUP'
-        AuthTokenMailer.signup(email, token).deliver_now
+        AuthMailer.signup(email, token).deliver_now
       end
     end
   end

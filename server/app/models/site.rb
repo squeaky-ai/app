@@ -10,15 +10,15 @@ class Site < ApplicationRecord
   # that will be used publicly
   attribute :uuid, :string, default: -> { SecureRandom.uuid }
 
-  has_many :memberships
-  has_many :users, through: :memberships
+  has_many :teams
+  has_many :users, through: :teams
 
   def owner_name
-    memberships.find(&:owner?).user.full_name
+    teams.find(&:owner?).user.full_name
   end
 
   def admins
-    memberships.filter { |m| m.role < 2 }
+    teams.filter { |m| m.role < 2 }
   end
 
   def self.format_uri(url)

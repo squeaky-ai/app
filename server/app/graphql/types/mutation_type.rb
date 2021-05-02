@@ -14,6 +14,9 @@ module Types
     field :user_update,
           mutation: Mutations::UserUpdate,
           description: 'Update a user\'s details'
+    field :user_delete,
+          mutation: Mutations::UserDelete,
+          description: 'Delet a user'
 
     # Sites
     field :site_create,
@@ -25,5 +28,10 @@ module Types
     field :site_verify,
           mutation: Mutations::SiteVerify,
           description: 'Verify that the site has the script installed correctly'
+
+    # Team
+    field :team_invite,
+          mutation: Mutations::TeamInvite,
+          description: 'Invite a team member by sending them an email'
   end
 end

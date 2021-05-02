@@ -15,10 +15,11 @@ module Mutations
       otp = OneTimePassword.new(email)
       token_valid = otp.verify(token)
 
-      raise Errors::AuthTokenInvalid unless token_valid
+      raise Errors::AuthInvalid unless token_valid
 
       otp.delete!
       user ||= User.create(email: email)
+      user.update(last_signed_in_at: Time.now)
 
       jwt = JsonWebToken.encode(id: user.id)
       { jwt: jwt }

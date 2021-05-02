@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Membership < ApplicationRecord
+class Team < ApplicationRecord
   belongs_to :site
   belongs_to :user
 

@@ -15,7 +15,6 @@ module Mutations
       site = user.sites.find { |s| s.id == id.to_i }
 
       raise Errors::SiteNotFound unless site
-
       raise Errors::SiteForbidden unless user.admin_for?(site)
 
       update = {}

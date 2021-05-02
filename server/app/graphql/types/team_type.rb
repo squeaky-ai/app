@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Types
-  class MembershipType < Types::BaseObject
-    description 'The membership object'
+  class TeamType < Types::BaseObject
+    description 'The team object'
 
     field :id, ID, null: false
     field :status, Integer, null: false
