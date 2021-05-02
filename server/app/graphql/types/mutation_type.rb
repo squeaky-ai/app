@@ -21,7 +21,7 @@ module Types
           description: 'Create a new, unverified site'
     field :site_update,
           mutation: Mutations::SiteUpdate,
-          description: 'Update a site\'s details'
+          description: 'Update a site\'s details. If the url is changed, the verification will be reset'
     field :site_verify,
           mutation: Mutations::SiteVerify,
           description: 'Verify that the site has the script installed correctly'
