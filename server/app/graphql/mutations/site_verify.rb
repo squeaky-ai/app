@@ -4,7 +4,7 @@ require 'uri'
 require 'net/http'
 
 module Mutations
-  class SiteVerify < Mutations::BaseMutation
+  class SiteVerify < AuthenticatedMutation
     null false
 
     argument :id, ID, required: true
@@ -23,12 +23,6 @@ module Mutations
       site.update({ verified_at: Time.now }) if script_tag_exists?(site)
 
       site
-    end
-
-    def ready?(_args)
-      raise Errors::Unauthorized unless context[:current_user]
-
-      true
     end
 
     private

@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 2021_05_01_133535) do
     t.string "last_name"
     t.string "email"
     t.datetime "invited_at"
-    t.datetime "last_sign_in_at"
+    t.datetime "last_signed_in_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true

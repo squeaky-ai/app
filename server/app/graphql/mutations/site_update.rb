@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Mutations
-  class SiteUpdate < Mutations::BaseMutation
+  class SiteUpdate < AuthenticatedMutation
     null false
 
     argument :id, ID, required: true
@@ -32,12 +32,6 @@ module Mutations
       raise GraphQL::ExecutionError, site.errors.full_messages.first unless site.valid?
 
       site
-    end
-
-    def ready?(_args)
-      raise Errors::Unauthorized unless context[:current_user]
-
-      true
     end
 
     private

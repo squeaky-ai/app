@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Mutations
-  class TeamInvite < Mutations::BaseMutation
+  class TeamInvite < AuthenticatedMutation
     null false
 
     argument :id, ID, required: true
@@ -31,12 +31,6 @@ module Mutations
       TeamMailer.invite(email, site, user, token).deliver_now
 
       site.reload
-    end
-
-    def ready?(_args)
-      raise Errors::Unauthorized unless context[:current_user]
-
-      true
     end
   end
 end

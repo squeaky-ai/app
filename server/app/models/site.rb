@@ -13,12 +13,15 @@ class Site < ApplicationRecord
   has_many :teams
   has_many :users, through: :teams
 
+  # The plural sounds weird
+  alias_attribute :team, :teams
+
   def owner_name
-    teams.find(&:owner?).user.full_name
+    team.find(&:owner?).user.full_name
   end
 
   def admins
-    teams.filter { |m| m.role < 2 }
+    team.filter(&:admin?)
   end
 
   def self.format_uri(url)

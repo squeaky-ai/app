@@ -8,7 +8,7 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.string :email
 
       t.datetime :invited_at
-      t.datetime :last_sign_in_at
+      t.datetime :last_signed_in_at
 
       t.timestamps
     end

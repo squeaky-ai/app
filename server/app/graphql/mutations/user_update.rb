@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Mutations
-  class UserUpdate < Mutations::BaseMutation
+  class UserUpdate < AuthenticatedMutation
     null false
 
     argument :first_name, String, required: false
@@ -14,12 +14,6 @@ module Mutations
       user = context[:current_user]
       user.update(args)
       user
-    end
-
-    def ready?(_args)
-      raise Errors::Unauthorized unless context[:current_user]
-
-      true
     end
   end
 end

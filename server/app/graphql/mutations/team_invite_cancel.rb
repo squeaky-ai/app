@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 module Mutations
-  class TeamInvite < Mutations::BaseMutation
+  class TeamInviteCancel < AuthenticatedMutation
     null false
 
     argument :id, ID, required: true
-    argument :team_id, String, required: true
+    argument :team_id, Integer, required: true
 
     type Types::SiteType
 
@@ -16,13 +16,10 @@ module Mutations
       raise Errors::SiteNotFound unless site
       raise Errors::SiteForbidden unless user.admin_for?(site)
 
-      site
-    end
+      member = site.team.find { |t| t.id == team_id.to_i }
+      member.destroy if member.pending?
 
-    def ready?(_args)
-      raise Errors::Unauthorized unless context[:current_user]
-
-      true
+      site.reload
     end
   end
 end

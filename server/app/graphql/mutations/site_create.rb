@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Mutations
-  class SiteCreate < Mutations::BaseMutation
+  class SiteCreate < AuthenticatedMutation
     null false
 
     argument :name, String, required: true
@@ -19,12 +19,6 @@ module Mutations
       # and skip the confirmation steps
       Team.create({ status: 0, role: 2, user: user, site: site })
       site
-    end
-
-    def ready?(_args)
-      raise Errors::Unauthorized unless context[:current_user]
-
-      true
     end
 
     private
