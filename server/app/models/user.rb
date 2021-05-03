@@ -11,4 +11,8 @@ class User < ApplicationRecord
   def admin_for?(site)
     site.admins.find { |a| a.user.id == id }
   end
+
+  def member_of?(site)
+    site.team.any? { |t| t.user.id == id }
+  end
 end

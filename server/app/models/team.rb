@@ -8,7 +8,6 @@ class Team < ApplicationRecord
   ADMIN = 1
   MEMBER = 0
 
-  REJECTED = 2
   PENDING = 1
   ACCEPTED = 0
 

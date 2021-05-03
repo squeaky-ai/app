@@ -36,5 +36,8 @@ module Types
     field :team_invite_cancel,
           mutation: Mutations::TeamInviteCancel,
           description: 'Cancel a team members invite if their status is pending'
+    field :team_invite_resend,
+          mutation: Mutations::TeamInviteResend,
+          description: 'Resend an invite to a team member if their status is pending'
   end
 end
