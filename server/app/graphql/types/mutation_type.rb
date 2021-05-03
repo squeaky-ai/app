@@ -39,5 +39,8 @@ module Types
     field :team_invite_resend,
           mutation: Mutations::TeamInviteResend,
           description: 'Resend an invite to a team member if their status is pending'
+    field :team_update,
+          mutation: Mutations::TeamUpdate,
+          description: 'Update a team member'
   end
 end

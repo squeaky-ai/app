@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Mutations
-  class SiteUpdate < AuthenticatedMutation
+  class SiteUpdate < SiteMutation
     null false
 
     argument :id, ID, required: true
@@ -11,12 +11,6 @@ module Mutations
     type Types::SiteType
 
     def resolve(id:, name: nil, url: nil)
-      user = context[:current_user]
-      site = user.sites.find { |s| s.id == id.to_i }
-
-      raise Errors::SiteNotFound unless site
-      raise Errors::SiteForbidden unless user.admin_for?(site)
-
       update = {}
       update[:name] = name if name
 
@@ -27,11 +21,11 @@ module Mutations
         update[:verified_at] = nil
       end
 
-      site.update(update)
+      @site.update(update)
 
-      raise GraphQL::ExecutionError, site.errors.full_messages.first unless site.valid?
+      raise GraphQL::ExecutionError, @site.errors.full_messages.first unless @site.valid?
 
-      site
+      @site
     end
 
     private

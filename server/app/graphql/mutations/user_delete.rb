@@ -1,14 +1,13 @@
 # frozen_string_literal: true
 
 module Mutations
-  class UserDelete < AuthenticatedMutation
+  class UserDelete < UserMutation
     null true
 
     type Types::UserType
 
     def resolve
-      user = context[:current_user]
-      user.destroy
+      @user.destroy
       nil
     end
   end
