@@ -4,13 +4,13 @@ module Mutations
   class SiteUpdate < SiteMutation
     null false
 
-    argument :id, ID, required: true
+    argument :site_id, ID, required: true
     argument :name, String, required: false
     argument :url, String, required: false
 
     type Types::SiteType
 
-    def resolve(id:, name: nil, url: nil)
+    def resolve(site_id:, name: nil, url: nil)
       update = {}
       update[:name] = name if name
 

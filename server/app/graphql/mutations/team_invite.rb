@@ -4,13 +4,13 @@ module Mutations
   class TeamInvite < SiteMutation
     null false
 
-    argument :id, ID, required: true
+    argument :site_id, ID, required: true
     argument :email, String, required: true
     argument :role, Integer, required: true
 
     type Types::SiteType
 
-    def resolve(id:, email:, role:)
+    def resolve(site_id:, email:, role:)
       raise Errors::TeamRoleInvalid unless [0, 1].include?(role)
 
       invited_user = User.find_or_create_by(email: email) do |u|

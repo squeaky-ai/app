@@ -7,11 +7,11 @@ module Mutations
   class SiteVerify < SiteMutation
     null false
 
-    argument :id, ID, required: true
+    argument :site_id, ID, required: true
 
     type Types::SiteType
 
-    def resolve(id:)
+    def resolve(site_id:)
       # The user may want to validate more than once
       # so we store a timestamp rather than a boolean
       @site.update({ verified_at: Time.now }) if script_tag_exists?
