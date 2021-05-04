@@ -9,9 +9,9 @@ COPY yarn.lock /app
 
 RUN yarn install --production=false
 
-RUN yarn build
-
 COPY . /app
+
+RUN yarn build
 
 EXPOSE 3000
 
