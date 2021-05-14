@@ -18,7 +18,7 @@ const SignupPage: NextPage = () => (
           Sign Up
         </Heading>
         <Stack.Item>
-          <TextInput placeholder="e.g. sam@domain.ext" />
+          <TextInput labelText="Email" placeholder="e.g. sam@domain.ext" />
         </Stack.Item>
         <Button modFullWidth>Continue</Button>
       </Stack>

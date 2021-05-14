@@ -34,6 +34,7 @@ declare module 'styled-components' {
       spacing: {
         default: string;
         large: string;
+        small: string;
       };
     };
     typography: {
