@@ -1,18 +1,23 @@
 import InputLabel, { InputLabelProps } from 'components/InputLabel/InputLabel';
+import { useUniqueId } from 'components/UniqueId';
 import { ForwardRefRenderFunction, InputHTMLAttributes, forwardRef, ReactNode } from 'react';
 import InputElement from './components/InputElement';
 
 const TextInput: ForwardRefRenderFunction<HTMLInputElement, TextInputProps> = (
-  { labelText, modHideLabel, ...rest },
+  { id, labelText, modHideLabel, ...rest },
   ref,
-) => (
-  <>
-    <InputLabel modHideLabel={modHideLabel} modSpaceAfter>
-      {labelText}
-    </InputLabel>
-    <InputElement ref={ref} {...rest} />
-  </>
-);
+) => {
+  const inputId = useUniqueId('', id);
+
+  return (
+    <>
+      <InputLabel htmlFor={inputId} modHideLabel={modHideLabel} modSpaceAfter>
+        {labelText}
+      </InputLabel>
+      <InputElement id={inputId} ref={ref} {...rest} />
+    </>
+  );
+};
 
 interface TextInputProps
   extends InputHTMLAttributes<HTMLInputElement>,

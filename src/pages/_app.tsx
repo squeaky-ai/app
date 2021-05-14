@@ -5,16 +5,19 @@ import BaseStyles from 'components/BaseStyles';
 import { ThemeProvider } from 'styled-components';
 import squeakyTheme from 'theme/squeakyTheme';
 import Section from 'components/Section';
+import UniqueId from 'components/UniqueId';
 
 const SqueakyApp: FC<AppProps> = ({ Component, pageProps }) => {
   return (
-    <ThemeProvider theme={squeakyTheme}>
-      <Section>
-        <Normalize />
-        <BaseStyles />
-        <Component {...pageProps} />
-      </Section>
-    </ThemeProvider>
+    <UniqueId>
+      <ThemeProvider theme={squeakyTheme}>
+        <Section>
+          <Normalize />
+          <BaseStyles />
+          <Component {...pageProps} />
+        </Section>
+      </ThemeProvider>
+    </UniqueId>
   );
 };
 
