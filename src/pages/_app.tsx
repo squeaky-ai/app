@@ -4,13 +4,16 @@ import { Normalize } from 'styled-normalize';
 import BaseStyles from 'components/BaseStyles';
 import { ThemeProvider } from 'styled-components';
 import squeakyTheme from 'theme/squeakyTheme';
+import Section from 'components/Section';
 
 const SqueakyApp: FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <ThemeProvider theme={squeakyTheme}>
-      <Normalize />
-      <BaseStyles />
-      <Component {...pageProps} />
+      <Section>
+        <Normalize />
+        <BaseStyles />
+        <Component {...pageProps} />
+      </Section>
     </ThemeProvider>
   );
 };
