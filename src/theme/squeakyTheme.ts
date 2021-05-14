@@ -6,6 +6,7 @@ const squeakyTheme: DefaultTheme = {
     radius: '0.8rem',
   },
   colors: {
+    blue: '#0074e0',
     default: {
       background: '#ffffff',
       neutralDark: '#222222',
@@ -16,6 +17,10 @@ const squeakyTheme: DefaultTheme = {
       primaryFaded: '#4097e8',
       warning: '#f0438c',
     },
+    green: '#2ce21c',
+    orange: '#ff8a00',
+    magenta: '#f0438c',
+    yellow: '#fde50b',
   },
   inputs: {
     disabledOpacity: '25%',

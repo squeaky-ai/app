@@ -7,6 +7,7 @@ declare module 'styled-components' {
       radius: string;
     };
     colors: {
+      blue: string;
       default: {
         background: string;
         neutralFaded: string;
@@ -17,6 +18,10 @@ declare module 'styled-components' {
         primaryFaded: string;
         warning: string;
       };
+      green: string;
+      magenta: string;
+      orange: string;
+      yellow: string;
     };
     inputs: {
       disabledOpacity: string;
