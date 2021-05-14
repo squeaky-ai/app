@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const ButtonMarkup = styled.button<ButtonMarkupProps>`
   display: inline-block;
@@ -11,6 +11,7 @@ const ButtonMarkup = styled.button<ButtonMarkupProps>`
   color: ${({ theme }) => theme.colors.default.background};
   cursor: pointer;
   font-size: ${({ theme }) => theme.typography.defaultSize};
+  font-weight: ${({ theme }) => theme.typography.weights.semibold};
   line-height: 1;
   text-align: center;
   text-decoration: none;
@@ -33,11 +34,60 @@ const ButtonMarkup = styled.button<ButtonMarkupProps>`
   }
 
   ${({ modFullWidth }) => modFullWidth && 'width: 100%;'}
+
+  ${({ modSecondary, theme }) =>
+    modSecondary &&
+    css`
+      background-color: ${theme.colors.default.background};
+      border-color: ${theme.colors.default.primary};
+      color: ${theme.colors.default.neutralDark};
+
+      &:active,
+      &:hover:not(:disabled) {
+        background-color: ${theme.colors.default.primary};
+        border-color: ${theme.colors.default.primary};
+        color: ${theme.colors.default.background};
+      }
+    `}
+
+${({ modTertiary, theme }) =>
+    modTertiary &&
+    css`
+      background-color: ${theme.colors.default.neutralFaded};
+      border-color: ${theme.colors.default.neutralFaded};
+      color: ${theme.colors.default.neutralDark};
+
+      &:hover:not(:disabled) {
+        background-color: ${theme.colors.default.neutralFaded};
+        border-color: ${theme.colors.default.neutralFadedDark};
+      }
+    `}
+
+${({ modWarning, theme }) =>
+    modWarning &&
+    css`
+      background-color: ${theme.colors.default.background};
+      border-color: ${theme.colors.default.warning};
+      color: ${theme.colors.default.neutralDark};
+
+      &:active,
+      &:hover:not(:disabled) {
+        background-color: ${theme.colors.default.warning};
+        border-color: ${theme.colors.default.warning};
+        color: ${theme.colors.default.background};
+      }
+    `}
 `;
 
 export interface ButtonMarkupProps {
   /** Renders a full-width button variation */
   modFullWidth?: boolean;
+  /** Renders the Secondary button variation */
+  modSecondary?: boolean;
+  /** Renders the Tertiary button variation */
+  modTertiary?: boolean;
+  /** Renders the Warning button variation */
+  modWarning?: boolean;
 }
 
 export default ButtonMarkup;

@@ -9,9 +9,13 @@ declare module 'styled-components' {
     colors: {
       default: {
         background: string;
+        neutralFaded: string;
+        neutralFadedDark: string;
+        neutralDark: string;
         primary: string;
         primaryDark: string;
         primaryFaded: string;
+        warning: string;
       };
     };
     inputs: {
@@ -21,6 +25,10 @@ declare module 'styled-components' {
       defaultSize: string;
       lineHeight: string;
       stack: string;
+      weights: {
+        normal: integer;
+        semibold: integer;
+      };
     };
   }
 }

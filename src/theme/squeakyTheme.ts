@@ -8,9 +8,13 @@ const squeakyTheme: DefaultTheme = {
   colors: {
     default: {
       background: '#ffffff',
+      neutralDark: '#222222',
+      neutralFaded: '#f2f2f2',
+      neutralFadedDark: '#bfbfbf',
       primary: '#0074e0',
       primaryDark: '#005eb6',
       primaryFaded: '#4097e8',
+      warning: '#f0438c',
     },
   },
   inputs: {
@@ -21,6 +25,10 @@ const squeakyTheme: DefaultTheme = {
     lineHeight: '1.5',
     stack:
       'Poppins, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+    weights: {
+      normal: 400,
+      semibold: 600,
+    },
   },
 };
 
