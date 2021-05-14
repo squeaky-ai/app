@@ -47,6 +47,18 @@ const BaseStyles = createGlobalStyle`
     max-height: 100%;
     max-width: 100%;
   }
+
+  a[href] {
+    color: ${({ theme }) => theme.colors.default.primary};
+
+    &:hover {
+      color: ${({ theme }) => theme.colors.default.primaryFaded};
+    }
+  }
+
+  p {
+    margin: 0;
+  }
 `;
 
 export default BaseStyles;

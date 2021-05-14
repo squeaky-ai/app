@@ -36,6 +36,7 @@ declare module 'styled-components' {
         default: string;
         large: string;
         small: string;
+        wide: string;
       };
     };
     typography: {

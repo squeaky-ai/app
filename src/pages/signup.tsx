@@ -9,50 +9,56 @@ import Stack from 'components/Stack';
 import TextInput from 'components/TextInput';
 import SEO from 'components/SEO';
 import SqueakyPattern from 'components/SqueakyPattern';
+import Text from 'components/Text';
 
 const SignupPage: NextPage = () => (
   <>
     <SEO title="Sign Up" />
     <SqueakyPattern modFullPage />
     <Stack modCenter modFullHeight>
-      <Box modNarrow>
-        <Formik
-          initialValues={{ email: '' }}
-          onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              console.log({ values });
-              setSubmitting(false);
-            }, 1000);
-          }}
-        >
-          {({ handleBlur, handleChange, handleSubmit, isSubmitting, values }) => (
-            <form onSubmit={handleSubmit}>
-              <Stack>
-                <Stack.Item modSpaceLarge>
-                  <Logo style={{ display: 'block', margin: 'auto', width: '24rem' }} />
-                </Stack.Item>
-                <Heading modFormHeading modSpaceAfter>
-                  Sign Up
-                </Heading>
-                <Stack.Item>
-                  <TextInput
-                    labelText="Email"
-                    name="email"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    placeholder="e.g. sam@domain.ext"
-                    type="email"
-                    value={values.email}
-                  />
-                </Stack.Item>
-                <Button type="submit" modFullWidth disabled={isSubmitting}>
-                  Continue
-                </Button>
-              </Stack>
-            </form>
-          )}
-        </Formik>
-      </Box>
+      <Stack.Item>
+        <Box modNarrow>
+          <Formik
+            initialValues={{ email: '' }}
+            onSubmit={(values, { setSubmitting }) => {
+              setTimeout(() => {
+                console.log({ values });
+                setSubmitting(false);
+              }, 1000);
+            }}
+          >
+            {({ handleBlur, handleChange, handleSubmit, isSubmitting, values }) => (
+              <form onSubmit={handleSubmit}>
+                <Stack>
+                  <Stack.Item modSpaceLarge>
+                    <Logo style={{ display: 'block', margin: 'auto', width: '24rem' }} />
+                  </Stack.Item>
+                  <Heading modFormHeading modSpaceAfter>
+                    Sign Up
+                  </Heading>
+                  <Stack.Item>
+                    <TextInput
+                      labelText="Email"
+                      name="email"
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      placeholder="e.g. sam@domain.ext"
+                      type="email"
+                      value={values.email}
+                    />
+                  </Stack.Item>
+                  <Button type="submit" modFullWidth disabled={isSubmitting}>
+                    Continue
+                  </Button>
+                </Stack>
+              </form>
+            )}
+          </Formik>
+        </Box>
+        <Text modCenter modWideSpaceBefore>
+          Already have an account? <a href="/login">Log in</a>.
+        </Text>
+      </Stack.Item>
     </Stack>
   </>
 );

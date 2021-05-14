@@ -8,6 +8,7 @@ const StackContainer = styled.div<StackContainerProps>`
     modCenter &&
     css`
       place-items: center;
+      justify-content: center;
     `}
 
   ${({ modFullHeight }) =>

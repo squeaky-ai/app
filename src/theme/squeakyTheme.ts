@@ -35,6 +35,7 @@ const squeakyTheme: DefaultTheme = {
       default: '2.4rem',
       large: '3.2rem',
       small: '0.8rem',
+      wide: '4.8rem',
     },
   },
   typography: {
