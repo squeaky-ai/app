@@ -9,6 +9,23 @@ const BaseStyles = createGlobalStyle`
     outline: none;
   }
 
+  *:focus-visible {
+    position: relative;
+
+    &::before {
+      position: absolute;
+      bottom: -0.6rem;
+      left: -0.6rem;
+      right: -0.6rem;
+      top: -0.6rem;
+      content: '';
+      border: ${({ theme }) => theme.borders.defaultSize} solid ${({ theme }) =>
+  theme.colors.default.neutralDark};
+      border-radius: ${({ theme }) => theme.borders.radiusMedium};
+      pointer-events: none;
+    }
+  }
+
   html {
     font-size: 62.5%;
   }
