@@ -2,7 +2,7 @@ import { Formik } from 'formik';
 import { NextPage } from 'next';
 import { Trans, useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as Yup from 'yup';
 import Heading from 'components/Heading';
 import Button from 'components/Button';
@@ -13,14 +13,34 @@ import TextInput from 'components/TextInput';
 import SEO from 'components/SEO';
 import SqueakyPattern from 'components/SqueakyPattern';
 import Text from 'components/Text';
+import { useUniqueId } from 'components/UniqueId';
+import { useRouter } from 'next/dist/client/router';
 
 const SignupPage: NextPage = () => {
+  const { push } = useRouter();
   const { t } = useTranslation('common');
   const [emailCodeStep, setEmailCodeStep] = useState(false);
+  const [moveFocus, setMoveFocus] = useState(false);
+  const pageId = useUniqueId();
+  const emailCodeElementId = `emailCode${pageId}`;
 
   const SignupSchema = Yup.object().shape({
     email: Yup.string().email(t('form.invalid.email')).required(t('required')),
   });
+
+  /**
+   * This effect aims to move the focus to the message indicating that we sent
+   * an email with a code when it is appearing on the screen
+   */
+  useEffect(() => {
+    if (!emailCodeStep || !moveFocus) return;
+
+    const textElement = document.querySelector<HTMLElement>(`[id="${emailCodeElementId}"]`);
+    if (!textElement) return;
+
+    textElement.focus();
+    setMoveFocus(false);
+  }, [emailCodeStep, moveFocus]);
 
   return (
     <>
@@ -31,10 +51,23 @@ const SignupPage: NextPage = () => {
           <Box modNarrow>
             <Formik
               initialValues={{ code: '', email: '' }}
-              onSubmit={(_values, { setSubmitting }) => {
+              onSubmit={(values, { setErrors, setSubmitting }) => {
                 setTimeout(() => {
-                  setEmailCodeStep(!emailCodeStep);
                   setSubmitting(false);
+
+                  // early-termination if it's the first step, by moving to the second one
+                  if (!emailCodeStep) {
+                    setEmailCodeStep(true);
+                    setMoveFocus(true);
+
+                    return;
+                  }
+
+                  // early-termination if the code is not valid
+                  if (values.code !== '123456') return setErrors({ code: t('form.invalid.code') });
+
+                  // redirect to home
+                  push('/');
                 }, 1000);
               }}
               validationSchema={SignupSchema}
@@ -70,8 +103,11 @@ const SignupPage: NextPage = () => {
                     />
                     {emailCodeStep && (
                       <>
-                        <Text modSpaceAfter>{t('emailCode.signupExplaination')}</Text>
+                        <Text id={emailCodeElementId} modSpaceAfter tabIndex={-1}>
+                          {t('emailCode.signupExplaination')}
+                        </Text>
                         <TextInput
+                          error={touched.code && errors.code}
                           inputMode="numeric"
                           labelText={t('emailCode.signup')}
                           maxLength={6}

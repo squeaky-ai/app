@@ -2,7 +2,8 @@ import { Formik } from 'formik';
 import { NextPage } from 'next';
 import { Trans, useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import * as Yup from 'yup';
 import Heading from 'components/Heading';
 import Button from 'components/Button';
 import Logo from 'components/Logo';
@@ -12,9 +13,34 @@ import TextInput from 'components/TextInput';
 import SEO from 'components/SEO';
 import SqueakyPattern from 'components/SqueakyPattern';
 import Text from 'components/Text';
+import { useUniqueId } from 'components/UniqueId';
+import { useRouter } from 'next/dist/client/router';
 
 const LoginPage: NextPage = () => {
+  const { push } = useRouter();
   const { t } = useTranslation('common');
+  const [emailCodeStep, setEmailCodeStep] = useState(false);
+  const [moveFocus, setMoveFocus] = useState(false);
+  const pageId = useUniqueId();
+  const emailCodeElementId = `emailCode${pageId}`;
+
+  const LoginSchema = Yup.object().shape({
+    email: Yup.string().email(t('form.invalid.email')).required(t('required')),
+  });
+
+  /**
+   * This effect aims to move the focus to the message indicating that we sent
+   * an email with a code when it is appearing on the screen
+   */
+  useEffect(() => {
+    if (!emailCodeStep || !moveFocus) return;
+
+    const textElement = document.querySelector<HTMLElement>(`[id="${emailCodeElementId}"]`);
+    if (!textElement) return;
+
+    textElement.focus();
+    setMoveFocus(false);
+  }, [emailCodeStep, moveFocus]);
 
   return (
     <>
@@ -24,15 +50,37 @@ const LoginPage: NextPage = () => {
         <Stack.Item>
           <Box modNarrow>
             <Formik
-              initialValues={{ email: '' }}
-              onSubmit={(values, { setSubmitting }) => {
+              initialValues={{ code: '', email: '' }}
+              onSubmit={(values, { setErrors, setSubmitting }) => {
                 setTimeout(() => {
-                  console.log({ values });
                   setSubmitting(false);
+
+                  // early-termination if it's the first step, by moving to the second one
+                  if (!emailCodeStep) {
+                    setEmailCodeStep(true);
+                    setMoveFocus(true);
+
+                    return;
+                  }
+
+                  // early-termination if the code is not valid
+                  if (values.code !== '123456') return setErrors({ code: t('form.invalid.code') });
+
+                  // redirect to home
+                  push('/');
                 }, 1000);
               }}
+              validationSchema={LoginSchema}
             >
-              {({ handleBlur, handleChange, handleSubmit, isSubmitting, values }) => (
+              {({
+                errors,
+                handleBlur,
+                handleChange,
+                handleSubmit,
+                isSubmitting,
+                touched,
+                values,
+              }) => (
                 <form onSubmit={handleSubmit}>
                   <Stack>
                     <Stack.Item modSpaceLarge>
@@ -41,17 +89,38 @@ const LoginPage: NextPage = () => {
                     <Heading modFormHeading modSpaceAfter>
                       {t('login')}
                     </Heading>
-                    <Stack.Item>
-                      <TextInput
-                        labelText={t('email')}
-                        name="email"
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        placeholder={t('placeholder.email')}
-                        type="email"
-                        value={values.email}
-                      />
-                    </Stack.Item>
+                    <TextInput
+                      error={touched.email && errors.email}
+                      inputMode="email"
+                      labelText={t('email')}
+                      modSpaceAfter
+                      name="email"
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      placeholder={t('placeholder.email')}
+                      type="email"
+                      value={values.email}
+                    />
+                    {emailCodeStep && (
+                      <>
+                        <Text id={emailCodeElementId} modSpaceAfter tabIndex={-1}>
+                          {t('emailCode.loginExplaination')}
+                        </Text>
+                        <TextInput
+                          error={touched.code && errors.code}
+                          inputMode="numeric"
+                          labelText={t('emailCode.login')}
+                          maxLength={6}
+                          minLength={6}
+                          modSpaceAfter
+                          name="code"
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          type="text"
+                          value={values.code}
+                        />
+                      </>
+                    )}
                     <Button type="submit" modFullWidth disabled={isSubmitting}>
                       {t('continue')}
                     </Button>
