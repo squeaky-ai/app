@@ -9,7 +9,7 @@ const InputLabel = styled.label<InputLabelProps>`
   line-height: ${({ theme }) => theme.typography.lineHeight.default};
 
   ${({ modSpaceAfter, theme }) =>
-    modSpaceAfter && `margin-block-end: ${theme.stack.spacing.small};`}
+    modSpaceAfter && `padding-block-end: ${theme.stack.spacing.small};`}
 
   ${({ modHideLabel }) => modHideLabel && cssVisuallyHidden}
 `;
