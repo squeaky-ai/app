@@ -27,12 +27,19 @@ declare module 'styled-components' {
     inputs: {
       disabledOpacity: string;
     };
+    stack: {
+      spacing: {
+        default: string;
+        large: string;
+      };
+    };
     typography: {
       lineHeight: {
         condensed: integer;
         default: integer;
         headings: {
           default: integer;
+          form: integer;
           section: integer;
           subsection: integer;
         };
@@ -41,6 +48,7 @@ declare module 'styled-components' {
         default: string;
         headings: {
           default: string;
+          form: string;
           section: string;
           subsection: string;
         };

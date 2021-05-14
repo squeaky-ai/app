@@ -26,12 +26,19 @@ const squeakyTheme: DefaultTheme = {
   inputs: {
     disabledOpacity: '25%',
   },
+  stack: {
+    spacing: {
+      default: '2.4rem',
+      large: '3.2rem',
+    },
+  },
   typography: {
     lineHeight: {
       condensed: 1,
       default: 1.5,
       headings: {
         default: 1.25,
+        form: 1.33,
         section: 1.33,
         subsection: 1.5,
       },
@@ -42,6 +49,7 @@ const squeakyTheme: DefaultTheme = {
       default: '1.6rem',
       headings: {
         default: '6.4rem',
+        form: '2.4rem',
         section: '4.8rem',
         subsection: '3.2rem',
       },

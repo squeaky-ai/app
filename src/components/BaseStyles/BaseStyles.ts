@@ -14,6 +14,11 @@ const BaseStyles = createGlobalStyle`
     font-size: ${({ theme }) => theme.typography.sizes.default};
     line-height: ${({ theme }) => theme.typography.lineHeight.default};
   }
+
+  svg {
+    max-height: 100%;
+    max-width: 100%;
+  }
 `;
 
 export default BaseStyles;
