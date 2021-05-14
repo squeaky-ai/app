@@ -5,6 +5,7 @@ import Button from 'components/Button';
 import Logo from 'components/Logo';
 import Box from 'components/Box';
 import Stack from 'components/Stack';
+import TextInput from 'components/TextInput';
 
 const SignupPage: NextPage = () => (
   <Stack modCenter modFullHeight>
@@ -16,6 +17,9 @@ const SignupPage: NextPage = () => (
         <Heading modFormHeading modSpaceAfter>
           Sign Up
         </Heading>
+        <Stack.Item>
+          <TextInput placeholder="e.g. sam@domain.ext" />
+        </Stack.Item>
         <Button modFullWidth>Continue</Button>
       </Stack>
     </Box>

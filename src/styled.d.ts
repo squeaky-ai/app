@@ -11,9 +11,11 @@ declare module 'styled-components' {
       blue: string;
       default: {
         background: string;
+        backgroundAlt: string;
         neutralFaded: string;
         neutralFadedDark: string;
         neutralDark: string;
+        neutralMedium: string;
         primary: string;
         primaryDark: string;
         primaryFaded: string;
