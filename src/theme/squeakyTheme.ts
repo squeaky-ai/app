@@ -12,6 +12,7 @@ const squeakyTheme: DefaultTheme = {
     default: {
       background: '#ffffff',
       backgroundAlt: '#fbfbfb',
+      backgroundNeutral: '#e5e5e5',
       neutralDark: '#222222',
       neutralFaded: '#f2f2f2',
       neutralFadedDark: '#bfbfbf',

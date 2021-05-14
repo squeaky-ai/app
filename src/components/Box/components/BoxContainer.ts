@@ -5,6 +5,7 @@ const BoxContainer = styled.section<BoxContainerProps>`
   max-width: ${({ modNarrow }) => (modNarrow ? '44rem' : '100%')};
   padding: 6.4rem;
   width: 100%;
+  background-color: ${({ theme }) => theme.colors.default.background};
   box-shadow: 0 0 2.4rem rgba(0, 0, 0, 0.1);
   border-radius: ${({ theme }) => theme.borders.radiusLarge};
 `;

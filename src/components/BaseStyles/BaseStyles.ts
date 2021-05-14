@@ -27,6 +27,7 @@ const BaseStyles = createGlobalStyle`
   }
 
   html {
+    background-color: ${({ theme }) => theme.colors.default.backgroundNeutral};
     font-size: 62.5%;
   }
 

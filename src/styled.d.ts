@@ -13,6 +13,7 @@ declare module 'styled-components' {
       default: {
         background: string;
         backgroundAlt: string;
+        backgroundNeutral: string;
         neutralFaded: string;
         neutralFadedDark: string;
         neutralDark: string;
