@@ -8,10 +8,12 @@ import Box from 'components/Box';
 import Stack from 'components/Stack';
 import TextInput from 'components/TextInput';
 import SEO from 'components/SEO';
+import SqueakyPattern from 'components/SqueakyPattern';
 
 const SignupPage: NextPage = () => (
   <>
     <SEO title="Sign Up" />
+    <SqueakyPattern modFullPage />
     <Stack modCenter modFullHeight>
       <Box modNarrow>
         <Formik

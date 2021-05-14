@@ -26,6 +26,11 @@ const BaseStyles = createGlobalStyle`
     }
   }
 
+  html, body, [id="__next"] {
+    height: 100%;
+    min-height: 100%;
+  }
+
   html {
     background-color: ${({ theme }) => theme.colors.default.backgroundNeutral};
     font-size: 62.5%;

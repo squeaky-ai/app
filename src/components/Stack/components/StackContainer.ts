@@ -14,7 +14,7 @@ const StackContainer = styled.div<StackContainerProps>`
     modFullHeight &&
     css`
       height: 100%;
-      min-height: 100vh;
+      min-height: 100%;
     `}
 `;
 
