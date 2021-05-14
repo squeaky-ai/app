@@ -1,0 +1,13 @@
+{
+  "continue": "Continue",
+  "email": "Email",
+  "login": "Log in",
+  "placeholder": {
+    "email": "e.g. sam@domain.ext"
+  },
+  "redirect": {
+    "login": "Already have an account? <1>Log in</1>.",
+    "signup": "New to Squeaky? <1>Sign up</1>."
+  },
+  "signup": "Sign up"
+}
