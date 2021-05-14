@@ -13,9 +13,9 @@ const Logo: FC<SVGAttributes<SVGSVGElement>> = (props) => (
     />
     <path
       fill={squeakyTheme.colors.default.neutralDark}
-      fill-rule="evenodd"
+      fillRule="evenodd"
       d="M246 64.93l-16.931.252L216.76 76V35.746L246 64.93zm-18.092-2.75l-8.123 7.139V43.034l5.48 5.47a4.88 4.88 0 00-1.447 3.474 4.906 4.906 0 004.911 4.901c1.36 0 2.591-.552 3.481-1.443l6.594 6.582-10.896.162zm2.913-8.13l-4.167-4.16a2.93 2.93 0 00-.872 2.088 2.944 2.944 0 002.947 2.94 2.94 2.94 0 002.092-.869z"
-      clip-rule="evenodd"
+      clipRule="evenodd"
     />
     <path
       fill={squeakyTheme.colors.default.neutralDark}
