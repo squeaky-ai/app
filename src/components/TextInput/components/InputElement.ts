@@ -26,7 +26,8 @@ const InputElement = styled.input`
     background-color: ${({ theme }) => theme.colors.default.background};
   }
 
-  &:invalid {
+  &:invalid,
+  &[aria-invalid] {
     border-color: ${({ theme }) => theme.colors.default.warning};
   }
 `;

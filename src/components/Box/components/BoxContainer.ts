@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const BoxContainer = styled.section<BoxContainerProps>`
   margin: auto;
-  max-width: 85%;
+  max-width: 85vw;
   padding: 6.4rem;
   width: ${({ modNarrow }) => (modNarrow ? '44rem' : '100%')};
   background-color: ${({ theme }) => theme.colors.default.background};

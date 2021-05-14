@@ -2,7 +2,8 @@ import { Formik } from 'formik';
 import { NextPage } from 'next';
 import { Trans, useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import React from 'react';
+import React, { useState } from 'react';
+import * as Yup from 'yup';
 import Heading from 'components/Heading';
 import Button from 'components/Button';
 import Logo from 'components/Logo';
@@ -15,6 +16,11 @@ import Text from 'components/Text';
 
 const SignupPage: NextPage = () => {
   const { t } = useTranslation('common');
+  const [emailCodeStep, setEmailCodeStep] = useState(false);
+
+  const SignupSchema = Yup.object().shape({
+    email: Yup.string().email(t('form.invalid.email')).required(t('required')),
+  });
 
   return (
     <>
@@ -24,15 +30,24 @@ const SignupPage: NextPage = () => {
         <Stack.Item>
           <Box modNarrow>
             <Formik
-              initialValues={{ email: '' }}
-              onSubmit={(values, { setSubmitting }) => {
+              initialValues={{ code: '', email: '' }}
+              onSubmit={(_values, { setSubmitting }) => {
                 setTimeout(() => {
-                  console.log({ values });
+                  setEmailCodeStep(!emailCodeStep);
                   setSubmitting(false);
                 }, 1000);
               }}
+              validationSchema={SignupSchema}
             >
-              {({ handleBlur, handleChange, handleSubmit, isSubmitting, values }) => (
+              {({
+                errors,
+                handleBlur,
+                handleChange,
+                handleSubmit,
+                isSubmitting,
+                touched,
+                values,
+              }) => (
                 <form onSubmit={handleSubmit}>
                   <Stack>
                     <Stack.Item modSpaceLarge>
@@ -41,17 +56,35 @@ const SignupPage: NextPage = () => {
                     <Heading modFormHeading modSpaceAfter>
                       {t('signup')}
                     </Heading>
-                    <Stack.Item>
-                      <TextInput
-                        labelText={t('email')}
-                        name="email"
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        placeholder={t('placeholder.email')}
-                        type="email"
-                        value={values.email}
-                      />
-                    </Stack.Item>
+                    <TextInput
+                      error={touched.email && errors.email}
+                      inputMode="email"
+                      labelText={t('email')}
+                      modSpaceAfter
+                      name="email"
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      placeholder={t('placeholder.email')}
+                      type="email"
+                      value={values.email}
+                    />
+                    {emailCodeStep && (
+                      <>
+                        <Text modSpaceAfter>{t('emailCode.signupExplaination')}</Text>
+                        <TextInput
+                          inputMode="numeric"
+                          labelText={t('emailCode.signup')}
+                          maxLength={6}
+                          minLength={6}
+                          modSpaceAfter
+                          name="code"
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          type="text"
+                          value={values.code}
+                        />
+                      </>
+                    )}
                     <Button type="submit" modFullWidth disabled={isSubmitting}>
                       {t('continue')}
                     </Button>

@@ -1,6 +1,18 @@
 {
   "continue": "Continue",
   "email": "Email",
+  "emailCode": {
+    "loginExplaination": "We’ve just emailed you a temporary login code. Please check your inbox.",
+    "login": "Login code",
+    "signupExplaination": "We’ve just emailed you a temporary sign-up code. Please check your inbox.",
+    "signup": "Sign-up code"
+  },
+  "form": {
+    "invalid": {
+      "code": "Invalid code, please try again.",
+      "email": "Invalid email address"
+    }
+  },
   "login": "Log in",
   "placeholder": {
     "email": "e.g. sam@domain.ext"
@@ -9,5 +21,6 @@
     "login": "Already have an account? <1>Log in</1>.",
     "signup": "New to Squeaky? <1>Sign up</1>."
   },
+  "required": "This field is required.",
   "signup": "Sign up"
 }
