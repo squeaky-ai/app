@@ -7,8 +7,8 @@ const BaseStyles = createGlobalStyle`
 
   body {
     font-family: ${({ theme }) => theme.typography.stack};
-    font-size: ${({ theme }) => theme.typography.defaultSize};
-    line-height: ${({ theme }) => theme.typography.lineHeight};
+    font-size: ${({ theme }) => theme.typography.sizes.default};
+    line-height: ${({ theme }) => theme.typography.lineHeight.default};
   }
 `;
 

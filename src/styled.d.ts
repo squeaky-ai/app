@@ -22,10 +22,27 @@ declare module 'styled-components' {
       disabledOpacity: string;
     };
     typography: {
-      defaultSize: string;
-      lineHeight: string;
+      lineHeight: {
+        condensed: integer;
+        default: integer;
+        headings: {
+          default: integer;
+          section: integer;
+          subsection: integer;
+        };
+      };
+      sizes: {
+        default: string;
+        headings: {
+          default: string;
+          section: string;
+          subsection: string;
+        };
+      };
       stack: string;
       weights: {
+        bold: integer;
+        heavy: integer;
         normal: integer;
         semibold: integer;
       };

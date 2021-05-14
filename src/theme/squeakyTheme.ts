@@ -21,11 +21,28 @@ const squeakyTheme: DefaultTheme = {
     disabledOpacity: '25%',
   },
   typography: {
-    defaultSize: '1.6rem',
-    lineHeight: '1.5',
+    lineHeight: {
+      condensed: 1,
+      default: 1.5,
+      headings: {
+        default: 1.25,
+        section: 1.33,
+        subsection: 1.5,
+      },
+    },
     stack:
       'Poppins, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+    sizes: {
+      default: '1.6rem',
+      headings: {
+        default: '6.4rem',
+        section: '4.8rem',
+        subsection: '3.2rem',
+      },
+    },
     weights: {
+      bold: 700,
+      heavy: 800,
       normal: 400,
       semibold: 600,
     },

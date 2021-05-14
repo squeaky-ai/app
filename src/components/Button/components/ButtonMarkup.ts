@@ -10,9 +10,9 @@ const ButtonMarkup = styled.button<ButtonMarkupProps>`
   box-sizing: border-box;
   color: ${({ theme }) => theme.colors.default.background};
   cursor: pointer;
-  font-size: ${({ theme }) => theme.typography.defaultSize};
+  font-size: ${({ theme }) => theme.typography.sizes.default};
   font-weight: ${({ theme }) => theme.typography.weights.semibold};
-  line-height: 1;
+  line-height: ${({ theme }) => theme.typography.lineHeight.condensed};
   text-align: center;
   text-decoration: none;
 

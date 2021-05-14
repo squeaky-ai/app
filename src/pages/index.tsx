@@ -6,6 +6,8 @@ import Button from 'components/Button';
 const Home: NextPage = () => (
   <>
     <Heading>Hello World!</Heading>
+    <Heading modSection>Hello World!</Heading>
+    <Heading modSubsection>Hello World!</Heading>
     <Button>Continue</Button>
   </>
 );
