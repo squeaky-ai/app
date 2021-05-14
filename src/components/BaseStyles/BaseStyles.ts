@@ -6,9 +6,9 @@ const BaseStyles = createGlobalStyle`
   }
 
   body {
-    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    font-size: 1.6em;
-    line-height: 1.5;
+    font-family: ${({ theme }) => theme.typography.stack};
+    font-size: ${({ theme }) => theme.typography.defaultSize};
+    line-height: ${({ theme }) => theme.typography.lineHeight};
   }
 `;
 
