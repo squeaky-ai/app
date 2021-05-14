@@ -4,6 +4,7 @@ const squeakyTheme: DefaultTheme = {
   borders: {
     defaultSize: '0.2rem',
     radius: '0.8rem',
+    radiusLarge: '1.6rem',
   },
   colors: {
     blue: '#0074e0',
