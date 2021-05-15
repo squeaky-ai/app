@@ -1,8 +1,11 @@
-import InputLabel, { InputLabelProps } from 'components/InputLabel/InputLabel';
+import React, { forwardRef } from 'react';
+import type { ForwardRefRenderFunction, InputHTMLAttributes, ReactNode } from 'react';
+import type { InputLabelProps } from 'components/InputLabel/InputLabel';
+import InputLabel from 'components/InputLabel/InputLabel';
 import Text from 'components/Text';
 import { useUniqueId } from 'components/UniqueId';
-import { ForwardRefRenderFunction, InputHTMLAttributes, forwardRef, ReactNode } from 'react';
-import InputContainer, { InputContainerProps } from './components/InputContainer';
+import type { InputContainerProps } from './components/InputContainer';
+import InputContainer from './components/InputContainer';
 import InputElement from './components/InputElement';
 
 const TextInput: ForwardRefRenderFunction<HTMLInputElement, TextInputProps> = (

@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-unassigned-import
 import 'styled-components';
 
 declare module 'styled-components' {
@@ -41,13 +42,13 @@ declare module 'styled-components' {
     };
     typography: {
       lineHeight: {
-        condensed: integer;
-        default: integer;
+        condensed: number;
+        default: number;
         headings: {
-          default: integer;
-          form: integer;
-          section: integer;
-          subsection: integer;
+          default: number;
+          form: number;
+          section: number;
+          subsection: number;
         };
       };
       sizes: {
@@ -61,10 +62,10 @@ declare module 'styled-components' {
       };
       stack: string;
       weights: {
-        bold: integer;
-        heavy: integer;
-        normal: integer;
-        semibold: integer;
+        bold: number;
+        heavy: number;
+        normal: number;
+        semibold: number;
       };
     };
   }

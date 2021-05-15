@@ -1,9 +1,9 @@
-import { NextPage } from 'next';
+import type { NextPage } from 'next';
 import React from 'react';
-import Heading from 'components/Heading';
-import Button from 'components/Button';
-import Logo from 'components/Logo';
 import Box from 'components/Box';
+import Button from 'components/Button';
+import Heading from 'components/Heading';
+import Logo from 'components/Logo';
 
 const Home: NextPage = () => (
   <Box modNarrow>

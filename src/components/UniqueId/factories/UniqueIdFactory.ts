@@ -1,5 +1,5 @@
-import { IdGenerator } from '../types/IdGenerator';
-import { IdGeneratorFactory } from '../types/IdGeneratorFactory';
+import type { IdGenerator } from '../types/IdGenerator';
+import type { IdGeneratorFactory } from '../types/IdGeneratorFactory';
 
 export default class UniqueIdFactory {
   private idGeneratorFactory: IdGeneratorFactory;

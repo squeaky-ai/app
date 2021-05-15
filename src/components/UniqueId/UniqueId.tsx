@@ -1,8 +1,9 @@
-import { FC } from 'react';
+import React from 'react';
+import type { FC } from 'react';
 import UniqueIdFactoryContext from './contexts/UniqueIdFactoryContext';
 import globalIdGeneratorFactory from './factories/globalIdGeneratorFactory';
 import UniqueIdFactory from './factories/UniqueIdFactory';
-import { IdGeneratorFactory } from './types/IdGeneratorFactory';
+import type { IdGeneratorFactory } from './types/IdGeneratorFactory';
 
 const UniqueId: FC<UniqueIdProps> = ({ children, factory = globalIdGeneratorFactory }) => (
   <UniqueIdFactoryContext.Provider value={new UniqueIdFactory(factory)}>

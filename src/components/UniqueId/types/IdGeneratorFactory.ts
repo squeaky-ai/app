@@ -1,3 +1,3 @@
-import { IdGenerator } from './IdGenerator';
+import type { IdGenerator } from './IdGenerator';
 
 export type IdGeneratorFactory = (prefix: string) => IdGenerator;

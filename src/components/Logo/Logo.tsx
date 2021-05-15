@@ -1,4 +1,5 @@
-import { FC, SVGAttributes } from 'react';
+import React from 'react';
+import type { FC, SVGAttributes } from 'react';
 import squeakyTheme from 'theme/squeakyTheme';
 
 const Logo: FC<SVGAttributes<SVGSVGElement>> = (props) => (

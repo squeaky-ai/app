@@ -1,4 +1,5 @@
-import { FC } from 'react';
+import React from 'react';
+import type { FC } from 'react';
 import SectionContext from './contexts/SectionContext';
 import useSectionContext from './hooks/useSectionContext';
 

@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import UniqueIdFactory from '../factories/UniqueIdFactory';
+import type UniqueIdFactory from '../factories/UniqueIdFactory';
 
 const UniqueIdFactoryContext = createContext<UniqueIdFactory | undefined>(undefined);
 

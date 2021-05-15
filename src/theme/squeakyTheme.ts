@@ -1,11 +1,11 @@
-import { DefaultTheme } from 'styled-components';
+import type { DefaultTheme } from 'styled-components';
 
 const squeakyTheme: DefaultTheme = {
   borders: {
     defaultSize: '0.2rem',
     radius: '0.8rem',
-    radiusMedium: '1.2rem',
     radiusLarge: '1.6rem',
+    radiusMedium: '1.2rem',
   },
   colors: {
     blue: '#0074e0',
@@ -23,8 +23,8 @@ const squeakyTheme: DefaultTheme = {
       warning: '#f0438c',
     },
     green: '#2ce21c',
-    orange: '#ff8a00',
     magenta: '#f0438c',
+    orange: '#ff8a00',
     yellow: '#fde50b',
   },
   inputs: {
@@ -49,8 +49,6 @@ const squeakyTheme: DefaultTheme = {
         subsection: 1.5,
       },
     },
-    stack:
-      'Poppins, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
     sizes: {
       default: '1.6rem',
       headings: {
@@ -60,6 +58,8 @@ const squeakyTheme: DefaultTheme = {
         subsection: '3.2rem',
       },
     },
+    stack:
+      'Poppins, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
     weights: {
       bold: 700,
       heavy: 800,

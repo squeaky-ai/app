@@ -1,7 +1,9 @@
+import React from 'react';
+import type { FC } from 'react';
 import { useSectionContext } from 'components/Section';
-import { FC } from 'react';
-import HeadingTag, { HeadingTagProps } from './components/HeadingTag';
-import { HeadingElement } from './types/HeadingElement';
+import type { HeadingTagProps } from './components/HeadingTag';
+import HeadingTag from './components/HeadingTag';
+import type { HeadingElement } from './types/HeadingElement';
 
 const Heading: FC<HeadingTagProps> = ({ children, ...rest }) => {
   const headingLevel = useSectionContext();

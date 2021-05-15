@@ -1,20 +1,20 @@
 import { Formik } from 'formik';
-import { NextPage } from 'next';
+import type { GetStaticProps, NextPage } from 'next';
 import { Trans, useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useRouter } from 'next/dist/client/router';
 import React, { useEffect, useState } from 'react';
 import * as Yup from 'yup';
-import Heading from 'components/Heading';
-import Button from 'components/Button';
-import Logo from 'components/Logo';
 import Box from 'components/Box';
-import Stack from 'components/Stack';
-import TextInput from 'components/TextInput';
+import Button from 'components/Button';
+import Heading from 'components/Heading';
+import Logo from 'components/Logo';
 import SEO from 'components/SEO';
 import SqueakyPattern from 'components/SqueakyPattern';
+import Stack from 'components/Stack';
 import Text from 'components/Text';
+import TextInput from 'components/TextInput';
 import { useUniqueId } from 'components/UniqueId';
-import { useRouter } from 'next/dist/client/router';
 
 const SignupPage: NextPage = () => {
   const { push } = useRouter();
@@ -40,7 +40,7 @@ const SignupPage: NextPage = () => {
 
     textElement.focus();
     setMoveFocus(false);
-  }, [emailCodeStep, moveFocus]);
+  }, [emailCodeElementId, emailCodeStep, moveFocus]);
 
   return (
     <>
@@ -67,7 +67,7 @@ const SignupPage: NextPage = () => {
                   if (values.code !== '123456') return setErrors({ code: t('form.invalid.code') });
 
                   // redirect to home
-                  push('/');
+                  void push('/');
                 }, 1000);
               }}
               validationSchema={SignupSchema}
@@ -140,7 +140,7 @@ const SignupPage: NextPage = () => {
   );
 };
 
-export const getStaticProps = async ({ locale }) => ({
+export const getStaticProps: GetStaticProps = async ({ locale }) => ({
   props: {
     ...(await serverSideTranslations(locale, ['common'])),
   },
