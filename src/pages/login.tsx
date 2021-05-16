@@ -67,7 +67,7 @@ const LoginPage: NextPage = () => {
                   if (values.code !== '123456') return setErrors({ code: t('form.invalid.code') });
 
                   // redirect to home
-                  void push('/');
+                  void push('/sites');
                 }, 1000);
               }}
               validationSchema={LoginSchema}
