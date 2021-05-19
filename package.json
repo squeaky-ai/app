@@ -15,7 +15,9 @@
     "lint:ts": "tsc --noEmit"
   },
   "dependencies": {
+    "@apollo/client": "^3.3.19",
     "formik": "^2.2.6",
+    "graphql": "^15.5.0",
     "luxon": "^1.27.0",
     "next": "^10.2.0",
     "next-i18next": "^8.2.0",

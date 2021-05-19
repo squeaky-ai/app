@@ -9,6 +9,7 @@
   },
   "form": {
     "invalid": {
+      "accountMissing": "The email address is not associated to an existing account.",
       "code": "Invalid code, please try again.",
       "email": "Invalid email address"
     }
