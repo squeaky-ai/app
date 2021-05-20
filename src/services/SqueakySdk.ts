@@ -28,6 +28,19 @@ export default class SqueakySdk {
       // restore the cache using the data passed from getStaticProps/getServerSideProps combined with the existing cached data
       this.client.cache.restore({ ...existingCache, ...initialState });
     }
+
+    // early-termination if we're server-side
+    if (typeof window === 'undefined') return;
+
+    // retrives the jwt token from the localStorage when available
+    const sessionInfo = this.getSession();
+
+    // early-termination if there is no session information
+    if (!sessionInfo) return;
+
+    // stores info in the object
+    this.jwtToken = sessionInfo.jwt;
+    this.tokenExpiresAt = sessionInfo.expiresAt;
   }
 
   /** Creates a session by storing information about it in the localStorage */
@@ -42,9 +55,21 @@ export default class SqueakySdk {
     localStorage.setItem(SESSION.key, JSON.stringify(sessionInfo));
   }
 
+  /** Fetches the information about the session in the localStorage */
+  public getSession(): SessionInfo {
+    const sessionInfo = JSON.parse(localStorage.getItem(SESSION.key)) as SessionInfo;
+
+    return sessionInfo;
+  }
+
   /** Detroys the current session by removing information from the localStorage */
   public destroySession(): void {
     localStorage.clear();
+  }
+
+  /** Returns the registered JWT token */
+  public getToken(): string {
+    return this.jwtToken;
   }
 
   /** Requests the backend to send an email with the auth token to the user */

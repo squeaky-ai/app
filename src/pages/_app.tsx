@@ -6,19 +6,22 @@ import { ThemeProvider } from 'styled-components';
 import { Normalize } from 'styled-normalize';
 import BaseStyles from 'components/BaseStyles';
 import Section from 'components/Section';
+import SqueakyProvider from 'components/SqueakyProvider';
 import UniqueId from 'components/UniqueId';
 import squeakyTheme from 'theme/squeakyTheme';
 
 const SqueakyApp: FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <UniqueId>
-      <ThemeProvider theme={squeakyTheme}>
-        <Section>
-          <Normalize />
-          <BaseStyles />
-          <Component {...pageProps} />
-        </Section>
-      </ThemeProvider>
+      <SqueakyProvider>
+        <ThemeProvider theme={squeakyTheme}>
+          <Section>
+            <Normalize />
+            <BaseStyles />
+            <Component {...pageProps} />
+          </Section>
+        </ThemeProvider>
+      </SqueakyProvider>
     </UniqueId>
   );
 };

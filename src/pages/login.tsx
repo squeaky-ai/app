@@ -11,13 +11,14 @@ import Heading from 'components/Heading';
 import Logo from 'components/Logo';
 import SEO from 'components/SEO';
 import SqueakyPattern from 'components/SqueakyPattern';
+import { useSqueaky } from 'components/SqueakyProvider';
 import Stack from 'components/Stack';
 import Text from 'components/Text';
 import TextInput from 'components/TextInput';
 import { useUniqueId } from 'components/UniqueId';
-import SqueakySdk from 'services/SqueakySdk';
 
 const LoginPage: NextPage = () => {
+  const api = useSqueaky();
   const { push } = useRouter();
   const { t } = useTranslation('common');
   const [emailCodeStep, setEmailCodeStep] = useState(false);
@@ -54,9 +55,6 @@ const LoginPage: NextPage = () => {
               initialValues={{ code: '', email: '' }}
               onSubmit={(values, { setErrors, setSubmitting }) => {
                 (async () => {
-                  // initializes the Squeaky SDK
-                  const api = new SqueakySdk();
-
                   // early-termination if it's the first step, by moving to the second one
                   if (!emailCodeStep) {
                     // requests an auth email for the requested email
