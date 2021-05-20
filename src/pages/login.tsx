@@ -1,5 +1,4 @@
 import { Formik } from 'formik';
-import { DateTime } from 'luxon';
 import type { GetStaticProps, NextPage } from 'next';
 import { Trans, useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -11,13 +10,11 @@ import Button from 'components/Button';
 import Heading from 'components/Heading';
 import Logo from 'components/Logo';
 import SEO from 'components/SEO';
-import type { SessionInfo } from 'components/SqueakyPage';
 import SqueakyPattern from 'components/SqueakyPattern';
 import Stack from 'components/Stack';
 import Text from 'components/Text';
 import TextInput from 'components/TextInput';
 import { useUniqueId } from 'components/UniqueId';
-import SESSION from 'config/session';
 import SqueakySdk from 'services/SqueakySdk';
 
 const LoginPage: NextPage = () => {
@@ -89,13 +86,6 @@ const LoginPage: NextPage = () => {
 
                     return setErrors({ code: t('form.invalid.code') });
                   }
-
-                  // registers user in the localStorage
-                  const sessionInfo: SessionInfo = {
-                    expiresOn: DateTime.now().plus(SESSION.duration).toISO(),
-                    jwt: response.authVerify.jwt,
-                  };
-                  localStorage.setItem(SESSION.key, JSON.stringify(sessionInfo));
 
                   // redirect to home
                   void push('/sites');

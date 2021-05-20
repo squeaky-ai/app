@@ -27,7 +27,7 @@ const SqueakyPage: FC<SqueakyPageProps> = ({ children, isPublic = false }) => {
 
     // invalidates the session if it is expired (if diff <0 the token is expired)
     const sessionInfo = JSON.parse(storedInfo) as SessionInfo;
-    const isExpired = DateTime.fromISO(sessionInfo.expiresOn).diffNow().milliseconds <= 0;
+    const isExpired = DateTime.fromISO(sessionInfo.expiresAt).diffNow().milliseconds <= 0;
     if (isExpired) {
       localStorage.removeItem(SESSION.key);
 

@@ -1,5 +1,9 @@
 import type { NormalizedCacheObject } from '@apollo/client';
-import { gql, ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
+import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
+import type { SessionInfo } from 'components/SqueakyPage';
+import SESSION from 'config/session';
+import { requestTokenMutation, verifyTokenMutation } from 'data/users/mutations';
+import type { RequestAuthMutationResponse, VerifyAuthMutationResponse } from 'data/users/types';
 
 /** This SDK handles most communication with the Squeaky GraphQL Api */
 export default class SqueakySdk {
@@ -7,7 +11,10 @@ export default class SqueakySdk {
   public readonly client: ApolloClient<NormalizedCacheObject>;
 
   /** JWT token used to identify the current client with the API */
-  public readonly jwtToken: string | null = null;
+  private jwtToken: string;
+
+  /** Expiration time for the JWT token as indicated by the backend */
+  private tokenExpiresAt: string;
 
   constructor(initialState: NormalizedCacheObject | null = null) {
     // creates the API client
@@ -23,20 +30,31 @@ export default class SqueakySdk {
     }
   }
 
+  /** Creates a session by storing information about it in the localStorage */
+  public createSession(): void {
+    // creates the session info object
+    const sessionInfo: SessionInfo = {
+      expiresAt: this.tokenExpiresAt,
+      jwt: this.jwtToken,
+    };
+
+    // stores the information
+    localStorage.setItem(SESSION.key, JSON.stringify(sessionInfo));
+  }
+
+  /** Detroys the current session by removing information from the localStorage */
+  public destroySession(): void {
+    localStorage.clear();
+  }
+
   /** Requests the backend to send an email with the auth token to the user */
-  public async requestAuth<T = { authRequest: { emailSentAt: string } }>(
+  public async requestAuth(
     authType: 'LOGIN' | 'SIGNUP',
     email: string,
-  ): Promise<T | null> {
+  ): Promise<RequestAuthMutationResponse | null> {
     try {
-      const { data } = await this.client.mutate<T>({
-        mutation: gql`
-          mutation RequestToken($input: AuthRequestInput!) {
-            authRequest(input: $input) {
-              emailSentAt
-            }
-          }
-        `,
+      const { data } = await this.client.mutate<RequestAuthMutationResponse>({
+        mutation: requestTokenMutation,
         variables: { input: { authType, email } },
       });
 
@@ -47,25 +65,24 @@ export default class SqueakySdk {
   }
 
   /** Verifies the token entered by the user to authenticate them */
-  public async verifyAuth<
-    T = { authVerify: { expiresAt: string; jwt: string; user: { email: string } } }
-  >(email: string, token: string): Promise<T | null> {
+  public async verifyAuth(
+    email: string,
+    token: string,
+  ): Promise<VerifyAuthMutationResponse | null> {
     try {
       // verifies the token with the backend
-      const { data } = await this.client.mutate<T>({
-        mutation: gql`
-          mutation VerifyToken($input: AuthVerifyInput!) {
-            authVerify(input: $input) {
-              expiresAt
-              jwt
-              user {
-                email
-              }
-            }
-          }
-        `,
+      const { data } = await this.client.mutate<VerifyAuthMutationResponse>({
+        mutation: verifyTokenMutation,
         variables: { input: { email, token } },
       });
+
+      // stores JWT + Expiration timestamp
+      const { expiresAt, jwt } = data.authVerify;
+      this.jwtToken = jwt;
+      this.tokenExpiresAt = expiresAt;
+
+      // creates the session
+      this.createSession();
 
       return data;
     } catch {

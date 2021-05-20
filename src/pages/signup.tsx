@@ -15,6 +15,7 @@ import Stack from 'components/Stack';
 import Text from 'components/Text';
 import TextInput from 'components/TextInput';
 import { useUniqueId } from 'components/UniqueId';
+import SqueakySdk from 'services/SqueakySdk';
 
 const SignupPage: NextPage = () => {
   const { push } = useRouter();
@@ -52,23 +53,43 @@ const SignupPage: NextPage = () => {
             <Formik
               initialValues={{ code: '', email: '' }}
               onSubmit={(values, { setErrors, setSubmitting }) => {
-                setTimeout(() => {
-                  setSubmitting(false);
+                (async () => {
+                  // initializes the Squeaky SDK
+                  const api = new SqueakySdk();
 
                   // early-termination if it's the first step, by moving to the second one
                   if (!emailCodeStep) {
-                    setEmailCodeStep(true);
-                    setMoveFocus(true);
+                    // requests an auth email for the requested email
+                    const response = await api.requestAuth('SIGNUP', values.email);
 
-                    return;
+                    // enables the submit button again
+                    setSubmitting(false);
+
+                    // early-termination if it works, going to the next step
+                    if (response) {
+                      setEmailCodeStep(true);
+                      setMoveFocus(true);
+
+                      return;
+                    }
+
+                    // if the answer was null, we throw a form error
+                    return setErrors({ email: t('form.invalid.accountMissing') });
                   }
 
-                  // early-termination if the code is not valid
-                  if (values.code !== '123456') return setErrors({ code: t('form.invalid.code') });
+                  // on 2nd step, verifies with backend the validity of the auth token
+                  const response = await api.verifyAuth(values.email, values.code);
+
+                  // early-termination if the code is not valid with an error and the reactivation of the submit button
+                  if (!response) {
+                    setSubmitting(false);
+
+                    return setErrors({ code: t('form.invalid.code') });
+                  }
 
                   // redirect to home
-                  void push('/');
-                }, 1000);
+                  void push('/sites');
+                })();
               }}
               validationSchema={SignupSchema}
             >

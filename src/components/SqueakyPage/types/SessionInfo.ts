@@ -1,4 +1,4 @@
 export interface SessionInfo {
-  expiresOn: string;
+  expiresAt: string;
   jwt: string;
 }
