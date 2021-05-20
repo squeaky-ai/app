@@ -16,11 +16,13 @@ import Stack from 'components/Stack';
 import Text from 'components/Text';
 import TextInput from 'components/TextInput';
 import { useUniqueId } from 'components/UniqueId';
+import ValidationMessage from 'components/ValidationMessage';
 
 const LoginPage: NextPage = () => {
   const api = useSqueaky();
   const { push } = useRouter();
   const { t } = useTranslation('common');
+  const [attemptsLeft, setAttemptsLeft] = useState(10);
   const [emailCodeStep, setEmailCodeStep] = useState(false);
   const [moveFocus, setMoveFocus] = useState(false);
   const pageId = useUniqueId();
@@ -60,9 +62,6 @@ const LoginPage: NextPage = () => {
                     // requests an auth email for the requested email
                     const response = await api.requestAuth('LOGIN', values.email);
 
-                    // enables the submit button again
-                    setSubmitting(false);
-
                     // early-termination if it works, going to the next step
                     if (response) {
                       setEmailCodeStep(true);
@@ -71,8 +70,16 @@ const LoginPage: NextPage = () => {
                       return;
                     }
 
-                    // if the answer was null, we throw a form error
-                    return setErrors({ email: t('form.invalid.accountMissing') });
+                    // if the answer was null, we decrease the amount of attempts left
+                    const updatedAttemptsLeft = Math.max(attemptsLeft - 1, 0);
+                    setAttemptsLeft(attemptsLeft - 1);
+                    console.log(updatedAttemptsLeft);
+                    console.log(updatedAttemptsLeft > 0);
+
+                    // enables the submit button again if there is some attempts left
+                    if (updatedAttemptsLeft > 0) setSubmitting(false);
+
+                    return;
                   }
 
                   // on 2nd step, verifies with backend the validity of the auth token
@@ -108,6 +115,13 @@ const LoginPage: NextPage = () => {
                     <Heading modFormHeading modSpaceAfter>
                       {t('login')}
                     </Heading>
+                    {attemptsLeft < 10 && (
+                      <Stack.Item>
+                        <ValidationMessage>
+                          {t('form.invalid.accountMissing', { count: attemptsLeft })}
+                        </ValidationMessage>
+                      </Stack.Item>
+                    )}
                     <TextInput
                       error={touched.email && errors.email}
                       inputMode="email"
