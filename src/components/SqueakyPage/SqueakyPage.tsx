@@ -2,11 +2,12 @@ import { DateTime } from 'luxon';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 import type { FC } from 'react';
+import Header from 'components/Header/Header';
 import SESSION from 'config/session';
 import SessionContext from './contexts/SessionContext';
 import type { SessionInfo } from './types/SessionInfo';
 
-const SqueakyPage: FC<SqueakyPageProps> = ({ children, isPublic = false }) => {
+const SqueakyPage: FC<SqueakyPageProps> = ({ children, isPublic = false, noHeader = false }) => {
   const router = useRouter();
   const [, setAuthenticated] = useState(false);
   const [sessionInfo, setSessionInfo] = useState<SessionInfo | undefined>(undefined);
@@ -39,12 +40,19 @@ const SqueakyPage: FC<SqueakyPageProps> = ({ children, isPublic = false }) => {
     setSessionInfo(sessionInfo);
   }, [isPublic, toLogin]);
 
-  return <SessionContext.Provider value={sessionInfo}>{children}</SessionContext.Provider>;
+  return (
+    <SessionContext.Provider value={sessionInfo}>
+      {!noHeader && <Header />}
+      {children}
+    </SessionContext.Provider>
+  );
 };
 
 interface SqueakyPageProps {
   /** Makes the page public, without auth barrier, defaults to `false` */
   isPublic?: boolean;
+  /** Prevents the header from rendering */
+  noHeader?: boolean;
 }
 
 export default SqueakyPage;

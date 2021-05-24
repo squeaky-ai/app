@@ -10,6 +10,7 @@ import Button from 'components/Button';
 import Heading from 'components/Heading';
 import Logo from 'components/Logo';
 import SEO from 'components/SEO';
+import SqueakyPage from 'components/SqueakyPage';
 import SqueakyPattern from 'components/SqueakyPattern';
 import { useSqueaky } from 'components/SqueakyProvider';
 import Stack from 'components/Stack';
@@ -47,7 +48,7 @@ const LoginPage: NextPage = () => {
   }, [emailCodeElementId, emailCodeStep, moveFocus]);
 
   return (
-    <>
+    <SqueakyPage isPublic noHeader>
       <SEO title={t('login')} />
       <SqueakyPattern modFullPage />
       <Stack modCenter modFullHeight>
@@ -170,7 +171,7 @@ const LoginPage: NextPage = () => {
           </Text>
         </Stack.Item>
       </Stack>
-    </>
+    </SqueakyPage>
   );
 };
 
