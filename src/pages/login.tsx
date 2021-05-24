@@ -66,6 +66,7 @@ const LoginPage: NextPage = () => {
                     if (response) {
                       setEmailCodeStep(true);
                       setMoveFocus(true);
+                      setSubmitting(false);
 
                       return;
                     }
