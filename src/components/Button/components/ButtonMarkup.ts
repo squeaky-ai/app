@@ -35,6 +35,22 @@ const ButtonMarkup = styled.button<ButtonMarkupProps>`
 
   ${({ modFullWidth }) => modFullWidth && 'width: 100%;'}
 
+  ${({ modNaked, theme }) =>
+    modNaked &&
+    css`
+      padding: 1.2rem 0 1rem;
+      background: transparent;
+      border: 0;
+      color: ${theme.colors.default.neutralDark};
+
+      &:active,
+      &:hover:not(:disabled) {
+        background: transparent;
+        border: 0;
+        color: inherit;
+      }
+    `}
+
   ${({ modSecondary, theme }) =>
     modSecondary &&
     css`
@@ -82,6 +98,8 @@ ${({ modWarning, theme }) =>
 export interface ButtonMarkupProps {
   /** Renders a full-width button variation */
   modFullWidth?: boolean;
+  /** Renders a button without the default styles */
+  modNaked?: boolean;
   /** Renders the Secondary button variation */
   modSecondary?: boolean;
   /** Renders the Tertiary button variation */

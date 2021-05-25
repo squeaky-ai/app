@@ -1,3 +1,4 @@
+/* eslint-disable sort-keys */
 import type { DefaultTheme } from 'styled-components';
 
 const squeakyTheme: DefaultTheme = {
@@ -31,6 +32,22 @@ const squeakyTheme: DefaultTheme = {
     disabledOpacity: '25%',
   },
   stack: {
+    elevation: {
+      default: 'auto',
+      outline: 10,
+      shadows: 50,
+      sticky: 100,
+      drawers: 500,
+      uiShell: 1000,
+      popup: 2000,
+      dropdown: 3000,
+      dialog: 4000,
+      overlay: 5000,
+      modal: 6000,
+      toast: 7000,
+      spinner: 8000,
+      maximum: 9000,
+    },
     spacing: {
       default: '2.4rem',
       large: '3.2rem',

@@ -2,17 +2,22 @@ import styled from 'styled-components';
 
 const HeaderContainer = styled.header`
   display: flex;
+  align-items: center;
   height: 8rem;
-  padding: 3.2rem;
+  padding: 1.6rem 3.2rem;
   width: 100%;
   background: ${({ theme }) => theme.colors.default.neutralFaded};
 
   & > svg {
     display: block;
     height: 3rem;
-    margin-bottom: -1.6rem;
+    margin-bottom: -1.2rem;
     max-height: initial;
     width: 9rem;
+  }
+
+  & > div:last-child {
+    margin-left: auto;
   }
 `;
 
