@@ -16,7 +16,12 @@ const ButtonMarkup = styled.button<ButtonMarkupProps>`
   text-align: center;
   text-decoration: none;
 
-  &:active {
+  &[href] {
+    color: ${({ theme }) => theme.colors.default.background};
+  }
+
+  &:active,
+  &[href]:active {
     background-color: ${({ theme }) => theme.colors.default.primaryDark};
     border-color: ${({ theme }) => theme.colors.default.primaryDark};
   }
@@ -27,10 +32,12 @@ const ButtonMarkup = styled.button<ButtonMarkupProps>`
     pointer-events: hover;
   }
 
-  &:hover:not(:disabled) {
+  &:hover:not(:disabled),
+  &[href]:hover:not(:disabled) {
     background-color: ${({ theme }) => theme.colors.default.primaryFaded};
     border: ${({ theme }) => theme.borders.defaultSize} solid
       ${({ theme }) => theme.colors.default.primaryDark};
+    color: ${({ theme }) => theme.colors.default.background};
   }
 
   ${({ modFullWidth }) => modFullWidth && 'width: 100%;'}
