@@ -75,8 +75,6 @@ const LoginPage: NextPage = () => {
                     // if the answer was null, we decrease the amount of attempts left
                     const updatedAttemptsLeft = Math.max(attemptsLeft - 1, 0);
                     setAttemptsLeft(attemptsLeft - 1);
-                    console.log(updatedAttemptsLeft);
-                    console.log(updatedAttemptsLeft > 0);
 
                     // enables the submit button again if there is some attempts left
                     if (updatedAttemptsLeft > 0) setSubmitting(false);
