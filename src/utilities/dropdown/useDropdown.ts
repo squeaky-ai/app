@@ -44,6 +44,7 @@ export default function useDropdown(id: string): UseDropdown {
   const menuItemProps = useCallback(
     () => ({
       role: 'menuitem',
+      tabIndex: -1,
     }),
     [],
   );
@@ -54,7 +55,7 @@ export default function useDropdown(id: string): UseDropdown {
     const { current: dropdownElement } = ref;
     if (!dropdownElement) return;
 
-    const handleGlobalKeydown = ({ key }: KeyboardEvent) => {
+    const handleGlobalKeydown = (event: KeyboardEvent) => {
       // early-termination if the active element is not the menu element
       const { activeElement } = document;
       const menuButtonElement = dropdownElement.querySelector<HTMLButtonElement>(
@@ -62,13 +63,16 @@ export default function useDropdown(id: string): UseDropdown {
       );
       if (!menuButtonElement || activeElement !== menuButtonElement) return;
 
-      switch (key) {
+      switch (event.key) {
         case 'ArrowDown':
         case 'Enter':
         case 'Space':
+          event.preventDefault();
+
           return open();
 
         case 'ArrowUp':
+          event.preventDefault();
           setSelectLastItem(true);
 
           return open();
@@ -104,7 +108,7 @@ export default function useDropdown(id: string): UseDropdown {
     };
 
     /** Event handler running on keypress to close the dropdown if applicable */
-    const handleGlobalKeydown = ({ key }: KeyboardEvent) => {
+    const handleGlobalKeydown = (event: KeyboardEvent) => {
       const currentElement = document.activeElement;
       let nodes: NodeListOf<HTMLButtonElement | HTMLAnchorElement>;
       let target: HTMLElement;
@@ -112,11 +116,13 @@ export default function useDropdown(id: string): UseDropdown {
       // early-termination when the menu is closed
       if (!isOpen) return;
 
-      switch (key) {
+      switch (event.key) {
         case 'Escape':
           return close();
 
         case 'ArrowDown':
+          event.preventDefault();
+
           // finds the next menu item
           target = currentElement.parentElement.nextElementSibling?.querySelector<
             HTMLAnchorElement | HTMLButtonElement
@@ -131,6 +137,8 @@ export default function useDropdown(id: string): UseDropdown {
           break;
 
         case 'ArrowUp':
+          event.preventDefault();
+
           // finds the previous menu item
           target = currentElement.parentElement.previousElementSibling?.querySelector<
             HTMLAnchorElement | HTMLButtonElement
@@ -141,22 +149,30 @@ export default function useDropdown(id: string): UseDropdown {
             nodes = currentElement
               .closest('[role="menu"]')
               ?.querySelectorAll<HTMLAnchorElement | HTMLButtonElement>('[role="menuitem"]');
-            target = nodes.length ? nodes[nodes.length - 1] : undefined;
+            target = nodes ? nodes[nodes.length - 1] : undefined;
           }
           break;
 
         case 'End':
+          event.preventDefault();
+
           nodes = currentElement
             .closest('[role="menu"]')
             ?.querySelectorAll<HTMLAnchorElement | HTMLButtonElement>('[role="menuitem"]');
-          target = nodes.length ? nodes[nodes.length - 1] : undefined;
+          target = nodes ? nodes[nodes.length - 1] : undefined;
           break;
 
         case 'Home':
+          event.preventDefault();
+
           target = currentElement
             .closest('[role="menu"]')
             ?.querySelector<HTMLAnchorElement | HTMLButtonElement>('[role="menuitem"]');
           break;
+
+        case 'Tab':
+          close();
+          return;
 
         default:
           return;
