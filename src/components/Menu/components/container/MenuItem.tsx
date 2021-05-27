@@ -1,7 +1,7 @@
 import React from 'react';
 import type { FC, AnchorHTMLAttributes, ButtonHTMLAttributes } from 'react';
-import MenuItemContainer from './MenuItemContainer';
-import MenuItemElement from './MenuItemElement';
+import MenuItemContainer from '../markup/MenuItemContainer';
+import MenuItemElement from '../markup/MenuItemElement';
 
 const MenuItem: FC<MenuItemProps> = ({ children, ...rest }) => {
   const isLink = 'href' in rest && !('disabled' in rest) && !('aria-disabled' in rest);

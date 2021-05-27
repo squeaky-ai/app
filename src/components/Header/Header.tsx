@@ -14,6 +14,7 @@ const Header: FC = () => (
     >
       <Menu.Item href="/me/settings">Account settings</Menu.Item>
       <Menu.Item href="/logout">Logout</Menu.Item>
+      <Menu.Separator />
     </Menu>
   </HeaderContainer>
 );

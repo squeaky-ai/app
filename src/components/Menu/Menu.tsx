@@ -4,11 +4,12 @@ import { RiArrowDropDownLine } from 'react-icons/ri';
 import Button from 'components/Button';
 import { useUniqueId } from 'components/UniqueId';
 import { useDropdown } from 'utilities/dropdown';
-import MenuContainer from './components/MenuContainer';
-import MenuDropdown from './components/MenuDropdown';
-import MenuItem from './components/MenuItem';
+import MenuItem from './components/container/MenuItem';
+import MenuSeparator from './components/container/MenuSeparator';
+import MenuContainer from './components/markup/MenuContainer';
+import MenuDropdown from './components/markup/MenuDropdown';
 
-const Menu: FC<MenuProps> & { Item: typeof MenuItem } = ({
+const Menu: FC<MenuProps> & { Item: typeof MenuItem; Separator: typeof MenuSeparator } = ({
   children,
   label,
   modNakedTrigger,
@@ -34,6 +35,7 @@ const Menu: FC<MenuProps> & { Item: typeof MenuItem } = ({
 };
 
 Menu.Item = MenuItem;
+Menu.Separator = MenuSeparator;
 
 interface MenuProps extends HTMLAttributes<HTMLElement> {
   label: ReactNode;

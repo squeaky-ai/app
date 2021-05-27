@@ -1,13 +1,13 @@
 import React from 'react';
 import type { FC, HTMLAttributes } from 'react';
-import { AlertCircle } from 'react-feather';
+import { RiAlertLine } from 'react-icons/ri';
 import MessageContainer from './components/MessageContainer';
 import MessageContent from './components/MessageContent';
 
 const ValidationMessage: FC<HTMLAttributes<HTMLElement>> = ({ children }) => {
   return (
     <MessageContainer>
-      <AlertCircle />
+      <RiAlertLine />
       <MessageContent>{children}</MessageContent>
     </MessageContainer>
   );
