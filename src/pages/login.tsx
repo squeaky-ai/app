@@ -117,7 +117,7 @@ const LoginPage: NextPage = () => {
                     </Heading>
                     {attemptsLeft < 10 && (
                       <Stack.Item>
-                        <ValidationMessage>
+                        <ValidationMessage modWarning>
                           {t('form.invalid.accountMissing', { count: attemptsLeft })}
                         </ValidationMessage>
                       </Stack.Item>

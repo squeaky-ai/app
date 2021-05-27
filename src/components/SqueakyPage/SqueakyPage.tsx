@@ -4,10 +4,19 @@ import React, { useCallback, useEffect, useState } from 'react';
 import type { FC } from 'react';
 import Header from 'components/Header/Header';
 import SESSION from 'config/session';
+import PageContainer from './components/PageContainer';
+import type { PageContentProps } from './components/PageContent';
+import PageContent from './components/PageContent';
 import SessionContext from './contexts/SessionContext';
 import type { SessionInfo } from './types/SessionInfo';
 
-const SqueakyPage: FC<SqueakyPageProps> = ({ children, isPublic = false, noHeader = false }) => {
+const SqueakyPage: FC<SqueakyPageProps> = ({
+  children,
+  isPublic = false,
+  modNoBackground = false,
+  modNoPadding = false,
+  noHeader = false,
+}) => {
   const router = useRouter();
   const [, setAuthenticated] = useState(false);
   const [isLoading, setLoading] = useState(true);
@@ -44,13 +53,19 @@ const SqueakyPage: FC<SqueakyPageProps> = ({ children, isPublic = false, noHeade
 
   return (
     <SessionContext.Provider value={sessionInfo}>
-      {!noHeader && <Header />}
-      {!isLoading && children}
+      <PageContainer>
+        {!noHeader && <Header />}
+        {!isLoading && (
+          <PageContent modNoBackground={modNoBackground} modNoPadding={modNoPadding}>
+            {children}
+          </PageContent>
+        )}
+      </PageContainer>
     </SessionContext.Provider>
   );
 };
 
-interface SqueakyPageProps {
+interface SqueakyPageProps extends PageContentProps {
   /** Makes the page public, without auth barrier, defaults to `false` */
   isPublic?: boolean;
   /** Prevents the header from rendering */

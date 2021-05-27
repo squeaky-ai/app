@@ -1,0 +1,13 @@
+{
+  "fields": {
+    "email": "Email address",
+    "firstName": "First name",
+    "lastName": "Last name"
+  },
+  "pages": {
+    "settings": "Account Settings"
+  },
+  "welcome": {
+    "explanation": "Please enter your name below to set up your user account."
+  }
+}
