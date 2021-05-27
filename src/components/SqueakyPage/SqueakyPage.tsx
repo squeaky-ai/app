@@ -10,6 +10,7 @@ import type { SessionInfo } from './types/SessionInfo';
 const SqueakyPage: FC<SqueakyPageProps> = ({ children, isPublic = false, noHeader = false }) => {
   const router = useRouter();
   const [, setAuthenticated] = useState(false);
+  const [isLoading, setLoading] = useState(true);
   const [sessionInfo, setSessionInfo] = useState<SessionInfo | undefined>(undefined);
 
   /** Redirects the current user to the login page */
@@ -20,7 +21,7 @@ const SqueakyPage: FC<SqueakyPageProps> = ({ children, isPublic = false, noHeade
    */
   useEffect(() => {
     // early-termination if the page is public
-    if (isPublic) return;
+    if (isPublic) return setLoading(false);
 
     // fetches session information from the local storage
     const storedInfo = localStorage.getItem(SESSION.key);
@@ -38,12 +39,13 @@ const SqueakyPage: FC<SqueakyPageProps> = ({ children, isPublic = false, noHeade
     // registers the authentication in the state
     setAuthenticated(true);
     setSessionInfo(sessionInfo);
+    setLoading(false);
   }, [isPublic, toLogin]);
 
   return (
     <SessionContext.Provider value={sessionInfo}>
       {!noHeader && <Header />}
-      {children}
+      {!isLoading && children}
     </SessionContext.Provider>
   );
 };
