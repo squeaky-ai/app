@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const MenuDropdown = styled.ul`
   position: absolute;
   right: 0;
-  top: calc(100% + 0.8rem);
+  top: 100%;
   margin: 0;
   min-width: 16rem;
   padding: 0.8rem;

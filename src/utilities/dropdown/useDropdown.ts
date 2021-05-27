@@ -49,7 +49,7 @@ export default function useDropdown(id: string): UseDropdown {
     [],
   );
 
-  /** This effect aims to manage all keyboard-related events on the mouse button */
+  /** This effect aims to manage all keyboard-related events on the button */
   useEffect(() => {
     // early-termination if the reference is not set
     const { current: dropdownElement } = ref;

@@ -8,6 +8,11 @@ const HeaderContainer = styled.header`
   width: 100%;
   background: ${({ theme }) => theme.colors.default.neutralFaded};
 
+  & [data-header-account-icon] {
+    height: 2.4rem;
+    width: 2.4rem;
+  }
+
   & > svg {
     display: block;
     height: 3rem;

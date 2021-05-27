@@ -4,6 +4,7 @@ const MenuItemElement = styled.button`
   display: block;
   margin: 0;
   padding: 0.8rem 1.6rem 0.8rem 1.2rem;
+  border-radius: 0.8rem;
   color: ${({ theme }) => theme.colors.default.neutralDark};
   text-decoration: none;
 
@@ -13,8 +14,8 @@ const MenuItemElement = styled.button`
 
   &:hover,
   &[href]:hover {
+    background: ${({ theme }) => theme.colors.default.neutralFaded};
     color: ${({ theme }) => theme.colors.default.neutralDark};
-    text-decoration: underline;
   }
 `;
 
