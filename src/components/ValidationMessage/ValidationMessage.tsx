@@ -1,13 +1,13 @@
 import React from 'react';
 import type { FC, HTMLAttributes } from 'react';
-import { RiAlertLine } from 'react-icons/ri';
+import { RiErrorWarningLine } from 'react-icons/ri';
 import MessageContainer from './components/MessageContainer';
 import MessageContent from './components/MessageContent';
 
 const ValidationMessage: FC<HTMLAttributes<HTMLElement>> = ({ children }) => {
   return (
     <MessageContainer>
-      <RiAlertLine />
+      <RiErrorWarningLine data-validationmessage-icon />
       <MessageContent>{children}</MessageContent>
     </MessageContainer>
   );

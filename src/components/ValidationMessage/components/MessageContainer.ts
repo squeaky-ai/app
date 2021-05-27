@@ -10,9 +10,11 @@ const MessageContainer = styled.div`
     ${({ theme }) => theme.colors.default.warning};
   border-radius: ${({ theme }) => theme.borders.radiusMedium};
 
-  & svg {
-    margin-right: 1rem;
+  & [data-validationmessage-icon] {
     flex: 0 0 auto;
+    height: 2.4rem;
+    margin-right: 0.8rem;
+    width: 2.4rem;
     color: ${({ theme }) => theme.colors.default.warning};
   }
 
