@@ -1,13 +1,14 @@
 import type { NextPage } from 'next';
 import React from 'react';
 import SqueakyPage from 'components/SqueakyPage';
+import SiteTabs from 'components/SiteTabs';
 import Wrapper from 'components/Wrapper';
 
 const SitesRecordings: NextPage = () => {
   return (
-    <SqueakyPage modNoBackground>
+    <SqueakyPage>
       <Wrapper size='lg'>
-        <p>Recordings</p>
+        <SiteTabs />
       </Wrapper>
     </SqueakyPage>
   );
