@@ -10,17 +10,12 @@ import PageContent from './components/PageContent';
 import SessionContext from './contexts/SessionContext';
 import type { SessionInfo } from './types/SessionInfo';
 
-const SqueakyPage: FC<SqueakyPageProps> = ({
-  children,
-  isPublic = false,
-  modNoBackground = false,
-  modNoPadding = false,
-  noHeader = false,
-}) => {
+const SqueakyPage: FC<SqueakyPageProps> = ({ children, isPublic = false, ...rest }) => {
   const router = useRouter();
   const [, setAuthenticated] = useState(false);
   const [isLoading, setLoading] = useState(true);
   const [sessionInfo, setSessionInfo] = useState<SessionInfo | undefined>(undefined);
+  const { noHeader } = rest;
 
   /** Redirects the current user to the login page */
   const toLogin = useCallback((): void => void router.push('/login'), [router]);
@@ -55,11 +50,7 @@ const SqueakyPage: FC<SqueakyPageProps> = ({
     <SessionContext.Provider value={sessionInfo}>
       <PageContainer>
         {!noHeader && <Header />}
-        {!isLoading && (
-          <PageContent modNoBackground={modNoBackground} modNoPadding={modNoPadding}>
-            {children}
-          </PageContent>
-        )}
+        {!isLoading && <PageContent {...rest}>{children}</PageContent>}
       </PageContainer>
     </SessionContext.Provider>
   );

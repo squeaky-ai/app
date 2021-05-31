@@ -46,7 +46,7 @@ const SignupPage: NextPage = () => {
   }, [emailCodeElementId, emailCodeStep, moveFocus]);
 
   return (
-    <SqueakyPage isPublic noHeader>
+    <SqueakyPage isPublic modCenteredContent noHeader>
       <SEO title={t('signup')} />
       <SqueakyPattern modFullPage />
       <Stack modCenter modFullHeight>
