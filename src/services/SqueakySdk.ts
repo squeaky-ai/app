@@ -3,7 +3,9 @@ import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
 import type { SessionInfo } from 'components/SqueakyPage';
 import SESSION from 'config/session';
 import { requestTokenMutation, verifyTokenMutation } from 'data/users/mutations';
+import { getSitesQuery } from 'data/sites/queries';
 import type { RequestAuthMutationResponse, VerifyAuthMutationResponse } from 'data/users/types';
+import type { SitesQueryResponse } from 'data/sites/types';
 
 /** This SDK handles most communication with the Squeaky GraphQL Api */
 export default class SqueakySdk {
@@ -41,6 +43,9 @@ export default class SqueakySdk {
     // stores info in the object
     this.jwtToken = sessionInfo.jwt;
     this.tokenExpiresAt = sessionInfo.expiresAt;
+
+    // TODO: The client is created before the token is set!
+    this.client = this.createClient();
   }
 
   /** Creates a session by storing information about it in the localStorage */
@@ -112,6 +117,20 @@ export default class SqueakySdk {
       return data;
     } catch {
       return null;
+    }
+  }
+
+  /** Get the basic list of sites for a user */
+  public async getSites(): Promise<SitesQueryResponse> {
+    try {
+      const { data } = await this.client.query<SitesQueryResponse>({
+        query: getSitesQuery,
+      });
+
+      return data;
+    } catch(error) {
+      console.error(error);
+      return { sites: [] };
     }
   }
 

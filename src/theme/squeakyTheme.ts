@@ -7,6 +7,7 @@ const squeakyTheme: DefaultTheme = {
     radius: '0.8rem',
     radiusLarge: '1.6rem',
     radiusMedium: '1.2rem',
+    radiusSmall: '.5rem',
   },
   colors: {
     blue: '#0074e0',

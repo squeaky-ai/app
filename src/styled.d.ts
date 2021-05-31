@@ -6,6 +6,7 @@ declare module 'styled-components' {
     borders: {
       defaultSize: string;
       radius: string;
+      radiusSmall: string;
       radiusMedium: string;
       radiusLarge: string;
     };
