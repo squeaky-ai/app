@@ -12,3 +12,12 @@ export const getSitesQuery = gql`
     }
   }
 `;
+
+export const getSiteQuery = gql`
+  query GetSite($id: ID!) {
+    site(id: $id) {
+      id
+      name
+    }
+  }
+`;

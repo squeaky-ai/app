@@ -3,9 +3,9 @@ import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
 import type { SessionInfo } from 'components/SqueakyPage';
 import SESSION from 'config/session';
 import { requestTokenMutation, verifyTokenMutation } from 'data/users/mutations';
-import { getSitesQuery } from 'data/sites/queries';
+import { getSitesQuery, getSiteQuery } from 'data/sites/queries';
 import type { RequestAuthMutationResponse, VerifyAuthMutationResponse } from 'data/users/types';
-import type { SitesQueryResponse } from 'data/sites/types';
+import type { SitesQueryResponse, SiteQueryResponse } from 'data/sites/types';
 
 /** This SDK handles most communication with the Squeaky GraphQL Api */
 export default class SqueakySdk {
@@ -133,6 +133,23 @@ export default class SqueakySdk {
       return { sites: [] };
     }
   }
+
+  /** Get the full site by it's id */
+  public async getSite(id: string): Promise<SiteQueryResponse> {
+    try {
+      const { data } = await this.client.query<SiteQueryResponse>({
+        query: getSiteQuery,
+        variables: { id },
+      });
+
+      console.log(data);
+
+      return data;
+    } catch(error) {
+      console.error(error);
+      return { site: null };
+    }
+  } 
 
   /** Creates the ApolloClient linked to the Squeaky API */
   private createClient(): ApolloClient<NormalizedCacheObject> {

@@ -18,6 +18,10 @@ export interface Site {
   updatedAt: string;
 }
 
+export interface SiteQueryResponse {
+  site: Site | null;
+}
+
 export interface SitesQueryResponse {
   sites: Site[];
 }

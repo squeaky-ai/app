@@ -14,9 +14,7 @@ const SitesIndex: NextPage = () => {
     setSites(sites);
   };
 
-  useEffect(() => {
-    getSites();
-  }, []);
+  useEffect(() => { getSites() }, []);
 
   return (
     <SqueakyPage modNoBackground>
