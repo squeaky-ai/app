@@ -10,8 +10,6 @@ import SqueakyProvider from 'components/SqueakyProvider';
 import UniqueId from 'components/UniqueId';
 import squeakyTheme from 'theme/squeakyTheme';
 
-import 'remixicon/fonts/remixicon.css';
-
 const SqueakyApp: FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <UniqueId>
