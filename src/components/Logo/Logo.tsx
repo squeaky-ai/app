@@ -24,4 +24,5 @@ const Logo: FC<SVGAttributes<SVGSVGElement>> = (props) => (
     />
   </svg>
 );
+
 export default Logo;

@@ -19,8 +19,6 @@ const SitesIndex: NextPage = () => {
   return (
     <SqueakyPage modNoBackground>
       <Wrapper size='lg'>
-        <h2>Sites</h2>
-
         <SiteList sites={sites} />
       </Wrapper>
     </SqueakyPage>
