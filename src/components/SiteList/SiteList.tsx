@@ -5,6 +5,7 @@ import SiteListContainer from './components/SiteListContainer';
 import SiteListItem from './components/SiteListItem';
 import EmptyState from './components/EmptyState';
 import EmptyStateImage from './components/EmptyStateImage';
+import Heading from './components/Heading';
 import Text from 'components/Text';
 import Avatar from 'components/Avatar';
 import { Site } from 'data/sites/types';
@@ -18,7 +19,13 @@ const SiteList: FC<SiteListProps> = ({ sites }) => (
   <>
     {sites && (
       <>
-        <h2>Sites</h2>
+        <Heading>
+          <h2>Sites</h2>
+          <Link href='/sites/new'>
+            <a>+ Add New</a>
+          </Link>
+        </Heading>
+
         <SiteListContainer>
           {sites.map((site) => (
             <SiteListItem key={site.id}>

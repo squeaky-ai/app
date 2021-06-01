@@ -142,8 +142,6 @@ export default class SqueakySdk {
         variables: { id },
       });
 
-      console.log(data);
-
       return data;
     } catch(error) {
       console.error(error);
