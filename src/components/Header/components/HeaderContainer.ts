@@ -13,7 +13,7 @@ const HeaderContainer = styled.header`
     width: 2.4rem;
   }
 
-  & > svg {
+  & > a svg {
     display: block;
     height: 3rem;
     margin-bottom: -1.2rem;

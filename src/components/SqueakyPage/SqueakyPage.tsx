@@ -49,7 +49,7 @@ const SqueakyPage: FC<SqueakyPageProps> = ({ children, isPublic = false, ...rest
   return (
     <SessionContext.Provider value={sessionInfo}>
       <PageContainer>
-        {!noHeader && <Header />}
+        {!noHeader && <Header isPublic={isPublic} />}
         {!isLoading && <PageContent {...rest}>{children}</PageContent>}
       </PageContainer>
     </SessionContext.Provider>

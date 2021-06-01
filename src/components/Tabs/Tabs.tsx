@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC, ReactNode } from 'react';
+import type { IconType } from 'react-icons';
 import Text from 'components/Text';
 import Button from 'components/Button';
 import TabsContainer from './components/TabsContainer';
@@ -10,7 +11,7 @@ import TabsBodyItem from './components/TabsBodyItem';
 
 type TabHeader = {
   name: string;
-  icon: string;
+  icon: IconType;
   path: string;
 }
 
@@ -32,7 +33,7 @@ const Wrapper: FC<TabProps> = ({ tabs }) => {
         {tabs.map(({ header }) => (
           <TabsHeaderItem key={header.name} active={activeTab === header.path}>
             <Button modNaked onClick={() => setActiveTab(header.path)}>
-              <i className={header.icon} />
+              <header.icon />
               <Text>{header.name}</Text>
             </Button>
           </TabsHeaderItem>

@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import { RiVidiconLine, RiLineChartLine, RiSettings3Line, RiGroupLine } from 'react-icons/ri';
 import Link from 'next/link';
 import Tabs from 'components/Tabs';
 import { Site } from 'data/sites/types';
@@ -16,7 +17,7 @@ const tabs = [
   {
     header: {
       name: 'Recordings',
-      icon: 'ri-vidicon-line',
+      icon: RiVidiconLine,
       path: 'recordings',
     },
     body: <h3>Recordings</h3>
@@ -24,7 +25,7 @@ const tabs = [
   {
     header: {
       name: 'Analytics',
-      icon: 'ri-line-chart-line',
+      icon: RiLineChartLine,
       path: 'analytics',
     },
     body: <h3>Analytics</h3>
@@ -32,7 +33,7 @@ const tabs = [
   {
     header: {
       name: 'Site Settings',
-      icon: 'ri-settings-3-line',
+      icon: RiSettings3Line,
       path: 'settings',
     },
     body: <h3>Site Settings</h3>
@@ -40,7 +41,7 @@ const tabs = [
   {
     header: {
       name: 'Team',
-      icon: 'ri-group-line',
+      icon: RiGroupLine,
       path: 'team',
     },
     body: <h3>Team</h3>

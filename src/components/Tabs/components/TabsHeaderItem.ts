@@ -19,7 +19,7 @@ const TabsHeaderItem = styled.li<TabsHeaderItemProps>`
       color: ${({ theme }) => theme.colors.default.neutralMedium};
     }
   
-    i {
+    svg {
       font-size: 2.5rem;
       font-weight: ${({ theme }) => theme.typography.weights.normal};
       margin-right: 1rem;
@@ -29,7 +29,7 @@ const TabsHeaderItem = styled.li<TabsHeaderItemProps>`
       color: ${({ theme }) => theme.colors.default.neutralDark};
       border-color: ${({ theme }) => theme.colors.blue};
   
-      i {
+      svg {
         color: ${({ theme }) => theme.colors.blue};
       }
     `};
