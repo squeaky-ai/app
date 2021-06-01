@@ -1,5 +1,5 @@
 import type { NormalizedCacheObject } from '@apollo/client';
-import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
+import { ApolloLink, ApolloClient, HttpLink, InMemoryCache, concat } from '@apollo/client';
 import type { SessionInfo } from 'components/SqueakyPage';
 import SESSION from 'config/session';
 import { requestTokenMutation, verifyTokenMutation } from 'data/users/mutations';
@@ -43,9 +43,6 @@ export default class SqueakySdk {
     // stores info in the object
     this.jwtToken = sessionInfo.jwt;
     this.tokenExpiresAt = sessionInfo.expiresAt;
-
-    // TODO: The client is created before the token is set!
-    this.client = this.createClient();
   }
 
   /** Creates a session by storing information about it in the localStorage */
@@ -151,16 +148,22 @@ export default class SqueakySdk {
 
   /** Creates the ApolloClient linked to the Squeaky API */
   private createClient(): ApolloClient<NormalizedCacheObject> {
+    const httpLink = new HttpLink({ uri: 'https://dev.squeaky.ai/graphql' });
+
+    const authMiddleware = new ApolloLink((operation, forward) => {
+      operation.setContext({
+        headers: {
+          Authorization: this.jwtToken ? `Bearer ${this.jwtToken}` : null,
+        }
+      });
+
+      return forward(operation);
+    });
+
+
     return new ApolloClient({
       cache: new InMemoryCache(),
-      link: new HttpLink({
-        headers: this.jwtToken
-          ? {
-              Authorization: `Bearer ${this.jwtToken}`,
-            }
-          : {},
-        uri: 'https://dev.squeaky.ai/graphql',
-      }),
+      link: concat(authMiddleware, httpLink),
       ssrMode: typeof window === 'undefined',
     });
   }
