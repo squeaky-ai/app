@@ -4,6 +4,7 @@ import { RiVidiconLine, RiLineChartLine, RiSettings3Line, RiGroupLine } from 're
 import Link from 'next/link';
 import Tabs from 'components/Tabs';
 import { Site } from 'data/sites/types';
+import { PageHeading } from 'components/SqueakyPage';
 import AllSitesButton from './components/AllSitesButton';
 import SiteHeaderContainer from './components/SiteHeaderContainer';
 import SiteTitle from './components/SiteTitle';
@@ -20,7 +21,7 @@ const tabs = [
       icon: RiVidiconLine,
       path: 'recordings',
     },
-    body: <h3>Recordings</h3>
+    body: <PageHeading>Recordings</PageHeading>
   },
   {
     header: {
@@ -28,7 +29,7 @@ const tabs = [
       icon: RiLineChartLine,
       path: 'analytics',
     },
-    body: <h3>Analytics</h3>
+    body: <PageHeading>Analytics</PageHeading>
   },
   {
     header: {
@@ -36,7 +37,7 @@ const tabs = [
       icon: RiSettings3Line,
       path: 'settings',
     },
-    body: <h3>Site Settings</h3>
+    body: <PageHeading>Site Settings</PageHeading>
   },
   {
     header: {
@@ -44,7 +45,7 @@ const tabs = [
       icon: RiGroupLine,
       path: 'team',
     },
-    body: <h3>Team</h3>
+    body: <PageHeading>Team</PageHeading>
   }
 ];
 
