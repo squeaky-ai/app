@@ -1,11 +1,15 @@
-import type { NextPage } from 'next';
 import React from 'react';
+import type { NextPage } from 'next';
 import { RiWindowLine, RiCodeSSlashLine } from 'react-icons/ri';
 import SqueakyPage, { PageHeading } from 'components/SqueakyPage';
 import Wrapper from 'components/Wrapper';
 import Tabs from 'components/Tabs';
+import { SiteDetails, SiteTrackingCode } from 'components/SiteCreate';
+import { Site } from 'data/sites/types';
 
 const SitesNew: NextPage = () => {
+  const [site, setSite] = React.useState<Site>(null);
+
   const tabs = [
     {
       header: {
@@ -13,7 +17,7 @@ const SitesNew: NextPage = () => {
         icon: RiWindowLine,
         path: 'site-details',
       },
-      body: <h3>Site details</h3>
+      body: <SiteDetails site={site} />
     },
     {
       header: {
@@ -21,7 +25,7 @@ const SitesNew: NextPage = () => {
         icon: RiCodeSSlashLine,
         path: 'tracking-code',
       },
-      body: <h3>Tracking code</h3>
+      body: site && <SiteTrackingCode site={site} />
     }
   ];
 
