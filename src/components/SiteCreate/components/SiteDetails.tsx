@@ -4,13 +4,17 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 import Button from 'components/Button';
 import TextInput from 'components/TextInput';
+import { useSqueaky } from 'components/SqueakyProvider';
 import { Site } from 'data/sites/types';
 
 interface SiteDetailsProps {
   site?: Site;
+  setSite: (site: Site) => void;
 }
 
-const SiteDetails: FC<SiteDetailsProps> = ({ site }) => {
+const SiteDetails: FC<SiteDetailsProps> = ({ site, setSite }) => {
+  const api = useSqueaky();
+
   const SiteCreateSchema = Yup.object().shape({
     name: Yup.string().required('Required'),
     url: Yup.string().url().required('Required'),
@@ -24,7 +28,14 @@ const SiteDetails: FC<SiteDetailsProps> = ({ site }) => {
         initialValues={{ name: '', url: '' }}
         onSubmit={(values, { setErrors, setSubmitting }) => {
           (async () => {
-            console.log(values);
+            // TODO: Not sure how you're supposed to handle errors
+            const response = await api.createSite(values.name, values.url);
+
+            setSubmitting(false);
+
+            response
+              ? setSite(response.site)
+              : setErrors({ name: 'Unlikely to be the problem', url: 'Probably exists already' });
           })();
         }}
         validationSchema={SiteCreateSchema}
@@ -50,6 +61,7 @@ const SiteDetails: FC<SiteDetailsProps> = ({ site }) => {
               placeholder={'e.g. My Website'}
               type='text'
               value={values.name}
+              defaultValue={site?.name}
             />
             <TextInput
               error={touched.url && errors.url}
@@ -62,6 +74,7 @@ const SiteDetails: FC<SiteDetailsProps> = ({ site }) => {
               placeholder={'e.g. www.website.com'}
               type='url'
               value={values.url}
+              defaultValue={site?.url}
             />
             <Button type="submit" disabled={isSubmitting}>
               Continue

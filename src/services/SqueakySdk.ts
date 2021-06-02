@@ -4,6 +4,7 @@ import type { SessionInfo } from 'components/SqueakyPage';
 import SESSION from 'config/session';
 import { requestTokenMutation, verifyTokenMutation } from 'data/users/mutations';
 import { getSitesQuery, getSiteQuery } from 'data/sites/queries';
+import { SiteCreateMutation } from 'data/sites/mutations';
 import type { RequestAuthMutationResponse, VerifyAuthMutationResponse } from 'data/users/types';
 import type { SitesQueryResponse, SiteQueryResponse } from 'data/sites/types';
 
@@ -146,6 +147,20 @@ export default class SqueakySdk {
     }
   } 
 
+  public async createSite(name: string, url: string): Promise<SiteQueryResponse> {
+    try {
+      const { data } = await this.client.mutate<SiteQueryResponse>({
+        mutation: SiteCreateMutation,
+        variables: { input: { name, url } },
+      });
+
+      return data;
+    } catch(error) {
+      console.error(error);
+      return null;
+    }
+  }
+
   /** Creates the ApolloClient linked to the Squeaky API */
   private createClient(): ApolloClient<NormalizedCacheObject> {
     const httpLink = new HttpLink({ uri: 'https://dev.squeaky.ai/graphql' });
@@ -159,7 +174,6 @@ export default class SqueakySdk {
 
       return forward(operation);
     });
-
 
     return new ApolloClient({
       cache: new InMemoryCache(),

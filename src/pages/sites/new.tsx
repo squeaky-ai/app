@@ -10,6 +10,10 @@ import { Site } from 'data/sites/types';
 const SitesNew: NextPage = () => {
   const [site, setSite] = React.useState<Site>(null);
 
+  const onSiteCreate = (site: Site) => {
+    setSite(site);
+  };
+
   const tabs = [
     {
       header: {
@@ -17,7 +21,7 @@ const SitesNew: NextPage = () => {
         icon: RiWindowLine,
         path: 'site-details',
       },
-      body: <SiteDetails site={site} />
+      body: <SiteDetails site={site} setSite={onSiteCreate} />
     },
     {
       header: {
