@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import React, { useEffect } from 'react';
 import SqueakyPage from 'components/SqueakyPage';
-import SiteTabs from 'components/SiteHeader';
+import { SiteHeader } from 'components/SiteHeader';
 import Wrapper from 'components/Wrapper';
 import { useSqueaky } from 'components/SqueakyProvider';
 import { useRouter } from 'next/router';
@@ -25,7 +25,7 @@ const SitesRecordings: NextPage = () => {
       <Wrapper size='lg'>
         {site && (
           <>
-            <SiteTabs site={site} />
+            <SiteHeader site={site} />
           </>
         )}
       </Wrapper>

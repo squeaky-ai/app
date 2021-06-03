@@ -2,8 +2,8 @@ import React from 'react';
 import type { NextPage } from 'next';
 import { RiWindowLine, RiCodeSSlashLine } from 'react-icons/ri';
 import SqueakyPage, { PageHeading } from 'components/SqueakyPage';
+import { SiteCreateHeader } from 'components/SiteHeader';
 import Wrapper from 'components/Wrapper';
-import Tabs from 'components/Tabs';
 import { SiteDetails, SiteTrackingCode } from 'components/SiteCreate';
 import { Site } from 'data/sites/types';
 
@@ -13,6 +13,10 @@ const SitesNew: NextPage = () => {
   const onSiteCreate = (site: Site) => {
     setSite(site);
   };
+
+  // const url = (path: string) => `/sites/${site.id}/${path}`;
+
+  // const active = (path: string) => router.asPath.startsWith(url(path));
 
   const tabs = [
     {
@@ -38,7 +42,7 @@ const SitesNew: NextPage = () => {
       <Wrapper size='lg'>
         <PageHeading>Add Site</PageHeading>
 
-        <Tabs tabs={tabs} />
+        <SiteCreateHeader />
       </Wrapper>
     </SqueakyPage>
   );

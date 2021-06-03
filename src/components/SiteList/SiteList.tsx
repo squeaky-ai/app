@@ -21,7 +21,7 @@ const SiteList: FC<SiteListProps> = ({ sites }) => (
       <>
         <Heading>
           <h2>Sites</h2>
-          <Link href='/sites/new'>
+          <Link href='/sites/create'>
             <a>+ Add New</a>
           </Link>
         </Heading>
@@ -29,7 +29,7 @@ const SiteList: FC<SiteListProps> = ({ sites }) => (
         <SiteListContainer>
           {sites.map((site) => (
             <SiteListItem key={site.id}>
-              <Link href={`/sites/${site.id}`}>
+              <Link href={`/sites/${site.id}/recordings`}>
                 <a>
                   <Avatar src={site.avatar} />
                   <Text><b>{site.name}</b></Text>
