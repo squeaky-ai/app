@@ -1,48 +1,96 @@
 import React from 'react';
 import type { NextPage } from 'next';
-import { RiWindowLine, RiCodeSSlashLine } from 'react-icons/ri';
+import * as Yup from 'yup';
+import { Formik } from 'formik';
 import SqueakyPage, { PageHeading } from 'components/SqueakyPage';
-import { SiteCreateHeader } from 'components/SiteHeader';
+import { SiteCreateHeader, Tab } from 'components/SiteHeader';
 import Wrapper from 'components/Wrapper';
-import { SiteDetails, SiteTrackingCode } from 'components/SiteCreate';
+import Button from 'components/Button';
+import TextInput from 'components/TextInput';
+import { useSqueaky } from 'components/SqueakyProvider';
 import { Site } from 'data/sites/types';
 
 const SitesNew: NextPage = () => {
+  const api = useSqueaky();
+
+  const [tab, setTab] = React.useState<Tab>(Tab.DETAILS);
   const [site, setSite] = React.useState<Site>(null);
 
-  const onSiteCreate = (site: Site) => {
-    setSite(site);
-  };
-
-  // const url = (path: string) => `/sites/${site.id}/${path}`;
-
-  // const active = (path: string) => router.asPath.startsWith(url(path));
-
-  const tabs = [
-    {
-      header: {
-        name: 'Site details',
-        icon: RiWindowLine,
-        path: 'site-details',
-      },
-      body: <SiteDetails site={site} setSite={onSiteCreate} />
-    },
-    {
-      header: {
-        name: 'Tracking code',
-        icon: RiCodeSSlashLine,
-        path: 'tracking-code',
-      },
-      body: site && <SiteTrackingCode site={site} />
-    }
-  ];
+  const SiteCreateSchema = Yup.object().shape({
+    name: Yup.string().required('Required'),
+    url: Yup.string().url().required('Required'),
+  });
 
   return (
     <SqueakyPage>
       <Wrapper size='lg'>
         <PageHeading>Add Site</PageHeading>
 
-        <SiteCreateHeader />
+        <SiteCreateHeader tab={tab} />
+
+        <h3>Enter your site details below</h3>
+
+        <Formik
+          initialValues={{ name: '', url: '' }}
+          onSubmit={(values, { setErrors, setSubmitting }) => {
+            (async () => {
+              // TODO: Not sure how you're supposed to handle errors
+              const response = await api.createSite(values.name, values.url);
+
+              setSubmitting(false);
+
+              if (response) {
+                setSite(response.site);
+                setTab(Tab.TRACKING);
+              } else {
+                setErrors({ name: 'Unlikely to be the problem', url: 'Probably exists already' });
+              }
+            })();
+          }}
+          validationSchema={SiteCreateSchema}
+        >
+          {({
+            errors,
+            handleBlur,
+            handleChange,
+            handleSubmit,
+            isSubmitting,
+            touched,
+            values,
+          }) => (
+            <form onSubmit={handleSubmit}>
+              <TextInput
+                error={touched.name && errors.name}
+                inputMode='text'
+                labelText='Site Name'
+                modSpaceAfter
+                name='name'
+                onBlur={handleBlur}
+                onChange={handleChange}
+                placeholder={'e.g. My Website'}
+                type='text'
+                value={values.name}
+                defaultValue={site?.name}
+              />
+              <TextInput
+                error={touched.url && errors.url}
+                inputMode='url'
+                labelText='Site URL'
+                modSpaceAfter
+                name='url'
+                onBlur={handleBlur}
+                onChange={handleChange}
+                placeholder={'e.g. www.website.com'}
+                type='url'
+                value={values.url}
+                defaultValue={site?.url}
+              />
+              <Button type="submit" disabled={isSubmitting}>
+                Continue
+              </Button>
+            </form>
+          )}
+        </Formik>
       </Wrapper>
     </SqueakyPage>
   );
