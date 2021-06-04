@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const WrapperContainer = styled.div<WrapperContainerProps>`
   margin: 0 auto;
@@ -9,10 +9,16 @@ const WrapperContainer = styled.div<WrapperContainerProps>`
       case 'lg': return '1280px';
     }
   }};
+
+  ${({ modNotCentered }) => modNotCentered && css`
+    margin: 0;
+  `}
 `;
 
 export interface WrapperContainerProps {
   size?: 'sm' | 'md' | 'lg';
+
+  modNotCentered?: boolean;
 }
 
 export default WrapperContainer;

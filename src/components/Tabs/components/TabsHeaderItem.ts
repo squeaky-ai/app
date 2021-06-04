@@ -4,7 +4,7 @@ const TabsHeaderItem = styled.li<TabsHeaderItemProps>`
   list-style: none;
   margin: 0 2.5rem -2px 0;
 
-  a,
+  a[href],
   button {
     align-items: center;
     border-radius: 0;
