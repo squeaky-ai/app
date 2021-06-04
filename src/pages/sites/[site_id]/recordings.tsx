@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import SqueakyPage from 'components/SqueakyPage';
 import { SiteHeader } from 'components/SiteHeader';
 import Wrapper from 'components/Wrapper';
+import Recordings from 'components/Recordings';
 import { useSqueaky } from 'components/SqueakyProvider';
 import { useRouter } from 'next/router';
 
@@ -26,6 +27,7 @@ const SitesRecordings: NextPage = () => {
         {site && (
           <>
             <SiteHeader site={site} />
+            <Recordings site={site} />
           </>
         )}
       </Wrapper>
