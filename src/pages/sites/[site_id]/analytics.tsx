@@ -12,13 +12,10 @@ const SitesAnalytics: NextPage = () => {
   return (
     <SqueakyPage>
       <Wrapper size='lg'>
+        <SiteHeader site={site} />
+  
         {loading && (
           <Spinner />
-        )}
-        {site && (
-          <>
-            <SiteHeader site={site} />
-          </>
         )}
       </Wrapper>
     </SqueakyPage>

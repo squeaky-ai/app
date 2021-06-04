@@ -19,6 +19,10 @@ const Recordings: FC<RecordingsProps> = ({ site }) => (
         <Alert style={{ maxWidth: 540 }} text='If you have only recently installed your tracking code it may take a little time before results appear.' />
       </EmptyState>
     )}
+
+    {site.recordings?.items && (
+      <p>Recordings!</p>
+    )}
   </RecordingsContainer>
 );
 

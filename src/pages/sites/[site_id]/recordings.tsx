@@ -5,6 +5,7 @@ import { SiteHeader } from 'components/SiteHeader';
 import Wrapper from 'components/Wrapper';
 import Recordings from 'components/Recordings';
 import { useSite } from 'data/sites/hooks';
+import Spinner from 'components/Spinner';
 
 const SitesRecordings: NextPage = () => {
   const [site, loading] = useSite();
@@ -12,15 +13,14 @@ const SitesRecordings: NextPage = () => {
   return (
     <SqueakyPage>
       <Wrapper size='lg'>
+        <SiteHeader site={site} />
+
         {loading && (
-          <p>Loading...</p>
+          <Spinner />
         )}
 
         {site && (
-          <>
-            <SiteHeader site={site} />
-            <Recordings site={site} />
-          </>
+          <Recordings site={site} />
         )}
       </Wrapper>
     </SqueakyPage>

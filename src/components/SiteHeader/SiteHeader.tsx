@@ -12,13 +12,13 @@ import SiteTitle from './components/SiteTitle';
 import Avatar from 'components/Avatar';
 
 export interface SiteHeaderProps {
-  site: Site;
+  site?: Site;
 }
 
 const SiteHeader: FC<SiteHeaderProps> = ({ site }) => {
   const router = useRouter();
 
-  const url = (path: string) => `/sites/${site.id}/${path}`;
+  const url = (path: string) => `/sites/${site?.id}/${path}`;
 
   const active = (path: string) => router.asPath.startsWith(url(path));
 
@@ -30,8 +30,8 @@ const SiteHeader: FC<SiteHeaderProps> = ({ site }) => {
         </Link>
       </AllSitesButton>
       <SiteTitle>
-        <Avatar src={site.avatar} />
-        <h2>{site.name}</h2>
+        <Avatar src={site?.avatar} />
+        <h2>{site?.name}</h2>
       </SiteTitle>
       <TabsHeader>
         <TabsHeaderItem active={active('recordings')}>

@@ -4,6 +4,7 @@ import SqueakyPage from 'components/SqueakyPage';
 import { SiteHeader } from 'components/SiteHeader';
 import Wrapper from 'components/Wrapper';
 import { useSite } from 'data/sites/hooks';
+import Spinner from 'components/Spinner';
 
 const SitesTeam: NextPage = () => {
   const [site, loading] = useSite();
@@ -11,13 +12,10 @@ const SitesTeam: NextPage = () => {
   return (
     <SqueakyPage>
       <Wrapper size='lg'>
+        <SiteHeader site={site} />
+
         {loading && (
-          <p>Loading...</p>
-        )}
-        {site && (
-          <>
-            <SiteHeader site={site} />
-          </>
+          <Spinner />
         )}
       </Wrapper>
     </SqueakyPage>
