@@ -1,0 +1,33 @@
+.message {
+  border: 2px solid var(--blue-500);
+  border-left-width: 6px;
+  border-radius: var(--border-radius-md);
+  display: flex;
+  margin-bottom: 1.5rem;
+  padding: .75rem 1rem;
+  text-align: left;
+
+  i {
+    color: var(--blue-500);
+    display: block;
+    flex-shrink: 0;
+    font-size: 1.5rem;
+    margin-right: .5rem;
+  }
+
+  &.error {
+    border-color: var(--magenta-500);
+
+    i {
+      color: var(--magenta-500);
+    }
+  }
+
+  &.success {
+    border-color: var(--green-500);
+
+    i {
+      color: var(--green-500);
+    }
+  }
+}

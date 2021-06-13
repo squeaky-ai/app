@@ -17,7 +17,7 @@ const Home: NextPage = () => (
       <span>Already have an account? <Link href='/auth/signin'><a>Log in</a></Link>.</span>
     </Header>
 
-    <Container size='md' centered>
+    <Container className='md centered'>
       <h1>Understand your users.</h1>
       
       <p>Start viewing live or recorded user sessions on your website in minutes, no technical expertise required.</p>
