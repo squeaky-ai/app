@@ -2,11 +2,16 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import Head from 'next/head';
 import { Container } from '../components/container';
 import { Header } from '../components/header';
 
 const Home: NextPage = () => (
   <div className='page home'>
+    <Head>
+      <title>Squeaky</title>
+    </Head>
+
     <Header className='transparent'>
       <Link href='/'>
         <a className='logo'>

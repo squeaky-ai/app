@@ -2,6 +2,7 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
@@ -26,6 +27,9 @@ const Signin: NextPage = () => {
 
   return (
     <div className='page signin'>
+      <Head>
+        <title>Squeaky / Log in</title>
+      </Head>
       <Container className='sm'>
         <Card>
           <Link href='/'>
