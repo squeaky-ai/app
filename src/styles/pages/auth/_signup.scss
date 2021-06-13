@@ -29,4 +29,16 @@
       width: 100%;
     }
   }
+
+  .email-taken {
+    .button {
+      display: inline-block;
+      text-align: center;
+      width: 100%;
+
+      &.primary {
+        margin-bottom: 1rem;
+      }
+    }
+  }
 }

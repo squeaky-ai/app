@@ -15,7 +15,7 @@ import { Input } from '../../components/input';
 import { Button } from '../../components/button';
 import { Message } from '../../components/message';
 
-const Schema = Yup.object().shape({
+const SigninSchema = Yup.object().shape({
   email: Yup.string().email('Please enter a valid email address').required('Email is required'),
   password: Yup.string().required('Password is required')
 });
@@ -53,7 +53,7 @@ const Signin: NextPage = () => {
 
           <Formik
             initialValues={{ email: '', password: '' }}
-            validationSchema={Schema}
+            validationSchema={SigninSchema}
             onSubmit={(values, { setSubmitting }) => {
               (async () => {
                 if (exceeded) return;

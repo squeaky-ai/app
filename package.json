@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.3.19",
+    "axios": "^0.21.1",
     "classnames": "^2.3.1",
     "formik": "^2.2.9",
     "graphql": "^15.5.0",

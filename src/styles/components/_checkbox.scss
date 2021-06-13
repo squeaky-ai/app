@@ -34,9 +34,36 @@
     }
   }
 
+  &.label {
+    font-weight: 400;
+    justify-content: flex-start;
+    margin-bottom: 1.5rem;
+  }
+
   &:hover {
     .check {
       border-color: var(--blue-500);
+    }
+  }
+
+  & + .validation {
+    color: var(--magenta-500);
+    font-size: 13px;
+    line-height: 16px;
+    display: none;
+    margin: .5rem 0 1.5rem;
+  }
+
+  &.invalid {
+    border-color: var(--magenta-500);
+    margin-bottom: 0;
+
+    & + .validation {
+      display: block;
+    }
+
+    .check { 
+      border-color: var(--magenta-500);
     }
   }
 }
