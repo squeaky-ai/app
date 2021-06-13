@@ -1,5 +1,13 @@
-const { i18n } = require('./next-i18next.config')
-
 module.exports = {
-  i18n,
-}
+  future: {
+    webpack5: true
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:slug*',
+        destination: 'http://localhost:4000/api/:slug*'
+      }
+    ];
+  }
+};

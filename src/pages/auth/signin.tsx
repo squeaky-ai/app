@@ -2,13 +2,13 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Link from 'next/link';
 
-const Home: NextPage = () => (
+const Signin: NextPage = () => (
   <div>
-    <p>Home</p>
+    <p>Signin</p>
     <Link href='/auth/signup'>
       <a>Sign up</a>
     </Link>
   </div>
 );
 
-export default Home;
+export default Signin;
