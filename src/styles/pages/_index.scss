@@ -1,0 +1,19 @@
+.page.home {
+  .header {
+    background: var(--white);
+    padding: 3rem;
+
+    .logo {
+      margin-bottom: -.5rem;
+    }
+  }
+
+  .container {
+    text-align: center;
+
+    p {
+      margin: 3rem auto;
+      max-width: 560px;
+    }
+  }
+}

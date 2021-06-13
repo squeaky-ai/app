@@ -1,0 +1,9 @@
+.container {
+  &.md {
+    max-width: 780px;
+  }
+  
+  &.centered {
+    margin: 0 auto;
+  }
+}

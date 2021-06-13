@@ -1,0 +1,11 @@
+.header {
+  align-items: center;
+  background: var(--background);
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+
+  &.transparent {
+    background: transparent;
+  }
+}
