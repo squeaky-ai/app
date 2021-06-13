@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Head from 'next/head';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-import { emailExists } from '../../data/auth';
+import { emailExists, signup } from '../../data/auth';
 import { Container } from '../../components/container';
 import { Card } from '../../components/card';
 import { Label } from '../../components/label';
@@ -13,11 +13,13 @@ import { Input } from '../../components/input';
 import { Button } from '../../components/button';
 import { Checkbox } from '../../components/checkbox';
 import { Message } from '../../components/message';
+import { Password } from '../../components/password';
 
 enum PageView {
   EMAIL,
   PASSWORD,
-  EMAIL_TAKEN
+  EMAIL_TAKEN,
+  VERIFY
 }
 
 const EmailSchema = Yup.object().shape({
@@ -86,7 +88,7 @@ const Signup: NextPage = () => {
                     <span className='validation'>{errors.email}</span>
 
                     <Checkbox name='terms' onChange={handleChange} checked={values.terms} invalid={touched.terms && !!errors.terms}>
-                      I have read and accept the <a href='#'>Terms Of Use</a>
+                      I have read and accept the <a href='#TODO'>Terms Of Use</a>
                     </Checkbox>
                     <span className='validation'>{errors.terms}</span>
 
@@ -107,8 +109,12 @@ const Signup: NextPage = () => {
                 validationSchema={PasswordSchema}
                 onSubmit={(values, { setSubmitting }) => {
                   (async () => {
-                    console.log(values);
+                    const { body } = await signup({ email: values.email, password: values.password });
                     setSubmitting(false);
+
+                    if (body) {
+                      setPageView(PageView.VERIFY);
+                    }
                   })();
                 }}
               >
@@ -137,8 +143,10 @@ const Signup: NextPage = () => {
                     />
                     <span className='validation'>{errors.password}</span>
 
+                    <Password password={values.password} />
+
                     <Checkbox name='terms' onChange={handleChange} checked={values.terms} invalid={touched.terms && !!errors.terms}>
-                      I have read and accept the <a href='#'>Terms Of Use</a>
+                      I have read and accept the <a href='#TODO'>Terms Of Use</a>
                     </Checkbox>
                     <span className='validation'>{errors.terms}</span>
 
@@ -159,6 +167,17 @@ const Signup: NextPage = () => {
               </Link>
               <Button className='secondary' onClick={() => setPageView(PageView.EMAIL)}>
                 Sign Up With A Different Email
+              </Button>
+            </div>
+          )}
+
+          {pageView === PageView.VERIFY && (
+            <div className='verify'>
+              <i className='ri-checkbox-circle-line' />
+              <h4>Sign Up Complete</h4>
+              <p>To log in to your account, please open the verification email sent to <b>{email}</b> and click the link provided.</p>
+              <Button className='secondary' onClick={() => console.log('TODO')}>
+                Resend Verification Email
               </Button>
             </div>
           )}

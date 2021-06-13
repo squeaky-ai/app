@@ -41,4 +41,19 @@
       }
     }
   }
+
+  .verify {
+    i {
+      color: var(--green-500);
+      display: block;
+      font-size: 80px;
+      font-weight: 400;
+      text-align: center;
+    }
+
+    h4 {
+      text-align: center;
+      margin: .5rem 0 2rem 0;
+    }
+  }
 }
