@@ -1,0 +1,42 @@
+.checkbox {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  margin-bottom: 1.5rem;
+
+  input {
+    display: none;
+
+    &:checked + .check {
+      background: var(--blue-500);
+      border-color: var(--blue-500);
+
+      i {
+        display: block;
+      }
+    }
+  }
+
+  .check {
+    align-items: center;
+    background: var(--white);
+    border: 2px solid var(--gray-200);
+    border-radius: var(--border-radius-sm);
+    display: flex;
+    height: 1.5rem;
+    justify-content: center;
+    margin-right: .75rem;
+    width: 1.5rem;
+
+    i {
+      color: var(--white);
+      display: none;
+    }
+  }
+
+  &:hover {
+    .check {
+      border-color: var(--blue-500);
+    }
+  }
+}

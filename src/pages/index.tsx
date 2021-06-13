@@ -14,7 +14,7 @@ const Home: NextPage = () => (
         </a>
       </Link>
 
-      <span>Already have an account? <Link href='/auth/login'><a>Log in</a></Link>.</span>
+      <span>Already have an account? <Link href='/auth/signin'><a>Log in</a></Link>.</span>
     </Header>
 
     <Container size='md' centered>

@@ -1,0 +1,25 @@
+.select {
+  background: var(--gray-50);
+  border: 2px solid var(--gray-200);
+  border-radius: var(--border-radius-md);
+  margin: 0 0 1.5rem 0;
+  position: relative;
+  width: 100%;
+
+  select {
+    appearance: none;
+    -webkit-appearance: none;
+    background: none;
+    border: none;
+    height: 40px;
+    padding: .35rem .75rem;
+    width: 100%;
+  }
+
+  i {
+    font-size: 2rem;
+    position: absolute;
+    right: 0;
+    top: .25rem;
+  }
+}
