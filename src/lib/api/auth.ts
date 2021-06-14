@@ -18,7 +18,7 @@ interface Response<T> {
 export const session = async <T>(cookie: string): Promise<T> => {
   try {
     // TODO
-    const response = await axios.get('http://localhost:4000/api/auth/current', {
+    const response = await axios.get('http://localhost:4000/api/auth/current.json', {
       headers: {
         'Accept': 'application/json',
         'Cookie': cookie
@@ -33,7 +33,7 @@ export const session = async <T>(cookie: string): Promise<T> => {
 
 export const signin = async <T>(input: SigninInput): Promise<Response<T>> => {
   try {
-    const response = await axios.post('/api/auth/sign_in', { user: input });
+    const response = await axios.post('/api/auth/sign_in.json', { user: input });
     return { body: response.data };
   } catch(error) {
     console.error(error.response.status, error.response.data);
@@ -43,7 +43,7 @@ export const signin = async <T>(input: SigninInput): Promise<Response<T>> => {
 
 export const signup = async <T>(input: SignupInput): Promise<Response<T>> => {
   try {
-    const response = await axios.post('/api/auth/sign_up', { user: input });
+    const response = await axios.post('/api/auth/sign_up.json', { user: input });
     return { body: response.data };
   } catch(error) {
     console.error(error.response);
@@ -53,7 +53,7 @@ export const signup = async <T>(input: SignupInput): Promise<Response<T>> => {
 
 export const emailExists = async <T>(email: string): Promise<Response<T>> => {
   try {
-    const response = await axios.get(`/api/auth/email_exists?email=${email}`);
+    const response = await axios.get(`/api/auth/email_exists.json?email=${email}`);
     return { body: response.data.exists };
   } catch(error) {
     console.error(error.response.status, error.response.data);
