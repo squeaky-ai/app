@@ -38,7 +38,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  if (!user.firstName || !user.lastName) {
+  if (!user?.firstName || !user?.lastName) {
     console.log('TODO: Missing name!');
   }
 

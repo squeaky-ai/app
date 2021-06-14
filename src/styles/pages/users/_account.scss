@@ -1,3 +1,11 @@
-.page.users {
+.page.user.account {
   background: var(--white);
+
+  .title {
+    margin: 3rem 0;
+  }
+
+  .delete-account {
+    color: var(--magenta-500);
+  }
 }

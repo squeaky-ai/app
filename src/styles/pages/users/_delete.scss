@@ -1,0 +1,23 @@
+.page.user.delete {
+  .title {
+    margin: 3rem 0 2rem 0;
+  }
+
+  .back-to-account {
+    display: block;
+    margin-bottom: 3rem;
+    text-decoration: none;
+
+    span {
+      text-decoration: underline;
+    }
+  }
+
+  .delete-list {
+    padding: 0 0 0 1rem;
+  }
+
+  .delete-account {
+    margin-top: 2rem;
+  }
+}

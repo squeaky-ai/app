@@ -1,9 +1,13 @@
 .user-tabs {
-  padding: 2rem 0;
+  padding: 0 0 2rem 0;
 
-  h3 {
-    align-items: center;
-    display: flex;
-    margin: 1rem 0 0 0;
+  .tab-header {
+    margin-bottom: 0;
+  }
+
+  ul {
+    li {
+      margin-bottom: 0 !important;
+    }
   }
 }

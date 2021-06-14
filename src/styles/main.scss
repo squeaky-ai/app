@@ -4,6 +4,7 @@
 
 @import './components/sites/header';
 @import './components/sites/tabs';
+@import './components/users/tabs';
 @import './components/button';
 @import './components/card';
 @import './components/checkbox';
@@ -31,4 +32,6 @@
 @import './pages/sites/[site_id]/team';
 @import './pages/sites/index';
 @import './pages/users/account';
+@import './pages/users/delete';
+@import './pages/users/password';
 @import './pages/index';

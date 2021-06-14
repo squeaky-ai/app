@@ -12,7 +12,6 @@ interface Props {
 export const Tabs: FC<Props> = ({ user, page }) => {
   return (
     <div className='user-tabs'>
-      <h3>Account Settings</h3>
       <ul className='tab-header'>
         <li className='tab'>
           <Link href='/users/account'>
