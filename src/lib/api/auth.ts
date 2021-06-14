@@ -10,6 +10,11 @@ type SignupInput = {
   password: string;
 }
 
+type ChangePasswordInput = {
+  password: string;
+  reset_password_token: string;
+}
+
 interface Response<T> {
   body?: T,
   error?: any;
@@ -69,3 +74,23 @@ export const emailExists = async <T>(email: string): Promise<Response<T>> => {
     return { error: error.response.data };
   }
 }
+
+export const resetPassword = async<T>(email:string): Promise<Response<T>> => {
+  try {
+    const response = await axios.post('/api/auth/reset_password.json?', { user: { email } });
+    return { body: response.data };
+  } catch(error) {
+    console.error(error.response.status, error.response.data);
+    return { error: error.response.data };
+  }
+};
+
+export const changePassword = async<T>(input: ChangePasswordInput): Promise<Response<T>> => {
+  try {
+    const response = await axios.put('/api/auth/change_password.json?', { user: input });
+    return { body: response.data };
+  } catch(error) {
+    console.error(error.response.status, error.response.data);
+    return { error: error.response.data };
+  }
+};

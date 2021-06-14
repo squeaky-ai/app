@@ -98,7 +98,7 @@ const Signin: NextPage<ServerSideProps> = () => {
 
                 <Label htmlFor='password'>
                   Password
-                  <Link href='#'>
+                  <Link href='/auth/reset'>
                     <a>Forgot your password?</a>
                   </Link>
                 </Label>
