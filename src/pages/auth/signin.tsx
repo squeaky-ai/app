@@ -6,7 +6,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-import { signin } from '../../lib/api/auth';
+import { signin, confirmAccount } from '../../lib/api/auth';
 import { useLoginAttemps, MAX_ATTEMPTS } from '../../hooks/login-attempts';
 import { Container } from '../../components/container';
 import { Card } from '../../components/card';
@@ -25,6 +25,20 @@ const Signin: NextPage<ServerSideProps> = () => {
   const router = useRouter();
   const [attemps, exceeded, incrAttempt, clearAttempt] = useLoginAttemps();
   const [failed, setFailed] = React.useState<boolean>(false);
+  const [confirmed, setConfirmed] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    (async () => {
+      const { token } = router.query;
+      if (!token) return;
+
+      const { error } = await confirmAccount(token as string);
+      if (!error) {
+        setConfirmed(true);
+        router.push({ pathname: '/api/signin', query: {} });
+      }
+    })();
+  }, []);
 
   return (
     <div className='page signin'>
@@ -40,6 +54,13 @@ const Signin: NextPage<ServerSideProps> = () => {
           </Link>
 
           <h2>Log In</h2>
+
+          {confirmed && (
+            <Message
+              type='success'
+              message='Your email address has been verified.'
+            />
+          )}
 
           {(exceeded || failed) && (
             <Message 
