@@ -8,3 +8,14 @@ export interface User {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface UserMutationInput {
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+}
+
+export interface UserMutationResponse {
+  user?: User;
+  error?: { [key: string]: string };
+}

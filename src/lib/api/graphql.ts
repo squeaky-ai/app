@@ -1,11 +1,19 @@
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
-import { SitesQueryResponse, SiteQueryResponse, SiteMutationResponse } from 'types/site';
+import { SitesQueryResponse, SiteQueryResponse, SiteMutationResponse } from '../../types/site';
+import { UserMutationInput, UserMutationResponse } from '../../types/user';
 
 export const client = new ApolloClient({
   uri: '/api/graphql',
   cache: new InMemoryCache(),
   ssrMode: typeof window === 'undefined',
 });
+
+const parseGraphQLError = (error: Error): { [key: string]: string } => {
+  const parts = error.message.split(' ');
+  const key = parts[0].toLowerCase();
+  const value = parts.slice(1).join(' ');
+  return { [key]: value };
+};
 
 export const getSites = async (): Promise<SitesQueryResponse> => {
   try {
@@ -105,13 +113,29 @@ export const createSite = async (name: string, url: string): Promise<SiteMutatio
     return { site: data.siteCreate };
   } catch(error) {
     console.error(error);
+    return parseGraphQLError(error);
+  }
+};
 
-    const parts = error.message.split(' ');
-    const key = parts[0].toLowerCase();
-    const value = parts.slice(1).join(' ');
+export const updateUser = async (input: UserMutationInput): Promise<UserMutationResponse> => {
+  try {
+    const { data } = await client.mutate({
+      mutation: gql`
+        mutation UserUpdate($input: UserUpdateInput!) {
+          userUpdate(input: $input) {
+            id
+            firstName
+            lastName
+            email
+          }
+        }
+      `,
+      variables: { input }
+    });
 
-    return { 
-      error: { [key]: value }
-    };
+    return { user: data.userUpdate };
+  } catch(error) {
+    console.error(error);
+    return parseGraphQLError(error);
   }
 };

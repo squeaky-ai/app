@@ -12,6 +12,7 @@ import { Divider } from '../../components/divider';
 import { Header } from '../../components/sites/header';
 import { Tabs } from '../../components/users/tabs';
 import { ServerSideProps, getServerSideProps } from '../../lib/auth';
+import { updateUser } from '../../lib/api/graphql';
 
 const AccountSchema = Yup.object().shape({
   email: Yup.string().email('Please enter a valid email address').required('Email is required'),
@@ -38,7 +39,8 @@ const Users: NextPage<ServerSideProps> = ({ user }) => (
           validationSchema={AccountSchema}
           onSubmit={(values, { setSubmitting }) => {
             (async () => {
-              console.log(values);
+              await updateUser(values);
+              setSubmitting(false);
             })();
           }}
         >
