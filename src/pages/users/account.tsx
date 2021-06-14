@@ -20,7 +20,7 @@ const AccountSchema = Yup.object().shape({
   lastName: Yup.string().required('Last name is required'),
 });
 
-const Users: NextPage<ServerSideProps> = ({ user }) => (
+const UsersAccount: NextPage<ServerSideProps> = ({ user }) => (
   <div className='page user account'>
     <Head>
       <title>Squeaky / User / Account</title>
@@ -110,5 +110,5 @@ const Users: NextPage<ServerSideProps> = ({ user }) => (
   </div>
 );
 
-export default Users;
+export default UsersAccount;
 export { getServerSideProps };
