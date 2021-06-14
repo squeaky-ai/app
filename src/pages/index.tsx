@@ -5,8 +5,9 @@ import Image from 'next/image';
 import Head from 'next/head';
 import { Container } from '../components/container';
 import { Header } from '../components/header';
+import { ServerSideProps, getServerSideProps } from '../lib/auth';
 
-const Home: NextPage = () => (
+const Home: NextPage<ServerSideProps> = ({ user }) => (
   <div className='page home'>
     <Head>
       <title>Squeaky</title>
@@ -19,7 +20,10 @@ const Home: NextPage = () => (
         </a>
       </Link>
 
-      <span>Already have an account? <Link href='/auth/signin'><a>Log in</a></Link>.</span>
+      {user
+        ? <p>Welcome back, <Link href='/sites'><a>Go to app</a></Link></p>
+        : <span>Already have an account? <Link href='/auth/signin'><a>Log in</a></Link>.</span>
+      }
     </Header>
 
     <Container className='md centered'>
@@ -31,3 +35,4 @@ const Home: NextPage = () => (
 );
 
 export default Home;
+export { getServerSideProps };

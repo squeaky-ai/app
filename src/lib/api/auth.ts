@@ -15,6 +15,21 @@ interface Response<T> {
   error?: any;
 }
 
+export const session = async <T>(cookie: string): Promise<T> => {
+  try {
+    // TODO
+    const response = await axios.get('http://localhost:4000/api/auth/current', {
+      headers: {
+        'Accept': 'application/json',
+        'Cookie': cookie
+      }
+    });
+    return response.data;
+  } catch {
+    return null;
+  }
+};
+
 export const signin = async <T>(input: SigninInput): Promise<Response<T>> => {
   try {
     const response = await axios.post('/api/auth/sign_in', { user: input });

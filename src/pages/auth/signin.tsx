@@ -6,21 +6,22 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-import { signin } from '../../data/auth';
-import { useLoginAttemps, MAX_ATTEMPTS } from '../../data/login-attempts';
+import { signin } from '../../lib/api/auth';
+import { useLoginAttemps, MAX_ATTEMPTS } from '../../hooks/login-attempts';
 import { Container } from '../../components/container';
 import { Card } from '../../components/card';
 import { Label } from '../../components/label';
 import { Input } from '../../components/input';
 import { Button } from '../../components/button';
 import { Message } from '../../components/message';
+import { ServerSideProps, getServerSideProps } from '../../lib/auth';
 
 const SigninSchema = Yup.object().shape({
   email: Yup.string().email('Please enter a valid email address').required('Email is required'),
   password: Yup.string().required('Password is required')
 });
 
-const Signin: NextPage = () => {
+const Signin: NextPage<ServerSideProps> = () => {
   const router = useRouter();
   const [attemps, exceeded, incrAttempt, clearAttempt] = useLoginAttemps();
   const [failed, setFailed] = React.useState<boolean>(false);
@@ -130,3 +131,4 @@ const Signin: NextPage = () => {
 };
 
 export default Signin;
+export { getServerSideProps };

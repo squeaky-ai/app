@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Head from 'next/head';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-import { emailExists, signup } from '../../data/auth';
+import { emailExists, signup } from '../../lib/api/auth';
 import { Container } from '../../components/container';
 import { Card } from '../../components/card';
 import { Label } from '../../components/label';
@@ -14,6 +14,7 @@ import { Button } from '../../components/button';
 import { Checkbox } from '../../components/checkbox';
 import { Message } from '../../components/message';
 import { Password } from '../../components/password';
+import { ServerSideProps, getServerSideProps } from '../../lib/auth';
 
 enum PageView {
   EMAIL,
@@ -32,7 +33,7 @@ const PasswordSchema = Yup.object().shape({
   terms: Yup.boolean().oneOf([true], 'You must agree to the terms')
 });
 
-const Signup: NextPage = () => {
+const Signup: NextPage<ServerSideProps> = () => {
   const [pageView, setPageView] = React.useState(PageView.EMAIL);
   const [email, setEmail] = React.useState<string>(null);
 
@@ -57,7 +58,7 @@ const Signup: NextPage = () => {
                 validationSchema={EmailSchema}
                 onSubmit={(values, { setSubmitting }) => {
                   (async () => {
-                    const { body } = await emailExists(values.email);
+                    const { body } = await emailExists<boolean>(values.email);
                     setSubmitting(false);
                     setEmail(values.email);
                     setPageView(body ? PageView.EMAIL_TAKEN : PageView.PASSWORD);
@@ -192,3 +193,4 @@ const Signup: NextPage = () => {
 };
 
 export default Signup;
+export { getServerSideProps };
