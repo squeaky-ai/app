@@ -1,4 +1,5 @@
 import axios from 'axios';
+import getConfig from 'next/config';
 
 type SigninInput = {
   email: string;
@@ -20,10 +21,11 @@ interface Response<T> {
   error?: any;
 }
 
+const { publicRuntimeConfig } = getConfig();
+
 export const session = async <T>(cookie: string): Promise<T> => {
   try {
-    // TODO
-    const response = await axios.get('http://localhost:4000/api/auth/current.json', {
+    const response = await axios.get(`${publicRuntimeConfig.apiHost}/api/auth/current.json`, {
       headers: {
         'Accept': 'application/json',
         'Cookie': cookie

@@ -1,13 +1,18 @@
+const { API_HOST, NODE_ENV } = process.env;
+
 module.exports = {
   future: {
     webpack5: true
   },
+  publicRuntimeConfig: {
+    apiHost: API_HOST || 'http://localhost:4000'
+  },
   async rewrites() {
-    return [
+    return NODE_ENV !== 'production' ? [
       {
         source: '/api/:slug*',
         destination: 'http://localhost:4000/api/:slug*'
       }
-    ];
+    ] : [];
   }
 };
