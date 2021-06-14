@@ -25,3 +25,8 @@ export interface SiteQueryResponse {
 export interface SitesQueryResponse {
   sites: Site[];
 }
+
+export interface SiteMutationResponse {
+  site?: Site;
+  error?: { [key: string]: string };
+}

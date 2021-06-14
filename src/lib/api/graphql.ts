@@ -1,5 +1,5 @@
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
-import { SitesQueryResponse, SiteQueryResponse } from 'types/site';
+import { SitesQueryResponse, SiteQueryResponse, SiteMutationResponse } from 'types/site';
 
 export const client = new ApolloClient({
   uri: '/api/graphql',
@@ -83,5 +83,34 @@ export const getSite = async (id: string): Promise<SiteQueryResponse> => {
   } catch(error) {
     console.error(error);
     return { site: null };
+  }
+};
+
+export const createSite = async (name: string, url: string): Promise<SiteMutationResponse> => {
+  try {
+    const { data } = await client.mutate({
+      mutation: gql`
+        mutation SiteCreate($input: SiteCreateInput!) {
+          siteCreate(input: $input) {
+            id
+            name
+            url
+          }
+        }
+      `,
+      variables: { input: { name, url } },
+    });
+
+    return { site: data.siteCreate };
+  } catch(error) {
+    console.error(error);
+
+    const parts = error.message.split(' ');
+    const key = parts[0].toLowerCase();
+    const value = parts.slice(1).join(' ');
+
+    return { 
+      error: { [key]: value }
+    };
   }
 };
