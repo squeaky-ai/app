@@ -16,7 +16,7 @@ const Sites: NextPage<ServerSideProps> = ({ user }) => (
     <Header>
       <Link href='/'>
         <a className='logo'>
-          <Image src='/logo.svg' height={48} width={158} />
+          <Image src='/logo.svg' height={32} width={103} />
         </a>
       </Link>
 

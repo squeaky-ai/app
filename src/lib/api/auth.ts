@@ -25,7 +25,8 @@ export const session = async <T>(cookie: string): Promise<T> => {
       }
     });
     return response.data;
-  } catch {
+  } catch(error) {
+    console.error(error.response.status, error.response.data);
     return null;
   }
 };
@@ -35,7 +36,7 @@ export const signin = async <T>(input: SigninInput): Promise<Response<T>> => {
     const response = await axios.post('/api/auth/sign_in', { user: input });
     return { body: response.data };
   } catch(error) {
-    console.error(error);
+    console.error(error.response.status, error.response.data);
     return { error: error.response.data };
   }
 };
@@ -45,7 +46,7 @@ export const signup = async <T>(input: SignupInput): Promise<Response<T>> => {
     const response = await axios.post('/api/auth/sign_up', { user: input });
     return { body: response.data };
   } catch(error) {
-    console.error(error);
+    console.error(error.response);
     return { error: error.response.data };
   }
 };
@@ -55,7 +56,7 @@ export const emailExists = async <T>(email: string): Promise<Response<T>> => {
     const response = await axios.get(`/api/auth/email_exists?email=${email}`);
     return { body: response.data.exists };
   } catch(error) {
-    console.error(error);
+    console.error(error.response.status, error.response.data);
     return { error: error.response.data };
   }
 }
