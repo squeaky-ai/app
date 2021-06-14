@@ -1,10 +1,9 @@
 import React from 'react';
-import { getSites } from '../lib/api/graphql';
+import { useRouter } from 'next/router';
+import { getSites, getSite } from '../lib/api/graphql';
 import type { Site } from '../types/site';
 
-type Sites = [boolean, Site[]];
-
-export const useSites = (): Sites => {
+export const useSites = (): [boolean, Site[]] => {
   const [loading, setLoading] = React.useState(true);
   const [sites, setSites] = React.useState<Site[]>([]);
 
@@ -17,4 +16,20 @@ export const useSites = (): Sites => {
   }, []);
 
   return [loading, sites];
+};
+
+export const useSite = (): [boolean, Site | null] => {
+  const router = useRouter();
+  const [loading, setLoading] = React.useState(true);
+  const [site, setSite] = React.useState<Site>(null);
+
+  React.useEffect(() => {
+    (async () => {
+      const response = await getSite(router.query.site_id as string);
+      setLoading(false);
+      setSite(response.site);
+    })();
+  }, []);
+
+  return [loading, site];
 };

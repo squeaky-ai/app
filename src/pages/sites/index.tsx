@@ -50,7 +50,7 @@ const Sites: NextPage<ServerSideProps> = () => {
             <ul className='sites-list'>
               {sites.map(site => (
                 <li key={site.id}>
-                  <Link href={`/sites/${site.id}`}>
+                  <Link href={`/sites/${site.id}/recordings`}>
                     <a>
                       <span className='avatar'></span>
                       <p className='name'><b>{site.name}</b></p>

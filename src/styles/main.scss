@@ -3,6 +3,7 @@
 @import './variables';
 
 @import './components/sites/header';
+@import './components/sites/tabs';
 @import './components/button';
 @import './components/card';
 @import './components/checkbox';
@@ -18,9 +19,14 @@
 @import './components/password';
 @import './components/select';
 @import './components/spinner';
+@import './components/tabs';
 
 @import './pages/auth/reset';
 @import './pages/auth/signin';
 @import './pages/auth/signup';
+@import './pages/sites/[site_id]/analytics';
+@import './pages/sites/[site_id]/recordings';
+@import './pages/sites/[site_id]/settings';
+@import './pages/sites/[site_id]/team';
 @import './pages/sites/index';
 @import './pages/index';
