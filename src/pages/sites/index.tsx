@@ -8,7 +8,6 @@ import { Formik } from 'formik';
 import { useRouter } from 'next/router';
 import { Container } from '../../components/container';
 import { Header } from '../../components/sites/header';
-import { Spinner } from '../../components/spinner';
 import { Label } from '../../components/label';
 import { Input } from '../../components/input';
 import { Button } from '../../components/button';
@@ -44,10 +43,6 @@ const Sites: NextPage<ServerSideProps> = () => {
       <Header />
 
       <Container className='lg centered'>
-        {loading && (
-          <Spinner />
-        )}
-
         {!loading && sites.length === 0 && (
           <div className='empty-state'>
             <div className='contents'>

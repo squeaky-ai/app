@@ -4,7 +4,6 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { Container } from '../../../components/container';
 import { Header } from '../../../components/sites/header';
-import { Spinner } from '../../../components/spinner';
 import { Message } from '../../../components/message';
 import { Tabs } from '../../../components/sites/tabs';
 import { ServerSideProps, getServerSideProps } from '../../../lib/auth';
@@ -20,10 +19,6 @@ const SitesRecordings: NextPage<ServerSideProps> = () => {
       </Head>
 
       <Header />
-
-      {loading && (
-        <Spinner />
-      )}
 
       {!loading && site && (
         <Container className='lg centered'>

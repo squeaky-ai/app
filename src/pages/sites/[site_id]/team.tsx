@@ -3,7 +3,6 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { Container } from '../../../components/container';
 import { Header } from '../../../components/sites/header';
-import { Spinner } from '../../../components/spinner';
 import { Tabs } from '../../../components/sites/tabs';
 import { ServerSideProps, getServerSideProps } from '../../../lib/auth';
 import { useSite } from '../../../hooks/sites';
@@ -18,10 +17,6 @@ const SitesTeam: NextPage<ServerSideProps> = () => {
       </Head>
 
       <Header />
-
-      {loading && (
-        <Spinner />
-      )}
 
       {!loading && site && (
         <Container className='lg centered'>
