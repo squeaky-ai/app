@@ -50,6 +50,7 @@ export const getSite = async (id: string): Promise<SiteQueryResponse> => {
               user {
                 firstName
                 lastName
+                fullName
                 email
               }
             }

@@ -1,3 +1,41 @@
 .page.settings {
   background: var(--white);
+
+  .tracking {
+    .label {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+
+      .button {
+        background: none;
+        border: none;
+        color: var(--blue-500);
+        font-weight: 600;
+        padding: none;
+      }
+    }
+
+    .verify-site {
+      display: inline-block;
+      margin: 1.5rem 0 3rem 0;
+    }
+  }
+
+  h4 {
+    align-items: center;
+    display: flex;
+
+    .verified {
+      align-items: center;
+      display: flex;
+      font-size: 16px;
+      font-weight: 400;
+
+      .icon {
+        color: var(--green-500);
+        margin: 0 .25rem 0 1rem;
+      }
+    }
+  }
 }
