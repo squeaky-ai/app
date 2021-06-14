@@ -1,0 +1,15 @@
+.site-header {
+  .dropdown {
+    position: relative;
+
+    .button {
+      background: none;
+      border: none;
+
+      i:first-of-type {
+        color: var(--gray-500);
+        font-size: 1.5rem;
+      }
+    }
+  }
+}

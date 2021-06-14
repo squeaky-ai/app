@@ -1,10 +1,10 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Link from 'next/link';
-import Image from 'next/image';
 import Head from 'next/head';
+import Image from 'next/image';
 import { Container } from '../../components/container';
-import { Header } from '../../components/header';
+import { Header } from '../../components/sites/header';
 import { ServerSideProps, getServerSideProps } from '../../lib/auth';
 
 const Sites: NextPage<ServerSideProps> = ({ user }) => (
@@ -13,15 +13,7 @@ const Sites: NextPage<ServerSideProps> = ({ user }) => (
       <title>Squeaky / Sites</title>
     </Head>
 
-    <Header>
-      <Link href='/sites'>
-        <a className='logo'>
-          <Image src='/logo.svg' height={32} width={103} />
-        </a>
-      </Link>
-
-      <span />
-    </Header>
+    <Header />
 
     <Container className='lg centered'>
       <p>Sites</p>

@@ -59,7 +59,7 @@ const Signin: NextPage<ServerSideProps> = () => {
               (async () => {
                 if (exceeded) return;
 
-                const { body, error } = await signin(values);
+                const { error } = await signin(values);
 
                 setSubmitting(false);
 
@@ -68,9 +68,8 @@ const Signin: NextPage<ServerSideProps> = () => {
                   return incrAttempt();
                 }
 
-                // setUser(body);
                 clearAttempt();
-                await router.push('/');
+                await router.push('/sites');
               })();
             }}
           >

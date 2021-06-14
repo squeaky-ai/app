@@ -1,6 +1,24 @@
 .dropdown {
   position: relative;
 
+  .button {
+    align-items: center;
+    display: flex;
+    padding-right: 1.5rem;
+    position: relative;
+
+    i {
+      display: block;
+    }
+
+    .arrow {
+      font-size: 1.5rem;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+
   .dropdown-menu {
     background: var(--white);
     border-radius: var(--border-radius-md);
@@ -27,7 +45,13 @@
     }
   }
 
-  &:hover {
+  &.open {
+    .button {
+      .arrow {
+        transform: rotate(180deg);
+      }
+    }
+
     .dropdown-menu {
       display: block;
     }

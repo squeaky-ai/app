@@ -51,6 +51,15 @@ export const signup = async <T>(input: SignupInput): Promise<Response<T>> => {
   }
 };
 
+export const signout = async (): Promise<void> => {
+  try {
+    await axios.delete('/api/auth/sign_out.json');
+  } catch(error) {
+    console.error(error.response);
+    return null;
+  }
+};
+
 export const emailExists = async <T>(email: string): Promise<Response<T>> => {
   try {
     const response = await axios.get(`/api/auth/email_exists.json?email=${email}`);
