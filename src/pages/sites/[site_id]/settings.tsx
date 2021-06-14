@@ -26,6 +26,7 @@ const SitesSettings: NextPage<ServerSideProps> = () => {
       {!loading && site && (
         <Container className='lg centered'>
           <Tabs site={site} page='settings' />
+          <h3>Settings</h3>
         </Container>
       )}
     </div>

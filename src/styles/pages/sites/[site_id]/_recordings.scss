@@ -1,3 +1,21 @@
 .page.recordings {
   background: var(--white);
+
+  .empty-state {
+    align-items: center;
+    background: var(--gray-50);
+    border-radius: var(--border-radius-lg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem;
+
+    h3 {
+      font-size: 3.2rem;
+    }
+
+    .message {
+      max-width: 580px;
+    }
+  }
 }
