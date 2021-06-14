@@ -22,7 +22,7 @@ export const Header: FC = () => {
       </Link>
 
       <Dropdown button={<i className='ri-account-circle-line' />}>
-        <Link href='/users'>
+        <Link href='/users/account'>
           <a className='button'>Edit account</a>
         </Link>
         <Button onClick={handleSignOut}>Log out</Button>

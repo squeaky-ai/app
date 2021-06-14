@@ -10,6 +10,12 @@
         color: var(--gray-500);
         font-size: 1.5rem;
       }
+
+      &:hover {
+        i:first-of-type {
+          color: var(--gray-800);
+        }
+      }
     }
   }
 }
