@@ -30,10 +30,12 @@ const SitesTeam: NextPage<ServerSideProps> = () => {
           <div className='table'>
             <table cellSpacing='0'>
               <thead>
-                <th>Name</th>
-                <th>Email address</th>
-                <th>Role</th>
-                <th>Options</th>
+                <tr>
+                  <th>Name</th>
+                  <th>Email address</th>
+                  <th>Role</th>
+                  <th>Options</th>
+                </tr>
               </thead>
               <tbody>
                 {site.team.map(team => (

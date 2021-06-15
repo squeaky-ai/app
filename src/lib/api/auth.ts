@@ -99,7 +99,7 @@ export const changePassword = async<T>(input: ChangePasswordInput): Promise<Resp
 
 export const reconfirm = async<T>(email: string): Promise<Response<T>> => {
   try {
-    const response = await axios.post('/api/auth/reset_password.json?', { user: { email }});
+    const response = await axios.post('/api/auth/reset_password.json', { user: { email }});
     return { body: response.data };
   } catch(error) {
     console.error(error.response.status, error.response.data);

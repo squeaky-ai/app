@@ -41,7 +41,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   // A bunch of the site expects the users first and last
   // name to exist so we should trap them here until they've
   // filled it out
-  if ((!user?.firstName || !user?.lastName) && url !== '/users/new') {
+  if (user && (!user?.firstName || !user?.lastName) && url !== '/users/new') {
     return {
       redirect: {
         destination: '/users/new',

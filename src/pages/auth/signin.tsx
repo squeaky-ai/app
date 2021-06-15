@@ -35,7 +35,7 @@ const Signin: NextPage<ServerSideProps> = () => {
       const { error } = await confirmAccount(token as string);
       if (!error) {
         setConfirmed(true);
-        router.push({ pathname: '/api/signin', query: {} });
+        router.push({ pathname: '/auth/signin', query: {} });
       }
     })();
   }, []);

@@ -1,5 +1,5 @@
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
-import { SitesQueryResponse, SiteQueryResponse, SiteMutationResponse } from '../../types/site';
+import { SitesQueryResponse, SiteQueryResponse, SiteMutationResponse, SiteMutationInput } from '../../types/site';
 import { UserMutationInput, UserMutationResponse } from '../../types/user';
 
 export const client = new ApolloClient({
@@ -111,6 +111,28 @@ export const createSite = async (name: string, url: string): Promise<SiteMutatio
     });
 
     return { site: data.siteCreate };
+  } catch(error) {
+    console.error(error);
+    return parseGraphQLError(error);
+  }
+};
+
+export const updateSite = async (input: SiteMutationInput): Promise<SiteMutationResponse> => {
+  try {
+    const { data } = await client.mutate({
+      mutation: gql`
+        mutation SiteUpdate($input: SiteUpdateInput!) {
+          siteUpdate(input: $input) {
+            id
+            name
+            url
+          }
+        }
+      `,
+      variables: { input }
+    });
+
+    return { site: data.siteUpdate };
   } catch(error) {
     console.error(error);
     return parseGraphQLError(error);

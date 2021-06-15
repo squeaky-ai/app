@@ -30,3 +30,9 @@ export interface SiteMutationResponse {
   site?: Site;
   error?: { [key: string]: string };
 }
+
+export interface SiteMutationInput {
+  siteId: string;
+  name?: string;
+  url?: string;
+}
