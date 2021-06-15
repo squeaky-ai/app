@@ -40,18 +40,18 @@ export const Tabs: FC<Props> = ({ site, page }) => {
           </Link>
         </li>
         <li className='tab'>
-          <Link href={`/sites/${site.id}/settings`}>
-            <a className={classnames('button tab-button', { active: page === 'settings' })}>
-              <i className='ri-settings-3-line' />
-              Settings
-            </a>
-          </Link>
-        </li>
-        <li className='tab'>
           <Link href={`/sites/${site.id}/team`}>
             <a className={classnames('button tab-button', { active: page === 'team' })}>
               <i className='ri-group-line' />
               Team
+            </a>
+          </Link>
+        </li>
+        <li className='tab'>
+          <Link href={`/sites/${site.id}/settings`}>
+            <a className={classnames('button tab-button', { active: page === 'settings' })}>
+              <i className='ri-settings-3-line' />
+              Settings
             </a>
           </Link>
         </li>
