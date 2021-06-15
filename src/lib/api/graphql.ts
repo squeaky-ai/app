@@ -56,6 +56,7 @@ export const getSite = async (id: string): Promise<SiteQueryResponse> => {
               role
               status
               user {
+                id
                 firstName
                 lastName
                 fullName
