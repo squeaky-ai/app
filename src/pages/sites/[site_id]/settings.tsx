@@ -12,6 +12,7 @@ import { Tabs } from '../../../components/sites/tabs';
 import { Drawer } from '../../../components/drawer';
 import { ServerSideProps, getServerSideProps } from '../../../lib/auth';
 import { updateSite } from '../../../lib/api/graphql';
+import { useToasts } from '../../../hooks/toasts';
 import { useSite } from '../../../hooks/sites';
 
 const DetailsSchema = Yup.object().shape({
@@ -20,6 +21,7 @@ const DetailsSchema = Yup.object().shape({
 });
 
 const SitesSettings: NextPage<ServerSideProps> = () => {
+  const toast = useToasts();
   const [loading, site] = useSite();
 
   return (
@@ -46,6 +48,8 @@ const SitesSettings: NextPage<ServerSideProps> = () => {
                   if (error) {
                     const [key, value] = Object.entries(error)[0];
                     setErrors({ [key]: value });
+                  } else {
+                    toast.add({ type: 'success', body: 'Your site changes have been successfully saved.' });
                   }
                 })();
               }}
