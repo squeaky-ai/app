@@ -18,4 +18,45 @@
       max-width: 580px;
     }
   }
+
+  .table {
+    color: var(--gray-700);
+    margin-top: 3rem;
+
+    .indicator {
+      background: var(--gray-200);
+      border-radius: 50%;
+      display: inline-block;
+      height: .75rem;
+      margin-right: .5rem;
+      width: .75rem;
+
+      &.active {
+        background: var(--green-500);
+      }
+    }
+
+    .device {
+      color: var(--blue-500);
+      font-size: 1.5rem;
+      margin-right: .5rem;
+      vertical-align: middle;
+    }
+
+    .start-exit-page {
+      font-size: 13px;
+      line-height: 20px;
+
+      td {
+        border: none;
+        padding: 0;
+        text-align: left;
+
+        &:first-of-type {
+          color: var(--gray-200);
+          width: 70px;
+        }
+      }
+    }
+  }
 }

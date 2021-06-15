@@ -5,6 +5,7 @@ export interface Recording {
   id: string;
   active: boolean;
   locale: string;
+  viewerId: string;
   duration: number;
   pageCount: number;
   startPage: string;
