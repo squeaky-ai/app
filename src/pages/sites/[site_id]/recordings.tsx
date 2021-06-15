@@ -50,7 +50,7 @@ const SitesRecordings: NextPage<ServerSideProps> = () => {
             </div>
           )}
 
-          {site.recordings.items.length && (
+          {!!site.recordings.items.length && (
             <div className='table'>
               <table cellSpacing='0'>
                 <thead>
