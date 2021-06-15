@@ -13,6 +13,7 @@ import { Header } from '../../components/sites/header';
 import { Tabs } from '../../components/users/tabs';
 import { ServerSideProps, getServerSideProps } from '../../lib/auth';
 import { updateUser } from '../../lib/api/graphql';
+import { useToasts } from '../../hooks/toasts';
 
 const AccountSchema = Yup.object().shape({
   email: Yup.string().email('Please enter a valid email address').required('Email is required'),
@@ -20,95 +21,100 @@ const AccountSchema = Yup.object().shape({
   lastName: Yup.string().required('Last name is required'),
 });
 
-const UsersAccount: NextPage<ServerSideProps> = ({ user }) => (
-  <div className='page user account'>
-    <Head>
-      <title>Squeaky / User / Account</title>
-    </Head>
+const UsersAccount: NextPage<ServerSideProps> = ({ user }) => {
+  const toast = useToasts();
 
-    <Header />
+  return (
+    <div className='page user account'>
+      <Head>
+        <title>Squeaky / User / Account</title>
+      </Head>
 
-    <Container className='lg centered'>
-      <h3 className='title'>Account Settings</h3>
+      <Header />
 
-      <Tabs user={user} page='account' />
+      <Container className='lg centered'>
+        <h3 className='title'>Account Settings</h3>
 
-      <Container className='xsm'>
-        <Formik
-          initialValues={{ email: user.email, firstName: user.firstName, lastName: user.lastName }}
-          validationSchema={AccountSchema}
-          onSubmit={(values, { setSubmitting }) => {
-            (async () => {
-              await updateUser(values);
-              setSubmitting(false);
-            })();
-          }}
-        >
-          {({
-            errors,
-            handleBlur,
-            handleChange,
-            handleSubmit,
-            isSubmitting,
-            touched,
-            values,
-          }) => (
-            <form onSubmit={handleSubmit}>
-              <Label htmlFor='email'>Email address</Label>
-              <Input
-                name='email' 
-                type='email' 
-                onBlur={handleBlur}
-                onChange={handleChange}
-                placeholder='e.g. jess@email.com'
-                autoComplete='email'
-                value={values.email}
-                invalid={touched.email && !!errors.email}
-              />
-              <span className='validation'>{errors.email}</span>
+        <Tabs user={user} page='account' /> 
 
-              <Label htmlFor='firstName'>First name</Label>
-              <Input
-                name='firstName' 
-                type='text' 
-                onBlur={handleBlur}
-                onChange={handleChange}
-                placeholder='e.g. Jess'
-                autoComplete='given-name'
-                value={values.firstName}
-                invalid={touched.firstName && !!errors.firstName}
-              />
-              <span className='validation'>{errors.firstName}</span>
+        <Container className='xsm'>
+          <Formik
+            initialValues={{ email: user.email, firstName: user.firstName, lastName: user.lastName }}
+            validationSchema={AccountSchema}
+            onSubmit={(values, { setSubmitting }) => {
+              (async () => {
+                await updateUser(values);
+                setSubmitting(false);
+                toast.add({ type: 'success', body: 'Settings saved successfully' });
+              })();
+            }}
+          >
+            {({
+              errors,
+              handleBlur,
+              handleChange,
+              handleSubmit,
+              isSubmitting,
+              touched,
+              values,
+            }) => (
+              <form onSubmit={handleSubmit}>
+                <Label htmlFor='email'>Email address</Label>
+                <Input
+                  name='email' 
+                  type='email' 
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  placeholder='e.g. jess@email.com'
+                  autoComplete='email'
+                  value={values.email}
+                  invalid={touched.email && !!errors.email}
+                />
+                <span className='validation'>{errors.email}</span>
 
-              <Label htmlFor='lastName'>Last name</Label>
-              <Input
-                name='lastName' 
-                type='text' 
-                onBlur={handleBlur}
-                onChange={handleChange}
-                placeholder='e.g. Smith'
-                autoComplete='family-name'
-                value={values.lastName}
-                invalid={touched.lastName && !!errors.lastName}
-              />
-              <span className='validation'>{errors.lastName}</span>
+                <Label htmlFor='firstName'>First name</Label>
+                <Input
+                  name='firstName' 
+                  type='text' 
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  placeholder='e.g. Jess'
+                  autoComplete='given-name'
+                  value={values.firstName}
+                  invalid={touched.firstName && !!errors.firstName}
+                />
+                <span className='validation'>{errors.firstName}</span>
 
-              <Button  type='submit' disabled={isSubmitting} className='primary'>
-                Save Changes
-              </Button>
-            </form>
-          )}
-        </Formik>
+                <Label htmlFor='lastName'>Last name</Label>
+                <Input
+                  name='lastName' 
+                  type='text' 
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  placeholder='e.g. Smith'
+                  autoComplete='family-name'
+                  value={values.lastName}
+                  invalid={touched.lastName && !!errors.lastName}
+                />
+                <span className='validation'>{errors.lastName}</span>
+
+                <Button  type='submit' disabled={isSubmitting} className='primary'>
+                  Save Changes
+                </Button>
+              </form>
+            )}
+          </Formik>
+        </Container>
+
+        <Divider />
+
+        <Link href='/users/delete'>
+          <a className='delete-account'>Delete account</a>
+        </Link>
       </Container>
-
-      <Divider />
-
-      <Link href='/users/delete'>
-        <a className='delete-account'>Delete account</a>
-      </Link>
-    </Container>
-  </div>
-);
+    </div>
+  );
+};
 
 export default UsersAccount;
 export { getServerSideProps };
