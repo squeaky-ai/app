@@ -42,39 +42,55 @@ const SitesAnalytics: NextPage<ServerSideProps> = () => {
               <h4>Pages Per Session</h4>
               <h2>0</h2>
             </div>
-            <div className='card basic pages'>
-              <h4>Pages</h4>
-              <div className='table'>
-                <table cellSpacing='0'>
-                  <thead>
-                    <tr>
-                      <th>Page</th>
-                      <th>Views</th>
-                      <th>Average time on page</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div className='card basic browser'>
-              <h4>Browser</h4>
-              <div className='card'>
+            <div className='card basic page-browser'>
+              <div className='grid'>
+                <div className='card basic pages'>
+                  <h4>Pages</h4>
+                  <div className='table'>
+                    <table cellSpacing='0'>
+                      <thead>
+                        <tr>
+                          <th>Page</th>
+                          <th>Views</th>
+                          <th>Average time on page</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div className='card basic browser'>
+                  <h4>Browser</h4>
+                  <div className='card'>
 
+                  </div>
+                </div>
               </div>
             </div>
             <div className='card basic devices'>
               <h4>Devices</h4>
               <div className='grid'>
                 <div className='card'>
-
+                  <i className='ri-computer-line' />
+                  <div className='stats'>
+                    <p><b>Desktop / Laptop</b></p>
+                    <h3>0 <span>0%</span></h3>
+                  </div>
                 </div>
                 <div className='card'>
-
+                  <i className='ri-tablet-line' />
+                  <div className='stats'>
+                    <p><b>Tablet</b></p>
+                    <h3>0 <span>0%</span></h3>
+                  </div>
                 </div>
                 <div className='card'>
-
+                  <i className='ri-smartphone-line' />
+                  <div className='stats'>
+                    <p><b>Mobile</b></p>
+                    <h3>0 <span>0%</span></h3>
+                  </div>
                 </div>
               </div>
             </div>
