@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import * as Yup from 'yup';
@@ -12,7 +12,9 @@ import { Select, Option } from '../../../components/select';
 import { Tabs } from '../../../components/sites/tabs';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from '../../../components/modal';
 import { ServerSideProps, getServerSideProps } from '../../../lib/auth';
+import { teamInvite, teamInviteCancel, teamInviteResend, teamUpdate } from '../../../lib/api/graphql';
 import { useSite } from '../../../hooks/sites';
+import { useToasts } from '../../../hooks/toasts';
 
 const InviteSchema = Yup.object().shape({
   email: Yup.string().email('Please enter a valid email address').required('Email is required'),
@@ -20,7 +22,6 @@ const InviteSchema = Yup.object().shape({
 });
 
 const roleName = (role: number | string) => {
-  console.log(role);
   switch(Number(role)) {
     case 1:
       return 'Admin';
@@ -32,6 +33,7 @@ const roleName = (role: number | string) => {
 };
 
 const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
+  const toast = useToasts();
   const ref = React.createRef<Modal>();
   const [loading, site] = useSite();
 
@@ -41,6 +43,27 @@ const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
 
   const closeModal = () => {
     if (ref.current) ref.current.hide();
+  };
+
+  const resendInvitation = async (id: string) => {
+    const { error } = await teamInviteResend({ siteId: site.id, teamId: id });
+    error
+      ? toast.add({ type: 'error', body: 'There was an unexpected error when sending your invitation. Please try again.' })
+      : toast.add({ type: 'success', body: 'Invitation resent' })
+  };
+
+  const cancelInvitation = async (id: string) => {
+    const { error } = await teamInviteCancel({ siteId: site.id, teamId: id });
+    error
+      ? toast.add({ type: 'error', body: 'There was an unexpected error when cancelling your invitation. Please try again.' })
+      : toast.add({ type: 'success', body: 'Invitation cancelled' });
+  };
+
+  const changeRole = async (id: string, role: string) => {
+    const { error } = await teamUpdate({ siteId: site.id, teamId: id, role: Number(role) });
+    error
+      ? toast.add({ type: 'error', body: 'There was an unexpected error when changing the user role. Please try again.' })
+      : toast.add({ type: 'success', body: 'Role change complete' })
   };
 
   return (
@@ -71,17 +94,38 @@ const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
                 </tr>
               </thead>
               <tbody>
-                {site.team.map(team => (
-                  <tr key={team.id}>
-                    <td>
-                      <b>{team.user.fullName}</b>
-                      {Number(team.user.id) === user.id && <i> (you)</i>}
-                    </td>
-                    <td>{team.user.email}</td>
-                    <td>{roleName(team.role)}</td>
-                    <td>-</td>
-                  </tr>
-                ))}
+                {site.team.map(team => {
+                  const self = Number(team.user.id) === user.id;
+                  const invited = team.status === 1;
+
+                  return (
+                    <tr key={team.id}>
+                      <td>
+                        {invited && <i>Invited</i>}
+                        <b>{team.user.fullName}</b>
+                        {self && <i> (you)</i>}
+                      </td>
+                      <td>{team.user.email}</td>
+                      <td className='role'>
+                        {self && roleName(team.role)}
+                        {!self && (
+                          <Select name='role' onChange={(event: ChangeEvent) => changeRole(team.id, (event.target as HTMLSelectElement).value)} defaultValue={team.role}>
+                            <Option value='0'>User</Option>
+                            <Option value='1'>Admin</Option>
+                          </Select>
+                        )}
+                      </td>
+                      <td className='options'>
+                        {invited && (
+                          <>
+                            <Button className='positive' onClick={() => resendInvitation(team.id)}>Resend Invitation</Button>
+                            <Button className='negative' onClick={() => cancelInvitation(team.id)}>Cancel Invitation</Button>
+                          </>
+                        )}
+                      </td>
+                    </tr>
+                  )
+                })}
               </tbody>
             </table>
           </div>
@@ -137,8 +181,15 @@ const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
             validationSchema={InviteSchema}
             onSubmit={(values, { setSubmitting, setErrors }) => {
               (async () => {
-                console.log(values);    
-                setSubmitting(false);      
+                const { error } = await teamInvite({ 
+                  siteId: site.id, 
+                  email: values.email, 
+                  role: Number(values.role) 
+                });
+
+                setSubmitting(false); 
+                
+                if (!error) closeModal();
               })();
             }}
           >

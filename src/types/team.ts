@@ -8,3 +8,25 @@ export interface Team {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface TeamInviteInput {
+  siteId: string;
+  email: string;
+  role: number;
+}
+
+export interface TeamInviteCancelInput {
+  siteId: string;
+  teamId: string;
+}
+
+export interface TeamInviteResendInput {
+  siteId: string;
+  teamId: string;
+}
+
+export interface TeamUpdateInput {
+  siteId: string;
+  teamId: string;
+  role: number;
+}

@@ -1,5 +1,6 @@
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
 import { SitesQueryResponse, SiteQueryResponse, SiteMutationResponse, SiteMutationInput } from '../../types/site';
+import { TeamInviteInput, TeamInviteCancelInput, TeamInviteResendInput, TeamUpdateInput } from '../../types/team';
 import { UserMutationInput, UserMutationResponse } from '../../types/user';
 
 export const client = new ApolloClient({
@@ -157,6 +158,135 @@ export const updateUser = async (input: UserMutationInput): Promise<UserMutation
     });
 
     return { user: data.userUpdate };
+  } catch(error) {
+    console.error(error);
+    return parseGraphQLError(error);
+  }
+};
+
+export const teamInvite = async (input: TeamInviteInput): Promise<SiteMutationResponse> => {
+  try {
+    const { data } = await client.mutate({
+      mutation: gql`
+        mutation TeamInvite($input: TeamInviteInput!) {
+          teamInvite(input: $input) {
+            id
+            team {
+              id
+              role
+              status
+              user {
+                id
+                firstName
+                lastName
+                fullName
+                email
+              }
+            }
+          }
+        }
+      `,
+      variables: { input }
+    });
+
+    return { site: data.teamInvite };
+  } catch(error) {
+    console.error(error);
+    return parseGraphQLError(error);
+  }
+};
+
+export const teamInviteCancel = async (input: TeamInviteCancelInput): Promise<SiteMutationResponse> => {
+  try {
+    const { data } = await client.mutate({
+      mutation: gql`
+        mutation TeamInviteCancel($input: TeamInviteCancelInput!) {
+          teamInviteCancel(input: $input) {
+            id
+            team {
+              id
+              role
+              status
+              user {
+                id
+                firstName
+                lastName
+                fullName
+                email
+              }
+            }
+          }
+        }
+      `,
+      variables: { input }
+    });
+
+    return { site: data.teamInviteCancel };
+  } catch(error) {
+    console.error(error);
+    return parseGraphQLError(error);
+  }
+};
+
+
+export const teamInviteResend = async (input: TeamInviteResendInput): Promise<SiteMutationResponse> => {
+  try {
+    const { data } = await client.mutate({
+      mutation: gql`
+        mutation TeamInviteResend($input: TeamInviteResendInput!) {
+          teamInviteResend(input: $input) {
+            id
+            team {
+              id
+              role
+              status
+              user {
+                id
+                firstName
+                lastName
+                fullName
+                email
+              }
+            }
+          }
+        }
+      `,
+      variables: { input }
+    });
+
+    return { site: data.teamInviteResend };
+  } catch(error) {
+    console.error(error);
+    return parseGraphQLError(error);
+  }
+};
+
+export const teamUpdate = async (input: TeamUpdateInput): Promise<SiteMutationResponse> => {
+  try {
+    const { data } = await client.mutate({
+      mutation: gql`
+        mutation TeamUpdate($input: TeamUpdateInput!) {
+          teamUpdate(input: $input) {
+            id
+            team {
+              id
+              role
+              status
+              user {
+                id
+                firstName
+                lastName
+                fullName
+                email
+              }
+            }
+          }
+        }
+      `,
+      variables: { input }
+    });
+
+    return { site: data.teamUpdate };
   } catch(error) {
     console.error(error);
     return parseGraphQLError(error);

@@ -6,6 +6,43 @@
     td {
       color: var(--gray-700);
     }
+
+    tr {
+      height: 3.75rem;
+    }
+
+    .role {
+      width: 240px;
+
+      .select {
+        margin: 0;
+        width: 160px;
+      }
+    }
+  
+    .options {
+      width: 340px;
+  
+      .button {
+        background: none;
+        border: none;
+        font-weight: 400;
+        padding: 0;
+        text-decoration: underline;
+  
+        &.positive {
+          color: var(--blue-500);
+        }
+  
+        &.negative {
+          color: var(--magenta-500);
+        }
+  
+        & + .button {
+          margin-left: 1rem;
+        }
+      }
+    }
   }
 
   .invite-member {
