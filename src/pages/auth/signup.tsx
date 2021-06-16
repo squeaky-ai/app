@@ -29,8 +29,7 @@ const EmailSchema = Yup.object().shape({
 });
 
 const PasswordSchema = Yup.object().shape({
-  password: Yup.string().required('Password is required'),
-  terms: Yup.boolean().oneOf([true], 'You must agree to the terms')
+  password: Yup.string().required('Password is required')
 });
 
 const Signup: NextPage<ServerSideProps> = () => {
@@ -106,7 +105,7 @@ const Signup: NextPage<ServerSideProps> = () => {
             <>
               <h2>Sign Up</h2>
               <Formik
-                initialValues={{ email, password: '', terms: false }}
+                initialValues={{ email, password: '' }}
                 validationSchema={PasswordSchema}
                 onSubmit={(values, { setSubmitting }) => {
                   (async () => {
@@ -145,11 +144,6 @@ const Signup: NextPage<ServerSideProps> = () => {
                     <span className='validation'>{errors.password}</span>
 
                     <Password password={values.password} />
-
-                    <Checkbox name='terms' onChange={handleChange} checked={values.terms} invalid={touched.terms && !!errors.terms}>
-                      I have read and accept the <a href='#TODO'>Terms Of Use</a>
-                    </Checkbox>
-                    <span className='validation'>{errors.terms}</span>
 
                     <Button type='submit' disabled={isSubmitting} className='primary'>
                       Sign up
