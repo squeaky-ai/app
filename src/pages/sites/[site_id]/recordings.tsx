@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import classnames from 'classnames';
 import UAParser from 'ua-parser-js';
-import { Container } from '../../../components/container';
+import { Main } from '../../../components/main';
 import { Header } from '../../../components/sites/header';
 import { Message } from '../../../components/message';
 import { Tabs } from '../../../components/sites/tabs';
@@ -35,7 +35,7 @@ const SitesRecordings: NextPage<ServerSideProps> = () => {
       <Header />
 
       {!loading && site && (
-        <Container className='lg centered'>
+        <Main>
           <Tabs site={site} page='recordings' />
           <h3>Recordings</h3>
 
@@ -111,7 +111,7 @@ const SitesRecordings: NextPage<ServerSideProps> = () => {
               </table>
             </div>
           )}
-        </Container>
+        </Main>
       )}
     </div>
   );

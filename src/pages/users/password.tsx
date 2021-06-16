@@ -9,6 +9,7 @@ import { Button } from '../../components/button';
 import { Label } from '../../components/label';
 import { Header } from '../../components/sites/header';
 import { Tabs } from '../../components/users/tabs';
+import { Main } from '../../components/main';
 import { Password } from '../../components/password';
 import { ServerSideProps, getServerSideProps } from '../../lib/auth';
 
@@ -25,7 +26,7 @@ const UsersPassword: NextPage<ServerSideProps> = ({ user }) => (
 
     <Header />
 
-    <Container className='lg centered'>
+    <Main>
       <h3 className='title'>Account Settings</h3>
 
       <Tabs user={user} page='password' />
@@ -86,7 +87,7 @@ const UsersPassword: NextPage<ServerSideProps> = ({ user }) => (
           )}
         </Formik>
       </Container>
-    </Container>
+    </Main>
   </div>
 );
 

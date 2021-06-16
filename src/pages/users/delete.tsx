@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { Button } from '../../components/button';
 import { Container } from '../../components/container';
+import { Main } from '../../components/main';
 import { Header } from '../../components/sites/header';
 import { ServerSideProps, getServerSideProps } from '../../lib/auth';
 
@@ -15,7 +16,7 @@ const UsersDelete: NextPage<ServerSideProps> = ({ user }) => (
 
     <Header />
 
-    <Container className='lg centered'>
+    <Main>
       <h3 className='title'>Delete Account</h3>
 
       <Link href='/users/account'>
@@ -34,7 +35,7 @@ const UsersDelete: NextPage<ServerSideProps> = ({ user }) => (
           Delete Account
         </Button>
       </Container>
-    </Container>
+    </Main>
   </div>
 );
 

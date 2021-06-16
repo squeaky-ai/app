@@ -10,6 +10,7 @@ import { Label } from '../../../components/label';
 import { Input } from '../../../components/input';
 import { Button } from '../../../components/button';
 import { Tabs } from '../../../components/sites/tabs';
+import { Main } from '../../../components/main';
 import { Drawer } from '../../../components/drawer';
 import { ServerSideProps, getServerSideProps } from '../../../lib/auth';
 import { deleteSite } from '../../../lib/api/graphql';
@@ -47,7 +48,7 @@ const SitesSettings: NextPage<ServerSideProps> = () => {
       <Header />
 
       {!loading && site && (
-        <Container className='lg centered'>
+        <Main>
           <Tabs site={site} page='settings' />
           <h3>Settings</h3>
           <Drawer title='Site details'>
@@ -126,7 +127,7 @@ const SitesSettings: NextPage<ServerSideProps> = () => {
               </Button>
             </Container>
           </Drawer>
-        </Container>
+        </Main>
       )}
     </div>
   );

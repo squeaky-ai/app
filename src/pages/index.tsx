@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Head from 'next/head';
 import { Container } from '../components/container';
+import { Main } from '../components/main';
 import { Header } from '../components/header';
 import { ServerSideProps, getServerSideProps } from '../lib/auth';
 
@@ -26,11 +27,13 @@ const Home: NextPage<ServerSideProps> = ({ user }) => (
       }
     </Header>
 
-    <Container className='md centered'>
-      <h1>Understand your users.</h1>
-      
-      <p>Start viewing live or recorded user sessions on your website in minutes, no technical expertise required.</p>
-    </Container>
+    <Main>
+      <Container className='md centered'>
+        <h1>Understand your users.</h1>
+        
+        <p>Start viewing live or recorded user sessions on your website in minutes, no technical expertise required.</p>
+      </Container>
+    </Main>
   </div>
 );
 

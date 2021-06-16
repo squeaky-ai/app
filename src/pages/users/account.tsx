@@ -10,6 +10,7 @@ import { Input } from '../../components/input';
 import { Button } from '../../components/button';
 import { Divider } from '../../components/divider';
 import { Header } from '../../components/sites/header';
+import { Main } from '../../components/main';
 import { Tabs } from '../../components/users/tabs';
 import { ServerSideProps, getServerSideProps } from '../../lib/auth';
 import { updateUser } from '../../lib/api/graphql';
@@ -32,7 +33,7 @@ const UsersAccount: NextPage<ServerSideProps> = ({ user }) => {
 
       <Header />
 
-      <Container className='lg centered'>
+      <Main>
         <h3 className='title'>Account Settings</h3>
 
         <Tabs user={user} page='account' /> 
@@ -114,7 +115,7 @@ const UsersAccount: NextPage<ServerSideProps> = ({ user }) => {
         <Link href='/users/delete'>
           <a className='delete-account'>Delete account</a>
         </Link>
-      </Container>
+      </Main>
     </div>
   );
 };

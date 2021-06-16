@@ -2,7 +2,7 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
-import { Container } from '../../../components/container';
+import { Main } from '../../../components/main';
 import { Header } from '../../../components/sites/header';
 import { Tabs } from '../../../components/sites/tabs';
 import { Message } from '../../../components/message';
@@ -21,7 +21,7 @@ const SitesAnalytics: NextPage<ServerSideProps> = () => {
       <Header />
 
       {!loading && site && (
-        <Container className='lg centered'>
+        <Main>
           <Tabs site={site} page='analytics' />
 
           {!site.recordings.items.length && (
@@ -113,7 +113,7 @@ const SitesAnalytics: NextPage<ServerSideProps> = () => {
               </div>
             </>
           )}
-        </Container>
+        </Main>
       )}
     </div>
   );

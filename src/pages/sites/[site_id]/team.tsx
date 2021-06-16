@@ -9,6 +9,7 @@ import { Header } from '../../../components/sites/header';
 import { Label } from '../../../components/label';
 import { Input } from '../../../components/input';
 import { Button } from '../../../components/button';
+import { Main } from '../../../components/main';
 import { Select, Option } from '../../../components/select';
 import { Tabs } from '../../../components/sites/tabs';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from '../../../components/modal';
@@ -95,7 +96,7 @@ const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
       <Header />
 
       {!loading && site && (
-        <Container className='lg centered'>
+        <Main>
           <Tabs site={site} page='team' />
           <h3>Team</h3>
 
@@ -202,7 +203,7 @@ const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
               </ul>
             </div>
           </div>
-        </Container>
+        </Main>
       )}
 
       <Modal ref={ref}>

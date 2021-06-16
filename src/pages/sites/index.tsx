@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 import { Container } from '../../components/container';
 import { Header } from '../../components/sites/header';
 import { Label } from '../../components/label';
+import { Main } from '../../components/main';
 import { Input } from '../../components/input';
 import { Button } from '../../components/button';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from '../../components/modal';
@@ -42,7 +43,7 @@ const Sites: NextPage<ServerSideProps> = () => {
 
       <Header />
 
-      <Container className='lg centered'>
+      <Main>
         {!loading && sites.length === 0 && (
           <div className='empty-state'>
             <div className='contents'>
@@ -80,7 +81,7 @@ const Sites: NextPage<ServerSideProps> = () => {
             </ul>
           </>
         )}
-      </Container>
+      </Main>
 
       <Modal ref={ref}>
         <ModalBody>

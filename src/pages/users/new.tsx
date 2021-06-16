@@ -8,7 +8,8 @@ import { Container } from '../../components/container';
 import { Label } from '../../components/label';
 import { Input } from '../../components/input';
 import { Button } from '../../components/button';
-import { Header } from '../../components/sites/header';
+import { Header } from '../../components/sites/header
+import { Main } from '../../components/main';';
 import { Message } from '../../components/message';
 import { ServerSideProps, getServerSideProps } from '../../lib/auth';
 import { updateUser } from '../../lib/api/graphql';
@@ -30,7 +31,7 @@ const UsersNew: NextPage<ServerSideProps> = ({ user }) => {
 
       <Header />
 
-      <Container className='lg centered'>
+      <Main>
         <h3 className='title'>Account Settings</h3>
 
         <Container className='xsm'>
@@ -106,7 +107,7 @@ const UsersNew: NextPage<ServerSideProps> = ({ user }) => {
             )}
           </Formik>
         </Container>
-      </Container>
+      </Main>
     </div>
   );
 };
