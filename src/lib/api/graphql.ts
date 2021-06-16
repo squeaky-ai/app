@@ -10,13 +10,15 @@ import {
 import { 
   TeamInviteInput,
   TeamInviteCancelInput, 
-  TeamInviteResendInput, 
+  TeamInviteResendInput,
   TeamUpdateInput, 
+  TeamInviteAcceptInput,
   TeamLeaveInput, 
   TeamDeleteInput
 } from '../../types/team';
 
 import { 
+  User,
   UserMutationInput, 
   UserMutationResponse 
 } from '../../types/user';
@@ -246,6 +248,37 @@ export const teamInviteCancel = async (input: TeamInviteCancelInput): Promise<Si
   }
 };
 
+export const teamInviteAccept = async (input: TeamInviteAcceptInput): Promise<SiteMutationResponse> => {
+  try {
+    const { data } = await client.mutate({
+      mutation: gql`
+        mutation TeamInviteAccept($input: TeamInviteAcceptInput!) {
+          teamInviteAccept(input: $input) {
+            id
+            team {
+              id
+              role
+              status
+              user {
+                id
+                firstName
+                lastName
+                fullName
+                email
+              }
+            }
+          }
+        }
+      `,
+      variables: { input }
+    });
+
+    return { site: data.teamInviteCancel };
+  } catch(error) {
+    console.error(error);
+    return parseGraphQLError(error);
+  }
+};
 
 export const teamInviteResend = async (input: TeamInviteResendInput): Promise<SiteMutationResponse> => {
   try {
@@ -276,6 +309,26 @@ export const teamInviteResend = async (input: TeamInviteResendInput): Promise<Si
   } catch(error) {
     console.error(error);
     return parseGraphQLError(error);
+  }
+};
+
+export const userInvitation = async (token: string): Promise<User | null> => {
+  try {
+    const { data } = await client.query({
+      query: gql`
+        query UserInvitation($token: String!) {
+          userInvitation(token: $token) {
+            email
+          }
+        }
+      `,
+      variables: { token }
+    });
+
+    return data.userInvitation;
+  } catch(error) {
+    console.error(error);
+    return null;
   }
 };
 

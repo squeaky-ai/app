@@ -6,7 +6,8 @@ const PUBLIC_ROUTES = [
   '/',
   '/auth/signin',
   '/auth/signup',
-  '/auth/reset'
+  '/auth/reset',
+  '/auth/accept'
 ];
 
 export interface ServerSideProps {

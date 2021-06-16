@@ -20,6 +20,11 @@ export interface TeamInviteCancelInput {
   teamId: string;
 }
 
+export interface TeamInviteAcceptInput {
+  password: string;
+  token: string;
+}
+
 export interface TeamInviteResendInput {
   siteId: string;
   teamId: string;

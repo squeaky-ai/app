@@ -1,0 +1,32 @@
+.page.accept {
+  align-items: center;
+  background: url('/squiggles.svg');
+  background-color: var(--gray-100);
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+
+  .card {
+    flex-shrink: 0;
+    margin-bottom: 3rem;
+    width: 528px;
+
+    .logo {
+      display: flex;
+      justify-content: center;
+      margin: 0 0 2rem 0;
+    }
+  
+    h2 {
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 32px;
+      margin: 0 0 1.5rem 0;
+    }
+
+    .button {
+      width: 100%;
+    }
+  }
+}
