@@ -1,7 +1,25 @@
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
-import { SitesQueryResponse, SiteQueryResponse, SiteMutationResponse, SiteMutationInput } from '../../types/site';
-import { TeamInviteInput, TeamInviteCancelInput, TeamInviteResendInput, TeamUpdateInput } from '../../types/team';
-import { UserMutationInput, UserMutationResponse } from '../../types/user';
+
+import { 
+  SitesQueryResponse, 
+  SiteQueryResponse, 
+  SiteMutationResponse, 
+  SiteMutationInput 
+} from '../../types/site';
+
+import { 
+  TeamInviteInput,
+  TeamInviteCancelInput, 
+  TeamInviteResendInput, 
+  TeamUpdateInput, 
+  TeamLeaveInput, 
+  TeamDeleteInput
+} from '../../types/team';
+
+import { 
+  UserMutationInput, 
+  UserMutationResponse 
+} from '../../types/user';
 
 export const client = new ApolloClient({
   uri: '/api/graphql',
@@ -287,6 +305,58 @@ export const teamUpdate = async (input: TeamUpdateInput): Promise<SiteMutationRe
     });
 
     return { site: data.teamUpdate };
+  } catch(error) {
+    console.error(error);
+    return parseGraphQLError(error);
+  }
+};
+
+export const teamLeave = async (input: TeamLeaveInput): Promise<SiteMutationResponse> => {
+  try {
+    await client.mutate({
+      mutation: gql`
+        mutation TeamLeave($input: TeamLeaveInput!) {
+          teamLeave(input: $input) {
+            id
+          }
+        }
+      `,
+      variables: { input }
+    });
+
+    return { site: null };
+  } catch(error) {
+    console.error(error);
+    return parseGraphQLError(error);
+  }
+};
+
+export const teamDelete = async (input: TeamDeleteInput): Promise<SiteMutationResponse> => {
+  try {
+    const { data } = await client.mutate({
+      mutation: gql`
+        mutation TeamDelete($input: TeamDeleteInput!) {
+          teamDelete(input: $input) {
+            id
+            team {
+              id
+              role
+              status
+              user {
+                id
+                firstName
+                lastName
+                fullName
+                email
+              }
+            }
+          }
+        }
+      `,
+      variables: { input }
+    });
+
+    return { site: data.teamDelete };
   } catch(error) {
     console.error(error);
     return parseGraphQLError(error);

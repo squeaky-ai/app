@@ -3,6 +3,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
+import { useRouter } from 'next/router';
 import { Container } from '../../../components/container';
 import { Header } from '../../../components/sites/header';
 import { Label } from '../../../components/label';
@@ -12,7 +13,7 @@ import { Select, Option } from '../../../components/select';
 import { Tabs } from '../../../components/sites/tabs';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from '../../../components/modal';
 import { ServerSideProps, getServerSideProps } from '../../../lib/auth';
-import { teamInvite, teamInviteCancel, teamInviteResend, teamUpdate } from '../../../lib/api/graphql';
+import { teamInvite, teamInviteCancel, teamInviteResend, teamUpdate, teamLeave, teamDelete } from '../../../lib/api/graphql';
 import { useSite } from '../../../hooks/sites';
 import { useToasts } from '../../../hooks/toasts';
 
@@ -34,6 +35,7 @@ const roleName = (role: number | string) => {
 
 const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
   const toast = useToasts();
+  const router = useRouter();
   const ref = React.createRef<Modal>();
   const [loading, site] = useSite();
 
@@ -64,6 +66,24 @@ const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
     error
       ? toast.add({ type: 'error', body: 'There was an unexpected error when changing the user role. Please try again.' })
       : toast.add({ type: 'success', body: 'Role change complete' })
+  };
+
+  const leaveTeam = async () => {
+    const { error } = await teamLeave({ siteId: site.id });
+
+    if (error) {
+      toast.add({ type: 'error', body: 'There was an unexpected error when leaving the team. Please try again.' });
+    } else {
+      toast.add({ type: 'success', body: `You have successfully left the ${site.name} team` });
+      await router.push('/sites');
+    }
+  };
+
+  const deleteTeam = async (id: string) => {
+    const { error } = await teamDelete({ siteId: site.id, teamId: id });
+    error
+      ? toast.add({ type: 'error', body: 'There was an unexpected error when removing your user. Please try again.' })
+      : toast.add({ type: 'success', body: 'User removed successfully' })
   };
 
   return (
@@ -97,13 +117,14 @@ const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
                 {site.team.map(team => {
                   const self = Number(team.user.id) === user.id;
                   const invited = team.status === 1;
+                  const owner = team.role === 2;
 
                   return (
                     <tr key={team.id}>
                       <td>
                         {invited && <i>Invited</i>}
-                        <b>{team.user.fullName}</b>
-                        {self && <i> (you)</i>}
+                        {!self && <span>{team.user.fullName}</span>}
+                        {self && <><b>{team.user.fullName}</b> <i>(you)</i></>}
                       </td>
                       <td>{team.user.email}</td>
                       <td className='role'>
@@ -120,6 +141,16 @@ const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
                           <>
                             <Button className='positive' onClick={() => resendInvitation(team.id)}>Resend Invitation</Button>
                             <Button className='negative' onClick={() => cancelInvitation(team.id)}>Cancel Invitation</Button>
+                          </>
+                        )}
+                        {!invited && (
+                          <>
+                            {!owner && self && (
+                              <Button className='negative' onClick={() => leaveTeam()}>Leave site</Button>
+                            )}
+                            {!owner && !self && (
+                              <Button className='negative' onClick={() => deleteTeam(team.id)}>Remove</Button>
+                            )}
                           </>
                         )}
                       </td>
@@ -188,8 +219,13 @@ const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
                 });
 
                 setSubmitting(false); 
-                
-                if (!error) closeModal();
+
+                if (error) {
+                  toast.add({ type: 'error', body: 'There was an unexpected error when sending your invitation. Please try again.' });
+                } else {
+                  closeModal();
+                  toast.add({ type: 'success', body: 'Invitation sent' });
+                }
               })();
             }}
           >

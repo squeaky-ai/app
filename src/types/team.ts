@@ -30,3 +30,12 @@ export interface TeamUpdateInput {
   teamId: string;
   role: number;
 }
+
+export interface TeamLeaveInput {
+  siteId: string;
+}
+
+export interface TeamDeleteInput {
+  siteId: string;
+  teamId: string;
+}
