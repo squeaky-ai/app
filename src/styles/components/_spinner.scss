@@ -4,7 +4,7 @@
   border-right: .5rem solid rgba(255, 255, 255, 0.2);
   border-bottom: .5rem solid rgba(255, 255, 255, 0.2);
   border-left: .5rem solid var(--blue-500);
-  border-radius: 50%;
+  border-radius: var(--border-radius-c);
   font-size: 10px;
   height: 5rem;
   margin: 60px auto;
@@ -14,7 +14,7 @@
   width: 5rem;
   
   &:after {
-    border-radius: 50%;
+    border-radius: var(--border-radius-c);
     height: 10rem;
     width: 10rem;
   }

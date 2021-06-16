@@ -71,7 +71,7 @@
 
       .avatar {
         background: var(--gray-150);
-        border-radius: 50%;
+        border-radius: var(--border-radius-c);
         display: block;
         flex-shrink: 0;
         height: 2rem;

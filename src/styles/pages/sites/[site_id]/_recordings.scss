@@ -25,7 +25,7 @@
 
     .indicator {
       background: var(--gray-200);
-      border-radius: 50%;
+      border-radius: var(--border-radius-c);
       display: inline-block;
       height: .75rem;
       margin-right: .5rem;
