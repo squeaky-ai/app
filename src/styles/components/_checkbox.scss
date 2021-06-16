@@ -35,7 +35,7 @@
   }
 
   &.label {
-    font-weight: 400;
+    font-weight: var(--font-weight-normal);
     justify-content: flex-start;
     margin-bottom: 1.5rem;
   }

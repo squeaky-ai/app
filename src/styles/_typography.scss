@@ -5,31 +5,31 @@ html, body {
 
 h1 {
   font-size: 64px;
-  font-weight: 800;
+  font-weight: var(--font-weight-block);
   line-height: 80px;
 }
 
 h2 {
   font-size: 48px;
-  font-weight: 800;
+  font-weight: var(--font-weight-block);
   line-height: 64px;
 }
 
 h3 {
   font-size: 32px;
-  font-weight: 600;
+  font-weight: var(--font-weight-bold);
   line-height: 48px;
 }
 
 h4 {
   font-size: 24px;
-  font-weight: 600;
+  font-weight: var(--font-weight-bold);
   line-height: 32px;
 }
 
 p {
   font-size: 16px;
-  font-weight: 400;
+  font-weight: var(--font-weight-normal);
   line-height: 24px;
   margin: 0 0 1.5rem 0;
 
@@ -44,7 +44,7 @@ a {
 }
 
 b {
-  font-weight: 600;
+  font-weight: var(--font-weight-bold);
 }
 
 code, pre {
@@ -62,7 +62,7 @@ code, pre {
 
 .label {
   font-size: 16px;
-  font-weight: 600;
+  font-weight: var(--font-weight-bold);
   line-height: 24px;
 }
 

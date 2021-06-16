@@ -7,12 +7,12 @@
     border: none;
     display: flex;
     font-size: 24px;
-    font-weight: 600;
+    font-weight: var(--font-weight-bold);
     padding: 0;
 
     i {
       color: var(--gray-500);
-      font-weight: 400;
+      font-weight: var(--font-weight-normal);
       margin-right: .5rem;
     }
   }

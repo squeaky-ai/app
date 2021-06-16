@@ -20,7 +20,7 @@
   
     h2 {
       font-size: 24px;
-      font-weight: 600;
+      font-weight: var(--font-weight-bold);
       line-height: 32px;
       margin: 0 0 1.5rem 0;
     }
@@ -47,7 +47,7 @@
       color: var(--green-500);
       display: block;
       font-size: 80px;
-      font-weight: 400;
+      font-weight: var(--font-weight-normal);
       text-align: center;
     }
 

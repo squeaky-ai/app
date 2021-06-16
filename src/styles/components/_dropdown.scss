@@ -37,7 +37,7 @@
     .button {
       border-radius: var(--border-radius-md);
       color: var(--gray-700);
-      font-weight: 400;
+      font-weight: var(--font-weight-normal);
       padding: .5rem .75rem;
       text-decoration: none;
       width: 100%;
