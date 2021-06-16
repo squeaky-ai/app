@@ -19,3 +19,11 @@ export const UPDATE_SITE_MUTATION = gql`
     }
   }
 `;
+
+export const DELETE_SITE_MUTATION = gql`
+  mutation SiteDelete($input: SiteDeleteInput!) {
+    siteDelete(input: $input) {
+      id
+    }
+  }
+`;

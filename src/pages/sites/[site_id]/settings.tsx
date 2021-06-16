@@ -3,6 +3,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
+import { useRouter } from 'next/router';
 import { Container } from '../../../components/container';
 import { Header } from '../../../components/sites/header';
 import { Label } from '../../../components/label';
@@ -11,6 +12,7 @@ import { Button } from '../../../components/button';
 import { Tabs } from '../../../components/sites/tabs';
 import { Drawer } from '../../../components/drawer';
 import { ServerSideProps, getServerSideProps } from '../../../lib/auth';
+import { deleteSite } from '../../../lib/api/graphql';
 import { updateSite } from '../../../lib/api/graphql';
 import { useToasts } from '../../../hooks/toasts';
 import { useSite } from '../../../hooks/sites';
@@ -22,7 +24,19 @@ const DetailsSchema = Yup.object().shape({
 
 const SitesSettings: NextPage<ServerSideProps> = () => {
   const toast = useToasts();
+  const router = useRouter();
   const [loading, site] = useSite();
+
+  const siteDelete = async () => {
+    const { error } = await deleteSite({ siteId: site.id });
+    
+    if (error) {
+      toast.add({ type: 'error', body: 'There was an unexpected error deleting your site' });
+    } else {
+      toast.add({ type: 'success', body: 'Site deleted' });
+      await router.push('/sites');
+    }
+  };
 
   return (
     <div className='page settings'>
@@ -101,7 +115,16 @@ const SitesSettings: NextPage<ServerSideProps> = () => {
             <p>!!</p>
           </Drawer>
           <Drawer title='Site deletion'>
-            <p>!!</p>
+            <Container className='md'>
+              <p><b>You can delete your site at any time:</b></p>
+              <ul className='delete-list'>
+                <li>Deleting your site will not delete your Squeaky user account. To delete you account please visit the account settings page.</li>
+                <li>Site deletion is irreversable. If you have an active subscription you can downgrade to a free plan in the subscription tab.</li>
+              </ul>
+              <Button className='tertiary' onClick={siteDelete}>
+                Delete Site
+              </Button>
+            </Container>
           </Drawer>
         </Container>
       )}

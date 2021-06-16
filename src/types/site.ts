@@ -36,3 +36,7 @@ export interface SiteMutationInput {
   name?: string;
   url?: string;
 }
+
+export interface SiteDeleteMutationInput {
+  siteId: string;
+}

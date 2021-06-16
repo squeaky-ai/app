@@ -4,7 +4,8 @@ import {
   SitesQueryResponse, 
   SiteQueryResponse, 
   SiteMutationResponse, 
-  SiteMutationInput 
+  SiteMutationInput,
+  SiteDeleteMutationInput
 } from '../../types/site';
 
 import { 
@@ -14,7 +15,8 @@ import {
 
 import { 
   CREATE_SITE_MUTATION, 
-  UPDATE_SITE_MUTATION
+  UPDATE_SITE_MUTATION,
+  DELETE_SITE_MUTATION
 } from '../../data/sites/mutations';
 
 import { 
@@ -112,6 +114,20 @@ export const updateSite = async (input: SiteMutationInput): Promise<SiteMutation
     });
 
     return { site: data.siteUpdate };
+  } catch(error) {
+    console.error(error);
+    return parseGraphQLError(error);
+  }
+};
+
+export const deleteSite = async (input: SiteDeleteMutationInput): Promise<SiteMutationResponse> => {
+  try {
+    await client.mutate({
+      mutation: DELETE_SITE_MUTATION,
+      variables: { input }
+    });
+
+    return { site: null };
   } catch(error) {
     console.error(error);
     return parseGraphQLError(error);
