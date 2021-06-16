@@ -8,20 +8,47 @@ import {
 } from '../../types/site';
 
 import { 
+  GET_SITES_QUERY, 
+  GET_SITE_QUERY 
+} from '../../data/sites/queries';
+
+import { 
+  CREATE_SITE_MUTATION, 
+  UPDATE_SITE_MUTATION
+} from '../../data/sites/mutations';
+
+import { 
   TeamInviteInput,
   TeamInviteCancelInput, 
   TeamInviteResendInput,
   TeamUpdateInput, 
   TeamInviteAcceptInput,
   TeamLeaveInput, 
-  TeamDeleteInput
+  TeamDeleteInput,
 } from '../../types/team';
+
+import { 
+  TEAM_INVITE_MUTATION, 
+  TEAM_INVITE_CANCEL_MUTATION, 
+  TEAM_INVITE_ACCEPT_MUTATION,
+  TEAM_INVITE_RESEND_MUTATION,
+  TEAM_UPDATE_MUTATION,
+  TEAM_DELETE_MUTATION
+} from '../../data/teams/mutations';
 
 import { 
   User,
   UserMutationInput, 
   UserMutationResponse 
 } from '../../types/user';
+
+import { 
+  USER_INVITATION_QUERY 
+} from '../../data/users/queries';
+
+import { 
+  UPDATE_USER_MUTATION 
+} from '../../data/users/mutations';
 
 export const client = new ApolloClient({
   uri: '/api/graphql',
@@ -39,18 +66,7 @@ const parseGraphQLError = (error: Error): { [key: string]: string } => {
 export const getSites = async (): Promise<SitesQueryResponse> => {
   try {
     const { data } = await client.query<SitesQueryResponse>({
-      query: gql`
-        query GetSites {
-          sites {
-            id
-            name
-            url
-            avatar
-            planName
-            ownerName
-          }
-        }
-      `,
+      query: GET_SITES_QUERY
     });
 
     return data;
@@ -63,50 +79,7 @@ export const getSites = async (): Promise<SitesQueryResponse> => {
 export const getSite = async (id: string): Promise<SiteQueryResponse> => {
   try {
     const { data } = await client.query<SiteQueryResponse>({
-      query: gql`
-        query GetSite($id: ID!) {
-          site(id: $id) {
-            id
-            name
-            url
-            avatar
-            planName
-            ownerName
-            team {
-              id
-              role
-              status
-              user {
-                id
-                firstName
-                lastName
-                fullName
-                email
-              }
-            }
-            recordings {
-              items {
-                id
-                active
-                locale
-                duration
-                startPage
-                exitPage
-                pageCount
-                useragent
-                viewportX
-                viewportY
-                viewerId
-              }
-              pagination {
-                cursor
-                isLast
-                pageSize
-              }
-            }
-          }
-        }
-      `,
+      query: GET_SITE_QUERY,
       variables: { id },
     });
 
@@ -120,15 +93,7 @@ export const getSite = async (id: string): Promise<SiteQueryResponse> => {
 export const createSite = async (name: string, url: string): Promise<SiteMutationResponse> => {
   try {
     const { data } = await client.mutate({
-      mutation: gql`
-        mutation SiteCreate($input: SiteCreateInput!) {
-          siteCreate(input: $input) {
-            id
-            name
-            url
-          }
-        }
-      `,
+      mutation: CREATE_SITE_MUTATION,
       variables: { input: { name, url } },
     });
 
@@ -142,15 +107,7 @@ export const createSite = async (name: string, url: string): Promise<SiteMutatio
 export const updateSite = async (input: SiteMutationInput): Promise<SiteMutationResponse> => {
   try {
     const { data } = await client.mutate({
-      mutation: gql`
-        mutation SiteUpdate($input: SiteUpdateInput!) {
-          siteUpdate(input: $input) {
-            id
-            name
-            url
-          }
-        }
-      `,
+      mutation: UPDATE_SITE_MUTATION,
       variables: { input }
     });
 
@@ -164,16 +121,7 @@ export const updateSite = async (input: SiteMutationInput): Promise<SiteMutation
 export const updateUser = async (input: UserMutationInput): Promise<UserMutationResponse> => {
   try {
     const { data } = await client.mutate({
-      mutation: gql`
-        mutation UserUpdate($input: UserUpdateInput!) {
-          userUpdate(input: $input) {
-            id
-            firstName
-            lastName
-            email
-          }
-        }
-      `,
+      mutation: UPDATE_USER_MUTATION,
       variables: { input }
     });
 
@@ -187,25 +135,7 @@ export const updateUser = async (input: UserMutationInput): Promise<UserMutation
 export const teamInvite = async (input: TeamInviteInput): Promise<SiteMutationResponse> => {
   try {
     const { data } = await client.mutate({
-      mutation: gql`
-        mutation TeamInvite($input: TeamInviteInput!) {
-          teamInvite(input: $input) {
-            id
-            team {
-              id
-              role
-              status
-              user {
-                id
-                firstName
-                lastName
-                fullName
-                email
-              }
-            }
-          }
-        }
-      `,
+      mutation: TEAM_INVITE_MUTATION,
       variables: { input }
     });
 
@@ -219,25 +149,7 @@ export const teamInvite = async (input: TeamInviteInput): Promise<SiteMutationRe
 export const teamInviteCancel = async (input: TeamInviteCancelInput): Promise<SiteMutationResponse> => {
   try {
     const { data } = await client.mutate({
-      mutation: gql`
-        mutation TeamInviteCancel($input: TeamInviteCancelInput!) {
-          teamInviteCancel(input: $input) {
-            id
-            team {
-              id
-              role
-              status
-              user {
-                id
-                firstName
-                lastName
-                fullName
-                email
-              }
-            }
-          }
-        }
-      `,
+      mutation: TEAM_INVITE_CANCEL_MUTATION,
       variables: { input }
     });
 
@@ -251,25 +163,7 @@ export const teamInviteCancel = async (input: TeamInviteCancelInput): Promise<Si
 export const teamInviteAccept = async (input: TeamInviteAcceptInput): Promise<SiteMutationResponse> => {
   try {
     const { data } = await client.mutate({
-      mutation: gql`
-        mutation TeamInviteAccept($input: TeamInviteAcceptInput!) {
-          teamInviteAccept(input: $input) {
-            id
-            team {
-              id
-              role
-              status
-              user {
-                id
-                firstName
-                lastName
-                fullName
-                email
-              }
-            }
-          }
-        }
-      `,
+      mutation: TEAM_INVITE_ACCEPT_MUTATION,
       variables: { input }
     });
 
@@ -283,25 +177,7 @@ export const teamInviteAccept = async (input: TeamInviteAcceptInput): Promise<Si
 export const teamInviteResend = async (input: TeamInviteResendInput): Promise<SiteMutationResponse> => {
   try {
     const { data } = await client.mutate({
-      mutation: gql`
-        mutation TeamInviteResend($input: TeamInviteResendInput!) {
-          teamInviteResend(input: $input) {
-            id
-            team {
-              id
-              role
-              status
-              user {
-                id
-                firstName
-                lastName
-                fullName
-                email
-              }
-            }
-          }
-        }
-      `,
+      mutation: TEAM_INVITE_RESEND_MUTATION,
       variables: { input }
     });
 
@@ -315,13 +191,7 @@ export const teamInviteResend = async (input: TeamInviteResendInput): Promise<Si
 export const userInvitation = async (token: string): Promise<User | null> => {
   try {
     const { data } = await client.query({
-      query: gql`
-        query UserInvitation($token: String!) {
-          userInvitation(token: $token) {
-            email
-          }
-        }
-      `,
+      query: USER_INVITATION_QUERY,
       variables: { token }
     });
 
@@ -335,25 +205,7 @@ export const userInvitation = async (token: string): Promise<User | null> => {
 export const teamUpdate = async (input: TeamUpdateInput): Promise<SiteMutationResponse> => {
   try {
     const { data } = await client.mutate({
-      mutation: gql`
-        mutation TeamUpdate($input: TeamUpdateInput!) {
-          teamUpdate(input: $input) {
-            id
-            team {
-              id
-              role
-              status
-              user {
-                id
-                firstName
-                lastName
-                fullName
-                email
-              }
-            }
-          }
-        }
-      `,
+      mutation: TEAM_UPDATE_MUTATION,
       variables: { input }
     });
 
@@ -387,25 +239,7 @@ export const teamLeave = async (input: TeamLeaveInput): Promise<SiteMutationResp
 export const teamDelete = async (input: TeamDeleteInput): Promise<SiteMutationResponse> => {
   try {
     const { data } = await client.mutate({
-      mutation: gql`
-        mutation TeamDelete($input: TeamDeleteInput!) {
-          teamDelete(input: $input) {
-            id
-            team {
-              id
-              role
-              status
-              user {
-                id
-                firstName
-                lastName
-                fullName
-                email
-              }
-            }
-          }
-        }
-      `,
+      mutation: TEAM_DELETE_MUTATION,
       variables: { input }
     });
 
