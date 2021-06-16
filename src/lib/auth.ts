@@ -19,11 +19,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const url = resolvedUrl.split('?')[0];
 
-  if (!cookies.session) {
-    return { props: {} };
-  }
-
-  const user = await session<User>(headers.cookie);
+  const user = cookies.session ? await session<User>(headers.cookie) : null;
   const isPublic = PUBLIC_ROUTES.includes(url);
 
   // If the user doesn't exist and they're trying to access
