@@ -60,7 +60,7 @@ const Sites: NextPage<ServerSideProps> = () => {
         {!loading && sites.length > 0 && (
           <>
             <h4 className='title'>
-              Site
+              Sites
               <Button className='new-site' onClick={openModal}>+ Add New</Button>
             </h4>
 
