@@ -11,5 +11,9 @@
 
   .logo {
     margin-bottom: -.5rem;
+
+    img, svg {
+      display: block;
+    }
   }
 }

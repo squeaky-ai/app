@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Header as BaseHeader } from '../../components/header';
 import { Button } from '../button';
+import { Logo } from '../logo';
 import { Dropdown } from '../dropdown';
 import { signout } from '../../lib/api/auth';
 
@@ -17,7 +18,7 @@ export const Header: FC = () => {
     <BaseHeader className='site-header'>
       <Link href='/sites'>
         <a className='logo'>
-          <Image src='/logo.svg' height={32} width={103} />
+          <Logo />
         </a>
       </Link>
 

@@ -17,6 +17,10 @@
       right: 0;
       top: 0;
     }
+
+    &:active {
+      color: var(--gray-900);
+    }
   }
 
   .dropdown-menu {
