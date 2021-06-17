@@ -3,7 +3,7 @@ import type { FC } from 'react';
 
 export const Page: FC = ({ children }) => {
   React.useEffect(() => {
-    if (window && window.matchMedia('(prefers-color-scheme: dark)')) {
+    if (window && window.matchMedia('(prefers-color-scheme: dark)').matches) {
       const icons = document.querySelectorAll('link[rel="icon"]');
       
       icons.forEach(icon => {
