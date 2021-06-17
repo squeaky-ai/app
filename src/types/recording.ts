@@ -10,7 +10,8 @@ export interface Recording {
   pageCount: number;
   startPage: string;
   exitPage: string;
-  useragent: string;
+  deviceType?: string;
+  browser?: string;
   viewportX: number;
   viewportY: number;
   events?: PaginatedEventsResponse;

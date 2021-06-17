@@ -3,8 +3,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import classnames from 'classnames';
-import UAParser from 'ua-parser-js';
-import router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { Main } from '../../../../components/main';
 import { Header } from '../../../../components/sites/header';
 import { Message } from '../../../../components/message';
@@ -13,6 +12,7 @@ import { ServerSideProps, getServerSideProps } from '../../../../lib/auth';
 import { useSite } from '../../../../hooks/sites';
 
 const deviceIcon = (device: string = '') => {
+  // TODO this list will need to change
   switch(device.toLowerCase()) {
     case 'mobile':
       return 'ri-smartphone-line';
@@ -24,8 +24,8 @@ const deviceIcon = (device: string = '') => {
 };
 
 const SitesRecordings: NextPage<ServerSideProps> = () => {
+  const router = useRouter();
   const [loading, site] = useSite();
-  const parser = new UAParser();
 
   const viewRecording = async (id: string) => {
     await router.push(`/sites/${site.id}/recordings/${id}`);
@@ -77,45 +77,41 @@ const SitesRecordings: NextPage<ServerSideProps> = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {site.recordings.items.map(recording => {
-                      const useragent = parser.setUA(recording.useragent).getResult();
-            
-                      return (
-                        <tr className='hover' key={recording.id} role='button' onClick={() => viewRecording(recording.id)}>
-                          <td>
-                            <span className={classnames('indicator', { active: recording.active })} />
-                            {recording.active ? 'Active' : 'Recorded'}
-                          </td>
-                          <td>{recording.id}</td>
-                          <td>{recording.viewerId}</td>
-                          <td>{recording.locale}</td>
-                          <td>{recording.duration}</td>
-                          <td><a href='#'>{recording.pageCount}</a></td>
-                          <td>
-                            <table className='start-exit-page'>
-                              <tbody>
-                                <tr>
-                                  <td>START URL</td>
-                                  <td>{recording.startPage}</td>
-                                </tr>
-                                <tr>
-                                  <td>EXIT URL</td>
-                                  <td>{recording.exitPage}</td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </td>
-                          <td>
-                            <i className={classnames('device', deviceIcon(useragent.device.type))} />
-                            {useragent.device.type || 'Desktop'}
-                          </td>
-                          <td>{recording.viewportX} x {recording.viewportY}</td>
-                          <td>
-                            <Image src={`/browsers/${useragent.browser.name.toLowerCase()}.svg`} height={24} width={24} />
-                          </td>
-                        </tr>
-                      );
-                    })}
+                    {site.recordings.items.map(recording => (
+                      <tr className='hover' key={recording.id} role='button' onClick={() => viewRecording(recording.id)}>
+                        <td>
+                          <span className={classnames('indicator', { active: recording.active })} />
+                          {recording.active ? 'Active' : 'Recorded'}
+                        </td>
+                        <td>{recording.id}</td>
+                        <td>{recording.viewerId}</td>
+                        <td>{recording.locale}</td>
+                        <td>{recording.duration}</td>
+                        <td><a href='#'>{recording.pageCount}</a></td>
+                        <td>
+                          <table className='start-exit-page'>
+                            <tbody>
+                              <tr>
+                                <td>START URL</td>
+                                <td>{recording.startPage}</td>
+                              </tr>
+                              <tr>
+                                <td>EXIT URL</td>
+                                <td>{recording.exitPage}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                        <td>
+                          <i className={classnames('device', deviceIcon(recording.deviceType))} />
+                          {recording.deviceType || 'Unknown'}
+                        </td>
+                        <td>{recording.viewportX} x {recording.viewportY}</td>
+                        <td>
+                          <Image src={`/browsers/${recording.browser.toLowerCase()}.svg`} height={24} width={24} />
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>

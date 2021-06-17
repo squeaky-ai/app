@@ -44,7 +44,8 @@ export const GET_SITE_QUERY = gql`
           startPage
           exitPage
           pageCount
-          useragent
+          deviceType
+          browser
           viewportX
           viewportY
           viewerId
