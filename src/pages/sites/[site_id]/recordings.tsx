@@ -4,12 +4,12 @@ import Head from 'next/head';
 import Image from 'next/image';
 import classnames from 'classnames';
 import { useRouter } from 'next/router';
-import { Main } from '../../../../components/main';
-import { Header } from '../../../../components/sites/header';
-import { Message } from '../../../../components/message';
-import { Tabs } from '../../../../components/sites/tabs';
-import { ServerSideProps, getServerSideProps } from '../../../../lib/auth';
-import { useSite } from '../../../../hooks/sites';
+import { Main } from '../../../components/main';
+import { Header } from '../../../components/sites/header';
+import { Message } from '../../../components/message';
+import { Tabs } from '../../../components/sites/tabs';
+import { ServerSideProps, getServerSideProps } from '../../../lib/auth';
+import { useSite } from '../../../hooks/sites';
 
 const deviceIcon = (device: string = '') => {
   // TODO this list will need to change

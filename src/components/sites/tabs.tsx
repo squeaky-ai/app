@@ -6,7 +6,7 @@ import { Site } from '../../types/site';
 
 interface Props {
   site: Site;
-  page: 'recordings' | 'analytics' | 'settings' | 'team';
+  page: 'recordings' | 'analytics' | 'settings' | 'team' | 'subscription';
 }
 
 export const Tabs: FC<Props> = ({ site, page }) => {
@@ -49,6 +49,14 @@ export const Tabs: FC<Props> = ({ site, page }) => {
             <a className={classnames('button tab-button', { active: page === 'settings' })}>
               <i className='ri-settings-3-line' />
               Settings
+            </a>
+          </Link>
+        </li>
+        <li className='tab'>
+          <Link href={`/sites/${site.id}/subscription`}>
+            <a className={classnames('button tab-button', { active: page === 'subscription' })}>
+              <i className='ri-bank-card-2-line' />
+              Subscription
             </a>
           </Link>
         </li>
