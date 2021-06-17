@@ -24,7 +24,7 @@ const CreateSchema = Yup.object().shape({
 
 const Sites: NextPage<ServerSideProps> = () => {
   const router = useRouter();
-  const ref = React.createRef<Modal>();
+  const ref = React.useRef<Modal>();
   const [loading, sites] = useSites();
 
   const openModal = () => {

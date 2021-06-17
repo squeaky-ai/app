@@ -37,7 +37,7 @@ const roleName = (role: number | string) => {
 const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
   const toast = useToasts();
   const router = useRouter();
-  const ref = React.createRef<Modal>();
+  const ref = React.useRef<Modal>();
   const [loading, site] = useSite();
 
   const openModal = () => {
@@ -125,10 +125,11 @@ const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
                     <tr key={team.id}>
                       <td>
                         {invited && <i>Invited</i>}
-                        {self
-                          ? <><b>{team.user.fullName}</b> <i>(you)</i></>
-                          : <span>{team.user.fullName}</span>
-                        }
+                        {!invited && (
+                          self
+                            ? <><b>{team.user.fullName}</b> <i>(you)</i></>
+                            : <span>{team.user.fullName}</span>
+                        )}
                       </td>
                       <td>{team.user.email}</td>
                       <td className='role'>
@@ -214,7 +215,7 @@ const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
           <Formik
             initialValues={{ email: '', role: '0' }}
             validationSchema={InviteSchema}
-            onSubmit={(values, { setSubmitting, setErrors }) => {
+            onSubmit={(values, { setSubmitting }) => {
               (async () => {
                 const { error } = await teamInvite({ 
                   siteId: site.id, 
