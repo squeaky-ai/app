@@ -6,6 +6,7 @@ import Head from 'next/head';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { useRouter } from 'next/router';
+import { signout } from '../../lib/api/auth';
 import { userInvitation, teamInviteAccept } from '../../lib/api/graphql';
 import { Container } from '../../components/container';
 import { Card } from '../../components/card';
@@ -14,6 +15,8 @@ import { Input } from '../../components/input';
 import { Button } from '../../components/button';
 import { Checkbox } from '../../components/checkbox';
 import { Password } from '../../components/password';
+import { Message } from '../../components/message';
+import { Spinner } from '../../components/spinner';
 import { ServerSideProps, getServerSideProps } from '../../lib/auth';
 import { useToasts } from '../../hooks/toasts';
 
@@ -26,15 +29,21 @@ const Accept: NextPage<ServerSideProps> = () => {
   const toast = useToasts();
   const router = useRouter();
   const [email, setEmail] = React.useState<string>(null);
+  const [loading, setLoading] = React.useState<boolean>(true);
 
   React.useEffect(() => {
     if (router.query.token) {
       (async () => {
+        // If they are already logged in then it will be confusing
+        // when they log in as a different user to their current
+        // session
+        await signout();
+
         const user = await userInvitation(router.query.token as string);
+
+        setLoading(false);
         
-        if (user) {
-          setEmail(user.email);
-        }
+        if (user) setEmail(user.email);
       })();
     }
   }, []);
@@ -52,7 +61,20 @@ const Accept: NextPage<ServerSideProps> = () => {
             </a>
           </Link>
 
-          {email && (
+          {loading && (
+            <Spinner />
+          )}
+
+          {!loading && !email && (
+            <div className='invalid-invidation'>
+              <Message 
+                type='error'
+                message='There is a problem with your invitation, please contact the site owner'
+              />
+            </div>
+          )}
+
+          {!loading && email && (
             <>
               <h2>Reset Password</h2>
 
