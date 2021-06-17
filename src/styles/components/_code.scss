@@ -1,0 +1,15 @@
+.code {
+  background: var(--gray-100);
+  color: var(--magenta-500);
+  display: inline-block;
+  padding: .05rem .25rem;
+
+  &.block {
+    background: var(--gray-50);
+    border: 2px solid var(--gray-200);
+    border-radius: var(--border-radius-md);
+    margin: 0 0 1.5rem 0;
+    padding: 1rem 1.25rem;
+    width: 100%;
+  }
+}

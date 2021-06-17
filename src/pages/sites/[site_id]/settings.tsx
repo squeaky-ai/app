@@ -10,6 +10,7 @@ import { Label } from '../../../components/label';
 import { Input } from '../../../components/input';
 import { Button } from '../../../components/button';
 import { Tabs } from '../../../components/sites/tabs';
+import { Message } from '../../../components/message';
 import { Main } from '../../../components/main';
 import { Drawer } from '../../../components/drawer';
 import { ServerSideProps, getServerSideProps } from '../../../lib/auth';
@@ -113,7 +114,44 @@ const SitesSettings: NextPage<ServerSideProps> = () => {
             </Formik>
           </Drawer>
           <Drawer title='Tracking code'>
-            <p>!!</p>
+            <Container className='md'>
+              {!site.verifiedAt && (
+                <>
+                  <Message
+                    type='info'
+                    message='Your tracking code is not yet verified. Please following the instructions below to start using Squeaky on your site.'
+                  />
+
+                  <p>Please paste the code below into the <code className='code'>&lt;head&gt;</code> section of your HTML on every page you wish to track on your website <a href={site.url} target='_blank'>{site.url}</a>.</p>
+                  <p>This enables Squeaky to anonymously capture user behaviour, giving you valuable insights into their experience on your site.</p>
+
+                  <Label>
+                    Tracking code
+                    <Button className='link icon'>
+                      <i className='ri-file-copy-line' />
+                      Copy to clipboard
+                    </Button>
+                  </Label>
+                  <pre className='code block'>
+                    <code>
+{`<!-- Squeaky Tracking Code for ${site.url} -->
+<script>
+  (function(s,q,e,a,u,k,y){
+    s._sqSettings={site_id:'${site.uuid}'};
+    u=q.getElementsByTagName('head')[0];
+    k=q.createElement('script');k.async=1;
+    k.src=e+s._sqSettings.site_id;
+    u.appendChild(k);
+  })(window,document,'https://cdn.squeaky.ai/g/0.1.0/script.js?');
+</script>`}
+                    </code>
+                  </pre>
+                  <Button className='primary'>
+                    Verify Installation
+                  </Button>
+                </>
+              )}
+            </Container>
           </Drawer>
           <Drawer title='Site deletion'>
             <Container className='md'>
