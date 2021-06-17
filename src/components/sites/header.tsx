@@ -8,7 +8,7 @@ import { Logo } from '../logo';
 import { Dropdown } from '../dropdown';
 import { signout } from '../../lib/api/auth';
 
-export const Header: FC = () => {
+export const Header: FC = ({ children }) => {
   const handleSignOut = async () => {
     await signout();
     location.href = '/';
@@ -21,6 +21,8 @@ export const Header: FC = () => {
           <Logo />
         </a>
       </Link>
+
+      {children}
 
       <Dropdown button={<i className='ri-account-circle-line' />}>
         <Link href='/users/account'>

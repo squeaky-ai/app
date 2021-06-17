@@ -4,12 +4,13 @@ import Head from 'next/head';
 import Image from 'next/image';
 import classnames from 'classnames';
 import UAParser from 'ua-parser-js';
-import { Main } from '../../../components/main';
-import { Header } from '../../../components/sites/header';
-import { Message } from '../../../components/message';
-import { Tabs } from '../../../components/sites/tabs';
-import { ServerSideProps, getServerSideProps } from '../../../lib/auth';
-import { useSite } from '../../../hooks/sites';
+import router, { useRouter } from 'next/router';
+import { Main } from '../../../../components/main';
+import { Header } from '../../../../components/sites/header';
+import { Message } from '../../../../components/message';
+import { Tabs } from '../../../../components/sites/tabs';
+import { ServerSideProps, getServerSideProps } from '../../../../lib/auth';
+import { useSite } from '../../../../hooks/sites';
 
 const deviceIcon = (device: string = '') => {
   switch(device.toLowerCase()) {
@@ -25,6 +26,10 @@ const deviceIcon = (device: string = '') => {
 const SitesRecordings: NextPage<ServerSideProps> = () => {
   const [loading, site] = useSite();
   const parser = new UAParser();
+
+  const viewRecording = async (id: string) => {
+    await router.push(`/sites/${site.id}/recordings/${id}`);
+  };
 
   return (
     <div className='page recordings'>
@@ -76,7 +81,7 @@ const SitesRecordings: NextPage<ServerSideProps> = () => {
                       const useragent = parser.setUA(recording.useragent).getResult();
             
                       return (
-                        <tr className='hover' key={recording.id} role='button'>
+                        <tr className='hover' key={recording.id} role='button' onClick={() => viewRecording(recording.id)}>
                           <td>
                             <span className={classnames('indicator', { active: recording.active })} />
                             {recording.active ? 'Active' : 'Recorded'}

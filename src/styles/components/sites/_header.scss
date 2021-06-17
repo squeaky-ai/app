@@ -1,6 +1,47 @@
 .site-header {
+  .logo {
+    width: 103px;
+  }
+
+  .recording-details {
+    p {
+      margin: 0;
+
+      .seperator {
+        color: var(--gray-200);
+        display: inline-block;
+        margin: 0 .25rem;
+      }
+
+      .session {
+        color: var(--gray-500);
+      }
+
+      .session-number {
+        color: var(--gray-800);
+      }
+
+      .indicator {
+        background: var(--gray-200);
+        border-radius: var(--border-radius-o);
+        display: inline-block;
+        height: .75rem;
+        margin-left: .5rem;
+        width: .75rem;
+
+        &.active {
+          background: var(--green-500);
+        }
+      }
+    }
+  }
+
   .dropdown {
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
     position: relative;
+    width: 103px;
 
     .button {
       background: none;
