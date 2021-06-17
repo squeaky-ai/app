@@ -13,9 +13,6 @@ export const Tabs: FC<Props> = ({ site, page }) => {
   return (
     <>
       <div className='site-tabs'>
-        <Link href='/sites'>
-          <a className='all-sites'>&lt; All sites</a>
-        </Link>
         <h3>
           <div className='avatar'></div>
           {site.name}
