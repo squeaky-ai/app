@@ -1,35 +1,33 @@
-import React from 'react';
 import { useRouter } from 'next/router';
-import { getSites, getSite } from '../lib/api/graphql';
+import { useQuery } from '@apollo/client';
+import { GET_SITES_QUERY, GET_SITE_QUERY } from '../data/sites/queries';
+import { useToasts } from './toasts';
 import type { Site } from '../types/site';
 
 export const useSites = (): [boolean, Site[]] => {
-  const [loading, setLoading] = React.useState(true);
-  const [sites, setSites] = React.useState<Site[]>([]);
+  const toasts = useToasts();
+  const { loading, data, error } = useQuery(GET_SITES_QUERY);
 
-  React.useEffect(() => {
-    (async () => {
-      const response = await getSites();
-      setLoading(false);
-      setSites(response.sites);
-    })();
-  }, []);
+  if (error) {
+    toasts.add({ type: 'error', body: 'There was an unexpected error fetching the sites' });
+  }
 
-  return [loading, sites];
+  return [loading, data ? data.sites : []];
 };
 
 export const useSite = (): [boolean, Site | null] => {
+  const toasts = useToasts();
   const router = useRouter();
-  const [loading, setLoading] = React.useState(true);
-  const [site, setSite] = React.useState<Site>(null);
 
-  React.useEffect(() => {
-    (async () => {
-      const response = await getSite(router.query.site_id as string);
-      setLoading(false);
-      setSite(response.site);
-    })();
-  }, []);
+  const { loading, data, error } = useQuery(GET_SITE_QUERY, {
+    variables: {
+      id: router.query.site_id as string
+    }
+  });
 
-  return [loading, site];
+  if (error) {
+    toasts.add({ type: 'error', body: 'There was an unexpected error fetching the site' });
+  }
+
+  return [loading, data ? data.site : null];
 };

@@ -224,8 +224,9 @@ const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
                 if (error) {
                   toast.add({ type: 'error', body: 'There was an unexpected error when sending your invitation. Please try again.' });
                 } else {
-                  closeModal();
                   toast.add({ type: 'success', body: 'Invitation sent' });
+
+                  closeModal();
                 }
               })();
             }}

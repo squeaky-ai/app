@@ -1,17 +1,10 @@
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
 
-import { 
-  SitesQueryResponse, 
-  SiteQueryResponse, 
+import {
   SiteMutationResponse, 
   SiteMutationInput,
   SiteDeleteMutationInput
 } from '../../types/site';
-
-import { 
-  GET_SITES_QUERY, 
-  GET_SITE_QUERY 
-} from '../../data/sites/queries';
 
 import { 
   CREATE_SITE_MUTATION, 
@@ -67,33 +60,6 @@ const parseGraphQLError = (error: Error): ErrorResponse => {
   const key = parts[0].toLowerCase();
   const value = parts.slice(1).join(' ');
   return { error: { [key]: value } };
-};
-
-export const getSites = async (): Promise<SitesQueryResponse> => {
-  try {
-    const { data } = await client.query<SitesQueryResponse>({
-      query: GET_SITES_QUERY
-    });
-
-    return data;
-  } catch(error) {
-    console.error(error);
-    return { sites: [] };
-  }
-};
-
-export const getSite = async (id: string): Promise<SiteQueryResponse> => {
-  try {
-    const { data } = await client.query<SiteQueryResponse>({
-      query: GET_SITE_QUERY,
-      variables: { id },
-    });
-
-    return data;
-  } catch(error) {
-    console.error(error);
-    return { site: null };
-  }
 };
 
 export const createSite = async (name: string, url: string): Promise<SiteMutationResponse> => {
