@@ -3,6 +3,12 @@
   cursor: pointer;
   text-decoration: none;
 
+  &.disabled,
+  &:disabled {
+    opacity: .25;
+    pointer-events: none;
+  }
+
   &.primary {
     background: var(--blue-500);
     border: 2px solid var(--blue-500);
@@ -20,12 +26,6 @@
       background: var(--blue-700);
       border-color: var(--blue-700);
     }
-
-    &.disabled,
-    &:disabled {
-      opacity: .25;
-      pointer-events: none;
-    }
   }
 
   &.secondary {
@@ -41,12 +41,6 @@
     &:active {
       background: var(--blue-500);
       color: var(--white);
-    }
-
-    &.disabled,
-    &:disabled {
-      opacity: .25;
-      pointer-events: none;
     }
   }
 
@@ -64,12 +58,6 @@
       background: var(--magenta-500);
       color: var(--white);
     }
-
-    &.disabled,
-    &:disabled {
-      opacity: .25;
-      pointer-events: none;
-    }
   }
 
   &.quaternary {
@@ -84,12 +72,6 @@
     &:hover,
     &:active {
       border-color: var(--gray-200);
-    }
-
-    &.disabled,
-    &:disabled {
-      opacity: .25;
-      pointer-events: none;
     }
   }
 
