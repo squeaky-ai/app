@@ -43,12 +43,21 @@
   }
 
   .verify {
-    i {
-      color: var(--green-500);
-      display: block;
-      font-size: 80px;
-      font-weight: var(--font-weight-normal);
-      text-align: center;
+    .check {
+      align-items: center;
+      border: 2px solid var(--green-500);
+      border-radius: var(--border-radius-o);
+      display: flex;
+      height: 4rem;
+      justify-content: center;
+      margin: 0 auto 2rem auto;
+      width: 4rem;
+
+      i {
+        color: var(--green-500);
+        display: block;
+        font-size: 2rem;
+      }
     }
 
     h4 {

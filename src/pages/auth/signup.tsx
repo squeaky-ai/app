@@ -168,7 +168,9 @@ const Signup: NextPage<ServerSideProps> = () => {
 
           {pageView === PageView.VERIFY && (
             <div className='verify'>
-              <i className='ri-checkbox-circle-line' />
+              <div className='check'>
+                <i className='ri-check-line' />
+              </div>
               <h4>Sign Up Complete</h4>
               <p>To log in to your account, please open the verification email sent to <b>{email}</b> and click the link provided.</p>
               <Button className='secondary' onClick={() => console.log('TODO')}>

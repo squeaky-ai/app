@@ -172,7 +172,9 @@ const Reset: NextPage<ServerSideProps> = () => {
 
           {pageView === PageView.COMPLETE && (
             <div className='complete'>
-              <i className='ri-checkbox-circle-line' />
+              <div className='check'>
+                <i className='ri-check-line' />
+              </div>
               <h4>Password Reset Successfully</h4>
               <Link href='/auth/signin'>
                 <a className='button primary'>Go To Login Page</a>
