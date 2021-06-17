@@ -251,7 +251,7 @@ const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
                   </Button>
                 </ModalHeader>
                 <ModalContents>
-                  <Label htmlFor='email'>Emaiil address</Label>
+                  <Label htmlFor='email'>Email address</Label>
                   <Input
                     name='email' 
                     type='email' 

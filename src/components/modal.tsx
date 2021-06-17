@@ -2,16 +2,32 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import type { FC } from 'react';
 
-export class Modal extends React.Component {
-  private element: HTMLDivElement;
+interface State {
+  show: boolean;
+}
 
+export const Portal: FC = ({ children }) => {
+  const selector = '#modal-root';
+
+  const ref = React.useRef<HTMLElement>();
+  const [mounted, setMounted] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    ref.current = document.querySelector(selector);
+    setMounted(true);
+  }, [selector]);
+
+  return mounted ? ReactDOM.createPortal(children, ref.current) : null
+};
+
+export class Modal extends React.Component<{}, State> {
   public constructor(props: {}) {
     super(props);
+
+    this.state = { show: false };
   }
 
   public componentDidMount() {
-    this.element = document.createElement('div');
-    this.element.classList.add('modal');
     document.addEventListener('click', this.handleClick);
   }
 
@@ -20,11 +36,11 @@ export class Modal extends React.Component {
   }
 
   public show = () => {
-    this.root.appendChild(this.element);
+    this.setState({ show: true });
   };
 
   public hide = () => {
-    this.root.removeChild(this.element);
+    this.setState({ show: false });
   };
 
   private handleClick = (event: MouseEvent) => {
@@ -35,16 +51,16 @@ export class Modal extends React.Component {
     }
   };
 
-  private get root() {
-    return document.getElementById('modal-root');
-  }
-
   public render() {
-    if (typeof window === 'undefined' || !this.element) {
-      return null;
-    }
-
-    return ReactDOM.createPortal(this.props.children, this.element);
+    return (
+      <Portal>
+        {this.state.show && (
+          <div className='modal'>
+            {this.props.children}
+          </div>
+        )}
+      </Portal>
+    );
   }
 }
 
