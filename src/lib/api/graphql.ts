@@ -58,11 +58,15 @@ export const client = new ApolloClient({
   ssrMode: typeof window === 'undefined',
 });
 
-const parseGraphQLError = (error: Error): { [key: string]: string } => {
+interface ErrorResponse {
+  error: { [key: string]: string }
+}
+
+const parseGraphQLError = (error: Error): ErrorResponse => {
   const parts = error.message.split(' ');
   const key = parts[0].toLowerCase();
   const value = parts.slice(1).join(' ');
-  return { [key]: value };
+  return { error: { [key]: value } };
 };
 
 export const getSites = async (): Promise<SitesQueryResponse> => {

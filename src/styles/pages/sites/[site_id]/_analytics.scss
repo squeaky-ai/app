@@ -3,6 +3,14 @@
   flex: 1;
   padding-bottom: 3rem;
 
+  .title {
+    margin: 3rem 0;
+
+    &.empty {
+      margin-bottom: 1rem;
+    }
+  }
+
   .empty-state {
     align-items: center;
     background: var(--gray-50);

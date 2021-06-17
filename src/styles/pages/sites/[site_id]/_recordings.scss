@@ -2,6 +2,14 @@
   background: var(--white);
   flex: 1;
 
+  .title {
+    margin: 3rem 0;
+
+    &.empty {
+      margin-bottom: 1rem;
+    }
+  }
+
   .empty-state {
     align-items: center;
     background: var(--gray-50);
@@ -22,7 +30,6 @@
 
   .table {
     color: var(--gray-700);
-    margin-top: 3rem;
 
     .indicator {
       background: var(--gray-200);

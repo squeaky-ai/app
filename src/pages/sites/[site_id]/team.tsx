@@ -98,7 +98,7 @@ const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
       {!loading && site && (
         <Main>
           <Tabs site={site} page='team' />
-          <h3>Team</h3>
+          <h3 className='title'>Team</h3>
 
           <Container className='md'>
             <p>This page allows you to view, invite and manage the roles of any team members associated with this site. Adding members is always free of charge, regardless of their role.</p>

@@ -25,19 +25,22 @@ const SitesAnalytics: NextPage<ServerSideProps> = () => {
           <Tabs site={site} page='analytics' />
 
           {!site.recordings.items.length && (
-            <div className='empty-state'>
-              <Image src='/empty-state-3.svg' height={240} width={320} />
-              <h4>There are currently no analytics available.</h4>
-              <Message
-                type='info'
-                message='If you have only recently installed or updated your tracking code it may take a little time before results appear.'
-              />
-            </div>
+            <>
+              <h3 className='title empty'>Analytics</h3>
+              <div className='empty-state'>
+                <Image src='/empty-state-3.svg' height={240} width={320} />
+                <h4>There are currently no analytics available.</h4>
+                <Message
+                  type='info'
+                  message='If you have only recently installed or updated your tracking code it may take a little time before results appear.'
+                />
+              </div>
+            </>
           )}
 
           {!!site.recordings.items.length && (
             <>
-              <h3>Analytics</h3>
+              <h3 className='title'>Analytics</h3>
 
               <div className='analytics-grid'>
                 <div className='card graph'>

@@ -50,7 +50,7 @@ const SitesSettings: NextPage<ServerSideProps> = () => {
       {!loading && site && (
         <Main>
           <Tabs site={site} page='settings' />
-          <h3>Settings</h3>
+          <h3 className='title'>Settings</h3>
           <Drawer title='Site details'>
             <Formik
               initialValues={{ name: site.name, url: site.url }}

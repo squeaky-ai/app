@@ -3,6 +3,10 @@
   flex: 1;
   padding-bottom: 3rem;
 
+  .title {
+    margin: 3rem 0;
+  }
+
   .table {
     td {
       color: var(--gray-700);
