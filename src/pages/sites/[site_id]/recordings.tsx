@@ -76,7 +76,7 @@ const SitesRecordings: NextPage<ServerSideProps> = () => {
                       const useragent = parser.setUA(recording.useragent).getResult();
             
                       return (
-                        <tr className='hover' key={recording.id}>
+                        <tr className='hover' key={recording.id} role='button'>
                           <td>
                             <span className={classnames('indicator', { active: recording.active })} />
                             {recording.active ? 'Active' : 'Recorded'}

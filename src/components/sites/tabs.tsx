@@ -13,10 +13,10 @@ export const Tabs: FC<Props> = ({ site, page }) => {
   return (
     <>
       <div className='site-tabs'>
-        <h3>
+        <h4 className='sub-heading'>
           <div className='avatar'></div>
           {site.name}
-        </h3>
+        </h4>
       </div>
 
       <ul className='tab-header'>
