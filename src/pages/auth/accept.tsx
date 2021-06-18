@@ -34,6 +34,8 @@ const Accept: NextPage<ServerSideProps> = () => {
   React.useEffect(() => {
     if (router.query.token) {
       (async () => {
+        const newUser = router.query.new_user !== 'false';
+
         // If they are already logged in then it will be confusing
         // when they log in as a different user to their current
         // session
@@ -43,7 +45,15 @@ const Accept: NextPage<ServerSideProps> = () => {
 
         setLoading(false);
         
-        if (user) setEmail(user.email);
+        // New users need to finish off creating their account
+        if (user && newUser) setEmail(user.email);
+
+        // Existing users can accept straight away and go to 
+        // the login page
+        if (user && !newUser) {
+          await teamInviteAccept({ token: router.query.token as string });
+          await router.push('/auth/signin');
+        }
       })();
     }
   }, []);

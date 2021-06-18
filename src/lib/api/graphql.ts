@@ -45,9 +45,32 @@ import {
   UPDATE_USER_MUTATION 
 } from '../../data/users/mutations';
 
+const cache = new InMemoryCache({
+  typePolicies: {
+    Site: {
+      fields: {
+        // When fetching recordings, merge the old and new
+        // so they build a paginated list
+        recordings: {
+          keyArgs: false,
+          merge(existing, incoming) {
+            return {
+              ...incoming,
+              items: [
+                ...existing?.items || [],
+                ...incoming?.items || [], 
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+});
+
 export const client = new ApolloClient({
+  cache,
   uri: '/api/graphql',
-  cache: new InMemoryCache(),
   ssrMode: typeof window === 'undefined',
 });
 

@@ -21,7 +21,7 @@ export interface TeamInviteCancelInput {
 }
 
 export interface TeamInviteAcceptInput {
-  password: string;
+  password?: string;
   token: string;
 }
 

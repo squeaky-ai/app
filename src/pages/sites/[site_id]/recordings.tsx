@@ -2,40 +2,16 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
-import classnames from 'classnames';
-import { useRouter } from 'next/router';
-import locales from '../../../data/locales.json';
 import { Main } from '../../../components/main';
 import { Header } from '../../../components/sites/header';
 import { Message } from '../../../components/message';
 import { Tabs } from '../../../components/sites/tabs';
+import { RecordingsList } from '../../../components/sites/recordings-list';
 import { ServerSideProps, getServerSideProps } from '../../../lib/auth';
 import { useSite } from '../../../hooks/sites';
 
-const deviceIcon = (device: string = '') => {
-  // TODO this list will need to change
-  switch(device.toLowerCase()) {
-    case 'mobile':
-      return 'ri-smartphone-line';
-    case 'tablet':
-      return 'ri-tablet-line';
-    default:
-      return 'ri-computer-line';
-  }
-};
-
 const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
-  const router = useRouter();
   const [loading, site] = useSite();
-
-  const viewRecording = async (id: string) => {
-    await router.push(`/sites/${site.id}/recordings/${id}`);
-  };
-
-  const language = (locale: string) => {
-    const language = locales[locale.toLowerCase().replace('-', '_')];
-    return language || 'Unknown';
-  };
 
   return (
     <div className='page recordings'>
@@ -66,61 +42,7 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
           {!!site.recordings.items.length && (
             <>
               <h3 className='title'>Recordings</h3>
-              <div className='table'>
-                <table cellSpacing='0'>
-                  <thead>
-                    <tr>
-                      <th>Status</th>
-                      <th>Session #</th>
-                      <th>User</th>
-                      <th>Language</th>
-                      <th>Duration</th>
-                      <th>Pages</th>
-                      <th>Start &amp; Exit URL</th>
-                      <th>Device type</th>
-                      <th>Viewport (px)</th>
-                      <th>Browser</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {site.recordings.items.map(recording => (
-                      <tr className='hover' key={recording.id} role='button' onClick={() => viewRecording(recording.id)}>
-                        <td>
-                          <span className={classnames('indicator', { active: recording.active })} />
-                          {recording.active ? 'Active' : 'Recorded'}
-                        </td>
-                        <td>{recording.id}</td>
-                        <td>{recording.viewerId}</td>
-                        <td>{language(recording.locale)}</td>
-                        <td>{recording.duration}</td>
-                        <td><a href='#'>{recording.pageCount}</a></td>
-                        <td>
-                          <table className='start-exit-page'>
-                            <tbody>
-                              <tr>
-                                <td>START URL</td>
-                                <td>{recording.startPage}</td>
-                              </tr>
-                              <tr>
-                                <td>EXIT URL</td>
-                                <td>{recording.exitPage}</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </td>
-                        <td>
-                          <i className={classnames('device', deviceIcon(recording.deviceType))} />
-                          {recording.deviceType || 'Unknown'}
-                        </td>
-                        <td>{recording.viewportX} x {recording.viewportY}</td>
-                        <td>
-                          <Image src={`/browsers/${recording.browser.toLowerCase()}.svg`} height={24} width={24} />
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+              <RecordingsList site={site} />
             </>
           )}
         </Main>
