@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import classnames from 'classnames';
 import { useRouter } from 'next/router';
+import locales from '../../../data/locales.json';
 import { Main } from '../../../components/main';
 import { Header } from '../../../components/sites/header';
 import { Message } from '../../../components/message';
@@ -29,6 +30,11 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
 
   const viewRecording = async (id: string) => {
     await router.push(`/sites/${site.id}/recordings/${id}`);
+  };
+
+  const language = (locale: string) => {
+    const language = locales[locale.toLowerCase().replace('-', '_')];
+    return language || 'Unknown';
   };
 
   return (
@@ -85,7 +91,7 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
                         </td>
                         <td>{recording.id}</td>
                         <td>{recording.viewerId}</td>
-                        <td>{recording.locale}</td>
+                        <td>{language(recording.locale)}</td>
                         <td>{recording.duration}</td>
                         <td><a href='#'>{recording.pageCount}</a></td>
                         <td>
