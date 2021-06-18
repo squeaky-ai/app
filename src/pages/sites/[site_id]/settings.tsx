@@ -13,9 +13,11 @@ import { Tabs } from '../../../components/sites/tabs';
 import { Message } from '../../../components/message';
 import { Main } from '../../../components/main';
 import { Drawer } from '../../../components/drawer';
+import { OWNER } from '../../../data/teams/constants';
 import { ServerSideProps, getServerSideProps } from '../../../lib/auth';
 import { deleteSite } from '../../../lib/api/graphql';
 import { updateSite } from '../../../lib/api/graphql';
+import { getTeamMember } from '../../../lib/sites';
 import { useToasts } from '../../../hooks/toasts';
 import { useSite } from '../../../hooks/sites';
 
@@ -28,6 +30,8 @@ const SitesSettings: NextPage<ServerSideProps> = ({ user }) => {
   const toast = useToasts();
   const router = useRouter();
   const [loading, site] = useSite();
+
+  const member = getTeamMember(site, user);
 
   const siteDelete = async () => {
     const { error } = await deleteSite({ siteId: site.id });
@@ -153,18 +157,20 @@ const SitesSettings: NextPage<ServerSideProps> = ({ user }) => {
               )}
             </Container>
           </Drawer>
-          <Drawer title='Site deletion'>
-            <Container className='md'>
-              <p><b>You can delete your site at any time:</b></p>
-              <ul className='delete-list'>
-                <li>Deleting your site will not delete your Squeaky user account. To delete you account please visit the account settings page.</li>
-                <li>Site deletion is irreversable. If you have an active subscription you can downgrade to a free plan in the subscription tab.</li>
-              </ul>
-              <Button className='tertiary' onClick={siteDelete}>
-                Delete Site
-              </Button>
-            </Container>
-          </Drawer>
+          {member.role === OWNER && (
+            <Drawer title='Site deletion'>
+              <Container className='md'>
+                <p><b>You can delete your site at any time:</b></p>
+                <ul className='delete-list'>
+                  <li>Deleting your site will not delete your Squeaky user account. To delete you account please visit the account settings page.</li>
+                  <li>Site deletion is irreversable. If you have an active subscription you can downgrade to a free plan in the subscription tab.</li>
+                </ul>
+                <Button className='tertiary' onClick={siteDelete}>
+                  Delete Site
+                </Button>
+              </Container>
+            </Drawer>
+          )}
         </Main>
       )}
     </div>

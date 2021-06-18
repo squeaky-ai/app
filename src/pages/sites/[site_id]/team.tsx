@@ -14,6 +14,7 @@ import { Select, Option } from '../../../components/select';
 import { Tabs } from '../../../components/sites/tabs';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from '../../../components/modal';
 import { ServerSideProps, getServerSideProps } from '../../../lib/auth';
+import { OWNER, ADMIN, INVITED } from '../../../data/teams/constants';
 import { teamInvite, teamInviteCancel, teamInviteResend, teamUpdate, teamLeave, teamDelete } from '../../../lib/api/graphql';
 import { useSite } from '../../../hooks/sites';
 import { useToasts } from '../../../hooks/toasts';
@@ -25,9 +26,9 @@ const InviteSchema = Yup.object().shape({
 
 const roleName = (role: number | string) => {
   switch(Number(role)) {
-    case 1:
+    case ADMIN:
       return 'Admin';
-    case 2:
+    case OWNER:
       return 'Owner';
     default:
       return 'User';
@@ -117,8 +118,8 @@ const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
               <tbody>
                 {site.team.map(team => {
                   const self = Number(team.user.id) === user.id;
-                  const owner = team.role === 2;
-                  const invited = team.status === 1;
+                  const owner = team.role === OWNER;
+                  const invited = team.status === INVITED;
 
                   return (
                     <tr key={team.id}>

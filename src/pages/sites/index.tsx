@@ -6,7 +6,6 @@ import Image from 'next/image';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { useRouter } from 'next/router';
-import { Container } from '../../components/container';
 import { Header } from '../../components/sites/header';
 import { Label } from '../../components/label';
 import { Main } from '../../components/main';

@@ -2,6 +2,8 @@ import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
 import classnames from 'classnames';
+import { getTeamMember } from '../../lib/sites';
+import { ADMIN, MEMBER } from '../../data/teams/constants';
 import { User } from '../../types/user';
 import { Site } from '../../types/site';
 
@@ -21,7 +23,7 @@ interface Props {
 }
 
 export const Tabs: FC<Props> = ({ site, page, user }) => {
-  const member = site.team.find(team => team.user.id.toString() === user.id.toString());
+  const member = getTeamMember(site, user);
 
   const tabs: Tab[] = [
     {
@@ -40,19 +42,19 @@ export const Tabs: FC<Props> = ({ site, page, user }) => {
       page: 'team',
       name: 'Team',
       icon: 'ri-group-line',
-      hideForRoles: [0]
+      hideForRoles: [MEMBER]
     },
     {
       page: 'settings',
       name: 'Settings',
       icon: 'ri-settings-3-line',
-      hideForRoles: []
+      hideForRoles: [MEMBER]
     },
     {
       page: 'subscription',
       name: 'Subscription',
       icon: 'ri-bank-card-2-line',
-      hideForRoles: []
+      hideForRoles: [MEMBER, ADMIN]
     }
   ];
 
@@ -67,7 +69,7 @@ export const Tabs: FC<Props> = ({ site, page, user }) => {
 
       <ul className='tab-header'>
         {tabs.map(tab => (
-          <li className={classnames('tab', { hidden: tab.hideForRoles.includes(member.role) })} key={tab.page}>
+          <li className={classnames('tab', { hidden: tab.hideForRoles.includes(member?.role) })} key={tab.page}>
             <Link href={`/sites/${site.id}/${tab.page}`}>
               <a className={classnames('button tab-button', { active: page === tab.page })}>
                 <i className={tab.icon} />
