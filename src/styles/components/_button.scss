@@ -3,6 +3,10 @@
   cursor: pointer;
   text-decoration: none;
 
+  i {
+    font-weight: var(--font-weight-normal);
+  }
+
   &.disabled,
   &:disabled {
     opacity: .25;
