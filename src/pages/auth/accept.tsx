@@ -76,7 +76,7 @@ const Accept: NextPage<ServerSideProps> = () => {
 
           {!loading && email && (
             <>
-              <h2>Reset Password</h2>
+              <h2>Sign Up</h2>
 
               <Formik
                 initialValues={{ password: '', terms: false }}
@@ -128,7 +128,7 @@ const Accept: NextPage<ServerSideProps> = () => {
                     <span className='validation'>{errors.terms}</span>
 
                     <Button  type='submit' disabled={isSubmitting} className='primary'>
-                      Reset Password
+                      Sign Up
                     </Button>
                   </form>
                 )}
