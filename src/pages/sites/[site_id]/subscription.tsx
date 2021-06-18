@@ -7,7 +7,7 @@ import { Main } from '../../../components/main';
 import { ServerSideProps, getServerSideProps } from '../../../lib/auth';
 import { useSite } from '../../../hooks/sites';
 
-const SitesSubscription: NextPage<ServerSideProps> = () => {
+const SitesSubscription: NextPage<ServerSideProps> = ({ user }) => {
   const [loading, site] = useSite();
 
   return (
@@ -20,7 +20,7 @@ const SitesSubscription: NextPage<ServerSideProps> = () => {
 
       {!loading && site && (
         <Main>
-          <Tabs site={site} page='subscription' />
+          <Tabs site={site} user={user} page='subscription' />
           <h3 className='title'>Subscription</h3>
         </Main>
       )}

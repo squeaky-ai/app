@@ -9,7 +9,7 @@ import { Message } from '../../../components/message';
 import { ServerSideProps, getServerSideProps } from '../../../lib/auth';
 import { useSite } from '../../../hooks/sites';
 
-const SitesAnalytics: NextPage<ServerSideProps> = () => {
+const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
   const [loading, site] = useSite();
 
   return (
@@ -22,7 +22,7 @@ const SitesAnalytics: NextPage<ServerSideProps> = () => {
 
       {!loading && site && (
         <Main>
-          <Tabs site={site} page='analytics' />
+          <Tabs site={site} user={user} page='analytics' />
 
           {!site.recordings.items.length && (
             <>

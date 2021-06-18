@@ -23,7 +23,7 @@ const deviceIcon = (device: string = '') => {
   }
 };
 
-const SitesRecordings: NextPage<ServerSideProps> = () => {
+const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
   const router = useRouter();
   const [loading, site] = useSite();
 
@@ -41,7 +41,7 @@ const SitesRecordings: NextPage<ServerSideProps> = () => {
 
       {!loading && site && (
         <Main>
-          <Tabs site={site} page='recordings' />
+          <Tabs site={site} user={user} page='recordings' />
 
           {!site.recordings.items.length && (
             <>

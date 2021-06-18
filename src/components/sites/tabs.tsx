@@ -2,14 +2,60 @@ import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
 import classnames from 'classnames';
+import { User } from '../../types/user';
 import { Site } from '../../types/site';
+
+type Page = 'recordings' | 'analytics' | 'settings' | 'team' | 'subscription';
+
+type Tab = {
+  page: Page;
+  name: string;
+  icon: string;
+  hideForRoles: number[];
+}
 
 interface Props {
   site: Site;
-  page: 'recordings' | 'analytics' | 'settings' | 'team' | 'subscription';
+  user: User;
+  page: Page;
 }
 
-export const Tabs: FC<Props> = ({ site, page }) => {
+export const Tabs: FC<Props> = ({ site, page, user }) => {
+  const member = site.team.find(team => team.user.id.toString() === user.id.toString());
+
+  const tabs: Tab[] = [
+    {
+      page: 'recordings',
+      name: 'Recordings',
+      icon: 'ri-vidicon-line',
+      hideForRoles: []
+    },
+    {
+      page: 'analytics',
+      name: 'Analytics',
+      icon: 'ri-line-chart-line',
+      hideForRoles: []
+    },
+    {
+      page: 'team',
+      name: 'Team',
+      icon: 'ri-group-line',
+      hideForRoles: [0]
+    },
+    {
+      page: 'settings',
+      name: 'Settings',
+      icon: 'ri-settings-3-line',
+      hideForRoles: []
+    },
+    {
+      page: 'subscription',
+      name: 'Subscription',
+      icon: 'ri-bank-card-2-line',
+      hideForRoles: []
+    }
+  ];
+
   return (
     <>
       <div className='site-tabs'>
@@ -20,46 +66,16 @@ export const Tabs: FC<Props> = ({ site, page }) => {
       </div>
 
       <ul className='tab-header'>
-        <li className='tab'>
-          <Link href={`/sites/${site.id}/recordings`}>
-            <a className={classnames('button tab-button', { active: page === 'recordings' })}>
-              <i className='ri-vidicon-line' />
-              Recordings
-            </a>
-          </Link>
-        </li>
-        <li className='tab'>
-          <Link href={`/sites/${site.id}/analytics`}>
-            <a className={classnames('button tab-button', { active: page === 'analytics' })}>
-              <i className='ri-line-chart-line' />
-              Analytics
-            </a>
-          </Link>
-        </li>
-        <li className='tab'>
-          <Link href={`/sites/${site.id}/team`}>
-            <a className={classnames('button tab-button', { active: page === 'team' })}>
-              <i className='ri-group-line' />
-              Team
-            </a>
-          </Link>
-        </li>
-        <li className='tab'>
-          <Link href={`/sites/${site.id}/settings`}>
-            <a className={classnames('button tab-button', { active: page === 'settings' })}>
-              <i className='ri-settings-3-line' />
-              Settings
-            </a>
-          </Link>
-        </li>
-        <li className='tab'>
-          <Link href={`/sites/${site.id}/subscription`}>
-            <a className={classnames('button tab-button', { active: page === 'subscription' })}>
-              <i className='ri-bank-card-2-line' />
-              Subscription
-            </a>
-          </Link>
-        </li>
+        {tabs.map(tab => (
+          <li className={classnames('tab', { hidden: tab.hideForRoles.includes(member.role) })} key={tab.page}>
+            <Link href={`/sites/${site.id}/${tab.page}`}>
+              <a className={classnames('button tab-button', { active: page === tab.page })}>
+                <i className={tab.icon} />
+                {tab.name}
+              </a>
+            </Link>
+          </li>
+        ))}
       </ul>
     </>
   );

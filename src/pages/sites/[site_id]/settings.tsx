@@ -24,7 +24,7 @@ const DetailsSchema = Yup.object().shape({
   url: Yup.string().required('Site URL is required')
 });
 
-const SitesSettings: NextPage<ServerSideProps> = () => {
+const SitesSettings: NextPage<ServerSideProps> = ({ user }) => {
   const toast = useToasts();
   const router = useRouter();
   const [loading, site] = useSite();
@@ -50,7 +50,7 @@ const SitesSettings: NextPage<ServerSideProps> = () => {
 
       {!loading && site && (
         <Main>
-          <Tabs site={site} page='settings' />
+          <Tabs site={site} user={user} page='settings' />
           <h3 className='title'>Settings</h3>
           <Drawer title='Site details'>
             <Formik

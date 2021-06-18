@@ -97,7 +97,7 @@ const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
 
       {!loading && site && (
         <Main>
-          <Tabs site={site} page='team' />
+          <Tabs site={site} user={user} page='team' />
           <h3 className='title'>Team</h3>
 
           <Container className='md'>
@@ -119,7 +119,6 @@ const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
                   const self = Number(team.user.id) === user.id;
                   const owner = team.role === 2;
                   const invited = team.status === 1;
-                  const disabled = self && team.role === 0;
 
                   return (
                     <tr key={team.id}>
@@ -135,7 +134,7 @@ const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
                       <td className='role'>
                         {owner && roleName(team.role)}
                         {!owner && (
-                          <Select name='role' onChange={(event: ChangeEvent) => changeRole(team.id, (event.target as HTMLSelectElement).value)} defaultValue={team.role} disabled={disabled}>
+                          <Select name='role' onChange={(event: ChangeEvent) => changeRole(team.id, (event.target as HTMLSelectElement).value)} defaultValue={team.role}>
                             <Option value='0'>User</Option>
                             <Option value='1'>Admin</Option>
                           </Select>
@@ -144,8 +143,8 @@ const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
                       <td className='options'>
                         {invited && (
                           <>
-                            <Button className='positive' disabled={disabled} onClick={() => resendInvitation(team.id)}>Resend Invitation</Button>
-                            <Button className='negative' disabled={disabled} onClick={() => cancelInvitation(team.id)}>Cancel Invitation</Button>
+                            <Button className='positive' onClick={() => resendInvitation(team.id)}>Resend Invitation</Button>
+                            <Button className='negative' onClick={() => cancelInvitation(team.id)}>Cancel Invitation</Button>
                           </>
                         )}
                         {!invited && (
@@ -154,7 +153,7 @@ const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
                               <Button className='negative' onClick={() => leaveTeam()}>Leave site</Button>
                             )}
                             {!owner && !self && (
-                              <Button className='negative' disabled={disabled} onClick={() => deleteTeam(team.id)}>Remove</Button>
+                              <Button className='negative' onClick={() => deleteTeam(team.id)}>Remove</Button>
                             )}
                           </>
                         )}
