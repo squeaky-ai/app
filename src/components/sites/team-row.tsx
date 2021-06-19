@@ -118,7 +118,7 @@ export const TeamRow: FC<Props> = ({ user, site, team }) => {
             </Button>
           </ModalHeader>
           <ModalContents>
-            <p>Are you sure you wish to make {team.user.fullName} {roleNames[role]}?</p>
+            <p>Are you sure you wish to make {self ? 'yourself' : team.user.fullName} {roleNames[role]}?</p>
           </ModalContents>
           <ModalFooter>
             <Button type='button' className='primary' onClick={changeRole}>
