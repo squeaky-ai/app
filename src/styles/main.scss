@@ -2,10 +2,10 @@
 @import './typography';
 @import './variables';
 
-@import './components/sites/recordings/controls';
-@import './components/sites/recordings/player';
 @import './components/sites/access';
+@import './components/sites/controls';
 @import './components/sites/header';
+@import './components/sites/player';
 @import './components/sites/recordings-list';
 @import './components/sites/tabs';
 @import './components/users/tabs';
@@ -35,8 +35,8 @@
 @import './pages/auth/reset';
 @import './pages/auth/signin';
 @import './pages/auth/signup';
-@import './pages/sites/[site_id]/recordings/[recording_id]/index';
 @import './pages/sites/[site_id]/analytics';
+@import './pages/sites/[site_id]/player';
 @import './pages/sites/[site_id]/recordings';
 @import './pages/sites/[site_id]/settings';
 @import './pages/sites/[site_id]/subscription';

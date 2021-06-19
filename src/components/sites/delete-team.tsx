@@ -1,11 +1,11 @@
 import React from 'react';
 import type { FC } from 'react';
-import { Button } from '../../button';
-import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from '../../modal';
-import { teamDelete } from '../../../lib/api/graphql';
-import { useToasts } from '../../../hooks/toasts';
-import type { Site } from '../../../types/site';
-import type { Team } from '../../../types/team';
+import { Button } from '../button';
+import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from '../modal';
+import { teamDelete } from '../../lib/api/graphql';
+import { useToasts } from '../../hooks/toasts';
+import type { Site } from '../../types/site';
+import type { Team } from '../../types/team';
 
 interface Props {
   site: Site;

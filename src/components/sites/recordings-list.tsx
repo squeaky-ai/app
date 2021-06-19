@@ -39,7 +39,7 @@ export const RecordingsList: FC<Props> = ({ site }) => {
   };
 
   const viewRecording = async (id: string) => {
-    await router.push(`/sites/${site.id}/recordings/${id}`);
+    await router.push(`/sites/${site.id}/player?recording_id=${id}`);
   };
 
   const language = (locale: string) => {

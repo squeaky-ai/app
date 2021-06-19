@@ -1,6 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
-import { Button } from '../../button';
+import { Button } from '../button';
 
 export const Controls: FC = () => (
   <aside className='controls'>

@@ -3,20 +3,20 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Header } from '../../../../../components/sites/header';
-import { Player } from '../../../../../components/sites/recordings/player';
-import { Controls } from '../../../../../components/sites/recordings/controls';
-import { ServerSideProps, getServerSideProps } from '../../../../../lib/auth';
-import { useSite } from '../../../../../hooks/sites';
+import { Header } from '../../../components/sites/header';
+import { Player } from '../../../components/sites/player';
+import { Controls } from '../../../components/sites/controls';
+import { ServerSideProps, getServerSideProps } from '../../../lib/auth';
+import { useSite } from '../../../hooks/sites';
 
-const SitesRecording: NextPage<ServerSideProps> = () => {
+const SitesPlayer: NextPage<ServerSideProps> = () => {
   const router = useRouter();
   const [_loading, site] = useSite();
 
   return (
-    <div className='page recording'>
+    <div className='page player'>
       <Head>
-        <title>Squeaky / Site Recording</title>
+        <title>Squeaky / Site Player</title>
       </Head>
 
       <Header>
@@ -42,5 +42,5 @@ const SitesRecording: NextPage<ServerSideProps> = () => {
   );
 };
 
-export default SitesRecording;
+export default SitesPlayer;
 export { getServerSideProps };

@@ -1,18 +1,18 @@
 import React from 'react';
 import type { FC } from 'react';
-import { Select, Option } from '../../../components/select';
-import { OWNER, INVITED } from '../../../data/teams/constants';
+import { Select, Option } from '../../components/select';
+import { OWNER, INVITED } from '../../data/teams/constants';
 import { CancelInvitation } from './cancel-invitation';
 import { ResendInvitation } from './resend-invitation';
 import { DeleteTeam } from './delete-team';
 import { LeaveTeam } from './leave-team';
-import { Button } from '../../button';
-import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from '../../modal';
-import { teamUpdate } from '../../../lib/api/graphql';
-import { useToasts } from '../../../hooks/toasts';
-import type { Team } from '../../../types/team';
-import type { User } from '../../../types/user';
-import type { Site } from '../../../types/site';
+import { Button } from '../button';
+import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from '../modal';
+import { teamUpdate } from '../../lib/api/graphql';
+import { useToasts } from '../../hooks/toasts';
+import type { Team } from '../../types/team';
+import type { User } from '../../types/user';
+import type { Site } from '../../types/site';
 
 interface Props {
   user: User;
