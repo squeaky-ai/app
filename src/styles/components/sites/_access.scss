@@ -1,0 +1,42 @@
+.access {
+  align-items: center;
+  background: var(--gray-100);
+  border: none;
+  border-radius: var(--border-radius-md);
+  display: flex;
+  height: 2rem;
+  margin-left: 1rem;
+  padding: .5rem;
+  width: 2rem;
+
+  i {
+    color: var(--gray-500);
+  }
+
+  .description {
+    color: var(--gray-700);
+    display: none;
+    font-weight: var(--font-weight-normal);
+    font-size: 13px;
+    line-height: 1rem;
+    margin-left: .25rem;
+  }
+
+  &:hover {
+    i {
+      color: var(--blue-500);
+    } 
+  }
+
+  &.open {
+    width: auto;
+
+    i {
+      color: var(--blue-500);
+    }
+
+    .description {
+      display: block;
+    }
+  }
+}

@@ -13,7 +13,8 @@ import { Tabs } from '../../../components/sites/tabs';
 import { Message } from '../../../components/message';
 import { Main } from '../../../components/main';
 import { Drawer } from '../../../components/drawer';
-import { OWNER } from '../../../data/teams/constants';
+import { Access } from '../../../components/sites/access';
+import { OWNER, ADMIN } from '../../../data/teams/constants';
 import { ServerSideProps, getServerSideProps } from '../../../lib/auth';
 import { deleteSite } from '../../../lib/api/graphql';
 import { updateSite } from '../../../lib/api/graphql';
@@ -55,7 +56,10 @@ const SitesSettings: NextPage<ServerSideProps> = ({ user }) => {
       {!loading && site && (
         <Main>
           <Tabs site={site} user={user} page='settings' />
-          <h3 className='title'>Settings</h3>
+          <h3 className='title'>
+            Settings
+            <Access roles={[OWNER, ADMIN]} />
+          </h3>
           <Drawer title='Site details'>
             <Formik
               initialValues={{ name: site.name, url: site.url }}
@@ -158,7 +162,7 @@ const SitesSettings: NextPage<ServerSideProps> = ({ user }) => {
             </Container>
           </Drawer>
           {member.role === OWNER && (
-            <Drawer title='Site deletion'>
+            <Drawer title='Site deletion' aside={<Access roles={[OWNER]} />}>
               <Container className='md'>
                 <p><b>You can delete your site at any time:</b></p>
                 <ul className='delete-list'>

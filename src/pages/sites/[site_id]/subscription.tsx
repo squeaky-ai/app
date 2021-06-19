@@ -4,6 +4,8 @@ import Head from 'next/head';
 import { Header } from '../../../components/sites/header';
 import { Tabs } from '../../../components/sites/tabs';
 import { Main } from '../../../components/main';
+import { Access } from '../../../components/sites/access';
+import { OWNER } from '../../../data/teams/constants';
 import { ServerSideProps, getServerSideProps } from '../../../lib/auth';
 import { useSite } from '../../../hooks/sites';
 
@@ -21,7 +23,10 @@ const SitesSubscription: NextPage<ServerSideProps> = ({ user }) => {
       {!loading && site && (
         <Main>
           <Tabs site={site} user={user} page='subscription' />
-          <h3 className='title'>Subscription</h3>
+          <h3 className='title'>
+            Subscription
+            <Access roles={[OWNER]} />
+          </h3>
         </Main>
       )}
     </div>

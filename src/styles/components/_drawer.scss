@@ -3,18 +3,23 @@
 
   .drawer-title {
     align-items: center;
-    background: none;
-    border: none;
-    color: var(--gray-800);
     display: flex;
-    font-size: 24px;
-    font-weight: var(--font-weight-bold);
-    padding: 0;
 
-    i {
-      color: var(--gray-500);
-      font-weight: var(--font-weight-normal);
-      margin-right: .5rem;
+    .drawer-toggle {
+      align-items: center;
+      background: none;
+      border: none;
+      color: var(--gray-800);
+      display: flex;
+      font-size: 24px;
+      font-weight: var(--font-weight-bold);
+      padding: 0;
+
+      .arrow {
+        color: var(--gray-500);
+        font-weight: var(--font-weight-normal);
+        margin-right: .5rem;
+      }
     }
   }
 
@@ -26,7 +31,7 @@
 
   &.open {
     .drawer-title {
-      i {
+      .arrow {
         transform: rotate(180deg);
       }
     }

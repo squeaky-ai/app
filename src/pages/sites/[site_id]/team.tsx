@@ -13,6 +13,7 @@ import { Main } from '../../../components/main';
 import { Select, Option } from '../../../components/select';
 import { Tabs } from '../../../components/sites/tabs';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from '../../../components/modal';
+import { Access } from '../../../components/sites/access';
 import { ServerSideProps, getServerSideProps } from '../../../lib/auth';
 import { OWNER, ADMIN, INVITED } from '../../../data/teams/constants';
 import { teamInvite, teamInviteCancel, teamInviteResend, teamUpdate, teamLeave, teamDelete } from '../../../lib/api/graphql';
@@ -99,7 +100,10 @@ const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
       {!loading && site && (
         <Main>
           <Tabs site={site} user={user} page='team' />
-          <h3 className='title'>Team</h3>
+          <h3 className='title'>
+            Team
+            <Access roles={[OWNER, ADMIN]} />
+          </h3>
 
           <Container className='md'>
             <p>This page allows you to view, invite and manage the roles of any team members associated with this site. Adding members is always free of charge, regardless of their role.</p>

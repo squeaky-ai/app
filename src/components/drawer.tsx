@@ -5,17 +5,21 @@ import { Button } from './button';
 
 interface Props {
   title: string | React.ReactNode;
+  aside?: string | React.ReactNode;
 }
 
-export const Drawer: FC<Props> = ({ title, children }) => {
+export const Drawer: FC<Props> = ({ title, children, aside }) => {
   const [open, setOpen] = React.useState(false);
 
   return (
     <div className={classnames('drawer', { open })}>
-      <Button className='drawer-title' onClick={() => setOpen(!open)}>
-        <i className='arrow ri-arrow-drop-down-line' />
-        {title}
-      </Button>
+      <div className='drawer-title'>
+        <Button className='drawer-toggle' onClick={() => setOpen(!open)}>
+          <i className='arrow ri-arrow-drop-down-line' />
+          {title}
+        </Button>
+        {aside}
+      </div>
       <div className='drawer-body'>
         {children}
       </div>
