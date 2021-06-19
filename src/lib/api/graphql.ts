@@ -3,13 +3,15 @@ import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
 import {
   SiteMutationResponse, 
   SiteMutationInput,
-  SiteDeleteMutationInput
+  SiteDeleteMutationInput,
+  SiteVerifyMutationInput
 } from 'types/site';
 
 import { 
   CREATE_SITE_MUTATION, 
   UPDATE_SITE_MUTATION,
-  DELETE_SITE_MUTATION
+  DELETE_SITE_MUTATION,
+  VERIFY_SITE_MUTATION
 } from 'data/sites/mutations';
 
 import { 
@@ -128,6 +130,20 @@ export const deleteSite = async (input: SiteDeleteMutationInput): Promise<SiteMu
     });
 
     return { site: null };
+  } catch(error) {
+    console.error(error);
+    return parseGraphQLError(error);
+  }
+};
+
+export const verifySite = async (input: SiteVerifyMutationInput): Promise<SiteMutationResponse> => {
+  try {
+    const { data } = await client.mutate({
+      mutation: VERIFY_SITE_MUTATION,
+      variables: { input }
+    });
+
+    return { site: data.siteVerify };
   } catch(error) {
     console.error(error);
     return parseGraphQLError(error);

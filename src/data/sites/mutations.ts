@@ -27,3 +27,12 @@ export const DELETE_SITE_MUTATION = gql`
     }
   }
 `;
+
+export const VERIFY_SITE_MUTATION = gql`
+  mutation SiteVerify($input: SiteVerifyInput!) {
+    siteVerify(input: $input) {
+      id
+      verifiedAt
+    }
+  }
+`;

@@ -40,3 +40,7 @@ export interface SiteMutationInput {
 export interface SiteDeleteMutationInput {
   siteId: string;
 }
+
+export interface SiteVerifyMutationInput {
+  siteId: string;
+}

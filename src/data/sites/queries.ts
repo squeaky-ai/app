@@ -20,6 +20,7 @@ export const GET_SITE_QUERY = gql`
       name
       url
       avatar
+      verifiedAt
       uuid
       planName
       ownerName

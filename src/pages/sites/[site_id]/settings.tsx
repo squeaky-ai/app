@@ -15,6 +15,8 @@ import { Drawer } from 'components/drawer';
 import { Access } from 'components/sites/access';
 import { DeleteSite } from 'components/sites/delete-site';
 import { Unauthorized } from 'components/sites/unauthorized';
+import { Verify } from 'components/sites/verify';
+import { TrackingCode } from 'components/sites/tracking-code';
 import { OWNER, ADMIN } from 'data/teams/constants';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { updateSite } from 'lib/api/graphql';
@@ -117,7 +119,14 @@ const SitesSettings: NextPage<ServerSideProps> = ({ user }) => {
                 )}
               </Formik>
             </Drawer>
-            <Drawer title='Tracking code'>
+            <Drawer 
+              title='Tracking code' 
+              aside={
+                site.verifiedAt 
+                  ? <span className='verified-badge'><i className='ri-checkbox-circle-line' />Verified and active</span> 
+                  : null
+              }
+            >
               <Container className='md'>
                 {!site.verifiedAt && (
                   <>
@@ -128,32 +137,17 @@ const SitesSettings: NextPage<ServerSideProps> = ({ user }) => {
 
                     <p>Please paste the code below into the <code className='code'>&lt;head&gt;</code> section of your HTML on every page you wish to track on your website <a href={site.url} target='_blank'>{site.url}</a>.</p>
                     <p>This enables Squeaky to anonymously capture user behaviour, giving you valuable insights into their experience on your site.</p>
-
-                    <Label>
-                      Tracking code
-                      <Button className='link icon'>
-                        <i className='ri-file-copy-line' />
-                        Copy to clipboard
-                      </Button>
-                    </Label>
-                    <pre className='code block'>
-                      <code>
-  {`<!-- Squeaky Tracking Code for ${site.url} -->
-  <script>
-    (function(s,q,e,a,u,k,y){
-      s._sqSettings={site_id:'${site.uuid}'};
-      u=q.getElementsByTagName('head')[0];
-      k=q.createElement('script');k.async=1;
-      k.src=e+s._sqSettings.site_id;
-      u.appendChild(k);
-    })(window,document,'https://cdn.squeaky.ai/g/0.1.0/script.js?');
-  </script>`}
-                      </code>
-                    </pre>
-                    <Button className='primary'>
-                      Verify Installation
-                    </Button>
                   </>
+                )}
+
+                {site.verifiedAt && (
+                  <p>You can paste the code below into the <code className='code'>&lt;head&gt;</code> section of your HTML on any page that you wish to track on <a href={site.url} target='_blank'>{site.url}</a>.</p>
+                )}
+
+                <TrackingCode site={site} />
+
+                {!site.verifiedAt && (
+                  <Verify site={site} />
                 )}
               </Container>
             </Drawer>
