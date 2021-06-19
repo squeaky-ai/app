@@ -3,11 +3,11 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Header } from '../../../components/sites/header';
-import { Player } from '../../../components/sites/player';
-import { Controls } from '../../../components/sites/controls';
-import { ServerSideProps, getServerSideProps } from '../../../lib/auth';
-import { useSite } from '../../../hooks/sites';
+import { Header } from 'components/sites/header';
+import { Player } from 'components/sites/player';
+import { Controls } from 'components/sites/controls';
+import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { useSite } from 'hooks/sites';
 
 const SitesPlayer: NextPage<ServerSideProps> = () => {
   const router = useRouter();

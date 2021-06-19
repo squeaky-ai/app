@@ -3,10 +3,10 @@ import type { NextPage } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import Head from 'next/head';
-import { Container } from '../components/container';
-import { Main } from '../components/main';
-import { Header } from '../components/header';
-import { ServerSideProps, getServerSideProps } from '../lib/auth';
+import { Container } from 'components/container';
+import { Main } from 'components/main';
+import { Header } from 'components/header';
+import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
 const Home: NextPage<ServerSideProps> = ({ user }) => (
   <div className='page home'>

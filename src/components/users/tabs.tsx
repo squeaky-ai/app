@@ -2,7 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
 import classnames from 'classnames';
-import { User } from '../../types/user';
+import { User } from 'types/user';
 
 interface Props {
   user: User;

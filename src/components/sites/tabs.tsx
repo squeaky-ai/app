@@ -2,11 +2,11 @@ import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
 import classnames from 'classnames';
-import { Container } from '../container';
-import { getTeamMember } from '../../lib/sites';
-import { ADMIN, MEMBER } from '../../data/teams/constants';
-import { User } from '../../types/user';
-import { Site } from '../../types/site';
+import { Container } from 'components/container';
+import { getTeamMember } from 'lib/sites';
+import { ADMIN, MEMBER } from 'data/teams/constants';
+import { User } from 'types/user';
+import { Site } from 'types/site';
 
 type Page = 'recordings' | 'analytics' | 'settings' | 'team' | 'subscription';
 

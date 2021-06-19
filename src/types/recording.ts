@@ -1,5 +1,5 @@
-import type { Pagination } from './common';
-import type { PaginatedEventsResponse } from './event';
+import type { Pagination } from 'types/common';
+import type { PaginatedEventsResponse } from 'types/event';
 
 export interface Recording {
   id: string;

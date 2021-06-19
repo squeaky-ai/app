@@ -1,7 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
-import { Button } from './button';
+import { Button } from 'components/button';
 
 interface Props {
   button: string | React.ReactNode;

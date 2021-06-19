@@ -1,5 +1,5 @@
-import type { Team } from './team';
-import type { Recording, PaginatedRecordingsResponse } from './recording';
+import type { Team } from 'types/team';
+import type { Recording, PaginatedRecordingsResponse } from 'types/recording';
 
 export interface Site {
   id: string;

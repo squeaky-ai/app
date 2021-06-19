@@ -1,18 +1,18 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { Container } from '../../../components/container';
-import { Header } from '../../../components/sites/header';
-import { Main } from '../../../components/main';
-import { Tabs } from '../../../components/sites/tabs';
-import { Access } from '../../../components/sites/access';
-import { InviteTeam } from '../../../components/sites/invite-team';
-import { TeamRow } from '../../../components/sites/team-row';
-import { Unauthorized } from '../../../components/sites/unauthorized';
-import { ServerSideProps, getServerSideProps } from '../../../lib/auth';
-import { getTeamMember } from '../../../lib/sites';
-import { OWNER, ADMIN } from '../../../data/teams/constants';
-import { useSite } from '../../../hooks/sites';
+import { Container } from 'components/container';
+import { Header } from 'components/sites/header';
+import { Main } from 'components/main';
+import { Tabs } from 'components/sites/tabs';
+import { Access } from 'components/sites/access';
+import { InviteTeam } from 'components/sites/invite-team';
+import { TeamRow } from 'components/sites/team-row';
+import { Unauthorized } from 'components/sites/unauthorized';
+import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { getTeamMember } from 'lib/sites';
+import { OWNER, ADMIN } from 'data/teams/constants';
+import { useSite } from 'hooks/sites';
 
 const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
   const [loading, site] = useSite();

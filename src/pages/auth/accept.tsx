@@ -6,19 +6,19 @@ import Head from 'next/head';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { useRouter } from 'next/router';
-import { signout } from '../../lib/api/auth';
-import { userInvitation, teamInviteAccept } from '../../lib/api/graphql';
-import { Container } from '../../components/container';
-import { Card } from '../../components/card';
-import { Label } from '../../components/label';
-import { Input } from '../../components/input';
-import { Button } from '../../components/button';
-import { Checkbox } from '../../components/checkbox';
-import { Password } from '../../components/password';
-import { Message } from '../../components/message';
-import { Spinner } from '../../components/spinner';
-import { ServerSideProps, getServerSideProps } from '../../lib/auth';
-import { useToasts } from '../../hooks/toasts';
+import { signout } from 'lib/api/auth';
+import { userInvitation, teamInviteAccept } from 'lib/api/graphql';
+import { Container } from 'components/container';
+import { Card } from 'components/card';
+import { Label } from 'components/label';
+import { Input } from 'components/input';
+import { Button } from 'components/button';
+import { Checkbox } from 'components/checkbox';
+import { Password } from 'components/password';
+import { Message } from 'components/message';
+import { Spinner } from 'components/spinner';
+import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { useToasts } from 'hooks/toasts';
 
 const AcceptSchema = Yup.object().shape({
   password: Yup.string().required('Password is required'),

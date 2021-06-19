@@ -5,16 +5,16 @@ import Link from 'next/link';
 import Head from 'next/head';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-import { emailExists, signup } from '../../lib/api/auth';
-import { Container } from '../../components/container';
-import { Card } from '../../components/card';
-import { Label } from '../../components/label';
-import { Input } from '../../components/input';
-import { Button } from '../../components/button';
-import { Checkbox } from '../../components/checkbox';
-import { Message } from '../../components/message';
-import { Password } from '../../components/password';
-import { ServerSideProps, getServerSideProps } from '../../lib/auth';
+import { emailExists, signup } from 'lib/api/auth';
+import { Container } from 'components/container';
+import { Card } from 'components/card';
+import { Label } from 'components/label';
+import { Input } from 'components/input';
+import { Button } from 'components/button';
+import { Checkbox } from 'components/checkbox';
+import { Message } from 'components/message';
+import { Password } from 'components/password';
+import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
 enum PageView {
   EMAIL,

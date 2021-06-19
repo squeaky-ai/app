@@ -1,19 +1,19 @@
 import React from 'react';
 import type { FC } from 'react';
 import { useRouter } from 'next/router';
-import { Select, Option } from '../../components/select';
-import { OWNER, INVITED, MEMBER } from '../../data/teams/constants';
-import { CancelInvitation } from './cancel-invitation';
-import { ResendInvitation } from './resend-invitation';
-import { DeleteTeam } from './delete-team';
-import { LeaveTeam } from './leave-team';
-import { Button } from '../button';
-import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from '../modal';
-import { teamUpdate } from '../../lib/api/graphql';
-import { useToasts } from '../../hooks/toasts';
-import type { Team } from '../../types/team';
-import type { User } from '../../types/user';
-import type { Site } from '../../types/site';
+import { Select, Option } from 'components/select';
+import { OWNER, INVITED, MEMBER } from 'data/teams/constants';
+import { CancelInvitation } from 'components/sites/cancel-invitation';
+import { ResendInvitation } from 'components/sites/resend-invitation';
+import { DeleteTeam } from 'components/sites/delete-team';
+import { LeaveTeam } from 'components/sites/leave-team';
+import { Button } from 'components/button';
+import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
+import { teamUpdate } from 'lib/api/graphql';
+import { useToasts } from 'hooks/toasts';
+import type { Team } from 'types/team';
+import type { User } from 'types/user';
+import type { Site } from 'types/site';
 
 interface Props {
   user: User;

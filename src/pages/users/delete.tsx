@@ -2,11 +2,11 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import { Button } from '../../components/button';
-import { Container } from '../../components/container';
-import { Main } from '../../components/main';
-import { Header } from '../../components/sites/header';
-import { ServerSideProps, getServerSideProps } from '../../lib/auth';
+import { Button } from 'components/button';
+import { Container } from 'components/container';
+import { Main } from 'components/main';
+import { Header } from 'components/sites/header';
+import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
 const UsersDelete: NextPage<ServerSideProps> = () => (
   <div className='page user delete'>

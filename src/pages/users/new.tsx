@@ -4,15 +4,15 @@ import Head from 'next/head';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { useRouter } from 'next/router';
-import { Container } from '../../components/container';
-import { Label } from '../../components/label';
-import { Input } from '../../components/input';
-import { Button } from '../../components/button';
-import { Header } from '../../components/sites/header';
-import { Main } from '../../components/main';
-import { Message } from '../../components/message';
-import { ServerSideProps, getServerSideProps } from '../../lib/auth';
-import { updateUser } from '../../lib/api/graphql';
+import { Container } from 'components/container';
+import { Label } from 'components/label';
+import { Input } from 'components/input';
+import { Button } from 'components/button';
+import { Header } from 'components/sites/header';
+import { Main } from 'components/main';
+import { Message } from 'components/message';
+import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { updateUser } from 'lib/api/graphql';
 
 const NewSchema = Yup.object().shape({
   email: Yup.string().email('Please enter a valid email address').required('Email is required'),

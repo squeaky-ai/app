@@ -3,15 +3,15 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-import { Container } from '../../components/container';
-import { Input } from '../../components/input';
-import { Button } from '../../components/button';
-import { Label } from '../../components/label';
-import { Header } from '../../components/sites/header';
-import { Tabs } from '../../components/users/tabs';
-import { Main } from '../../components/main';
-import { Password } from '../../components/password';
-import { ServerSideProps, getServerSideProps } from '../../lib/auth';
+import { Container } from 'components/container';
+import { Input } from 'components/input';
+import { Button } from 'components/button';
+import { Label } from 'components/label';
+import { Header } from 'components/sites/header';
+import { Tabs } from 'components/users/tabs';
+import { Main } from 'components/main';
+import { Password } from 'components/password';
+import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
 const PasswordSchema = Yup.object().shape({
   currentPassword: Yup.string().required('Current password is required'),

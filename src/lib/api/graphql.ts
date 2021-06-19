@@ -4,13 +4,13 @@ import {
   SiteMutationResponse, 
   SiteMutationInput,
   SiteDeleteMutationInput
-} from '../../types/site';
+} from 'types/site';
 
 import { 
   CREATE_SITE_MUTATION, 
   UPDATE_SITE_MUTATION,
   DELETE_SITE_MUTATION
-} from '../../data/sites/mutations';
+} from 'data/sites/mutations';
 
 import { 
   TeamInviteInput,
@@ -20,7 +20,7 @@ import {
   TeamInviteAcceptInput,
   TeamLeaveInput, 
   TeamDeleteInput,
-} from '../../types/team';
+} from 'types/team';
 
 import { 
   TEAM_INVITE_MUTATION, 
@@ -29,21 +29,21 @@ import {
   TEAM_INVITE_RESEND_MUTATION,
   TEAM_UPDATE_MUTATION,
   TEAM_DELETE_MUTATION
-} from '../../data/teams/mutations';
+} from 'data/teams/mutations';
 
 import { 
   User,
   UserMutationInput, 
   UserMutationResponse 
-} from '../../types/user';
+} from 'types/user';
 
 import { 
   USER_INVITATION_QUERY 
-} from '../../data/users/queries';
+} from 'data/users/queries';
 
 import { 
   UPDATE_USER_MUTATION 
-} from '../../data/users/mutations';
+} from 'data/users/mutations';
 
 const cache = new InMemoryCache({
   typePolicies: {

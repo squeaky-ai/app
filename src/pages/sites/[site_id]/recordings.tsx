@@ -2,14 +2,14 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
-import { Main } from '../../../components/main';
-import { Header } from '../../../components/sites/header';
-import { Message } from '../../../components/message';
-import { Container } from '../../../components/container';
-import { Tabs } from '../../../components/sites/tabs';
-import { RecordingsList } from '../../../components/sites/recordings-list';
-import { ServerSideProps, getServerSideProps } from '../../../lib/auth';
-import { useSite } from '../../../hooks/sites';
+import { Main } from 'components/main';
+import { Header } from 'components/sites/header';
+import { Message } from 'components/message';
+import { Container } from 'components/container';
+import { Tabs } from 'components/sites/tabs';
+import { RecordingsList } from 'components/sites/recordings-list';
+import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { useSite } from 'hooks/sites';
 
 const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
   const [loading, site] = useSite();

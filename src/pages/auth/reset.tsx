@@ -6,14 +6,14 @@ import Head from 'next/head';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { useRouter } from 'next/router';
-import { resetPassword, changePassword } from '../../lib/api/auth';
-import { Container } from '../../components/container';
-import { Card } from '../../components/card';
-import { Label } from '../../components/label';
-import { Input } from '../../components/input';
-import { Button } from '../../components/button';
-import { Password } from '../../components/password';
-import { ServerSideProps, getServerSideProps } from '../../lib/auth';
+import { resetPassword, changePassword } from 'lib/api/auth';
+import { Container } from 'components/container';
+import { Card } from 'components/card';
+import { Label } from 'components/label';
+import { Input } from 'components/input';
+import { Button } from 'components/button';
+import { Password } from 'components/password';
+import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
 const ResetSchema = Yup.object().shape({
   email: Yup.string().email('Please enter a valid email address').required('Email is required')

@@ -4,17 +4,17 @@ import Head from 'next/head';
 import Link from 'next/link';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-import { Container } from '../../components/container';
-import { Label } from '../../components/label';
-import { Input } from '../../components/input';
-import { Button } from '../../components/button';
-import { Divider } from '../../components/divider';
-import { Header } from '../../components/sites/header';
-import { Main } from '../../components/main';
-import { Tabs } from '../../components/users/tabs';
-import { ServerSideProps, getServerSideProps } from '../../lib/auth';
-import { updateUser } from '../../lib/api/graphql';
-import { useToasts } from '../../hooks/toasts';
+import { Container } from 'components/container';
+import { Label } from 'components/label';
+import { Input } from 'components/input';
+import { Button } from 'components/button';
+import { Divider } from 'components/divider';
+import { Header } from 'components/sites/header';
+import { Main } from 'components/main';
+import { Tabs } from 'components/users/tabs';
+import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { updateUser } from 'lib/api/graphql';
+import { useToasts } from 'hooks/toasts';
 
 const AccountSchema = Yup.object().shape({
   email: Yup.string().email('Please enter a valid email address').required('Email is required'),

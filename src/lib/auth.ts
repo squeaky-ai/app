@@ -1,6 +1,6 @@
 import type { GetServerSideProps } from 'next';
-import { session } from './api/auth';
-import type { User } from '../types/user';
+import { session } from 'lib/api/auth';
+import type { User } from 'types/user';
 
 const PUBLIC_ROUTES = [
   '/',

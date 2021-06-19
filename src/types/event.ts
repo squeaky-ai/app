@@ -1,4 +1,4 @@
-import type { Pagination } from './common';
+import type { Pagination } from 'types/common';
 
 export type Event = PageViewEvent | CursorEvent | ScrollEvent | InteractionEvent;
 

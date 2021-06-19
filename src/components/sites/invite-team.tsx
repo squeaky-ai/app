@@ -2,14 +2,14 @@ import React from 'react';
 import type { FC } from 'react';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-import { Label } from '../../components/label';
-import { Input } from '../../components/input';
-import { Button } from '../button';
-import { Select, Option } from '../../components/select';
-import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from '../modal';
-import { teamInvite } from '../../lib/api/graphql';
-import { useToasts } from '../../hooks/toasts';
-import type { Site } from '../../types/site';
+import { Label } from 'components/label';
+import { Input } from 'components/input';
+import { Button } from 'components/button';
+import { Select, Option } from 'components/select';
+import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
+import { teamInvite } from 'lib/api/graphql';
+import { useToasts } from 'hooks/toasts';
+import type { Site } from 'types/site';
 
 interface Props {
   site: Site;

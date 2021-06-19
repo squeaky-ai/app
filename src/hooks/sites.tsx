@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
-import { GET_SITES_QUERY, GET_SITE_QUERY } from '../data/sites/queries';
-import { useToasts } from './toasts';
-import type { Site } from '../types/site';
+import { GET_SITES_QUERY, GET_SITE_QUERY } from 'data/sites/queries';
+import { useToasts } from 'hooks/toasts';
+import type { Site } from 'types/site';
 
 export const useSites = (): [boolean, Site[]] => {
   const toasts = useToasts();

@@ -6,15 +6,15 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-import { signin, confirmAccount } from '../../lib/api/auth';
-import { useLoginAttemps, MAX_ATTEMPTS } from '../../hooks/login-attempts';
-import { Container } from '../../components/container';
-import { Card } from '../../components/card';
-import { Label } from '../../components/label';
-import { Input } from '../../components/input';
-import { Button } from '../../components/button';
-import { Message } from '../../components/message';
-import { ServerSideProps, getServerSideProps } from '../../lib/auth';
+import { signin, confirmAccount } from 'lib/api/auth';
+import { useLoginAttemps, MAX_ATTEMPTS } from 'hooks/login-attempts';
+import { Container } from 'components/container';
+import { Card } from 'components/card';
+import { Label } from 'components/label';
+import { Input } from 'components/input';
+import { Button } from 'components/button';
+import { Message } from 'components/message';
+import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
 const SigninSchema = Yup.object().shape({
   email: Yup.string().email('Please enter a valid email address').required('Email is required'),

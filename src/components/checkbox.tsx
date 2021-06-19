@@ -1,7 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
-import { Label } from './label';
+import { Label } from 'components/label';
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   invalid?: boolean;

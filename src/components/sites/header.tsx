@@ -1,11 +1,11 @@
 import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
-import { Header as BaseHeader } from '../../components/header';
-import { Button } from '../button';
-import { Logo } from '../logo';
-import { Dropdown } from '../dropdown';
-import { signout } from '../../lib/api/auth';
+import { Header as BaseHeader } from 'components/header';
+import { Button } from 'components/button';
+import { Logo } from 'components/logo';
+import { Dropdown } from 'components/dropdown';
+import { signout } from 'lib/api/auth';
 
 export const Header: FC = ({ children }) => {
   const handleSignOut = async () => {

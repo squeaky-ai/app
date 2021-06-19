@@ -6,15 +6,15 @@ import Image from 'next/image';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { useRouter } from 'next/router';
-import { Header } from '../../components/sites/header';
-import { Label } from '../../components/label';
-import { Main } from '../../components/main';
-import { Input } from '../../components/input';
-import { Button } from '../../components/button';
-import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from '../../components/modal';
-import { ServerSideProps, getServerSideProps } from '../../lib/auth';
-import { createSite } from '../../lib/api/graphql';
-import { useSites } from '../../hooks/sites';
+import { Header } from 'components/sites/header';
+import { Label } from 'components/label';
+import { Main } from 'components/main';
+import { Input } from 'components/input';
+import { Button } from 'components/button';
+import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
+import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { createSite } from 'lib/api/graphql';
+import { useSites } from 'hooks/sites';
 
 const CreateSchema = Yup.object().shape({
   name: Yup.string().required('Site name is required'),

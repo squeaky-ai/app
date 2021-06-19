@@ -1,7 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
-import { Container } from '../container';
+import { Container } from 'components/container';
 
 export const Unauthorized: FC = () => (
   <div className='unauthorized'>

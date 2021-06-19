@@ -2,13 +2,13 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
-import { Main } from '../../../components/main';
-import { Header } from '../../../components/sites/header';
-import { Tabs } from '../../../components/sites/tabs';
-import { Message } from '../../../components/message';
-import { Container } from '../../../components/container';
-import { ServerSideProps, getServerSideProps } from '../../../lib/auth';
-import { useSite } from '../../../hooks/sites';
+import { Main } from 'components/main';
+import { Header } from 'components/sites/header';
+import { Tabs } from 'components/sites/tabs';
+import { Message } from 'components/message';
+import { Container } from 'components/container';
+import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { useSite } from 'hooks/sites';
 
 const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
   const [loading, site] = useSite();
