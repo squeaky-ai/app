@@ -6,6 +6,7 @@ import { Main } from '../../../components/main';
 import { Header } from '../../../components/sites/header';
 import { Tabs } from '../../../components/sites/tabs';
 import { Message } from '../../../components/message';
+import { Container } from '../../../components/container';
 import { ServerSideProps, getServerSideProps } from '../../../lib/auth';
 import { useSite } from '../../../hooks/sites';
 
@@ -25,9 +26,9 @@ const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
           <Tabs site={site} user={user} page='analytics' />
 
           {!site.recordings.items.length && (
-            <>
+            <Container className='xl centered empty-state'>
               <h3 className='title empty'>Analytics</h3>
-              <div className='empty-state'>
+              <div className='empty-state-contents'>
                 <Image src='/empty-state-3.svg' height={240} width={320} />
                 <h4>There are currently no analytics available.</h4>
                 <Message
@@ -35,7 +36,7 @@ const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
                   message='If you have only recently installed or updated your tracking code it may take a little time before results appear.'
                 />
               </div>
-            </>
+            </Container>
           )}
 
           {!!site.recordings.items.length && (
