@@ -8,12 +8,17 @@ import { Tabs } from '../../../components/sites/tabs';
 import { Access } from '../../../components/sites/access';
 import { InviteTeam } from '../../../components/sites/invite-team';
 import { TeamRow } from '../../../components/sites/team-row';
+import { Unauthorized } from '../../../components/sites/unauthorized';
 import { ServerSideProps, getServerSideProps } from '../../../lib/auth';
+import { getTeamMember } from '../../../lib/sites';
 import { OWNER, ADMIN } from '../../../data/teams/constants';
 import { useSite } from '../../../hooks/sites';
 
 const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
   const [loading, site] = useSite();
+
+  const member = getTeamMember(site, user);
+  const authorized = [OWNER, ADMIN].includes(member?.role);
 
   return (
     <div className='page team'>
@@ -23,7 +28,11 @@ const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
 
       <Header />
 
-      {!loading && site && (
+      {!loading && !authorized && (
+        <Unauthorized />
+      )}
+
+      {site && authorized && (
         <Main>
           <Tabs site={site} user={user} page='team' />
           <h3 className='title'>

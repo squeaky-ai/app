@@ -3,7 +3,6 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-import { useRouter } from 'next/router';
 import { Container } from '../../../components/container';
 import { Header } from '../../../components/sites/header';
 import { Label } from '../../../components/label';
@@ -14,10 +13,10 @@ import { Message } from '../../../components/message';
 import { Main } from '../../../components/main';
 import { Drawer } from '../../../components/drawer';
 import { Access } from '../../../components/sites/access';
+import { DeleteSite } from '../../../components/sites/delete-site';
+import { Unauthorized } from '../../../components/sites/unauthorized';
 import { OWNER, ADMIN } from '../../../data/teams/constants';
-import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from '../../../components/modal';
 import { ServerSideProps, getServerSideProps } from '../../../lib/auth';
-import { deleteSite } from '../../../lib/api/graphql';
 import { updateSite } from '../../../lib/api/graphql';
 import { getTeamMember } from '../../../lib/sites';
 import { useToasts } from '../../../hooks/toasts';
@@ -30,30 +29,10 @@ const DetailsSchema = Yup.object().shape({
 
 const SitesSettings: NextPage<ServerSideProps> = ({ user }) => {
   const toast = useToasts();
-  const router = useRouter();
-  const ref = React.useRef<Modal>();
   const [loading, site] = useSite();
 
   const member = getTeamMember(site, user);
-
-  const openModal = () => {
-    if (ref.current) ref.current.show();
-  };
-
-  const closeModal = () => {
-    if (ref.current) ref.current.hide();
-  };
-
-  const siteDelete = async () => {
-    const { error } = await deleteSite({ siteId: site.id });
-    
-    if (error) {
-      toast.add({ type: 'error', body: 'There was an unexpected error deleting your site' });
-    } else {
-      toast.add({ type: 'success', body: 'Site deleted' });
-      await router.push('/sites');
-    }
-  };
+  const authorized = [OWNER, ADMIN].includes(member?.role);
 
   return (
     <div className='page settings'>
@@ -63,7 +42,11 @@ const SitesSettings: NextPage<ServerSideProps> = ({ user }) => {
 
       <Header />
 
-      {!loading && site && (
+      {!loading && !authorized && (
+        <Unauthorized />
+      )}
+
+      {site && authorized && (
         <Main>
           <Tabs site={site} user={user} page='settings' />
           <h3 className='title'>
@@ -179,37 +162,12 @@ const SitesSettings: NextPage<ServerSideProps> = ({ user }) => {
                   <li>Deleting your site will not delete your Squeaky user account. To delete you account please visit the account settings page.</li>
                   <li>Site deletion is irreversable. If you have an active subscription you can downgrade to a free plan in the subscription tab.</li>
                 </ul>
-                <Button className='tertiary' onClick={openModal}>
-                  Delete Site
-                </Button>
+                <DeleteSite site={site} />
               </Container>
             </Drawer>
           )}
         </Main>
       )}
-
-      <Modal ref={ref}>
-        <ModalBody>
-          <ModalHeader>
-            <p><b>Delete site</b></p>
-            <Button type='button' onClick={closeModal}>
-              <i className='ri-close-line' />
-            </Button>
-          </ModalHeader>
-          <ModalContents>
-            <p><b>Are you sure you wish to delete your site?</b></p>
-            <p>If so, all site data will be permanently deleted.</p>
-          </ModalContents>
-          <ModalFooter>
-            <Button type='button' className='tertiary' onClick={siteDelete}>
-              Yes, Delete Site
-            </Button>
-            <Button type='button' className='quaternary' onClick={closeModal}>
-              Cancel
-            </Button>
-          </ModalFooter>
-        </ModalBody>
-      </Modal>
     </div>
   );
 };
