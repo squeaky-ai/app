@@ -1,7 +1,8 @@
 import React from 'react';
 import type { FC } from 'react';
+import { useRouter } from 'next/router';
 import { Select, Option } from '../../components/select';
-import { OWNER, INVITED } from '../../data/teams/constants';
+import { OWNER, INVITED, MEMBER } from '../../data/teams/constants';
 import { CancelInvitation } from './cancel-invitation';
 import { ResendInvitation } from './resend-invitation';
 import { DeleteTeam } from './delete-team';
@@ -22,6 +23,7 @@ interface Props {
 
 export const TeamRow: FC<Props> = ({ user, site, team }) => {
   const toast = useToasts();
+  const router = useRouter();
   const ref = React.useRef<Modal>();
   const [role, setRole] = React.useState(team.role);
 
@@ -55,6 +57,12 @@ export const TeamRow: FC<Props> = ({ user, site, team }) => {
       toast.add({ type: 'error', body: 'There was an unexpected error when changing the user role. Please try again.' });
     } else {
       toast.add({ type: 'success', body: 'Role change complete' });
+
+      // They can no longer view this page as they won't be authenticated
+      if (self && role === MEMBER) {
+        return await router.push(`/sites/${site.id}/recordings`);
+      }
+
       // Calling closeModal() would revert the role change in the UI
       if (ref.current) ref.current.hide();
     }
@@ -114,7 +122,7 @@ export const TeamRow: FC<Props> = ({ user, site, team }) => {
           </ModalContents>
           <ModalFooter>
             <Button type='button' className='primary' onClick={changeRole}>
-            Yes, Change Role
+              Yes, Change Role
             </Button>
             <Button type='button' className='quaternary' onClick={closeModal}>
               Cancel
