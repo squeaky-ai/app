@@ -5,11 +5,34 @@
   flex-direction: column;
 
   .title {
+    align-items: center;
+    display: flex;
     margin: 3rem 0;
 
     &.empty {
       margin: 3rem 0 1rem 0;
       width: 100%;
+    }
+
+    .search {
+      align-items: center;
+      display: flex;
+      margin: 0 0 0 2rem;
+      position: relative;
+      width: 320px;
+
+      .input {
+        margin: 0;
+        padding-right: 2.25rem;
+      }
+
+      i {
+        color: var(--gray-200);
+        display: block;
+        font-size: 1.5rem;
+        position: absolute;
+        right: .5rem;
+      }
     }
   }
 
@@ -42,4 +65,53 @@
       }
     }
   }
+
+  .recordings-list {
+    margin-bottom: 2rem;
+  
+    &.table {
+      color: var(--gray-700);
+  
+      .indicator {
+        background: var(--gray-200);
+        border-radius: var(--border-radius-o);
+        display: inline-block;
+        height: .75rem;
+        margin-right: .5rem;
+        width: .75rem;
+  
+        &.active {
+          background: var(--green-500);
+        }
+      }
+  
+      .device {
+        color: var(--blue-500);
+        font-size: 1.5rem;
+        margin-right: .5rem;
+        vertical-align: middle;
+      }
+  
+      .start-exit-page {
+        font-size: 13px;
+        line-height: 20px;
+  
+        td {
+          border: none;
+          padding: 0;
+          text-align: left;
+  
+          &:first-of-type {
+            color: var(--gray-200);
+            width: 70px;
+          }
+        }
+      }
+    }
+  
+    & + .button {
+      display: block;
+      margin: 0 auto 2rem auto;
+    }
+  }  
 }

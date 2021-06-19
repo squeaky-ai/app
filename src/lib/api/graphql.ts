@@ -51,20 +51,6 @@ const cache = new InMemoryCache({
   typePolicies: {
     Site: {
       fields: {
-        // When fetching recordings, merge the old and new
-        // so they build a paginated list
-        recordings: {
-          keyArgs: false,
-          merge(existing, incoming) {
-            return {
-              ...incoming,
-              items: [
-                ...existing?.items || [],
-                ...incoming?.items || [], 
-              ]
-            }
-          }
-        },
         // The teams coming back from the API are always the
         // source of truth
         team: {

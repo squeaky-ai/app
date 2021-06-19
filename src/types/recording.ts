@@ -1,10 +1,9 @@
-import type { Pagination } from 'types/common';
 import type { PaginatedEventsResponse } from 'types/event';
 
 export interface Recording {
   id: string;
   active: boolean;
-  locale: string;
+  language: string;
   viewerId: string;
   duration: number;
   pageCount: number;
@@ -19,5 +18,10 @@ export interface Recording {
 
 export interface PaginatedRecordingsResponse {
   items: Recording[];
-  pagination: Pagination;
+  pagination: RecordingPagination;
+}
+
+export interface RecordingPagination {
+  pageSize: number;
+  pageCount: number;
 }

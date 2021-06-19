@@ -25,7 +25,7 @@ const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
         <>
           <Tabs site={site} user={user} page='analytics' />
 
-          {!site.recordings.items.length && (
+          {true && (
             <Container className='xl centered empty-state'>
               <h3 className='title empty'>Analytics</h3>
               <div className='empty-state-contents'>
@@ -39,7 +39,7 @@ const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
             </Container>
           )}
 
-          {!!site.recordings.items.length && (
+          {false && (
             <Main>
               <h3 className='title'>Analytics</h3>
 

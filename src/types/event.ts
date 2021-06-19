@@ -1,5 +1,3 @@
-import type { Pagination } from 'types/common';
-
 export type Event = PageViewEvent | CursorEvent | ScrollEvent | InteractionEvent;
 
 export type InteractionEventType = 'click' | 'hover' | 'focus' | 'blur';
@@ -40,5 +38,11 @@ export interface InteractionEvent {
 
 export interface PaginatedEventsResponse {
   items: Event[];
-  pagination: Pagination;
+  pagination: EventPagination;
+}
+
+export interface EventPagination {
+  cursor?: string;
+  isLast: boolean;
+  pageSize: number;
 }
