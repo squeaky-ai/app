@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
-import locales from '../../data/locales.json';
+import { Locales, locales } from '../../data/locales';
 import { Button } from '../../components/button';
 import { GET_RECORDINGS_QUERY } from '../../data/recordings/queries';
 import type { Site } from '../../types/site';
@@ -43,7 +43,8 @@ export const RecordingsList: FC<Props> = ({ site }) => {
   };
 
   const language = (locale: string) => {
-    const language = locales[locale.toLowerCase().replace('-', '_')];
+    const key: keyof Locales = locale.toLowerCase().replace('-', '_');
+    const language = locales[key];
     return language || 'Unknown';
   };
 

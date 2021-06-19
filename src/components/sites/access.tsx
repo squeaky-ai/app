@@ -10,7 +10,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 export const Access: FC<Props> = ({ className, roles }) => {
   const [open, setOpen] = React.useState<boolean>(false);
 
-  const roleNames = {
+  const roleNames: { [key: number]: string } = {
     1: 'Admins',
     2: 'Site Owner'
   };

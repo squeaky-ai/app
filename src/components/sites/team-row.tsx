@@ -31,7 +31,7 @@ export const TeamRow: FC<Props> = ({ user, site, team }) => {
   const owner = team.role === OWNER;
   const invited = team.status === INVITED;
 
-  const roleNames = {
+  const roleNames: { [key: number]: string } = {
     0: 'a User',
     1: 'an Admin'
   };
