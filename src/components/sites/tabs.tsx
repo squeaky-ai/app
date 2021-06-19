@@ -2,6 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
 import classnames from 'classnames';
+import { Container } from '../container';
 import { getTeamMember } from '../../lib/sites';
 import { ADMIN, MEMBER } from '../../data/teams/constants';
 import { User } from '../../types/user';
@@ -59,7 +60,7 @@ export const Tabs: FC<Props> = ({ site, page, user }) => {
   ];
 
   return (
-    <>
+    <Container className='xl centered'>
       <div className='site-tabs'>
         <h4 className='sub-heading'>
           <div className='avatar'></div>
@@ -79,6 +80,6 @@ export const Tabs: FC<Props> = ({ site, page, user }) => {
           </li>
         ))}
       </ul>
-    </>
+    </Container>
   );
 };

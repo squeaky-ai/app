@@ -49,11 +49,13 @@ const SitesSettings: NextPage<ServerSideProps> = ({ user }) => {
       {site && authorized && (
         <>
           <Tabs site={site} user={user} page='settings' />
-          <h3 className='title'>
-            Settings
-            <Access roles={[OWNER, ADMIN]} />
-          </h3>
+
           <Main>
+            <h3 className='title'>
+              Settings
+              <Access roles={[OWNER, ADMIN]} />
+            </h3>
+
             <Drawer title='Site details'>
               <Formik
                 initialValues={{ name: site.name, url: site.url }}

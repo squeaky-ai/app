@@ -32,12 +32,12 @@ const SitesSubscription: NextPage<ServerSideProps> = ({ user }) => {
       {site && authorized && (
         <>
           <Tabs site={site} user={user} page='subscription' />
-          <h3 className='title'>
-            Subscription
-            <Access roles={[OWNER]} />
-          </h3>
-          <Main>
 
+          <Main>
+            <h3 className='title'>
+              Subscription
+              <Access roles={[OWNER]} />
+            </h3>
           </Main>
         </>
       )}

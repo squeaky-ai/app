@@ -1,4 +1,6 @@
 .container {
+  width: 100%;
+
   &.xsm {
     max-width: 400px;
   }
@@ -15,7 +17,7 @@
     max-width: 1260px;
   }
 
-  *.xl {
+  &.xl {
     max-width: 106rem;
   }
 

@@ -35,12 +35,13 @@ const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
       {site && authorized && (
         <>
           <Tabs site={site} user={user} page='team' />
-          <h3 className='title'>
-            Team
-            <Access roles={[OWNER, ADMIN]} />
-          </h3>
 
           <Main>
+            <h3 className='title'>
+              Team
+              <Access roles={[OWNER, ADMIN]} />
+            </h3>
+
             <Container className='md'>
               <p>This page allows you to view, invite and manage the roles of any team members associated with this site. Adding members is always free of charge, regardless of their role.</p>
             </Container>
