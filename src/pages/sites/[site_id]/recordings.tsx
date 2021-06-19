@@ -22,7 +22,7 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
       <Header />
 
       {!loading && site && (
-        <Main>
+        <>
           <Tabs site={site} user={user} page='recordings' />
 
           {!site.recordings.items.length && (
@@ -40,12 +40,12 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
           )}
 
           {!!site.recordings.items.length && (
-            <>
+            <Main>
               <h3 className='title'>Recordings</h3>
               <RecordingsList site={site} />
-            </>
+              </Main>
           )}
-        </Main>
+        </>
       )}
     </div>
   );

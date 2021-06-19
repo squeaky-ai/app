@@ -1,4 +1,5 @@
 .site-tabs {
+  margin: 0 3rem;
   padding: 3rem 0;
 
   .avatar {
@@ -13,5 +14,9 @@
     align-items: center;
     display: flex;
     margin: 0;
+  }
+
+  & + .tab-header {
+    margin: 0 3rem;
   }
 }

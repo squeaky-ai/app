@@ -42,45 +42,43 @@ const Sites: NextPage<ServerSideProps> = () => {
 
       <Header />
 
-      <Main>
-        {!loading && sites.length === 0 && (
-          <div className='empty-state'>
-            <div className='contents'>
-              <Image src='/empty-state-1.svg' height={260} width={500} />
-              <h2>Welcome to Squeaky</h2>
-              <p>It’s time to discover what your users are really getting up to! Add your first site by clicking the button below.</p>
-              <Button className='button primary icon' onClick={openModal}>
-                Add Site
-                <i className='ri-arrow-right-line' />
-              </Button>
-            </div>
-        </div>
-        )}
+      {!loading && sites.length === 0 && (
+        <div className='empty-state'>
+          <div className='contents'>
+            <Image src='/empty-state-1.svg' height={260} width={500} />
+            <h2>Welcome to Squeaky</h2>
+            <p>It’s time to discover what your users are really getting up to! Add your first site by clicking the button below.</p>
+            <Button className='button primary icon' onClick={openModal}>
+              Add Site
+              <i className='ri-arrow-right-line' />
+            </Button>
+          </div>
+      </div>
+      )}
 
-        {!loading && sites.length > 0 && (
-          <>
-            <h4 className='title'>
-              Sites
-              <Button className='new-site' onClick={openModal}>+ Add New</Button>
-            </h4>
+      {!loading && sites.length > 0 && (
+        <Main>
+          <h4 className='title'>
+            Sites
+            <Button className='new-site' onClick={openModal}>+ Add New</Button>
+          </h4>
 
-            <ul className='sites-list'>
-              {sites.map(site => (
-                <li key={site.id}>
-                  <Link href={`/sites/${site.id}/recordings`}>
-                    <a>
-                      <span className='avatar'></span>
-                      <p className='name'><b>{site.name}</b></p>
-                      <p className='url'>{site.url}</p>
-                      <p className='owner'>Owner: {site.ownerName}</p>
-                    </a>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </>
-        )}
-      </Main>
+          <ul className='sites-list'>
+            {sites.map(site => (
+              <li key={site.id}>
+                <Link href={`/sites/${site.id}/recordings`}>
+                  <a>
+                    <span className='avatar'></span>
+                    <p className='name'><b>{site.name}</b></p>
+                    <p className='url'>{site.url}</p>
+                    <p className='owner'>Owner: {site.ownerName}</p>
+                  </a>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Main>
+      )}
 
       <Modal ref={ref}>
         <ModalBody>

@@ -21,7 +21,7 @@ const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
       <Header />
 
       {!loading && site && (
-        <Main>
+        <>
           <Tabs site={site} user={user} page='analytics' />
 
           {!site.recordings.items.length && (
@@ -39,7 +39,7 @@ const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
           )}
 
           {!!site.recordings.items.length && (
-            <>
+            <Main>
               <h3 className='title'>Analytics</h3>
 
               <div className='analytics-grid'>
@@ -114,9 +114,9 @@ const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
                   </div>
                 </div>
               </div>
-            </>
+            </Main>
           )}
-        </Main>
+        </>
       )}
     </div>
   );
