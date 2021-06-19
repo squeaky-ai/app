@@ -1,7 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Header as BaseHeader } from '../../components/header';
 import { Button } from '../button';
 import { Logo } from '../logo';

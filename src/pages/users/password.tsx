@@ -37,7 +37,7 @@ const UsersPassword: NextPage<ServerSideProps> = ({ user }) => (
         <Formik
           initialValues={{ currentPassword: '', newPassword: '' }}
           validationSchema={PasswordSchema}
-          onSubmit={(values, { setSubmitting }) => {
+          onSubmit={(values) => {
             (async () => {
               // TODO
               console.log(values);

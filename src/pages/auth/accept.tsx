@@ -53,7 +53,8 @@ const Accept: NextPage<ServerSideProps> = () => {
 
           if (!error) {
             toast.add({ type: 'success', body: 'Invitation accepted' });
-            return await router.push('/auth/signin');
+            await router.push('/auth/signin');
+            return;
           }
         }
 

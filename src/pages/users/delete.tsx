@@ -8,7 +8,7 @@ import { Main } from '../../components/main';
 import { Header } from '../../components/sites/header';
 import { ServerSideProps, getServerSideProps } from '../../lib/auth';
 
-const UsersDelete: NextPage<ServerSideProps> = ({ user }) => (
+const UsersDelete: NextPage<ServerSideProps> = () => (
   <div className='page user delete'>
     <Head>
       <title>Squeaky / User / Delete</title>

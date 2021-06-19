@@ -9,7 +9,7 @@ interface Props {
   page: 'account' | 'password';
 }
 
-export const Tabs: FC<Props> = ({ user, page }) => {
+export const Tabs: FC<Props> = ({ page }) => {
   return (
     <div className='user-tabs'>
       <ul className='tab-header'>
