@@ -1,9 +1,6 @@
 const { API_HOST, NODE_ENV } = process.env;
 
 module.exports = {
-  future: {
-    webpack5: true
-  },
   publicRuntimeConfig: {
     apiHost: API_HOST || 'http://localhost:4000'
   },
