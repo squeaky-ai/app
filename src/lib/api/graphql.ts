@@ -62,6 +62,13 @@ const cache = new InMemoryCache({
               ]
             }
           }
+        },
+        // The teams coming back from the API are always the
+        // source of truth
+        team: {
+          merge(_existing, incoming) {
+            return [...incoming];
+          }
         }
       }
     }
