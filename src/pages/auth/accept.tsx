@@ -42,8 +42,6 @@ const Accept: NextPage<ServerSideProps> = () => {
         await signout();
 
         const user = await userInvitation(router.query.token as string);
-
-        setLoading(false);
         
         // New users need to finish off creating their account
         if (user && newUser) setEmail(user.email);
@@ -51,9 +49,15 @@ const Accept: NextPage<ServerSideProps> = () => {
         // Existing users can accept straight away and go to 
         // the login page
         if (user && !newUser) {
-          await teamInviteAccept({ token: router.query.token as string });
-          await router.push('/auth/signin');
+          const { error } = await teamInviteAccept({ token: router.query.token as string });
+
+          if (!error) {
+            toast.add({ type: 'success', body: 'Invitation accepted' });
+            return await router.push('/auth/signin');
+          }
         }
+
+        setLoading(false);
       })();
     }
   }, []);

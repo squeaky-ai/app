@@ -16,6 +16,7 @@
     box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     display: flex;
+    margin-bottom: 1rem;
     padding: 1.5rem;
 
     i {
@@ -45,10 +46,10 @@
     }
 
     &.error {
-      border-color: var(--red-500);
+      border-color: var(--magenta-500);
 
       i {
-        color: var(--red-500);
+        color: var(--magenta-500);
       }
     }
   }
