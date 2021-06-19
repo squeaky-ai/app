@@ -4,6 +4,7 @@ export interface Team {
   id: string;
   status: number;
   role: number;
+  roleName: string;
   user: User;
   createdAt: string;
   updatedAt: string;

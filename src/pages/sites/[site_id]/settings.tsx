@@ -15,6 +15,7 @@ import { Main } from '../../../components/main';
 import { Drawer } from '../../../components/drawer';
 import { Access } from '../../../components/sites/access';
 import { OWNER, ADMIN } from '../../../data/teams/constants';
+import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from '../../../components/modal';
 import { ServerSideProps, getServerSideProps } from '../../../lib/auth';
 import { deleteSite } from '../../../lib/api/graphql';
 import { updateSite } from '../../../lib/api/graphql';
@@ -30,9 +31,18 @@ const DetailsSchema = Yup.object().shape({
 const SitesSettings: NextPage<ServerSideProps> = ({ user }) => {
   const toast = useToasts();
   const router = useRouter();
+  const ref = React.useRef<Modal>();
   const [loading, site] = useSite();
 
   const member = getTeamMember(site, user);
+
+  const openModal = () => {
+    if (ref.current) ref.current.show();
+  };
+
+  const closeModal = () => {
+    if (ref.current) ref.current.hide();
+  };
 
   const siteDelete = async () => {
     const { error } = await deleteSite({ siteId: site.id });
@@ -169,7 +179,7 @@ const SitesSettings: NextPage<ServerSideProps> = ({ user }) => {
                   <li>Deleting your site will not delete your Squeaky user account. To delete you account please visit the account settings page.</li>
                   <li>Site deletion is irreversable. If you have an active subscription you can downgrade to a free plan in the subscription tab.</li>
                 </ul>
-                <Button className='tertiary' onClick={siteDelete}>
+                <Button className='tertiary' onClick={openModal}>
                   Delete Site
                 </Button>
               </Container>
@@ -177,6 +187,29 @@ const SitesSettings: NextPage<ServerSideProps> = ({ user }) => {
           )}
         </Main>
       )}
+
+      <Modal ref={ref}>
+        <ModalBody>
+          <ModalHeader>
+            <p><b>Delete site</b></p>
+            <Button type='button' onClick={closeModal}>
+              <i className='ri-close-line' />
+            </Button>
+          </ModalHeader>
+          <ModalContents>
+            <p><b>Are you sure you wish to delete your site?</b></p>
+            <p>If so, all site data will be permanently deleted.</p>
+          </ModalContents>
+          <ModalFooter>
+            <Button type='button' className='tertiary' onClick={siteDelete}>
+              Yes, Delete Site
+            </Button>
+            <Button type='button' className='quaternary' onClick={closeModal}>
+              Cancel
+            </Button>
+          </ModalFooter>
+        </ModalBody>
+      </Modal>
     </div>
   );
 };
