@@ -88,7 +88,7 @@ const Signup: NextPage<ServerSideProps> = () => {
                     <span className='validation'>{errors.email}</span>
 
                     <Checkbox name='terms' onChange={handleChange} checked={values.terms} invalid={touched.terms && !!errors.terms}>
-                      I have read and accept the <a href='#TODO'>Terms Of Use</a>
+                      I have read and accept the <a href='/terms' target='_blank'>Terms Of Use</a>
                     </Checkbox>
                     <span className='validation'>{errors.terms}</span>
 

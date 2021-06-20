@@ -1,13 +1,5 @@
-export const getDeviceIcon = (device: string = '') => {
-  // TODO this list will need to change
-  switch(device.toLowerCase()) {
-    case 'mobile':
-      return 'ri-smartphone-line';
-    case 'tablet':
-      return 'ri-tablet-line';
-    default:
-      return 'ri-computer-line';
-  }
+export const getDeviceIcon = (_device: string = '') => {
+  return 'ri-computer-line'; // TODO
 };
 
 export const getDuration = (seconds: number) => {
