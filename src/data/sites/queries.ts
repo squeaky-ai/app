@@ -37,27 +37,6 @@ export const GET_SITE_QUERY = gql`
           email
         }
       }
-      recordings {
-        items {
-          id
-          active
-          locale
-          duration
-          startPage
-          exitPage
-          pageCount
-          deviceType
-          browser
-          viewportX
-          viewportY
-          viewerId
-        }
-        pagination {
-          cursor
-          isLast
-          pageSize
-        }
-      }
     }
   }
 `;
