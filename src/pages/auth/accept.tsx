@@ -84,7 +84,7 @@ const Accept: NextPage<ServerSideProps> = () => {
             <div className='invalid-invidation'>
               <Message 
                 type='error'
-                message='There is a problem with your invitation, please contact the site owner'
+                message='Your invitation link is no longer valid, please contact the site owner to request a new invitation'
               />
             </div>
           )}
