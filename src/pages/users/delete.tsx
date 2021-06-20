@@ -25,6 +25,7 @@ const UsersDelete: NextPage<ServerSideProps> = () => (
 
       <Container className='md'>
         <p><b>You can delete your account at any time, here’s how it works:</b></p>
+
         <ul className='delete-list'>
           <li>If you only own sites without additional users, they will be deleted immediately, along with your account.</li>
           <li>If you have any additional users added to one or more of the sites you own, you will have the opportunity to view and transfer ownership, or delete the site, once you click the ‘Delete Account’ button below.</li>

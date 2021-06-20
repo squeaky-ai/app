@@ -3,9 +3,8 @@ import type { FC } from 'react';
 import Link from 'next/link';
 import classnames from 'classnames';
 import { Container } from 'components/container';
-import { getTeamMember } from 'lib/sites';
 import { ADMIN, MEMBER } from 'data/teams/constants';
-import { User } from 'types/user';
+import { Team } from 'types/team';
 import { Site } from 'types/site';
 
 type Page = 'recordings' | 'analytics' | 'settings' | 'team' | 'subscription';
@@ -19,13 +18,11 @@ type Tab = {
 
 interface Props {
   site: Site;
-  user: User;
+  member: Team;
   page: Page;
 }
 
-export const Tabs: FC<Props> = ({ site, page, user }) => {
-  const member = getTeamMember(site, user);
-
+export const Tabs: FC<Props> = ({ site, page, member }) => {
   const tabs: Tab[] = [
     {
       page: 'recordings',

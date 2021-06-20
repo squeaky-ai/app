@@ -14,15 +14,13 @@ import { Main } from 'components/main';
 import { Drawer } from 'components/drawer';
 import { Access } from 'components/sites/access';
 import { DeleteSite } from 'components/sites/delete-site';
-import { Unauthorized } from 'components/sites/unauthorized';
 import { Verify } from 'components/sites/verify';
 import { TrackingCode } from 'components/sites/tracking-code';
+import { Page } from 'components/sites/page';
 import { OWNER, ADMIN } from 'data/teams/constants';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { updateSite } from 'lib/api/graphql';
-import { getTeamMember } from 'lib/sites';
 import { useToasts } from 'hooks/toasts';
-import { useSite } from 'hooks/sites';
 
 const DetailsSchema = Yup.object().shape({
   name: Yup.string().required('Site name is required'),
@@ -31,10 +29,6 @@ const DetailsSchema = Yup.object().shape({
 
 const SitesSettings: NextPage<ServerSideProps> = ({ user }) => {
   const toast = useToasts();
-  const [loading, site] = useSite();
-
-  const member = getTeamMember(site, user);
-  const authorized = [OWNER, ADMIN].includes(member?.role);
 
   return (
     <div className='page settings'>
@@ -44,128 +38,126 @@ const SitesSettings: NextPage<ServerSideProps> = ({ user }) => {
 
       <Header />
 
-      {!loading && !authorized && (
-        <Unauthorized />
-      )}
+      <Page user={user} scope={[OWNER, ADMIN]}>
+        {({ site, member }) => (
+          <>
+            <Tabs site={site} member={member} page='settings' />
 
-      {site && authorized && (
-        <>
-          <Tabs site={site} user={user} page='settings' />
+            <Main>
+              <h3 className='title'>
+                Settings
+                <Access roles={[OWNER, ADMIN]} />
+              </h3>
 
-          <Main>
-            <h3 className='title'>
-              Settings
-              <Access roles={[OWNER, ADMIN]} />
-            </h3>
+              <Drawer title='Site details'>
+                <Formik
+                  initialValues={{ name: site.name, url: site.url }}
+                  validationSchema={DetailsSchema}
+                  onSubmit={(values, { setSubmitting, setErrors }) => {
+                    (async () => {
+                      const { error } = await updateSite({ siteId: site.id, ...values });
+                      setSubmitting(false);
 
-            <Drawer title='Site details'>
-              <Formik
-                initialValues={{ name: site.name, url: site.url }}
-                validationSchema={DetailsSchema}
-                onSubmit={(values, { setSubmitting, setErrors }) => {
-                  (async () => {
-                    const { error } = await updateSite({ siteId: site.id, ...values });
-                    setSubmitting(false);
+                      if (error) {
+                        const [key, value] = Object.entries(error)[0];
+                        setErrors({ [key]: value });
+                      } else {
+                        toast.add({ type: 'success', body: 'Your site changes have been successfully saved.' });
+                      }
+                    })();
+                  }}
+                >
+                  {({
+                    errors,
+                    handleBlur,
+                    handleChange,
+                    handleSubmit,
+                    isSubmitting,
+                    touched,
+                    values,
+                  }) => (
+                    <form onSubmit={handleSubmit}>
+                      <Container className='xsm'>
+                        <Label htmlFor='name'>Site Name</Label>
+                        <Input
+                          name='name' 
+                          type='text' 
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          placeholder='e.g. My Webite'
+                          value={values.name}
+                          invalid={touched.name && !!errors.name}
+                        />
+                        <span className='validation'>{errors.name}</span>
 
-                    if (error) {
-                      const [key, value] = Object.entries(error)[0];
-                      setErrors({ [key]: value });
-                    } else {
-                      toast.add({ type: 'success', body: 'Your site changes have been successfully saved.' });
-                    }
-                  })();
-                }}
+                        <Label htmlFor='url'>Site URL</Label>
+                        <Input
+                          name='url' 
+                          type='url' 
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          placeholder='e.g. www.mywebsite.com'
+                          value={values.url}
+                          invalid={touched.url && !!errors.url}
+                        />
+                        <span className='validation'>{errors.url}</span>
+
+                        <Button type='submit' disabled={isSubmitting} className='primary'>
+                          Save Changes
+                        </Button>
+                      </Container>
+                    </form>
+                  )}
+                </Formik>
+              </Drawer>
+              <Drawer 
+                title='Tracking code' 
+                aside={
+                  site.verifiedAt 
+                    ? <span className='verified-badge'><i className='ri-checkbox-circle-line' />Verified and active</span> 
+                    : null
+                }
               >
-                {({
-                  errors,
-                  handleBlur,
-                  handleChange,
-                  handleSubmit,
-                  isSubmitting,
-                  touched,
-                  values,
-                }) => (
-                  <form onSubmit={handleSubmit}>
-                    <Container className='xsm'>
-                      <Label htmlFor='name'>Site Name</Label>
-                      <Input
-                        name='name' 
-                        type='text' 
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        placeholder='e.g. My Webite'
-                        value={values.name}
-                        invalid={touched.name && !!errors.name}
-                      />
-                      <span className='validation'>{errors.name}</span>
-
-                      <Label htmlFor='url'>Site URL</Label>
-                      <Input
-                        name='url' 
-                        type='url' 
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        placeholder='e.g. www.mywebsite.com'
-                        value={values.url}
-                        invalid={touched.url && !!errors.url}
-                      />
-                      <span className='validation'>{errors.url}</span>
-
-                      <Button type='submit' disabled={isSubmitting} className='primary'>
-                        Save Changes
-                      </Button>
-                    </Container>
-                  </form>
-                )}
-              </Formik>
-            </Drawer>
-            <Drawer 
-              title='Tracking code' 
-              aside={
-                site.verifiedAt 
-                  ? <span className='verified-badge'><i className='ri-checkbox-circle-line' />Verified and active</span> 
-                  : null
-              }
-            >
-              <Container className='md'>
-                {!site.verifiedAt && (
-                  <>
-                    <Message
-                      type='info'
-                      message='Your tracking code is not yet verified. Please following the instructions below to start using Squeaky on your site.'
-                    />
-
-                    <p>Please paste the code below into the <code className='code'>&lt;head&gt;</code> section of your HTML on every page you wish to track on your website <a href={site.url} target='_blank'>{site.url}</a>.</p>
-                    <p>This enables Squeaky to anonymously capture user behaviour, giving you valuable insights into their experience on your site.</p>
-                  </>
-                )}
-
-                {site.verifiedAt && (
-                  <p>You can paste the code below into the <code className='code'>&lt;head&gt;</code> section of your HTML on any page that you wish to track on <a href={site.url} target='_blank'>{site.url}</a>.</p>
-                )}
-
-                <TrackingCode site={site} />
-
-                {!site.verifiedAt && (
-                  <Verify site={site} />
-                )}
-              </Container>
-            </Drawer>
-            {member.role === OWNER && (
-              <Drawer title='Site deletion' aside={<Access roles={[OWNER]} />}>
                 <Container className='md'>
-                  <p><b>You can delete your site at any time:</b></p>
-                  <ul className='delete-list'>
-                    <li>Deleting your site will not delete your Squeaky user account. To delete you account please visit the account settings page.</li>
-                    <li>Site deletion is irreversable. If you have an active subscription you can downgrade to a free plan in the subscription tab.</li>
-                  </ul>
-                  <DeleteSite site={site} />
+                  {!site.verifiedAt && (
+                    <>
+                      <Message
+                        type='info'
+                        message='Your tracking code is not yet verified. Please following the instructions below to start using Squeaky on your site.'
+                      />
+
+                      <p>Please paste the code below into the <code className='code'>&lt;head&gt;</code> section of your HTML on every page you wish to track on your website <a href={site.url} target='_blank'>{site.url}</a>.</p>
+                      <p>This enables Squeaky to anonymously capture user behaviour, giving you valuable insights into their experience on your site.</p>
+                    </>
+                  )}
+
+                  {site.verifiedAt && (
+                    <p>You can paste the code below into the <code className='code'>&lt;head&gt;</code> section of your HTML on any page that you wish to track on <a href={site.url} target='_blank'>{site.url}</a>.</p>
+                  )}
+
+                  <TrackingCode site={site} />
+
+                  {!site.verifiedAt && (
+                    <Verify site={site} />
+                  )}
                 </Container>
               </Drawer>
-            )}
-          </Main>
-        </>
-      )}
+              {member.role === OWNER && (
+                <Drawer title='Site deletion' aside={<Access roles={[OWNER]} />}>
+                  <Container className='md'>
+                    <p><b>You can delete your site at any time:</b></p>
+                    <ul className='delete-list'>
+                      <li>Deleting your site will not delete your Squeaky user account. To delete you account please visit the account settings page.</li>
+                      <li>Site deletion is irreversable. If you have an active subscription you can downgrade to a free plan in the subscription tab.</li>
+                    </ul>
+                    <DeleteSite site={site} />
+                  </Container>
+                </Drawer>
+              )}
+            </Main>
+          </>
+        )}
+      </Page>
     </div>
   );
 };

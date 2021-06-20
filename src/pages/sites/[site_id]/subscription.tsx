@@ -5,33 +5,22 @@ import { Header } from 'components/sites/header';
 import { Tabs } from 'components/sites/tabs';
 import { Main } from 'components/main';
 import { Access } from 'components/sites/access';
+import { Page } from 'components/sites/page';
 import { OWNER } from 'data/teams/constants';
-import { Unauthorized } from 'components/sites/unauthorized';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
-import { getTeamMember } from 'lib/sites';
-import { useSite } from 'hooks/sites';
 
-const SitesSubscription: NextPage<ServerSideProps> = ({ user }) => {
-  const [loading, site] = useSite();
+const SitesSubscription: NextPage<ServerSideProps> = ({ user }) => (
+  <div className='page subscription'>
+    <Head>
+      <title>Squeaky / Site Settings</title>
+    </Head>
 
-  const member = getTeamMember(site, user);
-  const authorized = [OWNER].includes(member?.role);
+    <Header />
 
-  return (
-    <div className='page subscription'>
-      <Head>
-        <title>Squeaky / Site Settings</title>
-      </Head>
-
-      <Header />
-
-      {!loading && !authorized && (
-        <Unauthorized />
-      )}
-
-      {site && authorized && (
+    <Page user={user} scope={[OWNER]}>
+      {({ site, member }) => (
         <>
-          <Tabs site={site} user={user} page='subscription' />
+          <Tabs site={site} member={member} page='subscription' />
 
           <Main>
             <h3 className='title'>
@@ -41,9 +30,9 @@ const SitesSubscription: NextPage<ServerSideProps> = ({ user }) => {
           </Main>
         </>
       )}
-    </div>
-  );
-};
+    </Page>
+  </div>
+);
 
 export default SitesSubscription;
 export { getServerSideProps };

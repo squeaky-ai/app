@@ -8,33 +8,22 @@ import { Tabs } from 'components/sites/tabs';
 import { Access } from 'components/sites/access';
 import { InviteTeam } from 'components/sites/invite-team';
 import { TeamRow } from 'components/sites/team-row';
-import { Unauthorized } from 'components/sites/unauthorized';
+import { Page } from 'components/sites/page';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
-import { getTeamMember } from 'lib/sites';
 import { OWNER, ADMIN } from 'data/teams/constants';
-import { useSite } from 'hooks/sites';
 
-const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
-  const [loading, site] = useSite();
+const SitesTeam: NextPage<ServerSideProps> = ({ user }) => (
+  <div className='page team'>
+    <Head>
+      <title>Squeaky / Site Team</title>
+    </Head>
 
-  const member = getTeamMember(site, user);
-  const authorized = [OWNER, ADMIN].includes(member?.role);
+    <Header />
 
-  return (
-    <div className='page team'>
-      <Head>
-        <title>Squeaky / Site Team</title>
-      </Head>
-
-      <Header />
-
-      {!loading && !authorized && (
-        <Unauthorized />
-      )}
-
-      {site && authorized && (
+    <Page user={user} scope={[OWNER, ADMIN]}>
+      {({ site, member }) => (
         <>
-          <Tabs site={site} user={user} page='team' />
+          <Tabs site={site} member={member} page='team' />
 
           <Main>
             <h3 className='title'>
@@ -104,9 +93,9 @@ const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
           </Main>
         </>
       )}
-    </div>
-  );
-};
+    </Page>
+  </div>
+);
 
 export default SitesTeam;
 export { getServerSideProps };

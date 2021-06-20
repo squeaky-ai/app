@@ -7,23 +7,21 @@ import { Header } from 'components/sites/header';
 import { Tabs } from 'components/sites/tabs';
 import { Message } from 'components/message';
 import { Container } from 'components/container';
+import { Page } from 'components/sites/page';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
-import { useSite } from 'hooks/sites';
 
-const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
-  const [_loading, site] = useSite();
+const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => (
+  <div className='page analytics'>
+    <Head>
+      <title>Squeaky / Site Analytics</title>
+    </Head>
 
-  return (
-    <div className='page analytics'>
-      <Head>
-        <title>Squeaky / Site Analytics</title>
-      </Head>
+    <Header />
 
-      <Header />
-
-      {site && (
+    <Page user={user} scope={[]}>
+      {({ site, member }) => (
         <>
-          <Tabs site={site} user={user} page='analytics' />
+          <Tabs site={site} member={member} page='analytics' />
 
           {true && (
             <Container className='xl centered empty-state'>
@@ -119,9 +117,9 @@ const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
           )}
         </>
       )}
-    </div>
-  );
-};
+    </Page>
+  </div>
+);
 
 export default SitesAnalytics;
 export { getServerSideProps };

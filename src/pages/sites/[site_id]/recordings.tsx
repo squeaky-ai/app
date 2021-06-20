@@ -7,23 +7,21 @@ import { Message } from 'components/message';
 import { Container } from 'components/container';
 import { Tabs } from 'components/sites/tabs';
 import { Recordings } from 'components/sites/recordings';
+import { Page } from 'components/sites/page';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
-import { useSite } from 'hooks/sites';
 
-const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
-  const [_loading, site] = useSite();
+const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => (
+  <div className='page recordings'>
+    <Head>
+      <title>Squeaky / Site Recordings</title>
+    </Head>
 
-  return (
-    <div className='page recordings'>
-      <Head>
-        <title>Squeaky / Site Recordings</title>
-      </Head>
+    <Header />
 
-      <Header />
-
-      {site && (
+    <Page user={user} scope={[]}>
+      {({ site, member }) => (
         <>
-          <Tabs site={site} user={user} page='recordings' />
+          <Tabs site={site} member={member} page='recordings' />
 
           {!site.recordings.items.length && (
             <Container className='xl centered empty-state'>
@@ -44,9 +42,9 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
           )}
         </>
       )}
-    </div>
-  );
-};
+    </Page>
+  </div>
+);
 
 export default SitesRecordings;
 export { getServerSideProps };
