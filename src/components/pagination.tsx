@@ -21,7 +21,7 @@ export const Pagination: FC<Props> = ({ className, page, pageCount, setPage }) =
       {range(pageCount).map(i => (
         <li key={i}>
           <Button className={classnames({ active: i === page })} disabled={page === i}  onClick={() => setPage(i)}>
-            {i}
+            {i + 1}
           </Button>
         </li>
       ))}
