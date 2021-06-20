@@ -11,7 +11,7 @@ import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useSite } from 'hooks/sites';
 
 const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
-  const [loading, site] = useSite();
+  const [_loading, site] = useSite();
 
   return (
     <div className='page analytics'>
@@ -21,7 +21,7 @@ const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
 
       <Header />
 
-      {!loading && site && (
+      {site && (
         <>
           <Tabs site={site} user={user} page='analytics' />
 

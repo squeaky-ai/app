@@ -24,6 +24,11 @@ export const GET_SITE_QUERY = gql`
       uuid
       planName
       ownerName
+      recordings(size: 1) {
+        items {
+          id
+        }
+      }
       team {
         id
         role

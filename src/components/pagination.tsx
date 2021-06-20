@@ -1,7 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
-import { range } from 'lib/utils';
+import { range } from 'lodash';
 import { Button } from 'components/button';
 
 interface Props extends React.HTMLAttributes<HTMLUListElement> {
@@ -11,6 +11,8 @@ interface Props extends React.HTMLAttributes<HTMLUListElement> {
 }
 
 export const Pagination: FC<Props> = ({ className, page, pageCount, setPage }) => {
+  if (pageCount === 0) return null;
+
   return (
     <ul className={classnames('pagination', className)}>
       <li>
