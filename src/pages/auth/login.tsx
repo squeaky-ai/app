@@ -6,7 +6,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-import { signin, confirmAccount } from 'lib/api/auth';
+import { login, confirmAccount } from 'lib/api/auth';
 import { useLoginAttemps, MAX_ATTEMPTS } from 'hooks/login-attempts';
 import { Container } from 'components/container';
 import { Card } from 'components/card';
@@ -16,12 +16,12 @@ import { Button } from 'components/button';
 import { Message } from 'components/message';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
-const SigninSchema = Yup.object().shape({
+const LoginSchema = Yup.object().shape({
   email: Yup.string().email('Please enter a valid email address').required('Email is required'),
   password: Yup.string().required('Password is required')
 });
 
-const Signin: NextPage<ServerSideProps> = () => {
+const Login: NextPage<ServerSideProps> = () => {
   const router = useRouter();
   const [attemps, exceeded, incrAttempt, clearAttempt] = useLoginAttemps();
   const [failed, setFailed] = React.useState<boolean>(false);
@@ -35,13 +35,13 @@ const Signin: NextPage<ServerSideProps> = () => {
       const { error } = await confirmAccount(token as string);
       if (!error) {
         setConfirmed(true);
-        router.push({ pathname: '/auth/signin', query: {} });
+        router.push({ pathname: '/auth/login', query: {} });
       }
     })();
   }, []);
 
   return (
-    <div className='page signin'>
+    <div className='page login'>
       <Head>
         <title>Squeaky / Log in</title>
       </Head>
@@ -75,12 +75,12 @@ const Signin: NextPage<ServerSideProps> = () => {
 
           <Formik
             initialValues={{ email: '', password: '' }}
-            validationSchema={SigninSchema}
+            validationSchema={LoginSchema}
             onSubmit={(values, { setSubmitting }) => {
               (async () => {
                 if (exceeded) return;
 
-                const { error } = await signin(values);
+                const { error } = await login(values);
 
                 setSubmitting(false);
 
@@ -150,5 +150,5 @@ const Signin: NextPage<ServerSideProps> = () => {
   );
 };
 
-export default Signin;
+export default Login;
 export { getServerSideProps };

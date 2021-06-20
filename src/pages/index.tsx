@@ -23,7 +23,7 @@ const Home: NextPage<ServerSideProps> = ({ user }) => (
 
       {user
         ? <p>Welcome back, <Link href='/sites'><a>Go to app</a></Link></p>
-        : <span>Already have an account? <Link href='/auth/signin'><a>Log in</a></Link>.</span>
+        : <span>Already have an account? <Link href='/auth/login'><a>Log in</a></Link>.</span>
       }
     </Header>
 

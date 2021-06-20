@@ -157,7 +157,7 @@ const Signup: NextPage<ServerSideProps> = () => {
           {pageView === PageView.EMAIL_TAKEN && (
             <div className='email-taken'>
               <Message type='info' message={`A user with the email address ${email || ''} already exists. Please choose from the options below.`} />
-              <Link href='/auth/signin'>
+              <Link href='/auth/login'>
                 <a className='button primary'>Go To Login Page</a>
               </Link>
               <Button className='secondary' onClick={() => setPageView(PageView.EMAIL)}>
@@ -182,7 +182,7 @@ const Signup: NextPage<ServerSideProps> = () => {
       </Container>
 
       <div className='footer-link'>
-        <p>Already have an account? <Link href='/auth/signin'><a>Log in</a></Link></p>
+        <p>Already have an account? <Link href='/auth/login'><a>Log in</a></Link></p>
       </div>
     </div>
   ); 

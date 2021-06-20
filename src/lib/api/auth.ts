@@ -1,7 +1,7 @@
 import axios from 'axios';
 import getConfig from 'next/config';
 
-type SigninInput = {
+type LoginInput = {
   email: string;
   password: string;
 }
@@ -38,7 +38,7 @@ export const session = async <T>(cookie: string): Promise<T> => {
   }
 };
 
-export const signin = async <T>(input: SigninInput): Promise<Response<T>> => {
+export const login = async <T>(input: LoginInput): Promise<Response<T>> => {
   try {
     const response = await axios.post('/api/auth/sign_in.json', { user: input });
     return { body: response.data };

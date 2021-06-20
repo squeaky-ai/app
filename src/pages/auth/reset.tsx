@@ -176,7 +176,7 @@ const Reset: NextPage<ServerSideProps> = () => {
                 <i className='ri-check-line' />
               </div>
               <h4>Password Reset Successfully</h4>
-              <Link href='/auth/signin'>
+              <Link href='/auth/login'>
                 <a className='button primary'>Go To Login Page</a>
               </Link>
             </div>

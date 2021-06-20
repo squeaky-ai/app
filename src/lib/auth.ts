@@ -4,7 +4,7 @@ import type { User } from 'types/user';
 
 const PUBLIC_ROUTES = [
   '/',
-  '/auth/signin',
+  '/auth/login',
   '/auth/signup',
   '/auth/reset',
   '/auth/accept'
@@ -29,7 +29,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (!user && !isPublic) {
     return {
       redirect: {
-        destination: '/auth/signin',
+        destination: '/auth/login',
         permanent: false
       }
     };
