@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import { debounce } from 'lodash';
 import { useRouter } from 'next/router';
 import { Main } from 'components/main';
+import { Button } from 'components/button';
 import { Input } from 'components/input';
 import { Pagination } from 'components/pagination';
 import { Container } from 'components/container';
@@ -25,6 +26,14 @@ export const Recordings: FC = () => {
     setQuery(element.value);
   }, 200);
 
+  const handleCancel = () => {
+    setQuery('');
+
+    const search = document.querySelector<HTMLInputElement>('#search');
+    search.value = '';
+    search.focus();
+  };
+
   const viewRecording = async (id: string) => {
     await router.push(`/sites/${router.query.site_id}/player?recording_id=${id}`);
   };
@@ -34,7 +43,12 @@ export const Recordings: FC = () => {
       <h3 className='title'>
         Recordings
         <div className='search'>
-          <Input type='search' placeholder='Search...' onKeyUp={handleSearch} />
+          <Input type='search' placeholder='Search...' onKeyUp={handleSearch} id='search' />
+          {query && (
+            <Button onClick={handleCancel}>
+              <i className='ri-close-line' />
+            </Button>
+          )}
           <i className='ri-search-line' /> 
         </div>
       </h3>

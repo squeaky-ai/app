@@ -26,12 +26,30 @@
         padding-right: 2.25rem;
       }
 
-      i {
+      .button {
+        background: none;
+        border: none;
+        color: var(--gray-800);
+        font-size: 1.25rem;
+        padding: 0;
+        position: absolute;
+        right: 2.5rem;
+
+        i {
+          display: block;
+        }
+
+        &:hover {
+          color: var(--blue-500);
+        }
+      }
+
+      & > i {
         color: var(--gray-200);
         display: block;
         font-size: 1.5rem;
         position: absolute;
-        right: .5rem;
+        right: .75rem;
       }
     }
   }
@@ -125,6 +143,10 @@
       flex: 1;
       flex-direction: column;
 
+      &#main {
+        padding-bottom: 0;
+      }
+
       .title {
         margin-bottom: 1rem;
       }
@@ -132,6 +154,7 @@
       .empty-state {
         display: flex;
         flex: 1;
+        padding: 0;
       }
 
       .recordings-list {

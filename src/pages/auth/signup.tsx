@@ -128,6 +128,8 @@ const Signup: NextPage<ServerSideProps> = () => {
                   isSubmitting,
                   touched,
                   values,
+                  isValid,
+                  dirty,
                 }) => (
                   <form onSubmit={handleSubmit}>
                     <Label htmlFor='email'>Email</Label>
@@ -147,7 +149,7 @@ const Signup: NextPage<ServerSideProps> = () => {
 
                     <Password password={values.password} />
 
-                    <Button type='submit' disabled={isSubmitting} className='primary'>
+                    <Button type='submit' disabled={isSubmitting || !(dirty && isValid)} className='primary'>
                       Sign up
                     </Button>
                   </form>
