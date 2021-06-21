@@ -72,6 +72,8 @@ const Signup: NextPage<ServerSideProps> = () => {
                   isSubmitting,
                   touched,
                   values,
+                  isValid,
+                  dirty,
                 }) => (
                   <form onSubmit={handleSubmit}>
                     <Label htmlFor='email'>Email</Label>
@@ -92,7 +94,7 @@ const Signup: NextPage<ServerSideProps> = () => {
                     </Checkbox>
                     <span className='validation'>{errors.terms}</span>
 
-                    <Button type='submit' disabled={isSubmitting} className='primary'>
+                    <Button type='submit' disabled={isSubmitting || !(dirty && isValid)} className='primary'>
                       Continue
                     </Button>
                   </form>

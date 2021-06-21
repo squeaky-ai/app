@@ -118,6 +118,8 @@ const Accept: NextPage<ServerSideProps> = () => {
                   isSubmitting,
                   touched,
                   values,
+                  isValid,
+                  dirty,
                 }) => (
                   <form onSubmit={handleSubmit}>
                     <Label>Email</Label>
@@ -142,7 +144,7 @@ const Accept: NextPage<ServerSideProps> = () => {
                     </Checkbox>
                     <span className='validation'>{errors.terms}</span>
 
-                    <Button  type='submit' disabled={isSubmitting} className='primary'>
+                    <Button  type='submit' disabled={isSubmitting || !(dirty && isValid)} className='primary'>
                       Sign Up
                     </Button>
                   </form>
