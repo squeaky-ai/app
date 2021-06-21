@@ -12,14 +12,13 @@ import { Label } from 'components/label';
 import { Input } from 'components/input';
 import { Button } from 'components/button';
 import { Message } from 'components/message';
-import { PASSWORD_REGEX } from 'data/users/constants';
 import { login, confirmAccount } from 'lib/api/auth';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useLoginAttemps, MAX_ATTEMPTS } from 'hooks/login-attempts';
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email('Please enter a valid email address').required('Email is required'),
-  password: Yup.string().matches(PASSWORD_REGEX, 'Password must match the criteria defined below').required('Password is required')
+  password: Yup.string().required('Password is required')
 });
 
 const Login: NextPage<ServerSideProps> = () => {
