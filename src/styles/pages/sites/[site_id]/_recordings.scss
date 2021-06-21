@@ -113,5 +113,30 @@
       display: block;
       margin: 0 auto 2rem auto;
     }
-  }  
+  }
+  
+  .recordings {
+    .empty-state {
+      display: none;
+    }
+
+    &.empty {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+
+      .title {
+        margin-bottom: 1rem;
+      }
+
+      .empty-state {
+        display: flex;
+        flex: 1;
+      }
+
+      .recordings-list {
+        display: none;
+      }
+    }
+  }
 }

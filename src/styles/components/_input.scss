@@ -24,6 +24,14 @@
       display: block;
     }
   }
+
+  &[type=search] {
+    appearance: none;
+
+    &:focus {
+      border-color: var(--blue-500);
+    }
+  }
 }
 
 .input:-webkit-autofill,

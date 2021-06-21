@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { Main } from 'components/main';
 import { Input } from 'components/input';
 import { Pagination } from 'components/pagination';
+import { Container } from 'components/container';
 import { getDeviceIcon, getDuration } from 'lib/sites';
 import { useRecordings } from 'hooks/recordings';
 
@@ -17,6 +18,7 @@ export const Recordings: FC = () => {
   const [query, setQuery] = React.useState<string>('');
 
   const recordings = useRecordings({ page, query });
+  const hasRecordings = recordings.items.length > 0;
 
   const handleSearch = debounce((event: React.KeyboardEvent<HTMLInputElement>) => {
     const element = event.target as HTMLInputElement;
@@ -28,7 +30,7 @@ export const Recordings: FC = () => {
   };
 
   return (
-    <Main>
+    <Main className={classnames('recordings', { 'empty': !hasRecordings })}>
       <h3 className='title'>
         Recordings
         <div className='search'>
@@ -36,6 +38,14 @@ export const Recordings: FC = () => {
           <i className='ri-search-line' /> 
         </div>
       </h3>
+
+      <Container className='xl centered empty-state'>
+        <div className='empty-state-contents'>
+          <Image src='/empty-state-4.svg' height={240} width={320} />
+          <h4 className='sub-heading'>There are no recordings matching your search.</h4>
+        </div>
+      </Container>
+    
       <div className='table recordings-list'>
         <table cellSpacing='0'>
           <thead>
