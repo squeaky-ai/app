@@ -15,6 +15,7 @@ import { Message } from 'components/message';
 import { login, confirmAccount } from 'lib/api/auth';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useLoginAttemps, MAX_ATTEMPTS } from 'hooks/login-attempts';
+import { useToasts } from 'hooks/toasts';
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email('Please enter a valid email address').required('Email is required'),
@@ -23,6 +24,7 @@ const LoginSchema = Yup.object().shape({
 
 const Login: NextPage<ServerSideProps> = () => {
   const router = useRouter();
+  const toasts = useToasts();
   const [attemps, exceeded, incrAttempt, clearAttempt] = useLoginAttemps();
   const [failed, setFailed] = React.useState<boolean>(false);
   const [confirmed, setConfirmed] = React.useState<boolean>(false);
@@ -36,6 +38,8 @@ const Login: NextPage<ServerSideProps> = () => {
       if (!error) {
         setConfirmed(true);
         router.push({ pathname: '/auth/login', query: {} });
+      } else {
+        toasts.add({ type: 'error', body: 'There was an error with your sign in token' });
       }
     })();
   }, []);

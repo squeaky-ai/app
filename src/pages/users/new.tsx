@@ -13,6 +13,7 @@ import { Main } from 'components/main';
 import { Message } from 'components/message';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { updateUser } from 'lib/api/graphql';
+import { useToasts } from 'hooks/toasts';
 
 const NewSchema = Yup.object().shape({
   email: Yup.string().email('Please enter a valid email address').required('Email is required'),
@@ -22,6 +23,7 @@ const NewSchema = Yup.object().shape({
 
 const UsersNew: NextPage<ServerSideProps> = ({ user }) => {
   const router = useRouter();
+  const toast = useToasts();
 
   return (
     <div className='page user new'>
@@ -47,6 +49,7 @@ const UsersNew: NextPage<ServerSideProps> = ({ user }) => {
               (async () => {
                 await updateUser(values);
                 setSubmitting(false);
+                toast.add({ type: 'success', body: 'Settings saved successfully' });
                 await router.push('/sites');
               })();
             }}
