@@ -61,6 +61,8 @@ const UsersAccount: NextPage<ServerSideProps> = ({ user }) => {
               isSubmitting,
               touched,
               values,
+              isValid,
+              dirty,
             }) => (
               <form onSubmit={handleSubmit}>
                 <Label htmlFor='email'>Email address</Label>
@@ -102,7 +104,7 @@ const UsersAccount: NextPage<ServerSideProps> = ({ user }) => {
                 />
                 <span className='validation'>{errors.lastName}</span>
 
-                <Button  type='submit' disabled={isSubmitting} className='primary'>
+                <Button  type='submit' disabled={isSubmitting || !(dirty && isValid)} className='primary'>
                   Save Changes
                 </Button>
               </form>
