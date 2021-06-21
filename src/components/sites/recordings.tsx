@@ -17,7 +17,7 @@ export const Recordings: FC = () => {
   const [page, setPage] = React.useState<number>(0);
   const [query, setQuery] = React.useState<string>('');
 
-  const recordings = useRecordings({ page, query });
+  const [loading, recordings] = useRecordings({ page, query });
   const hasRecordings = recordings.items.length > 0;
 
   const handleSearch = debounce((event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -30,7 +30,7 @@ export const Recordings: FC = () => {
   };
 
   return (
-    <Main className={classnames('recordings', { 'empty': !hasRecordings })}>
+    <Main className={classnames('recordings', { empty: !hasRecordings })}>
       <h3 className='title'>
         Recordings
         <div className='search'>
@@ -39,12 +39,14 @@ export const Recordings: FC = () => {
         </div>
       </h3>
 
-      <Container className='xl centered empty-state'>
-        <div className='empty-state-contents'>
-          <Image src='/empty-state-4.svg' height={240} width={320} />
-          <h4 className='sub-heading'>There are no recordings matching your search.</h4>
-        </div>
-      </Container>
+      {!loading && (
+        <Container className='xl centered empty-state'>
+          <div className='empty-state-contents'>
+            <Image src='/empty-state-4.svg' height={240} width={320} />
+            <h4 className='sub-heading'>There are no recordings matching your search.</h4>
+          </div>
+        </Container>
+      )}
     
       <div className='table recordings-list'>
         <table cellSpacing='0'>

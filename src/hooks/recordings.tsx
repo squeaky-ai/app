@@ -9,10 +9,10 @@ interface Props {
   query?: string;
 }
 
-export const useRecordings = ({ page, query }: Props): PaginatedRecordingsResponse => {
+export const useRecordings = ({ page, query }: Props): [boolean, PaginatedRecordingsResponse] => {
   const router = useRouter();
 
-  const { data } = useQuery<{ site: Site }>(GET_RECORDINGS_QUERY, {
+  const { data, loading } = useQuery<{ site: Site }>(GET_RECORDINGS_QUERY, {
     variables: { 
       id: router.query.site_id as string, 
       page, 
@@ -21,7 +21,9 @@ export const useRecordings = ({ page, query }: Props): PaginatedRecordingsRespon
     }
   });
 
-  return data 
+  const results = data 
     ? data.site.recordings
     : { items: [], pagination: { pageSize: 0, pageCount: 0 } };
+
+  return [loading, results];
 };
