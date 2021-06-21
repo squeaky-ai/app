@@ -67,7 +67,7 @@ const Login: NextPage<ServerSideProps> = () => {
               type='error' 
               message={
                 exceeded
-                  ? <span>You have made too many failed log in attempts. Please retry in 10 minutes or contact us.</span>
+                  ? <span>You have made too many failed log in attempts. <b>Please retry in 10 minutes or contact us</b>.</span>
                   : <span>Email and password combination not recognised. <b>{MAX_ATTEMPTS - attemps} attempts remaining</b>.</span>
               }
             />
@@ -136,7 +136,7 @@ const Login: NextPage<ServerSideProps> = () => {
                 />
                 <span className='validation'>{errors.password}</span>
 
-                <Button type='submit' disabled={isSubmitting || !(dirty && isValid)} className='primary'>
+                <Button type='submit' disabled={isSubmitting || !(dirty && isValid) || exceeded} className='primary'>
                   Log in
                 </Button>
               </form>
