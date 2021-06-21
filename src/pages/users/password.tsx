@@ -11,11 +11,12 @@ import { Header } from 'components/sites/header';
 import { Tabs } from 'components/users/tabs';
 import { Main } from 'components/main';
 import { Password } from 'components/password';
+import { PASSWORD_REGEX } from 'data/users/constants';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
 const PasswordSchema = Yup.object().shape({
   currentPassword: Yup.string().required('Current password is required'),
-  newPassword: Yup.string().required('New password is required'),
+  newPassword: Yup.string().matches(PASSWORD_REGEX, 'Password must match the criteria defined below').required('New password is required'),
 });
 
 const UsersPassword: NextPage<ServerSideProps> = ({ user }) => (

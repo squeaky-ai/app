@@ -6,8 +6,6 @@ import Head from 'next/head';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { useRouter } from 'next/router';
-import { signout } from 'lib/api/auth';
-import { userInvitation, teamInviteAccept } from 'lib/api/graphql';
 import { Container } from 'components/container';
 import { Card } from 'components/card';
 import { Label } from 'components/label';
@@ -17,11 +15,14 @@ import { Checkbox } from 'components/checkbox';
 import { Password } from 'components/password';
 import { Message } from 'components/message';
 import { Spinner } from 'components/spinner';
+import { PASSWORD_REGEX } from 'data/users/constants';
+import { signout } from 'lib/api/auth';
+import { userInvitation, teamInviteAccept } from 'lib/api/graphql';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useToasts } from 'hooks/toasts';
 
 const AcceptSchema = Yup.object().shape({
-  password: Yup.string().required('Password is required'),
+  password: Yup.string().matches(PASSWORD_REGEX, 'Password must match the criteria defined below').required('Password is required'),
   terms: Yup.boolean().oneOf([true], 'You must agree to the terms')
 });
 
