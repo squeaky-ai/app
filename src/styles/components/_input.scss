@@ -31,6 +31,10 @@
     &:focus {
       border-color: var(--blue-500);
     }
+
+    &::-webkit-search-cancel-button {
+      display: none;
+    }
   }
 }
 
