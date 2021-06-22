@@ -34,9 +34,9 @@ import {
 } from 'data/teams/mutations';
 
 import { 
-  User,
   UserMutationInput, 
-  UserMutationResponse 
+  UserMutationResponse,
+  UserInvitationQueryResponse
 } from 'types/user';
 
 import { 
@@ -206,7 +206,7 @@ export const teamInviteResend = async (input: TeamInviteResendInput): Promise<Si
   }
 };
 
-export const userInvitation = async (token: string): Promise<User | null> => {
+export const userInvitation = async (token: string): Promise<UserInvitationQueryResponse> => {
   try {
     const { data } = await client.query({
       query: USER_INVITATION_QUERY,
@@ -216,7 +216,7 @@ export const userInvitation = async (token: string): Promise<User | null> => {
     return data.userInvitation;
   } catch(error) {
     console.error(error);
-    return null;
+    return { email: null, hasPending: false };
   }
 };
 

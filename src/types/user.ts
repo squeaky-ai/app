@@ -19,3 +19,8 @@ export interface UserMutationResponse {
   user?: User;
   error?: { [key: string]: string };
 }
+
+export interface UserInvitationQueryResponse {
+  email?: string;
+  hasPending: boolean;
+}

@@ -42,25 +42,31 @@ const Accept: NextPage<ServerSideProps> = () => {
         // session
         await signout();
 
-        const user = await userInvitation(router.query.token as string);
-        
-        // New users need to finish off creating their account
-        if (user && newUser) setEmail(user.email);
+        const invitation = await userInvitation(router.query.token as string);
 
-        // Existing users can accept straight away and go to 
-        // the login page
-        if (user && !newUser) {
-          const { error } = await teamInviteAccept({ token: router.query.token as string });
+        if (invitation.hasPending) {
+          // New users need to finish off creating their account
+          setEmail(invitation.email);
 
-          if (!error) {
-            toast.add({ type: 'success', body: 'Invitation accepted' });
-            await router.push('/auth/login');
-            return;
+          // Existing users can accept straight away and go to 
+          // the login page
+          if (!newUser) {
+            const { error } = await teamInviteAccept({ token: router.query.token as string });
+
+            if (!error) {
+              toast.add({ type: 'success', body: 'Invitation accepted' });
+              await router.push('/auth/login');
+              return;
+            }
           }
         }
 
         setLoading(false);
       })();
+    } else {
+      // They've visited the page with no token so there's nothing
+      // we can do for them
+      setLoading(false);
     }
   }, []);
 

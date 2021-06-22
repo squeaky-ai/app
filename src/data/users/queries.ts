@@ -4,6 +4,7 @@ export const USER_INVITATION_QUERY = gql`
   query UserInvitation($token: String!) {
     userInvitation(token: $token) {
       email
+      hasPending
     }
   }
 `;
