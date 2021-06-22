@@ -10,3 +10,11 @@ export const UPDATE_USER_MUTATION = gql`
     }
   }
 `;
+
+export const USER_DELETE_MUTATION = gql`
+  mutation UserDelete {
+    userDelete(input: {}) {
+      id
+    }
+  }
+`;

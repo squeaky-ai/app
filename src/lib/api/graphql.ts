@@ -40,11 +40,12 @@ import {
 } from 'types/user';
 
 import { 
-  USER_INVITATION_QUERY 
+  USER_INVITATION_QUERY
 } from 'data/users/queries';
 
 import { 
-  UPDATE_USER_MUTATION 
+  UPDATE_USER_MUTATION,
+  USER_DELETE_MUTATION
 } from 'data/users/mutations';
 
 const cache = new InMemoryCache({
@@ -217,6 +218,16 @@ export const userInvitation = async (token: string): Promise<UserInvitationQuery
   } catch(error) {
     console.error(error);
     return { email: null, hasPending: false };
+  }
+};
+
+export const userDelete = async (): Promise<boolean> => {
+  try {
+    await client.mutate({ mutation: USER_DELETE_MUTATION });
+    return true;
+  } catch(error) {
+    console.error(error);
+    return false;
   }
 };
 

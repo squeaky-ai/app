@@ -4,6 +4,7 @@ import type { User } from 'types/user';
 
 const PUBLIC_ROUTES = [
   '/',
+  '/contact',
   '/terms',
   '/auth/login',
   '/auth/signup',

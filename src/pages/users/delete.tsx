@@ -2,10 +2,10 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import { Button } from 'components/button';
 import { Container } from 'components/container';
 import { Main } from 'components/main';
 import { Header } from 'components/sites/header';
+import { DeleteAccount } from 'components/users/delete-account';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
 const UsersDelete: NextPage<ServerSideProps> = () => (
@@ -32,9 +32,7 @@ const UsersDelete: NextPage<ServerSideProps> = () => (
           <li>Once your account has been deleted we will email you to confirm.</li>
         </ul>
 
-        <Button className='tertiary delete-account'>
-          Delete Account
-        </Button>
+        <DeleteAccount />
       </Container>
     </Main>
   </div>
