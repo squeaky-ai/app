@@ -83,7 +83,6 @@ const UsersAccount: NextPage<ServerSideProps> = ({ user }) => {
                   type='text' 
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  placeholder='e.g. Jess'
                   autoComplete='given-name'
                   value={values.firstName}
                   invalid={touched.firstName && !!errors.firstName}
@@ -96,7 +95,6 @@ const UsersAccount: NextPage<ServerSideProps> = ({ user }) => {
                   type='text' 
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  placeholder='e.g. Smith'
                   autoComplete='family-name'
                   value={values.lastName}
                   invalid={touched.lastName && !!errors.lastName}
