@@ -13,84 +13,103 @@ import { Main } from 'components/main';
 import { Password } from 'components/password';
 import { PASSWORD_REGEX } from 'data/users/constants';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { login } from 'lib/api/auth';
+import { userPassword } from 'lib/api/graphql';
+import { useToasts } from 'hooks/toasts';
 
 const PasswordSchema = Yup.object().shape({
   currentPassword: Yup.string().required('Current password is required'),
   newPassword: Yup.string().matches(PASSWORD_REGEX, 'Password must match the criteria defined below').required('New password is required'),
 });
 
-const UsersPassword: NextPage<ServerSideProps> = ({ user }) => (
-  <div className='page user password'>
-    <Head>
-      <title>Squeaky / User / Password</title>
-    </Head>
+const UsersPassword: NextPage<ServerSideProps> = ({ user }) => {
+  const toasts = useToasts();
 
-    <Header />
+  return (
+    <div className='page user password'>
+      <Head>
+        <title>Squeaky / User / Password</title>
+      </Head>
 
-    <Main>
-      <h3 className='title'>Account Settings</h3>
+      <Header />
 
-      <Tabs user={user} page='password' />
+      <Main>
+        <h3 className='title'>Account Settings</h3>
 
-      <p>To change your password please complete the form below.</p>
+        <Tabs user={user} page='password' />
 
-      <Container className='xsm'>
-        <Formik
-          initialValues={{ currentPassword: '', newPassword: '' }}
-          validationSchema={PasswordSchema}
-          onSubmit={(values) => {
-            (async () => {
-              // TODO
-              console.log(values);
-            })();
-          }}
-        >
-          {({
-            errors,
-            handleBlur,
-            handleChange,
-            handleSubmit,
-            isSubmitting,
-            touched,
-            values,
-          }) => (
-            <form onSubmit={handleSubmit}>
-              <Label htmlFor='currentPassword'>Current password</Label>
-              <Input
-                name='currentPassword' 
-                type='password' 
-                onBlur={handleBlur}
-                onChange={handleChange}
-                autoComplete='current-password'
-                value={values.currentPassword}
-                invalid={touched.currentPassword && !!errors.currentPassword}
-              />
-              <span className='validation'>{errors.currentPassword}</span>
+        <p>To change your password please complete the form below.</p>
 
-              <Label htmlFor='newPassword'>New password</Label>
-              <Input
-                name='newPassword' 
-                type='password' 
-                onBlur={handleBlur}
-                onChange={handleChange}
-                autoComplete='new-password'
-                value={values.newPassword}
-                invalid={touched.newPassword && !!errors.newPassword}
-              />
-              <span className='validation'>{errors.newPassword}</span>
+        <Container className='xsm'>
+          <Formik
+            initialValues={{ currentPassword: '', newPassword: '' }}
+            validationSchema={PasswordSchema}
+            onSubmit={(values) => {
+              (async () => {
+                const { error } = await userPassword({
+                  currentPassword: values.currentPassword,
+                  password: values.newPassword,
+                  passwordConfirmation: values.newPassword
+                });
 
-              <Password password={values.newPassword} />
+                if (error) {
+                  toasts.add({ type: 'error', body: 'There was a problem updating your password' });
+                } else {
+                  // The user would need to log back in after changing their password
+                  // so we can log them in here to save that step
+                  await login({ email: user.email, password: values.newPassword });
+                  toasts.add({ type: 'success', body: 'Your new password has been saved successfully.' });
+                }
+              })();
+            }}
+          >
+            {({
+              errors,
+              handleBlur,
+              handleChange,
+              handleSubmit,
+              isSubmitting,
+              touched,
+              values,
+            }) => (
+              <form onSubmit={handleSubmit}>
+                <Label htmlFor='currentPassword'>Current password</Label>
+                <Input
+                  name='currentPassword' 
+                  type='password' 
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  autoComplete='current-password'
+                  value={values.currentPassword}
+                  invalid={touched.currentPassword && !!errors.currentPassword}
+                />
+                <span className='validation'>{errors.currentPassword}</span>
 
-              <Button  type='submit' disabled={isSubmitting} className='primary'>
-                Save Changes
-              </Button>
-            </form>
-          )}
-        </Formik>
-      </Container>
-    </Main>
-  </div>
-);
+                <Label htmlFor='newPassword'>New password</Label>
+                <Input
+                  name='newPassword' 
+                  type='password' 
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  autoComplete='new-password'
+                  value={values.newPassword}
+                  invalid={touched.newPassword && !!errors.newPassword}
+                />
+                <span className='validation'>{errors.newPassword}</span>
+
+                <Password password={values.newPassword} />
+
+                <Button  type='submit' disabled={isSubmitting} className='primary'>
+                  Save Changes
+                </Button>
+              </form>
+            )}
+          </Formik>
+        </Container>
+      </Main>
+    </div>
+  );
+};
 
 export default UsersPassword;
 export { getServerSideProps };

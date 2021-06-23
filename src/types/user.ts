@@ -24,3 +24,9 @@ export interface UserInvitationQueryResponse {
   email?: string;
   hasPending: boolean;
 }
+
+export interface UserPasswordMutationInput {
+  password: string;
+  passwordConfirmation: string;
+  currentPassword: string;
+}

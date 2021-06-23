@@ -18,3 +18,11 @@ export const USER_DELETE_MUTATION = gql`
     }
   }
 `;
+
+export const USER_PASSWORD_MUTATION = gql`
+  mutation UserPassword($input: UserPasswordInput!) {
+    userPassword(input: $input) {
+      id
+    }
+  }
+`;

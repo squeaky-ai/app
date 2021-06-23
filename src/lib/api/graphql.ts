@@ -36,6 +36,7 @@ import {
 import { 
   UserMutationInput, 
   UserMutationResponse,
+  UserPasswordMutationInput,
   UserInvitationQueryResponse
 } from 'types/user';
 
@@ -45,7 +46,8 @@ import {
 
 import { 
   UPDATE_USER_MUTATION,
-  USER_DELETE_MUTATION
+  USER_DELETE_MUTATION,
+  USER_PASSWORD_MUTATION
 } from 'data/users/mutations';
 
 const cache = new InMemoryCache({
@@ -230,6 +232,19 @@ export const userDelete = async (): Promise<boolean> => {
     return false;
   }
 };
+
+export const userPassword = async (input: UserPasswordMutationInput): Promise<UserMutationResponse> => {
+  try {
+    const { data } = await client.mutate({
+      mutation: USER_PASSWORD_MUTATION,
+      variables: { input }
+    });
+    return { user: data.userPassword };
+  } catch(error) {
+    console.error(error);
+    return parseGraphQLError(error); 
+  }
+}
 
 export const teamUpdate = async (input: TeamUpdateInput): Promise<SiteMutationResponse> => {
   try {
