@@ -13,7 +13,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
 const CreateSchema = Yup.object().shape({
   name: Yup.string().required('Site name is required'),
-  url: Yup.string().required('Site URL is required')
+  url: Yup.string().url('URL is not valid').required('Site URL is required')
 });
 
 export const CreateSite: FC<Props> = ({ children, className }) => {
@@ -63,6 +63,8 @@ export const CreateSite: FC<Props> = ({ children, className }) => {
               isSubmitting,
               touched,
               values,
+              isValid,
+              dirty,
             }) => (
               <form onSubmit={handleSubmit}>
                 <ModalHeader>
@@ -99,8 +101,8 @@ export const CreateSite: FC<Props> = ({ children, className }) => {
                   <span className='validation'>{errors.url}</span>
                 </ModalContents>
                 <ModalFooter>
-                  <Button disabled={isSubmitting} type='submit' className='primary'>
-                    Continue
+                  <Button disabled={isSubmitting || !(dirty && isValid)} type='submit' className='primary'>
+                    Create
                   </Button>
                   <Button type='button' className='quaternary' onClick={closeModal}>
                     Cancel
