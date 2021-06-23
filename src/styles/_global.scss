@@ -7,6 +7,10 @@ html, body {
   box-sizing: border-box;
 }
 
+*:focus-visible {
+  outline: 2px dashed var(--gray-800);
+}
+
 #__next {
   display: flex;
   flex-direction: column;

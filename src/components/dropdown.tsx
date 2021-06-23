@@ -19,11 +19,19 @@ export const Dropdown: FC<Props> = ({ button, children }) => {
     }
   };
 
+  const handleKeyUp = (event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      setOpen(false);
+    }
+  };
+
   React.useEffect(() => {
     document.addEventListener('click', handleClick);
+    document.addEventListener('keyup', handleKeyUp);
 
     return () => {
       document.removeEventListener('click', handleClick, true);
+      document.removeEventListener('keyup', handleKeyUp, true);
     }
   }, []);
 

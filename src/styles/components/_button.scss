@@ -13,6 +13,10 @@
     pointer-events: none;
   }
 
+  &:focus {
+    outline-offset: 2px;
+  }
+
   &.primary {
     background: var(--blue-500);
     border: 2px solid var(--blue-500);

@@ -68,6 +68,10 @@
         &:hover {
           border-color: var(--blue-500);
         }
+
+        &:focus {
+          outline-offset: 2px;
+        }
       }
 
       .avatar {

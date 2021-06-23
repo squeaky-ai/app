@@ -67,6 +67,10 @@
           }
         }
 
+        &:focus {
+          outline-offset: -2px;
+        }
+
         &:hover {
           & > td {
             border-color: var(--blue-500);

@@ -15,6 +15,7 @@
     "@apollo/client": "^3.3.20",
     "axios": "^0.21.1",
     "classnames": "^2.3.1",
+    "focus-trap-react": "^8.6.0",
     "formik": "^2.2.9",
     "graphql": "^15.5.0",
     "lodash": "^4.17.21",

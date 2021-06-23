@@ -47,10 +47,11 @@
   }
 
   &:focus {
-    outline: none;
+    outline: none !important;
 
     .check {
-      border-color: var(--blue-500);
+      outline: 2px dashed var(--gray-800);
+      outline-offset: 2px;
     }
   }
 

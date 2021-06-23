@@ -34,7 +34,10 @@
       width: 100%;
     }
 
-    &:hover {
+    &:hover,
+    &:focus {
+      outline-offset: 3px;
+
       &::after {
         display: block;
       }

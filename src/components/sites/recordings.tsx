@@ -80,7 +80,7 @@ export const Recordings: FC = () => {
           </thead>
           <tbody>
             {recordings.items.map(recording => (
-              <tr className='hover' key={recording.id} role='button' onClick={() => viewRecording(recording.id)}>
+              <tr className='hover' key={recording.id} role='button' onClick={() => viewRecording(recording.id)} tabIndex={0}>
                 <td>
                   <span className={classnames('indicator', { active: recording.active })} />
                   {recording.active ? 'Active' : 'Recorded'}

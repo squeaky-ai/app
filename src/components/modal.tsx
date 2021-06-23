@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import FocusTrap from 'focus-trap-react';
 import type { FC } from 'react';
 
 interface State {
@@ -29,10 +30,12 @@ export class Modal extends React.Component<{}, State> {
 
   public componentDidMount() {
     document.addEventListener('click', this.handleClick);
+    document.addEventListener('keyup', this.handleKeyUp);
   }
 
   public componentWillUnmount() {
     document.removeEventListener('click', this.handleClick, true);
+    document.removeEventListener('keyup', this.handleKeyUp, true);
   }
 
   public show = () => {
@@ -51,6 +54,12 @@ export class Modal extends React.Component<{}, State> {
     }
   };
 
+  private handleKeyUp = (event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      this.hide();
+    }
+  };
+
   public render() {
     return (
       <Portal>
@@ -65,9 +74,11 @@ export class Modal extends React.Component<{}, State> {
 }
 
 export const ModalBody: FC = ({ children }) => (
-  <div className='modal-body'>
-    {children}
-  </div>
+  <FocusTrap>
+    <div className='modal-body'>
+      {children}
+    </div>
+  </FocusTrap>
 );
 
 export const ModalHeader: FC = ({ children }) => (
