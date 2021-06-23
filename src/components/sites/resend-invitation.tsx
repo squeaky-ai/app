@@ -40,15 +40,15 @@ export const ResendInvitation: FC<Props> = ({ site, team }) => {
       <Button className='positive' onClick={openModal}>Resend Invitation</Button>
 
       <Modal ref={ref}>
-        <ModalBody>
+        <ModalBody aria-labelledby='resend-invitation-title' aria-describedby='resend-invitation-description'>
           <ModalHeader>
-            <p><b>Resend Invitation</b></p>
+            <p id='resend-invitation-title'><b>Resend Invitation</b></p>
             <Button type='button' onClick={openModal}>
               <i className='ri-close-line' />
             </Button>
           </ModalHeader>
           <ModalContents>
-            <p>Are you sure you wish to resend the invitation to {team.user.email}?</p>
+            <p id='resend-invitation-description'>Are you sure you wish to resend the invitation to {team.user.email}?</p>
           </ModalContents>
           <ModalFooter>
             <Button type='button' className='secondary' onClick={resendInvitation}>

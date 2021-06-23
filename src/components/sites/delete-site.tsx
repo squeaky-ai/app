@@ -42,15 +42,15 @@ export const DeleteSite: FC<Props> = ({ site }) => {
       </Button>
 
       <Modal ref={ref}>
-        <ModalBody>
+        <ModalBody aria-labelledby='delete-site-title' aria-describedby='delete-site-description'>
           <ModalHeader>
-            <p><b>Delete site</b></p>
+            <p id='delete-site-title'><b>Delete site</b></p>
             <Button type='button' onClick={closeModal}>
               <i className='ri-close-line' />
             </Button>
           </ModalHeader>
           <ModalContents>
-            <p><b>Are you sure you wish to delete your site?</b></p>
+            <p id='delete-site-description'><b>Are you sure you wish to delete your site?</b></p>
             <p>If so, all site data will be permanently deleted.</p>
           </ModalContents>
           <ModalFooter>

@@ -111,15 +111,15 @@ export const TeamRow: FC<Props> = ({ user, site, team }) => {
       </tr>
 
       <Modal ref={ref}>
-        <ModalBody>
+        <ModalBody aria-labelledby='change-role-title' aria-describedby='change-role-description'>
           <ModalHeader>
-            <p><b>Change role</b></p>
+            <p id='change-role-title'><b>Change role</b></p>
             <Button type='button' onClick={closeModal}>
               <i className='ri-close-line' />
             </Button>
           </ModalHeader>
           <ModalContents>
-            <p>Are you sure you wish to make {self ? 'yourself' : team.user.fullName} {roleNames[role]}?</p>
+            <p id='change-role-description'>Are you sure you wish to make {self ? 'yourself' : team.user.fullName} {roleNames[role]}?</p>
           </ModalContents>
           <ModalFooter>
             <Button type='button' className='primary' onClick={changeRole}>

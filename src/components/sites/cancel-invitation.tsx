@@ -40,15 +40,15 @@ export const CancelInvitation: FC<Props> = ({ site, team }) => {
       <Button className='negative' onClick={openModal}>Cancel Invitation</Button>
 
       <Modal ref={ref}>
-        <ModalBody>
+        <ModalBody aria-labelledby='cancel-invitation-title' aria-describedby='cancel-invitation-description'>
           <ModalHeader>
-            <p><b>Cancel Invitation</b></p>
+            <p id='cancel-invitation-title'><b>Cancel Invitation</b></p>
             <Button type='button' onClick={openModal}>
               <i className='ri-close-line' />
             </Button>
           </ModalHeader>
           <ModalContents>
-            <p>Are you sure you wish to cancel the invitation for {team.user.email}?</p>
+            <p id='cancel-invitation-description'>Are you sure you wish to cancel the invitation for {team.user.email}?</p>
           </ModalContents>
           <ModalFooter>
             <Button type='button' className='tertiary' onClick={cancelInvitation}>

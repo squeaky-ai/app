@@ -12,7 +12,7 @@ interface Props {
 export const Tabs: FC<Props> = ({ page }) => {
   return (
     <div className='user-tabs'>
-      <ul className='tab-header'>
+      <ul className='tab-header' role='navigation' aria-label='Account navigation'>
         <li className='tab'>
           <Link href='/users/account'>
             <a className={classnames('button tab-button', { active: page === 'account' })}>

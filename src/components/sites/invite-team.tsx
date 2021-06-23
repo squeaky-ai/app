@@ -39,7 +39,7 @@ export const InviteTeam: FC<Props> = ({ site }) => {
       </Button>
 
       <Modal ref={ref}>
-        <ModalBody>
+        <ModalBody aria-labelledby='invite-team-title'>
           <Formik
             initialValues={{ email: '', role: '0' }}
             validationSchema={InviteSchema}
@@ -74,7 +74,7 @@ export const InviteTeam: FC<Props> = ({ site }) => {
             }) => (
               <form onSubmit={handleSubmit}>
                 <ModalHeader>
-                  <p><b>Invite New Team Member</b></p>
+                  <p id='invite-team-title'><b>Invite New Team Member</b></p>
                   <Button type='button' onClick={closeModal}>
                     <i className='ri-close-line' />
                   </Button>

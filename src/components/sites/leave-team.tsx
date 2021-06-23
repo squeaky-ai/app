@@ -40,15 +40,15 @@ export const LeaveTeam: FC<Props> = ({ site }) => {
       <Button className='negative' onClick={openModal}>Leave site</Button>
 
       <Modal ref={ref}>
-        <ModalBody>
+        <ModalBody aria-labelledby='leave-team-title' aria-describedby='leave-team-description'>
           <ModalHeader>
-            <p><b>Leave site</b></p>
+            <p id='leave-team-title'><b>Leave site</b></p>
             <Button type='button' onClick={openModal}>
               <i className='ri-close-line' />
             </Button>
           </ModalHeader>
           <ModalContents>
-            <p>Are you sure you wish to leave the site/team?</p>
+            <p id='leave-team-description'>Are you sure you wish to leave the site/team?</p>
           </ModalContents>
           <ModalFooter>
             <Button type='button' className='tertiary' onClick={leaveTeam}>

@@ -50,15 +50,15 @@ export const DeleteAccount: FC = () => {
       )}
 
       <Modal ref={ref}>
-        <ModalBody>
+        <ModalBody aria-labelledby='delete-account-title' aria-describedby='delete-account-description'>
           <ModalHeader>
-            <p><b>Delete account</b></p>
+            <p id='delete-account-title'><b>Delete account</b></p>
             <Button type='button' onClick={closeModal}>
               <i className='ri-close-line' />
             </Button>
           </ModalHeader>
           <ModalContents>
-            <p><b>Are you sure you wish to delete your account?</b></p>
+            <p id='delete-account-description'><b>Are you sure you wish to delete your account?</b></p>
             <p>If so, all account data and sites, will be permanently deleted.</p>
           </ModalContents>
           <ModalFooter>

@@ -66,7 +66,7 @@ export const Tabs: FC<Props> = ({ site, page, member }) => {
         </h4>
       </div>
 
-      <ul className='tab-header'>
+      <ul className='tab-header' role='navigation' aria-label='Site navigation'>
         {tabs.map(tab => (
           <li className={classnames('tab', { hidden: tab.hideForRoles.includes(member?.role) })} key={tab.page}>
             <Link href={`/sites/${site.id}/${tab.page}`}>

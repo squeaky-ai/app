@@ -73,28 +73,28 @@ export class Modal extends React.Component<{}, State> {
   }
 }
 
-export const ModalBody: FC = ({ children }) => (
-  <FocusTrap>
-    <div className='modal-body'>
+export const ModalBody: FC = ({ children, ...rest }) => (
+  <FocusTrap focusTrapOptions={{ clickOutsideDeactivates: true }}>
+    <div className='modal-body' role='dialog' {...rest}>
       {children}
     </div>
   </FocusTrap>
 );
 
-export const ModalHeader: FC = ({ children }) => (
-  <div className='modal-header'>
+export const ModalHeader: FC = ({ children, ...rest }) => (
+  <div className='modal-header' {...rest}>
     {children}
   </div>
 );
 
-export const ModalContents: FC = ({ children }) => (
-  <div className='modal-contents'>
+export const ModalContents: FC = ({ children, ...rest }) => (
+  <div className='modal-contents' {...rest}>
     {children}
   </div>
 );
 
-export const ModalFooter: FC = ({ children }) => (
-  <div className='modal-footer'>
+export const ModalFooter: FC = ({ children, ...rest }) => (
+  <div className='modal-footer' {...rest}>
     {children}
   </div>
 );

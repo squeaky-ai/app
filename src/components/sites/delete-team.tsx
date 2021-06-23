@@ -40,15 +40,15 @@ export const DeleteTeam: FC<Props> = ({ site, team }) => {
       <Button className='negative' onClick={openModal}>Remove</Button>
 
       <Modal ref={ref}>
-        <ModalBody>
+        <ModalBody aria-labelledby='delete-team-title' aria-describedby='delete-team-description'>
           <ModalHeader>
-            <p><b>Remove User</b></p>
+            <p id='delete-team-title'><b>Remove User</b></p>
             <Button type='button' onClick={openModal}>
               <i className='ri-close-line' />
             </Button>
           </ModalHeader>
           <ModalContents>
-            <p>Are you sure you wish to remove {team.user.fullName} from your site?</p>
+            <p id='delete-team-description'>Are you sure you wish to remove {team.user.fullName} from your site?</p>
             <p>If {team.user.firstName} has created any video notes or other similar content it will be relabeled as ‘Removed User’.</p>
           </ModalContents>
           <ModalFooter>

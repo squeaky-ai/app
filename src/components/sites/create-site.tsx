@@ -35,7 +35,7 @@ export const CreateSite: FC<Props> = ({ children, className }) => {
       </Button>
 
       <Modal ref={ref}>
-        <ModalBody>
+        <ModalBody aria-labelledby='create-site-title' aria-describedby='create-site-description'>
           <Formik
             initialValues={{ name: '', url: '' }}
             validationSchema={CreateSchema}
@@ -68,13 +68,13 @@ export const CreateSite: FC<Props> = ({ children, className }) => {
             }) => (
               <form onSubmit={handleSubmit}>
                 <ModalHeader>
-                  <p><b>Add Site</b></p>
+                  <p id='create-site-title'><b>Add Site</b></p>
                   <Button type='button' onClick={closeModal}>
                     <i className='ri-close-line' />
                   </Button>
                 </ModalHeader>
                 <ModalContents>
-                  <p>Please enter your site details below.</p>
+                  <p id='create-site-description'>Please enter your site details below.</p>
 
                   <Label htmlFor='name'>Site Name</Label>
                   <Input
