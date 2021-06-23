@@ -58,7 +58,8 @@ export const DeleteAccount: FC = () => {
             </Button>
           </ModalHeader>
           <ModalContents>
-            <p><b>Are you sure? If so, all account data and sites, will be permanently deleted.</b></p>
+            <p><b>Are you sure you wish to delete your account?</b></p>
+            <p>If so, all account data and sites, will be permanently deleted.</p>
           </ModalContents>
           <ModalFooter>
             <Button type='button' className='tertiary' onClick={deleteAccount}>
