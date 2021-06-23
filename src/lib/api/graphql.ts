@@ -242,7 +242,7 @@ export const userPassword = async (input: UserPasswordMutationInput): Promise<Us
     return { user: data.userPassword };
   } catch(error) {
     console.error(error);
-    return parseGraphQLError(error); 
+    return { error: { currentPassword: error.message } };
   }
 }
 

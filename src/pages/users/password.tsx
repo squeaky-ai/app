@@ -44,7 +44,7 @@ const UsersPassword: NextPage<ServerSideProps> = ({ user }) => {
           <Formik
             initialValues={{ currentPassword: '', newPassword: '' }}
             validationSchema={PasswordSchema}
-            onSubmit={(values) => {
+            onSubmit={(values, { setErrors, setSubmitting }) => {
               (async () => {
                 const { error } = await userPassword({
                   currentPassword: values.currentPassword,
@@ -53,13 +53,16 @@ const UsersPassword: NextPage<ServerSideProps> = ({ user }) => {
                 });
 
                 if (error) {
-                  toasts.add({ type: 'error', body: 'There was a problem updating your password' });
+                  const [key, value] = Object.entries(error)[0];
+                  setErrors({ [key]: value });
                 } else {
                   // The user would need to log back in after changing their password
                   // so we can log them in here to save that step
                   await login({ email: user.email, password: values.newPassword });
                   toasts.add({ type: 'success', body: 'Your new password has been saved successfully.' });
                 }
+
+                setSubmitting(false);
               })();
             }}
           >
@@ -71,6 +74,7 @@ const UsersPassword: NextPage<ServerSideProps> = ({ user }) => {
               isSubmitting,
               touched,
               values,
+              isValid
             }) => (
               <form onSubmit={handleSubmit}>
                 <Label htmlFor='currentPassword'>Current password</Label>
@@ -99,7 +103,7 @@ const UsersPassword: NextPage<ServerSideProps> = ({ user }) => {
 
                 <Password password={values.newPassword} />
 
-                <Button  type='submit' disabled={isSubmitting} className='primary'>
+                <Button  type='submit' disabled={isSubmitting || !isValid} className='primary'>
                   Save Changes
                 </Button>
               </form>
