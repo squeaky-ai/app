@@ -10,7 +10,7 @@ import { Container } from 'components/container';
 import { Card } from 'components/card';
 import { Label } from 'components/label';
 import { Input } from 'components/input';
-import { Button } from 'components/button';
+import { Button, DelayedButton } from 'components/button';
 import { Password } from 'components/password';
 import { PASSWORD_REGEX } from 'data/users/constants';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
@@ -116,9 +116,9 @@ const Reset: NextPage<ServerSideProps> = () => {
               <i className='ri-checkbox-circle-line' />
               <h4>Check Your Email</h4>
               <p>If you have an existing Squeaky account you will receive password reset instructions at the email address <b>{email}</b>.</p>
-              <Button className='secondary' onClick={() => console.log('TODO')}>
-                Resend Password Reset Email
-              </Button>
+              <DelayedButton delay={10} className='secondary' onClick={() => resetPassword(email)}>
+                Resend Password
+              </DelayedButton>
             </div>
           )}
 
