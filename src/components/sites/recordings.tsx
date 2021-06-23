@@ -42,7 +42,7 @@ export const Recordings: FC = () => {
     <Main className={classnames('recordings', { empty: !hasRecordings })}>
       <h3 className='title'>
         Recordings
-        <div className='search'>
+        <div className='search' role='search' aria-label='Filter recordings'>
           <Input type='search' placeholder='Search...' onKeyUp={handleSearch} id='search' />
           {query && (
             <Button onClick={handleCancel}>
