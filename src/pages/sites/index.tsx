@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Header } from 'components/sites/header';
+import { Avatar } from 'components/sites/avatar';
 import { Main } from 'components/main';
 import { CreateSite } from 'components/sites/create-site';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
@@ -23,7 +24,7 @@ const Sites: NextPage<ServerSideProps> = () => {
       {!loading && sites.length === 0 && (
         <div className='empty-state'>
           <div className='contents'>
-            <Image src='/empty-state-1.svg' height={260} width={500} />
+            <Image src='/empty-state-1.svg' height={256} width={500} />
             <h2>Welcome to Squeaky</h2>
             <p>It’s time to discover what your users are really getting up to! Add your first site by clicking the button below.</p>
             <CreateSite className='button primary icon'>
@@ -46,7 +47,7 @@ const Sites: NextPage<ServerSideProps> = () => {
               <li key={site.id}>
                 <Link href={`/sites/${site.id}/recordings`}>
                   <a>
-                    <span className='avatar'></span>
+                    <Avatar site={site} />
                     <p className='name'><b>{site.name}</b></p>
                     <p className='url'>{site.url}</p>
                     <p className='owner'>Owner: {site.ownerName}</p>

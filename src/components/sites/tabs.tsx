@@ -4,6 +4,7 @@ import Link from 'next/link';
 import classnames from 'classnames';
 import { Container } from 'components/container';
 import { ADMIN, MEMBER } from 'data/teams/constants';
+import { Avatar } from 'components/sites/avatar';
 import { Team } from 'types/team';
 import { Site } from 'types/site';
 
@@ -60,7 +61,7 @@ export const Tabs: FC<Props> = ({ site, page, member }) => {
     <Container className='xl centered'>
       <div className='site-tabs'>
         <h4 className='sub-heading'>
-          <div className='avatar'></div>
+          <Avatar site={site} />
           {site.name}
         </h4>
       </div>

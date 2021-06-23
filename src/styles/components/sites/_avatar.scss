@@ -1,0 +1,22 @@
+.avatar {
+  align-items: center;
+  background: var(--blue-700);
+  border-radius: var(--border-radius-o);
+  color: var(--white);
+  display: flex;
+  height: 2rem;
+  justify-content: center;
+  overflow: hidden;
+  width: 2rem;
+
+  span {
+    display: block;
+    font-size: 1rem;
+    font-weight: var(--font-weight-normal);
+  }
+
+  img {
+    display: block;
+    width: 100%;
+  }
+}
