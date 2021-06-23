@@ -16,6 +16,7 @@ import { login, confirmAccount } from 'lib/api/auth';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useLoginAttemps, MAX_ATTEMPTS } from 'hooks/login-attempts';
 import { useToasts } from 'hooks/toasts';
+import type { User } from 'types/user';
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email('Please enter a valid email address').required('Email is required'),
@@ -27,16 +28,16 @@ const Login: NextPage<ServerSideProps> = () => {
   const toasts = useToasts();
   const [attemps, exceeded, incrAttempt, clearAttempt] = useLoginAttemps();
   const [failed, setFailed] = React.useState<boolean>(false);
-  const [confirmed, setConfirmed] = React.useState<boolean>(false);
+  const [confirmedEmail, setConfirmedEmail] = React.useState<string>('');
 
   React.useEffect(() => {
     (async () => {
       const { token } = router.query;
       if (!token) return;
 
-      const { error } = await confirmAccount(token as string);
+      const { body, error } = await confirmAccount<User>(token as string);
       if (!error) {
-        setConfirmed(true);
+        setConfirmedEmail(body.email);
         router.push({ pathname: '/auth/login', query: {} });
       } else {
         toasts.add({ type: 'error', body: 'There was an error with your sign in token' });
@@ -59,7 +60,7 @@ const Login: NextPage<ServerSideProps> = () => {
 
           <h2>Log In</h2>
 
-          {confirmed && (
+          {!!confirmedEmail && (
             <Message
               type='success'
               message='Your email address has been verified.'
@@ -78,8 +79,9 @@ const Login: NextPage<ServerSideProps> = () => {
           )}
 
           <Formik
-            initialValues={{ email: '', password: '' }}
+            initialValues={{ email: confirmedEmail, password: '' }}
             validationSchema={LoginSchema}
+            enableReinitialize
             onSubmit={(values, { setSubmitting }) => {
               (async () => {
                 if (exceeded) return;
