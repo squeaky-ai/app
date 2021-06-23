@@ -46,6 +46,14 @@
     }
   }
 
+  &:focus {
+    outline: none;
+
+    .check {
+      border-color: var(--blue-500);
+    }
+  }
+
   & + .validation {
     color: var(--magenta-500);
     font-size: 13px;
