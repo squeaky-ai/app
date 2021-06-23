@@ -56,7 +56,7 @@ export const Recordings: FC = () => {
       {!loading && (
         <Container className='xl centered empty-state'>
           <div className='empty-state-contents'>
-            <Image src='/empty-state-4.svg' height={240} width={320} />
+            <Image src='/empty-state-4.svg' height={240} width={320} alt='Illustration to represent that there were no search results' />
             <h4 className='sub-heading'>There are no recordings matching your search.</h4>
           </div>
         </Container>
@@ -110,7 +110,7 @@ export const Recordings: FC = () => {
                 </td>
                 <td>{recording.viewportX} x {recording.viewportY}</td>
                 <td>
-                  <Image src={`/browsers/${recording.browser.toLowerCase()}.svg`} height={24} width={24} />
+                  <Image src={`/browsers/${recording.browser.toLowerCase()}.svg`} height={24} width={24} alt={`Icon for the ${recording.browser} browser`} />
                 </td>
               </tr>
             ))}

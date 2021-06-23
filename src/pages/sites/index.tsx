@@ -24,7 +24,7 @@ const Sites: NextPage<ServerSideProps> = () => {
       {!loading && sites.length === 0 && (
         <div className='empty-state'>
           <div className='contents'>
-            <Image src='/empty-state-1.svg' height={256} width={500} />
+            <Image src='/empty-state-1.svg' height={256} width={500} alt='Illustration to welcome the user to Squeaky' />
             <h2>Welcome to Squeaky</h2>
             <p>It’s time to discover what your users are really getting up to! Add your first site by clicking the button below.</p>
             <CreateSite className='button primary icon'>

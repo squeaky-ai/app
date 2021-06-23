@@ -27,7 +27,7 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => (
             <Container className='xl centered empty-state'>
               <h3 className='title empty'>Recordings</h3>
               <div className='empty-state-contents'>
-                <Image src='/empty-state-2.svg' height={240} width={320} />
+                <Image src='/empty-state-2.svg' height={240} width={320} alt='Illustration to represent the empty recordings page' />
                 <h4>There are currently no recordings available.</h4>
                 <Message
                   type='info'

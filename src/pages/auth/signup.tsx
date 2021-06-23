@@ -46,7 +46,7 @@ const Signup: NextPage<ServerSideProps> = () => {
         <Card>
           <Link href='/'>
             <a className='logo'>
-              <Image src='/logo.svg' height={76} width={246} />
+              <Image src='/logo.svg' height={76} width={246} alt='Squeaky logo' />
             </a>
           </Link>
 

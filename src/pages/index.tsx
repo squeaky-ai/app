@@ -17,7 +17,7 @@ const Home: NextPage<ServerSideProps> = ({ user }) => (
     <Header className='transparent'>
       <Link href='/'>
         <a className='logo'>
-          <Image src='/logo.svg' height={48} width={158} />
+          <Image src='/logo.svg' height={48} width={158} alt='Squeaky logo' />
         </a>
       </Link>
 

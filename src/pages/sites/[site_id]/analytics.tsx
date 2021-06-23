@@ -27,7 +27,7 @@ const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => (
             <Container className='xl centered empty-state'>
               <h3 className='title empty'>Analytics</h3>
               <div className='empty-state-contents'>
-                <Image src='/empty-state-3.svg' height={240} width={320} />
+                <Image src='/empty-state-3.svg' height={240} width={320} alt='Illustration to represent the empty analytics page' />
                 <h4>There are currently no analytics available.</h4>
                 <Message
                   type='info'
