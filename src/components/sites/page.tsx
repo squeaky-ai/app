@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC, ReactElement } from 'react';
 import { useSite } from 'hooks/sites';
+import { NotFound } from 'components/sites/not-found';
 import { Unauthorized } from 'components/sites/unauthorized';
 import type { User } from 'types/user';
 import type { Site } from 'types/site';
@@ -31,7 +32,11 @@ export const Page: FC<Props> = ({ children, user, scope }) => {
 
   return (
     <>
-      {!loading && !authorized && (
+      {!loading && !site && (
+        <NotFound />
+      )}
+
+      {site && !authorized && (
         <Unauthorized />
       )}
 
