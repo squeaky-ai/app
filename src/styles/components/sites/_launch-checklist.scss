@@ -41,6 +41,11 @@
                 color: var(--gray-500);
               }
             }
+
+            &:is(span):hover {
+              background: none;
+              cursor: default;
+            }
           }
 
           i {
