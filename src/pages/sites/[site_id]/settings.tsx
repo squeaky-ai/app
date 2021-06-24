@@ -1,6 +1,7 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { Container } from 'components/container';
@@ -147,8 +148,9 @@ const SitesSettings: NextPage<ServerSideProps> = ({ user }) => {
                   <Container className='md'>
                     <p><b>You can delete your site at any time:</b></p>
                     <ul className='delete-list'>
-                      <li>Deleting your site will not delete your Squeaky user account. To delete you account please visit the account settings page.</li>
-                      <li>Site deletion is irreversable. If you have an active subscription you can downgrade to a free plan in the subscription tab.</li>
+                      <li>The site will be deleted immediately for all users.</li>
+                      <li>Deleting your site will not delete your Squeaky user account. To delete you account please visit the <Link href={`/sites/${site.id}/settings`}><a>account settings page</a></Link>.</li>
+                      <li>Site deletion is irreversable. If you have an active subscription you can downgrade to a free plan in the <Link href={`/sites/${site.id}/subscription`}><a>subscription tab</a></Link>.</li>
                     </ul>
                     <DeleteSite site={site} />
                   </Container>
