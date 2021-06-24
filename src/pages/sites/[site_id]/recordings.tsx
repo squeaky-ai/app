@@ -29,10 +29,12 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => (
               <div className='empty-state-contents'>
                 <Image src='/empty-state-2.svg' height={240} width={320} alt='Illustration to represent the empty recordings page' />
                 <h4>There are currently no recordings available.</h4>
-                <Message
-                  type='info'
-                  message='If you have only recently installed or updated your tracking code it may take a little time before results appear.'
-                />
+                {site.verifiedAt && (
+                  <Message
+                    type='info'
+                    message='If you have only recently installed or updated your tracking code it may take a little time before results appear.'
+                  />
+                )}
               </div>
             </Container>
           )}
