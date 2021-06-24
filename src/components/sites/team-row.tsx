@@ -30,6 +30,7 @@ export const TeamRow: FC<Props> = ({ user, site, team }) => {
   const self = Number(team.user.id) === user.id;
   const owner = team.role === OWNER;
   const invited = team.status === INVITED;
+  const userRole = site.team.find(t => Number(t.user.id) === user.id);
 
   const roleNames: { [key: number]: string } = {
     0: 'a User',
@@ -102,7 +103,7 @@ export const TeamRow: FC<Props> = ({ user, site, team }) => {
               {!owner && self && (
                 <LeaveTeam site={site} />
               )}
-              {!owner && !self && (
+              {!owner && !self && userRole.role > team.role && (
                 <DeleteTeam site={site} team={team} />
               )}
             </>
