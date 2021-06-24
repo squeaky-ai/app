@@ -21,6 +21,7 @@ export const GET_SITE_QUERY = gql`
       url
       avatar
       verifiedAt
+      checklistDismissedAt
       uuid
       planName
       ownerName

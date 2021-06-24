@@ -3,11 +3,12 @@ import type { FC } from 'react';
 import classnames from 'classnames';
 import { Button } from 'components/button';
 
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   button: string | React.ReactNode;
+  buttonClassName?: string;
 }
 
-export const Dropdown: FC<Props> = ({ button, children }) => {
+export const Dropdown: FC<Props> = ({ button, buttonClassName, className, children }) => {
   const ref = React.useRef<HTMLDivElement>();
   const [open, setOpen] = React.useState(false);
 
@@ -36,8 +37,8 @@ export const Dropdown: FC<Props> = ({ button, children }) => {
   }, []);
 
   return (
-    <div ref={ref} className={classnames('dropdown', { open })}>
-      <Button onClick={() => setOpen(!open)}>
+    <div ref={ref} className={classnames('dropdown', className, { open })}>
+      <Button onClick={() => setOpen(!open)} className={buttonClassName}>
         {button}
         <i className='arrow ri-arrow-drop-down-line' />
       </Button>

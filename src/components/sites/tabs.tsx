@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import { Container } from 'components/container';
 import { ADMIN, MEMBER } from 'data/teams/constants';
 import { Avatar } from 'components/sites/avatar';
+import { LaunchChecklist } from 'components/sites/launch-checklist';
 import { Team } from 'types/team';
 import { Site } from 'types/site';
 
@@ -64,6 +65,8 @@ export const Tabs: FC<Props> = ({ site, page, member }) => {
           <Avatar site={site} />
           {site.name}
         </h4>
+
+        <LaunchChecklist site={site} />
       </div>
 
       <ul className='tab-header' role='navigation' aria-label='Site navigation'>

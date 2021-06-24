@@ -14,6 +14,7 @@ export interface Site {
   recording?: Recording;
   recordings?: PaginatedRecordingsResponse;
   verifiedAt?: string;
+  checklistDismissedAt?: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -35,6 +36,7 @@ export interface SiteMutationInput {
   siteId: string;
   name?: string;
   url?: string;
+  dismissChecklist?: boolean;
 }
 
 export interface SiteDeleteMutationInput {

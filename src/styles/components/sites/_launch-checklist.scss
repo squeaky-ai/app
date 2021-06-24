@@ -1,0 +1,85 @@
+.launch-checklist {
+  &.dropdown {
+    .button {
+      padding-right: 1rem;
+
+      span {
+        font-weight: var(--font-weight-normal);
+        margin-left: .5rem;
+        opacity: .85;
+      }
+
+      .arrow {
+        display: none;
+      }
+    }
+
+    .dropdown-menu {
+      top: calc(100% + 1.5rem);
+      width: 26rem;
+
+      ul {
+        margin: 0;
+        padding: 0;
+
+        li {
+          list-style: none;
+
+          .button {
+            align-items: center;
+            display: flex;
+            padding: 1rem;
+
+            &.complete {
+              .check {
+                color: var(--green-500);
+              }
+            }
+
+            &:hover {
+              .indicator {
+                color: var(--gray-500);
+              }
+            }
+          }
+
+          i {
+            color: var(--gray-500);
+            margin-left: .75rem;
+          }
+
+          .text {
+            align-items: center;
+            display: flex;
+            flex: 1;
+            margin: 0;
+          }
+
+          .check {
+            color: var(--gray-200);
+            display: block;
+            font-size: 1.75rem;
+            margin: 0 1rem 0 0;
+          }
+
+          .indicator {
+            color: var(--gray-200);
+            display: block;
+            font-size: 1.5rem;
+          }
+        }
+      }
+
+      .remove-checklist {
+        color: var(--magenta-500);
+        margin: .5rem 0;
+        text-decoration: underline;
+
+        &:hover {
+          background: none;
+          color: var(--magenta-500);
+        }
+      }
+    }
+  }
+}
