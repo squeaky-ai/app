@@ -2,6 +2,7 @@
 @import './typography';
 @import './variables';
 
+@import './components/public/header';
 @import './components/sites/access';
 @import './components/sites/avatar';
 @import './components/sites/controls';
@@ -50,6 +51,8 @@
 @import './pages/users/delete';
 @import './pages/users/new';
 @import './pages/users/password';
+@import './pages/404';
+@import './pages/500';
 @import './pages/contact';
 @import './pages/index';
 @import './pages/terms';
