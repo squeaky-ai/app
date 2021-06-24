@@ -5,14 +5,17 @@ import classnames from 'classnames';
 import { Button } from 'components/button';
 import { Dropdown } from 'components/dropdown';
 import { updateSite } from 'lib/api/graphql';
+import { MEMBER } from 'data/teams/constants';
+import type { Team } from 'types/team';
 import type { Site } from 'types/site';
 import { useToasts } from 'hooks/toasts';
 
 interface Props {
   site: Site;
+  member: Team;
 }
 
-export const LaunchChecklist: FC<Props> = ({ site }) => {
+export const LaunchChecklist: FC<Props> = ({ site, member }) => {
   const toasts = useToasts();
 
   const hasAdded = true;
@@ -21,7 +24,7 @@ export const LaunchChecklist: FC<Props> = ({ site }) => {
 
   const completedCount = [hasAdded, hasInstalled, hasTeamMembers].filter(Boolean).length;
 
-  if (completedCount === 3 || site.checklistDismissedAt) {
+  if (completedCount === 3 || site.checklistDismissedAt || member.role === MEMBER) {
     return null;
   }
 

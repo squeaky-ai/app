@@ -6,8 +6,8 @@ import { Container } from 'components/container';
 import { ADMIN, MEMBER } from 'data/teams/constants';
 import { Avatar } from 'components/sites/avatar';
 import { LaunchChecklist } from 'components/sites/launch-checklist';
-import { Team } from 'types/team';
-import { Site } from 'types/site';
+import type { Team } from 'types/team';
+import type { Site } from 'types/site';
 
 type Page = 'recordings' | 'analytics' | 'settings' | 'team' | 'subscription';
 
@@ -66,7 +66,7 @@ export const Tabs: FC<Props> = ({ site, page, member }) => {
           {site.name}
         </h4>
 
-        <LaunchChecklist site={site} />
+        <LaunchChecklist site={site} member={member} />
       </div>
 
       <ul className='tab-header' role='navigation' aria-label='Site navigation'>
