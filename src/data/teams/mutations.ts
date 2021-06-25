@@ -87,6 +87,7 @@ export const TEAM_UPDATE_MUTATION = gql`
       team {
         id
         role
+        roleName
         status
         user {
           id

@@ -83,13 +83,15 @@ export const TeamRow: FC<Props> = ({ user, site, team }) => {
         </td>
         <td>{team.user.email}</td>
         <td className='role'>
-          {owner && team.roleName}
-          {!owner && (
-            <Select name='role' onChange={openModal} value={role}>
-              <Option value='0'>User</Option>
-              <Option value='1'>Admin</Option>
-            </Select>
-          )}
+          {owner || userRole.role <= team.role
+            ? team.roleName
+            : (
+                <Select name='role' onChange={openModal} value={role}>
+                  <Option value='0'>User</Option>
+                  <Option value='1'>Admin</Option>
+                </Select>
+              )
+          }
         </td>
         <td className='options'>
           {invited && (
