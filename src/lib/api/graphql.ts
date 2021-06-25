@@ -1,11 +1,16 @@
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
 
 import {
+  SitesQueryResponse,
   SiteMutationResponse, 
   SiteMutationInput,
   SiteDeleteMutationInput,
   SiteVerifyMutationInput
 } from 'types/site';
+
+import {
+  GET_SITES_QUERY
+} from 'data/sites/queries';
 
 import { 
   CREATE_SITE_MUTATION, 
@@ -50,17 +55,18 @@ import {
   USER_PASSWORD_MUTATION
 } from 'data/users/mutations';
 
+const ACCEPT_INCOMING = <E, I>(_existing: E, incoming: I[]): I[] => [...incoming];
+
 const cache = new InMemoryCache({
   typePolicies: {
+    Query: {
+      fields: {
+        sites: { merge: ACCEPT_INCOMING }
+      },
+    },
     Site: {
       fields: {
-        // The teams coming back from the API are always the
-        // source of truth
-        team: {
-          merge(_existing, incoming) {
-            return [...incoming];
-          }
-        }
+        team: { merge: ACCEPT_INCOMING }
       }
     }
   }
@@ -90,6 +96,13 @@ export const createSite = async (name: string, url: string): Promise<SiteMutatio
       variables: { input: { name, url } },
     });
 
+    const { sites } = cache.readQuery<SitesQueryResponse>({ query: GET_SITES_QUERY });
+
+    cache.writeQuery({
+      query: GET_SITES_QUERY,
+      data: { sites: [...sites, data.siteCreate] }
+    });
+
     return { site: data.siteCreate };
   } catch(error) {
     console.error(error);
@@ -116,6 +129,13 @@ export const deleteSite = async (input: SiteDeleteMutationInput): Promise<SiteMu
     await client.mutate({
       mutation: DELETE_SITE_MUTATION,
       variables: { input }
+    });
+
+    const { sites } = cache.readQuery<SitesQueryResponse>({ query: GET_SITES_QUERY });
+
+    cache.writeQuery({
+      query: GET_SITES_QUERY,
+      data: { sites: sites.filter(site => site.id !== input.siteId) }
     });
 
     return { site: null };
