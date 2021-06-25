@@ -9,5 +9,10 @@
     display: flex;
     flex: 1;
     justify-content: center;
+    padding: 3rem 0 4rem 0;
+
+    .container {
+      padding: 0;
+    }
   }
 }

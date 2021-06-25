@@ -1,6 +1,8 @@
 .page.subscription {
   background: var(--white);
+  display: flex;
   flex: 1;
+  flex-direction: column;
 
   .title {
     align-items: center;
