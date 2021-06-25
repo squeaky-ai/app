@@ -6,14 +6,17 @@ import { useRouter } from 'next/router';
 import { Label } from 'components/label';
 import { Input } from 'components/input';
 import { Button } from 'components/button';
+import { Option, Select } from 'components/select';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { createSite } from 'lib/api/graphql';
+import { HOSTNAME_REGEX } from 'data/sites/constants';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
 const CreateSchema = Yup.object().shape({
   name: Yup.string().required('Site name is required'),
-  url: Yup.string().url('URL is not valid').required('Site URL is required')
+  hostname: Yup.string().matches(HOSTNAME_REGEX, 'URL must be a valid hostname').required('Site URL is required'),
+  protocol: Yup.string().oneOf(['http://', 'https://'], 'Please select a protocol')
 });
 
 export const CreateSite: FC<Props> = ({ children, className }) => {
@@ -28,6 +31,15 @@ export const CreateSite: FC<Props> = ({ children, className }) => {
     if (ref.current) ref.current.hide();
   };
 
+  const validateUrl = (urlString: string): boolean => {
+    try {
+      new URL(urlString);
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
   return (
     <>
       <Button className={className} onClick={openModal}>
@@ -37,11 +49,18 @@ export const CreateSite: FC<Props> = ({ children, className }) => {
       <Modal ref={ref}>
         <ModalBody aria-labelledby='create-site-title' aria-describedby='create-site-description'>
           <Formik
-            initialValues={{ name: '', url: '' }}
+            initialValues={{ name: '', protocol: 'https://', hostname: '' }}
             validationSchema={CreateSchema}
             onSubmit={(values, { setSubmitting, setErrors }) => {
               (async () => {
-                const { site, error } = await createSite(values.name, values.url);
+                const { name, protocol, hostname } = values;
+                const url = `${protocol}${hostname}`;
+
+                if (!validateUrl(url)) {
+                  return setErrors({ 'hostname': 'URL must be a valid hostname' });
+                }
+
+                const { site, error } = await createSite(name, url);
 
                 setSubmitting(false);
 
@@ -89,16 +108,22 @@ export const CreateSite: FC<Props> = ({ children, className }) => {
                   <span className='validation'>{errors.name}</span>
 
                   <Label htmlFor='url'>Site URL</Label>
-                  <Input
-                    name='url' 
-                    type='url' 
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    placeholder='e.g. www.mywebsite.com'
-                    value={values.url}
-                    invalid={touched.url && !!errors.url}
-                  />
-                  <span className='validation'>{errors.url}</span>
+                  <div className='select-input-group'>
+                    <Select name='protocol' onChange={handleChange} value={values.protocol} invalid={touched.protocol && !!errors.protocol}>
+                      <Option value='https://'>https://</Option>
+                      <Option value='http://'>http://</Option>
+                    </Select>
+                    <Input
+                      name='hostname' 
+                      type='text' 
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      placeholder='e.g. www.mywebsite.com'
+                      value={values.hostname}
+                      invalid={touched.hostname && !!errors.hostname}
+                    />
+                    <span className='validation'>{errors.hostname}</span>
+                  </div>
                 </ModalContents>
                 <ModalFooter>
                   <Button disabled={isSubmitting || !(dirty && isValid)} type='submit' className='primary'>

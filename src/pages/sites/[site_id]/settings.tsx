@@ -18,18 +18,30 @@ import { DeleteSite } from 'components/sites/delete-site';
 import { Verify } from 'components/sites/verify';
 import { TrackingCode } from 'components/sites/tracking-code';
 import { Page } from 'components/sites/page';
+import { Option, Select } from 'components/select';
 import { OWNER, ADMIN } from 'data/teams/constants';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { updateSite } from 'lib/api/graphql';
+import { HOSTNAME_REGEX } from 'data/sites/constants';
 import { useToasts } from 'hooks/toasts';
 
 const DetailsSchema = Yup.object().shape({
   name: Yup.string().required('Site name is required'),
-  url: Yup.string().required('Site URL is required')
+  hostname: Yup.string().matches(HOSTNAME_REGEX, 'URL must be a valid hostname').required('Site URL is required'),
+  protocol: Yup.string().oneOf(['http://', 'https://'], 'Please select a protocol')
 });
 
 const SitesSettings: NextPage<ServerSideProps> = ({ user }) => {
   const toast = useToasts();
+
+  const validateUrl = (urlString: string): boolean => {
+    try {
+      new URL(urlString);
+      return true;
+    } catch {
+      return false;
+    }
+  };
 
   return (
     <div className='page settings'>
@@ -52,11 +64,18 @@ const SitesSettings: NextPage<ServerSideProps> = ({ user }) => {
 
               <Drawer title='Site details'>
                 <Formik
-                  initialValues={{ name: site.name, url: site.url }}
+                  initialValues={{ name: site.name, protocol: `${site.url.split('://')[0]}://`, hostname: site.url.split('://')[1] }}
                   validationSchema={DetailsSchema}
                   onSubmit={(values, { setSubmitting, setErrors }) => {
                     (async () => {
-                      const { error } = await updateSite({ siteId: site.id, ...values });
+                      const { name, protocol, hostname } = values;
+                      const url = `${protocol}${hostname}`;
+
+                      if (!validateUrl(url)) {
+                        return setErrors({ 'hostname': 'URL must be a valid hostname' });
+                      }
+
+                      const { error } = await updateSite({ siteId: site.id, name, url });
                       setSubmitting(false);
 
                       if (error) {
@@ -92,16 +111,22 @@ const SitesSettings: NextPage<ServerSideProps> = ({ user }) => {
                         <span className='validation'>{errors.name}</span>
 
                         <Label htmlFor='url'>Site URL</Label>
-                        <Input
-                          name='url' 
-                          type='url' 
-                          onBlur={handleBlur}
-                          onChange={handleChange}
-                          placeholder='e.g. www.mywebsite.com'
-                          value={values.url}
-                          invalid={touched.url && !!errors.url}
-                        />
-                        <span className='validation'>{errors.url}</span>
+                        <div className='select-input-group'>
+                          <Select name='protocol' onChange={handleChange} value={values.protocol} invalid={touched.protocol && !!errors.protocol}>
+                            <Option value='https://'>https://</Option>
+                            <Option value='http://'>http://</Option>
+                          </Select>
+                          <Input
+                            name='hostname' 
+                            type='text' 
+                            onBlur={handleBlur}
+                            onChange={handleChange}
+                            placeholder='e.g. www.mywebsite.com'
+                            value={values.hostname}
+                            invalid={touched.hostname && !!errors.hostname}
+                          />
+                          <span className='validation'>{errors.hostname}</span>
+                        </div>
 
                         <Button type='submit' disabled={isSubmitting} className='primary'>
                           Save Changes
