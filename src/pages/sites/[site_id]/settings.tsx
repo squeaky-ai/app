@@ -110,7 +110,7 @@ const SitesSettings: NextPage<ServerSideProps> = ({ user }) => {
                         />
                         <span className='validation'>{errors.name}</span>
 
-                        <Label htmlFor='url'>Site URL</Label>
+                        <Label htmlFor='hostname'>Site URL</Label>
                         <div className='select-input-group'>
                           <Select name='protocol' onChange={handleChange} value={values.protocol} invalid={touched.protocol && !!errors.protocol}>
                             <Option value='https://'>https://</Option>
