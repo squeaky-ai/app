@@ -26,7 +26,7 @@ const AcceptSchema = Yup.object().shape({
   terms: Yup.boolean().oneOf([true], 'You must agree to the terms')
 });
 
-const Accept: NextPage<ServerSideProps> = () => {
+const Accept: NextPage<ServerSideProps> = ({ user }) => {
   const toast = useToasts();
   const router = useRouter();
   const [email, setEmail] = React.useState<string>(null);
@@ -37,31 +37,34 @@ const Accept: NextPage<ServerSideProps> = () => {
       (async () => {
         const newUser = router.query.new_user !== 'false';
 
-        // If they are already logged in then it will be confusing
-        // when they log in as a different user to their current
-        // session
-        await signout();
-
         const invitation = await userInvitation(router.query.token as string);
+
+        if (user && user.email !== invitation.email) {
+          // If they are already logged in to a different account
+          // then they need to be logged out first
+          await signout();
+        }
 
         if (invitation.hasPending) {
           // New users need to finish off creating their account
           setEmail(invitation.email);
 
           // Existing users can accept straight away and go to 
-          // the login page
+          // the login page or the site page
           if (!newUser) {
             const { error } = await teamInviteAccept({ token: router.query.token as string });
 
             if (!error) {
               toast.add({ type: 'success', body: 'Invitation accepted' });
-              await router.push('/auth/login');
-              return;
+
+              return user
+                ? await router.push('/sites')
+                : await router.push('/auth/login');
             }
           }
         }
 
-        setLoading(false);
+        return setLoading(false);
       })();
     } else {
       // They've visited the page with no token so there's nothing
@@ -111,7 +114,7 @@ const Accept: NextPage<ServerSideProps> = () => {
                     if (error) {
                       toast.add({ type: 'error', body: 'There was an error accepting the invitation' });
                     } else {
-                      toast.add({ type: 'info', body: 'Invitation accepted succesfully' });
+                      toast.add({ type: 'success', body: 'Invitation accepted succesfully' });
                       await router.push('/auth/login');
                     }
                   })();
