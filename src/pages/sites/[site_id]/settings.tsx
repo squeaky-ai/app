@@ -145,7 +145,7 @@ const SitesSettings: NextPage<ServerSideProps> = ({ user }) => {
                 aside={
                   site.verifiedAt 
                     ? <span className='verified-badge'><i className='ri-checkbox-circle-line' />Verified and active</span> 
-                    : null
+                    : <span className='unverified-badge'><i className='ri-error-warning-line' />Unverified</span> 
                 }
               >
                 <Container className='md'>

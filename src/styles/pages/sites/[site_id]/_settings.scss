@@ -61,6 +61,19 @@
     }
   }
 
+  .unverified-badge {
+    align-items: center;
+    display: flex;
+    font-style: italic;
+    margin-left: 1rem;
+
+    i {
+      color: var(--magenta-500);
+      font-size: 1.5rem;
+      margin-right: .5rem;
+    }
+  }
+
   .delete-list {
     margin-bottom: 2rem;
     padding: 0 0 0 1rem;
