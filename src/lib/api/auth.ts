@@ -116,3 +116,13 @@ export const confirmAccount = async<T>(token: string): Promise<Response<T>> => {
     return { error: error.response.data };
   }
 };
+
+export const reconfirmAccount = async<T>(email: string): Promise<Response<T>> => {
+  try {
+    const response = await axios.post('/api/auth/confirm.json', { user: { email } });
+    return { body: response.data };
+  } catch(error) {
+    console.error(error.response.status, error.response.data);
+    return { error: error.response.data };
+  }
+};

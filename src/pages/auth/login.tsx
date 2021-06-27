@@ -10,13 +10,18 @@ import { Container } from 'components/container';
 import { Card } from 'components/card';
 import { Label } from 'components/label';
 import { Input } from 'components/input';
-import { Button } from 'components/button';
+import { Button, DelayedButton } from 'components/button';
 import { Message } from 'components/message';
-import { login, confirmAccount } from 'lib/api/auth';
+import { login, confirmAccount, reconfirmAccount } from 'lib/api/auth';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useLoginAttemps, MAX_ATTEMPTS } from 'hooks/login-attempts';
 import { useToasts } from 'hooks/toasts';
 import type { User } from 'types/user';
+
+enum PageView {
+  LOGIN,
+  UNCONFIRMED
+}
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email('Please enter a valid email address').required('Email is required'),
@@ -26,9 +31,21 @@ const LoginSchema = Yup.object().shape({
 const Login: NextPage<ServerSideProps> = () => {
   const router = useRouter();
   const toasts = useToasts();
-  const [attemps, exceeded, incrAttempt, clearAttempt] = useLoginAttemps();
+  const [email, setEmail] = React.useState<string>('');
   const [failed, setFailed] = React.useState<boolean>(false);
-  const [confirmedEmail, setConfirmedEmail] = React.useState<string>('');
+  const [pageView, setPageView] = React.useState(PageView.LOGIN);
+  const [attemps, exceeded, incrAttempt, clearAttempt] = useLoginAttemps();
+
+  const resendConfirmation = async () => {
+    const { error } = await reconfirmAccount(email);
+
+    if (error) {
+      toasts.add({ type: 'error', body: 'There was an issue resending the verification email' });
+    } else {
+      toasts.add({ type: 'success', body: 'Verification email send successfully' });
+      setPageView(PageView.LOGIN);
+    }
+  };
 
   React.useEffect(() => {
     (async () => {
@@ -37,7 +54,7 @@ const Login: NextPage<ServerSideProps> = () => {
 
       const { body, error } = await confirmAccount<User>(token as string);
       if (!error) {
-        setConfirmedEmail(body.email);
+        setEmail(body.email);
         router.push({ pathname: '/auth/login', query: {} });
       } else {
         toasts.add({ type: 'error', body: 'There was an error with your sign in token' });
@@ -58,96 +75,119 @@ const Login: NextPage<ServerSideProps> = () => {
             </a>
           </Link>
 
-          <h2>Log In</h2>
+          {pageView === PageView.LOGIN && ( 
+            <>
+              <h2>Log In</h2>
 
-          {!!confirmedEmail && (
-            <Message
-              type='success'
-              message='Your email address has been verified.'
-            />
+              {!!email && (
+                <Message
+                  type='success'
+                  message='Your email address has been verified.'
+                />
+              )}
+
+              {(exceeded || failed) && (
+                <Message 
+                  type='error' 
+                  message={
+                    exceeded
+                      ? <span>You have made too many failed log in attempts. <b>Please retry in 10 minutes or contact us</b>.</span>
+                      : <span>Email and password combination not recognised. <b>{MAX_ATTEMPTS - attemps} attempts remaining</b>.</span>
+                  }
+                />
+              )}
+
+              <Formik
+                initialValues={{ email, password: '' }}
+                validationSchema={LoginSchema}
+                enableReinitialize
+                onSubmit={(values, { setSubmitting }) => {
+                  (async () => {
+                    if (exceeded) return;
+
+                    const { error } = await login(values);
+
+                    setSubmitting(false);
+
+                    if (!error) {
+                      clearAttempt();
+                      return await router.push('/sites');
+                    }
+
+                    if (/confirm your email/.test(error.error)) {
+                      setEmail(values.email);
+                      return setPageView(PageView.UNCONFIRMED);
+                    }
+                  
+                    setFailed(true);
+                    return incrAttempt();
+                  })();
+                }}
+              >
+                {({
+                  errors,
+                  handleBlur,
+                  handleChange,
+                  handleSubmit,
+                  isSubmitting,
+                  touched,
+                  values,
+                  isValid,
+                  dirty,
+                }) => (
+                  <form onSubmit={handleSubmit}>
+                    <Label htmlFor='email'>Email</Label>
+                    <Input
+                      name='email' 
+                      type='email' 
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      placeholder='e.g. jess@email.com'
+                      autoComplete='email'
+                      value={values.email}
+                      invalid={touched.email && !!errors.email}
+                    />
+                    <span className='validation'>{errors.email}</span>
+
+                    <Label htmlFor='password'>
+                      Password
+                      <Link href='/auth/reset'>
+                        <a>Forgot your password?</a>
+                      </Link>
+                    </Label>
+                    <Input
+                      name='password' 
+                      type='password' 
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      autoComplete='current-password'
+                      value={values.password}
+                      invalid={touched.password && !!errors.password}
+                    />
+                    <span className='validation'>{errors.password}</span>
+
+                    <Button type='submit' disabled={isSubmitting || !(dirty && isValid) || exceeded} className='primary'>
+                      Log in
+                    </Button>
+                  </form>
+                )}
+              </Formik>
+            </>
           )}
 
-          {(exceeded || failed) && (
-            <Message 
-              type='error' 
-              message={
-                exceeded
-                  ? <span>You have made too many failed log in attempts. <b>Please retry in 10 minutes or contact us</b>.</span>
-                  : <span>Email and password combination not recognised. <b>{MAX_ATTEMPTS - attemps} attempts remaining</b>.</span>
-              }
-            />
+          {pageView === PageView.UNCONFIRMED && (
+            <>
+              <Message
+                type='info'
+                message={<span>You have previously attempted to sign up with email address <span className='email'>{email}</span>. To resend the verification email click the button below.</span>}
+                className='reconfirm-message'
+              />
+
+              <DelayedButton delay={10} initialDelayed={false} className='primary' onClick={resendConfirmation}>
+                Resend Verfication Email
+              </DelayedButton>
+            </>
           )}
-
-          <Formik
-            initialValues={{ email: confirmedEmail, password: '' }}
-            validationSchema={LoginSchema}
-            enableReinitialize
-            onSubmit={(values, { setSubmitting }) => {
-              (async () => {
-                if (exceeded) return;
-
-                const { error } = await login(values);
-
-                setSubmitting(false);
-
-                if (error) {
-                  setFailed(true);
-                  return incrAttempt();
-                }
-
-                clearAttempt();
-                await router.push('/sites');
-              })();
-            }}
-          >
-            {({
-              errors,
-              handleBlur,
-              handleChange,
-              handleSubmit,
-              isSubmitting,
-              touched,
-              values,
-              isValid,
-              dirty,
-            }) => (
-              <form onSubmit={handleSubmit}>
-                <Label htmlFor='email'>Email</Label>
-                <Input
-                  name='email' 
-                  type='email' 
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  placeholder='e.g. jess@email.com'
-                  autoComplete='email'
-                  value={values.email}
-                  invalid={touched.email && !!errors.email}
-                />
-                <span className='validation'>{errors.email}</span>
-
-                <Label htmlFor='password'>
-                  Password
-                  <Link href='/auth/reset'>
-                    <a>Forgot your password?</a>
-                  </Link>
-                </Label>
-                <Input
-                  name='password' 
-                  type='password' 
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  autoComplete='current-password'
-                  value={values.password}
-                  invalid={touched.password && !!errors.password}
-                />
-                <span className='validation'>{errors.password}</span>
-
-                <Button type='submit' disabled={isSubmitting || !(dirty && isValid) || exceeded} className='primary'>
-                  Log in
-                </Button>
-              </form>
-            )}
-          </Formik>
         </Card>
       </Container>
 

@@ -9,13 +9,14 @@ import { Container } from 'components/container';
 import { Card } from 'components/card';
 import { Label } from 'components/label';
 import { Input } from 'components/input';
-import { Button } from 'components/button';
+import { Button, DelayedButton } from 'components/button';
 import { Checkbox } from 'components/checkbox';
 import { Message } from 'components/message';
 import { Password } from 'components/password';
 import { PASSWORD_REGEX } from 'data/users/constants';
-import { emailExists, signup } from 'lib/api/auth';
+import { emailExists, signup, reconfirmAccount } from 'lib/api/auth';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { useToasts } from 'hooks/toasts';
 
 enum PageView {
   EMAIL,
@@ -34,8 +35,17 @@ const PasswordSchema = Yup.object().shape({
 });
 
 const Signup: NextPage<ServerSideProps> = () => {
+  const toasts = useToasts();
   const [pageView, setPageView] = React.useState(PageView.EMAIL);
   const [email, setEmail] = React.useState<string>(null);
+
+  const resendConfirmation = async () => {
+    const { error } = await reconfirmAccount(email);
+
+    error
+      ? toasts.add({ type: 'error', body: 'There was an issue resending the verification email' })
+      : toasts.add({ type: 'success', body: 'Verification email send successfully' });
+  };
 
   return (
     <div className='page signup'>
@@ -178,9 +188,9 @@ const Signup: NextPage<ServerSideProps> = () => {
               </div>
               <h4>Sign Up Complete</h4>
               <p>To log in to your account, please open the verification email sent to <b>{email}</b> and click the link provided.</p>
-              <Button className='secondary' onClick={() => console.log('TODO')}>
+              <DelayedButton delay={10} className='secondary' onClick={resendConfirmation}>
                 Resend Verification Email
-              </Button>
+              </DelayedButton>
             </div>
           )}
         </Card>

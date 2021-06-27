@@ -28,6 +28,14 @@
     .button {
       width: 100%;
     }
+
+    .reconfirm-message {
+      margin-bottom: 3rem;
+
+      .email {
+        color: var(--blue-500);
+      }
+    }
   }
 
   .footer-link {

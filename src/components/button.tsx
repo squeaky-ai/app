@@ -4,19 +4,24 @@ import classnames from 'classnames';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
+interface DelayedProps {
+  delay: number;
+  initialDelayed?: boolean;
+}
+
 export const Button: FC<Props> = ({ children, className, ...rest }) => (
   <button className={classnames('button', className)} {...rest}>
     {children}
   </button>
 );
 
-export const DelayedButton: FC<Props & { delay: number }> = ({ children, onClick, ...rest }) => {
-  const [disabled, setDisabled] = React.useState<boolean>(true);
+export const DelayedButton: FC<Props & DelayedProps> = ({ children, onClick, delay, initialDelayed, ...rest }) => {
+  const [disabled, setDisabled] = React.useState<boolean>(initialDelayed ?? true);
 
   React.useEffect(() => {
     setTimeout(() => {
       disabled && setDisabled(false);
-    }, 10000);
+    }, delay);
   }, []);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
