@@ -188,7 +188,7 @@ const Signup: NextPage<ServerSideProps> = () => {
               </div>
               <h4>Sign Up Complete</h4>
               <p>To log in to your account, please open the verification email sent to <b>{email}</b> and click the link provided.</p>
-              <DelayedButton delay={10} className='secondary' onClick={resendConfirmation}>
+              <DelayedButton delay={10} initialDelayed={false} className='secondary' onClick={resendConfirmation}>
                 Resend Verification Email
               </DelayedButton>
             </div>
