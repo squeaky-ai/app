@@ -75,6 +75,10 @@ const SitesSettings: NextPage<ServerSideProps> = ({ user }) => {
                         return setErrors({ 'hostname': 'URL must be a valid hostname' });
                       }
 
+                      if (url !== site.url) {
+                        toast.add({ type: 'error', body: 'Please note, your tracking code will need to be updated as you’ve changed your URL.' });
+                      }
+
                       const { error } = await updateSite({ siteId: site.id, name, url });
                       setSubmitting(false);
 

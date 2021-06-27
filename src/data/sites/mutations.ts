@@ -16,6 +16,7 @@ export const UPDATE_SITE_MUTATION = gql`
       id
       name
       url
+      verifiedAt
       checklistDismissedAt
     }
   }
