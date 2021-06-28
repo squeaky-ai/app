@@ -10,6 +10,7 @@ import { Input } from 'components/input';
 import { Pagination } from 'components/pagination';
 import { Container } from 'components/container';
 import { Tooltip } from 'components/tooltip';
+import { Highlighter } from 'components/highlighter';
 import { useRecordings } from 'hooks/recordings';
 
 export const Recordings: FC = () => {
@@ -94,11 +95,11 @@ export const Recordings: FC = () => {
                 onClick={() => viewRecording(recording.id)} 
                 tabIndex={0}
               >
-                <td><span className={classnames('indicator', { active: recording.active })} /> {recording.id}</td>
-                <td>{recording.viewerId}</td>
-                <td>{recording.dateString}</td>
-                <td>{recording.durationString}</td>
-                <td>{recording.language}</td>
+                <td><span className={classnames('indicator', { active: recording.active })} /><Highlighter value={query}>{recording.id}</Highlighter></td>
+                <td><Highlighter value={query}>{recording.viewerId}</Highlighter></td>
+                <td><Highlighter value={query}>{recording.dateString}</Highlighter></td>
+                <td><Highlighter value={query}>{recording.durationString}</Highlighter></td>
+                <td><Highlighter value={query}>{recording.language}</Highlighter></td>
                 <td>
                   <Tooltip button={recording.pageCount} buttonClassName='link'>
                     <ul className='tooltip-list'>
@@ -113,20 +114,20 @@ export const Recordings: FC = () => {
                     <tbody>
                       <tr>
                         <td>START URL</td>
-                        <td>{recording.startPage}</td>
+                        <td><Highlighter value={query}>{recording.startPage}</Highlighter></td>
                       </tr>
                       <tr>
                         <td>EXIT URL</td>
-                        <td>{recording.exitPage}</td>
+                        <td><Highlighter value={query}>{recording.exitPage}</Highlighter></td>
                       </tr>
                     </tbody>
                   </table>
                 </td>
                 <td>
                   <i className={classnames('device', deviceIcon(recording.deviceType))} />
-                  {recording.deviceType}
+                  <Highlighter value={query}>{recording.deviceType}</Highlighter>
                 </td>
-                <td>{recording.viewportX} x {recording.viewportY}</td>
+                <td><Highlighter value={query}>{recording.viewportX}</Highlighter> x <Highlighter value={query}>{recording.viewportY}</Highlighter></td>
                 <td>
                   <Tooltip positionX='right' button={<Image src={`/browsers/${browserIcon(recording.browser)}.svg`} height={24} width={24} alt={`Icon for the ${recording.browser} browser`} />}>
                     {recording.browserString}
