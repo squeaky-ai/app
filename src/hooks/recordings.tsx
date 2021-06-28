@@ -12,7 +12,7 @@ interface Props {
 export const useRecordings = ({ page, query }: Props): [boolean, PaginatedRecordingsResponse] => {
   const router = useRouter();
 
-  const { data, loading } = useQuery<{ site: Site }>(GET_RECORDINGS_QUERY, {
+  const { data, loading, previousData } = useQuery<{ site: Site }>(GET_RECORDINGS_QUERY, {
     variables: { 
       id: router.query.site_id as string, 
       page, 
@@ -21,9 +21,16 @@ export const useRecordings = ({ page, query }: Props): [boolean, PaginatedRecord
     }
   });
 
-  const results = data 
+  // When every keypress is made, the state will turn to loading
+  // which means that we'd default to an empty items list. This
+  // causes the UI to flicker. Instead, we return the last set of
+  // results whenever it's loading and only update when the new
+  // results are in
+  const results = data
     ? data.site.recordings
-    : { items: [], pagination: { pageSize: 0, pageCount: 0 } };
+    : previousData
+      ? previousData.site.recordings
+      : { items: [], pagination: { pageSize: 0, pageCount: 0 } };
 
   return [loading, results];
 };
