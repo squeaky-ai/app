@@ -24,6 +24,14 @@
     }
   }
 
+  &.warning {
+    border-color: var(--orange-500);
+
+    i {
+      color: var(--orange-500);
+    }
+  }
+
   &.success {
     border-color: var(--green-500);
 

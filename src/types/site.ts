@@ -15,6 +15,7 @@ export interface Site {
   recordings?: PaginatedRecordingsResponse;
   verifiedAt?: string;
   checklistDismissedAt?: string;
+  daysSinceLastRecording?: number;
   createdAt: string;
   updatedAt: string;
 }
