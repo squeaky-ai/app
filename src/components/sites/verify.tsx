@@ -20,10 +20,10 @@ export const Verify: FC<Props> = ({ site }) => {
 
     const response = await verifySite({ siteId: site.id });
 
-    if (!response.site.verifiedAt) {
+    if (!response.site?.verifiedAt) {
       setFailed(true);
     } else {
-      toast.add({ type: 'success', body: 'Your website has been succesfully verified.' });
+      toast.add({ type: 'success', body: 'Your tracking code is verified and active.' });
     }
 
     setLoading(false);
@@ -39,7 +39,10 @@ export const Verify: FC<Props> = ({ site }) => {
       )}
 
       <Button className='primary' onClick={siteVerify}>
-        {loading ? 'Verifying ...' : 'Verify Installation'}
+        {loading 
+          ? 'Verifying ...' 
+          : site.verifiedAt ? 'Check Installation' : 'Verify Installation'
+        }
       </Button>
     </>
   );

@@ -145,7 +145,7 @@ const SitesSettings: NextPage<ServerSideProps> = ({ user }) => {
                 aside={
                   site.verifiedAt 
                     ? <span className='verified-badge'><i className='ri-checkbox-circle-line' />Verified and active</span> 
-                    : <span className='unverified-badge'><i className='ri-error-warning-line' />Unverified</span> 
+                    : <span className='unverified-badge'><i className='ri-error-warning-line' />Inactive</span> 
                 }
               >
                 <Container className='md'>
@@ -167,9 +167,7 @@ const SitesSettings: NextPage<ServerSideProps> = ({ user }) => {
 
                   <TrackingCode site={site} />
 
-                  {!site.verifiedAt && (
-                    <Verify site={site} />
-                  )}
+                  <Verify site={site} />
                 </Container>
               </Drawer>
               {member.role === OWNER && (
