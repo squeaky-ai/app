@@ -1,12 +1,13 @@
 import React from 'react';
 import type { FC } from 'react';
+import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 
 interface Props extends React.HTMLAttributes<HTMLSpanElement> {
   value: string;
 }
 
 export const Highlighter: FC<Props> = ({ value, children }) => {
-  if (value === '' || value.length < 3) {
+  if (value === '' || value.length < MIN_SEARCH_CHARS) {
     return <>{children}</>;
   }
 

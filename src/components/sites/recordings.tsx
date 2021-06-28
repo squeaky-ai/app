@@ -12,6 +12,7 @@ import { Container } from 'components/container';
 import { Tooltip } from 'components/tooltip';
 import { Highlighter } from 'components/highlighter';
 import { useRecordings } from 'hooks/recordings';
+import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 
 export const Recordings: FC = () => {
   const router = useRouter();
@@ -19,7 +20,12 @@ export const Recordings: FC = () => {
   const [page, setPage] = React.useState<number>(0);
   const [query, setQuery] = React.useState<string>('');
 
-  const [loading, recordings] = useRecordings({ page, query });
+  const [loading, recordings] = useRecordings({ 
+    page, 
+    // No point in searching if it's below this value
+    query: query.length < MIN_SEARCH_CHARS ? '' : query 
+  });
+
   const hasRecordings = recordings.items.length > 0;
 
   const handleSearch = debounce((event: React.KeyboardEvent<HTMLInputElement>) => {
