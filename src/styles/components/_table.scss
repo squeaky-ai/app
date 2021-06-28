@@ -1,24 +1,25 @@
 .table {
-  border-radius: var(--border-radius-md);
-  overflow: hidden;
-
   table {
+    border-collapse: separate;
+    border-spacing: 0;
     width: 100%;
 
     thead {
-      background: var(--gray-100);
       border-bottom: 2px solid var(--gray-150);
       
       th {
+        background: var(--gray-100);
         font-weight: var(--font-weight-normal);
         padding: .75rem 0;
         text-align: left;
 
         &:first-of-type {
+          border-top-left-radius: var(--border-radius-md);
           padding-left: 1.5rem;
         }
 
         &:last-of-type {
+          border-top-right-radius: var(--border-radius-md);
           padding-right: 1.5rem;
         }
       }
@@ -27,7 +28,7 @@
     tbody {
       td {
         border-top: 2px solid var(--gray-150);
-        padding: .5rem 0;
+        padding: .75rem 0;
 
         &:first-of-type {
           padding-left: 1.5rem;

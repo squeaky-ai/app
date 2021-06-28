@@ -6,14 +6,18 @@ export interface Recording {
   language: string;
   viewerId: string;
   duration: number;
+  durationString: string;
+  pages: string[];
   pageCount: number;
   startPage: string;
   exitPage: string;
   deviceType?: string;
   browser?: string;
+  browserString?: string;
   viewportX: number;
   viewportY: number;
   events?: PaginatedEventsResponse;
+  dateString: string;
 }
 
 export interface PaginatedRecordingsResponse {

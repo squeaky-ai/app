@@ -9,7 +9,7 @@ import { Button } from 'components/button';
 import { Input } from 'components/input';
 import { Pagination } from 'components/pagination';
 import { Container } from 'components/container';
-import { getDeviceIcon, getDuration } from 'lib/sites';
+import { Tooltip } from 'components/tooltip';
 import { useRecordings } from 'hooks/recordings';
 
 export const Recordings: FC = () => {
@@ -37,6 +37,12 @@ export const Recordings: FC = () => {
   const viewRecording = async (id: string) => {
     await router.push(`/sites/${router.query.site_id}/player?recording_id=${id}`);
   };
+
+  const deviceIcon = (deviceType: string) => deviceType === 'Computer'
+    ? 'ri-computer-line' 
+    : 'ri-mobile-line';
+
+  const browserIcon = (browser: string) => browser.toLowerCase().replace(' ', '-');
 
   return (
     <Main className={classnames('recordings', { empty: !hasRecordings })}>
@@ -66,11 +72,11 @@ export const Recordings: FC = () => {
         <table cellSpacing='0'>
           <thead>
             <tr>
-              <th>Status</th>
               <th>Session #</th>
               <th>User</th>
-              <th>Language</th>
+              <th>Date</th>
               <th>Duration</th>
+              <th>Language</th>
               <th>Pages</th>
               <th>Start &amp; Exit URL</th>
               <th>Device type</th>
@@ -88,15 +94,20 @@ export const Recordings: FC = () => {
                 onClick={() => viewRecording(recording.id)} 
                 tabIndex={0}
               >
-                <td>
-                  <span className={classnames('indicator', { active: recording.active })} />
-                  {recording.active ? 'Active' : 'Recorded'}
-                </td>
-                <td>{recording.id}</td>
+                <td><span className={classnames('indicator', { active: recording.active })} /> {recording.id}</td>
                 <td>{recording.viewerId}</td>
+                <td>{recording.dateString}</td>
+                <td>{recording.durationString}</td>
                 <td>{recording.language}</td>
-                <td>{getDuration(recording.duration)}</td>
-                <td><a href='#'>{recording.pageCount}</a></td>
+                <td>
+                  <Tooltip button={recording.pageCount} buttonClassName='link'>
+                    <ul className='tooltip-list'>
+                      {recording.pages.map(page => (
+                        <li key={page}>{page}</li>
+                      ))}
+                    </ul>
+                  </Tooltip>
+                </td>
                 <td>
                   <table className='start-exit-page'>
                     <tbody>
@@ -112,12 +123,14 @@ export const Recordings: FC = () => {
                   </table>
                 </td>
                 <td>
-                  <i className={classnames('device', getDeviceIcon(recording.deviceType))} />
+                  <i className={classnames('device', deviceIcon(recording.deviceType))} />
                   {recording.deviceType}
                 </td>
                 <td>{recording.viewportX} x {recording.viewportY}</td>
                 <td>
-                  <Image src={`/browsers/${recording.browser.toLowerCase()}.svg`} height={24} width={24} alt={`Icon for the ${recording.browser} browser`} />
+                  <Tooltip positionX='right' button={<Image src={`/browsers/${browserIcon(recording.browser)}.svg`} height={24} width={24} alt={`Icon for the ${recording.browser} browser`} />}>
+                    {recording.browserString}
+                  </Tooltip>
                 </td>
               </tr>
             ))}

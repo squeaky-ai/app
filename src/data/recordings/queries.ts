@@ -11,14 +11,18 @@ export const GET_RECORDINGS_QUERY = gql`
           active
           language
           duration
+          durationString
           startPage
           exitPage
+          pages
           pageCount
           deviceType
           browser
+          browserString
           viewportX
           viewportY
           viewerId
+          dateString
         }
         pagination {
           pageSize
