@@ -47,7 +47,7 @@ export const Recordings: FC = () => {
 
   const deviceIcon = (deviceType: string) => deviceType === 'Computer'
     ? 'ri-computer-line' 
-    : 'ri-mobile-line';
+    : 'ri-smartphone-line';
 
   const browserIcon = (browser: string) => browser.toLowerCase().replace(' ', '-');
 
