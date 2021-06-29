@@ -32,3 +32,53 @@ export const GET_RECORDINGS_QUERY = gql`
     }
   }
 `;
+
+export const GET_RECORDING_QUERY = gql`
+  query GetRecording($site_id: ID!, $recording_id: ID!, $cursor: String) { 
+    site(id: $site_id) {
+      id
+      name
+      recording(id: $recording_id) {
+        id
+        active
+        events(first: 10, cursor: $cursor) {
+          items {
+            ... on PageView {
+              type
+              locale
+              useragent 
+              path
+              time
+              timestamp
+            }
+            ... on Scroll {
+              type
+              x
+              y
+              time
+              timestamp
+            }
+            ... on Cursor {
+              type
+              x
+              y
+              time
+              timestamp
+            }
+            ... on Interaction {
+              type
+              selector
+              time
+              timestamp
+            }
+          }
+          pagination {
+            cursor
+            isLast
+            pageSize
+          }
+        }
+      }
+    }
+  }
+`;

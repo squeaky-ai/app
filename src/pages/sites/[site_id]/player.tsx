@@ -8,10 +8,14 @@ import { Player } from 'components/sites/player';
 import { Controls } from 'components/sites/controls';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useSite } from 'hooks/sites';
+import { useRecording } from 'hooks/recording';
 
 const SitesPlayer: NextPage<ServerSideProps> = () => {
   const router = useRouter();
-  const [_loading, site] = useSite();
+  const [_siteLoading, site] = useSite();
+  const [_recordingLoading, recording] = useRecording({ cursor: '' });
+
+  console.log(recording);
 
   return (
     <div className='page player'>
