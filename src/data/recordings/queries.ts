@@ -44,6 +44,13 @@ export const GET_RECORDING_QUERY = gql`
         active
         events(first: 10, cursor: $cursor) {
           items {
+            ... on Snapshot {
+              type
+              event
+              snapshot
+              time
+              timestamp
+            }
             ... on PageView {
               type
               locale
