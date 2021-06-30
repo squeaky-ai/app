@@ -7,9 +7,10 @@ import type { PaginatedRecordingsResponse } from 'types/recording';
 interface Props {
   page: number;
   query?: string;
+  sort?: 'ASC' | 'DESC';
 }
 
-export const useRecordings = ({ page, query }: Props): [boolean, PaginatedRecordingsResponse] => {
+export const useRecordings = ({ page, query, sort }: Props): [boolean, PaginatedRecordingsResponse] => {
   const router = useRouter();
 
   const { data, loading, previousData } = useQuery<{ site: Site }>(GET_RECORDINGS_QUERY, {
@@ -17,9 +18,19 @@ export const useRecordings = ({ page, query }: Props): [boolean, PaginatedRecord
       id: router.query.site_id as string, 
       page, 
       size: 15,
-      query
+      query,
+      sort
     }
   });
+
+  const fallback: PaginatedRecordingsResponse = { 
+    items: [], 
+    pagination: { 
+      pageSize: 0, 
+      pageCount: 0, 
+      sort: 'DESC' 
+    } 
+  };
 
   // When every keypress is made, the state will turn to loading
   // which means that we'd default to an empty items list. This
@@ -28,9 +39,7 @@ export const useRecordings = ({ page, query }: Props): [boolean, PaginatedRecord
   // results are in
   const results = data
     ? data.site.recordings
-    : previousData
-      ? previousData.site.recordings
-      : { items: [], pagination: { pageSize: 0, pageCount: 0 } };
+    : previousData ? previousData.site.recordings : fallback;
 
   return [loading, results];
 };

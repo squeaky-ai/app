@@ -28,4 +28,5 @@ export interface PaginatedRecordingsResponse {
 export interface RecordingPagination {
   pageSize: number;
   pageCount: number;
+  sort: 'ASC' | 'DESC';
 }

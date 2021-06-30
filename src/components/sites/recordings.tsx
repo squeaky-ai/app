@@ -19,11 +19,14 @@ export const Recordings: FC = () => {
 
   const [page, setPage] = React.useState<number>(0);
   const [query, setQuery] = React.useState<string>('');
+  const [sort, setSort] = React.useState<'ASC' | 'DESC'>('DESC');
+
+  setSort;
 
   const [loading, recordings] = useRecordings({ 
     page, 
-    // No point in searching if it's below this value
-    query: query.length < MIN_SEARCH_CHARS ? '' : query 
+    sort,
+    query: query.length < MIN_SEARCH_CHARS ? '' : query, // No point in searching if it's below this value
   });
 
   const hasRecordings = recordings.items.length > 0;

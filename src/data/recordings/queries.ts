@@ -1,11 +1,11 @@
 import { gql } from '@apollo/client';
 
 export const GET_RECORDINGS_QUERY = gql`
-  query GetRecordings($id: ID!, $page: Int, $size: Int, $query: String) {
+  query GetRecordings($id: ID!, $page: Int, $size: Int, $query: String, $sort: Sort) {
     site(id: $id) {
       id
       name
-      recordings(page: $page, size: $size, query: $query) {
+      recordings(page: $page, size: $size, query: $query, sort: $sort) {
         items {
           id
           active
@@ -27,6 +27,7 @@ export const GET_RECORDINGS_QUERY = gql`
         pagination {
           pageSize
           pageCount
+          sort
         }
       }
     }
