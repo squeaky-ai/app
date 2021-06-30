@@ -11,7 +11,7 @@ interface Props extends React.HTMLAttributes<HTMLUListElement> {
 }
 
 export const Pagination: FC<Props> = ({ className, page, pageCount, setPage }) => {
-  if (pageCount === 0) return null;
+  if (pageCount < 2) return null;
 
   return (
     <ul className={classnames('pagination', className)}>

@@ -1,0 +1,31 @@
+.sort {
+  display: inline-flex;
+  flex-direction: column;
+  vertical-align: middle;
+
+  .button {
+    background: none;
+    border: none;
+    height: .75rem;
+    margin: 0;
+    padding: 0;
+
+    i {
+      display: block;
+      font-size: 1.25rem;
+      line-height: .65rem;
+    }
+  }
+
+  &.desc {
+    .button:last-of-type {
+      color: var(--gray-200);
+    }
+  }
+
+  &.asc {
+    .button:first-of-type {
+      color: var(--gray-200);
+    }
+  }
+}

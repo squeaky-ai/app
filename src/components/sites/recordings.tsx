@@ -11,6 +11,7 @@ import { Pagination } from 'components/pagination';
 import { Container } from 'components/container';
 import { Tooltip } from 'components/tooltip';
 import { Highlighter } from 'components/highlighter';
+import { Sort } from 'components/sort';
 import { useRecordings } from 'hooks/recordings';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 
@@ -20,8 +21,6 @@ export const Recordings: FC = () => {
   const [page, setPage] = React.useState<number>(0);
   const [query, setQuery] = React.useState<string>('');
   const [sort, setSort] = React.useState<'ASC' | 'DESC'>('DESC');
-
-  setSort;
 
   const [loading, recordings] = useRecordings({ 
     page, 
@@ -84,7 +83,7 @@ export const Recordings: FC = () => {
             <tr>
               <th>Session #</th>
               <th>User</th>
-              <th>Date</th>
+              <th>Date <Sort order={sort} onAsc={() => setSort('ASC')} onDesc={() => setSort('DESC')} /></th>
               <th>Duration</th>
               <th>Language</th>
               <th>Pages</th>
