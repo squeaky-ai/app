@@ -45,6 +45,7 @@ export const GET_RECORDING_QUERY = gql`
         dateString
         language
         durationString
+        pages
         pageCount
         startPage
         exitPage

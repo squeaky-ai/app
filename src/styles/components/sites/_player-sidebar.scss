@@ -18,6 +18,7 @@
     display: none;
     flex-direction: column;
     height: 100%;
+    overflow-y: auto;
 
     &.active {
       display: flex;
@@ -82,6 +83,28 @@
         color: var(--blue-500);
         font-size: 16px;
         margin-right: .5rem;
+      }
+    }
+  }
+
+  .datarow {
+    font-size: 13px;
+    line-height: 16px;
+    margin: 0;
+    padding: 0;
+
+    li {
+      border-top: 2px solid var(--gray-100);
+      list-style: none;
+      padding: 1rem;
+
+      &:last-of-type {
+        border-bottom: 2px solid var(--gray-100);
+      }
+
+      &:hover {
+        background: var(--gray-100);
+        border-radius: var(--border-radius-md);
       }
     }
   }

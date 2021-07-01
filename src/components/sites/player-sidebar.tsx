@@ -106,7 +106,13 @@ export const PlayerSidebar: FC<Props> = ({ recording, active, setActive }) => {
           <Button onClick={handleClose}><i className='ri-close-line' /></Button>
         </Label>
         <div className='contents'>
-          
+          <ul className='datarow'>
+            {recording.events.items.map(item => (
+              <li key={item.timestamp}>
+                {item.type}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
       <div className={classnames('sidebar pages', { active: active === PlayerTab.PAGES })}>
@@ -115,7 +121,11 @@ export const PlayerSidebar: FC<Props> = ({ recording, active, setActive }) => {
           <Button onClick={handleClose}><i className='ri-close-line' /></Button>
         </Label>
         <div className='contents'>
-          
+          <ul className='datarow'>
+            {recording.pages.map(page => (
+              <li key={page}>{page}</li>
+            ))}
+          </ul>
         </div>
       </div>
     </aside>
