@@ -41,6 +41,17 @@ export const GET_RECORDING_QUERY = gql`
       name
       recording(id: $recording_id) {
         id
+        viewerId
+        dateString
+        language
+        durationString
+        pageCount
+        startPage
+        exitPage
+        deviceType
+        viewportX
+        viewportY
+        browser
         active
         events(first: 50, cursor: $cursor) {
           items {

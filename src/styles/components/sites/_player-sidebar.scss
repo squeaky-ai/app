@@ -26,7 +26,9 @@
     .heading {
       align-items: center;
       display: flex;
+      flex-shrink: 0;
       justify-content: space-between;
+      margin: 0;
       padding: 1.5rem;
 
       .button {
@@ -52,6 +54,35 @@
       flex: 1;
       margin-bottom: 80px;
       padding: 1.5rem;
+    }
+  }
+
+  .datalist {
+    font-size: 13px;
+    line-height: 16px;
+
+    .row {
+      border-bottom: 2px solid var(--gray-100);
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 0;
+    }
+
+    dt {
+      padding-left: 1rem;
+    }
+
+    dd {
+      align-items: center;
+      color: var(--gray-500);
+      display: flex;
+      padding-right: 1rem;
+
+      i, .browser {
+        color: var(--blue-500);
+        font-size: 16px;
+        margin-right: .5rem;
+      }
     }
   }
 }

@@ -4,8 +4,13 @@ import { Button } from 'components/button';
 import { PlayerTabs } from 'components/sites/player-tabs';
 import { PlayerSidebar } from 'components/sites/player-sidebar';
 import { PlayerTab } from 'data/sites/enums';
+import type { Recording } from 'types/recording';
 
-export const Controls: FC = () => {
+interface Props {
+  recording: Recording;
+}
+
+export const Controls: FC<Props> = ({ recording }) => {
   const [active, setActive] = React.useState<PlayerTab>(null);
 
   return (
@@ -28,7 +33,7 @@ export const Controls: FC = () => {
         </div>
       </footer>
 
-      <PlayerSidebar active={active} setActive={setActive} />
+      <PlayerSidebar recording={recording} active={active} setActive={setActive} />
     </>
   );
 };

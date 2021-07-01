@@ -43,7 +43,7 @@ export interface SnapshotEvent {
 }
 
 export interface PaginatedEventsResponse {
-  items: Event[];
+  items: EventWithTimestamps[];
   pagination: EventPagination;
 }
 
