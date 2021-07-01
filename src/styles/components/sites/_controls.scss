@@ -4,15 +4,17 @@
   display: flex;
   height: 80px;
   justify-content: space-between;
-  padding: 0 1.5rem;
+  padding: 0 1.75rem;
 
   .control-group {
     align-items: center;
     display: flex;
+    position: relative;
+    z-index: 3;
 
     &:first-of-type,
     &:last-of-type {
-      width: 216px;
+      width: 236px;
     }
 
     .control {
@@ -24,8 +26,9 @@
       height: 2.5rem;
       justify-content: center;
       flex-shrink: 0;
-      margin-right: .25rem;
+      margin-right: .55rem;
       padding: 0;
+      position: relative;
       width: 2.5rem;
 
       i {
@@ -43,6 +46,27 @@
 
       &:last-of-type {
         margin-right: 0;
+      }
+
+      &::before {
+        background: var(--blue-500);
+        content: ' ';
+        display: none;
+        height: 3px;
+        left: 0;
+        position: absolute;
+        top: -22px;
+        width: 100%;
+      }
+
+      &.active {
+        i {
+          color: var(--blue-500);
+        }
+
+        &::before {
+          display: block;
+        }
       }
     }
 

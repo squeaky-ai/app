@@ -1,4 +1,4 @@
-export type Event = PageViewEvent | CursorEvent | ScrollEvent | InteractionEvent;
+export type Event = PageViewEvent | CursorEvent | ScrollEvent | InteractionEvent | SnapshotEvent;
 
 export type InteractionEventType = 'click' | 'hover' | 'focus' | 'blur';
 
@@ -36,6 +36,12 @@ export interface InteractionEvent {
   timestamp: number;
 }
 
+export interface SnapshotEvent {
+  type: 'snapshot';
+  event: 'initialize' | 'apply_changed';
+  snapshot: string;
+}
+
 export interface PaginatedEventsResponse {
   items: Event[];
   pagination: EventPagination;
@@ -45,4 +51,9 @@ export interface EventPagination {
   cursor?: string;
   isLast: boolean;
   pageSize: number;
+}
+
+export type EventWithTimestamps = Event & {
+  time: number;
+  timestamp: number;
 }

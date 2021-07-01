@@ -42,7 +42,7 @@ export const GET_RECORDING_QUERY = gql`
       recording(id: $recording_id) {
         id
         active
-        events(first: 10, cursor: $cursor) {
+        events(first: 50, cursor: $cursor) {
           items {
             ... on Snapshot {
               type

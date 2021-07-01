@@ -1,21 +1,24 @@
 import React from 'react';
+import dynamic from 'next/dynamic';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Header } from 'components/sites/header';
-import { Player } from 'components/sites/player';
 import { Controls } from 'components/sites/controls';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useSite } from 'hooks/sites';
 import { useRecording } from 'hooks/recording';
 
+const Player = dynamic(
+  () => import('components/sites/player'),
+  { ssr: false }
+);
+
 const SitesPlayer: NextPage<ServerSideProps> = () => {
   const router = useRouter();
   const [_siteLoading, site] = useSite();
   const [_recordingLoading, recording] = useRecording({ cursor: '' });
-
-  console.log(recording);
 
   return (
     <div className='page player'>
@@ -38,8 +41,10 @@ const SitesPlayer: NextPage<ServerSideProps> = () => {
           </div>
         )}
       </Header>
-
-      <Player />
+      
+      {recording && (
+        <Player site={site} events={recording.events.items} />
+      )}
 
       <Controls />
     </div>

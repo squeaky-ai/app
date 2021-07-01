@@ -1231,6 +1231,11 @@ ms@2.0.0:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
   integrity sha1-VgiurfwAvmwpAd9fmGF4jeDVl8g=
 
+mutation-summary@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/mutation-summary/-/mutation-summary-1.0.0.tgz#488078e8f39becc29450438b24644a3bf81ef7bc"
+  integrity sha512-6+uYx4BJ9OtHsfQ3NRrcV8xXNZHf2yMU1CYJuM4rTpDA8xt+6SXUbSX4I4zo+5UOXTW4sLMyPG/C0VS35rHK/w==
+
 nanoclone@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/nanoclone/-/nanoclone-0.2.1.tgz#dd4090f8f1a110d26bb32c49ed2f5b9235209ed4"
