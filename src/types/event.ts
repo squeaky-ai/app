@@ -44,8 +44,7 @@ interface VisibilityEvent {
 
 export interface EventPagination {
   cursor?: string;
-  isLast: boolean;
-  pageSize: number;
+  hasNext: boolean;
 }
 
 export type Event = 
@@ -59,8 +58,3 @@ export type Event =
 export type InteractionEventType = 'click' | 'hover' | 'focus' | 'blur';
 
 export type EventWithTimestamps = Event & { time: number; timestamp: number; }
-
-export interface PaginatedEventsResponse {
-  items: EventWithTimestamps[];
-  pagination: EventPagination;
-}

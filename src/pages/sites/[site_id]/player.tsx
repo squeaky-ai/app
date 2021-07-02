@@ -18,7 +18,7 @@ const Player = dynamic(
 const SitesPlayer: NextPage<ServerSideProps> = () => {
   const router = useRouter();
   const [_siteLoading, site] = useSite();
-  const [_recordingLoading, recording] = useRecording({ cursor: '' });
+  const [_recordingLoading, recording] = useRecording();
 
   return (
     <div className='page player'>
@@ -43,7 +43,7 @@ const SitesPlayer: NextPage<ServerSideProps> = () => {
       </Header>
       
       {site && recording && (
-        <Player site={site} events={recording.events.items} />
+        <Player site={site} events={recording.events} />
       )}
 
       {site && recording && (

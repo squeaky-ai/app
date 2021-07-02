@@ -9,8 +9,7 @@ interface Props {
 export const SidebarActivity: FC<Props> = ({ recording }) => {
   const activity = recording
     .events
-    .items
-    .filter(item => !['snapshot', 'cursor', 'scroll', 'blur', 'focus'].includes(item.type))
+    .filter(item => !['snapshot', 'cursor'].includes(item.type))
     .sort((a, b) => a.time - b.time);
 
   const timeString = (ms: number) => {
@@ -56,9 +55,9 @@ export const SidebarActivity: FC<Props> = ({ recording }) => {
             <>
               <i className='ri-cursor-line' />
               <p className='title'>
-                Clicked <span>{item.time}</span>
+                Clicked <span>{timeString(item.time)}</span>
               </p>
-              <p className='info'>{timeString(item.time)}</p>
+              <p className='info'>{item.selector}</p>
             </>
           )}
         </li>

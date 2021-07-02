@@ -1,4 +1,4 @@
-import type { PaginatedEventsResponse } from 'types/event';
+import { EventWithTimestamps } from 'types/event';
 
 export interface Recording {
   id: string;
@@ -16,7 +16,7 @@ export interface Recording {
   browserString?: string;
   viewportX: number;
   viewportY: number;
-  events?: PaginatedEventsResponse;
+  events?: EventWithTimestamps[];
   dateString: string;
 }
 

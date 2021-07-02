@@ -35,7 +35,7 @@ export const GET_RECORDINGS_QUERY = gql`
 `;
 
 export const GET_RECORDING_QUERY = gql`
-  query GetRecording($site_id: ID!, $recording_id: ID!, $cursor: String) { 
+  query GetRecording($site_id: ID!, $recording_id: ID!) { 
     site(id: $site_id) {
       id
       name
@@ -54,53 +54,52 @@ export const GET_RECORDING_QUERY = gql`
         viewportY
         browser
         active
-        events(first: 100, cursor: $cursor) {
-          items {
-            ... on Snapshot {
-              eventId
-              type
-              event
-              snapshot
-              time
-              timestamp
-            }
-            ... on PageView {
-              eventId
-              type
-              locale
-              useragent 
-              path
-              time
-              timestamp
-            }
-            ... on Scroll {
-              eventId
-              type
-              x
-              y
-              time
-              timestamp
-            }
-            ... on Cursor {
-              eventId
-              type
-              x
-              y
-              time
-              timestamp
-            }
-            ... on Interaction {
-              eventId
-              type
-              selector
-              time
-              timestamp
-            }
+        events {
+          ... on Snapshot {
+            eventId
+            type
+            event
+            snapshot
+            time
+            timestamp
           }
-          pagination {
-            cursor
-            isLast
-            pageSize
+          ... on PageView {
+            eventId
+            type
+            locale
+            useragent 
+            path
+            time
+            timestamp
+          }
+          ... on Scroll {
+            eventId
+            type
+            x
+            y
+            time
+            timestamp
+          }
+          ... on Cursor {
+            eventId
+            type
+            x
+            y
+            time
+            timestamp
+          }
+          ... on Interaction {
+            eventId
+            type
+            selector
+            time
+            timestamp
+          }
+          ... on Visibility {
+            eventId
+            visible
+            time
+            timestamp
           }
         }
       }
