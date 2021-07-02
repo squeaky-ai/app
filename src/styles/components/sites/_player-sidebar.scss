@@ -96,7 +96,10 @@
     li {
       border-top: 2px solid var(--gray-100);
       list-style: none;
+      overflow: hidden;
       padding: 1rem;
+      text-overflow: ellipsis;
+      white-space: nowrap;
 
       &:last-of-type {
         border-bottom: 2px solid var(--gray-100);
@@ -105,6 +108,45 @@
       &:hover {
         background: var(--gray-100);
         border-radius: var(--border-radius-md);
+      }
+
+      &.icon {
+        padding-left: 3rem;
+        position: relative;
+
+        p {
+          font-size: 13px;
+          line-height: 16px;
+          margin: 0;
+        }
+
+        i {
+          color: var(--gray-200);
+          font-size: 1.5rem;
+          left: 1rem;
+          position: absolute;
+          top: 1rem;
+        }
+        
+        .title {
+          align-items: center;
+          display: flex;
+          justify-content: space-between;
+
+          span {
+            color: var(--blue-500);
+            cursor: pointer;
+            text-decoration: underline;
+          }
+        }
+
+        .info {
+          color: var(--gray-500);
+          margin-top: .5rem;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
       }
     }
   }

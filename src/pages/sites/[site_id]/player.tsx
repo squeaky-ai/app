@@ -42,11 +42,11 @@ const SitesPlayer: NextPage<ServerSideProps> = () => {
         )}
       </Header>
       
-      {recording && (
+      {site && recording && (
         <Player site={site} events={recording.events.items} />
       )}
 
-      {recording && (
+      {site && recording && (
         <Controls recording={recording} />
       )}
     </div>

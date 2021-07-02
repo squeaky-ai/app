@@ -54,9 +54,10 @@ export const GET_RECORDING_QUERY = gql`
         viewportY
         browser
         active
-        events(first: 50, cursor: $cursor) {
+        events(first: 100, cursor: $cursor) {
           items {
             ... on Snapshot {
+              eventId
               type
               event
               snapshot
@@ -64,6 +65,7 @@ export const GET_RECORDING_QUERY = gql`
               timestamp
             }
             ... on PageView {
+              eventId
               type
               locale
               useragent 
@@ -72,6 +74,7 @@ export const GET_RECORDING_QUERY = gql`
               timestamp
             }
             ... on Scroll {
+              eventId
               type
               x
               y
@@ -79,6 +82,7 @@ export const GET_RECORDING_QUERY = gql`
               timestamp
             }
             ... on Cursor {
+              eventId
               type
               x
               y
@@ -86,6 +90,7 @@ export const GET_RECORDING_QUERY = gql`
               timestamp
             }
             ... on Interaction {
+              eventId
               type
               selector
               time

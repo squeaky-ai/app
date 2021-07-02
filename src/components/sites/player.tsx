@@ -39,8 +39,7 @@ export default class Player extends React.Component<Props> {
 
   private setIframeContents = (event: SnapshotEvent) => {
     const args = JSON.parse(event.snapshot);
-    const type = event.event === 'apply_changed' ? 'applyChanged' : event.event;
-    (this.mirror as any)[type].apply(this.mirror, args);
+    (this.mirror as any)[event.event].apply(this.mirror, args);
   }
 
   private iframeLoaded = () => {

@@ -1,50 +1,45 @@
-export type Event = PageViewEvent | CursorEvent | ScrollEvent | InteractionEvent | SnapshotEvent;
-
-export type InteractionEventType = 'click' | 'hover' | 'focus' | 'blur';
-
 export interface PageViewEvent {
-  type: 'page_view';
+  eventId: string;
+  type: 'pageview';
   path: string;
   locale: string;
   useragent: string;
   viewportX: number;
   viewportY: number;
-  time: number;
-  timestamp: number;
 }
 
 export interface CursorEvent {
+  eventId: string;
   type: 'cursor';
   x: number;
   y: number;
-  time: number;
-  timestamp: number;
 }
 
 export interface ScrollEvent {
+  eventId: string;
   type: 'scroll'; 
   x: number;
   y: number;
-  time: number;
-  timestamp: number;
 }
 
 export interface InteractionEvent {
+  eventId: string;
   type: InteractionEventType;
   selector: string;
-  time: number;
-  timestamp: number;
+  node: string;
 }
 
 export interface SnapshotEvent {
+  eventId: string;
   type: 'snapshot';
-  event: 'initialize' | 'apply_changed';
+  event: 'initialize' | 'applyChanged';
   snapshot: string;
 }
 
-export interface PaginatedEventsResponse {
-  items: EventWithTimestamps[];
-  pagination: EventPagination;
+interface VisibilityEvent {
+  eventId: string;
+  type: 'visibility';
+  visible: boolean;
 }
 
 export interface EventPagination {
@@ -53,7 +48,19 @@ export interface EventPagination {
   pageSize: number;
 }
 
-export type EventWithTimestamps = Event & {
-  time: number;
-  timestamp: number;
+export type Event = 
+  PageViewEvent | 
+  CursorEvent | 
+  ScrollEvent | 
+  InteractionEvent | 
+  SnapshotEvent |
+  VisibilityEvent;
+
+export type InteractionEventType = 'click' | 'hover' | 'focus' | 'blur';
+
+export type EventWithTimestamps = Event & { time: number; timestamp: number; }
+
+export interface PaginatedEventsResponse {
+  items: EventWithTimestamps[];
+  pagination: EventPagination;
 }
