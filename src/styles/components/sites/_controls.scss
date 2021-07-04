@@ -73,5 +73,22 @@
     .zoom-level {
       margin: 0 .25rem 0 0;
     }
+
+    .slider {
+      width: 400px;
+    }
+
+    .timestamps {
+      color: var(--gray-500);
+      font-size: 13px;
+      line-height: 16px;
+      margin-left: 1rem;
+    }
+
+    .speed {
+      background: none;
+      border: none;
+      margin-left: 1rem;
+    }
   }
 }

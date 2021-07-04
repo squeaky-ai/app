@@ -70,6 +70,7 @@
     }
 
     dt {
+      flex-shrink: 0;
       padding-left: 1rem;
     }
 
@@ -77,7 +78,12 @@
       align-items: center;
       color: var(--gray-500);
       display: flex;
+      flex: 1;
+      justify-content: flex-end;
+      overflow: hidden;
       padding-right: 1rem;
+      text-overflow: ellipsis;
+      white-space: nowrap;
 
       i, .browser {
         color: var(--blue-500);

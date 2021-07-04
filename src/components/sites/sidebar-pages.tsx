@@ -8,8 +8,8 @@ interface Props {
 
 export const SidebarPages: FC<Props> = ({ recording }) => (
   <ul className='datarow'>
-    {recording.pages.map(page => (
-      <li key={page}>{page}</li>
+    {recording.pages.map((page, i) => (
+      <li key={page + i}>{page}</li>
     ))}
   </ul>
 );

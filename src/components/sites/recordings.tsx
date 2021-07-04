@@ -111,8 +111,8 @@ export const Recordings: FC = () => {
                 <td>
                   <Tooltip button={recording.pageCount} buttonClassName='link'>
                     <ul className='tooltip-list'>
-                      {recording.pages.map(page => (
-                        <li key={page}>{page}</li>
+                      {recording.pages.map((page, i) => (
+                        <li key={page + i}>{page}</li>
                       ))}
                     </ul>
                   </Tooltip>

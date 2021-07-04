@@ -10,7 +10,7 @@ export const SidebarActivity: FC<Props> = ({ recording }) => {
   const activity = recording
     .events
     .filter(item => !['snapshot', 'cursor'].includes(item.type))
-    .sort((a, b) => a.timestamp - b.timestamp);
+    .sort((a, b) => Number(a.timestamp) - Number(b.timestamp));
 
   const timeString = (ms: number) => {
     const date = new Date(0);
