@@ -1,11 +1,11 @@
 import React from 'react';
-import { EventWithTimestamps, SnapshotEvent } from 'types/event';
+import { EventWithTimestamp, SnapshotEvent } from 'types/event';
 import { TreeMirror } from 'mutation-summary';
 import type { Site } from 'types/site';
 
 interface Props {
   site: Site;
-  events: EventWithTimestamps[];
+  events: EventWithTimestamp[];
 }
 
 export default class Player extends React.Component<Props> {
@@ -16,11 +16,6 @@ export default class Player extends React.Component<Props> {
     super(props);
 
     this.iframe = React.createRef();
-  }
-
-  public componentDidMount() {
-    const max = Math.max(...this.props.events.map(e => e.time));
-    this.setState({ max });
   }
 
   private get document() {

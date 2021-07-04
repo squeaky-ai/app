@@ -60,7 +60,6 @@ export const GET_RECORDING_QUERY = gql`
             type
             event
             snapshot
-            time
             timestamp
           }
           ... on PageView {
@@ -69,7 +68,6 @@ export const GET_RECORDING_QUERY = gql`
             locale
             useragent 
             path
-            time
             timestamp
           }
           ... on Scroll {
@@ -77,7 +75,6 @@ export const GET_RECORDING_QUERY = gql`
             type
             x
             y
-            time
             timestamp
           }
           ... on Cursor {
@@ -85,20 +82,17 @@ export const GET_RECORDING_QUERY = gql`
             type
             x
             y
-            time
             timestamp
           }
           ... on Interaction {
             eventId
             type
             selector
-            time
             timestamp
           }
           ... on Visibility {
             eventId
             visible
-            time
             timestamp
           }
         }

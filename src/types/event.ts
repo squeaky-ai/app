@@ -57,4 +57,4 @@ export type Event =
 
 export type InteractionEventType = 'click' | 'hover' | 'focus' | 'blur';
 
-export type EventWithTimestamps = Event & { time: number; timestamp: number; }
+export type EventWithTimestamp = Event & { timestamp: number; }

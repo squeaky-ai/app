@@ -10,13 +10,15 @@ export const SidebarActivity: FC<Props> = ({ recording }) => {
   const activity = recording
     .events
     .filter(item => !['snapshot', 'cursor'].includes(item.type))
-    .sort((a, b) => a.time - b.time);
+    .sort((a, b) => a.timestamp - b.timestamp);
 
   const timeString = (ms: number) => {
     const date = new Date(0);
     date.setSeconds(ms / 1000);
     return date.toISOString().substr(14, 5);
   };
+
+  const startedAt = activity[0]?.timestamp || 0;
 
   return (
     <ul className='datarow'>
@@ -26,7 +28,7 @@ export const SidebarActivity: FC<Props> = ({ recording }) => {
             <>
               <i className='ri-compass-discover-line' />
               <p className='title'>
-                Page view <span>{timeString(item.time)}</span>
+                Page view <span>{timeString(item.timestamp - startedAt)}</span>
               </p>
               <p className='info'>{item.path}</p>
             </>
@@ -36,7 +38,7 @@ export const SidebarActivity: FC<Props> = ({ recording }) => {
             <>
               <i className='ri-mouse-line' />
               <p className='title'>
-                Hover <span>{timeString(item.time)}</span>
+                Hover <span>{timeString(item.timestamp - startedAt)}</span>
               </p>
               <p className='info'>{item.selector}</p>
             </>
@@ -46,7 +48,7 @@ export const SidebarActivity: FC<Props> = ({ recording }) => {
             <>
               <i className='ri-mouse-line' />
               <p className='title'>
-                Scrolled <span>{timeString(item.time)}</span>
+                Scrolled <span>{timeString(item.timestamp - startedAt)}</span>
               </p>
             </>
           )}
@@ -55,7 +57,7 @@ export const SidebarActivity: FC<Props> = ({ recording }) => {
             <>
               <i className='ri-cursor-line' />
               <p className='title'>
-                Clicked <span>{timeString(item.time)}</span>
+                Clicked <span>{timeString(item.timestamp - startedAt)}</span>
               </p>
               <p className='info'>{item.selector}</p>
             </>
