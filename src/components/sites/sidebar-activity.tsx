@@ -1,22 +1,18 @@
 import React from 'react';
 import type { FC } from 'react';
+import { ActivityTimestamp } from 'components/sites/activity-timestamp';
 import type { Recording } from 'types/recording';
 
 interface Props {
   recording: Recording;
+  setProgress: (seconds: number) => void;
 }
 
-export const SidebarActivity: FC<Props> = ({ recording }) => {
+export const SidebarActivity: FC<Props> = ({ recording, setProgress }) => {
   const activity = recording
     .events
     .filter(item => !['snapshot', 'cursor'].includes(item.type))
     .sort((a, b) => Number(a.timestamp) - Number(b.timestamp));
-
-  const timeString = (ms: number) => {
-    const date = new Date(0);
-    date.setSeconds(ms / 1000);
-    return date.toISOString().substr(14, 5);
-  };
 
   const startedAt = activity[0]?.timestamp || 0;
 
@@ -28,7 +24,7 @@ export const SidebarActivity: FC<Props> = ({ recording }) => {
             <>
               <i className='ri-compass-discover-line' />
               <p className='title'>
-                Page view <span>{timeString(item.timestamp - startedAt)}</span>
+                Page view <ActivityTimestamp event={item} offset={startedAt} setProgress={setProgress} />
               </p>
               <p className='info'>{item.path}</p>
             </>
@@ -38,7 +34,7 @@ export const SidebarActivity: FC<Props> = ({ recording }) => {
             <>
               <i className='ri-mouse-line' />
               <p className='title'>
-                Hover <span>{timeString(item.timestamp - startedAt)}</span>
+                Hover <ActivityTimestamp event={item} offset={startedAt} setProgress={setProgress} />
               </p>
               <p className='info'>{item.selector}</p>
             </>
@@ -48,7 +44,7 @@ export const SidebarActivity: FC<Props> = ({ recording }) => {
             <>
               <i className='ri-mouse-line' />
               <p className='title'>
-                Scrolled <span>{timeString(item.timestamp - startedAt)}</span>
+                Scrolled <ActivityTimestamp event={item} offset={startedAt} setProgress={setProgress} />
               </p>
             </>
           )}
@@ -57,7 +53,7 @@ export const SidebarActivity: FC<Props> = ({ recording }) => {
             <>
               <i className='ri-cursor-line' />
               <p className='title'>
-                Clicked <span>{timeString(item.timestamp - startedAt)}</span>
+                Clicked <ActivityTimestamp event={item} offset={startedAt} setProgress={setProgress} />
               </p>
               <p className='info'>{item.selector}</p>
             </>

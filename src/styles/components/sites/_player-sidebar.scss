@@ -133,7 +133,7 @@
           font-size: 1.5rem;
           left: 1rem;
           position: absolute;
-          top: 1rem;
+          top: 1.3rem;
         }
         
         .title {
@@ -141,9 +141,15 @@
           display: flex;
           justify-content: space-between;
 
-          span {
+          .button {
+            background: none;
+            border: none;
             color: var(--blue-500);
             cursor: pointer;
+            font-size: 13px;
+            font-weight: var(--font-weight-normal);
+            margin: 0;
+            padding: 0;
             text-decoration: underline;
           }
         }

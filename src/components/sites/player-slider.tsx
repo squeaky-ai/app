@@ -4,17 +4,12 @@ import { first, last, throttle } from 'lodash';
 import { Button } from 'components/button';
 import { Slider } from 'components/slider';
 import { usePlayerState } from 'components/sites/player-provider';
-import type { Recording } from 'types/recording';
 
-interface Props {
-  recording: Recording;
-}
-
-export const PlayerSlider: FC<Props> = ({ recording }) => {
+export const PlayerSlider: FC = () => {
   const [state, setState] = usePlayerState();
 
-  const firstEventTime = first(recording.events)?.timestamp || 0;
-  const lastEventTime = last(recording.events)?.timestamp || 0;
+  const firstEventTime = first(state.recording.events)?.timestamp || 0;
+  const lastEventTime = last(state.recording.events)?.timestamp || 0;
 
   const durationSeconds = (lastEventTime - firstEventTime) / 1000000;
 

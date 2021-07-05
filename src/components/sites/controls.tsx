@@ -4,13 +4,8 @@ import { Button } from 'components/button';
 import { PlayerTabs } from 'components/sites/player-tabs';
 import { PlayerSidebar } from 'components/sites/player-sidebar';
 import { PlayerSlider } from 'components/sites/player-slider';
-import type { Recording } from 'types/recording';
 
-interface Props {
-  recording: Recording;
-}
-
-export const Controls: FC<Props> = ({ recording }) => (
+export const Controls: FC = () => (
   <>
     <footer className='controls'>
       <div className='control-group'>
@@ -23,13 +18,13 @@ export const Controls: FC<Props> = ({ recording }) => (
         </Button>
       </div>
       <div className='control-group'>
-        <PlayerSlider recording={recording} />
+        <PlayerSlider />
       </div>
       <div className='control-group'>
         <PlayerTabs />
       </div>
     </footer>
 
-    <PlayerSidebar recording={recording} />
+    <PlayerSidebar />
   </>
 );

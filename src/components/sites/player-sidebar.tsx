@@ -8,17 +8,16 @@ import { SidebarInfo } from 'components/sites/sidebar-info';
 import { SidebarActivity } from 'components/sites/sidebar-activity';
 import { SidebarPages } from 'components/sites/sidebar-pages';
 import { usePlayerState } from 'components/sites/player-provider';
-import type { Recording } from 'types/recording';
 
-interface Props {
-  recording: Recording;
-}
-
-export const PlayerSidebar: FC<Props> = ({ recording }) => {
+export const PlayerSidebar: FC = () => {
   const [state, setState] = usePlayerState();
 
   const handleClose = () => {
     setState(null);
+  };
+
+  const setProgress = (seconds: number) => {
+    setState({ progress: seconds });
   };
 
   return (
@@ -29,7 +28,7 @@ export const PlayerSidebar: FC<Props> = ({ recording }) => {
           <Button onClick={handleClose}><i className='ri-close-line' /></Button>
         </Label>
         <div className='contents'>
-          <SidebarInfo recording={recording} />
+          <SidebarInfo recording={state.recording} />
         </div>
       </div>
       <div className={classnames('sidebar notes', { active: state.activeTab === PlayerTab.NOTES })}>
@@ -56,7 +55,7 @@ export const PlayerSidebar: FC<Props> = ({ recording }) => {
           <Button onClick={handleClose}><i className='ri-close-line' /></Button>
         </Label>
         <div className='contents'>
-          <SidebarActivity recording={recording} />
+          <SidebarActivity recording={state.recording} setProgress={setProgress} />
         </div>
       </div>
       <div className={classnames('sidebar pages', { active: state.activeTab === PlayerTab.PAGES })}>
@@ -65,7 +64,7 @@ export const PlayerSidebar: FC<Props> = ({ recording }) => {
           <Button onClick={handleClose}><i className='ri-close-line' /></Button>
         </Label>
         <div className='contents'>
-          <SidebarPages recording={recording} />
+          <SidebarPages recording={state.recording} />
         </div>
       </div>
     </aside>

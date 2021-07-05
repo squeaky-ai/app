@@ -1,19 +1,26 @@
 import React from 'react';
 import type { FC } from 'react';
 import { PlayerTab } from 'data/sites/enums';
+import type { Recording } from 'types/recording';
 
 interface PlayerState {
+  recording: Recording;
   playing: boolean;
   progress: number;
   activeTab: PlayerTab;
 }
 
-type PlayerProps = [PlayerState, (state: Partial<PlayerState>) => void];
+interface PlayerProps {
+  recording: Recording;
+}
 
-export const PlayerContext = React.createContext<PlayerProps>(null);
+type PlayerContextParams = [PlayerState, (state: Partial<PlayerState>) => void];
 
-export const PlayerProvider: FC = ({ children }) => {
+export const PlayerContext = React.createContext<PlayerContextParams>(null);
+
+export const PlayerProvider: FC<PlayerProps> = ({ children, recording }) => {
   const [state, setState] = React.useState<PlayerState>({
+    recording,
     playing: false,
     progress: 0,
     activeTab: null,
