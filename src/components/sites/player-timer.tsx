@@ -19,15 +19,17 @@ const getMaxTimestamp = (events: EventWithTimestamp[]) => {
 export const PlayerTimer: FC = ({ children }) => {
   const [state, setState] = usePlayerState();
 
+  const interval = state.playbackSpeed * 100;
   const max = getMaxTimestamp(state.recording.events);
 
   const tick = () => {
-    count += 1000;
+    count += interval;
 
     if (count <= max) {
       setState({ progress: count });
     } else {
       clearInterval(timer);
+      setState({ playing: false });
     }
   };
 
@@ -39,7 +41,7 @@ export const PlayerTimer: FC = ({ children }) => {
     // Create a timer every Xms only if the state 
     // is now palying
     if (state.playing) {
-      timer = setInterval(tick, 1000);
+      timer = setInterval(tick, interval);
     }
   }, [state.playing]);
 
@@ -48,9 +50,8 @@ export const PlayerTimer: FC = ({ children }) => {
     // externally. Otherwise, play/pause will resume
     // from the local count variable
     count = state.progress;
-  }, [state.progress]);
 
-  console.log(state.progress);
+  }, [state.progress]);
 
   return (<>{children}</>);
 };

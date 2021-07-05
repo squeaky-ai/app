@@ -11,6 +11,7 @@ export const PlayerSlider: FC = () => {
   const firstEventTime = first(state.recording.events)?.timestamp || 0;
   const lastEventTime = last(state.recording.events)?.timestamp || 0;
 
+  const progressSeconds = state.progress / 1000;
   const durationSeconds = (lastEventTime - firstEventTime) / 1000000;
 
   const timeString = (ms: number) => {
@@ -36,9 +37,9 @@ export const PlayerSlider: FC = () => {
           : <i className='ri-play-fill' />
         }
       </Button>
-      <Slider type='range' min={0} max={durationSeconds} step={1} value={state.progress / 1000} onChange={handleScrub} />
+      <Slider type='range' min={0} max={durationSeconds} step={.1} value={progressSeconds} onChange={handleScrub} />
       <span className='timestamps'>
-        {timeString(state.progress / 1000)} / {timeString(durationSeconds)}
+        {timeString(progressSeconds)} / {timeString(durationSeconds)}
       </span>
       <Button className='speed'>1x</Button>
     </>

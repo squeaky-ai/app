@@ -7,6 +7,7 @@ interface PlayerState {
   recording: Recording;
   playing: boolean;
   progress: number;
+  playbackSpeed: number;
   activeTab: PlayerTab;
 }
 
@@ -23,6 +24,7 @@ export const PlayerProvider: FC<PlayerProps> = ({ children, recording }) => {
     recording,
     playing: false,
     progress: 0,
+    playbackSpeed: 1,
     activeTab: null,
   });
 
