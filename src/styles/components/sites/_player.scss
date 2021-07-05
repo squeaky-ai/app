@@ -1,14 +1,18 @@
 #player {
-  background: var(--white);
-  border: 2px solid var(--gray-150);
-  border-radius: var(--border-radius-lg);
+  align-items: center;
   cursor: default;
+  display: flex;
   flex: 1;
+  justify-content: center;
   margin: 3rem 1.5rem;
-  pointer-events: none;
   overflow: hidden;
+  pointer-events: none;
 
   iframe {
-    border: none;
+    background: var(--white);
+    border: 2px solid var(--gray-150);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    transform-origin: center center;
   }
 }

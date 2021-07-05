@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import dynamic from 'next/dynamic';
 import { PlayerProvider } from 'components/sites/player-provider';
 import { PlayerTimer } from 'components/sites/player-timer';
-import { Controls } from 'components/sites/controls';
+import { PlayerControls } from 'components/sites/player-controls';
 import type { Site } from 'types/site';
 import type { Recording } from 'types/recording';
 
@@ -21,7 +21,7 @@ export const PlayerWrapper: FC<Props> = ({ site, recording }) => (
   <PlayerProvider recording={recording}>
     <PlayerTimer>
       <Player site={site} events={recording.events} />
-      <Controls />
+      <PlayerControls />
     </PlayerTimer>
   </PlayerProvider>
 );

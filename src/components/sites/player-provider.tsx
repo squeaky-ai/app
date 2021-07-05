@@ -9,6 +9,7 @@ interface PlayerState {
   progress: number;
   playbackSpeed: number;
   activeTab: PlayerTab;
+  zoom: number;
 }
 
 interface PlayerProps {
@@ -26,6 +27,7 @@ export const PlayerProvider: FC<PlayerProps> = ({ children, recording }) => {
     progress: 0,
     playbackSpeed: 1,
     activeTab: null,
+    zoom: 1,
   });
 
   const handleSetState = (update: Partial<PlayerState>) => {

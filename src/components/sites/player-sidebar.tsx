@@ -13,7 +13,7 @@ export const PlayerSidebar: FC = () => {
   const [state, setState] = usePlayerState();
 
   const handleClose = () => {
-    setState(null);
+    setState({ activeTab: null });
   };
 
   const setProgress = (seconds: number) => {

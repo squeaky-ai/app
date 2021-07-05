@@ -1,14 +1,35 @@
 import React from 'react';
+import type { FC } from 'react';
 import { EventWithTimestamp, SnapshotEvent } from 'types/event';
 import { TreeMirror } from 'mutation-summary';
 import type { Site } from 'types/site';
+import { usePlayerState } from 'hooks/player-state';
 
 interface Props {
   site: Site;
   events: EventWithTimestamp[];
 }
 
-export default class Player extends React.Component<Props> {
+const Player: FC<Props> = () => {
+  const [state] = usePlayerState();
+  const iframe = React.useRef<HTMLIFrameElement>(null);
+
+  const iframeProps = {
+    transform: `scale(${state.zoom})`, 
+    height: state.recording.viewportY, 
+    width: state.recording.viewportX
+  };
+
+  return (
+    <main id='player'>
+      <iframe id='player' scrolling="no" onLoad={console.log} ref={iframe} style={iframeProps} />
+    </main>
+  );
+};
+
+export default Player;
+
+export class Player1 extends React.Component<Props> {
   private mirror: TreeMirror;
   private iframe: React.RefObject<HTMLIFrameElement>;
 
@@ -72,7 +93,7 @@ export default class Player extends React.Component<Props> {
 
   public render(): JSX.Element {
     return (
-      <main id='player'>
+      <main id='player' style={{ transform: 'scale(1)' }}>
         <iframe scrolling="no" onLoad={this.iframeLoaded} ref={this.iframe} width='100%' height='100%' />
       </main>
     );
