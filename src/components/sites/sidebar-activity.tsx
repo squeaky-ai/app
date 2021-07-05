@@ -2,6 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import { ActivityTimestamp } from 'components/sites/activity-timestamp';
 import type { Recording } from 'types/recording';
+import { sortBy } from 'lodash';
 
 interface Props {
   recording: Recording;
@@ -9,10 +10,10 @@ interface Props {
 }
 
 export const SidebarActivity: FC<Props> = ({ recording, setProgress }) => {
-  const activity = recording
-    .events
-    .filter(item => !['snapshot', 'cursor'].includes(item.type))
-    .sort((a, b) => Number(a.timestamp) - Number(b.timestamp));
+  // Exlcude things that don't appear in the sidebar
+  const sidebarActivity = recording.events.filter(item => !['snapshot', 'cursor'].includes(item.type));
+  // Sort the remaining events by their timestamp
+  const activity = sortBy(sidebarActivity, (activity) => activity.timestamp);
 
   const startedAt = activity[0]?.timestamp || 0;
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import { first, sortBy, round } from 'lodash';
 import { EventWithTimestamp, SnapshotEvent } from 'types/event';
 import { TreeMirror } from 'mutation-summary';
 import { usePlayerState } from 'hooks/player-state';
@@ -10,6 +11,8 @@ interface Props {
   site: Site;
   events: EventWithTimestamp[];
 }
+
+type EventWithTime = EventWithTimestamp & { time: number };
 
 /**
  * Create an instance of the TreeMirror class using the
@@ -41,7 +44,7 @@ const createMirror = (player: Document, host: string): TreeMirror => {
         return node;
       }
 
-      return null;
+      return undefined;
     }
   });
 };
@@ -69,7 +72,8 @@ const clearDocument = (player: Document): void => {
  */
 const setIframeContents = (event: SnapshotEvent, mirror: TreeMirror): void => {
   const args = JSON.parse(event.snapshot);
-  (mirror as any)[event.event].apply(mirror, args);
+  console.log(args, mirror);
+  // (mirror as any)[event.event].apply(mirror, args);
 };
 
 /**
@@ -84,17 +88,80 @@ const getIframeProps = (state: PlayerState): React.CSSProperties => ({
   width: state.recording.viewportX
 });
 
+/**
+ * In order to get relative time (i.e. x ms from 0), the
+ * first events timestamp must be sutracted from all of 
+ * the timestamps
+ * @param {PlayerState} state 
+ * @returns {number}
+ */
+const getTimestampOffset = (state: PlayerState): number => {
+  const sorted = sortBy(state.recording.events, (event) => Number(event.timestamp));
+
+  return first(sorted)?.timestamp || 0;
+};
+
+/**
+ * Use the offset to calculate the relative time for the
+ * event, and them round it to the neareset 100ms so we 
+ * can play back with reasoable performance
+ * @param {EventWithTimestamp} event 
+ * @param {number} offset
+ * @param {number} precision 
+ * @returns {EventWithTimestamp}
+ */
+const roundToNearestTimestamp = (event: EventWithTimestamp, offset: number, precision: number = -2): EventWithTime => {
+  const relative = event.timestamp - offset;
+  const time = round(relative, precision);
+  
+  return { ...event, time };
+};
+
+/**
+ *  We can't possibly play stuff back with millisecond
+ * accuracy and it's unlikely that users will be able to tell
+ * the difference between 50ms or so. Events are rounded up
+ * to the nearest 100 milliseconds
+ * @param {PlayerState} state 
+ * @returns {EventWithTime[]}
+ */
+const getEventsWithRoundedTimestamps = (state: PlayerState): EventWithTime[] => {
+  const offset = getTimestampOffset(state);
+  const events = state.recording.events.map(event => roundToNearestTimestamp(event, offset));
+
+  return sortBy(events, (event) => event.time);
+};
+
 const Player: FC<Props> = ({ site }) => {
   const [state] = usePlayerState();
+  const [events, setEvents] = React.useState<EventWithTime[]>([]);
+  const [mirror, setMirror] = React.useState<TreeMirror>(null);
   const iframe = React.useRef<HTMLIFrameElement>(null);
 
   const player = iframe.current?.contentDocument;
   const iframeProps = getIframeProps(state);
 
-  let mirror: TreeMirror;
+  // Don't caculate this on every render or you might set
+  // someones phone on fire
+  React.useEffect(() => {
+    const eventsWithTimestamps = getEventsWithRoundedTimestamps(state);
+    setEvents(eventsWithTimestamps);
+  }, [state.recording.events]);
+
+  // Listen to the progress change and grab events that fit
+  // into this batch
+  React.useEffect(() => {
+    const batch = events.filter(event => event.time === state.progress);
+
+    const snapshot = batch.find(batch => batch.type === 'snapshot');
+
+    if (snapshot) {
+      setIframeContents(snapshot as SnapshotEvent, mirror);
+    }
+  }, [state.progress]);
 
   const onIframeLoaded = () => {
-    mirror = createMirror(player, site.url);
+    setMirror(createMirror(player, site.url));
     clearDocument(player);
   };
 
