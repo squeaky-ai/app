@@ -36,5 +36,3 @@ export const PlayerProvider: FC<PlayerProps> = ({ children, recording }) => {
     </PlayerContext.Provider>
   );
 };
-
-export const usePlayerState = () => React.useContext(PlayerContext);

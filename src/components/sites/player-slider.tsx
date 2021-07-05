@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import { first, last, throttle } from 'lodash';
 import { Button } from 'components/button';
 import { Slider } from 'components/slider';
-import { usePlayerState } from 'components/sites/player-provider';
+import { usePlayerState } from 'hooks/player-state';
 
 export const PlayerSlider: FC = () => {
   const [state, setState] = usePlayerState();

@@ -7,7 +7,7 @@ import { Button } from 'components/button';
 import { SidebarInfo } from 'components/sites/sidebar-info';
 import { SidebarActivity } from 'components/sites/sidebar-activity';
 import { SidebarPages } from 'components/sites/sidebar-pages';
-import { usePlayerState } from 'components/sites/player-provider';
+import { usePlayerState } from 'hooks/player-state';
 
 export const PlayerSidebar: FC = () => {
   const [state, setState] = usePlayerState();

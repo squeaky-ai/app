@@ -2,7 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
 import { Button } from 'components/button';
-import { usePlayerState } from 'components/sites/player-provider';
+import { usePlayerState } from 'hooks/player-state';
 import { PlayerTab } from 'data/sites/enums';
 
 const tabs = [
