@@ -12,7 +12,7 @@ export const PlayerSlider: FC = () => {
   const lastEventTime = last(state.recording.events)?.timestamp || 0;
 
   const progressSeconds = state.progress / 1000;
-  const durationSeconds = (lastEventTime - firstEventTime) / 1000000;
+  const durationSeconds = Math.floor((lastEventTime - firstEventTime) / 1000);
 
   const timeString = (ms: number) => {
     const date = new Date(0);

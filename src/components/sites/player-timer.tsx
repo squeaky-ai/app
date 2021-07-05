@@ -13,7 +13,7 @@ const getMaxTimestamp = (events: EventWithTimestamp[]) => {
   const earliest = first(sorted)?.timestamp || 0;
   const latest = last(sorted)?.timestamp || 0;
 
-  return Math.round((latest - earliest) / 1000);
+  return Math.round(latest - earliest);
 };
 
 export const PlayerTimer: FC = ({ children }) => {

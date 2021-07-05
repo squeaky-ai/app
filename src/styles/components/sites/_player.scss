@@ -7,6 +7,7 @@
   margin: 3rem 1.5rem;
   overflow: hidden;
   pointer-events: none;
+  position: relative;
 
   iframe {
     background: var(--white);
@@ -14,5 +15,17 @@
     border-radius: var(--border-radius-lg);
     overflow: hidden;
     transform-origin: center center;
+  }
+
+  #cursor {
+    background: var(--magenta-500);
+    border-radius: var(--border-radius-o);
+    height: 2rem;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transition: all .1s linear;
+    width: 2rem;
+    z-index: 2;
   }
 }
