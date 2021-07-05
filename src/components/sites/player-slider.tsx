@@ -25,7 +25,7 @@ export const PlayerSlider: FC = () => {
 
   const handleScrub = throttle((event: ChangeEvent) => {
     const element = event.target as HTMLInputElement;
-    setState({ progress: Number(element.value) });
+    setState({ progress: Number(element.value) * 1000 });
   }, 25);
 
   return (
@@ -36,9 +36,9 @@ export const PlayerSlider: FC = () => {
           : <i className='ri-play-fill' />
         }
       </Button>
-      <Slider type='range' min={0} max={durationSeconds} step={1} value={state.progress} onChange={handleScrub} />
+      <Slider type='range' min={0} max={durationSeconds} step={1} value={state.progress / 1000} onChange={handleScrub} />
       <span className='timestamps'>
-        {timeString(state.progress)} / {timeString(durationSeconds)}
+        {timeString(state.progress / 1000)} / {timeString(durationSeconds)}
       </span>
       <Button className='speed'>1x</Button>
     </>

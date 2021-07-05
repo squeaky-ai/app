@@ -19,8 +19,8 @@ export const ActivityTimestamp: FC<Props> = ({ event, offset, setProgress }) => 
   };
 
   const handleClick = () => {
-    const seconds = Math.round(timestamp / 1000);
-    setProgress(seconds);
+    const milliseconds = Math.round(timestamp);
+    setProgress(milliseconds);
   };
 
   return (

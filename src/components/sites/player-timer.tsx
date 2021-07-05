@@ -13,7 +13,7 @@ const getMaxTimestamp = (events: EventWithTimestamp[]) => {
   const earliest = first(sorted)?.timestamp || 0;
   const latest = last(sorted)?.timestamp || 0;
 
-  return Math.round((latest - earliest) / 1000000);
+  return Math.round((latest - earliest) / 1000);
 };
 
 export const PlayerTimer: FC = ({ children }) => {
@@ -22,7 +22,7 @@ export const PlayerTimer: FC = ({ children }) => {
   const max = getMaxTimestamp(state.recording.events);
 
   const tick = () => {
-    count += 1;
+    count += 1000;
 
     if (count <= max) {
       setState({ progress: count });
@@ -49,6 +49,8 @@ export const PlayerTimer: FC = ({ children }) => {
     // from the local count variable
     count = state.progress;
   }, [state.progress]);
+
+  console.log(state.progress);
 
   return (<>{children}</>);
 };
