@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import { PlayerTab } from 'data/sites/enums';
 import type { Recording } from 'types/recording';
 
-interface PlayerState {
+export interface PlayerState {
   recording: Recording;
   playing: boolean;
   progress: number;
