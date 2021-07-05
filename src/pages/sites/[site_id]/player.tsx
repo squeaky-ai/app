@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { Header } from 'components/sites/header';
 import { Controls } from 'components/sites/controls';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PlayerProvider } from 'components/sites/player-provider';
 import { useSite } from 'hooks/sites';
 import { useRecording } from 'hooks/recording';
 
@@ -21,35 +22,37 @@ const SitesPlayer: NextPage<ServerSideProps> = () => {
   const [_recordingLoading, recording] = useRecording();
 
   return (
-    <div className='page player'>
-      <Head>
-        <title>Squeaky / Site Player</title>
-      </Head>
+    <PlayerProvider>
+      <div className='page player'>
+        <Head>
+          <title>Squeaky / Site Player</title>
+        </Head>
 
-      <Header>
-        {site && (
-          <div className='recording-details'>
-            <p>
-              <Link href={`/sites/${site.id}/recordings`}>
-                <a>Recordings</a>
-              </Link>
-              <span className='seperator'>/</span>
-              <span className='session'>Session</span>
-              <span className='session-number'> #{router.query.recording_id}</span>
-              <span className='indicator' />
-            </p>
-          </div>
+        <Header>
+          {site && (
+            <div className='recording-details'>
+              <p>
+                <Link href={`/sites/${site.id}/recordings`}>
+                  <a>Recordings</a>
+                </Link>
+                <span className='seperator'>/</span>
+                <span className='session'>Session</span>
+                <span className='session-number'> #{router.query.recording_id}</span>
+                <span className='indicator' />
+              </p>
+            </div>
+          )}
+        </Header>
+        
+        {site && recording && (
+          <Player site={site} events={recording.events} />
         )}
-      </Header>
-      
-      {site && recording && (
-        <Player site={site} events={recording.events} />
-      )}
 
-      {site && recording && (
-        <Controls recording={recording} />
-      )}
-    </div>
+        {site && recording && (
+          <Controls recording={recording} />
+        )}
+      </div>
+    </PlayerProvider>
   );
 };
 

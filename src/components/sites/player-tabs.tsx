@@ -2,12 +2,8 @@ import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
 import { Button } from 'components/button';
+import { usePlayerState } from 'components/sites/player-provider';
 import { PlayerTab } from 'data/sites/enums';
-
-interface Props {
-  active: PlayerTab;
-  setActive: (active: PlayerTab) => void;
-}
 
 const tabs = [
   {
@@ -37,15 +33,18 @@ const tabs = [
   },
 ]
 
-export const PlayerTabs: FC<Props> = ({ active, setActive }) => {
+export const PlayerTabs: FC = () => {
+  const [state, setState] = usePlayerState();
+
   const handleSetActive = (value: PlayerTab) => {
-    setActive(value === active ? null : value);
+    const activeTab = value === state.activeTab ? null : value;
+    setState({ activeTab });
   };
 
   return (
     <>
       {tabs.map(tab => (
-        <Button key={tab.key} className={classnames('control', { active: active === tab.name })} onClick={() => handleSetActive(tab.name)}>
+        <Button key={tab.key} className={classnames('control', { active: state.activeTab === tab.name })} onClick={() => handleSetActive(tab.name)}>
           <i className={tab.icon} />
         </Button>
       ))}
