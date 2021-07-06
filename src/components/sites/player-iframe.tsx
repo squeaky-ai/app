@@ -47,16 +47,22 @@ export class PlayerIframe extends React.Component<Props> {
   };
 
   private setIframeContents = (event: SnapshotEvent) => {
-    const args = JSON.parse(event.snapshot);
+    try {
+      const args = JSON.parse(event.snapshot);
+      const mirror = this.mirror as any;
 
-    if (event.event === 'initialize') {
-      // The ID map cache needs to be busted between
-      // every pay load or it thinks it's already rendered
-      (this.mirror as any).idMap = {};
-      this.clearPage();
+      if (event.event === 'initialize') {
+        // The ID map cache needs to be busted between
+        // every pay load or it thinks it's already rendered
+        mirror.idMap = {};
+        this.clearPage();
+        mirror.initialize(...args);
+      } else {
+        mirror.applyChanged(...args);
+      }
+    } catch(error) {
+      console.error(error);
     }
-
-    (this.mirror as any)[event.event].apply(this.mirror, args);
   };
 
   private handleSnapshotEvents = (events: SnapshotEvent[]) => {
