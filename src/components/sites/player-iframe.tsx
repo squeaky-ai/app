@@ -88,9 +88,9 @@ export class PlayerIframe extends React.Component<Props> {
   private handleBatchUpdate = () => {
     const batch = this.props.events.filter(event => event.time === this.props.progress);
 
-    const snapshots = batch.filter(batch => batch.type === 'snapshot');
     const scrolls = batch.filter(batch => batch.type === 'scroll');
     const cursors = batch.filter(batch => batch.type === 'cursor');
+    const snapshots = batch.filter(batch => batch.type === 'snapshot');
 
     this.handleSnapshotEvents(snapshots as SnapshotEvent[]);
     this.handleScrollEvents(scrolls as ScrollEvent[]);
@@ -135,6 +135,17 @@ export class PlayerIframe extends React.Component<Props> {
     this.setFirstSnapshot();
   };
 
+  private get cursorTrailCoords() {
+    const events = this.props.events.filter(event => event.type === 'cursor' && event.time <= this.props.progress) as CursorEvent[];
+    
+    const coords = events
+      .map(e => `${e.x} ${e.y} L `)
+      .join('')
+      .replace(/\sL\s$/, '');
+
+    return `M ${coords}`;
+  }
+
   public render(): JSX.Element {
     const props = {
       transform: `scale(${this.props.zoom})`, 
@@ -144,8 +155,18 @@ export class PlayerIframe extends React.Component<Props> {
 
     return (
       <main id='player'>
-        <div className='test' style={props}>
+        <div className='player-container' style={props}>
           <div id='cursor' />
+          <svg id='cursor-trail'>
+          <path
+            d={this.cursorTrailCoords}
+            fill='transparent'
+            stroke='var(--magenta-500)'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            strokeWidth={2}
+          />
+          </svg>
           <iframe scrolling='no' onLoad={this.onIframeLoad} ref={this.iframe} height='100%' width='100%' />
         </div>
       </main>

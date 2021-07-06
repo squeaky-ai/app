@@ -42,7 +42,7 @@ const roundToNearestTimestamp = (event: EventWithTimestamp, offset: number, prec
 };
 
 /**
- *  We can't possibly play stuff back with millisecond
+ * We can't possibly play stuff back with millisecond
  * accuracy and it's unlikely that users will be able to tell
  * the difference between 50ms or so. Events are rounded up
  * to the nearest 100 milliseconds
