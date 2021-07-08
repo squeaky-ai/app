@@ -33,7 +33,7 @@ export class PlayerIframe extends React.Component<Props, State> {
     // Don't do anything if the states are the same
     if (prevProps.playing === this.props.playing) return;
 
-    if (this.props.playing) {
+    if (this.props.playing && this.mirror) {
       this.processEvent();
     } else {
       clearTimeout(this.timer);
@@ -105,7 +105,7 @@ export class PlayerIframe extends React.Component<Props, State> {
         this.cursor.style.transition = `translate ${diff}ms linear`;
         break;
       case 'click':
-        console.log('@@');
+        console.log('click', event);
         break;
     }
 
@@ -155,7 +155,7 @@ export class PlayerIframe extends React.Component<Props, State> {
       .join('')
       .replace(/\sL\s$/, '');
 
-    return `M ${coords}`;
+    return `M ${coords || '0 0'}`;
   }
 
   public render(): JSX.Element {
