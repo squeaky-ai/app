@@ -4,5 +4,15 @@
   display: flex;
   flex: 1;
   flex-direction: column;
+  height: 100%;
   overflow: hidden;
+
+  .header {
+    flex-shrink: 0;
+  }
+
+  .footer {
+    flex-shrink: 0;
+    z-index: 1;
+  }
 }

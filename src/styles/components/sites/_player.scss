@@ -5,6 +5,7 @@
   flex: 1;
   justify-content: center;
   margin: 3rem 1.5rem;
+  max-height: calc(100% - 16rem);
   pointer-events: none;
 
   iframe {
