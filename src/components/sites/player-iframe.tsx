@@ -1,30 +1,42 @@
 import React from 'react';
-import { CursorEvent, EventWithTime, ScrollEvent, SnapshotEvent } from 'types/event';
+import { CursorEvent, EventWithTimestamp, SnapshotEvent } from 'types/event';
 import { TreeMirror } from 'mutation-summary';
 import type { Site } from 'types/site';
 
 interface Props {
   site: Site;
   progress: number;
-  events: EventWithTime[];
+  events: EventWithTimestamp[];
+  playing: boolean;
   height: number;
   width: number;
   zoom: number;
 }
 
-export class PlayerIframe extends React.Component<Props> {
+interface State {
+  index: number;
+}
+
+export class PlayerIframe extends React.Component<Props, State> {
+  private timer: NodeJS.Timer;
   private mirror: TreeMirror;
   private iframe: React.RefObject<HTMLIFrameElement>;
 
   public constructor(props: Props) {
     super(props);
 
+    this.state = { index: 0 };
     this.iframe = React.createRef();
   }
 
   public componentDidUpdate(prevProps: Props) {
-    if (prevProps.progress !== this.props.progress) {
-      this.handleBatchUpdate();
+    // Don't do anything if the states are the same
+    if (prevProps.playing === this.props.playing) return;
+
+    if (this.props.playing) {
+      this.processEvent();
+    } else {
+      clearTimeout(this.timer);
     }
   }
 
@@ -65,39 +77,37 @@ export class PlayerIframe extends React.Component<Props> {
     }
   };
 
-  private handleSnapshotEvents = (events: SnapshotEvent[]) => {
-    events.forEach(snapshot => {
-      this.setIframeContents(snapshot)
-    });
-  };
+  private processEvent = () => {
+    clearTimeout(this.timer);
 
-  private handleScrollEvents = (events: ScrollEvent[]) => {
-    if (events.length > 0) {
-      const { x, y } = events[0];
-      this.document.body?.scrollTo({ left: x, top: y, behavior: 'smooth' });
+    const event = this.props.events[this.state.index];
+    if (!event) return;
+
+    switch(event.type) {
+      case 'snapshot':
+        this.setIframeContents(event);
+        break;
+      case 'scroll':
+        this.document.body?.scrollTo({ left: event.x, top: event.y, behavior: 'smooth' });
+        break;
+      case 'cursor':
+        this.cursor.style.transform = `translate(${event.x}px, ${event.y}px)`;
+        break;
     }
+
+    const nextEvent = this.props.events[this.state.index + 1];
+
+    if (!nextEvent) return;
+
+    const diff = nextEvent.timestamp - event.timestamp;
+
+    this.timer = setTimeout(() => {
+      this.setState({ index: this.state.index + 1 });
+      this.processEvent();
+    }, diff);
   };
 
-  private handleCursorEvents = (events: CursorEvent[]) => {
-    if (events.length > 0) {
-      const { x, y } = events[0];
-      this.cursor.style.transform = `translate(${x}px, ${y}px)`;
-    }
-  };
-
-  private handleBatchUpdate = () => {
-    const batch = this.props.events.filter(event => event.time === this.props.progress);
-
-    const scrolls = batch.filter(batch => batch.type === 'scroll');
-    const cursors = batch.filter(batch => batch.type === 'cursor');
-    const snapshots = batch.filter(batch => batch.type === 'snapshot');
-
-    this.handleSnapshotEvents(snapshots as SnapshotEvent[]);
-    this.handleScrollEvents(scrolls as ScrollEvent[]);
-    this.handleCursorEvents(cursors as CursorEvent[]);
-  };
-
-  private createMirror = () => {
+  private onIframeLoad = () => {
     this.mirror = new TreeMirror(this.document, {
       createElement: (tagName: string) => {
         // Don't display any script tags
@@ -122,21 +132,9 @@ export class PlayerIframe extends React.Component<Props> {
     });
   };
 
-  private setFirstSnapshot = () => {
-    const snapshot = this.props.events.find(e => e.type === 'snapshot' && e.event == 'initialize');
-
-    if (snapshot) {
-      this.setIframeContents(snapshot as SnapshotEvent);
-    }
-  };
-
-  private onIframeLoad = () => {
-    this.createMirror();   
-    this.setFirstSnapshot();
-  };
-
   private get cursorTrailCoords() {
-    const events = this.props.events.filter(event => event.type === 'cursor' && event.time <= this.props.progress) as CursorEvent[];
+    const event = this.props.events[this.state.index];
+    const events = this.props.events.filter(e => e.type === 'cursor' && e.timestamp <= event.timestamp) as CursorEvent[];
     
     const coords = events
       .map(e => `${e.x} ${e.y} L `)
