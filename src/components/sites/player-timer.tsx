@@ -1,6 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
-import { first, last, sortBy } from 'lodash';
+import { first, last } from 'lodash';
 import { usePlayerState } from 'hooks/player-state';
 import type { EventWithTimestamp } from 'types/event';
 
@@ -8,15 +8,13 @@ let count: number = 0;
 let timer: NodeJS.Timer;
 
 const getMaxTimestamp = (events: EventWithTimestamp[]) => {
-  const sorted = sortBy(events, (event) => Number(event.timestamp));
-
-  const earliest = first(sorted)?.timestamp || 0;
-  const latest = last(sorted)?.timestamp || 0;
+  const earliest = first(events)?.timestamp || 0;
+  const latest = last(events)?.timestamp || 0;
 
   return Math.round(latest - earliest);
 };
 
-export const PlayerTimer: FC = ({ children }) => {
+export const PlayerTimer: FC = React.memo(({ children }) => {
   const [state, setState] = usePlayerState();
 
   const interval = state.playbackSpeed * 100;
@@ -54,4 +52,4 @@ export const PlayerTimer: FC = ({ children }) => {
   }, [state.progress]);
 
   return (<>{children}</>);
-};
+});

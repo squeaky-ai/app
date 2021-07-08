@@ -78,6 +78,7 @@ export class PlayerIframe extends React.Component<Props, State> {
   };
 
   private processEvent = () => {
+    // We only want one thing happening at once
     clearTimeout(this.timer);
 
     const event = this.props.events[this.state.index];
@@ -91,11 +92,24 @@ export class PlayerIframe extends React.Component<Props, State> {
         this.document.body?.scrollTo({ left: event.x, top: event.y, behavior: 'smooth' });
         break;
       case 'cursor':
+        // In order to smooth the mouse cursor we need to work out how long
+        // it will take for the mouse to get there. Unfortunately you can't
+        // just take the next event as it may not be a cursor event.
+        const nextCursorEvent = this.props.events
+          .slice(0, this.state.index + 1)
+          .find(e => e.type === 'cursor');
+
+        const diff = nextCursorEvent?.timestamp - event.timestamp;
+
         this.cursor.style.transform = `translate(${event.x}px, ${event.y}px)`;
+        this.cursor.style.transition = `translate ${diff}ms linear`;
+        break;
+      case 'click':
+        console.log('@@');
         break;
     }
 
-    const nextEvent = this.props.events[this.state.index + 1];
+    const nextEvent = this.props.events[this.state.index + 1]
 
     if (!nextEvent) return;
 
