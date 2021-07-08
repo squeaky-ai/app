@@ -34,11 +34,11 @@ const tabs = [
 ]
 
 export const PlayerTabs: FC = () => {
-  const [state, setState] = usePlayerState();
+  const [state, dispatch] = usePlayerState();
 
   const handleSetActive = (value: PlayerTab) => {
     const activeTab = value === state.activeTab ? null : value;
-    setState({ activeTab });
+    dispatch({ type: 'activeTab', value: activeTab });
   };
 
   return (

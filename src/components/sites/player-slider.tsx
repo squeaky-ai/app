@@ -6,7 +6,7 @@ import { Slider } from 'components/slider';
 import { usePlayerState } from 'hooks/player-state';
 
 export const PlayerSlider: FC = () => {
-  const [state, setState] = usePlayerState();
+  const [state, dispatch] = usePlayerState();
 
   const firstEventTime = first(state.recording.events)?.timestamp || 0;
   const lastEventTime = last(state.recording.events)?.timestamp || 0;
@@ -21,12 +21,12 @@ export const PlayerSlider: FC = () => {
   };
 
   const handlePlayPause = () => {
-    setState({ playing: !state.playing });
+    dispatch({ type: 'playing', value: !state.playing });
   };
 
   const handleScrub = throttle((event: ChangeEvent) => {
     const element = event.target as HTMLInputElement;
-    setState({ progress: Number(element.value) * 1000 });
+    dispatch({ type: 'progress', value: Number(element.value) * 1000 });
   }, 25);
 
   return (

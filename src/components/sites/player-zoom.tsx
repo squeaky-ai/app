@@ -4,7 +4,7 @@ import { Button } from 'components/button';
 import { usePlayerState } from 'hooks/player-state';
 
 export const PlayerZoom: FC = () => {
-  const [state, setState] = usePlayerState();
+  const [state, dispatch] = usePlayerState();
 
   const min = .5;
   const max = 2;
@@ -12,12 +12,12 @@ export const PlayerZoom: FC = () => {
 
   const handleZoomIn = () => {
     const next = state.zoom + step;
-    if (next <= max) setState({ zoom: next });
+    if (next <= max) dispatch({ type: 'zoom', value: next });
   };
 
   const handleZoomOut = () => {
     const next = state.zoom - step;
-    if (next >= min) setState({ zoom: next });
+    if (next >= min) dispatch({ type: 'zoom', value: next });
   };
 
   return (

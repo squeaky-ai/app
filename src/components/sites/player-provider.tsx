@@ -16,12 +16,23 @@ interface PlayerProps {
   recording: Recording;
 }
 
-type PlayerContextParams = [PlayerState, (state: Partial<PlayerState>) => void];
+type ValueOf<T> = T[keyof T];
+
+type Action = {
+  type: keyof PlayerState;
+  value: ValueOf<PlayerState>;
+}
+
+type PlayerContextParams = [PlayerState, React.Dispatch<Action>];
 
 export const PlayerContext = React.createContext<PlayerContextParams>(null);
 
+const reducer = (state: PlayerState, action: Action) => {
+  return { ...state, [action.type]: action.value };
+};
+
 export const PlayerProvider: FC<PlayerProps> = ({ children, recording }) => {
-  const [state, setState] = React.useState<PlayerState>({
+  const [state, dispatch] = React.useReducer(reducer, {
     recording,
     playing: false,
     progress: 0,
@@ -30,12 +41,8 @@ export const PlayerProvider: FC<PlayerProps> = ({ children, recording }) => {
     zoom: 1,
   });
 
-  const handleSetState = (update: Partial<PlayerState>) => {
-    setState({ ...state, ...update });
-  };
-
   return (
-    <PlayerContext.Provider value={[state, handleSetState]}>
+    <PlayerContext.Provider value={[state, dispatch]}>
       {children}
     </PlayerContext.Provider>
   );

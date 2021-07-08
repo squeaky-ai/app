@@ -15,7 +15,7 @@ const getMaxTimestamp = (events: EventWithTimestamp[]) => {
 };
 
 export const PlayerTimer: FC = React.memo(({ children }) => {
-  const [state, setState] = usePlayerState();
+  const [state, dispatch] = usePlayerState();
 
   const interval = state.playbackSpeed * 100;
   const max = getMaxTimestamp(state.recording.events);
@@ -24,10 +24,10 @@ export const PlayerTimer: FC = React.memo(({ children }) => {
     count += interval;
 
     if (count <= max) {
-      setState({ progress: count });
+      dispatch({ type: 'progress', value: count });
     } else {
       clearInterval(timer);
-      setState({ playing: false });
+      dispatch({ type: 'playing', value: false });
     }
   };
 

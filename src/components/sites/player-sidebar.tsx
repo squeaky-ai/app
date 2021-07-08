@@ -10,14 +10,14 @@ import { SidebarPages } from 'components/sites/sidebar-pages';
 import { usePlayerState } from 'hooks/player-state';
 
 export const PlayerSidebar: FC = () => {
-  const [state, setState] = usePlayerState();
+  const [state, dispatch] = usePlayerState();
 
   const handleClose = () => {
-    setState({ activeTab: null });
+    dispatch({ type: 'activeTab', value: null });
   };
 
   const setProgress = (seconds: number) => {
-    setState({ progress: seconds });
+    dispatch({ type: 'progress', value: seconds });
   };
 
   return (
