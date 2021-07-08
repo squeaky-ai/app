@@ -58,6 +58,11 @@ export class PlayerIframe extends React.Component<Props, State> {
     }
   };
 
+  private postMessage = (args: any) => {
+    const message = JSON.stringify(args);
+    this.iframe.current.contentWindow.postMessage(message, location.origin);
+  };
+
   private setIframeContents = (event: SnapshotEvent) => {
     try {
       const args = JSON.parse(event.snapshot);
@@ -90,7 +95,7 @@ export class PlayerIframe extends React.Component<Props, State> {
         this.setIframeContents(event);
         break;
       case 'scroll':
-        this.document.body?.scrollTo({ left: event.x, top: event.y, behavior: 'smooth' });
+        this.postMessage({ x: event.x, y: event.y });
         break;
       case 'cursor':
         // In order to smooth the mouse cursor we need to work out how long
@@ -137,8 +142,22 @@ export class PlayerIframe extends React.Component<Props, State> {
         // absolute
         if (tagName === 'HEAD') {
           const node = document.createElement('HEAD');
-          node.appendChild(document.createElement('BASE'));
-          (node.firstChild as HTMLLinkElement).href = this.host;
+
+          const base = document.createElement('BASE') as HTMLLinkElement;
+          base.href = this.host
+
+          const script = document.createElement('SCRIPT') as HTMLScriptElement;
+          script.innerHTML = `
+            window.addEventListener("message", (event) => {
+              if (event.origin === '${location.origin}') {
+                const { x, y } = JSON.parse(event.data);
+                window.scrollTo({ left: x, top: y, behaviour: 'smooth' });
+              }
+            });
+          `;
+
+          node.appendChild(base);
+          node.appendChild(script);
           return node;
         }
 
