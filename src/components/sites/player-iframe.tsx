@@ -182,7 +182,7 @@ export class PlayerIframe extends React.Component<Props, State> {
             strokeWidth={2}
           />
           </svg>
-          <iframe scrolling='no' onLoad={this.onIframeLoad} ref={this.iframe} height='100%' width='100%' />
+          <iframe src='/_blank' onLoad={this.onIframeLoad} scrolling='no' ref={this.iframe} height='100%' width='100%' />
         </div>
       </main>
     );
