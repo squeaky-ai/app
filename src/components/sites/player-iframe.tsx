@@ -74,6 +74,7 @@ export class PlayerIframe extends React.Component<Props, State> {
       }
     } catch(error) {
       console.error(error);
+      console.log('Had trouble with this: ', event);
     }
   };
 
@@ -106,9 +107,6 @@ export class PlayerIframe extends React.Component<Props, State> {
           this.cursor.style.transition = `translate ${diff}ms linear`;
         }
 
-        break;
-      case 'click':
-        console.log('click', event);
         break;
     }
 
