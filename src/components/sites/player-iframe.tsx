@@ -101,8 +101,11 @@ export class PlayerIframe extends React.Component<Props, State> {
 
         const diff = nextCursorEvent?.timestamp - event.timestamp;
 
-        this.cursor.style.transform = `translate(${event.x}px, ${event.y}px)`;
-        this.cursor.style.transition = `translate ${diff}ms linear`;
+        if (this.cursor) {
+          this.cursor.style.transform = `translate(${event.x}px, ${event.y}px)`;
+          this.cursor.style.transition = `translate ${diff}ms linear`;
+        }
+
         break;
       case 'click':
         console.log('click', event);
