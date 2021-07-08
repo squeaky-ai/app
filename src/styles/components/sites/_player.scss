@@ -4,9 +4,11 @@
   display: flex;
   flex: 1;
   justify-content: center;
+  height: 100%;
   margin: 3rem 1.5rem;
   max-height: calc(100% - 16rem);
   pointer-events: none;
+  width: 100%;
 
   iframe {
     background: var(--white);
