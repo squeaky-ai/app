@@ -33,10 +33,8 @@ const Player: FC<Props> = React.memo(({ site }) => {
   return (
     <PlayerIframe
       site={site}
-      events={state.recording.events}
+      recording={state.recording}
       playing={state.playing}
-      height={state.recording.viewportY}
-      width={state.recording.viewportX}
       zoom={state.zoom}
     />
   );

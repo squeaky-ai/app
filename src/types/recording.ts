@@ -1,4 +1,4 @@
-import { EventWithTimestamp } from 'types/event';
+import { Event } from 'types/event';
 
 export interface Recording {
   id: string;
@@ -16,7 +16,7 @@ export interface Recording {
   browserString?: string;
   viewportX: number;
   viewportY: number;
-  events?: EventWithTimestamp[];
+  events?: Event[];
   dateString: string;
 }
 

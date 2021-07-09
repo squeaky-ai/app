@@ -1,10 +1,10 @@
 import React from 'react';
 import type { FC } from 'react';
 import { Button } from 'components/button';
-import type { EventWithTimestamp } from 'types/event';
+import type { Event } from 'types/event';
 
 interface Props {
-  event: EventWithTimestamp;
+  event: Event;
   offset: number;
   setProgress: (seconds: number) => void;
 }

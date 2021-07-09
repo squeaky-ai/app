@@ -1,19 +1,21 @@
 import React from 'react';
-import { CursorEvent, EventWithTimestamp, SnapshotEvent } from 'types/event';
+import { CursorEvent, PageViewEvent, ScrollEvent, SnapshotEvent } from 'types/event';
 import { TreeMirror } from 'mutation-summary';
+import { PlayerCursor } from 'components/sites/player-cursor';
 import type { Site } from 'types/site';
+import type { Recording } from 'types/recording';
 
 interface Props {
   site: Site;
-  events: EventWithTimestamp[];
+  recording: Recording;
   playing: boolean;
-  height: number;
-  width: number;
   zoom: number;
 }
 
 interface State {
   index: number;
+  scroll: [number, number];
+  cursor: [number, number][];
 }
 
 export class PlayerIframe extends React.Component<Props, State> {
@@ -24,7 +26,12 @@ export class PlayerIframe extends React.Component<Props, State> {
   public constructor(props: Props) {
     super(props);
 
-    this.state = { index: 0 };
+    this.state = { 
+      index: 0,
+      scroll: [0, 0],
+      cursor: []
+    };
+
     this.iframe = React.createRef();
   }
 
@@ -62,23 +69,46 @@ export class PlayerIframe extends React.Component<Props, State> {
     this.iframe.current.contentWindow.postMessage(message, location.origin);
   };
 
-  private setIframeContents = (event: SnapshotEvent) => {
-    try {
-      const args = JSON.parse(event.snapshot);
-      const mirror = this.mirror as any;
+  private handleSnapshotEvent = (event: SnapshotEvent) => {
+    const args = JSON.parse(event.snapshot);
+    const mirror = this.mirror as any;
 
-      if (event.event === 'initialize') {
-        // The ID map cache needs to be busted between
-        // every pay load or it thinks it's already rendered
-        mirror.idMap = {};
-        this.clearPage();
-        mirror.initialize(...args);
-      } else {
-        mirror.applyChanged(...args);
-      }
-    } catch(error) {
-      console.error(error);
-      console.log('Had trouble with this: ', event);
+    if (event.event === 'initialize') {
+      // The ID map cache needs to be busted between
+      // every pay load or it thinks it's already rendered
+      mirror.idMap = {};
+      this.clearPage();
+      mirror.initialize(...args);
+    } else {
+      mirror.applyChanged(...args);
+    }
+  };
+
+  private handlePageviewevent = (_event: PageViewEvent) => {
+    // Reset the cursors on every page view, otherwise it will 
+    // accumulate the cursor trail across the entire session!
+    this.setState({ cursor: [] });
+  };
+
+  private handleScrollEvent = (event: ScrollEvent) => {
+    this.setState({ scroll: [event.x, event.y]});
+    this.postMessage({ x: event.x, y: event.y });
+  };
+
+  private handleCursorEvent = (event: CursorEvent) => {
+    // In order to smooth the mouse cursor we need to work out how long
+    // it will take for the mouse to get there. Unfortunately you can't
+    // just take the next event as it may not be a cursor event.
+    const nextCursorEvent = this.props.recording.events
+      .slice(0, this.state.index + 1)
+      .find(e => e.type === 'cursor');
+
+    this.setState({ cursor: [...this.state.cursor, [event.x, event.y]] });
+
+    const diff = nextCursorEvent?.timestamp - event.timestamp;
+
+    if (this.cursor) {
+      this.cursor.style.transition = `translate ${diff}ms linear`;
     }
   };
 
@@ -86,36 +116,25 @@ export class PlayerIframe extends React.Component<Props, State> {
     // We only want one thing happening at once
     clearTimeout(this.timer);
 
-    const event = this.props.events[this.state.index];
+    const event = this.props.recording.events[this.state.index];
     if (!event) return;
 
     switch(event.type) {
       case 'snapshot':
-        this.setIframeContents(event);
+        this.handleSnapshotEvent(event);
+        break;
+      case 'pageview':
+        this.handlePageviewevent(event);
         break;
       case 'scroll':
-        this.postMessage({ x: event.x, y: event.y });
+        this.handleScrollEvent(event);
         break;
       case 'cursor':
-        // In order to smooth the mouse cursor we need to work out how long
-        // it will take for the mouse to get there. Unfortunately you can't
-        // just take the next event as it may not be a cursor event.
-        const nextCursorEvent = this.props.events
-          .slice(0, this.state.index + 1)
-          .find(e => e.type === 'cursor');
-
-        const diff = nextCursorEvent?.timestamp - event.timestamp;
-
-        if (this.cursor) {
-          this.cursor.style.transform = `translate(${event.x}px, ${event.y}px)`;
-          this.cursor.style.transition = `translate ${diff}ms linear`;
-        }
-
+        this.handleCursorEvent(event);
         break;
     }
 
-    const nextEvent = this.props.events[this.state.index + 1]
-
+    const nextEvent = this.props.recording.events[this.state.index + 1]
     if (!nextEvent) return;
 
     const diff = nextEvent.timestamp - event.timestamp;
@@ -168,39 +187,17 @@ export class PlayerIframe extends React.Component<Props, State> {
     });
   };
 
-  private get cursorTrailCoords() {
-    const event = this.props.events[this.state.index];
-    const events = this.props.events.filter(e => e.type === 'cursor' && e.timestamp <= event.timestamp) as CursorEvent[];
-    
-    const coords = events
-      .map(e => `${e.x} ${e.y} L `)
-      .join('')
-      .replace(/\sL\s$/, '');
-
-    return `M ${coords || '0 0'}`;
-  }
-
   public render(): JSX.Element {
     const props = {
       transform: `scale(${this.props.zoom})`, 
-      height: this.props.height, 
-      width: this.props.width
+      height: this.props.recording.viewportY, 
+      width: this.props.recording.viewportX
     };
 
     return (
       <main id='player'>
         <div className='player-container' style={props}>
-          <div id='cursor' />
-          <svg id='cursor-trail'>
-          <path
-            d={this.cursorTrailCoords}
-            fill='transparent'
-            stroke='var(--magenta-500)'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth={2}
-          />
-          </svg>
+          <PlayerCursor recording={this.props.recording} scroll={this.state.scroll} cursor={this.state.cursor} />
           <iframe src='/_blank' onLoad={this.onIframeLoad} scrolling='no' ref={this.iframe} height='100%' width='100%' />
         </div>
       </main>

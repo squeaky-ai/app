@@ -6,6 +6,7 @@ export interface PageViewEvent {
   useragent: string;
   viewportX: number;
   viewportY: number;
+  timestamp: number;
 }
 
 export interface CursorEvent {
@@ -13,6 +14,7 @@ export interface CursorEvent {
   type: 'cursor';
   x: number;
   y: number;
+  timestamp: number;
 }
 
 export interface ScrollEvent {
@@ -20,6 +22,7 @@ export interface ScrollEvent {
   type: 'scroll'; 
   x: number;
   y: number;
+  timestamp: number;
 }
 
 export interface InteractionEvent {
@@ -27,6 +30,7 @@ export interface InteractionEvent {
   type: InteractionEventType;
   selector: string;
   node: string;
+  timestamp: number;
 }
 
 export interface SnapshotEvent {
@@ -34,12 +38,14 @@ export interface SnapshotEvent {
   type: 'snapshot';
   event: 'initialize' | 'applyChanged';
   snapshot: string;
+  timestamp: number;
 }
 
 interface VisibilityEvent {
   eventId: string;
   type: 'visibility';
   visible: boolean;
+  timestamp: number;
 }
 
 export interface EventPagination {
@@ -56,5 +62,3 @@ export type Event =
   VisibilityEvent;
 
 export type InteractionEventType = 'click' | 'hover' | 'focus' | 'blur';
-
-export type EventWithTimestamp = Event & { timestamp: number; }

@@ -2,12 +2,12 @@ import React from 'react';
 import type { FC } from 'react';
 import { first, last } from 'lodash';
 import { usePlayerState } from 'hooks/player-state';
-import type { EventWithTimestamp } from 'types/event';
+import type { Event } from 'types/event';
 
 let count: number = 0;
 let timer: NodeJS.Timer;
 
-const getMaxTimestamp = (events: EventWithTimestamp[]) => {
+const getMaxTimestamp = (events: Event[]) => {
   const earliest = first(events)?.timestamp || 0;
   const latest = last(events)?.timestamp || 0;
 

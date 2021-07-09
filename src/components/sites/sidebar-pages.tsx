@@ -5,7 +5,7 @@ import { groupBy } from 'lodash';
 import { Button } from 'components/button';
 import { usePlayerState } from 'hooks/player-state';
 import type { Recording } from 'types/recording';
-import type { EventWithTimestamp } from 'types/event';
+import type { Event } from 'types/event';
 
 interface Props {
   recording: Recording;
@@ -31,22 +31,22 @@ export const SidebarPages: FC<Props> = ({ recording }) => {
     return date.toISOString().substr(14, 5);
   };
 
-  const nextPageView = (event: EventWithTimestamp) => {
+  const nextPageView = (event: Event) => {
     const index = pageviews.findIndex(e => e.eventId === event.eventId);
     return pageviews[index + 1] || null;
   };
 
-  const timeToNextPageView = (event: EventWithTimestamp) => {
+  const timeToNextPageView = (event: Event) => {
     const nextEvent = nextPageView(event);
     return timeString(nextEvent?.timestamp || event.timestamp);
   };
 
-  const setProgress = (event: EventWithTimestamp) => {
+  const setProgress = (event: Event) => {
     const timestamp = event.timestamp - offset;
     dispatch({ type: 'progress', value: timestamp / 1000 });
   };
 
-  const setNextProgress = (event: EventWithTimestamp) => {
+  const setNextProgress = (event: Event) => {
     const nextEvent = nextPageView(event) || event;
     const timestamp = nextEvent.timestamp - offset;
 
