@@ -198,4 +198,78 @@
       text-align: center;
     }
   }
+
+  .pages {
+    .title {
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem;
+
+      .path {
+        max-width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .count {
+        color: var(--blue-500);
+        text-decoration: underline;
+      }
+    }
+
+    li {
+      padding: 0;
+      
+      &.open {
+        background: var(--gray-100);
+        border-radius: var(--border-radius-md);
+  
+        .timestamps {
+          display: block;
+        }
+
+        + li {
+          border-top-color: transparent;
+        }
+      }
+
+      &:hover {
+        + li {
+          border-top-color: transparent;
+        }
+      }
+    }
+
+    .timestamps {
+      display: none;
+      padding: 1rem 1rem 1rem 1.5rem;
+
+      .event {
+        align-items: center;
+        display: flex;
+        margin-bottom: .5rem;
+
+        .button {
+          background: none;
+          border: none;
+          color: var(--blue-500);
+          font-size: 13px;
+          font-weight: var(--font-weight-normal);
+          line-height: 16px;
+          padding: 0;
+          text-align: left;
+          text-decoration: underline;
+          width: 40px;
+        }
+
+        i {
+          color: var(--gray-500);
+          font-size: 1rem;
+          margin: 0 .5rem;
+        }
+      }
+    }
+  }
 }
