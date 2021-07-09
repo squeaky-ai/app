@@ -5,7 +5,6 @@ import type { Site } from 'types/site';
 
 interface Props {
   site: Site;
-  progress: number;
   events: EventWithTimestamp[];
   playing: boolean;
   height: number;

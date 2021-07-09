@@ -35,7 +35,6 @@ const Player: FC<Props> = React.memo(({ site }) => {
       site={site}
       events={state.recording.events}
       playing={state.playing}
-      progress={state.progress}
       height={state.recording.viewportY}
       width={state.recording.viewportX}
       zoom={state.zoom}

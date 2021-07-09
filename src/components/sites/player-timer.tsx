@@ -11,17 +11,17 @@ const getMaxTimestamp = (events: EventWithTimestamp[]) => {
   const earliest = first(events)?.timestamp || 0;
   const latest = last(events)?.timestamp || 0;
 
-  return Math.round(latest - earliest);
+  return Math.floor(latest - earliest) / 1000;
 };
 
 export const PlayerTimer: FC = React.memo(({ children }) => {
   const [state, dispatch] = usePlayerState();
 
-  const interval = state.playbackSpeed * 100;
+  const interval = state.playbackSpeed * 1000;
   const max = getMaxTimestamp(state.recording.events);
 
   const tick = () => {
-    count += interval;
+    count += 1;
 
     if (count <= max) {
       dispatch({ type: 'progress', value: count });
