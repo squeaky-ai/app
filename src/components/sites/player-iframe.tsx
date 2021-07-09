@@ -54,10 +54,6 @@ export class PlayerIframe extends React.Component<Props, State> {
     return this.props.site.url;
   }
 
-  private get cursor() {
-    return document.getElementById('cursor');
-  }
-
   private clearPage = () => {
     while (this.document.firstChild) {
       this.document.removeChild(this.document.firstChild);
