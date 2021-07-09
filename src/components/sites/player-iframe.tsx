@@ -96,20 +96,7 @@ export class PlayerIframe extends React.Component<Props, State> {
   };
 
   private handleCursorEvent = (event: CursorEvent) => {
-    // In order to smooth the mouse cursor we need to work out how long
-    // it will take for the mouse to get there. Unfortunately you can't
-    // just take the next event as it may not be a cursor event.
-    const nextCursorEvent = this.props.recording.events
-      .slice(0, this.state.index + 1)
-      .find(e => e.type === 'cursor');
-
     this.setState({ cursor: [...this.state.cursor, [event.x, event.y]] });
-
-    const diff = nextCursorEvent?.timestamp - event.timestamp;
-
-    if (this.cursor) {
-      this.cursor.style.transition = `translate ${diff}ms linear`;
-    }
   };
 
   private processEvent = () => {
