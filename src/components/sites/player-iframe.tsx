@@ -1,7 +1,6 @@
 import React from 'react';
 import { CursorEvent, PageViewEvent, ScrollEvent, SnapshotEvent } from 'types/event';
 import { TreeMirror } from 'mutation-summary';
-import { PlayerCursor } from 'components/sites/player-cursor';
 import type { Site } from 'types/site';
 import type { Recording } from 'types/recording';
 
@@ -80,7 +79,7 @@ export class PlayerIframe extends React.Component<Props, State> {
     }
   };
 
-  private handlePageviewevent = (_event: PageViewEvent) => {
+  private handlePageviewEvent = (_event: PageViewEvent) => {
     // Reset the cursors on every page view, otherwise it will 
     // accumulate the cursor trail across the entire session!
     this.setState({ cursor: [] });
@@ -88,11 +87,11 @@ export class PlayerIframe extends React.Component<Props, State> {
 
   private handleScrollEvent = (event: ScrollEvent) => {
     this.setState({ scroll: [event.x, event.y]});
-    this.postMessage({ x: event.x, y: event.y });
+    this.postMessage({ x: event.x, y: event.y, type: 'scroll' });
   };
 
   private handleCursorEvent = (event: CursorEvent) => {
-    this.setState({ cursor: [...this.state.cursor, [event.x, event.y]] });
+    this.postMessage({ x: event.x, y: event.y, type: 'cursor' });
   };
 
   private processEvent = () => {
@@ -107,7 +106,7 @@ export class PlayerIframe extends React.Component<Props, State> {
         this.handleSnapshotEvent(event);
         break;
       case 'pageview':
-        this.handlePageviewevent(event);
+        this.handlePageviewEvent(event);
         break;
       case 'scroll':
         this.handleScrollEvent(event);
@@ -153,14 +152,46 @@ export class PlayerIframe extends React.Component<Props, State> {
           script.innerHTML = `
             window.addEventListener('message', (event) => {
               if (event.origin === '${location.origin}') {
-                const { x, y } = JSON.parse(event.data);
-                window.scrollTo({ left: x, top: y, behaviour: 'smooth' });
+                const { x, y, type } = JSON.parse(event.data);
+
+                switch(type) {
+                  case 'scroll':
+                    window.scrollTo({ left: x, top: y, behaviour: 'smooth' });
+                    break;
+                  case 'cursor':
+                    window.__squeaky_cursor.style.left = x + 'px';
+                    window.__squeaky_cursor.style.top = y + 'px';
+                    break;
+                }
               }
             });
+
+            setTimeout(() => {
+              const cursor = document.createElement('div');
+              cursor.id = '__squeaky_cursor';
+              window.__squeaky_cursor = cursor;
+  
+              document.body.appendChild(cursor);
+            }, 0);
+          `;
+
+          const style = document.createElement('STYLE') as HTMLStyleElement;
+          style.innerHTML = `
+            #__squeaky_cursor {
+              background: red;
+              border-radius: 50%;
+              height: 2rem;
+              left: 0;
+              position: absolute;
+              top: 0;
+              width: 2rem;
+              z-index: 2;
+            }
           `;
 
           node.appendChild(base);
           node.appendChild(script);
+          node.appendChild(style);
 
           return node;
         }
@@ -180,7 +211,6 @@ export class PlayerIframe extends React.Component<Props, State> {
     return (
       <main id='player'>
         <div className='player-container' style={props}>
-          <PlayerCursor recording={this.props.recording} scroll={this.state.scroll} cursor={this.state.cursor} />
           <iframe src='/_blank' onLoad={this.onIframeLoad} scrolling='no' ref={this.iframe} height='100%' width='100%' />
         </div>
       </main>

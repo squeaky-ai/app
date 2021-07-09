@@ -24,17 +24,6 @@
     overflow: hidden;
   }
 
-  #cursor {
-    background: var(--magenta-500);
-    border-radius: var(--border-radius-lg);
-    height: 2rem;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 2rem;
-    z-index: 2;
-  }
-
   #cursor-trail {
     height: 100%;
     left: 0;
