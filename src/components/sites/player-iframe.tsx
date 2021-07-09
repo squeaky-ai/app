@@ -13,7 +13,6 @@ interface Props {
 
 interface State {
   index: number;
-  scroll: [number, number];
   cursor: [number, number][];
 }
 
@@ -27,7 +26,6 @@ export class PlayerIframe extends React.Component<Props, State> {
 
     this.state = { 
       index: 0,
-      scroll: [0, 0],
       cursor: []
     };
 
@@ -51,6 +49,10 @@ export class PlayerIframe extends React.Component<Props, State> {
 
   private get cursor() {
     return this.document.getElementById('__squeaky_cursor');
+  }
+
+  private get cursorTail() {
+    return this.document.getElementById('__squeaky_cursor_tail').firstChild as SVGPathElement;
   }
 
   private get host() {
@@ -90,12 +92,23 @@ export class PlayerIframe extends React.Component<Props, State> {
   };
 
   private handleScrollEvent = (event: ScrollEvent) => {
-    this.setState({ scroll: [event.x, event.y]});
     this.postMessage({ x: event.x, y: event.y, });
   };
 
   private handleCursorEvent = (event: CursorEvent) => {
+    // Add the event to the list of existing cursor
+    // events for this page
+    this.setState({ cursor: [...this.state.cursor, [event.x, event.y]]});
+    // Position the mouse cursor
     this.cursor.style.transform = `translate(${event.x}px, ${event.y}px)`;
+    // Build the SVG path so that it draws a continuous
+    // line
+    const coords = this.state.cursor
+      .map(([x, y]) => `${x} ${y} L `)
+      .join('')
+      .replace(/\sL\s$/, '');
+    // Update the svg path
+    this.cursorTail.setAttribute('d', `M ${coords}`);
   };
 
   private processEvent = () => {
@@ -163,8 +176,9 @@ export class PlayerIframe extends React.Component<Props, State> {
             });
           `;
 
-          // Inject some styles for the cursor so that
-          // the host can control the cursor
+          // Inject some styles for so that the host can 
+          // the position of the cursor and draw the mouse
+          // tail
           const style = document.createElement('STYLE') as HTMLStyleElement;
           style.innerHTML = `
             #__squeaky_cursor {
@@ -175,7 +189,16 @@ export class PlayerIframe extends React.Component<Props, State> {
               position: absolute;
               top: 0;
               width: 2rem;
-              z-index: 2;
+              z-index: 999;
+            }
+
+            #__squeaky_cursor_tail {
+              height: 1000%;
+              left: 0;
+              position: absolute;
+              top: 0;
+              width: 100%;
+              z-index: 999;
             }
           `;
 
@@ -192,10 +215,20 @@ export class PlayerIframe extends React.Component<Props, State> {
           // place as it will be relative to the real body
           // and will work nicely with zooming
           const node = document.createElement('BODY');
+
+          // The actual cursor
           const cursor = document.createElement('div');
           cursor.id = '__squeaky_cursor';
 
+          // The SVG that will contains the path that draws
+          // the tail of the cursor movements
+          const tail = document.createElement('svg');
+          tail.id = '__squeaky_cursor_tail';
+          tail.innerHTML = '<path d="M 0 0" fill="transparent" stroke="#F0438C" stroke-width="2" />';
+
           node.appendChild(cursor);
+          node.appendChild(tail);
+
           return node;
         }
 
@@ -214,7 +247,7 @@ export class PlayerIframe extends React.Component<Props, State> {
     return (
       <main id='player'>
         <div className='player-container' style={props}>
-          <iframe src='/_blank' onLoad={this.onIframeLoad} scrolling='no' ref={this.iframe} height='100%' width='100%' />
+          <iframe src='/_blank.html' onLoad={this.onIframeLoad} scrolling='no' ref={this.iframe} height='100%' width='100%' />
         </div>
       </main>
     );
