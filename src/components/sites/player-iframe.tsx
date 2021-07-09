@@ -49,6 +49,10 @@ export class PlayerIframe extends React.Component<Props, State> {
     return this.iframe.current.contentDocument;
   }
 
+  private get cursor() {
+    return this.document.getElementById('__squeaky_cursor');
+  }
+
   private get host() {
     return this.props.site.url;
   }
@@ -87,11 +91,11 @@ export class PlayerIframe extends React.Component<Props, State> {
 
   private handleScrollEvent = (event: ScrollEvent) => {
     this.setState({ scroll: [event.x, event.y]});
-    this.postMessage({ x: event.x, y: event.y, type: 'scroll' });
+    this.postMessage({ x: event.x, y: event.y, });
   };
 
   private handleCursorEvent = (event: CursorEvent) => {
-    this.postMessage({ x: event.x, y: event.y, type: 'cursor' });
+    this.cursor.style.transform = `translate(${event.x}px, ${event.y}px)`;
   };
 
   private processEvent = () => {
@@ -131,17 +135,18 @@ export class PlayerIframe extends React.Component<Props, State> {
     this.mirror = new TreeMirror(this.document, {
       createElement: (tagName: string) => {
         if (tagName === 'SCRIPT') {
-          // Don't display any script tags
+          // Replace all nodes that are script tags with
+          // no-script to prevent any scripts from loading
           const node = document.createElement('NO-SCRIPT');
           node.style.display = 'none';
           return node;
         }
   
         if (tagName === 'HEAD') {
-          const node = document.createElement('HEAD');
           // Inject the base tag into the page so that
           // all of the pages relative assets become 
           // absolute
+          const node = document.createElement('HEAD');
           const base = document.createElement('BASE') as HTMLLinkElement;
           base.href = this.host
 
@@ -152,33 +157,18 @@ export class PlayerIframe extends React.Component<Props, State> {
           script.innerHTML = `
             window.addEventListener('message', (event) => {
               if (event.origin === '${location.origin}') {
-                const { x, y, type } = JSON.parse(event.data);
-
-                switch(type) {
-                  case 'scroll':
-                    window.scrollTo({ left: x, top: y, behaviour: 'smooth' });
-                    break;
-                  case 'cursor':
-                    window.__squeaky_cursor.style.left = x + 'px';
-                    window.__squeaky_cursor.style.top = y + 'px';
-                    break;
-                }
+                const { x, y } = JSON.parse(event.data);
+                window.scrollTo({ left: x, top: y, behaviour: 'smooth' });
               }
             });
-
-            setTimeout(() => {
-              const cursor = document.createElement('div');
-              cursor.id = '__squeaky_cursor';
-              window.__squeaky_cursor = cursor;
-  
-              document.body.appendChild(cursor);
-            }, 0);
           `;
 
+          // Inject some styles for the cursor so that
+          // the host can control the cursor
           const style = document.createElement('STYLE') as HTMLStyleElement;
           style.innerHTML = `
             #__squeaky_cursor {
-              background: red;
+              background: #F0438C;
               border-radius: 50%;
               height: 2rem;
               left: 0;
@@ -193,6 +183,19 @@ export class PlayerIframe extends React.Component<Props, State> {
           node.appendChild(script);
           node.appendChild(style);
 
+          return node;
+        }
+
+        if (tagName === 'BODY') {
+          // Inject the cursor into the body, it will make
+          // it much easier to place the cursor in the right
+          // place as it will be relative to the real body
+          // and will work nicely with zooming
+          const node = document.createElement('BODY');
+          const cursor = document.createElement('div');
+          cursor.id = '__squeaky_cursor';
+
+          node.appendChild(cursor);
           return node;
         }
 
