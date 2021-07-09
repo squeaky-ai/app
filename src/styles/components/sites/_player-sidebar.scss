@@ -164,4 +164,38 @@
       }
     }
   }
+
+  .notes {
+    &.empty {
+      align-items: center;
+      background: var(--gray-50);
+      border-radius: var(--border-radius-lg);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: center;
+    }
+
+    .empty-state {
+      padding: 1.5rem;
+      text-align: center;
+    }
+  }
+
+  .tags {
+    &.empty {
+      align-items: center;
+      background: var(--gray-50);
+      border-radius: var(--border-radius-lg);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: center;
+    }
+
+    .empty-state {
+      padding: 1.5rem;
+      text-align: center;
+    }
+  }
 }

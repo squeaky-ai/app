@@ -6,6 +6,8 @@ import { Label } from 'components/label';
 import { Button } from 'components/button';
 import { SidebarInfo } from 'components/sites/sidebar-info';
 import { SidebarActivity } from 'components/sites/sidebar-activity';
+import { SidebarNotes } from 'components/sites/sidebar-notes';
+import { SidebarTags } from 'components/sites/sidebar-tags';
 import { SidebarPages } from 'components/sites/sidebar-pages';
 import { usePlayerState } from 'hooks/player-state';
 
@@ -37,7 +39,7 @@ export const PlayerSidebar: FC = () => {
           <Button onClick={handleClose}><i className='ri-close-line' /></Button>
         </Label>
         <div className='contents'>
-          
+          <SidebarNotes recording={state.recording} />
         </div>
       </div>
       <div className={classnames('sidebar tags', { active: state.activeTab === PlayerTab.TAGS })}>
@@ -46,7 +48,7 @@ export const PlayerSidebar: FC = () => {
           <Button onClick={handleClose}><i className='ri-close-line' /></Button>
         </Label>
         <div className='contents'>
-          
+          <SidebarTags recording={state.recording} />
         </div>
       </div>
       <div className={classnames('sidebar activity', { active: state.activeTab === PlayerTab.ACTIVITY })}>

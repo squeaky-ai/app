@@ -129,25 +129,27 @@ export class PlayerIframe extends React.Component<Props, State> {
   private onIframeLoad = () => {
     this.mirror = new TreeMirror(this.document, {
       createElement: (tagName: string) => {
-        // Don't display any script tags
         if (tagName === 'SCRIPT') {
+          // Don't display any script tags
           const node = document.createElement('NO-SCRIPT');
           node.style.display = 'none';
           return node;
         }
   
-        // Inject the base tag into the page so that
-        // all of the pages relative assets become 
-        // absolute
         if (tagName === 'HEAD') {
           const node = document.createElement('HEAD');
-
+          // Inject the base tag into the page so that
+          // all of the pages relative assets become 
+          // absolute
           const base = document.createElement('BASE') as HTMLLinkElement;
           base.href = this.host
 
+          // Inject a message listener into the page so
+          // that the scroll position can be controlled
+          // from outside the iframe
           const script = document.createElement('SCRIPT') as HTMLScriptElement;
           script.innerHTML = `
-            window.addEventListener("message", (event) => {
+            window.addEventListener('message', (event) => {
               if (event.origin === '${location.origin}') {
                 const { x, y } = JSON.parse(event.data);
                 window.scrollTo({ left: x, top: y, behaviour: 'smooth' });
@@ -157,6 +159,7 @@ export class PlayerIframe extends React.Component<Props, State> {
 
           node.appendChild(base);
           node.appendChild(script);
+
           return node;
         }
 
