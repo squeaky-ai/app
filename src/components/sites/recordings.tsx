@@ -108,7 +108,7 @@ export const Recordings: FC = () => {
                 <td><Highlighter value={query}>{recording.dateString}</Highlighter></td>
                 <td><Highlighter value={query}>{recording.durationString}</Highlighter></td>
                 <td><Highlighter value={query}>{recording.language}</Highlighter></td>
-                <td>
+                <td className='no-overflow'>
                   <Tooltip button={recording.pageCount} buttonClassName='link'>
                     <ul className='tooltip-list'>
                       {recording.pages.map((page, i) => (
@@ -136,7 +136,7 @@ export const Recordings: FC = () => {
                   <Highlighter value={query}>{recording.deviceType}</Highlighter>
                 </td>
                 <td><Highlighter value={query}>{recording.viewportX}</Highlighter> x <Highlighter value={query}>{recording.viewportY}</Highlighter></td>
-                <td>
+                <td className='no-overflow'>
                   <Tooltip positionX='right' button={<Image src={`/browsers/${browserIcon(recording.browser)}.svg`} height={24} width={24} alt={`Icon for the ${recording.browser} browser`} />}>
                     {recording.browserString}
                   </Tooltip>

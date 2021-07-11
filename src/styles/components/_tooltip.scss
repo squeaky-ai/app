@@ -41,6 +41,9 @@
     li {
       list-style: none;
       margin-bottom: .5rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
 
       &:last-of-type {
         margin-bottom: 0;
