@@ -6,9 +6,10 @@ import { Button } from 'components/button';
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   button: string | React.ReactNode;
   buttonClassName?: string;
+  direction?: 'up' | 'down';
 }
 
-export const Dropdown: FC<Props> = ({ button, buttonClassName, className, children }) => {
+export const Dropdown: FC<Props> = ({ button, buttonClassName, className, children, direction }) => {
   const ref = React.useRef<HTMLDivElement>();
   const [open, setOpen] = React.useState(false);
 
@@ -37,7 +38,7 @@ export const Dropdown: FC<Props> = ({ button, buttonClassName, className, childr
   }, []);
 
   return (
-    <div ref={ref} className={classnames('dropdown', className, { open })}>
+    <div ref={ref} className={classnames('dropdown', className, direction, { open })}>
       <Button onClick={() => setOpen(!open)} className={buttonClassName}>
         {button}
         <i className='arrow ri-arrow-drop-down-line' />

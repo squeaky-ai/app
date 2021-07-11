@@ -10,6 +10,7 @@ interface Props {
   recording: Recording;
   playing: boolean;
   zoom: number;
+  playbackSpeed: number;
 }
 
 interface State {
@@ -125,12 +126,16 @@ export class PlayerIframe extends React.Component<Props, State> {
     const nextEvent = this.props.recording.events[this.state.index + 1];
     if (!nextEvent) return;
 
+    // Work out how long it should take before the next event
+    // should be fired
     const diff = nextEvent.timestamp - event.timestamp;
+    // Factor in the playback speed
+    const time = diff / this.props.playbackSpeed;
 
     this.timer = setTimeout(() => {
       this.setState({ index: this.state.index + 1 });
       this.processEvent();
-    }, diff);
+    }, time);
   };
 
   private onIframeLoad = () => {

@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import { first, last, throttle } from 'lodash';
 import { Button } from 'components/button';
 import { Slider } from 'components/slider';
+import { PlayerSpeed } from 'components/sites/player-speed';
 import { usePlayerState } from 'hooks/player-state';
 
 export const PlayerSlider: FC = () => {
@@ -26,6 +27,10 @@ export const PlayerSlider: FC = () => {
     dispatch({ type: 'playing', value: !state.playing });
   };
 
+  const handlePlaybackSpeed = (speed: number) => {
+    dispatch({ type: 'playbackSpeed', value: speed });
+  };
+
   const handleScrub = throttle((event: ChangeEvent) => {
     const element = event.target as HTMLInputElement;
     dispatch({ type: 'progress', value: Number(element.value) });
@@ -43,7 +48,7 @@ export const PlayerSlider: FC = () => {
       <span className='timestamps'>
         {timeString(state.progress)} / {timeString(durationSeconds)}
       </span>
-      <Button className='speed'>1x</Button>
+      <PlayerSpeed playbackSpeed={state.playbackSpeed} handlePlaybackSpeed={handlePlaybackSpeed} />
     </>
   );
 };

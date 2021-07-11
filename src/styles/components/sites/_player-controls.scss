@@ -96,6 +96,19 @@
       background: none;
       border: none;
       margin-left: 1rem;
+      padding: 0;
+
+      i {
+        display: none;
+      } 
+
+      & + .dropdown-menu {
+        padding: 1.5rem;
+
+        .label:last-of-type {
+          margin-bottom: 0;
+        }
+      }
     }
   }
 

@@ -19,7 +19,7 @@ export const PlayerTimer: FC = React.memo(({ children }) => {
 
   const events = state.recording?.events || [];
 
-  const interval = state.playbackSpeed * 1000;
+  const interval = 1000 / state.playbackSpeed;
   const max = getMaxTimestamp(events);
 
   const tick = () => {

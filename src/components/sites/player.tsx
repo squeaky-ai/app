@@ -43,6 +43,7 @@ const Player: FC<Props> = React.memo(({ site }) => {
       recording={state.recording}
       playing={state.playing}
       zoom={state.zoom}
+      playbackSpeed={state.playbackSpeed}
     />
   );
 });

@@ -49,6 +49,13 @@
     }
   }
 
+  &.up {
+    .dropdown-menu {
+      bottom: calc(100% + 1rem);
+      top: auto;
+    }
+  }
+
   &.open {
     .button {
       .arrow {
