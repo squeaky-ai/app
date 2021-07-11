@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
+import FocusTrap from 'focus-trap-react';
 import { Button } from 'components/button';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
@@ -43,9 +44,14 @@ export const Dropdown: FC<Props> = ({ button, buttonClassName, className, childr
         {button}
         <i className='arrow ri-arrow-drop-down-line' />
       </Button>
-      <div className='dropdown-menu'>
-        {children}
-      </div>
+
+      {open && (
+        <FocusTrap focusTrapOptions={{ clickOutsideDeactivates: true }}>
+          <div className='dropdown-menu'>
+            {children}
+          </div>
+        </FocusTrap>
+      )}
     </div>
   );
 };
