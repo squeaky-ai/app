@@ -18,7 +18,7 @@ interface Props {
 }
 
 export const PlayerWrapper: FC<Props> = ({ site, recording }) => (
-  <PlayerProvider recording={null}>
+  <PlayerProvider recording={recording}>
     <PlayerTimer>
       <Player site={site} />
       <PlayerControls />
