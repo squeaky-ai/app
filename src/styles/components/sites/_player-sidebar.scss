@@ -93,6 +93,17 @@
         margin-right: .5rem;
       }
     }
+
+    .pages {
+      background: none;
+      border: none;
+      color: var(--blue-500);
+      font-size: 13px;
+      font-weight: var(--font-weight-normal);
+      line-height: 16px;
+      padding: 0;
+      text-decoration: underline;
+    }
   }
 
   .datarow {
@@ -270,6 +281,20 @@
           margin: 0 .5rem;
         }
       }
+    }
+  }
+
+  .indicator {
+    background: var(--gray-200);
+    border-radius: var(--border-radius-o);
+    display: inline-block;
+    height: .75rem;
+    margin-right: .5rem;
+    vertical-align: middle;
+    width: .75rem;
+
+    &.active {
+      background: var(--green-500);
     }
   }
 }

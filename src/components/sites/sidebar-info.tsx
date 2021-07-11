@@ -1,17 +1,21 @@
 import React from 'react';
 import type { FC } from 'react';
 import Image from 'next/image';
+import classnames from 'classnames';
+import { Button } from 'components/button';
+import { PlayerTab } from 'data/sites/enums';
 import type { Recording } from 'types/recording';
 
 interface Props {
   recording: Recording;
+  setActiveTab: (value: PlayerTab) => void;
 }
 
-export const SidebarInfo: FC<Props> = ({ recording }) => (
+export const SidebarInfo: FC<Props> = ({ recording, setActiveTab }) => (
   <dl className='datalist'>
     <div className='row'>
       <dt>Session #</dt>
-      <dd>{recording.id}</dd>
+      <dd><span className={classnames('indicator', { active: recording.active })} /> {recording.id}</dd>
     </div>
     <div className='row'>
       <dt>User</dt>
@@ -31,7 +35,7 @@ export const SidebarInfo: FC<Props> = ({ recording }) => (
     </div>
     <div className='row'>
       <dt>Pages</dt>
-      <dd>{recording.pageCount}</dd>
+      <dd><Button onClick={() => setActiveTab(PlayerTab.PAGES)} className='pages'>{recording.pageCount}</Button></dd>
     </div>
     <div className='row'>
       <dt>Start URL</dt>

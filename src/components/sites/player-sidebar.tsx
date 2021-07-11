@@ -18,6 +18,10 @@ export const PlayerSidebar: FC = () => {
     dispatch({ type: 'activeTab', value: null });
   };
 
+  const setActiveTab = (value: PlayerTab) => {
+    dispatch({ type: 'activeTab', value });
+  };
+
   const setProgress = (seconds: number) => {
     dispatch({ type: 'progress', value: seconds });
   };
@@ -35,7 +39,7 @@ export const PlayerSidebar: FC = () => {
           <Button onClick={handleClose}><i className='ri-close-line' /></Button>
         </Label>
         <div className='contents'>
-          <SidebarInfo recording={state.recording} />
+          <SidebarInfo recording={state.recording} setActiveTab={setActiveTab} />
         </div>
       </div>
       <div className={classnames('sidebar notes', { active: state.activeTab === PlayerTab.NOTES })}>
