@@ -14,6 +14,8 @@ export interface CursorEvent {
   type: 'cursor';
   x: number;
   y: number;
+  offsetX: number;
+  offsetY: number;
   timestamp: number;
 }
 

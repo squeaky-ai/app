@@ -11,7 +11,7 @@ const getMaxTimestamp = (events: Event[]) => {
   const earliest = first(events)?.timestamp || 0;
   const latest = last(events)?.timestamp || 0;
 
-  return Math.floor(latest - earliest) / 1000;
+  return Math.floor((latest - earliest) / 1000);
 };
 
 export const PlayerTimer: FC = React.memo(({ children }) => {
@@ -35,10 +35,10 @@ export const PlayerTimer: FC = React.memo(({ children }) => {
     // Always clear when play/pause is handled 
     // externally
     clearInterval(timer);
-
-    // Create a timer every Xms only if the state 
-    // is now palying
+    
     if (state.playing) {
+      // Create a timer every Xms only if the state 
+      // is now palying
       timer = setInterval(tick, interval);
     }
   }, [state.playing]);
@@ -48,7 +48,6 @@ export const PlayerTimer: FC = React.memo(({ children }) => {
     // externally. Otherwise, play/pause will resume
     // from the local count variable
     count = state.progress;
-
   }, [state.progress]);
 
   return (<>{children}</>);

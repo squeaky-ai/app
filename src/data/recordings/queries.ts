@@ -82,6 +82,8 @@ export const GET_RECORDING_QUERY = gql`
             type
             x
             y
+            offsetX
+            offsetY
             timestamp
           }
           ... on Interaction {

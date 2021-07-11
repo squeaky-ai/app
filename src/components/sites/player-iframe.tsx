@@ -1,8 +1,9 @@
 import React from 'react';
-import { CursorEvent, PageViewEvent, ScrollEvent, SnapshotEvent } from 'types/event';
 import { TreeMirror } from 'mutation-summary';
+import { PlayerCursor } from 'components/sites/player-cursor';
 import type { Site } from 'types/site';
 import type { Recording } from 'types/recording';
+import type { CursorEvent, PageViewEvent, ScrollEvent, SnapshotEvent } from 'types/event';
 
 interface Props {
   site: Site;
@@ -13,7 +14,8 @@ interface Props {
 
 interface State {
   index: number;
-  cursor: [number, number][];
+  cursor: CursorEvent[];
+  scroll: [number, number];
 }
 
 export class PlayerIframe extends React.Component<Props, State> {
@@ -26,7 +28,8 @@ export class PlayerIframe extends React.Component<Props, State> {
 
     this.state = { 
       index: 0,
-      cursor: []
+      cursor: [],
+      scroll: [0, 0]
     };
 
     this.iframe = React.createRef();
@@ -45,14 +48,6 @@ export class PlayerIframe extends React.Component<Props, State> {
 
   private get document() {
     return this.iframe.current.contentDocument;
-  }
-
-  private get cursor() {
-    return this.document.getElementById('__squeaky_cursor');
-  }
-
-  private get cursorTail() {
-    return this.document.getElementById('__squeaky_cursor_tail').firstChild as SVGPathElement;
   }
 
   private get host() {
@@ -92,23 +87,17 @@ export class PlayerIframe extends React.Component<Props, State> {
   };
 
   private handleScrollEvent = (event: ScrollEvent) => {
+    // Set the state so that the cursor tail can move to the 
+    // correct position
+    this.setState({ scroll: [event.x, event.y] });
+    // Post a message to the iframe so that it can scroll itself
     this.postMessage({ x: event.x, y: event.y, });
   };
 
   private handleCursorEvent = (event: CursorEvent) => {
     // Add the event to the list of existing cursor
     // events for this page
-    this.setState({ cursor: [...this.state.cursor, [event.x, event.y]]});
-    // Position the mouse cursor
-    this.cursor.style.transform = `translate(${event.x}px, ${event.y}px)`;
-    // Build the SVG path so that it draws a continuous
-    // line
-    const coords = this.state.cursor
-      .map(([x, y]) => `${x} ${y} L `)
-      .join('')
-      .replace(/\sL\s$/, '');
-    // Update the svg path
-    this.cursorTail.setAttribute('d', `M ${coords}`);
+    this.setState({ cursor: [...this.state.cursor, event] });
   };
 
   private processEvent = () => {
@@ -133,7 +122,7 @@ export class PlayerIframe extends React.Component<Props, State> {
         break;
     }
 
-    const nextEvent = this.props.recording.events[this.state.index + 1]
+    const nextEvent = this.props.recording.events[this.state.index + 1];
     if (!nextEvent) return;
 
     const diff = nextEvent.timestamp - event.timestamp;
@@ -176,58 +165,8 @@ export class PlayerIframe extends React.Component<Props, State> {
             });
           `;
 
-          // Inject some styles for so that the host can 
-          // the position of the cursor and draw the mouse
-          // tail
-          const style = document.createElement('STYLE') as HTMLStyleElement;
-          style.innerHTML = `
-            #__squeaky_cursor {
-              background: #F0438C;
-              border-radius: 50%;
-              height: 2rem;
-              left: 0;
-              position: absolute;
-              top: 0;
-              width: 2rem;
-              z-index: 999;
-            }
-
-            #__squeaky_cursor_tail {
-              height: 1000%;
-              left: 0;
-              position: absolute;
-              top: 0;
-              width: 100%;
-              z-index: 999;
-            }
-          `;
-
           node.appendChild(base);
           node.appendChild(script);
-          node.appendChild(style);
-
-          return node;
-        }
-
-        if (tagName === 'BODY') {
-          // Inject the cursor into the body, it will make
-          // it much easier to place the cursor in the right
-          // place as it will be relative to the real body
-          // and will work nicely with zooming
-          const node = document.createElement('BODY');
-
-          // The actual cursor
-          const cursor = document.createElement('div');
-          cursor.id = '__squeaky_cursor';
-
-          // The SVG that will contains the path that draws
-          // the tail of the cursor movements
-          const tail = document.createElement('svg');
-          tail.id = '__squeaky_cursor_tail';
-          tail.innerHTML = '<path d="M 0 0" fill="transparent" stroke="#F0438C" stroke-width="2" />';
-
-          node.appendChild(cursor);
-          node.appendChild(tail);
 
           return node;
         }
@@ -247,6 +186,7 @@ export class PlayerIframe extends React.Component<Props, State> {
     return (
       <main id='player'>
         <div className='player-container' style={props}>
+          <PlayerCursor recording={this.props.recording} cursor={this.state.cursor} scroll={this.state.scroll} />
           <iframe src='/_blank.html' onLoad={this.onIframeLoad} scrolling='no' ref={this.iframe} height='100%' width='100%' />
         </div>
       </main>
