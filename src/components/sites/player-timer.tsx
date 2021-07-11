@@ -17,8 +17,10 @@ const getMaxTimestamp = (events: Event[]) => {
 export const PlayerTimer: FC = React.memo(({ children }) => {
   const [state, dispatch] = usePlayerState();
 
+  const events = state.recording?.events || [];
+
   const interval = state.playbackSpeed * 1000;
-  const max = getMaxTimestamp(state.recording.events);
+  const max = getMaxTimestamp(events);
 
   const tick = () => {
     count += 1;

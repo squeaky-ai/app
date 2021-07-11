@@ -8,8 +8,10 @@ import { usePlayerState } from 'hooks/player-state';
 export const PlayerSlider: FC = () => {
   const [state, dispatch] = usePlayerState();
 
-  const firstEventTime = first(state.recording.events)?.timestamp || 0;
-  const lastEventTime = last(state.recording.events)?.timestamp || 0;
+  const events = state.recording?.events || [];
+
+  const firstEventTime = first(events)?.timestamp || 0;
+  const lastEventTime = last(events)?.timestamp || 0;
 
   const progress = Math.floor(state.progress);
   const durationSeconds = Math.floor((lastEventTime - firstEventTime) / 1000);

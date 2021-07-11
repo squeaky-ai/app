@@ -41,6 +41,12 @@ export const PlayerProvider: FC<PlayerProps> = ({ children, recording }) => {
     zoom: 1,
   });
 
+  React.useEffect(() => {
+    // The source of truth for the recording is from the props,
+    // so always update when it changes
+    dispatch({ type: 'recording', value: recording });
+  }, [recording]);
+
   return (
     <PlayerContext.Provider value={[state, dispatch]}>
       {children}

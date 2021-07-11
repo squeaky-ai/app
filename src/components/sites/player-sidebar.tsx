@@ -22,6 +22,11 @@ export const PlayerSidebar: FC = () => {
     dispatch({ type: 'progress', value: seconds });
   };
 
+  if (!state.recording) {
+    // The page is likely loading
+    return null;
+  }
+
   return (
     <aside className={classnames('player-sidebar', { active: state.activeTab !== null })}>
       <div className={classnames('sidebar info', { active: state.activeTab === PlayerTab.INFO })}>

@@ -14,7 +14,7 @@ const Player = dynamic(
 
 interface Props {
   site: Site;
-  recording: Recording;
+  recording: Recording | null;
 }
 
 export const PlayerWrapper: FC<Props> = ({ site, recording }) => (

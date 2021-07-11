@@ -36,7 +36,7 @@ const SitesPlayer: NextPage<ServerSideProps> = ({ user }) => {
               </div>
             </Header>
 
-            {recording && <PlayerWrapper site={site} recording={recording} />}
+            <PlayerWrapper site={site} recording={recording} />
           </>
         )}
       </Page>
