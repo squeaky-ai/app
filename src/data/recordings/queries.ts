@@ -54,6 +54,10 @@ export const GET_RECORDING_QUERY = gql`
         viewportY
         browser
         active
+        tags {
+          id
+          name
+        }
         events {
           ... on Snapshot {
             eventId

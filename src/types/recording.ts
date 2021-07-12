@@ -17,7 +17,13 @@ export interface Recording {
   viewportX: number;
   viewportY: number;
   events?: Event[];
+  tags?: Tag[];
   dateString: string;
+}
+
+export interface Tag {
+  id: string;
+  name: string;
 }
 
 export interface PaginatedRecordingsResponse {
@@ -29,4 +35,16 @@ export interface RecordingPagination {
   pageSize: number;
   pageCount: number;
   sort: 'ASC' | 'DESC';
+}
+
+export interface TagCreateMutationInput {
+  site_id: string;
+  session_id: string;
+  name: string;
+}
+
+export interface TagDeleteMutationInput {
+  site_id: string;
+  session_id: string;
+  tag_id: string;
 }

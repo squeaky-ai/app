@@ -55,6 +55,16 @@ import {
   USER_PASSWORD_MUTATION
 } from 'data/users/mutations';
 
+import {
+  CREATE_TAG_MUTATION,
+  DELETE_TAG_MUTATION
+} from 'data/recordings/mutations';
+
+import {
+  TagCreateMutationInput,
+  TagDeleteMutationInput
+} from 'types/recording';
+
 const ACCEPT_INCOMING = <E, I>(_existing: E, incoming: I[]): I[] => [...incoming];
 
 const cache = new InMemoryCache({
@@ -308,6 +318,34 @@ export const teamDelete = async (input: TeamDeleteInput): Promise<SiteMutationRe
     });
 
     return { site: data.teamDelete };
+  } catch(error) {
+    console.error(error);
+    return parseGraphQLError(error);
+  }
+};
+
+export const tagCreate = async (input: TagCreateMutationInput): Promise<SiteMutationResponse> => {
+  try {
+    const { data } = await client.mutate({
+      mutation: CREATE_TAG_MUTATION,
+      variables: input
+    });
+
+    return { site: data.tagCreate };
+  } catch(error) {
+    console.error(error);
+    return parseGraphQLError(error);
+  }
+};
+
+export const tagDelete = async (input: TagDeleteMutationInput): Promise<SiteMutationResponse> => {
+  try {
+    const { data } = await client.mutate({
+      mutation: DELETE_TAG_MUTATION,
+      variables: input
+    });
+
+    return { site: data.tagDelete };
   } catch(error) {
     console.error(error);
     return parseGraphQLError(error);
