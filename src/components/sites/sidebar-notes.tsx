@@ -27,7 +27,7 @@ const NoteSchema = Yup.object().shape({
 export const SidebarNotes: FC<Props> = ({ recording }) => {
   const router = useRouter();
   const ref = React.useRef<Modal>();
-  const [_state, dispatch] = usePlayerState();
+  const [state, dispatch] = usePlayerState();
 
   const siteId = router.query.site_id + '';
 
@@ -43,6 +43,12 @@ export const SidebarNotes: FC<Props> = ({ recording }) => {
 
   const setProgress = (ms: number) => {
     dispatch({ type: 'progress', value: ms / 1000 });
+  };
+
+  const timeString = (seconds: number) => {
+    const date = new Date(0);
+    date.setSeconds(seconds);
+    return date.toISOString().substr(14, 5);
   };
 
   const handleDelete = async (id: string) => {
@@ -88,7 +94,7 @@ export const SidebarNotes: FC<Props> = ({ recording }) => {
       <Modal ref={ref}>
         <ModalBody aria-labelledby='add-note-title'>
           <Formik
-            initialValues={{ timestamp: '', body: '' }}
+            initialValues={{ timestamp: timeString(state.progress), body: '' }}
             validationSchema={NoteSchema}
             onSubmit={(values, { setSubmitting }) => {
               (async () => {
