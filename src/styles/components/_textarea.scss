@@ -1,0 +1,45 @@
+.textarea {
+  background: var(--gray-50);
+  border: 2px solid var(--gray-200);
+  border-radius: var(--border-radius-md);
+  margin: 0 0 1.5rem 0; 
+  outline: none;
+  padding: .35rem .75rem;
+  width: 100%;
+
+  & + .validation {
+    color: var(--magenta-500);
+    font-size: 13px;
+    line-height: 16px;
+    display: none;
+    margin: .5rem 0 1.5rem;
+  }
+
+  &.invalid {
+    border-color: var(--magenta-500);
+    margin-bottom: 0;
+
+    & + .validation {
+      display: block;
+    }
+  }
+
+  &:focus {
+    border-color: var(--blue-500);
+  }
+
+  &[type=search] {
+    appearance: none;
+
+    &::-webkit-search-cancel-button {
+      display: none;
+    }
+  }
+}
+
+.textarea:-webkit-autofill,
+.textarea:-webkit-autofill:hover,
+.textarea:-webkit-autofill:focus,
+.textarea:-webkit-autofill:active {
+    transition: background 5000s ease-in-out 0s;
+}

@@ -1,16 +1,15 @@
 import React from 'react';
 import type { FC } from 'react';
 import { Button } from 'components/button';
-import type { Event } from 'types/event';
 
 interface Props {
-  event: Event;
+  timestamp: number;
   offset: number;
   setProgress: (seconds: number) => void;
 }
 
-export const ActivityTimestamp: FC<Props> = ({ event, offset, setProgress }) => {
-  const timestamp = event.timestamp - offset;
+export const ActivityTimestamp: FC<Props> = ({ timestamp, offset, setProgress }) => {
+  const value = timestamp - offset;
 
   const timeString = (ms: number) => {
     const date = new Date(0);
@@ -19,13 +18,13 @@ export const ActivityTimestamp: FC<Props> = ({ event, offset, setProgress }) => 
   };
 
   const handleClick = () => {
-    const milliseconds = Math.round(timestamp);
+    const milliseconds = Math.round(value);
     setProgress(milliseconds);
   };
 
   return (
     <Button className='timestamp' onClick={handleClick}>
-      {timeString(timestamp)}
+      {timeString(value)}
     </Button>
   );
 };

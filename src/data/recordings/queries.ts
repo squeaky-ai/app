@@ -58,6 +58,14 @@ export const GET_RECORDING_QUERY = gql`
           id
           name
         }
+        notes {
+          id
+          timestamp
+          body
+          user {
+            fullName
+          }
+        }
         events {
           ... on Snapshot {
             eventId

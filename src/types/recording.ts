@@ -1,4 +1,5 @@
 import { Event } from 'types/event';
+import { User } from 'types/user';
 
 export interface Recording {
   id: string;
@@ -18,12 +19,20 @@ export interface Recording {
   viewportY: number;
   events?: Event[];
   tags?: Tag[];
+  notes?: Note[];
   dateString: string;
 }
 
 export interface Tag {
   id: string;
   name: string;
+}
+
+export interface Note {
+  id: string;
+  timestamp: number;
+  body: string;
+  user: User;
 }
 
 export interface PaginatedRecordingsResponse {
@@ -47,4 +56,17 @@ export interface TagDeleteMutationInput {
   site_id: string;
   session_id: string;
   tag_id: string;
+}
+
+export interface NoteCreateMutationInput {
+  site_id: string;
+  session_id: string;
+  body: string;
+  timestamp?: number;
+}
+
+export interface NoteDeleteMutationInput {
+  site_id: string;
+  session_id: string;
+  note_id: string;
 }

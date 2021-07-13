@@ -1,3 +1,4 @@
+import { camelCase } from 'lodash';
 import type { GetServerSideProps } from 'next';
 import { session } from 'lib/api/auth';
 import type { User } from 'types/user';
@@ -16,13 +17,23 @@ export interface ServerSideProps {
   user: User | null;
 }
 
+const getUser = async (cookie: string): Promise<User | null> => {
+  const user = await session(cookie);
+  if (!user) return null;
+
+  return Object.entries(user).reduce((acc, [k, v]) => {
+    const key = camelCase(k) as keyof User;
+    return { ...acc, [key]: v };
+  }, {} as User);
+};
+
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { resolvedUrl } = context;
   const { headers, cookies } = context.req;
 
   const url = resolvedUrl.split('?')[0];
 
-  const user = cookies.session ? await session<User>(headers.cookie) : null;
+  const user = cookies.session ? await getUser(headers.cookie) : null;
   const isPublic = PUBLIC_ROUTES.includes(url);
 
   // If the user doesn't exist and they're trying to access

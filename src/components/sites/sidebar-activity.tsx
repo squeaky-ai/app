@@ -22,7 +22,7 @@ export const SidebarActivity: FC<Props> = ({ recording, setProgress }) => {
             <>
               <i className='ri-compass-discover-line' />
               <p className='title'>
-                Page view <ActivityTimestamp event={item} offset={startedAt} setProgress={setProgress} />
+                Page view <ActivityTimestamp timestamp={item.timestamp} offset={startedAt} setProgress={setProgress} />
               </p>
               <p className='info'>{item.path}</p>
             </>
@@ -32,7 +32,7 @@ export const SidebarActivity: FC<Props> = ({ recording, setProgress }) => {
             <>
               <i className='ri-mouse-line' />
               <p className='title'>
-                Hover <ActivityTimestamp event={item} offset={startedAt} setProgress={setProgress} />
+                Hover <ActivityTimestamp timestamp={item.timestamp} offset={startedAt} setProgress={setProgress} />
               </p>
               <p className='info'>{item.selector}</p>
             </>
@@ -42,7 +42,7 @@ export const SidebarActivity: FC<Props> = ({ recording, setProgress }) => {
             <>
               <i className='ri-mouse-line' />
               <p className='title'>
-                Scrolled <ActivityTimestamp event={item} offset={startedAt} setProgress={setProgress} />
+                Scrolled <ActivityTimestamp timestamp={item.timestamp} offset={startedAt} setProgress={setProgress} />
               </p>
             </>
           )}
@@ -51,7 +51,7 @@ export const SidebarActivity: FC<Props> = ({ recording, setProgress }) => {
             <>
               <i className='ri-cursor-line' />
               <p className='title'>
-                Clicked <ActivityTimestamp event={item} offset={startedAt} setProgress={setProgress} />
+                Clicked <ActivityTimestamp timestamp={item.timestamp} offset={startedAt} setProgress={setProgress} />
               </p>
               <p className='info'>{item.selector}</p>
             </>

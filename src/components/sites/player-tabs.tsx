@@ -18,12 +18,12 @@ const tabs = [
   },
   {
     key: 'tags',
-    icon: 'ri-time-line',
+    icon: 'ri-price-tag-3-line',
     name: PlayerTab.TAGS
   },
   {
     key: 'activity',
-    icon: 'ri-information-line',
+    icon: 'ri-time-line',
     name: PlayerTab.ACTIVITY
   },
   {

@@ -57,12 +57,16 @@ import {
 
 import {
   CREATE_TAG_MUTATION,
-  DELETE_TAG_MUTATION
+  DELETE_TAG_MUTATION,
+  CREATE_NOTE_MUTATION,
+  DELETE_NOTE_MUTATION
 } from 'data/recordings/mutations';
 
 import {
   TagCreateMutationInput,
-  TagDeleteMutationInput
+  TagDeleteMutationInput,
+  NoteCreateMutationInput,
+  NoteDeleteMutationInput
 } from 'types/recording';
 
 const ACCEPT_INCOMING = <E, I>(_existing: E, incoming: I[]): I[] => [...incoming];
@@ -346,6 +350,34 @@ export const tagDelete = async (input: TagDeleteMutationInput): Promise<SiteMuta
     });
 
     return { site: data.tagDelete };
+  } catch(error) {
+    console.error(error);
+    return parseGraphQLError(error);
+  }
+};
+
+export const noteCreate = async (input: NoteCreateMutationInput): Promise<SiteMutationResponse> => {
+  try {
+    const { data } = await client.mutate({
+      mutation: CREATE_NOTE_MUTATION,
+      variables: input
+    });
+
+    return { site: data.noteCreate };
+  } catch(error) {
+    console.error(error);
+    return parseGraphQLError(error);
+  }
+};
+
+export const noteDelete = async (input: NoteDeleteMutationInput): Promise<SiteMutationResponse> => {
+  try {
+    const { data } = await client.mutate({
+      mutation: DELETE_NOTE_MUTATION,
+      variables: input
+    });
+
+    return { site: data.noteDelete };
   } catch(error) {
     console.error(error);
     return parseGraphQLError(error);
