@@ -43,7 +43,7 @@ export const ResendInvitation: FC<Props> = ({ site, team }) => {
         <ModalBody aria-labelledby='resend-invitation-title' aria-describedby='resend-invitation-description'>
           <ModalHeader>
             <p id='resend-invitation-title'><b>Resend Invitation</b></p>
-            <Button type='button' onClick={openModal}>
+            <Button type='button' onClick={closeModal}>
               <i className='ri-close-line' />
             </Button>
           </ModalHeader>

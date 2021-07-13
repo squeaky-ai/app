@@ -43,7 +43,7 @@ export const DeleteTeam: FC<Props> = ({ site, team }) => {
         <ModalBody aria-labelledby='delete-team-title' aria-describedby='delete-team-description'>
           <ModalHeader>
             <p id='delete-team-title'><b>Remove User</b></p>
-            <Button type='button' onClick={openModal}>
+            <Button type='button' onClick={closeModal}>
               <i className='ri-close-line' />
             </Button>
           </ModalHeader>

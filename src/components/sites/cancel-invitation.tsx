@@ -43,7 +43,7 @@ export const CancelInvitation: FC<Props> = ({ site, team }) => {
         <ModalBody aria-labelledby='cancel-invitation-title' aria-describedby='cancel-invitation-description'>
           <ModalHeader>
             <p id='cancel-invitation-title'><b>Cancel Invitation</b></p>
-            <Button type='button' onClick={openModal}>
+            <Button type='button' onClick={closeModal}>
               <i className='ri-close-line' />
             </Button>
           </ModalHeader>

@@ -70,3 +70,11 @@ export interface NoteDeleteMutationInput {
   session_id: string;
   note_id: string;
 }
+
+export interface NoteUpdateMutationInput {
+  site_id: string;
+  session_id: string;
+  note_id: string;
+  body?: string;
+  timestamp?: number;
+}

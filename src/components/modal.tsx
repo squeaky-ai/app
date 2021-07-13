@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import FocusTrap from 'focus-trap-react';
+import classnames from 'classnames';
 import type { FC } from 'react';
 
 interface State {
@@ -93,8 +94,8 @@ export const ModalContents: FC = ({ children, ...rest }) => (
   </div>
 );
 
-export const ModalFooter: FC = ({ children, ...rest }) => (
-  <div className='modal-footer' {...rest}>
+export const ModalFooter: FC<React.HTMLProps<HTMLDivElement>> = ({ children, className, ...rest }) => (
+  <div className={classnames('modal-footer', className)} {...rest}>
     {children}
   </div>
 );

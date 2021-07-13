@@ -63,3 +63,21 @@ export const DELETE_NOTE_MUTATION = gql`
     }
   }
 `;
+
+export const UPDATE_NOTE_MUTATION = gql`
+  mutation NoteUpdate($site_id: ID!, $session_id: ID!, $note_id: ID!, $body: String, $timestamp: Int) {
+    noteUpdate(input: { siteId: $site_id, sessionId: $session_id, noteId: $note_id, body: $body, timestamp: $timestamp }) {
+      id
+      recording(id: $session_id) {
+        notes {
+          id
+          body
+          timestamp
+          user {
+            fullName
+          }
+        }
+      }
+    }
+  }
+`;

@@ -2,8 +2,8 @@ import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
 import * as Yup from 'yup';
-import { useRouter } from 'next/router';
 import { Formik } from 'formik';
+import { useRouter } from 'next/router';
 import { Button } from 'components/button';
 import { Label } from 'components/label';
 import { Input } from 'components/input';
@@ -12,8 +12,8 @@ import { Note } from 'components/sites/note';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { TIMESTAMP_REGEX } from 'data/sites/constants';
 import { usePlayerState } from 'hooks/player-state';
-import { noteDelete } from 'lib/api/graphql';
-import type { Recording } from 'types/recording';
+import { noteDelete, noteCreate, noteUpdate } from 'lib/api/graphql';
+import type { Recording, Note as INote } from 'types/recording';
 
 interface Props {
   recording: Recording;
@@ -53,6 +53,16 @@ export const SidebarNotes: FC<Props> = ({ recording }) => {
     });
   };
 
+  const handleUpdate = async (note: INote) => {
+    await noteUpdate({
+      site_id: siteId, 
+      session_id: recording.id, 
+      note_id: note.id,
+      body: note.body,
+      timestamp: note.timestamp
+    })
+  };
+
   return (
     <>
       <div className={classnames('notes', { empty: notes.length === 0 })}>
@@ -61,12 +71,15 @@ export const SidebarNotes: FC<Props> = ({ recording }) => {
           <Button className='secondary' onClick={openModal}>+ Add Note</Button>
         </div>
         <div className='note-state'>
+          <Button className='secondary create-note' onClick={openModal}>+ Add Note</Button>
+
           {notes.map(note => (
             <Note 
               key={note.id} 
               note={note} 
               setProgress={setProgress} 
               handleDelete={handleDelete} 
+              handleUpdate={handleUpdate}
             />
           ))}
         </div>
@@ -79,8 +92,20 @@ export const SidebarNotes: FC<Props> = ({ recording }) => {
             validationSchema={NoteSchema}
             onSubmit={(values, { setSubmitting }) => {
               (async () => {
-                console.log(values);  
                 setSubmitting(false);
+
+                const timestamp = values.timestamp
+                  ? Number(values.timestamp.replace(':', '')) * 1000
+                  : null;
+
+                await noteCreate({ 
+                  site_id: siteId, 
+                  session_id: recording.id, 
+                  body: values.body,
+                  timestamp
+                });
+
+                closeModal();
               })();
             }}
           >
@@ -98,7 +123,7 @@ export const SidebarNotes: FC<Props> = ({ recording }) => {
             <form onSubmit={handleSubmit}>
               <ModalHeader>
                 <p id='add-note-title'><b>Add Note</b></p>
-                <Button type='button' onClick={openModal}>
+                <Button type='button' onClick={closeModal}>
                   <i className='ri-close-line' />
                 </Button>
               </ModalHeader>

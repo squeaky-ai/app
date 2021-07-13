@@ -43,7 +43,7 @@ export const LeaveTeam: FC<Props> = ({ site }) => {
         <ModalBody aria-labelledby='leave-team-title' aria-describedby='leave-team-description'>
           <ModalHeader>
             <p id='leave-team-title'><b>Leave site</b></p>
-            <Button type='button' onClick={openModal}>
+            <Button type='button' onClick={closeModal}>
               <i className='ri-close-line' />
             </Button>
           </ModalHeader>
