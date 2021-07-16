@@ -1,7 +1,8 @@
 import React from 'react';
 import type { FC } from 'react';
-import { EventType, IncrementalSource } from 'rrweb';
+import { EventType, IncrementalSource, MouseInteractions } from 'rrweb';
 import { ActivityTimestamp } from 'components/sites/activity-timestamp';
+import { useReplayer } from 'hooks/replayer';
 import type { Event } from 'types/event';
 import type { Recording } from 'types/recording';
 
@@ -9,18 +10,56 @@ interface Props {
   recording: Recording;
 }
 
+const getMouseInteractionLabel = (type: MouseInteractions): string => {
+  switch(type) {
+    case MouseInteractions.DblClick:
+    case MouseInteractions.Click:
+      return 'Clicked';
+    case MouseInteractions.Focus:
+      return 'Focus';
+    case MouseInteractions.Blur:
+      return 'Blur';
+    default:
+      return 'Unknown';
+  }
+};
+
 export const SidebarActivity: FC<Props> = ({ recording }) => {
+  const [replayer] = useReplayer();
+
   // Exlcude things that don't appear in the sidebar
   const events: Event[] = JSON.parse(recording.events || '[]');
 
   const activity = events.filter(item => {
-    if (item.type === EventType.Meta) return true;
+    // Page view events
+    if (item.type === EventType.Meta) {
+      return true;
+    }
 
-    return item.type === EventType.IncrementalSnapshot && [
-      IncrementalSource.Scroll, 
-      IncrementalSource.MouseInteraction
-    ].includes(item.data.source);
+    // Scroll events
+    if (item.type === EventType.IncrementalSnapshot && item.data.source === IncrementalSource.Scroll) {
+      return true;
+    }
+
+    // Interaction events that are worth showing
+    if (item.type === EventType.IncrementalSnapshot && item.data.source === IncrementalSource.MouseInteraction) {
+      return [
+        MouseInteractions.Click, 
+        MouseInteractions.Focus, 
+        MouseInteractions.Blur
+      ].includes(item.data.type) && item.data.id === Node.ELEMENT_NODE;
+    }
+    
+    return false;
   });
+
+  const getCssSelector = (id: number) => {
+    const node = replayer?.getMirror().getNode(id);
+    if (!node) return 'Loading...';
+
+    console.log(node);
+    return 'TODO';
+  }
 
   const startedAt = activity[0]?.timestamp || 0;
 
@@ -53,9 +92,9 @@ export const SidebarActivity: FC<Props> = ({ recording }) => {
             <>
               <i className='ri-cursor-line' />
               <p className='title'>
-                Clicked <ActivityTimestamp timestamp={item.timestamp} offset={startedAt} />
+                {getMouseInteractionLabel(item.data.type)} <ActivityTimestamp timestamp={item.timestamp} offset={startedAt} />
               </p>
-              <p className='info'>TODO</p>
+              <p className='info'>{getCssSelector(item.data.id)}</p>
             </>
           )}
         </li>
