@@ -27,7 +27,7 @@ const NoteSchema = Yup.object().shape({
 export const SidebarNotes: FC<Props> = ({ recording }) => {
   const router = useRouter();
   const ref = React.useRef<Modal>();
-  const [state, dispatch] = usePlayerState();
+  const [state] = usePlayerState();
 
   const siteId = router.query.site_id + '';
 
@@ -39,10 +39,6 @@ export const SidebarNotes: FC<Props> = ({ recording }) => {
 
   const closeModal = () => {
     if (ref.current) ref.current.hide();
-  };
-
-  const setProgress = (ms: number) => {
-    dispatch({ type: 'progress', value: ms / 1000 });
   };
 
   const timeString = (seconds: number) => {
@@ -82,8 +78,7 @@ export const SidebarNotes: FC<Props> = ({ recording }) => {
           {notes.map(note => (
             <Note 
               key={note.id} 
-              note={note} 
-              setProgress={setProgress} 
+              note={note}
               handleDelete={handleDelete} 
               handleUpdate={handleUpdate}
             />

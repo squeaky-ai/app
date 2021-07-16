@@ -5,10 +5,9 @@ import { Button } from 'components/button';
 interface Props {
   timestamp: number;
   offset: number;
-  setProgress: (seconds: number) => void;
 }
 
-export const ActivityTimestamp: FC<Props> = ({ timestamp, offset, setProgress }) => {
+export const ActivityTimestamp: FC<Props> = ({ timestamp, offset }) => {
   const value = timestamp - offset;
 
   const timeString = (ms: number) => {
@@ -19,7 +18,7 @@ export const ActivityTimestamp: FC<Props> = ({ timestamp, offset, setProgress })
 
   const handleClick = () => {
     const milliseconds = Math.round(value);
-    setProgress(milliseconds);
+    window.replayer.play(milliseconds);
   };
 
   return (

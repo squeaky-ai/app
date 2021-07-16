@@ -1,4 +1,3 @@
-import { Event } from 'types/event';
 import { User } from 'types/user';
 
 export interface Recording {
@@ -17,7 +16,7 @@ export interface Recording {
   browserString?: string;
   viewportX: number;
   viewportY: number;
-  events?: Event[];
+  events?: string;
   tags?: Tag[];
   notes?: Note[];
   dateString: string;

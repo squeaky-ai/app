@@ -66,50 +66,7 @@ export const GET_RECORDING_QUERY = gql`
             fullName
           }
         }
-        events {
-          ... on Snapshot {
-            eventId
-            type
-            event
-            snapshot
-            timestamp
-          }
-          ... on PageView {
-            eventId
-            type
-            locale
-            useragent 
-            path
-            timestamp
-          }
-          ... on Scroll {
-            eventId
-            type
-            x
-            y
-            timestamp
-          }
-          ... on Cursor {
-            eventId
-            type
-            x
-            y
-            offsetX
-            offsetY
-            timestamp
-          }
-          ... on Interaction {
-            eventId
-            type
-            selector
-            timestamp
-          }
-          ... on Visibility {
-            eventId
-            visible
-            timestamp
-          }
-        }
+        events
       }
     }
   }

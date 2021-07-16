@@ -22,10 +22,6 @@ export const PlayerSidebar: FC = () => {
     dispatch({ type: 'activeTab', value });
   };
 
-  const setProgress = (seconds: number) => {
-    dispatch({ type: 'progress', value: seconds });
-  };
-
   if (!state.recording) {
     // The page is likely loading
     return null;
@@ -66,7 +62,7 @@ export const PlayerSidebar: FC = () => {
           <Button onClick={handleClose}><i className='ri-close-line' /></Button>
         </Label>
         <div className='contents'>
-          <SidebarActivity recording={state.recording} setProgress={setProgress} />
+          <SidebarActivity recording={state.recording} />
         </div>
       </div>
       <div className={classnames('sidebar pages', { active: state.activeTab === PlayerTab.PAGES })}>

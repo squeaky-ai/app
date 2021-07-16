@@ -14,7 +14,6 @@ import { Note as INote } from 'types/recording';
 
 interface Props {
   note: INote;
-  setProgress: (value: number) => void;
   handleDelete: (id: string) => void;
   handleUpdate: (note: INote) => void;
 }
@@ -24,7 +23,7 @@ const NoteSchema = Yup.object().shape({
   body: Yup.string().required('Note is required')
 });
 
-export const Note: FC<Props> = ({ note, setProgress, handleDelete, handleUpdate }) => {
+export const Note: FC<Props> = ({ note, handleDelete, handleUpdate }) => {
   const ref = React.useRef<Modal>();
 
   const openModal = () => {
@@ -58,7 +57,7 @@ export const Note: FC<Props> = ({ note, setProgress, handleDelete, handleUpdate 
       <div className='note'>
         <div className='title'>
           {note.timestamp
-            ? <ActivityTimestamp timestamp={note.timestamp} offset={0} setProgress={setProgress} />
+            ? <ActivityTimestamp timestamp={note.timestamp} offset={0} />
             : <i className='no-timestamp'>No timestamp</i>
           }
           <Dropdown button={<i className='ri-more-2-fill' />} buttonClassName='kebab'>

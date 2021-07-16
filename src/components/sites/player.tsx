@@ -1,21 +1,16 @@
 import React from 'react';
 import type { FC } from 'react';
-import { PlayerIframe } from 'components/sites/player-iframe';
 import { PlayerLoading } from 'components/sites/player-loading';
 import { usePlayerState } from 'hooks/player-state';
-import type { Site } from 'types/site';
 
-interface Props {
-  site: Site;
-}
-
-const Player: FC<Props> = React.memo(({ site }) => {
+export const Player: FC = React.memo(() => {
   const [state, dispatch] = usePlayerState();
 
   React.useEffect(() => {
     if (!state.recording) return;
 
     const container = document.getElementById('player');
+
     const { width, height } = container.getBoundingClientRect();
     const { viewportX, viewportY } = state.recording;
 
@@ -38,14 +33,9 @@ const Player: FC<Props> = React.memo(({ site }) => {
   }
 
   return (
-    <PlayerIframe
-      site={site}
-      recording={state.recording}
-      playing={state.playing}
-      zoom={state.zoom}
-      playbackSpeed={state.playbackSpeed}
-    />
+    <main id='player'>
+      <div className='player-container' style={{ transform: `scale(${state.zoom})` }} />
+    </main>
   );
 });
 
-export default Player;

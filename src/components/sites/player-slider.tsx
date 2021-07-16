@@ -5,11 +5,12 @@ import { Button } from 'components/button';
 import { Slider } from 'components/slider';
 import { PlayerSpeed } from 'components/sites/player-speed';
 import { usePlayerState } from 'hooks/player-state';
+import type { Event } from 'types/event';
 
 export const PlayerSlider: FC = () => {
   const [state, dispatch] = usePlayerState();
 
-  const events = state.recording?.events || [];
+  const events: Event[] = JSON.parse(state.recording?.events || '[]');
 
   const firstEventTime = first(events)?.timestamp || 0;
   const lastEventTime = last(events)?.timestamp || 0;
@@ -24,7 +25,9 @@ export const PlayerSlider: FC = () => {
   };
 
   const handlePlayPause = () => {
-    dispatch({ type: 'playing', value: !state.playing });
+    state.playing
+      ? window.replayer.pause()
+      : window.replayer.play();
   };
 
   const handlePlaybackSpeed = (speed: number) => {
@@ -33,7 +36,8 @@ export const PlayerSlider: FC = () => {
 
   const handleScrub = throttle((event: ChangeEvent) => {
     const element = event.target as HTMLInputElement;
-    dispatch({ type: 'progress', value: Number(element.value) });
+    const value = Number(element.value);
+    window.replayer.pause(value * 1000);
   }, 25);
 
   return (
