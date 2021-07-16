@@ -1,3 +1,4 @@
+import React from 'react';
 import { first } from 'lodash';
 import { Replayer } from 'rrweb';
 import { usePlayerState } from 'hooks/player-state';
@@ -6,18 +7,23 @@ import type { Recording } from 'types/recording';
 
 type InitFunction = (element: HTMLElement, recording: Recording) => void;
 
-let replayer: Replayer;
+let replayer: Replayer = null;
 
 export const useReplayer = (): [Replayer | null, InitFunction] => {
   const [_state, dispatch] = usePlayerState();
 
   const init = (element: HTMLElement, recording: Recording) => {
     if (replayer) {
-      console.warn('Replayer already exist');
+      console.error('Replayer already exist');
       return;
     }
 
     const events: Event[] = JSON.parse(recording.events);
+
+    if (events.length === 0) {
+      console.error('Events list is empty');
+      return;
+    }
 
     replayer = new Replayer(events, {
       root: element,
@@ -44,6 +50,12 @@ export const useReplayer = (): [Replayer | null, InitFunction] => {
       }
     });
   };
+
+  React.useEffect(() => {
+    return () => {
+      replayer = null;
+    };
+  }, []);
 
   return [replayer, init];
 };
