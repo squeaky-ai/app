@@ -44,6 +44,7 @@ export const SidebarActivity: FC<Props> = ({ recording }) => {
     // Interaction events that are worth showing
     if (item.type === EventType.IncrementalSnapshot && item.data.source === IncrementalSource.MouseInteraction) {
       return [
+        MouseInteractions.DblClick,
         MouseInteractions.Click, 
         MouseInteractions.Focus, 
         MouseInteractions.Blur
