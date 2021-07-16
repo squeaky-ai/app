@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import { Button } from 'components/button';
+import { useReplayer } from 'hooks/replayer';
 
 interface Props {
   timestamp: number;
@@ -9,6 +10,7 @@ interface Props {
 
 export const ActivityTimestamp: FC<Props> = ({ timestamp, offset }) => {
   const value = timestamp - offset;
+  const [replayer] = useReplayer();
 
   const timeString = (ms: number) => {
     const date = new Date(0);
@@ -18,7 +20,7 @@ export const ActivityTimestamp: FC<Props> = ({ timestamp, offset }) => {
 
   const handleClick = () => {
     const milliseconds = Math.round(value);
-    window.replayer.play(milliseconds);
+    replayer?.play(milliseconds);
   };
 
   return (

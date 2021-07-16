@@ -4,11 +4,13 @@ import { first, last, throttle } from 'lodash';
 import { Button } from 'components/button';
 import { Slider } from 'components/slider';
 import { PlayerSpeed } from 'components/sites/player-speed';
+import { useReplayer } from 'hooks/replayer';
 import { usePlayerState } from 'hooks/player-state';
 import type { Event } from 'types/event';
 
 export const PlayerSlider: FC = () => {
   const [state, dispatch] = usePlayerState();
+  const [replayer] = useReplayer();
 
   const events: Event[] = JSON.parse(state.recording?.events || '[]');
 
@@ -26,8 +28,8 @@ export const PlayerSlider: FC = () => {
 
   const handlePlayPause = () => {
     state.playing
-      ? window.replayer.pause()
-      : window.replayer.play();
+      ? replayer?.pause()
+      : replayer?.play();
   };
 
   const handlePlaybackSpeed = (speed: number) => {
@@ -37,7 +39,7 @@ export const PlayerSlider: FC = () => {
   const handleScrub = throttle((event: ChangeEvent) => {
     const element = event.target as HTMLInputElement;
     const value = Number(element.value);
-    window.replayer.pause(value * 1000);
+    replayer?.pause(value * 1000);
   }, 25);
 
   return (

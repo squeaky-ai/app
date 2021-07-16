@@ -1,13 +1,19 @@
 import React from 'react';
 import type { FC } from 'react';
-import { PlayerLoading } from 'components/sites/player-loading';
+import { Spinner } from 'components/spinner';
+import { useReplayer } from 'hooks/replayer';
 import { usePlayerState } from 'hooks/player-state';
 
 export const Player: FC = React.memo(() => {
+  const ref = React.useRef<HTMLDivElement>(null);
+
+  const [replayer, init] = useReplayer();
   const [state, dispatch] = usePlayerState();
 
   React.useEffect(() => {
     if (!state.recording) return;
+
+    init(ref.current, state.recording);
 
     const container = document.getElementById('player');
 
@@ -28,13 +34,11 @@ export const Player: FC = React.memo(() => {
     dispatch({ type: 'zoom', value: Number(multiplier.toFixed(1)) });
   }, [state.recording]);
 
-  if (!state.recording) {
-    return <PlayerLoading />;
-  }
-
   return (
     <main id='player'>
-      <div className='player-container' style={{ transform: `scale(${state.zoom})` }} />
+      <div className='player-container' ref={ref} style={{ transform: `scale(${state.zoom})` }}>
+        {!replayer && <Spinner />}
+      </div>
     </main>
   );
 });
