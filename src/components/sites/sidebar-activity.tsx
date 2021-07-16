@@ -47,7 +47,7 @@ export const SidebarActivity: FC<Props> = ({ recording }) => {
         MouseInteractions.Click, 
         MouseInteractions.Focus, 
         MouseInteractions.Blur
-      ].includes(item.data.type) && item.data.id === Node.ELEMENT_NODE;
+      ].includes(item.data.type);
     }
     
     return false;
