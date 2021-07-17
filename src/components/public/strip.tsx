@@ -21,7 +21,7 @@ export const Strip: FC<Props> = ({ user }) => (
       {!user && (
         <>
           <i className='ri-mail-line' />
-          <a href='#'>Contact</a>
+          <Link href='/contact'><a>Contact</a></Link>
           <i className='ri-account-circle-line' />
           <Link href='/auth/login'><a>Login</a></Link>
         </>

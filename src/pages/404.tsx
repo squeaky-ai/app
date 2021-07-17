@@ -4,15 +4,12 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Container } from 'components/container';
-import { Header } from 'components/public/header';
 
 const NotFound: NextPage = () => (
   <div className='page not-found'>
     <Head>
       <title>Squeaky / 404</title>
     </Head>
-
-    <Header />
 
     <Container className='lg error-state'>
       <Container className='md'>

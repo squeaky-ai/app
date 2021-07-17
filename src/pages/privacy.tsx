@@ -7,17 +7,17 @@ import { Header } from 'components/public/header';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { Footer } from 'components/public/footer';
 
-const Terms: NextPage<ServerSideProps> = ({ user }) => (
-  <div className='page terms'>
+const Privacy: NextPage<ServerSideProps> = ({ user }) => (
+  <div className='page privacy'>
     <Head>
-      <title>Squeaky / Terms</title>
+      <title>Squeaky / Privacy</title>
     </Head>
 
     <Header user={user} />
 
     <Main>
       <Container className='xl'>
-        <p>Terms</p>
+        <p>Privacy</p>
       </Container>
     </Main>
 
@@ -25,5 +25,5 @@ const Terms: NextPage<ServerSideProps> = ({ user }) => (
   </div>
 );
 
-export default Terms;
+export default Privacy;
 export { getServerSideProps };

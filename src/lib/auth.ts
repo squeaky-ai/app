@@ -6,6 +6,7 @@ import type { User } from 'types/user';
 const PUBLIC_ROUTES = [
   '/',
   '/contact',
+  '/privacy',
   '/terms',
   '/auth/login',
   '/auth/signup',

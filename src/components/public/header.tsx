@@ -14,6 +14,7 @@ interface Props {
 export const Header: FC<Props> = ({ user }) => (
   <>
     <Strip user={user} />
+
     <BaseHeader className='public-header'>
       <Container className='xl centered'>
         <Link href='/'>
