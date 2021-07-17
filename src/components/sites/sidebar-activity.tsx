@@ -87,14 +87,18 @@ export const SidebarActivity: FC<Props> = ({ recording }) => {
     return [...acc];
   }, [] as Event[]);
 
+  const startedAt = activity[0]?.timestamp || 0;
+
   const getCssSelector = (id: number) => {
     const node = replayer?.getMirror().getNode(id);
     if (!node) return 'Loading...';
 
-    return cssPath(node) || 'html > body';
-  }
+    const element = node.nodeType === Node.TEXT_NODE
+      ? node.parentNode
+      : node;
 
-  const startedAt = activity[0]?.timestamp || 0;
+    return cssPath(element) || 'html > body';
+  }
 
   const getPathName = (url: string) => new URL(url).pathname;
 
