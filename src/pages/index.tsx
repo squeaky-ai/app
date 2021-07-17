@@ -1,11 +1,15 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
+import Image from 'next/image';
 import { Container } from 'components/container';
 import { Header } from 'components/public/header';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { Input } from 'components/input';
 import { Button } from 'components/button';
+import { Select, Option } from 'components/select';
+import { Footer } from 'components/public/footer';
+import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
 const Home: NextPage<ServerSideProps> = ({ user }) => (
   <div className='page home'>
@@ -27,12 +31,12 @@ const Home: NextPage<ServerSideProps> = ({ user }) => (
       </Container>
     </section>
 
-    <section className='section demo'>
+    <section className='section demo' id='recordings'>
       <Container className='lg centered'>
         <h2>Simple yet powerful</h2>
         <p>Our tools make it easy for you to understand <b>who your users</b> are and <b>how they’re using your site</b>.</p>
 
-        <div className='panels' id='recordings'>
+        <div className='panels'>
           <div className='list'>
             <h3>Screen Recording</h3>
             <Button>
@@ -106,6 +110,9 @@ const Home: NextPage<ServerSideProps> = ({ user }) => (
       <Container className='lg centered'>
         <h2>All The Right Features</h2>
         <div className='features-card'>
+          <div className='star'>
+            <Image src='/star.svg' height={256} width={273} />
+          </div>
           <div>
             <h4>Flexible &amp; Easy To Use</h4>
             <ul>
@@ -140,14 +147,130 @@ const Home: NextPage<ServerSideProps> = ({ user }) => (
           </div>
           <div>
             <div className='coming-soon'>
-
+              <p className='title'>
+                <img src='/fire.svg' />
+                <b>Coming Soon!</b>
+              </p>
+              <p>We’re moving at lightning-pace to keep the amazing features coming, next up on our roadmap:</p>
+              <ul>
+                <li>
+                  <i className='ri-download-cloud-line' />
+                  Analytics Exports
+                </li>
+                <li>
+                  <i className='ri-line-chart-line' />
+                  Automated Email Reports
+                </li>
+                <li>
+                  <i className='ri-cursor-line' />
+                  Heatmaps and clickmaps
+                </li>
+                <li>
+                  <i className='ri-lightbulb-line' />
+                  Insights &amp; Tips
+                </li>
+              </ul>
             </div>
           </div>
         </div>
-        <h2>Plans For Everyone</h2>
-        <p>We offer flexible and affordable pricing, so you can focus on the important part - improving your product.</p>
       </Container>
     </section>
+    <section className='section plan' id='pricing'>
+      <Container className='lg centered'>
+        <h2>Plans For Everyone</h2>
+        <p>We offer flexible and affordable pricing, so you can focus on the important part - improving your product.</p>
+        <Select className='price-select'>
+          <Option>USD ($)</Option>
+          <Option>GBP (£)</Option>
+          <Option>EUR (€)</Option>
+        </Select>
+        <div className='plans'>
+          <div className='plan-card'>
+            <h3>Free</h3>
+            <h4 className='price'>$0</h4>
+            <p>forever</p>
+            <ul>
+              <li>Unlimited team members</li>
+              <li>100 recordings per month</li>
+              <li>30 day analytics history</li>
+            </ul>
+            <div className='cta'>
+              <Link href='/auth/signup'>
+                <a className='button secondary'>
+                  Get Started Free
+                </a>
+              </Link>
+            </div>
+          </div>
+          <div className='plan-card important'>
+            <h3>Plus</h3>
+            <h4 className='price'>$50</h4>
+            <p>per month</p>
+            <ul>
+              <li>Unlimited team members</li>
+              <li>500 recordings per month</li>
+              <li>36 month analytics history</li>
+            </ul>
+            <div className='cta'>
+              <Link href='/auth/signup'>
+                <a className='button primary'>
+                  Get Started Free
+                </a>
+              </Link>
+            </div>
+          </div>
+          <div className='plan-card'>
+            <h3>Pro</h3>
+            <h4 className='price'>$150</h4>
+            <p>per month</p>
+            <ul>
+              <li>Unlimited team members</li>
+              <li>5000 recordings per month</li>
+              <li>1 year analytics history</li>
+            </ul>
+            <div className='cta'>
+              <Link href='/auth/signup'>
+                <a className='button secondary'>
+                  Get Started Free
+                </a>
+              </Link>
+            </div>
+          </div>
+          <div className='plan-card'>
+            <h3>Enterprise</h3>
+            <h4 className='price small'>Contact Sales</h4>
+            <p>TEL: +31 681171234</p>
+            <ul>
+              <li>Unlimited team members</li>
+              <li>Unlimited recordings</li>
+              <li>Unlimited analytics history</li>
+            </ul>
+            <div className='cta'>
+              <Link href='#'>
+                <a className='button secondary'>
+                  Get In Touch
+                </a>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+    <section className='section info'>
+      <Container className='lg centered'>
+        <img src='/basketball.svg' className='image basketball' />
+        <img src='/cheese-legs.svg' className='image cheese-legs' />
+
+        <h2>Looking For<br />More Information?</h2>
+        <p>Schedule a demo using the button below and we’ll give you a guided tour of Squeaky and answer any questions you might have.</p>
+        <Link href='#'>
+          <a className='button primary'>
+            Schedule Demo
+          </a>
+        </Link>
+      </Container>
+    </section>
+    <Footer />
   </div>
 );
 

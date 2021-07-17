@@ -124,17 +124,6 @@
       h2 {
         margin: 0 0 8rem 0;
         text-align: center;
-
-        &:nth-of-type(2) {
-          margin-bottom: 2rem;
-        }
-
-        + p {
-          color: var(--gray-700);
-          margin: 0 auto 1.5rem auto;
-          text-align: center;
-          width: 540px;
-        }
       }
 
       .features-card {
@@ -143,8 +132,8 @@
         display: grid;
         grid-gap: 3rem;
         grid-template-columns: repeat(auto-fill, minmax(0, 340px));
-        margin-bottom: 8rem;
         padding: 4rem;
+        position: relative;
 
         h4 {
           margin: 0 0 1rem 0;
@@ -172,10 +161,190 @@
           }
         }
 
+        .star {
+          left: -70px;
+          position: absolute;
+          top: -210px;
+        }
+
         .coming-soon {
           background: var(--white);
           border-radius: var(--border-radius-lg);
           padding: 1.5rem;
+
+          .title {
+            align-items: center;
+            color: var(--gray-800);
+            display: flex;
+
+            img {
+              margin-right: .75rem;
+            }
+          }
+
+          p {
+            color: var(--gray-500);
+          }
+
+          ul {
+            padding-top: 1rem;
+          }
+
+          li {
+            margin-bottom: 2.5rem;
+            padding: 0 1rem;
+
+            i {
+              color: var(--blue-500);
+              font-size: 1.5rem;
+              margin-right: 1rem;
+            }
+          }
+        }
+      }
+    }
+
+    &.plan {
+      padding: 0 0 8rem 0;
+
+      .container {
+        background-image: url('/flowers.svg');
+        background-repeat: no-repeat;
+        background-position: top right;
+      }
+
+      h2 {
+        margin-bottom: 2rem;
+        text-align: center;
+
+        + p {
+          color: var(--gray-700);
+          margin: 0 auto 2rem auto;
+          text-align: center;
+          width: 540px;
+        }
+      }
+
+      .price-select {
+        margin: 0 auto 4rem auto;
+        width: 120px;
+      }
+
+      .plans {
+        display: grid;
+        grid-gap: 2.5rem;
+        grid-template-columns: repeat(auto-fill, minmax(0, 280px));
+
+        .plan-card {
+          border: 2px solid var(--gray-100);
+          border-radius: var(--border-radius-lg);
+          overflow: hidden;
+
+          h3 {
+            align-items: center;
+            background: var(--gray-50);
+            display: flex;
+            height: 6rem;
+            justify-content: center;
+            margin: 0;
+          }
+
+          h4 {
+            align-items: center;
+            display: flex;
+            font-size: 48px;
+            font-weight: var(--font-weight-normal);
+            height: 64px;
+            justify-content: center;
+            margin: 2rem 0 1rem 0;
+            text-align: center;
+
+            &.small {
+              font-size: 28px;
+            }
+          }
+
+          p {
+            color: var(--gray-500);
+            margin: 0 0 2rem 0;
+            text-align: center;
+          }
+
+          ul {
+            margin: 0;
+            padding: 0 .75rem;
+
+            li {
+              border-bottom: 2px solid var(--gray-100);
+              list-style: none;
+              padding: 1rem;
+              text-align: center;
+
+              &:first-of-type {
+                border-top: 2px solid var(--gray-100);
+              }
+            }
+          }
+
+          .cta {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            margin: 3rem 0;
+
+            .button {
+              margin: 0 2rem;
+              text-align: center;
+              width: 100%;
+            }
+          }
+
+          &.important {
+            border-color: var(--blue-500);
+
+            h3 {
+              background: var(--blue-500);
+              color: var(--white);
+            }
+          }
+        }
+      }
+    }
+
+    &.info {
+      background: var(--gray-100);
+      text-align: center;
+      padding: 8rem 0;
+
+      h2 {
+        margin: 0 auto 2rem auto;
+        width: 520px;
+      }
+
+      p {
+        margin: 0 auto 2rem auto;
+        width: 540px;
+      }
+
+      .button {
+        margin: 0 auto;
+      }
+
+      .container {
+        position: relative;
+      }
+
+      .image {
+        position: absolute;
+
+        &.basketball {
+          left: 0;
+          top: 0;
+        }
+
+        &.cheese-legs {
+          bottom: 0;
+          right: 0;
         }
       }
     }
