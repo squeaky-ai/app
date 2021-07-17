@@ -3,23 +3,34 @@ import type { FC } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Header as BaseHeader } from 'components/header';
-import type { User } from 'types/user';
+import { Container } from 'components/container';
+import { Strip } from 'components/public/strip';
+import { User } from 'types/user';
 
 interface Props {
-  user?: User;
+  user: User;
 }
 
 export const Header: FC<Props> = ({ user }) => (
-  <BaseHeader className='public-header transparent'>
-    <Link href='/'>
-      <a className='logo'>
-        <Image src='/logo.svg' height={48} width={158} alt='Squeaky logo' />
-      </a>
-    </Link>
+  <>
+    <Strip user={user} />
+    <BaseHeader className='public-header transparent'>
+      <Container className='xl centered'>
+        <Link href='/'>
+          <a className='logo'>
+            <Image src='/logo.svg' height={32} width={103} alt='Squeaky logo' />
+          </a>
+        </Link>
 
-    {user
-      ? <p>Welcome back, <Link href='/sites'><a>Go to app</a></Link></p>
-      : <span>Already have an account? <Link href='/auth/login'><a>Log in</a></Link>.</span>
-    }
-  </BaseHeader>
+        <menu>
+          <a href='#'>Recordings</a>
+          <a href='#'>Analytics</a>
+          <a href='#'>Features</a>
+          <a href='#'>Pricing</a>
+          <Link href='/auth/signup'><a className='button primary'>Sign Up</a></Link>
+          <a href='#' className='button secondary'>Book Demo</a>
+        </menu>
+      </Container>
+    </BaseHeader>
+  </>
 );

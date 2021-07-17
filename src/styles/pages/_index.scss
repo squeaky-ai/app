@@ -1,12 +1,59 @@
 .page.home {
   flex: 1;
 
-  .container {
-    text-align: center;
+  .section {
+    &.hero {
+      padding: 10rem 0;
 
-    p {
-      margin: 3rem auto;
-      max-width: 560px;
+      .container {
+        background-image: url('/confusion.svg');
+        background-position: right center;
+        background-repeat: no-repeat;
+        background-size: auto 100%;
+      }
+
+      h1 {
+        margin: 0 0 2rem 0;
+      }
+
+      p {
+        margin: 0 0 3rem 0;
+        width: 600px;
+      }
+
+      form {
+        align-items: center;
+        display: flex;
+
+        input {
+          margin: 0 1rem 0 0;
+          width: 300px;
+        }
+
+        button {
+          margin-right: 1.5rem;
+        }
+
+        i {
+          color: var(--gray-700);
+        }
+      }
+    }
+
+    &.demo {
+      background: var(--gray-100);
+      padding: 8rem 0;
+
+      h2 {
+        margin: 0 0 2.5rem 0;
+        text-align: center;
+
+        & + p {
+          margin: 0 auto 8rem auto;
+          text-align: center;
+          width: 600px;
+        }
+      }
     }
   }
 }
