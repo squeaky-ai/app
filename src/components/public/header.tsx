@@ -8,7 +8,7 @@ import { Strip } from 'components/public/strip';
 import { User } from 'types/user';
 
 interface Props {
-  user: User;
+  user?: User;
 }
 
 export const Header: FC<Props> = ({ user }) => (
