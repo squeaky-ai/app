@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import { last } from 'lodash';
 import { EventType, IncrementalSource, MouseInteractions } from 'rrweb';
 import { ActivityTimestamp } from 'components/sites/activity-timestamp';
 import { useReplayer } from 'hooks/replayer';
@@ -10,6 +11,12 @@ import type { Recording } from 'types/recording';
 interface Props {
   recording: Recording;
 }
+
+const isPageViewEvent = (event: Event) => event.type === EventType.Meta;
+
+const isMouseEvent = (event: Event) => event.type === EventType.IncrementalSnapshot && event.data.source === IncrementalSource.MouseInteraction;
+
+const isScrollEvent = (event: Event) => event.type === EventType.IncrementalSnapshot && event.data.source === IncrementalSource.Scroll;
 
 const getMouseInteractionLabel = (type: MouseInteractions): string => {
   switch(type) {
@@ -60,17 +67,25 @@ export const SidebarActivity: FC<Props> = ({ recording }) => {
   // Exlcude things that don't appear in the sidebar
   const events: Event[] = JSON.parse(recording.events || '[]');
 
-  const activity = events.filter(item => {
-    if (item.type === EventType.Meta) {
-      return true;
+  const activity = events.reduce((acc, item) => {
+    // Add all of the page views
+    if (isPageViewEvent(item)) {
+      return [...acc, item];
     }
 
-    if (item.type === EventType.IncrementalSnapshot && [IncrementalSource.Scroll, IncrementalSource.MouseInteraction].includes(item.data.source)) {
-      return true;
+    // Add all of the mouse events
+    if (isMouseEvent(item)) {
+      return [...acc, item];
     }
 
-    return false;
-  });
+    // Only add scroll events if the previous event was not a scroll event
+    if (isScrollEvent(item)) {
+      const prevEvent = last(acc);
+      return isScrollEvent(prevEvent) ? [...acc] : [...acc, item];
+    }
+
+    return [...acc];
+  }, [] as Event[]);
 
   const getCssSelector = (id: number) => {
     const node = replayer?.getMirror().getNode(id);

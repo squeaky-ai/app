@@ -20,7 +20,7 @@ export const ActivityTimestamp: FC<Props> = ({ timestamp, offset }) => {
 
   const handleClick = () => {
     const milliseconds = Math.round(value);
-    replayer?.play(milliseconds);
+    replayer?.pause(milliseconds);
   };
 
   return (
