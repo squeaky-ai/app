@@ -14,7 +14,7 @@ interface Props {
 export const Header: FC<Props> = ({ user }) => (
   <>
     <Strip user={user} />
-    <BaseHeader className='public-header transparent'>
+    <BaseHeader className='public-header'>
       <Container className='xl centered'>
         <Link href='/'>
           <a className='logo'>
@@ -23,10 +23,10 @@ export const Header: FC<Props> = ({ user }) => (
         </Link>
 
         <menu>
-          <a href='#'>Recordings</a>
-          <a href='#'>Analytics</a>
-          <a href='#'>Features</a>
-          <a href='#'>Pricing</a>
+          <a href='#recordings'>Recordings</a>
+          <a href='#analytics'>Analytics</a>
+          <a href='#features'>Features</a>
+          <a href='#pricing'>Pricing</a>
           <Link href='/auth/signup'><a className='button primary'>Sign Up</a></Link>
           <a href='#' className='button secondary'>Book Demo</a>
         </menu>

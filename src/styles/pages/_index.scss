@@ -54,6 +54,130 @@
           width: 600px;
         }
       }
+
+      .panels {
+        display: flex;
+
+        .list {
+          flex-shrink: 0;
+          margin-right: 3rem;
+          width: 25rem;
+
+          h3 {
+            margin: 0 0 3rem 0;
+          }
+
+          .button {
+            align-items: center;
+            background: none;
+            border: none;
+            border-bottom: 2px solid var(--gray-150);
+            display: flex;
+            font-weight: var(--font-weight-normal);
+            padding: 1.5rem 1rem;
+            text-align: left;
+            width: 100%;
+
+            span {
+              flex: 1;
+            }
+
+            i {
+              font-size: 1.5rem;
+
+              &:first-of-type {
+                color: var(--blue-500);
+                margin-right: .75rem;
+              }
+
+              &:last-of-type {
+                color: var(--gray-500);
+              }
+            }
+          }
+        }
+
+        .screen {
+          flex: 1;
+
+          img {
+            width: 100%;
+          }
+        }
+
+        &.reverse {
+          flex-direction: row-reverse;
+          margin-top: 8rem;
+
+          .list {
+            margin-left: 3rem;
+            margin-right: 0;
+          }
+        }
+      }
+    }
+
+    &.features {
+      background: var(--white);
+      padding: 8rem 0;
+
+      h2 {
+        margin: 0 0 8rem 0;
+        text-align: center;
+
+        &:nth-of-type(2) {
+          margin-bottom: 2rem;
+        }
+
+        + p {
+          color: var(--gray-700);
+          margin: 0 auto 1.5rem auto;
+          text-align: center;
+          width: 540px;
+        }
+      }
+
+      .features-card {
+        background: var(--gray-100);
+        border-radius: var(--border-radius-lg);
+        display: grid;
+        grid-gap: 3rem;
+        grid-template-columns: repeat(auto-fill, minmax(0, 340px));
+        margin-bottom: 8rem;
+        padding: 4rem;
+
+        h4 {
+          margin: 0 0 1rem 0;
+
+          &:nth-of-type(2) {
+            margin-top: 5rem;
+          }
+        }
+
+        ul {
+          padding: 0;
+
+          li {
+            align-items: center;
+            color: var(--gray-700);
+            display: flex;
+            list-style: none;
+            margin-bottom: .5rem;
+
+            i {
+              color: var(--blue-300);
+              font-size: 1.5rem;
+              margin-right: .25rem;
+            }
+          }
+        }
+
+        .coming-soon {
+          background: var(--white);
+          border-radius: var(--border-radius-lg);
+          padding: 1.5rem;
+        }
+      }
     }
   }
 }
