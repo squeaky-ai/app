@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import { EventType, IncrementalSource, MouseInteractions } from 'rrweb';
 import { ActivityTimestamp } from 'components/sites/activity-timestamp';
 import { useReplayer } from 'hooks/replayer';
+import { cssPath } from 'lib/css-path';
 import type { Event } from 'types/event';
 import type { Recording } from 'types/recording';
 
@@ -12,6 +13,8 @@ interface Props {
 
 const getMouseInteractionLabel = (type: MouseInteractions): string => {
   switch(type) {
+    case MouseInteractions.MouseUp:
+    case MouseInteractions.MouseDown:
     case MouseInteractions.DblClick:
     case MouseInteractions.Click:
       return 'Clicked';
@@ -19,8 +22,35 @@ const getMouseInteractionLabel = (type: MouseInteractions): string => {
       return 'Focus';
     case MouseInteractions.Blur:
       return 'Blur';
+    case MouseInteractions.TouchEnd:
+    case MouseInteractions.TouchStart:
+    case MouseInteractions.TouchMove_Departed:
+      return 'Touch';
+    case MouseInteractions.ContextMenu:
+      return 'Context';
     default:
       return 'Unknown';
+  }
+};
+
+const getMouseInteractionIcon = (type: MouseInteractions): string => {
+  switch(type) {
+    case MouseInteractions.MouseUp:
+    case MouseInteractions.MouseDown:
+    case MouseInteractions.DblClick:
+    case MouseInteractions.Click:
+      return 'ri-cursor-line';
+    case MouseInteractions.Focus:
+    case MouseInteractions.Blur:
+      return 'ri-input-method-line';
+    case MouseInteractions.TouchEnd:
+    case MouseInteractions.TouchStart:
+    case MouseInteractions.TouchMove_Departed:
+      return 'ri-drag-drop-line';
+    case MouseInteractions.ContextMenu:
+      return 'ri-menu-line';
+    default:
+      return 'ri-question-line';
   }
 };
 
@@ -31,26 +61,14 @@ export const SidebarActivity: FC<Props> = ({ recording }) => {
   const events: Event[] = JSON.parse(recording.events || '[]');
 
   const activity = events.filter(item => {
-    // Page view events
     if (item.type === EventType.Meta) {
       return true;
     }
 
-    // Scroll events
-    if (item.type === EventType.IncrementalSnapshot && item.data.source === IncrementalSource.Scroll) {
+    if (item.type === EventType.IncrementalSnapshot && [IncrementalSource.Scroll, IncrementalSource.MouseInteraction].includes(item.data.source)) {
       return true;
     }
 
-    // Interaction events that are worth showing
-    if (item.type === EventType.IncrementalSnapshot && item.data.source === IncrementalSource.MouseInteraction) {
-      return [
-        MouseInteractions.DblClick,
-        MouseInteractions.Click, 
-        MouseInteractions.Focus, 
-        MouseInteractions.Blur
-      ].includes(item.data.type);
-    }
-    
     return false;
   });
 
@@ -58,8 +76,7 @@ export const SidebarActivity: FC<Props> = ({ recording }) => {
     const node = replayer?.getMirror().getNode(id);
     if (!node) return 'Loading...';
 
-    console.log(node);
-    return 'TODO';
+    return cssPath(node) || 'html > body';
   }
 
   const startedAt = activity[0]?.timestamp || 0;
@@ -91,7 +108,7 @@ export const SidebarActivity: FC<Props> = ({ recording }) => {
 
           {item.type === EventType.IncrementalSnapshot && item.data.source === IncrementalSource.MouseInteraction && (
             <>
-              <i className='ri-cursor-line' />
+              <i className={getMouseInteractionIcon(item.data.type)} />
               <p className='title'>
                 {getMouseInteractionLabel(item.data.type)} <ActivityTimestamp timestamp={item.timestamp} offset={startedAt} />
               </p>
