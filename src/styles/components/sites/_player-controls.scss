@@ -104,9 +104,14 @@
 
       & + .dropdown-menu {
         padding: 1.5rem;
+        width: 200px;
 
         .label:last-of-type {
           margin-bottom: 0;
+        }
+
+        .divider {
+          margin: 1.5rem 0;
         }
       }
     }

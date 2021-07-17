@@ -3,10 +3,14 @@ import type { FC } from 'react';
 import { Dropdown } from 'components/dropdown';
 import { Label } from 'components/label';
 import { Radio } from 'components/radio';
+import { Divider } from 'components/divider';
+import { Checkbox } from 'components/checkbox';
 
 interface Props {
   playbackSpeed: number;
+  skipInactivity: boolean;
   handlePlaybackSpeed: (speed: number) => void;
+  handleSkipInactivity: (skip: boolean) => void;
 }
 
 const speeds = [
@@ -32,8 +36,15 @@ const speeds = [
   }
 ];
 
-export const PlayerSpeed: FC<Props> = ({ playbackSpeed, handlePlaybackSpeed }) => {
+export const PlayerSpeed: FC<Props> = ({ 
+  playbackSpeed,
+  skipInactivity,
+  handlePlaybackSpeed,
+  handleSkipInactivity
+}) => {
   const { short } = speeds.find(s => s.value === playbackSpeed);
+
+  const handleSkipChange = () => handleSkipInactivity(!skipInactivity);
 
   return (
     <Dropdown button={short} buttonClassName='speed' direction='up'>
@@ -44,6 +55,12 @@ export const PlayerSpeed: FC<Props> = ({ playbackSpeed, handlePlaybackSpeed }) =
           {speed.name}
         </Radio>
       ))}
+
+      <Divider />
+
+      <Checkbox checked={skipInactivity} onChange={handleSkipChange}>
+        Skip inactivity
+      </Checkbox>
     </Dropdown>
   );
 };

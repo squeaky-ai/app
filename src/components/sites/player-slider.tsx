@@ -33,7 +33,14 @@ export const PlayerSlider: FC = () => {
   };
 
   const handlePlaybackSpeed = (speed: number) => {
-    dispatch({ type: 'playbackSpeed', value: speed });
+    replayer.setConfig({ speed });
+  };
+
+  const handleSkipInactivity = (skip: boolean) => {
+    replayer.setConfig({ skipInactive: skip });
+    // TODO: It would be nice if the replayer reacted and 
+    // dispatched but it doesn't seem to trigger anything
+    dispatch({ type: 'skipInactivity', value: skip });
   };
 
   const handleScrub = throttle((event: ChangeEvent) => {
@@ -50,11 +57,26 @@ export const PlayerSlider: FC = () => {
           : <i className='ri-play-fill' />
         }
       </Button>
-      <Slider type='range' min={0} max={durationSeconds} step={1} value={progress} onChange={handleScrub} />
+
+      <Slider 
+        type='range' 
+        min={0} 
+        max={durationSeconds} 
+        step={1} 
+        value={progress} 
+        onChange={handleScrub} 
+      />
+
       <span className='timestamps'>
         {timeString(state.progress)} / {timeString(durationSeconds)}
       </span>
-      <PlayerSpeed playbackSpeed={state.playbackSpeed} handlePlaybackSpeed={handlePlaybackSpeed} />
+
+      <PlayerSpeed 
+        playbackSpeed={state.playbackSpeed} 
+        skipInactivity={state.skipInactivity}
+        handlePlaybackSpeed={handlePlaybackSpeed} 
+        handleSkipInactivity={handleSkipInactivity}
+      />
     </>
   );
 };

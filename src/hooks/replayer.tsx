@@ -25,6 +25,13 @@ export const useReplayer = (): [Replayer | null, InitFunction] => {
       return;
     }
 
+    if (element.childNodes.length > 1) {
+      // TODO: Next doesn't like this on reload, I suspect
+      // it's because of the replayer in the global state
+      console.error('Something other than the spinner exists in the container');
+      return;
+    }
+
     replayer = new Replayer(events, {
       root: element,
       mouseTail: {
@@ -35,7 +42,8 @@ export const useReplayer = (): [Replayer | null, InitFunction] => {
 
     const offset = first<Event>(events).timestamp;
 
-    (replayer.on as any)('*', (type: string, x: Event) => {
+    // TODO: The typing for this is a mess
+    (replayer.on as any)('*', (type: string, x: any) => {
       switch(type) {
         case 'event-cast':
           const progress = Math.floor((x.timestamp - offset) / 1000);
@@ -47,14 +55,19 @@ export const useReplayer = (): [Replayer | null, InitFunction] => {
         case 'pause':
           dispatch({ type: 'playing', value: false });
           break;
+        case 'state-change':
+          if (x.speed) {
+            dispatch({ type: 'playbackSpeed', value: x.speed.context.timer.speed });
+          }
+          break;
       }
     });
   };
 
   React.useEffect(() => {
-    return () => {
-      replayer = null;
-    };
+    // Clean up between page views as the replayer lives in 
+    // the global state
+    return () => { replayer = null };
   }, []);
 
   return [replayer, init];

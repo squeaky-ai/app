@@ -46,7 +46,7 @@
     }
   }
 
-  &:focus {
+  &:focus-visible {
     outline: none !important;
 
     .check {
