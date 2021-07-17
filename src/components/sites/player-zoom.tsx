@@ -6,18 +6,22 @@ import { usePlayerState } from 'hooks/player-state';
 export const PlayerZoom: FC = () => {
   const [state, dispatch] = usePlayerState();
 
-  const min = .5;
+  const min = .1;
   const max = 2;
   const step = .1;
 
+  const getValueWithoutStupidRounding = (value: number) => {
+    return Number(value.toFixed(2));
+  };
+
   const handleZoomIn = () => {
     const next = state.zoom + step;
-    if (next <= max) dispatch({ type: 'zoom', value: next });
+    if (next <= max) dispatch({ type: 'zoom', value: getValueWithoutStupidRounding(next) });
   };
 
   const handleZoomOut = () => {
     const next = state.zoom - step;
-    if (next >= min) dispatch({ type: 'zoom', value: next });
+    if (next >= min) dispatch({ type: 'zoom', value: getValueWithoutStupidRounding(next) });
   };
 
   return (
