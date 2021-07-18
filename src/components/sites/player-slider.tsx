@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import type { FC } from 'react';
 import { first, last, throttle } from 'lodash';
 import { Button } from 'components/button';
@@ -9,8 +9,9 @@ import { usePlayerState } from 'hooks/player-state';
 import type { Event } from 'types/event';
 
 export const PlayerSlider: FC = () => {
-  const [state, dispatch] = usePlayerState();
   const [replayer] = useReplayer();
+  const [state, dispatch] = usePlayerState();
+  const [slide, setSlide] = React.useState<number>(0);
 
   const events: Event[] = JSON.parse(state.recording?.events || '[]');
 
@@ -43,11 +44,16 @@ export const PlayerSlider: FC = () => {
     dispatch({ type: 'skipInactivity', value: skip });
   };
 
-  const handleScrub = throttle((event: ChangeEvent) => {
+  const handleSlide = (event: React.ChangeEvent) => {
     const element = event.target as HTMLInputElement;
     const value = Number(element.value);
+    setSlide(value);
     replayer?.pause(value * 1000);
-  }, 25);
+  };
+
+  React.useEffect(() => {
+    setSlide(progress);
+  }, [progress]);
 
   return (
     <>
@@ -63,8 +69,8 @@ export const PlayerSlider: FC = () => {
         min={0} 
         max={durationSeconds} 
         step={1} 
-        value={progress} 
-        onChange={handleScrub} 
+        value={slide} 
+        onChange={handleSlide} 
       />
 
       <span className='timestamps'>
