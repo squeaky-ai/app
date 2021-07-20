@@ -6,7 +6,7 @@ import { Main } from 'components/main';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
 const Contact: NextPage<ServerSideProps> = () => (
-  <div className='page contact'>
+  <>
     <Head>
       <title>Squeaky / Contact</title>
     </Head>
@@ -17,7 +17,7 @@ const Contact: NextPage<ServerSideProps> = () => (
       </Container>
 
     </Main>
-  </div>
+  </>
 );
 
 export default Contact;

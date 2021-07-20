@@ -43,152 +43,155 @@ const Reset: NextPage<ServerSideProps> = () => {
   }, []);
 
   return (
-    <div className='page reset'>
+    <>
       <Head>
         <title>Squeaky / Reset Password</title>
       </Head>
-      <Container className='sm'>
-        <Card>
-          <Link href='/'>
-            <a className='logo'>
-              <Image src='/logo.svg' height={76} width={246} alt='Squeaky logo' />
-            </a>
-          </Link>
 
-          {pageView == PageView.EMAIL && (
-            <>
-              <h2>Reset Password</h2> 
+      <div className='center'>
+        <Container className='sm'>
+          <Card>
+            <Link href='/'>
+              <a className='logo'>
+                <Image src='/logo.svg' height={76} width={246} alt='Squeaky logo' />
+              </a>
+            </Link>
 
-              <p>If you’d like to reset your password, please enter your email address below and click the reset password button.</p>
+            {pageView == PageView.EMAIL && (
+              <>
+                <h2>Reset Password</h2> 
 
-              <Formik
-                initialValues={{ email: '' }}
-                validationSchema={ResetSchema}
-                onSubmit={(values, { setSubmitting }) => {
-                  (async () => {
-                    const { body } = await resetPassword(values.email);
-                    
-                    setEmail(values.email);
-                    setSubmitting(false);
+                <p>If you’d like to reset your password, please enter your email address below and click the reset password button.</p>
 
-                    if (body) {
-                      setPageView(PageView.VERIFY);
-                    }
-                  })();
-                }}
-              >
-                {({
-                  errors,
-                  handleBlur,
-                  handleChange,
-                  handleSubmit,
-                  isSubmitting,
-                  touched,
-                  values,
-                  isValid,
-                  dirty,
-                }) => (
-                  <form onSubmit={handleSubmit}>
-                    <Label htmlFor='email'>Email</Label>
-                    <Input
-                      name='email' 
-                      type='email' 
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      placeholder='e.g. jess@email.com'
-                      autoComplete='email'
-                      value={values.email}
-                      invalid={touched.email && !!errors.email}
-                    />
-                    <span className='validation'>{errors.email}</span>
+                <Formik
+                  initialValues={{ email: '' }}
+                  validationSchema={ResetSchema}
+                  onSubmit={(values, { setSubmitting }) => {
+                    (async () => {
+                      const { body } = await resetPassword(values.email);
+                      
+                      setEmail(values.email);
+                      setSubmitting(false);
 
-                    <Button  type='submit' disabled={isSubmitting || !(dirty && isValid)} className='primary'>
-                      Reset Password
-                    </Button>
-                  </form>
-                )}
-              </Formik>
-            </>
-          )}
+                      if (body) {
+                        setPageView(PageView.VERIFY);
+                      }
+                    })();
+                  }}
+                >
+                  {({
+                    errors,
+                    handleBlur,
+                    handleChange,
+                    handleSubmit,
+                    isSubmitting,
+                    touched,
+                    values,
+                    isValid,
+                    dirty,
+                  }) => (
+                    <form onSubmit={handleSubmit}>
+                      <Label htmlFor='email'>Email</Label>
+                      <Input
+                        name='email' 
+                        type='email' 
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        placeholder='e.g. jess@email.com'
+                        autoComplete='email'
+                        value={values.email}
+                        invalid={touched.email && !!errors.email}
+                      />
+                      <span className='validation'>{errors.email}</span>
 
-          {pageView == PageView.VERIFY && (
-            <div className='verify'>
-              <i className='ri-checkbox-circle-line' />
-              <h4>Check Your Email</h4>
-              <p>If you have an existing Squeaky account you will receive password reset instructions at the email address <b>{email}</b>.</p>
-              <DelayedButton delay={10} initialDelayed={false} className='secondary' onClick={() => resetPassword(email)}>
-                Resend Password
-              </DelayedButton>
-            </div>
-          )}
+                      <Button  type='submit' disabled={isSubmitting || !(dirty && isValid)} className='primary'>
+                        Reset Password
+                      </Button>
+                    </form>
+                  )}
+                </Formik>
+              </>
+            )}
 
-          {pageView === PageView.CHANGE && (
-            <>
-              <h2>Create New Password</h2>
-
-              <Formik
-                initialValues={{ reset_password_token: router.query.token as string, password: '' }}
-                validationSchema={ChangeSchema}
-                onSubmit={(values, { setSubmitting }) => {
-                  (async () => {
-                    const { error } = await changePassword(values);
-                    setSubmitting(false);
-
-                    if (!error) {
-                      setPageView(PageView.COMPLETE);
-                    }
-                  })();
-                }}
-              >
-                {({
-                  errors,
-                  handleBlur,
-                  handleChange,
-                  handleSubmit,
-                  isSubmitting,
-                  touched,
-                  values,
-                  isValid,
-                  dirty,
-                }) => (
-                  <form onSubmit={handleSubmit}>
-                    <Label htmlFor='password'>New password</Label>
-                    <Input
-                      name='password' 
-                      type='password' 
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      autoComplete='new-password'
-                      value={values.password}
-                      invalid={touched.password && !!errors.password}
-                    />
-                    <span className='validation'>{errors.password}</span>
-
-                    <Password password={values.password} />
-
-                    <Button  type='submit' disabled={isSubmitting || !(dirty && isValid)} className='primary'>
-                      Reset Password
-                    </Button>
-                  </form>
-                )}
-              </Formik>
-            </>
-          )}
-
-          {pageView === PageView.COMPLETE && (
-            <div className='complete'>
-              <div className='check'>
-                <i className='ri-check-line' />
+            {pageView == PageView.VERIFY && (
+              <div className='verify'>
+                <i className='ri-checkbox-circle-line' />
+                <h4>Check Your Email</h4>
+                <p>If you have an existing Squeaky account you will receive password reset instructions at the email address <b>{email}</b>.</p>
+                <DelayedButton delay={10} initialDelayed={false} className='secondary' onClick={() => resetPassword(email)}>
+                  Resend Password
+                </DelayedButton>
               </div>
-              <h4>Password Reset Successfully</h4>
-              <Link href='/auth/login'>
-                <a className='button primary'>Go To Login Page</a>
-              </Link>
-            </div>
-          )}
-        </Card>
-      </Container>
-    </div>
+            )}
+
+            {pageView === PageView.CHANGE && (
+              <>
+                <h2>Create New Password</h2>
+
+                <Formik
+                  initialValues={{ reset_password_token: router.query.token as string, password: '' }}
+                  validationSchema={ChangeSchema}
+                  onSubmit={(values, { setSubmitting }) => {
+                    (async () => {
+                      const { error } = await changePassword(values);
+                      setSubmitting(false);
+
+                      if (!error) {
+                        setPageView(PageView.COMPLETE);
+                      }
+                    })();
+                  }}
+                >
+                  {({
+                    errors,
+                    handleBlur,
+                    handleChange,
+                    handleSubmit,
+                    isSubmitting,
+                    touched,
+                    values,
+                    isValid,
+                    dirty,
+                  }) => (
+                    <form onSubmit={handleSubmit}>
+                      <Label htmlFor='password'>New password</Label>
+                      <Input
+                        name='password' 
+                        type='password' 
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        autoComplete='new-password'
+                        value={values.password}
+                        invalid={touched.password && !!errors.password}
+                      />
+                      <span className='validation'>{errors.password}</span>
+
+                      <Password password={values.password} />
+
+                      <Button  type='submit' disabled={isSubmitting || !(dirty && isValid)} className='primary'>
+                        Reset Password
+                      </Button>
+                    </form>
+                  )}
+                </Formik>
+              </>
+            )}
+
+            {pageView === PageView.COMPLETE && (
+              <div className='complete'>
+                <div className='check'>
+                  <i className='ri-check-line' />
+                </div>
+                <h4>Password Reset Successfully</h4>
+                <Link href='/auth/login'>
+                  <a className='button primary'>Go To Login Page</a>
+                </Link>
+              </div>
+            )}
+          </Card>
+        </Container>
+      </div>
+    </>
   );
 };
 

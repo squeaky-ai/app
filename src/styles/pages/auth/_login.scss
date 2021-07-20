@@ -1,11 +1,17 @@
-.page.login {
-  align-items: center;
+.page.auth.login {
   background: url('/squiggles.svg');
   background-color: var(--gray-100);
   display: flex;
   flex: 1;
   flex-direction: column;
-  justify-content: center;
+
+  .center {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+  }
 
   .card {
     flex-shrink: 0;

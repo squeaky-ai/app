@@ -6,7 +6,7 @@ import { Main } from 'components/main';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
 const Terms: NextPage<ServerSideProps> = () => (
-  <div className='page terms'>
+  <>
     <Head>
       <title>Squeaky / Terms</title>
     </Head>
@@ -16,7 +16,7 @@ const Terms: NextPage<ServerSideProps> = () => (
         <p>Terms</p>
       </Container>
     </Main>
-  </div>
+  </>
 );
 
 export default Terms;

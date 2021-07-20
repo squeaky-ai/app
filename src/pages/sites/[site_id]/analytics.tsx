@@ -10,7 +10,7 @@ import { Page } from 'components/sites/page';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
 const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => (
-  <div className='page analytics'>
+  <>
     <Head>
       <title>Squeaky / Site Analytics</title>
     </Head>
@@ -117,7 +117,7 @@ const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => (
         </>
       )}
     </Page>
-  </div>
+  </>
 );
 
 export default SitesAnalytics;

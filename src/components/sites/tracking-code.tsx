@@ -41,7 +41,7 @@ export const TrackingCode: FC<Props> = ({ site }) => {
   (function(s,q,e,a,u,k,y){
     s._sqSettings={site_id:'${site.uuid}'};
     u=q.getElementsByTagName('head')[0];
-    k=q.createElement('script');k.async=1;
+    k=q.createElement('script');
     k.src=e+s._sqSettings.site_id;
     u.appendChild(k);
   })(window,document,'https://cdn.squeaky.ai/g/0.3.1/script.js?');

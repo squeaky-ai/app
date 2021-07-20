@@ -25,7 +25,7 @@ const UsersAccount: NextPage<ServerSideProps> = ({ user }) => {
   const toast = useToasts();
 
   return (
-    <div className='page user account'>
+    <>
       <Head>
         <title>Squeaky / User / Account</title>
       </Head>
@@ -112,7 +112,7 @@ const UsersAccount: NextPage<ServerSideProps> = ({ user }) => {
           <a className='delete-account'>Delete account</a>
         </Link>
       </Main>
-    </div>
+    </>
   );
 };
 

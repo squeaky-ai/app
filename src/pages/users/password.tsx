@@ -25,7 +25,7 @@ const UsersPassword: NextPage<ServerSideProps> = ({ user }) => {
   const toasts = useToasts();
 
   return (
-    <div className='page user password'>
+    <>
       <Head>
         <title>Squeaky / User / Password</title>
       </Head>
@@ -108,7 +108,7 @@ const UsersPassword: NextPage<ServerSideProps> = ({ user }) => {
           </Formik>
         </Container>
       </Main>
-    </div>
+    </>
   );
 };
 

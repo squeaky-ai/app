@@ -13,7 +13,7 @@ const Sites: NextPage<ServerSideProps> = () => {
   const [loading, sites] = useSites();
 
   return (
-    <div className='page sites'>
+    <>
       <Head>
         <title>Squeaky / Sites</title>
       </Head>
@@ -55,7 +55,7 @@ const Sites: NextPage<ServerSideProps> = () => {
           </ul>
         </Main>
       )}
-    </div>
+    </>
   );
 };
 

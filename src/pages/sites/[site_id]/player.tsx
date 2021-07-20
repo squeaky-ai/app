@@ -14,7 +14,7 @@ const SitesPlayer: NextPage<ServerSideProps> = ({ user }) => {
   const [_recordingLoading, recording] = useRecording();
 
   return (
-    <div className='page player'>
+    <>
       <Head>
         <title>Squeaky / Site Player</title>
       </Head>
@@ -40,7 +40,7 @@ const SitesPlayer: NextPage<ServerSideProps> = ({ user }) => {
           </>
         )}
       </Page>
-    </div>
+    </>
   );
 };
 

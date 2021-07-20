@@ -63,138 +63,141 @@ const Login: NextPage<ServerSideProps> = () => {
   }, []);
 
   return (
-    <div className='page login'>
+    <>
       <Head>
         <title>Squeaky / Log in</title>
       </Head>
-      <Container className='sm'>
-        <Card>
-          <Link href='/'>
-            <a className='logo'>
-              <Image src='/logo.svg' height={76} width={246} alt='Squeaky logo' />
-            </a>
-          </Link>
 
-          {pageView === PageView.LOGIN && ( 
-            <>
-              <h2>Log In</h2>
+      <div className='center'>
+        <Container className='sm'>
+          <Card>
+            <Link href='/'>
+              <a className='logo'>
+                <Image src='/logo.svg' height={76} width={246} alt='Squeaky logo' />
+              </a>
+            </Link>
 
-              {!!email && (
-                <Message
-                  type='success'
-                  message='Your email address has been verified.'
-                />
-              )}
+            {pageView === PageView.LOGIN && ( 
+              <>
+                <h2>Log In</h2>
 
-              {(exceeded || failed) && (
-                <Message 
-                  type='error' 
-                  message={
-                    exceeded
-                      ? <span>You have made too many failed log in attempts. <b>Please retry in 10 minutes or contact us</b>.</span>
-                      : <span>Email and password combination not recognised. <b>{MAX_ATTEMPTS - attemps} attempts remaining</b>.</span>
-                  }
-                />
-              )}
-
-              <Formik
-                initialValues={{ email, password: '' }}
-                validationSchema={LoginSchema}
-                enableReinitialize
-                onSubmit={(values, { setSubmitting }) => {
-                  (async () => {
-                    if (exceeded) return;
-
-                    const { error } = await login(values);
-
-                    setSubmitting(false);
-
-                    if (!error) {
-                      clearAttempt();
-                      return await router.push('/sites');
-                    }
-
-                    if (/confirm your email/.test(error.error)) {
-                      setEmail(values.email);
-                      return setPageView(PageView.UNCONFIRMED);
-                    }
-                  
-                    setFailed(true);
-                    return incrAttempt();
-                  })();
-                }}
-              >
-                {({
-                  errors,
-                  handleBlur,
-                  handleChange,
-                  handleSubmit,
-                  isSubmitting,
-                  touched,
-                  values,
-                  isValid,
-                  dirty,
-                }) => (
-                  <form onSubmit={handleSubmit}>
-                    <Label htmlFor='email'>Email</Label>
-                    <Input
-                      name='email' 
-                      type='email' 
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      placeholder='e.g. jess@email.com'
-                      autoComplete='email'
-                      value={values.email}
-                      invalid={touched.email && !!errors.email}
-                    />
-                    <span className='validation'>{errors.email}</span>
-
-                    <Label htmlFor='password'>
-                      Password
-                      <Link href='/auth/reset'>
-                        <a>Forgot your password?</a>
-                      </Link>
-                    </Label>
-                    <Input
-                      name='password' 
-                      type='password' 
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      autoComplete='current-password'
-                      value={values.password}
-                      invalid={touched.password && !!errors.password}
-                    />
-                    <span className='validation'>{errors.password}</span>
-
-                    <Button type='submit' disabled={isSubmitting || !(dirty && isValid) || exceeded} className='primary'>
-                      Log in
-                    </Button>
-                  </form>
+                {!!email && (
+                  <Message
+                    type='success'
+                    message='Your email address has been verified.'
+                  />
                 )}
-              </Formik>
-            </>
-          )}
 
-          {pageView === PageView.UNCONFIRMED && (
-            <>
-              <Message
-                type='info'
-                message={<span>You have previously attempted to sign up with email address <span className='email'>{email}</span>. To resend the verification email click the button below.</span>}
-                className='reconfirm-message'
-              />
+                {(exceeded || failed) && (
+                  <Message 
+                    type='error' 
+                    message={
+                      exceeded
+                        ? <span>You have made too many failed log in attempts. <b>Please retry in 10 minutes or contact us</b>.</span>
+                        : <span>Email and password combination not recognised. <b>{MAX_ATTEMPTS - attemps} attempts remaining</b>.</span>
+                    }
+                  />
+                )}
 
-              <DelayedButton delay={10} initialDelayed={false} className='primary' onClick={resendConfirmation}>
-                Resend Verfication Email
-              </DelayedButton>
-            </>
-          )}
-        </Card>
-      </Container>
+                <Formik
+                  initialValues={{ email, password: '' }}
+                  validationSchema={LoginSchema}
+                  enableReinitialize
+                  onSubmit={(values, { setSubmitting }) => {
+                    (async () => {
+                      if (exceeded) return;
 
-      <div className='footer-link'>
-        <p>New to Squeaky? <Link href='/auth/signup'><a>Sign up</a></Link></p>
+                      const { error } = await login(values);
+
+                      setSubmitting(false);
+
+                      if (!error) {
+                        clearAttempt();
+                        return await router.push('/sites');
+                      }
+
+                      if (/confirm your email/.test(error.error)) {
+                        setEmail(values.email);
+                        return setPageView(PageView.UNCONFIRMED);
+                      }
+                    
+                      setFailed(true);
+                      return incrAttempt();
+                    })();
+                  }}
+                >
+                  {({
+                    errors,
+                    handleBlur,
+                    handleChange,
+                    handleSubmit,
+                    isSubmitting,
+                    touched,
+                    values,
+                    isValid,
+                    dirty,
+                  }) => (
+                    <form onSubmit={handleSubmit}>
+                      <Label htmlFor='email'>Email</Label>
+                      <Input
+                        name='email' 
+                        type='email' 
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        placeholder='e.g. jess@email.com'
+                        autoComplete='email'
+                        value={values.email}
+                        invalid={touched.email && !!errors.email}
+                      />
+                      <span className='validation'>{errors.email}</span>
+
+                      <Label htmlFor='password'>
+                        Password
+                        <Link href='/auth/reset'>
+                          <a>Forgot your password?</a>
+                        </Link>
+                      </Label>
+                      <Input
+                        name='password' 
+                        type='password' 
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        autoComplete='current-password'
+                        value={values.password}
+                        invalid={touched.password && !!errors.password}
+                      />
+                      <span className='validation'>{errors.password}</span>
+
+                      <Button type='submit' disabled={isSubmitting || !(dirty && isValid) || exceeded} className='primary'>
+                        Log in
+                      </Button>
+                    </form>
+                  )}
+                </Formik>
+              </>
+            )}
+
+            {pageView === PageView.UNCONFIRMED && (
+              <>
+                <Message
+                  type='info'
+                  message={<span>You have previously attempted to sign up with email address <span className='email'>{email}</span>. To resend the verification email click the button below.</span>}
+                  className='reconfirm-message'
+                />
+
+                <DelayedButton delay={10} initialDelayed={false} className='primary' onClick={resendConfirmation}>
+                  Resend Verfication Email
+                </DelayedButton>
+              </>
+            )}
+          </Card>
+        </Container>
+
+        <div className='footer-link'>
+          <p>New to Squeaky? <Link href='/auth/signup'><a>Sign up</a></Link></p>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

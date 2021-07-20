@@ -1,4 +1,4 @@
-.page.player {
+.page.sites.player {
   align-items: center;
   background: var(--gray-100);
   display: flex;
@@ -9,5 +9,9 @@
 
   .header {
     flex-shrink: 0;
+
+    &:first-of-type {
+      display: none;
+    }
   }
 }

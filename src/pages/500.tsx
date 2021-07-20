@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { Container } from 'components/container';
 
 const InternalServerError: NextPage = () => (
-  <div className='page internal-server-error'>
+  <>
     <Head>
       <title>Squeaky / 404</title>
     </Head>
@@ -23,7 +23,7 @@ const InternalServerError: NextPage = () => (
         </Link>
       </Container>
     </Container>
-  </div>
+  </>
 );
 
 export default InternalServerError;

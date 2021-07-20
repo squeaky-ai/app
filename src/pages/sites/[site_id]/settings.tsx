@@ -43,7 +43,7 @@ const SitesSettings: NextPage<ServerSideProps> = ({ user }) => {
   };
 
   return (
-    <div className='page settings'>
+    <>
       <Head>
         <title>Squeaky / Site Settings</title>
       </Head>
@@ -198,7 +198,7 @@ const SitesSettings: NextPage<ServerSideProps> = ({ user }) => {
           </>
         )}
       </Page>
-    </div>
+    </>
   );
 };
 

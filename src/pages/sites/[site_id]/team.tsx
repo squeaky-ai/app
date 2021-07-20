@@ -12,7 +12,7 @@ import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { OWNER, ADMIN } from 'data/teams/constants';
 
 const SitesTeam: NextPage<ServerSideProps> = ({ user }) => (
-  <div className='page team'>
+  <>
     <Head>
       <title>Squeaky / Site Team</title>
     </Head>
@@ -91,7 +91,7 @@ const SitesTeam: NextPage<ServerSideProps> = ({ user }) => (
         </>
       )}
     </Page>
-  </div>
+  </>
 );
 
 export default SitesTeam;

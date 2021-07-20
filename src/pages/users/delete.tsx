@@ -8,7 +8,7 @@ import { DeleteAccount } from 'components/users/delete-account';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
 const UsersDelete: NextPage<ServerSideProps> = () => (
-  <div className='page user delete'>
+  <>
     <Head>
       <title>Squeaky / User / Delete</title>
     </Head>
@@ -32,7 +32,7 @@ const UsersDelete: NextPage<ServerSideProps> = () => (
         <DeleteAccount />
       </Container>
     </Main>
-  </div>
+  </>
 );
 
 export default UsersDelete;

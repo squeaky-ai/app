@@ -9,7 +9,7 @@ import { OWNER } from 'data/teams/constants';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
 const SitesSubscription: NextPage<ServerSideProps> = ({ user }) => (
-  <div className='page subscription'>
+  <>
     <Head>
       <title>Squeaky / Site Settings</title>
     </Head>
@@ -28,7 +28,7 @@ const SitesSubscription: NextPage<ServerSideProps> = ({ user }) => (
         </>
       )}
     </Page>
-  </div>
+  </>
 );
 
 export default SitesSubscription;

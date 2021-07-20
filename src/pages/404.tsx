@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { Container } from 'components/container';
 
 const NotFound: NextPage = () => (
-  <div className='page not-found'>
+  <>
     <Head>
       <title>Squeaky / 404</title>
     </Head>
@@ -23,7 +23,7 @@ const NotFound: NextPage = () => (
         </Link>
       </Container>
     </Container>
-  </div>
+  </>
 );
 
 export default NotFound;

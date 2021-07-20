@@ -10,7 +10,7 @@ import { Page } from 'components/sites/page';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
 const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => (
-  <div className='page recordings'>
+  <>
     <Head>
       <title>Squeaky / Site Recordings</title>
     </Head>
@@ -42,7 +42,7 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => (
         </>
       )}
     </Page>
-  </div>
+  </>
 );
 
 export default SitesRecordings;

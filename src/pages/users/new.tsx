@@ -25,7 +25,7 @@ const UsersNew: NextPage<ServerSideProps> = ({ user }) => {
   const toast = useToasts();
 
   return (
-    <div className='page user new'>
+    <>
       <Head>
         <title>Squeaky / User / New</title>
       </Head>
@@ -108,7 +108,7 @@ const UsersNew: NextPage<ServerSideProps> = ({ user }) => {
           </Formik>
         </Container>
       </Main>
-    </div>
+    </>
   );
 };
 

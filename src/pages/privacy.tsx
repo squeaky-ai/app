@@ -6,7 +6,7 @@ import { Main } from 'components/main';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
 const Privacy: NextPage<ServerSideProps> = () => (
-  <div className='page privacy'>
+  <>
     <Head>
       <title>Squeaky / Privacy</title>
     </Head>
@@ -16,7 +16,7 @@ const Privacy: NextPage<ServerSideProps> = () => (
         <p>Privacy</p>
       </Container>
     </Main>
-  </div>
+  </>
 );
 
 export default Privacy;
