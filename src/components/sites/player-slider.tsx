@@ -1,6 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
-import { first, last, throttle } from 'lodash';
+import { first, last } from 'lodash';
 import { Button } from 'components/button';
 import { Slider } from 'components/slider';
 import { PlayerSpeed } from 'components/sites/player-speed';
