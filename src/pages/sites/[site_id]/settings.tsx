@@ -5,7 +5,6 @@ import Link from 'next/link';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { Container } from 'components/container';
-import { Header } from 'components/sites/header';
 import { Label } from 'components/label';
 import { Input } from 'components/input';
 import { Button } from 'components/button';
@@ -48,8 +47,6 @@ const SitesSettings: NextPage<ServerSideProps> = ({ user }) => {
       <Head>
         <title>Squeaky / Site Settings</title>
       </Head>
-
-      <Header />
 
       <Page user={user} scope={[OWNER, ADMIN]}>
         {({ site, member }) => (

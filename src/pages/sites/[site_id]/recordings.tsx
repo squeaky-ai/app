@@ -2,7 +2,6 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
-import { Header } from 'components/sites/header';
 import { Message } from 'components/message';
 import { Container } from 'components/container';
 import { Tabs } from 'components/sites/tabs';
@@ -15,8 +14,6 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => (
     <Head>
       <title>Squeaky / Site Recordings</title>
     </Head>
-
-    <Header />
 
     <Page user={user} scope={[]}>
       {({ site, member }) => (

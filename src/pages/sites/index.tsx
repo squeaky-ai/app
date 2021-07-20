@@ -3,7 +3,6 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Header } from 'components/sites/header';
 import { Avatar } from 'components/sites/avatar';
 import { Main } from 'components/main';
 import { CreateSite } from 'components/sites/create-site';
@@ -18,8 +17,6 @@ const Sites: NextPage<ServerSideProps> = () => {
       <Head>
         <title>Squeaky / Sites</title>
       </Head>
-
-      <Header />
 
       {!loading && sites.length === 0 && (
         <div className='empty-state'>

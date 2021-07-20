@@ -8,7 +8,6 @@ import { Container } from 'components/container';
 import { Label } from 'components/label';
 import { Input } from 'components/input';
 import { Button } from 'components/button';
-import { Header } from 'components/sites/header';
 import { Main } from 'components/main';
 import { Message } from 'components/message';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
@@ -30,8 +29,6 @@ const UsersNew: NextPage<ServerSideProps> = ({ user }) => {
       <Head>
         <title>Squeaky / User / New</title>
       </Head>
-
-      <Header />
 
       <Main>
         <h3 className='title'>Account Settings</h3>

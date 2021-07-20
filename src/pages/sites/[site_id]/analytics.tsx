@@ -3,7 +3,6 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import { Main } from 'components/main';
-import { Header } from 'components/sites/header';
 import { Tabs } from 'components/sites/tabs';
 import { Message } from 'components/message';
 import { Container } from 'components/container';
@@ -15,8 +14,6 @@ const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => (
     <Head>
       <title>Squeaky / Site Analytics</title>
     </Head>
-
-    <Header />
 
     <Page user={user} scope={[]}>
       {({ site, member }) => (

@@ -1,18 +1,8 @@
 import { camelCase } from 'lodash';
 import type { GetServerSideProps } from 'next';
 import { session } from 'lib/api/auth';
+import { PUBLIC_ROUTES } from 'data/common/constants';
 import type { User } from 'types/user';
-
-const PUBLIC_ROUTES = [
-  '/',
-  '/contact',
-  '/privacy',
-  '/terms',
-  '/auth/login',
-  '/auth/signup',
-  '/auth/reset',
-  '/auth/accept'
-];
 
 export interface ServerSideProps {
   user: User | null;

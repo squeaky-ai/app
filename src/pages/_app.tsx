@@ -9,10 +9,12 @@ import { Page } from 'components/page';
 import '../styles/main.scss';
 
 const App: FC<AppProps> = ({ Component, pageProps }) => {
+  const { user } = pageProps;
+
   return (
     <ApolloProvider client={client}>
       <ToastProvider>
-        <Page>
+        <Page user={user}>
           <Component {...pageProps} />
         </Page>
       </ToastProvider>

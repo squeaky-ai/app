@@ -4,21 +4,17 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Container } from 'components/container';
-import { Header } from 'components/public/header';
 import { Input } from 'components/input';
 import { Button } from 'components/button';
 import { Select, Option } from 'components/select';
-import { Footer } from 'components/public/footer';
 import { Main } from 'components/main';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
-const Home: NextPage<ServerSideProps> = ({ user }) => (
+const Home: NextPage<ServerSideProps> = () => (
   <div className='page home'>
     <Head>
       <title>Squeaky</title>
     </Head>
-
-    <Header user={user} />
     
     <Main>
       <section className='section hero'>
@@ -273,8 +269,6 @@ const Home: NextPage<ServerSideProps> = ({ user }) => (
         </Container>
       </section>
     </Main>
-
-    <Footer />
   </div>
 );
 

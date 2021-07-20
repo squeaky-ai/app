@@ -4,7 +4,6 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { Container } from 'components/container';
 import { Main } from 'components/main';
-import { Header } from 'components/sites/header';
 import { DeleteAccount } from 'components/users/delete-account';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
@@ -13,8 +12,6 @@ const UsersDelete: NextPage<ServerSideProps> = () => (
     <Head>
       <title>Squeaky / User / Delete</title>
     </Head>
-
-    <Header />
 
     <Main>
       <h3 className='title'>Delete Account</h3>

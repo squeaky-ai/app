@@ -2,7 +2,6 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { Container } from 'components/container';
-import { Header } from 'components/sites/header';
 import { Main } from 'components/main';
 import { Tabs } from 'components/sites/tabs';
 import { Access } from 'components/sites/access';
@@ -17,8 +16,6 @@ const SitesTeam: NextPage<ServerSideProps> = ({ user }) => (
     <Head>
       <title>Squeaky / Site Team</title>
     </Head>
-
-    <Header />
 
     <Page user={user} scope={[OWNER, ADMIN]}>
       {({ site, member }) => (
