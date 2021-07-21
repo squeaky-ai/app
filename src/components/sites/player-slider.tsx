@@ -1,22 +1,18 @@
 import React from 'react';
 import type { FC } from 'react';
-import { first, last } from 'lodash';
 import { Button } from 'components/button';
 import { Slider } from 'components/slider';
 import { PlayerSpeed } from 'components/sites/player-speed';
 import { useReplayer } from 'hooks/replayer';
 import { usePlayerState } from 'hooks/player-state';
-import type { Event } from 'types/event';
 
 export const PlayerSlider: FC = () => {
   const [replayer] = useReplayer();
   const [state, dispatch] = usePlayerState();
   const [slide, setSlide] = React.useState<number>(0);
 
-  const events: Event[] = JSON.parse(state.recording?.events || '[]');
-
-  const firstEventTime = first(events)?.timestamp || 0;
-  const lastEventTime = last(events)?.timestamp || 0;
+  const firstEventTime = state.recording.connectedAt;
+  const lastEventTime = state.recording.disconnectedAt || firstEventTime;
 
   const progress = Math.floor(state.progress);
   const durationSeconds = Math.floor((lastEventTime - firstEventTime) / 1000);
@@ -54,6 +50,10 @@ export const PlayerSlider: FC = () => {
   React.useEffect(() => {
     setSlide(progress);
   }, [progress]);
+
+  React.useEffect(() => {
+    console.log(state.playing);
+  }, [state.playing]);
 
   return (
     <>
