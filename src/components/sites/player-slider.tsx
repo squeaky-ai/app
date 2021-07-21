@@ -11,12 +11,6 @@ export const PlayerSlider: FC = () => {
   const [state, dispatch] = usePlayerState();
   const [slide, setSlide] = React.useState<number>(0);
 
-  const firstEventTime = state.recording.connectedAt;
-  const lastEventTime = state.recording.disconnectedAt || firstEventTime;
-
-  const progress = Math.floor(state.progress);
-  const durationSeconds = Math.floor((lastEventTime - firstEventTime) / 1000);
-
   const timeString = (ms: number) => {
     const date = new Date(0);
     date.setSeconds(ms);
@@ -46,6 +40,18 @@ export const PlayerSlider: FC = () => {
     setSlide(value);
     replayer?.pause(value * 1000);
   };
+
+  const getDuration = () => {
+    if (!state.recording) return 0;
+
+    const firstEventTime = state.recording.connectedAt;
+    const lastEventTime = state.recording.disconnectedAt || firstEventTime;
+  
+    return Math.floor((lastEventTime - firstEventTime) / 1000);
+  };
+
+  const progress = Math.floor(state.progress);
+  const durationSeconds = getDuration();
 
   React.useEffect(() => {
     setSlide(progress);

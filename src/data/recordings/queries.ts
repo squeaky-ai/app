@@ -58,6 +58,8 @@ export const GET_RECORDING_QUERY = gql`
         viewportY
         browser
         active
+        connectedAt
+        disconnectedAt
         tags {
           id
           name
