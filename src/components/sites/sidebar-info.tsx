@@ -15,7 +15,7 @@ export const SidebarInfo: FC<Props> = ({ recording, setActiveTab }) => (
   <dl className='datalist'>
     <div className='row'>
       <dt>Session #</dt>
-      <dd><span className={classnames('indicator', { active: recording.active })} /> {recording.id}</dd>
+      <dd><span className={classnames('indicator', { active: recording.active })} /> {recording.sessionId}</dd>
     </div>
     <div className='row'>
       <dt>User</dt>

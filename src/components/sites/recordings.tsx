@@ -97,13 +97,13 @@ export const Recordings: FC = () => {
             {recordings.items.map(recording => (
               <tr 
                 className='hover' 
-                key={recording.id} 
+                key={recording.sessionId} 
                 role='link' 
-                data-href={`/sites/${router.query.site_id}/player?recording_id=${recording.id}`} 
-                onClick={() => viewRecording(recording.id)} 
+                data-href={`/sites/${router.query.site_id}/player?recording_id=${recording.sessionId}`} 
+                onClick={() => viewRecording(recording.sessionId)} 
                 tabIndex={0}
               >
-                <td><span className={classnames('indicator', { active: recording.active })} /><Highlighter value={query}>{recording.id}</Highlighter></td>
+                <td><span className={classnames('indicator', { active: recording.active })} /><Highlighter value={query}>{recording.sessionId}</Highlighter></td>
                 <td><Highlighter value={query}>{recording.viewerId}</Highlighter></td>
                 <td><Highlighter value={query}>{recording.dateString}</Highlighter></td>
                 <td><Highlighter value={query}>{recording.durationString}</Highlighter></td>
@@ -111,7 +111,7 @@ export const Recordings: FC = () => {
                 <td className='no-overflow'>
                   <Tooltip button={recording.pageCount} buttonClassName='link'>
                     <ul className='tooltip-list'>
-                      {recording.pages.map((page, i) => (
+                      {recording.pageViews.map((page, i) => (
                         <li key={page + i}>{page}</li>
                       ))}
                     </ul>

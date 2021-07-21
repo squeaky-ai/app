@@ -14,13 +14,14 @@ export const GET_RECORDINGS_QUERY = gql`
           durationString
           startPage
           exitPage
-          pages
+          pageViews
           pageCount
           deviceType
           browser
           browserString
           viewportX
           viewportY
+          sessionId
           viewerId
           dateString
         }
@@ -41,11 +42,12 @@ export const GET_RECORDING_QUERY = gql`
       name
       recording(id: $recording_id) {
         id
+        sessionId
         viewerId
         dateString
         language
         durationString
-        pages
+        pageViews
         pageCount
         startPage
         exitPage

@@ -50,7 +50,7 @@ export const SidebarNotes: FC<Props> = ({ recording }) => {
   const handleDelete = async (id: string) => {
     await noteDelete({ 
       site_id: siteId, 
-      session_id: recording.id, 
+      session_id: recording.sessionId, 
       note_id: id
     });
   };
@@ -58,7 +58,7 @@ export const SidebarNotes: FC<Props> = ({ recording }) => {
   const handleUpdate = async (note: INote) => {
     await noteUpdate({
       site_id: siteId, 
-      session_id: recording.id, 
+      session_id: recording.sessionId, 
       note_id: note.id,
       body: note.body,
       timestamp: note.timestamp
@@ -101,7 +101,7 @@ export const SidebarNotes: FC<Props> = ({ recording }) => {
 
                 await noteCreate({ 
                   site_id: siteId, 
-                  session_id: recording.id, 
+                  session_id: recording.sessionId, 
                   body: values.body,
                   timestamp
                 });

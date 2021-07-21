@@ -4,10 +4,11 @@ export interface Recording {
   id: string;
   active: boolean;
   language: string;
+  sessionId: string;
   viewerId: string;
   duration: number;
   durationString: string;
-  pages: string[];
+  pageViews: string[];
   pageCount: number;
   startPage: string;
   exitPage: string;
