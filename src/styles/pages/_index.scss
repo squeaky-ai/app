@@ -38,6 +38,15 @@
           color: var(--gray-700);
         }
       }
+
+      @include breakpoint-lg {
+        padding: 10rem 2rem;
+
+        h1 {
+          font-size: 48px;
+          line-height: 64px;
+        }
+      }
     }
 
     &.demo {
@@ -112,6 +121,20 @@
           .list {
             margin-left: 3rem;
             margin-right: 0;
+          }
+        }
+      }
+      
+      @include breakpoint-lg {
+        padding: 8rem 2rem;
+
+        .panels {
+          .list {
+            width: calc(50% - 3rem);
+          }
+
+          .screen {
+            padding-top: 6.5rem;
           }
         }
       }
@@ -199,6 +222,24 @@
               font-size: 1.5rem;
               margin-right: 1rem;
             }
+          }
+        }
+      }
+
+      @include breakpoint-lg {
+        padding: 8rem 2rem;
+
+        h2 {
+          text-align: left;
+        }
+
+        .features-card {
+          grid-template-columns: 50% 50%;
+
+          .star {
+            left: auto;
+            right: -1rem;
+            transform: scaleX(-1);
           }
         }
       }
@@ -307,6 +348,27 @@
               color: var(--white);
             }
           }
+        }
+      }
+
+      @include breakpoint-lg {
+        padding: 0 2rem 8rem 2rem;
+
+        h2 {
+          text-align: left;
+
+          & + p {
+            margin: 0 0 2rem 0;
+            text-align: left;
+          }
+        }
+
+        .price-select {
+          margin: 0 0 4rem 0;
+        }
+
+        .plans {
+          grid-template-columns: calc(50% - 1.5rem) calc(50% - 1.5rem);
         }
       }
     }
