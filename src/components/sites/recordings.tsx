@@ -18,7 +18,7 @@ import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 export const Recordings: FC = () => {
   const router = useRouter();
 
-  const [page, setPage] = React.useState<number>(0);
+  const [page, setPage] = React.useState<number>(1);
   const [query, setQuery] = React.useState<string>('');
   const [sort, setSort] = React.useState<'ASC' | 'DESC'>('DESC');
 
@@ -148,7 +148,7 @@ export const Recordings: FC = () => {
       </div>
 
       <Pagination 
-        page={page} 
+        page={page - 1} 
         setPage={setPage}
         {...recordings.pagination}
       />

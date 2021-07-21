@@ -13,22 +13,24 @@ interface Props extends React.HTMLAttributes<HTMLUListElement> {
 export const Pagination: FC<Props> = ({ className, page, pageCount, setPage }) => {
   if (pageCount < 2) return null;
 
+  console.log(page);
+
   return (
     <ul className={classnames('pagination', className)}>
       <li>
-        <Button className='back' disabled={page === 0} onClick={() => setPage(page - 1)}>
+        <Button className='back' disabled={page === 0} onClick={() => setPage(page)}>
           <i className='ri-arrow-drop-left-line' />
         </Button>
       </li>
       {range(pageCount).map(i => (
         <li key={i}>
-          <Button className={classnames({ active: i === page })} disabled={page === i}  onClick={() => setPage(i)}>
+          <Button className={classnames({ active: i === page })} disabled={page === i}  onClick={() => setPage(i + 1)}>
             {i + 1}
           </Button>
         </li>
       ))}
       <li>
-        <Button className='forward' disabled={(pageCount - 1) <= page} onClick={() => setPage(page + 1)}>
+        <Button className='forward' disabled={(pageCount - 1) <= page} onClick={() => setPage(page + 2)}>
           <i className='ri-arrow-drop-right-line' />
         </Button>
       </li>
