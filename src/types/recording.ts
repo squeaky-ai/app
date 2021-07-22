@@ -21,8 +21,6 @@ export interface Recording {
   tags?: Tag[];
   notes?: Note[];
   dateString: string;
-  connectedAt: number;
-  disconnectedAt: number;
 }
 
 export interface Tag {

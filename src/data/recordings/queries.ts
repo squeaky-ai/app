@@ -24,8 +24,6 @@ export const GET_RECORDINGS_QUERY = gql`
           sessionId
           viewerId
           dateString
-          connectedAt
-          disconnectedAt
         }
         pagination {
           pageSize
@@ -58,8 +56,6 @@ export const GET_RECORDING_QUERY = gql`
         viewportY
         browser
         active
-        connectedAt
-        disconnectedAt
         tags {
           id
           name

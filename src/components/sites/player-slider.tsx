@@ -1,8 +1,10 @@
 import React from 'react';
+import { Replayer } from 'rrweb';
 import { Slider } from 'components/slider';
 import type { Recording } from 'types/recording';
 
 interface Props {
+  replayer: Replayer;
   playing: boolean;
   playbackSpeed: number;
   recording: Recording;
@@ -14,12 +16,16 @@ interface State {
 }
 
 export class PlayerSlider extends React.Component<Props, State> {
-  private timer: NodeJS.Timer;
+  private timer: number;
 
   public constructor(props: Props) {
     super(props);
 
     this.state = { value: 0 };
+  }
+
+  public componentDidMount() {
+    this.start();
   }
 
   public componentDidUpdate(prevProps: Props) {
@@ -37,18 +43,31 @@ export class PlayerSlider extends React.Component<Props, State> {
   }
 
   private start = () => {
-    this.timer = setInterval(() => {
-      // Don't go past the max value
-      if (this.state.value >= this.durationInSeconds) {
-        return clearTimeout(this.timer);
+    this.stop();
+
+    const update = () => {
+      const { replayer } = this.props;
+
+      const currentTime = replayer.getCurrentTime();
+      const seconds = this.getSeconds(currentTime);
+
+      if (seconds !== this.state.value) {
+        this.setState({ value: seconds });
       }
 
-      this.setState({ value: this.state.value + 1 });
-    }, this.interval);
+      if (currentTime < this.meta.totalTime) {
+        this.timer = requestAnimationFrame(update);
+      }
+    };
+
+    this.timer = requestAnimationFrame(update);
   };
 
   private stop = () => {
-    clearInterval(this.timer);
+    if (this.timer) {
+      cancelAnimationFrame(this.timer);
+      this.timer = null;
+    }
   };
 
   private toTimeString(seconds: number) {
@@ -64,17 +83,16 @@ export class PlayerSlider extends React.Component<Props, State> {
     this.props.handleSlide(value * 1000);
   };
 
-  private get interval() {
-    return 1000 / this.props.playbackSpeed;
+  private getSeconds = (ms: number) => {
+    return Math.floor(ms / 1000);
+  };
+
+  private get meta() {
+    return this.props.replayer.getMetaData();
   }
 
   private get durationInSeconds() {
-    if (!this.props.recording) return 0;
-
-    const firstEventTime = this.props.recording.connectedAt;
-    const lastEventTime = this.props.recording.disconnectedAt || firstEventTime;
-  
-    return Math.floor((lastEventTime - firstEventTime) / 1000);
+    return this.getSeconds(this.meta.totalTime);
   }
 
   private get currentTimeString() {

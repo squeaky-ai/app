@@ -40,12 +40,15 @@ export const PlayerControls: FC = () => {
         }
       </Button>
 
-      <PlayerSlider 
-        playing={state.playing}
-        playbackSpeed={state.playbackSpeed}
-        recording={state.recording} 
-        handleSlide={handleSetProgress} 
-      />
+      {replayer && (
+        <PlayerSlider 
+          replayer={replayer}
+          playing={state.playing}
+          playbackSpeed={state.playbackSpeed}
+          recording={state.recording} 
+          handleSlide={handleSetProgress} 
+        />
+      )}
 
       <PlayerSpeed 
         playbackSpeed={state.playbackSpeed} 

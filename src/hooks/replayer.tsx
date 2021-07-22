@@ -13,7 +13,7 @@ export const useReplayer = (): [Replayer | null, InitFunction] => {
   const [_state, dispatch] = usePlayerState();
 
   const init = (element: HTMLElement, recording: Recording) => {
-    if (replayer) {
+    if (replayer) { 
       console.error('Replayer already exist');
       return;
     }
@@ -59,6 +59,9 @@ export const useReplayer = (): [Replayer | null, InitFunction] => {
           if (x.speed) {
             dispatch({ type: 'playbackSpeed', value: x.speed.context.timer.speed });
           }
+          break;
+        case 'finish':
+          dispatch({ type: 'playing', value: false });
           break;
       }
     });
