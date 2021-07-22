@@ -26,10 +26,11 @@
   }
 
   .replayer-mouse {
-    background-image: url('/cheese.svg');
-    background-size: 100%;
-    height: 3.4rem;
-    width: 2.5rem;
+    background: var(--magenta-500);
+    border-radius: var(--border-radius-lg);
+    height: 1.5rem;
+    transform: translate(-.75rem, -.75rem);
+    width: 1.5rem;
 
     &:after {
       display: none;

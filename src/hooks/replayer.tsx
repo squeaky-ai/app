@@ -35,8 +35,8 @@ export const useReplayer = (): [Replayer | null, InitFunction] => {
     replayer = new Replayer(events, {
       root: element,
       mouseTail: {
-        lineWidth: 2,
-        strokeStyle: '#222222'
+        lineWidth: 3,
+        strokeStyle: '#F0438C'
       } 
     });
 
