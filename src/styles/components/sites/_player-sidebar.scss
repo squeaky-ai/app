@@ -187,7 +187,7 @@
       height: 100%;
       justify-content: center;
 
-      .empty-state {
+      .create-state {
         display: block;
       }
 
@@ -196,7 +196,7 @@
       }  
     }
 
-    .empty-state {
+    .create-state {
       display: none;
       padding: 1.5rem;
       text-align: center;
@@ -205,6 +205,12 @@
     .create-note {
       margin-bottom: 1.5rem;
       width: 100%;
+    }
+    
+    .note {
+      .title {
+        margin: 0 0 1rem 0;
+      }
     }
   }
 
@@ -218,7 +224,7 @@
       height: 100%;
       justify-content: center;
 
-      .empty-state {
+      .create-state {
         display: block;
       }
 
@@ -227,7 +233,7 @@
       }  
     }
 
-    .empty-state {
+    .create-state {
       display: none;
       padding: 1.5rem;
       text-align: center;
@@ -247,27 +253,28 @@
   }
 
   .pages {
-    .title {
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      padding: 1rem;
-
-      .path {
-        max-width: 150px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-
-      .count {
-        color: var(--blue-500);
-        text-decoration: underline;
-      }
-    }
-
     li {
       padding: 0;
+
+      .title {
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        margin: 0;
+        padding: 1rem;
+  
+        .path {
+          max-width: 150px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+  
+        .count {
+          color: var(--blue-500);
+          text-decoration: underline;
+        }
+      }
       
       &.open {
         background: var(--gray-100);

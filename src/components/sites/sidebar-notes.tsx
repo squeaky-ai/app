@@ -68,7 +68,7 @@ export const SidebarNotes: FC<Props> = ({ recording }) => {
   return (
     <>
       <div className={classnames('notes', { empty: notes.length === 0 })}>
-        <div className='empty-state'>
+        <div className='create-state'>
           <p>There are no notes for this recording</p>
           <Button className='secondary' onClick={openModal}>+ Add Note</Button>
         </div>

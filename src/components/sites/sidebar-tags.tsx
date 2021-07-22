@@ -47,7 +47,7 @@ export const SidebarTags: FC<Props> = ({ recording }) => {
 
   return (
     <div className={classnames('tags', { empty: page === PageView.EMPTY })}>
-      <div className='empty-state'>
+      <div className='create-state'>
         <p>There are no tags for this recording</p>
         <Button className='secondary' onClick={setShow}>+ Add Tag</Button>
       </div>

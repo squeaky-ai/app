@@ -12,6 +12,16 @@ const tabs = [
     name: PlayerTab.INFO
   },
   {
+    key: 'activity',
+    icon: 'ri-time-line',
+    name: PlayerTab.ACTIVITY
+  },
+  {
+    key: 'pages',
+    icon: 'ri-pages-line',
+    name: PlayerTab.PAGES
+  },
+  {
     key: 'notes',
     icon: 'ri-sticky-note-line',
     name: PlayerTab.NOTES
@@ -20,16 +30,6 @@ const tabs = [
     key: 'tags',
     icon: 'ri-price-tag-3-line',
     name: PlayerTab.TAGS
-  },
-  {
-    key: 'activity',
-    icon: 'ri-time-line',
-    name: PlayerTab.ACTIVITY
-  },
-  {
-    key: 'pages',
-    icon: 'ri-file-copy-line',
-    name: PlayerTab.PAGES
   },
 ]
 
