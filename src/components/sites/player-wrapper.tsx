@@ -2,7 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import { Player } from 'components/sites/player';
 import { PlayerProvider } from 'components/sites/player-provider';
-import { PlayerControls } from 'components/sites/player-controls';
+import { PlayerFooter } from 'components/sites/player-footer';
 import type { Recording } from 'types/recording';
 
 interface Props {
@@ -12,6 +12,6 @@ interface Props {
 export const PlayerWrapper: FC<Props> = ({ recording }) => (
   <PlayerProvider recording={recording}>
     <Player />
-    <PlayerControls />
+    <PlayerFooter />
   </PlayerProvider>
 );

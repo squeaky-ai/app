@@ -1,94 +1,106 @@
 import React from 'react';
-import type { FC } from 'react';
-import { Button } from 'components/button';
 import { Slider } from 'components/slider';
-import { PlayerSpeed } from 'components/sites/player-speed';
-import { useReplayer } from 'hooks/replayer';
-import { usePlayerState } from 'hooks/player-state';
+import type { Recording } from 'types/recording';
 
-export const PlayerSlider: FC = () => {
-  const [replayer] = useReplayer();
-  const [state, dispatch] = usePlayerState();
-  const [slide, setSlide] = React.useState<number>(0);
+interface Props {
+  playing: boolean;
+  playbackSpeed: number;
+  recording: Recording;
+  handleSlide: (seconds: number) => void;
+}
 
-  const timeString = (ms: number) => {
+interface State {
+  value: number;
+}
+
+export class PlayerSlider extends React.Component<Props, State> {
+  private timer: NodeJS.Timer;
+
+  public constructor(props: Props) {
+    super(props);
+
+    this.state = { value: 0 };
+  }
+
+  public componentDidUpdate(prevProps: Props) {
+    if (prevProps.playing !== this.props.playing) {
+      this.props.playing
+        ? this.start()
+        : this.stop();
+    }
+
+    if (prevProps.playbackSpeed !== this.props.playbackSpeed) {
+      // Start and stop to pick up the latest value
+      this.stop();
+      this.start();
+    }
+  }
+
+  private start = () => {
+    this.timer = setInterval(() => {
+      // Don't go past the max value
+      if (this.state.value >= this.durationInSeconds) {
+        return clearTimeout(this.timer);
+      }
+
+      this.setState({ value: this.state.value + 1 });
+    }, this.interval);
+  };
+
+  private stop = () => {
+    clearInterval(this.timer);
+  };
+
+  private toTimeString(seconds: number) {
     const date = new Date(0);
-    date.setSeconds(ms);
+    date.setSeconds(seconds);
     return date.toISOString().substr(14, 5);
-  };
+  }
 
-  const handlePlayPause = () => {
-    state.playing
-      ? replayer?.pause()
-      : replayer?.play();
-  };
-
-  const handlePlaybackSpeed = (speed: number) => {
-    replayer.setConfig({ speed });
-  };
-
-  const handleSkipInactivity = (skip: boolean) => {
-    replayer.setConfig({ skipInactive: skip });
-    // TODO: It would be nice if the replayer reacted and 
-    // dispatched but it doesn't seem to trigger anything
-    dispatch({ type: 'skipInactivity', value: skip });
-  };
-
-  const handleSlide = (event: React.ChangeEvent) => {
+  private onSlide = (event: React.ChangeEvent) => {
     const element = event.target as HTMLInputElement;
     const value = Number(element.value);
-    setSlide(value);
-    replayer?.pause(value * 1000);
+    this.setState({ value });
+    this.props.handleSlide(value * 1000);
   };
 
-  const getDuration = () => {
-    if (!state.recording) return 0;
+  private get interval() {
+    return 1000 / this.props.playbackSpeed;
+  }
 
-    const firstEventTime = state.recording.connectedAt;
-    const lastEventTime = state.recording.disconnectedAt || firstEventTime;
+  private get durationInSeconds() {
+    if (!this.props.recording) return 0;
+
+    const firstEventTime = this.props.recording.connectedAt;
+    const lastEventTime = this.props.recording.disconnectedAt || firstEventTime;
   
     return Math.floor((lastEventTime - firstEventTime) / 1000);
+  }
+
+  private get currentTimeString() {
+    return this.toTimeString(this.state.value);
   };
 
-  const progress = Math.floor(state.progress);
-  const durationSeconds = getDuration();
+  private get totalTimeString() {
+    return this.toTimeString(this.durationInSeconds);
+  }
 
-  React.useEffect(() => {
-    setSlide(progress);
-  }, [progress]);
+  public render(): JSX.Element {
+    return (
+      <>
+        <Slider 
+          type='range' 
+          min={0} 
+          max={this.durationInSeconds} 
+          step={1} 
+          value={this.state.value} 
+          onChange={this.onSlide} 
+        />
 
-  React.useEffect(() => {
-    console.log(state.playing);
-  }, [state.playing]);
-
-  return (
-    <>
-      <Button className='control play-pause' onClick={handlePlayPause}>
-        {state.playing
-          ? <i className='ri-pause-fill' />
-          : <i className='ri-play-fill' />
-        }
-      </Button>
-
-      <Slider 
-        type='range' 
-        min={0} 
-        max={durationSeconds} 
-        step={1} 
-        value={slide} 
-        onChange={handleSlide} 
-      />
-
-      <span className='timestamps'>
-        {timeString(state.progress)} / {timeString(durationSeconds)}
-      </span>
-
-      <PlayerSpeed 
-        playbackSpeed={state.playbackSpeed} 
-        skipInactivity={state.skipInactivity}
-        handlePlaybackSpeed={handlePlaybackSpeed} 
-        handleSkipInactivity={handleSkipInactivity}
-      />
-    </>
-  );
-};
+        <span className='timestamps'>
+          {this.currentTimeString} / {this.totalTimeString}
+        </span>
+      </>
+    );
+  }
+}

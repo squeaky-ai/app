@@ -36,7 +36,7 @@ export const useReplayer = (): [Replayer | null, InitFunction] => {
       root: element,
       mouseTail: {
         lineWidth: 2,
-        strokeStyle: '#F0438C'
+        strokeStyle: '#222222'
       } 
     });
 
@@ -62,6 +62,8 @@ export const useReplayer = (): [Replayer | null, InitFunction] => {
           break;
       }
     });
+
+    replayer.play();
   };
 
   React.useEffect(() => {
