@@ -2,12 +2,12 @@ import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_RECORDINGS_QUERY } from 'data/recordings/queries';
 import type { Site } from 'types/site';
-import type { PaginatedRecordingsResponse } from 'types/recording';
+import type { PaginatedRecordingsResponse, SortBy } from 'types/recording';
 
 interface Props {
   page: number;
   query?: string;
-  sort?: 'ASC' | 'DESC';
+  sort?: SortBy;
 }
 
 export const useRecordings = ({ page, query, sort }: Props): [boolean, PaginatedRecordingsResponse] => {
@@ -28,7 +28,7 @@ export const useRecordings = ({ page, query, sort }: Props): [boolean, Paginated
     pagination: { 
       pageSize: 0, 
       pageCount: 0, 
-      sort: 'DESC' 
+      sort: 'DATE_DESC' 
     } 
   };
 

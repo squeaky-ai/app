@@ -1,5 +1,13 @@
 import { User } from 'types/user';
 
+export type SortBy =
+  'DATE_DESC' |
+  'DATE_ASC' |
+  'DURATION_DESC' |
+  'DURATION_ASC' |
+  'PAGE_SIZE_DESC' |
+  'PAGE_SIZE_ASC';
+
 export interface Recording {
   id: string;
   active: boolean;
@@ -43,7 +51,7 @@ export interface PaginatedRecordingsResponse {
 export interface RecordingPagination {
   pageSize: number;
   pageCount: number;
-  sort: 'ASC' | 'DESC';
+  sort: SortBy;
 }
 
 export interface TagCreateMutationInput {

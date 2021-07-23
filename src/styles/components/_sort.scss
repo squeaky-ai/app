@@ -6,7 +6,7 @@
   .button {
     background: none;
     border: none;
-    height: .75rem;
+    height: .7rem;
     margin: 0;
     padding: 0;
 
@@ -15,17 +15,12 @@
       font-size: 1.25rem;
       line-height: .65rem;
     }
-  }
 
-  &.desc {
-    .button:last-of-type {
-      color: var(--gray-200);
-    }
-  }
-
-  &.asc {
-    .button:first-of-type {
-      color: var(--gray-200);
+    &:disabled {
+      .button:last-of-type {
+        color: var(--gray-200);
+        opacity: 1;
+      }
     }
   }
 }

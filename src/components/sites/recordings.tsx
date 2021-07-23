@@ -14,13 +14,14 @@ import { Highlighter } from 'components/highlighter';
 import { Sort } from 'components/sort';
 import { useRecordings } from 'hooks/recordings';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
+import type { SortBy } from 'types/recording';
 
 export const Recordings: FC = () => {
   const router = useRouter();
 
   const [page, setPage] = React.useState<number>(1);
   const [query, setQuery] = React.useState<string>('');
-  const [sort, setSort] = React.useState<'ASC' | 'DESC'>('DESC');
+  const [sort, setSort] = React.useState<SortBy>('DATE_DESC');
 
   const [loading, recordings] = useRecordings({ 
     page, 
@@ -83,10 +84,10 @@ export const Recordings: FC = () => {
             <tr>
               <th>Session #</th>
               <th>User</th>
-              <th>Date <Sort order={sort} onAsc={() => setSort('ASC')} onDesc={() => setSort('DESC')} /></th>
-              <th>Duration</th>
+              <th>Date <Sort name='date' order={sort} onAsc={() => setSort('DATE_ASC')} onDesc={() => setSort('DATE_DESC')} /></th>
+              <th>Duration <Sort name='duration' order={sort} onAsc={() => setSort('DURATION_ASC')} onDesc={() => setSort('DURATION_DESC')} /></th>
               <th>Language</th>
-              <th>Pages</th>
+              <th>Pages <Sort name='page_size' order={sort} onAsc={() => setSort('PAGE_SIZE_ASC')} onDesc={() => setSort('PAGE_SIZE_DESC')} /></th>
               <th>Start &amp; Exit URL</th>
               <th>Device type</th>
               <th>Viewport (px)</th>
