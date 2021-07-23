@@ -9,6 +9,10 @@ export const GET_ANALYTICS_QUERY = gql`
         pageViews
         averageSessionDuration
         pagesPerSession
+        pages {
+          path
+          count
+        }
       }
     }
   }

@@ -3,4 +3,10 @@ export interface Analytics {
   pageViews: number;
   averageSessionDuration: number;
   pagesPerSession: number;
+  pages: AnalyticsPage[];
+}
+
+interface AnalyticsPage {
+  path: string;
+  count: number;
 }

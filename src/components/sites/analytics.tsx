@@ -70,6 +70,13 @@ export const Analytics: FC = () => {
                     </tr>
                   </thead>
                   <tbody>
+                    {analytics.pages.map(page => (
+                      <tr key={page.path}>
+                        <td>{page.path}</td>
+                        <td>{page.count}</td>
+                        <td></td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>
