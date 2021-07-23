@@ -42,7 +42,9 @@ export const PlayerSpeed: FC<Props> = ({
   handlePlaybackSpeed,
   handleSkipInactivity
 }) => {
-  const name = `${playbackSpeed.toString()}x`;
+  const name = playbackSpeed > 2 
+    ? <i className='ri-speed-line skip' /> 
+    : `${playbackSpeed.toString()}x`;
 
   const handleSkipChange = () => handleSkipInactivity(!skipInactivity);
 

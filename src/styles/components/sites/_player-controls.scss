@@ -98,8 +98,12 @@
       margin-left: 1rem;
       padding: 0;
 
-      i {
-        display: none;
+      i{
+        font-size: 1.25rem;
+        
+        &:not(.skip) {
+          display: none;
+        }
       } 
 
       & + .dropdown-menu {

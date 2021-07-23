@@ -39,7 +39,7 @@ export const PlayerProvider: FC<PlayerProps> = ({ children, recording }) => {
     progress: 0,
     playbackSpeed: 1,
     activeTab: null,
-    skipInactivity: false,
+    skipInactivity: true,
     zoom: 1,
   });
 
