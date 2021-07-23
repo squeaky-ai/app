@@ -4,12 +4,13 @@ import { GET_ANALYTICS_QUERY } from 'data/analytics/queries';
 import type { Site } from 'types/site';
 import type { Analytics } from 'types/analytics';
 
-export const useAnalytics = (): [boolean, Analytics] => {
+export const useAnalytics = (date_string: string): [boolean, Analytics] => {
   const router = useRouter();
 
   const { data, loading } = useQuery<{ site: Site }>(GET_ANALYTICS_QUERY, {
-    variables: { 
-      site_id: router.query.site_id as string
+    variables: {
+      site_id: router.query.site_id as string,
+      date_string
     }
   });
 

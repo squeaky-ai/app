@@ -3,10 +3,18 @@ import type { FC } from 'react';
 import { Main } from 'components/main';
 import { useAnalytics } from 'hooks/analytics';
 import { Spinner } from 'components/spinner';
-import { toMinutesAndSeconds } from 'lib/dates';
+import { toMinutesAndSeconds, daysBefore, toIsoDate } from 'lib/dates';
+import { Select, Option } from 'components/select';
 
 export const Analytics: FC = () => {
-  const [loading, analytics] = useAnalytics();
+  const today = toIsoDate();
+
+  const [date, setDate] = React.useState(today);
+  const [loading, analytics] = useAnalytics(date);
+
+  const handleDateChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setDate(event.target.value);
+  };
 
   if (loading) {
     return <Spinner />;
@@ -14,7 +22,20 @@ export const Analytics: FC = () => {
 
   return (
     <Main>
-      <h3 className='title'>Analytics</h3>
+      <div className='heading'>
+        <h3 className='title'>Analytics</h3>
+        <div className='period'>
+          <p><b>Period:</b></p>
+          <Select onChange={handleDateChange} value={date}>
+            <Option value={today}>Today</Option>
+            {daysBefore().map(date => (
+              <Option value={toIsoDate(date)} key={date.valueOf()}>
+                {toIsoDate(date)}
+              </Option>
+            ))}
+          </Select>
+        </div>
+      </div>
 
       <div className='analytics-grid'>
         <div className='card graph'>

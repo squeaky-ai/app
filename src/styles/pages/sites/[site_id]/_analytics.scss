@@ -13,6 +13,31 @@
     }
   }
 
+  .heading {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 3rem 0;
+
+    .title {
+      margin: 0;
+    }
+
+    .period {
+      align-items: center;
+      display: flex;
+
+      p {
+        margin: 0;
+      }
+
+      .select {
+        margin: 0 0 0 1rem;
+        width: 140px;
+      }
+    }
+  }
+
   .empty-state {
     align-items: center;
     display: flex;
