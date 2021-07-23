@@ -76,7 +76,7 @@
                          'session-duration session-duration session-pages session-pages'
                          'page-browser page-browser page-browser page-browser'
                          'devices devices devices devices';
-    grid-template-columns: repeat(auto-fill, minmax(279px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(calc(25% - 3rem), 1fr));
     grid-template-rows: 216px 216px 296px 600px 210px;
 
     .card {
