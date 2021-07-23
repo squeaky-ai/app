@@ -12,6 +12,7 @@ import { Note } from 'components/sites/note';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { TIMESTAMP_REGEX } from 'data/sites/constants';
 import { usePlayerState } from 'hooks/player-state';
+import { toTimeString } from 'lib/dates';
 import { noteDelete, noteCreate, noteUpdate } from 'lib/api/graphql';
 import type { Recording, Note as INote } from 'types/recording';
 
@@ -39,12 +40,6 @@ export const SidebarNotes: FC<Props> = ({ recording }) => {
 
   const closeModal = () => {
     if (ref.current) ref.current.hide();
-  };
-
-  const timeString = (seconds: number) => {
-    const date = new Date(0);
-    date.setSeconds(seconds);
-    return date.toISOString().substr(14, 5);
   };
 
   const handleDelete = async (id: string) => {
@@ -89,7 +84,7 @@ export const SidebarNotes: FC<Props> = ({ recording }) => {
       <Modal ref={ref}>
         <ModalBody aria-labelledby='add-note-title'>
           <Formik
-            initialValues={{ timestamp: timeString(state.progress), body: '' }}
+            initialValues={{ timestamp: toTimeString(state.progress * 1000), body: '' }}
             validationSchema={NoteSchema}
             onSubmit={(values, { setSubmitting }) => {
               (async () => {

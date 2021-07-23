@@ -5,6 +5,7 @@ import { EventType } from 'rrweb';
 import { groupBy } from 'lodash';
 import { Button } from 'components/button';
 import { usePlayerState } from 'hooks/player-state';
+import { toTimeString } from 'lib/dates';
 import type { Event } from 'types/event';
 import type { Recording } from 'types/recording';
 
@@ -31,11 +32,7 @@ export const SidebarPages: FC<Props> = ({ recording }) => {
 
   const getPathName = (url: string) => new URL(url).pathname;
 
-  const timeString = (timestamp: number) => {
-    const date = new Date(0);
-    date.setSeconds((timestamp - offset) / 1000);
-    return date.toISOString().substr(14, 5);
-  };
+  const timeString = (timestamp: number) => toTimeString(timestamp - offset);
 
   const nextPageView = (event: Event) => {
     const index = pageviews.findIndex(e => e.id === event.id);

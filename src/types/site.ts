@@ -1,5 +1,6 @@
 import type { Team } from 'types/team';
 import type { Recording, PaginatedRecordingsResponse } from 'types/recording';
+import type { Analytics } from 'types/analytics';
 
 export interface Site {
   id: string;
@@ -13,6 +14,7 @@ export interface Site {
   team: Team[];
   recording?: Recording;
   recordings?: PaginatedRecordingsResponse;
+  analytics?: Analytics;
   verifiedAt?: string;
   checklistDismissedAt?: string;
   daysSinceLastRecording?: number;

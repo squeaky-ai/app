@@ -10,6 +10,7 @@ import { TextArea } from 'components/textarea';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { ActivityTimestamp } from 'components/sites/activity-timestamp';
 import { TIMESTAMP_REGEX } from 'data/sites/constants';
+import { toTimeString } from 'lib/dates';
 import { Note as INote } from 'types/recording';
 
 interface Props {
@@ -32,14 +33,6 @@ export const Note: FC<Props> = ({ note, handleDelete, handleUpdate }) => {
 
   const closeModal = () => {
     if (ref.current) ref.current.hide();
-  };
-
-  const timeString = (ms?: number) => {
-    if (!ms) return '';
-
-    const date = new Date(0);
-    date.setSeconds(ms / 1000);
-    return date.toISOString().substr(14, 5);
   };
 
   const onDelete = () => {
@@ -77,7 +70,7 @@ export const Note: FC<Props> = ({ note, handleDelete, handleUpdate }) => {
       <Modal ref={ref}>
         <ModalBody aria-labelledby='add-note-title'>
           <Formik
-            initialValues={{ timestamp: timeString(note.timestamp), body: note.body }}
+            initialValues={{ timestamp: toTimeString(note.timestamp), body: note.body }}
             validationSchema={NoteSchema}
             onSubmit={(values, { setSubmitting }) => {
               (async () => {

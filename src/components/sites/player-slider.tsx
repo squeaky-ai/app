@@ -1,6 +1,7 @@
 import React from 'react';
 import { Replayer } from 'rrweb';
 import { Slider } from 'components/slider';
+import { toTimeString } from 'lib/dates';
 import type { Recording } from 'types/recording';
 
 interface Props {
@@ -70,12 +71,6 @@ export class PlayerSlider extends React.Component<Props, State> {
     }
   };
 
-  private toTimeString(seconds: number) {
-    const date = new Date(0);
-    date.setSeconds(seconds);
-    return date.toISOString().substr(14, 5);
-  }
-
   private onSlide = (event: React.ChangeEvent) => {
     const element = event.target as HTMLInputElement;
     const value = Number(element.value);
@@ -96,11 +91,11 @@ export class PlayerSlider extends React.Component<Props, State> {
   }
 
   private get currentTimeString() {
-    return this.toTimeString(this.state.value);
+    return toTimeString(this.state.value * 1000);
   };
 
   private get totalTimeString() {
-    return this.toTimeString(this.durationInSeconds);
+    return toTimeString(this.durationInSeconds * 1000);
   }
 
   public render(): JSX.Element {
