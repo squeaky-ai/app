@@ -27,7 +27,7 @@ export const useRecordings = ({ page, query, sort }: Props): [boolean, Paginated
     items: [], 
     pagination: { 
       pageSize: 0, 
-      pageCount: 0, 
+      total: 0, 
       sort: 'DATE_DESC' 
     } 
   };

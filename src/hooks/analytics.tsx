@@ -19,6 +19,8 @@ export const useAnalytics = (date_string: string): [boolean, Analytics] => {
     pageViews: 0,
     averageSessionDuration: 0,
     pagesPerSession: 0,
+    pages: [],
+    browsers: [],
   };
 
   const results = data
