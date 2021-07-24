@@ -27,7 +27,7 @@ export const GET_RECORDINGS_QUERY = gql`
         }
         pagination {
           pageSize
-          pageCount
+          total
           sort
         }
       }

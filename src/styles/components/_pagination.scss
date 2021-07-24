@@ -1,4 +1,4 @@
-.pagination {
+.rc-pagination {
   display: flex;
   margin: 0;
   padding: 0;
@@ -6,6 +6,20 @@
   li {
     flex-shrink: 0;
     list-style: none;
+
+    &.rc-pagination-disabled {
+      opacity: .5;
+      pointer-events: none;
+    }
+
+    &.rc-pagination-item-active {
+      pointer-events: none;
+
+      .button {
+        color: var(--gray-800);
+        text-decoration: none;
+      }
+    }
 
     .button {
       align-items: center;
@@ -34,22 +48,19 @@
         text-decoration: none;
       }
 
+      &.blank {
+        color: var(--gray-800);
+        opacity: .5;
+        pointer-events: none;
+        text-decoration: none;
+      }
+
       i {
         font-size: 1.5rem;
       }
 
       &:hover {
         background: var(--gray-100);
-      }
-
-      &:disabled {
-        color: var(--gray-500);
-        opacity: 1;
-
-        &.active {
-          color: var(--gray-800);
-          text-decoration: none;
-        }
       }
     }
   }

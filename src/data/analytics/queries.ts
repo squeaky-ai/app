@@ -13,6 +13,10 @@ export const GET_ANALYTICS_QUERY = gql`
           path
           count
         }
+        browsers {
+          name
+          count
+        }
       }
     }
   }

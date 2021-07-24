@@ -50,7 +50,7 @@ export interface PaginatedRecordingsResponse {
 
 export interface RecordingPagination {
   pageSize: number;
-  pageCount: number;
+  total: number;
   sort: SortBy;
 }
 

@@ -149,9 +149,10 @@ export const Recordings: FC = () => {
       </div>
 
       <Pagination 
-        page={page - 1} 
+        currentPage={page} 
+        pageSize={recordings.pagination.pageSize}
+        total={recordings.pagination.total}
         setPage={setPage}
-        {...recordings.pagination}
       />
     </Main>
   );

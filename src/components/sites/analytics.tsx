@@ -73,7 +73,7 @@ export const Analytics: FC = () => {
                     {analytics.pages.map(page => (
                       <tr key={page.path}>
                         <td>{page.path}</td>
-                        <td>{page.count}</td>
+                        <td><b>{page.count}</b></td>
                         <td></td>
                       </tr>
                     ))}
@@ -84,7 +84,13 @@ export const Analytics: FC = () => {
             <div className='card basic browser'>
               <h4>Browser</h4>
               <div className='card'>
-
+                <ul>
+                  {analytics.browsers.map(browser => (
+                    <li key={browser.name}>
+                      <p>{browser.name} ({browser.count})</p>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>

@@ -4,9 +4,15 @@ export interface Analytics {
   averageSessionDuration: number;
   pagesPerSession: number;
   pages: AnalyticsPage[];
+  browsers: AnalyticsBrowser[];
 }
 
 interface AnalyticsPage {
   path: string;
+  count: number;
+}
+
+interface AnalyticsBrowser {
+  name: string;
   count: number;
 }
