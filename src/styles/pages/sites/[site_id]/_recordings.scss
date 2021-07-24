@@ -90,6 +90,8 @@
   
     &.table {
       color: var(--gray-700);
+      font-size: 13px;
+      line-height: 16px;
   
       .indicator {
         background: var(--gray-200);
@@ -126,6 +128,50 @@
           }
         }
       }
+
+      .dropdown {
+        .options {
+          align-items: center;
+          background: none;
+          border: none;
+          border-radius: var(--border-radius-o);
+          display: flex;
+          height: 2rem;
+          flex-shrink: 0;
+          font-size: 1.25rem;
+          justify-content: center;
+          padding: 0;
+          width: 2rem;
+
+          .arrow {
+            display: none;
+          }
+
+          &:hover {
+            background: var(--gray-100);
+            color: var(--blue-500);
+          }
+        }
+
+        .dropdown-menu {
+          z-index: 2;
+
+          .button {
+            background: none;
+            border: none;
+
+            i {
+              color: var(--blue-500);
+              font-size: 1.25rem;
+              margin-right: .5rem;
+            }
+
+            &:hover {
+              background: var(--gray-100);
+            }
+          }
+        }
+      }
     }
   
     & + .button {
@@ -134,6 +180,10 @@
     }
 
     tbody {
+      tr.viewed {
+        background: var(--gray-100);
+      }
+
       td:nth-of-type(1) {
         max-width: 130px;
         width: 130px;
@@ -145,43 +195,53 @@
       }
 
       td:nth-of-type(3) {
+        max-width: 120px;
+        width: 120px;
+      }
+
+      td:nth-of-type(4) {
+        max-width: 220px;
+        width: 220px;
+      }
+
+      td:nth-of-type(5) {
+        max-width: 140px;
+        width: 140px;
+      }
+
+      td:nth-of-type(6) {
+        max-width: 200px;
+        width: 200px;
+      }
+
+      td:nth-of-type(7) {
+        max-width: 110px;
+        width: 110px;
+      }
+
+      td:nth-of-type(8) {
+        max-width: 3000px;
+        width: 300px;
+      }
+
+      td:nth-of-type(9) {
         max-width: 170px;
         width: 170px;
       }
 
-      td:nth-of-type(4) {
-        max-width: 110px;
-        width: 110px;
-      }
-
-      td:nth-of-type(5) {
-        max-width: 200px;
-        width: 200px;
-      }
-
-      td:nth-of-type(6) {
-        max-width: 110px;
-        width: 110px;
-      }
-
-      td:nth-of-type(7) {
-        max-width: 320px;
-        width: 320px;
-      }
-
-      td:nth-of-type(8) {
-        max-width: 160px;
-        width: 160px;
-      }
-
-      td:nth-of-type(9) {
-        max-width: 200px;
-        width: 200px;
-      }
-
       td:nth-of-type(10) {
-        max-width: 110px;
-        width: 110px;
+        max-width: 200px;
+        width: 200px;
+      }
+
+      td:nth-of-type(11) {
+        max-width: 150px;
+        width: 150px;
+      }
+
+      td:nth-of-type(12) {
+        max-width: 60px;
+        width: 60px;
       }
     }
   }

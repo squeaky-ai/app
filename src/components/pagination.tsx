@@ -13,22 +13,19 @@ interface Props extends React.HTMLAttributes<HTMLUListElement> {
 interface RenderItemProps {
   page: number;
   type: string;
-  handleBack: VoidFunction;
-  handleForward: VoidFunction;
-  handlePage: (page: number) => void;
 }
 
-const RenderItem: FC<RenderItemProps> = ({ page, type, handleBack, handleForward, handlePage }) => {
+const RenderItem: FC<RenderItemProps> = ({ page, type }) => {
   switch(type) {
     case 'prev':
       return (
-        <Button className='back' onClick={handleBack}>
+        <Button className='back'>
           <i className='ri-arrow-drop-left-line' />
         </Button>
       );
     case 'next':
       return (
-        <Button className='forward' onClick={handleForward}>
+        <Button className='forward'>
           <i className='ri-arrow-drop-right-line' />
         </Button>
       );
@@ -41,7 +38,7 @@ const RenderItem: FC<RenderItemProps> = ({ page, type, handleBack, handleForward
       );
     case 'page':
       return (
-        <Button onClick={() => handlePage(page)}>
+        <Button>
           {page}
         </Button>
       );
@@ -51,24 +48,20 @@ const RenderItem: FC<RenderItemProps> = ({ page, type, handleBack, handleForward
 }
 
 export const Pagination: FC<Props> = ({ currentPage, pageSize, total, setPage }) => {
-  const handleBack = () => setPage(currentPage - 1);
-  
-  const handleForward = () => setPage(currentPage + 1);
-
-  const handlePage = (page: number) => setPage(page);
+  if (total < pageSize) {
+    return null;
+  }
 
   return (
     <ReactPagination
       current={currentPage}
       pageSize={pageSize}
       total={total}
+      onChange={(page) => setPage(page)}
       itemRender={(page, type) => (
         <RenderItem 
           page={page} 
-          type={type} 
-          handleBack={handleBack} 
-          handleForward={handleForward}
-          handlePage={handlePage}
+          type={type}
         />
       )}
     />

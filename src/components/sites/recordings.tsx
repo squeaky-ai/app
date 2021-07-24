@@ -3,22 +3,18 @@ import type { FC } from 'react';
 import Image from 'next/image';
 import classnames from 'classnames';
 import { debounce } from 'lodash';
-import { useRouter } from 'next/router';
 import { Main } from 'components/main';
 import { Button } from 'components/button';
 import { Input } from 'components/input';
 import { Pagination } from 'components/pagination';
 import { Container } from 'components/container';
-import { Tooltip } from 'components/tooltip';
-import { Highlighter } from 'components/highlighter';
+import { RecordingsItem } from 'components/sites/recordings-item';
 import { Sort } from 'components/sort';
 import { useRecordings } from 'hooks/recordings';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 import type { SortBy } from 'types/recording';
 
 export const Recordings: FC = () => {
-  const router = useRouter();
-
   const [page, setPage] = React.useState<number>(1);
   const [query, setQuery] = React.useState<string>('');
   const [sort, setSort] = React.useState<SortBy>('DATE_DESC');
@@ -43,16 +39,6 @@ export const Recordings: FC = () => {
     search.value = '';
     search.focus();
   };
-
-  const viewRecording = async (id: string) => {
-    await router.push(`/sites/${router.query.site_id}/player?recording_id=${id}`);
-  };
-
-  const deviceIcon = (deviceType: string) => deviceType === 'Computer'
-    ? 'ri-computer-line' 
-    : 'ri-smartphone-line';
-
-  const browserIcon = (browser: string) => browser.toLowerCase().replace(' ', '-');
 
   return (
     <Main className={classnames('recordings', { empty: !hasRecordings })}>
@@ -82,67 +68,27 @@ export const Recordings: FC = () => {
         <table cellSpacing='0'>
           <thead>
             <tr>
-              <th>Session #</th>
-              <th>User</th>
-              <th>Date <Sort name='date' order={sort} onAsc={() => setSort('DATE_ASC')} onDesc={() => setSort('DATE_DESC')} /></th>
+              <th>Status</th>
+              <th>Recording ID</th>
+              <th>User ID</th>
+              <th>Date &amp; Time<Sort name='date' order={sort} onAsc={() => setSort('DATE_ASC')} onDesc={() => setSort('DATE_DESC')} /></th>
               <th>Duration <Sort name='duration' order={sort} onAsc={() => setSort('DURATION_ASC')} onDesc={() => setSort('DURATION_DESC')} /></th>
               <th>Language</th>
               <th>Pages <Sort name='page_size' order={sort} onAsc={() => setSort('PAGE_SIZE_ASC')} onDesc={() => setSort('PAGE_SIZE_DESC')} /></th>
               <th>Start &amp; Exit URL</th>
-              <th>Device type</th>
-              <th>Viewport (px)</th>
               <th>Browser</th>
+              <th>Device &amp; Viewport (px)</th>
+              <th>Browser</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
             {recordings.items.map(recording => (
-              <tr 
-                className='hover' 
-                key={recording.sessionId} 
-                role='link' 
-                data-href={`/sites/${router.query.site_id}/player?recording_id=${recording.sessionId}`} 
-                onClick={() => viewRecording(recording.sessionId)} 
-                tabIndex={0}
-              >
-                <td><span className={classnames('indicator', { active: recording.active })} /><Highlighter value={query}>{recording.sessionId}</Highlighter></td>
-                <td><Highlighter value={query}>{recording.viewerId}</Highlighter></td>
-                <td><Highlighter value={query}>{recording.dateString}</Highlighter></td>
-                <td><Highlighter value={query}>{recording.durationString}</Highlighter></td>
-                <td><Highlighter value={query}>{recording.language}</Highlighter></td>
-                <td className='no-overflow'>
-                  <Tooltip button={recording.pageCount} buttonClassName='link'>
-                    <ul className='tooltip-list'>
-                      {recording.pageViews.map((page, i) => (
-                        <li key={page + i}>{page}</li>
-                      ))}
-                    </ul>
-                  </Tooltip>
-                </td>
-                <td>
-                  <table className='start-exit-page'>
-                    <tbody>
-                      <tr>
-                        <td>START URL</td>
-                        <td><Highlighter value={query}>{recording.startPage}</Highlighter></td>
-                      </tr>
-                      <tr>
-                        <td>EXIT URL</td>
-                        <td><Highlighter value={query}>{recording.exitPage}</Highlighter></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
-                <td>
-                  <i className={classnames('device', deviceIcon(recording.deviceType))} />
-                  <Highlighter value={query}>{recording.deviceType}</Highlighter>
-                </td>
-                <td><Highlighter value={query}>{recording.viewportX}</Highlighter> x <Highlighter value={query}>{recording.viewportY}</Highlighter></td>
-                <td className='no-overflow'>
-                  <Tooltip positionX='right' button={<Image src={`/browsers/${browserIcon(recording.browser)}.svg`} height={24} width={24} alt={`Icon for the ${recording.browser} browser`} />}>
-                    {recording.browserString}
-                  </Tooltip>
-                </td>
-              </tr>
+              <RecordingsItem 
+                recording={recording} 
+                query={query} 
+                key={recording.id} 
+              />
             ))}
           </tbody>
         </table>

@@ -1,0 +1,18 @@
+.pill {
+  border: 2px solid var(--gray-150);
+  border-radius: var(--border-radius-lg);
+  color: var(--gray-500);
+  font-size: 13px;
+  font-weight: var(--font-weight-bold);
+  line-height: 16px;
+  padding: .2rem 1rem;
+
+  &.primary {
+    border-color: var(--blue-500);
+    color: var(--blue-500);
+  }
+
+  &.secondary {
+    background: var(--gray-150);
+  }
+}

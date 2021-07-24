@@ -1,10 +1,10 @@
 import { gql } from '@apollo/client';
 
 export const CREATE_TAG_MUTATION = gql`
-  mutation TagCreate($site_id: ID!, $session_id: ID!, $name: String!) {
-    tagCreate(input: { siteId: $site_id, sessionId: $session_id, name: $name }) {
+  mutation TagCreate($siteId: ID!, $recordingId: ID!, $name: String!) {
+    tagCreate(input: { siteId: $siteId, recordingId: $recordingId, name: $name }) {
       id
-      recording(id: $session_id) {
+      recording(recordingId: $recordingId) {
         tags {
           id
           name
@@ -15,10 +15,10 @@ export const CREATE_TAG_MUTATION = gql`
 `;
 
 export const DELETE_TAG_MUTATION = gql`
-  mutation TagDelete($site_id: ID!, $session_id: ID!, $tag_id: ID!) {
-    tagDelete(input: { siteId: $site_id, sessionId: $session_id, tagId: $tag_id }) {
+  mutation TagDelete($siteId: ID!, $recordingId: ID!, $tagId: ID!) {
+    tagDelete(input: { siteId: $siteId, recordingId: $recordingId, tagId: $tagId }) {
       id
-      recording(id: $session_id) {
+      recording(recordingId: $recordingId) {
         tags {
           id
           name
@@ -29,10 +29,10 @@ export const DELETE_TAG_MUTATION = gql`
 `;
 
 export const CREATE_NOTE_MUTATION = gql`
-  mutation NoteCreate($site_id: ID!, $session_id: ID!, $body: String!, $timestamp: Int) {
-    noteCreate(input: { siteId: $site_id, sessionId: $session_id, body: $body, timestamp: $timestamp }) {
+  mutation NoteCreate($siteId: ID!, $recordingId: ID!, $body: String!, $timestamp: Int) {
+    noteCreate(input: { siteId: $siteId, recordingId: $recordingId, body: $body, timestamp: $timestamp }) {
       id
-      recording(id: $session_id) {
+      recording(recordingId: $recordingId) {
         notes {
           id
           body
@@ -47,10 +47,10 @@ export const CREATE_NOTE_MUTATION = gql`
 `;
 
 export const DELETE_NOTE_MUTATION = gql`
-  mutation NoteDelete($site_id: ID!, $session_id: ID!, $note_id: ID!) {
-    noteDelete(input: { siteId: $site_id, sessionId: $session_id, noteId: $note_id }) {
+  mutation NoteDelete($siteId: ID!, $recordingId: ID!, $noteId: ID!) {
+    noteDelete(input: { siteId: $siteId, recordingId: $recordingId, noteId: $noteId }) {
       id
-      recording(id: $session_id) {
+      recording(recordingId: $recordingId) {
         notes {
           id
           body
@@ -65,10 +65,10 @@ export const DELETE_NOTE_MUTATION = gql`
 `;
 
 export const UPDATE_NOTE_MUTATION = gql`
-  mutation NoteUpdate($site_id: ID!, $session_id: ID!, $note_id: ID!, $body: String, $timestamp: Int) {
-    noteUpdate(input: { siteId: $site_id, sessionId: $session_id, noteId: $note_id, body: $body, timestamp: $timestamp }) {
+  mutation NoteUpdate($siteId: ID!, $recordingId: ID!, $noteId: ID!, $body: String, $timestamp: Int) {
+    noteUpdate(input: { siteId: $siteId, recordingId: $recordingId, noteId: $noteId, body: $body, timestamp: $timestamp }) {
       id
-      recording(id: $session_id) {
+      recording(recordingId: $recordingId) {
         notes {
           id
           body
@@ -76,6 +76,38 @@ export const UPDATE_NOTE_MUTATION = gql`
           user {
             fullName
           }
+        }
+      }
+    }
+  }
+`;
+
+export const DELETE_RECORDING_MUTATION = gql`
+  mutation DeleteRecording($input: RecordingDeleteInput!) {
+    recordingDelete(input: $input) {
+      id
+      recordings {
+        items {
+          id
+        }
+        pagination {
+          pageSize
+          total
+          sort
+        }
+      }
+    }
+  }
+`;
+
+export const VIEWED_RECORDING_MUTATION = gql`
+  mutation ViewedRecording($input: RecordingViewedInput!) {
+    recordingViewed(input: $input) {
+      id
+      recordings {
+        items {
+          id
+          viewed
         }
       }
     }

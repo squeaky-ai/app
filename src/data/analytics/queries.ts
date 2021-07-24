@@ -1,10 +1,10 @@
 import { gql } from '@apollo/client';
 
 export const GET_ANALYTICS_QUERY = gql`
-  query GetAnalytics($site_id: ID!, $date_string: String!) { 
-    site(id: $site_id) {
+  query GetAnalytics($siteId: ID!, $dateString: String!) { 
+    site(siteId: $siteId) {
       id
-      analytics(dateString: $date_string) {
+      analytics(dateString: $dateString) {
         visitors
         pageViews
         averageSessionDuration

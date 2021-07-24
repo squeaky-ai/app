@@ -4,6 +4,7 @@ import Image from 'next/image';
 import classnames from 'classnames';
 import { Button } from 'components/button';
 import { PlayerTab } from 'data/sites/enums';
+import { toNiceDate } from 'lib/dates';
 import type { Recording } from 'types/recording';
 
 interface Props {
@@ -23,7 +24,7 @@ export const SidebarInfo: FC<Props> = ({ recording, setActiveTab }) => (
     </div>
     <div className='row'>
       <dt>Date</dt>
-      <dd>{recording.dateString}</dd>
+      <dd>{toNiceDate(recording.connectedAt)}</dd>
     </div>
     <div className='row'>
       <dt>Language</dt>

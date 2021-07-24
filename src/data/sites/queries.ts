@@ -14,8 +14,8 @@ export const GET_SITES_QUERY = gql`
 `;
 
 export const GET_SITE_QUERY = gql`
-  query GetSite($id: ID!) {
-    site(id: $id) {
+  query GetSite($siteId: ID!) {
+    site(siteId: $siteId) {
       id
       name
       url

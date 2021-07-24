@@ -21,7 +21,7 @@ export const useSite = (): [boolean, Site | null] => {
 
   const { loading, data, error } = useQuery(GET_SITE_QUERY, {
     variables: {
-      id: router.query.site_id as string
+      siteId: router.query.site_id as string
     }
   });
 

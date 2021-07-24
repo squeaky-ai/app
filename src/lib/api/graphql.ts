@@ -1,3 +1,4 @@
+import { cloneDeep } from 'lodash';
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
 
 import {
@@ -60,7 +61,9 @@ import {
   DELETE_TAG_MUTATION,
   CREATE_NOTE_MUTATION,
   DELETE_NOTE_MUTATION,
-  UPDATE_NOTE_MUTATION
+  UPDATE_NOTE_MUTATION,
+  DELETE_RECORDING_MUTATION,
+  VIEWED_RECORDING_MUTATION
 } from 'data/recordings/mutations';
 
 import {
@@ -68,21 +71,31 @@ import {
   TagDeleteMutationInput,
   NoteCreateMutationInput,
   NoteDeleteMutationInput,
-  NoteUpdateMutationInput
+  NoteUpdateMutationInput,
+  DeleteRecordingMutationInput,
+  ViewedRecordingMutationInput
 } from 'types/recording';
 
-const ACCEPT_INCOMING = <E, I>(_existing: E, incoming: I[]): I[] => [...incoming];
+const ACCEPT_INCOMING_ARRAY = <E, I>(_existing: E, incoming: I[]): I[] => [...incoming];
+
+const ACCEPT_INCOMING_OBJECT = <E, I>(_existing: E, incoming: I): I => cloneDeep(incoming);
 
 const cache = new InMemoryCache({
   typePolicies: {
     Query: {
       fields: {
-        sites: { merge: ACCEPT_INCOMING }
+        sites: { merge: ACCEPT_INCOMING_ARRAY }
       },
     },
     Site: {
       fields: {
-        team: { merge: ACCEPT_INCOMING }
+        team: { merge: ACCEPT_INCOMING_ARRAY },
+        recordings: { merge: ACCEPT_INCOMING_OBJECT }
+      }
+    },
+    Recording: {
+      fields: {
+        tags: { merge: ACCEPT_INCOMING_ARRAY }
       }
     }
   }
@@ -394,6 +407,34 @@ export const noteUpdate = async (input: NoteUpdateMutationInput): Promise<SiteMu
     });
 
     return { site: data.noteUpdate };
+  } catch(error) {
+    console.error(error);
+    return parseGraphQLError(error);
+  }
+};
+
+export const recordingDelete = async (input: DeleteRecordingMutationInput): Promise<SiteMutationResponse> => {
+  try {
+    const { data } = await client.mutate({
+      mutation: DELETE_RECORDING_MUTATION,
+      variables: input
+    });
+
+    return { site: data.recordingDelete };
+  } catch(error) {
+    console.error(error);
+    return parseGraphQLError(error);
+  }
+};
+
+export const recordingViewed = async (input: ViewedRecordingMutationInput): Promise<SiteMutationResponse> => {
+  try {
+    const { data } = await client.mutate({
+      mutation: VIEWED_RECORDING_MUTATION,
+      variables: { input }
+    });
+
+    return { site: data.recordingViewed };
   } catch(error) {
     console.error(error);
     return parseGraphQLError(error);

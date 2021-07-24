@@ -9,7 +9,7 @@ export const useAnalytics = (date_string: string): [boolean, Analytics] => {
 
   const { data, loading } = useQuery<{ site: Site }>(GET_ANALYTICS_QUERY, {
     variables: {
-      site_id: router.query.site_id as string,
+      siteId: router.query.site_id as string,
       date_string
     }
   });

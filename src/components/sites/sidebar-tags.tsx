@@ -35,9 +35,9 @@ export const SidebarTags: FC<Props> = ({ recording }) => {
 
   const handleTagDelete = async (tag: ITag) => {
     await tagDelete({ 
-      site_id: siteId,
-      session_id: recording.sessionId, 
-      tag_id: tag.id 
+      siteId,
+      recordingId: recording.id, 
+      tagId: tag.id 
     });
   };
 
@@ -58,8 +58,8 @@ export const SidebarTags: FC<Props> = ({ recording }) => {
           onSubmit={(values, { setValues }) => {
             (async () => {
               await tagCreate({
-                site_id: siteId,
-                session_id: recording.sessionId, 
+                siteId,
+                recordingId: recording.id, 
                 name: values.name
               });
 

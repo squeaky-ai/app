@@ -14,6 +14,8 @@ export interface Recording {
   language: string;
   sessionId: string;
   viewerId: string;
+  viewed: boolean;
+  bookmarked: boolean;
   duration: number;
   durationString: string;
   pageViews: string[];
@@ -28,7 +30,8 @@ export interface Recording {
   events?: string;
   tags?: Tag[];
   notes?: Note[];
-  dateString: string;
+  connectedAt: number;
+  disconnectedAt: number;
 }
 
 export interface Tag {
@@ -55,34 +58,44 @@ export interface RecordingPagination {
 }
 
 export interface TagCreateMutationInput {
-  site_id: string;
-  session_id: string;
+  siteId: string;
+  recordingId: string;
   name: string;
 }
 
 export interface TagDeleteMutationInput {
-  site_id: string;
-  session_id: string;
-  tag_id: string;
+  siteId: string;
+  recordingId: string;
+  tagId: string;
 }
 
 export interface NoteCreateMutationInput {
-  site_id: string;
-  session_id: string;
+  siteId: string;
+  recordingId: string;
   body: string;
   timestamp?: number;
 }
 
 export interface NoteDeleteMutationInput {
-  site_id: string;
-  session_id: string;
-  note_id: string;
+  siteId: string;
+  recordingId: string;
+  noteId: string;
 }
 
 export interface NoteUpdateMutationInput {
-  site_id: string;
-  session_id: string;
-  note_id: string;
+  siteId: string;
+  recordingId: string;
+  noteId: string;
   body?: string;
   timestamp?: number;
+}
+
+export interface DeleteRecordingMutationInput {
+  siteId: string;
+  recordingId: string;
+}
+
+export interface ViewedRecordingMutationInput {
+  siteId: string;
+  recordingId: string;
 }

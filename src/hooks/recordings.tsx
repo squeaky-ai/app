@@ -15,7 +15,7 @@ export const useRecordings = ({ page, query, sort }: Props): [boolean, Paginated
 
   const { data, loading, previousData } = useQuery<{ site: Site }>(GET_RECORDINGS_QUERY, {
     variables: { 
-      id: router.query.site_id as string, 
+      siteId: router.query.site_id as string, 
       page, 
       size: 15,
       query,

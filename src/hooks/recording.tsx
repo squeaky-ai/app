@@ -9,8 +9,8 @@ export const useRecording = (): [boolean, Recording | null] => {
 
   const { data, loading } = useQuery<{ site: Site }>(GET_RECORDING_QUERY, {
     variables: { 
-      site_id: router.query.site_id as string,
-      recording_id: router.query.recording_id as string
+      siteId: router.query.site_id as string,
+      recordingId: router.query.recordingId as string
     }
   });
 

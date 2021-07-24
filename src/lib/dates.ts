@@ -32,3 +32,10 @@ export const toIsoDate = (date?: Date) => {
   date ||= new Date();
   return date.toISOString().split('T')[0];
 };
+
+export const toNiceDate = (timestamp?: number) => {
+  if (!timestamp) return 'Unknown';
+
+  const date = new Date(Number(timestamp));
+  return date.toUTCString().split(':').slice(0, 2).join(':');
+};

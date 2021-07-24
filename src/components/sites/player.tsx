@@ -1,14 +1,26 @@
 import React from 'react';
 import type { FC } from 'react';
+import { useRouter } from 'next/router';
 import { Spinner } from 'components/spinner';
 import { useReplayer } from 'hooks/replayer';
 import { usePlayerState } from 'hooks/player-state';
+import { recordingViewed } from 'lib/api/graphql';
 
 export const Player: FC = React.memo(() => {
+  const router = useRouter();
   const ref = React.useRef<HTMLDivElement>(null);
 
   const [replayer, init] = useReplayer();
   const [state, dispatch] = usePlayerState();
+
+  const markAsViewed = async () => {
+    if (state.recording && !state.recording.viewed) {
+      await recordingViewed({ 
+        siteId: router.query.site_id as string,
+        recordingId: state.recording.id 
+      });
+    }
+  };
 
   React.useEffect(() => {
     if (!state.recording) return;
@@ -32,6 +44,9 @@ export const Player: FC = React.memo(() => {
     // as 0.40000000000000013, so it must be fixed (to a string?! 🤦‍♂️)
     // and then cast back to a number
     dispatch({ type: 'zoom', value: Number(multiplier.toFixed(1)) });
+
+    // Fire and forget here, should be okay
+    markAsViewed();
   }, [state.recording]);
 
   return (

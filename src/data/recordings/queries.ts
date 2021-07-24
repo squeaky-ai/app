@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const GET_RECORDINGS_QUERY = gql`
-  query GetRecordings($id: ID!, $page: Int, $size: Int, $query: String, $sort: Sort) {
-    site(id: $id) {
+  query GetRecordings($siteId: ID!, $page: Int, $size: Int, $query: String, $sort: Sort) {
+    site(siteId: $siteId) {
       id
       name
       recordings(page: $page, size: $size, query: $query, sort: $sort) {
@@ -12,6 +12,8 @@ export const GET_RECORDINGS_QUERY = gql`
           language
           duration
           durationString
+          viewed
+          bookmarked
           startPage
           exitPage
           pageViews
@@ -23,7 +25,8 @@ export const GET_RECORDINGS_QUERY = gql`
           viewportY
           sessionId
           viewerId
-          dateString
+          connectedAt
+          disconnectedAt
         }
         pagination {
           pageSize
@@ -36,17 +39,18 @@ export const GET_RECORDINGS_QUERY = gql`
 `;
 
 export const GET_RECORDING_QUERY = gql`
-  query GetRecording($site_id: ID!, $recording_id: ID!) { 
-    site(id: $site_id) {
+  query GetRecording($siteId: ID!, $recordingId: ID!) { 
+    site(siteId: $siteId) {
       id
       name
-      recording(id: $recording_id) {
+      recording(recordingId: $recordingId) {
         id
         sessionId
         viewerId
-        dateString
         language
         durationString
+        viewed
+        bookmarked
         pageViews
         pageCount
         startPage
@@ -56,6 +60,8 @@ export const GET_RECORDING_QUERY = gql`
         viewportY
         browser
         active
+        connectedAt
+        disconnectedAt
         tags {
           id
           name
