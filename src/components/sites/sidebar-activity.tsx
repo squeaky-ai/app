@@ -5,6 +5,7 @@ import { EventType, IncrementalSource, MouseInteractions } from 'rrweb';
 import { ActivityTimestamp } from 'components/sites/activity-timestamp';
 import { useReplayer } from 'hooks/replayer';
 import { cssPath } from 'lib/css-path';
+import { parseEvents } from 'lib/events';
 import type { Event } from 'types/event';
 import type { Recording } from 'types/recording';
 
@@ -64,8 +65,8 @@ const getMouseInteractionIcon = (type: MouseInteractions): string => {
 export const SidebarActivity: FC<Props> = ({ recording }) => {
   const [replayer] = useReplayer();
 
-  // Exlcude things that don't appear in the sidebar
-  const events: Event[] = JSON.parse(recording.events || '[]');
+  const events: Event[] = parseEvents(recording);
+  console.log(events);
 
   const activity = events.reduce((acc, item) => {
     // Add all of the page views
