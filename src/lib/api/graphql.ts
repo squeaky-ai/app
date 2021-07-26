@@ -417,7 +417,7 @@ export const recordingDelete = async (input: DeleteRecordingMutationInput): Prom
   try {
     const { data } = await client.mutate({
       mutation: DELETE_RECORDING_MUTATION,
-      variables: input
+      variables: { input }
     });
 
     return { site: data.recordingDelete };

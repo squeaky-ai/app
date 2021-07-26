@@ -35,7 +35,7 @@ export const SidebarPages: FC<Props> = ({ recording }) => {
   const timeString = (timestamp: number) => toTimeString(timestamp - offset);
 
   const nextPageView = (event: Event) => {
-    const index = pageviews.findIndex(e => e.timestamp === event.timestamp);
+    const index = pageviews.findIndex(e => e.id === event.id);
     return pageviews[index + 1] || null;
   };
 
@@ -69,7 +69,7 @@ export const SidebarPages: FC<Props> = ({ recording }) => {
             </div>
             <div className='timestamps'>
               {events.map(event => (
-                <div key={event.timestamp} className='event'>
+                <div key={event.id} className='event'>
                   <Button onClick={() => setProgress(event)}>
                     {timeString(event.timestamp)}
                   </Button>

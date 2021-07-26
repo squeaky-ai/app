@@ -1,3 +1,5 @@
 import type { eventWithTime } from 'rrweb/typings/types';
 
-export type Event = eventWithTime;
+export type Event = eventWithTime & {
+  id: number;
+};
