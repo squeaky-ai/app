@@ -78,26 +78,19 @@ import {
   BookmarkRecordingMutationInput
 } from 'types/recording';
 
-const ACCEPT_INCOMING_ARRAY = <E, I>(_existing: E, incoming: I[]): I[] => [...incoming];
-
-const ACCEPT_INCOMING_OBJECT = <E, I>(_existing: E, incoming: I): I => cloneDeep(incoming);
+const ACCEPT_INCOMING = <E, I>(_existing: E, incoming: I[]): I[] => cloneDeep(incoming);
 
 const cache = new InMemoryCache({
   typePolicies: {
     Query: {
       fields: {
-        sites: { merge: ACCEPT_INCOMING_ARRAY }
+        sites: { merge: ACCEPT_INCOMING }
       },
     },
     Site: {
       fields: {
-        team: { merge: ACCEPT_INCOMING_ARRAY },
-        recordings: { merge: ACCEPT_INCOMING_OBJECT }
-      }
-    },
-    Recording: {
-      fields: {
-        tags: { merge: ACCEPT_INCOMING_ARRAY }
+        team: { merge: ACCEPT_INCOMING },
+        recordings: { merge: ACCEPT_INCOMING }
       }
     }
   }
@@ -432,7 +425,12 @@ export const recordingViewed = async (input: ViewedRecordingMutationInput): Prom
 export const recordingDelete = async (input: DeleteRecordingMutationInput): Promise<SiteMutationResponse> => {
   const { data } = await client.mutate({
     mutation: DELETE_RECORDING_MUTATION,
-    variables: { input }
+    variables: { input },
+    update(cache) {
+      const normalizedId = cache.identify({ id: input.recordingId, __typename: 'Recording' });
+      cache.evict({ id: normalizedId });
+      cache.gc();
+    }
   });
 
   return { site: data.recordingDelete };
