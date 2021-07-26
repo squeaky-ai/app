@@ -98,3 +98,9 @@ export interface ViewedRecordingMutationInput {
   siteId: string;
   recordingId: string;
 }
+
+export interface BookmarkRecordingMutationInput {
+  siteId: string;
+  recordingId: string;
+  bookmarked: boolean;
+}

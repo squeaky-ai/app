@@ -11,7 +11,7 @@ import { Dropdown } from 'components/dropdown';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { toNiceDate } from 'lib/dates';
 import { useToasts } from 'hooks/toasts';
-import { recordingDelete } from 'lib/api/graphql';
+import { recordingDelete, recordingBookmarked } from 'lib/api/graphql';
 import type { Recording } from 'types/recording';
 
 interface Props {
@@ -49,6 +49,18 @@ export const RecordingsItem: FC<Props> = ({ query, recording }) => {
     }
   };
 
+  const bookmarkRecording = async () => {
+    try {
+      await recordingBookmarked({ 
+        siteId: router.query.site_id as string, 
+        recordingId: recording.id,
+        bookmarked: !recording.bookmarked,
+      });
+    } catch {
+      toast.add({ type: 'error', body: 'There was an error bookmarking your recording. Please try again.' });
+    }
+  };
+
   const openModal = () => {
     if (ref.current) ref.current.show();
   };
@@ -78,7 +90,12 @@ export const RecordingsItem: FC<Props> = ({ query, recording }) => {
             : <Pill type='primary'>New</Pill>
           }
         </td>
-        <td><Highlighter value={query}>{recording.sessionId}</Highlighter></td>
+        <td>
+          <Button onClick={bookmarkRecording} className={classnames('bookmark', { active: recording.bookmarked })}>
+            <i className='ri-bookmark-3-line' />
+          </Button>
+          <Highlighter value={query}>{recording.sessionId}</Highlighter>
+        </td>
         <td><Highlighter value={query}>{recording.viewerId}</Highlighter></td>
         <td><Highlighter value={query}>{toNiceDate(recording.connectedAt)}</Highlighter></td>
         <td><Highlighter value={query}>{recording.durationString}</Highlighter></td>

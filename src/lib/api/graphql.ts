@@ -63,7 +63,8 @@ import {
   DELETE_NOTE_MUTATION,
   UPDATE_NOTE_MUTATION,
   DELETE_RECORDING_MUTATION,
-  VIEWED_RECORDING_MUTATION
+  VIEWED_RECORDING_MUTATION,
+  BOOKMARK_RECORDING_MUTATION
 } from 'data/recordings/mutations';
 
 import {
@@ -73,7 +74,8 @@ import {
   NoteDeleteMutationInput,
   NoteUpdateMutationInput,
   DeleteRecordingMutationInput,
-  ViewedRecordingMutationInput
+  ViewedRecordingMutationInput,
+  BookmarkRecordingMutationInput
 } from 'types/recording';
 
 const ACCEPT_INCOMING_ARRAY = <E, I>(_existing: E, incoming: I[]): I[] => [...incoming];
@@ -413,20 +415,6 @@ export const noteUpdate = async (input: NoteUpdateMutationInput): Promise<SiteMu
   }
 };
 
-export const recordingDelete = async (input: DeleteRecordingMutationInput): Promise<SiteMutationResponse> => {
-  try {
-    const { data } = await client.mutate({
-      mutation: DELETE_RECORDING_MUTATION,
-      variables: { input }
-    });
-
-    return { site: data.recordingDelete };
-  } catch(error) {
-    console.error(error);
-    return parseGraphQLError(error);
-  }
-};
-
 export const recordingViewed = async (input: ViewedRecordingMutationInput): Promise<SiteMutationResponse> => {
   try {
     const { data } = await client.mutate({
@@ -439,4 +427,22 @@ export const recordingViewed = async (input: ViewedRecordingMutationInput): Prom
     console.error(error);
     return parseGraphQLError(error);
   }
+};
+
+export const recordingDelete = async (input: DeleteRecordingMutationInput): Promise<SiteMutationResponse> => {
+  const { data } = await client.mutate({
+    mutation: DELETE_RECORDING_MUTATION,
+    variables: { input }
+  });
+
+  return { site: data.recordingDelete };
+};
+
+export const recordingBookmarked = async (input: BookmarkRecordingMutationInput): Promise<SiteMutationResponse> => {
+  const { data } = await client.mutate({
+    mutation: BOOKMARK_RECORDING_MUTATION,
+    variables: { input }
+  });
+
+  return { site: data.recordingBookmarked };
 };

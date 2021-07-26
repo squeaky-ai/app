@@ -113,3 +113,17 @@ export const VIEWED_RECORDING_MUTATION = gql`
     }
   }
 `;
+
+export const BOOKMARK_RECORDING_MUTATION = gql`
+  mutation BookmarkRecording($input: RecordingBookmarkedInput!) {
+    recordingBookmarked(input: $input) {
+      id
+      recordings {
+        items {
+          id
+          bookmarked
+        }
+      }
+    }
+  }
+`;

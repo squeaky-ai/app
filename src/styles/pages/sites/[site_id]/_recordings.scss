@@ -99,6 +99,24 @@
         margin-right: .5rem;
         vertical-align: middle;
       }
+
+      .bookmark {
+        background: none;
+        border: none;
+        color: var(--gray-150);
+        font-size: 1.5rem;
+        margin-right: .5rem;
+        padding: 0;
+        vertical-align: middle;
+
+        &:hover {
+          color: var(--gray-700);
+        }
+
+        &.active {
+          color: var(--blue-500);
+        }
+      }
   
       .start-exit-page {
         font-size: 13px;
@@ -177,8 +195,8 @@
       }
 
       td:nth-of-type(2) {
-        max-width: 120px;
-        width: 120px;
+        max-width: 150px;
+        width: 150px;
       }
 
       td:nth-of-type(3) {
@@ -192,8 +210,8 @@
       }
 
       td:nth-of-type(5) {
-        max-width: 140px;
-        width: 140px;
+        max-width: 120px;
+        width: 120px;
       }
 
       td:nth-of-type(6) {

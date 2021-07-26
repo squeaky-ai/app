@@ -19,15 +19,18 @@ export const Sort: FC<Props> = ({ name, order, onAsc, onDesc }) => {
 
   const direction = order.includes('ASC') ? 'asc' : 'desc';
 
-  const isDisabled = (dir: 'asc' | 'desc') => key === name && dir === direction;
+  const handleClick = () => {
+    if (key === name) {
+      direction === 'asc' ? onDesc() : onAsc();
+    } else {
+      onAsc();
+    }
+  };
 
   return (
     <div className={classnames('sort', order.toLowerCase())}>
-      <Button onClick={onAsc} disabled={isDisabled('asc')}>
-        <i className='ri-arrow-drop-up-line' /> 
-      </Button>
-      <Button onClick={onDesc} disabled={isDisabled('desc')}>
-        <i className='ri-arrow-drop-down-line' /> 
+      <Button onClick={handleClick} className={classnames(key === name ? direction : '', { active: key === name })}>
+        <i className='ri-arrow-up-line' />
       </Button>
     </div>
   );
