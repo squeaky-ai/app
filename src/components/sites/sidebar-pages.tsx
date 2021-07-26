@@ -6,7 +6,6 @@ import { groupBy } from 'lodash';
 import { Button } from 'components/button';
 import { usePlayerState } from 'hooks/player-state';
 import { toTimeString } from 'lib/dates';
-import { parseEvents } from 'lib/events';
 import type { Event } from 'types/event';
 import type { Recording } from 'types/recording';
 
@@ -18,7 +17,7 @@ export const SidebarPages: FC<Props> = ({ recording }) => {
   const [open, setOpen] = React.useState<string>(null);
   const [_, dispatch] = usePlayerState();
   
-  const events: Event[] = parseEvents(recording);
+  const events: Event[] = JSON.parse(recording.events);
   const pageviews = events.filter(event => event.type === EventType.Meta);
 
   const offset = pageviews[0]?.timestamp || 0;

@@ -26,7 +26,7 @@ export interface Recording {
   browserString?: string;
   viewportX: number;
   viewportY: number;
-  events: string[];
+  events: string;
   tags?: Tag[];
   notes?: Note[];
   connectedAt: number;

@@ -2,7 +2,6 @@ import React from 'react';
 import { first } from 'lodash';
 import { Replayer } from 'rrweb';
 import { usePlayerState } from 'hooks/player-state';
-import { parseEvents } from 'lib/events';
 import type { Event } from 'types/event';
 import type { Recording } from 'types/recording';
 
@@ -19,7 +18,7 @@ export const useReplayer = (): [Replayer | null, InitFunction] => {
       return;
     }
 
-    const events: Event[] = parseEvents(recording);
+    const events: Event[] = JSON.parse(recording.events);
 
     if (events.length === 0) {
       console.error('Events list is empty');
