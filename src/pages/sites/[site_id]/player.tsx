@@ -29,7 +29,6 @@ const SitesPlayer: NextPage<ServerSideProps> = ({ user }) => {
                   <span className='seperator'>/</span>
                   <span className='session'>Session</span>
                   <span className='session-number'> #{recording?.sessionId}</span>
-                  <span className='indicator' />
                 </p>
               </div>
             </Header>

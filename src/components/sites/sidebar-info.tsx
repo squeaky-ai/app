@@ -1,7 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
 import Image from 'next/image';
-import classnames from 'classnames';
 import { Button } from 'components/button';
 import { PlayerTab } from 'data/sites/enums';
 import { toNiceDate } from 'lib/dates';
@@ -16,7 +15,7 @@ export const SidebarInfo: FC<Props> = ({ recording, setActiveTab }) => (
   <dl className='datalist'>
     <div className='row'>
       <dt>Session #</dt>
-      <dd><span className={classnames('indicator', { active: recording.active })} /> {recording.sessionId}</dd>
+      <dd>{recording.sessionId}</dd>
     </div>
     <div className='row'>
       <dt>User</dt>

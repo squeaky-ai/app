@@ -93,19 +93,6 @@
       font-size: 13px;
       line-height: 16px;
   
-      .indicator {
-        background: var(--gray-200);
-        border-radius: var(--border-radius-o);
-        display: inline-block;
-        height: .75rem;
-        margin-right: .5rem;
-        width: .75rem;
-  
-        &.active {
-          background: var(--green-500);
-        }
-      }
-  
       .device {
         color: var(--blue-500);
         font-size: 1.5rem;

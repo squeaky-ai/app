@@ -10,7 +10,6 @@ export type SortBy =
 
 export interface Recording {
   id: string;
-  active: boolean;
   language: string;
   sessionId: string;
   viewerId: string;

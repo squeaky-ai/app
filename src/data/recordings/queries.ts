@@ -8,7 +8,6 @@ export const GET_RECORDINGS_QUERY = gql`
       recordings(page: $page, size: $size, query: $query, sort: $sort) {
         items {
           id
-          active
           language
           duration
           durationString
@@ -59,7 +58,6 @@ export const GET_RECORDING_QUERY = gql`
         viewportX
         viewportY
         browser
-        active
         connectedAt
         disconnectedAt
         tags {

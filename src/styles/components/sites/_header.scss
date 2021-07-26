@@ -22,19 +22,6 @@
       .session-number {
         color: var(--gray-800);
       }
-
-      .indicator {
-        background: var(--gray-200);
-        border-radius: var(--border-radius-o);
-        display: inline-block;
-        height: .75rem;
-        margin-left: .5rem;
-        width: .75rem;
-
-        &.active {
-          background: var(--green-500);
-        }
-      }
     }
   }
 
