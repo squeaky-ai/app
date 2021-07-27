@@ -45,7 +45,7 @@ export const AnalyticsGraph: FC<Props> = ({ viewsAndVisitors }) => {
       </div>
       <ResponsiveContainer width='100%' height={340}>
         <BarChart data={results} margin={{ top: 0, left: -15, right: 0, bottom: 0 }}>
-          <XAxis dataKey='name' />
+          <XAxis dataKey='name' interval={1} />
           <YAxis />
           <CartesianGrid strokeDasharray='3 3' vertical={false} />
           <Bar dataKey='visitors' fill='#0074E0' barSize={8} radius={[10, 10, 0, 0]} />
