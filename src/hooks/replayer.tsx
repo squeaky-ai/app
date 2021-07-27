@@ -14,7 +14,7 @@ export const useReplayer = (): [Replayer | null, InitFunction] => {
 
   const init = (element: HTMLElement, recording: Recording) => {
     if (replayer) { 
-      console.error('Replayer already exist');
+      // We don't want to be creating more than 1!
       return;
     }
 

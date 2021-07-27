@@ -72,6 +72,12 @@ export const GET_RECORDING_QUERY = gql`
             fullName
           }
         }
+        previousRecording {
+          id
+        }
+        nextRecording {
+          id
+        }
         events
       }
     }

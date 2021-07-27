@@ -29,6 +29,8 @@ export interface Recording {
   events: string;
   tags?: Tag[];
   notes?: Note[];
+  previousRecording?: Recording;
+  nextRecording?: Recording;
   connectedAt: number;
   disconnectedAt: number;
 }
