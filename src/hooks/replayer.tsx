@@ -26,9 +26,8 @@ export const useReplayer = (): [Replayer | null, InitFunction] => {
     }
 
     if (element.childNodes.length > 1) {
-      // TODO: Next doesn't like this on reload, I suspect
-      // it's because of the replayer in the global state
-      console.error('Something other than the spinner exists in the container');
+      // The unmount should take care of this, but it's good
+      // to guard against it anyway
       return;
     }
 
@@ -73,7 +72,11 @@ export const useReplayer = (): [Replayer | null, InitFunction] => {
   React.useEffect(() => {
     // Clean up between page views as the replayer lives in 
     // the global state
-    return () => { replayer = null };
+    return () => {
+      replayer?.pause();
+      document.querySelector('.replayer-wrapper')?.remove();
+      replayer = null;
+    };
   }, []);
 
   return [replayer, init];
