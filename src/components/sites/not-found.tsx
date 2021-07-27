@@ -7,7 +7,7 @@ import { Container } from 'components/container';
 export const NotFound: FC = () => (
   <div className='not-found'>
     <Container className='md'>
-      <Image src='/error-state.svg' height={256} width={256} />
+      <Image src='/error-state.svg' height={256} width={256} alt='Page not found' />
       <h2>404</h2>
       <p>The page you are looking for cannot be found.</p>
       <Link href='/sites'>

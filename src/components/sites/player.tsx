@@ -58,3 +58,4 @@ export const Player: FC = React.memo(() => {
   );
 });
 
+Player.displayName = 'Player';

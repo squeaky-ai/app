@@ -60,7 +60,7 @@ export const SidebarInfo: FC<Props> = ({ recording, setActiveTab }) => (
       <dt>Browser</dt>
       <dd>
         <span className='browser'>
-          <Image height={16} width={16} src={`/browsers/${recording.browser.toLowerCase().replace(' ', '-')}.svg`} />
+          <Image height={16} width={16} src={`/browsers/${recording.browser.toLowerCase().replace(' ', '-')}.svg`} alt={`${recording.browser} icon`} />
         </span>
         {recording.browser}
       </dd>

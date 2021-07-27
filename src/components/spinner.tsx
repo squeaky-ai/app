@@ -7,6 +7,6 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {}
 
 export const Spinner: FC<Props> = ({ className, ...rest }) => (
   <div className={classnames('spinner', className)} {...rest}>
-    <Image src='/spinner.svg' height={120} width={120} />
+    <Image src='/spinner.svg' height={120} width={120} alt='Loading spinner' />
   </div>
 );

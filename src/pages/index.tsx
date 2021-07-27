@@ -62,7 +62,7 @@ const Home: NextPage<ServerSideProps> = () => (
             </Button>
           </div>
           <div className='screen'>
-            <img src='/screen.svg' />
+            <img src='/screen.svg' alt='Demo screen' />
           </div>
         </div>
 
@@ -96,7 +96,7 @@ const Home: NextPage<ServerSideProps> = () => (
             </Button>
           </div>
           <div className='screen'>
-            <img src='/screen.svg' />
+            <img src='/screen.svg' alt='Demo screen' />
           </div>
         </div>
       </Container>
@@ -144,7 +144,7 @@ const Home: NextPage<ServerSideProps> = () => (
           <div>
             <div className='coming-soon'>
               <p className='title'>
-                <img src='/fire.svg' />
+                <img src='/fire.svg' alt='' />
                 <b>Coming Soon!</b>
               </p>
               <p>We’re moving at lightning-pace to keep the amazing features coming, next up on our roadmap:</p>
@@ -254,8 +254,8 @@ const Home: NextPage<ServerSideProps> = () => (
     </section>
     <section className='section info'>
       <Container className='lg centered'>
-        <img src='/basketball.svg' className='image basketball' />
-        <img src='/cheese-legs.svg' className='image cheese-legs' />
+        <img src='/basketball.svg' className='image basketball' alt='' />
+        <img src='/cheese-legs.svg' className='image cheese-legs' alt='' />
 
         <h2>Looking For<br />More Information?</h2>
         <p>Schedule a demo using the button below and we’ll give you a guided tour of Squeaky and answer any questions you might have.</p>
