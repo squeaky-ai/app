@@ -29,7 +29,7 @@ export const PlayerDetails: FC<Props> = ({ site, recording }) => {
 
   return (
     <div className='recording-details'>
-      <Button onClick={viewPrevious} className={classnames({ disabled: !recording.previousRecording })}>
+      <Button onClick={viewPrevious} className={classnames({ disabled: !recording?.previousRecording })}>
         <i className='ri-arrow-left-s-line' />
       </Button>
         <span className='session'> #{recording?.sessionId}</span>
@@ -37,7 +37,7 @@ export const PlayerDetails: FC<Props> = ({ site, recording }) => {
           ? <Pill type='secondary'>Viewed</Pill>
           : <Pill type='primary'>New</Pill>
         }
-      <Button onClick={viewNext} className={classnames({ disabled: !recording.nextRecording })}>
+      <Button onClick={viewNext} className={classnames({ disabled: !recording?.nextRecording })}>
         <i className='ri-arrow-right-s-line' />
       </Button>
     </div>
