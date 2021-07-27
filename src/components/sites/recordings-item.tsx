@@ -126,7 +126,7 @@ export const RecordingsItem: FC<Props> = ({ query, recording }) => {
           <Highlighter value={query}>{recording.viewportX}</Highlighter> x <Highlighter value={query}>{recording.viewportY}</Highlighter>
         </td>
         <td className='no-overflow'>
-          <Tooltip positionX='right' button={<Browser name={recording.browser} />}>
+          <Tooltip positionX='right' button={<Browser name={recording.browser} height={24} width={24} />}>
             {recording.browserString}
           </Tooltip>
         </td>
