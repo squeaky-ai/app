@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import Link from 'next/link';
 import classnames from 'classnames';
 import { useRouter } from 'next/router';
 import { Button } from 'components/button';
@@ -46,10 +47,15 @@ export const PlayerActions: FC<Props> = ({ site, recording }) => {
 
   return (
     <div className='recording-actions'>
+      <Link href={`/sites/${site.id}/recordings`}>
+        <a className='button'>
+          <i className='ri-close-line' />
+        </a>
+      </Link>
       <Button onClick={handleBookmark} className={classnames('boookmark', { active: recording?.bookmarked })}>
         <i className='ri-bookmark-3-line' />
       </Button>
-      <Button onClick={handleDelete}>
+      <Button onClick={handleDelete} className='delete'>
         <i className='ri-delete-bin-line' />
       </Button>
     </div>
