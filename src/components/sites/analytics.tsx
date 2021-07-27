@@ -4,6 +4,8 @@ import { Main } from 'components/main';
 import { useAnalytics } from 'hooks/analytics';
 import { AnalyticsBrowsers } from 'components/sites/analytics-browsers';
 import { AnalyticsGraph } from 'components/sites/analytics-graph';
+import { AnalyticsSessionDuration } from 'components/sites/analytics-session-duration';
+import { AnalyticsPagesPerSession } from 'components/sites/analytics-pages-per-session';
 import { AnalyticsPages } from 'components/sites/analytics-pages';
 import { Spinner } from 'components/spinner';
 import { toMinutesAndSeconds, daysBefore, toIsoDate } from 'lib/dates';
@@ -55,10 +57,12 @@ export const Analytics: FC = () => {
         <div className='card session-duration'>
           <h4>Average Session Duration</h4>
           <h2>{toMinutesAndSeconds(analytics.averageSessionDuration)}</h2>
+          <AnalyticsSessionDuration />
         </div>
         <div className='card session-pages'>
           <h4>Pages Per Session</h4>
           <h2>{analytics.pagesPerSession}</h2>
+          <AnalyticsPagesPerSession />
         </div>
         <div className='card basic page-browser'>
           <div className='grid'>
