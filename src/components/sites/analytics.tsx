@@ -48,7 +48,7 @@ export const Analytics: FC = () => {
 
       <div className='analytics-grid'>
         <div className='card graph'>
-          <AnalyticsGraph />
+          <AnalyticsGraph viewsAndVisitors={analytics.viewsAndVisitorsPerHour} />
         </div>
         <div className='card visitors'>
           <h4>Visitors</h4>

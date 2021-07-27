@@ -3,140 +3,13 @@ import type { FC } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
 import { Label } from 'components/label';
 import { Checkbox } from 'components/checkbox';
+import type { ViewAndVisitor } from 'types/analytics';
 
 interface Props {
-  
+  viewsAndVisitors: ViewAndVisitor[];
 }
 
-const data = [
-  {
-    name: '12am',
-    visitors: 30,
-    pageViews: 40
-  },
-  {
-    name: '1am',
-    visitors: 35,
-    pageViews: 40
-  },
-  {
-    name: '2am',
-    visitors: 20,
-    pageViews: 30
-  },
-  {
-    name: '3am',
-    visitors: 25,
-    pageViews: 35
-  },
-  {
-    name: '4am',
-    visitors: 35,
-    pageViews: 45
-  },
-  {
-    name: '5am',
-    visitors: 35,
-    pageViews: 45
-  },
-  {
-    name: '6am',
-    visitors: 30,
-    pageViews: 30
-  },
-  {
-    name: '7am',
-    visitors: 25,
-    pageViews: 40
-  },
-  {
-    name: '8am',
-    visitors: 35,
-    pageViews: 60
-  },
-  {
-    name: '9am',
-    visitors: 15,
-    pageViews: 20
-  },
-  {
-    name: '10am',
-    visitors: 70,
-    pageViews: 80
-  },
-  {
-    name: '11am',
-    visitors: 150,
-    pageViews: 130
-  },
-  {
-    name: '12pm',
-    visitors: 30,
-    pageViews: 40
-  },
-  {
-    name: '1pm',
-    visitors: 100,
-    pageViews: 120
-  },
-  {
-    name: '2pm',
-    visitors: 30,
-    pageViews: 40
-  },
-  {
-    name: '3pm',
-    visitors: 30,
-    pageViews: 40
-  },
-  {
-    name: '4pm',
-    visitors: 40,
-    pageViews: 45
-  },
-  {
-    name: '5pm',
-    visitors: 70,
-    pageViews: 105
-  },
-  {
-    name: '6pm',
-    visitors: 20,
-    pageViews: 25
-  },
-  {
-    name: '6pm',
-    visitors: 40,
-    pageViews: 65
-  },
-  {
-    name: '8pm',
-    visitors: 60,
-    pageViews: 120
-  },
-  {
-    name: '9pm',
-    visitors: 40,
-    pageViews: 25
-  },
-  {
-    name: '10pm',
-    visitors: 50,
-    pageViews: 65
-  },
-  {
-    name: '11pm',
-    visitors: 100,
-    pageViews: 120
-  },
-  {
-    name: '12pm',
-    visitors: 40,
-    pageViews: 40
-  }
-];
-
-export const AnalyticsGraph: FC<Props> = () => {
+export const AnalyticsGraph: FC<Props> = ({ viewsAndVisitors }) => {
   const [show, setShow] = React.useState<string[]>(['visitors', 'pageViews']);
 
   const handleClick = (value: string) => {
@@ -144,6 +17,18 @@ export const AnalyticsGraph: FC<Props> = () => {
       ? setShow(show.filter(s => s !== value))
       : setShow([...show, value]);
   };
+
+  const getAmPmForHour = (hour: number): string => {
+    if (hour == 24) return '12pm';
+    if (hour <= 12) return `${hour}am`;
+    return `${hour - 12}pm`;
+  };
+
+  const data = viewsAndVisitors.map(v => ({
+    name: getAmPmForHour(v.hour),
+    visitors: v.visitors,
+    pageViews: v.pageViews,
+  }));
 
   const results = data.map(d => ({
     name: d.name,

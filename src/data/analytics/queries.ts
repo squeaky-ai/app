@@ -5,6 +5,11 @@ export const GET_ANALYTICS_QUERY = gql`
     site(siteId: $siteId) {
       id
       analytics(dateString: $dateString) {
+        viewsAndVisitorsPerHour {
+          hour
+          pageViews
+          visitors
+        }
         visitors
         pageViews
         averageSessionDuration

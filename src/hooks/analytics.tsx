@@ -14,7 +14,8 @@ export const useAnalytics = (dateString: string): [boolean, Analytics] => {
     }
   });
 
-  const fallback: Analytics = { 
+  const fallback: Analytics = {
+    viewsAndVisitorsPerHour: [],
     visitors: 0,
     pageViews: 0,
     averageSessionDuration: 0,
