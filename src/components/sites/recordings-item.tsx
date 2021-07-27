@@ -125,9 +125,8 @@ export const RecordingsItem: FC<Props> = ({ query, recording }) => {
         </td>
         <td>
           <i className={classnames('device', deviceIcon(recording.deviceType))} />
-          <Highlighter value={query}>{recording.deviceType}</Highlighter>
+          <Highlighter value={query}>{recording.viewportX}</Highlighter> x <Highlighter value={query}>{recording.viewportY}</Highlighter>
         </td>
-        <td><Highlighter value={query}>{recording.viewportX}</Highlighter> x <Highlighter value={query}>{recording.viewportY}</Highlighter></td>
         <td className='no-overflow'>
           <Tooltip positionX='right' button={<Image src={`/browsers/${browserIcon(recording.browser)}.svg`} height={24} width={24} alt={`Icon for the ${recording.browser} browser`} />}>
             {recording.browserString}

@@ -47,17 +47,17 @@ export const PlayerActions: FC<Props> = ({ site, recording }) => {
 
   return (
     <div className='recording-actions'>
-      <Link href={`/sites/${site.id}/recordings`}>
-        <a className='button'>
-          <i className='ri-close-line' />
-        </a>
-      </Link>
       <Button onClick={handleBookmark} className={classnames('boookmark', { active: recording?.bookmarked })}>
         <i className='ri-bookmark-3-line' />
       </Button>
-      <Button onClick={handleDelete} className='delete'>
+      <Button onClick={handleDelete}>
         <i className='ri-delete-bin-line' />
       </Button>
+      <Link href={`/sites/${site.id}/recordings`}>
+        <a className='button close'>
+          <i className='ri-close-line' />
+        </a>
+      </Link>
     </div>
   );
 };

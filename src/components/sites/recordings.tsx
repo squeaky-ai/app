@@ -76,7 +76,6 @@ export const Recordings: FC = () => {
               <th>Language</th>
               <th>Pages <Sort name='page_size' order={sort} onAsc={() => setSort('PAGE_SIZE_ASC')} onDesc={() => setSort('PAGE_SIZE_DESC')} /></th>
               <th>Start &amp; Exit URL</th>
-              <th>Browser</th>
               <th>Device &amp; Viewport (px)</th>
               <th>Browser</th>
               <th></th>
