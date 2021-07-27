@@ -1,12 +1,12 @@
 import React from 'react';
 import type { FC } from 'react';
-import Image from 'next/image';
 import classnames from 'classnames';
 import { useRouter } from 'next/router';
 import { Highlighter } from 'components/highlighter';
 import { Pill } from 'components/pill';
 import { Button } from 'components/button';
 import { Tooltip } from 'components/tooltip';
+import { Browser } from 'components/browser';
 import { Dropdown } from 'components/dropdown';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { toNiceDate } from 'lib/dates';
@@ -73,8 +73,6 @@ export const RecordingsItem: FC<Props> = ({ query, recording }) => {
     ? 'ri-computer-line' 
     : 'ri-smartphone-line';
 
-  const browserIcon = (browser: string) => browser.toLowerCase().replace(' ', '-');
-
   return (
     <>
       <tr 
@@ -128,7 +126,7 @@ export const RecordingsItem: FC<Props> = ({ query, recording }) => {
           <Highlighter value={query}>{recording.viewportX}</Highlighter> x <Highlighter value={query}>{recording.viewportY}</Highlighter>
         </td>
         <td className='no-overflow'>
-          <Tooltip positionX='right' button={<Image src={`/browsers/${browserIcon(recording.browser)}.svg`} height={24} width={24} alt={`Icon for the ${recording.browser} browser`} />}>
+          <Tooltip positionX='right' button={<Browser name={recording.browser} />}>
             {recording.browserString}
           </Tooltip>
         </td>

@@ -1,9 +1,9 @@
 import React from 'react';
 import type { FC } from 'react';
-import Image from 'next/image';
 import { Button } from 'components/button';
 import { PlayerTab } from 'data/sites/enums';
 import { toNiceDate } from 'lib/dates';
+import { Browser } from 'components/browser';
 import type { Recording } from 'types/recording';
 
 interface Props {
@@ -60,7 +60,7 @@ export const SidebarInfo: FC<Props> = ({ recording, setActiveTab }) => (
       <dt>Browser</dt>
       <dd>
         <span className='browser'>
-          <Image height={16} width={16} src={`/browsers/${recording.browser.toLowerCase().replace(' ', '-')}.svg`} alt={`${recording.browser} icon`} />
+          <Browser name={recording.browser} />
         </span>
         {recording.browser}
       </dd>

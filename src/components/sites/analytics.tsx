@@ -2,6 +2,9 @@ import React from 'react';
 import type { FC } from 'react';
 import { Main } from 'components/main';
 import { useAnalytics } from 'hooks/analytics';
+import { AnalyticsBrowsers } from 'components/sites/analytics-browsers';
+import { AnalyticsGraph } from 'components/sites/analytics-graph';
+import { AnalyticsPages } from 'components/sites/analytics-pages';
 import { Spinner } from 'components/spinner';
 import { toMinutesAndSeconds, daysBefore, toIsoDate } from 'lib/dates';
 import { Select, Option } from 'components/select';
@@ -39,6 +42,7 @@ export const Analytics: FC = () => {
 
       <div className='analytics-grid'>
         <div className='card graph'>
+          <AnalyticsGraph />
         </div>
         <div className='card visitors'>
           <h4>Visitors</h4>
@@ -60,37 +64,12 @@ export const Analytics: FC = () => {
           <div className='grid'>
             <div className='card basic pages'>
               <h4>Pages</h4>
-              <div className='table'>
-                <table cellSpacing='0'>
-                  <thead>
-                    <tr>
-                      <th>Page</th>
-                      <th>Views</th>
-                      <th>Average time on page</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {analytics.pages.map(page => (
-                      <tr key={page.path}>
-                        <td>{page.path}</td>
-                        <td><b>{page.count}</b></td>
-                        <td></td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+              <AnalyticsPages pages={analytics.pages} />
             </div>
             <div className='card basic browser'>
               <h4>Browser</h4>
               <div className='card'>
-                <ul>
-                  {analytics.browsers.map(browser => (
-                    <li key={browser.name}>
-                      <p>{browser.name} ({browser.count})</p>
-                    </li>
-                  ))}
-                </ul>
+                <AnalyticsBrowsers browsers={analytics.browsers} />
               </div>
             </div>
           </div>

@@ -7,12 +7,12 @@ export interface Analytics {
   browsers: AnalyticsBrowser[];
 }
 
-interface AnalyticsPage {
+export interface AnalyticsPage {
   path: string;
   count: number;
 }
 
-interface AnalyticsBrowser {
+export interface AnalyticsBrowser {
   name: string;
   count: number;
 }
