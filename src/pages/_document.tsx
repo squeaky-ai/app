@@ -14,6 +14,16 @@ class Document extends NextDocument {
           <link rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png' />
           <link rel='icon' type='image/x-icon' href='/favicon.ico' />
           <link rel='manifest' href='/site.webmanifest' />
+          <script dangerouslySetInnerHTML={{ __html: `
+            <!-- Squeaky Tracking Code for https://squeaky.ai -->
+            (function(s,q,e,a,u,k,y){
+              s._sqSettings={site_id:'18f15775-e673-43e4-afd6-21d6236ea6fc'};
+              u=q.getElementsByTagName('head')[0];
+              k=q.createElement('script');
+              k.src=e+s._sqSettings.site_id;
+              u.appendChild(k);
+            })(window,document,'https://cdn.squeaky.ai/g/0.4.0/script.js?');
+          `}} />
         </Head>
         <body>
           <Main />
