@@ -51,10 +51,14 @@ export const Player: FC = React.memo(() => {
     const container = document.getElementById('player');
 
     const observer = new ResizeObserver(debounce(() => {
-      squidgeToFit();
+      if (state.recording) {
+        squidgeToFit();
+      }
     }, 100));
 
     observer.observe(container);
+
+    return () => { observer.disconnect() };
   }, []);
 
   React.useEffect(() => {
