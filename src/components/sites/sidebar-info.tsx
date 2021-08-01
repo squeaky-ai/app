@@ -2,7 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import { Button } from 'components/button';
 import { PlayerTab } from 'data/sites/enums';
-import { toNiceDate } from 'lib/dates';
+import { toNiceDate, toMinutesAndSeconds } from 'lib/dates';
 import { Browser } from 'components/browser';
 import type { Recording } from 'types/recording';
 
@@ -31,7 +31,7 @@ export const SidebarInfo: FC<Props> = ({ recording, setActiveTab }) => (
     </div>
     <div className='row'>
       <dt>Duration</dt>
-      <dd>{recording.durationString}</dd>
+      <dd>{toMinutesAndSeconds(recording.duration)}</dd>
     </div>
     <div className='row'>
       <dt>Pages</dt>

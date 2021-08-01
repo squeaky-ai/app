@@ -10,7 +10,6 @@ export const GET_RECORDINGS_QUERY = gql`
           id
           language
           duration
-          durationString
           viewed
           bookmarked
           startPage
@@ -47,8 +46,8 @@ export const GET_RECORDING_QUERY = gql`
         sessionId
         viewerId
         language
-        durationString
         viewed
+        duration
         bookmarked
         pageViews
         pageCount

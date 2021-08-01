@@ -9,7 +9,7 @@ import { Tooltip } from 'components/tooltip';
 import { Browser } from 'components/browser';
 import { Dropdown } from 'components/dropdown';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
-import { toNiceDate } from 'lib/dates';
+import { toNiceDate, toMinutesAndSeconds } from 'lib/dates';
 import { useToasts } from 'hooks/toasts';
 import { recordingDelete, recordingBookmarked } from 'lib/api/graphql';
 import type { Recording } from 'types/recording';
@@ -96,7 +96,7 @@ export const RecordingsItem: FC<Props> = ({ query, recording }) => {
         </td>
         <td><Highlighter value={query}>{recording.viewerId}</Highlighter></td>
         <td><Highlighter value={query}>{toNiceDate(recording.connectedAt)}</Highlighter></td>
-        <td><Highlighter value={query}>{recording.durationString}</Highlighter></td>
+        <td>{toMinutesAndSeconds(recording.duration)}</td>
         <td><Highlighter value={query}>{recording.language}</Highlighter></td>
         <td className='no-overflow'>
           <Tooltip button={recording.pageCount} buttonClassName='link'>
