@@ -88,10 +88,16 @@ export const RecordingsItem: FC<Props> = ({ query, recording }) => {
             : <Pill type='primary'>New</Pill>
           }
         </td>
-        <td>
-          <Button onClick={bookmarkRecording} className={classnames('bookmark', { active: recording.bookmarked })}>
-            <i className='ri-bookmark-3-line' />
-          </Button>
+        <td className="no-overflow">
+          <Tooltip
+            button={
+              <Button onClick={bookmarkRecording} className={classnames('bookmark', { active: recording.bookmarked })}>
+              <i className='ri-bookmark-3-line' />
+            </Button>
+            }
+          >
+            {recording.bookmarked ? 'Bookmarked' : 'Not bookmarked'}
+          </Tooltip>
           <Highlighter value={query}>{recording.sessionId}</Highlighter>
         </td>
         <td><Highlighter value={query}>{recording.viewerId}</Highlighter></td>
@@ -121,8 +127,10 @@ export const RecordingsItem: FC<Props> = ({ query, recording }) => {
             </tbody>
           </table>
         </td>
-        <td>
-          <i className={classnames('device', deviceIcon(recording.deviceType))} />
+        <td className="no-overflow">
+          <Tooltip positionX='right' button={<i className={classnames('device', deviceIcon(recording.deviceType))} />}>
+            {recording.deviceType === 'Computer' ? 'Desktop or Laptop Device' : 'Mobile Device'}
+          </Tooltip>
           <Highlighter value={query}>{recording.viewportX}</Highlighter> x <Highlighter value={query}>{recording.viewportY}</Highlighter>
         </td>
         <td className='no-overflow'>
