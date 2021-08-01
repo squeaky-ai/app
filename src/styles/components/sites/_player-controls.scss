@@ -43,7 +43,7 @@
       }
 
       &:hover {
-        background: var(--gray-150);
+        background: var(--white);
 
         i {
           color: var(--gray-800);
@@ -93,12 +93,22 @@
     }
 
     .speed {
+      align-items: center;
       background: none;
       border: none;
-      margin-left: 1rem;
+      border-radius: var(--border-radius-o);
+      display: flex;
+      height: 2.5rem;
+      justify-content: center;
+      margin-left: .5rem;
       padding: 0;
+      width: 2.5rem;
 
-      i{
+      &:hover {
+        background: var(--white);
+      }
+
+      i {
         font-size: 1.25rem;
         
         &:not(.skip) {

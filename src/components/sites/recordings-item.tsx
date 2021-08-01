@@ -91,9 +91,9 @@ export const RecordingsItem: FC<Props> = ({ query, recording }) => {
         <td className="no-overflow">
           <Tooltip
             button={
-              <Button onClick={bookmarkRecording} className={classnames('bookmark', { active: recording.bookmarked })}>
+              <span onClick={bookmarkRecording} className={classnames('bookmark', { active: recording.bookmarked })}>
               <i className='ri-bookmark-3-line' />
-            </Button>
+            </span>
             }
           >
             {recording.bookmarked ? 'Bookmarked' : 'Not bookmarked'}

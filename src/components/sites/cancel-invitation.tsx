@@ -61,5 +61,5 @@ export const CancelInvitation: FC<Props> = ({ site, team }) => {
         </ModalBody>
       </Modal>
     </>
-  )
+  );
 };
