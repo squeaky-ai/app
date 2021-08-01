@@ -23,6 +23,10 @@
       justify-content: center;
     }
 
+    &:last-of-type {
+      transition: transform .3s ease-in-out;
+    }
+
     .control {
       align-items: center;
       background: none;
@@ -134,7 +138,8 @@
   &.active {
     .control-group:last-of-type {
       background: white;
-      box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.1);
+      border-left: 2px solid var(--gray-150);
+      transform: translateX(300px);
     }
   }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import { debounce } from 'lodash';
 import { useRouter } from 'next/router';
 import { Spinner } from 'components/spinner';
 import { useReplayer } from 'hooks/replayer';
@@ -22,12 +23,12 @@ export const Player: FC = React.memo(() => {
     }
   };
 
-  React.useEffect(() => {
-    if (!state.recording) return;
-
-    init(ref.current, state.recording);
-
+  function squidgeToFit() {
     const container = document.getElementById('player');
+
+    if (!container || !state.recording) {
+      return;
+    }
 
     const { width, height } = container.getBoundingClientRect();
     const { viewportX, viewportY } = state.recording;
@@ -36,7 +37,7 @@ export const Player: FC = React.memo(() => {
 
     // Keep shrinking the multiplier until the viewport of the player
     // window fits inside the bounds of the page
-    while((viewportX * multiplier) > width || (viewportY * multiplier) > height) {
+    while((viewportX * multiplier) > (width - 32) || (viewportY * multiplier) > (height - 32)) {
       multiplier -= .1;
     }
 
@@ -44,7 +45,24 @@ export const Player: FC = React.memo(() => {
     // as 0.40000000000000013, so it must be fixed (to a string?! 🤦‍♂️)
     // and then cast back to a number
     dispatch({ type: 'zoom', value: Number(multiplier.toFixed(1)) });
+  }
 
+  React.useEffect(() => {
+    const container = document.getElementById('player');
+
+    const observer = new ResizeObserver(debounce(() => {
+      squidgeToFit();
+    }, 100));
+
+    observer.observe(container);
+  }, []);
+
+  React.useEffect(() => {
+    if (!state.recording) return;
+
+    init(ref.current, state.recording);
+    // Work out the sizing once it's loaded
+    squidgeToFit();
     // Fire and forget here, should be okay
     markAsViewed();
   }, [state.recording]);

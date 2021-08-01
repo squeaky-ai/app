@@ -8,10 +8,25 @@
   overflow: hidden;
 
   .header {
+    display: none;
     flex-shrink: 0;
+  }
 
-    &:first-of-type {
-      display: none;
+  .player-page {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    height: 100%;
+    transition: padding .3s ease-in-out;
+    width: 100%;
+
+    .header {
+      display: flex;
+    }
+
+    &.open {
+      padding-right: 300px;
     }
   }
 }
