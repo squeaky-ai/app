@@ -63,7 +63,12 @@ export const Note: FC<Props> = ({ note, handleDelete, handleUpdate }) => {
         </p>
         <p className='user'>
           <i className='ri-account-circle-line' />
-          <span>{note.user.fullName}</span>
+          <span>
+            {note.user
+              ? note.user.fullName
+              : 'No user'
+            }
+          </span>
         </p>
       </div>
 

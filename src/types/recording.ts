@@ -43,7 +43,7 @@ export interface Note {
   id: string;
   timestamp: number;
   body: string;
-  user: User;
+  user?: User;
 }
 
 export interface PaginatedRecordingsResponse {
