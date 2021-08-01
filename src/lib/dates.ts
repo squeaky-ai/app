@@ -2,9 +2,10 @@ import { range } from 'lodash';
 
 export const toTimeString = (ms?: number) => {
   if (!ms) return '00:00';
+  if (ms >= 3600000) return '60:00+'
 
   const date = new Date(0);
-  date.setSeconds(ms / 1000);
+  date.setMilliseconds(ms);
   return date.toISOString().substr(14, 5);
 };
 
