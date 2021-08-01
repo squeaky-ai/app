@@ -24,7 +24,7 @@ export const LaunchChecklist: FC<Props> = ({ site, member }) => {
 
   const completedCount = [hasAdded, hasInstalled, hasTeamMembers].filter(Boolean).length;
 
-  if (completedCount === 3 || site.checklistDismissedAt || member.role === MEMBER) {
+  if (completedCount === 3 || site.checklistDismissedAt || member?.role === MEMBER) {
     return null;
   }
 
