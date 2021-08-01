@@ -14,7 +14,7 @@ interface Props {
 }
 
 export const SidebarPages: FC<Props> = ({ recording }) => {
-  const [open, setOpen] = React.useState<string>(null);
+  const [open, setOpen] = React.useState<string[]>([]);
   const [_, dispatch] = usePlayerState();
   
   const events: Event[] = JSON.parse(recording.events);
@@ -25,9 +25,9 @@ export const SidebarPages: FC<Props> = ({ recording }) => {
   const groups = groupBy(pageviews, 'data.href');
 
   const handleOpen = (path: string) => {
-    open === path
-      ? setOpen(null)
-      : setOpen(path);
+    open.includes(path)
+      ? setOpen(open.filter(o => o !== path))
+      : setOpen([...open, path]);
   };
 
   const getPathName = (url: string) => new URL(url).pathname;
@@ -62,7 +62,7 @@ export const SidebarPages: FC<Props> = ({ recording }) => {
         const path = getPathName(url);
 
         return (
-          <li key={path} className={classnames({ open: path === open })}>
+          <li key={path} className={classnames({ open: open.includes(path) })}>
             <div className='title' onClick={() => handleOpen(path)}>
               <span className='path'>{path}</span>
               <span className='count'>{events.length}</span>

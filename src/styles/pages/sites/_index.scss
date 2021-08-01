@@ -83,6 +83,11 @@
         flex: 1;
         margin: 0;
       }
+      
+      .pill {
+        margin-left: .5rem;
+        vertical-align: middle;
+      }
 
       .url {
         color: var(--gray-500);

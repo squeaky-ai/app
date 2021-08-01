@@ -15,4 +15,14 @@
   &.secondary {
     background: var(--gray-150);
   }
+
+  &.tertiary {
+    border-color: var(--magenta-500);
+  }
+
+  &.small {
+    font-size: 10px;
+    line-height: 13px;
+    padding: .1rem .5rem;
+  }
 }

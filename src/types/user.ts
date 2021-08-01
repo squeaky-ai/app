@@ -5,6 +5,7 @@ export interface User {
   fullName?: string;
   email: string;
   lastSignedInAt: string;
+  superuser: boolean;
   createdAt: string;
   updatedAt: string;
 }
