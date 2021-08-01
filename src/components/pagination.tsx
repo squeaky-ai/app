@@ -48,7 +48,7 @@ const RenderItem: FC<RenderItemProps> = ({ page, type }) => {
 }
 
 export const Pagination: FC<Props> = ({ currentPage, pageSize, total, setPage }) => {
-  if (total < pageSize) {
+  if (total <= pageSize) {
     return null;
   }
 
