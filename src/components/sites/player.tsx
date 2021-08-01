@@ -7,6 +7,8 @@ import { useReplayer } from 'hooks/replayer';
 import { usePlayerState } from 'hooks/player-state';
 import { recordingViewed } from 'lib/api/graphql';
 
+const MAIN_PADDING_SIZE = 24;
+
 export const Player: FC = React.memo(() => {
   const router = useRouter();
   const ref = React.useRef<HTMLDivElement>(null);
@@ -26,9 +28,7 @@ export const Player: FC = React.memo(() => {
   function squidgeToFit() {
     const container = document.getElementById('player');
 
-    if (!container || !state.recording) {
-      return;
-    }
+    if (!container) return;
 
     const { width, height } = container.getBoundingClientRect();
     const { viewportX, viewportY } = state.recording;
@@ -37,7 +37,7 @@ export const Player: FC = React.memo(() => {
 
     // Keep shrinking the multiplier until the viewport of the player
     // window fits inside the bounds of the page
-    while((viewportX * multiplier) > (width - 32) || (viewportY * multiplier) > (height - 32)) {
+    while((viewportX * multiplier) > (width - MAIN_PADDING_SIZE) || (viewportY * multiplier) > (height - MAIN_PADDING_SIZE)) {
       multiplier -= .1;
     }
 

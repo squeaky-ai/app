@@ -7,7 +7,7 @@ export const PlayerZoom: FC = () => {
   const [state, dispatch] = usePlayerState();
 
   const min = .1;
-  const max = 2;
+  const max = 5;
   const step = .1;
 
   const getValueWithoutStupidRounding = (value: number) => {
