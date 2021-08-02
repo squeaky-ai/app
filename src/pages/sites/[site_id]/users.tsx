@@ -2,26 +2,23 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { Main } from 'components/main';
-import { Access } from 'components/sites/access';
 import { Page } from 'components/sites/page';
-import { OWNER } from 'data/teams/constants';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
-const SitesSubscription: NextPage<ServerSideProps> = ({ user }) => (
+const SitesUsers: NextPage<ServerSideProps> = ({ user }) => (
   <>
     <Head>
-      <title>Squeaky / Site Settings</title>
+      <title>Squeaky / Site Users</title>
     </Head>
 
-    <Page user={user} scope={[OWNER]}>
+    <Page user={user} scope={[]}>
       {({ site }) => (
         <Main>
-          <BreadCrumbs site={site} page='Overview' />
+          <BreadCrumbs site={site} page='Users' />
 
           <h3 className='title'>
-            Subscription
-            <Access roles={[OWNER]} />
+            Users
           </h3>
         </Main>
       )}
@@ -29,5 +26,5 @@ const SitesSubscription: NextPage<ServerSideProps> = ({ user }) => (
   </>
 );
 
-export default SitesSubscription;
+export default SitesUsers;
 export { getServerSideProps };

@@ -9,9 +9,15 @@ import { AnalyticsPagesPerSession } from 'components/sites/analytics-pages-per-s
 import { AnalyticsPages } from 'components/sites/analytics-pages';
 import { Spinner } from 'components/spinner';
 import { toMinutesAndSeconds, daysBefore, toIsoDate } from 'lib/dates';
+import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { Select, Option } from 'components/select';
+import type { Site } from 'types/site';
 
-export const Analytics: FC = () => {
+interface Props {
+  site: Site;
+}
+
+export const Analytics: FC<Props> = ({ site }) => {
   const today = toIsoDate();
 
   const [date, setDate] = React.useState(today);
@@ -31,6 +37,8 @@ export const Analytics: FC = () => {
 
   return (
     <Main>
+      <BreadCrumbs site={site} page='Analytics' />
+
       <div className='heading'>
         <h3 className='title'>Analytics</h3>
         <div className='period'>

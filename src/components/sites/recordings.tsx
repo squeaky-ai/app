@@ -10,11 +10,17 @@ import { Pagination } from 'components/pagination';
 import { Container } from 'components/container';
 import { RecordingsItem } from 'components/sites/recordings-item';
 import { Sort } from 'components/sort';
+import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { useRecordings } from 'hooks/recordings';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 import type { SortBy } from 'types/recording';
+import type { Site } from 'types/site';
 
-export const Recordings: FC = () => {
+interface Props {
+  site: Site;
+}
+
+export const Recordings: FC<Props> = ({ site }) => {
   const [page, setPage] = React.useState<number>(1);
   const [query, setQuery] = React.useState<string>('');
   const [sort, setSort] = React.useState<SortBy>('DATE_DESC');
@@ -42,6 +48,8 @@ export const Recordings: FC = () => {
 
   return (
     <Main className={classnames('recordings', { empty: !hasRecordings })}>
+      <BreadCrumbs site={site} page='Recordings' />
+
       <h3 className='title'>
         Recordings
         <div className='search' role='search' aria-label='Filter recordings'>

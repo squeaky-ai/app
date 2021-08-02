@@ -5,6 +5,7 @@
 @import './typography';
 @import './variables';
 
+@import './components/app/sidebar';
 @import './components/public/footer';
 @import './components/public/header';
 @import './components/public/strip';
@@ -15,6 +16,7 @@
 @import './components/sites/analytics-pages';
 @import './components/sites/analytics-session-duration';
 @import './components/sites/avatar';
+@import './components/sites/breadcrumbs';
 @import './components/sites/header';
 @import './components/sites/launch-checklist';
 @import './components/sites/player-sidebar';
@@ -22,7 +24,6 @@
 @import './components/sites/player-controls';
 @import './components/sites/not-found';
 @import './components/sites/note';
-@import './components/sites/tabs';
 @import './components/sites/unauthorized';
 @import './components/users/tabs';
 @import './components/button';
@@ -40,6 +41,7 @@
 @import './components/main';
 @import './components/message';
 @import './components/modal';
+@import './components/page';
 @import './components/pagination';
 @import './components/password';
 @import './components/pill';
