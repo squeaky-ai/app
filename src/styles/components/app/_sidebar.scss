@@ -34,6 +34,16 @@
       margin-right: 1rem;
     }
 
+    span {
+      flex: 1;
+    }
+
+    .arrow {
+      color: var(--gray-500);
+      margin: 0;
+      transition: transform .3s ease-in-out;
+    }
+
     &:hover {
       background: var(--gray-100);
     }
@@ -41,6 +51,44 @@
     &.active,
     &.active i {
       color: var(--blue-500);
+    }
+
+    &.account {
+      flex-direction: column;
+
+      .button {
+        align-items: center;
+        background: none;
+        border: none;
+        display: flex;
+        margin: 0;
+        text-align: left;
+        padding: 0;
+        width: 100%;
+      }
+
+      .items {
+        display: none;
+        padding: 1.5rem 0 0 2.5rem;
+        width: 100%;
+
+        .button {
+          color: var(--gray-700);
+          margin-bottom: .5rem;
+        }
+      }
+
+      &.open {
+        background: var(--gray-100);
+
+        .items {
+          display: block;
+        }
+
+        .arrow {
+          transform: rotate(180deg);
+        }
+      }
     }
   }
 
