@@ -12,9 +12,18 @@ const MAIN_PADDING_SIZE = 24;
 export const Player: FC = React.memo(() => {
   const router = useRouter();
   const ref = React.useRef<HTMLDivElement>(null);
+  const container = document.getElementById('player');
 
   const [replayer, init] = useReplayer();
   const [state, dispatch] = usePlayerState();
+
+  // When the size of the container changes we should
+  // recalculate the zoom every 100ms or so. Be careful
+  // not to observe this until the container and recording
+  // exist
+  const observer = new ResizeObserver(debounce(() => {
+    squidgeToFit();
+  }, 100));
 
   const markAsViewed = async () => {
     if (state.recording && !state.recording.viewed) {
@@ -26,8 +35,6 @@ export const Player: FC = React.memo(() => {
   };
 
   function squidgeToFit() {
-    const container = document.getElementById('player');
-
     if (!container) return;
 
     const { width, height } = container.getBoundingClientRect();
@@ -48,28 +55,26 @@ export const Player: FC = React.memo(() => {
   }
 
   React.useEffect(() => {
-    const container = document.getElementById('player');
-
-    const observer = new ResizeObserver(debounce(() => {
-      if (state.recording) {
-        squidgeToFit();
-      }
-    }, 100));
-
-    observer.observe(container);
-
-    return () => { observer.disconnect() };
-  }, []);
-
-  React.useEffect(() => {
     if (!state.recording) return;
 
     init(ref.current, state.recording);
+
     // Work out the sizing once it's loaded
     squidgeToFit();
+
     // Fire and forget here, should be okay
     markAsViewed();
+
+    observer.observe(container);
+  
   }, [state.recording]);
+
+
+  React.useEffect(() => {
+    // Stop observing once this component unmounts as it will start
+    // watching again on the next mount
+    return () => { observer.disconnect() };
+  }, []);
 
   return (
     <main id='player'>
