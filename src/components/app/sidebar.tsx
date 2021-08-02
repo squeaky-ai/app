@@ -32,12 +32,12 @@ export const Sidebar: FC = () => {
         <div className='slider'>
           <div className='nav left'>
             <Link href='/sites'>
-              <a className='link active'>
+              <a className={classnames('link', { active: path === '/sites' })}>
                 <i className='ri-window-line' />
                 <span>All Sites</span>
               </a>
             </Link>
-            <SidebarAccount />
+            <SidebarAccount path={path} />
           </div>
           <div className='nav right'>
             <Link href={`/sites/${siteId}/overview`}>
@@ -90,7 +90,7 @@ export const Sidebar: FC = () => {
               </a>
             </Link>
             <div className='divider' />
-            <SidebarAccount />
+            <SidebarAccount path={path} />
           </div>
         </div>
       </menu>

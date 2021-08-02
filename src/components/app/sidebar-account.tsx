@@ -5,7 +5,11 @@ import classnames from 'classnames';
 import { Button } from 'components/button';
 import { signout } from 'lib/api/auth';
 
-export const SidebarAccount: FC = () => {
+interface Props {
+  path: string;
+}
+
+export const SidebarAccount: FC<Props> = ({ path }) => {
   const [open, setOpen] = React.useState<boolean>(true);
 
   const toggleOpen = () => {
@@ -26,7 +30,9 @@ export const SidebarAccount: FC = () => {
       </Button>
       <div className='items'>
         <Link href='/users/account'>
-          <a className='button'>Settings</a>
+          <a className={classnames('button', { active: path.startsWith('/users') })}>
+            Settings
+          </a>
         </Link>
         <Button onClick={handleSignOut}>Log out</Button>
       </div>

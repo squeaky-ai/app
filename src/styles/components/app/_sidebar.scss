@@ -74,13 +74,16 @@
 
         .button {
           color: var(--gray-700);
+          font-weight: var(--font-weight-normal);
           margin-bottom: .5rem;
+          
+          &.active {
+            color: var(--blue-500);
+          }
         }
       }
 
       &.open {
-        background: var(--gray-100);
-
         .items {
           display: block;
         }
