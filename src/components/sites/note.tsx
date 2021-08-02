@@ -7,6 +7,7 @@ import { Button } from 'components/button';
 import { Label } from 'components/label';
 import { Input } from 'components/input';
 import { TextArea } from 'components/textarea';
+import { NoteDelete } from 'components/sites/note-delete'
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { ActivityTimestamp } from 'components/sites/activity-timestamp';
 import { TIMESTAMP_REGEX } from 'data/sites/constants';
@@ -55,7 +56,7 @@ export const Note: FC<Props> = ({ note, handleDelete, handleUpdate }) => {
           }
           <Dropdown button={<i className='ri-more-2-fill' />} buttonClassName='kebab'>
             <Button onClick={openModal}>Edit</Button>
-            <Button onClick={onDelete}>Delete</Button>
+            <NoteDelete handleDelete={onDelete}>Delete</NoteDelete>
           </Dropdown>
         </div>
         <p className='body'>
@@ -141,9 +142,9 @@ export const Note: FC<Props> = ({ note, handleDelete, handleUpdate }) => {
                     Cancel
                   </Button>
                 </div>
-                <Button type='button' className='tertiary' onClick={onDelete}>
+                <NoteDelete type='button' className='tertiary' handleDelete={onDelete}>
                   Delete
-                </Button>
+                </NoteDelete>
               </ModalFooter>
               </form>
             )}

@@ -65,6 +65,8 @@ export const Player: FC = React.memo(() => {
     // Fire and forget here, should be okay
     markAsViewed();
 
+    if (!container) return;
+
     observer.observe(container);
   
   }, [state.recording]);
