@@ -1,9 +1,4 @@
 .page.sites.recordings {
-  background: var(--white);
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-
   .title {
     align-items: center;
     display: flex;
@@ -186,10 +181,6 @@
     }
 
     tbody {
-      tr.viewed {
-        background: var(--gray-100);
-      }
-
       td:nth-of-type(1) {
         max-width: 130px;
         width: 130px;

@@ -2,9 +2,9 @@ import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
 import { useRouter } from 'next/router';
-import { Header as SiteHeader } from 'components/sites/header';
 import { Header as PublicHeader } from 'components/public/header';
 import { Footer } from 'components/public/footer';
+import { Sidebar } from 'components/app/sidebar';
 import { PUBLIC_ROUTES } from 'data/common/constants';
 import type { User } from 'types/user';
 
@@ -46,11 +46,20 @@ export const Page: FC<Props> = ({ children, user }) => {
     }
   }, []);
 
+  if (isPublic) {
+    return (
+      <div className={classnames('page', ...slug)}>
+        <PublicHeader user={user} />
+        {children}
+        <Footer />
+      </div>
+    );
+  }
+
   return (
-    <div className={classnames('page', ...slug)}>
-      {isPublic ? <PublicHeader user={user} /> : <SiteHeader />}
+    <div className={classnames('page app', ...slug)}>
+      <Sidebar />
       {children}
-      {isPublic ? <Footer /> : null}
     </div>
   );
 };

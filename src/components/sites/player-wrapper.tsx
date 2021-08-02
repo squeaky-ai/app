@@ -1,9 +1,11 @@
 import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
-import { Header } from 'components/sites/header';
+import Link from 'next/link';
+import { Logo } from 'components/logo';
 import { Page } from 'components/sites/page';
 import { Player } from 'components/sites/player';
+import { Header } from 'components/header';
 import { PlayerActions } from 'components/sites/player-actions';
 import { PlayerDetails } from 'components/sites/player-details';
 import { PlayerFooter } from 'components/sites/player-footer';
@@ -22,11 +24,17 @@ export const PlayerWrapper: FC<Props> = ({ user }) => {
       <Page user={user} scope={[]}>
         {({ site }) => (
           <>
-            <Header 
-              center={<PlayerDetails site={site} recording={state.recording} />}
-              right={<PlayerActions site={site} recording={state.recording} />}
-            />
+            <Header className='site-header'>
+              <Link href='/sites'>
+                <a className='logo'>
+                  <Logo />
+                </a>
+              </Link>
 
+              <PlayerDetails site={site} recording={state.recording} />
+
+              <PlayerActions site={site} recording={state.recording} />
+            </Header>
             <Player />
             <PlayerFooter />
           </>

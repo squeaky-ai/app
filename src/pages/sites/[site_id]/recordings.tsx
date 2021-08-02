@@ -4,7 +4,6 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { Message } from 'components/message';
 import { Container } from 'components/container';
-import { Tabs } from 'components/sites/tabs';
 import { Recordings } from 'components/sites/recordings';
 import { Page } from 'components/sites/page';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
@@ -16,10 +15,8 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => (
     </Head>
 
     <Page user={user} scope={[]}>
-      {({ site, member }) => (
+      {({ site }) => (
         <>
-          <Tabs site={site} member={member} page='recordings' />
-
           {!site.recordings.items.length && (
             <Container className='xl centered empty-state'>
               <h3 className='title empty'>Recordings</h3>
@@ -37,7 +34,7 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => (
           )}
 
           {!!site.recordings.items.length && (
-            <Recordings />
+            <Recordings site={site} />
           )}
         </>
       )}

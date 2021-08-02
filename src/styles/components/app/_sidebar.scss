@@ -1,0 +1,143 @@
+#app-sidebar {
+  background: var(--white);
+  border-right: 1px solid var(--gray-150);
+  flex-direction: row;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1rem;
+  transition: width .3s ease-in-out;
+  width: 80px;
+
+  .logo {
+    display: block;
+    margin: 0 1rem;
+  }
+
+  .link {
+    align-items: center;
+    background: var(--white);
+    border-radius: var(--border-radius-md);
+    color: var(--gray-700);
+    display: flex;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: .5rem;
+    padding: .75rem 1rem;
+    text-decoration: none;
+    width: 100%;
+
+    i {
+      color: var(--gray-200);
+      display: block;
+      font-size: 1.5rem;
+      font-weight: var(--font-weight-normal);
+      margin-right: 1rem;
+    }
+
+    span {
+      flex: 1;
+    }
+
+    .arrow {
+      color: var(--gray-500);
+      margin: 0;
+      transition: transform .3s ease-in-out;
+    }
+
+    &:hover {
+      background: var(--gray-100);
+    }
+
+    &.active,
+    &.active i {
+      color: var(--blue-500);
+    }
+
+    &.account {
+      flex-direction: column;
+
+      .button {
+        align-items: center;
+        background: none;
+        border: none;
+        display: flex;
+        margin: 0;
+        text-align: left;
+        padding: 0;
+        width: 100%;
+      }
+
+      .items {
+        display: none;
+        padding: 1.5rem 0 0 2.5rem;
+        width: 100%;
+
+        .button {
+          color: var(--gray-700);
+          font-weight: var(--font-weight-normal);
+          margin-bottom: .5rem;
+          
+          &.active {
+            color: var(--blue-500);
+          }
+        }
+      }
+
+      &.open {
+        .items {
+          display: block;
+        }
+
+        .arrow {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+
+  .divider {
+    margin: 1rem 0;
+  }
+
+  menu {
+    flex: 1;
+    margin: 0;
+    overflow: hidden;
+    padding: 2rem 0;
+    width: 100%;
+
+    .slider {
+      display: flex;
+      transition: transform .3s ease-in-out;
+      width: 200%;
+
+      .nav {
+        width: 50%;
+      }
+    }
+
+    &.right {
+      .slider {
+        transform: translateX(-204px);
+      }
+    }
+  }
+
+  footer {
+    .link {
+      margin-bottom: 0;
+
+      i {
+        color: var(--gray-200);
+      }
+    }
+  }
+
+  &.open {
+    width: 240px;
+  }
+
+  #main {
+    flex: 1;
+  }
+}

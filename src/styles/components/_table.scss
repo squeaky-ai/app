@@ -1,26 +1,28 @@
 .table {
   table {
+    background: var(--white);
+    border: 1px solid var(--gray-150);
     border-collapse: separate;
+    border-radius: var(--border-radius-lg);
     border-spacing: 0;
+    color: var(--gray-700);
     width: 100%;
 
+    table {
+      background: transparent;
+      border: none;
+    }
+
     thead {
-      border-bottom: 2px solid var(--gray-150);
+      border: 1px solid var(--gray-150);
       
       th {
-        background: var(--gray-100);
         font-weight: var(--font-weight-normal);
-        padding: .75rem 0 .75rem 1.5rem;
+        padding: 1rem 0 1rem 1.5rem;
         text-align: left;
         white-space: nowrap;
 
-        &:first-of-type {
-          border-top-left-radius: var(--border-radius-md);
-          
-        }
-
         &:last-of-type {
-          border-top-right-radius: var(--border-radius-md);
           padding-left: 0;
           padding-right: 1.5rem;
         }
@@ -29,7 +31,7 @@
 
     tbody {
       td {
-        border-top: 2px solid var(--gray-150);
+        border-top: 1px solid var(--gray-150);
         overflow: hidden;
         padding: .75rem 0 .75rem 1.5rem;
         text-overflow: ellipsis;
@@ -45,33 +47,13 @@
         }
       }
 
-      tr:last-of-type {
-        td {
-          border-bottom: 2px solid var(--gray-150);
-        }
-      }
-
       tr.hover {
         & > td {
           border-color: transparent;
           border-top-color: var(--gray-150);
           border-style: solid;
-          border-width: 2px 0;
+          border-width: 1px 0;
           cursor: pointer;
-
-          &:first-of-type {
-            border-left-width: 2px;
-          }
-
-          &:last-of-type {
-            border-right-width: 2px;
-          }
-        }
-
-        &:last-of-type {
-          & > td {
-            border-bottom-color: var(--gray-150);
-          }
         }
 
         &:focus {
@@ -79,23 +61,7 @@
         }
 
         &:hover {
-          & > td {
-            border-color: var(--blue-500);
-
-            &:first-of-type {
-              border-left-width: 2px;
-              border-radius: var(--border-radius-md) 0 0 var(--border-radius-md);
-            }
-  
-            &:last-of-type {
-              border-right-width: 2px;
-              border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
-            }
-          }
-
-          & + tr > td {
-            border-top-color: transparent;
-          }
+          background: var(--gray-100);
         }
       }
     }

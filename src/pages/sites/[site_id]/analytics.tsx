@@ -2,7 +2,6 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
-import { Tabs } from 'components/sites/tabs';
 import { Message } from 'components/message';
 import { Container } from 'components/container';
 import { Page } from 'components/sites/page';
@@ -16,10 +15,8 @@ const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => (
     </Head>
 
     <Page user={user} scope={[]}>
-      {({ site, member }) => (
+      {({ site }) => (
         <>
-          <Tabs site={site} member={member} page='analytics' />
-
           {!site.recordings.items.length && (
             <Container className='xl centered empty-state'>
               <h3 className='title empty'>Analytics</h3>
@@ -37,7 +34,7 @@ const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => (
           )}
 
           {!!site.recordings.items.length && (
-            <Analytics />
+            <Analytics site={site} />
           )}
         </>
       )}
