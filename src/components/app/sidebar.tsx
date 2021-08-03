@@ -99,7 +99,7 @@ export const Sidebar: FC = () => {
       </menu>
       <footer>
         <Button className='link' onClick={toggleOpen}>
-          <i className='ri-arrow-left-line' />
+          <i className='ri-arrow-right-line' />
           <span>Collapse</span>
         </Button>
       </footer>
