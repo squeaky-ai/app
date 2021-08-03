@@ -43,7 +43,8 @@
 
     .empty-state-contents {
       align-items: center;
-      background: var(--gray-50);
+      background: var(--white);
+      border: 1px solid var(--gray-150);
       border-radius: var(--border-radius-lg);
       display: flex;
       flex: 1;
@@ -94,6 +95,7 @@
 
       &.basic {
         background: none;
+        border: none;
         padding: 0;
       }
 
