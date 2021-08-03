@@ -11,7 +11,7 @@
 
   .logo {
     display: block;
-    margin: 0 1rem;
+    margin: 0 auto;
   }
 
   .link {
@@ -21,8 +21,10 @@
     color: var(--gray-700);
     display: flex;
     font-weight: var(--font-weight-bold);
+    height: 3rem;
+    justify-content: center;
     margin-bottom: .5rem;
-    padding: .75rem 1rem;
+    padding: 0;
     text-decoration: none;
     width: 100%;
 
@@ -31,15 +33,18 @@
       display: block;
       font-size: 1.5rem;
       font-weight: var(--font-weight-normal);
-      margin-right: 1rem;
+      margin: 0;
     }
 
     span {
+      display: none;
       flex: 1;
+      white-space: nowrap;
     }
 
     .arrow {
       color: var(--gray-500);
+      display: none;
       margin: 0;
       transition: transform .3s ease-in-out;
     }
@@ -61,6 +66,7 @@
         background: none;
         border: none;
         display: flex;
+        justify-content: center;
         margin: 0;
         text-align: left;
         padding: 0;
@@ -84,8 +90,14 @@
       }
 
       &.open {
+        height: auto;
+  
         .items {
           display: block;
+
+          .button {
+            justify-content: flex-start;
+          }
         }
 
         .arrow {
@@ -118,14 +130,19 @@
 
     &.right {
       .slider {
-        transform: translateX(-204px);
+        transform: translateX(-47px);
       }
     }
   }
 
   footer {
     .link {
+      justify-content: center;
       margin-bottom: 0;
+
+      span {
+        text-align: left;
+      }
 
       i {
         color: var(--gray-200);
@@ -135,6 +152,42 @@
 
   &.open {
     width: 240px;
+
+    .logo {
+      height: 32px;
+      margin: 0 1rem;
+      width: 103px;
+    }
+
+    .link {    
+      padding: .75rem 1rem;
+
+      i {
+        margin-right: 1rem;
+      }
+
+      span {
+        display: inline-block;
+      }
+
+      .arrow {
+        display: block;
+      }
+    }
+
+    menu {
+      &.right {
+        .slider {
+          transform: translateX(-207px);
+        }
+      }
+    }
+
+    footer { 
+      .link {
+        justify-content: flex-start;
+      }
+    }
   }
 
   #main {

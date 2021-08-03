@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const SidebarAccount: FC<Props> = ({ path }) => {
-  const [open, setOpen] = React.useState<boolean>(true);
+  const [open, setOpen] = React.useState<boolean>(false);
 
   const toggleOpen = () => {
     setOpen(!open);

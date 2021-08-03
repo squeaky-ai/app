@@ -25,7 +25,10 @@ export const Sidebar: FC = () => {
     <aside id='app-sidebar' className={classnames({ open })}>
       <Link href='/sites'>
         <a className='logo'>
-          <Image src='/logo.svg' alt='Logo' height={32} width={103} />
+          {open
+            ? <Image src='/logo.svg' alt='Logo' height={32} width={103} />
+            : <Image src='/logo-small.svg' alt='Logo' height={32} width={24} />
+          }
         </a>
       </Link>
       <menu className={position}>
