@@ -81,7 +81,6 @@ export const Recordings: FC<Props> = ({ site }) => {
               <th>User ID</th>
               <th>Date &amp; Time<Sort name='date' order={sort} onAsc={() => setSort('DATE_ASC')} onDesc={() => setSort('DATE_DESC')} /></th>
               <th>Duration <Sort name='duration' order={sort} onAsc={() => setSort('DURATION_ASC')} onDesc={() => setSort('DURATION_DESC')} /></th>
-              <th>Language</th>
               <th>Pages <Sort name='page_size' order={sort} onAsc={() => setSort('PAGE_SIZE_ASC')} onDesc={() => setSort('PAGE_SIZE_DESC')} /></th>
               <th>Start &amp; Exit URL</th>
               <th>Device &amp; Viewport (px)</th>

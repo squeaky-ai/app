@@ -1,19 +1,22 @@
 .pill {
-  border: 2px solid var(--gray-150);
+  border: 1px solid var(--gray-150);
   border-radius: var(--border-radius-lg);
   color: var(--gray-500);
   font-size: 13px;
   font-weight: var(--font-weight-bold);
   line-height: 16px;
-  padding: .2rem 1rem;
+  padding: .2rem .5rem;
+  text-align: center;
 
   &.primary {
-    border-color: var(--blue-500);
+    background: var(--blue-50);
+    border-color: var(--blue-50);
     color: var(--blue-500);
   }
 
   &.secondary {
-    background: var(--gray-150);
+    background: var(--gray-100);
+    border-color: var(--gray-100);
   }
 
   &.tertiary {
