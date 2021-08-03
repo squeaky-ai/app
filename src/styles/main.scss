@@ -62,11 +62,14 @@
 @import './pages/auth/login';
 @import './pages/auth/signup';
 @import './pages/sites/[site_id]/analytics';
+@import './pages/sites/[site_id]/insights';
+@import './pages/sites/[site_id]/overview';
 @import './pages/sites/[site_id]/player';
 @import './pages/sites/[site_id]/recordings';
 @import './pages/sites/[site_id]/settings';
 @import './pages/sites/[site_id]/subscription';
 @import './pages/sites/[site_id]/team';
+@import './pages/sites/[site_id]/users';
 @import './pages/sites/index';
 @import './pages/users/account';
 @import './pages/users/delete';

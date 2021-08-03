@@ -61,7 +61,7 @@ export const TeamRow: FC<Props> = ({ user, site, team }) => {
 
       // They can no longer view this page as they won't be authenticated
       if (self && role === MEMBER) {
-        await router.push(`/sites/${site.id}/recordings`);
+        await router.push(`/sites/${site.id}/overview`);
         return;
       }
 

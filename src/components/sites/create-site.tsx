@@ -69,7 +69,7 @@ export const CreateSite: FC<Props> = ({ children, className }) => {
                   setErrors({ [key]: value });
                 } else {
                   closeModal();
-                  await router.push(`/sites/${site.id}/recordings`);
+                  await router.push(`/sites/${site.id}/overview`);
                 }            
               })();
             }}
