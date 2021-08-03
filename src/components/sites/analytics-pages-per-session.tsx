@@ -114,7 +114,7 @@ export const AnalyticsPagesPerSession: FC<Props> = () => {
     <div className='pages-per-session'>
       <ResponsiveContainer width='100%' height={56}>
         <AreaChart data={data} margin={{ top: 0, left: -15, right: 0, bottom: 0 }}>
-          <Area dataKey='duration' stroke='#0074E0' fill='#0074E0' type='basis' />
+          <Area dataKey='duration' stroke='#0074E0' fill='#E9F5FF' type='basis' />
         </AreaChart>
       </ResponsiveContainer>
     </div>

@@ -71,12 +71,13 @@
                          'graph graph graph views'
                          'session-duration session-duration session-pages session-pages'
                          'page-browser page-browser page-browser page-browser'
-                         'devices devices devices devices';
+                         'meta meta meta meta';
     grid-template-columns: repeat(auto-fill, minmax(calc(25% - 3rem), 1fr));
-    grid-template-rows: 216px 216px 296px 600px 210px;
+    grid-template-rows: 216px 216px 296px 600px 484px;
 
     .card {
-      background: var(--gray-100);
+      background: var(--white);
+      border: 1px solid var(--gray-150);
       border-radius: var(--border-radius-lg);
       padding: 3rem;
 
@@ -146,41 +147,125 @@
         }
       }
 
+      &.meta {
+        display: grid;
+        grid-area: meta;
+        grid-gap: 3rem;
+        grid-template-areas: 'language devices devices'
+                             'language viewport viewport';
+        grid-template-columns: repeat(auto-fill, minmax(calc(33% - 3rem), 1fr));
+        grid-template-rows: 144px 292px;
 
-      &.devices {
-        grid-area: devices;
+        .language {
+          grid-area: language;
 
-        .grid {
-          display: grid;
-          grid-gap: 3rem;
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-          grid-template-rows: 144px;
+          ul {
+            margin: 0;
+            padding: 0 1rem;
+
+            li {
+              align-items: center;
+              display: flex;
+              list-style: none;
+              margin: 0 0 .5rem 0;
+
+              &:last-of-type {
+                margin-bottom: 0;
+              }
+
+              h2 {
+                color: var(--blue-500);
+                font-size: 2rem;
+                margin-right: 2rem;
+                width: 2rem;
+              }
+
+              p {
+                font-weight: var(--font-weight-bold);
+                margin: 0;
+
+                &.count {
+                  color: var(--gray-500);
+                  font-weight: var(--font-weight-normal);
+                }
+              }
+            }
+          }
         }
 
-        .card {
-          align-items: center;
-          display: flex;
+        .devices {
+          grid-area: devices;
 
-          i {
-            color: var(--blue-500);
-            display: block;
-            font-size: 2.5rem;
-            margin: 0 3rem 0 1rem;
+          .grid {
+            display: grid;
+            grid-gap: 3rem;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-rows: 144px;
           }
 
-          .stats {
-            p {
-              margin: 0;
-            }
-
-            h3 {
+          .card {
+            align-items: center;
+            display: flex;
+  
+            i {
               color: var(--blue-500);
-              margin: 0;
+              display: block;
+              font-size: 2.5rem;
+              margin: 0 3rem 0 1rem;
+            }
+  
+            .stats {
+              p {
+                margin: 0;
+              }
+  
+              h3 {
+                color: var(--blue-500);
+                margin: 0;
+  
+                span {
+                  color: var(--gray-700);
+                  font-size: 13px;
+                  font-weight: var(--font-weight-normal);
+                }
+              }
+            }
+          }
+        }
 
-              span {
-                color: var(--gray-700);
-                font-size: 13px;
-                font-weight: var(--font-weight-normal);
+        .viewport {
+          grid-area: viewport;
+          margin-top: 3rem;
+          padding: 3rem;
+          
+          h4 {
+            align-items: center;
+            display: flex;
+
+            i {
+              font-weight: var(--font-weight-normal);
+              
+              &:first-of-type {
+                margin-left: 1rem;
+              }
+            }
+          }
+
+          .items {
+            display: flex;
+            margin-top: 3rem;
+
+            .item {
+              padding: 1rem;
+              width: 33%;
+
+              p {
+                margin: 0 0 .5rem 0;
+              }
+
+              h3 {
+                color: var(--blue-500);
+                margin: 0;
               }
             }
           }
