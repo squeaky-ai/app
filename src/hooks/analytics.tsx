@@ -24,6 +24,21 @@ export const useAnalytics = (fromDate: string, toDate: string): [boolean, Analyt
     pages: [],
     browsers: [],
     languages: [],
+    devices: [
+      {
+        type: 'mobile',
+        count: 0
+      },
+      {
+        type: 'desktop',
+        count: 0
+      }
+    ],
+    dimensions: {
+      max: 0,
+      min: 0,
+      avg: 0
+    }
   };
 
   const results = data
