@@ -3,15 +3,15 @@ import { useQuery } from '@apollo/client';
 import { GET_ANALYTICS_QUERY } from 'data/analytics/queries';
 import type { Site } from 'types/site';
 import type { Analytics } from 'types/analytics';
+import type { TimeRange } from 'lib/dates';
 
-export const useAnalytics = (fromDate: string, toDate: string): [boolean, Analytics] => {
+export const useAnalytics = (range: TimeRange): [boolean, Analytics] => {
   const router = useRouter();
 
   const { data, loading } = useQuery<{ site: Site }>(GET_ANALYTICS_QUERY, {
     variables: {
       siteId: router.query.site_id as string,
-      fromDate,
-      toDate,
+      ...range,
     }
   });
 

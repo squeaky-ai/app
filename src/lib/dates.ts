@@ -1,4 +1,27 @@
 import { range } from 'lodash';
+import { 
+  startOfToday, 
+  startOfYesterday, 
+  endOfYesterday, 
+  startOfWeek,
+  startOfMonth,
+  startOfQuarter,
+  startOfYear,
+  format 
+} from 'date-fns';
+
+export type TimePeriod =
+  'today' |
+  'yesterday' |
+  'past_week' |
+  'past_month' |
+  'this_quarter' |
+  'year_to_date';
+
+export type TimeRange = {
+  fromDate: string;
+  toDate: string;
+}
 
 export const toTimeString = (ms?: number) => {
   if (!ms) return '00:00';
@@ -39,4 +62,45 @@ export const toNiceDate = (timestamp?: number) => {
 
   const date = new Date(Number(timestamp));
   return date.toUTCString().split(':').slice(0, 2).join(':');
+};
+
+export const getDateRange = (period: TimePeriod): TimeRange => {
+  const now = new Date();
+
+  const formatDate = (date: Date) => format(date, 'yyyy-M-dd');
+
+  const todaysDate = formatDate(now);
+
+  switch(period) {
+    case 'today':
+      return {
+        fromDate: formatDate(startOfToday()),
+        toDate: todaysDate
+      };
+    case 'yesterday':
+      return {
+        fromDate: formatDate(startOfYesterday()),
+        toDate: formatDate(endOfYesterday())
+      };
+    case 'past_week':
+      return {
+        fromDate: formatDate(startOfWeek(now)),
+        toDate: todaysDate
+      };
+    case 'past_month':
+      return {
+        fromDate: formatDate(startOfMonth(now)),
+        toDate: todaysDate
+      };
+    case 'this_quarter':
+      return {
+        fromDate: formatDate(startOfQuarter(now)),
+        toDate: todaysDate
+      };
+    case 'year_to_date':
+      return {
+        fromDate: formatDate(startOfYear(now)),
+        toDate: todaysDate
+      };
+  }
 };

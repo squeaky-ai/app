@@ -10,23 +10,49 @@ import { AnalyticsLanguages } from 'components/sites/analytics-languages';
 import { AnalyticsPages } from 'components/sites/analytics-pages';
 import { AnalyticsDevices } from 'components/sites/analytics-devices';
 import { Spinner } from 'components/spinner';
-import { toMinutesAndSeconds, daysBefore, toIsoDate } from 'lib/dates';
+import { toMinutesAndSeconds, getDateRange } from 'lib/dates';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { Select, Option } from 'components/select';
 import type { Site } from 'types/site';
+import type { TimePeriod } from 'lib/dates';
+
+const timePeriods: { name: string, key: TimePeriod }[] = [
+  {
+    name: 'Today',
+    key: 'today'
+  },
+  {
+    name: 'Yesterday',
+    key: 'yesterday'
+  },
+  {
+    name: 'Past Week',
+    key: 'past_week'
+  },
+  {
+    name: 'Past Month',
+    key: 'past_month'
+  },
+  {
+    name: 'This Quarter',
+    key: 'this_quarter'
+  },
+  {
+    name: 'Year to Date',
+    key: 'year_to_date'
+  }
+];
 
 interface Props {
   site: Site;
 }
 
 export const Analytics: FC<Props> = ({ site }) => {
-  const today = toIsoDate();
-
-  const [date, setDate] = React.useState(today);
-  const [loading, analytics] = useAnalytics('2021-07-03', '2021-08-03');
+  const [period, setPeriod] = React.useState<TimePeriod>(timePeriods[0].key);
+  const [loading, analytics] = useAnalytics(getDateRange(period));
 
   const handleDateChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setDate(event.target.value);
+    setPeriod(event.target.value as TimePeriod);
   };
 
   const toTwoDecimalPlaces = (value: number) => {
@@ -43,13 +69,12 @@ export const Analytics: FC<Props> = ({ site }) => {
 
       <div className='heading'>
         <h3 className='title'>Analytics</h3>
-        <div className='period' style={{ display: 'none' }}>
+        <div className='period'>
           <p><b>Period:</b></p>
-          <Select onChange={handleDateChange} value={date}>
-            <Option value={today}>Today</Option>
-            {daysBefore().map(date => (
-              <Option value={toIsoDate(date)} key={date.valueOf()}>
-                {toIsoDate(date)}
+          <Select onChange={handleDateChange} value={period}>
+            {timePeriods.map(p => (
+              <Option value={p.key} key={p.key}>
+                {p.name}
               </Option>
             ))}
           </Select>
