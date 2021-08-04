@@ -6,6 +6,9 @@ export interface Analytics {
   pagesPerSession: number;
   pages: AnalyticsPage[];
   browsers: AnalyticsBrowser[];
+  languages: AnalyticsLanguage[];
+  devices: AnalyticsDevice[];
+  dimensions: AnalyticsDimensions;
 }
 
 export interface ViewAndVisitor {
@@ -22,4 +25,20 @@ export interface AnalyticsPage {
 export interface AnalyticsBrowser {
   name: string;
   count: number;
+}
+
+export interface AnalyticsLanguage {
+  name: string;
+  count: number;
+}
+
+export interface AnalyticsDevice {
+  type: string;
+  count: number;
+}
+
+export interface AnalyticsDimensions {
+  min: number;
+  max: number;
+  avg: number;
 }

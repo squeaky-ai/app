@@ -6,7 +6,9 @@ import { AnalyticsBrowsers } from 'components/sites/analytics-browsers';
 import { AnalyticsGraph } from 'components/sites/analytics-graph';
 import { AnalyticsSessionDuration } from 'components/sites/analytics-session-duration';
 import { AnalyticsPagesPerSession } from 'components/sites/analytics-pages-per-session';
+import { AnalyticsLanguages } from 'components/sites/analytics-languages';
 import { AnalyticsPages } from 'components/sites/analytics-pages';
+import { AnalyticsDevices } from 'components/sites/analytics-devices';
 import { Spinner } from 'components/spinner';
 import { toMinutesAndSeconds, daysBefore, toIsoDate } from 'lib/dates';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
@@ -21,7 +23,7 @@ export const Analytics: FC<Props> = ({ site }) => {
   const today = toIsoDate();
 
   const [date, setDate] = React.useState(today);
-  const [loading, analytics] = useAnalytics(date);
+  const [loading, analytics] = useAnalytics('2021-07-03', '2021-08-03');
 
   const handleDateChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setDate(event.target.value);
@@ -41,7 +43,7 @@ export const Analytics: FC<Props> = ({ site }) => {
 
       <div className='heading'>
         <h3 className='title'>Analytics</h3>
-        <div className='period'>
+        <div className='period' style={{ display: 'none' }}>
           <p><b>Period:</b></p>
           <Select onChange={handleDateChange} value={date}>
             <Option value={today}>Today</Option>
@@ -94,70 +96,12 @@ export const Analytics: FC<Props> = ({ site }) => {
           <div className='card basic language'>
             <h4>Language</h4>
             <div className='card'>
-              <ul>
-                <li>
-                  <h2>1</h2>
-                  <div className='details'>
-                    <p>English (GB)</p>
-                    <p className='count'>32.00%</p>
-                  </div>
-                </li>
-                <li>
-                  <h2>2</h2>
-                  <div className='details'>
-                    <p>English (US)</p>
-                    <p className='count'>32.00%</p>
-                  </div>
-                </li>
-                <li>
-                  <h2>3</h2>
-                  <div className='details'>
-                    <p>Italian (IT)</p>
-                    <p className='count'>32.00%</p>
-                  </div>
-                </li>
-                <li>
-                  <h2>4</h2>
-                  <div className='details'>
-                    <p>German (DE)</p>
-                    <p className='count'>32.00%</p>
-                  </div>
-                </li>
-                <li>
-                  <h2>5</h2>
-                  <div className='details'>
-                    <p>Spanish (ES)</p>
-                    <p className='count'>32.00%</p>
-                  </div>
-                </li>
-                <li>
-                  <h2>6</h2>
-                  <div className='details'>
-                    <p>Spanish (US)</p>
-                    <p className='count'>32.00%</p>
-                  </div>
-                </li>
-              </ul>
+              <AnalyticsLanguages languages={analytics.languages} />
             </div>
           </div>
           <div className='card basic devices'>
             <h4>Devices</h4>
-            <div className='grid'>
-              <div className='card'>
-                <i className='ri-computer-line' />
-                <div className='stats'>
-                  <p><b>Desktop / Laptop</b></p>
-                  <h3>0 <span>0%</span></h3>
-                </div>
-              </div>
-              <div className='card'>
-                <i className='ri-tablet-line' />
-                <div className='stats'>
-                  <p><b>Tablet / Mobile</b></p>
-                  <h3>0 <span>0%</span></h3>
-                </div>
-              </div>
-            </div>
+            <AnalyticsDevices devices={analytics.devices} />
           </div>
           <div className='card viewport'>
             <h4>
@@ -168,15 +112,15 @@ export const Analytics: FC<Props> = ({ site }) => {
             <div className='items'>
               <div className='item'>
                 <p>Largest</p>
-                <h3>3600px</h3>
+                <h3>{analytics.dimensions.max}px</h3>
               </div>
               <div className='item'>
                 <p>Average</p>
-                <h3>1523px</h3>
+                <h3>{analytics.dimensions.avg}px</h3>
               </div>
               <div className='item'>
                 <p>Smallest</p>
-                <h3>270px</h3>
+                <h3>{analytics.dimensions.min}px</h3>
               </div>
             </div>
           </div>
