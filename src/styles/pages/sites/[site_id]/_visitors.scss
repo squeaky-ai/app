@@ -1,0 +1,87 @@
+.page.sites.visitors {
+  .title {
+    align-items: center;
+    display: flex;
+    margin: 0 0 3rem 0;
+
+    .search {
+      align-items: center;
+      display: flex;
+      margin: 0 0 0 2rem;
+      position: relative;
+      width: 320px;
+
+      .input {
+        margin: 0;
+        padding-right: 2.25rem;
+      }
+
+      .button {
+        background: none;
+        border: none;
+        color: var(--gray-800);
+        font-size: 1.25rem;
+        padding: 0;
+        position: absolute;
+        right: 2.5rem;
+
+        i {
+          display: block;
+        }
+
+        &:hover {
+          color: var(--blue-500);
+        }
+      }
+
+      & > i {
+        color: var(--gray-200);
+        display: block;
+        font-size: 1.5rem;
+        font-weight: var(--font-weight-normal);
+        position: absolute;
+        right: .75rem;
+      }
+    }
+  }
+
+  .empty-state {
+    align-items: center;
+    display: none;
+    flex: 1;
+    flex-direction: column;
+    height: calc(100% - 11rem);
+    width: 100%;
+
+    .empty-state-contents {
+      align-items: center;
+      background: var(--gray-50);
+      border-radius: var(--border-radius-lg);
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+
+      h4 {
+        margin: 3rem 0;
+      }
+
+      .message {
+        max-width: 580px;
+      }
+    }
+  }
+
+  .empty {
+    .title {
+      .search {
+        display: none;
+      }
+    }
+
+    .empty-state {
+      display: flex;
+    }
+  }
+}

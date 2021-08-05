@@ -16,7 +16,6 @@ export interface Site {
   recordings?: PaginatedRecordingsResponse;
   analytics?: Analytics;
   verifiedAt?: string;
-  checklistDismissedAt?: string;
   daysSinceLastRecording?: number;
   createdAt: string;
   updatedAt: string;
@@ -39,7 +38,6 @@ export interface SiteMutationInput {
   siteId: string;
   name?: string;
   url?: string;
-  dismissChecklist?: boolean;
 }
 
 export interface SiteDeleteMutationInput {

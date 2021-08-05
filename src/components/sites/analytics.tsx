@@ -1,6 +1,5 @@
 import React from 'react';
 import type { FC } from 'react';
-import { Main } from 'components/main';
 import { useAnalytics } from 'hooks/analytics';
 import { AnalyticsBrowsers } from 'components/sites/analytics-browsers';
 import { AnalyticsGraph } from 'components/sites/analytics-graph';
@@ -11,49 +10,14 @@ import { AnalyticsPages } from 'components/sites/analytics-pages';
 import { AnalyticsDevices } from 'components/sites/analytics-devices';
 import { Spinner } from 'components/spinner';
 import { toMinutesAndSeconds, getDateRange } from 'lib/dates';
-import { BreadCrumbs } from 'components/sites/breadcrumbs';
-import { Select, Option } from 'components/select';
-import type { Site } from 'types/site';
 import type { TimePeriod } from 'lib/dates';
 
-const timePeriods: { name: string, key: TimePeriod }[] = [
-  {
-    name: 'Today',
-    key: 'today'
-  },
-  {
-    name: 'Yesterday',
-    key: 'yesterday'
-  },
-  {
-    name: 'Past Week',
-    key: 'past_week'
-  },
-  {
-    name: 'Past Month',
-    key: 'past_month'
-  },
-  {
-    name: 'This Quarter',
-    key: 'this_quarter'
-  },
-  {
-    name: 'Year to Date',
-    key: 'year_to_date'
-  }
-];
-
 interface Props {
-  site: Site;
+  period: TimePeriod;
 }
 
-export const Analytics: FC<Props> = ({ site }) => {
-  const [period, setPeriod] = React.useState<TimePeriod>(timePeriods[0].key);
+export const Analytics: FC<Props> = ({ period }) => {
   const [loading, analytics] = useAnalytics(getDateRange(period));
-
-  const handleDateChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setPeriod(event.target.value as TimePeriod);
-  };
 
   const toTwoDecimalPlaces = (value: number) => {
     return Number(value.toFixed(2));
@@ -64,23 +28,7 @@ export const Analytics: FC<Props> = ({ site }) => {
   }
 
   return (
-    <Main>
-      <BreadCrumbs site={site} page='Analytics' />
-
-      <div className='heading'>
-        <h3 className='title'>Analytics</h3>
-        <div className='period'>
-          <p><b>Period:</b></p>
-          <Select onChange={handleDateChange} value={period}>
-            {timePeriods.map(p => (
-              <Option value={p.key} key={p.key}>
-                {p.name}
-              </Option>
-            ))}
-          </Select>
-        </div>
-      </div>
-
+    <>
       <div className='analytics-grid'>
         <div className='card graph'>
           <AnalyticsGraph viewsAndVisitors={analytics.viewsAndVisitorsPerHour} />
@@ -151,6 +99,6 @@ export const Analytics: FC<Props> = ({ site }) => {
           </div>
         </div>
       </div>
-    </Main>
+    </>
   );
 };

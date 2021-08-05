@@ -35,32 +35,39 @@
 
   .empty-state {
     align-items: center;
-    display: flex;
+    display: none;
     flex: 1;
     flex-direction: column;
-    padding: 0 3rem;
+    height: calc(100% - 11rem);
     width: 100%;
 
     .empty-state-contents {
       align-items: center;
-      background: var(--white);
-      border: 1px solid var(--gray-150);
-      border-radius: var(--border-radius-lg);
       display: flex;
       flex: 1;
       flex-direction: column;
       justify-content: center;
-      margin-bottom: 3rem;
-      padding: 4rem 3rem;
       width: 100%;
 
       h4 {
-        margin: 0 0 2rem 0;
+        margin: 3rem 0;
       }
 
       .message {
         max-width: 580px;
       }
+    }
+  }
+
+  .empty {
+    .heading {
+      .period {
+        display: none;
+      }
+    }
+
+    .empty-state {
+      display: flex;
     }
   }
 

@@ -49,10 +49,10 @@ export const Sidebar: FC = () => {
                 <span>Overview</span>
               </a>
             </Link>
-            <Link href={`/sites/${siteId}/users`}>
-              <a className={classnames('link', { active: path === `/sites/${siteId}/users` })} data-label='Users'>
+            <Link href={`/sites/${siteId}/visitors`}>
+              <a className={classnames('link', { active: path === `/sites/${siteId}/visitors` })} data-label='Visitors'>
                 <i className='ri-group-line' />
-                <span>Users</span>
+                <span>Visitors</span>
               </a>
             </Link>
             <Link href={`/sites/${siteId}/recordings`}>

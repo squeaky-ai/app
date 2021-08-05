@@ -1,28 +1,20 @@
 import React from 'react';
 import type { FC } from 'react';
 import Image from 'next/image';
-import classnames from 'classnames';
-import { debounce } from 'lodash';
-import { Main } from 'components/main';
-import { Button } from 'components/button';
-import { Input } from 'components/input';
 import { Pagination } from 'components/pagination';
 import { Container } from 'components/container';
 import { RecordingsItem } from 'components/sites/recordings-item';
 import { Sort } from 'components/sort';
-import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { useRecordings } from 'hooks/recordings';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 import type { SortBy } from 'types/recording';
-import type { Site } from 'types/site';
 
 interface Props {
-  site: Site;
+  query: string;
 }
 
-export const Recordings: FC<Props> = ({ site }) => {
+export const Recordings: FC<Props> = ({ query }) => {
   const [page, setPage] = React.useState<number>(1);
-  const [query, setQuery] = React.useState<string>('');
   const [sort, setSort] = React.useState<SortBy>('DATE_DESC');
 
   const [loading, recordings] = useRecordings({ 
@@ -31,38 +23,8 @@ export const Recordings: FC<Props> = ({ site }) => {
     query: query.length < MIN_SEARCH_CHARS ? '' : query, // No point in searching if it's below this value
   });
 
-  const hasRecordings = recordings.items.length > 0;
-
-  const handleSearch = debounce((event: React.KeyboardEvent<HTMLInputElement>) => {
-    const element = event.target as HTMLInputElement;
-    setQuery(element.value);
-  }, 200);
-
-  const handleCancel = () => {
-    setQuery('');
-
-    const search = document.querySelector<HTMLInputElement>('#search');
-    search.value = '';
-    search.focus();
-  };
-
   return (
-    <Main className={classnames('recordings', { empty: !hasRecordings })}>
-      <BreadCrumbs site={site} page='Recordings' />
-
-      <h3 className='title'>
-        Recordings
-        <div className='search' role='search' aria-label='Filter recordings'>
-          <Input type='search' placeholder='Search...' onKeyUp={handleSearch} id='search' />
-          {query && (
-            <Button onClick={handleCancel}>
-              <i className='ri-close-line' />
-            </Button>
-          )}
-          <i className='ri-search-line' /> 
-        </div>
-      </h3>
-
+    <>
       {!loading && (
         <Container className='xl centered empty-state'>
           <div className='empty-state-contents'>
@@ -106,6 +68,6 @@ export const Recordings: FC<Props> = ({ site }) => {
         total={recordings.pagination.total}
         setPage={setPage}
       />
-    </Main>
+    </>
   );
 };

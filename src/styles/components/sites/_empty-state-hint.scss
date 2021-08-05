@@ -1,0 +1,24 @@
+.empty-state-hint {
+  border: 2px solid var(--blue-500);
+  border-radius: var(--border-radius-md);
+  padding: 1.5rem;
+  width: 560px;
+
+  p {
+    &.empty-state-heading {
+      align-items: center;
+      display: flex;
+      margin: 0 0 1.5rem 0;
+
+      i {
+        color: var(--blue-500);
+        font-size: 1.25rem;
+        margin-right: .75rem;
+      }
+    }
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+}
