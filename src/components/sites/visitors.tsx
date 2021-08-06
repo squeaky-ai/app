@@ -41,7 +41,7 @@ export const Visitors: FC<Props> = ({ query }) => {
           <thead>
             <tr>
               <th>Visitor ID</th>
-              <th>Recordings<Sort name='recording_count' order={sort} onAsc={() => setSort('RECORDING_COUNT_ASC')} onDesc={() => setSort('RECORDING_COUNT_DESC')} /></th>
+              <th>Recordings<Sort name='recordings_count' order={sort} onAsc={() => setSort('RECORDINGS_COUNT_ASC')} onDesc={() => setSort('RECORDINGS_COUNT_DESC')} /></th>
               <th>First visited<Sort name='first_viewed_at' order={sort} onAsc={() => setSort('FIRST_VIEWED_AT_ASC')} onDesc={() => setSort('FIRST_VIEWED_AT_DESC')} /></th>
               <th>Last activity<Sort name='last_activity_at' order={sort} onAsc={() => setSort('LAST_ACTIVITY_AT_ASC')} onDesc={() => setSort('LAST_ACTIVITY_AT_DESC')} /></th>
               <th>Language</th>
