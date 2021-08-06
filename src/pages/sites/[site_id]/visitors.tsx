@@ -72,7 +72,7 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
             </Container>
 
             {!!site.recordings.items.length && (
-              <Visitors site={site} />
+              <Visitors site={site} query={query} />
             )}
           </Main>
         )}

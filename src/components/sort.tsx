@@ -2,11 +2,12 @@ import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
 import { Button } from 'components/button';
-import type { SortBy } from 'types/recording';
+import type { SortBy as RecordingsSortBy } from 'types/recording';
+import type { SortBy as VisitorsSortBy } from 'types/visitor';
 
 interface Props {
   name: string;
-  order: SortBy;
+  order: RecordingsSortBy | VisitorsSortBy;
   onAsc: VoidFunction;
   onDesc: VoidFunction;
 }
