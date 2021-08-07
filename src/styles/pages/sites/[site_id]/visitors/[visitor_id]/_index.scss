@@ -74,6 +74,56 @@
       }
     }
 
+    .visitor-recordings-table {
+      color: var(--gray-700);
+      font-size: 13px;
+      line-height: 16px;
+      margin-bottom: 2rem;
+
+      thead {
+        th {
+          padding: 1.5rem 0 1.5rem 1.5rem;
+        }
+      }
+
+      > tbody {
+        td:nth-of-type(1) {
+          max-width: 130px;
+          width: 130px;
+        }
+
+        td:nth-of-type(2) {
+          max-width: 150px;
+          width: 150px;
+        }
+
+        td:nth-of-type(3) {
+          max-width: 220px;
+          width: 220px;
+        }
+
+        td:nth-of-type(4) {
+          max-width: 120px;
+          width: 120px;
+        }
+
+        td:nth-of-type(5) {
+          max-width: 110px;
+          width: 110px;
+        }
+
+        td:nth-of-type(6) {
+          max-width: 300px;
+          width: 300px;
+        }
+
+        td:nth-of-type(7) {
+          max-width: 60px;
+          width: 60px;
+        }
+      }
+    }
+
     .stats {
       display: grid;
       grid-gap: 3rem;

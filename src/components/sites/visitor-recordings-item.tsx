@@ -2,13 +2,10 @@ import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
 import { useRouter } from 'next/router';
-import { Highlighter } from 'components/highlighter';
 import { Pill } from 'components/pill';
 import { Button } from 'components/button';
 import { Tooltip } from 'components/tooltip';
-import { Browser } from 'components/browser';
 import { Dropdown } from 'components/dropdown';
-import { Device } from 'components/device';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { toNiceDate, toTimeString } from 'lib/dates';
 import { useToasts } from 'hooks/toasts';
@@ -16,11 +13,10 @@ import { recordingDelete, recordingBookmarked } from 'lib/api/graphql';
 import type { Recording } from 'types/recording';
 
 interface Props {
-  query?: string;
   recording: Recording;
 }
 
-export const RecordingsItem: FC<Props> = ({ query, recording }) => {
+export const VisitorRecordingsItem: FC<Props> = ({ recording }) => {
   const toast = useToasts();
   const router = useRouter();
   const ref = React.useRef<Modal>();
@@ -95,10 +91,9 @@ export const RecordingsItem: FC<Props> = ({ query, recording }) => {
           >
             {recording.bookmarked ? 'Bookmarked' : 'Not bookmarked'}
           </Tooltip>
-          <Highlighter value={query}>{recording.sessionId}</Highlighter>
+          {recording.sessionId}
         </td>
-        <td><Highlighter value={query}>{recording.viewerId}</Highlighter></td>
-        <td><Highlighter value={query}>{toNiceDate(recording.connectedAt)}</Highlighter></td>
+        <td>{toNiceDate(recording.connectedAt)}</td>
         <td>{toTimeString(recording.duration)}</td>
         <td className='no-overflow'>
           <Tooltip button={recording.pageCount} buttonClassName='link'>
@@ -114,25 +109,14 @@ export const RecordingsItem: FC<Props> = ({ query, recording }) => {
             <tbody>
               <tr>
                 <td>START URL</td>
-                <td><Highlighter value={query}>{recording.startPage}</Highlighter></td>
+                <td>{recording.startPage}</td>
               </tr>
               <tr>
                 <td>EXIT URL</td>
-                <td><Highlighter value={query}>{recording.exitPage}</Highlighter></td>
+                <td>{recording.exitPage}</td>
               </tr>
             </tbody>
           </table>
-        </td>
-        <td className="no-overflow">
-          <Tooltip positionX='right' button={<Device deviceType={recording.deviceType} />}>
-            {recording.deviceType === 'Computer' ? 'Desktop or Laptop Device' : 'Mobile Device'}
-          </Tooltip>
-          <Highlighter value={query}>{recording.viewportX}</Highlighter> x <Highlighter value={query}>{recording.viewportY}</Highlighter>
-        </td>
-        <td className='no-overflow'>
-          <Tooltip positionX='right' button={<Browser name={recording.browser} height={24} width={24} />}>
-            {recording.browserString}
-          </Tooltip>
         </td>
         <td className='no-overflow'>
           <Dropdown button={<i className='ri-more-2-fill' />} buttonClassName='options'>

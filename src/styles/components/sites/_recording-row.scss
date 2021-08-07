@@ -1,0 +1,85 @@
+.recording-row {
+  .bookmark {
+    background: none;
+    border: none;
+    color: var(--gray-150);
+    display: inline-block;
+    font-size: 1.5rem;
+    margin-right: .5rem;
+    padding: 0;
+    vertical-align: middle;
+
+    &:hover {
+      color: var(--gray-700);
+    }
+
+    &.active {
+      color: var(--magenta-500);
+    }
+  }
+
+  .pill {
+    display: inline-block;
+    width: 70px;
+  }
+
+  .start-exit-page {
+    font-size: 13px;
+    line-height: 20px;
+
+    td {
+      border: none;
+      padding: 0;
+      text-align: left;
+
+      &:first-of-type {
+        color: var(--gray-200);
+        width: 70px;
+      }
+    }
+  }
+
+  .dropdown {
+    .options {
+      align-items: center;
+      background: none;
+      border: none;
+      border-radius: var(--border-radius-o);
+      display: flex;
+      height: 2rem;
+      flex-shrink: 0;
+      font-size: 1.25rem;
+      justify-content: center;
+      padding: 0;
+      width: 2rem;
+
+      .arrow {
+        display: none;
+      }
+
+      &:hover {
+        background: var(--gray-100);
+        color: var(--blue-500);
+      }
+    }
+
+    .dropdown-menu {
+      z-index: 2;
+
+      .button {
+        background: none;
+        border: none;
+
+        i {
+          color: var(--blue-500);
+          font-size: 1.25rem;
+          margin-right: .5rem;
+        }
+
+        &:hover {
+          background: var(--gray-100);
+        }
+      }
+    }
+  }
+}

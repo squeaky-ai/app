@@ -1,3 +1,5 @@
+import { PaginatedRecordingsResponse } from 'types/recording';
+
 export type SortBy =
   'RECORDINGS_COUNT_DESC' |
   'RECORDINGS_COUNT_ASC' |
@@ -18,6 +20,7 @@ export interface Visitor {
   browser: string;
   browserString: string;
   pageViewCount?: number;
+  recordings?: PaginatedRecordingsResponse;
 }
 
 export interface PaginatedVisitorsResponse {

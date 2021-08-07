@@ -15,6 +15,9 @@ import { useVisitor } from 'hooks/visitor';
 
 const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
   const router = useRouter();
+
+  const [recordingPage, setRecordingPage] = React.useState<number>(1);
+
   const [loading, visitor] = useVisitor();
 
   const { site_id, visitor_id } = router.query;
@@ -48,7 +51,7 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
             </h3>
 
             <VisitorSummary visitor={visitor} />
-            <VisitorRecording visitor={visitor} />
+            <VisitorRecording visitor={visitor} page={recordingPage} setPage={setRecordingPage} />
             <VisitorStats visitor={visitor} />
             <VisitorPages visitor={visitor} />
           </Main>
