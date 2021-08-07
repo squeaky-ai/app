@@ -27,3 +27,25 @@ export const GET_VISITORS_QUERY = gql`
     }
   }
 `;
+
+export const GET_VISITOR_QUERY = gql`
+  query GetVisitor($siteId: ID!, $viewerId: ID!) {
+    site(siteId: $siteId) {
+      id
+      name
+      visitor(viewerId: $viewerId) {
+        viewerId
+        recordingCount
+        firstViewedAt
+        lastActivityAt
+        language
+        viewportX
+        viewportY
+        deviceType
+        browser
+        browserString
+        pageViewCount
+      }
+    }
+  }
+`;

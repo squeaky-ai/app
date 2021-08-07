@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { GET_RECORDING_QUERY } from 'data/recordings/queries';
 import type { Site } from 'types/site';
-import { Recording } from 'types/recording';
+import type { Recording } from 'types/recording';
 
 export const useRecording = (): [boolean, Recording | null] => {
   const router = useRouter();

@@ -17,6 +17,7 @@ export interface Visitor {
   deviceType: string;
   browser: string;
   browserString: string;
+  pageViewCount?: number;
 }
 
 export interface PaginatedVisitorsResponse {

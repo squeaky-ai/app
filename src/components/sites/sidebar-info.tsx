@@ -4,6 +4,7 @@ import { Button } from 'components/button';
 import { PlayerTab } from 'data/sites/enums';
 import { toNiceDate, toTimeString } from 'lib/dates';
 import { Browser } from 'components/browser';
+import { Device } from 'components/device';
 import type { Recording } from 'types/recording';
 
 interface Props {
@@ -48,7 +49,7 @@ export const SidebarInfo: FC<Props> = ({ recording, setActiveTab }) => (
     <div className='row'>
       <dt>Device</dt>
       <dd>
-        <i className={recording.deviceType === 'Computer' ? 'ri-computer-line' : 'ri-smartphone-line'} />
+        <Device deviceType={recording.deviceType} />
         {recording.deviceType}
       </dd>
     </div>

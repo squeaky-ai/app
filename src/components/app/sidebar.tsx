@@ -50,7 +50,7 @@ export const Sidebar: FC = () => {
               </a>
             </Link>
             <Link href={`/sites/${siteId}/visitors`}>
-              <a className={classnames('link', { active: path === `/sites/${siteId}/visitors` })} data-label='Visitors'>
+              <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/visitors`) })} data-label='Visitors'>
                 <i className='ri-group-line' />
                 <span>Visitors</span>
               </a>

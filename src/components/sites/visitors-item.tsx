@@ -1,10 +1,10 @@
 import React from 'react';
 import type { FC } from 'react';
-import classnames from 'classnames';
 import { useRouter } from 'next/router';
 import { Tooltip } from 'components/tooltip';
 import { Browser } from 'components/browser';
 import { Highlighter } from 'components/highlighter';
+import { Device } from 'components/device';
 import { toNiceDate } from 'lib/dates';
 import type { Visitor } from 'types/visitor';
 
@@ -27,10 +27,6 @@ export const VisitorsItem: FC<Props> = ({ visitor, query }) => {
     }
   };
 
-  const deviceIcon = (deviceType: string) => deviceType === 'Computer'
-    ? 'ri-computer-line' 
-    : 'ri-smartphone-line';
-
   const toTimeStringDate = (value: string) => toNiceDate(Number(value));
 
   return (
@@ -47,7 +43,7 @@ export const VisitorsItem: FC<Props> = ({ visitor, query }) => {
       <td>{toTimeStringDate(visitor.lastActivityAt)}</td>
       <td>{visitor.language}</td>
       <td className="no-overflow">
-        <Tooltip positionX='right' button={<i className={classnames('device', deviceIcon(visitor.deviceType))} />}>
+        <Tooltip positionX='right' button={<Device deviceType={visitor.deviceType} />}>
           {visitor.deviceType === 'Computer' ? 'Desktop or Laptop Device' : 'Mobile Device'}
         </Tooltip>
         <Highlighter value={query}>{visitor.viewportX}</Highlighter> x <Highlighter value={query}>{visitor.viewportY}</Highlighter>

@@ -1,7 +1,7 @@
 import type { Team } from 'types/team';
 import type { Recording, PaginatedRecordingsResponse } from 'types/recording';
 import type { Analytics } from 'types/analytics';
-import type { PaginatedVisitorsResponse } from 'types/visitor';
+import type { PaginatedVisitorsResponse, Visitor } from 'types/visitor';
 
 export interface Site {
   id: string;
@@ -15,6 +15,7 @@ export interface Site {
   team: Team[];
   recording?: Recording;
   recordings?: PaginatedRecordingsResponse;
+  visitor?: Visitor;
   visitors?: PaginatedVisitorsResponse;
   analytics?: Analytics;
   verifiedAt?: string;
