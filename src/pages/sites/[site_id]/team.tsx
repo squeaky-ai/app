@@ -20,7 +20,7 @@ const SitesTeam: NextPage<ServerSideProps> = ({ user }) => (
     <Page user={user} scope={[OWNER, ADMIN]}>
       {({ site }) => (
         <Main>
-          <BreadCrumbs site={site} page='Team' />
+          <BreadCrumbs site={site} items={[{ name: 'Team' }]} />
 
           <h3 className='title'>
             Team

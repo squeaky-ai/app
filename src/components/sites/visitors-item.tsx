@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
+import { useRouter } from 'next/router';
 import { Tooltip } from 'components/tooltip';
 import { Browser } from 'components/browser';
 import { Highlighter } from 'components/highlighter';
@@ -13,6 +14,19 @@ interface Props {
 }
 
 export const VisitorsItem: FC<Props> = ({ visitor, query }) => {
+  const router = useRouter();
+
+  const viewVisitor = (event: React.MouseEvent) => {
+    const element = event.target as HTMLElement;
+    const ignored = element.closest('button');
+
+    if (ignored) {
+      event.preventDefault();
+    } else {
+      router.push(`/sites/${router.query.site_id}/visitors/${visitor.viewerId}`);
+    }
+  };
+
   const deviceIcon = (deviceType: string) => deviceType === 'Computer'
     ? 'ri-computer-line' 
     : 'ri-smartphone-line';
@@ -20,7 +34,13 @@ export const VisitorsItem: FC<Props> = ({ visitor, query }) => {
   const toTimeStringDate = (value: string) => toNiceDate(Number(value));
 
   return (
-    <tr className='hover'>
+    <tr 
+      className='hover'
+      role='link' 
+      data-href={`/sites/${router.query.site_id}/visitors/${visitor.viewerId}`} 
+      onClick={viewVisitor} 
+      tabIndex={0}
+    >
       <td>{visitor.viewerId}</td>
       <td><a href='#'>{visitor.recordingCount}</a></td>
       <td>{toTimeStringDate(visitor.firstViewedAt)}</td>

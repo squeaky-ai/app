@@ -40,7 +40,7 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
       <Page user={user} scope={[]}>
         {({ site }) => (
           <Main className={classnames({ empty: site.recordings.items.length === 0 })}>
-            <BreadCrumbs site={site} page='Recordings' />
+            <BreadCrumbs site={site} items={[{ name: 'Recordings' }]} />
 
             <h3 className='title'>
               Recordings

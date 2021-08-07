@@ -57,7 +57,7 @@ const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
       <Page user={user} scope={[]}>
         {({ site }) => (
           <Main className={classnames({ empty: site.recordings.items.length === 0})}>
-            <BreadCrumbs site={site} page='Analytics' />
+            <BreadCrumbs site={site} items={[{ name: 'Analytics' }]} />
 
             <div className='heading'>
               <h3 className='title'>Analytics</h3>

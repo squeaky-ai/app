@@ -15,7 +15,7 @@ const SitesOverview: NextPage<ServerSideProps> = ({ user }) => (
     <Page user={user} scope={[]}>
       {({ site }) => (
         <Main>
-          <BreadCrumbs site={site} page='Overview' />
+          <BreadCrumbs site={site} items={[{ name: 'Overview' }]} />
 
           <h3 className='title'>
             Overview

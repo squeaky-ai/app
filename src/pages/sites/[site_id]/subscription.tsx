@@ -17,7 +17,7 @@ const SitesSubscription: NextPage<ServerSideProps> = ({ user }) => (
     <Page user={user} scope={[OWNER]}>
       {({ site }) => (
         <Main>
-          <BreadCrumbs site={site} page='Overview' />
+          <BreadCrumbs site={site} items={[{ name: 'Subscription' }]} />
 
           <h3 className='title'>
             Subscription
