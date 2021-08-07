@@ -77,6 +77,8 @@ export const GET_VISITOR_QUERY = gql`
             sort
           }
         }
+        pagesPerSession
+        averageSessionDuration
       }
     }
   }

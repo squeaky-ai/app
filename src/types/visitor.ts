@@ -26,6 +26,8 @@ export interface Visitor {
   pageViewCount?: number;
   recordings?: PaginatedRecordingsResponse;
   pages?: PaginatedPagesResponse;
+  averageSessionDuration?: number;
+  pagesPerSession?: number;
 }
 
 export interface PaginatedVisitorsResponse {
