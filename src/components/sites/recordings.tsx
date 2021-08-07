@@ -7,7 +7,7 @@ import { RecordingsItem } from 'components/sites/recordings-item';
 import { Sort } from 'components/sort';
 import { useRecordings } from 'hooks/recordings';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
-import type { SortBy } from 'types/recording';
+import type { RecordingSortBy } from 'types/recording';
 
 interface Props {
   query: string;
@@ -15,7 +15,7 @@ interface Props {
 
 export const Recordings: FC<Props> = ({ query }) => {
   const [page, setPage] = React.useState<number>(1);
-  const [sort, setSort] = React.useState<SortBy>('DATE_DESC');
+  const [sort, setSort] = React.useState<RecordingSortBy>('DATE_DESC');
 
   const [loading, recordings] = useRecordings({ 
     page, 

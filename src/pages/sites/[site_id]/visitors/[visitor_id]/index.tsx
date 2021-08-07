@@ -12,17 +12,27 @@ import { VisitorStats } from 'components/sites/visitor-stats';
 import { VisitorPages } from 'components/sites/visitors-pages';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useVisitor } from 'hooks/visitor';
+import type { PageSortBy } from 'types/visitor';
+import type { RecordingSortBy } from 'types/recording';
 
 const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
   const router = useRouter();
 
+  const [pageviewPage, setPageviewPage] = React.useState<number>(1);
+  const [pageviewSort, setPageviewSort] = React.useState<PageSortBy>('VIEWS_COUNT_DESC');
   const [recordingPage, setRecordingPage] = React.useState<number>(1);
+  const [recordingSort, setRecordingSort] = React.useState<RecordingSortBy>('DATE_DESC');
 
-  const [loading, visitor] = useVisitor();
+  const [_loading, visitor] = useVisitor({ 
+    recordingPage,
+    recordingSort,
+    pagesPage: pageviewPage,
+    pagesSort: pageviewSort
+  });
 
   const { site_id, visitor_id } = router.query;
 
-  if (loading || !visitor) {
+  if (!visitor) {
     return <Spinner />
   }
 
@@ -51,9 +61,24 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
             </h3>
 
             <VisitorSummary visitor={visitor} />
-            <VisitorRecording visitor={visitor} page={recordingPage} setPage={setRecordingPage} />
+
+            <VisitorRecording 
+              visitor={visitor} 
+              page={recordingPage} 
+              setPage={setRecordingPage} 
+              sort={recordingSort}
+              setSort={setRecordingSort}
+            />
+
             <VisitorStats visitor={visitor} />
-            <VisitorPages visitor={visitor} />
+  
+            <VisitorPages 
+              visitor={visitor} 
+              page={pageviewPage} 
+              setPage={setPageviewPage} 
+              sort={pageviewSort}
+              setSort={setPageviewSort}
+            />
           </Main>
         )}
       </Page>

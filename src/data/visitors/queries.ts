@@ -29,7 +29,7 @@ export const GET_VISITORS_QUERY = gql`
 `;
 
 export const GET_VISITOR_QUERY = gql`
-  query GetVisitor($siteId: ID!, $viewerId: ID!, $recordingPage: Int, $recordingSort: RecordingSort) {
+  query GetVisitor($siteId: ID!, $viewerId: ID!, $recordingPage: Int, $recordingSort: RecordingSort, $pagesPage: Int, $pagesSort: VisitorPagesSort) {
     site(siteId: $siteId) {
       id
       name
@@ -45,7 +45,7 @@ export const GET_VISITOR_QUERY = gql`
         browser
         browserString
         pageViewCount
-        recordings(page: $recordingPage, size: 15, sort: $recordingSort) {
+        recordings(page: $recordingPage, size: 10, sort: $recordingSort) {
           items {
             id
             duration
@@ -58,6 +58,18 @@ export const GET_VISITOR_QUERY = gql`
             sessionId
             connectedAt
             disconnectedAt
+          }
+          pagination {
+            pageSize
+            total
+            sort
+          }
+        }
+        pages(page: $pagesPage, size: 10, sort: $pagesSort) {
+          items {
+            pageView
+            pageViewCount
+            averageTimeOnPage
           }
           pagination {
             pageSize

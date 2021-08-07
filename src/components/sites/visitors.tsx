@@ -8,7 +8,7 @@ import { Sort } from 'components/sort';
 import { VisitorsItem } from 'components/sites/visitors-item';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 import type { Site } from 'types/site';
-import type { SortBy } from 'types/visitor';
+import type { VisitorSortBy } from 'types/visitor';
 
 interface Props {
   query: string;
@@ -17,7 +17,7 @@ interface Props {
 
 export const Visitors: FC<Props> = ({ query }) => {
   const [page, setPage] = React.useState<number>(1);
-  const [sort, setSort] = React.useState<SortBy>('FIRST_VIEWED_AT_DESC');
+  const [sort, setSort] = React.useState<VisitorSortBy>('FIRST_VIEWED_AT_DESC');
 
   const [loading, visitors] = useVisitors({ 
     page, 

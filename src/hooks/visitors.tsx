@@ -2,12 +2,12 @@ import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_VISITORS_QUERY } from 'data/visitors/queries';
 import type { Site } from 'types/site';
-import type { PaginatedVisitorsResponse, SortBy } from 'types/visitor';
+import type { PaginatedVisitorsResponse, VisitorSortBy } from 'types/visitor';
 
 interface Props {
   page: number;
   query?: string;
-  sort?: SortBy;
+  sort?: VisitorSortBy;
 }
 
 export const useVisitors = ({ page, query, sort }: Props): [boolean, PaginatedVisitorsResponse] => {

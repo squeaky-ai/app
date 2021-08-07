@@ -1,6 +1,6 @@
 import { User } from 'types/user';
 
-export type SortBy =
+export type RecordingSortBy =
   'DATE_DESC' |
   'DATE_ASC' |
   'DURATION_DESC' |
@@ -54,7 +54,7 @@ export interface PaginatedRecordingsResponse {
 export interface RecordingPagination {
   pageSize: number;
   total: number;
-  sort: SortBy;
+  sort: RecordingSortBy;
 }
 
 export interface TagCreateMutationInput {

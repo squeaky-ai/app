@@ -88,10 +88,20 @@
   .visitors-list {
     margin-bottom: 2rem;
 
+    thead {
+      th {
+        padding: 1.5rem 0 1.5rem 1.5rem;
+      }
+    }
+
     &.table {
       color: var(--gray-700);
       font-size: 13px;
       line-height: 16px;
+
+      td {
+        height: 66px;
+      }
     }
   }
 }
