@@ -5,8 +5,7 @@ import type { TimePeriod } from 'lib/dates';
 import { 
   addDays, 
   addMonths,
-  getHours, 
-  getDay, 
+  getHours,
   getDate, 
   getDaysInMonth, 
   startOfWeek, 
@@ -60,7 +59,7 @@ const getWeeklyResults = (pageViews: PageViewRange[]): DataForPeriod => {
 
     // Only interested in page views that happened on this day
     // of the week
-    const views = pageViews.filter(p => getDay(new Date(p.date)) === getDay(date));
+    const views = pageViews.filter(p => isSameDay(new Date(p.date), date));
 
     return {
       date: format(date, 'EEE'),
