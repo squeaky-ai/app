@@ -84,7 +84,7 @@ export const getDateRange = (period: TimePeriod): TimeRange => {
       };
     case 'past_week':
       return {
-        fromDate: formatDate(startOfWeek(now)),
+        fromDate: formatDate(startOfWeek(now, { weekStartsOn: 1 })),
         toDate: todaysDate
       };
     case 'past_month':
