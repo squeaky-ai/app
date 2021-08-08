@@ -17,13 +17,13 @@ interface Props {
 }
 
 export const Analytics: FC<Props> = ({ period }) => {
-  const [loading, analytics] = useAnalytics(getDateRange(period));
+  const [_loading, analytics] = useAnalytics(getDateRange(period));
 
   const toTwoDecimalPlaces = (value: number) => {
     return Number(value.toFixed(2));
   };
 
-  if (loading) {
+  if (!analytics) {
     return <Spinner />;
   }
 
@@ -31,7 +31,7 @@ export const Analytics: FC<Props> = ({ period }) => {
     <>
       <div className='analytics-grid'>
         <div className='card graph'>
-          <AnalyticsGraph viewsAndVisitors={analytics.viewsAndVisitorsPerHour} />
+          <AnalyticsGraph viewsAndVisitors={analytics.pageViewsRange} period={period} />
         </div>
         <div className='card visitors'>
           <h4>Visitors</h4>

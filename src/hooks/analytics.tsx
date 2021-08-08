@@ -8,7 +8,7 @@ import type { TimeRange } from 'lib/dates';
 export const useAnalytics = (range: TimeRange): [boolean, Analytics] => {
   const router = useRouter();
 
-  const { data, loading } = useQuery<{ site: Site }>(GET_ANALYTICS_QUERY, {
+  const { data, loading, previousData } = useQuery<{ site: Site }>(GET_ANALYTICS_QUERY, {
     variables: {
       siteId: router.query.site_id as string,
       ...range,
@@ -16,7 +16,7 @@ export const useAnalytics = (range: TimeRange): [boolean, Analytics] => {
   });
 
   const fallback: Analytics = {
-    viewsAndVisitorsPerHour: [],
+    pageViewsRange: [],
     visitors: 0,
     pageViews: 0,
     averageSessionDuration: 0,
@@ -43,7 +43,7 @@ export const useAnalytics = (range: TimeRange): [boolean, Analytics] => {
 
   const results = data
     ? data.site.analytics
-    : fallback;
+    : previousData ? previousData.site.analytics : fallback;
 
   return [loading, results];
 };

@@ -9,10 +9,9 @@ export const GET_ANALYTICS_QUERY = gql`
         pageViews(fromDate: $fromDate, toDate: $toDate)
         averageSessionDuration(fromDate: $fromDate, toDate: $toDate)
         pagesPerSession(fromDate: $fromDate, toDate: $toDate)
-        viewsAndVisitorsPerHour(fromDate: $fromDate, toDate: $toDate) {
-          hour
-          pageViews
-          visitors
+        pageViewsRange(fromDate: $fromDate, toDate: $toDate) {
+          date
+          pageViewCount
         }
         pages(fromDate: $fromDate, toDate: $toDate) {
           path

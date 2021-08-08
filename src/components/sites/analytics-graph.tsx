@@ -1,15 +1,18 @@
 import React from 'react';
 import type { FC } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
 import { Label } from 'components/label';
 import { Checkbox } from 'components/checkbox';
-import type { ViewAndVisitor } from 'types/analytics';
+import { formatResultsForPeriod } from 'lib/analytics';
+import type { PageViewRange } from 'types/analytics';
+import type { TimePeriod } from 'lib/dates';
 
 interface Props {
-  viewsAndVisitors: ViewAndVisitor[];
+  period: TimePeriod;
+  viewsAndVisitors: PageViewRange[];
 }
 
-export const AnalyticsGraph: FC<Props> = ({ viewsAndVisitors }) => {
+export const AnalyticsGraph: FC<Props> = ({ viewsAndVisitors, period }) => {
   const [show, setShow] = React.useState<string[]>(['visitors', 'pageViews']);
 
   const handleClick = (value: string) => {
@@ -18,20 +21,11 @@ export const AnalyticsGraph: FC<Props> = ({ viewsAndVisitors }) => {
       : setShow([...show, value]);
   };
 
-  const getAmPmForHour = (hour: number): string => {
-    if (hour == 24) return '12pm';
-    if (hour <= 12) return `${hour}am`;
-    return `${hour - 12}pm`;
-  };
-
-  const data = viewsAndVisitors.map(v => ({
-    name: getAmPmForHour(v.hour),
-    visitors: v.visitors,
-    pageViews: v.pageViews,
-  }));
+  // Best you don't look in that function
+  const { data, interval } = formatResultsForPeriod(period, viewsAndVisitors);
 
   const results = data.map(d => ({
-    name: d.name,
+    date: d.date,
     visitors: show.includes('visitors') ? d.visitors : 0,
     pageViews: show.includes('pageViews') ? d.pageViews : 0
   }));
@@ -44,13 +38,13 @@ export const AnalyticsGraph: FC<Props> = ({ viewsAndVisitors }) => {
         <Checkbox checked={show.includes('pageViews')} onChange={() => handleClick('pageViews')}>Page Views</Checkbox>
       </div>
       <ResponsiveContainer width='100%' height={340}>
-        <BarChart data={results} margin={{ top: 0, left: -15, right: 0, bottom: 0 }}>
-          <XAxis dataKey='name' interval={1} />
+        <AreaChart data={results} margin={{ top: 0, left: -15, right: 0, bottom: 0 }}>
+          <XAxis dataKey='date' interval={interval} />
           <YAxis />
           <CartesianGrid strokeDasharray='3 3' vertical={false} />
-          <Bar dataKey='visitors' fill='#0074E0' barSize={8} radius={[10, 10, 0, 0]} />
-          <Bar dataKey='pageViews' fill='#F0438C' barSize={8} radius={[10, 10, 0, 0]} />
-        </BarChart>
+          <Area dataKey='pageViews' fill='#FFD6E7' stroke='#F0438C' type='monotone' />
+          <Area dataKey='visitors' fill='#E9F5FF' stroke='#0074E0' type='monotone' />
+        </AreaChart>
       </ResponsiveContainer>
     </div>
   );

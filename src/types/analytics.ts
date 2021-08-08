@@ -1,5 +1,5 @@
 export interface Analytics {
-  viewsAndVisitorsPerHour: ViewAndVisitor[];
+  pageViewsRange: PageViewRange[];
   visitors: number;
   pageViews: number;
   averageSessionDuration: number;
@@ -11,10 +11,9 @@ export interface Analytics {
   dimensions: AnalyticsDimensions;
 }
 
-export interface ViewAndVisitor {
-  hour: number;
-  pageViews: number;
-  visitors: number;
+export interface PageViewRange {
+  date: string;
+  pageViewCount: number;
 }
 
 export interface AnalyticsPage {
