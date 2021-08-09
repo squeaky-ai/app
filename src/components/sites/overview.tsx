@@ -3,9 +3,11 @@ import type { FC } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Card } from 'components/card';
+import { useOverview } from 'hooks/overview';
 
 export const Overview: FC = () => {
   const router = useRouter();
+  const [_loading, overview] = useOverview();
 
   const { site_id } = router.query;
 
@@ -16,7 +18,7 @@ export const Overview: FC = () => {
           <i className='ri-group-line' />
           Visitors
         </h3>
-        <h2>0</h2>
+        <h2>{overview.visitors}</h2>
         <div className='link'>
           <Link href={`/sites/${site_id}/visitors`}>
             <a>View All</a>
@@ -30,7 +32,7 @@ export const Overview: FC = () => {
           <i className='ri-vidicon-line' />
           Recordings
         </h3>
-        <h2>0</h2>
+        <h2>{overview.recordingsCount}</h2>
         <div className='link'>
           <Link href={`/sites/${site_id}/recordings`}>
             <a>View All</a>
@@ -44,7 +46,7 @@ export const Overview: FC = () => {
           <i className='ri-pages-line' />
           Page Views
         </h3>
-        <h2>0</h2>
+        <h2>{overview.pageViews}</h2>
         <div className='link'>
           <Link href={`/sites/${site_id}/analytics`}>
             <a>Analytics</a>
