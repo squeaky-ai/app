@@ -6,7 +6,6 @@ import type { Recording } from 'types/recording';
 export interface PlayerState {
   recording: Recording;
   playing: boolean;
-  progress: number;
   playbackSpeed: number;
   activeTab: PlayerTab;
   skipInactivity: boolean;
@@ -36,7 +35,6 @@ export const PlayerProvider: FC<PlayerProps> = ({ children, recording }) => {
   const [state, dispatch] = React.useReducer(reducer, {
     recording,
     playing: false,
-    progress: 0,
     playbackSpeed: 1,
     activeTab: null,
     skipInactivity: true,

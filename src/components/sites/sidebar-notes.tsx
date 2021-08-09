@@ -11,7 +11,6 @@ import { TextArea } from 'components/textarea';
 import { Note } from 'components/sites/note';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { TIMESTAMP_REGEX } from 'data/sites/constants';
-import { usePlayerState } from 'hooks/player-state';
 import { useReplayer } from 'hooks/replayer';
 import { toTimeString } from 'lib/dates';
 import { noteDelete, noteCreate, noteUpdate } from 'lib/api/graphql';
@@ -30,7 +29,6 @@ export const SidebarNotes: FC<Props> = ({ recording }) => {
   const router = useRouter();
   const ref = React.useRef<Modal>();
 
-  const [state] = usePlayerState();
   const [replayer] = useReplayer();
 
   const siteId = router.query.site_id + '';
@@ -93,7 +91,7 @@ export const SidebarNotes: FC<Props> = ({ recording }) => {
       <Modal ref={ref}>
         <ModalBody aria-labelledby='add-note-title'>
           <Formik
-            initialValues={{ timestamp: toTimeString(state.progress * 1000), body: '' }}
+            initialValues={{ timestamp: toTimeString(replayer?.getCurrentTime()), body: '' }}
             validationSchema={NoteSchema}
             onSubmit={(values, { setSubmitting }) => {
               (async () => {

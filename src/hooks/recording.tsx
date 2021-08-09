@@ -7,7 +7,7 @@ import type { Recording } from 'types/recording';
 export const useRecording = (): [boolean, Recording | null] => {
   const router = useRouter();
 
-  const { data, loading } = useQuery<{ site: Site }>(GET_RECORDING_QUERY, {
+  const { data, loading, previousData } = useQuery<{ site: Site }>(GET_RECORDING_QUERY, {
     variables: { 
       siteId: router.query.site_id as string,
       recordingId: router.query.recordingId as string
@@ -16,6 +16,8 @@ export const useRecording = (): [boolean, Recording | null] => {
 
   return [
     loading, 
-    data ? data.site.recording : null
+    data 
+      ? data.site.recording 
+      : previousData ? previousData.site.recording : null
   ];
 };

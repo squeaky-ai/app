@@ -1,5 +1,4 @@
 import React from 'react';
-import { first } from 'lodash';
 import { Replayer } from 'rrweb';
 import { usePlayerState } from 'hooks/player-state';
 import type { Event } from 'types/event';
@@ -40,15 +39,9 @@ export const useReplayer = (): [Replayer | null, InitFunction] => {
       } 
     });
 
-    const offset = first<Event>(events).timestamp;
-
     // TODO: The typing for this is a mess
     (replayer.on as any)('*', (type: string, x: any) => {
       switch(type) {
-        case 'event-cast':
-          const progress = Math.floor((x.timestamp - offset) / 1000);
-          dispatch({ type: 'progress', value: progress });
-          break;
         case 'start':
           dispatch({ type: 'playing', value: true });
           break;

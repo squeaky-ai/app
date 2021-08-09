@@ -35,6 +35,7 @@ export const PlayerWrapper: FC<Props> = ({ user }) => {
 
               <PlayerActions site={site} recording={state.recording} />
             </Header>
+  
             <Player />
             <PlayerFooter />
           </>
