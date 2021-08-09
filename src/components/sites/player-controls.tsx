@@ -12,8 +12,8 @@ export const PlayerControls: FC = () => {
 
   const handlePlayPause = () => {
     state.playing
-      ? replayer?.pause()
-      : replayer?.play();
+      ? replayer.pause()
+      : replayer.play(replayer.getCurrentTime());
   };
 
   const handlePlaybackSpeed = (speed: number) => {
@@ -28,7 +28,7 @@ export const PlayerControls: FC = () => {
   };
 
   const handleSetProgress = (ms: number) => {
-    replayer?.play(ms);
+    replayer.play(ms);
   };
 
   return (

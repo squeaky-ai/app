@@ -90,7 +90,13 @@ const cache = new InMemoryCache({
     Site: {
       fields: {
         team: { merge: ACCEPT_INCOMING },
-        recordings: { merge: ACCEPT_INCOMING }
+        recordings: { merge: ACCEPT_INCOMING },
+      }
+    },
+    Recording: {
+      fields: {
+        notes: { merge: ACCEPT_INCOMING },
+        tags: { merge: ACCEPT_INCOMING },
       }
     }
   }

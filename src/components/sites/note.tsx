@@ -33,14 +33,14 @@ export const Note: FC<Props> = ({ note, handleDelete, handleUpdate }) => {
   const openModal = () => {
     if (ref.current) {
       ref.current.show();
-      replayer?.pause();
+      replayer.pause();
     }
   };
 
   const closeModal = () => {
     if (ref.current) {
       ref.current.hide();
-      replayer?.play();
+      replayer.play(replayer.getCurrentTime());
     }
   };
 
