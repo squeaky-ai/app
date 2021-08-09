@@ -12,6 +12,7 @@ import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'compo
 import { ActivityTimestamp } from 'components/sites/activity-timestamp';
 import { TIMESTAMP_REGEX } from 'data/sites/constants';
 import { toTimeString } from 'lib/dates';
+import { useReplayer } from 'hooks/replayer';
 import { Note as INote } from 'types/recording';
 
 interface Props {
@@ -27,13 +28,20 @@ const NoteSchema = Yup.object().shape({
 
 export const Note: FC<Props> = ({ note, handleDelete, handleUpdate }) => {
   const ref = React.useRef<Modal>();
+  const [replayer] = useReplayer();
 
   const openModal = () => {
-    if (ref.current) ref.current.show();
+    if (ref.current) {
+      ref.current.show();
+      replayer?.pause();
+    }
   };
 
   const closeModal = () => {
-    if (ref.current) ref.current.hide();
+    if (ref.current) {
+      ref.current.hide();
+      replayer?.play();
+    }
   };
 
   const onDelete = () => {

@@ -12,6 +12,7 @@ import { Note } from 'components/sites/note';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { TIMESTAMP_REGEX } from 'data/sites/constants';
 import { usePlayerState } from 'hooks/player-state';
+import { useReplayer } from 'hooks/replayer';
 import { toTimeString } from 'lib/dates';
 import { noteDelete, noteCreate, noteUpdate } from 'lib/api/graphql';
 import type { Recording, Note as INote } from 'types/recording';
@@ -28,18 +29,26 @@ const NoteSchema = Yup.object().shape({
 export const SidebarNotes: FC<Props> = ({ recording }) => {
   const router = useRouter();
   const ref = React.useRef<Modal>();
+
   const [state] = usePlayerState();
+  const [replayer] = useReplayer();
 
   const siteId = router.query.site_id + '';
 
   const notes = recording.notes || [];
 
   const openModal = () => {
-    if (ref.current) ref.current.show();
+    if (ref.current) {
+      ref.current.show();
+      replayer?.pause();
+    }
   };
 
   const closeModal = () => {
-    if (ref.current) ref.current.hide();
+    if (ref.current) {
+      ref.current.hide();
+      replayer?.play();
+    }
   };
 
   const handleDelete = async (id: string) => {
