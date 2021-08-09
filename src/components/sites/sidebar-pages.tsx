@@ -3,9 +3,7 @@ import type { FC } from 'react';
 import classnames from 'classnames';
 import { EventType } from 'rrweb';
 import { groupBy } from 'lodash';
-import { Button } from 'components/button';
-import { usePlayerState } from 'hooks/player-state';
-import { toTimeString } from 'lib/dates';
+import { ActivityTimestamp } from 'components/sites/activity-timestamp';
 import type { Event } from 'types/event';
 import type { Recording } from 'types/recording';
 
@@ -15,7 +13,6 @@ interface Props {
 
 export const SidebarPages: FC<Props> = ({ recording }) => {
   const [open, setOpen] = React.useState<string[]>([]);
-  const [_, dispatch] = usePlayerState();
   
   const events: Event[] = JSON.parse(recording.events);
   const pageviews = events.filter(event => event.type === EventType.Meta);
@@ -32,8 +29,6 @@ export const SidebarPages: FC<Props> = ({ recording }) => {
 
   const getPathName = (url: string) => new URL(url).pathname;
 
-  const timeString = (timestamp: number) => toTimeString(timestamp - offset);
-
   const nextPageView = (event: Event) => {
     const index = pageviews.findIndex(e => e.id === event.id);
     return pageviews[index + 1] || null;
@@ -41,19 +36,7 @@ export const SidebarPages: FC<Props> = ({ recording }) => {
 
   const timeToNextPageView = (event: Event) => {
     const nextEvent = nextPageView(event);
-    return timeString(nextEvent?.timestamp || event.timestamp);
-  };
-
-  const setProgress = (event: Event) => {
-    const timestamp = event.timestamp - offset;
-    dispatch({ type: 'progress', value: timestamp / 1000 });
-  };
-
-  const setNextProgress = (event: Event) => {
-    const nextEvent = nextPageView(event) || event;
-    const timestamp = nextEvent.timestamp - offset;
-
-    dispatch({ type: 'progress', value: timestamp / 1000 });
+    return nextEvent?.timestamp || event.timestamp;
   };
 
   return (
@@ -70,13 +53,9 @@ export const SidebarPages: FC<Props> = ({ recording }) => {
             <div className='timestamps'>
               {events.map(event => (
                 <div key={event.id} className='event'>
-                  <Button onClick={() => setProgress(event)}>
-                    {timeString(event.timestamp)}
-                  </Button>
+                  <ActivityTimestamp offset={offset} timestamp={event.timestamp} />
                   <i className='ri-arrow-right-line' />
-                  <Button onClick={() => setNextProgress(event)}>
-                    {timeToNextPageView(event)}
-                  </Button>
+                  <ActivityTimestamp offset={offset} timestamp={timeToNextPageView(event)} />
                 </div>
               ))}
             </div>
