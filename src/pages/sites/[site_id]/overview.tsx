@@ -9,6 +9,7 @@ import { Page } from 'components/sites/page';
 import { Container } from 'components/container';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { EmptyStateHint } from 'components/sites/empty-state-hint';
+import { Overview } from 'components/sites/overview';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
 const SitesOverview: NextPage<ServerSideProps> = ({ user }) => (
@@ -41,7 +42,7 @@ const SitesOverview: NextPage<ServerSideProps> = ({ user }) => (
           </Container>
 
           {!!site.recordings.items.length && (
-            <></>
+            <Overview />
           )}
         </Main>
       )}
