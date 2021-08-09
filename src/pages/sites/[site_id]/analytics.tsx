@@ -81,7 +81,7 @@ const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
                   title='Collecting Site Analytics'
                   body={
                     <>
-                      <p>New to Squeaky? Please <Link href={`/sites/${site.id}/settings`}><a>install your tracking code</a></Link> to begin recording user sessions for your website or web app.</p>
+                      <p>New to Squeaky? Please <Link href={`/sites/${site.id}/settings?tab=code`}><a>install your tracking code</a></Link> to begin recording user sessions for your website or web app.</p>
                       <p>If you have only recently installed or updated your tracking code it may take up to an hour before new session recordings are available in the recordings page.</p>
                     </>
                   }

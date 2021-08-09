@@ -35,7 +35,7 @@ export const Sidebar: FC = () => {
         <div className='slider'>
           <div className='nav left'>
             <Link href='/sites'>
-              <a className={classnames('link', { active: path === '/sites' })} data-label='All Sites'>
+              <a className={classnames('link', { active: path.startsWith('/sites') })} data-label='All Sites'>
                 <i className='ri-window-line' />
                 <span>All Sites</span>
               </a>
@@ -44,7 +44,7 @@ export const Sidebar: FC = () => {
           </div>
           <div className='nav right'>
             <Link href={`/sites/${siteId}/overview`}>
-              <a className={classnames('link', { active: path === `/sites/${siteId}/overview` })} data-label='Overview'>
+              <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/overview`) })} data-label='Overview'>
                 <i className='ri-dashboard-3-line' />
                 <span>Overview</span>
               </a>
@@ -56,38 +56,32 @@ export const Sidebar: FC = () => {
               </a>
             </Link>
             <Link href={`/sites/${siteId}/recordings`}>
-              <a className={classnames('link', { active: path === `/sites/${siteId}/recordings` })} data-label='Recordings'>
+              <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/recordings`) })} data-label='Recordings'>
                 <i className='ri-vidicon-line' />
                 <span>Recordings</span>
               </a>
             </Link>
             <Link href={`/sites/${siteId}/analytics`}>
-              <a className={classnames('link', { active: path === `/sites/${siteId}/analytics` })} data-label='Analytics'>
+              <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/analytics`) })} data-label='Analytics'>
                 <i className='ri-line-chart-line' />
                 <span>Analytics</span>
               </a>
             </Link>
-            <Link href={`/sites/${siteId}/insights`}>
-              <a className={classnames('link', { active: path === `/sites/${siteId}/insights` })} data-label='Insights'>
-                <i className='ri-lightbulb-line' />
-                <span>Insights</span>
-              </a>
-            </Link>
             <div className='divider' />
             <Link href={`/sites/${siteId}/team`}>
-              <a className={classnames('link', { active: path === `/sites/${siteId}/team` })} data-label='Team'>
+              <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/team`) })} data-label='Team'>
                 <i className='ri-group-line' />
                 <span>Team</span>
               </a>
             </Link>
             <Link href={`/sites/${siteId}/settings`}>
-              <a className={classnames('link', { active: path === `/sites/${siteId}/settings` })} data-label='Settings'>
+              <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/settings`) })} data-label='Settings'>
                 <i className='ri-settings-3-line' />
                 <span>Settings</span>
               </a>
             </Link>
             <Link href={`/sites/${siteId}/subscription`}>
-              <a className={classnames('link', { active: path === `/sites/${siteId}/subscription` })} data-label='Subscriptions'>
+              <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/subscription`) })} data-label='Subscriptions'>
                 <i className='ri-bank-card-2-line' />
                 <span>Subscriptions</span>
               </a>

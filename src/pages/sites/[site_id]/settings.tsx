@@ -58,7 +58,7 @@ const SitesSettings: NextPage<ServerSideProps> = ({ user }) => {
               <Access roles={[OWNER, ADMIN]} />
             </h3>
 
-            <Drawer title='Site details'>
+            <Drawer title='Site details' name='details'>
               <Formik
                 initialValues={{ name: site.name, protocol: `${site.url.split('://')[0]}://`, hostname: site.url.split('://')[1] }}
                 validationSchema={DetailsSchema}
@@ -138,6 +138,7 @@ const SitesSettings: NextPage<ServerSideProps> = ({ user }) => {
             </Drawer>
             <Drawer 
               title='Tracking code' 
+              name='code'
               aside={
                 site.verifiedAt 
                   ? site.daysSinceLastRecording >= MAX_DAYS_BEFORE_POTENTIAL_ISSUE
@@ -181,7 +182,7 @@ const SitesSettings: NextPage<ServerSideProps> = ({ user }) => {
               </Container>
             </Drawer>
             {member.role === OWNER && (
-              <Drawer title='Site deletion' aside={<Access roles={[OWNER]} />}>
+              <Drawer title='Site deletion' name='delete' aside={<Access roles={[OWNER]} />}>
                 <Container className='md'>
                   <p><b>You can delete your site at any time:</b></p>
                   <ul className='delete-list'>
