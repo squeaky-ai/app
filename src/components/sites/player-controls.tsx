@@ -28,7 +28,7 @@ export const PlayerControls: FC = () => {
   };
 
   const handleSetProgress = (ms: number) => {
-    replayer?.pause(ms);
+    replayer?.play(ms);
   };
 
   return (
