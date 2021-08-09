@@ -25,7 +25,7 @@ export type TimeRange = {
 
 export const toTimeString = (ms?: number) => {
   if (!ms) return '00:00';
-  if (ms >= 3600000) return '60:00+'
+  if (ms >= 3600000) return '>60:00'
 
   const date = new Date(0);
   date.setMilliseconds(ms);
@@ -36,9 +36,9 @@ export const toMinutesAndSeconds = (ms?: number) => {
   if (!ms) return '0m 0s';
 
   const timeString = toTimeString(ms);
-  const [minutes, seconds] = timeString.split(':');
-  
+  if (timeString === '>60:00') return '>60m';
 
+  const [minutes, seconds] = timeString.split(':');
   return `${minutes.replace('00', '0')}m ${seconds.replace('00', '0')}s`;
 };
 
