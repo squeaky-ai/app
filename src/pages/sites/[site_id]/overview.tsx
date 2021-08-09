@@ -30,11 +30,11 @@ const SitesOverview: NextPage<ServerSideProps> = ({ user }) => (
               <Image src='/empty-state-5.svg' height={240} width={320} alt='Illustration to represent the empty recordings page' />
               <h4>There is currently no dashboard data</h4>
               <EmptyStateHint
-                title='Viewing the Dashboard'
+                title='Accessing The Dashboard'
                 body={
                   <>
                     <p>New to Squeaky? Please <Link href={`/sites/${site.id}/settings?tab=code`}><a>install your tracking code</a></Link> to begin recording user sessions for your website or web app.</p>
-                    <p>If you have only recently installed or updated your tracking code it may take up to an hour before new session recordings are available in the recordings page.</p>
+                    <p>If you have only recently installed or updated your tracking code it may take up to an hour before data for your dashboard becomes available.</p>
                   </>
                 }
               />
