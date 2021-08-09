@@ -4,32 +4,32 @@ export const GET_ANALYTICS_QUERY = gql`
   query GetAnalytics($siteId: ID!, $fromDate: String!, $toDate: String!) { 
     site(siteId: $siteId) {
       id
-      analytics {
-        visitors(fromDate: $fromDate, toDate: $toDate)
-        pageViews(fromDate: $fromDate, toDate: $toDate)
-        averageSessionDuration(fromDate: $fromDate, toDate: $toDate)
-        pagesPerSession(fromDate: $fromDate, toDate: $toDate)
-        pageViewsRange(fromDate: $fromDate, toDate: $toDate) {
+      analytics(fromDate: $fromDate, toDate: $toDate) {
+        visitors
+        pageViews
+        averageSessionDuration
+        pagesPerSession
+        pageViewsRange {
           date
           pageViewCount
         }
-        pages(fromDate: $fromDate, toDate: $toDate) {
+        pages {
           path
           count
         }
-        browsers(fromDate: $fromDate, toDate: $toDate) {
+        browsers  {
           name
           count
         }
-        languages(fromDate: $fromDate, toDate: $toDate) {
+        languages {
           name
           count
         }
-        devices(fromDate: $fromDate, toDate: $toDate) {
+        devices {
           type
           count
         }
-        dimensions(fromDate: $fromDate, toDate: $toDate) {
+        dimensions {
           min
           max
           avg
