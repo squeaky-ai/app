@@ -17,13 +17,13 @@ export const PlayerDetails: FC<Props> = ({ site, recording }) => {
 
   const viewPrevious = async () => {
     if (recording.previousRecording) {
-      await router.push(`/sites/${site.id}/player?recordingId=${recording.previousRecording.id}`);
+      await router.push(`/sites/${site.id}/recordings/${recording.previousRecording.id}`);
     }
   };
 
   const viewNext = async () => {
     if (recording.nextRecording) {
-      await router.push(`/sites/${site.id}/player?recordingId=${recording.nextRecording.id}`);
+      await router.push(`/sites/${site.id}/recordings/${recording.nextRecording.id}`);
     }
   };
 

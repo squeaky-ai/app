@@ -25,7 +25,7 @@ export interface Recording {
   browserString?: string;
   viewportX: number;
   viewportY: number;
-  events: string;
+  events: PaginatedEventsResponse;
   tags?: Tag[];
   notes?: Note[];
   previousRecording?: Recording;
@@ -104,4 +104,15 @@ export interface BookmarkRecordingMutationInput {
   siteId: string;
   recordingId: string;
   bookmarked: boolean;
+}
+
+export interface PaginatedEventsResponse {
+  items: string;
+  pagination: EventPagination;
+}
+
+export interface EventPagination {
+  pageSize: number;
+  pageCount: number;
+  total: number;
 }

@@ -16,7 +16,7 @@ export const Page: FC<Props> = ({ children, user }) => {
   const router = useRouter();
   const isPublic = PUBLIC_ROUTES.includes(router.route);
 
-  const slug = router.route.split('/').filter(r => !!r && !r.startsWith('['));
+  const slug = router.route.split('/').map(r => r.replace(/[\[\]]|(_id)/g, ''));
 
   if (slug.length === 0) {
     slug.push('home');

@@ -28,7 +28,7 @@ export const VisitorRecordingsItem: FC<Props> = ({ recording }) => {
     if (ignored) {
       event.preventDefault();
     } else {
-      router.push(`/sites/${router.query.site_id}/player?recordingId=${recording.id}`);
+      router.push(`/sites/${router.query.site_id}/recordings/${recording.id}`);
     }
   };
 
@@ -71,7 +71,7 @@ export const VisitorRecordingsItem: FC<Props> = ({ recording }) => {
       <tr 
         className='hover recording-row'
         role='link' 
-        data-href={`/sites/${router.query.site_id}/player?recordingId=${recording.id}`} 
+        data-href={`/sites/${router.query.site_id}/recordings/${recording.id}`} 
         onClick={viewRecording} 
         tabIndex={0}
       >
