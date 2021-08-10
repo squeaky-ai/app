@@ -112,25 +112,31 @@ const data = [
   }
 ];
 
-export const VisitorStats: FC<Props> = ({ visitor }) => (
-  <div className='stats'>
-    <Card className='session-duration'>
-      <h3>Average Session Duration</h3>
-      <h2>{toMinutesAndSeconds(visitor.averageSessionDuration || 0)}</h2>
-      <ResponsiveContainer width='100%' height={56}>
-        <AreaChart data={data} margin={{ top: 0, left: -15, right: 0, bottom: 0 }}>
-          <Area dataKey='duration' stroke='#0074E0' fill='#E9F5FF' type='basis' strokeWidth={2} fillOpacity={1} />
-        </AreaChart>
-      </ResponsiveContainer>
-    </Card>
-    <Card className='per-session'>
-      <h3>Pages Per Session</h3>
-      <h2>{visitor.pagesPerSession || 0}</h2>
-      <ResponsiveContainer width='100%' height={56}>
-        <AreaChart data={data} margin={{ top: 0, left: -15, right: 0, bottom: 0 }}>
-          <Area dataKey='duration' stroke='#0074E0' fill='#E9F5FF' type='basis' strokeWidth={2} fillOpacity={1} />
-        </AreaChart>
-      </ResponsiveContainer>
-    </Card>
-  </div>
-);
+export const VisitorStats: FC<Props> = ({ visitor }) => {
+  const toTwoDecimalPlaces = (value: number) => {
+    return Number(value.toFixed(2));
+  };
+
+  return (
+    <div className='stats'>
+      <Card className='session-duration'>
+        <h3>Average Session Duration</h3>
+        <h2>{toMinutesAndSeconds(visitor.averageSessionDuration || 0)}</h2>
+        <ResponsiveContainer width='100%' height={56}>
+          <AreaChart data={data} margin={{ top: 0, left: -15, right: 0, bottom: 0 }}>
+            <Area dataKey='duration' stroke='#0074E0' fill='#E9F5FF' type='basis' strokeWidth={2} fillOpacity={1} />
+          </AreaChart>
+        </ResponsiveContainer>
+      </Card>
+      <Card className='per-session'>
+        <h3>Pages Per Session</h3>
+        <h2>{toTwoDecimalPlaces(visitor.pagesPerSession || 0)}</h2>
+        <ResponsiveContainer width='100%' height={56}>
+          <AreaChart data={data} margin={{ top: 0, left: -15, right: 0, bottom: 0 }}>
+            <Area dataKey='duration' stroke='#0074E0' fill='#E9F5FF' type='basis' strokeWidth={2} fillOpacity={1} />
+          </AreaChart>
+        </ResponsiveContainer>
+      </Card>
+    </div>
+  );
+};
