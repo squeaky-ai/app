@@ -64,7 +64,7 @@ const getMouseInteractionIcon = (type: MouseInteractions): string => {
 export const SidebarActivity: FC<Props> = ({ recording }) => {
   const [replayer] = useReplayer();
 
-  const events: Event[] = JSON.parse(recording.events);
+  const events: Event[] = JSON.parse(recording.events.items);
 
   const activity = events.reduce((acc, item) => {
     // Add all of the page views

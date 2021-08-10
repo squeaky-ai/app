@@ -7,7 +7,7 @@ import { PlayerProvider } from 'components/sites/player-provider';
 import { useRecording } from 'hooks/recording';
 
 const SitesPlayer: NextPage<ServerSideProps> = ({ user }) => {
-  const [_recordingLoading, recording] = useRecording();
+  const [_recordingLoading, recording] = useRecording({ page: 1 });
 
   return (
     <PlayerProvider recording={recording}>

@@ -17,7 +17,7 @@ export const useReplayer = (): [Replayer | null, InitFunction] => {
       return;
     }
 
-    const events: Event[] = JSON.parse(recording.events);
+    const events: Event[] = JSON.parse(recording.events.items);
 
     if (events.length === 0) {
       console.error('Events list is empty');

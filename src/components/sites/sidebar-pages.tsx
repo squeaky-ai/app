@@ -14,7 +14,7 @@ interface Props {
 export const SidebarPages: FC<Props> = ({ recording }) => {
   const [open, setOpen] = React.useState<string[]>([]);
   
-  const events: Event[] = JSON.parse(recording.events);
+  const events: Event[] = JSON.parse(recording.events.items);
   const pageviews = events.filter(event => event.type === EventType.Meta);
 
   const offset = pageviews[0]?.timestamp || 0;
