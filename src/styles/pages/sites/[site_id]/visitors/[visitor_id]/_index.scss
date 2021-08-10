@@ -14,8 +14,21 @@
     .summary {
       display: grid;
       grid-gap: 3rem;
-      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-areas: 'info info recordings pageviews';
+      grid-template-columns: repeat(auto-fill, 1fr);
       grid-template-rows: 292px;
+
+      @include breakpoint-lg {
+        grid-template-areas: 'info info'
+                             'recordings pageviews';
+        grid-template-rows: 292px;
+      }
+
+      @include breakpoint-md {
+        grid-template-areas: 'info'
+                             'recordings'
+                             'pageviews';
+      }
 
       .card {
         border: 1px solid var(--gray-150);
@@ -34,18 +47,24 @@
         }
 
         &.recordings {
+          grid-area: recordings;
+
           h2 {
             color: var(--blue-500);
           }
         }
 
         &.page-views {
+          grid-area: pageviews;
+
           h2 {
             color: var(--magenta-500);
           }
         }
 
         &.info {
+          grid-area: info;
+
           .row {
             display: flex;
             font-size: 13px;
@@ -85,51 +104,22 @@
           padding: 1.5rem 0 1.5rem 1.5rem;
         }
       }
-      
-      table > tbody {
-        td:nth-of-type(1) {
-          max-width: 130px;
-          width: 130px;
-        }
-
-        td:nth-of-type(2) {
-          max-width: 150px;
-          width: 150px;
-        }
-
-        td:nth-of-type(3) {
-          max-width: 220px;
-          width: 220px;
-        }
-
-        td:nth-of-type(4) {
-          max-width: 120px;
-          width: 120px;
-        }
-
-        td:nth-of-type(5) {
-          max-width: 110px;
-          width: 110px;
-        }
-
-        td:nth-of-type(6) {
-          max-width: 300px;
-          width: 300px;
-        }
-
-        td:nth-of-type(7) {
-          max-width: 60px;
-          width: 60px;
-        }
-      }
     }
 
     .stats {
       display: grid;
       grid-gap: 3rem;
-      grid-template-columns: 1fr 1fr;
+      grid-template-areas: 'session-duration per-session';
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       grid-template-rows: 292px;
       margin-top: 3rem;
+
+      @include breakpoint-lg {
+        grid-template-areas: 'session-duration'
+                             'per-session';
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: 292px;
+      }
 
       .card {
         border: 1px solid var(--gray-150);
@@ -146,6 +136,14 @@
           font-size: 24px;
           line-height: 32px;
           margin: 0;
+        }
+
+        &.session-duration {
+          grid-area: session-duration;
+        }
+
+        &.per-session {
+          grid-area: per-session;
         }
       }
     }
@@ -165,21 +163,6 @@
       table > tbody {
         td {
           height: 66px;
-        }
-
-        td:nth-of-type(1) {
-          max-width: 330px;
-          width: 330px;
-        }
-
-        td:nth-of-type(2) {
-          max-width: 330px;
-          width: 330px;
-        }
-
-        td:nth-of-type(3) {
-          max-width: 330px;
-          width: 330px;
         }
       }
     }

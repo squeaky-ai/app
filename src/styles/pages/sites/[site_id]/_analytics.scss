@@ -79,8 +79,31 @@
                          'session-duration session-duration session-pages session-pages'
                          'page-browser page-browser page-browser page-browser'
                          'meta meta meta meta';
-    grid-template-columns: repeat(auto-fill, minmax(calc(25% - 3rem), 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-template-rows: 216px 216px 296px 600px 484px;
+
+    @include breakpoint-lg {
+      grid-template-areas: 'graph graph'
+                           'visitors views'
+                           'session-duration session-duration'
+                           'session-pages session-pages'
+                           'page-browser page-browser'
+                           'meta meta';
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: 480px 216px 296px 296px 1296px 960px;
+    }
+
+    @include breakpoint-md {
+      grid-template-areas: 'graph'
+                           'visitors'
+                           'views'
+                           'session-duration'
+                           'session-pages'
+                           'page-browser'
+                           'meta';
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: 480px 216px 216px 296px 296px 1296px 1160px;
+    }
 
     .card {
       background: var(--white);
@@ -149,8 +172,24 @@
         .grid {
           display: grid;
           grid-gap: 3rem;
-          grid-template-columns: 1fr 388px;
+          grid-template-areas: 'pages pages browser';
+          grid-template-columns: repeat(3, minmax(0, 1fr));
           grid-template-rows: 600px;
+
+          @include breakpoint-lg {
+            grid-template-areas: 'pages'
+                                 'browser';
+            grid-template-columns: minmax(0, 1fr);
+            grid-template-rows: 600px 600px;
+          }
+
+          .pages {
+            grid-area: pages;
+          }
+
+          .browser {
+            grid-area: browser;
+          }
         }
       }
 
@@ -160,11 +199,29 @@
         grid-gap: 3rem;
         grid-template-areas: 'language devices devices'
                              'language viewport viewport';
-        grid-template-columns: repeat(auto-fill, minmax(calc(33% - 3rem), 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         grid-template-rows: 144px 292px;
+
+        @include breakpoint-lg {
+          grid-template-areas: 'language'
+                               'devices'
+                               'viewport';
+          grid-template-columns:  minmax(0, 1fr);
+          grid-template-rows: 380px 192px 292px;
+        }
+
+        @include breakpoint-md {
+          grid-template-rows: 380px 380px 292px;
+        }
 
         .language {
           grid-area: language;
+
+          @include breakpoint-lg {
+            .card {
+              height: calc(100% - 2rem);
+            }
+          }
 
           ul {
             margin: 0;
@@ -208,6 +265,11 @@
             grid-gap: 3rem;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             grid-template-rows: 144px;
+
+            @include breakpoint-md {
+              grid-template-columns: minmax(0, 1fr);
+              grid-template-rows: 144px;
+            }
           }
 
           .card {
@@ -244,6 +306,10 @@
           grid-area: viewport;
           margin-top: 3rem;
           padding: 3rem;
+
+          @include breakpoint-lg {
+            margin-top: 0;
+          }
           
           h4 {
             align-items: center;

@@ -3,3 +3,9 @@
     @content;
   }
 }
+
+@mixin breakpoint-md {
+  @media only screen and (max-width: 960px) {
+    @content;
+  }
+}
