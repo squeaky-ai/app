@@ -6,7 +6,7 @@ import { PlayerWrapper } from 'components/sites/player-wrapper';
 import { PlayerProvider } from 'components/sites/player-provider';
 import { useRecording } from 'hooks/recording';
 
-const SitesPlayer: NextPage<ServerSideProps> = ({ user }) => {
+const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
   const [_recordingLoading, recording] = useRecording({ page: 1 });
 
   return (
@@ -20,5 +20,5 @@ const SitesPlayer: NextPage<ServerSideProps> = ({ user }) => {
   );
 };
 
-export default SitesPlayer;
+export default SitesRecording;
 export { getServerSideProps };
