@@ -1,15 +1,20 @@
 import React from 'react';
 import type { FC } from 'react';
+import type { Replayer } from 'rrweb';
 import { Button } from 'components/button';
 import { PlayerSpeed } from 'components/sites/player-speed';
 import { PlayerSlider } from 'components/sites/player-slider';
-import { useReplayer } from 'hooks/replayer';
-import { usePlayerState } from 'hooks/player-state';
+import type { PlayerState, Action } from 'types/player';
+import type { Recording } from 'types/recording';
 
-export const PlayerControls: FC = () => {
-  const [replayer] = useReplayer();
-  const [state, dispatch] = usePlayerState();
+interface Props {
+  state: PlayerState;
+  replayer: Replayer;
+  recording: Recording;
+  dispatch: React.Dispatch<Action>;
+}
 
+export const PlayerControls: FC<Props> = ({ state, replayer, recording, dispatch }) => {
   const handlePlayPause = () => {
     state.playing
       ? replayer.pause()
@@ -45,7 +50,7 @@ export const PlayerControls: FC = () => {
           replayer={replayer}
           playing={state.playing}
           playbackSpeed={state.playbackSpeed}
-          recording={state.recording} 
+          recording={recording} 
           handleSlide={handleSetProgress} 
         />
       )}

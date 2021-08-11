@@ -1,11 +1,14 @@
 import React from 'react';
 import type { FC } from 'react';
 import { Button } from 'components/button';
-import { usePlayerState } from 'hooks/player-state';
+import type { PlayerState, Action } from 'types/player';
 
-export const PlayerZoom: FC = () => {
-  const [state, dispatch] = usePlayerState();
+interface Props {
+  state: PlayerState;
+  dispatch: React.Dispatch<Action>;
+}
 
+export const PlayerZoom: FC<Props> = ({ state, dispatch }) => {
   const min = .1;
   const max = 5;
   const step = .1;

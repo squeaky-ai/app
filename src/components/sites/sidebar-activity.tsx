@@ -1,14 +1,15 @@
 import React from 'react';
 import type { FC } from 'react';
+import type { Replayer } from 'rrweb';
 import { last } from 'lodash';
 import { EventType, IncrementalSource, MouseInteractions } from 'rrweb';
 import { ActivityTimestamp } from 'components/sites/activity-timestamp';
-import { useReplayer } from 'hooks/replayer';
 import { cssPath } from 'lib/css-path';
 import type { Event } from 'types/event';
 import type { Recording } from 'types/recording';
 
 interface Props {
+  replayer: Replayer;
   recording: Recording;
 }
 
@@ -61,9 +62,7 @@ const getMouseInteractionIcon = (type: MouseInteractions): string => {
   }
 };
 
-export const SidebarActivity: FC<Props> = ({ recording }) => {
-  const [replayer] = useReplayer();
-
+export const SidebarActivity: FC<Props> = ({ recording, replayer }) => {
   const events: Event[] = JSON.parse(recording.events.items);
 
   const activity = events.reduce((acc, item) => {
@@ -109,7 +108,7 @@ export const SidebarActivity: FC<Props> = ({ recording }) => {
             <>
               <i className='ri-compass-discover-line' />
               <p className='title'>
-                Page view <ActivityTimestamp timestamp={item.timestamp} offset={startedAt} />
+                Page view <ActivityTimestamp timestamp={item.timestamp} offset={startedAt} replayer={replayer} />
               </p>
               <p className='info'>{getPathName(item.data.href)}</p>
             </>
@@ -119,7 +118,7 @@ export const SidebarActivity: FC<Props> = ({ recording }) => {
             <>
               <i className='ri-mouse-line' />
               <p className='title'>
-                Scrolled <ActivityTimestamp timestamp={item.timestamp} offset={startedAt} />
+                Scrolled <ActivityTimestamp timestamp={item.timestamp} offset={startedAt} replayer={replayer} />
               </p>
             </>
           )}
@@ -128,7 +127,7 @@ export const SidebarActivity: FC<Props> = ({ recording }) => {
             <>
               <i className={getMouseInteractionIcon(item.data.type)} />
               <p className='title'>
-                {getMouseInteractionLabel(item.data.type)} <ActivityTimestamp timestamp={item.timestamp} offset={startedAt} />
+                {getMouseInteractionLabel(item.data.type)} <ActivityTimestamp timestamp={item.timestamp} offset={startedAt} replayer={replayer} />
               </p>
               <p className='info'>{getCssSelector(item.data.id)}</p>
             </>

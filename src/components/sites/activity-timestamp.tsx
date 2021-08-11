@@ -1,17 +1,17 @@
 import React from 'react';
 import type { FC } from 'react';
+import type { Replayer } from 'rrweb';
 import { Button } from 'components/button';
-import { useReplayer } from 'hooks/replayer';
 import { toTimeString } from 'lib/dates';
 
 interface Props {
   timestamp: number;
   offset: number;
+  replayer: Replayer;
 }
 
-export const ActivityTimestamp: FC<Props> = ({ timestamp, offset }) => {
+export const ActivityTimestamp: FC<Props> = ({ timestamp, offset, replayer }) => {
   const value = timestamp - offset;
-  const [replayer] = useReplayer();
 
   const handleClick = () => {
     const milliseconds = Math.round(value);

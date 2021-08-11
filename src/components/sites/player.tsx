@@ -1,44 +1,84 @@
 import React from 'react';
-import type { FC } from 'react';
+import type { Replayer } from 'rrweb';
 import { debounce } from 'lodash';
-import { useRouter } from 'next/router';
 import { Spinner } from 'components/spinner';
-import { useReplayer } from 'hooks/replayer';
-import { usePlayerState } from 'hooks/player-state';
 import { recordingViewed } from 'lib/api/graphql';
+import type { Recording } from 'types/recording';
+import type { PlayerState, Action } from 'types/player';
+import type { Site } from 'types/site';
 
 const MAIN_PADDING_SIZE = 24;
 
-export const Player: FC = React.memo(() => {
-  const router = useRouter();
-  const ref = React.useRef<HTMLDivElement>(null);
-  const container = document.getElementById('player');
+interface Props {
+  site: Site;
+  state: PlayerState;
+  replayer: Replayer;
+  recording: Recording;
+  dispatch: React.Dispatch<Action>;
+}
 
-  const [replayer, init] = useReplayer();
-  const [state, dispatch] = usePlayerState();
 
-  // When the size of the container changes we should
-  // recalculate the zoom every 100ms or so. Be careful
-  // not to observe this until the container and recording
-  // exist
-  const observer = new ResizeObserver(debounce(() => {
-    squidgeToFit();
+export class Player extends React.Component<Props> {
+  private container: Element;
+
+  private observer = new ResizeObserver(debounce(() => {
+    this.squidgeToFit();
   }, 100));
 
-  const markAsViewed = async () => {
-    if (state.recording && !state.recording.viewed) {
+  public constructor(props: Props) {
+    super(props);
+  }
+
+  public componentDidMount() {
+    this.squidgeToFit();
+    this.container = document.getElementById('player');
+
+    // The recording might already be in the cache 
+    // so kick things off right away
+    if (this.props.recording) {
+      this.init();
+    }
+  }
+
+  public componentWillUnmount() {
+    this.observer.disconnect();
+  }
+
+  public componentDidUpdate(prevProps: Props) {
+    // The recording wasn't cached, but it will exist
+    // now
+    if (!prevProps.recording && this.props.recording) {
+      this.init();
+    }
+  }
+
+  private init = (): void => {
+    // Work out the sizing once it's loaded
+    this.squidgeToFit();
+
+    // Fire and forget here, should be okay
+    this.markAsViewed();
+
+    // It might have already unmounted
+    if (!this.container) return;
+
+    this.observer.observe(this.container);
+  };
+
+  private markAsViewed = async (): Promise<void> => {
+    if (this.props.recording && !this.props.recording.viewed) {
       await recordingViewed({ 
-        siteId: router.query.site_id as string,
-        recordingId: state.recording.id 
+        siteId: this.props.site.id,
+        recordingId: this.props.recording.id 
       });
     }
   };
 
-  function squidgeToFit() {
-    if (!container) return;
+  private squidgeToFit = (): void => {
+    if (!this.container) return;
 
-    const { width, height } = container.getBoundingClientRect();
-    const { viewportX, viewportY } = state.recording;
+    const { width, height } = this.container.getBoundingClientRect();
+    const { viewportX, viewportY } = this.props.recording;
 
     let multiplier = 1;
 
@@ -51,40 +91,16 @@ export const Player: FC = React.memo(() => {
     // Once JS gets to .4, the precision goes to shit and it ends up
     // as 0.40000000000000013, so it must be fixed (to a string?! 🤦‍♂️)
     // and then cast back to a number
-    dispatch({ type: 'zoom', value: Number(multiplier.toFixed(1)) });
+    this.props.dispatch({ type: 'zoom', value: Number(multiplier.toFixed(1)) });
+  };
+
+  public render(): JSX.Element {
+    return (
+      <main id='player'>
+        <div className='player-container' style={{ transform: `scale(${this.props.state.zoom})` }}>
+          {!this.props.replayer && <Spinner />}
+        </div>
+      </main>
+    );
   }
-
-  React.useEffect(() => {
-    if (!state.recording) return;
-
-    init(ref.current, state.recording);
-
-    // Work out the sizing once it's loaded
-    squidgeToFit();
-
-    // Fire and forget here, should be okay
-    markAsViewed();
-
-    if (!container) return;
-
-    observer.observe(container);
-  
-  }, [state.recording]);
-
-
-  React.useEffect(() => {
-    // Stop observing once this component unmounts as it will start
-    // watching again on the next mount
-    return () => { observer.disconnect() };
-  }, []);
-
-  return (
-    <main id='player'>
-      <div className='player-container' ref={ref} style={{ transform: `scale(${state.zoom})` }}>
-        {!replayer && <Spinner />}
-      </div>
-    </main>
-  );
-});
-
-Player.displayName = 'Player';
+}

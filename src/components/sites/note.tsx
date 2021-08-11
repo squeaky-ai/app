@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import type { Replayer } from 'rrweb';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { Dropdown } from 'components/dropdown';
@@ -12,13 +13,13 @@ import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'compo
 import { ActivityTimestamp } from 'components/sites/activity-timestamp';
 import { TIMESTAMP_REGEX } from 'data/sites/constants';
 import { toTimeString } from 'lib/dates';
-import { useReplayer } from 'hooks/replayer';
 import { Note as INote } from 'types/recording';
 
 interface Props {
   note: INote;
   handleDelete: (id: string) => void;
   handleUpdate: (note: INote) => void;
+  replayer: Replayer;
 }
 
 const NoteSchema = Yup.object().shape({
@@ -26,9 +27,8 @@ const NoteSchema = Yup.object().shape({
   body: Yup.string().required('Note is required')
 });
 
-export const Note: FC<Props> = ({ note, handleDelete, handleUpdate }) => {
+export const Note: FC<Props> = ({ note, handleDelete, handleUpdate, replayer }) => {
   const ref = React.useRef<Modal>();
-  const [replayer] = useReplayer();
 
   const openModal = () => {
     if (ref.current) {
@@ -59,7 +59,7 @@ export const Note: FC<Props> = ({ note, handleDelete, handleUpdate }) => {
       <div className='note'>
         <div className='title'>
           {note.timestamp
-            ? <ActivityTimestamp timestamp={note.timestamp} offset={0} />
+            ? <ActivityTimestamp timestamp={note.timestamp} offset={0} replayer={replayer} />
             : <i className='no-timestamp'>No timestamp</i>
           }
           <Dropdown button={<i className='ri-more-2-fill' />} buttonClassName='kebab'>

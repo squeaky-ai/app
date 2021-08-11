@@ -1,30 +1,51 @@
 import React from 'react';
 import type { FC } from 'react';
+import type { Replayer } from 'rrweb';
 import classnames from 'classnames';
 import { PlayerZoom } from 'components/sites/player-zoom';
 import { PlayerTabs } from 'components/sites/player-tabs';
 import { PlayerSidebar } from 'components/sites/player-sidebar';
 import { PlayerControls } from 'components/sites/player-controls';
-import { usePlayerState } from 'hooks/player-state';
+import type { Recording } from 'types/recording';
+import type { PlayerState, Action } from 'types/player';
 
-export const PlayerFooter: FC = () => {
-  const [state] = usePlayerState();
+interface Props {
+  state: PlayerState;
+  replayer: Replayer;
+  recording: Recording;
+  dispatch: React.Dispatch<Action>;
+}
 
-  return (
-    <>
-      <footer className={classnames('controls', { active: state.activeTab !== null })}>
-        <div className='control-group'>
-          <PlayerZoom />
-        </div>
-        <div className='control-group'>
-          <PlayerControls />
-        </div>
-        <div className='control-group'>
-          <PlayerTabs />
-        </div>
-      </footer>
+export const PlayerFooter: FC<Props> = ({ state, replayer, recording, dispatch }) => (
+  <>
+    <footer className={classnames('controls', { active: state.activeTab !== null })}>
+      <div className='control-group'>
+        <PlayerZoom 
+          state={state} 
+          dispatch={dispatch} 
+        />
+      </div>
+      <div className='control-group'>
+        <PlayerControls 
+          state={state} 
+          replayer={replayer} 
+          recording={recording}
+          dispatch={dispatch}
+        />
+      </div>
+      <div className='control-group'>
+        <PlayerTabs 
+          state={state}
+          dispatch={dispatch}
+        />
+      </div>
+    </footer>
 
-      <PlayerSidebar />
-    </>
-  );
-};
+    <PlayerSidebar 
+      state={state}
+      replayer={replayer} 
+      recording={recording}
+      dispatch={dispatch}
+    />
+  </>
+);

@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import type { Replayer } from 'rrweb';
 import classnames from 'classnames';
 import { PlayerTab } from 'data/sites/enums';
 import { Label } from 'components/label';
@@ -9,11 +10,17 @@ import { SidebarActivity } from 'components/sites/sidebar-activity';
 import { SidebarNotes } from 'components/sites/sidebar-notes';
 import { SidebarTags } from 'components/sites/sidebar-tags';
 import { SidebarPages } from 'components/sites/sidebar-pages';
-import { usePlayerState } from 'hooks/player-state';
+import type { Recording } from 'types/recording';
+import type { PlayerState, Action } from 'types/player';
 
-export const PlayerSidebar: FC = () => {
-  const [state, dispatch] = usePlayerState();
+interface Props {
+  state: PlayerState;
+  replayer: Replayer;
+  recording: Recording;
+  dispatch: React.Dispatch<Action>;
+}
 
+export const PlayerSidebar: FC<Props> = ({ state, replayer, recording, dispatch }) => {
   const handleClose = () => {
     dispatch({ type: 'activeTab', value: null });
   };
@@ -22,7 +29,7 @@ export const PlayerSidebar: FC = () => {
     dispatch({ type: 'activeTab', value });
   };
 
-  if (!state.recording) {
+  if (!recording) {
     // The page is likely loading
     return null;
   }
@@ -35,7 +42,7 @@ export const PlayerSidebar: FC = () => {
           <Button onClick={handleClose}><i className='ri-close-line' /></Button>
         </Label>
         <div className='contents'>
-          <SidebarInfo recording={state.recording} setActiveTab={setActiveTab} />
+          <SidebarInfo recording={recording} setActiveTab={setActiveTab} />
         </div>
       </div>
       <div className={classnames('sidebar activity', { active: state.activeTab === PlayerTab.ACTIVITY })}>
@@ -44,7 +51,7 @@ export const PlayerSidebar: FC = () => {
           <Button onClick={handleClose}><i className='ri-close-line' /></Button>
         </Label>
         <div className='contents'>
-          <SidebarActivity recording={state.recording} />
+          <SidebarActivity recording={recording} replayer={replayer} />
         </div>
       </div>
       <div className={classnames('sidebar pages', { active: state.activeTab === PlayerTab.PAGES })}>
@@ -53,7 +60,7 @@ export const PlayerSidebar: FC = () => {
           <Button onClick={handleClose}><i className='ri-close-line' /></Button>
         </Label>
         <div className='contents'>
-          <SidebarPages recording={state.recording} />
+          <SidebarPages recording={recording} replayer={replayer} />
         </div>
       </div>
       <div className={classnames('sidebar notes', { active: state.activeTab === PlayerTab.NOTES })}>
@@ -62,7 +69,7 @@ export const PlayerSidebar: FC = () => {
           <Button onClick={handleClose}><i className='ri-close-line' /></Button>
         </Label>
         <div className='contents'>
-          <SidebarNotes recording={state.recording} />
+          <SidebarNotes recording={recording} replayer={replayer} />
         </div>
       </div>
       <div className={classnames('sidebar tags', { active: state.activeTab === PlayerTab.TAGS })}>
@@ -71,7 +78,7 @@ export const PlayerSidebar: FC = () => {
           <Button onClick={handleClose}><i className='ri-close-line' /></Button>
         </Label>
         <div className='contents'>
-          <SidebarTags recording={state.recording} />
+          <SidebarTags recording={recording} />
         </div>
       </div>
     </aside>

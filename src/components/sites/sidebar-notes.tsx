@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import type { Replayer } from 'rrweb';
 import classnames from 'classnames';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
@@ -11,12 +12,12 @@ import { TextArea } from 'components/textarea';
 import { Note } from 'components/sites/note';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { TIMESTAMP_REGEX } from 'data/sites/constants';
-import { useReplayer } from 'hooks/replayer';
 import { toTimeString } from 'lib/dates';
 import { noteDelete, noteCreate, noteUpdate } from 'lib/api/graphql';
 import type { Recording, Note as INote } from 'types/recording';
 
 interface Props {
+  replayer: Replayer;
   recording: Recording;
 }
 
@@ -25,11 +26,9 @@ const NoteSchema = Yup.object().shape({
   body: Yup.string().required('Note is required')
 });
 
-export const SidebarNotes: FC<Props> = ({ recording }) => {
+export const SidebarNotes: FC<Props> = ({ recording, replayer }) => {
   const router = useRouter();
   const ref = React.useRef<Modal>();
-
-  const [replayer] = useReplayer();
 
   const siteId = router.query.site_id + '';
 
@@ -83,6 +82,7 @@ export const SidebarNotes: FC<Props> = ({ recording }) => {
               note={note}
               handleDelete={handleDelete} 
               handleUpdate={handleUpdate}
+              replayer={replayer}
             />
           ))}
         </div>

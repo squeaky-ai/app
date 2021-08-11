@@ -2,8 +2,13 @@ import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
 import { Button } from 'components/button';
-import { usePlayerState } from 'hooks/player-state';
 import { PlayerTab } from 'data/sites/enums';
+import type { PlayerState, Action } from 'types/player';
+
+interface Props {
+  state: PlayerState;
+  dispatch: React.Dispatch<Action>;
+}
 
 const tabs = [
   {
@@ -31,11 +36,9 @@ const tabs = [
     icon: 'ri-price-tag-3-line',
     name: PlayerTab.TAGS
   },
-]
+];
 
-export const PlayerTabs: FC = () => {
-  const [state, dispatch] = usePlayerState();
-
+export const PlayerTabs: FC<Props> = ({ state, dispatch }) => {
   const handleSetActive = (value: PlayerTab) => {
     const activeTab = value === state.activeTab ? null : value;
     dispatch({ type: 'activeTab', value: activeTab });

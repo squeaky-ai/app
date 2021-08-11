@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import type { Replayer } from 'rrweb';
 import classnames from 'classnames';
 import { EventType } from 'rrweb';
 import { groupBy } from 'lodash';
@@ -8,10 +9,11 @@ import type { Event } from 'types/event';
 import type { Recording } from 'types/recording';
 
 interface Props {
+  replayer: Replayer;
   recording: Recording;
 }
 
-export const SidebarPages: FC<Props> = ({ recording }) => {
+export const SidebarPages: FC<Props> = ({ recording, replayer }) => {
   const [open, setOpen] = React.useState<string[]>([]);
   
   const events: Event[] = JSON.parse(recording.events.items);
@@ -53,9 +55,9 @@ export const SidebarPages: FC<Props> = ({ recording }) => {
             <div className='timestamps'>
               {events.map(event => (
                 <div key={event.id} className='event'>
-                  <ActivityTimestamp offset={offset} timestamp={event.timestamp} />
+                  <ActivityTimestamp offset={offset} timestamp={event.timestamp} replayer={replayer} />
                   <i className='ri-arrow-right-line' />
-                  <ActivityTimestamp offset={offset} timestamp={timeToNextPageView(event)} />
+                  <ActivityTimestamp offset={offset} timestamp={timeToNextPageView(event)} replayer={replayer} />
                 </div>
               ))}
             </div>
