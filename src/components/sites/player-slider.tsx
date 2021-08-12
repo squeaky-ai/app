@@ -85,7 +85,7 @@ export class PlayerSlider extends React.Component<Props, State> {
   }
 
   private get durationInSeconds() {
-    return this.getSeconds(this.meta.totalTime);
+    return this.getSeconds(this.props.recording.disconnectedAt - this.props.recording.connectedAt);
   }
 
   private get currentTimeString() {

@@ -9,6 +9,7 @@ import { initReplayer } from 'lib/replayer';
 import type { PlayerState, Action } from 'types/player';
 
 let replayer: Replayer = null;
+let nextPageTimer: NodeJS.Timer;
 
 const reducer = (state: PlayerState, action: Action) => {
   return { ...state, [action.type]: action.value };
@@ -24,7 +25,7 @@ const initialState: PlayerState = {
 };
 
 const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
-  const [page, _setPage] = React.useState<number>(1);
+  const [page, setPage] = React.useState<number>(1);
   const [state, dispatch] = React.useReducer(reducer, initialState);
 
   const { recording } = useRecording({ page });
@@ -47,6 +48,9 @@ const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
       replayer?.pause();
       document.querySelector('.replayer-wrapper')?.remove();
       replayer = null;
+
+      // This could go on for a while and must be cancelled
+      clearTimeout(nextPageTimer);
     };
   }, []);
 
@@ -54,7 +58,16 @@ const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
     if (!recording) return;
 
     const { currentPage, totalPages } = recording.events.pagination;
-    console.log(`Currently loaded page ${currentPage} of ${totalPages}`);
+
+    if (currentPage < totalPages) {
+      // We can't load all of the events in one go as there's
+      // potentially hundreds of thousands. This is a dumb way
+      // to incrementally load them all. This will need to change
+      // to load the next batch as the play time gets close
+      nextPageTimer = setTimeout(() => {
+        setPage(currentPage + 1);
+      }, 3000);
+    }
   }, [recording?.events?.pagination?.currentPage || 0]);
 
   return (
