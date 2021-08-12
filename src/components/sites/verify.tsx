@@ -4,7 +4,7 @@ import { Button } from 'components/button';
 import { Message } from 'components/message';
 import { verifySite } from 'lib/api/graphql';
 import { Site } from 'types/site';
-import { useToasts } from 'hooks/toasts';
+import { useToasts } from 'hooks/use-toasts';
 
 interface Props {
   site: Site;

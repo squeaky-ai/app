@@ -10,7 +10,12 @@ interface Props {
   sort?: VisitorSortBy;
 }
 
-export const useVisitors = ({ page, query, sort }: Props): [boolean, PaginatedVisitorsResponse] => {
+interface UseVisitors {
+  loading: boolean;
+  visitors: PaginatedVisitorsResponse;
+}
+
+export const useVisitors = ({ page, query, sort }: Props): UseVisitors => {
   const router = useRouter();
 
   const { data, loading, previousData } = useQuery<{ site: Site }>(GET_VISITORS_QUERY, {
@@ -32,14 +37,15 @@ export const useVisitors = ({ page, query, sort }: Props): [boolean, PaginatedVi
     } 
   };
 
-  // When every keypress is made, the state will turn to loading
-  // which means that we'd default to an empty items list. This
-  // causes the UI to flicker. Instead, we return the last set of
-  // results whenever it's loading and only update when the new
-  // results are in
-  const results = data
-    ? data.site.visitors
-    : previousData ? previousData.site.visitors : fallback;
-
-  return [loading, results];
+  return {
+    loading,
+    visitors: data
+      ? data.site.visitors
+      // When every keypress is made, the state will turn to loading
+      // which means that we'd default to an empty items list. This
+      // causes the UI to flicker. Instead, we return the last set of
+      // results whenever it's loading and only update when the new
+      // results are in
+      : previousData ? previousData.site.visitors : fallback
+  }
 };

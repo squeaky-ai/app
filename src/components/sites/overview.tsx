@@ -3,11 +3,11 @@ import type { FC } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Card } from 'components/card';
-import { useOverview } from 'hooks/overview';
+import { useOverview } from 'hooks/use-overview';
 
 export const Overview: FC = () => {
   const router = useRouter();
-  const [_loading, overview] = useOverview();
+  const { overview } = useOverview();
 
   const { site_id } = router.query;
 

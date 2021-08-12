@@ -5,7 +5,7 @@ import { Pagination } from 'components/pagination';
 import { Container } from 'components/container';
 import { RecordingsItem } from 'components/sites/recordings-item';
 import { Sort } from 'components/sort';
-import { useRecordings } from 'hooks/recordings';
+import { useRecordings } from 'hooks/use-recordings';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 import type { RecordingSortBy } from 'types/recording';
 
@@ -17,7 +17,7 @@ export const Recordings: FC<Props> = ({ query }) => {
   const [page, setPage] = React.useState<number>(1);
   const [sort, setSort] = React.useState<RecordingSortBy>('DATE_DESC');
 
-  const [loading, recordings] = useRecordings({ 
+  const { loading, recordings } = useRecordings({ 
     page, 
     sort,
     query: query.length < MIN_SEARCH_CHARS ? '' : query, // No point in searching if it's below this value

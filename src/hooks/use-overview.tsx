@@ -6,7 +6,12 @@ import type { Site } from 'types/site';
 import type { Overview } from 'types/overview';
 import type { TimeRange } from 'lib/dates';
 
-export const useOverview = (): [boolean, Overview] => {
+interface UseOverview {
+  loading: boolean;
+  overview: Overview;
+}
+
+export const useOverview = (): UseOverview => {
   const router = useRouter();
 
   const now = new Date();
@@ -29,9 +34,10 @@ export const useOverview = (): [boolean, Overview] => {
     recordingsCount: 0,
   };
 
-  const results = data
-    ? data.site.analytics
-    : previousData ? previousData.site.analytics : fallback;
-
-  return [loading, results as Overview];
+  return {
+    loading,
+    overview: (data
+      ? data.site.analytics
+      : previousData ? previousData.site.analytics : fallback) as Overview
+  };
 };

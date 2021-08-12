@@ -10,7 +10,7 @@ import { LeaveTeam } from 'components/sites/leave-team';
 import { Button } from 'components/button';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { teamUpdate } from 'lib/api/graphql';
-import { useToasts } from 'hooks/toasts';
+import { useToasts } from 'hooks/use-toasts';
 import type { Team } from 'types/team';
 import type { User } from 'types/user';
 import type { Site } from 'types/site';

@@ -1,6 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
-import { useAnalytics } from 'hooks/analytics';
+import { useAnalytics } from 'hooks/use-analytics';
 import { AnalyticsBrowsers } from 'components/sites/analytics-browsers';
 import { AnalyticsGraph } from 'components/sites/analytics-graph';
 import { AnalyticsSessionDuration } from 'components/sites/analytics-session-duration';
@@ -17,7 +17,7 @@ interface Props {
 }
 
 export const Analytics: FC<Props> = ({ period }) => {
-  const [_loading, analytics] = useAnalytics(getDateRange(period));
+  const { analytics } = useAnalytics(getDateRange(period));
 
   const toTwoDecimalPlaces = (value: number) => {
     return Number(value.toFixed(2));

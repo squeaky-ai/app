@@ -2,7 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import Image from 'next/image';
 import { Pagination } from 'components/pagination';
-import { useVisitors } from 'hooks/visitors';
+import { useVisitors } from 'hooks/use-visitors';
 import { Container } from 'components/container';
 import { Sort } from 'components/sort';
 import { VisitorsItem } from 'components/sites/visitors-item';
@@ -19,7 +19,7 @@ export const Visitors: FC<Props> = ({ query }) => {
   const [page, setPage] = React.useState<number>(1);
   const [sort, setSort] = React.useState<VisitorSortBy>('FIRST_VIEWED_AT_DESC');
 
-  const [loading, visitors] = useVisitors({ 
+  const { loading, visitors } = useVisitors({ 
     page, 
     sort,
     query: query.length < MIN_SEARCH_CHARS ? '' : query, // No point in searching if it's below this value

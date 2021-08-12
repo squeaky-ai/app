@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRecording } from 'hooks/recording';
+import { useRecording } from 'hooks/use-recording';
 import type { Recording } from 'types/recording';
 
 export interface WithRecordingProps {
@@ -10,7 +10,7 @@ export interface WithRecordingProps {
 
 export const WithRecording = (Component: React.ComponentClass<WithRecordingProps & any>) => {
   const [page, _setPage] = React.useState<number>(1);
-  const [_recordingLoading, recording] = useRecording({ page });
+  const { recording } = useRecording({ page });
 
   const fetchNextBatchOfEvents = async () => {
     console.log('!!');

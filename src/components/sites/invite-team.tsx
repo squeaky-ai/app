@@ -8,7 +8,7 @@ import { Button } from 'components/button';
 import { Select, Option } from 'components/select';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { teamInvite } from 'lib/api/graphql';
-import { useToasts } from 'hooks/toasts';
+import { useToasts } from 'hooks/use-toasts';
 import type { Site } from 'types/site';
 
 interface Props {

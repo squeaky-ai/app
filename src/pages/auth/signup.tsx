@@ -16,7 +16,7 @@ import { Password } from 'components/password';
 import { PASSWORD_REGEX } from 'data/users/constants';
 import { emailExists, signup, reconfirmAccount } from 'lib/api/auth';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
-import { useToasts } from 'hooks/toasts';
+import { useToasts } from 'hooks/use-toasts';
 
 enum PageView {
   EMAIL,

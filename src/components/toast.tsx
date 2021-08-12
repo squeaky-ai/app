@@ -17,7 +17,7 @@ interface State {
   toasts: ToastItem[];
 }
 
-interface ToastItem {
+export interface ToastItem {
   id?: string;
   type: 'info' | 'success' | 'error';
   body: string;

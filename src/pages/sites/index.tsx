@@ -7,10 +7,10 @@ import { Avatar } from 'components/sites/avatar';
 import { Main } from 'components/main';
 import { CreateSite } from 'components/sites/create-site';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
-import { useSites } from 'hooks/sites';
+import { useSites } from 'hooks/use-sites';
 
 const Sites: NextPage<ServerSideProps> = () => {
-  const [loading, sites] = useSites();
+  const { loading, sites } = useSites();
 
   return (
     <>

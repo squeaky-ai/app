@@ -10,7 +10,12 @@ interface Props {
   sort?: RecordingSortBy;
 }
 
-export const useRecordings = ({ page, query, sort }: Props): [boolean, PaginatedRecordingsResponse] => {
+interface UseRecordings {
+  loading: boolean;
+  recordings: PaginatedRecordingsResponse;
+}
+
+export const useRecordings = ({ page, query, sort }: Props): UseRecordings => {
   const router = useRouter();
 
   const { data, loading, previousData } = useQuery<{ site: Site }>(GET_RECORDINGS_QUERY, {
@@ -32,14 +37,15 @@ export const useRecordings = ({ page, query, sort }: Props): [boolean, Paginated
     } 
   };
 
-  // When every keypress is made, the state will turn to loading
-  // which means that we'd default to an empty items list. This
-  // causes the UI to flicker. Instead, we return the last set of
-  // results whenever it's loading and only update when the new
-  // results are in
-  const results = data
-    ? data.site.recordings
-    : previousData ? previousData.site.recordings : fallback;
-
-  return [loading, results];
+  return {
+    loading,
+    recordings: data
+      ? data.site.recordings
+      // When every keypress is made, the state will turn to loading
+      // which means that we'd default to an empty items list. This
+      // causes the UI to flicker. Instead, we return the last set of
+      // results whenever it's loading and only update when the new
+      // results are in
+      : previousData ? previousData.site.recordings : fallback
+  };
 };

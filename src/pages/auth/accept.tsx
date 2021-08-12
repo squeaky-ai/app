@@ -19,7 +19,7 @@ import { PASSWORD_REGEX } from 'data/users/constants';
 import { signout } from 'lib/api/auth';
 import { userInvitation, teamInviteAccept } from 'lib/api/graphql';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
-import { useToasts } from 'hooks/toasts';
+import { useToasts } from 'hooks/use-toasts';
 
 const AcceptSchema = Yup.object().shape({
   password: Yup.string().matches(PASSWORD_REGEX, 'Password must match the criteria defined below').required('Password is required'),

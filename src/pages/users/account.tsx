@@ -13,7 +13,7 @@ import { Main } from 'components/main';
 import { Tabs } from 'components/users/tabs';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { updateUser } from 'lib/api/graphql';
-import { useToasts } from 'hooks/toasts';
+import { useToasts } from 'hooks/use-toasts';
 
 const AccountSchema = Yup.object().shape({
   email: Yup.string().email('Please enter a valid email address').required('Email is required'),

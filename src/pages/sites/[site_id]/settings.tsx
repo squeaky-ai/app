@@ -22,7 +22,7 @@ import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { updateSite } from 'lib/api/graphql';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { HOSTNAME_REGEX, MAX_DAYS_BEFORE_POTENTIAL_ISSUE } from 'data/sites/constants';
-import { useToasts } from 'hooks/toasts';
+import { useToasts } from 'hooks/use-toasts';
 
 const DetailsSchema = Yup.object().shape({
   name: Yup.string().required('Site name is required'),

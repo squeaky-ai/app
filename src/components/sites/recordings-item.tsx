@@ -11,7 +11,7 @@ import { Dropdown } from 'components/dropdown';
 import { Device } from 'components/device';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { toNiceDate, toTimeString } from 'lib/dates';
-import { useToasts } from 'hooks/toasts';
+import { useToasts } from 'hooks/use-toasts';
 import { recordingDelete, recordingBookmarked } from 'lib/api/graphql';
 import type { Recording } from 'types/recording';
 

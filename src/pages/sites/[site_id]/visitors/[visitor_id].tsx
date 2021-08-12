@@ -11,7 +11,7 @@ import { VisitorRecording } from 'components/sites/visitor-recordings';
 import { VisitorStats } from 'components/sites/visitor-stats';
 import { VisitorPages } from 'components/sites/visitors-pages';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
-import { useVisitor } from 'hooks/visitor';
+import { useVisitor } from 'hooks/use-visitor';
 import type { PageSortBy } from 'types/visitor';
 import type { RecordingSortBy } from 'types/recording';
 
@@ -23,7 +23,7 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
   const [recordingPage, setRecordingPage] = React.useState<number>(1);
   const [recordingSort, setRecordingSort] = React.useState<RecordingSortBy>('DATE_DESC');
 
-  const [_loading, visitor] = useVisitor({ 
+  const { visitor } = useVisitor({ 
     recordingPage,
     recordingSort,
     pagesPage: pageviewPage,

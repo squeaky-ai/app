@@ -12,7 +12,12 @@ interface Props {
   pagesSort: PageSortBy;
 }
 
-export const useVisitor = (props: Props): [boolean, Visitor | null] => {
+interface UseVisitor {
+  loading: boolean;
+  visitor: Visitor | null;
+}
+
+export const useVisitor = (props: Props): UseVisitor => {
   const router = useRouter();
 
   const { data, loading, previousData } = useQuery<{ site: Site }>(GET_VISITOR_QUERY, {
@@ -23,10 +28,10 @@ export const useVisitor = (props: Props): [boolean, Visitor | null] => {
     }
   });
 
-  return [
+  return {
     loading, 
-    data 
+    visitor: data 
       ? data.site.visitor 
       : previousData ? previousData.site.visitor : null
-  ];
+  };
 };

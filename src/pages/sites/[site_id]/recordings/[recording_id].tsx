@@ -4,7 +4,7 @@ import Head from 'next/head';
 import type { Replayer } from 'rrweb';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { PlayerWrapper } from 'components/sites/player-wrapper';
-import { useRecording } from 'hooks/recording';
+import { useRecording } from 'hooks/use-recording';
 import { initReplayer } from 'lib/replayer';
 import type { Event } from 'types/event';
 import type { PlayerState, Action } from 'types/player';
@@ -26,7 +26,7 @@ const initialState: PlayerState = {
 
 const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
   const [page, _setPage] = React.useState<number>(1);
-  const [_recordingLoading, recording] = useRecording({ page });
+  const { recording } = useRecording({ page });
 
   const [state, dispatch] = React.useReducer(reducer, initialState);
 
@@ -81,6 +81,13 @@ const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
       replayer = null;
     };
   }, []);
+
+  React.useEffect(() => {
+    if (!recording) return;
+
+    const { currentPage, totalPages } = recording.events.pagination;
+    console.log(`Currently loaded page ${currentPage} of ${totalPages}`);
+  }, [recording?.events?.pagination?.currentPage || 0]);
 
   return (
     <>

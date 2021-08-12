@@ -14,7 +14,7 @@ import { PASSWORD_REGEX } from 'data/users/constants';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { login } from 'lib/api/auth';
 import { userPassword } from 'lib/api/graphql';
-import { useToasts } from 'hooks/toasts';
+import { useToasts } from 'hooks/use-toasts';
 
 const PasswordSchema = Yup.object().shape({
   currentPassword: Yup.string().required('Current password is required'),

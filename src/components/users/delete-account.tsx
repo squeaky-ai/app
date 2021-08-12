@@ -6,7 +6,7 @@ import { Button } from 'components/button';
 import { Container } from 'components/container';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { userDelete } from 'lib/api/graphql';
-import { useToasts } from 'hooks/toasts';
+import { useToasts } from 'hooks/use-toasts';
 
 export const DeleteAccount: FC = () => {
   const toasts = useToasts();

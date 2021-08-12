@@ -1,7 +1,11 @@
 import React from 'react';
-import { ToastContext } from 'components/toast';
+import { ToastContext, ToastItem } from 'components/toast';
 
-export const useToasts = () => {
+interface UseToasts {
+  add: (value: ToastItem) => void;
+}
+
+export const useToasts = (): UseToasts => {
   const ctx = React.useContext(ToastContext);
 
   if (!ctx) {

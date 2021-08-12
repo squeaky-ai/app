@@ -14,8 +14,8 @@ import { Button, DelayedButton } from 'components/button';
 import { Message } from 'components/message';
 import { login, confirmAccount, reconfirmAccount } from 'lib/api/auth';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
-import { useLoginAttemps, MAX_ATTEMPTS } from 'hooks/login-attempts';
-import { useToasts } from 'hooks/toasts';
+import { useLoginAttemps, MAX_ATTEMPTS } from 'hooks/use-login-attempts';
+import { useToasts } from 'hooks/use-toasts';
 import type { User } from 'types/user';
 
 enum PageView {
@@ -34,7 +34,13 @@ const Login: NextPage<ServerSideProps> = () => {
   const [email, setEmail] = React.useState<string>('');
   const [failed, setFailed] = React.useState<boolean>(false);
   const [pageView, setPageView] = React.useState(PageView.LOGIN);
-  const [attemps, exceeded, incrAttempt, clearAttempt] = useLoginAttemps();
+
+  const { 
+    attempts, 
+    exceeded, 
+    incr, 
+    clear 
+  } = useLoginAttemps();
 
   const resendConfirmation = async () => {
     const { error } = await reconfirmAccount(email);
@@ -94,7 +100,7 @@ const Login: NextPage<ServerSideProps> = () => {
                     message={
                       exceeded
                         ? <span>You have made too many failed log in attempts. <b>Please retry in 10 minutes or contact us</b>.</span>
-                        : <span>Email and password combination not recognised. <b>{MAX_ATTEMPTS - attemps} attempts remaining</b>.</span>
+                        : <span>Email and password combination not recognised. <b>{MAX_ATTEMPTS - attempts} attempts remaining</b>.</span>
                     }
                   />
                 )}
@@ -112,7 +118,7 @@ const Login: NextPage<ServerSideProps> = () => {
                       setSubmitting(false);
 
                       if (!error) {
-                        clearAttempt();
+                        clear();
                         return await router.push('/sites');
                       }
 
@@ -122,7 +128,7 @@ const Login: NextPage<ServerSideProps> = () => {
                       }
                     
                       setFailed(true);
-                      return incrAttempt();
+                      return incr();
                     })();
                   }}
                 >

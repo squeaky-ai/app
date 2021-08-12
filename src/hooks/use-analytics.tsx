@@ -5,7 +5,12 @@ import type { Site } from 'types/site';
 import type { Analytics } from 'types/analytics';
 import type { TimeRange } from 'lib/dates';
 
-export const useAnalytics = (range: TimeRange): [boolean, Analytics] => {
+interface UseAnalytics {
+  loading: boolean;
+  analytics: Analytics;
+}
+
+export const useAnalytics = (range: TimeRange): UseAnalytics => {
   const router = useRouter();
 
   const { data, loading, previousData } = useQuery<{ site: Site }>(GET_ANALYTICS_QUERY, {
@@ -41,9 +46,10 @@ export const useAnalytics = (range: TimeRange): [boolean, Analytics] => {
     }
   };
 
-  const results = data
-    ? data.site.analytics
-    : previousData ? previousData.site.analytics : fallback;
-
-  return [loading, results];
+  return { 
+    loading, 
+    analytics: data
+      ? data.site.analytics
+      : previousData ? previousData.site.analytics : fallback
+  };
 };

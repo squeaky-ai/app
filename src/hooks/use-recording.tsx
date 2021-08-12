@@ -8,7 +8,12 @@ interface Props {
   page: number;
 }
 
-export const useRecording = (props: Props): [boolean, Recording | null] => {
+interface UseRecording {
+  loading: boolean;
+  recording: Recording | null;
+}
+
+export const useRecording = (props: Props): UseRecording => {
   const router = useRouter();
 
   const { data, loading, previousData } = useQuery<{ site: Site }>(GET_RECORDING_QUERY, {
@@ -19,10 +24,10 @@ export const useRecording = (props: Props): [boolean, Recording | null] => {
     }
   });
 
-  return [
+  return {
     loading, 
-    data 
+    recording: data 
       ? data.site.recording 
       : previousData ? previousData.site.recording : null
-  ];
+  };
 };

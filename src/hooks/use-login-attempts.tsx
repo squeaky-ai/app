@@ -3,7 +3,12 @@ import React from 'react';
 const KEY = 'login_attemps';
 export const MAX_ATTEMPTS = 10;
 
-type UseLoginAttemps = [number, boolean, VoidFunction, VoidFunction];
+interface UseLoginAttemps {
+  attempts: number;
+  exceeded: boolean;
+  incr: VoidFunction;
+  clear: VoidFunction;
+}
 
 export const useLoginAttemps = (): UseLoginAttemps => {
   const getOrCreate = (): number => {
@@ -15,17 +20,22 @@ export const useLoginAttemps = (): UseLoginAttemps => {
     return Number(value || '0');
   };
 
-  const [attemps, setAttemps] = React.useState(getOrCreate());
+  const [attempts, setAttempts] = React.useState(getOrCreate());
 
   const incr = (): void => {
-    sessionStorage.setItem(KEY, (attemps + 1).toString());
-    setAttemps(attemps + 1);
+    sessionStorage.setItem(KEY, (attempts + 1).toString());
+    setAttempts(attempts + 1);
   };
 
   const clear = (): void => {
     sessionStorage.removeItem(KEY);
-    setAttemps(0);
+    setAttempts(0);
   };
 
-  return [attemps, attemps >= MAX_ATTEMPTS, incr, clear];
+  return {
+    attempts, 
+    exceeded: attempts >= MAX_ATTEMPTS, 
+    incr, 
+    clear
+  };
 };

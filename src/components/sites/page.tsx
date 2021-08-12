@@ -1,6 +1,6 @@
 import React from 'react';
 import type { FC, ReactElement } from 'react';
-import { useSite } from 'hooks/sites';
+import { useSite } from 'hooks/use-site';
 import { NotFound } from 'components/sites/not-found';
 import { Unauthorized } from 'components/sites/unauthorized';
 import type { User } from 'types/user';
@@ -25,7 +25,7 @@ export const getTeamMember = (site: Site, user: User): Team | null => {
 };
 
 export const Page: FC<Props> = ({ children, user, scope }) => {
-  const [loading, site] = useSite();
+  const { loading, site } = useSite();
 
   const member = getTeamMember(site, user);
   const authorized = scope.length ? scope.includes(member?.role) : true;

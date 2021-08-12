@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { Button } from 'components/button';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { recordingDelete, recordingBookmarked } from 'lib/api/graphql';
-import { useToasts } from 'hooks/toasts';
+import { useToasts } from 'hooks/use-toasts';
 import type { Site } from 'types/site';
 import type { Recording } from 'types/recording';
 
