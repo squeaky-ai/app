@@ -6,7 +6,6 @@ import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { PlayerWrapper } from 'components/sites/player-wrapper';
 import { useRecording } from 'hooks/use-recording';
 import { initReplayer } from 'lib/replayer';
-import type { Event } from 'types/event';
 import type { PlayerState, Action } from 'types/player';
 
 let replayer: Replayer = null;
@@ -26,50 +25,19 @@ const initialState: PlayerState = {
 
 const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
   const [page, _setPage] = React.useState<number>(1);
-  const { recording } = useRecording({ page });
-
   const [state, dispatch] = React.useReducer(reducer, initialState);
 
-  const init = (): void => {
-    if (replayer || !recording || state.failed) { 
-      // We don't want to be creating more than 1! But at the same
-      // time there are multiple times when it could be ready to
-      // init, so the responsibility falls here to make sure it
-      // returns early
-      return;
-    }
-
-    const element = document.querySelector('.player-container');
-
-    if (!element) {
-      // The recording is ready, but the DOM is not. We should 
-      // wait until the div exists before trying to init the replayer
-      // or it will cry
-      return;
-    }
-
-    const events: Event[] = JSON.parse(recording.events.items);
-
-    if (events.length === 0) {
-      // Shouldn't be possible to create a recording without events
-      // but someone could have deleted something
-      dispatch({ type: 'failed', value: true });
-      return;
-    }
-
-    replayer = initReplayer({
-      events,
-      element,
-      dispatch
-    });
-
-    replayer.play();
-  };
+  const { recording } = useRecording({ page });
 
   React.useEffect(() => {
     // Keep on trying to init the app, if it succeeds 
     // then it will return immediately
-    init();
+    replayer = initReplayer({
+      replayer,
+      recording,
+      failed: state.failed,
+      dispatch,
+    });
   });
   
   React.useEffect(() => {
