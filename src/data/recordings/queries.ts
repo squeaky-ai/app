@@ -80,9 +80,10 @@ export const GET_RECORDING_QUERY = gql`
         events(page: $eventPage) {
           items
           pagination {
-            pageSize
-            pageCount
-            total
+            perPage
+            itemCount
+            currentPage
+            totalPages
           }
         }
       }

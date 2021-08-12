@@ -112,7 +112,8 @@ export interface PaginatedEventsResponse {
 }
 
 export interface EventPagination {
-  pageSize: number;
-  pageCount: number;
-  total: number;
+  perPage: number;
+  itemCount: number;
+  currentPage: number;
+  totalPages: number;
 }

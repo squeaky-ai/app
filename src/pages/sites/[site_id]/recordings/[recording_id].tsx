@@ -61,8 +61,8 @@ const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
   React.useEffect(() => {
     // It probably wasn't ready on mount, so try again
     // when the recording shows up
-    init();
-  }, [recording]);
+      init();
+  });
   
   React.useEffect(() => {
     // Have a go on mount just in case it's in the cache

@@ -103,8 +103,9 @@ export class PlayerSlider extends React.Component<Props, State> {
           min={0} 
           max={this.durationInSeconds} 
           step={1} 
-          value={this.state.value} 
-          onChange={this.onSlide} 
+          value={this.state.value}
+          recording={this.props.recording}
+          onChange={this.onSlide}
         />
 
         <span className='timestamps'>
