@@ -138,7 +138,10 @@
     width: 100%;
 
     .slider {
+      background: none;
       display: flex;
+      height: auto;
+      margin: 0;
       transition: transform .3s ease-in-out;
       width: 200%;
 

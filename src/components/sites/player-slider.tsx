@@ -71,9 +71,7 @@ export class PlayerSlider extends React.Component<Props, State> {
     }
   };
 
-  private onSlide = (event: React.ChangeEvent) => {
-    const element = event.target as HTMLInputElement;
-    const value = Number(element.value);
+  private onSlide = (value: number) => {
     this.setState({ value });
     this.props.handleSlide(value * 1000);
   };
@@ -102,7 +100,6 @@ export class PlayerSlider extends React.Component<Props, State> {
     return (
       <>
         <Slider 
-          type='range' 
           min={0} 
           max={this.durationInSeconds} 
           step={1} 
