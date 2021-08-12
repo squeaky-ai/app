@@ -98,7 +98,10 @@ export class Player extends React.Component<Props> {
     return (
       <main id='player'>
         <div className='player-container' style={{ transform: `scale(${this.props.state.zoom})` }}>
-          {!this.props.replayer && <Spinner />}
+          {this.props.state.failed
+            ? <h3>Oh no!</h3>
+            : this.props.replayer ? null : <Spinner />
+          }
         </div>
       </main>
     );

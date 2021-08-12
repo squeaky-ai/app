@@ -16,6 +16,7 @@ const reducer = (state: PlayerState, action: Action) => {
 };
 
 const initialState: PlayerState = {
+  failed: false,
   playing: false,
   playbackSpeed: 1,
   activeTab: null,
@@ -30,7 +31,7 @@ const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
   const [state, dispatch] = React.useReducer(reducer, initialState);
 
   const init = (): void => {
-    if (replayer || !recording) { 
+    if (replayer || !recording || state.failed) { 
       // We don't want to be creating more than 1! But at the same
       // time there are multiple times when it could be ready to
       // init, so the responsibility falls here to make sure it
@@ -40,12 +41,19 @@ const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
 
     const element = document.querySelector('.player-container');
 
-    if (!element) return;
+    if (!element) {
+      // The recording is ready, but the DOM is not. We should 
+      // wait until the div exists before trying to init the replayer
+      // or it will cry
+      return;
+    }
 
     const events: Event[] = JSON.parse(recording.events.items);
 
     if (events.length === 0) {
-      console.error('Events list is empty');
+      // Shouldn't be possible to create a recording without events
+      // but someone could have deleted something
+      dispatch({ type: 'failed', value: true });
       return;
     }
 
@@ -59,15 +67,12 @@ const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
   };
 
   React.useEffect(() => {
-    // It probably wasn't ready on mount, so try again
-    // when the recording shows up
-      init();
+    // Keep on trying to init the app, if it succeeds 
+    // then it will return immediately
+    init();
   });
   
   React.useEffect(() => {
-    // Have a go on mount just in case it's in the cache
-    init();
-
     // Clean up between page views as the replayer lives in 
     // the global state
     return () => {

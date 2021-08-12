@@ -1,6 +1,7 @@
 import type { PlayerTab } from 'data/sites/enums';
 
 export interface PlayerState {
+  failed: boolean;
   playing: boolean;
   playbackSpeed: number;
   activeTab: PlayerTab;

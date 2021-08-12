@@ -107,7 +107,7 @@ const Home: NextPage<ServerSideProps> = () => (
         <h2>All The Right Features</h2>
         <div className='features-card'>
           <div className='star'>
-            <Image src='/star.svg' height={256} width={273} />
+            <Image src='/star.svg' height={256} width={273} alt='Star' />
           </div>
           <div>
             <h4>Flexible &amp; Easy To Use</h4>

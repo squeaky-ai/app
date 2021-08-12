@@ -152,7 +152,7 @@ const Accept: NextPage<ServerSideProps> = ({ user }) => {
                       <Password password={values.password} />
 
                       <Checkbox name='terms' onChange={handleChange} checked={values.terms} invalid={touched.terms && !!errors.terms}>
-                        I have read and accept the <a href='/terms' target='_blank'>Terms Of Use</a>
+                        I have read and accept the <Link href='/terms'><a target='_blank'>Terms Of Use</a></Link>
                       </Checkbox>
                       <span className='validation'>{errors.terms}</span>
 
