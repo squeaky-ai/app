@@ -24,22 +24,20 @@ export type TimeRange = {
 }
 
 export const toTimeString = (ms?: number) => {
-  if (!ms) return '00:00';
-  if (ms >= 3600000) return '>60:00'
+  if (!ms) return '00:00:00';
 
   const date = new Date(0);
   date.setMilliseconds(ms);
-  return date.toISOString().substr(14, 5);
+  return date.toISOString().substr(11, 8);
 };
 
 export const toMinutesAndSeconds = (ms?: number) => {
-  if (!ms) return '0m 0s';
+  if (!ms) return '0h 0m 0s';
 
   const timeString = toTimeString(ms);
-  if (timeString === '>60:00') return '>60m';
 
-  const [minutes, seconds] = timeString.split(':');
-  return `${minutes.replace('00', '0')}m ${seconds.replace('00', '0')}s`;
+  const [hours, minutes, seconds] = timeString.split(':');
+  return `${hours.replace('00', '0')}h ${minutes.replace('00', '0')}m ${seconds.replace('00', '0')}s`;
 };
 
 export const daysBefore = (count = 7, from?: Date) => {
