@@ -15,17 +15,19 @@ const reducer = (state: PlayerState, action: Action) => {
   return { ...state, [action.type]: action.value };
 };
 
+const initialState: PlayerState = {
+  playing: false,
+  playbackSpeed: 1,
+  activeTab: null,
+  skipInactivity: true,
+  zoom: 1,
+};
+
 const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
   const [page, _setPage] = React.useState<number>(1);
   const [_recordingLoading, recording] = useRecording({ page });
 
-  const [state, dispatch] = React.useReducer(reducer, {
-    playing: false,
-    playbackSpeed: 1,
-    activeTab: null,
-    skipInactivity: true,
-    zoom: 1,
-  });
+  const [state, dispatch] = React.useReducer(reducer, initialState);
 
   const init = (): void => {
     if (replayer || !recording) { 
