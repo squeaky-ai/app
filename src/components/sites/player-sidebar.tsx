@@ -51,7 +51,7 @@ export const PlayerSidebar: FC<Props> = ({ state, replayer, recording, dispatch 
           <Button onClick={handleClose}><i className='ri-close-line' /></Button>
         </Label>
         <div className='contents'>
-          <SidebarActivity recording={recording} replayer={replayer} />
+          <SidebarActivity state={state} replayer={replayer} />
         </div>
       </div>
       <div className={classnames('sidebar pages', { active: state.activeTab === PlayerTab.PAGES })}>
@@ -60,7 +60,7 @@ export const PlayerSidebar: FC<Props> = ({ state, replayer, recording, dispatch 
           <Button onClick={handleClose}><i className='ri-close-line' /></Button>
         </Label>
         <div className='contents'>
-          <SidebarPages recording={recording} replayer={replayer} />
+          <SidebarPages state={state} replayer={replayer} />
         </div>
       </div>
       <div className={classnames('sidebar notes', { active: state.activeTab === PlayerTab.NOTES })}>

@@ -6,6 +6,7 @@ import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { PlayerWrapper } from 'components/sites/player-wrapper';
 import { useRecording } from 'hooks/use-recording';
 import { initReplayer } from 'lib/replayer';
+import type { Event } from 'types/event';
 import type { PlayerState, Action } from 'types/player';
 
 let replayer: Replayer = null;
@@ -21,6 +22,7 @@ const initialState: PlayerState = {
   playbackSpeed: 1,
   activeTab: null,
   skipInactivity: true,
+  events: [],
   zoom: 1,
 };
 
@@ -57,7 +59,18 @@ const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
   React.useEffect(() => {
     if (!recording) return;
 
-    const { currentPage, totalPages } = recording.events.pagination;
+    const { items, pagination } = recording.events;
+    const { currentPage, totalPages } = pagination;
+
+    const events: Event[] = JSON.parse(items);
+    // Append the events to the list of the other events so that the
+    // sidebar has the complete picture
+    dispatch({ type: 'events', value: [...state.events, ...events] });
+    
+    if (replayer) {
+      // Shove the new events into the replayer
+      events.forEach(e => replayer.addEvent(e));
+    }
 
     if (currentPage < totalPages) {
       // We can't load all of the events in one go as there's
