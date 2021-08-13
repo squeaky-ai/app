@@ -1,6 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip } from 'recharts';
 import { Label } from 'components/label';
 import { Checkbox } from 'components/checkbox';
 import { formatResultsForPeriod } from 'lib/analytics';
@@ -42,8 +42,19 @@ export const AnalyticsGraph: FC<Props> = ({ viewsAndVisitors, period }) => {
           <XAxis dataKey='date' interval={interval} />
           <YAxis />
           <CartesianGrid strokeDasharray='3 3' vertical={false} />
-          <Area dataKey='pageViews' fill='#FFD6E7' stroke='#F0438C' type='monotone' />
-          <Area dataKey='visitors' fill='#E9F5FF' stroke='#0074E0' type='monotone' />
+          <Tooltip 
+            contentStyle={{
+              background: 'var(--gray-800)',
+              border: '2px solid var(--gray-700)',
+              borderRadius: 'var(--border-radius-md)'
+            }}
+            labelStyle={{
+              color: 'var(--gray-50)'
+            }}
+            formatter={(value: string, name: string) => ([name === 'visitors' ? 'Visitors' : 'Page Views', value])}
+          />
+          <Area dataKey='pageViews' fill='#FFD6E7' stroke='#F0438C' />
+          <Area dataKey='visitors' fill='#E9F5FF' stroke='#0074E0' />
         </AreaChart>
       </ResponsiveContainer>
     </div>
