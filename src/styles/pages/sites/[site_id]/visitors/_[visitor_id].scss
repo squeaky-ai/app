@@ -111,14 +111,14 @@
       grid-gap: 3rem;
       grid-template-areas: 'session-duration per-session';
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      grid-template-rows: 292px;
+      grid-template-rows: 216px;
       margin-top: 3rem;
 
       @include breakpoint-lg {
         grid-template-areas: 'session-duration'
                              'per-session';
         grid-template-columns: minmax(0, 1fr);
-        grid-template-rows: 292px;
+        grid-template-rows: 216px;
       }
 
       .card {

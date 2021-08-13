@@ -80,7 +80,7 @@
                          'page-browser page-browser page-browser page-browser'
                          'meta meta meta meta';
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    grid-template-rows: 216px 216px 296px 600px 484px;
+    grid-template-rows: 216px 216px 216px 600px 484px;
 
     @include breakpoint-lg {
       grid-template-areas: 'graph graph'
