@@ -185,6 +185,16 @@
 
           .pages {
             grid-area: pages;
+
+            table {
+              table-layout: fixed;
+
+              thead {
+                th {
+                  width: 33%;
+                }
+              }
+            }
           }
 
           .browser {

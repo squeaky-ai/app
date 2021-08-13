@@ -47,6 +47,7 @@ export const Visitors: FC<Props> = ({ query }) => {
               <th>Language</th>
               <th>Device &amp; viewport</th>
               <th>Browser</th>
+              <th />
             </tr>
           </thead>
           <tbody>
