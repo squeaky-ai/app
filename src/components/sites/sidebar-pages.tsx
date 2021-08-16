@@ -6,17 +6,19 @@ import { EventType } from 'rrweb';
 import { groupBy } from 'lodash';
 import { ActivityTimestamp } from 'components/sites/activity-timestamp';
 import type { Event } from 'types/event';
-import type { PlayerState } from 'types/player';
+import type { Recording } from 'types/recording';
 
 interface Props {
-  state: PlayerState;
   replayer: Replayer;
+  recording: Recording;
 }
 
-export const SidebarPages: FC<Props> = ({ state, replayer }) => {
+export const SidebarPages: FC<Props> = ({ recording, replayer }) => {
   const [open, setOpen] = React.useState<string[]>([]);
+
+  const events: Event[] = recording.events.items.map(i => JSON.parse(i));
   
-  const pageviews = state.events.filter(event => event.type === EventType.Meta);
+  const pageviews = events.filter(event => event.type === EventType.Meta);
 
   const offset = pageviews[0]?.timestamp || 0;
 

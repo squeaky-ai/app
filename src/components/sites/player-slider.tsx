@@ -1,6 +1,6 @@
 import React from 'react';
 import { Replayer } from 'rrweb';
-import { Slider } from 'components/slider';
+import { Slider } from 'components/sites/slider';
 import { toTimeString } from 'lib/dates';
 import type { Recording } from 'types/recording';
 
@@ -85,7 +85,9 @@ export class PlayerSlider extends React.Component<Props, State> {
   }
 
   private get durationInSeconds() {
-    return this.getSeconds(this.props.recording.disconnectedAt - this.props.recording.connectedAt);
+    return this.props.recording
+      ? this.getSeconds(this.props.recording.disconnectedAt - this.props.recording.connectedAt)
+      : 0
   }
 
   private get currentTimeString() {

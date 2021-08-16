@@ -16,7 +16,7 @@ interface UseRecording {
 export const useRecording = (props: Props): UseRecording => {
   const router = useRouter();
 
-  const { data, loading, previousData } = useQuery<{ site: Site }>(GET_RECORDING_QUERY, {
+  const { data, loading } = useQuery<{ site: Site }>(GET_RECORDING_QUERY, {
     variables: {
       siteId: router.query.site_id as string,
       recordingId: router.query.recording_id as string,
@@ -28,6 +28,6 @@ export const useRecording = (props: Props): UseRecording => {
     loading, 
     recording: data 
       ? data.site.recording 
-      : previousData ? previousData.site.recording : null
+      : null
   };
 };

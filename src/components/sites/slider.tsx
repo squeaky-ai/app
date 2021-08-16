@@ -15,7 +15,10 @@ interface Props {
 }
 
 export const Slider: FC<Props> = ({ max, min, step, value, recording, onChange }) => {
-  const { totalPages, currentPage } = recording.events.pagination;
+  const { totalPages, currentPage } = recording?.events?.pagination || { 
+    totalPages: 0, 
+    currentPage: 0 
+  };
 
   const progress = clamp(value / (max - min), min, max);
   const buffered = currentPage / totalPages;
