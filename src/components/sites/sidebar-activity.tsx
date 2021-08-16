@@ -6,11 +6,11 @@ import { EventType, IncrementalSource, MouseInteractions } from 'rrweb';
 import { ActivityTimestamp } from 'components/sites/activity-timestamp';
 import { cssPath } from 'lib/css-path';
 import type { Event } from 'types/event';
-import type { PlayerState } from 'types/player';
+import type { Recording } from 'types/recording';
 
 interface Props {
-  state: PlayerState;
   replayer: Replayer;
+  recording: Recording;
 }
 
 const isPageViewEvent = (event: Event) => event.type === EventType.Meta;
@@ -62,8 +62,10 @@ const getMouseInteractionIcon = (type: MouseInteractions): string => {
   }
 };
 
-export const SidebarActivity: FC<Props> = ({ state, replayer }) => {
-  const activity = state.events.reduce((acc, item) => {
+export const SidebarActivity: FC<Props> = ({ recording, replayer }) => {
+  const events: Event[] = recording.events.items.map(i => JSON.parse(i));
+
+  const activity = events.reduce((acc, item) => {
     // Add all of the page views
     if (isPageViewEvent(item)) {
       return [...acc, item];

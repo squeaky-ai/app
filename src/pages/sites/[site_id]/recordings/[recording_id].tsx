@@ -2,12 +2,14 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import type { Replayer } from 'rrweb';
+import { useRouter } from 'next/router';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { PlayerWrapper } from 'components/sites/player-wrapper';
 import { useRecording } from 'hooks/use-recording';
 import { initReplayer } from 'lib/replayer';
 import type { Event } from 'types/event';
 import type { PlayerState, Action } from 'types/player';
+import type { Recording } from 'types/recording';
 
 let replayer: Replayer = null;
 let nextPageTimer: NodeJS.Timer;
@@ -22,11 +24,12 @@ const initialState: PlayerState = {
   playbackSpeed: 1,
   activeTab: null,
   skipInactivity: true,
-  events: [],
   zoom: 1,
 };
 
 const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
+  const router = useRouter();
+
   const [page, setPage] = React.useState<number>(1);
   const [state, dispatch] = React.useReducer(reducer, initialState);
 
@@ -42,19 +45,21 @@ const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
       dispatch,
     });
   });
-  
-  React.useEffect(() => {
-    // Clean up between page views as the replayer lives in 
-    // the global state
-    return () => {
-      replayer?.pause();
-      document.querySelector('.replayer-wrapper')?.remove();
-      replayer = null;
 
+  React.useEffect(() => {
+    return () => {
+      // When this component unmounts the replayer should be
+      // completely destroyed
+      replayer?.pause();
+      replayer = null;
+      // Clean up the contents of the div (this is not controlled
+      // by react, it's injected by the player)
+      document.querySelector('.replayer-wrapper')?.remove();
       // This could go on for a while and must be cancelled
       clearTimeout(nextPageTimer);
+      dispatch({ type: 'failed', value: false });
     };
-  }, []);
+  }, [router.query.recording_id]);
 
   React.useEffect(() => {
     if (!recording) return;
@@ -62,14 +67,12 @@ const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
     const { items, pagination } = recording.events;
     const { currentPage, totalPages } = pagination;
 
-    const events: Event[] = JSON.parse(items);
-    // Append the events to the list of the other events so that the
-    // sidebar has the complete picture
-    dispatch({ type: 'events', value: [...state.events, ...events] });
+    const events: Event[] = items.map(i => JSON.parse(i));
     
     if (replayer) {
       // Shove the new events into the replayer
-      events.forEach(e => replayer.addEvent(e));
+      console.log(events);
+      // events.forEach(e => replayer.addEvent(e));
     }
 
     if (currentPage < totalPages) {
@@ -81,7 +84,7 @@ const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
         setPage(currentPage + 1);
       }, 3000);
     }
-  }, [recording?.events?.pagination?.currentPage || 0]);
+  }, [recording?.events?.pagination?.currentPage || 1]);
 
   return (
     <>

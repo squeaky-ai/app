@@ -107,7 +107,7 @@ export interface BookmarkRecordingMutationInput {
 }
 
 export interface PaginatedEventsResponse {
-  items: string;
+  items: string[];
   pagination: EventPagination;
 }
 

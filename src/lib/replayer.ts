@@ -29,7 +29,7 @@ export const initReplayer = ({ failed, replayer, recording, dispatch }: InitArgs
     return replayer;
   }
 
-  const events: Event[] = JSON.parse(recording.events.items);
+  const events: Event[] = recording.events.items.map(i => JSON.parse(i));
 
   if (events.length === 0) {
     // Shouldn't be possible to create a recording without events

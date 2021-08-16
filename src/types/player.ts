@@ -1,4 +1,3 @@
-import type { Event } from 'types/event';
 import type { PlayerTab } from 'data/sites/enums';
 
 export interface PlayerState {
@@ -7,7 +6,6 @@ export interface PlayerState {
   playbackSpeed: number;
   activeTab: PlayerTab;
   skipInactivity: boolean;
-  events: Event[];
   zoom: number;
 }
 
