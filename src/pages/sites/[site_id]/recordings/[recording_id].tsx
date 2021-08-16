@@ -9,7 +9,7 @@ import { useRecording } from 'hooks/use-recording';
 import { initReplayer } from 'lib/replayer';
 import type { Event } from 'types/event';
 import type { PlayerState, Action } from 'types/player';
-import type { Recording } from 'types/recording';
+// import type { Recording } from 'types/recording';
 
 let replayer: Replayer = null;
 let nextPageTimer: NodeJS.Timer;
