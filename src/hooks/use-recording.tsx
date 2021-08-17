@@ -7,7 +7,7 @@ import type { Recording, PaginatedEventsResponse } from 'types/recording';
 interface UseRecording {
   loading: boolean;
   recording: Recording | null;
-  fetMoreEvents: (eventPage: number) => Promise<PaginatedEventsResponse>;
+  fetchMoreEvents: (eventPage: number) => Promise<PaginatedEventsResponse>;
 }
 
 export const useRecording = (): UseRecording => {
@@ -21,7 +21,7 @@ export const useRecording = (): UseRecording => {
     }
   });
 
-  const fetMoreEvents = async (eventPage: number) => {
+  const fetchMoreEvents = async (eventPage: number) => {
     // This is a much ligher query so that the pagination
     // only needs to grab the bare essentials
     const { data } = await fetchMore({ 
@@ -41,6 +41,6 @@ export const useRecording = (): UseRecording => {
     recording: data 
       ? data.site.recording 
       : null,
-      fetMoreEvents
+      fetchMoreEvents
   };
 };

@@ -28,10 +28,27 @@ const initialState: PlayerState = {
 
 const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
   const router = useRouter();
-
   const [state, dispatch] = React.useReducer(reducer, initialState);
 
-  const { recording, fetMoreEvents } = useRecording();
+  const { recording, fetchMoreEvents } = useRecording();
+
+  const processNextBatchOfEvents = (page: number): void => {
+    nextPageTimer = setTimeout(async () => {
+      const { totalPages } = recording.events.pagination;
+
+      // All of them are loaded now
+      if (page > totalPages) return;
+      // Fetch the next batch of events, and add them to the
+      // replayer. There's no need to manage the events as 
+      // part of the recording as the InMemoryCache will take
+      // care of it
+      const { items } = await fetchMoreEvents(page);
+      items.forEach((e) => replayer.addEvent(JSON.parse(e)));
+      // Recursively call it again, if it's been exceeded then
+      // it will return early
+      processNextBatchOfEvents(page + 1);
+    }, 3000);
+  };
 
   React.useEffect(() => {
     // Keep on trying to init the app, if it succeeds 
@@ -62,20 +79,16 @@ const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
   React.useEffect(() => {
     if (!recording) return;
 
-    const { pagination } = recording.events;
-    const { currentPage, totalPages } = pagination;
+    const { currentPage, totalPages } = recording.events.pagination;
 
-    if (currentPage < totalPages) {
-      // We can't load all of the events in one go as there's
-      // potentially hundreds of thousands. This is a dumb way
-      // to incrementally load them all. This will need to change
-      // to load the next batch as the play time gets close
-      nextPageTimer = setTimeout(async () => {
-        const { items } = await fetMoreEvents(currentPage + 1);
-        items.forEach((e) => replayer.addEvent(JSON.parse(e)));
-      }, 3000);
-    }
-  }, [recording?.events?.pagination?.currentPage || 0]);
+    // We already have all the events to bail
+    if (currentPage >= totalPages) return;
+    // We can't load all of the events in one go as there's
+    // potentially hundreds of thousands. This is a dumb way
+    // to incrementally load them all. This will need to change
+    // to load the next batch as the play time gets close
+    processNextBatchOfEvents(2);
+  }, [recording?.id]);
 
   return (
     <>
