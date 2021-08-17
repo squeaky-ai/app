@@ -33,6 +33,11 @@ const speeds = [
     name: '2 x',
     value: 2,
     short: '2x'
+  },
+  {
+    name: '5 x',
+    value: 5,
+    short: '5x'
   }
 ];
 
@@ -42,7 +47,7 @@ export const PlayerSpeed: FC<Props> = ({
   handlePlaybackSpeed,
   handleSkipInactivity
 }) => {
-  const name = playbackSpeed > 2 
+  const name = playbackSpeed > 5 
     ? <i className='ri-speed-line skip' /> 
     : `${playbackSpeed.toString()}x`;
 
