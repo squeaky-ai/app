@@ -7,16 +7,15 @@ import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { PlayerWrapper } from 'components/sites/player-wrapper';
 import { useRecording } from 'hooks/use-recording';
 import { initReplayer } from 'lib/replayer';
-import type { Event } from 'types/event';
 import type { PlayerState, Action } from 'types/player';
-// import type { Recording } from 'types/recording';
 
 let replayer: Replayer = null;
 let nextPageTimer: NodeJS.Timer;
 
-const reducer = (state: PlayerState, action: Action) => {
-  return { ...state, [action.type]: action.value };
-};
+const reducer = (state: PlayerState, action: Action) => ({ 
+  ...state,
+  [action.type]: action.value 
+});
 
 const initialState: PlayerState = {
   failed: false,
@@ -30,10 +29,9 @@ const initialState: PlayerState = {
 const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
   const router = useRouter();
 
-  const [page, setPage] = React.useState<number>(1);
   const [state, dispatch] = React.useReducer(reducer, initialState);
 
-  const { recording } = useRecording({ page });
+  const { recording, fetMoreEvents } = useRecording();
 
   React.useEffect(() => {
     // Keep on trying to init the app, if it succeeds 
@@ -64,27 +62,20 @@ const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
   React.useEffect(() => {
     if (!recording) return;
 
-    const { items, pagination } = recording.events;
+    const { pagination } = recording.events;
     const { currentPage, totalPages } = pagination;
-
-    const events: Event[] = items.map(i => JSON.parse(i));
-    
-    if (replayer) {
-      // Shove the new events into the replayer
-      console.log(events);
-      // events.forEach(e => replayer.addEvent(e));
-    }
 
     if (currentPage < totalPages) {
       // We can't load all of the events in one go as there's
       // potentially hundreds of thousands. This is a dumb way
       // to incrementally load them all. This will need to change
       // to load the next batch as the play time gets close
-      nextPageTimer = setTimeout(() => {
-        setPage(currentPage + 1);
+      nextPageTimer = setTimeout(async () => {
+        const { items } = await fetMoreEvents(currentPage + 1);
+        items.forEach((e) => replayer.addEvent(JSON.parse(e)));
       }, 3000);
     }
-  }, [recording?.events?.pagination?.currentPage || 1]);
+  }, [recording?.events?.pagination?.currentPage || 0]);
 
   return (
     <>

@@ -68,6 +68,7 @@ import {
 } from 'data/recordings/mutations';
 
 import {
+  PaginatedEventsResponse,
   TagCreateMutationInput,
   TagDeleteMutationInput,
   NoteCreateMutationInput,
@@ -97,6 +98,23 @@ const cache = new InMemoryCache({
       fields: {
         notes: { merge: ACCEPT_INCOMING },
         tags: { merge: ACCEPT_INCOMING },
+        events: {
+          // Is Apollo even designed for humans to work with? This is madness!
+          // In order to build up the list of events, the caching by any of the
+          // arguments (in this case, page) needs to be disabled. The fetchMore
+          // function is used in conjunction with these merging rules to build
+          // the full list
+          keyArgs: false,
+          merge(existing: PaginatedEventsResponse, incoming: PaginatedEventsResponse) {
+            if (!incoming) return existing;
+            if (!existing) return incoming;
+
+            return {
+              ...incoming,
+              items: [...existing.items, ...incoming.items],
+            };
+          }
+        }
       }
     }
   }

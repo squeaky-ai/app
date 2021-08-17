@@ -77,7 +77,27 @@ export const GET_RECORDING_QUERY = gql`
         nextRecording {
           id
         }
-        events(page: $eventPage) {
+        events(page: $eventPage, size: 20) {
+          items
+          pagination {
+            perPage
+            itemCount
+            currentPage
+            totalPages
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_RECORDING_EVENTS_QUERY = gql`
+  query GetRecording($siteId: ID!, $recordingId: ID!, $eventPage: Int) { 
+    site(siteId: $siteId) {
+      id
+      recording(recordingId: $recordingId) {
+        id
+        events(page: $eventPage, size: 20) {
           items
           pagination {
             perPage
