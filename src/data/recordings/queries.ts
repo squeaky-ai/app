@@ -77,7 +77,7 @@ export const GET_RECORDING_QUERY = gql`
         nextRecording {
           id
         }
-        events(page: $eventPage, size: 20) {
+        events(page: $eventPage) {
           items
           pagination {
             perPage
@@ -97,7 +97,7 @@ export const GET_RECORDING_EVENTS_QUERY = gql`
       id
       recording(recordingId: $recordingId) {
         id
-        events(page: $eventPage, size: 20) {
+        events(page: $eventPage) {
           items
           pagination {
             perPage
