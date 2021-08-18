@@ -49,7 +49,11 @@ const RenderItem: FC<RenderItemProps> = ({ page, type }) => {
 
 export const Pagination: FC<Props> = ({ currentPage, pageSize, total, setPage }) => {
   if (total <= pageSize) {
-    return null;
+    // Usuall the pagination sits along side the page size, if this
+    // doesn't render anything at all, then the space-between flex
+    // will mean that the page-size will render on the left which 
+    // looks crap
+    return <span />;
   }
 
   return (
