@@ -1,6 +1,7 @@
 import type { Team } from 'types/team';
 import type { Recording, PaginatedRecordingsResponse } from 'types/recording';
 import type { Analytics } from 'types/analytics';
+import type { PaginatedNotesResponse } from 'types/note';
 import type { PaginatedVisitorsResponse, Visitor } from 'types/visitor';
 
 export interface Site {
@@ -13,6 +14,7 @@ export interface Site {
   uuid: string;
   ownerName: string;
   team: Team[];
+  notes?: PaginatedNotesResponse;
   recording?: Recording;
   recordings?: PaginatedRecordingsResponse;
   visitor?: Visitor;

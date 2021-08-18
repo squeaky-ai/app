@@ -71,13 +71,16 @@ import {
   PaginatedEventsResponse,
   TagCreateMutationInput,
   TagDeleteMutationInput,
-  NoteCreateMutationInput,
-  NoteDeleteMutationInput,
-  NoteUpdateMutationInput,
   DeleteRecordingMutationInput,
   ViewedRecordingMutationInput,
   BookmarkRecordingMutationInput
 } from 'types/recording';
+
+import {
+  NoteCreateMutationInput,
+  NoteDeleteMutationInput,
+  NoteUpdateMutationInput,
+} from 'types/note';
 
 const ACCEPT_INCOMING = <E, I>(_existing: E, incoming: I[]): I[] => cloneDeep(incoming);
 

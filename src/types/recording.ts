@@ -1,4 +1,4 @@
-import { User } from 'types/user';
+import { Note } from 'types/note';
 
 export type RecordingSortBy =
   'DATE_DESC' |
@@ -39,13 +39,6 @@ export interface Tag {
   name: string;
 }
 
-export interface Note {
-  id: string;
-  timestamp: number;
-  body: string;
-  user?: User;
-}
-
 export interface PaginatedRecordingsResponse {
   items: Recording[];
   pagination: RecordingPagination;
@@ -67,27 +60,6 @@ export interface TagDeleteMutationInput {
   siteId: string;
   recordingId: string;
   tagId: string;
-}
-
-export interface NoteCreateMutationInput {
-  siteId: string;
-  recordingId: string;
-  body: string;
-  timestamp?: number;
-}
-
-export interface NoteDeleteMutationInput {
-  siteId: string;
-  recordingId: string;
-  noteId: string;
-}
-
-export interface NoteUpdateMutationInput {
-  siteId: string;
-  recordingId: string;
-  noteId: string;
-  body?: string;
-  timestamp?: number;
 }
 
 export interface DeleteRecordingMutationInput {

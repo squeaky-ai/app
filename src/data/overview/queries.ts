@@ -9,6 +9,18 @@ export const GET_OVERVIEW_QUERY = gql`
         pageViews
         recordingsCount
       }
+      notes(page: 1, size: 5) {
+        items {
+          id
+          timestamp
+          body
+          recordingId
+          sessionId
+          user {
+            fullName
+          }
+        }
+      }
       recordings(page: 1, size: 1, sort: DATE_DESC) {
         items {
           id

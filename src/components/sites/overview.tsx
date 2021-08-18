@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Card } from 'components/card';
 import { Tooltip } from 'components/tooltip';
+import { Divider } from 'components/divider';
 import { PlayerPreview } from 'components/sites/player-preview';
 import { useOverview } from 'hooks/use-overview';
 
@@ -12,8 +13,9 @@ export const Overview: FC = () => {
   const { overview, loading } = useOverview();
 
   const { site_id } = router.query;
+
+  const notes = overview.notes?.items;
   const recording = overview.recordings?.items[0];
-  const notes = [];
 
   return (
     <div className='overview-grid'>
@@ -129,6 +131,36 @@ export const Overview: FC = () => {
             <i className='ri-time-line' />
             <p>No data available</p>
           </div>
+        )}
+
+        {notes.length > 0 && (
+          <>
+            <Divider />
+
+            <div className='notes-list'>
+              <ul>
+                {notes.map(note => (
+                  <li key={note.id}>
+                    <p className='title'>
+                      Recording ID: <Link href={`/sites/${site_id}/recordings/${note.recordingId}`}><a>{note.sessionId}</a></Link>
+                    </p>
+                    <p className='body'>{note.body}</p>
+                    <p className='user'>
+                      <i className='ri-account-circle-line' />
+                      <span>
+                        {note.user
+                          ? note.user.fullName
+                          : 'No user'
+                        }
+                      </span>
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className='fader' />
+          </>
         )}
       </Card>
     </div>

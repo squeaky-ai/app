@@ -29,6 +29,9 @@ export const useOverview = (): UseOverview => {
   });
 
   const fallback: Overview = {
+    notes: {
+      items: []
+    },
     analytics: {
       visitors: 0,
       pageViews: 0,
