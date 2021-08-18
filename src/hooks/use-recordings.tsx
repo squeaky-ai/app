@@ -6,6 +6,7 @@ import type { PaginatedRecordingsResponse, RecordingSortBy } from 'types/recordi
 
 interface Props {
   page: number;
+  size?: number;
   query?: string;
   sort?: RecordingSortBy;
 }
@@ -15,14 +16,14 @@ interface UseRecordings {
   recordings: PaginatedRecordingsResponse;
 }
 
-export const useRecordings = ({ page, query, sort }: Props): UseRecordings => {
+export const useRecordings = ({ page, size, query, sort }: Props): UseRecordings => {
   const router = useRouter();
 
   const { data, loading, previousData } = useQuery<{ site: Site }>(GET_RECORDINGS_QUERY, {
     variables: { 
       siteId: router.query.site_id as string, 
       page, 
-      size: 15,
+      size,
       query,
       sort
     }

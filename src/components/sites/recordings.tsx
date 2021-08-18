@@ -5,6 +5,7 @@ import { Pagination } from 'components/pagination';
 import { Container } from 'components/container';
 import { RecordingsItem } from 'components/sites/recordings-item';
 import { Sort } from 'components/sort';
+import { PageSize } from 'components/sites/page-size';
 import { useRecordings } from 'hooks/use-recordings';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 import type { RecordingSortBy } from 'types/recording';
@@ -15,13 +16,17 @@ interface Props {
 
 export const Recordings: FC<Props> = ({ query }) => {
   const [page, setPage] = React.useState<number>(1);
+  const [size, setSize] = React.useState<number>(25);
   const [sort, setSort] = React.useState<RecordingSortBy>('DATE_DESC');
 
   const { loading, recordings } = useRecordings({ 
     page, 
     sort,
+    size,
     query: query.length < MIN_SEARCH_CHARS ? '' : query, // No point in searching if it's below this value
   });
+
+  const { items, pagination } = recordings;
 
   return (
     <>
@@ -51,7 +56,7 @@ export const Recordings: FC<Props> = ({ query }) => {
             </tr>
           </thead>
           <tbody>
-            {recordings.items.map(recording => (
+            {items.map(recording => (
               <RecordingsItem 
                 recording={recording} 
                 query={query} 
@@ -61,13 +66,20 @@ export const Recordings: FC<Props> = ({ query }) => {
           </tbody>
         </table>
       </div>
-
-      <Pagination 
-        currentPage={page} 
-        pageSize={recordings.pagination.pageSize}
-        total={recordings.pagination.total}
-        setPage={setPage}
-      />
+      
+      <div className='recordings-footer'>
+        <Pagination 
+          currentPage={page} 
+          pageSize={pagination.pageSize}
+          total={pagination.total}
+          setPage={setPage}
+        />
+        <PageSize 
+          value={pagination.pageSize} 
+          onChange={setSize}
+          show={pagination.total >= pagination.pageSize}
+        />
+      </div>
     </>
   );
 };
