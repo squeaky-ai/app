@@ -22,7 +22,9 @@ export const Verify: FC<Props> = ({ site }) => {
 
     if (!response.site?.verifiedAt) {
       setFailed(true);
+      toast.add({ type: 'error', body: 'The tracking code could not be found' });
     } else {
+      setFailed(false);
       toast.add({ type: 'success', body: 'Your tracking code is verified and active.' });
     }
 
