@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Button } from 'components/button';
 import { Container } from 'components/container';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
-import { userDelete } from 'lib/api/graphql';
+import { cache, userDelete } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
 
 export const DeleteAccount: FC = () => {
@@ -26,6 +26,8 @@ export const DeleteAccount: FC = () => {
 
     if (success) {
       setDeleted(true);
+      closeModal();
+      cache.reset();
     } else {
       toasts.add({ type: 'error', body: 'There was an issue deleting your accout, please contact us' });
     }

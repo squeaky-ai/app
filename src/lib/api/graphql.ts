@@ -81,7 +81,7 @@ import {
 
 const ACCEPT_INCOMING = <E, I>(_existing: E, incoming: I[]): I[] => cloneDeep(incoming);
 
-const cache = new InMemoryCache({
+export const cache = new InMemoryCache({
   typePolicies: {
     Query: {
       fields: {
