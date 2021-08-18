@@ -21,6 +21,7 @@ export const useAnalytics = (range: TimeRange): UseAnalytics => {
   });
 
   const fallback: Analytics = {
+    recordingsCount: 0,
     pageViewsRange: [],
     visitors: 0,
     pageViews: 0,
