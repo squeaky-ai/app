@@ -12,7 +12,7 @@ import { NoteDelete } from 'components/sites/note-delete'
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { ActivityTimestamp } from 'components/sites/activity-timestamp';
 import { TIMESTAMP_REGEX } from 'data/sites/constants';
-import { toTimeString } from 'lib/dates';
+import { toTimeString, fromTimeString } from 'lib/dates';
 import { Note as INote } from 'types/recording';
 
 interface Props {
@@ -90,11 +90,10 @@ export const Note: FC<Props> = ({ note, handleDelete, handleUpdate, replayer }) 
               (async () => {
                 setSubmitting(false);
 
-                const timestamp = values.timestamp
-                  ? Number(values.timestamp.replace(':', '')) * 1000
-                  : null;
-
-                onUpdate({ body: values.body, timestamp });
+                onUpdate({ 
+                  body: values.body, 
+                  timestamp: fromTimeString(values.timestamp),
+                });
               })();
             }}
           >

@@ -31,6 +31,21 @@ export const toTimeString = (ms?: number) => {
   return date.toISOString().substr(11, 8);
 };
 
+export const fromTimeString = (timeString: string) => {
+  const date = new Date(0);
+  const [rawHours, rawMinutes, rawSeconds] = (timeString || '').split(':');
+
+  const hours = Number(rawHours);
+  const minutes = Number(rawMinutes);
+  const seconds = Number(rawSeconds);
+
+  if (hours) date.setHours(hours);
+  if (minutes) date.setMinutes(minutes);
+  if (seconds) date.setSeconds(seconds);
+
+  return date.valueOf();
+};
+
 export const toMinutesAndSeconds = (ms?: number) => {
   if (!ms) return '0h 0m 0s';
 

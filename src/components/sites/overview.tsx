@@ -69,9 +69,11 @@ export const Overview: FC = () => {
             <Link href={`/sites/${site_id}/recordings/${recording.id}`}>
               <a className='recording-preview'>
                 <PlayerPreview recording={recording} />
-                <div className='play-button'>
-                  <i className='ri-play-fill' />
-                  Play
+                <div className='play-button-wrapper'>
+                  <div className='play-button'>
+                    <i className='ri-play-fill' />
+                    Play
+                  </div>
                 </div>
               </a>
             </Link>

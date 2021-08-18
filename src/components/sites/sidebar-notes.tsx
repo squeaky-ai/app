@@ -12,7 +12,7 @@ import { TextArea } from 'components/textarea';
 import { Note } from 'components/sites/note';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { TIMESTAMP_REGEX } from 'data/sites/constants';
-import { toTimeString } from 'lib/dates';
+import { toTimeString, fromTimeString } from 'lib/dates';
 import { noteDelete, noteCreate, noteUpdate } from 'lib/api/graphql';
 import type { Recording, Note as INote } from 'types/recording';
 
@@ -97,15 +97,11 @@ export const SidebarNotes: FC<Props> = ({ recording, replayer }) => {
               (async () => {
                 setSubmitting(false);
 
-                const timestamp = values.timestamp
-                  ? Number(values.timestamp.replace(':', '')) * 1000
-                  : null;
-
                 await noteCreate({ 
                   siteId, 
                   recordingId: recording.id, 
                   body: values.body,
-                  timestamp
+                  timestamp: fromTimeString(values.timestamp) || null,
                 });
 
                 closeModal();

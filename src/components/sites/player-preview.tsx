@@ -25,24 +25,16 @@ export const PlayerPreview: FC<Props> = ({ recording }) => {
       mouseTail: false,
     });
 
-    let multiplier = 1;
+    const { height } = ref.current.getBoundingClientRect();
 
-    const { width } = ref.current.getBoundingClientRect();
-
-    while((viewportX * multiplier) > width) {
-      multiplier -= .01;
-    }
-
-    setScale(`scale(${Number(multiplier.toFixed(1))})`);
+    setScale(`scale(${height / viewportY})`);
 
     replayer.play();
   }, []);
 
   return (
     <div ref={ref} className='preview-container' style={{ transform: scale }}>
-      <div id='preview-wrapper' style={{ width: `${viewportX}px`, height: `${viewportY}px` }}>
-
-      </div>
+      <div id='preview-wrapper' style={{ width: `${viewportX}px`, height: `${viewportY}px` }} />
     </div>
   );
 };
