@@ -17,4 +17,12 @@
     line-height: 16px;
     margin: 0;
   }
+
+  a {
+    color: var(--blue-500);
+  }
+
+  a, p, span {
+    flex-shrink: 0;
+  }
 }

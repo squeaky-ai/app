@@ -10,6 +10,17 @@
   .header {
     display: none;
     flex-shrink: 0;
+
+    .breadcrumbs {
+      flex-shrink: 0;
+      margin: 0;
+      width: 228px;
+    }
+
+    .recording-actions {
+      justify-content: flex-end;
+      width: 228px;
+    }
   }
 
   .player-page {

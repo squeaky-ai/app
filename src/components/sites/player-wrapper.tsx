@@ -2,11 +2,10 @@ import React from 'react';
 import type { FC } from 'react';
 import type { Replayer } from 'rrweb';
 import classnames from 'classnames';
-import Link from 'next/link';
-import { Logo } from 'components/logo';
 import { Page } from 'components/sites/page';
 import { Player } from 'components/sites/player';
 import { Header } from 'components/header';
+import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { PlayerActions } from 'components/sites/player-actions';
 import { PlayerDetails } from 'components/sites/player-details';
 import { PlayerFooter } from 'components/sites/player-footer';
@@ -28,11 +27,10 @@ export const PlayerWrapper: FC<Props> = ({ user, state, replayer, recording, dis
       {({ site }) => (
         <>
           <Header className='site-header'>
-            <Link href='/sites'>
-              <a className='logo'>
-                <Logo />
-              </a>
-            </Link>
+            <BreadCrumbs 
+              site={site} 
+              items={[{ name: 'Recordings', href: `/sites/${site.id}/recordings` }]} 
+            />
 
             <PlayerDetails 
               site={site} 
