@@ -29,15 +29,20 @@ export const useOverview = (): UseOverview => {
   });
 
   const fallback: Overview = {
-    visitors: 0,
-    pageViews: 0,
-    recordingsCount: 0,
+    analytics: {
+      visitors: 0,
+      pageViews: 0,
+      recordingsCount: 0,
+    },
+    recordings: { 
+      items: [] 
+    },
   };
 
   return {
     loading,
     overview: (data
-      ? data.site.analytics
-      : previousData ? previousData.site.analytics : fallback) as Overview
+      ? data.site
+      : previousData ? previousData.site : fallback) as Overview
   };
 };

@@ -9,6 +9,7 @@ export interface Analytics {
   languages: AnalyticsLanguage[];
   devices: AnalyticsDevice[];
   dimensions: AnalyticsDimensions;
+  recordingsCount: number;
 }
 
 export interface PageViewRange {

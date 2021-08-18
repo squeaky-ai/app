@@ -9,6 +9,21 @@ export const GET_OVERVIEW_QUERY = gql`
         pageViews
         recordingsCount
       }
+      recordings(page: 1, size: 1, sort: DATE_DESC) {
+        items {
+          id
+          viewerId
+          duration
+          startPage
+          exitPage
+          pageCount
+          pageViews
+          connectedAt
+          events(page: 1, size: 10) {
+            items
+          }
+        }
+      }
     }
   }
 `;
