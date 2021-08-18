@@ -4,11 +4,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Card } from 'components/card';
 import { Tooltip } from 'components/tooltip';
+import { PlayerPreview } from 'components/sites/player-preview';
 import { useOverview } from 'hooks/use-overview';
 
 export const Overview: FC = () => {
   const router = useRouter();
-  const { overview } = useOverview();
+  const { overview, loading } = useOverview();
 
   const { site_id } = router.query;
   const recording = overview.recordings?.items[0];
@@ -67,6 +68,7 @@ export const Overview: FC = () => {
           <div className='preview'>
             <Link href={`/sites/${site_id}/recordings/${recording.id}`}>
               <a className='recording-preview'>
+                <PlayerPreview recording={recording} />
                 <div className='play-button'>
                   <i className='ri-play-fill' />
                   Play
@@ -106,7 +108,7 @@ export const Overview: FC = () => {
           </div>
         )}
 
-        {!recording && (
+        {!recording && !loading && (
           <div className='preview-empty-state'>
             <i className='ri-time-line' />
             <p>No data available</p>

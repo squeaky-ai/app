@@ -19,6 +19,8 @@ export const GET_OVERVIEW_QUERY = gql`
           pageCount
           pageViews
           connectedAt
+          viewportX
+          viewportY
           events(page: 1, size: 10) {
             items
           }

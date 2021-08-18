@@ -1,4 +1,4 @@
-import { cloneDeep } from 'lodash';
+import { cloneDeep, uniq } from 'lodash';
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
 
 import {
@@ -111,7 +111,11 @@ export const cache = new InMemoryCache({
 
             return {
               ...incoming,
-              items: [...existing.items, ...incoming.items],
+              // A small amount of the events may have been loaded to show a preview,
+              // in this case the events will be merged with the existing ones which
+              // causes duplicates. I'm sure this is horrendous for performance but
+              // we can cross that bridge another day
+              items: uniq([...existing.items, ...incoming.items]),
             };
           }
         }

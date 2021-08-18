@@ -42,13 +42,14 @@
     grid-gap: 3rem;
     grid-template-areas: 'visitors recordings pageviews'
                          'latest-recording latest-recording latest-notes';
-    grid-template-columns: repeat(auto-fill, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-template-rows: 280px 456px;
 
     @include breakpoint-lg {
       grid-template-areas: 'visitors recordings'
                            'latest-recording latest-recording'
                            'pageviews latest-notes';
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       grid-template-rows: 280px 456px 280px;
     }
 
@@ -58,6 +59,7 @@
                            'latest-recording'
                            'pageviews'
                            'latest-notes';
+      grid-template-columns: minmax(0, 1fr);
       grid-template-rows: 280px 280px 456px 280px 456px;
     }
 
@@ -163,7 +165,21 @@
           height: 100%;
           text-decoration: none;
           flex: 1;
+          overflow: hidden;
           position: relative;
+        }
+
+        .preview-container {
+          pointer-events: none;
+          transform-origin: top left;
+
+          iframe {
+            border: none;
+          }
+
+          .replayer-mouse {
+            display: none;
+          }
         }
 
         .play-button {
