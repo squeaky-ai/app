@@ -5,6 +5,7 @@ import { Pagination } from 'components/pagination';
 import { useVisitors } from 'hooks/use-visitors';
 import { Container } from 'components/container';
 import { Sort } from 'components/sort';
+import { PageSize } from 'components/sites/page-size';
 import { VisitorsItem } from 'components/sites/visitors-item';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 import type { Site } from 'types/site';
@@ -17,13 +18,17 @@ interface Props {
 
 export const Visitors: FC<Props> = ({ query }) => {
   const [page, setPage] = React.useState<number>(1);
+  const [size, setSize] = React.useState<number>(25);
   const [sort, setSort] = React.useState<VisitorSortBy>('FIRST_VIEWED_AT_DESC');
 
   const { loading, visitors } = useVisitors({ 
     page, 
     sort,
+    size,
     query: query.length < MIN_SEARCH_CHARS ? '' : query, // No point in searching if it's below this value
   });
+
+  const { items, pagination } = visitors;
 
   return (
     <>
@@ -51,19 +56,26 @@ export const Visitors: FC<Props> = ({ query }) => {
             </tr>
           </thead>
           <tbody>
-            {visitors.items.map(v => (
+            {items.map(v => (
               <VisitorsItem visitor={v} key={v.viewerId} query={query} />
             ))}
           </tbody>
         </table>
       </div>
-
-      <Pagination 
-        currentPage={page} 
-        pageSize={visitors.pagination.pageSize}
-        total={visitors.pagination.total}
-        setPage={setPage}
-      />
+      
+      <div className='visitors-footer'>
+        <Pagination 
+          currentPage={page} 
+          pageSize={pagination.pageSize}
+          total={pagination.total}
+          setPage={setPage}
+        />
+        <PageSize 
+          value={pagination.pageSize} 
+          onChange={setSize}
+          show={items.length > 0}
+        />
+      </div>
     </>
   );
 };

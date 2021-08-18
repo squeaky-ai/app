@@ -6,6 +6,7 @@ import type { PaginatedVisitorsResponse, VisitorSortBy } from 'types/visitor';
 
 interface Props {
   page: number;
+  size?: number;
   query?: string;
   sort?: VisitorSortBy;
 }
@@ -15,14 +16,14 @@ interface UseVisitors {
   visitors: PaginatedVisitorsResponse;
 }
 
-export const useVisitors = ({ page, query, sort }: Props): UseVisitors => {
+export const useVisitors = ({ page, size, query, sort }: Props): UseVisitors => {
   const router = useRouter();
 
   const { data, loading, previousData } = useQuery<{ site: Site }>(GET_VISITORS_QUERY, {
     variables: { 
       siteId: router.query.site_id as string, 
       page, 
-      size: 15,
+      size,
       query,
       sort
     }

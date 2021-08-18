@@ -9,7 +9,17 @@
 
   .select {
     flex-shrink: 0;
+    height: 32px;
     margin: 0;
     width: 90px;
+
+    select {
+      height: 30px;
+      line-height: 30px;
+    }
+
+    i {
+      top: -.25rem;
+    }
   }
 }
