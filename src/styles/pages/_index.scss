@@ -63,8 +63,47 @@
           position: absolute;
           top: -1rem;
         }
+
+        @include breakpoint-md {
+          display: none;
+        }
       }
     }
+
+    @include breakpoint-md {
+      padding: 3rem 1.5rem 6rem 1.5rem;
+
+      h1 {
+        font-size: 48px;
+        line-height: 60px;
+        margin: 2rem 0;
+      }
+    }
+
+    @include breakpoint-sm {
+      padding: 3rem 1.5rem 4rem 1.5rem;
+
+      h1 {
+        font-size: 32px;
+        line-height: 40px;
+      }
+
+      p {
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 0 1.5rem;
+      }
+
+      .signup-form {
+        flex-direction: column;
+
+        .button {
+          margin: 1rem 0 0 0;
+          width: 100%;
+        }
+      }
+    }
+
   }
 
   .features {
@@ -80,10 +119,30 @@
       }
     }
 
-    .features-card {
-      margin: 0 auto;
-      max-width: 960px;
-      padding: 3rem 4rem;
+    @include breakpoint-md {
+      padding: 4rem 1.5rem;
+
+      h2 {
+        font-size: 32px;
+      }
+
+      .features-card {
+        padding: 2rem;
+      }
+    }
+
+    @include breakpoint-sm {
+      h2 {
+        font-size: 18px;
+        line-height: 24px;
+        margin: 0 0 2rem 0;
+
+        + p {
+          font-size: 14px;
+          line-height: 18px;
+          margin: 0 0 4rem;
+        }
+      }
     }
   }
 }

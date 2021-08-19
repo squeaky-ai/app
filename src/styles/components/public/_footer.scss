@@ -35,5 +35,12 @@
         width: 2px;
       }
     }
+
+    @include breakpoint-md {
+      p, a {
+        font-size: 14px;
+        line-height: 18px;
+      }
+    }
   }
 }
