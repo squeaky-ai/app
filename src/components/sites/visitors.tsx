@@ -57,7 +57,7 @@ export const Visitors: FC<Props> = ({ query }) => {
           </thead>
           <tbody>
             {items.map(v => (
-              <VisitorsItem visitor={v} key={v.viewerId} query={query} />
+              <VisitorsItem visitor={v} key={v.visitorId} query={query} />
             ))}
           </tbody>
         </table>

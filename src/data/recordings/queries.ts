@@ -22,7 +22,7 @@ export const GET_RECORDINGS_QUERY = gql`
           viewportX
           viewportY
           sessionId
-          viewerId
+          visitorId
           connectedAt
           disconnectedAt
         }
@@ -44,7 +44,7 @@ export const GET_RECORDING_QUERY = gql`
       recording(recordingId: $recordingId) {
         id
         sessionId
-        viewerId
+        visitorId
         language
         viewed
         duration

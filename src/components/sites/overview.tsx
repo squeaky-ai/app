@@ -82,7 +82,7 @@ export const Overview: FC = () => {
             <ul className='details'>
               <li>
                 <span>Visitor ID</span>
-                <span>{recording.viewerId}</span>
+                <span>{recording.visitorId}</span>
               </li>
               <li>
                 <span>Duration</span>

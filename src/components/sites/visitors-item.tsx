@@ -23,7 +23,7 @@ export const VisitorsItem: FC<Props> = ({ visitor, query }) => {
     if (ignored) {
       event.preventDefault();
     } else {
-      router.push(`/sites/${router.query.site_id}/visitors/${visitor.viewerId}`);
+      router.push(`/sites/${router.query.site_id}/visitors/${visitor.visitorId}`);
     }
   };
 
@@ -33,11 +33,11 @@ export const VisitorsItem: FC<Props> = ({ visitor, query }) => {
     <tr 
       className='hover'
       role='link' 
-      data-href={`/sites/${router.query.site_id}/visitors/${visitor.viewerId}`} 
+      data-href={`/sites/${router.query.site_id}/visitors/${visitor.visitorId}`} 
       onClick={viewVisitor} 
       tabIndex={0}
     >
-      <td>{visitor.viewerId}</td>
+      <td>{visitor.visitorId}</td>
       <td><a href='#'>{visitor.recordingCount}</a></td>
       <td>{toTimeStringDate(visitor.firstViewedAt)}</td>
       <td>{toTimeStringDate(visitor.lastActivityAt)}</td>

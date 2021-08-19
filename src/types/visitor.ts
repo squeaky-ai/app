@@ -13,7 +13,7 @@ export type PageSortBy =
   'VIEWS_COUNT_ASC';
 
 export interface Visitor {
-  viewerId: string;
+  visitorId: string;
   recordingCount: number;
   firstViewedAt: string;
   lastActivityAt: string;

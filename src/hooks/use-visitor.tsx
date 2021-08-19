@@ -23,7 +23,7 @@ export const useVisitor = (props: Props): UseVisitor => {
   const { data, loading, previousData } = useQuery<{ site: Site }>(GET_VISITOR_QUERY, {
     variables: { 
       siteId: router.query.site_id as string,
-      viewerId: router.query.visitor_id as string,
+      visitorId: router.query.visitor_id as string,
       ...props
     }
   });

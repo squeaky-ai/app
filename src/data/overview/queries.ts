@@ -24,7 +24,7 @@ export const GET_OVERVIEW_QUERY = gql`
       recordings(page: 1, size: 1, sort: DATE_DESC) {
         items {
           id
-          viewerId
+          visitorId
           duration
           startPage
           exitPage

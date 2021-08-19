@@ -15,7 +15,7 @@ export const VisitorSummary: FC<Props> = ({ visitor }) => (
     <Card className='info'>
       <div className='row'>
         <dt>Visitor ID</dt>
-        <dd>{visitor.viewerId}</dd>
+        <dd>{visitor.visitorId}</dd>
       </div>
       <div className='row'>
         <dt>First visited</dt>
