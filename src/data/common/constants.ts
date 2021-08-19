@@ -1,3 +1,7 @@
+export const BLANK_ROUTES = [
+  '/',
+];
+
 export const PUBLIC_ROUTES = [
   '/',
   '/contact',
@@ -6,5 +10,5 @@ export const PUBLIC_ROUTES = [
   '/auth/login',
   '/auth/signup',
   '/auth/reset',
-  '/auth/accept'
+  '/auth/accept',
 ];

@@ -1,414 +1,89 @@
 .page.home {
+  background: var(--gray-100);
   flex: 1;
 
-  .section {
-    &.hero {
-      padding: 10rem 0;
+  .header {
+    background: var(--white);
+    height: auto;
+    font-size: 13px;
+    line-height: 16px;
+    padding: 1.5rem;
+    position: static;
+    text-align: right;
+  }
 
-      .container {
-        background-image: url('/confusion.svg');
-        background-position: right center;
-        background-repeat: no-repeat;
-        background-size: auto 100%;
-      }
+  .hero {
+    background: var(--white);
+    padding: 5.5rem 1.5rem 11.75rem 1.5rem;
+    text-align: center;
 
-      h1 {
-        margin: 0 0 2rem 0;
-      }
-
-      p {
-        margin: 0 0 3rem 0;
-        width: 600px;
-      }
-
-      form {
-        align-items: center;
-        display: flex;
-
-        input {
-          margin: 0 1rem 0 0;
-          width: 300px;
-        }
-
-        button {
-          margin-right: 1.5rem;
-        }
-
-        i {
-          color: var(--gray-700);
-        }
-      }
-
-      @include breakpoint-lg {
-        padding: 10rem 2rem;
-
-        h1 {
-          font-size: 48px;
-          line-height: 64px;
-        }
-      }
+    h1 {
+      margin: 4rem 0 3rem 0;
     }
 
-    &.demo {
-      background: var(--gray-100);
-      padding: 8rem 0;
-
-      h2 {
-        margin: 0 0 2.5rem 0;
-        text-align: center;
-
-        & + p {
-          margin: 0 auto 8rem auto;
-          text-align: center;
-          width: 600px;
-        }
-      }
-
-      .panels {
-        display: flex;
-
-        .list {
-          flex-shrink: 0;
-          margin-right: 3rem;
-          width: 25rem;
-
-          h3 {
-            margin: 0 0 3rem 0;
-          }
-
-          .button {
-            align-items: center;
-            background: none;
-            border: none;
-            border-bottom: 2px solid var(--gray-150);
-            display: flex;
-            font-weight: var(--font-weight-normal);
-            padding: 1.5rem 1rem;
-            text-align: left;
-            width: 100%;
-
-            span {
-              flex: 1;
-            }
-
-            i {
-              font-size: 1.5rem;
-
-              &:first-of-type {
-                color: var(--blue-500);
-                margin-right: .75rem;
-              }
-
-              &:last-of-type {
-                color: var(--gray-500);
-              }
-            }
-          }
-        }
-
-        .screen {
-          flex: 1;
-
-          img {
-            width: 100%;
-          }
-        }
-
-        &.reverse {
-          flex-direction: row-reverse;
-          margin-top: 8rem;
-
-          .list {
-            margin-left: 3rem;
-            margin-right: 0;
-          }
-        }
-      }
-      
-      @include breakpoint-lg {
-        padding: 8rem 2rem;
-
-        .panels {
-          .list {
-            width: calc(50% - 3rem);
-          }
-
-          .screen {
-            padding-top: 6.5rem;
-          }
-        }
-      }
+    p {
+      margin: 0 auto 3rem auto;
+      max-width: 540px;
     }
 
-    &.features {
-      background: var(--white);
-      padding: 8rem 0;
+    .signup-form {
+      align-items: flex-start;
+      display: flex;
+      margin: 0 auto;
+      max-width: 540px;
+      position: relative;
 
-      h2 {
-        margin: 0 0 8rem 0;
-        text-align: center;
+      fieldset {
+        border: 0;
+        margin: 0;
+        padding: 0;
+        text-align: left;
+        width: 100%;
       }
 
-      .features-card {
-        background: var(--gray-100);
-        border-radius: var(--border-radius-lg);
-        display: grid;
-        grid-gap: 3rem;
-        grid-template-columns: repeat(auto-fill, minmax(0, 340px));
-        padding: 4rem;
-        position: relative;
-
-        h4 {
-          margin: 0 0 1rem 0;
-
-          &:nth-of-type(2) {
-            margin-top: 5rem;
-          }
-        }
-
-        ul {
-          padding: 0;
-
-          li {
-            align-items: center;
-            color: var(--gray-700);
-            display: flex;
-            list-style: none;
-            margin-bottom: .5rem;
-
-            i {
-              color: var(--blue-300);
-              font-size: 1.5rem;
-              margin-right: .25rem;
-            }
-          }
-        }
-
-        .star {
-          left: -70px;
-          position: absolute;
-          top: -210px;
-        }
-
-        .coming-soon {
-          background: var(--white);
-          border-radius: var(--border-radius-lg);
-          padding: 1.5rem;
-
-          .title {
-            align-items: center;
-            color: var(--gray-800);
-            display: flex;
-
-            img {
-              margin-right: .75rem;
-            }
-          }
-
-          p {
-            color: var(--gray-500);
-          }
-
-          ul {
-            padding-top: 1rem;
-          }
-
-          li {
-            margin-bottom: 2.5rem;
-            padding: 0 1rem;
-
-            i {
-              color: var(--blue-500);
-              font-size: 1.5rem;
-              margin-right: 1rem;
-            }
-          }
-        }
-      }
-
-      @include breakpoint-lg {
-        padding: 8rem 2rem;
-
-        h2 {
-          text-align: left;
-        }
-
-        .features-card {
-          grid-template-columns: 50% 50%;
-
-          .star {
-            left: auto;
-            right: -1rem;
-            transform: scaleX(-1);
-          }
-        }
-      }
-    }
-
-    &.plan {
-      padding: 0 0 8rem 0;
-
-      .container {
-        background-image: url('/flowers.svg');
-        background-repeat: no-repeat;
-        background-position: top right;
-      }
-
-      h2 {
-        margin-bottom: 2rem;
-        text-align: center;
-
-        + p {
-          color: var(--gray-700);
-          margin: 0 auto 2rem auto;
-          text-align: center;
-          width: 540px;
-        }
-      }
-
-      .price-select {
-        margin: 0 auto 4rem auto;
-        width: 120px;
-      }
-
-      .plans {
-        display: grid;
-        grid-gap: 2.5rem;
-        grid-template-columns: repeat(auto-fill, minmax(0, 280px));
-
-        .plan-card {
-          border: 2px solid var(--gray-100);
-          border-radius: var(--border-radius-lg);
-          overflow: hidden;
-
-          h3 {
-            align-items: center;
-            background: var(--gray-50);
-            display: flex;
-            height: 6rem;
-            justify-content: center;
-            margin: 0;
-          }
-
-          h4 {
-            align-items: center;
-            display: flex;
-            font-size: 48px;
-            font-weight: var(--font-weight-normal);
-            height: 64px;
-            justify-content: center;
-            margin: 2rem 0 1rem 0;
-            text-align: center;
-
-            &.small {
-              font-size: 28px;
-            }
-          }
-
-          p {
-            color: var(--gray-500);
-            margin: 0 0 2rem 0;
-            text-align: center;
-          }
-
-          ul {
-            margin: 0;
-            padding: 0 .75rem;
-
-            li {
-              border-bottom: 2px solid var(--gray-100);
-              list-style: none;
-              padding: 1rem;
-              text-align: center;
-
-              &:first-of-type {
-                border-top: 2px solid var(--gray-100);
-              }
-            }
-          }
-
-          .cta {
-            align-items: center;
-            display: flex;
-            justify-content: center;
-            margin: 3rem 0;
-
-            .button {
-              margin: 0 2rem;
-              text-align: center;
-              width: 100%;
-            }
-          }
-
-          &.important {
-            border-color: var(--blue-500);
-
-            h3 {
-              background: var(--blue-500);
-              color: var(--white);
-            }
-          }
-        }
-      }
-
-      @include breakpoint-lg {
-        padding: 0 2rem 8rem 2rem;
-
-        h2 {
-          text-align: left;
-
-          & + p {
-            margin: 0 0 2rem 0;
-            text-align: left;
-          }
-        }
-
-        .price-select {
-          margin: 0 0 4rem 0;
-        }
-
-        .plans {
-          grid-template-columns: calc(50% - 1.5rem) calc(50% - 1.5rem);
-        }
-      }
-    }
-
-    &.info {
-      background: var(--gray-100);
-      text-align: center;
-      padding: 8rem 0;
-
-      h2 {
-        margin: 0 auto 2rem auto;
-        width: 520px;
-      }
-
-      p {
-        margin: 0 auto 2rem auto;
-        width: 540px;
+      .input {
+        margin: 0;
       }
 
       .button {
-        margin: 0 auto;
+        flex-shrink: 0;
+        margin: 0 0 0 1rem;
       }
 
-      .container {
-        position: relative;
-      }
-
-      .image {
+      .pointer {
+        left: 100%;
+        margin: 2rem 0 0 2rem;
         position: absolute;
+        top: 100%;
+        white-space: nowrap;
 
-        &.basketball {
-          left: 0;
-          top: 0;
-        }
-
-        &.cheese-legs {
-          bottom: 0;
-          right: 0;
+        .image {
+          display: block;
+          left: -2.25rem;
+          position: absolute;
+          top: -1rem;
         }
       }
+    }
+  }
+
+  .features {
+    padding: 7.75rem 1.5rem;
+    text-align: center;
+    
+    h2 {
+      margin: 0 0 3rem 0;
+
+      + p {
+        margin: 0 auto 4rem auto;
+        max-width: 540px;
+      }
+    }
+
+    .features-card {
+      margin: 0 auto;
+      max-width: 960px;
+      padding: 3rem 4rem;
     }
   }
 }

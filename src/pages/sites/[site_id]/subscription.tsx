@@ -32,7 +32,7 @@ const SitesSubscription: NextPage<ServerSideProps> = ({ user }) => (
               <Image src='/empty-state-7.svg' height={240} width={400} alt='Illustration to represent the empty recordings page' />
               <h4>Squeaky is free during beta testing!</h4>
               <EmptyStateHint
-                title='Help Squeaky!'
+                title='Help Squeaky'
                 body={
                   <>
                     <p>Right now, your feedback is worth more to us than money, but before long we will start to charge for our service.</p>

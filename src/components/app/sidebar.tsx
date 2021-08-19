@@ -81,9 +81,9 @@ export const Sidebar: FC = () => {
               </a>
             </Link>
             <Link href={`/sites/${siteId}/subscription`}>
-              <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/subscription`) })} data-label='Subscriptions'>
+              <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/subscription`) })} data-label='Subscription'>
                 <i className='ri-bank-card-2-line' />
-                <span>Subscriptions</span>
+                <span>Subscription</span>
               </a>
             </Link>
             <div className='divider' />

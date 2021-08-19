@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { Header as PublicHeader } from 'components/public/header';
 import { Footer } from 'components/public/footer';
 import { Sidebar } from 'components/app/sidebar';
-import { PUBLIC_ROUTES } from 'data/common/constants';
+import { BLANK_ROUTES, PUBLIC_ROUTES } from 'data/common/constants';
 import type { User } from 'types/user';
 
 interface Props {
@@ -14,6 +14,7 @@ interface Props {
 
 export const Page: FC<Props> = ({ children, user }) => {
   const router = useRouter();
+  const isBlank = BLANK_ROUTES.includes(router.route);
   const isPublic = PUBLIC_ROUTES.includes(router.route);
 
   const slug = router.route
@@ -48,6 +49,14 @@ export const Page: FC<Props> = ({ children, user }) => {
       });
     }
   }, []);
+
+  if (isBlank) {
+    return (
+      <div className={classnames('page', ...slug)}>
+        {children}
+      </div>
+    )
+  }
 
   if (isPublic) {
     return (
