@@ -86,7 +86,7 @@ export const SidebarFeedback: FC = () => {
                   <Select name='type' onChange={handleChange} value={values.type} invalid={touched.type && !!errors.type}>
                     <Option value=''>Please select ...</Option>
                     <Option value='general'>General Enquiry</Option>
-                    <Option value='feature'>Feature request</Option>
+                    <Option value='feature'>Feature Request</Option>
                     <Option value='bug'>Bug</Option>
                     <Option value='complaint'>Complaint</Option>
                   </Select>
