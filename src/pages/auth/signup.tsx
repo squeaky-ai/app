@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Head from 'next/head';
 import * as Yup from 'yup';
+import { useRouter } from 'next/router';
 import { Formik } from 'formik';
 import { Container } from 'components/container';
 import { Card } from 'components/card';
@@ -36,6 +37,7 @@ const PasswordSchema = Yup.object().shape({
 
 const Signup: NextPage<ServerSideProps> = () => {
   const toasts = useToasts();
+  const router = useRouter();
   const [pageView, setPageView] = React.useState(PageView.EMAIL);
   const [email, setEmail] = React.useState<string>(null);
 
@@ -66,7 +68,7 @@ const Signup: NextPage<ServerSideProps> = () => {
               <>
                 <h2>Sign Up</h2>
                 <Formik
-                  initialValues={{ email: '', terms: false }}
+                  initialValues={{ email: (router.query.email || '') as string, terms: false }}
                   validationSchema={EmailSchema}
                   onSubmit={(values, { setSubmitting }) => {
                     (async () => {
