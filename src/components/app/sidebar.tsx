@@ -6,6 +6,7 @@ import classnames from 'classnames';
 import { useRouter } from 'next/router';
 import { Button } from 'components/button';
 import { SidebarAccount } from 'components/app/sidebar-account';
+import { SidebarFeedback } from 'components/app/sidebar-feedback';
 
 export const Sidebar: FC = () => {
   const router = useRouter();
@@ -41,6 +42,7 @@ export const Sidebar: FC = () => {
               </a>
             </Link>
             <SidebarAccount path={path} />
+            <SidebarFeedback />
           </div>
           <div className='nav right'>
             <Link href={`/sites/${siteId}/overview`}>
@@ -88,6 +90,7 @@ export const Sidebar: FC = () => {
             </Link>
             <div className='divider' />
             <SidebarAccount path={path} />
+            <SidebarFeedback />
           </div>
         </div>
       </menu>

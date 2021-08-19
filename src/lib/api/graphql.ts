@@ -82,6 +82,14 @@ import {
   NoteUpdateMutationInput,
 } from 'types/note';
 
+import {
+  FEEDBACK_CREATE_MUTATION
+} from 'data/feedback/mutations';
+
+import {
+  FeedbackCreateMutation
+} from 'types/feedback';
+
 const ACCEPT_INCOMING = <E, I>(_existing: E, incoming: I[]): I[] => cloneDeep(incoming);
 
 export const cache = new InMemoryCache({
@@ -474,4 +482,11 @@ export const recordingBookmarked = async (input: BookmarkRecordingMutationInput)
   });
 
   return { site: data.recordingBookmarked };
+};
+
+export const feedbackCreate = async (input: FeedbackCreateMutation): Promise<void> => {
+  await client.mutate({
+    mutation: FEEDBACK_CREATE_MUTATION,
+    variables: { input }
+  });
 };

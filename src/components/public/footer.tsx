@@ -15,10 +15,6 @@ export const Footer: FC = () => (
         <Link href='/privacy'>
           <a>Privacy</a>
         </Link>
-        <span className='divider' />
-        <Link href='/contact'>
-          <a>Contact Us</a>
-        </Link>
       </nav>
     </Container>
   </footer>

@@ -4,6 +4,10 @@ import FocusTrap from 'focus-trap-react';
 import classnames from 'classnames';
 import type { FC } from 'react';
 
+interface Props {
+  className?: string;
+}
+
 interface State {
   show: boolean;
 }
@@ -22,8 +26,8 @@ export const Portal: FC = ({ children }) => {
   return mounted ? ReactDOM.createPortal(children, ref.current) : null
 };
 
-export class Modal extends React.Component<{}, State> {
-  public constructor(props: {}) {
+export class Modal extends React.Component<Props, State> {
+  public constructor(props: Props) {
     super(props);
 
     this.state = { show: false };
@@ -65,7 +69,7 @@ export class Modal extends React.Component<{}, State> {
     return (
       <Portal>
         {this.state.show && (
-          <div className='modal'>
+          <div className={classnames('modal', this.props.className)}>
             {this.props.children}
           </div>
         )}

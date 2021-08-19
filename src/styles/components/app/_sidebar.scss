@@ -14,6 +14,11 @@
     margin: 0 auto;
   }
 
+  .icon {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+
   .link {
     align-items: center;
     background: var(--white);
@@ -77,7 +82,8 @@
       color: var(--blue-500);
     }
 
-    &.account {
+    &.account,
+    &.feedback {
       flex-direction: column;
 
       .button {
@@ -207,6 +213,10 @@
       height: 32px;
       margin: 0 1rem;
       width: 103px;
+    }
+
+    .icon {
+      margin: 0 1rem 0 0;
     }
 
     .link {    
