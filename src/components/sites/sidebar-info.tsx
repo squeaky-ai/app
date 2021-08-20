@@ -19,11 +19,11 @@ export const SidebarInfo: FC<Props> = ({ site, recording, setActiveTab }) => (
   <dl className='datalist'>
     <div className='row'>
       <dt>Session #</dt>
-      <dd><VisitorStarred site={site} visitor={recording.visitor} /></dd>
+      <dd>{recording.sessionId}</dd>
     </div>
     <div className='row'>
       <dt>User</dt>
-      <dd>{recording.visitor.visitorId}</dd>
+      <dd><VisitorStarred site={site} visitor={recording.visitor} /></dd>
     </div>
     <div className='row'>
       <dt>Date</dt>
