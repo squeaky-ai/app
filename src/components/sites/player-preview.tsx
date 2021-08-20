@@ -17,7 +17,7 @@ export const PlayerPreview: FC<Props> = ({ recording }) => {
   React.useEffect(() => {
     const items: Event[] = events.items.map(e => JSON.parse(e));
 
-    if (items.length === 0) return;
+    if (items.length === 0) return undefined;
 
     const replayer = new Replayer(items, {
       root: document.getElementById('preview-wrapper'),
@@ -30,6 +30,10 @@ export const PlayerPreview: FC<Props> = ({ recording }) => {
     setScale(`scale(${height / viewportY})`);
 
     replayer.play();
+
+    return () => {
+      replayer?.pause();
+    };
   }, []);
 
   return (
