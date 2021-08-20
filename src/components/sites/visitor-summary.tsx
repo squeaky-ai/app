@@ -4,18 +4,23 @@ import { Card } from 'components/card';
 import { toNiceDate } from 'lib/dates';
 import { Device } from 'components/device';
 import { Browser } from 'components/browser';
+import { VisitorStarred } from 'components/sites/visitor-starred';
+import type { Site } from 'types/site';
 import type { Visitor } from 'types/visitor';
 
 interface Props {
+  site: Site;
   visitor: Visitor;
 }
 
-export const VisitorSummary: FC<Props> = ({ visitor }) => (
+export const VisitorSummary: FC<Props> = ({ site, visitor }) => (
   <div className='summary'>
     <Card className='info'>
       <div className='row'>
         <dt>Visitor ID</dt>
-        <dd>{visitor.viewerId}</dd>
+        <dd>
+          <VisitorStarred site={site} visitor={visitor} />
+        </dd>
       </div>
       <div className='row'>
         <dt>First visited</dt>

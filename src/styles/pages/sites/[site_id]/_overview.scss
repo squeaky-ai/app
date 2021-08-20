@@ -239,13 +239,13 @@
             }
 
             span {
-              &:first-of-type {
+              &.name {
                 color: var(--gray-800);
                 margin-right: .5rem;
                 width: 60px;
               }
 
-              &:last-of-type {
+              &.value {
                 color: var(--gray-500);
                 overflow: hidden;
                 text-align: right;

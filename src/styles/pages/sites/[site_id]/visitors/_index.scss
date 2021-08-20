@@ -97,7 +97,7 @@
         padding: 1.5rem 0 1.5rem 1.5rem;
 
         &:nth-of-type(1) {
-          width: 100px;
+          width: 120px;
         }
 
         &:nth-of-type(2) {
@@ -138,6 +138,10 @@
       td {
         height: 66px;
       }
+    }
+
+    .visitor-starred {
+      font-size: 1.25rem;
     }
   }
 

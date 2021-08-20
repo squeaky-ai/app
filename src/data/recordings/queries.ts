@@ -22,9 +22,12 @@ export const GET_RECORDINGS_QUERY = gql`
           viewportX
           viewportY
           sessionId
-          viewerId
           connectedAt
           disconnectedAt
+          visitor {
+            id
+            visitorId
+          }
         }
         pagination {
           pageSize
@@ -44,7 +47,6 @@ export const GET_RECORDING_QUERY = gql`
       recording(recordingId: $recordingId) {
         id
         sessionId
-        viewerId
         language
         viewed
         duration
@@ -59,6 +61,11 @@ export const GET_RECORDING_QUERY = gql`
         browser
         connectedAt
         disconnectedAt
+        visitor {
+          id
+          visitorId
+          starred
+        }
         tags {
           id
           name

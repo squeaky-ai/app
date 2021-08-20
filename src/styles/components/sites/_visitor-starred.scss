@@ -1,0 +1,11 @@
+.visitor-starred {
+  color: var(--gray-150);
+  cursor: pointer;
+  display: inline-block;
+  margin-right: .25rem;
+  vertical-align: middle;
+
+  &.active {
+    color: var(--yellow-500);
+  }
+}

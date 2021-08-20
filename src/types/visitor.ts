@@ -13,17 +13,19 @@ export type PageSortBy =
   'VIEWS_COUNT_ASC';
 
 export interface Visitor {
-  viewerId: string;
-  recordingCount: number;
-  firstViewedAt: string;
-  lastActivityAt: string;
-  language: string;
-  viewportX: number;
-  viewportY: number;
-  deviceType: string;
-  browser: string;
-  browserString: string;
+  id: string;
+  visitorId: string;
+  recordingCount?: number;
+  firstViewedAt?: string;
+  lastActivityAt?: string;
+  language?: string;
+  viewportX?: number;
+  viewportY?: number;
+  deviceType?: string;
+  browser?: string;
+  browserString?: string;
   pageViewCount?: number;
+  starred: boolean;
   recordings?: PaginatedRecordingsResponse;
   pages?: PaginatedPagesResponse;
   averageSessionDuration?: number;
@@ -56,4 +58,10 @@ export interface PagePagination {
   pageSize: number;
   total: number;
   sort: PageSortBy;
+}
+
+export interface VisitorStarredMutationInput {
+  siteId: string;
+  visitorId: string;
+  starred: boolean;
 }

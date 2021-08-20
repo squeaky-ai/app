@@ -6,14 +6,17 @@ import { Browser } from 'components/browser';
 import { Highlighter } from 'components/highlighter';
 import { Device } from 'components/device';
 import { toNiceDate } from 'lib/dates';
+import { VisitorStarred } from 'components/sites/visitor-starred';
+import type { Site } from 'types/site';
 import type { Visitor } from 'types/visitor';
 
 interface Props {
+  site: Site;
   query: string;
   visitor: Visitor;
 }
 
-export const VisitorsItem: FC<Props> = ({ visitor, query }) => {
+export const VisitorsItem: FC<Props> = ({ site, visitor, query }) => {
   const router = useRouter();
 
   const viewVisitor = (event: React.MouseEvent) => {
@@ -23,7 +26,7 @@ export const VisitorsItem: FC<Props> = ({ visitor, query }) => {
     if (ignored) {
       event.preventDefault();
     } else {
-      router.push(`/sites/${router.query.site_id}/visitors/${visitor.viewerId}`);
+      router.push(`/sites/${router.query.site_id}/visitors/${visitor.id}`);
     }
   };
 
@@ -33,11 +36,13 @@ export const VisitorsItem: FC<Props> = ({ visitor, query }) => {
     <tr 
       className='hover'
       role='link' 
-      data-href={`/sites/${router.query.site_id}/visitors/${visitor.viewerId}`} 
+      data-href={`/sites/${router.query.site_id}/visitors/${visitor.id}`} 
       onClick={viewVisitor} 
       tabIndex={0}
     >
-      <td>{visitor.viewerId}</td>
+      <td className='no-overflow'>
+        <VisitorStarred site={site} visitor={visitor} />
+      </td>
       <td><a href='#'>{visitor.recordingCount}</a></td>
       <td>{toTimeStringDate(visitor.firstViewedAt)}</td>
       <td>{toTimeStringDate(visitor.lastActivityAt)}</td>

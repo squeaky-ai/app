@@ -1,5 +1,6 @@
 import { Note } from 'types/note';
-
+import { Visitor } from 'types/visitor';
+ 
 export type RecordingSortBy =
   'DATE_DESC' |
   'DATE_ASC' |
@@ -12,7 +13,6 @@ export interface Recording {
   id: string;
   language: string;
   sessionId: string;
-  viewerId: string;
   viewed: boolean;
   bookmarked: boolean;
   duration: number;
@@ -32,6 +32,7 @@ export interface Recording {
   nextRecording?: Recording;
   connectedAt: number;
   disconnectedAt: number;
+  visitor: Visitor;
 }
 
 export interface Tag {

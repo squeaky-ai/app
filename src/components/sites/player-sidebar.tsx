@@ -12,15 +12,17 @@ import { SidebarTags } from 'components/sites/sidebar-tags';
 import { SidebarPages } from 'components/sites/sidebar-pages';
 import type { Recording } from 'types/recording';
 import type { PlayerState, Action } from 'types/player';
+import type { Site } from 'types/site';
 
 interface Props {
   state: PlayerState;
+  site: Site;
   replayer: Replayer;
   recording: Recording;
   dispatch: React.Dispatch<Action>;
 }
 
-export const PlayerSidebar: FC<Props> = ({ state, replayer, recording, dispatch }) => {
+export const PlayerSidebar: FC<Props> = ({ state, site, replayer, recording, dispatch }) => {
   const handleClose = () => {
     dispatch({ type: 'activeTab', value: null });
   };
@@ -42,7 +44,7 @@ export const PlayerSidebar: FC<Props> = ({ state, replayer, recording, dispatch 
           <Button onClick={handleClose}><i className='ri-close-line' /></Button>
         </Label>
         <div className='contents'>
-          <SidebarInfo recording={recording} setActiveTab={setActiveTab} />
+          <SidebarInfo site={site} recording={recording} setActiveTab={setActiveTab} />
         </div>
       </div>
       <div className={classnames('sidebar activity', { active: state.activeTab === PlayerTab.ACTIVITY })}>

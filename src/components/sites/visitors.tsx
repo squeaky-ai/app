@@ -16,7 +16,7 @@ interface Props {
   site: Site;
 }
 
-export const Visitors: FC<Props> = ({ query }) => {
+export const Visitors: FC<Props> = ({ site, query }) => {
   const [page, setPage] = React.useState<number>(1);
   const [size, setSize] = React.useState<number>(25);
   const [sort, setSort] = React.useState<VisitorSortBy>('FIRST_VIEWED_AT_DESC');
@@ -57,7 +57,7 @@ export const Visitors: FC<Props> = ({ query }) => {
           </thead>
           <tbody>
             {items.map(v => (
-              <VisitorsItem visitor={v} key={v.viewerId} query={query} />
+              <VisitorsItem site={site} visitor={v} key={v.visitorId} query={query} />
             ))}
           </tbody>
         </table>

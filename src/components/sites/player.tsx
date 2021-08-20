@@ -17,7 +17,6 @@ interface Props {
   dispatch: React.Dispatch<Action>;
 }
 
-
 export class Player extends React.Component<Props> {
   private container: Element;
 

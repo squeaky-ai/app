@@ -87,10 +87,14 @@
       text-overflow: ellipsis;
       white-space: nowrap;
 
-      i, .browser {
+      i:not(.star), .browser {
         color: var(--blue-500);
         font-size: 16px;
         margin-right: .5rem;
+      }
+
+      .tooltip {
+        height: 1.25rem;
       }
     }
 
