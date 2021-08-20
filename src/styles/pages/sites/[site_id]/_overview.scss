@@ -137,7 +137,7 @@
         align-items: center;
         background: var(--gray-50);
         border: 1px solid var(--gray-150);
-        border-radius: var(--border-radius-lg);
+        border-radius: var(--border-radius-md);
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -289,7 +289,7 @@
         align-items: center;
         background: var(--gray-50);
         border: 1px solid var(--gray-150);
-        border-radius: var(--border-radius-lg);
+        border-radius: var(--border-radius-md);
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -314,7 +314,7 @@
       .fader {
         background: linear-gradient(360deg, rgba(0, 0, 0, .07) 0%, rgba(255, 255, 255, 0) 78.13%);
         background-blend-mode: multiply;
-        border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);
+        border-radius: 0 0 var(--border-radius-md) var(--border-radius-md);
         bottom: 0;
         height: 4rem;
         left: 0;

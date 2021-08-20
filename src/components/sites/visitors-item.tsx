@@ -58,7 +58,6 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, query }) => {
           {visitor.browserString}
         </Tooltip>
       </td>
-      <td />
     </tr>
   )
 };

@@ -12,13 +12,13 @@
 
   .modal-body {
     background: var(--white);
-    border: 2px solid var(--gray-150);
-    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--border-radius-md);
     width: 448px;
 
     .modal-header {
       align-items: center;
-      border-bottom: 2px solid var(--gray-100);
+      border-bottom: 1px solid var(--gray-150);
       display: flex;
       justify-content: space-between;
       padding: 1.5rem;
@@ -49,7 +49,7 @@
     }
 
     .modal-footer {
-      border-top: 2px solid var(--gray-100);
+      border-top: 1px solid var(--gray-150);
       padding: 1rem 1.5rem;
 
       .button + .button {

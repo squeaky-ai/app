@@ -3,7 +3,7 @@
     background: var(--white);
     border: 1px solid var(--gray-150);
     border-collapse: separate;
-    border-radius: var(--border-radius-lg);
+    border-radius: var(--border-radius-md);
     border-spacing: 0;
     color: var(--gray-700);
     width: 100%;
@@ -34,17 +34,12 @@
       td {
         border-top: 1px solid var(--gray-150);
         overflow: hidden;
-        padding: .75rem 0 .75rem 1.5rem;
+        padding: .75rem 0 .75rem 1rem;
         text-overflow: ellipsis;
         white-space: nowrap;
 
         &.no-overflow {
           overflow: visible;
-        }
-
-        &:last-of-type {
-          padding-left: 0rem;
-          padding-right: 1.5rem;
         }
       }
 

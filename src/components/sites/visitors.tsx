@@ -52,7 +52,6 @@ export const Visitors: FC<Props> = ({ site, query }) => {
               <th>Language</th>
               <th>Device &amp; viewport</th>
               <th>Browser</th>
-              <th />
             </tr>
           </thead>
           <tbody>
@@ -73,7 +72,7 @@ export const Visitors: FC<Props> = ({ site, query }) => {
         <PageSize 
           value={pagination.pageSize} 
           onChange={setSize}
-          show={items.length > 0}
+          show={items.length > 25}
         />
       </div>
     </>
