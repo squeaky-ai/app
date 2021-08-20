@@ -24,7 +24,6 @@ export const GET_OVERVIEW_QUERY = gql`
       recordings(page: 1, size: 1, sort: DATE_DESC) {
         items {
           id
-          visitorId
           duration
           startPage
           exitPage
@@ -33,6 +32,11 @@ export const GET_OVERVIEW_QUERY = gql`
           connectedAt
           viewportX
           viewportY
+          visitor {
+            id
+            visitorId
+            starred
+          }
           events(page: 1, size: 10) {
             items
           }

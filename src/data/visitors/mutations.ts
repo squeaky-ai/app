@@ -7,7 +7,7 @@ export const VISITOR_STARRED_MUTATION = gql`
     visitorStarred(input: { siteId: $siteId, visitorId: $visitorId, starred: $starred }) {
       id
       visitor(visitorId: $visitorId) {
-        userId
+        id
         visitorId
         starred
       }

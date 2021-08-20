@@ -53,6 +53,7 @@ export const PlayerWrapper: FC<Props> = ({ user, state, replayer, recording, dis
 
           <PlayerFooter 
             state={state}
+            site={site}
             replayer={replayer}
             recording={recording}
             dispatch={dispatch}

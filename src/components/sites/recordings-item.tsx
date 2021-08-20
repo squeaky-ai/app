@@ -97,7 +97,7 @@ export const RecordingsItem: FC<Props> = ({ query, recording }) => {
           </Tooltip>
           <Highlighter value={query}>{recording.sessionId}</Highlighter>
         </td>
-        <td><Highlighter value={query}>{recording.userId}</Highlighter></td>
+        <td><Highlighter value={query}>{recording.visitor.visitorId}</Highlighter></td>
         <td><Highlighter value={query}>{toNiceDate(recording.connectedAt)}</Highlighter></td>
         <td>{toTimeString(recording.duration)}</td>
         <td className='no-overflow'>

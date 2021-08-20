@@ -5,22 +5,25 @@ import { PlayerTab } from 'data/sites/enums';
 import { toNiceDate, toTimeString } from 'lib/dates';
 import { Browser } from 'components/browser';
 import { Device } from 'components/device';
+import { VisitorStarred } from 'components/sites/visitor-starred';
 import type { Recording } from 'types/recording';
+import type { Site } from 'types/site';
 
 interface Props {
+  site: Site;
   recording: Recording;
   setActiveTab: (value: PlayerTab) => void;
 }
 
-export const SidebarInfo: FC<Props> = ({ recording, setActiveTab }) => (
+export const SidebarInfo: FC<Props> = ({ site, recording, setActiveTab }) => (
   <dl className='datalist'>
     <div className='row'>
       <dt>Session #</dt>
-      <dd>{recording.sessionId}</dd>
+      <dd><VisitorStarred site={site} visitor={recording.visitor} /></dd>
     </div>
     <div className='row'>
       <dt>User</dt>
-      <dd>{recording.userId}</dd>
+      <dd>{recording.visitor.visitorId}</dd>
     </div>
     <div className='row'>
       <dt>Date</dt>

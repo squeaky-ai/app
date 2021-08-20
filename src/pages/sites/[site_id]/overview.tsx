@@ -42,7 +42,7 @@ const SitesOverview: NextPage<ServerSideProps> = ({ user }) => (
           </Container>
 
           {!!site.recordings.items.length && (
-            <Overview />
+            <Overview site={site} />
           )}
         </Main>
       )}

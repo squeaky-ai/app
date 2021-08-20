@@ -8,15 +8,17 @@ import { PlayerSidebar } from 'components/sites/player-sidebar';
 import { PlayerControls } from 'components/sites/player-controls';
 import type { Recording } from 'types/recording';
 import type { PlayerState, Action } from 'types/player';
+import type { Site } from 'types/site';
 
 interface Props {
   state: PlayerState;
+  site: Site;
   replayer: Replayer;
   recording: Recording;
   dispatch: React.Dispatch<Action>;
 }
 
-export const PlayerFooter: FC<Props> = ({ state, replayer, recording, dispatch }) => (
+export const PlayerFooter: FC<Props> = ({ state, site, replayer, recording, dispatch }) => (
   <>
     <footer className={classnames('controls', { active: state.activeTab !== null })}>
       <div className='control-group'>
@@ -43,6 +45,7 @@ export const PlayerFooter: FC<Props> = ({ state, replayer, recording, dispatch }
 
     <PlayerSidebar 
       state={state}
+      site={site}
       replayer={replayer} 
       recording={recording}
       dispatch={dispatch}

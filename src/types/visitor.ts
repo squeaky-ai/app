@@ -13,8 +13,8 @@ export type PageSortBy =
   'VIEWS_COUNT_ASC';
 
 export interface Visitor {
+  id: string;
   visitorId: string;
-  userId: string;
   recordingCount: number;
   firstViewedAt: string;
   lastActivityAt: string;
@@ -62,6 +62,12 @@ export interface PagePagination {
 
 export interface VisitorStarredMutationInput {
   siteId: string;
+  visitorId: string;
+  starred: boolean;
+}
+
+export interface VisitorDetails {
+  id: string;
   visitorId: string;
   starred: boolean;
 }

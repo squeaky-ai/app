@@ -39,7 +39,7 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
   return (
     <>
       <Head>
-        <title>Squeaky / Site Visitors / {visitor.userId}</title>
+        <title>Squeaky / Site Visitors / {visitor.visitorId}</title>
       </Head>
 
       <Page user={user} scope={[]}>
@@ -50,14 +50,14 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
               items={
                 [
                   { name: 'Visitors', href: `/sites/${site_id}/visitors` }, 
-                  { name: `ID: ${visitor.userId}` }
+                  { name: `ID: ${visitor.visitorId}` }
                 ]
               } 
             />
 
             <h3 className='title'>
               <i className='ri-user-line' />
-              {visitor.userId}
+              {visitor.visitorId}
             </h3>
 
             <VisitorSummary site={site} visitor={visitor} />

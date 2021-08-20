@@ -6,9 +6,15 @@ import { Card } from 'components/card';
 import { Tooltip } from 'components/tooltip';
 import { Divider } from 'components/divider';
 import { PlayerPreview } from 'components/sites/player-preview';
+import { VisitorStarred } from 'components/sites/visitor-starred';
 import { useOverview } from 'hooks/use-overview';
+import type { Site } from 'types/site';
 
-export const Overview: FC = () => {
+interface Props {
+  site: Site;
+}
+
+export const Overview: FC<Props> = ({ site }) => {
   const router = useRouter();
   const { overview, loading } = useOverview();
 
@@ -81,16 +87,18 @@ export const Overview: FC = () => {
             </Link>
             <ul className='details'>
               <li>
-                <span>Visitor ID</span>
-                <span>{recording.visitorId}</span>
+                <span className='name'>Visitor ID</span>
+                <span className='value'>
+                  <VisitorStarred site={site} visitor={recording.visitor} />
+                </span>
               </li>
               <li>
-                <span>Duration</span>
-                <span>{recording.duration}</span>
+                <span className='name'>Duration</span>
+                <span className='value'>{recording.duration}</span>
               </li>
               <li>
-                <span>Pages</span>
-                <span className='no-overflow'>
+                <span className='name'>Pages</span>
+                <span className='value no-overflow'>
                   <Tooltip button={recording.pageCount} buttonClassName='link'>
                     <ul className='tooltip-list'>
                       {recording.pageViews.map((page, i) => (
@@ -101,12 +109,12 @@ export const Overview: FC = () => {
                 </span>
               </li>
               <li>
-                <span>Start URL</span>
-                <span>{recording.startPage}</span>
+                <span className='name'>Start URL</span>
+                <span className='value'>{recording.startPage}</span>
               </li>
               <li>
-                <span>Exit URL</span>
-                <span>{recording.exitPage}</span>
+                <span className='name'>Exit URL</span>
+                <span className='value'>{recording.exitPage}</span>
               </li>
             </ul>
           </div>

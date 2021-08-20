@@ -7,7 +7,7 @@ export const GET_VISITORS_QUERY = gql`
       name
       visitors(page: $page, size: $size, query: $query, sort: $sort) {
         items {
-          userId
+          id
           visitorId
           recordingCount
           firstViewedAt
@@ -36,7 +36,7 @@ export const GET_VISITOR_QUERY = gql`
       id
       name
       visitor(visitorId: $visitorId) {
-        userId
+        id
         visitorId
         recordingCount
         firstViewedAt

@@ -1,13 +1,12 @@
 import React from 'react';
 import type { FC } from 'react';
-import classnames from 'classnames';
 import { useRouter } from 'next/router';
 import { Tooltip } from 'components/tooltip';
 import { Browser } from 'components/browser';
 import { Highlighter } from 'components/highlighter';
 import { Device } from 'components/device';
 import { toNiceDate } from 'lib/dates';
-import { visitorStarred } from 'lib/api/graphql';
+import { VisitorStarred } from 'components/sites/visitor-starred';
 import type { Site } from 'types/site';
 import type { Visitor } from 'types/visitor';
 
@@ -27,16 +26,8 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, query }) => {
     if (ignored) {
       event.preventDefault();
     } else {
-      router.push(`/sites/${router.query.site_id}/visitors/${visitor.visitorId}`);
+      router.push(`/sites/${router.query.site_id}/visitors/${visitor.id}`);
     }
-  };
-
-  const starVisitor = async () => {
-    await visitorStarred({
-      siteId: site.id,
-      visitorId: visitor.visitorId,
-      starred: !visitor.starred,
-    });
   };
 
   const toTimeStringDate = (value: string) => toNiceDate(Number(value));
@@ -45,21 +36,12 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, query }) => {
     <tr 
       className='hover'
       role='link' 
-      data-href={`/sites/${router.query.site_id}/visitors/${visitor.visitorId}`} 
+      data-href={`/sites/${router.query.site_id}/visitors/${visitor.id}`} 
       onClick={viewVisitor} 
       tabIndex={0}
     >
       <td className='no-overflow'>
-        <Tooltip
-          button={
-            <span onClick={starVisitor} className={classnames('star', { active: visitor.starred })}>
-              {visitor.starred ? <i className='ri-star-fill' /> : <i className='ri-star-line' />}
-            </span>
-          }
-        >
-          {visitor.starred ? 'Starred' : 'Not starred'}
-        </Tooltip>
-        {visitor.userId}
+        <VisitorStarred site={site} visitor={visitor} />
       </td>
       <td><a href='#'>{visitor.recordingCount}</a></td>
       <td>{toTimeStringDate(visitor.firstViewedAt)}</td>
