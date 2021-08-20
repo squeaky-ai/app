@@ -1,5 +1,5 @@
 import { Note } from 'types/note';
-import { VisitorDetails } from 'types/visitor';
+import { Visitor } from 'types/visitor';
  
 export type RecordingSortBy =
   'DATE_DESC' |
@@ -32,7 +32,7 @@ export interface Recording {
   nextRecording?: Recording;
   connectedAt: number;
   disconnectedAt: number;
-  visitor: VisitorDetails;
+  visitor: Visitor;
 }
 
 export interface Tag {

@@ -3,12 +3,12 @@ import type { FC } from 'react';
 import classnames from 'classnames';
 import { Tooltip } from 'components/tooltip';
 import { visitorStarred } from 'lib/api/graphql';
-import type { Visitor, VisitorDetails } from 'types/visitor';
+import type { Visitor } from 'types/visitor';
 import type { Site } from 'types/site';
 
 interface Props {
   site: Site;
-  visitor: Visitor | VisitorDetails;
+  visitor: Visitor;
 }
 
 export const VisitorStarred: FC<Props> = ({ site, visitor }) => {

@@ -64,6 +64,7 @@ export const GET_RECORDING_QUERY = gql`
         visitor {
           id
           visitorId
+          starred
         }
         tags {
           id

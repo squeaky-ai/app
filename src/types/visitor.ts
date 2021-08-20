@@ -15,15 +15,15 @@ export type PageSortBy =
 export interface Visitor {
   id: string;
   visitorId: string;
-  recordingCount: number;
-  firstViewedAt: string;
-  lastActivityAt: string;
-  language: string;
-  viewportX: number;
-  viewportY: number;
-  deviceType: string;
-  browser: string;
-  browserString: string;
+  recordingCount?: number;
+  firstViewedAt?: string;
+  lastActivityAt?: string;
+  language?: string;
+  viewportX?: number;
+  viewportY?: number;
+  deviceType?: string;
+  browser?: string;
+  browserString?: string;
   pageViewCount?: number;
   starred: boolean;
   recordings?: PaginatedRecordingsResponse;
@@ -62,12 +62,6 @@ export interface PagePagination {
 
 export interface VisitorStarredMutationInput {
   siteId: string;
-  visitorId: string;
-  starred: boolean;
-}
-
-export interface VisitorDetails {
-  id: string;
   visitorId: string;
   starred: boolean;
 }
