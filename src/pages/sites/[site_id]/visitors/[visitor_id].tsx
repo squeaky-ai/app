@@ -30,7 +30,7 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
     pagesSort: pageviewSort
   });
 
-  const { site_id, visitor_id } = router.query;
+  const { site_id } = router.query;
 
   if (!visitor) {
     return <Spinner />
@@ -39,7 +39,7 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
   return (
     <>
       <Head>
-        <title>Squeaky / Site Visitors / {visitor_id}</title>
+        <title>Squeaky / Site Visitors / {visitor.userId}</title>
       </Head>
 
       <Page user={user} scope={[]}>
@@ -50,17 +50,17 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
               items={
                 [
                   { name: 'Visitors', href: `/sites/${site_id}/visitors` }, 
-                  { name: `ID: ${visitor_id}` }
+                  { name: `ID: ${visitor.userId}` }
                 ]
               } 
             />
 
             <h3 className='title'>
               <i className='ri-user-line' />
-              {visitor_id}
+              {visitor.userId}
             </h3>
 
-            <VisitorSummary visitor={visitor} />
+            <VisitorSummary site={site} visitor={visitor} />
 
             <VisitorRecording 
               visitor={visitor} 

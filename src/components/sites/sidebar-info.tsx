@@ -20,7 +20,7 @@ export const SidebarInfo: FC<Props> = ({ recording, setActiveTab }) => (
     </div>
     <div className='row'>
       <dt>User</dt>
-      <dd>{recording.visitorId}</dd>
+      <dd>{recording.userId}</dd>
     </div>
     <div className='row'>
       <dt>Date</dt>

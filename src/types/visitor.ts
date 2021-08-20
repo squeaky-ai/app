@@ -14,6 +14,7 @@ export type PageSortBy =
 
 export interface Visitor {
   visitorId: string;
+  userId: string;
   recordingCount: number;
   firstViewedAt: string;
   lastActivityAt: string;
@@ -24,6 +25,7 @@ export interface Visitor {
   browser: string;
   browserString: string;
   pageViewCount?: number;
+  starred: boolean;
   recordings?: PaginatedRecordingsResponse;
   pages?: PaginatedPagesResponse;
   averageSessionDuration?: number;
@@ -56,4 +58,10 @@ export interface PagePagination {
   pageSize: number;
   total: number;
   sort: PageSortBy;
+}
+
+export interface VisitorStarredMutationInput {
+  siteId: string;
+  visitorId: string;
+  starred: boolean;
 }

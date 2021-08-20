@@ -13,6 +13,7 @@ export interface Recording {
   language: string;
   sessionId: string;
   visitorId: string;
+  userId: string;
   viewed: boolean;
   bookmarked: boolean;
   duration: number;

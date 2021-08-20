@@ -23,6 +23,7 @@ export const GET_RECORDINGS_QUERY = gql`
           viewportY
           sessionId
           visitorId
+          userId
           connectedAt
           disconnectedAt
         }
@@ -45,6 +46,7 @@ export const GET_RECORDING_QUERY = gql`
         id
         sessionId
         visitorId
+        userId
         language
         viewed
         duration

@@ -7,6 +7,7 @@ export const GET_VISITORS_QUERY = gql`
       name
       visitors(page: $page, size: $size, query: $query, sort: $sort) {
         items {
+          userId
           visitorId
           recordingCount
           firstViewedAt
@@ -17,6 +18,7 @@ export const GET_VISITORS_QUERY = gql`
           deviceType
           browser
           browserString
+          starred
         }
         pagination {
           pageSize
@@ -34,6 +36,7 @@ export const GET_VISITOR_QUERY = gql`
       id
       name
       visitor(visitorId: $visitorId) {
+        userId
         visitorId
         recordingCount
         firstViewedAt
@@ -45,6 +48,7 @@ export const GET_VISITOR_QUERY = gql`
         browser
         browserString
         pageViewCount
+        starred
         recordings(page: $recordingPage, size: 10, sort: $recordingSort) {
           items {
             id

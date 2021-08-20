@@ -90,6 +90,14 @@ import {
   FeedbackCreateMutation
 } from 'types/feedback';
 
+import { 
+  VISITOR_STARRED_MUTATION
+} from 'data/visitors/mutations';
+
+import {
+  VisitorStarredMutationInput
+} from 'types/visitor';
+
 const ACCEPT_INCOMING = <E, I>(_existing: E, incoming: I[]): I[] => cloneDeep(incoming);
 
 export const cache = new InMemoryCache({
@@ -131,6 +139,9 @@ export const cache = new InMemoryCache({
           }
         }
       }
+    },
+    Visitor: {
+      merge: ACCEPT_INCOMING
     }
   }
 });
@@ -489,4 +500,13 @@ export const feedbackCreate = async (input: FeedbackCreateMutation): Promise<voi
     mutation: FEEDBACK_CREATE_MUTATION,
     variables: { input }
   });
+};
+
+export const visitorStarred = async (input: VisitorStarredMutationInput): Promise<SiteMutationResponse> => {
+  const { data } = await client.mutate({
+    mutation: VISITOR_STARRED_MUTATION,
+    variables: input
+  });
+
+  return { site: data.visitorStarred };
 };
