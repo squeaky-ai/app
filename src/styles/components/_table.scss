@@ -1,63 +1,44 @@
 .table {
-  table {
-    background: var(--white);
-    border: 1px solid var(--gray-150);
-    border-collapse: separate;
-    border-radius: var(--border-radius-md);
-    border-spacing: 0;
-    color: var(--gray-700);
-    width: 100%;
+  background: var(--white);
+  border: 1px solid var(--gray-150);
+  border-radius: var(--border-radius-md);
+  font-size: 13px;
+  line-height: 16px;
+  width: 100%;
 
-    table {
-      background: transparent;
-      border: none;
+  .row {
+    align-items: center;
+    border-top: 1px solid var(--gray-150);
+    color: var(--gray-700);
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    height: 4rem;
+    text-decoration: none;
+
+    &:hover {
+      background: var(--gray-100);
     }
 
-    thead {
-      border: 1px solid var(--gray-150);
-      
-      th {
+    .cell {
+      overflow: hidden;
+      padding: 0 1rem;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &.head {
+      border-top: none;
+
+      &:hover {
+        background: transparent;
+      }
+
+      .cell {
+        border-right: 1px solid var(--gray-150);
         color: var(--gray-800);
-        font-weight: var(--font-weight-normal);
-        padding: 1rem 0 1rem 1.5rem;
-        text-align: left;
-        white-space: nowrap;
 
         &:last-of-type {
-          padding-left: 0;
-          padding-right: 1.5rem;
-        }
-      }
-    }
-
-    tbody {
-      td {
-        border-top: 1px solid var(--gray-150);
-        overflow: hidden;
-        padding: .75rem 0 .75rem 1rem;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-
-        &.no-overflow {
-          overflow: visible;
-        }
-      }
-
-      tr.hover {
-        & > td {
-          border-color: transparent;
-          border-top-color: var(--gray-150);
-          border-style: solid;
-          border-width: 1px 0;
-          cursor: pointer;
-        }
-
-        &:focus {
-          outline-offset: -2px;
-        }
-
-        &:hover {
-          background: var(--gray-100);
+          border-right: none;
         }
       }
     }

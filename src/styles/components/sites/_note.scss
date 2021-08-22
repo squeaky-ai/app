@@ -24,7 +24,13 @@
       }
 
       .dropdown-menu {
+        left: 100%;
+        top: calc(100% + 1rem);
         width: 100px;
+
+        .button {
+          padding: 0.5rem 0.75rem;
+        }
       }
     }
 

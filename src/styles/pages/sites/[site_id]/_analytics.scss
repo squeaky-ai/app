@@ -186,13 +186,9 @@
           .pages {
             grid-area: pages;
 
-            table {
-              table-layout: fixed;
-
-              thead {
-                th {
-                  width: 33%;
-                }
+            .table {
+              .row {
+                grid-template-columns: repeat(3, 1fr);
               }
             }
           }

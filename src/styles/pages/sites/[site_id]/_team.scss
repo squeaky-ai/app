@@ -6,26 +6,17 @@
   }
 
   .table {
-    td {
-      color: var(--gray-700);
-    }
-
-    tr {
-      height: 3.75rem;
+    .row {
+      grid-template-columns: repeat(4, 1fr);
     }
 
     .role {
-      width: 240px;
-
       .select {
         margin: 0;
-        width: 160px;
       }
     }
   
-    .options {
-      width: 340px;
-  
+    .options {  
       .button {
         background: none;
         border: none;

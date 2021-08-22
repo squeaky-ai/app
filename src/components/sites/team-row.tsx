@@ -9,6 +9,7 @@ import { DeleteTeam } from 'components/sites/delete-team';
 import { LeaveTeam } from 'components/sites/leave-team';
 import { Button } from 'components/button';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
+import { Row, Cell } from 'components/table';
 import { teamUpdate } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
 import type { Team } from 'types/team';
@@ -72,17 +73,19 @@ export const TeamRow: FC<Props> = ({ user, site, team }) => {
 
   return (
     <>
-      <tr>
-        <td>
+      <Row>
+        <Cell>
           {invited && <i>Invited</i>}
           {!invited && (
             self
               ? <><b>{team.user.fullName}</b> <i>(you)</i></>
               : <span>{team.user.fullName}</span>
           )}
-        </td>
-        <td>{team.user.email}</td>
-        <td className='role'>
+        </Cell>
+        <Cell>
+          {team.user.email}
+        </Cell>
+        <Cell className='role'>
           {owner || userRole.role <= team.role
             ? team.roleName
             : (
@@ -92,8 +95,8 @@ export const TeamRow: FC<Props> = ({ user, site, team }) => {
                 </Select>
               )
           }
-        </td>
-        <td className='options'>
+        </Cell>
+        <Cell className='options'>
           {invited && (
             <>
               <ResendInvitation site={site} team={team} />
@@ -110,8 +113,8 @@ export const TeamRow: FC<Props> = ({ user, site, team }) => {
               )}
             </>
           )}
-        </td>
-      </tr>
+        </Cell>
+      </Row>
 
       <Modal ref={ref}>
         <ModalBody aria-labelledby='change-role-title' aria-describedby='change-role-description'>

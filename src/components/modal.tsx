@@ -1,7 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import FocusTrap from 'focus-trap-react';
 import classnames from 'classnames';
+import { Portal } from 'components/portal';
 import type { FC } from 'react';
 
 interface Props {
@@ -11,20 +11,6 @@ interface Props {
 interface State {
   show: boolean;
 }
-
-export const Portal: FC = ({ children }) => {
-  const selector = '#modal-root';
-
-  const ref = React.useRef<HTMLElement>();
-  const [mounted, setMounted] = React.useState<boolean>(false);
-
-  React.useEffect(() => {
-    ref.current = document.querySelector(selector);
-    setMounted(true);
-  }, [selector]);
-
-  return mounted ? ReactDOM.createPortal(children, ref.current) : null
-};
 
 export class Modal extends React.Component<Props, State> {
   public constructor(props: Props) {

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { Pagination } from 'components/pagination';
 import { Container } from 'components/container';
 import { RecordingsItem } from 'components/sites/recordings-item';
+import { Table, Row, Cell } from 'components/table';
 import { Sort } from 'components/sort';
 import { PageSize } from 'components/sites/page-size';
 import { useRecordings } from 'hooks/use-recordings';
@@ -39,33 +40,27 @@ export const Recordings: FC<Props> = ({ query }) => {
         </Container>
       )}
     
-      <div className='table recordings-list'>
-        <table cellSpacing='0'>
-          <thead>
-            <tr>
-              <th>Status</th>
-              <th>Recording ID</th>
-              <th>User ID</th>
-              <th>Date &amp; Time<Sort name='date' order={sort} onAsc={() => setSort('DATE_ASC')} onDesc={() => setSort('DATE_DESC')} /></th>
-              <th>Duration <Sort name='duration' order={sort} onAsc={() => setSort('DURATION_ASC')} onDesc={() => setSort('DURATION_DESC')} /></th>
-              <th>Pages <Sort name='page_size' order={sort} onAsc={() => setSort('PAGE_SIZE_ASC')} onDesc={() => setSort('PAGE_SIZE_DESC')} /></th>
-              <th>Start &amp; Exit URL</th>
-              <th>Device &amp; Viewport (px)</th>
-              <th>Browser</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {items.map(recording => (
-              <RecordingsItem 
-                recording={recording} 
-                query={query} 
-                key={recording.id} 
-              />
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <Table className='recordings-list'>
+        <Row head>
+          <Cell>Status</Cell>
+          <Cell>Recording ID</Cell>
+          <Cell>User ID</Cell>
+          <Cell>Date &amp; Time<Sort name='date' order={sort} onAsc={() => setSort('DATE_ASC')} onDesc={() => setSort('DATE_DESC')} /></Cell>
+          <Cell>Duration <Sort name='duration' order={sort} onAsc={() => setSort('DURATION_ASC')} onDesc={() => setSort('DURATION_DESC')} /></Cell>
+          <Cell>Pages <Sort name='page_size' order={sort} onAsc={() => setSort('PAGE_SIZE_ASC')} onDesc={() => setSort('PAGE_SIZE_DESC')} /></Cell>
+          <Cell>Start &amp; Exit URL</Cell>
+          <Cell>Device &amp; Viewport (px)</Cell>
+          <Cell>Browser</Cell>
+          <Cell />
+        </Row>
+        {items.map(recording => (
+          <RecordingsItem 
+            recording={recording} 
+            query={query} 
+            key={recording.id} 
+          />
+        ))}
+      </Table>
       
       <div className='recordings-footer'>
         <Pagination 

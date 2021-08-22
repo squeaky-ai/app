@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import { sum, slice } from 'lodash';
+import { Table, Row, Cell } from 'components/table';
 import type { AnalyticsPage } from 'types/analytics';
 
 interface Props {
@@ -15,25 +16,19 @@ export const AnalyticsPages: FC<Props> = ({ pages }) => {
   const results = slice(pages, 0, 10);
 
   return (
-    <div className='table analytics-pages'>
-      <table cellSpacing='0'>
-        <thead>
-          <tr>
-            <th>Page</th>
-            <th>Views</th>
-            <th>Average time on page</th>
-          </tr>
-        </thead>
-        <tbody>
-          {results.map(page => (
-            <tr key={page.path}>
-              <td>{page.path}</td>
-              <td><b>{page.count}</b> <span className='percentage'>({percentage(page.count)}%)</span></td>
-              <td>00:00:00</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <Table className='analytics-pages'>
+      <Row head>
+        <Cell>Page</Cell>
+        <Cell>Views</Cell>
+        <Cell>Average time on page</Cell>
+      </Row>
+      {results.map(page => (
+        <Row key={page.path}>
+          <Cell>{page.path}</Cell>
+          <Cell><b>{page.count}</b> <span className='percentage'>({percentage(page.count)}%)</span></Cell>
+          <Cell>00:00:00</Cell>
+        </Row>
+      ))}
+    </Table>
   );
 };

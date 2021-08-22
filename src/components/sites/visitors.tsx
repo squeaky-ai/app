@@ -7,6 +7,7 @@ import { Container } from 'components/container';
 import { Sort } from 'components/sort';
 import { PageSize } from 'components/sites/page-size';
 import { VisitorsItem } from 'components/sites/visitors-item';
+import { Table, Row, Cell } from 'components/table';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 import type { Site } from 'types/site';
 import type { VisitorSortBy } from 'types/visitor';
@@ -41,26 +42,57 @@ export const Visitors: FC<Props> = ({ site, query }) => {
         </Container>
       )}
 
-      <div className='table visitors-list'>
-        <table cellSpacing='0'>
-          <thead>
-            <tr>
-              <th>Visitor ID</th>
-              <th>Recordings<Sort name='recordings_count' order={sort} onAsc={() => setSort('RECORDINGS_COUNT_ASC')} onDesc={() => setSort('RECORDINGS_COUNT_DESC')} /></th>
-              <th>First visited<Sort name='first_viewed_at' order={sort} onAsc={() => setSort('FIRST_VIEWED_AT_ASC')} onDesc={() => setSort('FIRST_VIEWED_AT_DESC')} /></th>
-              <th>Last activity<Sort name='last_activity_at' order={sort} onAsc={() => setSort('LAST_ACTIVITY_AT_ASC')} onDesc={() => setSort('LAST_ACTIVITY_AT_DESC')} /></th>
-              <th>Language</th>
-              <th>Device &amp; viewport</th>
-              <th>Browser</th>
-            </tr>
-          </thead>
-          <tbody>
-            {items.map(v => (
-              <VisitorsItem site={site} visitor={v} key={v.visitorId} query={query} />
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <Table className='visitors-list'>
+        <Row head>
+          <Cell>
+            Visitor ID
+          </Cell>
+          <Cell>
+            Recordings
+            <Sort 
+              name='recordings_count' 
+              order={sort} 
+              onAsc={() => setSort('RECORDINGS_COUNT_ASC')} 
+              onDesc={() => setSort('RECORDINGS_COUNT_DESC')} 
+            />
+          </Cell>
+          <Cell>
+            First visited
+            <Sort 
+              name='first_viewed_at' 
+              order={sort} 
+              onAsc={() => setSort('FIRST_VIEWED_AT_ASC')} 
+              onDesc={() => setSort('FIRST_VIEWED_AT_DESC')} 
+            />
+          </Cell>
+          <Cell>
+            Last activity
+            <Sort 
+              name='last_activity_at' 
+              order={sort} 
+              onAsc={() => setSort('LAST_ACTIVITY_AT_ASC')} 
+              onDesc={() => setSort('LAST_ACTIVITY_AT_DESC')} 
+            />
+          </Cell>
+          <Cell>
+            Language
+          </Cell>
+          <Cell>
+            Device &amp; viewport
+          </Cell>
+          <Cell>
+            Browser
+          </Cell>
+        </Row>
+        {items.map(v => (
+          <VisitorsItem 
+            site={site} 
+            visitor={v} 
+            key={v.visitorId} 
+            query={query} 
+          />
+        ))}
+      </Table>
       
       <div className='visitors-footer'>
         <Pagination 

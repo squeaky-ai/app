@@ -8,6 +8,7 @@ import { InviteTeam } from 'components/sites/invite-team';
 import { TeamRow } from 'components/sites/team-row';
 import { Page } from 'components/sites/page';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
+import { Table, Row, Cell } from 'components/table';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { OWNER, ADMIN } from 'data/teams/constants';
 
@@ -31,21 +32,15 @@ const SitesTeam: NextPage<ServerSideProps> = ({ user }) => (
             <p>This page allows you to view, invite and manage the roles of any team members associated with this site. Adding members is always free of charge, regardless of their role.</p>
           </Container>
 
-          <div className='table'>
-            <table cellSpacing='0'>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Email address</th>
-                  <th>Role</th>
-                  <th>Options</th>
-                </tr>
-              </thead>
-              <tbody>
-                {site.team.map(team => <TeamRow key={team.id} team={team} site={site} user={user} />)}
-              </tbody>
-            </table>
-          </div>
+          <Table>
+            <Row head>
+              <Cell>Name</Cell>
+              <Cell>Email address</Cell>
+              <Cell>Role</Cell>
+              <Cell>Options</Cell>
+            </Row>
+            {site.team.map(team => <TeamRow key={team.id} team={team} site={site} user={user} />)}
+          </Table>
 
           <InviteTeam site={site} />
 

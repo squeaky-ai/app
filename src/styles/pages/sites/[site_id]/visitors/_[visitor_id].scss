@@ -94,47 +94,10 @@
     }
 
     .visitor-recordings-table {
-      color: var(--gray-700);
-      font-size: 13px;
-      line-height: 16px;
       margin-bottom: 2rem;
 
-      table {
-        table-layout: fixed;
-      }
-
-      thead {
-        th {
-          padding: 1.5rem 0 1.5rem 1.5rem;
-
-          &:nth-of-type(1) {
-            width: 110px;
-          }
-
-          &:nth-of-type(2) {
-            width: 140px;
-          }
-
-          &:nth-of-type(3) {
-            width: 170px;
-          }
-
-          &:nth-of-type(4) {
-            width: 110px;
-          }
-
-          &:nth-of-type(5) {
-            width: 90px;
-          }
-
-          &:nth-of-type(6) {
-            width: 200px;
-          }
-
-          &:nth-of-type(7) {
-            width: 60px;
-          }
-        }
+      .row {
+        grid-template-columns: 105px 1fr 1fr 1fr 1fr 2fr 80px;
       }
     }
 
@@ -181,37 +144,10 @@
     }
 
     .visitor-pages-table {
-      color: var(--gray-700);
-      font-size: 13px;
-      line-height: 16px;
       margin-bottom: 2rem;
       
-    table {
-      table-layout: fixed;
-    }
-
-      thead {
-        th {
-          padding: 1.5rem 0 1.5rem 1.5rem;
-
-          &:nth-of-type(1) {
-            width: 33%;
-          }
-
-          &:nth-of-type(2) {
-            width: 33%;
-          }
-
-          &:nth-of-type(3) {
-            width: 33%;
-          }
-        }
-      }
-
-      table > tbody {
-        td {
-          height: 66px;
-        }
+      .row {
+        grid-template-columns: repeat(3, 1fr);
       }
     }
   }

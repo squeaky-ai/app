@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import Link from 'next/link';
 import classnames from 'classnames';
 import { useRouter } from 'next/router';
 import { Highlighter } from 'components/highlighter';
@@ -10,6 +11,7 @@ import { Browser } from 'components/browser';
 import { Dropdown } from 'components/dropdown';
 import { Device } from 'components/device';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
+import { Cell } from 'components/table';
 import { toNiceDate, toTimeString } from 'lib/dates';
 import { useToasts } from 'hooks/use-toasts';
 import { recordingDelete, recordingBookmarked } from 'lib/api/graphql';
@@ -25,14 +27,12 @@ export const RecordingsItem: FC<Props> = ({ query, recording }) => {
   const router = useRouter();
   const ref = React.useRef<Modal>();
 
-  const viewRecording = (event: React.MouseEvent) => {
+  const onRowClick = (event: React.MouseEvent) => {
     const element = event.target as HTMLElement;
     const ignored = element.closest('button');
 
     if (ignored) {
       event.preventDefault();
-    } else {
-      router.push(`/sites/${router.query.site_id}/recordings/${recording.id}`);
     }
   };
 
@@ -72,76 +72,82 @@ export const RecordingsItem: FC<Props> = ({ query, recording }) => {
 
   return (
     <>
-      <tr 
-        className='hover recording-row'
-        role='link' 
-        data-href={`/sites/${router.query.site_id}/recordings/${recording.id}`} 
-        onClick={viewRecording} 
-        tabIndex={0}
-      >
-        <td>
-          {recording.viewed
-            ? <Pill type='secondary'>Viewed</Pill>
-            : <Pill type='primary'>New</Pill>
-          }
-        </td>
-        <td className="no-overflow">
-          <Tooltip
-            button={
-              <span onClick={bookmarkRecording} className={classnames('bookmark', { active: recording.bookmarked })}>
-              <i className='ri-bookmark-3-line' />
-            </span>
+      <Link href={`/sites/${router.query.site_id}/recordings/${recording.id}`}>
+        <a className='row recording-row' onClick={onRowClick}>
+          <Cell>
+            {recording.viewed
+              ? <Pill type='secondary'>Viewed</Pill>
+              : <Pill type='primary'>New</Pill>
             }
-          >
-            {recording.bookmarked ? 'Bookmarked' : 'Not bookmarked'}
-          </Tooltip>
-          <Highlighter value={query}>{recording.sessionId}</Highlighter>
-        </td>
-        <td><Highlighter value={query}>{recording.visitor.visitorId}</Highlighter></td>
-        <td><Highlighter value={query}>{toNiceDate(recording.connectedAt)}</Highlighter></td>
-        <td>{toTimeString(recording.duration)}</td>
-        <td className='no-overflow'>
-          <Tooltip button={recording.pageCount} buttonClassName='link'>
-            <ul className='tooltip-list'>
-              {recording.pageViews.map((page, i) => (
-                <li key={page + i}>{page}</li>
-              ))}
-            </ul>
-          </Tooltip>
-        </td>
-        <td>
-          <table className='start-exit-page'>
-            <tbody>
-              <tr>
-                <td>START URL</td>
-                <td><Highlighter value={query}>{recording.startPage}</Highlighter></td>
-              </tr>
-              <tr>
-                <td>EXIT URL</td>
-                <td><Highlighter value={query}>{recording.exitPage}</Highlighter></td>
-              </tr>
-            </tbody>
-          </table>
-        </td>
-        <td className="no-overflow">
-          <Tooltip positionX='right' button={<Device deviceType={recording.deviceType} />}>
-            {recording.deviceType === 'Computer' ? 'Desktop or Laptop Device' : 'Mobile Device'}
-          </Tooltip>
-          <Highlighter value={query}>{recording.viewportX}</Highlighter> x <Highlighter value={query}>{recording.viewportY}</Highlighter>
-        </td>
-        <td className='no-overflow'>
-          <Tooltip positionX='right' button={<Browser name={recording.browser} height={24} width={24} />}>
-            {recording.browserString}
-          </Tooltip>
-        </td>
-        <td className='no-overflow'>
-          <Dropdown button={<i className='ri-more-2-fill' />} buttonClassName='options'>
-            <Button onClick={openModal}>
-              <i className='ri-delete-bin-line' /> Delete
-            </Button>
-          </Dropdown>
-        </td>
-      </tr>
+          </Cell>
+          <Cell>
+            <Tooltip
+              button={
+                <span onClick={bookmarkRecording} className={classnames('bookmark', { active: recording.bookmarked })}>
+                <i className='ri-bookmark-3-line' />
+              </span>
+              }
+            >
+              {recording.bookmarked ? 'Bookmarked' : 'Not bookmarked'}
+            </Tooltip>
+            <Highlighter value={query}>{recording.sessionId}</Highlighter>
+          </Cell>
+          <Cell>
+            <Highlighter value={query}>
+              {recording.visitor.visitorId}
+            </Highlighter>
+          </Cell>
+          <Cell>
+            <Highlighter value={query}>
+              {toNiceDate(recording.connectedAt)}
+            </Highlighter>
+          </Cell>
+          <Cell>
+            {toTimeString(recording.duration)}
+          </Cell>
+          <Cell>
+            <Tooltip button={recording.pageCount} buttonClassName='link'>
+              <ul className='tooltip-list'>
+                {recording.pageViews.map((page, i) => (
+                  <li key={page + i}>{page}</li>
+                ))}
+              </ul>
+            </Tooltip>
+          </Cell>
+          <Cell>
+            <table className='start-exit-page'>
+              <tbody>
+                <tr>
+                  <td>START URL</td>
+                  <td><Highlighter value={query}>{recording.startPage}</Highlighter></td>
+                </tr>
+                <tr>
+                  <td>EXIT URL</td>
+                  <td><Highlighter value={query}>{recording.exitPage}</Highlighter></td>
+                </tr>
+              </tbody>
+            </table>
+          </Cell>
+          <Cell>
+            <Tooltip positionX='right' button={<Device deviceType={recording.deviceType} />}>
+              {recording.deviceType === 'Computer' ? 'Desktop or Laptop Device' : 'Mobile Device'}
+            </Tooltip>
+            <Highlighter value={query}>{recording.viewportX}</Highlighter> x <Highlighter value={query}>{recording.viewportY}</Highlighter>
+          </Cell>
+          <Cell>
+            <Tooltip positionX='right' button={<Browser name={recording.browser} height={24} width={24} />}>
+              {recording.browserString}
+            </Tooltip>
+          </Cell>
+          <Cell>
+            <Dropdown portal button={<i className='ri-more-2-fill' />} buttonClassName='options'>
+              <Button onClick={openModal}>
+                <i className='ri-delete-bin-line' /> Delete
+              </Button>
+            </Dropdown>
+          </Cell>
+        </a>
+      </Link>
 
       <Modal ref={ref}>
         <ModalBody aria-labelledby='delete-recording-title' aria-describedby='delete-recording-description'>

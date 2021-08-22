@@ -2,6 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
 import { Button } from 'components/button';
+import { Portal } from 'components/portal';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   button: string | React.ReactNode;
@@ -21,14 +22,27 @@ export const Tooltip: FC<Props> = ({ button, buttonClassName, positionX, classNa
     setOpen(false);
   };
 
+  const coords = () => {
+    const { x, y, height, width } = ref.current.getBoundingClientRect();
+
+    const left = positionX === 'right' ? x + width : x;
+    const top = y + height + 16;
+
+    return { left, top };
+  };
+
   return (
-    <div ref={ref} className={classnames('tooltip', className, positionX, { open, })}>
+    <div ref={ref} className={classnames('tooltip', className)}>
       <Button onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} className={buttonClassName}>
         {button}
       </Button>
-      <div className='tooltip-menu'>
-        {children}
-      </div>
+      <Portal>
+        {open && (
+          <div className={classnames('tooltip-menu', positionX)} style={coords()}>
+            {children}
+          </div>
+        )}
+      </Portal>
     </div>
   );
 };
