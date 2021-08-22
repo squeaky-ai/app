@@ -8,6 +8,7 @@ import { Divider } from 'components/divider';
 import { PlayerPreview } from 'components/sites/player-preview';
 import { VisitorStarred } from 'components/sites/visitor-starred';
 import { useOverview } from 'hooks/use-overview';
+import { toTimeString } from 'lib/dates';
 import type { Site } from 'types/site';
 
 interface Props {
@@ -94,7 +95,7 @@ export const Overview: FC<Props> = ({ site }) => {
               </li>
               <li>
                 <span className='name'>Duration</span>
-                <span className='value'>{recording.duration}</span>
+                <span className='value'>{toTimeString(recording.duration)}</span>
               </li>
               <li>
                 <span className='name'>Pages</span>
