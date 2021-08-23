@@ -52,7 +52,7 @@ const Signup: NextPage<ServerSideProps> = () => {
   return (
     <>
       <Head>
-        <title>Squeaky / Sign up</title>
+        <title>Squeaky | Sign up</title>
       </Head>
 
       <div className='center'>

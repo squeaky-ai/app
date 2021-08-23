@@ -71,7 +71,7 @@ const Login: NextPage<ServerSideProps> = () => {
   return (
     <>
       <Head>
-        <title>Squeaky / Log in</title>
+        <title>Squeaky | Log in</title>
       </Head>
 
       <div className='center'>

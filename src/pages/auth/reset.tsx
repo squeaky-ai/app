@@ -45,7 +45,7 @@ const Reset: NextPage<ServerSideProps> = () => {
   return (
     <>
       <Head>
-        <title>Squeaky / Reset Password</title>
+        <title>Squeaky | Reset Password</title>
       </Head>
 
       <div className='center'>

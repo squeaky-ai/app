@@ -27,7 +27,7 @@ const UsersPassword: NextPage<ServerSideProps> = ({ user }) => {
   return (
     <>
       <Head>
-        <title>Squeaky / User / Password</title>
+        <title>Squeaky | User / Password</title>
       </Head>
 
       <Main>

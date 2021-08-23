@@ -15,7 +15,7 @@ const Sites: NextPage<ServerSideProps> = () => {
   return (
     <>
       <Head>
-        <title>Squeaky / Sites</title>
+        <title>Squeaky | Sites</title>
       </Head>
 
       {!loading && sites.length === 0 && (

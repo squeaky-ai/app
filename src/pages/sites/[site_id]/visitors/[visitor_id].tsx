@@ -39,7 +39,7 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
   return (
     <>
       <Head>
-        <title>Squeaky / Site Visitors / {visitor.visitorId}</title>
+        <title>Squeaky | Site Visitors / {visitor.visitorId}</title>
       </Head>
 
       <Page user={user} scope={[]}>

@@ -10,7 +10,7 @@ import { ServerSideProps, getServerSideProps } from 'lib/auth';
 const UsersDelete: NextPage<ServerSideProps> = () => (
   <>
     <Head>
-      <title>Squeaky / User / Delete</title>
+      <title>Squeaky | User / Delete</title>
     </Head>
 
     <Main>

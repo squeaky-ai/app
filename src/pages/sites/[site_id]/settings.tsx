@@ -45,7 +45,7 @@ const SitesSettings: NextPage<ServerSideProps> = ({ user }) => {
   return (
     <>
       <Head>
-        <title>Squeaky / Site Settings</title>
+        <title>Squeaky | Site Settings</title>
       </Head>
 
       <Page user={user} scope={[OWNER, ADMIN]}>

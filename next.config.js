@@ -2,7 +2,8 @@ const { API_HOST, NODE_ENV } = process.env;
 
 module.exports = {
   publicRuntimeConfig: {
-    apiHost: API_HOST || 'http://localhost:4000'
+    apiHost: API_HOST || 'http://localhost:4000',
+    webHost: NODE_ENV === 'production' ? 'https://squeaky.ai' : 'http://localhost:3000',
   },
   async rewrites() {
     return NODE_ENV !== 'production' ? [

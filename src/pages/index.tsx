@@ -23,7 +23,7 @@ const Home: NextPage<ServerSideProps> = ({ user }) => {
   return (
     <>
       <Head>
-        <title>Squeaky</title>
+        <title>Squeaky.ai | Better Web Analytics</title>
       </Head>
 
       <div className='header'>

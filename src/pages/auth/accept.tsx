@@ -76,7 +76,7 @@ const Accept: NextPage<ServerSideProps> = ({ user }) => {
   return (
     <>
       <Head>
-        <title>Squeaky / Accept Invitation</title>
+        <title>Squeaky | Accept Invitation</title>
       </Head>
 
       <div className='center'>

@@ -8,7 +8,7 @@ import { ServerSideProps, getServerSideProps } from 'lib/auth';
 const Contact: NextPage<ServerSideProps> = () => (
   <>
     <Head>
-      <title>Squeaky / Contact</title>
+      <title>Squeaky | Contact</title>
     </Head>
 
     <Main>

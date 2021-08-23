@@ -93,7 +93,7 @@ const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
   return (
     <>
       <Head>
-        <title>Squeaky / Site Player</title>
+        <title>Squeaky | Site Player</title>
       </Head>
 
       <PlayerWrapper 

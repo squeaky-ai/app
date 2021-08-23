@@ -8,7 +8,7 @@ import { Container } from 'components/container';
 const InternalServerError: NextPage = () => (
   <>
     <Head>
-      <title>Squeaky / 404</title>
+      <title>Squeaky | Internal Server Error</title>
     </Head>
 
     <Container className='lg error-state'>

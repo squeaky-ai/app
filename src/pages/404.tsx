@@ -8,7 +8,7 @@ import { Container } from 'components/container';
 const NotFound: NextPage = () => (
   <>
     <Head>
-      <title>Squeaky / 404</title>
+      <title>Squeaky | Page Not Found</title>
     </Head>
 
     <Container className='lg error-state'>

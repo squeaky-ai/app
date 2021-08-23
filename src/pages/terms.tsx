@@ -8,7 +8,7 @@ import { ServerSideProps, getServerSideProps } from 'lib/auth';
 const Terms: NextPage<ServerSideProps> = () => (
   <>
     <Head>
-      <title>Squeaky / Terms</title>
+      <title>Squeaky | Terms</title>
     </Head>
 
     <Main>

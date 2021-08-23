@@ -34,7 +34,7 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
   return (
     <>
       <Head>
-        <title>Squeaky / Site Recordings</title>
+        <title>Squeaky | Site Recordings</title>
       </Head>
 
       <Page user={user} scope={[]}>

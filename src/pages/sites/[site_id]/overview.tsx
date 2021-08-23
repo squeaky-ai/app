@@ -15,7 +15,7 @@ import { ServerSideProps, getServerSideProps } from 'lib/auth';
 const SitesOverview: NextPage<ServerSideProps> = ({ user }) => (
   <>
     <Head>
-      <title>Squeaky / Site Overview</title>
+      <title>Squeaky | Site Overview</title>
     </Head>
 
     <Page user={user} scope={[]}>

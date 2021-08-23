@@ -27,7 +27,7 @@ const UsersNew: NextPage<ServerSideProps> = ({ user }) => {
   return (
     <>
       <Head>
-        <title>Squeaky / User / New</title>
+        <title>Squeaky | User / New</title>
       </Head>
 
       <Main>

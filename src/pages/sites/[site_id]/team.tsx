@@ -15,7 +15,7 @@ import { OWNER, ADMIN } from 'data/teams/constants';
 const SitesTeam: NextPage<ServerSideProps> = ({ user }) => (
   <>
     <Head>
-      <title>Squeaky / Site Team</title>
+      <title>Squeaky | Site Team</title>
     </Head>
 
     <Page user={user} scope={[OWNER, ADMIN]}>

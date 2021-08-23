@@ -51,7 +51,7 @@ const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
   return (
     <>
       <Head>
-        <title>Squeaky / Site Analytics</title> 
+        <title>Squeaky | Site Analytics</title> 
       </Head>
 
       <Page user={user} scope={[]}>
