@@ -53,7 +53,7 @@ const Privacy: NextPage<ServerSideProps> = () => (
         <p>We may use your Personal Data to contact you with newsletters, marketing or promotional materials and other information that may be of interest to you. You may opt out of receiving any, or all, of these communications from us by following the unsubscribe link or by emailing at hello@squeaky.ai.</p>
         <p><b>Usage Data</b></p>
         <p>We may also collect information that your browser sends whenever you visit our Service or when you access Service by or through a mobile device (“Usage Data”).</p>
-        <p>This Usage Data may include information such as your computer's Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that you visit, the time and date of your visit, the time spent on those pages, unique device identifiers and other diagnostic data.</p>
+        <p>This Usage Data may include information such as your computer&apos;s Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that you visit, the time and date of your visit, the time spent on those pages, unique device identifiers and other diagnostic data.</p>
         <p>When you access Service with a mobile device, this Usage Data may include information such as the type of mobile device you use, your mobile device unique ID, the IP address of your mobile device, your mobile operating system, the type of mobile Internet browser you use, unique device identifiers and other diagnostic data.</p>
         <p><b>Tracking Cookies Data</b></p>
         <p>We use cookies and similar tracking technologies to track the activity on our Service and we hold certain information.</p>
@@ -113,7 +113,7 @@ const Privacy: NextPage<ServerSideProps> = () => (
         <p>The security of your data is important to us but remember that no method of transmission over the Internet or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your Personal Data, we cannot guarantee its absolute security.</p>
 
         <h4>10. Your Data Protection Rights Under General Data Protection Regulation (GDPR)</h4>
-        <p>If you are a resident of the European Union (EU) and European Economic Area (EEA), you have certain data protection rights, covered by GDPR. – See more at <a target='_blank' href='https://eur-lex.europa.eu/eli/reg/2016/679/oj'>https://eur-lex.europa.eu/eli/reg/2016/679/oj</a></p>
+        <p>If you are a resident of the European Union (EU) and European Economic Area (EEA), you have certain data protection rights, covered by GDPR. – See more at <a target='_blank' rel='noreferrer' href='https://eur-lex.europa.eu/eli/reg/2016/679/oj'>https://eur-lex.europa.eu/eli/reg/2016/679/oj</a></p>
         <p>We aim to take reasonable steps to allow you to correct, amend, delete, or limit the use of your Personal Data.</p>
         <p>If you wish to be informed what Personal Data we hold about you and if you want it to be removed from our systems, please email us at <a href='mailto:hello@squeaky.ai'>hello@squeaky.ai</a>.</p>
         <p>In certain circumstances, you have the following data protection rights:</p>
@@ -129,7 +129,7 @@ const Privacy: NextPage<ServerSideProps> = () => (
         <p>You have the right to complain to a Data Protection Authority about our collection and use of your Personal Data. For more information, please contact your local data protection authority in the European Economic Area (EEA).</p>
 
         <h4>11. Your Data Protection Rights under the California Privacy Protection Act (CalOPPA)</h4>
-        <p>CalOPPA is the first state law in the nation to require commercial websites and online services to post a privacy policy. The law’s reach stretches well beyond California to require a person or company in the United States (and conceivable the world) that operates websites collecting personally identifiable information from California consumers to post a conspicuous privacy policy on its website stating exactly the information being collected and those individuals with whom it is being shared, and to comply with this policy. – See more at: <a target='_blank' href='https://consumercal.org/about-cfc/cfc-education-foundation/california-online-privacy-protection-act-caloppa-3/'>https://consumercal.org/about-cfc/cfc-education-foundation/california-online-privacy-protection-act-caloppa-3/</a>.</p>
+        <p>CalOPPA is the first state law in the nation to require commercial websites and online services to post a privacy policy. The law’s reach stretches well beyond California to require a person or company in the United States (and conceivable the world) that operates websites collecting personally identifiable information from California consumers to post a conspicuous privacy policy on its website stating exactly the information being collected and those individuals with whom it is being shared, and to comply with this policy. – See more at: <a target='_blank' rel='noreferrer' href='https://consumercal.org/about-cfc/cfc-education-foundation/california-online-privacy-protection-act-caloppa-3/'>https://consumercal.org/about-cfc/cfc-education-foundation/california-online-privacy-protection-act-caloppa-3/</a>.</p>
         <p>According to CalOPPA we agree to the following:</p>
         <ul>
           <li>(a) users can visit our site anonymously;</li>
@@ -149,29 +149,29 @@ const Privacy: NextPage<ServerSideProps> = () => (
         <p>Squeaky B.V. uses remarketing services to advertise on third party websites to you after you visited our Service. We and our third-party vendors use cookies to inform, optimise and serve ads based on your past visits to our Service.</p>
         <p><b>Google Ads (AdWords)</b></p>
         <p>Google Ads (AdWords) remarketing service is provided by Google Inc.</p>
-        <p>You can opt-out of Google Analytics for Display Advertising and customize the Google Display Network ads by visiting the Google Ads Settings page: <a target='_blank' href='http://www.google.com/settings/ads'>http://www.google.com/settings/ads</a></p>
-        <p>Google also recommends installing the Google Analytics Opt-out Browser Add-on – <a target='_blank' href='https://tools.google.com/dlpage/gaoptout'>https://tools.google.com/dlpage/gaoptout</a> – for your web browser. Google Analytics Opt-out Browser Add-on provides visitors with the ability to prevent their data from being collected and used by Google Analytics.</p>
-        <p>For more information on the privacy practices of Google, please visit the Google Privacy Terms web page: <a target='_blank' href='https://policies.google.com/privacy?hl=en'>https://policies.google.com/privacy?hl=en</a></p>
+        <p>You can opt-out of Google Analytics for Display Advertising and customize the Google Display Network ads by visiting the Google Ads Settings page: <a target='_blank' rel='noreferrer' href='http://www.google.com/settings/ads'>http://www.google.com/settings/ads</a></p>
+        <p>Google also recommends installing the Google Analytics Opt-out Browser Add-on – <a target='_blank' rel='noreferrer' href='https://tools.google.com/dlpage/gaoptout'>https://tools.google.com/dlpage/gaoptout</a> – for your web browser. Google Analytics Opt-out Browser Add-on provides visitors with the ability to prevent their data from being collected and used by Google Analytics.</p>
+        <p>For more information on the privacy practices of Google, please visit the Google Privacy Terms web page: <a target='_blank' rel='noreferrer' href='https://policies.google.com/privacy?hl=en'>https://policies.google.com/privacy?hl=en</a></p>
         <p><b>Twitter</b></p>
         <p>Twitter remarketing service is provided by Twitter Inc.</p>
-        <p>You can opt-out from Twitter's interest-based ads by following their instructions: <a target='_blank' href='https://support.twitter.com/articles/20170405'>https://support.twitter.com/articles/20170405</a></p>
-        <p>You can learn more about the privacy practices and policies of Twitter by visiting their Privacy Policy page: <a target='_blank' href='https://twitter.com/privacy'>https://twitter.com/privacy</a></p>
+        <p>You can opt-out from Twitter&apos;s interest-based ads by following their instructions: <a target='_blank' rel='noreferrer' href='https://support.twitter.com/articles/20170405'>https://support.twitter.com/articles/20170405</a></p>
+        <p>You can learn more about the privacy practices and policies of Twitter by visiting their Privacy Policy page: <a target='_blank' rel='noreferrer' href='https://twitter.com/privacy'>https://twitter.com/privacy</a></p>
         <p><b>Facebook</b></p>
         <p>Facebook remarketing service is provided by Facebook Inc.</p>
-        <p>You can learn more about interest-based advertising from Facebook by visiting this page: <a target='_blank' href='https://www.facebook.com/help/164968693837950'>https://www.facebook.com/help/164968693837950</a></p>
-        <p>To opt-out from Facebook's interest-based ads, follow these instructions from Facebook: <a target='_blank' href='https://www.facebook.com/help/568137493302217'>https://www.facebook.com/help/568137493302217</a></p>
-        <p>Facebook adheres to the Self-Regulatory Principles for Online Behavioural Advertising established by the Digital Advertising Alliance. You can also opt-out from Facebook and other participating companies through the Digital Advertising Alliance in the USA <a target='_blank' href='http://www.aboutads.info/choices/'>http://www.aboutads.info/choices/</a>, the Digital Advertising Alliance of Canada in Canada <a target='_blank' href='http://youradchoices.ca/'>http://youradchoices.ca/</a> or the European Interactive Digital Advertising Alliance in Europe <a target='_blank' href='http://www.youronlinechoices.eu/'>http://www.youronlinechoices.eu/</a>, or opt-out using your mobile device settings.</p>
-        <p>For more information on the privacy practices of Facebook, please visit Facebook's Data Policy: <a target='_blank' href='https://www.facebook.com/privacy/explanation'>https://www.facebook.com/privacy/explanation</a></p>
+        <p>You can learn more about interest-based advertising from Facebook by visiting this page: <a target='_blank' rel='noreferrer' href='https://www.facebook.com/help/164968693837950'>https://www.facebook.com/help/164968693837950</a></p>
+        <p>To opt-out from Facebook&apos;s interest-based ads, follow these instructions from Facebook: <a target='_blank' rel='noreferrer' href='https://www.facebook.com/help/568137493302217'>https://www.facebook.com/help/568137493302217</a></p>
+        <p>Facebook adheres to the Self-Regulatory Principles for Online Behavioural Advertising established by the Digital Advertising Alliance. You can also opt-out from Facebook and other participating companies through the Digital Advertising Alliance in the USA <a target='_blank' rel='noreferrer' href='http://www.aboutads.info/choices/'>http://www.aboutads.info/choices/</a>, the Digital Advertising Alliance of Canada in Canada <a target='_blank' rel='noreferrer' href='http://youradchoices.ca/'>http://youradchoices.ca/</a> or the European Interactive Digital Advertising Alliance in Europe <a target='_blank' rel='noreferrer' href='http://www.youronlinechoices.eu/'>http://www.youronlinechoices.eu/</a>, or opt-out using your mobile device settings.</p>
+        <p>For more information on the privacy practices of Facebook, please visit Facebook&apos;s Data Policy: <a target='_blank' rel='noreferrer' href='https://www.facebook.com/privacy/explanation'>https://www.facebook.com/privacy/explanation</a></p>
 
         <h4>14. Payments</h4>
         <p>We may provide paid products and/or services within Service. In that case, we use third-party services for payment processing (e.g. payment processors).</p>
         <p>We will not store or collect your payment card details. That information is provided directly to our third-party payment processors whose use of your personal information is governed by their Privacy Policy. These payment processors adhere to the standards set by PCI-DSS as managed by the PCI Security Standards Council, which is a joint effort of brands like Visa, Mastercard, American Express and Discover. PCI-DSS requirements help ensure the secure handling of payment information.</p>
         <p>The payment processors we work with are:</p>
         <p><b>Stripe</b></p>
-        <p>Their Privacy Policy can be viewed at: <a target='_blank' href='https://stripe.com/us/privacy'>https://stripe.com/us/privacy</a></p>
+        <p>Their Privacy Policy can be viewed at: <a target='_blank' rel='noreferrer' href='https://stripe.com/us/privacy'>https://stripe.com/us/privacy</a></p>
 
         <h4>15. Links to Other Sites</h4>
-        <p>Our Service may contain links to other sites that are not operated by us. If you click a third party link, you will be directed to that third party's site. We strongly advise you to review the Privacy Policy of every site you visit.</p>
+        <p>Our Service may contain links to other sites that are not operated by us. If you click a third party link, you will be directed to that third party&apos;s site. We strongly advise you to review the Privacy Policy of every site you visit.</p>
         <p>We have no control over and assume no responsibility for the content, privacy policies or practices of any third party sites or services.</p>
 
         <h4>16. Children’s Privacy</h4>
