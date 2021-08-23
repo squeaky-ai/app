@@ -10,15 +10,3 @@ html, body {
 *:focus-visible {
   outline: 2px dashed var(--gray-800);
 }
-
-#__next {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  overflow: hidden;
-  width: 100vw;
-}
-
-.page {
-  overflow-y: auto;
-}
