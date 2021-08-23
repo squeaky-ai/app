@@ -2,17 +2,11 @@ import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
 import { useRouter } from 'next/router';
-import { Header as PublicHeader } from 'components/public/header';
 import { Footer } from 'components/public/footer';
 import { Sidebar } from 'components/app/sidebar';
 import { BLANK_ROUTES, PUBLIC_ROUTES } from 'data/common/constants';
-import type { User } from 'types/user';
 
-interface Props {
-  user?: User;
-}
-
-export const Page: FC<Props> = ({ children, user }) => {
+export const Page: FC = ({ children }) => {
   const router = useRouter();
   const isBlank = BLANK_ROUTES.includes(router.route);
   const isPublic = PUBLIC_ROUTES.includes(router.route);
@@ -61,7 +55,6 @@ export const Page: FC<Props> = ({ children, user }) => {
   if (isPublic) {
     return (
       <div className={classnames('page', ...slug)}>
-        <PublicHeader user={user} />
         {children}
         <Footer />
       </div>

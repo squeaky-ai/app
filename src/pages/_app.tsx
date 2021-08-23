@@ -8,18 +8,14 @@ import { Page } from 'components/page';
 
 import '../styles/main.scss';
 
-const App: FC<AppProps> = ({ Component, pageProps }) => {
-  const { user } = pageProps;
-
-  return (
-    <ApolloProvider client={client}>
-      <ToastProvider>
-        <Page user={user}>
-          <Component {...pageProps} />
-        </Page>
-      </ToastProvider>
-    </ApolloProvider>
-  );
-};
+const App: FC<AppProps> = ({ Component, pageProps }) => (
+  <ApolloProvider client={client}>
+    <ToastProvider>
+      <Page>
+        <Component {...pageProps} />
+      </Page>
+    </ToastProvider>
+  </ApolloProvider>
+);
 
 export default App;
