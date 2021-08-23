@@ -4,8 +4,9 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  height: 100%;
+  height: 100vh;
   overflow: hidden;
+  width: 100vw;
 
   .site-header {
     width: 100%;
