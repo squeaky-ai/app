@@ -37,10 +37,12 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, query }) => {
     <Link href={`/sites/${router.query.site_id}/visitors/${visitor.id}`}>
       <a className='row' onClick={onRowClick}>
         <Cell>
-          <VisitorStarred site={site} visitor={visitor} />
           {visitor.viewed && (
             <Pill type='primary'>New</Pill>
           )}
+        </Cell>
+        <Cell>
+          <VisitorStarred site={site} visitor={visitor} />
         </Cell>
         <Cell>
           {visitor.recordingCount}

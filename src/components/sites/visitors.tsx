@@ -45,6 +45,9 @@ export const Visitors: FC<Props> = ({ site, query }) => {
       <Table className='visitors-list'>
         <Row head>
           <Cell>
+            Status
+          </Cell>
+          <Cell>
             Visitor ID
           </Cell>
           <Cell>
