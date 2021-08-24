@@ -108,6 +108,21 @@
       }
     }
 
+    h2 {
+      align-items: center;
+      display: flex;
+    }
+
+    .pill {
+      background: var(--magenta-50);
+      border-color: var(--magenta-50);
+      color: var(--magenta-500);
+      font-size: 16px;
+      line-height: 24px;
+      margin-left: 1rem;
+      padding: .15rem 1rem;
+    }
+
     .visitors {
       grid-area: visitors;
     }

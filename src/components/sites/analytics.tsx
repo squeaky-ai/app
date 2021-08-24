@@ -33,7 +33,7 @@ export const Analytics: FC<Props> = ({ period }) => {
         </div>
         <div className='card visitors'>
           <h4>Visitors</h4>
-          <h2>{analytics.visitors}</h2>
+          <h2>{analytics.visitorsCount.total}</h2>
         </div>
         <div className='card views'>
           <h4>Page Views</h4>

@@ -1,6 +1,6 @@
 export interface Analytics {
   pageViewsRange: PageViewRange[];
-  visitors: number;
+  visitorsCount: AnalyticsVisitors;
   pageViews: number;
   averageSessionDuration: number;
   pagesPerSession: number;
@@ -9,7 +9,17 @@ export interface Analytics {
   languages: AnalyticsLanguage[];
   devices: AnalyticsDevice[];
   dimensions: AnalyticsDimensions;
-  recordingsCount: number;
+  recordingsCount: RecordingsVisitors;
+}
+
+export interface AnalyticsVisitors {
+  total: number;
+  new: number;
+}
+
+export interface RecordingsVisitors {
+  total: number;
+  new: number;
 }
 
 export interface PageViewRange {

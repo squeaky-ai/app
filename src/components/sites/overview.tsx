@@ -10,6 +10,7 @@ import { VisitorStarred } from 'components/sites/visitor-starred';
 import { useOverview } from 'hooks/use-overview';
 import { toTimeString } from 'lib/dates';
 import type { Site } from 'types/site';
+import { Pill } from 'components/pill';
 
 interface Props {
   site: Site;
@@ -31,7 +32,10 @@ export const Overview: FC<Props> = ({ site }) => {
           <i className='ri-group-line' />
           Visitors
         </h3>
-        <h2>{overview.analytics.visitors}</h2>
+        <h2>
+          {overview.analytics.visitorsCount.total}
+          <Pill>{overview.analytics.visitorsCount.new} New</Pill>
+        </h2>
         <div className='link'>
           <Link href={`/sites/${site_id}/visitors`}>
             <a>View All</a>
@@ -45,7 +49,10 @@ export const Overview: FC<Props> = ({ site }) => {
           <i className='ri-vidicon-line' />
           Recordings
         </h3>
-        <h2>{overview.analytics.recordingsCount}</h2>
+        <h2>
+          {overview.analytics.recordingsCount.total}
+          <Pill>{overview.analytics.recordingsCount.new} New</Pill>
+        </h2>
         <div className='link'>
           <Link href={`/sites/${site_id}/recordings`}>
             <a>View All</a>

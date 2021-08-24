@@ -5,9 +5,15 @@ export const GET_OVERVIEW_QUERY = gql`
     site(siteId: $siteId) {
       id
       analytics(fromDate: $fromDate, toDate: $toDate) {
-        visitors
         pageViews
-        recordingsCount
+        visitorsCount {
+          total
+          new
+        }
+        recordingsCount {
+          total
+          new
+        }
       }
       notes(page: 1, size: 5) {
         items {

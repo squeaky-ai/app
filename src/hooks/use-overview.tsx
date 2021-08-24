@@ -33,9 +33,15 @@ export const useOverview = (): UseOverview => {
       items: []
     },
     analytics: {
-      visitors: 0,
+      visitorsCount: {
+        total: 0,
+        new: 0,
+      },
       pageViews: 0,
-      recordingsCount: 0,
+      recordingsCount: {
+        total: 0,
+        new: 0,
+      },
     },
     recordings: { 
       items: [] 

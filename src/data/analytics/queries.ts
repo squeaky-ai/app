@@ -5,10 +5,13 @@ export const GET_ANALYTICS_QUERY = gql`
     site(siteId: $siteId) {
       id
       analytics(fromDate: $fromDate, toDate: $toDate) {
-        visitors
         pageViews
         averageSessionDuration
         pagesPerSession
+        visitorsCount {
+          total
+          new
+        }
         pageViewsRange {
           date
           pageViewCount

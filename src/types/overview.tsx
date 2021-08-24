@@ -4,6 +4,6 @@ import type { PaginatedNotesResponse } from 'types/note';
 
 export interface Overview {
   notes: Pick<PaginatedNotesResponse, 'items'>;
-  analytics: Pick<Analytics, 'visitors' | 'pageViews' | 'recordingsCount'>;
+  analytics: Pick<Analytics, 'visitorsCount' | 'pageViews' | 'recordingsCount'>;
   recordings: Pick<PaginatedRecordingsResponse, 'items'>;
 }
