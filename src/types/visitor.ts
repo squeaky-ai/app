@@ -16,7 +16,10 @@ export interface Visitor {
   id: string;
   visitorId: string;
   viewed?: boolean;
-  recordingCount?: number;
+  recordingsCount?: {
+    total: number;
+    new: number;
+  }
   firstViewedAt?: string;
   lastActivityAt?: string;
   language?: string;
@@ -25,7 +28,10 @@ export interface Visitor {
   deviceType?: string;
   browser?: string;
   browserString?: string;
-  pageViewCount?: number;
+  pageViewsCount?: {
+    total: number;
+    unique: number;
+  }
   starred: boolean;
   recordings?: PaginatedRecordingsResponse;
   pages?: PaginatedPagesResponse;

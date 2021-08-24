@@ -45,7 +45,7 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, query }) => {
           <VisitorStarred site={site} visitor={visitor} />
         </Cell>
         <Cell>
-          {visitor.recordingCount}
+          {visitor.recordingsCount.total}
         </Cell>
         <Cell>
           {toTimeStringDate(visitor.firstViewedAt)}

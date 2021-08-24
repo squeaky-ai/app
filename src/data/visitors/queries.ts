@@ -10,7 +10,9 @@ export const GET_VISITORS_QUERY = gql`
           id
           visitorId
           viewed
-          recordingCount
+          recordingsCount {
+            total
+          }
           firstViewedAt
           lastActivityAt
           language
@@ -40,7 +42,10 @@ export const GET_VISITOR_QUERY = gql`
         id
         visitorId
         viewed
-        recordingCount
+        recordingsCount {
+          total
+          new
+        }
         firstViewedAt
         lastActivityAt
         language
@@ -49,7 +54,10 @@ export const GET_VISITOR_QUERY = gql`
         deviceType
         browser
         browserString
-        pageViewCount
+        pageViewsCount {
+          total
+          unique
+        }
         starred
         recordings(page: $recordingPage, size: 10, sort: $recordingSort) {
           items {

@@ -57,11 +57,13 @@ export const VisitorSummary: FC<Props> = ({ site, visitor }) => (
     </Card>
     <Card className='recordings'>
       <h3>Recordings</h3>
-      <h2>{visitor.recordingCount}</h2>
+      <h2>{visitor.recordingsCount.total}</h2>
+      <Pill>{visitor.recordingsCount.new} New</Pill>
     </Card>
     <Card className='page-views'>
       <h3>Page Views</h3>
-      <h2>{visitor.pageViewCount || 0}</h2>
+      <h2>{visitor.pageViewsCount.total}</h2>
+      <Pill>{visitor.pageViewsCount.unique} Unique</Pill>
     </Card>
   </div>
 );
