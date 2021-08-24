@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import Image from 'next/image';
 import { Pagination } from 'components/pagination';
 import { Sort } from 'components/sort';
 import { VisitorRecordingsItem } from 'components/sites/visitor-recordings-item';
@@ -22,50 +23,59 @@ export const VisitorRecording: FC<Props> = ({ visitor, page, sort, setPage, setS
     <>
       <h4 className='sub-heading'>Recordings</h4>
 
-      <Table className='visitor-recordings-table'>
-        <Row head>
-          <Cell>
-            Status
-          </Cell>
-          <Cell>
-            Recording ID
-          </Cell>
-          <Cell>
-            Date &amp; Time
-            <Sort 
-              name='date' 
-              order={sort} 
-              onAsc={() => setSort('DATE_ASC')} 
-              onDesc={() => setSort('DATE_DESC')} 
-            />
-          </Cell>
-          <Cell>
-            Duration
-            <Sort 
-              name='duration' 
-              order={sort} 
-              onAsc={() => setSort('DURATION_ASC')} 
-              onDesc={() => setSort('DURATION_DESC')} 
-            />
-          </Cell>
-          <Cell>
-            Pages
-            <Sort 
-              name='page_size' 
-              order={sort} 
-              onAsc={() => setSort('PAGE_SIZE_ASC')} 
-              onDesc={() => setSort('PAGE_SIZE_DESC')} 
-            />
-          </Cell>
-          <Cell>
-            Start &amp; Exit URL
-          </Cell>
-          <Cell />
-        </Row>
-        {items.map(recording => (
-          <VisitorRecordingsItem key={recording.id} recording={recording} />
-        ))}
-      </Table>
+      {items.length > 0 && (
+        <Table className='visitor-recordings-table'>
+          <Row head>
+            <Cell>
+              Status
+            </Cell>
+            <Cell>
+              Recording ID
+            </Cell>
+            <Cell>
+              Date &amp; Time
+              <Sort 
+                name='date' 
+                order={sort} 
+                onAsc={() => setSort('DATE_ASC')} 
+                onDesc={() => setSort('DATE_DESC')} 
+              />
+            </Cell>
+            <Cell>
+              Duration
+              <Sort 
+                name='duration' 
+                order={sort} 
+                onAsc={() => setSort('DURATION_ASC')} 
+                onDesc={() => setSort('DURATION_DESC')} 
+              />
+            </Cell>
+            <Cell>
+              Pages
+              <Sort 
+                name='page_size' 
+                order={sort} 
+                onAsc={() => setSort('PAGE_SIZE_ASC')} 
+                onDesc={() => setSort('PAGE_SIZE_DESC')} 
+              />
+            </Cell>
+            <Cell>
+              Start &amp; Exit URL
+            </Cell>
+            <Cell />
+          </Row>
+          {items.map(recording => (
+            <VisitorRecordingsItem key={recording.id} recording={recording} />
+          ))}
+        </Table>
+      )}
+
+      {items.length === 0 && (
+        <div className='no-visitor-recordings'>
+          <Image src='/empty-state-1.svg' height={160} width={210} />
+          <h4>There are currently no recordings for this visitor.</h4>
+        </div>
+      )}
 
       <Pagination 
         currentPage={page} 
