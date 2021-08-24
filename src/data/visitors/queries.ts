@@ -9,6 +9,7 @@ export const GET_VISITORS_QUERY = gql`
         items {
           id
           visitorId
+          viewed
           recordingCount
           firstViewedAt
           lastActivityAt
@@ -38,6 +39,7 @@ export const GET_VISITOR_QUERY = gql`
       visitor(visitorId: $visitorId) {
         id
         visitorId
+        viewed
         recordingCount
         firstViewedAt
         lastActivityAt

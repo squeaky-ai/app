@@ -9,6 +9,7 @@ import { Device } from 'components/device';
 import { toNiceDate } from 'lib/dates';
 import { VisitorStarred } from 'components/sites/visitor-starred';
 import { Cell } from 'components/table';
+import { Pill } from 'components/pill';
 import type { Site } from 'types/site';
 import type { Visitor } from 'types/visitor';
 
@@ -37,6 +38,9 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, query }) => {
       <a className='row' onClick={onRowClick}>
         <Cell>
           <VisitorStarred site={site} visitor={visitor} />
+          {visitor.viewed && (
+            <Pill type='primary'>New</Pill>
+          )}
         </Cell>
         <Cell>
           {visitor.recordingCount}

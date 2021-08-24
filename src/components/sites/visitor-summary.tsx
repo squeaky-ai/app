@@ -5,6 +5,7 @@ import { toNiceDate } from 'lib/dates';
 import { Device } from 'components/device';
 import { Browser } from 'components/browser';
 import { VisitorStarred } from 'components/sites/visitor-starred';
+import { Pill } from 'components/pill';
 import type { Site } from 'types/site';
 import type { Visitor } from 'types/visitor';
 
@@ -20,6 +21,9 @@ export const VisitorSummary: FC<Props> = ({ site, visitor }) => (
         <dt>Visitor ID</dt>
         <dd>
           <VisitorStarred site={site} visitor={visitor} />
+          {visitor.viewed && (
+            <Pill type='primary'>New</Pill>
+          )}
         </dd>
       </div>
       <div className='row'>

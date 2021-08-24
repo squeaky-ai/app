@@ -15,6 +15,7 @@ export type PageSortBy =
 export interface Visitor {
   id: string;
   visitorId: string;
+  viewed?: boolean;
   recordingCount?: number;
   firstViewedAt?: string;
   lastActivityAt?: string;

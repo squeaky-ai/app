@@ -92,6 +92,12 @@
       grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 90px;
     }
 
+    .pill {
+      display: inline-block;
+      margin-left: .5rem;
+      width: 70px;
+    }
+
     .visitor-starred {
       font-size: 1.25rem;
     }
