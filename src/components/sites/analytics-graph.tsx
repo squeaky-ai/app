@@ -35,7 +35,7 @@ export const AnalyticsGraph: FC<Props> = ({ viewsAndVisitors, period }) => {
       <div className='show'>
         <Label>Show:</Label>
         <Checkbox checked={show.includes('visitors')} onChange={() => handleClick('visitors')}>Visitors</Checkbox>
-        <Checkbox checked={show.includes('pageViews')} onChange={() => handleClick('pageViews')}>Page Views</Checkbox>
+        <Checkbox className='tertiary' checked={show.includes('pageViews')} onChange={() => handleClick('pageViews')}>Page Views</Checkbox>
       </div>
       <ResponsiveContainer width='100%' height={340}>
         <AreaChart data={results} margin={{ top: 0, left: -15, right: 0, bottom: 0 }}>
@@ -53,8 +53,8 @@ export const AnalyticsGraph: FC<Props> = ({ viewsAndVisitors, period }) => {
             }}
             formatter={(value: string, name: string) => ([name === 'visitors' ? 'Visitors' : 'Page Views', value])}
           />
-          <Area dataKey='pageViews' fill='#FFD6E7' stroke='#F0438C' />
-          <Area dataKey='visitors' fill='#E9F5FF' stroke='#0074E0' />
+          <Area dataKey='pageViews' fill='#FFD6E7' fillOpacity={1} stroke='#F0438C' strokeWidth={2} />
+          <Area dataKey='visitors' fill='#E9F5FF' fillOpacity={1} stroke='#0074E0' strokeWidth={2} />
         </AreaChart>
       </ResponsiveContainer>
     </div>

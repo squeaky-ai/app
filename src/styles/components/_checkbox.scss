@@ -17,6 +17,15 @@
     }
   }
 
+  &.tertiary {
+    input {
+      &:checked + .check {
+        background: var(--magenta-500);
+        border-color: var(--magenta-500);
+      }
+    }
+  }
+
   .check {
     align-items: center;
     background: var(--white);
