@@ -33,6 +33,7 @@ export interface Visitor {
     unique: number;
   }
   starred: boolean;
+  attributes?: string;
   recordings?: PaginatedRecordingsResponse;
   pages?: PaginatedPagesResponse;
   averageSessionDuration?: number;

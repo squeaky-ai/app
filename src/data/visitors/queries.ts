@@ -59,6 +59,7 @@ export const GET_VISITOR_QUERY = gql`
           unique
         }
         starred
+        attributes
         recordings(page: $recordingPage, size: 10, sort: $recordingSort) {
           items {
             id

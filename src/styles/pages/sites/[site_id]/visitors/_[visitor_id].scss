@@ -12,21 +12,98 @@
     }
 
     .summary {
+      border: 1px solid var(--gray-150);
+      margin-bottom: 3rem;
+
+      .summary-data {
+        display: grid;
+        grid-gap: 3rem;
+        grid-template-areas: 'linked default';
+        grid-template-columns: repeat(2, 1fr);
+
+        @include breakpoint-lg {
+          grid-template-areas: 'linked'
+                               'default';
+          grid-template-columns: 1fr;
+        }
+
+        .linked {
+          background: var(--gray-100);
+          border-radius: var(--border-radius-md);
+          grid-area: linked;
+          padding: 2rem;
+
+          .heading {
+            align-items: center;
+            display: flex;
+            font-weight: var(--font-weight-bold);
+
+            i {
+              color: var(--blue-500);
+              font-size: 18px;
+              font-weight: var(--font-weight-normal);
+              margin-right: .5rem;
+            }
+          }
+
+          p {
+            &:last-of-type {
+              margin-bottom: 0;
+            }
+          }
+        }
+
+        .default {
+          grid-area: default;
+        }
+
+        .attributes {
+          margin-top: 1.5rem;
+        }
+
+        .row {
+          display: flex;
+          justify-content: space-between;
+          height: 1.3rem;
+          margin: 0 0 1rem 0;
+
+          &:last-of-type {
+            margin-bottom: 0;
+          }
+
+          dt {
+            font-weight: var(--font-weight-bold);
+          }
+
+          dd {
+            align-items: center;
+            display: flex;
+          }
+
+          .pill {
+            display: inline-block;
+            margin-left: .5rem;
+            width: 70px;
+          }
+
+          .browser {
+            display: inline-block;
+            height: 1.5rem;
+            margin-right: .5rem;
+          }
+        }
+      }
+    }
+
+    .visitor-highlights {
       display: grid;
       grid-gap: 3rem;
-      grid-template-areas: 'info info recordings pageviews';
+      grid-template-areas: 'recordings pageviews';
       grid-template-columns: repeat(auto-fill, 1fr);
       grid-template-rows: 292px;
 
-      @include breakpoint-lg {
-        grid-template-areas: 'info info'
-                             'recordings pageviews';
-        grid-template-rows: 292px;
-      }
-
       @include breakpoint-md {
-        grid-template-areas: 'info'
-                             'recordings'
+        grid-template-areas: 'recordings'
                              'pageviews';
       }
 
@@ -75,42 +152,6 @@
             border-color: var(--magenta-50);
             color: var(--magenta-500);
             padding: .25rem .75rem;
-          }
-        }
-
-        &.info {
-          grid-area: info;
-
-          .row {
-            display: flex;
-            font-size: 13px;
-            justify-content: space-between;
-            height: 1rem;
-            line-height: 16px;
-            margin: 0 0 1.25rem 0;
-
-            dt {
-              font-weight: var(--font-weight-bold);
-            }
-
-            dd {
-              align-items: center;
-              display: flex;
-            }
-
-            .pill {
-              display: inline-block;
-              margin-left: .5rem;
-              width: 70px;
-            }
-
-            .device {
-              font-size: 16px;
-            }
-
-            .browser {
-              margin-right: .5rem;
-            }
           }
         }
       }

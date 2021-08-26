@@ -7,6 +7,7 @@ import { Page } from 'components/sites/page';
 import { Spinner } from 'components/spinner';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { VisitorSummary } from 'components/sites/visitor-summary';
+import { VisitorHighlights } from 'components/sites/visitor-highlights';
 import { VisitorRecording } from 'components/sites/visitor-recordings';
 import { VisitorStats } from 'components/sites/visitor-stats';
 import { VisitorPages } from 'components/sites/visitors-pages';
@@ -55,12 +56,9 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
               } 
             />
 
-            <h3 className='title'>
-              <i className='ri-user-line' />
-              {visitor.visitorId}
-            </h3>
-
             <VisitorSummary site={site} visitor={visitor} />
+
+            <VisitorHighlights visitor={visitor} />
 
             <VisitorRecording 
               visitor={visitor} 
