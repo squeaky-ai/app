@@ -83,7 +83,7 @@ export const VisitorSummary: FC<Props> = ({ site, visitor }) => {
             <dt>Browser</dt>
             <dd>
               <div className='browser'>
-                <Browser name={visitor.browser} height={20} width={20} />
+                <Browser name={visitor.browser} height={16} width={16} />
               </div>
               {visitor.browserString}
             </dd>
