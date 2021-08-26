@@ -42,7 +42,7 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, query }) => {
       <a className='row' onClick={onRowClick}>
         <Cell>
           {visitor.viewed && (
-            <Pill type='primary'>New</Pill>
+            <Pill type='tertiary'>New</Pill>
           )}
         </Cell>
         <Cell>

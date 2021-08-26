@@ -20,7 +20,9 @@
   }
 
   &.tertiary {
-    border-color: var(--magenta-500);
+    background: var(--magenta-50);
+    border-color: var(--magenta-50);
+    color: var(--magenta-500);
   }
 
   &.small {

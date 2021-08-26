@@ -34,7 +34,7 @@ export const Overview: FC<Props> = ({ site }) => {
         </h3>
         <h2>
           {overview.analytics.visitorsCount.total}
-          <Pill>{overview.analytics.visitorsCount.new} New</Pill>
+          <Pill type='tertiary'>{overview.analytics.visitorsCount.new} New</Pill>
         </h2>
         <div className='link'>
           <Link href={`/sites/${site_id}/visitors`}>
@@ -51,7 +51,7 @@ export const Overview: FC<Props> = ({ site }) => {
         </h3>
         <h2>
           {overview.analytics.recordingsCount.total}
-          <Pill>{overview.analytics.recordingsCount.new} New</Pill>
+          <Pill type='tertiary'>{overview.analytics.recordingsCount.new} New</Pill>
         </h2>
         <div className='link'>
           <Link href={`/sites/${site_id}/recordings`}>

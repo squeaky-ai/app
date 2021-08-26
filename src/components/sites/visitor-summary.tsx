@@ -75,7 +75,7 @@ export const VisitorSummary: FC<Props> = ({ site, visitor }) => {
             <dd>
               <VisitorStarred site={site} visitor={visitor} />
               {visitor.viewed && (
-                <Pill type='primary'>New</Pill>
+                <Pill type='tertiary'>New</Pill>
               )}
             </dd>
           </div>

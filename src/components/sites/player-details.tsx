@@ -35,7 +35,7 @@ export const PlayerDetails: FC<Props> = ({ site, recording }) => {
         <span className='session'> #{recording?.sessionId}</span>
         {recording?.viewed
           ? <Pill type='secondary'>Viewed</Pill>
-          : <Pill type='primary'>New</Pill>
+          : <Pill type='tertiary'>New</Pill>
         }
       <Button onClick={viewNext} className={classnames({ disabled: !recording?.nextRecording })}>
         <i className='ri-arrow-right-s-line' />

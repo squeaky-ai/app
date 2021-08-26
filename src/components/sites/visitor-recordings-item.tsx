@@ -73,7 +73,7 @@ export const VisitorRecordingsItem: FC<Props> = ({ recording }) => {
           <Cell>
             {recording.viewed
               ? <Pill type='secondary'>Viewed</Pill>
-              : <Pill type='primary'>New</Pill>
+              : <Pill type='tertiary'>New</Pill>
             }
           </Cell>
           <Cell>

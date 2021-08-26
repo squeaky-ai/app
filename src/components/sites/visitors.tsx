@@ -7,6 +7,7 @@ import { useVisitors } from 'hooks/use-visitors';
 import { Container } from 'components/container';
 import { Sort } from 'components/sort';
 import { PageSize } from 'components/sites/page-size';
+import { Tooltip } from 'components/tooltip';
 import { VisitorsItem } from 'components/sites/visitors-item';
 import { Table, Row, Cell } from 'components/table';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
@@ -59,15 +60,21 @@ export const Visitors: FC<Props> = ({ site, query }) => {
             Visitor ID
           </Cell>
           <Cell>
-            <i className='ri-link-m' />
+            <Tooltip button={<i className='ri-link-m' />}>
+              Linked Data
+            </Tooltip>
             User ID
           </Cell>
           <Cell>
-            <i className='ri-link-m' />
+            <Tooltip button={<i className='ri-link-m' />}>
+              Linked Data
+            </Tooltip>
             Name
           </Cell>
           <Cell>
-            <i className='ri-link-m' />
+            <Tooltip button={<i className='ri-link-m' />}>
+              Linked Data
+            </Tooltip>
             Email
           </Cell>
           <Cell>

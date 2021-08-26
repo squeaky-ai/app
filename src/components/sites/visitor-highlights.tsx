@@ -13,7 +13,7 @@ export const VisitorHighlights: FC<Props> = ({ visitor }) => (
     <Card className='recordings'>
       <h3>Recordings</h3>
       <h2>{visitor.recordingsCount.total}</h2>
-      <Pill>{visitor.recordingsCount.new} New</Pill>
+      <Pill type='tertiary'>{visitor.recordingsCount.new} New</Pill>
     </Card>
     <Card className='page-views'>
       <h3>Page Views</h3>
