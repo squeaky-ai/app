@@ -73,3 +73,10 @@ export interface VisitorStarredMutationInput {
   visitorId: string;
   starred: boolean;
 }
+
+export interface ExternalAttributes {
+  id: string;
+  name?: string;
+  email?: string;
+  [key: string]: string;
+}

@@ -22,6 +22,7 @@ export const GET_VISITORS_QUERY = gql`
           browser
           browserString
           starred
+          attributes
         }
         pagination {
           pageSize

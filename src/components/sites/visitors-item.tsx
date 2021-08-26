@@ -11,7 +11,7 @@ import { VisitorStarred } from 'components/sites/visitor-starred';
 import { Cell } from 'components/table';
 import { Pill } from 'components/pill';
 import type { Site } from 'types/site';
-import type { Visitor } from 'types/visitor';
+import type { Visitor, ExternalAttributes } from 'types/visitor';
 
 interface Props {
   site: Site;
@@ -31,6 +31,10 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, query }) => {
     }
   };
 
+  const attributes = visitor.attributes 
+    ? JSON.parse(visitor.attributes) as ExternalAttributes
+    : null;
+
   const toTimeStringDate = (value: string) => toNiceDate(Number(value));
 
   return (
@@ -43,6 +47,15 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, query }) => {
         </Cell>
         <Cell>
           <VisitorStarred site={site} visitor={visitor} />
+        </Cell>
+        <Cell>
+          {attributes?.id || '-'}
+        </Cell>
+        <Cell>
+          {attributes?.name || '-'}
+        </Cell>
+        <Cell>
+          {attributes?.email || '-'}
         </Cell>
         <Cell>
           {visitor.recordingsCount.total}

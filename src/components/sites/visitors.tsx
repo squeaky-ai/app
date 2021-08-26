@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import Image from 'next/image';
+import classnames from 'classnames';
 import { Pagination } from 'components/pagination';
 import { useVisitors } from 'hooks/use-visitors';
 import { Container } from 'components/container';
@@ -10,7 +11,7 @@ import { VisitorsItem } from 'components/sites/visitors-item';
 import { Table, Row, Cell } from 'components/table';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 import type { Site } from 'types/site';
-import type { VisitorSortBy } from 'types/visitor';
+import type { VisitorSortBy, ExternalAttributes } from 'types/visitor';
 
 interface Props {
   query: string;
@@ -31,6 +32,13 @@ export const Visitors: FC<Props> = ({ site, query }) => {
 
   const { items, pagination } = visitors;
 
+  const showLinkedData = (() => !!items.find(i => {
+    if (!i.attributes) return false;
+
+    const attributes = JSON.parse(i.attributes) as ExternalAttributes;
+    return Object.keys(attributes).some(i => ['id', 'name', 'email'].includes(i));
+  }))();
+
   return (
     <>
       {!loading && (
@@ -42,13 +50,25 @@ export const Visitors: FC<Props> = ({ site, query }) => {
         </Container>
       )}
 
-      <Table className='visitors-list'>
+      <Table className={classnames('visitors-list', { 'show-linked-data': showLinkedData })}>
         <Row head>
           <Cell>
             Status
           </Cell>
           <Cell>
             Visitor ID
+          </Cell>
+          <Cell>
+            <i className='ri-link-m' />
+            User ID
+          </Cell>
+          <Cell>
+            <i className='ri-link-m' />
+            Name
+          </Cell>
+          <Cell>
+            <i className='ri-link-m' />
+            Email
           </Cell>
           <Cell>
             Recordings
