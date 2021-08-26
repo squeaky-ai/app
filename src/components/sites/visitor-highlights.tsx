@@ -18,7 +18,7 @@ export const VisitorHighlights: FC<Props> = ({ visitor }) => (
     <Card className='page-views'>
       <h3>Page Views</h3>
       <h2>{visitor.pageViewsCount.total}</h2>
-      <Pill>{visitor.pageViewsCount.unique} Unique</Pill>
+      <Pill type='tertiary'>{visitor.pageViewsCount.unique} Unique</Pill>
     </Card>
   </div>
 );
