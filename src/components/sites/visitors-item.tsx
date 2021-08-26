@@ -10,6 +10,7 @@ import { toNiceDate } from 'lib/dates';
 import { VisitorStarred } from 'components/sites/visitor-starred';
 import { Cell } from 'components/table';
 import { Pill } from 'components/pill';
+import { getAttributes } from 'lib/visitors';
 import type { Site } from 'types/site';
 import type { Visitor, ExternalAttributes } from 'types/visitor';
 
@@ -31,9 +32,7 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, query }) => {
     }
   };
 
-  const attributes = visitor.attributes 
-    ? JSON.parse(visitor.attributes) as ExternalAttributes
-    : null;
+  const attributes = getAttributes<ExternalAttributes>(visitor);
 
   const toTimeStringDate = (value: string) => toNiceDate(Number(value));
 

@@ -1,13 +1,13 @@
 import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
-import { capitalize } from 'lodash';
 import { Card } from 'components/card';
 import { toNiceDate } from 'lib/dates';
 import { Device } from 'components/device';
 import { Browser } from 'components/browser';
 import { VisitorStarred } from 'components/sites/visitor-starred';
 import { Pill } from 'components/pill';
+import { getAttributes, normalizeKey } from 'lib/visitors';
 import type { Site } from 'types/site';
 import type { Visitor } from 'types/visitor';
 
@@ -17,26 +17,7 @@ interface Props {
 }
 
 export const VisitorSummary: FC<Props> = ({ site, visitor }) => {
-  const attributes = (() => {
-    try {
-      return JSON.parse(visitor.attributes);
-    } catch {
-      return null;
-    }
-  })();
-
-  const normalizeKey = (key: string): string => {
-    switch(key) {
-      case 'id':
-        return 'User ID';
-      case 'name':
-        return 'Name';
-      case 'email':
-        return 'Email';
-      default:
-        return capitalize(key);
-    }
-  };
+  const attributes = getAttributes(visitor);
 
   return (
     <Card className='summary'>
