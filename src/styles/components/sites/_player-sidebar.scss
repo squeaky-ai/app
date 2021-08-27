@@ -61,7 +61,7 @@
   }
 
   .attributes {
-    background: var(--gray-100);
+    background: var(--gray-50);
     border-radius: var(--border-radius-md);
     padding: 1rem;
 
@@ -103,6 +103,7 @@
       margin: 0;
 
       .row {
+        border-bottom: none;
         padding: .5rem 0;
 
         dt {

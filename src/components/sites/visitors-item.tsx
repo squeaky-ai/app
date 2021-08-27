@@ -48,13 +48,13 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, query }) => {
           <VisitorStarred site={site} visitor={visitor} />
         </Cell>
         <Cell>
-          {attributes?.id || '-'}
+          <Highlighter value={query}>{attributes?.id || '-'}</Highlighter>
         </Cell>
         <Cell>
-          {attributes?.name || '-'}
+          <Highlighter value={query}>{attributes?.name || '-'}</Highlighter>
         </Cell>
         <Cell>
-          {attributes?.email || '-'}
+          <Highlighter value={query}>{attributes?.email || '-'}</Highlighter>
         </Cell>
         <Cell>
           {visitor.recordingsCount.total}
