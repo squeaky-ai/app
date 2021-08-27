@@ -20,14 +20,14 @@ export const AnalyticsDevices: FC<Props> = ({ devices }) => {
         <i className='ri-computer-line' />
         <div className='stats'>
           <p><b>Desktop / Laptop</b></p>
-          <h3>{desktop.count} <span>{percentage(desktop.count)}%</span></h3>
+          <h3>{desktop.count} <span>{percentage(desktop.count) || 0}%</span></h3>
         </div>
       </div>
       <div className='card'>
         <i className='ri-tablet-line' />
         <div className='stats'>
           <p><b>Tablet / Mobile</b></p>
-          <h3>{mobile.count} <span>{percentage(mobile.count)}%</span></h3>
+          <h3>{mobile.count} <span>{percentage(mobile.count) || 0}%</span></h3>
         </div>
       </div>
     </div>
