@@ -20,6 +20,7 @@ import { signout } from 'lib/api/auth';
 import { userInvitation, teamInviteAccept } from 'lib/api/graphql';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useToasts } from 'hooks/use-toasts';
+import { BASE_PATH } from 'data/common/constants';
 
 const AcceptSchema = Yup.object().shape({
   password: Yup.string().matches(PASSWORD_REGEX, 'Password must match the criteria defined below').required('Password is required'),
@@ -84,7 +85,7 @@ const Accept: NextPage<ServerSideProps> = ({ user }) => {
           <Card>
             <Link href='/'>
               <a className='logo'>
-                <Image src='/logo.svg' height={76} width={246} alt='Squeaky logo' />
+                <Image src={`${BASE_PATH}/logo.svg`} height={76} width={246} alt='Squeaky logo' />
               </a>
             </Link>
 

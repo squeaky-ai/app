@@ -8,6 +8,7 @@ import { Container } from 'components/container';
 import { Main } from 'components/main';
 import { Tabs } from 'components/tabs';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { BASE_PATH } from 'data/common/constants';
 
 const Developers: NextPage<ServerSideProps> = () => {
   React.useEffect(() => {
@@ -26,7 +27,7 @@ const Developers: NextPage<ServerSideProps> = () => {
         <div className='hero'>
           <Link href='/'>
             <a>
-              <Image src='/logo.svg' height={48} width={154} alt='Logo' />
+              <Image src={`${BASE_PATH}/logo.svg`} height={48} width={154} alt='Logo' />
             </a>
           </Link>
           <h1>Developers</h1>

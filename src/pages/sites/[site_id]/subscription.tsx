@@ -10,6 +10,7 @@ import { Container } from 'components/container';
 import { OWNER } from 'data/teams/constants';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { BASE_PATH } from 'data/common/constants';
 
 const SitesSubscription: NextPage<ServerSideProps> = ({ user }) => (
   <>
@@ -29,7 +30,7 @@ const SitesSubscription: NextPage<ServerSideProps> = ({ user }) => (
 
           <Container className='xl centered empty-state'>
             <div className='empty-state-contents'>
-              <Image src='/empty-state-7.svg' height={240} width={400} alt='Illustration to represent the empty recordings page' />
+              <Image src={`${BASE_PATH}/empty-state-7.svg`} height={240} width={400} alt='Illustration to represent the empty recordings page' />
               <h4>Squeaky is free during beta testing!</h4>
               <EmptyStateHint
                 title='Help Squeaky'

@@ -5,6 +5,7 @@ import { Pagination } from 'components/pagination';
 import { Sort } from 'components/sort';
 import { VisitorRecordingsItem } from 'components/sites/visitor-recordings-item';
 import { Table, Row, Cell } from 'components/table';
+import { BASE_PATH } from 'data/common/constants';
 import type { Visitor } from 'types/visitor';
 import type { RecordingSortBy } from 'types/recording';
 
@@ -72,7 +73,7 @@ export const VisitorRecording: FC<Props> = ({ visitor, page, sort, setPage, setS
 
       {items.length === 0 && (
         <div className='no-visitor-recordings'>
-          <Image src='/empty-state-1.svg' height={160} width={210} />
+          <Image src={`${BASE_PATH}/empty-state-1.svg`} height={160} width={210} />
           <h4>There are currently no recordings for this visitor.</h4>
         </div>
       )}

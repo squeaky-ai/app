@@ -1,3 +1,8 @@
+
+import getConfig from 'next/config';
+
+const { publicRuntimeConfig } = getConfig();
+
 export const BLANK_ROUTES = [
   '/',
 ];
@@ -13,3 +18,5 @@ export const PUBLIC_ROUTES = [
   '/auth/reset',
   '/auth/accept',
 ];
+
+export const BASE_PATH = publicRuntimeConfig.basePath;

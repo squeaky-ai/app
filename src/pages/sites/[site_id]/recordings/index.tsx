@@ -14,6 +14,7 @@ import { Recordings } from 'components/sites/recordings';
 import { Page } from 'components/sites/page';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { BASE_PATH } from 'data/common/constants';
 
 const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
   const [query, setQuery] = React.useState<string>('');
@@ -57,7 +58,7 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
 
             <Container className='xl centered empty-state'>
               <div className='empty-state-contents'>
-                <Image src='/empty-state-2.svg' height={240} width={320} alt='Illustration to represent the empty recordings page' />
+                <Image src={`${BASE_PATH}/empty-state-2.svg`} height={240} width={320} alt='Illustration to represent the empty recordings page' />
                 <h4>There are currently no recordings available</h4>
                 <EmptyStateHint
                   title='Collecting Session Recordings'

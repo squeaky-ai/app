@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import Image from 'next/image';
+import { BASE_PATH } from 'data/common/constants';
 
 interface Props {
   height?: number;
@@ -32,7 +33,7 @@ export const Browser: FC<Props> = ({ height, name, width }) => (
   <Image 
     height={height || 16} 
     width={width ||16} 
-    src={`/browsers/${getIconName(name)}`} 
+    src={`${BASE_PATH}/browsers/${getIconName(name)}`} 
     alt={`${name} icon`} 
   />
 );

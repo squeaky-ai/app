@@ -15,6 +15,7 @@ import { Password } from 'components/password';
 import { PASSWORD_REGEX } from 'data/users/constants';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { resetPassword, changePassword } from 'lib/api/auth';
+import { BASE_PATH } from 'data/common/constants';
 
 const ResetSchema = Yup.object().shape({
   email: Yup.string().email('Please enter a valid email address').required('Email is required')
@@ -53,7 +54,7 @@ const Reset: NextPage<ServerSideProps> = () => {
           <Card>
             <Link href='/'>
               <a className='logo'>
-                <Image src='/logo.svg' height={76} width={246} alt='Squeaky logo' />
+                <Image src={`${BASE_PATH}/logo.svg`} height={76} width={246} alt='Squeaky logo' />
               </a>
             </Link>
 

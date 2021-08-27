@@ -11,6 +11,7 @@ import { Tooltip } from 'components/tooltip';
 import { VisitorsItem } from 'components/sites/visitors-item';
 import { Table, Row, Cell } from 'components/table';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
+import { BASE_PATH } from 'data/common/constants';
 import type { Site } from 'types/site';
 import type { VisitorSortBy, ExternalAttributes } from 'types/visitor';
 
@@ -45,7 +46,7 @@ export const Visitors: FC<Props> = ({ site, query }) => {
       {!loading && (
         <Container className='xl centered empty-state'>
           <div className='empty-state-contents'>
-            <Image src='/empty-state-4.svg' height={240} width={320} alt='Illustration to represent that there were no search results' />
+            <Image src={`${BASE_PATH}/empty-state-4.svg`} height={240} width={320} alt='Illustration to represent that there were no search results' />
             <h4 className='sub-heading'>There are no visitors matching your search.</h4>
           </div>
         </Container>

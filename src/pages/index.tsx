@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import * as Yup from 'yup';
+import { useRouter } from 'next/router';
 import { Formik } from 'formik';
 import { Footer } from 'components/public/footer';
 import { Features } from 'components/public/features';
@@ -11,7 +12,8 @@ import { Container } from 'components/container';
 import { Input } from 'components/input';
 import { Button } from 'components/button';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
-import { useRouter } from 'next/router';
+import { BASE_PATH } from 'data/common/constants';
+
 
 const SigupSchema = Yup.object().shape({ 
   email: Yup.string().email('Please enter a valid email address').required('Email is required'),
@@ -36,7 +38,7 @@ const Home: NextPage<ServerSideProps> = ({ user }) => {
       </div>
 
       <section className='hero'>
-        <Image src='/logo.svg' alt='Logo' height={48} width={154} />
+        <Image src={`${BASE_PATH}/logo.svg`} alt='Logo' height={48} width={154} />
         <h1>Understand your users</h1>
         <p>We’re building a tool that captures screen recordings and data to let you see <b>exactly how visitors are using your website or app</b>.</p>
 
@@ -78,7 +80,7 @@ const Home: NextPage<ServerSideProps> = ({ user }) => {
 
               <div className='pointer'>
                 <span className='image'>
-                  <Image src='/pointer.svg' height={28} width={28} />
+                  <Image src={`${BASE_PATH}/pointer.svg`} height={28} width={28} />
                 </span>
                 <i>Free during beta testing</i> 😍
               </div>

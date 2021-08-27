@@ -14,6 +14,7 @@ import { Visitors } from 'components/sites/visitors';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { EmptyStateHint } from 'components/sites/empty-state-hint';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { BASE_PATH } from 'data/common/constants';
 
 const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
   const [query, setQuery] = React.useState<string>('');
@@ -57,7 +58,7 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
 
             <Container className='xl centered empty-state'>
               <div className='empty-state-contents'>
-                <Image src='/empty-state-6.svg' height={240} width={320} alt='Illustration to represent the empty recordings page' />
+                <Image src={`${BASE_PATH}/empty-state-6.svg`} height={240} width={320} alt='Illustration to represent the empty recordings page' />
                 <h4>There are currently no visitor records</h4>
                 <EmptyStateHint
                   title='Creating Visitor Records'

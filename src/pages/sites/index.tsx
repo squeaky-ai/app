@@ -8,6 +8,7 @@ import { Main } from 'components/main';
 import { CreateSite } from 'components/sites/create-site';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useSites } from 'hooks/use-sites';
+import { BASE_PATH } from 'data/common/constants';
 
 const Sites: NextPage<ServerSideProps> = () => {
   const { loading, sites } = useSites();
@@ -21,7 +22,7 @@ const Sites: NextPage<ServerSideProps> = () => {
       {!loading && sites.length === 0 && (
         <div className='empty-state welcome'>
           <div className='contents'>
-            <Image src='/empty-state-1.svg' height={256} width={500} alt='Illustration to welcome the user to Squeaky' />
+            <Image src={`${BASE_PATH}/empty-state-1.svg`} height={256} width={500} alt='Illustration to welcome the user to Squeaky' />
             <h2>Welcome to Squeaky</h2>
             <p>It’s time to discover what your users are really getting up to! Add your first site by clicking the button below.</p>
             <CreateSite className='button primary icon'>

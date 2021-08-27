@@ -12,6 +12,7 @@ import { Select, Option } from 'components/select';
 import { Analytics } from 'components/sites/analytics';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { BASE_PATH } from 'data/common/constants';
 import type { TimePeriod } from 'lib/dates';
 
 const timePeriods: { name: string, key: TimePeriod }[] = [
@@ -75,7 +76,7 @@ const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
 
             <Container className='xl centered empty-state'>
               <div className='empty-state-contents'>
-                <Image src='/empty-state-3.svg' height={240} width={320} alt='Illustration to represent the empty analytics page' />
+                <Image src={`${BASE_PATH}/empty-state-3.svg`} height={240} width={320} alt='Illustration to represent the empty analytics page' />
                 <h4>There are currently no analytics available</h4>
                 <EmptyStateHint
                   title='Collecting Analytics Data'

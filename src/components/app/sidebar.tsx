@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { Button } from 'components/button';
 import { SidebarAccount } from 'components/app/sidebar-account';
 import { SidebarFeedback } from 'components/app/sidebar-feedback';
+import { BASE_PATH } from 'data/common/constants';
 
 export const Sidebar: FC = () => {
   const router = useRouter();
@@ -27,8 +28,8 @@ export const Sidebar: FC = () => {
       <Link href='/sites'>
         <a className='logo'>
           {open
-            ? <Image src='/logo.svg' alt='Logo' height={32} width={103} />
-            : <Image src='/logo-small.svg' alt='Logo' height={32} width={24} />
+            ? <Image src={`${BASE_PATH}/logo.svg`} alt='Logo' height={32} width={103} />
+            : <Image src={`${BASE_PATH}/logo-small.svg`} alt='Logo' height={32} width={24} />
           }
         </a>
       </Link>

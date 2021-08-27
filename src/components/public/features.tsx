@@ -2,6 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import { Card } from 'components/card';
 import { Button } from 'components/button';
+import { BASE_PATH } from 'data/common/constants';
 
 interface Feature {
   icon: string;
@@ -88,7 +89,7 @@ export const Features: FC = () => {
       <div className='image'>
         <div className='slider' style={{ transform: `translateX(-${index * 100 / 7}%)` }}>
           {features.map(feature => (
-            <img key={feature.image} src={`/features/${feature.image}`} />
+            <img key={feature.image} src={`${BASE_PATH}/features/${feature.image}`} />
           ))}
         </div>
       </div>

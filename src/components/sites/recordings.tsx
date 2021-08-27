@@ -9,6 +9,7 @@ import { Sort } from 'components/sort';
 import { PageSize } from 'components/sites/page-size';
 import { useRecordings } from 'hooks/use-recordings';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
+import { BASE_PATH } from 'data/common/constants';
 import type { RecordingSortBy } from 'types/recording';
 
 interface Props {
@@ -34,7 +35,7 @@ export const Recordings: FC<Props> = ({ query }) => {
       {!loading && (
         <Container className='xl centered empty-state'>
           <div className='empty-state-contents'>
-            <Image src='/empty-state-4.svg' height={240} width={320} alt='Illustration to represent that there were no search results' />
+            <Image src={`${BASE_PATH}/empty-state-4.svg`} height={240} width={320} alt='Illustration to represent that there were no search results' />
             <h4 className='sub-heading'>There are no recordings matching your search.</h4>
           </div>
         </Container>

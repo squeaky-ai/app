@@ -16,6 +16,7 @@ import { login, confirmAccount, reconfirmAccount } from 'lib/api/auth';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useLoginAttemps, MAX_ATTEMPTS } from 'hooks/use-login-attempts';
 import { useToasts } from 'hooks/use-toasts';
+import { BASE_PATH } from 'data/common/constants';
 import type { User } from 'types/user';
 
 enum PageView {
@@ -79,7 +80,7 @@ const Login: NextPage<ServerSideProps> = () => {
           <Card>
             <Link href='/'>
               <a className='logo'>
-                <Image src='/logo.svg' height={76} width={246} alt='Squeaky logo' />
+                <Image src={`${BASE_PATH}/logo.svg`} height={76} width={246} alt='Squeaky logo' />
               </a>
             </Link>
 

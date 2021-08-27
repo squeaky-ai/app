@@ -11,6 +11,7 @@ import { Select, Option } from 'components/select';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { feedbackCreate } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
+import { BASE_PATH } from 'data/common/constants';
 
 const FeedbackSchema = Yup.object().shape({
   type: Yup.string().oneOf(['general', 'feature', 'bug', 'complaint'], 'Please select a feedback type'),
@@ -35,7 +36,7 @@ export const SidebarFeedback: FC = () => {
       <div className='link feedback' data-label='Feedback'>
         <Button onClick={openModal}>
           <div className='icon'>
-            <Image src='/lightbulb.svg' height={24} width={24} />
+            <Image src={`${BASE_PATH}/lightbulb.svg`} height={24} width={24} />
           </div>
           <span>Feedback</span>
         </Button>
