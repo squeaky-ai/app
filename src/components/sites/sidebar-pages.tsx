@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import type { Replayer } from 'rrweb';
+import type { metaEvent } from 'rrweb/typings/types';
 import classnames from 'classnames';
 import { EventType } from 'rrweb';
 import { groupBy } from 'lodash';
@@ -22,15 +23,15 @@ export const SidebarPages: FC<Props> = ({ recording, replayer }) => {
 
   const offset = pageviews[0]?.timestamp || 0;
 
-  const groups = groupBy(pageviews, 'data.href');
+  const getPathName = (url: string) => new URL(url).pathname;
+
+  const groups = groupBy(pageviews, (event: metaEvent) => getPathName(event.data.href));
 
   const handleOpen = (path: string) => {
     open.includes(path)
       ? setOpen(open.filter(o => o !== path))
       : setOpen([...open, path]);
   };
-
-  const getPathName = (url: string) => new URL(url).pathname;
 
   const nextPageView = (event: Event) => {
     const index = pageviews.findIndex(e => e.id === event.id);
@@ -44,27 +45,23 @@ export const SidebarPages: FC<Props> = ({ recording, replayer }) => {
 
   return (
     <ul className='datarow pages'>
-      {Object.entries(groups).map(([url, events]) => {
-        const path = getPathName(url);
-
-        return (
-          <li key={path} className={classnames({ open: open.includes(path) })}>
-            <div className='title' onClick={() => handleOpen(path)}>
-              <span className='path'>{path}</span>
-              <span className='count'>{events.length}</span>
-            </div>
-            <div className='timestamps'>
-              {events.map(event => (
-                <div key={event.id} className='event'>
-                  <ActivityTimestamp offset={offset} timestamp={event.timestamp} replayer={replayer} />
-                  <i className='ri-arrow-right-line' />
-                  <ActivityTimestamp offset={offset} timestamp={timeToNextPageView(event)} replayer={replayer} />
-                </div>
-              ))}
-            </div>
-          </li>
-        )
-      })}
+      {Object.entries(groups).map(([path, events]) => (
+        <li key={path} className={classnames({ open: open.includes(path) })}>
+          <div className='title' onClick={() => handleOpen(path)}>
+            <span className='path'>{path}</span>
+            <span className='count'>{events.length}</span>
+          </div>
+          <div className='timestamps'>
+            {(events as Event[]).map(event => (
+              <div key={event.id} className='event'>
+                <ActivityTimestamp offset={offset} timestamp={event.timestamp} replayer={replayer} />
+                <i className='ri-arrow-right-line' />
+                <ActivityTimestamp offset={offset} timestamp={timeToNextPageView(event)} replayer={replayer} />
+              </div>
+            ))}
+          </div>
+        </li>
+      ))}
     </ul>
   );
 };
