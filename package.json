@@ -1,7 +1,7 @@
 {
-  "name": "client",
+  "name": "app",
   "version": "0.1.0",
-  "description": "Squeaky Client",
+  "description": "Squeaky App",
   "main": "src/pages/index.tsx",
   "repository": "git@github.com:squeaky-ai/web.git",
   "license": "MIT",
