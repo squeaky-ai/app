@@ -11,4 +11,22 @@
       margin: 0;
     }
   }
+
+  .tabs {
+    margin: 2rem 0 0 0;
+
+    .code {
+      margin-bottom: 0;
+    }
+  }
+
+  .filename {
+    align-items: center;
+    display: flex;
+
+    i {
+      font-size: 1.25rem;
+      margin-right: .5rem;
+    }
+  }
 }

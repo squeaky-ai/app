@@ -64,3 +64,11 @@
     }
   }
 }
+
+.tab-body {
+  padding: 1.5rem 0;
+
+  &:not(.active) {
+    display: none;
+  }
+}
