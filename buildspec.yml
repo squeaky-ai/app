@@ -12,14 +12,14 @@ phases:
 
   build:
     commands:
-      - docker build -t web:latest .
-      - docker tag web:latest "${AWS_ACCOUNT_ID}.dkr.ecr.eu-west-1.amazonaws.com/web:latest"
-      - docker push "${AWS_ACCOUNT_ID}.dkr.ecr.eu-west-1.amazonaws.com/web:latest"
+      - docker build -t app:latest .
+      - docker tag app:latest "${AWS_ACCOUNT_ID}.dkr.ecr.eu-west-1.amazonaws.com/app:latest"
+      - docker push "${AWS_ACCOUNT_ID}.dkr.ecr.eu-west-1.amazonaws.com/app:latest"
 
   post_build:
     commands:
-      - aws ecs update-service --cluster squeaky --service web --force-new-deployment
-      - aws ecs wait services-stable --cluster squeaky --services web
+      - aws ecs update-service --cluster squeaky --service app --force-new-deployment
+      - aws ecs wait services-stable --cluster squeaky --services app
 
 cache:
   paths:
