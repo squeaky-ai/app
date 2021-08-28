@@ -27,21 +27,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const user = cookies.session ? await getUser(headers.cookie) : null;
   const isPublic = BLANK_ROUTES.includes(url);
 
-  // Logged in users should be forwarded on to the sites page
-  // if they land on the home page.
-  if (url === '/' && user) {
-    return {
-      redirect: {
-        destination: '/sites',
-        permanent: false
-      }
-    };
-  }
-
   // If the user doesn't exist and they're trying to access
   // a logged in page then we should redirect them to the 
   // login page
-  if (url === '/' || (!user && !isPublic)) {
+  if (!user && !isPublic) {
     return {
       redirect: {
         destination: '/auth/login',
