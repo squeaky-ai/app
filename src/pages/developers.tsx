@@ -1,7 +1,6 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Link from 'next/link';
 import Image from 'next/image'
 import hljs from 'highlight.js';
 import { Container } from 'components/container';
@@ -25,11 +24,9 @@ const Developers: NextPage<ServerSideProps> = () => {
 
       <Main>
         <div className='hero'>
-          <Link href='/'>
-            <a>
-              <Image src={`${BASE_PATH}/logo.svg`} height={48} width={154} alt='Logo' />
-            </a>
-          </Link>
+          <a href='/'>
+            <Image src={`${BASE_PATH}/logo.svg`} height={48} width={154} alt='Logo' />
+          </a>
           <h1>Developers</h1>
           <p>Last Updated: <b>September 1st 2021</b></p>
         </div>

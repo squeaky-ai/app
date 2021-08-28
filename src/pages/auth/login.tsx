@@ -78,11 +78,9 @@ const Login: NextPage<ServerSideProps> = () => {
       <div className='center'>
         <Container className='sm'>
           <Card>
-            <Link href='/'>
-              <a className='logo'>
-                <Image src={`${BASE_PATH}/logo.svg`} height={76} width={246} alt='Squeaky logo' />
-              </a>
-            </Link>
+            <a href='/' className='logo'>
+              <Image src={`${BASE_PATH}/logo.svg`} height={76} width={246} alt='Squeaky logo' />
+            </a>
 
             {pageView === PageView.LOGIN && ( 
               <>
