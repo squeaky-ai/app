@@ -136,14 +136,12 @@
     }
 
     dd {
-      align-items: center;
       color: var(--gray-500);
-      display: flex;
       flex: 1;
-      justify-content: flex-end;
       overflow: hidden;
-      margin-left: 1rem;
+      margin: 0 0 0 1rem;
       padding-right: 1rem;
+      text-align: right;
       text-overflow: ellipsis;
       white-space: nowrap;
 
