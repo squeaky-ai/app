@@ -7,9 +7,6 @@
 @import './variables';
 
 @import './components/app/sidebar';
-@import './components/public/features';
-@import './components/public/footer';
-@import './components/public/header';
 @import './components/sites/access';
 @import './components/sites/analytics-browsers';
 @import './components/sites/analytics-graph';
@@ -81,8 +78,4 @@
 @import './pages/users/password';
 @import './pages/404';
 @import './pages/500';
-@import './pages/contact';
 @import './pages/developers';
-@import './pages/index';
-@import './pages/privacy';
-@import './pages/terms';

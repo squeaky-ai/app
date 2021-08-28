@@ -2,14 +2,12 @@ import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
 import { useRouter } from 'next/router';
-import { Footer } from 'components/public/footer';
 import { Sidebar } from 'components/app/sidebar';
-import { BLANK_ROUTES, PUBLIC_ROUTES } from 'data/common/constants';
+import { BLANK_ROUTES } from 'data/common/constants';
 
 export const Page: FC = ({ children }) => {
   const router = useRouter();
   const isBlank = BLANK_ROUTES.includes(router.route);
-  const isPublic = PUBLIC_ROUTES.includes(router.route);
 
   const slug = router.route
     .split('/')
@@ -50,15 +48,6 @@ export const Page: FC = ({ children }) => {
         {children}
       </div>
     )
-  }
-
-  if (isPublic) {
-    return (
-      <div className={classnames('page', ...slug)}>
-        {children}
-        <Footer />
-      </div>
-    );
   }
 
   return (

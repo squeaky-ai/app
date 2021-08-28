@@ -1,7 +1,7 @@
 import { camelCase } from 'lodash';
 import type { GetServerSideProps } from 'next';
 import { session } from 'lib/api/auth';
-import { PUBLIC_ROUTES } from 'data/common/constants';
+import { BLANK_ROUTES } from 'data/common/constants';
 import type { User } from 'types/user';
 
 export interface ServerSideProps {
@@ -25,7 +25,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const url = resolvedUrl.split('?')[0];
 
   const user = cookies.session ? await getUser(headers.cookie) : null;
-  const isPublic = PUBLIC_ROUTES.includes(url);
+  const isPublic = BLANK_ROUTES.includes(url);
 
   // If the user doesn't exist and they're trying to access
   // a logged in page then we should redirect them to the 
