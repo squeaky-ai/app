@@ -40,9 +40,9 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, query }) => {
     <Link href={`/sites/${router.query.site_id}/visitors/${visitor.id}`}>
       <a className='row' onClick={onRowClick}>
         <Cell>
-          {!visitor.viewed && (
-            <Pill type='tertiary'>New</Pill>
-          )}
+          {visitor.viewed
+            ? <Pill type='secondary'>Existing</Pill>
+            : <Pill type='tertiary'>New</Pill>}
         </Cell>
         <Cell>
           <VisitorStarred site={site} visitor={visitor} />
