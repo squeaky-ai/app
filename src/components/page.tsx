@@ -14,10 +14,6 @@ export const Page: FC = ({ children }) => {
     .map(r => r.replace(/[\[\]]|(_id)/g, ''))
     .filter(r => !!r);
 
-  if (slug.length === 0) {
-    slug.push('home');
-  }
-
   if (slug.find(s => s === '404')) {
     slug.push('not-found');
   }
