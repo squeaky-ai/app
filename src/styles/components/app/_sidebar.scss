@@ -8,6 +8,7 @@
   padding: 2rem 1rem;
   transition: width .3s ease-in-out;
   width: 80px;
+  z-index: 1;
 
   .logo {
     display: block;
@@ -207,6 +208,7 @@
   }
 
   &.open {
+    overflow: hidden;
     width: 240px;
 
     .logo {
