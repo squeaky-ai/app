@@ -337,13 +337,17 @@
 
           .items {
             display: flex;
-            margin-top: 3rem;
+            justify-content: space-between;
+            margin-top: 2rem;
 
             .item {
-              padding: 1rem;
-              width: 33%;
+              background: var(--gray-50);
+              border-radius: var(--border-radius-md);
+              padding: 1.5rem;
+              width: calc(33% - 1rem);
 
               p {
+                font-weight: var(--font-weight-bold);
                 margin: 0 0 .5rem 0;
               }
 
