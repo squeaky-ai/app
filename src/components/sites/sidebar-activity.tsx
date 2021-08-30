@@ -7,6 +7,7 @@ import { EventType, IncrementalSource } from 'rrweb';
 import { ActivityTimestamp } from 'components/sites/activity-timestamp';
 import { SidebarActivityVisibility } from 'components/sites/sidebar-activity-visibility';
 import { cssPath } from 'lib/css-path';
+import { Preference, Preferences } from 'lib/preferences';
 import type { Event } from 'types/event';
 import type { Recording } from 'types/recording';
 
@@ -27,7 +28,13 @@ interface Props {
 }
 
 export const SidebarActivity: FC<Props> = ({ recording, replayer }) => {
-  const [active, setActive] = React.useState<ActivityName[]>(activities.map(a => a.value));
+  const savedActive = Preferences.getArray<ActivityName>(Preference.ACTIVITY_SHOW_TYPES);
+
+  const [active, setActive] = React.useState<ActivityName[]>(
+    // If they have anything stored in the preferences then
+    // show that, otherwise default to showing all of the types
+    savedActive.length === 0 ? activities.map(a => a.value) : savedActive
+  );
 
   const events: Event[] = recording.events.items.map(i => JSON.parse(i));
 

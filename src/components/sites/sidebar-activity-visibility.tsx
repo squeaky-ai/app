@@ -6,6 +6,7 @@ import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'compo
 import { Button } from 'components/button';
 import { Checkbox } from 'components/checkbox';
 import { activities, ActivityName } from 'lib/activity';
+import { Preference, Preferences } from 'lib/preferences';
 
 interface Props {
   active: ActivityName[];
@@ -41,6 +42,8 @@ export const SidebarActivityVisibility: FC<Props> = ({ active, setActive }) => {
             initialValues={{ checked: active }}
             validationSchema={ActivitySchema}
             onSubmit={(values, { setSubmitting }) => {
+              Preferences.setArray<string>(Preference.ACTIVITY_SHOW_TYPES, values.checked);
+
               setSubmitting(false);
               setActive(values.checked);
               closeModal();

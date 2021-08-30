@@ -39,7 +39,7 @@ export const PlayerActions: FC<Props> = ({ site, recording }) => {
       });
 
       if (skipDeleteModal) {
-        Preferences.set(Preference.RECORDINGS_PLAYER_DELETED_SKIP_PROMPT, true);
+        Preferences.setBoolean(Preference.RECORDINGS_PLAYER_DELETED_SKIP_PROMPT, true);
       }
 
       closeModal();
@@ -65,7 +65,7 @@ export const PlayerActions: FC<Props> = ({ site, recording }) => {
   };
 
   const handleDeleteClick = async () => {
-    const skipModal = Preferences.get(Preference.RECORDINGS_PLAYER_DELETED_SKIP_PROMPT);
+    const skipModal = Preferences.getBoolean(Preference.RECORDINGS_PLAYER_DELETED_SKIP_PROMPT);
 
     if (skipModal) {
       await deleteRecording();

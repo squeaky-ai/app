@@ -47,7 +47,7 @@ export const RecordingsItem: FC<Props> = ({ query, recording }) => {
       });
 
       if (skipDeleteModal) {
-        Preferences.set(Preference.RECORDINGS_DELETED_SKIP_PROMPT, true);
+        Preferences.setBoolean(Preference.RECORDINGS_DELETED_SKIP_PROMPT, true);
       }
 
       closeModal();
@@ -78,7 +78,7 @@ export const RecordingsItem: FC<Props> = ({ query, recording }) => {
   };
 
   const handleDeleteClick = async () => {
-    const skipModal = Preferences.get(Preference.RECORDINGS_DELETED_SKIP_PROMPT);
+    const skipModal = Preferences.getBoolean(Preference.RECORDINGS_DELETED_SKIP_PROMPT);
 
     if (skipModal) {
       await deleteRecording();
