@@ -108,11 +108,19 @@ export const VisitorRecordingsItem: FC<Props> = ({ recording }) => {
               <tbody>
                 <tr>
                   <td>START URL</td>
-                  <td>{recording.startPage}</td>
+                  <td>
+                    <Tooltip button={recording.startPage}>
+                      {recording.startPage}
+                    </Tooltip>
+                  </td>
                 </tr>
                 <tr>
                   <td>EXIT URL</td>
-                  <td>{recording.exitPage}</td>
+                  <td>
+                    <Tooltip button={recording.exitPage}>
+                      {recording.exitPage}
+                    </Tooltip>
+                  </td>
                 </tr>
               </tbody>
             </table>

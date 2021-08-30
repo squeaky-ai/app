@@ -119,11 +119,19 @@ export const RecordingsItem: FC<Props> = ({ query, recording }) => {
               <tbody>
                 <tr>
                   <td>START URL</td>
-                  <td><Highlighter value={query}>{recording.startPage}</Highlighter></td>
+                  <td>
+                    <Tooltip button={<Highlighter value={query}>{recording.startPage}</Highlighter>}>
+                      {recording.startPage}
+                    </Tooltip>
+                  </td>
                 </tr>
                 <tr>
                   <td>EXIT URL</td>
-                  <td><Highlighter value={query}>{recording.exitPage}</Highlighter></td>
+                  <td>
+                    <Tooltip button={<Highlighter value={query}>{recording.exitPage}</Highlighter>}>
+                      {recording.exitPage}
+                    </Tooltip>
+                  </td>
                 </tr>
               </tbody>
             </table>

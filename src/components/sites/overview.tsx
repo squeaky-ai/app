@@ -107,7 +107,7 @@ export const Overview: FC<Props> = ({ site }) => {
               <li>
                 <span className='name'>Pages</span>
                 <span className='value no-overflow'>
-                  <Tooltip button={recording.pageCount} buttonClassName='link'>
+                  <Tooltip positionX='right' button={recording.pageCount} buttonClassName='link'>
                     <ul className='tooltip-list'>
                       {recording.pageViews.map((page, i) => (
                         <li key={page + i}>{page}</li>
@@ -118,11 +118,19 @@ export const Overview: FC<Props> = ({ site }) => {
               </li>
               <li>
                 <span className='name'>Start URL</span>
-                <span className='value'>{recording.startPage}</span>
+                <span className='value'>
+                  <Tooltip positionX='right' className='pages' button={recording.startPage}>
+                    {recording.startPage}
+                  </Tooltip>
+                </span>
               </li>
               <li>
                 <span className='name'>Exit URL</span>
-                <span className='value'>{recording.exitPage}</span>
+                <span className='value'>
+                  <Tooltip positionX='right' className='pages' button={recording.exitPage}>
+                    {recording.exitPage}
+                  </Tooltip>
+                </span>
               </li>
             </ul>
           </div>

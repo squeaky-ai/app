@@ -268,6 +268,24 @@
                 &.no-overflow {
                   overflow: visible;
                 }
+
+                .button {
+                  font-size: 13px;
+                  line-height: 16px;
+                }
+
+                .pages {
+                  width: 100%;
+
+                  .button {
+                    color: var(--gray-500);
+                    overflow: hidden;
+                    text-align: right;
+                    text-overflow: ellipsis;
+                    width: 100%;
+                    white-space: nowrap;
+                  }
+                }
               }
             }
 
