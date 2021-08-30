@@ -119,7 +119,7 @@ export const Overview: FC<Props> = ({ site }) => {
               <li>
                 <span className='name'>Start URL</span>
                 <span className='value'>
-                  <Tooltip positionX='right' className='pages' button={recording.startPage}>
+                  <Tooltip fluid positionX='right' className='pages' button={recording.startPage}>
                     {recording.startPage}
                   </Tooltip>
                 </span>
@@ -127,7 +127,7 @@ export const Overview: FC<Props> = ({ site }) => {
               <li>
                 <span className='name'>Exit URL</span>
                 <span className='value'>
-                  <Tooltip positionX='right' className='pages' button={recording.exitPage}>
+                  <Tooltip fluid positionX='right' className='pages' button={recording.exitPage}>
                     {recording.exitPage}
                   </Tooltip>
                 </span>

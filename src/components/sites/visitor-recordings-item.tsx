@@ -108,7 +108,7 @@ export const VisitorRecordingsItem: FC<Props> = ({ recording }) => {
               <div className='item'>
                 <div>START URL</div>
                 <div>
-                  <Tooltip button={recording.startPage}>
+                  <Tooltip fluid button={recording.startPage}>
                     {recording.startPage}
                   </Tooltip>
                 </div>
@@ -116,7 +116,7 @@ export const VisitorRecordingsItem: FC<Props> = ({ recording }) => {
               <div className='item'>
                 <div>EXIT URL</div>
                 <div>
-                  <Tooltip button={recording.exitPage}>
+                  <Tooltip fluid button={recording.exitPage}>
                     {recording.exitPage}
                   </Tooltip>
                 </div>

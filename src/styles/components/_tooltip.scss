@@ -32,6 +32,10 @@
   white-space: nowrap;
   z-index: 1;
 
+  &.fluid {
+    max-width: 100%;
+  }
+
   &.right {
     transform: translateX(-100%);
   }

@@ -136,7 +136,7 @@ export const RecordingsItem: FC<Props> = ({ query, recording }) => {
               <div className='item'>
                 <div>START URL</div>
                 <div>
-                  <Tooltip button={<Highlighter value={query}>{recording.startPage}</Highlighter>}>
+                  <Tooltip fluid button={<Highlighter value={query}>{recording.startPage}</Highlighter>}>
                     {recording.startPage}
                   </Tooltip>
                 </div>
@@ -144,7 +144,7 @@ export const RecordingsItem: FC<Props> = ({ query, recording }) => {
               <div className='item'>
                 <div>EXIT URL</div>
                 <div>
-                  <Tooltip button={<Highlighter value={query}>{recording.exitPage}</Highlighter>}>
+                  <Tooltip fluid button={<Highlighter value={query}>{recording.exitPage}</Highlighter>}>
                     {recording.exitPage}
                   </Tooltip>
                 </div>
