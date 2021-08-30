@@ -182,6 +182,10 @@
       text-overflow: ellipsis;
       white-space: nowrap;
 
+      &.hidden {
+        display: none;
+      }
+
       &:last-of-type {
         border-bottom: 2px solid var(--gray-100);
       }
@@ -387,6 +391,39 @@
           margin: 0 .5rem;
         }
       }
+    }
+  }
+
+  .activity-visibility {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    &.secondary {
+      margin-bottom: 1.5rem;
+
+      &:hover {
+        i, span {
+          color: var(--white); 
+        }
+      }
+    }
+
+    i, span {
+      width: 30px;
+    }
+
+    i {
+      color: var(--blue-500);
+      font-size: 1.5rem;
+      text-align: left;
+    }
+
+    span {
+      color: var(--gray-500);
+      font-weight: var(--font-weight-normal);
+      text-align: right;
     }
   }
 }
