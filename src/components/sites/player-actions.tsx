@@ -4,9 +4,11 @@ import Link from 'next/link';
 import classnames from 'classnames';
 import { useRouter } from 'next/router';
 import { Button } from 'components/button';
+import { Checkbox } from 'components/checkbox';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { recordingDelete, recordingBookmarked } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
+import { Preferences, Preference } from 'lib/preferences';
 import type { Site } from 'types/site';
 import type { Recording } from 'types/recording';
 
@@ -19,6 +21,7 @@ export const PlayerActions: FC<Props> = ({ site, recording }) => {
   const toast = useToasts();
   const router = useRouter();
   const ref = React.useRef<Modal>();
+  const [skipDeleteModal, setSkipDeleteModal] = React.useState<boolean>(false);
 
   const openModal = () => {
     if (ref.current) ref.current.show();
@@ -28,12 +31,16 @@ export const PlayerActions: FC<Props> = ({ site, recording }) => {
     if (ref.current) ref.current.hide();
   };
 
-  const handleDelete = async () => {
+  const deleteRecording = async () => {
     try {
       await recordingDelete({ 
         siteId: site.id, 
         recordingId: recording.id 
       });
+
+      if (skipDeleteModal) {
+        Preferences.set(Preference.RECORDINGS_PLAYER_DELETED_SKIP_PROMPT, true);
+      }
 
       closeModal();
 
@@ -57,13 +64,23 @@ export const PlayerActions: FC<Props> = ({ site, recording }) => {
     }
   };
 
+  const handleDeleteClick = async () => {
+    const skipModal = Preferences.get(Preference.RECORDINGS_PLAYER_DELETED_SKIP_PROMPT);
+
+    if (skipModal) {
+      await deleteRecording();
+    } else {
+      openModal();
+    }
+  };
+
   return (
     <>
       <div className='recording-actions'>
         <Button onClick={handleBookmark} className={classnames('boookmark', { active: recording?.bookmarked })}>
           <i className='ri-bookmark-3-line' />
         </Button>
-        <Button onClick={openModal}>
+        <Button onClick={handleDeleteClick}>
           <i className='ri-delete-bin-line' />
         </Button>
         <Link href={`/sites/${site.id}/recordings`}>
@@ -83,9 +100,12 @@ export const PlayerActions: FC<Props> = ({ site, recording }) => {
           </ModalHeader>
           <ModalContents>
             <p id='delete-recording-description'>Are you sure you wish to delete this recording?</p>
+            <Checkbox checked={skipDeleteModal} onChange={() => setSkipDeleteModal(!skipDeleteModal)}>
+              Don&apos;t show message again
+            </Checkbox>
           </ModalContents>
           <ModalFooter>
-            <Button type='button' className='tertiary' onClick={handleDelete}>
+            <Button type='button' className='tertiary' onClick={deleteRecording}>
               Delete Recording
             </Button>
             <Button type='button' className='quaternary' onClick={closeModal}>

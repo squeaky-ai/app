@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import { useRouter } from 'next/router';
 import { Highlighter } from 'components/highlighter';
 import { Pill } from 'components/pill';
+import { Checkbox } from 'components/checkbox';
 import { Button } from 'components/button';
 import { Tooltip } from 'components/tooltip';
 import { Browser } from 'components/browser';
@@ -15,6 +16,7 @@ import { Cell } from 'components/table';
 import { toNiceDate, toTimeString } from 'lib/dates';
 import { useToasts } from 'hooks/use-toasts';
 import { recordingDelete, recordingBookmarked } from 'lib/api/graphql';
+import { Preferences, Preference } from 'lib/preferences';
 import type { Recording } from 'types/recording';
 
 interface Props {
@@ -26,6 +28,7 @@ export const RecordingsItem: FC<Props> = ({ query, recording }) => {
   const toast = useToasts();
   const router = useRouter();
   const ref = React.useRef<Modal>();
+  const [skipDeleteModal, setSkipDeleteModal] = React.useState<boolean>(false);
 
   const onRowClick = (event: React.MouseEvent) => {
     const element = event.target as HTMLElement;
@@ -42,6 +45,10 @@ export const RecordingsItem: FC<Props> = ({ query, recording }) => {
         siteId: router.query.site_id as string, 
         recordingId: recording.id 
       });
+
+      if (skipDeleteModal) {
+        Preferences.set(Preference.RECORDINGS_DELETED_SKIP_PROMPT, true);
+      }
 
       closeModal();
       toast.add({ type: 'success', body: 'Recording deleted' });
@@ -68,6 +75,16 @@ export const RecordingsItem: FC<Props> = ({ query, recording }) => {
 
   const closeModal = () => {
     if (ref.current) ref.current.hide();
+  };
+
+  const handleDeleteClick = async () => {
+    const skipModal = Preferences.get(Preference.RECORDINGS_DELETED_SKIP_PROMPT);
+
+    if (skipModal) {
+      await deleteRecording();
+    } else {
+      openModal();
+    }
   };
 
   return (
@@ -149,7 +166,7 @@ export const RecordingsItem: FC<Props> = ({ query, recording }) => {
           </Cell>
           <Cell>
             <Dropdown portal button={<i className='ri-more-2-fill' />} buttonClassName='options'>
-              <Button onClick={openModal}>
+              <Button onClick={handleDeleteClick}>
                 <i className='ri-delete-bin-line' /> Delete
               </Button>
             </Dropdown>
@@ -167,6 +184,9 @@ export const RecordingsItem: FC<Props> = ({ query, recording }) => {
           </ModalHeader>
           <ModalContents>
             <p id='delete-recording-description'>Are you sure you wish to delete this recording?</p>
+            <Checkbox checked={skipDeleteModal} onChange={() => setSkipDeleteModal(!skipDeleteModal)}>
+              Don&apos;t show message again
+            </Checkbox>
           </ModalContents>
           <ModalFooter>
             <Button type='button' className='tertiary' onClick={deleteRecording}>

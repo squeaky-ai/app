@@ -36,7 +36,7 @@ export const SidebarFeedback: FC = () => {
       <div className='link feedback' data-label='Feedback'>
         <Button onClick={openModal}>
           <div className='icon'>
-            <Image src={`${BASE_PATH}/lightbulb.svg`} height={24} width={24} />
+            <Image src={`${BASE_PATH}/lightbulb.svg`} height={24} width={24} alt='Lightbulb icon' />
           </div>
           <span>Feedback</span>
         </Button>
