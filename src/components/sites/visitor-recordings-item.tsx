@@ -104,26 +104,24 @@ export const VisitorRecordingsItem: FC<Props> = ({ recording }) => {
             </Tooltip>
           </Cell>
           <Cell>
-            <table className='start-exit-page'>
-              <tbody>
-                <tr>
-                  <td>START URL</td>
-                  <td>
-                    <Tooltip button={recording.startPage}>
-                      {recording.startPage}
-                    </Tooltip>
-                  </td>
-                </tr>
-                <tr>
-                  <td>EXIT URL</td>
-                  <td>
-                    <Tooltip button={recording.exitPage}>
-                      {recording.exitPage}
-                    </Tooltip>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div className='start-exit-page'>
+              <div className='item'>
+                <div>START URL</div>
+                <div>
+                  <Tooltip button={recording.startPage}>
+                    {recording.startPage}
+                  </Tooltip>
+                </div>
+              </div>
+              <div className='item'>
+                <div>EXIT URL</div>
+                <div>
+                  <Tooltip button={recording.exitPage}>
+                    {recording.exitPage}
+                  </Tooltip>
+                </div>
+              </div>
+            </div>
           </Cell>
           <Cell>
             <Dropdown portal button={<i className='ri-more-2-fill' />} buttonClassName='options'>

@@ -24,17 +24,37 @@
   }
 
   .start-exit-page {
-    font-size: 13px;
-    line-height: 20px;
+    .item {
+      display: flex;
+      margin-bottom: .25rem;
+      width: 100%;
 
-    td {
-      border: none;
-      padding: 0;
-      text-align: left;
+      &:last-of-type {
+        margin-bottom: 0;
+      }
 
-      &:first-of-type {
-        color: var(--gray-200);
-        width: 70px;
+      div {
+        &:first-of-type {
+          color: var(--gray-200);
+          margin-right: .5rem;
+          width: 70px;
+        }
+
+        &:last-of-type {
+          width: calc(100% - 78px);
+          
+          .tooltip {
+            width: 100%;
+
+            .button {
+              overflow: hidden;
+              text-align: left;
+              text-overflow: ellipsis;
+              width: 100%;
+              white-space: nowrap;
+            }
+          }
+        }
       }
     }
   }

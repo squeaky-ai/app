@@ -132,26 +132,24 @@ export const RecordingsItem: FC<Props> = ({ query, recording }) => {
             </Tooltip>
           </Cell>
           <Cell>
-            <table className='start-exit-page'>
-              <tbody>
-                <tr>
-                  <td>START URL</td>
-                  <td>
-                    <Tooltip button={<Highlighter value={query}>{recording.startPage}</Highlighter>}>
-                      {recording.startPage}
-                    </Tooltip>
-                  </td>
-                </tr>
-                <tr>
-                  <td>EXIT URL</td>
-                  <td>
-                    <Tooltip button={<Highlighter value={query}>{recording.exitPage}</Highlighter>}>
-                      {recording.exitPage}
-                    </Tooltip>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div className='start-exit-page'>
+              <div className='item'>
+                <div>START URL</div>
+                <div>
+                  <Tooltip button={<Highlighter value={query}>{recording.startPage}</Highlighter>}>
+                    {recording.startPage}
+                  </Tooltip>
+                </div>
+              </div>
+              <div className='item'>
+                <div>EXIT URL</div>
+                <div>
+                  <Tooltip button={<Highlighter value={query}>{recording.exitPage}</Highlighter>}>
+                    {recording.exitPage}
+                  </Tooltip>
+                </div>
+              </div>
+            </div>
           </Cell>
           <Cell>
             <Tooltip positionX='right' button={<Device deviceType={recording.deviceType} />}>
