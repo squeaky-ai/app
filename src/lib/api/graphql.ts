@@ -178,7 +178,7 @@ export const createSite = async (name: string, url: string): Promise<SiteMutatio
     });
 
     return { site: data.siteCreate };
-  } catch(error) {
+  } catch(error: any) {
     console.error(error);
     return parseGraphQLError(error);
   }
@@ -192,7 +192,7 @@ export const updateSite = async (input: SiteMutationInput): Promise<SiteMutation
     });
 
     return { site: data.siteUpdate };
-  } catch(error) {
+  } catch(error: any) {
     console.error(error);
     return parseGraphQLError(error);
   }
@@ -213,7 +213,7 @@ export const deleteSite = async (input: SiteDeleteMutationInput): Promise<SiteMu
     });
 
     return { site: null };
-  } catch(error) {
+  } catch(error: any) {
     console.error(error);
     return parseGraphQLError(error);
   }
@@ -227,7 +227,7 @@ export const verifySite = async (input: SiteVerifyMutationInput): Promise<SiteMu
     });
 
     return { site: data.siteVerify };
-  } catch(error) {
+  } catch(error: any) {
     console.error(error);
     return parseGraphQLError(error);
   }
@@ -241,7 +241,7 @@ export const updateUser = async (input: UserMutationInput): Promise<UserMutation
     });
 
     return { user: data.userUpdate };
-  } catch(error) {
+  } catch(error: any) {
     console.error(error);
     return parseGraphQLError(error);
   }
@@ -255,7 +255,7 @@ export const teamInvite = async (input: TeamInviteInput): Promise<SiteMutationRe
     });
 
     return { site: data.teamInvite };
-  } catch(error) {
+  } catch(error: any) {
     console.error(error);
     return parseGraphQLError(error);
   }
@@ -269,7 +269,7 @@ export const teamInviteCancel = async (input: TeamInviteCancelInput): Promise<Si
     });
 
     return { site: data.teamInviteCancel };
-  } catch(error) {
+  } catch(error: any) {
     console.error(error);
     return parseGraphQLError(error);
   }
@@ -283,7 +283,7 @@ export const teamInviteAccept = async (input: TeamInviteAcceptInput): Promise<Si
     });
 
     return { site: data.teamInviteCancel };
-  } catch(error) {
+  } catch(error: any) {
     console.error(error);
     return parseGraphQLError(error);
   }
@@ -297,7 +297,7 @@ export const teamInviteResend = async (input: TeamInviteResendInput): Promise<Si
     });
 
     return { site: data.teamInviteResend };
-  } catch(error) {
+  } catch(error: any) {
     console.error(error);
     return parseGraphQLError(error);
   }
@@ -311,7 +311,7 @@ export const userInvitation = async (token: string): Promise<UserInvitationQuery
     });
 
     return data.userInvitation;
-  } catch(error) {
+  } catch(error: any) {
     console.error(error);
     return { email: null, hasPending: false };
   }
@@ -321,7 +321,7 @@ export const userDelete = async (): Promise<boolean> => {
   try {
     await client.mutate({ mutation: USER_DELETE_MUTATION });
     return true;
-  } catch(error) {
+  } catch(error: any) {
     console.error(error);
     return false;
   }
@@ -334,7 +334,7 @@ export const userPassword = async (input: UserPasswordMutationInput): Promise<Us
       variables: { input }
     });
     return { user: data.userPassword };
-  } catch(error) {
+  } catch(error: any) {
     console.error(error);
     return { error: { currentPassword: error.message } };
   }
@@ -348,7 +348,7 @@ export const teamUpdate = async (input: TeamUpdateInput): Promise<SiteMutationRe
     });
 
     return { site: data.teamUpdate };
-  } catch(error) {
+  } catch(error: any) {
     console.error(error);
     return parseGraphQLError(error);
   }
@@ -368,7 +368,7 @@ export const teamLeave = async (input: TeamLeaveInput): Promise<SiteMutationResp
     });
 
     return { site: null };
-  } catch(error) {
+  } catch(error: any) {
     console.error(error);
     return parseGraphQLError(error);
   }
@@ -382,7 +382,7 @@ export const teamDelete = async (input: TeamDeleteInput): Promise<SiteMutationRe
     });
 
     return { site: data.teamDelete };
-  } catch(error) {
+  } catch(error: any) {
     console.error(error);
     return parseGraphQLError(error);
   }
@@ -396,7 +396,7 @@ export const tagCreate = async (input: TagCreateMutationInput): Promise<SiteMuta
     });
 
     return { site: data.tagCreate };
-  } catch(error) {
+  } catch(error: any) {
     console.error(error);
     return parseGraphQLError(error);
   }
@@ -410,7 +410,7 @@ export const tagDelete = async (input: TagDeleteMutationInput): Promise<SiteMuta
     });
 
     return { site: data.tagDelete };
-  } catch(error) {
+  } catch(error: any) {
     console.error(error);
     return parseGraphQLError(error);
   }
@@ -424,7 +424,7 @@ export const noteCreate = async (input: NoteCreateMutationInput): Promise<SiteMu
     });
 
     return { site: data.noteCreate };
-  } catch(error) {
+  } catch(error: any) {
     console.error(error);
     return parseGraphQLError(error);
   }
@@ -438,7 +438,7 @@ export const noteDelete = async (input: NoteDeleteMutationInput): Promise<SiteMu
     });
 
     return { site: data.noteDelete };
-  } catch(error) {
+  } catch(error: any) {
     console.error(error);
     return parseGraphQLError(error);
   }
@@ -452,7 +452,7 @@ export const noteUpdate = async (input: NoteUpdateMutationInput): Promise<SiteMu
     });
 
     return { site: data.noteUpdate };
-  } catch(error) {
+  } catch(error: any) {
     console.error(error);
     return parseGraphQLError(error);
   }
@@ -466,7 +466,7 @@ export const recordingViewed = async (input: ViewedRecordingMutationInput): Prom
     });
 
     return { site: data.recordingViewed };
-  } catch(error) {
+  } catch(error: any) {
     console.error(error);
     return parseGraphQLError(error);
   }
