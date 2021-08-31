@@ -22,8 +22,6 @@ export const VisitorRecording: FC<Props> = ({ visitor, page, sort, setPage, setS
 
   return (
     <>
-      <h4 className='sub-heading'>Recordings</h4>
-
       {items.length > 0 && (
         <Table className='visitor-recordings-table'>
           <Row head>

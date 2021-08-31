@@ -1,6 +1,5 @@
 import React from 'react';
 import type { FC } from 'react';
-import { toTimeString } from 'lib/dates';
 import { Sort } from 'components/sort';
 import { Pagination } from 'components/pagination';
 import { Table, Row, Cell } from 'components/table';
@@ -20,8 +19,6 @@ export const VisitorPages: FC<Props> = ({ visitor, page, sort, setPage, setSort 
 
   return (
     <>
-      <h4 className='sub-heading'>Pages</h4>
-
       <Table className='visitor-pages-table'>
         <Row head>
           <Cell>
@@ -36,15 +33,11 @@ export const VisitorPages: FC<Props> = ({ visitor, page, sort, setPage, setSort 
               onDesc={() => setSort('VIEWS_COUNT_DESC')} 
             />
           </Cell>
-          <Cell>
-            Average time on page
-          </Cell>
         </Row>
         {items.map(item => (
           <Row key={item.pageView}>
             <Cell>{item.pageView}</Cell>
             <Cell><b>{item.pageViewCount}</b></Cell>
-            <Cell>{toTimeString(item.averageTimeOnPage)}</Cell>
           </Row>
         ))}
       </Table>
