@@ -92,7 +92,7 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
                 <h3>Page Views</h3>
                 <h2>
                   {visitor.pageViewsCount.total}
-                  <Pill type='tertiary'>{visitor.pageViewsCount.unique} Unique</Pill>
+                  <Pill type='secondary'>{visitor.pageViewsCount.unique} Unique</Pill>
                 </h2>
               </Card>
               <Card className='per-session'>
