@@ -361,4 +361,27 @@
       }
     }
   }
+
+  .custom-tooltip {
+    background: var(--gray-800);
+    border-radius: var(--border-radius-md);
+    color: var(--gray-100);
+    padding: 1rem;
+
+    p {
+      margin: 0 0 .5rem 0;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+    
+    .page-views {
+      color: var(--magenta-500);
+    }
+
+    .visitors {
+      color: var(--blue-500);
+    }
+  }
 }

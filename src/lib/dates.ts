@@ -1,4 +1,5 @@
-import { range } from 'lodash';
+import { get, range } from 'lodash';
+
 import { 
   startOfToday, 
   startOfYesterday, 
@@ -53,6 +54,10 @@ export const toMinutesAndSeconds = (ms?: number) => {
 
   const [hours, minutes, seconds] = timeString.split(':');
   return `${hours.replace('00', '0')}h ${minutes.replace('00', '0')}m ${seconds.replace('00', '0')}s`;
+};
+
+export const toDayOfMonth = (date: Date) => {
+  return format(date, 'do MMMM');
 };
 
 export const daysBefore = (count = 7, from?: Date) => {
@@ -116,4 +121,37 @@ export const getDateRange = (period: TimePeriod): TimeRange => {
         toDate: todaysDate
       };
   }
+};
+
+export const expandDay = (day: string) => {
+  const days = {
+    Mon: 'Monday',
+    Tue: 'Tuesday',
+    Wed: 'Wednesday',
+    Thu: 'Thursday',
+    Fri: 'Firday',
+    Sat: 'Saturday',
+    Sun: 'Sunday'
+  };
+
+  return get(days, day, '');
+};
+
+export const expandMonth = (month: string) => {
+  const months = {
+    Jan: 'January',
+    Fed: 'February',
+    Mar: 'March',
+    Apr: 'April',
+    May: 'May',
+    Jun: 'June',
+    Jul: 'July',
+    Aug: 'August',
+    Sep: 'September',
+    Oct: 'October',
+    Nov: 'November',
+    Dec: 'December'
+  };
+
+  return get(months, month, '');
 };
