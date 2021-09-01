@@ -1,7 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
 import Image from 'next/image';
-import classnames from 'classnames';
 import { Pagination } from 'components/pagination';
 import { useVisitors } from 'hooks/use-visitors';
 import { Container } from 'components/container';
@@ -13,7 +12,7 @@ import { Table, Row, Cell } from 'components/table';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 import { BASE_PATH } from 'data/common/constants';
 import type { Site } from 'types/site';
-import type { VisitorSortBy, ExternalAttributes } from 'types/visitor';
+import type { VisitorSortBy } from 'types/visitor';
 
 interface Props {
   query: string;
@@ -34,13 +33,6 @@ export const Visitors: FC<Props> = ({ site, query }) => {
 
   const { items, pagination } = visitors;
 
-  const showLinkedData = (() => !!items.find(i => {
-    if (!i.attributes) return false;
-
-    const attributes = JSON.parse(i.attributes) as ExternalAttributes;
-    return Object.keys(attributes).some(i => ['id', 'name', 'email'].includes(i));
-  }))();
-
   return (
     <>
       {!loading && (
@@ -52,7 +44,7 @@ export const Visitors: FC<Props> = ({ site, query }) => {
         </Container>
       )}
 
-      <Table className={classnames('visitors-list', { 'show-linked-data': showLinkedData })}>
+      <Table className='visitors-list'>
         <Row head>
           <Cell>
             Status
@@ -60,19 +52,19 @@ export const Visitors: FC<Props> = ({ site, query }) => {
           <Cell>
             Visitor ID
           </Cell>
-          <Cell>
+          <Cell className='linked'>
             <Tooltip button={<i className='ri-link-m' />}>
               Linked Data
             </Tooltip>
             User ID
           </Cell>
-          <Cell>
+          <Cell className='linked'>
             <Tooltip button={<i className='ri-link-m' />}>
               Linked Data
             </Tooltip>
             Name
           </Cell>
-          <Cell>
+          <Cell className='linked'>
             <Tooltip button={<i className='ri-link-m' />}>
               Linked Data
             </Tooltip>
