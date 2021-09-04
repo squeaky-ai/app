@@ -1,6 +1,5 @@
 import React from 'react';
 import type { FC } from 'react';
-import hljs from 'highlight.js';
 import { Label } from 'components/label';
 import { Button } from 'components/button';
 import type { Site } from 'types/site';
@@ -12,12 +11,6 @@ interface Props {
 export const TrackingCode: FC<Props> = ({ site }) => {
   const ref = React.useRef<HTMLElement>();
   const [loading, setLoading] = React.useState<boolean>(false);
-
-  React.useEffect(() => {
-    document.querySelectorAll('pre code').forEach((element) => {
-      hljs.highlightElement(element as HTMLElement);
-    });
-  }, []);
 
   const copy = async () => {
     setLoading(true);
@@ -41,8 +34,8 @@ export const TrackingCode: FC<Props> = ({ site }) => {
           {loading ? 'Copied!' : 'Copy to clipboard'}
         </Button>
       </Label>
-      <pre className='code block'>
-        <code className='language-html' ref={ref}>
+      <pre className='code block simple'>
+        <code ref={ref}>
 {`<!-- Squeaky Tracking Code for ${site.url} -->
 <script>
   (function(s,q,e,a,u,k,y){

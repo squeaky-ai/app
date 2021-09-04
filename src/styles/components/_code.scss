@@ -12,5 +12,9 @@
     overflow: hidden;
     padding: 0;
     width: 100%;
+
+    &.simple {
+      padding: 1rem;
+    }
   }
 }
