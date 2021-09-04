@@ -23,7 +23,7 @@ export const VisitorRecording: FC<Props> = ({ visitor, page, sort, setPage, setS
   return (
     <>
       {items.length > 0 && (
-        <Table className='visitor-recordings-table'>
+        <Table className='visitor-recordings-table hover'>
           <Row head>
             <Cell>
               Status
@@ -61,6 +61,7 @@ export const VisitorRecording: FC<Props> = ({ visitor, page, sort, setPage, setS
             <Cell>
               Start &amp; Exit URL
             </Cell>
+            <Cell />
             <Cell />
           </Row>
           {items.map(recording => (

@@ -130,6 +130,9 @@ export const VisitorRecordingsItem: FC<Props> = ({ recording }) => {
               </Button>
             </Dropdown>
           </Cell>
+          <Cell className='link-hint'>
+            <i className='ri-arrow-right-line' />
+          </Cell>
         </a>
       </Link>
 

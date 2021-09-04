@@ -44,7 +44,7 @@ export const Visitors: FC<Props> = ({ site, query }) => {
         </Container>
       )}
 
-      <Table className='visitors-list'>
+      <Table className='visitors-list hover'>
         <Row head>
           <Cell>
             Status
@@ -106,6 +106,7 @@ export const Visitors: FC<Props> = ({ site, query }) => {
           <Cell>
             Browser
           </Cell>
+          <Cell />
         </Row>
         {items.map(v => (
           <VisitorsItem 

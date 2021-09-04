@@ -8,16 +8,14 @@
 
   .row {
     align-items: center;
-    border-top: 1px solid var(--gray-150);
+    border-color: var(--gray-150) transparent transparent transparent;
+    border-style: solid;
+    border-width: 1px;
     color: var(--gray-700);
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     height: 4rem;
     text-decoration: none;
-
-    &:hover {
-      background: var(--gray-100);
-    }
 
     .cell {
       overflow: hidden;
@@ -31,6 +29,15 @@
       font-size: 13px;
     }
 
+    .primary {
+      color: var(--blue-500);
+      text-decoration: underline;
+    }
+
+    .link-hint {
+      display: none;
+    }
+
     &.head {
       border-top: none;
 
@@ -39,12 +46,32 @@
       }
 
       .cell {
-        border-right: 1px solid var(--gray-150);
         color: var(--gray-800);
 
         &:last-of-type {
           border-right: none;
         }
+      }
+    }
+  }
+
+  &.hover {
+    .row:not(.head):hover {
+      border: 1px solid var(--blue-500);
+      border-radius: var(--border-radius-md);
+
+      .link-hint {
+        display: block;
+  
+        i {
+          color: var(--blue-500);
+          display: block;
+          font-size: 1.25rem;
+        }
+      }
+
+      + .row {
+        border-top-color: transparent;
       }
     }
   }

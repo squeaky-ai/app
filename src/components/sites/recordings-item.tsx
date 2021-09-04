@@ -97,7 +97,7 @@ export const RecordingsItem: FC<Props> = ({ query, recording }) => {
               : <Pill type='tertiary'>New</Pill>
             }
           </Cell>
-          <Cell>
+          <Cell className='primary'>
             <Tooltip
               button={
                 <span onClick={bookmarkRecording} className={classnames('bookmark', { active: recording.bookmarked })}>
@@ -168,6 +168,9 @@ export const RecordingsItem: FC<Props> = ({ query, recording }) => {
                 <i className='ri-delete-bin-line' /> Delete
               </Button>
             </Dropdown>
+          </Cell>
+          <Cell className='link-hint'>
+            <i className='ri-arrow-right-line' />
           </Cell>
         </a>
       </Link>

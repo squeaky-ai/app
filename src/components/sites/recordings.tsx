@@ -41,7 +41,7 @@ export const Recordings: FC<Props> = ({ query }) => {
         </Container>
       )}
     
-      <Table className='recordings-list'>
+      <Table className='recordings-list hover'>
         <Row head>
           <Cell>Status</Cell>
           <Cell>Recording ID</Cell>
@@ -52,6 +52,7 @@ export const Recordings: FC<Props> = ({ query }) => {
           <Cell>Start &amp; Exit URL</Cell>
           <Cell>Device &amp; Viewport (px)</Cell>
           <Cell>Browser</Cell>
+          <Cell />
           <Cell />
         </Row>
         {items.map(recording => (

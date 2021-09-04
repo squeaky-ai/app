@@ -44,7 +44,7 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, query }) => {
             ? <Pill type='secondary'>Existing</Pill>
             : <Pill type='tertiary'>New</Pill>}
         </Cell>
-        <Cell>
+        <Cell className='primary'>
           <VisitorStarred site={site} visitor={visitor} />
         </Cell>
         <Cell>
@@ -78,6 +78,9 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, query }) => {
           <Tooltip positionX='right' button={<Browser name={visitor.browser} height={24} width={24} />}>
             {visitor.browserString}
           </Tooltip>
+        </Cell>
+        <Cell className='link-hint'>
+          <i className='ri-arrow-right-line' />
         </Cell>
       </a>
     </Link>
