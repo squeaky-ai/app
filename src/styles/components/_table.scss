@@ -8,6 +8,7 @@
 
   .row {
     align-items: center;
+    background: var(--white);
     border-color: var(--gray-150) transparent transparent transparent;
     border-style: solid;
     border-width: 1px;
@@ -16,6 +17,7 @@
     grid-template-columns: repeat(10, 1fr);
     height: 4rem;
     text-decoration: none;
+    transition: transform .1s ease-in-out;
 
     .cell {
       overflow: hidden;
@@ -32,10 +34,6 @@
     .primary {
       color: var(--blue-500);
       text-decoration: underline;
-    }
-
-    .link-hint {
-      display: none;
     }
 
     &.head {
@@ -59,16 +57,7 @@
     .row:not(.head):hover {
       border: 1px solid var(--blue-500);
       border-radius: var(--border-radius-md);
-
-      .link-hint {
-        display: block;
-  
-        i {
-          color: var(--blue-500);
-          display: block;
-          font-size: 1.25rem;
-        }
-      }
+      transform: scale(1.01);
 
       + .row {
         border-top-color: transparent;

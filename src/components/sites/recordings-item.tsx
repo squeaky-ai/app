@@ -169,9 +169,6 @@ export const RecordingsItem: FC<Props> = ({ query, recording }) => {
               </Button>
             </Dropdown>
           </Cell>
-          <Cell className='link-hint'>
-            <i className='ri-arrow-right-line' />
-          </Cell>
         </a>
       </Link>
 

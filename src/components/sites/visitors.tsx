@@ -106,7 +106,6 @@ export const Visitors: FC<Props> = ({ site, query }) => {
           <Cell>
             Browser
           </Cell>
-          <Cell />
         </Row>
         {items.map(v => (
           <VisitorsItem 

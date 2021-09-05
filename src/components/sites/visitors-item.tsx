@@ -79,9 +79,6 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, query }) => {
             {visitor.browserString}
           </Tooltip>
         </Cell>
-        <Cell className='link-hint'>
-          <i className='ri-arrow-right-line' />
-        </Cell>
       </a>
     </Link>
   );

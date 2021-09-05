@@ -53,7 +53,6 @@ export const Recordings: FC<Props> = ({ query }) => {
           <Cell>Device &amp; Viewport (px)</Cell>
           <Cell>Browser</Cell>
           <Cell />
-          <Cell />
         </Row>
         {items.map(recording => (
           <RecordingsItem 

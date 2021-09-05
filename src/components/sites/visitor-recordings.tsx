@@ -62,7 +62,6 @@ export const VisitorRecording: FC<Props> = ({ visitor, page, sort, setPage, setS
               Start &amp; Exit URL
             </Cell>
             <Cell />
-            <Cell />
           </Row>
           {items.map(recording => (
             <VisitorRecordingsItem key={recording.id} recording={recording} />
