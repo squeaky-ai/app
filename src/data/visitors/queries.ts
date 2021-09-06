@@ -22,6 +22,7 @@ export const GET_VISITORS_QUERY = gql`
             viewportY
             browserName
             browserDetails
+            useragent
           }
           starred
           attributes
@@ -58,6 +59,7 @@ export const GET_VISITOR_QUERY = gql`
           viewportY
           browserName
           browserDetails
+          useragent
         }
         pageViewsCount {
           total

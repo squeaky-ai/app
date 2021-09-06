@@ -4,4 +4,5 @@ export interface Device {
   viewportY: number;
   browserName: string;
   browserDetails: string;
+  useragent: string;
 }

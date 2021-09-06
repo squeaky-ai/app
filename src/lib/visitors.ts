@@ -36,15 +36,11 @@ export function groupVisitorBrowsers(devices: Device[]): Device[] {
 }
 
 export function groupVisitorDevices(devices: Device[]): Device[] {
-  const out: Device[] = [];
-
-  for (const device of devices) {
-    const key = (d: Device) => `${d.viewportX}__${d.viewportY}__${d.deviceType}`;
-
-    if (!out.find(a => key(a) === key(device))) {
-      out.push(device);
+  return devices.reduce((acc, device) => {
+    if (!acc.find(a => a.useragent === device.useragent)) {
+      acc.push(device);
     }
-  }
 
-  return out;
+    return acc;
+  }, [] as Device[]);
 }

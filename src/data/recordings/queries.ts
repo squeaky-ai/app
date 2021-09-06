@@ -22,6 +22,7 @@ export const GET_RECORDINGS_QUERY = gql`
             viewportY
             browserName
             browserDetails
+            useragent
           }
           sessionId
           connectedAt
@@ -63,6 +64,7 @@ export const GET_RECORDING_QUERY = gql`
           viewportY
           browserName
           browserDetails
+          useragent
         }
         connectedAt
         disconnectedAt
