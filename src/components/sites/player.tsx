@@ -77,7 +77,7 @@ export class Player extends React.Component<Props> {
     if (!this.container) return;
 
     const { width, height } = this.container.getBoundingClientRect();
-    const { viewportX, viewportY } = this.props.recording;
+    const { viewportX, viewportY } = this.props.recording.device;
 
     let multiplier = 1;
 

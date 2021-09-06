@@ -99,6 +99,15 @@
             margin-right: .5rem;
           }
         }
+
+        .tooltip {
+          .button {
+            color: var(--blue-500);
+            font-size: 13px;
+            line-height: 16px;
+            text-decoration: underline;
+          }
+        }
       }
     }
 
@@ -154,7 +163,7 @@
       margin-bottom: 2rem;
 
       .row {
-        grid-template-columns: 105px 1fr 1fr 1fr 1fr 2fr 80px;
+        grid-template-columns: 105px 1fr 1fr 1fr 1fr 2fr 1fr 90px 80px;
       }
     }
 

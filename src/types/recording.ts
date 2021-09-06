@@ -1,5 +1,6 @@
-import { Note } from 'types/note';
-import { Visitor } from 'types/visitor';
+import type { Note } from 'types/note';
+import type { Visitor } from 'types/visitor';
+import type { Device } from 'types/device';
  
 export type RecordingSortBy =
   'DATE_DESC' |
@@ -20,11 +21,7 @@ export interface Recording {
   pageCount: number;
   startPage: string;
   exitPage: string;
-  deviceType?: string;
-  browser?: string;
-  browserString?: string;
-  viewportX: number;
-  viewportY: number;
+  device: Device;
   events: PaginatedEventsResponse;
   tags?: Tag[];
   notes?: Note[];

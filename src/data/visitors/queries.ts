@@ -16,11 +16,13 @@ export const GET_VISITORS_QUERY = gql`
           firstViewedAt
           lastActivityAt
           language
-          viewportX
-          viewportY
-          deviceType
-          browser
-          browserString
+          devices {
+            deviceType
+            viewportX
+            viewportY
+            browserName
+            browserDetails
+          }
           starred
           attributes
         }
@@ -50,11 +52,13 @@ export const GET_VISITOR_QUERY = gql`
         firstViewedAt
         lastActivityAt
         language
-        viewportX
-        viewportY
-        deviceType
-        browser
-        browserString
+        devices {
+          deviceType
+          viewportX
+          viewportY
+          browserName
+          browserDetails
+        }
         pageViewsCount {
           total
           unique
@@ -71,6 +75,13 @@ export const GET_VISITOR_QUERY = gql`
             exitPage
             pageViews
             pageCount
+            device {
+              deviceType
+              viewportX
+              viewportY
+              browserName
+              browserDetails
+            }
             sessionId
             connectedAt
             disconnectedAt

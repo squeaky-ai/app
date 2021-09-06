@@ -1,4 +1,5 @@
-import { PaginatedRecordingsResponse } from 'types/recording';
+import type { PaginatedRecordingsResponse } from 'types/recording';
+import type { Device } from 'types/device';
 
 export type VisitorSortBy =
   'RECORDINGS_COUNT_DESC' |
@@ -23,11 +24,7 @@ export interface Visitor {
   firstViewedAt?: string;
   lastActivityAt?: string;
   language?: string;
-  viewportX?: number;
-  viewportY?: number;
-  deviceType?: string;
-  browser?: string;
-  browserString?: string;
+  devices: Device[];
   pageViewsCount?: {
     total: number;
     unique: number;

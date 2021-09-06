@@ -36,8 +36,10 @@ export const GET_OVERVIEW_QUERY = gql`
           pageCount
           pageViews
           connectedAt
-          viewportX
-          viewportY
+          device {
+            viewportX
+            viewportY
+          }
           visitor {
             id
             visitorId

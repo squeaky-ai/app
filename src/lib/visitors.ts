@@ -1,5 +1,6 @@
 import { capitalize } from 'lodash';
-import { Visitor } from 'types/visitor';
+import type { Device } from 'types/device';
+import type { Visitor } from 'types/visitor';
 
 export function getAttributes<T>(visitor: Visitor): T {
   try {
@@ -21,3 +22,29 @@ export function normalizeKey(key: string): string {
       return capitalize(key);
   }
 };
+
+export function groupVisitorBrowsers(devices: Device[]): Device[] {
+  const out: Device[] = [];
+
+  for (const device of devices) {
+    if (!out.find(a => a.browserName === device.browserName)) {
+      out.push(device);
+    }
+  }
+
+  return out;
+}
+
+export function groupVisitorDevices(devices: Device[]): Device[] {
+  const out: Device[] = [];
+
+  for (const device of devices) {
+    const key = (d: Device) => `${d.viewportX}__${d.viewportY}__${d.deviceType}`;
+
+    if (!out.find(a => key(a) === key(device))) {
+      out.push(device);
+    }
+  }
+
+  return out;
+}

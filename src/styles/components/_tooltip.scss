@@ -39,6 +39,31 @@
   &.right {
     transform: translateX(-100%);
   }
+
+  ul {
+    margin: 0;
+    padding: 0;
+
+    li {
+      align-items: center;
+      display: flex;
+      list-style: none;
+      margin-bottom: .75rem;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+
+      span {
+        flex-shrink: 0;
+      }
+
+      i, div {
+        flex-shrink: 0;
+        margin-right: .5rem;
+      }
+    }
+  }
 }
 
 .tooltip-list {

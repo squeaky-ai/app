@@ -10,7 +10,7 @@ import { toNiceDate } from 'lib/dates';
 import { VisitorStarred } from 'components/sites/visitor-starred';
 import { Cell } from 'components/table';
 import { Pill } from 'components/pill';
-import { getAttributes } from 'lib/visitors';
+import { getAttributes, groupVisitorBrowsers, groupVisitorDevices } from 'lib/visitors';
 import type { Site } from 'types/site';
 import type { Visitor, ExternalAttributes } from 'types/visitor';
 
@@ -33,6 +33,8 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, query }) => {
   };
 
   const attributes = getAttributes<ExternalAttributes>(visitor);
+  const devices = groupVisitorDevices(visitor.devices);
+  const browsers = groupVisitorBrowsers(visitor.devices);
 
   const toTimeStringDate = (value: string) => toNiceDate(Number(value));
 
@@ -69,15 +71,45 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, query }) => {
           {visitor.language}
         </Cell>
         <Cell>
-          <Tooltip positionX='right' button={<Device deviceType={visitor.deviceType} />}>
-            {visitor.deviceType === 'Computer' ? 'Desktop or Laptop Device' : 'Mobile Device'}
-          </Tooltip>
-          <Highlighter value={query}>{visitor.viewportX}</Highlighter> x <Highlighter value={query}>{visitor.viewportY}</Highlighter>
+          {devices.length === 1 && (
+            <>
+              <Tooltip positionX='right' button={<Device deviceType={devices[0].deviceType} />}>
+                {devices[0].deviceType === 'Computer' ? 'Desktop or Laptop Device' : 'Mobile Device'}
+              </Tooltip>
+              <Highlighter value={query}>{devices[0].viewportX}</Highlighter> x <Highlighter value={query}>{devices[0].viewportY}</Highlighter>
+            </>
+          )}
+          {devices.length > 1 && (
+            <Tooltip positionX='right' button={devices.length} buttonClassName='link'>
+              <ul>
+                {devices.map(device => (
+                  <li key={`${device.viewportX}_${device.viewportY}_${device.deviceType}`}>
+                    <Device deviceType={device.deviceType} />
+                    <span>{device.viewportX} x {device.viewportY}</span>
+                  </li>
+                ))}
+              </ul>
+            </Tooltip>
+          )}
         </Cell>
         <Cell>
-          <Tooltip positionX='right' button={<Browser name={visitor.browser} height={24} width={24} />}>
-            {visitor.browserString}
-          </Tooltip>
+          {browsers.length === 1 && (
+            <Tooltip positionX='right' button={<Browser name={browsers[0].browserName} height={24} width={24} />}>
+              {browsers[0].browserDetails}
+            </Tooltip>
+          )}
+          {browsers.length > 1 && (
+            <Tooltip fluid positionX='right' button={browsers.length} buttonClassName='link'>
+              <ul>
+                {browsers.map(device => (
+                  <li key={device.browserName}>
+                    <Browser name={device.browserName} height={20} width={20} />
+                    <span>{device.browserName}</span>
+                  </li>
+                ))}
+              </ul>
+            </Tooltip>
+          )}
         </Cell>
       </a>
     </Link>

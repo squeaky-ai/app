@@ -27,8 +27,11 @@
     }
 
     .tooltip > .button {
-      color: var(--gray-700);
       font-size: 13px;
+
+      &:not(.link) {
+        color: var(--gray-700);
+      }
     }
 
     .primary {

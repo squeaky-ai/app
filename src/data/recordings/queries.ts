@@ -16,11 +16,13 @@ export const GET_RECORDINGS_QUERY = gql`
           exitPage
           pageViews
           pageCount
-          deviceType
-          browser
-          browserString
-          viewportX
-          viewportY
+          device {
+            deviceType
+            viewportX
+            viewportY
+            browserName
+            browserDetails
+          }
           sessionId
           connectedAt
           disconnectedAt
@@ -55,10 +57,13 @@ export const GET_RECORDING_QUERY = gql`
         pageCount
         startPage
         exitPage
-        deviceType
-        viewportX
-        viewportY
-        browser
+        device {
+          deviceType
+          viewportX
+          viewportY
+          browserName
+          browserDetails
+        }
         connectedAt
         disconnectedAt
         visitor {

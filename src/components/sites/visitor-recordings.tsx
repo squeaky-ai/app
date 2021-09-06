@@ -61,6 +61,8 @@ export const VisitorRecording: FC<Props> = ({ visitor, page, sort, setPage, setS
             <Cell>
               Start &amp; Exit URL
             </Cell>
+            <Cell>Device &amp; Viewport (px)</Cell>
+            <Cell>Browser</Cell>
             <Cell />
           </Row>
           {items.map(recording => (

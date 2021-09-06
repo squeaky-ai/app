@@ -152,14 +152,14 @@ export const RecordingsItem: FC<Props> = ({ query, recording }) => {
             </div>
           </Cell>
           <Cell>
-            <Tooltip positionX='right' button={<Device deviceType={recording.deviceType} />}>
-              {recording.deviceType === 'Computer' ? 'Desktop or Laptop Device' : 'Mobile Device'}
+            <Tooltip positionX='right' button={<Device deviceType={recording.device.deviceType} />}>
+              {recording.device.deviceType === 'Computer' ? 'Desktop or Laptop Device' : 'Mobile Device'}
             </Tooltip>
-            <Highlighter value={query}>{recording.viewportX}</Highlighter> x <Highlighter value={query}>{recording.viewportY}</Highlighter>
+            <Highlighter value={query}>{recording.device.viewportX}</Highlighter> x <Highlighter value={query}>{recording.device.viewportY}</Highlighter>
           </Cell>
           <Cell>
-            <Tooltip positionX='right' button={<Browser name={recording.browser} height={24} width={24} />}>
-              {recording.browserString}
+            <Tooltip positionX='right' button={<Browser name={recording.device.browserName} height={24} width={24} />}>
+              {recording.device.browserDetails}
             </Tooltip>
           </Cell>
           <Cell>

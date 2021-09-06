@@ -4,10 +4,11 @@ import Link from 'next/link';
 import { Card } from 'components/card';
 import { toNiceDate } from 'lib/dates';
 import { Device } from 'components/device';
+import { Tooltip } from 'components/tooltip';
 import { Browser } from 'components/browser';
 import { VisitorStarred } from 'components/sites/visitor-starred';
 import { Pill } from 'components/pill';
-import { getAttributes, normalizeKey } from 'lib/visitors';
+import { getAttributes, normalizeKey, groupVisitorBrowsers, groupVisitorDevices } from 'lib/visitors';
 import type { Site } from 'types/site';
 import type { Visitor } from 'types/visitor';
 
@@ -18,6 +19,8 @@ interface Props {
 
 export const VisitorSummary: FC<Props> = ({ site, visitor }) => {
   const attributes = getAttributes(visitor);
+  const devices = groupVisitorDevices(visitor.devices);
+  const browsers = groupVisitorBrowsers(visitor.devices);
 
   return (
     <Card className='summary'>
@@ -75,17 +78,49 @@ export const VisitorSummary: FC<Props> = ({ site, visitor }) => {
           <div className='row'>
             <dt>Device &amp; Viewport (px)</dt>
             <dd>
-              <Device deviceType={visitor.deviceType} />
-              {visitor.viewportX} by {visitor.viewportY} pixels
+              {devices.length === 1 && (
+                <>
+                  <Device deviceType={devices[0].deviceType} />
+                  {devices[0].viewportX} by {devices[0].viewportY} pixels
+                </>
+              )}
+              {devices.length > 1 && (
+                 <Tooltip positionX='right' button={devices.length}>
+                  <ul>
+                    {devices.map(device => (
+                      <li key={`${device.viewportX}_${device.viewportY}_${device.deviceType}`}>
+                        <Device deviceType={device.deviceType} />
+                        <span>{device.viewportX} x {device.viewportY}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </Tooltip>
+              )}
             </dd>
           </div>
           <div className='row'>
             <dt>Browser</dt>
             <dd>
-              <div className='browser'>
-                <Browser name={visitor.browser} height={16} width={16} />
-              </div>
-              {visitor.browserString}
+              {browsers.length === 1 && (
+                <>
+                  <div className='browser'>
+                    <Browser name={browsers[0].browserName} height={16} width={16} />
+                  </div>
+                  {browsers[0].browserDetails}
+                </>
+              )}
+              {browsers.length > 1 && (
+                <Tooltip positionX='right' button={browsers.length}>
+                  <ul>
+                    {browsers.map(device => (
+                      <li key={device.browserName}>
+                        <Browser name={device.browserName} height={20} width={20} />
+                        <span>{device.browserName}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </Tooltip>
+              )}
             </dd>
           </div>
         </div>

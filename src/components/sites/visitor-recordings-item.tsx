@@ -5,6 +5,8 @@ import classnames from 'classnames';
 import { useRouter } from 'next/router';
 import { Pill } from 'components/pill';
 import { Button } from 'components/button';
+import { Device } from 'components/device';
+import { Browser } from 'components/browser';
 import { Tooltip } from 'components/tooltip';
 import { Dropdown } from 'components/dropdown';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
@@ -122,6 +124,17 @@ export const VisitorRecordingsItem: FC<Props> = ({ recording }) => {
                 </div>
               </div>
             </div>
+          </Cell>
+          <Cell>
+            <Tooltip positionX='right' button={<Device deviceType={recording.device.deviceType} />}>
+              {recording.device.deviceType === 'Computer' ? 'Desktop or Laptop Device' : 'Mobile Device'}
+            </Tooltip>
+            {recording.device.viewportX} x {recording.device.viewportY}
+          </Cell>
+          <Cell>
+            <Tooltip positionX='right' button={<Browser name={recording.device.browserName} height={24} width={24} />}>
+              {recording.device.browserDetails}
+            </Tooltip>
           </Cell>
           <Cell>
             <Dropdown portal button={<i className='ri-more-2-fill' />} buttonClassName='options'>

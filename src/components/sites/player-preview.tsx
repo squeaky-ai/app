@@ -12,7 +12,8 @@ export const PlayerPreview: FC<Props> = ({ recording }) => {
   const ref = React.useRef<HTMLDivElement>(null);
   const [scale, setScale] = React.useState<string>('');
 
-  const { viewportX, viewportY, events } = recording;
+  const { device, events } = recording;
+  const { viewportX, viewportY } = device;
 
   React.useEffect(() => {
     const items: Event[] = events.items.map(e => JSON.parse(e));
