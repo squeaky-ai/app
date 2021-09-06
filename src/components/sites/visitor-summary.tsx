@@ -103,9 +103,7 @@ export const VisitorSummary: FC<Props> = ({ site, visitor }) => {
             <dd>
               {browsers.length === 1 && (
                 <>
-                  <div className='browser'>
-                    <Browser name={browsers[0].browserName} height={16} width={16} />
-                  </div>
+                  <Browser name={browsers[0].browserName} height={20} width={20} />
                   {browsers[0].browserDetails}
                 </>
               )}
