@@ -30,10 +30,12 @@ const getIconName = (name: string) => {
 };
 
 export const Browser: FC<Props> = ({ height, name, width }) => (
-  <Image 
-    height={height || 16} 
-    width={width ||16} 
-    src={`${BASE_PATH}/browsers/${getIconName(name)}`} 
-    alt={`${name} icon`} 
-  />
+  <span className='browser'>
+    <Image 
+      height={height || 16} 
+      width={width ||16} 
+      src={`${BASE_PATH}/browsers/${getIconName(name)}`} 
+      alt={`${name} icon`} 
+    />
+  </span>
 );

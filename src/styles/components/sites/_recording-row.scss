@@ -23,6 +23,12 @@
     width: 70px;
   }
 
+  .browser, 
+  .browser-tooltip {
+    display: block;
+    height: 1.5rem;
+  }
+
   .start-exit-page {
     .item {
       display: flex;

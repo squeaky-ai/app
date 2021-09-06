@@ -132,7 +132,7 @@ export const VisitorRecordingsItem: FC<Props> = ({ recording }) => {
             {recording.device.viewportX} x {recording.device.viewportY}
           </Cell>
           <Cell>
-            <Tooltip positionX='right' button={<Browser name={recording.device.browserName} height={24} width={24} />}>
+            <Tooltip positionX='right' className='browser-tooltip' button={<Browser name={recording.device.browserName} height={24} width={24} />}>
               {recording.device.browserDetails}
             </Tooltip>
           </Cell>

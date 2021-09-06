@@ -158,7 +158,7 @@ export const RecordingsItem: FC<Props> = ({ query, recording }) => {
             <Highlighter value={query}>{recording.device.viewportX}</Highlighter> x <Highlighter value={query}>{recording.device.viewportY}</Highlighter>
           </Cell>
           <Cell>
-            <Tooltip positionX='right' button={<Browser name={recording.device.browserName} height={24} width={24} />}>
+            <Tooltip positionX='right' className='browser-tooltip' button={<Browser name={recording.device.browserName} height={24} width={24} />}>
               {recording.device.browserDetails}
             </Tooltip>
           </Cell>
