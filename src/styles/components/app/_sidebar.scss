@@ -71,7 +71,7 @@
     }
 
     &:hover {
-      background: var(--gray-100);
+      background: var(--gray-50);
 
       &:after {
         display: block;
@@ -103,29 +103,36 @@
 
     &.account {
       .items {
-        background: var(--gray-800);
+        background: var(--white);
         border-radius: var(--border-radius-md);
+        box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.15);
         display: none;
         left: calc(100% + 2rem);
         top: 0;
-        padding: 1rem;
+        padding: .5rem;
         position: absolute;
-        width: 100px;
+        width: 180px;
 
         .button {
-          color: var(--white);
-          font-size: 13px;
-          line-height: 16px;
-          margin-bottom: 1rem;
+          border-radius: var(--border-radius-md);
+          color: var(--gray-800);
+          font-weight: var(--font-weight-normal);
+          margin: 0;
+          padding: .5rem .75rem;
 
-          &:last-child {
-            margin-bottom: 0;
+          &:hover {
+            background: var(--gray-50);
+            color: var(--gray-700);
+          }
+
+          &.active {
+            color: var(--blue-500);
           }
         }
       }
 
       &.open {
-        background: var(--gray-100);
+        background: var(--gray-50);
 
         &:after {
           display: none;
@@ -260,7 +267,8 @@
 
         .items {
           background: transparent;
-          padding: 1.5rem 0 0 2.5rem;
+          box-shadow: none;
+          padding: 1.5rem 0 .75rem 2.5rem;
           position: static;
           width: 100%;
 
@@ -269,10 +277,12 @@
             font-size: 16px;
             font-weight: var(--font-weight-normal);
             line-height: 20px;
-            margin-bottom: .5rem;
+            margin-bottom: 1.25rem;
+            padding: 0;
 
-            &.active {
-              color: var(--blue-500);
+
+            &:last-child {
+              margin-bottom: 0;
             }
           }
         }
