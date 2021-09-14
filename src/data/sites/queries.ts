@@ -6,7 +6,6 @@ export const GET_SITES_QUERY = gql`
       id
       name
       url
-      avatar
       planName
       ownerName
     }
@@ -19,9 +18,7 @@ export const GET_SITE_QUERY = gql`
       id
       name
       url
-      avatar
       verifiedAt
-      checklistDismissedAt
       uuid
       planName
       ownerName

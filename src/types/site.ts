@@ -8,7 +8,6 @@ export interface Site {
   id: string;
   name: string;
   url: string;
-  avatar?: string;
   plan: number;
   planName: string;
   uuid: string;

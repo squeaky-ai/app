@@ -17,7 +17,6 @@ export const UPDATE_SITE_MUTATION = gql`
       name
       url
       verifiedAt
-      checklistDismissedAt
     }
   }
 `;
