@@ -65,8 +65,8 @@ export const Recordings: FC<Props> = ({ query }) => {
       
       <div className='recordings-footer'>
         <Pagination 
-          currentPage={page} 
-          pageSize={pagination.pageSize + 1}
+          currentPage={page + 1} 
+          pageSize={pagination.pageSize}
           total={pagination.total}
           setPage={setPage}
         />

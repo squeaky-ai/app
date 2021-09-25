@@ -2,16 +2,16 @@ import type { PaginatedRecordingsResponse } from 'types/recording';
 import type { Device } from 'types/device';
 
 export type VisitorSortBy =
-  'RECORDINGS_COUNT_DESC' |
-  'RECORDINGS_COUNT_ASC' |
-  'FIRST_VIEWED_AT_DESC' |
-  'FIRST_VIEWED_AT_ASC' |
-  'LAST_ACTIVITY_AT_DESC' |
-  'LAST_ACTIVITY_AT_ASC';
+  'recordings_count__desc' |
+  'recordings_count__asc' |
+  'first_viewed_at__desc' |
+  'first_viewed_at__asc' |
+  'last_activity_at__desc' |
+  'last_activity_at__asc';
 
 export type PageSortBy = 
-  'VIEWS_COUNT_DESC' |
-  'VIEWS_COUNT_ASC';
+  'views_count__desc' |
+  'views_count__asc';
 
 export interface Visitor {
   id: string;

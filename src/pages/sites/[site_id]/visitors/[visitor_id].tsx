@@ -21,7 +21,7 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
   const router = useRouter();
 
   const [pageviewPage, setPageviewPage] = React.useState<number>(1);
-  const [pageviewSort, setPageviewSort] = React.useState<PageSortBy>('VIEWS_COUNT_DESC');
+  const [pageviewSort, setPageviewSort] = React.useState<PageSortBy>('views_count__desc');
   const [recordingPage, setRecordingPage] = React.useState<number>(0);
   const [recordingSort, setRecordingSort] = React.useState<RecordingSortBy>('connected_at__desc');
 
@@ -67,7 +67,7 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
               <Card className='recordings'>
                 <h3>Recordings</h3>
                 <h2>
-                  {visitor.recordingsCount.total}
+                  {visitor.recordingsCount?.total || 0}
                   <Pill type='tertiary'>{visitor.recordingsCount.new} New</Pill>
                 </h2>
               </Card>

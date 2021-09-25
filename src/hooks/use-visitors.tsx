@@ -34,7 +34,7 @@ export const useVisitors = ({ page, size, query, sort }: Props): UseVisitors => 
     pagination: { 
       pageSize: 0, 
       total: 0, 
-      sort: 'FIRST_VIEWED_AT_DESC' 
+      sort: 'first_viewed_at__desc' 
     } 
   };
 

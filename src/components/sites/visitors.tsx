@@ -20,9 +20,9 @@ interface Props {
 }
 
 export const Visitors: FC<Props> = ({ site, query }) => {
-  const [page, setPage] = React.useState<number>(1);
+  const [page, setPage] = React.useState<number>(0);
   const [size, setSize] = React.useState<number>(25);
-  const [sort, setSort] = React.useState<VisitorSortBy>('FIRST_VIEWED_AT_DESC');
+  const [sort, setSort] = React.useState<VisitorSortBy>('first_viewed_at__desc');
 
   const { loading, visitors } = useVisitors({ 
     page, 
@@ -75,8 +75,8 @@ export const Visitors: FC<Props> = ({ site, query }) => {
             <Sort 
               name='recordings_count' 
               order={sort} 
-              onAsc={() => setSort('RECORDINGS_COUNT_ASC')} 
-              onDesc={() => setSort('RECORDINGS_COUNT_DESC')} 
+              onAsc={() => setSort('recordings_count__asc')} 
+              onDesc={() => setSort('recordings_count__desc')} 
             />
           </Cell>
           <Cell>
@@ -84,8 +84,8 @@ export const Visitors: FC<Props> = ({ site, query }) => {
             <Sort 
               name='first_viewed_at' 
               order={sort} 
-              onAsc={() => setSort('FIRST_VIEWED_AT_ASC')} 
-              onDesc={() => setSort('FIRST_VIEWED_AT_DESC')} 
+              onAsc={() => setSort('first_viewed_at__asc')} 
+              onDesc={() => setSort('first_viewed_at__desc')} 
             />
           </Cell>
           <Cell>
@@ -93,8 +93,8 @@ export const Visitors: FC<Props> = ({ site, query }) => {
             <Sort 
               name='last_activity_at' 
               order={sort} 
-              onAsc={() => setSort('LAST_ACTIVITY_AT_ASC')} 
-              onDesc={() => setSort('LAST_ACTIVITY_AT_DESC')} 
+              onAsc={() => setSort('last_activity_at__asc')} 
+              onDesc={() => setSort('last_activity_at__desc')} 
             />
           </Cell>
           <Cell>
@@ -119,7 +119,7 @@ export const Visitors: FC<Props> = ({ site, query }) => {
       
       <div className='visitors-footer'>
         <Pagination 
-          currentPage={page} 
+          currentPage={page + 1} 
           pageSize={pagination.pageSize}
           total={pagination.total}
           setPage={setPage}

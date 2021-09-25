@@ -29,8 +29,8 @@ export const VisitorPages: FC<Props> = ({ visitor, page, sort, setPage, setSort 
             <Sort 
               name='views_count' 
               order={sort} 
-              onAsc={() => setSort('VIEWS_COUNT_ASC')} 
-              onDesc={() => setSort('VIEWS_COUNT_DESC')} 
+              onAsc={() => setSort('views_count__asc')} 
+              onDesc={() => setSort('views_count__desc')} 
             />
           </Cell>
         </Row>

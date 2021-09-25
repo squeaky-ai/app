@@ -36,7 +36,7 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, query }) => {
   const devices = groupVisitorDevices(visitor.devices);
   const browsers = groupVisitorBrowsers(visitor.devices);
 
-  const toTimeStringDate = (value: string) => toNiceDate(Number(value));
+  const toTimeStringDate = (value: string) => toNiceDate(new Date(value).valueOf());
 
   return (
     <Link href={`/sites/${router.query.site_id}/visitors/${visitor.id}`}>
@@ -59,16 +59,22 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, query }) => {
           <Highlighter value={query}>{attributes?.email || '-'}</Highlighter>
         </Cell>
         <Cell>
-          {visitor.recordingsCount.total}
+          {visitor.recordingsCount?.total || '😰'}
         </Cell>
         <Cell>
-          {toTimeStringDate(visitor.firstViewedAt)}
+          <Highlighter value={query}>
+            {toTimeStringDate(visitor.firstViewedAt)}
+          </Highlighter>
         </Cell>
         <Cell>
-          {toTimeStringDate(visitor.lastActivityAt)}
+          <Highlighter value={query}>
+            {toTimeStringDate(visitor.lastActivityAt)}
+          </Highlighter>
         </Cell>
         <Cell>
-          {visitor.language}
+          <Highlighter value={query}>
+            {visitor.language}
+          </Highlighter>
         </Cell>
         <Cell>
           {devices.length === 1 && (
