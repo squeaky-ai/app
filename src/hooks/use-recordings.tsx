@@ -34,7 +34,7 @@ export const useRecordings = ({ page, size, query, sort }: Props): UseRecordings
     pagination: { 
       pageSize: 0, 
       total: 0, 
-      sort: 'DATE_DESC' 
+      sort: 'connected_at__desc' 
     } 
   };
 

@@ -17,9 +17,9 @@ interface Props {
 }
 
 export const Recordings: FC<Props> = ({ query }) => {
-  const [page, setPage] = React.useState<number>(1);
+  const [page, setPage] = React.useState<number>(0);
   const [size, setSize] = React.useState<number>(25);
-  const [sort, setSort] = React.useState<RecordingSortBy>('DATE_DESC');
+  const [sort, setSort] = React.useState<RecordingSortBy>('connected_at__desc');
 
   const { loading, recordings } = useRecordings({ 
     page, 
@@ -46,9 +46,9 @@ export const Recordings: FC<Props> = ({ query }) => {
           <Cell>Status</Cell>
           <Cell>Recording ID</Cell>
           <Cell>User ID</Cell>
-          <Cell>Date &amp; Time<Sort name='date' order={sort} onAsc={() => setSort('DATE_ASC')} onDesc={() => setSort('DATE_DESC')} /></Cell>
-          <Cell>Duration <Sort name='duration' order={sort} onAsc={() => setSort('DURATION_ASC')} onDesc={() => setSort('DURATION_DESC')} /></Cell>
-          <Cell>Pages <Sort name='page_size' order={sort} onAsc={() => setSort('PAGE_SIZE_ASC')} onDesc={() => setSort('PAGE_SIZE_DESC')} /></Cell>
+          <Cell>Date &amp; Time<Sort name='connected_at' order={sort} onAsc={() => setSort('connected_at__asc')} onDesc={() => setSort('connected_at__desc')} /></Cell>
+          <Cell>Duration <Sort name='duration' order={sort} onAsc={() => setSort('duration__asc')} onDesc={() => setSort('duration__desc')} /></Cell>
+          <Cell>Pages <Sort name='page_count' order={sort} onAsc={() => setSort('page_count__asc')} onDesc={() => setSort('page_count__desc')} /></Cell>
           <Cell>Start &amp; Exit URL</Cell>
           <Cell>Device &amp; Viewport (px)</Cell>
           <Cell>Browser</Cell>
@@ -66,7 +66,7 @@ export const Recordings: FC<Props> = ({ query }) => {
       <div className='recordings-footer'>
         <Pagination 
           currentPage={page} 
-          pageSize={pagination.pageSize}
+          pageSize={pagination.pageSize + 1}
           total={pagination.total}
           setPage={setPage}
         />

@@ -34,10 +34,10 @@ export const VisitorRecording: FC<Props> = ({ visitor, page, sort, setPage, setS
             <Cell>
               Date &amp; Time
               <Sort 
-                name='date' 
+                name='connected_at' 
                 order={sort} 
-                onAsc={() => setSort('DATE_ASC')} 
-                onDesc={() => setSort('DATE_DESC')} 
+                onAsc={() => setSort('connected_at__asc')} 
+                onDesc={() => setSort('connected_at__desc')} 
               />
             </Cell>
             <Cell>
@@ -45,17 +45,17 @@ export const VisitorRecording: FC<Props> = ({ visitor, page, sort, setPage, setS
               <Sort 
                 name='duration' 
                 order={sort} 
-                onAsc={() => setSort('DURATION_ASC')} 
-                onDesc={() => setSort('DURATION_DESC')} 
+                onAsc={() => setSort('duration__asc')} 
+                onDesc={() => setSort('duration__desc')} 
               />
             </Cell>
             <Cell>
               Pages
               <Sort 
-                name='page_size' 
+                name='page_count' 
                 order={sort} 
-                onAsc={() => setSort('PAGE_SIZE_ASC')} 
-                onDesc={() => setSort('PAGE_SIZE_DESC')} 
+                onAsc={() => setSort('page_count__asc')} 
+                onDesc={() => setSort('page_count__desc')} 
               />
             </Cell>
             <Cell>
@@ -79,7 +79,7 @@ export const VisitorRecording: FC<Props> = ({ visitor, page, sort, setPage, setS
       )}
 
       <Pagination 
-        currentPage={page} 
+        currentPage={page - 1} 
         pageSize={pagination.pageSize}
         total={pagination.total}
         setPage={setPage}

@@ -15,11 +15,11 @@ interface Props {
 
 export const Sort: FC<Props> = ({ name, order, onAsc, onDesc }) => {
   const key = order
-    .replace('_DESC', '')
-    .replace('_ASC', '')
+    .replace('__desc', '')
+    .replace('__asc', '')
     .toLowerCase();
 
-  const direction = order.includes('ASC') ? 'asc' : 'desc';
+  const direction = order.includes('asc') ? 'asc' : 'desc';
 
   const handleClick = () => {
     if (key === name) {

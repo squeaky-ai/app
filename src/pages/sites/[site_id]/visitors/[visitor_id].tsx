@@ -22,8 +22,8 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
 
   const [pageviewPage, setPageviewPage] = React.useState<number>(1);
   const [pageviewSort, setPageviewSort] = React.useState<PageSortBy>('VIEWS_COUNT_DESC');
-  const [recordingPage, setRecordingPage] = React.useState<number>(1);
-  const [recordingSort, setRecordingSort] = React.useState<RecordingSortBy>('DATE_DESC');
+  const [recordingPage, setRecordingPage] = React.useState<number>(0);
+  const [recordingSort, setRecordingSort] = React.useState<RecordingSortBy>('connected_at__desc');
 
   const { visitor } = useVisitor({ 
     recordingPage,
@@ -80,7 +80,7 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
             <VisitorRecording 
               visitor={visitor} 
               page={recordingPage} 
-              setPage={setRecordingPage} 
+              setPage={setRecordingPage}
               sort={recordingSort}
               setSort={setRecordingSort}
             />

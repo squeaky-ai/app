@@ -27,7 +27,7 @@ export const GET_OVERVIEW_QUERY = gql`
           }
         }
       }
-      recordings(page: 1, size: 1, sort: DATE_DESC) {
+      recordings(page: 1, size: 1, sort: connected_at__desc) {
         items {
           id
           duration

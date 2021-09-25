@@ -3,12 +3,12 @@ import type { Visitor } from 'types/visitor';
 import type { Device } from 'types/device';
  
 export type RecordingSortBy =
-  'DATE_DESC' |
-  'DATE_ASC' |
-  'DURATION_DESC' |
-  'DURATION_ASC' |
-  'PAGE_SIZE_DESC' |
-  'PAGE_SIZE_ASC';
+  'connected_at__desc' |
+  'connected_at__asc' |
+  'duration__desc' |
+  'duration__asc' |
+  'page_count__desc' |
+  'page_count__asc';
 
 export interface Recording {
   id: string;
