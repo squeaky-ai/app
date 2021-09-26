@@ -61,7 +61,7 @@ export const Pagination: FC<Props> = ({ currentPage, pageSize, total, setPage })
       current={currentPage}
       pageSize={pageSize}
       total={total}
-      onChange={(page) => setPage(page)}
+      onChange={(page) => setPage(page - 1)}
       itemRender={(page, type) => (
         <RenderItem 
           page={page} 
