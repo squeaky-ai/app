@@ -43,9 +43,7 @@ export const useOverview = (): UseOverview => {
         new: 0,
       },
     },
-    recordings: { 
-      items: [] 
-    },
+    recordingLatest: null,
   };
 
   return {

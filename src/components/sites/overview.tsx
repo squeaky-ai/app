@@ -23,7 +23,7 @@ export const Overview: FC<Props> = ({ site }) => {
   const { site_id } = router.query;
 
   const notes = overview.notes?.items;
-  const recording = overview.recordings?.items[0];
+  const recording = overview.recordingLatest;
 
   return (
     <div className='overview-grid'>

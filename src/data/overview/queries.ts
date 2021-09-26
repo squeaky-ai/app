@@ -27,27 +27,25 @@ export const GET_OVERVIEW_QUERY = gql`
           }
         }
       }
-      recordings(page: 1, size: 1, sort: connected_at__desc) {
-        items {
+      recordingLatest {
+        id
+        duration
+        startPage
+        exitPage
+        pageCount
+        pageViews
+        connectedAt
+        device {
+          viewportX
+          viewportY
+        }
+        visitor {
           id
-          duration
-          startPage
-          exitPage
-          pageCount
-          pageViews
-          connectedAt
-          device {
-            viewportX
-            viewportY
-          }
-          visitor {
-            id
-            visitorId
-            starred
-          }
-          events(page: 1, size: 10) {
-            items
-          }
+          visitorId
+          starred
+        }
+        events(page: 1, size: 10) {
+          items
         }
       }
     }
