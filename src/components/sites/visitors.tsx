@@ -127,7 +127,7 @@ export const Visitors: FC<Props> = ({ site, query }) => {
         <PageSize 
           value={pagination.pageSize} 
           onChange={setSize}
-          show={items.length > 25}
+          show={pagination.total > 25}
         />
       </div>
     </>

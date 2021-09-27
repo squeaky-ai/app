@@ -13,6 +13,8 @@ import { Container } from 'components/container';
 import { Recordings } from 'components/sites/recordings';
 import { Page } from 'components/sites/page';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
+import { Dropdown } from 'components/dropdown';
+import { RecordingsFilters } from 'components/sites/recordings-filters';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { BASE_PATH } from 'data/common/constants';
 
@@ -43,18 +45,28 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
           <Main className={classnames({ empty: site.recordings.items.length === 0 })}>
             <BreadCrumbs site={site} items={[{ name: 'Recordings' }]} />
 
-            <h3 className='title'>
-              Recordings
-              <div className='search' role='search' aria-label='Filter recordings'>
-                <Input type='search' placeholder='Search...' onKeyUp={handleSearch} id='search' />
-                {query && (
-                  <Button onClick={handleCancel}>
-                    <i className='ri-close-line' />
-                  </Button>
-                )}
-                <i className='ri-search-line' /> 
-              </div>
-            </h3>
+            <div className='recordings-header'>
+              <h3 className='title'>
+                Recordings
+                <div className='search' role='search' aria-label='Filter recordings'>
+                  <Input type='search' placeholder='Search...' onKeyUp={handleSearch} id='search' />
+                  {query && (
+                    <Button onClick={handleCancel}>
+                      <i className='ri-close-line' />
+                    </Button>
+                  )}
+                  <i className='ri-search-line' /> 
+                </div>
+              </h3>
+              <menu>
+                <div className='menu-item'>
+                  <Dropdown button={<><i className='ri-layout-column-line' /> Columns</>}>
+                    <Button>TODO</Button>
+                  </Dropdown>
+                </div>
+                <RecordingsFilters />
+              </menu>
+            </div>
 
             <Container className='xl centered empty-state'>
               <div className='empty-state-contents'>

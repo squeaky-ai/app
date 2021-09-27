@@ -73,7 +73,7 @@ export const Recordings: FC<Props> = ({ query }) => {
         <PageSize 
           value={pagination.pageSize} 
           onChange={setSize}
-          show={items.length > 25}
+          show={pagination.total > 25}
         />
       </div>
     </>
