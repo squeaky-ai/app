@@ -34,6 +34,10 @@ export const Filters: FC = () => {
     setOpenFilter(openFilter === filter ? null : filter);
   };
 
+  const handleFilterClose = () => {
+    setOpenFilter(null);
+  };
+
   return ( 
     <div className='menu-item'>
       <Dropdown button={<><i className='ri-equalizer-line' /> Filters</>} dropdown-menu='down'>
@@ -86,74 +90,69 @@ export const Filters: FC = () => {
           {openFilter === FilterType.Date && (
             <>
               <Label>Date</Label>
-              <FiltersDate />
+              <FiltersDate onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.Status && (
             <>
               <Label>Status</Label>
-              <FiltersStatus />
+              <FiltersStatus onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.Duration && (
             <>
               <Label>Duration</Label>
-              <FiltersDuration />
+              <FiltersDuration onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.StartUrl && (
             <>
               <Label>Start URL</Label>
-              <FiltersPages />
+              <FiltersPages onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.ExitUrl && (
             <>
               <Label>Exit URL</Label>
-              <FiltersPages />
+              <FiltersPages onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.VisitedPages && (
             <>
               <Label>Visited pages</Label>
-              <FiltersPages />
+              <FiltersPages onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.UnvisitedPages && (
             <>
               <Label>Unvisited pages</Label>
-              <FiltersPages />
+              <FiltersPages onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.Device && (
             <>
               <Label>Device</Label>
-              <FiltersDevice />
+              <FiltersDevice onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.Browser && (
             <>
               <Label>Browser</Label>
-              <FiltersBrowsers />
+              <FiltersBrowsers onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.Viewport && (
             <>
               <Label>Viewport</Label>
-              <FiltersViewport />
+              <FiltersViewport onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.Language && (
             <>
               <Label>Language</Label>
-              <FiltersLanguage />
+              <FiltersLanguage onClose={handleFilterClose} />
             </>
           )}
-
-          <div className='actions'>
-            <Button className='primary'>Apply</Button>
-            <Button className='quaternary' onClick={() => setOpenFilter(null)}>Cancel</Button>
-          </div>
         </div>
       </Dropdown>
     </div>

@@ -111,7 +111,7 @@
     }
 
     form {
-      margin: 1.5rem 0;
+      margin: 1.5rem 0 0 0;
     }
 
     .filters-date {
@@ -175,6 +175,13 @@
 
         .checkbox {
           margin-bottom: .5rem;
+
+          span:not(.check) {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 240px;
+          }
         }
       }
     }

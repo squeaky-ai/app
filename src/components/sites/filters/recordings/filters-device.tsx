@@ -1,14 +1,63 @@
 import React from 'react';
 import type { FC } from 'react';
+import * as Yup from 'yup';
+import { Formik } from 'formik';
 import { Checkbox } from 'components/checkbox';
+import { Button } from 'components/button';
 
-export const FiltersDevice: FC = () => {
+interface Props {
+  onClose: VoidFunction;
+}
+
+const DevicesSchema = Yup.object().shape({
+  devices: Yup.array(),
+});
+
+export const FiltersDevice: FC<Props> = ({ onClose }) => {
   return (
-    <form className='filters-device'>
-      <div className='row'>
-        <Checkbox>Desktop/Laptop</Checkbox>
-        <Checkbox>Mobile</Checkbox>
-      </div>
-    </form>
+    <Formik
+      initialValues={{ devices: [] }}
+      validationSchema={DevicesSchema}
+      onSubmit={(values, { setSubmitting }) => {
+        setSubmitting(false);
+        console.log(values);
+      }}
+    >
+      {({
+        handleBlur,
+        handleChange,
+        handleSubmit,
+        isSubmitting,
+        values,
+      }) => (
+        <form className='filters-device' onSubmit={handleSubmit}>
+          <div className='row'>
+            <Checkbox
+              name='devices'
+              onBlur={handleBlur}
+              onChange={handleChange}
+              value='Desktop'
+              checked={values.devices.includes('Desktop')}
+            >
+              Desktop/Laptop
+            </Checkbox>
+            <Checkbox
+              name='devices'
+              onBlur={handleBlur}
+              onChange={handleChange}
+              value='Mobile'
+              checked={values.devices.includes('Mobile')}
+            >
+              Mobile
+            </Checkbox>
+          </div>
+
+          <div className='actions'>
+            <Button type='submit' disabled={isSubmitting} className='primary'>Apply</Button>
+            <Button type='button' className='quaternary' onClick={onClose}>Cancel</Button>
+          </div>
+        </form>
+      )}
+    </Formik>
   );
 };
