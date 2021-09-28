@@ -123,6 +123,24 @@
       }
     }
 
+    .search {
+      margin: 0;
+      position: relative;
+
+      .input {
+        margin: 0;
+        padding-right: 2.5rem;
+      }
+
+      i {
+        color: var(--gray-200);
+        font-size: 1.25rem;
+        position: absolute;
+        right: .75rem;
+        top: .5rem;
+      }
+    }
+
     .filters-status {
       width: 200px;
 
@@ -147,6 +165,16 @@
 
     .filters-pages {
       width: 300px;
+
+      .pages {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+
+        .checkbox {
+          margin-bottom: .5rem;
+        }
+      }
     }
 
     .filters-device {

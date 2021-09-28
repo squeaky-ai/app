@@ -14,6 +14,9 @@ export interface Site {
   ownerName: string;
   team: Team[];
   notes?: PaginatedNotesResponse;
+  languages?: string[];
+  pages?: string[];
+  browsers?: string[];
   recording?: Recording;
   recordings?: PaginatedRecordingsResponse;
   visitor?: Visitor;
