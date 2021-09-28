@@ -170,6 +170,8 @@
         align-items: flex-start;
         display: flex;
         flex-direction: column;
+        max-height: 300px;
+        overflow-y: scroll;
 
         .checkbox {
           margin-bottom: .5rem;
@@ -185,6 +187,19 @@
         flex-direction: column;
 
         .checkbox:not(:last-of-type) {
+          margin-bottom: .5rem;
+        }
+      }
+    }
+
+    .filters-browsers {
+      width: 200px;
+
+      .browsers {
+        align-items: flex-start;
+        flex-direction: column;
+
+        .checkbox {
           margin-bottom: .5rem;
         }
       }
@@ -212,6 +227,17 @@
 
     .filters-language {
       width: 320px;
+
+      .languages {
+        align-items: flex-start;
+        flex-direction: column;
+        max-height: 300px;
+        overflow-y: scroll;
+
+        .checkbox {
+          margin-bottom: .5rem;
+        }
+      }
     }
   }
 
