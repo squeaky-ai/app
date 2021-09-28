@@ -36,6 +36,10 @@
       display: none;
     }
   }
+
+  &.time {
+    width: 70px;
+  }
 }
 
 .input:-webkit-autofill,

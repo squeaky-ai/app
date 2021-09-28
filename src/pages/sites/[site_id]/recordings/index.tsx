@@ -14,7 +14,7 @@ import { Recordings } from 'components/sites/recordings';
 import { Page } from 'components/sites/page';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { Dropdown } from 'components/dropdown';
-import { RecordingsFilters } from 'components/sites/recordings-filters';
+import { Filters } from 'components/sites/filters/recordings/filters';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { BASE_PATH } from 'data/common/constants';
 
@@ -64,7 +64,7 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
                     <Button>TODO</Button>
                   </Dropdown>
                 </div>
-                <RecordingsFilters />
+                <Filters />
               </menu>
             </div>
 

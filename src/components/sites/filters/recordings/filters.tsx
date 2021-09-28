@@ -4,6 +4,14 @@ import classnames from 'classnames';
 import { Button } from 'components/button';
 import { Dropdown } from 'components/dropdown';
 import { Label } from 'components/label';
+import { FiltersDate } from 'components/sites/filters/recordings/filters-date';
+import { FiltersStatus } from 'components/sites/filters/recordings/filters-status';
+import { FiltersDuration } from 'components/sites/filters/recordings/filters-duration';
+import { FiltersPages } from 'components/sites/filters/recordings/filters-pages';
+import { FiltersDevice } from 'components/sites/filters/recordings/filters-device';
+import { FiltersBrowsers } from 'components/sites/filters/recordings/filters-browsers';
+import { FiltersViewport } from 'components/sites/filters/recordings/filters-viewport';
+import { FiltersLanguage } from 'components/sites/filters/recordings/filters-language';
 
 enum FilterType {
   Date,
@@ -19,14 +27,14 @@ enum FilterType {
   Language
 }
 
-export const RecordingsFilters: FC = () => {
+export const Filters: FC = () => {
   const [openFilter, setOpenFilter] = React.useState<FilterType | null>(null);
 
   const handleFilterChange = (filter: FilterType): void => {
     setOpenFilter(openFilter === filter ? null : filter);
   };
 
-  return (
+  return ( 
     <div className='menu-item'>
       <Dropdown button={<><i className='ri-equalizer-line' /> Filters</>} dropdown-menu='down'>
         <Button onClick={() => handleFilterChange(FilterType.Date)} className={classnames({ open: openFilter === FilterType.Date})}>
@@ -74,66 +82,77 @@ export const RecordingsFilters: FC = () => {
           Language
         </Button>
 
-        <div className={classnames('popout', { open: openFilter !== null })}>
+        <div className={classnames('popout filters', { open: openFilter !== null })}>
           {openFilter === FilterType.Date && (
             <>
               <Label>Date</Label>
+              <FiltersDate />
             </>
           )}
           {openFilter === FilterType.Status && (
             <>
               <Label>Status</Label>
+              <FiltersStatus />
             </>
           )}
           {openFilter === FilterType.Duration && (
             <>
               <Label>Duration</Label>
+              <FiltersDuration />
             </>
           )}
           {openFilter === FilterType.StartUrl && (
             <>
               <Label>Start URL</Label>
+              <FiltersPages />
             </>
           )}
           {openFilter === FilterType.ExitUrl && (
             <>
               <Label>Exit URL</Label>
+              <FiltersPages />
             </>
           )}
           {openFilter === FilterType.VisitedPages && (
             <>
               <Label>Visited pages</Label>
+              <FiltersPages />
             </>
           )}
           {openFilter === FilterType.UnvisitedPages && (
             <>
               <Label>Unvisited pages</Label>
+              <FiltersPages />
             </>
           )}
           {openFilter === FilterType.Device && (
             <>
               <Label>Device</Label>
+              <FiltersDevice />
             </>
           )}
           {openFilter === FilterType.Browser && (
             <>
               <Label>Browser</Label>
+              <FiltersBrowsers />
             </>
           )}
           {openFilter === FilterType.Viewport && (
             <>
               <Label>Viewport</Label>
+              <FiltersViewport />
             </>
           )}
           {openFilter === FilterType.Language && (
             <>
               <Label>Language</Label>
+              <FiltersLanguage />
             </>
           )}
 
           <div className='actions'>
             <Button className='primary'>Apply</Button>
-            <Button className='quaternary'>Cancel</Button>
+            <Button className='quaternary' onClick={() => setOpenFilter(null)}>Cancel</Button>
           </div>
         </div>
       </Dropdown>

@@ -87,11 +87,103 @@
 
             .button {
               margin-left: 0;
-              margin-right: .5rem;
+              margin-right: 1rem;
             }
           }
         }
       }
+    }
+  }
+
+  .filters {
+    .row {
+      align-items: center;
+      display: flex;
+      margin-bottom: 1.5rem;
+
+      > * {
+        margin: 0 .5rem 0 0;
+      }
+
+      .radio {
+        margin: 0;
+      }
+    }
+
+    form {
+      margin: 1.5rem 0;
+    }
+
+    .filters-date {
+      width: 500px;
+
+      .select {
+        min-width: 140px;
+        width: auto;
+      }
+    }
+
+    .filters-status {
+      width: 200px;
+
+      .row {
+        align-items: flex-start;
+        flex-direction: column;
+
+        .radio:not(:last-of-type) {
+          margin-bottom: .5rem;
+        }
+      }
+    }
+
+    .filters-duration {
+      width: 300px;
+
+      .select {
+        min-width: 160px;
+        width: auto;
+      }
+    }
+
+    .filters-pages {
+      width: 300px;
+    }
+
+    .filters-device {
+      width: 200px;
+
+      .row {
+        align-items: flex-start;
+        flex-direction: column;
+
+        .checkbox:not(:last-of-type) {
+          margin-bottom: .5rem;
+        }
+      }
+    }
+
+    .filters-viewport {
+      width: 320px;
+
+      .column {
+        position: relative;
+
+        .input {
+          margin: 0;
+          padding-right: 2.5rem;
+        }
+        
+        p {
+          color: var(--gray-500);
+          position: absolute;
+          right: .75rem;
+          top: calc(100% - 2rem);
+        }
+      }
+    }
+
+    .filters-language {
+      width: 320px;
     }
   }
 

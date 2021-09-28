@@ -1,0 +1,16 @@
+.date-picker {
+  position: relative;
+  width: 170px;
+
+  i {
+    left: .75rem;
+    font-size: 1.25rem;
+    position: absolute;
+    top: .5rem;
+  }
+
+  .input {
+    margin: 0;
+    padding-left: 2.5rem;
+  }
+}
