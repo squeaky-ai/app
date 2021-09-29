@@ -4,23 +4,27 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { Checkbox } from 'components/checkbox';
 import { Button } from 'components/button';
+import type { Filters } from 'types/recording';
+import type { ValueOf } from 'types/common';
 
 interface Props {
+  value: Filters['devices'];
   onClose: VoidFunction;
+  onUpdate: (value: ValueOf<Filters>) => void;
 }
 
 const DevicesSchema = Yup.object().shape({
   devices: Yup.array(),
 });
 
-export const FiltersDevice: FC<Props> = ({ onClose }) => {
+export const FiltersDevice: FC<Props> = ({ value, onClose, onUpdate }) => {
   return (
     <Formik
-      initialValues={{ devices: [] }}
+      initialValues={{ devices: value }}
       validationSchema={DevicesSchema}
       onSubmit={(values, { setSubmitting }) => {
         setSubmitting(false);
-        console.log(values);
+        onUpdate(values.devices);
       }}
     >
       {({

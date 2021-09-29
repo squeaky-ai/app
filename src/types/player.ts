@@ -1,4 +1,5 @@
 import type { PlayerTab } from 'data/sites/enums';
+import type { ValueOf } from 'types/common';
 
 export interface PlayerState {
   failed: boolean;
@@ -8,8 +9,6 @@ export interface PlayerState {
   skipInactivity: boolean;
   zoom: number;
 }
-
-type ValueOf<T> = T[keyof T];
 
 export type Action = {
   type: keyof PlayerState;

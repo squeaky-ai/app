@@ -8,9 +8,13 @@ import { Button } from 'components/button';
 import { Checkbox } from 'components/checkbox';
 import { Spinner } from 'components/spinner';
 import type { Site } from 'types/site';
+import type { Filters } from 'types/recording';
+import type { ValueOf } from 'types/common';
 
 interface Props {
+  value: Filters['browsers'];
   onClose: VoidFunction;
+  onUpdate: (value: ValueOf<Filters>) => void;
 }
 
 const QUERY = gql`
@@ -26,7 +30,7 @@ const BrowsersSchema = Yup.object().shape({
   browsers: Yup.array(),
 });
 
-export const FiltersBrowsers: FC<Props> = ({ onClose }) => {
+export const FiltersBrowsers: FC<Props> = ({ value, onClose, onUpdate }) => {
   const router = useRouter();
 
   const { data, loading } = useQuery<{ site: Site }>(QUERY, {
@@ -39,11 +43,11 @@ export const FiltersBrowsers: FC<Props> = ({ onClose }) => {
 
   return (
     <Formik
-      initialValues={{ browsers: [] }}
+      initialValues={{ browsers: value }}
       validationSchema={BrowsersSchema}
       onSubmit={(values, { setSubmitting }) => {
         setSubmitting(false);
-        console.log(values);
+        onUpdate(values.browsers);
       }}
     >
       {({

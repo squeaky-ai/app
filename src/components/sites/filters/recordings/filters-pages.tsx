@@ -9,9 +9,13 @@ import { Input } from 'components/input';
 import { Spinner } from 'components/spinner';
 import { Checkbox } from 'components/checkbox';
 import type { Site } from 'types/site';
+import type { Filters } from 'types/recording';
+import type { ValueOf } from 'types/common';
 
 interface Props {
+  value: Filters['visitedPages'] | Filters['unvisitedPages'];
   onClose: VoidFunction;
+  onUpdate: (value: ValueOf<Filters>) => void;
 }
 
 const QUERY = gql`
@@ -27,7 +31,7 @@ const PagesSchema = Yup.object().shape({
   pages: Yup.array(),
 });
 
-export const FiltersPages: FC<Props> = ({ onClose }) => {
+export const FiltersPages: FC<Props> = ({ value, onClose, onUpdate }) => {
   const router = useRouter();
   const [search, setSearch] = React.useState<string>('');
 
@@ -45,11 +49,11 @@ export const FiltersPages: FC<Props> = ({ onClose }) => {
 
   return (
     <Formik
-      initialValues={{ pages: [] }}
+      initialValues={{ pages: value }}
       validationSchema={PagesSchema}
       onSubmit={(values, { setSubmitting }) => {
         setSubmitting(false);
-        console.log(values);
+        onUpdate(values.pages);
       }}
     >
       {({
@@ -71,7 +75,7 @@ export const FiltersPages: FC<Props> = ({ onClose }) => {
             {pages.filter(l => l.toLowerCase().includes(search.toLowerCase())).map(page => (
               <Checkbox 
                 key={page}
-                name='page'
+                name='pages'
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={page}

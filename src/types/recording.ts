@@ -87,3 +87,34 @@ export interface EventPagination {
   currentPage: number;
   totalPages: number;
 }
+
+export interface Filters {
+  browsers: string[];
+  devices: string[];
+  languages: string[];
+  startUrl: string | null;
+  exitUrl: string | null;
+  visitedPages: string[];
+  unvisitedPages: string[];
+  status: 'New' | 'Viewed' | null;
+  date: {
+    dateRangeType: 'From' | 'Between' | null;
+    dateFromType: 'Before' | 'After' | null;
+    fromDate: string;
+    betweenFromDate: string;
+    betweenToDate: string;
+  };
+  duration: {
+    durationRangeType: 'From' | 'Between' | null;
+    durationFromType: 'GreaterThan' | 'LessThan' | null;
+    fromDuration: string;
+    betweenFromDuration: string;
+    betweenToDuration: string;
+  };
+  viewport: {
+    minWidth?: string;
+    maxWidth?: string;
+    minHeight?: string;
+    maxHeight?: string;
+  }
+}

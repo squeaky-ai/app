@@ -4,23 +4,27 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { Radio } from 'components/radio';
 import { Button } from 'components/button';
+import type { Filters } from 'types/recording';
+import type { ValueOf } from 'types/common';
 
 interface Props {
+  value: Filters['status'];
   onClose: VoidFunction;
+  onUpdate: (value: ValueOf<Filters>) => void;
 }
 
 const StatusSchema = Yup.object().shape({
   status: Yup.string().oneOf(['New', 'Viewed']),
 });
 
-export const FiltersStatus: FC<Props> = ({ onClose }) => {
+export const FiltersStatus: FC<Props> = ({ value, onClose, onUpdate }) => {
   return (
     <Formik
-      initialValues={{ status: null }}
+      initialValues={{ status: value }}
       validationSchema={StatusSchema}
       onSubmit={(values, { setSubmitting }) => {
         setSubmitting(false);
-        console.log(values);
+        onUpdate(values.status);
       }}
     >
       {({

@@ -6,9 +6,13 @@ import { Radio } from 'components/radio';
 import { Button } from 'components/button';
 import { Option, Select } from 'components/select';
 import { DatePicker } from 'components/date-picker';
+import type { Filters } from 'types/recording';
+import type { ValueOf } from 'types/common';
 
 interface Props {
+  value: Filters['date'];
   onClose: VoidFunction;
+  onUpdate: (value: ValueOf<Filters>) => void;
 }
 
 const DateSchema = Yup.object().shape({
@@ -19,14 +23,14 @@ const DateSchema = Yup.object().shape({
   betweenToDate: Yup.string(),
 });
 
-export const FiltersDate: FC<Props> = ({ onClose }) => {
+export const FiltersDate: FC<Props> = ({ value, onClose, onUpdate }) => {
   return (
     <Formik
-      initialValues={{ dateRangeType: null, dateFromType: 'Before', fromDate: '', betweenFromDate: '', betweenToDate: '' }}
+      initialValues={value}
       validationSchema={DateSchema}
       onSubmit={(values, { setSubmitting }) => {
         setSubmitting(false);
-        console.log(values);
+        onUpdate(values);
       }}
     >
       {({

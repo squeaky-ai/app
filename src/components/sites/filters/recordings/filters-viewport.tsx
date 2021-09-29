@@ -5,9 +5,13 @@ import { Formik } from 'formik';
 import { Button } from 'components/button';
 import { Input } from 'components/input';
 import { Label } from 'components/label';
+import type { Filters } from 'types/recording';
+import type { ValueOf } from 'types/common';
 
 interface Props {
+  value: Filters['viewport'];
   onClose: VoidFunction;
+  onUpdate: (value: ValueOf<Filters>) => void;
 }
 
 const ViewportSchema = Yup.object().shape({
@@ -17,14 +21,14 @@ const ViewportSchema = Yup.object().shape({
   maxHeight: Yup.string(),
 });
 
-export const FiltersViewport: FC<Props> = ({ onClose }) => {
+export const FiltersViewport: FC<Props> = ({ value, onClose, onUpdate }) => {
   return (
     <Formik
-      initialValues={{ minWidth: '', maxWidth: '', minHeight: '', maxHeight: '' }}
+      initialValues={value}
       validationSchema={ViewportSchema}
       onSubmit={(values, { setSubmitting }) => {
         setSubmitting(false);
-        console.log(values);
+        onUpdate(values);
       }}
     >
       {({

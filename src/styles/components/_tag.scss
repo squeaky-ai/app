@@ -31,4 +31,22 @@
       font-size: 1.15rem;
     }
   }
+
+  &.secondary {
+    background: var(--white);
+    border: 1px solid var(--gray-150);
+
+    span {
+      color: var(--gray-800);
+      padding-right: 0;
+    }
+
+    .button {
+      border-left-color: transparent;
+
+      i {
+        color: var(--gray-300);
+      }
+    }
+  }
 }

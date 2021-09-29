@@ -7,11 +7,19 @@ import { Label } from 'components/label';
 import { FiltersDate } from 'components/sites/filters/recordings/filters-date';
 import { FiltersStatus } from 'components/sites/filters/recordings/filters-status';
 import { FiltersDuration } from 'components/sites/filters/recordings/filters-duration';
+import { FiltersPage } from 'components/sites/filters/recordings/filters-page';
 import { FiltersPages } from 'components/sites/filters/recordings/filters-pages';
 import { FiltersDevice } from 'components/sites/filters/recordings/filters-device';
 import { FiltersBrowsers } from 'components/sites/filters/recordings/filters-browsers';
 import { FiltersViewport } from 'components/sites/filters/recordings/filters-viewport';
 import { FiltersLanguage } from 'components/sites/filters/recordings/filters-language';
+import type { Filters as IFilters } from 'types/recording';
+import type { ValueOf } from 'types/common';
+
+interface Props {
+  filters: IFilters;
+  updateFilters: (key: keyof IFilters, value: ValueOf<IFilters>) => void;
+}
 
 enum FilterType {
   Date,
@@ -27,7 +35,7 @@ enum FilterType {
   Language
 }
 
-export const Filters: FC = () => {
+export const Filters: FC<Props> = ({ filters, updateFilters }) => {
   const [openFilter, setOpenFilter] = React.useState<FilterType | null>(null);
 
   const handleFilterChange = (filter: FilterType): void => {
@@ -35,6 +43,11 @@ export const Filters: FC = () => {
   };
 
   const handleFilterClose = () => {
+    setOpenFilter(null);
+  };
+  
+  const handleUpdate = (key: keyof IFilters) => (value: ValueOf<IFilters>) => {
+    updateFilters(key, value);
     setOpenFilter(null);
   };
 
@@ -90,67 +103,67 @@ export const Filters: FC = () => {
           {openFilter === FilterType.Date && (
             <>
               <Label>Date</Label>
-              <FiltersDate onClose={handleFilterClose} />
+              <FiltersDate value={filters.date} onUpdate={handleUpdate('date')} onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.Status && (
             <>
               <Label>Status</Label>
-              <FiltersStatus onClose={handleFilterClose} />
+              <FiltersStatus value={filters.status} onUpdate={handleUpdate('status')}  onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.Duration && (
             <>
               <Label>Duration</Label>
-              <FiltersDuration onClose={handleFilterClose} />
+              <FiltersDuration value={filters.duration} onUpdate={handleUpdate('duration')}  onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.StartUrl && (
             <>
               <Label>Start URL</Label>
-              <FiltersPages onClose={handleFilterClose} />
+              <FiltersPage value={filters.startUrl} onUpdate={handleUpdate('startUrl')}  onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.ExitUrl && (
             <>
               <Label>Exit URL</Label>
-              <FiltersPages onClose={handleFilterClose} />
+              <FiltersPage value={filters.exitUrl} onUpdate={handleUpdate('exitUrl')}  onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.VisitedPages && (
             <>
               <Label>Visited pages</Label>
-              <FiltersPages onClose={handleFilterClose} />
+              <FiltersPages value={filters.visitedPages} onUpdate={handleUpdate('visitedPages')}  onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.UnvisitedPages && (
             <>
               <Label>Unvisited pages</Label>
-              <FiltersPages onClose={handleFilterClose} />
+              <FiltersPages value={filters.unvisitedPages} onUpdate={handleUpdate('unvisitedPages')}  onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.Device && (
             <>
               <Label>Device</Label>
-              <FiltersDevice onClose={handleFilterClose} />
+              <FiltersDevice value={filters.devices} onUpdate={handleUpdate('devices')}  onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.Browser && (
             <>
               <Label>Browser</Label>
-              <FiltersBrowsers onClose={handleFilterClose} />
+              <FiltersBrowsers value={filters.browsers} onUpdate={handleUpdate('browsers')}  onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.Viewport && (
             <>
               <Label>Viewport</Label>
-              <FiltersViewport onClose={handleFilterClose} />
+              <FiltersViewport value={filters.viewport} onUpdate={handleUpdate('viewport')}  onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.Language && (
             <>
               <Label>Language</Label>
-              <FiltersLanguage onClose={handleFilterClose} />
+              <FiltersLanguage value={filters.languages} onUpdate={handleUpdate('languages')}  onClose={handleFilterClose} />
             </>
           )}
         </div>

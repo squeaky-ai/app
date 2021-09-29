@@ -6,9 +6,13 @@ import { Radio } from 'components/radio';
 import { Button } from 'components/button';
 import { Option, Select } from 'components/select';
 import { Input } from 'components/input';
+import type { Filters } from 'types/recording';
+import type { ValueOf } from 'types/common';
 
 interface Props {
+  value: Filters['duration'];
   onClose: VoidFunction;
+  onUpdate: (value: ValueOf<Filters>) => void;
 }
 
 const DurationSchema = Yup.object().shape({
@@ -20,14 +24,14 @@ const DurationSchema = Yup.object().shape({
 });
 
 
-export const FiltersDuration: FC<Props> = ({ onClose }) => {
+export const FiltersDuration: FC<Props> = ({ value, onClose, onUpdate }) => {
   return (
     <Formik
-      initialValues={{ durationRangeType: null, durationFromType: 'From', fromDuration: '', betweenFromDuration: '', betweenToDuration: '' }}
+      initialValues={value}
       validationSchema={DurationSchema}
       onSubmit={(values, { setSubmitting }) => {
         setSubmitting(false);
-        console.log(values);
+        onUpdate(values);
       }}
     >
       {({

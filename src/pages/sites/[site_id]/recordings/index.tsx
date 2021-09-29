@@ -17,9 +17,14 @@ import { Dropdown } from 'components/dropdown';
 import { Filters } from 'components/sites/filters/recordings/filters';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { BASE_PATH } from 'data/common/constants';
+import { defaultFilters } from 'lib/recordings';
+import { Tags } from 'components/sites/filters/recordings/tags';
+import type { Filters as IFilters } from 'types/recording';
+import type { ValueOf } from 'types/common';
 
 const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
   const [query, setQuery] = React.useState<string>('');
+  const [filters, setFilters] = React.useState<IFilters>(defaultFilters);
 
   const handleCancel = () => {
     setQuery('');
@@ -33,6 +38,14 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
     const element = event.target as HTMLInputElement;
     setQuery(element.value);
   }, 200);
+
+  const updateFilters = (key: keyof IFilters, value: ValueOf<IFilters>) => {
+    setFilters({ ...filters, [key]: value });
+  };
+
+  const clearFilters = () => {
+    setFilters(defaultFilters);
+  };
 
   return (
     <>
@@ -64,7 +77,10 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
                     <Button>TODO</Button>
                   </Dropdown>
                 </div>
-                <Filters />
+                <Filters 
+                  filters={filters}
+                  updateFilters={updateFilters}
+                />
               </menu>
             </div>
 
@@ -85,7 +101,10 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
             </Container>
 
             {!!site.recordings.items.length && (
-              <Recordings query={query} />
+              <>
+                <Tags filters={filters} clearFilters={clearFilters} />
+                <Recordings query={query} />
+              </>
             )}
           </Main>
         )}
