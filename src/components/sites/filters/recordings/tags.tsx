@@ -1,145 +1,101 @@
 import React from 'react';
 import type { FC } from 'react';
-import { Label } from 'components/label';
-import { Tag } from 'components/tag';
-import type { Filters } from 'types/recording';
 import { Button } from 'components/button';
+import { TagsDate } from 'components/sites/filters/recordings/tags-date';
+import { TagsDuration } from 'components/sites/filters/recordings/tags-duration';
+import { TagsStatus } from 'components/sites/filters/recordings/tags-status';
+import { TagsStartUrl } from 'components/sites/filters/recordings/tags-start-page';
+import { TagsExitUrl } from 'components/sites/filters/recordings/tags-exit-url';
+import { TagsVisitedPages } from 'components/sites/filters/recordings/tags-visited-pages';
+import { TagsUnvisitedPages } from 'components/sites/filters/recordings/tags-unvisited-pages';
+import { TagsDevices } from 'components/sites/filters/recordings/tags-devices';
+import { TagsBrowsers } from 'components/sites/filters/recordings/tags-browsers';
+import { TagsLanguages } from './tags-languages';
+import { TagsViewport } from './tags-viewport';
+import type { Filters } from 'types/recording';
+import type { ValueOf } from 'types/common';
 
 interface Props {
   filters: Filters;
+  updateFilters: (key: keyof Filters, value: ValueOf<Filters>) => void;
   clearFilters: VoidFunction;
 }
 
-export const Tags: FC<Props> = ({ filters, clearFilters }) => {
-  const hasFilters = filters.date.dateRangeType ||
-    filters.status ||
-    filters.duration.durationRangeType ||
-    filters.startUrl ||
-    filters.exitUrl ||
-    filters.visitedPages.length > 0 ||
-    filters.unvisitedPages.length > 0 ||
-    filters.devices.length > 0 ||
-    filters.browsers.length > 0 ||
-    (filters.viewport.minWidth || filters.viewport.maxWidth) ||
-    (filters.viewport.minHeight || filters.viewport.maxHeight) ||
-    filters.languages.length > 0;
+export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
+  const hasDateRange = filters.date.dateRangeType !== null;
+  const hasStatus = filters.status !== null;
+  const hasDuration = filters.duration.durationRangeType !== null;
+  const hasStartUrl = filters.startUrl !== null;
+  const hasExitUrl = filters.exitUrl !== null;
+  const hasVisitedPages = filters.visitedPages.length > 0;
+  const hasUnvisitedPages = filters.unvisitedPages.length > 0;
+  const hasDevices = filters.devices.length > 0;
+  const hasBrowsers = filters.browsers.length > 0;
+  const hasViewportWidth = !!(filters.viewport.minWidth || filters.viewport.maxWidth);
+  const hasViewportHeight = !!(filters.viewport.minHeight || filters.viewport.maxHeight);
+  const hasLanguages = filters.languages.length > 0;
+
+  const hasFilters = (
+    hasDateRange ||
+    hasStatus ||
+    hasDuration ||
+    hasStartUrl ||
+    hasExitUrl ||
+    hasVisitedPages ||
+    hasUnvisitedPages ||
+    hasDevices ||
+    hasBrowsers ||
+    hasViewportWidth ||
+    hasViewportHeight ||
+    hasLanguages
+  );
 
   if (!hasFilters) return null;
 
   return (
     <div className='filter-tags'>
-      {filters.date.dateRangeType && (
-        <>
-          <Label>Date</Label>
-          {filters.date.dateRangeType === 'Between' && (
-            <Tag className='secondary' handleDelete={console.log}>
-              <span>Between</span> {filters.date.betweenFromDate} <span>and</span> {filters.date.betweenToDate}
-            </Tag>
-          )}
-          {filters.date.dateRangeType === 'From' && (
-            <Tag className='secondary' handleDelete={console.log}>
-              <span>From</span> {filters.date.fromDate}
-            </Tag>
-          )}
-        </>
+      {hasDateRange && (
+        <TagsDate filters={filters} updateFilters={updateFilters} />
       )}
 
-      {filters.status && (
-        <>
-          <Label>Status</Label>
-          <Tag className='secondary' handleDelete={console.log}>{filters.status}</Tag>
-        </>
+      {hasStatus && (
+        <TagsStatus filters={filters} updateFilters={updateFilters} />
       )}
 
-      {filters.duration.durationRangeType && (
-        <>
-          <Label>Duration</Label>
-          {filters.duration.durationRangeType === 'Between' && (
-            <Tag className='secondary' handleDelete={console.log}>
-              <span>Between</span> {filters.duration.betweenFromDuration} <span>and</span> {filters.duration.betweenToDuration}
-            </Tag>
-          )}
-          {filters.duration.durationRangeType === 'From' && (
-            <Tag className='secondary' handleDelete={console.log}>
-              <span>From</span> {filters.duration.fromDuration}
-            </Tag>
-          )}
-        </>
+      {hasDuration && (
+        <TagsDuration filters={filters} updateFilters={updateFilters} />
       )}
 
-      {filters.startUrl && (
-        <>
-          <Label>Start URL</Label>
-          <Tag className='secondary' handleDelete={console.log}>{filters.startUrl}</Tag>
-        </>
+      {hasStartUrl && (
+        <TagsStartUrl filters={filters} updateFilters={updateFilters} />
       )}
 
-      {filters.exitUrl && (
-        <>
-          <Label>Exit URL</Label>
-          <Tag className='secondary' handleDelete={console.log}>{filters.exitUrl}</Tag>
-        </>
+      {hasExitUrl && (
+        <TagsExitUrl filters={filters} updateFilters={updateFilters} />
       )}
 
-      {filters.visitedPages.length > 0 && (
-        <>
-          <Label>Visited pages</Label>
-          {filters.visitedPages.map(v => (
-            <Tag key={v} className='secondary' handleDelete={console.log}>{v}</Tag>
-          ))}
-        </>
+      {hasVisitedPages && (
+        <TagsVisitedPages filters={filters} updateFilters={updateFilters} />
       )}
 
-      {filters.unvisitedPages.length > 0 && (
-        <>
-          <Label>Unvisited pages</Label>
-          {filters.unvisitedPages.map(u => (
-            <Tag key={u} className='secondary' handleDelete={console.log}>{u}</Tag>
-          ))}
-        </>
+      {hasUnvisitedPages && (
+        <TagsUnvisitedPages filters={filters} updateFilters={updateFilters} />
       )}
 
-      {filters.devices.length > 0 && (
-        <>
-          <Label>Devices</Label>
-          {filters.devices.map(d => (
-            <Tag key={d} className='secondary' handleDelete={console.log}>{d}</Tag>
-          ))}
-        </>
+      {hasDevices && (
+        <TagsDevices filters={filters} updateFilters={updateFilters} />
       )}
 
-      {filters.browsers.length > 0 && (
-        <>
-          <Label>Browser</Label>
-          {filters.browsers.map(b => (
-            <Tag key={b} className='secondary' handleDelete={console.log}>{b}</Tag>
-          ))}
-        </>
+      {hasBrowsers && (
+        <TagsBrowsers filters={filters} updateFilters={updateFilters} />
       )}
 
-      {((filters.viewport.minWidth || filters.viewport.maxWidth) || (filters.viewport.minHeight || filters.viewport.maxHeight)) && (
-        <>
-          <Label>Viewport</Label>
-          {(filters.viewport.minWidth || filters.viewport.maxWidth) && (
-            <Tag className='secondary' handleDelete={console.log}>
-              <span>Width</span> {filters.viewport.minWidth || 'any'} - {filters.viewport.maxWidth || 'any'} pixels
-            </Tag>
-          )}
-          {(filters.viewport.minHeight || filters.viewport.maxHeight) && (
-            <Tag className='secondary' handleDelete={console.log}>
-              <span>Height</span> {filters.viewport.minHeight || 'any'} - {filters.viewport.maxHeight || 'any'} pixels
-            </Tag>
-          )}
-        </>
+      {(hasViewportWidth || hasViewportHeight) && (
+        <TagsViewport filters={filters} updateFilters={updateFilters} />
       )}
 
-      {filters.languages.length > 0 && (
-        <>
-          <Label>Languages</Label>
-          {filters.languages.map(l => (
-            <Tag key={l} className='secondary' handleDelete={console.log}>{l}</Tag>
-          ))}
-        </>
+      {hasLanguages && (
+        <TagsLanguages filters={filters} updateFilters={updateFilters} />
       )}
 
       <Button className='link clear-filters' onClick={clearFilters}>

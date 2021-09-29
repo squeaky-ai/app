@@ -102,7 +102,7 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
 
             {!!site.recordings.items.length && (
               <>
-                <Tags filters={filters} clearFilters={clearFilters} />
+                <Tags filters={filters} updateFilters={updateFilters} clearFilters={clearFilters} />
                 <Recordings query={query} />
               </>
             )}
