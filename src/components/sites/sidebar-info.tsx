@@ -56,7 +56,7 @@ export const SidebarInfo: FC<Props> = ({ site, recording, setActiveTab }) => {
           <dd>{recording.sessionId}</dd>
         </div>
         <div className='row'>
-          <dt>User</dt>
+          <dt>Visitor</dt>
           <dd><VisitorStarred site={site} visitor={recording.visitor} /></dd>
         </div>
         <div className='row'>
