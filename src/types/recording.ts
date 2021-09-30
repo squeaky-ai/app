@@ -100,16 +100,16 @@ export interface Filters {
   date: {
     dateRangeType: 'From' | 'Between' | null;
     dateFromType: 'Before' | 'After' | null;
-    fromDate: string;
-    betweenFromDate: string;
-    betweenToDate: string;
+    fromDate?: string;
+    betweenFromDate?: string;
+    betweenToDate?: string;
   };
   duration: {
     durationRangeType: 'From' | 'Between' | null;
     durationFromType: 'GreaterThan' | 'LessThan' | null;
-    fromDuration: string;
-    betweenFromDuration: string;
-    betweenToDuration: string;
+    fromDuration?: string;
+    betweenFromDuration?: string;
+    betweenToDuration?: string;
   };
   viewport: {
     minWidth?: string;

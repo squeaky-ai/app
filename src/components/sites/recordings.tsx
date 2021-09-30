@@ -10,13 +10,14 @@ import { PageSize } from 'components/sites/page-size';
 import { useRecordings } from 'hooks/use-recordings';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 import { BASE_PATH } from 'data/common/constants';
-import type { RecordingSortBy } from 'types/recording';
+import type { Filters, RecordingSortBy } from 'types/recording';
 
 interface Props {
   query: string;
+  filters: Filters;
 }
 
-export const Recordings: FC<Props> = ({ query }) => {
+export const Recordings: FC<Props> = ({ query, filters }) => {
   const [page, setPage] = React.useState<number>(0);
   const [size, setSize] = React.useState<number>(25);
   const [sort, setSort] = React.useState<RecordingSortBy>('connected_at__desc');
@@ -26,6 +27,7 @@ export const Recordings: FC<Props> = ({ query }) => {
     sort,
     size,
     query: query.length < MIN_SEARCH_CHARS ? '' : query, // No point in searching if it's below this value
+    filters,
   });
 
   const { items, pagination } = recordings;

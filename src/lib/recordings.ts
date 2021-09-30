@@ -12,21 +12,21 @@ export const defaultFilters: Filters = {
   date: {
     dateRangeType: null,
     dateFromType: 'Before',
-    fromDate: '',
-    betweenFromDate: '',
-    betweenToDate: '',
+    fromDate: null,
+    betweenFromDate: null,
+    betweenToDate: null,
   },
   duration: {
     durationRangeType: null,
     durationFromType: 'GreaterThan',
-    fromDuration: '',
-    betweenFromDuration: '',
-    betweenToDuration: '',
+    fromDuration: null,
+    betweenFromDuration: null,
+    betweenToDuration: null,
   },
   viewport: {
-    minHeight: '',
-    maxHeight: '',
-    maxWidth: '',
-    minWidth: '',
+    minHeight: null,
+    maxHeight: null,
+    maxWidth: null,
+    minWidth: null,
   }
 };

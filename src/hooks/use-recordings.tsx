@@ -2,13 +2,14 @@ import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_RECORDINGS_QUERY } from 'data/recordings/queries';
 import type { Site } from 'types/site';
-import type { PaginatedRecordingsResponse, RecordingSortBy } from 'types/recording';
+import type { Filters, PaginatedRecordingsResponse, RecordingSortBy } from 'types/recording';
 
 interface Props {
   page: number;
   size?: number;
   query?: string;
   sort?: RecordingSortBy;
+  filters?: Filters;
 }
 
 interface UseRecordings {
@@ -16,7 +17,7 @@ interface UseRecordings {
   recordings: PaginatedRecordingsResponse;
 }
 
-export const useRecordings = ({ page, size, query, sort }: Props): UseRecordings => {
+export const useRecordings = ({ page, size, query, sort, filters }: Props): UseRecordings => {
   const router = useRouter();
 
   const { data, loading, previousData } = useQuery<{ site: Site }>(GET_RECORDINGS_QUERY, {
@@ -25,7 +26,8 @@ export const useRecordings = ({ page, size, query, sort }: Props): UseRecordings
       page, 
       size,
       query,
-      sort
+      sort,
+      filters,
     }
   });
 
