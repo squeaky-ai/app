@@ -54,7 +54,7 @@ export const PlayerSpeed: FC<Props> = ({
   const handleSkipChange = () => handleSkipInactivity(!skipInactivity);
 
   return (
-    <Dropdown button={name} buttonClassName='speed' menuClassName='playback-speed-menu' direction='up'>
+    <Dropdown button={name} buttonClassName='speed' menuClassName='playback-speed-menu' direction='up' portal>
       <Label>Playback Speed</Label>
 
       {speeds.map(speed => (
