@@ -41,11 +41,15 @@ export const FiltersPages: FC<Props> = ({ value, onClose, onUpdate }) => {
     }
   });
 
-  const pages = data ? data.site.pages : [];
-
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearch(event.target.value);
   };
+
+  const pages = data ? data.site.pages : [];
+
+  const results = pages
+    .filter(l => l.toLowerCase().includes(search.toLowerCase()))
+    .sort((a, b) => a.length - b.length);
 
   return (
     <Formik
@@ -72,7 +76,7 @@ export const FiltersPages: FC<Props> = ({ value, onClose, onUpdate }) => {
           </div>
           <div className='row pages'>
             {loading && <Spinner />}
-            {pages.filter(l => l.toLowerCase().includes(search.toLowerCase())).map(page => (
+            {results.map(page => (
               <Checkbox 
                 key={page}
                 name='pages'
