@@ -5,6 +5,7 @@ import { Formik } from 'formik';
 import { Button } from 'components/button';
 import { Input } from 'components/input';
 import { Label } from 'components/label';
+import { valueOrDefaults, numbersOrNull } from 'lib/recordings';
 import type { Filters } from 'types/recording';
 import type { ValueOf } from 'types/common';
 
@@ -15,85 +16,83 @@ interface Props {
 }
 
 const ViewportSchema = Yup.object().shape({
-  minWidth: Yup.string(),
-  maxWidth: Yup.string(),
-  minHeight: Yup.string(),
-  maxHeight: Yup.string(),
+  minWidth: Yup.number(),
+  maxWidth: Yup.number(),
+  minHeight: Yup.number(),
+  maxHeight: Yup.number(),
 });
 
-export const FiltersViewport: FC<Props> = ({ value, onClose, onUpdate }) => {
-  return (
-    <Formik
-      initialValues={value}
-      validationSchema={ViewportSchema}
-      onSubmit={(values, { setSubmitting }) => {
-        setSubmitting(false);
-        onUpdate(values);
-      }}
-    >
-      {({
-        handleBlur,
-        handleChange,
-        handleSubmit,
-        isSubmitting,
-        values,
-      }) => (
-        <form className='filters-viewport' onSubmit={handleSubmit}>
-          <div className='row'>
-            <div className='column'>
-              <Label>Min. Width</Label>
-              <Input 
-                name='minWidth' 
-                type='string' 
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.minWidth}
-              />
-              <p>px</p>
-            </div>
-            <div className='column'>
-              <Label>Max. Width</Label>
-              <Input 
-                name='maxWidth' 
-                type='string' 
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.maxWidth}
-              />
-              <p>px</p>
-            </div>
+export const FiltersViewport: FC<Props> = ({ value, onClose, onUpdate }) => (
+  <Formik
+    initialValues={valueOrDefaults<Filters['viewport']>(value)}
+    validationSchema={ViewportSchema}
+    onSubmit={(values, { setSubmitting }) => {
+      setSubmitting(false);
+      onUpdate(numbersOrNull(values));
+    }}
+  >
+    {({
+      handleBlur,
+      handleChange,
+      handleSubmit,
+      isSubmitting,
+      values,
+    }) => (
+      <form className='filters-viewport' onSubmit={handleSubmit}>
+        <div className='row'>
+          <div className='column'>
+            <Label>Min. Width</Label>
+            <Input 
+              name='minWidth' 
+              type='number' 
+              onBlur={handleBlur}
+              onChange={handleChange}
+              value={values.minWidth}
+            />
+            <p>px</p>
           </div>
-          <div className='row'>
-            <div className='column'>
-              <Label>Min. Height</Label>
-              <Input 
-                name='minHeight' 
-                type='string' 
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.minHeight}
-              />
-              <p>px</p>
-            </div>
-            <div className='column'>
-              <Label>Max. Height</Label>
-              <Input 
-                name='maxHeight' 
-                type='string' 
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.maxHeight}
-              />
-              <p>px</p>
-            </div>
+          <div className='column'>
+            <Label>Max. Width</Label>
+            <Input 
+              name='maxWidth' 
+              type='number' 
+              onBlur={handleBlur}
+              onChange={handleChange}
+              value={values.maxWidth}
+            />
+            <p>px</p>
           </div>
+        </div>
+        <div className='row'>
+          <div className='column'>
+            <Label>Min. Height</Label>
+            <Input 
+              name='minHeight' 
+              type='number' 
+              onBlur={handleBlur}
+              onChange={handleChange}
+              value={values.minHeight}
+            />
+            <p>px</p>
+          </div>
+          <div className='column'>
+            <Label>Max. Height</Label>
+            <Input 
+              name='maxHeight' 
+              type='number' 
+              onBlur={handleBlur}
+              onChange={handleChange}
+              value={values.maxHeight}
+            />
+            <p>px</p>
+          </div>
+        </div>
 
-          <div className='actions'>
-            <Button type='submit' disabled={isSubmitting} className='primary'>Apply</Button>
-            <Button type='button' className='quaternary' onClick={onClose}>Cancel</Button>
-          </div>
-        </form>
-      )}
-    </Formik>
-  );
-};
+        <div className='actions'>
+          <Button type='submit' disabled={isSubmitting} className='primary'>Apply</Button>
+          <Button type='button' className='quaternary' onClick={onClose}>Cancel</Button>
+        </div>
+      </form>
+    )}
+  </Formik>
+);

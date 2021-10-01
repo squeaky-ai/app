@@ -40,8 +40,8 @@ export const FiltersDevice: FC<Props> = ({ value, onClose, onUpdate }) => {
               name='devices'
               onBlur={handleBlur}
               onChange={handleChange}
-              value='Desktop'
-              checked={values.devices.includes('Desktop')}
+              value='Computer'
+              checked={values.devices.includes('Computer')}
             >
               Desktop/Laptop
             </Checkbox>

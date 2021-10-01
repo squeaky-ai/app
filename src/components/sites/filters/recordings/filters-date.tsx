@@ -6,6 +6,7 @@ import { Radio } from 'components/radio';
 import { Button } from 'components/button';
 import { Option, Select } from 'components/select';
 import { DatePicker } from 'components/date-picker';
+import { valueOrDefaults } from 'lib/recordings';
 import type { Filters } from 'types/recording';
 import type { ValueOf } from 'types/common';
 
@@ -23,76 +24,74 @@ const DateSchema = Yup.object().shape({
   betweenToDate: Yup.string(),
 });
 
-export const FiltersDate: FC<Props> = ({ value, onClose, onUpdate }) => {
-  return (
-    <Formik
-      initialValues={value}
-      validationSchema={DateSchema}
-      onSubmit={(values, { setSubmitting }) => {
-        setSubmitting(false);
-        onUpdate(values);
-      }}
-    >
-      {({
-        handleBlur,
-        handleChange,
-        handleSubmit,
-        isSubmitting,
-        values,
-      }) => (
-        <form className='filters-date' onSubmit={handleSubmit}>
-          <div className='row'>
-            <Radio 
-              name='dateRangeType'
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value='From'
-              checked={values.dateRangeType === 'From'}
-            />
-            <Select name='dateFromType' onChange={handleChange} value={values.dateFromType}>
-              <Option value='Before'>Before</Option>
-              <Option value='After'>After</Option>
-            </Select>
-            <DatePicker
-              name='fromDate' 
-              type='text' 
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.fromDate}
-            />
-          </div>
-          <div className='row'>
-            <Radio 
-              name='dateRangeType'
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value='Between'
-              checked={values.dateRangeType === 'Between'}
-            />
-            <p>Between</p>
-            <DatePicker 
-              name='betweenFromDate' 
-              type='text' 
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.betweenFromDate}
-            />
-            <p>and</p>
-            <DatePicker 
-              name='betweenToDate' 
-              type='text' 
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.betweenToDate}
-            />
-          </div>
+export const FiltersDate: FC<Props> = ({ value, onClose, onUpdate }) => (
+  <Formik
+    initialValues={valueOrDefaults<Filters['date']>(value)}
+    validationSchema={DateSchema}
+    onSubmit={(values, { setSubmitting }) => {
+      setSubmitting(false);
+      onUpdate(values);
+    }}
+  >
+    {({
+      handleBlur,
+      handleChange,
+      handleSubmit,
+      isSubmitting,
+      values,
+    }) => (
+      <form className='filters-date' onSubmit={handleSubmit}>
+        <div className='row'>
+          <Radio 
+            name='dateRangeType'
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value='From'
+            checked={values.dateRangeType === 'From'}
+          />
+          <Select name='dateFromType' onChange={handleChange} value={values.dateFromType}>
+            <Option value='Before'>Before</Option>
+            <Option value='After'>After</Option>
+          </Select>
+          <DatePicker
+            name='fromDate' 
+            type='text' 
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={values.fromDate}
+          />
+        </div>
+        <div className='row'>
+          <Radio 
+            name='dateRangeType'
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value='Between'
+            checked={values.dateRangeType === 'Between'}
+          />
+          <p>Between</p>
+          <DatePicker 
+            name='betweenFromDate' 
+            type='text' 
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={values.betweenFromDate}
+          />
+          <p>and</p>
+          <DatePicker 
+            name='betweenToDate' 
+            type='text' 
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={values.betweenToDate}
+          />
+        </div>
 
-          <div className='actions'>
-            <Button type='submit' disabled={isSubmitting} className='primary'>Apply</Button>
-            <Button type='button' className='quaternary' onClick={onClose}>Cancel</Button>
-          </div>
-        </form>
-      )}
-    </Formik>
-  );
-};
+        <div className='actions'>
+          <Button type='submit' disabled={isSubmitting} className='primary'>Apply</Button>
+          <Button type='button' className='quaternary' onClick={onClose}>Cancel</Button>
+        </div>
+      </form>
+    )}
+  </Formik>
+);

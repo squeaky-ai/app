@@ -6,6 +6,7 @@ import { Radio } from 'components/radio';
 import { Button } from 'components/button';
 import { Option, Select } from 'components/select';
 import { Input } from 'components/input';
+import { valueOrDefaults } from 'lib/recordings';
 import type { Filters } from 'types/recording';
 import type { ValueOf } from 'types/common';
 
@@ -18,88 +19,86 @@ interface Props {
 const DurationSchema = Yup.object().shape({
   durationRangeType: Yup.string().oneOf(['From', 'Between']),
   durationFromType: Yup.string().oneOf(['GreaterThan', 'LessThan']),
-  fromDuration: Yup.string(),
-  betweenFromDuration: Yup.string(),
-  betweenToDuration: Yup.string(),
+  fromDuration: Yup.string().when('durationRangeType', { is: 'From', then: Yup.string().required() }),
+  betweenFromDuration: Yup.string().when('durationRangeType', { is: 'Between', then: Yup.string().required() }),
+  betweenToDuration: Yup.string().when('durationRangeType', { is: 'Between', then: Yup.string().required() }),
 });
 
 
-export const FiltersDuration: FC<Props> = ({ value, onClose, onUpdate }) => {
-  return (
-    <Formik
-      initialValues={value}
-      validationSchema={DurationSchema}
-      onSubmit={(values, { setSubmitting }) => {
-        setSubmitting(false);
-        onUpdate(values);
-      }}
-    >
-      {({
-        handleBlur,
-        handleChange,
-        handleSubmit,
-        isSubmitting,
-        values,
-      }) => (
-        <form className='filters-duration' onSubmit={handleSubmit}>
-          <div className='row'>
-            <Radio 
-              name='durationRangeType'
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value='From'
-              checked={values.durationRangeType === 'From'}
-            />
-            <Select name='durationFromType' onChange={handleChange} value={values.durationFromType}>
-              <Option value='GreaterThan'>Greater than</Option>
-              <Option value='LessThan'>Less than</Option>
-            </Select>
-            <Input 
-              placeholder='00:00' 
-              className='time' 
-              name='fromDuration' 
-              type='text' 
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.fromDuration}
-            />
-          </div>
-          <div className='row'>
-            <Radio 
-              name='durationRangeType'
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value='Between'
-              checked={values.durationRangeType === 'Between'}
-            />
-            <p>Between</p>
-            <Input 
-              placeholder='00:00' 
-              className='time' 
-              name='betweenFromDuration' 
-              type='text' 
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.betweenFromDuration}
-            />
-            <p>and</p>
-            <Input 
-              placeholder='00:00' 
-              className='time' 
-              name='betweenToDuration' 
-              type='text' 
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.betweenToDuration}
-            />
-          </div>
+export const FiltersDuration: FC<Props> = ({ value, onClose, onUpdate }) => (
+  <Formik
+    initialValues={valueOrDefaults<Filters['duration']>(value)}
+    validationSchema={DurationSchema}
+    onSubmit={(values, { setSubmitting }) => {
+      setSubmitting(false);
+      onUpdate(values);
+    }}
+  >
+    {({
+      handleBlur,
+      handleChange,
+      handleSubmit,
+      isSubmitting,
+      values,
+    }) => (
+      <form className='filters-duration' onSubmit={handleSubmit}>
+        <div className='row'>
+          <Radio 
+            name='durationRangeType'
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value='From'
+            checked={values.durationRangeType === 'From'}
+          />
+          <Select name='durationFromType' onChange={handleChange} value={values.durationFromType}>
+            <Option value='GreaterThan'>Greater than</Option>
+            <Option value='LessThan'>Less than</Option>
+          </Select>
+          <Input 
+            placeholder='00:00' 
+            className='time' 
+            name='fromDuration' 
+            type='text' 
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={values.fromDuration}
+          />
+        </div>
+        <div className='row'>
+          <Radio 
+            name='durationRangeType'
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value='Between'
+            checked={values.durationRangeType === 'Between'}
+          />
+          <p>Between</p>
+          <Input 
+            placeholder='00:00' 
+            className='time' 
+            name='betweenFromDuration' 
+            type='text' 
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={values.betweenFromDuration}
+          />
+          <p>and</p>
+          <Input 
+            placeholder='00:00' 
+            className='time' 
+            name='betweenToDuration' 
+            type='text' 
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={values.betweenToDuration}
+          />
+        </div>
 
-          <div className='actions'>
-            <Button type='submit' disabled={isSubmitting} className='primary'>Apply</Button>
-            <Button type='button' className='quaternary' onClick={onClose}>Cancel</Button>
-          </div>
-        </form>
-      )}
-    </Formik>
-  );
-};
+        <div className='actions'>
+          <Button type='submit' disabled={isSubmitting} className='primary'>Apply</Button>
+          <Button type='button' className='quaternary' onClick={onClose}>Cancel</Button>
+        </div>
+      </form>
+    )}
+  </Formik>
+);

@@ -112,9 +112,9 @@ export interface Filters {
     betweenToDuration?: string;
   };
   viewport: {
-    minWidth?: string;
-    maxWidth?: string;
-    minHeight?: string;
-    maxHeight?: string;
+    minWidth?: number;
+    maxWidth?: number;
+    minHeight?: number;
+    maxHeight?: number;
   }
 }
