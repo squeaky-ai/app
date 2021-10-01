@@ -12,11 +12,11 @@ interface Props {
 
 export const TagsViewport: FC<Props> = ({ filters, updateFilters }) => {
   const onDeleteWidthTag = () => {
-    updateFilters('viewport', { ...filters.viewport, minWidth: '', maxWidth: '' });
+    updateFilters('viewport', { ...filters.viewport, minWidth: null, maxWidth: null });
   };
 
   const onDeleteHeightTag = () => {
-    updateFilters('viewport', { ...filters.viewport, minHeight: '', maxHeight: '' });
+    updateFilters('viewport', { ...filters.viewport, minHeight: null, maxHeight: null });
   };
 
   return (

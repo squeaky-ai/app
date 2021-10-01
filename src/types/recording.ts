@@ -100,21 +100,21 @@ export interface Filters {
   date: {
     dateRangeType: 'From' | 'Between' | null;
     dateFromType: 'Before' | 'After' | null;
-    fromDate?: string;
-    betweenFromDate?: string;
-    betweenToDate?: string;
+    fromDate: string | null;
+    betweenFromDate: string | null;
+    betweenToDate: string | null;
   };
   duration: {
     durationRangeType: 'From' | 'Between' | null;
     durationFromType: 'GreaterThan' | 'LessThan' | null;
-    fromDuration?: string;
-    betweenFromDuration?: string;
-    betweenToDuration?: string;
+    fromDuration: string | null;
+    betweenFromDuration: string | null;
+    betweenToDuration: string | null;
   };
   viewport: {
-    minWidth?: number;
-    maxWidth?: number;
-    minHeight?: number;
-    maxHeight?: number;
+    minWidth: number | null;
+    maxWidth: number | null;
+    minHeight: number | null;
+    maxHeight: number | null;
   }
 }
