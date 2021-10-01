@@ -41,11 +41,15 @@ export const FiltersLanguage: FC<Props> = ({ value, onClose, onUpdate }) => {
     }
   });
 
-  const languages = data ? data.site.languages : [];
-
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearch(event.target.value);
   };
+
+  const languages = data ? data.site.languages : [];
+
+  const results = languages
+    .filter(l => l.toLowerCase().includes(search.toLowerCase()))
+    .sort((a, b) => a.localeCompare(b));
 
   return (
     <Formik
@@ -72,7 +76,7 @@ export const FiltersLanguage: FC<Props> = ({ value, onClose, onUpdate }) => {
           </div>
           <div className='row languages'>
             {loading && <Spinner />}
-            {languages.filter(l => l.toLowerCase().includes(search.toLowerCase())).map(language => (
+            {results.map(language => (
               <Checkbox 
                 key={language}
                 name='languages'

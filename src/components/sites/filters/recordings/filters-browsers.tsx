@@ -41,6 +41,8 @@ export const FiltersBrowsers: FC<Props> = ({ value, onClose, onUpdate }) => {
 
   const browsers = data ? data.site.browsers : [];
 
+  const results = browsers.sort((a, b) => a.localeCompare(b));
+
   return (
     <Formik
       initialValues={{ browsers: value }}
@@ -60,7 +62,7 @@ export const FiltersBrowsers: FC<Props> = ({ value, onClose, onUpdate }) => {
         <form className='filters-browsers' onSubmit={handleSubmit}>
           <div className='row browsers'>
             {loading && <Spinner />}
-            {browsers.map(browser => (
+            {results.map(browser => (
               <Checkbox 
                 key={browser}
                 name='browsers'
