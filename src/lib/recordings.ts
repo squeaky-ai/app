@@ -31,6 +31,15 @@ export const defaultFilters: Filters = {
   }
 };
 
+export const defaultColumns = [
+  'Date & Time',
+  'Duration',
+  'Pages',
+  'Start & Exit URL',
+  'Device & Viewport',
+  'Browser',
+];
+
 // React doesn't like inputs having nulls, so this will
 // convert all of those into empty strings
 export const valueOrDefaults = <T>(value: T, replacement = '' ) => Object

@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import Image from 'next/image';
+import classnames from 'classnames';
 import { Pagination } from 'components/pagination';
 import { Container } from 'components/container';
 import { RecordingsItem } from 'components/sites/recordings-item';
@@ -15,9 +16,23 @@ import type { Filters, RecordingSortBy } from 'types/recording';
 interface Props {
   query: string;
   filters: Filters;
+  columns: string[];
 }
 
-export const Recordings: FC<Props> = ({ query, filters }) => {
+const tableClassNames = (columns: string[]) => {
+  const classNames = [];
+
+  if (!columns.includes('Date & Time')) classNames.push('hide-date-time');
+  if (!columns.includes('Duration')) classNames.push('hide-duration');
+  if (!columns.includes('Pages')) classNames.push('hide-pages');
+  if (!columns.includes('Start & Exit URL')) classNames.push('hide-start-exit');
+  if (!columns.includes('Device & Viewport')) classNames.push('hide-device');
+  if (!columns.includes('Browser')) classNames.push('hide-browser');
+
+  return classNames;
+};
+
+export const Recordings: FC<Props> = ({ query, filters, columns }) => {
   const [page, setPage] = React.useState<number>(0);
   const [size, setSize] = React.useState<number>(25);
   const [sort, setSort] = React.useState<RecordingSortBy>('connected_at__desc');
@@ -43,7 +58,7 @@ export const Recordings: FC<Props> = ({ query, filters }) => {
         </Container>
       )}
     
-      <Table className='recordings-list hover'>
+      <Table className={classnames('recordings-list hover', tableClassNames(columns))}>
         <Row head>
           <Cell>Status</Cell>
           <Cell>Recording ID</Cell>

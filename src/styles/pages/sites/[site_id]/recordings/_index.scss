@@ -50,6 +50,25 @@
         }
       }
 
+      .columns {
+        .dropdown-menu {
+          width: 220px;
+        }
+
+        .filters-columns {
+          padding: .5rem;
+
+          .checkbox {
+            margin-bottom: .75rem;
+          }
+
+          .button {
+            margin-top: .5rem;
+            width: 100%;
+          }
+        }
+      }
+
       .dropdown-menu {
         width: 210px;
 

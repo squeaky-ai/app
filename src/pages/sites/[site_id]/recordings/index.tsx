@@ -13,17 +13,18 @@ import { Container } from 'components/container';
 import { Recordings } from 'components/sites/recordings';
 import { Page } from 'components/sites/page';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
-import { Dropdown } from 'components/dropdown';
 import { Filters } from 'components/sites/filters/recordings/filters';
+import { Tags } from 'components/sites/filters/recordings/tags';
+import { RecordingsColumns } from 'components/sites/recordings-columns';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { BASE_PATH } from 'data/common/constants';
-import { defaultFilters } from 'lib/recordings';
-import { Tags } from 'components/sites/filters/recordings/tags';
+import { defaultFilters, defaultColumns } from 'lib/recordings';
 import type { Filters as IFilters } from 'types/recording';
 import type { ValueOf } from 'types/common';
 
 const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
   const [query, setQuery] = React.useState<string>('');
+  const [columns, setColumns] = React.useState<string[]>(defaultColumns);
   const [filters, setFilters] = React.useState<IFilters>(defaultFilters);
 
   const handleCancel = () => {
@@ -73,9 +74,10 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
               </h3>
               <menu>
                 <div className='menu-item'>
-                  <Dropdown button={<><i className='ri-layout-column-line' /> Columns</>}>
-                    <Button>TODO</Button>
-                  </Dropdown>
+                  <RecordingsColumns 
+                    columns={columns}
+                    setColumns={setColumns}
+                  />
                 </div>
                 <Filters 
                   filters={filters}
@@ -103,7 +105,7 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
             {!!site.recordings.items.length && (
               <>
                 <Tags filters={filters} updateFilters={updateFilters} clearFilters={clearFilters} />
-                <Recordings query={query} filters={filters} />
+                <Recordings query={query} filters={filters} columns={columns} />
               </>
             )}
           </Main>
