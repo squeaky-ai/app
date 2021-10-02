@@ -88,6 +88,12 @@ export interface EventPagination {
   totalPages: number;
 }
 
+export interface Column {
+  name: string;
+  label: string;
+  width: string;
+}
+
 export interface Filters {
   browsers: string[];
   devices: string[];

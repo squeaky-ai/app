@@ -11,25 +11,42 @@ import { PageSize } from 'components/sites/page-size';
 import { useRecordings } from 'hooks/use-recordings';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 import { BASE_PATH } from 'data/common/constants';
-import type { Filters, RecordingSortBy } from 'types/recording';
+import type { Filters, RecordingSortBy, Column } from 'types/recording';
 
 interface Props {
   query: string;
   filters: Filters;
-  columns: string[];
+  columns: Column[];
 }
 
-const tableClassNames = (columns: string[]) => {
-  const classNames = [];
+const tableStyle = (columns: Column[]): string => {
+  const getSize = (name: string) => columns.find(c => c.name === name)?.width || '';
 
-  if (!columns.includes('Date & Time')) classNames.push('hide-date-time');
-  if (!columns.includes('Duration')) classNames.push('hide-duration');
-  if (!columns.includes('Pages')) classNames.push('hide-pages');
-  if (!columns.includes('Start & Exit URL')) classNames.push('hide-start-exit');
-  if (!columns.includes('Device & Viewport')) classNames.push('hide-device');
-  if (!columns.includes('Browser')) classNames.push('hide-browser');
+  return [
+    '105px',
+    '1fr',
+    '1fr',
+    getSize('date-time'),
+    getSize('duration'),
+    getSize('pages'),
+    getSize('start-exit'),
+    getSize('device'),
+    getSize('browser'),
+    '70px'
+  ].join(' ');
+};
 
-  return classNames;
+const tableClassNames = (columns: Column[]): string[] => {
+  const getClassName = (name: string) => columns.find(c => c.name === name) ? '' : `hide-${name}`;
+
+  return [
+    getClassName('date-time'),
+    getClassName('duration'),
+    getClassName('pages'),
+    getClassName('start-exit'),
+    getClassName('device'),
+    getClassName('browser'),
+  ];
 };
 
 export const Recordings: FC<Props> = ({ query, filters, columns }) => {
@@ -46,6 +63,13 @@ export const Recordings: FC<Props> = ({ query, filters, columns }) => {
   });
 
   const { items, pagination } = recordings;
+
+  React.useEffect(() => {
+    const rows = document.querySelectorAll<HTMLDivElement>('.recordings-list .row');
+    const style = tableStyle(columns);
+
+    rows.forEach(r => r.style.gridTemplateColumns = style);
+  }, [columns]);
 
   return (
     <>

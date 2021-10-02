@@ -5,34 +5,30 @@ import { Formik } from 'formik';
 import { Button } from 'components/button';
 import { Checkbox } from 'components/checkbox';
 import { Dropdown } from 'components/dropdown';
+import { defaultColumns } from 'lib/recordings';
+import type { Column } from 'types/recording';
 
 interface Props {
-  columns: string[];
-  setColumns: (columns: string[]) => void;
+  columns: Column[];
+  setColumns: (columns: Column[]) => void;
 }
-
-const allColumns = [
-  'Date & Time',
-  'Duration',
-  'Pages',
-  'Start & Exit URL',
-  'Device & Viewport',
-  'Browser',
-];
 
 const ColumnsSchema = Yup.object().shape({
   columns: Yup.array(),
 });
 
 export const RecordingsColumns: FC<Props> = ({ columns, setColumns }) => {
+  const columnNames = columns.map(c => c.name);
+
   return (
     <Dropdown className='columns' button={<><i className='ri-layout-column-line' /> Columns</>}>
       <Formik
-        initialValues={{ columns }}
+        initialValues={{ columns: columnNames }}
         validationSchema={ColumnsSchema}
         onSubmit={(values, { setSubmitting }) => {
           setSubmitting(false);
-          setColumns(values.columns);
+          const update = values.columns.map(c => defaultColumns.find(d => d.name === c));
+          setColumns(update);
         }}
       >
         {({
@@ -43,16 +39,16 @@ export const RecordingsColumns: FC<Props> = ({ columns, setColumns }) => {
           values,
         }) => (
           <form className='filters-columns' onSubmit={handleSubmit}>
-            {allColumns.map(column => 
+            {defaultColumns.map(column => 
               <Checkbox 
-                key={column}
+                key={column.name}
                 name='columns'
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={column}
-                checked={values.columns.includes(column)}
+                value={column.name}
+                checked={values.columns.includes(column.name)}
               >
-                {column}
+                {column.label}
               </Checkbox>
             )}
 

@@ -1,4 +1,4 @@
-import type { Filters } from 'types/recording';
+import type { Filters, Column } from 'types/recording';
 
 export const defaultFilters: Filters = {
   browsers: [],
@@ -31,13 +31,37 @@ export const defaultFilters: Filters = {
   }
 };
 
-export const defaultColumns = [
-  'Date & Time',
-  'Duration',
-  'Pages',
-  'Start & Exit URL',
-  'Device & Viewport',
-  'Browser',
+export const defaultColumns: Column[] = [
+  {
+    name: 'date-time',
+    label: 'Date & Time',
+    width: '1fr'
+  },
+  {
+    name: 'duration',
+    label: 'Duration',
+    width: '1fr'
+  },
+  {
+    name: 'pages',
+    label: 'Pages',
+    width: '1fr'
+  },
+  {
+    name: 'start-exit',
+    label: 'Start & Exit URL',
+    width: '2fr'
+  },
+  {
+    name: 'device',
+    label: 'Device',
+    width: '1fr',
+  },
+  {
+    name: 'browser',
+    label: 'Browser',
+    width: '90px'
+  },
 ];
 
 // React doesn't like inputs having nulls, so this will
