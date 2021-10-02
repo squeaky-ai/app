@@ -56,12 +56,20 @@ export const Pagination: FC<Props> = ({ currentPage, pageSize, total, setPage })
     return <span />;
   }
 
+  const handlePageChange = (page: number) => {
+    setPage(page - 1);
+
+    document
+      .getElementById('main')
+      .scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <ReactPagination
       current={currentPage}
       pageSize={pageSize}
       total={total}
-      onChange={(page) => setPage(page - 1)}
+      onChange={handlePageChange}
       itemRender={(page, type) => (
         <RenderItem 
           page={page} 
