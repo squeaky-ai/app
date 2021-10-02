@@ -57,11 +57,13 @@ export const Pagination: FC<Props> = ({ currentPage, pageSize, total, setPage })
   }
 
   const handlePageChange = (page: number) => {
-    document
+    setPage(page - 1);
+
+    setTimeout(() => {
+      document
         .getElementById('main')
         .scrollTo({ top: 0, behavior: 'smooth' });
-
-    setPage(page - 1);
+    }, 250);
   };
 
   return (
