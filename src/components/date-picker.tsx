@@ -2,7 +2,9 @@ import React from 'react';
 import type { FC } from 'react';
 import { Input } from './input';
 
-interface Props extends React.InputHTMLAttributes<HTMLInputElement> {}
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
+  invalid?: boolean;
+}
 
 export const DatePicker: FC<Props> = (props) => {
   return (

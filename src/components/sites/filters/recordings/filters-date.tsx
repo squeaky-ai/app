@@ -6,6 +6,7 @@ import { Radio } from 'components/radio';
 import { Button } from 'components/button';
 import { Option, Select } from 'components/select';
 import { DatePicker } from 'components/date-picker';
+import { DD_MM_YYYY_REGEX } from 'data/common/constants';
 import { valueOrDefaults } from 'lib/recordings';
 import type { Filters } from 'types/recording';
 import type { ValueOf } from 'types/common';
@@ -16,12 +17,14 @@ interface Props {
   onUpdate: (value: ValueOf<Filters>) => void;
 }
 
+const DateStringSchema = Yup.string().matches(DD_MM_YYYY_REGEX, 'Date must be formatted as dd/mm/yyyy');
+
 const DateSchema = Yup.object().shape({
   dateRangeType: Yup.string().oneOf(['From', 'Between']),
   dateFromType: Yup.string().oneOf(['Before', 'After']),
-  fromDate: Yup.string(),
-  betweenFromDate: Yup.string(),
-  betweenToDate: Yup.string(),
+  fromDate: DateStringSchema.when('dateRangeType', { is: 'From', then: DateStringSchema.required() }),
+  betweenFromDate: DateStringSchema.when('dateRangeType', { is: 'Between', then: DateStringSchema.required() }),
+  betweenToDate: DateStringSchema.when('dateRangeType', { is: 'Between', then: DateStringSchema.required() }),
 });
 
 export const FiltersDate: FC<Props> = ({ value, onClose, onUpdate }) => (
@@ -30,7 +33,14 @@ export const FiltersDate: FC<Props> = ({ value, onClose, onUpdate }) => (
     validationSchema={DateSchema}
     onSubmit={(values, { setSubmitting }) => {
       setSubmitting(false);
-      onUpdate(values);
+
+      onUpdate({
+        dateRangeType: values.dateRangeType,
+        dateFromType: values.dateFromType,
+        fromDate: values.fromDate || null,
+        betweenFromDate: values.betweenFromDate || null,
+        betweenToDate: values.betweenToDate || null,
+      });
     }}
   >
     {({
@@ -38,6 +48,8 @@ export const FiltersDate: FC<Props> = ({ value, onClose, onUpdate }) => (
       handleChange,
       handleSubmit,
       isSubmitting,
+      touched,
+      errors,
       values,
     }) => (
       <form className='filters-date' onSubmit={handleSubmit}>
@@ -59,6 +71,7 @@ export const FiltersDate: FC<Props> = ({ value, onClose, onUpdate }) => (
             onBlur={handleBlur}
             onChange={handleChange}
             value={values.fromDate}
+            invalid={touched.fromDate && !!errors.fromDate}
           />
         </div>
         <div className='row'>
@@ -76,6 +89,7 @@ export const FiltersDate: FC<Props> = ({ value, onClose, onUpdate }) => (
             onBlur={handleBlur}
             onChange={handleChange}
             value={values.betweenFromDate}
+            invalid={touched.betweenFromDate && !!errors.betweenFromDate}
           />
           <p>and</p>
           <DatePicker 
@@ -84,6 +98,7 @@ export const FiltersDate: FC<Props> = ({ value, onClose, onUpdate }) => (
             onBlur={handleBlur}
             onChange={handleChange}
             value={values.betweenToDate}
+            invalid={touched.betweenToDate && !!errors.betweenToDate}
           />
         </div>
 
