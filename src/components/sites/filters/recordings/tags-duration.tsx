@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import { Label } from 'components/label';
 import { Tag } from 'components/tag';
 import { defaultFilters } from 'lib/recordings';
+import { toTimeString } from 'lib/dates';
 import type { ValueOf } from 'types/common';
 import type { Filters } from 'types/recording';
 
@@ -12,6 +13,8 @@ interface Props {
 }
 
 export const TagsDuration: FC<Props> = ({ filters, updateFilters }) => {
+  const formatTimeString = (value: number) => toTimeString(value).slice(3);
+
   const onDeleteTag = () => {
     updateFilters('duration', defaultFilters.duration);
   };
@@ -22,13 +25,13 @@ export const TagsDuration: FC<Props> = ({ filters, updateFilters }) => {
     
       {filters.duration.durationRangeType === 'Between' && (
         <Tag className='secondary' handleDelete={onDeleteTag}>
-          <span>Between</span> {filters.duration.betweenFromDuration} <span>and</span> {filters.duration.betweenToDuration}
+          <span>Between</span> {formatTimeString(filters.duration.betweenFromDuration)} <span>and</span> {formatTimeString(filters.duration.betweenToDuration)}
         </Tag>
       )}
 
       {filters.duration.durationRangeType === 'From' && (
         <Tag className='secondary' handleDelete={onDeleteTag}>
-          <span>From</span> {filters.duration.fromDuration}
+          <span>From</span> {formatTimeString(filters.duration.fromDuration)}
         </Tag>
       )}
     </>

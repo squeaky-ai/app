@@ -13,3 +13,5 @@ export const BLANK_ROUTES = [
 ];
 
 export const BASE_PATH = publicRuntimeConfig.basePath;
+
+export const MM_SS_REGEX = /\d\d:\d\d/;

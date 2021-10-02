@@ -107,9 +107,9 @@ export interface Filters {
   duration: {
     durationRangeType: 'From' | 'Between' | null;
     durationFromType: 'GreaterThan' | 'LessThan' | null;
-    fromDuration: string | null;
-    betweenFromDuration: string | null;
-    betweenToDuration: string | null;
+    fromDuration: number | null;
+    betweenFromDuration: number | null;
+    betweenToDuration: number | null;
   };
   viewport: {
     minWidth: number | null;
