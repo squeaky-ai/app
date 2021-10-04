@@ -9,29 +9,27 @@ import { Input } from 'components/input';
 import { Spinner } from 'components/spinner';
 import { Checkbox } from 'components/checkbox';
 import type { Site } from 'types/site';
-import type { Filters } from 'types/recording';
-import type { ValueOf } from 'types/common';
 
 interface Props {
-  value: Filters['languages'];
+  value: string[];
   onClose: VoidFunction;
-  onUpdate: (value: ValueOf<Filters>) => void;
+  onUpdate: (value: string[]) => void;
 }
 
 const QUERY = gql`
-  query GetSiteLanguages($siteId: ID!) {
+  query GetSitePages($siteId: ID!) {
     site(siteId: $siteId) {
       id
-      languages
+      pages
     }
   }
 `;
 
-const LanguagesSchema = Yup.object().shape({
-  languages: Yup.array(),
+const PagesSchema = Yup.object().shape({
+  pages: Yup.array(),
 });
 
-export const FiltersLanguage: FC<Props> = ({ value, onClose, onUpdate }) => {
+export const FiltersPages: FC<Props> = ({ value, onClose, onUpdate }) => {
   const router = useRouter();
   const [search, setSearch] = React.useState<string>('');
 
@@ -45,19 +43,19 @@ export const FiltersLanguage: FC<Props> = ({ value, onClose, onUpdate }) => {
     setSearch(event.target.value);
   };
 
-  const languages = data ? data.site.languages : [];
+  const pages = data ? data.site.pages : [];
 
-  const results = languages
+  const results = pages
     .filter(l => l.toLowerCase().includes(search.toLowerCase()))
-    .sort((a, b) => a.localeCompare(b));
+    .sort((a, b) => a.length - b.length);
 
   return (
     <Formik
-      initialValues={{ languages: value }}
-      validationSchema={LanguagesSchema}
+      initialValues={{ pages: value }}
+      validationSchema={PagesSchema}
       onSubmit={(values, { setSubmitting }) => {
         setSubmitting(false);
-        onUpdate(values.languages);
+        onUpdate(values.pages);
       }}
     >
       {({
@@ -67,25 +65,25 @@ export const FiltersLanguage: FC<Props> = ({ value, onClose, onUpdate }) => {
         isSubmitting,
         values,
       }) => (
-        <form className='filters-language' onSubmit={handleSubmit}>
+        <form className='filters-pages' onSubmit={handleSubmit}>
           <div className='row'>
             <div className='search' role='search' aria-label='Filter recordings'>
               <Input type='search' placeholder='Search...' onChange={handleSearch} />
               <i className='ri-search-line' /> 
             </div>
           </div>
-          <div className='row languages'>
+          <div className='row pages'>
             {loading && <Spinner />}
-            {results.map(language => (
+            {results.map(page => (
               <Checkbox 
-                key={language}
-                name='languages'
+                key={page}
+                name='pages'
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={language}
-                checked={values.languages.includes(language)}
+                value={page}
+                checked={values.pages.includes(page)}
               >
-                {language}
+                {page}
               </Checkbox>
             ))}
           </div>

@@ -8,13 +8,12 @@ import { Option, Select } from 'components/select';
 import { DatePicker } from 'components/date-picker';
 import { DD_MM_YYYY_REGEX } from 'data/common/constants';
 import { valueOrDefaults } from 'lib/recordings';
-import type { Filters } from 'types/recording';
-import type { ValueOf } from 'types/common';
+import type { DateFilter } from 'types/common';
 
 interface Props {
-  value: Filters['date'];
+  value: DateFilter;
   onClose: VoidFunction;
-  onUpdate: (value: ValueOf<Filters>) => void;
+  onUpdate: (value: DateFilter) => void;
 }
 
 const DateStringSchema = Yup.string().matches(DD_MM_YYYY_REGEX, 'Date must be formatted as dd/mm/yyyy');
@@ -29,7 +28,7 @@ const DateSchema = Yup.object().shape({
 
 export const FiltersDate: FC<Props> = ({ value, onClose, onUpdate }) => (
   <Formik
-    initialValues={valueOrDefaults<Filters['date']>(value)}
+    initialValues={valueOrDefaults<DateFilter>(value)}
     validationSchema={DateSchema}
     onSubmit={(values, { setSubmitting }) => {
       setSubmitting(false);

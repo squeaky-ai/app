@@ -1,6 +1,6 @@
 import { capitalize } from 'lodash';
 import type { Device } from 'types/device';
-import type { Visitor, Column } from 'types/visitor';
+import type { Filters, Visitor, Column } from 'types/visitor';
 
 export function getAttributes<T>(visitor: Visitor): T {
   try {
@@ -44,6 +44,33 @@ export function groupVisitorDevices(devices: Device[]): Device[] {
     return acc;
   }, [] as Device[]);
 }
+
+export const defaultFilters: Filters = {
+  status: null,
+  startUrl: null,
+  exitUrl: null,
+  recordings: {
+    rangeType: 'GreaterThan',
+    count: null
+  },
+  visitedPages: [],
+  unvisitedPages: [],
+  languages: [],
+  firstVisited: {
+    dateRangeType: null,
+    dateFromType: 'Before',
+    fromDate: null,
+    betweenFromDate: null,
+    betweenToDate: null,
+  },
+  lastActivity: {
+    dateRangeType: null,
+    dateFromType: 'Before',
+    fromDate: null,
+    betweenFromDate: null,
+    betweenToDate: null,
+  },
+};
 
 export const allColumns: Column[] = [
   {

@@ -1,18 +1,15 @@
 import React from 'react';
 import type { FC } from 'react';
 import { Button } from 'components/button';
-import { TagsDate } from 'components/sites/filters/recordings/tags-date';
-import { TagsDuration } from 'components/sites/filters/recordings/tags-duration';
 import { TagsStatus } from 'components/sites/filters/common/tags-status';
+import { TagsDate } from 'components/sites/filters/visitors/tags-date';
 import { TagsStartUrl } from 'components/sites/filters/common/tags-start-page';
 import { TagsExitUrl } from 'components/sites/filters/common/tags-exit-url';
 import { TagsVisitedPages } from 'components/sites/filters/common/tags-visited-pages';
 import { TagsUnvisitedPages } from 'components/sites/filters/common/tags-unvisited-pages';
-import { TagsDevices } from 'components/sites/filters/recordings/tags-devices';
-import { TagsBrowsers } from 'components/sites/filters/recordings/tags-browsers';
 import { TagsLanguages } from 'components/sites/filters/common/tags-languages';
-import { TagsViewport } from 'components/sites/filters/recordings/tags-viewport';
-import type { Filters } from 'types/recording';
+import { TagsRecordings } from 'components/sites/filters/visitors/tags-recordings';
+import type { Filters } from 'types/visitor';
 import type { ValueOf } from 'types/common';
 
 interface Props {
@@ -22,31 +19,25 @@ interface Props {
 }
 
 export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
-  const hasDateRange = filters.date.dateRangeType !== null;
   const hasStatus = filters.status !== null;
-  const hasDuration = filters.duration.durationRangeType !== null;
+  const hasRecordings = filters.recordings.count !== null;
+  const hasFirstVisited = filters.firstVisited.dateRangeType !== null;
+  const hasLastActivity = filters.lastActivity.dateRangeType !== null;
   const hasStartUrl = filters.startUrl !== null;
   const hasExitUrl = filters.exitUrl !== null;
   const hasVisitedPages = filters.visitedPages.length > 0;
   const hasUnvisitedPages = filters.unvisitedPages.length > 0;
-  const hasDevices = filters.devices.length > 0;
-  const hasBrowsers = filters.browsers.length > 0;
-  const hasViewportWidth = !!(filters.viewport.minWidth || filters.viewport.maxWidth);
-  const hasViewportHeight = !!(filters.viewport.minHeight || filters.viewport.maxHeight);
   const hasLanguages = filters.languages.length > 0;
 
   const hasFilters = (
-    hasDateRange ||
     hasStatus ||
-    hasDuration ||
+    hasRecordings ||
+    hasFirstVisited ||
+    hasLastActivity ||
     hasStartUrl ||
     hasExitUrl ||
     hasVisitedPages ||
     hasUnvisitedPages ||
-    hasDevices ||
-    hasBrowsers ||
-    hasViewportWidth ||
-    hasViewportHeight ||
     hasLanguages
   );
 
@@ -54,16 +45,20 @@ export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
 
   return (
     <div className='filter-tags'>
-      {hasDateRange && (
-        <TagsDate filters={filters} updateFilters={updateFilters} />
-      )}
-
       {hasStatus && (
         <TagsStatus filters={filters} updateFilters={updateFilters} />
       )}
 
-      {hasDuration && (
-        <TagsDuration filters={filters} updateFilters={updateFilters} />
+      {hasRecordings && (
+        <TagsRecordings filters={filters} updateFilters={updateFilters} />
+      )}
+
+      {hasFirstVisited && (
+        <TagsDate filters={filters} updateFilters={updateFilters} name='firstVisited' />
+      )}
+
+      {hasLastActivity && (
+        <TagsDate filters={filters} updateFilters={updateFilters} name='lastActivity' />
       )}
 
       {hasStartUrl && (
@@ -80,18 +75,6 @@ export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
 
       {hasUnvisitedPages && (
         <TagsUnvisitedPages filters={filters} updateFilters={updateFilters} />
-      )}
-
-      {hasDevices && (
-        <TagsDevices filters={filters} updateFilters={updateFilters} />
-      )}
-
-      {hasBrowsers && (
-        <TagsBrowsers filters={filters} updateFilters={updateFilters} />
-      )}
-
-      {(hasViewportWidth || hasViewportHeight) && (
-        <TagsViewport filters={filters} updateFilters={updateFilters} />
       )}
 
       {hasLanguages && (

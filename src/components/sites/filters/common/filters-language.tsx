@@ -7,31 +7,29 @@ import { gql, useQuery } from '@apollo/client';
 import { Button } from 'components/button';
 import { Input } from 'components/input';
 import { Spinner } from 'components/spinner';
-import { Radio } from 'components/radio';
+import { Checkbox } from 'components/checkbox';
 import type { Site } from 'types/site';
-import type { Filters } from 'types/recording';
-import type { ValueOf } from 'types/common';
 
 interface Props {
-  value: Filters['startUrl'] | Filters['exitUrl'];
+  value: string[];
   onClose: VoidFunction;
-  onUpdate: (value: ValueOf<Filters>) => void;
+  onUpdate: (value: string[]) => void;
 }
 
 const QUERY = gql`
-  query GetSitePages($siteId: ID!) {
+  query GetSiteLanguages($siteId: ID!) {
     site(siteId: $siteId) {
       id
-      pages
+      languages
     }
   }
 `;
 
-const PageSchema = Yup.object().shape({
-  page: Yup.string(),
+const LanguagesSchema = Yup.object().shape({
+  languages: Yup.array(),
 });
 
-export const FiltersPage: FC<Props> = ({ value, onClose, onUpdate }) => {
+export const FiltersLanguage: FC<Props> = ({ value, onClose, onUpdate }) => {
   const router = useRouter();
   const [search, setSearch] = React.useState<string>('');
 
@@ -45,19 +43,19 @@ export const FiltersPage: FC<Props> = ({ value, onClose, onUpdate }) => {
     setSearch(event.target.value);
   };
 
-  const pages = data ? data.site.pages : [];
+  const languages = data ? data.site.languages : [];
 
-  const results = pages
+  const results = languages
     .filter(l => l.toLowerCase().includes(search.toLowerCase()))
-    .sort((a, b) => a.length - b.length);
+    .sort((a, b) => a.localeCompare(b));
 
   return (
     <Formik
-      initialValues={{ page: value }}
-      validationSchema={PageSchema}
+      initialValues={{ languages: value }}
+      validationSchema={LanguagesSchema}
       onSubmit={(values, { setSubmitting }) => {
         setSubmitting(false);
-        onUpdate(values.page);
+        onUpdate(values.languages);
       }}
     >
       {({
@@ -67,26 +65,26 @@ export const FiltersPage: FC<Props> = ({ value, onClose, onUpdate }) => {
         isSubmitting,
         values,
       }) => (
-        <form className='filters-pages' onSubmit={handleSubmit}>
+        <form className='filters-language' onSubmit={handleSubmit}>
           <div className='row'>
             <div className='search' role='search' aria-label='Filter recordings'>
               <Input type='search' placeholder='Search...' onChange={handleSearch} />
               <i className='ri-search-line' /> 
             </div>
           </div>
-          <div className='row pages'>
+          <div className='row languages'>
             {loading && <Spinner />}
-            {results.map(page => (
-              <Radio 
-                key={page}
-                name='page'
+            {results.map(language => (
+              <Checkbox 
+                key={language}
+                name='languages'
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={page}
-                checked={values.page === page}
+                value={language}
+                checked={values.languages.includes(language)}
               >
-                {page}
-              </Radio>
+                {language}
+              </Checkbox>
             ))}
           </div>
 

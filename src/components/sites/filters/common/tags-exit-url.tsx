@@ -2,9 +2,11 @@ import React from 'react';
 import type { FC } from 'react';
 import { Label } from 'components/label';
 import { Tag } from 'components/tag';
-import { defaultFilters } from 'lib/recordings';
 import type { ValueOf } from 'types/common';
-import type { Filters } from 'types/recording';
+import type { Filters as RecordingsFilters } from 'types/recording';
+import type { Filters as VisitorFilters } from 'types/visitor';
+
+type Filters = RecordingsFilters | VisitorFilters;
 
 interface Props {
   filters: Filters;
@@ -13,7 +15,7 @@ interface Props {
 
 export const TagsExitUrl: FC<Props> = ({ filters, updateFilters }) => {
   const onDeleteTag = () => {
-    updateFilters('exitUrl', defaultFilters.exitUrl);
+    updateFilters('exitUrl', null);
   };
 
   return (

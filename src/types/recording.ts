@@ -1,6 +1,7 @@
 import type { Note } from 'types/note';
 import type { Visitor } from 'types/visitor';
 import type { Device } from 'types/device';
+import type { DateFilter } from 'types/common';
  
 export type RecordingSortBy =
   'connected_at__desc' |
@@ -104,13 +105,7 @@ export interface Filters {
   visitedPages: string[];
   unvisitedPages: string[];
   status: 'New' | 'Viewed' | null;
-  date: {
-    dateRangeType: 'From' | 'Between' | null;
-    dateFromType: 'Before' | 'After' | null;
-    fromDate: string | null;
-    betweenFromDate: string | null;
-    betweenToDate: string | null;
-  };
+  date: DateFilter;
   duration: {
     durationRangeType: 'From' | 'Between' | null;
     durationFromType: 'GreaterThan' | 'LessThan' | null;

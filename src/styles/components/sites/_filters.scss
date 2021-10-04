@@ -1,0 +1,161 @@
+.filters {
+  .row {
+    align-items: center;
+    display: flex;
+    margin-bottom: 1.5rem;
+
+    > * {
+      margin: 0 .5rem 0 0;
+    }
+
+    .radio {
+      margin: 0;
+    }
+  }
+
+  form {
+    margin: 1.5rem 0 0 0;
+  }
+
+  .filters-date {
+    width: 500px;
+
+    .select {
+      min-width: 140px;
+      width: auto;
+    }
+  }
+
+  .search {
+    margin: 0;
+    position: relative;
+
+    .input {
+      margin: 0;
+      padding-right: 2.5rem;
+    }
+
+    i {
+      color: var(--gray-200);
+      font-size: 1.25rem;
+      position: absolute;
+      right: .75rem;
+      top: .5rem;
+    }
+  }
+
+  .filters-status {
+    width: 200px;
+
+    .row {
+      align-items: flex-start;
+      flex-direction: column;
+
+      .radio:not(:last-of-type) {
+        margin-bottom: .5rem;
+      }
+    }
+  }
+
+  .filters-duration {
+    width: 300px;
+
+    .select {
+      min-width: 160px;
+      width: auto;
+    }
+  }
+
+  .filters-pages {
+    width: 300px;
+
+    .pages {
+      align-items: flex-start;
+      display: flex;
+      flex-direction: column;
+      max-height: 300px;
+      overflow-y: scroll;
+
+      .checkbox,
+      .radio {
+        margin-bottom: .5rem;
+
+        span:not(.check) {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          width: 240px;
+        }
+      }
+    }
+  }
+
+  .filters-device {
+    width: 200px;
+
+    .row {
+      align-items: flex-start;
+      flex-direction: column;
+
+      .checkbox:not(:last-of-type) {
+        margin-bottom: .5rem;
+      }
+    }
+  }
+
+  .filters-browsers {
+    width: 200px;
+
+    .browsers {
+      align-items: flex-start;
+      flex-direction: column;
+
+      .checkbox {
+        margin-bottom: .5rem;
+      }
+    }
+  }
+
+  .filters-viewport {
+    width: 320px;
+
+    .column {
+      position: relative;
+
+      .input {
+        margin: 0;
+        padding-right: 2.5rem;
+      }
+      
+      p {
+        color: var(--gray-500);
+        position: absolute;
+        right: .75rem;
+        top: calc(100% - 2rem);
+      }
+    }
+  }
+
+  .filters-language {
+    width: 320px;
+
+    .languages {
+      align-items: flex-start;
+      flex-direction: column;
+      max-height: 300px;
+      overflow-y: scroll;
+
+      .checkbox {
+        margin-bottom: .5rem;
+      }
+    }
+  }
+
+  .filters-recordings {
+    width: 320px;
+
+    .input {
+      width: 130px;
+    }
+  }
+}

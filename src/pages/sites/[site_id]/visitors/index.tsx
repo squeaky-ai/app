@@ -14,13 +14,17 @@ import { Visitors } from 'components/sites/visitors';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { EmptyStateHint } from 'components/sites/empty-state-hint';
 import { VisitorsColumns } from 'components/sites/visitors-columns';
+import { Filters } from 'components/sites/filters/visitors/filters';
+import { Tags } from 'components/sites/filters/visitors/tags';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
-import { allColumns } from 'lib/visitors';
+import { defaultFilters, allColumns } from 'lib/visitors';
 import { BASE_PATH } from 'data/common/constants';
-import type { Column } from 'types/visitor';
+import type { Filters as IFilters, Column } from 'types/visitor';
+import type { ValueOf } from 'types/common';
 
 const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
   const [query, setQuery] = React.useState<string>('');
+  const [filters, setFilters] = React.useState<IFilters>(defaultFilters);
   const [columns, setColumns] = React.useState<Column[]>(allColumns);
 
   const handleCancel = () => {
@@ -35,6 +39,14 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
     const element = event.target as HTMLInputElement;
     setQuery(element.value);
   }, 200);
+
+  const updateFilters = (key: keyof IFilters, value: ValueOf<IFilters>) => {
+    setFilters({ ...filters, [key]: value });
+  };
+
+  const clearFilters = () => {
+    setFilters(defaultFilters);
+  };
 
   return (
     <>
@@ -67,6 +79,10 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
                     setColumns={setColumns}
                   />
                 </div>
+                <Filters 
+                  filters={filters}
+                  updateFilters={updateFilters}
+                />
               </menu>
             </div>
 
@@ -87,11 +103,19 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
             </Container>
 
             {!!site.recordings.items.length && (
-              <Visitors 
-                site={site} 
-                query={query}
-                columns={columns}
-              />
+              <>
+                <Tags 
+                  filters={filters} 
+                  updateFilters={updateFilters} 
+                  clearFilters={clearFilters} 
+                />
+
+                <Visitors 
+                  site={site} 
+                  query={query}
+                  columns={columns}
+                />
+              </>
             )}
           </Main>
         )}

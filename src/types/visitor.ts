@@ -1,5 +1,6 @@
 import type { PaginatedRecordingsResponse } from 'types/recording';
 import type { Device } from 'types/device';
+import type { DateFilter } from 'types/common';
 
 export type VisitorSortBy =
   'recordings_count__desc' |
@@ -83,4 +84,19 @@ export interface Column {
   label: string;
   width: string;
   disabled: boolean;
+}
+
+export interface Filters {
+  status: 'New' | 'Viewed' | null;
+  recordings: {
+    rangeType: 'LessThan' | 'GreaterThan' | null;
+    count: number | null;
+  };
+  startUrl: string | null;
+  exitUrl: string | null;
+  visitedPages: string[];
+  unvisitedPages: string[];
+  languages: string[];
+  firstVisited: DateFilter;
+  lastActivity: DateFilter;
 }

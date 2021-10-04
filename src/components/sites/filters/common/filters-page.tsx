@@ -7,15 +7,13 @@ import { gql, useQuery } from '@apollo/client';
 import { Button } from 'components/button';
 import { Input } from 'components/input';
 import { Spinner } from 'components/spinner';
-import { Checkbox } from 'components/checkbox';
+import { Radio } from 'components/radio';
 import type { Site } from 'types/site';
-import type { Filters } from 'types/recording';
-import type { ValueOf } from 'types/common';
 
 interface Props {
-  value: Filters['visitedPages'] | Filters['unvisitedPages'];
+  value: string | null;
   onClose: VoidFunction;
-  onUpdate: (value: ValueOf<Filters>) => void;
+  onUpdate: (value: string) => void;
 }
 
 const QUERY = gql`
@@ -27,11 +25,11 @@ const QUERY = gql`
   }
 `;
 
-const PagesSchema = Yup.object().shape({
-  pages: Yup.array(),
+const PageSchema = Yup.object().shape({
+  page: Yup.string(),
 });
 
-export const FiltersPages: FC<Props> = ({ value, onClose, onUpdate }) => {
+export const FiltersPage: FC<Props> = ({ value, onClose, onUpdate }) => {
   const router = useRouter();
   const [search, setSearch] = React.useState<string>('');
 
@@ -53,11 +51,11 @@ export const FiltersPages: FC<Props> = ({ value, onClose, onUpdate }) => {
 
   return (
     <Formik
-      initialValues={{ pages: value }}
-      validationSchema={PagesSchema}
+      initialValues={{ page: value }}
+      validationSchema={PageSchema}
       onSubmit={(values, { setSubmitting }) => {
         setSubmitting(false);
-        onUpdate(values.pages);
+        onUpdate(values.page);
       }}
     >
       {({
@@ -77,16 +75,16 @@ export const FiltersPages: FC<Props> = ({ value, onClose, onUpdate }) => {
           <div className='row pages'>
             {loading && <Spinner />}
             {results.map(page => (
-              <Checkbox 
+              <Radio 
                 key={page}
-                name='pages'
+                name='page'
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={page}
-                checked={values.pages.includes(page)}
+                checked={values.page === page}
               >
                 {page}
-              </Checkbox>
+              </Radio>
             ))}
           </div>
 

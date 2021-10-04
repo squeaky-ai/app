@@ -4,13 +4,11 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { Radio } from 'components/radio';
 import { Button } from 'components/button';
-import type { Filters } from 'types/recording';
-import type { ValueOf } from 'types/common';
 
 interface Props {
-  value: Filters['status'];
+  value: 'New' | 'Viewed' | null;
   onClose: VoidFunction;
-  onUpdate: (value: ValueOf<Filters>) => void;
+  onUpdate: (value: 'New' | 'Viewed' | null) => void;
 }
 
 const StatusSchema = Yup.object().shape({

@@ -6,14 +6,11 @@ import { Dropdown } from 'components/dropdown';
 import { Label } from 'components/label';
 import { FiltersDate } from 'components/sites/filters/common/filters-date';
 import { FiltersStatus } from 'components/sites/filters/common/filters-status';
-import { FiltersDuration } from 'components/sites/filters/recordings/filters-duration';
 import { FiltersPage } from 'components/sites/filters/common/filters-page';
 import { FiltersPages } from 'components/sites/filters/common/filters-pages';
-import { FiltersDevice } from 'components/sites/filters/recordings/filters-device';
-import { FiltersBrowsers } from 'components/sites/filters/recordings/filters-browsers';
-import { FiltersViewport } from 'components/sites/filters/recordings/filters-viewport';
 import { FiltersLanguage } from 'components/sites/filters/common/filters-language';
-import type { Filters as IFilters } from 'types/recording';
+import { FiltersRecordings } from 'components/sites/filters/visitors/filters-recordings';
+import type { Filters as IFilters } from 'types/visitor';
 import type { ValueOf } from 'types/common';
 
 interface Props {
@@ -22,16 +19,14 @@ interface Props {
 }
 
 enum FilterType {
-  Date,
   Status,
-  Duration,
+  Recordings,
+  FirstVisited,
+  LastActivity,
   StartUrl,
   ExitUrl,
   VisitedPages,
   UnvisitedPages,
-  Device,
-  Browser,
-  Viewport,
   Language
 }
 
@@ -54,17 +49,21 @@ export const Filters: FC<Props> = ({ filters, updateFilters }) => {
   return ( 
     <div className='menu-item'>
       <Dropdown button={<><i className='ri-equalizer-line' /> Filters</>} dropdown-menu='down'>
-        <Button onClick={() => handleFilterChange(FilterType.Date)} className={classnames({ open: openFilter === FilterType.Date})}>
-          <i className='ri-arrow-drop-left-line' />
-          Date
-        </Button>
         <Button onClick={() => handleFilterChange(FilterType.Status)} className={classnames({ open: openFilter === FilterType.Status})}>
           <i className='ri-arrow-drop-left-line' />
           Status
         </Button>
-        <Button onClick={() => handleFilterChange(FilterType.Duration)} className={classnames({ open: openFilter === FilterType.Duration})}>
+        <Button onClick={() => handleFilterChange(FilterType.Recordings)} className={classnames({ open: openFilter === FilterType.Recordings})}>
           <i className='ri-arrow-drop-left-line' />
-          Duration
+          Recordings
+        </Button>
+        <Button onClick={() => handleFilterChange(FilterType.FirstVisited)} className={classnames({ open: openFilter === FilterType.FirstVisited})}>
+          <i className='ri-arrow-drop-left-line' />
+          First visited
+        </Button>
+        <Button onClick={() => handleFilterChange(FilterType.LastActivity)} className={classnames({ open: openFilter === FilterType.LastActivity})}>
+          <i className='ri-arrow-drop-left-line' />
+          Last activity
         </Button>
         <Button onClick={() => handleFilterChange(FilterType.StartUrl)} className={classnames({ open: openFilter === FilterType.StartUrl})}>
           <i className='ri-arrow-drop-left-line' />
@@ -82,40 +81,34 @@ export const Filters: FC<Props> = ({ filters, updateFilters }) => {
           <i className='ri-arrow-drop-left-line' />
           Unvisited pages
         </Button>
-        <Button onClick={() => handleFilterChange(FilterType.Device)} className={classnames({ open: openFilter === FilterType.Device})}>
-          <i className='ri-arrow-drop-left-line' />
-          Device
-        </Button>
-        <Button onClick={() => handleFilterChange(FilterType.Browser)} className={classnames({ open: openFilter === FilterType.Browser})}>
-          <i className='ri-arrow-drop-left-line' />
-          Browser
-        </Button>
-        <Button onClick={() => handleFilterChange(FilterType.Viewport)} className={classnames({ open: openFilter === FilterType.Viewport})}>
-          <i className='ri-arrow-drop-left-line' />
-          Viewport
-        </Button>
         <Button onClick={() => handleFilterChange(FilterType.Language)} className={classnames({ open: openFilter === FilterType.Language})}>
           <i className='ri-arrow-drop-left-line' />
           Language
         </Button>
 
         <div className={classnames('popout filters', { open: openFilter !== null })}>
-          {openFilter === FilterType.Date && (
-            <>
-              <Label>Date</Label>
-              <FiltersDate value={filters.date} onUpdate={handleUpdate('date')} onClose={handleFilterClose} />
-            </>
-          )}
           {openFilter === FilterType.Status && (
             <>
               <Label>Status</Label>
-              <FiltersStatus value={filters.status} onUpdate={handleUpdate('status')}  onClose={handleFilterClose} />
+              <FiltersStatus value={filters.status} onUpdate={handleUpdate('status')} onClose={handleFilterClose} />
             </>
           )}
-          {openFilter === FilterType.Duration && (
+          {openFilter === FilterType.Recordings && (
             <>
-              <Label>Duration</Label>
-              <FiltersDuration value={filters.duration} onUpdate={handleUpdate('duration')}  onClose={handleFilterClose} />
+              <Label>Recordings</Label>
+              <FiltersRecordings value={filters.recordings} onUpdate={handleUpdate('recordings')} onClose={handleFilterClose} />
+            </>
+          )}
+          {openFilter === FilterType.FirstVisited && (
+            <>
+              <Label>First visited</Label>
+              <FiltersDate value={filters.firstVisited} onUpdate={handleUpdate('firstVisited')} onClose={handleFilterClose} />
+            </>
+          )}
+          {openFilter === FilterType.LastActivity && (
+            <>
+              <Label>Last activity</Label>
+              <FiltersDate value={filters.lastActivity} onUpdate={handleUpdate('lastActivity')} onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.StartUrl && (
@@ -140,24 +133,6 @@ export const Filters: FC<Props> = ({ filters, updateFilters }) => {
             <>
               <Label>Unvisited pages</Label>
               <FiltersPages value={filters.unvisitedPages} onUpdate={handleUpdate('unvisitedPages')}  onClose={handleFilterClose} />
-            </>
-          )}
-          {openFilter === FilterType.Device && (
-            <>
-              <Label>Device</Label>
-              <FiltersDevice value={filters.devices} onUpdate={handleUpdate('devices')}  onClose={handleFilterClose} />
-            </>
-          )}
-          {openFilter === FilterType.Browser && (
-            <>
-              <Label>Browser</Label>
-              <FiltersBrowsers value={filters.browsers} onUpdate={handleUpdate('browsers')}  onClose={handleFilterClose} />
-            </>
-          )}
-          {openFilter === FilterType.Viewport && (
-            <>
-              <Label>Viewport</Label>
-              <FiltersViewport value={filters.viewport} onUpdate={handleUpdate('viewport')}  onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.Language && (
