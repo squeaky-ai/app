@@ -18,13 +18,13 @@ import { Tags } from 'components/sites/filters/recordings/tags';
 import { RecordingsColumns } from 'components/sites/recordings-columns';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { BASE_PATH } from 'data/common/constants';
-import { defaultFilters, defaultColumns } from 'lib/recordings';
+import { defaultFilters, allColumns } from 'lib/recordings';
 import type { Filters as IFilters, Column } from 'types/recording';
 import type { ValueOf } from 'types/common';
 
 const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
   const [query, setQuery] = React.useState<string>('');
-  const [columns, setColumns] = React.useState<Column[]>(defaultColumns);
+  const [columns, setColumns] = React.useState<Column[]>(allColumns);
   const [filters, setFilters] = React.useState<IFilters>(defaultFilters);
 
   const handleCancel = () => {

@@ -11,6 +11,7 @@ import { PageSize } from 'components/sites/page-size';
 import { useRecordings } from 'hooks/use-recordings';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 import { BASE_PATH } from 'data/common/constants';
+import { allColumns } from 'lib/recordings';
 import type { Filters, RecordingSortBy, Column } from 'types/recording';
 
 interface Props {
@@ -18,36 +19,6 @@ interface Props {
   filters: Filters;
   columns: Column[];
 }
-
-const tableStyle = (columns: Column[]): string => {
-  const getSize = (name: string) => columns.find(c => c.name === name)?.width || '';
-
-  return [
-    '105px',
-    '1fr',
-    '1fr',
-    getSize('date-time'),
-    getSize('duration'),
-    getSize('pages'),
-    getSize('start-exit'),
-    getSize('device'),
-    getSize('browser'),
-    '70px'
-  ].join(' ');
-};
-
-const tableClassNames = (columns: Column[]): string[] => {
-  const getClassName = (name: string) => columns.find(c => c.name === name) ? '' : `hide-${name}`;
-
-  return [
-    getClassName('date-time'),
-    getClassName('duration'),
-    getClassName('pages'),
-    getClassName('start-exit'),
-    getClassName('device'),
-    getClassName('browser'),
-  ];
-};
 
 export const Recordings: FC<Props> = ({ query, filters, columns }) => {
   const [page, setPage] = React.useState<number>(0);
@@ -64,9 +35,18 @@ export const Recordings: FC<Props> = ({ query, filters, columns }) => {
 
   const { items, pagination } = recordings;
 
+  const tableStyle = (): string => {
+    return allColumns
+      .map(column => columns.find(c => c.name === column.name)?.width || '')
+      .join(' ');
+  };
+
+  const tableClassNames = allColumns
+    .map(column => columns.find(c => c.name === column.name) ? '' : `hide-${column.name}`);
+
   React.useEffect(() => {
     const rows = document.querySelectorAll<HTMLDivElement>('.recordings-list .row');
-    const style = tableStyle(columns);
+    const style = tableStyle();
 
     rows.forEach(r => r.style.gridTemplateColumns = style);
   }, [columns]);
@@ -82,7 +62,7 @@ export const Recordings: FC<Props> = ({ query, filters, columns }) => {
         </Container>
       )}
     
-      <Table className={classnames('recordings-list hover', tableClassNames(columns))}>
+      <Table className={classnames('recordings-list hover', tableClassNames)}>
         <Row head>
           <Cell>Status</Cell>
           <Cell>Recording ID</Cell>

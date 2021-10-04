@@ -31,36 +31,66 @@ export const defaultFilters: Filters = {
   }
 };
 
-export const defaultColumns: Column[] = [
+export const allColumns: Column[] = [
+  {
+    name: 'status',
+    label: 'Status',
+    width: '105px',
+    disabled: false,
+  },
+  {
+    name: 'recording-id',
+    label: 'Recording ID',
+    width: '1fr',
+    disabled: true,
+  },
+  {
+    name: 'visitor-id',
+    label: 'Visitor ID',
+    width: '1fr',
+    disabled: false,
+  },
   {
     name: 'date-time',
     label: 'Date & Time',
-    width: '1fr'
+    width: '1fr',
+    disabled: false,
   },
   {
     name: 'duration',
     label: 'Duration',
-    width: '1fr'
+    width: '1fr',
+    disabled: false,
   },
   {
     name: 'pages',
     label: 'Pages',
-    width: '1fr'
+    width: '1fr',
+    disabled: false,
   },
   {
     name: 'start-exit',
     label: 'Start & Exit URL',
-    width: '2fr'
+    width: '2fr',
+    disabled: false,
   },
   {
     name: 'device',
     label: 'Device',
     width: '1fr',
+    disabled: false,
   },
   {
     name: 'browser',
     label: 'Browser',
-    width: '90px'
+    width: '90px',
+    disabled: false,
+  },
+  {
+    name: 'options',
+    label: 'Options',
+    width: '70px',
+    disabled: true,
   },
 ];
 

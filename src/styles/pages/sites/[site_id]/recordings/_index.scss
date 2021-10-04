@@ -56,15 +56,14 @@
         }
 
         .filters-columns {
-          padding: .5rem;
+          padding: 1rem;
 
           .checkbox {
-            margin-bottom: .75rem;
-          }
+            margin-bottom: .5rem;
 
-          .button {
-            margin-top: .5rem;
-            width: 100%;
+            &:last-of-type {
+              margin-bottom: 0;
+            }
           }
         }
       }
@@ -402,6 +401,22 @@
     & + .button {
       display: block;
       margin: 0 auto 2rem auto;
+    }
+
+    &.hide-status {
+      .row {
+        .cell:nth-of-type(1) {
+          display: none;
+        }
+      }
+    }
+
+    &.hide-visitor-id {
+      .row {
+        .cell:nth-of-type(3) {
+          display: none;
+        }
+      }
     }
 
     &.hide-date-time {

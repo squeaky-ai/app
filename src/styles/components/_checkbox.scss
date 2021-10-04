@@ -15,6 +15,10 @@
         display: block;
       }
     }
+
+    &:disabled + .check {
+      opacity: .25;
+    }
   }
 
   &.tertiary {
@@ -85,6 +89,10 @@
     .check { 
       border-color: var(--magenta-500);
     }
+  }
+
+  &.disabled {
+    pointer-events: none;
   }
 }
 
