@@ -1,6 +1,8 @@
 import React from 'react';
 import type { FC } from 'react';
+import Link from 'next/link';
 import classnames from 'classnames';
+import { useRouter } from 'next/router';
 import { Tooltip } from 'components/tooltip';
 import { visitorStarred } from 'lib/api/graphql';
 import type { Visitor } from 'types/visitor';
@@ -8,10 +10,13 @@ import type { Site } from 'types/site';
 
 interface Props {
   site: Site;
+  link?: boolean;
   visitor: Visitor;
 }
 
-export const VisitorStarred: FC<Props> = ({ site, visitor }) => {
+export const VisitorStarred: FC<Props> = ({ site, link, visitor }) => {
+  const router = useRouter();
+
   const starVisitor = async () => {
     await visitorStarred({
       siteId: site.id,
@@ -31,7 +36,11 @@ export const VisitorStarred: FC<Props> = ({ site, visitor }) => {
       >
         {visitor.starred ? 'Starred' : 'Not starred'}
       </Tooltip>
-      {visitor.visitorId}
+      {link
+        ? <Link href={`/sites/${router.query.site_id}/visitors/${visitor.id}`}><a>{visitor.visitorId}</a></Link>
+        :visitor.visitorId
+
+      }
     </>
   );
 };
