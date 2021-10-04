@@ -113,6 +113,7 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
                 <Visitors 
                   site={site} 
                   query={query}
+                  filters={filters}
                   columns={columns}
                 />
               </>

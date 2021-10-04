@@ -14,15 +14,16 @@ import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 import { BASE_PATH } from 'data/common/constants';
 import { allColumns } from 'lib/visitors';
 import type { Site } from 'types/site';
-import type { Column, VisitorSortBy } from 'types/visitor';
+import type { Column, Filters, VisitorSortBy } from 'types/visitor';
 
 interface Props {
   query: string;
   site: Site;
   columns: Column[];
+  filters: Filters;
 }
 
-export const Visitors: FC<Props> = ({ site, query, columns }) => {
+export const Visitors: FC<Props> = ({ site, query, columns, filters }) => {
   const [page, setPage] = React.useState<number>(0);
   const [size, setSize] = React.useState<number>(25);
   const [sort, setSort] = React.useState<VisitorSortBy>('first_viewed_at__desc');
@@ -32,6 +33,7 @@ export const Visitors: FC<Props> = ({ site, query, columns }) => {
     sort,
     size,
     query: query.length < MIN_SEARCH_CHARS ? '' : query, // No point in searching if it's below this value
+    filters,
   });
 
   const { items, pagination } = visitors;
