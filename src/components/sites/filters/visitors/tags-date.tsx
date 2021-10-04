@@ -21,13 +21,13 @@ export const TagsDate: FC<Props> = ({ name, filters, updateFilters }) => {
     <>
       <Label>Date</Label>
 
-      {filters[name].dateRangeType === 'Between' && (
+      {filters[name].rangeType === 'Between' && (
         <Tag className='secondary' handleDelete={onDeleteTag}>
           <span>Between</span> {filters[name].betweenFromDate} <span>and</span> {filters[name].betweenToDate}
         </Tag>
       )}
 
-      {filters[name].dateRangeType === 'From' && (
+      {filters[name].rangeType === 'From' && (
         <Tag className='secondary' handleDelete={onDeleteTag}>
           <span>From</span> {filters[name].fromDate}
         </Tag>

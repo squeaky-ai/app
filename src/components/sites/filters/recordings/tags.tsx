@@ -22,9 +22,9 @@ interface Props {
 }
 
 export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
-  const hasDateRange = filters.date.dateRangeType !== null;
+  const hasDateRange = filters.date.rangeType !== null;
   const hasStatus = filters.status !== null;
-  const hasDuration = filters.duration.durationRangeType !== null;
+  const hasDuration = filters.duration.rangeType !== null;
   const hasStartUrl = filters.startUrl !== null;
   const hasExitUrl = filters.exitUrl !== null;
   const hasVisitedPages = filters.visitedPages.length > 0;

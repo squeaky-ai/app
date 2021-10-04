@@ -23,13 +23,13 @@ export const TagsDuration: FC<Props> = ({ filters, updateFilters }) => {
     <>
       <Label>Duration</Label>
     
-      {filters.duration.durationRangeType === 'Between' && (
+      {filters.duration.rangeType === 'Between' && (
         <Tag className='secondary' handleDelete={onDeleteTag}>
           <span>Between</span> {formatTimeString(filters.duration.betweenFromDuration)} <span>and</span> {formatTimeString(filters.duration.betweenToDuration)}
         </Tag>
       )}
 
-      {filters.duration.durationRangeType === 'From' && (
+      {filters.duration.rangeType === 'From' && (
         <Tag className='secondary' handleDelete={onDeleteTag}>
           <span>From</span> {formatTimeString(filters.duration.fromDuration)}
         </Tag>

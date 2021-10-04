@@ -20,11 +20,11 @@ interface Props {
 const TimeStampSchema = Yup.string().matches(MM_SS_REGEX, 'Timestamp must be formatted as 00:00');
 
 const DurationSchema = Yup.object().shape({
-  durationRangeType: Yup.string().oneOf(['From', 'Between']),
-  durationFromType: Yup.string().oneOf(['GreaterThan', 'LessThan']),
-  fromDuration: TimeStampSchema.when('durationRangeType', { is: 'From', then: TimeStampSchema }),
-  betweenFromDuration: TimeStampSchema.when('durationRangeType', { is: 'Between', then: TimeStampSchema.required() }),
-  betweenToDuration: TimeStampSchema.when('durationRangeType', { is: 'Between', then: TimeStampSchema.required() }),
+  rangeType: Yup.string().oneOf(['From', 'Between']),
+  fromType: Yup.string().oneOf(['GreaterThan', 'LessThan']),
+  fromDuration: TimeStampSchema.when('rangeType', { is: 'From', then: TimeStampSchema }),
+  betweenFromDuration: TimeStampSchema.when('rangeType', { is: 'Between', then: TimeStampSchema.required() }),
+  betweenToDuration: TimeStampSchema.when('rangeType', { is: 'Between', then: TimeStampSchema.required() }),
 });
 
 
@@ -39,8 +39,8 @@ export const FiltersDuration: FC<Props> = ({ value, onClose, onUpdate }) => {
     fromDuration: formatTimeString(value.fromDuration),
     betweenFromDuration: formatTimeString(value.betweenFromDuration),
     betweenToDuration: formatTimeString(value.betweenToDuration),
-    durationRangeType: value.durationRangeType,
-    durationFromType: value.durationFromType,
+    rangeType: value.rangeType,
+    fromType: value.fromType,
   };
   
   return (
@@ -54,8 +54,8 @@ export const FiltersDuration: FC<Props> = ({ value, onClose, onUpdate }) => {
           fromDuration: formatAsTimeString(values.fromDuration),
           betweenFromDuration: formatAsTimeString(values.betweenFromDuration),
           betweenToDuration: formatAsTimeString(values.betweenToDuration),
-          durationRangeType: values.durationRangeType,
-          durationFromType: values.durationFromType,
+          rangeType: values.rangeType,
+          fromType: values.fromType,
         });
       }}
     >
@@ -71,13 +71,13 @@ export const FiltersDuration: FC<Props> = ({ value, onClose, onUpdate }) => {
         <form className='filters-duration' onSubmit={handleSubmit}>
           <div className='row'>
             <Radio 
-              name='durationRangeType'
+              name='rangeType'
               onBlur={handleBlur}
               onChange={handleChange}
               value='From'
-              checked={values.durationRangeType === 'From'}
+              checked={values.rangeType === 'From'}
             />
-            <Select name='durationFromType' onChange={handleChange} value={values.durationFromType}>
+            <Select name='fromType' onChange={handleChange} value={values.fromType}>
               <Option value='GreaterThan'>Greater than</Option>
               <Option value='LessThan'>Less than</Option>
             </Select>
@@ -94,11 +94,11 @@ export const FiltersDuration: FC<Props> = ({ value, onClose, onUpdate }) => {
           </div>
           <div className='row'>
             <Radio 
-              name='durationRangeType'
+              name='rangeType'
               onBlur={handleBlur}
               onChange={handleChange}
               value='Between'
-              checked={values.durationRangeType === 'Between'}
+              checked={values.rangeType === 'Between'}
             />
             <p>Between</p>
             <Input 

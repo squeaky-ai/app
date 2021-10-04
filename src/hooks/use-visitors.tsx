@@ -2,13 +2,14 @@ import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_VISITORS_QUERY } from 'data/visitors/queries';
 import type { Site } from 'types/site';
-import type { PaginatedVisitorsResponse, VisitorSortBy } from 'types/visitor';
+import type { Filters, PaginatedVisitorsResponse, VisitorSortBy } from 'types/visitor';
 
 interface Props {
   page: number;
   size?: number;
   query?: string;
   sort?: VisitorSortBy;
+  filters?: Filters;
 }
 
 interface UseVisitors {
@@ -16,7 +17,7 @@ interface UseVisitors {
   visitors: PaginatedVisitorsResponse;
 }
 
-export const useVisitors = ({ page, size, query, sort }: Props): UseVisitors => {
+export const useVisitors = ({ page, size, query, sort, filters }: Props): UseVisitors => {
   const router = useRouter();
 
   const { data, loading, previousData } = useQuery<{ site: Site }>(GET_VISITORS_QUERY, {
@@ -25,7 +26,8 @@ export const useVisitors = ({ page, size, query, sort }: Props): UseVisitors => 
       page, 
       size,
       query,
-      sort
+      sort,
+      filters,
     }
   });
 

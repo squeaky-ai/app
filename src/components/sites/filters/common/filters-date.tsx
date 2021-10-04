@@ -19,11 +19,11 @@ interface Props {
 const DateStringSchema = Yup.string().matches(DD_MM_YYYY_REGEX, 'Date must be formatted as dd/mm/yyyy');
 
 const DateSchema = Yup.object().shape({
-  dateRangeType: Yup.string().oneOf(['From', 'Between']),
-  dateFromType: Yup.string().oneOf(['Before', 'After']),
-  fromDate: DateStringSchema.when('dateRangeType', { is: 'From', then: DateStringSchema.required() }),
-  betweenFromDate: DateStringSchema.when('dateRangeType', { is: 'Between', then: DateStringSchema.required() }),
-  betweenToDate: DateStringSchema.when('dateRangeType', { is: 'Between', then: DateStringSchema.required() }),
+  rangeType: Yup.string().oneOf(['From', 'Between']),
+  fromType: Yup.string().oneOf(['Before', 'After']),
+  fromDate: DateStringSchema.when('rangeType', { is: 'From', then: DateStringSchema.required() }),
+  betweenFromDate: DateStringSchema.when('rangeType', { is: 'Between', then: DateStringSchema.required() }),
+  betweenToDate: DateStringSchema.when('rangeType', { is: 'Between', then: DateStringSchema.required() }),
 });
 
 export const FiltersDate: FC<Props> = ({ value, onClose, onUpdate }) => (
@@ -34,8 +34,8 @@ export const FiltersDate: FC<Props> = ({ value, onClose, onUpdate }) => (
       setSubmitting(false);
 
       onUpdate({
-        dateRangeType: values.dateRangeType,
-        dateFromType: values.dateFromType,
+        rangeType: values.rangeType,
+        fromType: values.fromType,
         fromDate: values.fromDate || null,
         betweenFromDate: values.betweenFromDate || null,
         betweenToDate: values.betweenToDate || null,
@@ -54,13 +54,13 @@ export const FiltersDate: FC<Props> = ({ value, onClose, onUpdate }) => (
       <form className='filters-date' onSubmit={handleSubmit}>
         <div className='row'>
           <Radio 
-            name='dateRangeType'
+            name='rangeType'
             onBlur={handleBlur}
             onChange={handleChange}
             value='From'
-            checked={values.dateRangeType === 'From'}
+            checked={values.rangeType === 'From'}
           />
-          <Select name='dateFromType' onChange={handleChange} value={values.dateFromType}>
+          <Select name='fromType' onChange={handleChange} value={values.fromType}>
             <Option value='Before'>Before</Option>
             <Option value='After'>After</Option>
           </Select>
@@ -75,11 +75,11 @@ export const FiltersDate: FC<Props> = ({ value, onClose, onUpdate }) => (
         </div>
         <div className='row'>
           <Radio 
-            name='dateRangeType'
+            name='rangeType'
             onBlur={handleBlur}
             onChange={handleChange}
             value='Between'
-            checked={values.dateRangeType === 'Between'}
+            checked={values.rangeType === 'Between'}
           />
           <p>Between</p>
           <DatePicker 

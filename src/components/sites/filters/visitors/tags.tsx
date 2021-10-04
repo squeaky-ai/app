@@ -21,8 +21,8 @@ interface Props {
 export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
   const hasStatus = filters.status !== null;
   const hasRecordings = filters.recordings.count !== null;
-  const hasFirstVisited = filters.firstVisited.dateRangeType !== null;
-  const hasLastActivity = filters.lastActivity.dateRangeType !== null;
+  const hasFirstVisited = filters.firstVisited.rangeType !== null;
+  const hasLastActivity = filters.lastActivity.rangeType !== null;
   const hasStartUrl = filters.startUrl !== null;
   const hasExitUrl = filters.exitUrl !== null;
   const hasVisitedPages = filters.visitedPages.length > 0;

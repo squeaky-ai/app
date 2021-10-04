@@ -107,8 +107,8 @@ export interface Filters {
   status: 'New' | 'Viewed' | null;
   date: DateFilter;
   duration: {
-    durationRangeType: 'From' | 'Between' | null;
-    durationFromType: 'GreaterThan' | 'LessThan' | null;
+    rangeType: 'From' | 'Between' | null;
+    fromType: 'GreaterThan' | 'LessThan' | null;
     fromDuration: number | null;
     betweenFromDuration: number | null;
     betweenToDuration: number | null;
