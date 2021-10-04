@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import Image from 'next/image';
+import classnames from 'classnames';
 import { Pagination } from 'components/pagination';
 import { useVisitors } from 'hooks/use-visitors';
 import { Container } from 'components/container';
@@ -11,15 +12,17 @@ import { VisitorsItem } from 'components/sites/visitors-item';
 import { Table, Row, Cell } from 'components/table';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 import { BASE_PATH } from 'data/common/constants';
+import { allColumns } from 'lib/visitors';
 import type { Site } from 'types/site';
-import type { VisitorSortBy } from 'types/visitor';
+import type { Column, VisitorSortBy } from 'types/visitor';
 
 interface Props {
   query: string;
   site: Site;
+  columns: Column[];
 }
 
-export const Visitors: FC<Props> = ({ site, query }) => {
+export const Visitors: FC<Props> = ({ site, query, columns }) => {
   const [page, setPage] = React.useState<number>(0);
   const [size, setSize] = React.useState<number>(25);
   const [sort, setSort] = React.useState<VisitorSortBy>('first_viewed_at__desc');
@@ -33,6 +36,22 @@ export const Visitors: FC<Props> = ({ site, query }) => {
 
   const { items, pagination } = visitors;
 
+  const tableStyle = (): string => {
+    return allColumns
+      .map(column => columns.find(c => c.name === column.name)?.width || '')
+      .join(' ');
+  };
+
+  const tableClassNames = allColumns
+    .map(column => columns.find(c => c.name === column.name) ? '' : `hide-${column.name}`);
+
+  React.useEffect(() => {
+    const rows = document.querySelectorAll<HTMLDivElement>('.visitors-list .row');
+    const style = tableStyle();
+
+    rows.forEach(r => r.style.gridTemplateColumns = style);
+  }, [columns]);
+
   return (
     <>
       {!loading && (
@@ -44,7 +63,7 @@ export const Visitors: FC<Props> = ({ site, query }) => {
         </Container>
       )}
 
-      <Table className='visitors-list hover'>
+      <Table className={classnames('visitors-list hover', tableClassNames)}>
         <Row head>
           <Cell>
             Status

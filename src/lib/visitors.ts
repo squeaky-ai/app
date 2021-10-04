@@ -1,6 +1,6 @@
 import { capitalize } from 'lodash';
 import type { Device } from 'types/device';
-import type { Visitor } from 'types/visitor';
+import type { Visitor, Column } from 'types/visitor';
 
 export function getAttributes<T>(visitor: Visitor): T {
   try {
@@ -44,3 +44,72 @@ export function groupVisitorDevices(devices: Device[]): Device[] {
     return acc;
   }, [] as Device[]);
 }
+
+export const allColumns: Column[] = [
+  {
+    name: 'status',
+    label: 'Status',
+    width: '105px',
+    disabled: false,
+  },
+  {
+    name: 'visitor-id',
+    label: 'Visitor ID',
+    width: '1fr',
+    disabled: true,
+  },
+  {
+    name: 'user-id',
+    label: 'User ID',
+    width: '1fr',
+    disabled: false,
+  },
+  {
+    name: 'name',
+    label: 'Name',
+    width: '1fr',
+    disabled: false,
+  },
+  {
+    name: 'email',
+    label: 'Email',
+    width: '1fr',
+    disabled: false,
+  },
+  {
+    name: 'recordings',
+    label: 'Recordings',
+    width: '1fr',
+    disabled: false,
+  },
+  {
+    name: 'first-visited',
+    label: 'First visited',
+    width: '1fr',
+    disabled: false,
+  },
+  {
+    name: 'last-activity',
+    label: 'Last activity',
+    width: '1fr',
+    disabled: false,
+  },
+  {
+    name: 'language',
+    label: 'Language',
+    width: '1fr',
+    disabled: false,
+  },
+  {
+    name: 'device-viewport',
+    label: 'Device & Viewport',
+    width: '1fr',
+    disabled: false,
+  },
+  {
+    name: 'browser',
+    label: 'Browser',
+    width: '90px',
+    disabled: false,
+  },
+];

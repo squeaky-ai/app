@@ -77,3 +77,10 @@ export interface ExternalAttributes {
   email?: string;
   [key: string]: string;
 }
+
+export interface Column {
+  name: string;
+  label: string;
+  width: string;
+  disabled: boolean;
+}

@@ -13,11 +13,15 @@ import { Container } from 'components/container';
 import { Visitors } from 'components/sites/visitors';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { EmptyStateHint } from 'components/sites/empty-state-hint';
+import { VisitorsColumns } from 'components/sites/visitors-columns';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { allColumns } from 'lib/visitors';
 import { BASE_PATH } from 'data/common/constants';
+import type { Column } from 'types/visitor';
 
 const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
   const [query, setQuery] = React.useState<string>('');
+  const [columns, setColumns] = React.useState<Column[]>(allColumns);
 
   const handleCancel = () => {
     setQuery('');
@@ -43,18 +47,28 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
           <Main className={classnames({ empty: site.recordings.items.length === 0 })}>
             <BreadCrumbs site={site} items={[{ name: 'Visitors' }]} />
 
-            <h3 className='title'>
-              Visitors
-              <div className='search' role='search' aria-label='Filter recordings'>
-                <Input type='search' placeholder='Search...' onKeyUp={handleSearch} id='search' />
-                {query && (
-                  <Button onClick={handleCancel}>
-                    <i className='ri-close-line' />
-                  </Button>
-                )}
-                <i className='ri-search-line' /> 
-              </div>
-            </h3>
+            <div className='visitors-header'>
+              <h3 className='title'>
+                Visitors
+                <div className='search' role='search' aria-label='Filter recordings'>
+                  <Input type='search' placeholder='Search...' onKeyUp={handleSearch} id='search' />
+                  {query && (
+                    <Button onClick={handleCancel}>
+                      <i className='ri-close-line' />
+                    </Button>
+                  )}
+                  <i className='ri-search-line' /> 
+                </div>
+              </h3>
+              <menu>
+                <div className='menu-item'>
+                  <VisitorsColumns 
+                    columns={columns}
+                    setColumns={setColumns}
+                  />
+                </div>
+              </menu>
+            </div>
 
             <Container className='xl centered empty-state'>
               <div className='empty-state-contents'>
@@ -73,7 +87,11 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
             </Container>
 
             {!!site.recordings.items.length && (
-              <Visitors site={site} query={query} />
+              <Visitors 
+                site={site} 
+                query={query}
+                columns={columns}
+              />
             )}
           </Main>
         )}
