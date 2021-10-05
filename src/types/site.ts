@@ -3,6 +3,7 @@ import type { Recording, PaginatedRecordingsResponse } from 'types/recording';
 import type { Analytics } from 'types/analytics';
 import type { PaginatedNotesResponse } from 'types/note';
 import type { PaginatedVisitorsResponse, Visitor } from 'types/visitor';
+import type { Heatmaps } from 'types/heatmaps';
 
 export interface Site {
   id: string;
@@ -17,6 +18,7 @@ export interface Site {
   languages?: string[];
   pages?: string[];
   browsers?: string[];
+  heatmaps?: Heatmaps;
   recording?: Recording;
   recordings?: PaginatedRecordingsResponse;
   visitor?: Visitor;

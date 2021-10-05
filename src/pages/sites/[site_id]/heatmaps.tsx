@@ -49,8 +49,8 @@ const SitesHeatmaps: NextPage<ServerSideProps> = ({ user }) => {
               </div>
             </Container>
 
-            {!!site.recordings.items.length && (
-              <Heatmaps site={site} />
+            {!!site.recordings.items.length && page && (
+              <Heatmaps page={page} />
             )}
           </Main>
         )}

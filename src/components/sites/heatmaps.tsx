@@ -1,36 +1,39 @@
 import React from 'react';
 import classnames from 'classnames';
 import type { FC } from 'react';
-import type { Site } from 'types/site';
 import { Button } from 'components/button';
+import { useHeatmaps } from 'hooks/use-heatmaps';
+import type { HeatmapsDevice, HeatmapsType } from 'types/heatmaps';
 
 interface Props {
-  site: Site;
+  page: string;
 }
 
-export const Heatmaps: FC<Props> = () => {
-  const [device, setDevice] = React.useState<string>('desktop');
-  const [heatmapType, setHeatmapType] = React.useState<string>('click');
+export const Heatmaps: FC<Props> = ({ page }) => {
+  const [type, setType] = React.useState<HeatmapsType>('Click');
+  const [device, setDevice] = React.useState<HeatmapsDevice>('Desktop');
+
+  const { heatmaps } = useHeatmaps({ page, device, type })
 
   return (
     <div className='heatmaps-grid'>
       <div className='options'>
         <div className='button-group'>
-          <Button className={classnames(device === 'desktop' ? 'primary' : 'blank')} onClick={() => setDevice('desktop')}>
+          <Button className={classnames(device === 'Desktop' ? 'primary' : 'blank')} onClick={() => setDevice('Desktop')}>
             <i className='ri-computer-line' />
-            0
+            {heatmaps.desktopCount}
           </Button>
-          <Button className={classnames(device === 'mobile' ? 'primary' : 'blank')} onClick={() => setDevice('mobile')}>
+          <Button className={classnames(device === 'Mobile' ? 'primary' : 'blank')} onClick={() => setDevice('Mobile')}>
             <i className='ri-smartphone-line' />
-            0
+            {heatmaps.mobileCount}
           </Button>
         </div>
 
         <div className='button-group'>
-          <Button className={classnames(heatmapType === 'click' ? 'primary' : 'blank')} onClick={() => setHeatmapType('click')}>
+          <Button className={classnames(type === 'Click' ? 'primary' : 'blank')} onClick={() => setType('Click')}>
             Click
           </Button>
-          <Button className={classnames(heatmapType === 'scroll' ? 'primary' : 'blank')} onClick={() => setHeatmapType('scroll')}>
+          <Button className={classnames(type === 'Scroll' ? 'primary' : 'blank')} onClick={() => setType('Scroll')}>
             Scroll
           </Button>
         </div>

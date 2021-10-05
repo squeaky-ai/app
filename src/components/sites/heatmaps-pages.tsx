@@ -41,6 +41,10 @@ export const HeatmapsPages: FC<Props> = ({ page, setPage }) => {
 
   const results = [...pages].sort((a, b) => a.localeCompare(b));
 
+  React.useEffect(() => {
+    if (!page) setPage(pages[0]);
+  }, [pages]);
+
   return (
     <Formik
       initialValues={{ page: page || '' }}
