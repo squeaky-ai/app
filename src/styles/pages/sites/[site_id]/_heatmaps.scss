@@ -62,4 +62,47 @@
       display: none;
     }
   }
+
+  .heatmaps-grid {
+    display: grid;
+    grid-gap: 2rem;
+    grid-template-areas: 'options options'
+                         'content data';
+    grid-template-columns: 1fr 330px;
+    grid-template-rows: 40px 1fr;
+    min-height: calc(100% - 170px);
+
+    .options {
+      display: flex;
+      grid-area: options;
+  
+      .button-group {
+        margin-right: 1.5rem;
+  
+        .button {
+          align-items: center;
+          display: flex;
+  
+          i {
+            font-size: 1.25rem;
+            margin-right: .5rem;
+          }
+        }
+      }
+    }
+              
+    .data {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--border-radius-md);
+      grid-area: data;
+    }
+
+    .content {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--border-radius-md);
+      grid-area: content;
+    }
+  }
 }

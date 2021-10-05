@@ -83,6 +83,21 @@
     }
   }
 
+  &.blank {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--border-radius-md);
+    color: var(--gray-800);
+    height: 40px;
+    margin: 0;
+    padding: .34rem 1rem;
+
+    &:hover,
+    &:active {
+      background: var(--gray-100);
+    }
+  }
+
   &.icon {
     align-items: center;
     display: inline-flex;
@@ -103,6 +118,24 @@
 
     i {
       margin-right: .5rem;
+    }
+  }
+}
+
+.button-group {
+  align-items: center;
+  display: flex;
+
+  .button {
+    margin: 0;
+    &:first-of-type {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    &:last-of-type {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
     }
   }
 }
