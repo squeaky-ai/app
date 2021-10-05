@@ -6,8 +6,6 @@ import { Dropdown } from 'components/dropdown';
 import { Label } from 'components/label';
 import { FiltersDate } from 'components/sites/filters/common/filters-date';
 import { FiltersStatus } from 'components/sites/filters/common/filters-status';
-import { FiltersPage } from 'components/sites/filters/common/filters-page';
-import { FiltersPages } from 'components/sites/filters/common/filters-pages';
 import { FiltersLanguage } from 'components/sites/filters/common/filters-language';
 import { FiltersRecordings } from 'components/sites/filters/visitors/filters-recordings';
 import type { Filters as IFilters } from 'types/visitor';
@@ -65,22 +63,6 @@ export const Filters: FC<Props> = ({ filters, updateFilters }) => {
           <i className='ri-arrow-drop-left-line' />
           Last activity
         </Button>
-        <Button onClick={() => handleFilterChange(FilterType.StartUrl)} className={classnames({ open: openFilter === FilterType.StartUrl})}>
-          <i className='ri-arrow-drop-left-line' />
-          Start URL
-        </Button>
-        <Button onClick={() => handleFilterChange(FilterType.ExitUrl)} className={classnames({ open: openFilter === FilterType.ExitUrl})}>
-          <i className='ri-arrow-drop-left-line' />
-          Exit URL
-        </Button>
-        <Button onClick={() => handleFilterChange(FilterType.VisitedPages)} className={classnames({ open: openFilter === FilterType.VisitedPages})}>
-          <i className='ri-arrow-drop-left-line' />
-          Visited pages
-        </Button>
-        <Button onClick={() => handleFilterChange(FilterType.UnvisitedPages)} className={classnames({ open: openFilter === FilterType.UnvisitedPages})}>
-          <i className='ri-arrow-drop-left-line' />
-          Unvisited pages
-        </Button>
         <Button onClick={() => handleFilterChange(FilterType.Language)} className={classnames({ open: openFilter === FilterType.Language})}>
           <i className='ri-arrow-drop-left-line' />
           Language
@@ -109,30 +91,6 @@ export const Filters: FC<Props> = ({ filters, updateFilters }) => {
             <>
               <Label>Last activity</Label>
               <FiltersDate value={filters.lastActivity} onUpdate={handleUpdate('lastActivity')} onClose={handleFilterClose} />
-            </>
-          )}
-          {openFilter === FilterType.StartUrl && (
-            <>
-              <Label>Start URL</Label>
-              <FiltersPage value={filters.startUrl} onUpdate={handleUpdate('startUrl')}  onClose={handleFilterClose} />
-            </>
-          )}
-          {openFilter === FilterType.ExitUrl && (
-            <>
-              <Label>Exit URL</Label>
-              <FiltersPage value={filters.exitUrl} onUpdate={handleUpdate('exitUrl')}  onClose={handleFilterClose} />
-            </>
-          )}
-          {openFilter === FilterType.VisitedPages && (
-            <>
-              <Label>Visited pages</Label>
-              <FiltersPages value={filters.visitedPages} onUpdate={handleUpdate('visitedPages')}  onClose={handleFilterClose} />
-            </>
-          )}
-          {openFilter === FilterType.UnvisitedPages && (
-            <>
-              <Label>Unvisited pages</Label>
-              <FiltersPages value={filters.unvisitedPages} onUpdate={handleUpdate('unvisitedPages')}  onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.Language && (

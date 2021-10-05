@@ -92,10 +92,6 @@ export interface Filters {
     rangeType: 'LessThan' | 'GreaterThan' | null;
     count: number | null;
   };
-  startUrl: string | null;
-  exitUrl: string | null;
-  visitedPages: string[];
-  unvisitedPages: string[];
   languages: string[];
   firstVisited: DateFilter;
   lastActivity: DateFilter;

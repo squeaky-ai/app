@@ -47,14 +47,10 @@ export function groupVisitorDevices(devices: Device[]): Device[] {
 
 export const defaultFilters: Filters = {
   status: null,
-  startUrl: null,
-  exitUrl: null,
   recordings: {
     rangeType: 'GreaterThan',
     count: null
   },
-  visitedPages: [],
-  unvisitedPages: [],
   languages: [],
   firstVisited: {
     rangeType: null,

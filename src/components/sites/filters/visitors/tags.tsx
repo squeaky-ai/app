@@ -2,11 +2,8 @@ import React from 'react';
 import type { FC } from 'react';
 import { Button } from 'components/button';
 import { TagsStatus } from 'components/sites/filters/common/tags-status';
+
 import { TagsDate } from 'components/sites/filters/visitors/tags-date';
-import { TagsStartUrl } from 'components/sites/filters/common/tags-start-page';
-import { TagsExitUrl } from 'components/sites/filters/common/tags-exit-url';
-import { TagsVisitedPages } from 'components/sites/filters/common/tags-visited-pages';
-import { TagsUnvisitedPages } from 'components/sites/filters/common/tags-unvisited-pages';
 import { TagsLanguages } from 'components/sites/filters/common/tags-languages';
 import { TagsRecordings } from 'components/sites/filters/visitors/tags-recordings';
 import type { Filters } from 'types/visitor';
@@ -23,10 +20,6 @@ export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
   const hasRecordings = filters.recordings.count !== null;
   const hasFirstVisited = filters.firstVisited.rangeType !== null;
   const hasLastActivity = filters.lastActivity.rangeType !== null;
-  const hasStartUrl = filters.startUrl !== null;
-  const hasExitUrl = filters.exitUrl !== null;
-  const hasVisitedPages = filters.visitedPages.length > 0;
-  const hasUnvisitedPages = filters.unvisitedPages.length > 0;
   const hasLanguages = filters.languages.length > 0;
 
   const hasFilters = (
@@ -34,10 +27,6 @@ export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
     hasRecordings ||
     hasFirstVisited ||
     hasLastActivity ||
-    hasStartUrl ||
-    hasExitUrl ||
-    hasVisitedPages ||
-    hasUnvisitedPages ||
     hasLanguages
   );
 
@@ -59,22 +48,6 @@ export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
 
       {hasLastActivity && (
         <TagsDate filters={filters} updateFilters={updateFilters} name='lastActivity' />
-      )}
-
-      {hasStartUrl && (
-        <TagsStartUrl filters={filters} updateFilters={updateFilters} />
-      )}
-
-      {hasExitUrl && (
-        <TagsExitUrl filters={filters} updateFilters={updateFilters} />
-      )}
-
-      {hasVisitedPages && (
-        <TagsVisitedPages filters={filters} updateFilters={updateFilters} />
-      )}
-
-      {hasUnvisitedPages && (
-        <TagsUnvisitedPages filters={filters} updateFilters={updateFilters} />
       )}
 
       {hasLanguages && (
