@@ -157,6 +157,13 @@
       border: 1px solid var(--gray-200);
       border-radius: var(--border-radius-md);
       grid-area: content;
+      position: relative;
     }
+  }
+
+  .heatmap-overlay {
+    height: 100%;
+    position: absolute;
+    width: 100%;
   }
 }

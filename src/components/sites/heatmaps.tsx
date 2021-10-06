@@ -2,6 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import type { FC } from 'react';
 import { Button } from 'components/button';
+import { Clickmap } from 'components/sites/clickmap';
 import { useHeatmaps } from 'hooks/use-heatmaps';
 import type { HeatmapsDevice, HeatmapsType } from 'types/heatmaps';
 
@@ -39,7 +40,7 @@ export const Heatmaps: FC<Props> = ({ page }) => {
         </div>
       </div>
       <div className='content'>
-
+        {type === 'Click' && <Clickmap items={heatmaps.items} />}
       </div>
       <div className='data'>
         {type === 'Click' && (
