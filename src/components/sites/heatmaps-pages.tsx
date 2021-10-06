@@ -63,7 +63,7 @@ export const HeatmapsPages: FC<Props> = ({ page, setPage }) => {
         <form className='heatmaps-pages' onSubmit={handleSubmit}>
           <Label htmlFor='page-search'>Page</Label>
           {loading && <Spinner />}
-          <Select onChange={handleChange} value={values.page}>
+          <Select name='page' onChange={handleChange} value={values.page}>
             {results.map(page => (
               <Option key={page} value={page}>
                 {page}

@@ -1,4 +1,8 @@
 .page.sites.heatmaps {
+  #main {
+    padding-bottom: 3rem;
+  }
+
   .heatmaps-heading {
     align-items: center;
     display: flex;
@@ -70,7 +74,7 @@
                          'content data';
     grid-template-columns: 1fr 330px;
     grid-template-rows: 40px minmax(0, 1fr);
-    min-height: calc(100% - 84px);
+    height: calc(100% - 168px);
 
     .options {
       display: flex;
@@ -96,6 +100,7 @@
       border: 1px solid var(--gray-200);
       border-radius: var(--border-radius-md);
       grid-area: data;
+      height: 100%;
 
       .head {
         border-bottom: 1px solid var(--gray-150);
@@ -165,5 +170,9 @@
     height: 100%;
     position: absolute;
     width: 100%;
+
+    circle {
+      mix-blend-mode: multiply;
+    }
   }
 }

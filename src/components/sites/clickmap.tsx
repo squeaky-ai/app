@@ -14,7 +14,9 @@ export const Clickmap: FC<Props> = ({ items }) => {
           key={i} 
           cx={item.x} 
           cy={item.y} 
-          r={20} 
+          r={20}
+          fill='var(--magenta-500)'
+          opacity={.75}
         />
       ))}
     </svg>
