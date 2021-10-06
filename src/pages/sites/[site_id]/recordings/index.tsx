@@ -19,6 +19,7 @@ import { RecordingsColumns } from 'components/sites/recordings-columns';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { BASE_PATH } from 'data/common/constants';
 import { defaultFilters, allColumns } from 'lib/recordings';
+import { Preferences, Preference } from 'lib/preferences';
 import type { Filters as IFilters, Column } from 'types/recording';
 import type { ValueOf } from 'types/common';
 
@@ -47,6 +48,15 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
   const clearFilters = () => {
     setFilters(defaultFilters);
   };
+
+  React.useEffect(() => {
+    const existing = Preferences.getArray(Preference.RECORDINGS_COLUMNS);
+
+    if (existing.length > 0) { 
+      const columns = existing.map(e => allColumns.find(a => a.name === e));
+      setColumns(columns);
+    }
+  }, []);
 
   return (
     <>

@@ -38,21 +38,14 @@ export const Visitors: FC<Props> = ({ site, query, columns, filters }) => {
 
   const { items, pagination } = visitors;
 
-  const tableStyle = (): string => {
-    return allColumns
+  const rowStyle: React.CSSProperties = { 
+    gridTemplateColumns: allColumns
       .map(column => columns.find(c => c.name === column.name)?.width || '')
-      .join(' ');
+      .join(' ')
   };
 
   const tableClassNames = allColumns
     .map(column => columns.find(c => c.name === column.name) ? '' : `hide-${column.name}`);
-
-  React.useEffect(() => {
-    const rows = document.querySelectorAll<HTMLDivElement>('.visitors-list .row');
-    const style = tableStyle();
-
-    rows.forEach(r => r.style.gridTemplateColumns = style);
-  }, [columns]);
 
   return (
     <>
@@ -66,7 +59,7 @@ export const Visitors: FC<Props> = ({ site, query, columns, filters }) => {
       )}
 
       <Table className={classnames('visitors-list hover', tableClassNames)}>
-        <Row head>
+        <Row head style={rowStyle}>
           <Cell>
             Status
           </Cell>
@@ -134,6 +127,7 @@ export const Visitors: FC<Props> = ({ site, query, columns, filters }) => {
             visitor={v} 
             key={v.visitorId} 
             query={query} 
+            style={rowStyle}
           />
         ))}
       </Table>

@@ -35,21 +35,14 @@ export const Recordings: FC<Props> = ({ query, filters, columns }) => {
 
   const { items, pagination } = recordings;
 
-  const tableStyle = (): string => {
-    return allColumns
+  const rowStyle: React.CSSProperties = { 
+    gridTemplateColumns: allColumns
       .map(column => columns.find(c => c.name === column.name)?.width || '')
-      .join(' ');
+      .join(' ')
   };
 
   const tableClassNames = allColumns
     .map(column => columns.find(c => c.name === column.name) ? '' : `hide-${column.name}`);
-
-  React.useEffect(() => {
-    const rows = document.querySelectorAll<HTMLDivElement>('.recordings-list .row');
-    const style = tableStyle();
-
-    rows.forEach(r => r.style.gridTemplateColumns = style);
-  }, [columns]);
 
   return (
     <>
@@ -63,7 +56,7 @@ export const Recordings: FC<Props> = ({ query, filters, columns }) => {
       )}
     
       <Table className={classnames('recordings-list hover', tableClassNames)}>
-        <Row head>
+        <Row head style={rowStyle}>
           <Cell>Status</Cell>
           <Cell>Recording ID</Cell>
           <Cell>User ID</Cell>
@@ -80,6 +73,7 @@ export const Recordings: FC<Props> = ({ query, filters, columns }) => {
             recording={recording} 
             query={query} 
             key={recording.id} 
+            style={rowStyle}
           />
         ))}
       </Table>

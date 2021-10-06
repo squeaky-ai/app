@@ -18,9 +18,10 @@ interface Props {
   site: Site;
   query: string;
   visitor: Visitor;
+  style?: React.CSSProperties;
 }
 
-export const VisitorsItem: FC<Props> = ({ site, visitor, query }) => {
+export const VisitorsItem: FC<Props> = ({ site, visitor, query, style }) => {
   const router = useRouter();
 
   const onRowClick = (event: React.MouseEvent) => {
@@ -40,7 +41,7 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, query }) => {
 
   return (
     <Link href={`/sites/${router.query.site_id}/visitors/${visitor.id}`}>
-      <a className='row' onClick={onRowClick}>
+      <a className='row' onClick={onRowClick} style={style}>
         <Cell>
           {visitor.viewed
             ? <Pill type='secondary'>Existing</Pill>

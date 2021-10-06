@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import { Checkbox } from 'components/checkbox';
 import { Dropdown } from 'components/dropdown';
 import { allColumns } from 'lib/visitors';
+import { Preferences, Preference } from 'lib/preferences';
 import type { Column } from 'types/visitor';
 
 interface Props {
@@ -21,6 +22,8 @@ export const VisitorsColumns: FC<Props> = ({ columns, setColumns }) => {
     const result = event.target.checked
       ? [...columns, value]
       : columns.filter(c => c.name !== value.name);
+
+    Preferences.setArray(Preference.VISITORS_COLUMNS, result.map(r => r.name));
 
     setColumns(result);
   };

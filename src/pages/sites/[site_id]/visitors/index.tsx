@@ -19,6 +19,7 @@ import { Tags } from 'components/sites/filters/visitors/tags';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { defaultFilters, allColumns } from 'lib/visitors';
 import { BASE_PATH } from 'data/common/constants';
+import { Preferences, Preference } from 'lib/preferences';
 import type { Filters as IFilters, Column } from 'types/visitor';
 import type { ValueOf } from 'types/common';
 
@@ -47,6 +48,15 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
   const clearFilters = () => {
     setFilters(defaultFilters);
   };
+
+  React.useEffect(() => {
+    const existing = Preferences.getArray(Preference.VISITORS_COLUMNS);
+
+    if (existing.length > 0) {
+      const columns = existing.map(e => allColumns.find(a => a.name === e));
+      setColumns(columns);
+    }
+  }, []);
 
   return (
     <>

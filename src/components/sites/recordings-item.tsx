@@ -22,9 +22,10 @@ import type { Recording } from 'types/recording';
 interface Props {
   query?: string;
   recording: Recording;
+  style?: React.CSSProperties;
 }
 
-export const RecordingsItem: FC<Props> = ({ query, recording }) => {
+export const RecordingsItem: FC<Props> = ({ query, recording, style }) => {
   const toast = useToasts();
   const router = useRouter();
   const ref = React.useRef<Modal>();
@@ -90,7 +91,7 @@ export const RecordingsItem: FC<Props> = ({ query, recording }) => {
   return (
     <>
       <Link href={`/sites/${router.query.site_id}/recordings/${recording.id}`}>
-        <a className='row recording-row' onClick={onRowClick}>
+        <a className='row recording-row' onClick={onRowClick} style={style}>
           <Cell>
             {recording.viewed
               ? <Pill type='secondary'>Viewed</Pill>
