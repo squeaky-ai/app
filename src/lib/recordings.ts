@@ -46,7 +46,7 @@ export const allColumns: Column[] = [
   },
   {
     name: 'visitor-id',
-    label: 'Visitor ID',
+    label: 'User ID',
     width: '1fr',
     disabled: false,
   },

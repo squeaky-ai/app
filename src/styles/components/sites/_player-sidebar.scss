@@ -152,7 +152,12 @@
       }
 
       .tooltip {
-        height: 1.25rem;
+        height: 1rem;
+
+        & > .button {
+          height: 1rem;
+          line-height: .75rem;
+        }
       }
     }
 
