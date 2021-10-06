@@ -124,6 +124,10 @@
           border-bottom: 1px solid var(--gray-150);
           display: flex;
           list-style: none;
+
+          i {
+            color: var(--gray-500);
+          }
         }
       }
 

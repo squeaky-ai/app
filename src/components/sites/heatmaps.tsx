@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import type { FC } from 'react';
 import { Button } from 'components/button';
 import { Clickmap } from 'components/sites/clickmap';
+import { HeatmapsClicks } from 'components/sites/heatmaps-clicks';
 import { useHeatmaps } from 'hooks/use-heatmaps';
 import type { HeatmapsDevice, HeatmapsType } from 'types/heatmaps';
 
@@ -43,22 +44,7 @@ export const Heatmaps: FC<Props> = ({ page }) => {
         {type === 'Click' && <Clickmap items={heatmaps.items} />}
       </div>
       <div className='data'>
-        {type === 'Click' && (
-          <div className='clicks-table'>
-            <div className='head row'>
-              <p>Element</p>
-              <p>Clicks</p>
-            </div>
-            <ul>
-              {heatmaps.items.map((item, i) => (
-                <li key={i} className='row'>
-                  <p>x: {item.x}, y: {item.y}</p>
-                  <p></p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        {type === 'Click' && <HeatmapsClicks items={heatmaps.items} />}
 
         {type === 'Scroll' && (
           <div className='scrolls-table'>
