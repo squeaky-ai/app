@@ -69,8 +69,8 @@
     grid-template-areas: 'options options'
                          'content data';
     grid-template-columns: 1fr 330px;
-    grid-template-rows: 40px 1fr;
-    min-height: calc(100% - 170px);
+    grid-template-rows: 40px minmax(0, 1fr);
+    min-height: calc(100% - 84px);
 
     .options {
       display: flex;
