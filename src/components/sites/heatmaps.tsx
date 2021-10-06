@@ -13,7 +13,7 @@ export const Heatmaps: FC<Props> = ({ page }) => {
   const [type, setType] = React.useState<HeatmapsType>('Click');
   const [device, setDevice] = React.useState<HeatmapsDevice>('Desktop');
 
-  const { heatmaps } = useHeatmaps({ page, device, type })
+  const { heatmaps } = useHeatmaps({ page, device, type });
 
   return (
     <div className='heatmaps-grid'>
@@ -42,7 +42,41 @@ export const Heatmaps: FC<Props> = ({ page }) => {
 
       </div>
       <div className='data'>
+        {type === 'Click' && (
+          <div className='clicks-table'>
+            <div className='head row'>
+              <p>Element</p>
+              <p>Clicks</p>
+            </div>
+            <ul>
+              {heatmaps.items.map((item, i) => (
+                <li key={i} className='row'>
+                  <p>x: {item.x}, y: {item.y}</p>
+                  <p></p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
+        {type === 'Scroll' && (
+          <div className='scrolls-table'>
+            <div className='head row'>
+              <p>% scrolled</p>
+              <p>Pixels scrolled</p>
+              <p>Users</p>
+            </div>
+            <ul>
+              {heatmaps.items.map((item, i) => (
+                <li key={i} className='row'>
+                  <p>x: {item.x}, y: {item.y}</p>
+                  <p></p>
+                  <p></p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );

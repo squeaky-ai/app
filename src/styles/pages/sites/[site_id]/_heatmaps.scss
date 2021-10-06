@@ -96,6 +96,60 @@
       border: 1px solid var(--gray-200);
       border-radius: var(--border-radius-md);
       grid-area: data;
+
+      .head {
+        border-bottom: 1px solid var(--gray-150);
+        display: flex;
+      }
+
+      p {
+        font-size: 13px;
+        line-height: 16px;
+        margin: 0;
+        padding: 1.5rem 0 1.5rem 1.5rem;
+      }
+
+      ul {
+        flex: 1;
+        margin: 0;
+        overflow-y: auto;
+        padding: 0;
+
+        li {
+          border-bottom: 1px solid var(--gray-150);
+          display: flex;
+          list-style: none;
+        }
+      }
+
+      .clicks-table {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        .row {
+          p:first-of-type {
+            flex: 1;
+          }
+
+          p:last-of-type {
+            width: 140px;
+          }
+        }
+      }
+
+      .scrolls-table {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        .row {
+          p {
+            flex: 1;
+            white-space: nowrap;
+          }
+        }
+      }
     }
 
     .content {
