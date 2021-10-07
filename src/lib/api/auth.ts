@@ -1,5 +1,6 @@
 import axios from 'axios';
 import getConfig from 'next/config';
+import type { User } from 'types/user';
 
 type LoginInput = {
   email: string;
@@ -38,7 +39,7 @@ export const session = async <T>(cookie: string): Promise<T> => {
   }
 };
 
-export const login = async <T>(input: LoginInput): Promise<Response<T>> => {
+export const login = async (input: LoginInput): Promise<Response<any>> => {
   try {
     const response = await axios.post('/api/auth/sign_in.json', { user: input });
     return { body: response.data };
@@ -48,7 +49,7 @@ export const login = async <T>(input: LoginInput): Promise<Response<T>> => {
   }
 };
 
-export const signup = async <T>(input: SignupInput): Promise<Response<T>> => {
+export const signup = async (input: SignupInput): Promise<Response<any>> => {
   try {
     const response = await axios.post('/api/auth/sign_up.json', { user: input });
     return { body: response.data };
@@ -67,9 +68,9 @@ export const signout = async (): Promise<void> => {
   }
 };
 
-export const emailExists = async <T>(email: string): Promise<Response<T>> => {
+export const emailExists = async (email: string): Promise<Response<boolean>> => {
   try {
-    const response = await axios.get(`/api/auth/email_exists.json?email=${email}`);
+    const response = await axios.get<{ exists: boolean }>(`/api/auth/email_exists.json?email=${email}`);
     return { body: response.data.exists };
   } catch(error: any) {
     console.error(error.response.status, error.response.data);
@@ -77,7 +78,7 @@ export const emailExists = async <T>(email: string): Promise<Response<T>> => {
   }
 }
 
-export const resetPassword = async<T>(email: string): Promise<Response<T>> => {
+export const resetPassword = async(email: string): Promise<Response<any>> => {
   try {
     const response = await axios.post('/api/auth/reset_password.json', { user: { email } });
     return { body: response.data };
@@ -87,7 +88,7 @@ export const resetPassword = async<T>(email: string): Promise<Response<T>> => {
   }
 };
 
-export const changePassword = async<T>(input: ChangePasswordInput): Promise<Response<T>> => {
+export const changePassword = async(input: ChangePasswordInput): Promise<Response<any>> => {
   try {
     const response = await axios.put('/api/auth/change_password.json', { user: input });
     return { body: response.data };
@@ -97,7 +98,7 @@ export const changePassword = async<T>(input: ChangePasswordInput): Promise<Resp
   }
 };
 
-export const reconfirm = async<T>(email: string): Promise<Response<T>> => {
+export const reconfirm = async (email: string): Promise<Response<any>> => {
   try {
     const response = await axios.post('/api/auth/reset_password.json', { user: { email }});
     return { body: response.data };
@@ -107,9 +108,9 @@ export const reconfirm = async<T>(email: string): Promise<Response<T>> => {
   }
 };
 
-export const confirmAccount = async<T>(token: string): Promise<Response<T>> => {
+export const confirmAccount = async (token: string): Promise<Response<User>> => {
   try {
-    const response = await axios.get(`/api/auth/confirm.json?confirmation_token=${token}`);
+    const response = await axios.get<User>(`/api/auth/confirm.json?confirmation_token=${token}`);
     return { body: response.data };
   } catch(error: any) {
     console.error(error.response.status, error.response.data);
@@ -117,7 +118,7 @@ export const confirmAccount = async<T>(token: string): Promise<Response<T>> => {
   }
 };
 
-export const reconfirmAccount = async<T>(email: string): Promise<Response<T>> => {
+export const reconfirmAccount = async (email: string): Promise<Response<any>> => {
   try {
     const response = await axios.post('/api/auth/confirm.json', { user: { email } });
     return { body: response.data };

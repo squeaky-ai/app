@@ -12,29 +12,29 @@
     "start": "next start"
   },
   "dependencies": {
-    "@apollo/client": "^3.4.10",
-    "axios": "^0.21.1",
+    "@apollo/client": "^3.4.16",
+    "axios": "^0.22.0",
     "classnames": "^2.3.1",
-    "date-fns": "^2.23.0",
-    "focus-trap-react": "^8.7.1",
+    "date-fns": "^2.25.0",
+    "focus-trap-react": "^8.8.1",
     "formik": "^2.2.9",
-    "graphql": "^15.5.2",
+    "graphql": "^15.6.1",
     "highlight.js": "^11.2.0",
     "lodash": "^4.17.21",
     "next": "^11.1.2",
     "rc-pagination": "^3.1.9",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "recharts": "^2.1.2",
-    "rrweb": "^1.0.4",
-    "sass": "^1.38.2",
+    "recharts": "^2.1.4",
+    "rrweb": "^1.0.5",
+    "sass": "^1.42.1",
     "yup": "^0.32.9"
   },
   "devDependencies": {
-    "@types/react": "^17.0.19",
+    "@types/react": "^17.0.27",
     "@types/react-dom": "^17.0.9",
     "eslint": "^7.32.0",
     "eslint-config-next": "^11.1.2",
-    "typescript": "^4.4.2"
+    "typescript": "^4.4.3"
   }
 }

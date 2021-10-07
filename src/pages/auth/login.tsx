@@ -17,7 +17,6 @@ import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useLoginAttemps, MAX_ATTEMPTS } from 'hooks/use-login-attempts';
 import { useToasts } from 'hooks/use-toasts';
 import { BASE_PATH } from 'data/common/constants';
-import type { User } from 'types/user';
 
 enum PageView {
   LOGIN,
@@ -59,7 +58,7 @@ const Login: NextPage<ServerSideProps> = () => {
       const { token } = router.query;
       if (!token) return;
 
-      const { body, error } = await confirmAccount<User>(token as string);
+      const { body, error } = await confirmAccount(token as string);
       if (!error) {
         setEmail(body.email);
         router.push({ pathname: '/auth/login', query: {} });

@@ -71,7 +71,7 @@ const Signup: NextPage<ServerSideProps> = () => {
                   validationSchema={EmailSchema}
                   onSubmit={(values, { setSubmitting }) => {
                     (async () => {
-                      const { body } = await emailExists<boolean>(values.email);
+                      const { body } = await emailExists(values.email);
                       setSubmitting(false);
                       setEmail(values.email);
                       setPageView(body ? PageView.EMAIL_TAKEN : PageView.PASSWORD);
