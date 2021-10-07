@@ -23,11 +23,15 @@
   }
 
   i {
+    display: flex;
+    height: 2rem;
     font-size: 2rem;
+    line-height: 2.2rem;
     pointer-events: none;
     position: absolute;
     right: .25rem;
-    top: 0;
+    top: .15rem;
+    width: 2rem;
   }
 
   & + .validation {
