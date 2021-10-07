@@ -6,6 +6,7 @@ const BASE_PATH = IS_DEV ? '' : '/app';
 
 module.exports = {
   basePath: BASE_PATH,
+  assetPrefix: IS_DEV ? '' : 'https://cdn.squeaky.ai',
   publicRuntimeConfig: {
     apiHost: API_HOST || 'http://localhost:4000',
     webHost: IS_DEV ? 'http://localhost:3000' : 'https://squeaky.ai',
