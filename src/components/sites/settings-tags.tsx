@@ -6,9 +6,8 @@ import { Drawer } from 'components/drawer';
 import { Container } from 'components/container';
 import { Checkbox } from 'components/checkbox';
 import { Table, Row, Cell } from 'components/table';
+import { SettingsTag } from 'components/sites/settings-tag';
 import type { Site } from 'types/site';
-import { Tag } from 'components/tag';
-import { Button } from 'components/button';
 
 const QUERY = gql`
   query GetSiteTags($siteId: ID!) {
@@ -24,11 +23,10 @@ const QUERY = gql`
 
 export const SettingsTags: FC = () => {
   const router = useRouter();
+  const siteId = router.query.site_id;
 
   const { data } = useQuery<{ site: Site }>(QUERY, {
-    variables: {
-      siteId: router.query.site_id as string
-    }
+    variables: { siteId }
   });
 
   const tags = data ? data.site.tags : [];
@@ -51,18 +49,7 @@ export const SettingsTags: FC = () => {
           )}
 
           {tags.map(tag => (
-            <Row key={tag.id}>
-              <Cell>
-                <Checkbox />
-              </Cell>
-              <Cell>
-                <Tag>{tag.name}</Tag>
-              </Cell>
-              <Cell className='options'>
-                <Button className='link'>Edit</Button>
-                <Button className='link tertiary'>Delete</Button>
-              </Cell>
-            </Row>
+            <SettingsTag key={tag.id} tag={tag} />
           ))}
         </Table>
       </Container>
