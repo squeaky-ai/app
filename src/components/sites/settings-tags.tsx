@@ -7,6 +7,7 @@ import { Container } from 'components/container';
 import { Checkbox } from 'components/checkbox';
 import { Table, Row, Cell } from 'components/table';
 import { SettingsTag } from 'components/sites/settings-tag';
+import { Sort } from 'components/sort';
 import type { Site } from 'types/site';
 
 const QUERY = gql`
@@ -24,12 +25,18 @@ const QUERY = gql`
 export const SettingsTags: FC = () => {
   const router = useRouter();
   const siteId = router.query.site_id;
+  const [sort, setSort] = React.useState<string>('name__asc');
 
   const { data } = useQuery<{ site: Site }>(QUERY, {
     variables: { siteId }
   });
 
   const tags = data ? data.site.tags : [];
+
+  const results = [...tags].sort((a, b) => sort === 'name__asc'
+    ? a.name.localeCompare(b.name)
+    : b.name.localeCompare(a.name)
+  );
 
   return (
     <Drawer title='Tags' name='tags'>
@@ -39,7 +46,15 @@ export const SettingsTags: FC = () => {
         <Table className='tags-table'>
           <Row head>
             <Cell><Checkbox /></Cell>
-            <Cell>Tag name</Cell>
+            <Cell>
+              Tag name
+              <Sort 
+                name='name' 
+                order={sort} 
+                onAsc={() => setSort('name__asc')} 
+                onDesc={() => setSort('name__desc')} 
+              />
+            </Cell>
             <Cell>Options</Cell>
           </Row>
           {tags.length === 0 && (
@@ -48,8 +63,8 @@ export const SettingsTags: FC = () => {
             </Row>
           )}
 
-          {tags.map(tag => (
-            <SettingsTag key={tag.id} tag={tag} />
+          {results.map(tag => (
+            <SettingsTag key={tag.id} tag={tag} siteId={siteId as string} />
           ))}
         </Table>
       </Container>

@@ -55,10 +55,21 @@ export interface TagCreateMutationInput {
   name: string;
 }
 
-export interface TagDeleteMutationInput {
+export interface TagRemoveMutationInput {
   siteId: string;
   recordingId: string;
   tagId: string;
+}
+
+export interface TagDeleteMutationInput {
+  siteId: string;
+  tagId: string;
+}
+
+export interface TagUpdateMutationInput {
+  siteId: string;
+  tagId: string;
+  name: string;
 }
 
 export interface DeleteRecordingMutationInput {

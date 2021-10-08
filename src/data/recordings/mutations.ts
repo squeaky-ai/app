@@ -14,15 +14,39 @@ export const CREATE_TAG_MUTATION = gql`
   }
 `;
 
-export const DELETE_TAG_MUTATION = gql`
-  mutation TagDelete($siteId: ID!, $recordingId: ID!, $tagId: ID!) {
-    tagDelete(input: { siteId: $siteId, recordingId: $recordingId, tagId: $tagId }) {
+export const REMOVE_TAG_MUTATION = gql`
+  mutation TagRemove($siteId: ID!, $recordingId: ID!, $tagId: ID!) {
+    tagRemove(input: { siteId: $siteId, recordingId: $recordingId, tagId: $tagId }) {
       id
       recording(recordingId: $recordingId) {
         tags {
           id
           name
         }
+      }
+    }
+  }
+`;
+
+export const DELETE_TAG_MUTATION = gql`
+  mutation TagDelete($siteId: ID!, $tagId: ID!) {
+    tagDelete(input: { siteId: $siteId, tagId: $tagId }) {
+      id
+      tags {
+        id
+        name
+      }
+    }
+  }
+`;
+
+export const UPDATE_TAG_MUTATION = gql`
+  mutation TagUpdate($siteId: ID!, $tagId: ID!, $name: String!) {
+    tagUpdate(input: { siteId: $siteId, tagId: $tagId, name: $name }) {
+      id
+      tags {
+        id
+        name
       }
     }
   }

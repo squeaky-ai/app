@@ -6,18 +6,22 @@ import { Button } from 'components/button';
 import { Input } from 'components/input';
 import { Label } from 'components/label';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
+import { tagUpdate } from 'lib/api/graphql';
+import { useToasts } from 'hooks/use-toasts';
 import type { Tag as ITag } from 'types/recording';
 
 interface Props {
   tag: ITag;
+  siteId: string;
 }
 
 const FeedbackSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
 });
 
-export const SettingsTagEdit: FC<Props> = ({ tag }) => {
+export const SettingsTagEdit: FC<Props> = ({ tag, siteId }) => {
   const ref = React.useRef<Modal>();
+  const toasts = useToasts();
 
   const openModal = () => {
     if (ref.current) ref.current.show();
@@ -37,9 +41,20 @@ export const SettingsTagEdit: FC<Props> = ({ tag }) => {
           validationSchema={FeedbackSchema}
           onSubmit={(values, { setSubmitting }) => {
             (async () => {
-              setSubmitting(false);
-              closeModal();
-              console.log(values);
+              try {
+                setSubmitting(false);
+                closeModal();
+                
+                await tagUpdate({ 
+                  siteId,
+                  tagId: tag.id,
+                  name: values.name,
+                });
+
+                toasts.add({ type: 'success', body: 'Tag updated successfully' });
+              } catch {
+                toasts.add({ type: 'error', body: 'There was an issue updating the tag' });
+              }
             })();
           }}
         >

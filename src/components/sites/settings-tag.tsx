@@ -9,9 +9,10 @@ import type { Tag as ITag } from 'types/recording';
 
 interface Props {
   tag: ITag;
+  siteId: string;
 }
 
-export const SettingsTag: FC<Props> = ({ tag }) => {
+export const SettingsTag: FC<Props> = ({ tag, siteId }) => {
   return (
     <Row key={tag.id}>
       <Cell>
@@ -21,8 +22,8 @@ export const SettingsTag: FC<Props> = ({ tag }) => {
         <Tag>{tag.name}</Tag>
       </Cell>
       <Cell className='options'>
-        <SettingsTagEdit tag={tag} />
-        <SettingsTagDelete tag={tag} />
+        <SettingsTagEdit tag={tag} siteId={siteId} />
+        <SettingsTagDelete tag={tag} siteId={siteId} />
       </Cell>
     </Row>
   );

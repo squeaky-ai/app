@@ -7,7 +7,7 @@ import { Formik } from 'formik';
 import { Button } from 'components/button';
 import { Input } from 'components/input';
 import { Tag } from 'components/tag';
-import { tagCreate, tagDelete } from 'lib/api/graphql';
+import { tagCreate, tagRemove } from 'lib/api/graphql';
 import type { Recording, Tag as ITag } from 'types/recording';
 
 interface Props {
@@ -33,8 +33,8 @@ export const SidebarTags: FC<Props> = ({ recording }) => {
     setPage(PageView.SHOW);
   };
 
-  const handleTagDelete = async (tag: ITag) => {
-    await tagDelete({ 
+  const handleTagRemove = async (tag: ITag) => {
+    await tagRemove({ 
       siteId,
       recordingId: recording.id, 
       tagId: tag.id 
@@ -88,7 +88,7 @@ export const SidebarTags: FC<Props> = ({ recording }) => {
         </Formik>
         <div className='tag-list'>
           {recording.tags.map(tag => (
-            <Tag handleDelete={() => handleTagDelete(tag)} key={tag.id}>
+            <Tag handleDelete={() => handleTagRemove(tag)} key={tag.id}>
               {tag.name}
             </Tag>
           ))}

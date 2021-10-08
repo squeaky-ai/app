@@ -58,7 +58,9 @@ import {
 
 import {
   CREATE_TAG_MUTATION,
+  REMOVE_TAG_MUTATION,
   DELETE_TAG_MUTATION,
+  UPDATE_TAG_MUTATION,
   CREATE_NOTE_MUTATION,
   DELETE_NOTE_MUTATION,
   UPDATE_NOTE_MUTATION,
@@ -70,7 +72,9 @@ import {
 import {
   PaginatedEventsResponse,
   TagCreateMutationInput,
+  TagRemoveMutationInput,
   TagDeleteMutationInput,
+  TagUpdateMutationInput,
   DeleteRecordingMutationInput,
   ViewedRecordingMutationInput,
   BookmarkRecordingMutationInput
@@ -104,13 +108,15 @@ export const cache = new InMemoryCache({
   typePolicies: {
     Query: {
       fields: {
-        sites: { merge: ACCEPT_INCOMING }
+        sites: { merge: ACCEPT_INCOMING },
+
       },
     },
     Site: {
       fields: {
         team: { merge: ACCEPT_INCOMING },
         recordings: { merge: ACCEPT_INCOMING },
+        tags: { merge: ACCEPT_INCOMING },
       }
     },
     Recording: {
@@ -142,7 +148,7 @@ export const cache = new InMemoryCache({
     },
     Visitor: {
       merge: ACCEPT_INCOMING
-    }
+    },
   }
 });
 
@@ -402,6 +408,20 @@ export const tagCreate = async (input: TagCreateMutationInput): Promise<SiteMuta
   }
 };
 
+export const tagRemove = async (input: TagRemoveMutationInput): Promise<SiteMutationResponse> => {
+  try {
+    const { data } = await client.mutate({
+      mutation: REMOVE_TAG_MUTATION,
+      variables: input
+    });
+
+    return { site: data.tagRemove };
+  } catch(error: any) {
+    console.error(error);
+    return parseGraphQLError(error);
+  }
+};
+
 export const tagDelete = async (input: TagDeleteMutationInput): Promise<SiteMutationResponse> => {
   try {
     const { data } = await client.mutate({
@@ -410,6 +430,20 @@ export const tagDelete = async (input: TagDeleteMutationInput): Promise<SiteMuta
     });
 
     return { site: data.tagDelete };
+  } catch(error: any) {
+    console.error(error);
+    return parseGraphQLError(error);
+  }
+};
+
+export const tagUpdate = async (input: TagUpdateMutationInput): Promise<SiteMutationResponse> => {
+  try {
+    const { data } = await client.mutate({
+      mutation: UPDATE_TAG_MUTATION,
+      variables: input
+    });
+
+    return { site: data.tagUpdate };
   } catch(error: any) {
     console.error(error);
     return parseGraphQLError(error);

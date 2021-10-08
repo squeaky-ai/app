@@ -2,14 +2,18 @@ import React from 'react';
 import type { FC } from 'react';
 import { Button } from 'components/button';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
+import { tagDelete } from 'lib/api/graphql';
+import { useToasts } from 'hooks/use-toasts';
 import type { Tag as ITag } from 'types/recording';
 
 interface Props {
   tag: ITag;
+  siteId: string;
 }
 
-export const SettingsTagDelete: FC<Props> = ({ tag }) => {
+export const SettingsTagDelete: FC<Props> = ({ tag, siteId }) => {
   const ref = React.useRef<Modal>();
+  const toasts = useToasts();
 
   const openModal = () => {
     if (ref.current) ref.current.show();
@@ -20,7 +24,16 @@ export const SettingsTagDelete: FC<Props> = ({ tag }) => {
   };
 
   const deleteTag = async () => {
-    
+    try {
+      await tagDelete({ 
+        siteId,
+        tagId: tag.id 
+      });
+
+      toasts.add({ type: 'success', body: 'Tag deleted successfully' });
+    } catch {
+      toasts.add({ type: 'error', body: 'There was an issue deleting the tag' });
+    }
   };
 
   return (

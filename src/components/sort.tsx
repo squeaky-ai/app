@@ -8,7 +8,7 @@ import type { VisitorSortBy } from 'types/visitor';
 
 interface Props {
   name: string;
-  order: RecordingSortBy | VisitorSortBy | PageSortBy;
+  order: RecordingSortBy | VisitorSortBy | PageSortBy | string;
   onAsc: VoidFunction;
   onDesc: VoidFunction;
 }
