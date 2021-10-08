@@ -101,9 +101,7 @@
 
   .tags-table {
     .row {
-      &.head {
-        grid-template-columns: 60px 1fr 1fr;
-      }
+      grid-template-columns: 60px 1fr 1fr;
 
       &.fluid {
         p {
@@ -114,6 +112,21 @@
 
       .checkbox {
         margin: 0;
+      }
+
+      .tag {
+        margin: 0;
+        padding: .4rem .4rem;
+      }
+
+      .options {
+        .button {
+          text-decoration: underline;
+
+          &:first-of-type {
+            margin-right: 1rem;
+          }
+        }
       }
     }
   }
