@@ -13,13 +13,14 @@ import { Input } from 'components/input';
 interface Props {
   tags: ITag[];
   siteId: string;
+  onCompleted: VoidFunction;
 }
 
 const TagSchema = Yup.object().shape({
   name: Yup.string().required('Name is required')
 });
 
-export const SettingsTagsMerge: FC<Props> = ({ tags, siteId }) => {
+export const SettingsTagsMerge: FC<Props> = ({ tags, siteId, onCompleted }) => {
   const ref = React.useRef<Modal>();
   const toasts = useToasts();
 
@@ -42,6 +43,8 @@ export const SettingsTagsMerge: FC<Props> = ({ tags, siteId }) => {
           onSubmit={(values) => {
             (async () => {
               try {
+                onCompleted();
+
                 await tagsMerge({ 
                   siteId,
                   tagIds: tags.map(t => t.id),

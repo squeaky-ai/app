@@ -9,9 +9,10 @@ import type { Tag as ITag } from 'types/recording';
 interface Props {
   tags: ITag[];
   siteId: string;
+  onCompleted: VoidFunction;
 }
 
-export const SettingsTagsDelete: FC<Props> = ({ tags, siteId }) => {
+export const SettingsTagsDelete: FC<Props> = ({ tags, siteId, onCompleted }) => {
   const ref = React.useRef<Modal>();
   const toasts = useToasts();
 
@@ -25,6 +26,8 @@ export const SettingsTagsDelete: FC<Props> = ({ tags, siteId }) => {
 
   const deleteTags = async () => {
     try {
+      onCompleted();
+
       await tagsDelete({ 
         siteId,
         tagIds: tags.map(t => t.id),

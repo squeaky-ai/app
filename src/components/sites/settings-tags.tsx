@@ -51,6 +51,8 @@ export const SettingsTags: FC = () => {
 
   const selectedTags = selected.map(s => tags.find(t => t.id === s));
 
+  const onCompleted = () => setSelected([]);
+
   return (
     <Drawer title='Tags' name='tags'>
       <Container className='md'>
@@ -59,8 +61,8 @@ export const SettingsTags: FC = () => {
         {tags.length > 0 && (
           <div className='bulk-actions'>
             <Dropdown direction='down' buttonClassName={classnames({ disabled: selected.length === 0 })} button={<><i className='ri-checkbox-multiple-line' /> Bulk Actions</>}>
-              <SettingsTagsMerge tags={selectedTags} siteId={siteId} />
-              <SettingsTagsDelete tags={selectedTags} siteId={siteId} />
+              <SettingsTagsMerge tags={selectedTags} siteId={siteId} onCompleted={onCompleted} />
+              <SettingsTagsDelete tags={selectedTags} siteId={siteId} onCompleted={onCompleted} />
             </Dropdown>
           </div>
         )}
