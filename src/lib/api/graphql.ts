@@ -60,6 +60,7 @@ import {
   CREATE_TAG_MUTATION,
   REMOVE_TAG_MUTATION,
   DELETE_TAG_MUTATION,
+  DELETE_TAGS_MUTATION,
   UPDATE_TAG_MUTATION,
   CREATE_NOTE_MUTATION,
   DELETE_NOTE_MUTATION,
@@ -74,6 +75,7 @@ import {
   TagCreateMutationInput,
   TagRemoveMutationInput,
   TagDeleteMutationInput,
+  TagsDeleteMutationInput,
   TagUpdateMutationInput,
   DeleteRecordingMutationInput,
   ViewedRecordingMutationInput,
@@ -430,6 +432,20 @@ export const tagDelete = async (input: TagDeleteMutationInput): Promise<SiteMuta
     });
 
     return { site: data.tagDelete };
+  } catch(error: any) {
+    console.error(error);
+    return parseGraphQLError(error);
+  }
+};
+
+export const tagsDelete = async (input: TagsDeleteMutationInput): Promise<SiteMutationResponse> => {
+  try {
+    const { data } = await client.mutate({
+      mutation: DELETE_TAGS_MUTATION,
+      variables: input
+    });
+
+    return { site: data.tagsDelete };
   } catch(error: any) {
     console.error(error);
     return parseGraphQLError(error);

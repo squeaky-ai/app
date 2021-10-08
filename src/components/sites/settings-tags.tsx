@@ -12,6 +12,7 @@ import { Button } from 'components/button';
 import { SettingsTag } from 'components/sites/settings-tag';
 import { Sort } from 'components/sort';
 import type { Site } from 'types/site';
+import { SettingsTagsDelete } from './settings-tags-delete';
 
 const QUERY = gql`
   query GetSiteTags($siteId: ID!) {
@@ -27,7 +28,7 @@ const QUERY = gql`
 
 export const SettingsTags: FC = () => {
   const router = useRouter();
-  const siteId = router.query.site_id;
+  const siteId = router.query.site_id as string;
   const [sort, setSort] = React.useState<string>('name__asc');
   const [selected, setSelected] = React.useState<string[]>([]);
 
@@ -57,7 +58,7 @@ export const SettingsTags: FC = () => {
           <div className='bulk-actions'>
             <Dropdown direction='down' buttonClassName={classnames({ disabled: selected.length === 0 })} button={<><i className='ri-checkbox-multiple-line' /> Bulk Actions</>}>
               <Button>Merge</Button>
-              <Button>Delete</Button>
+              <SettingsTagsDelete tags={selected.map(s => tags.find(t => t.id === s))} siteId={siteId} />
             </Dropdown>
           </div>
         )}
@@ -67,7 +68,7 @@ export const SettingsTags: FC = () => {
             <Cell>
               <Checkbox
                 checked={selected.length === tags.length && tags.length !== 0}
-                partial={selected.length !== 0 && selected.length !== tags.length}
+                partial={selected.length !== 0 && selected.length !== tags.length && tags.length !== 0}
                 disabled={tags.length === 0}
                 onChange={onSelectAll} 
               />
@@ -93,7 +94,7 @@ export const SettingsTags: FC = () => {
             <SettingsTag 
               key={tag.id} 
               tag={tag} 
-              siteId={siteId as string} 
+              siteId={siteId} 
               selected={selected}
               setSelected={setSelected}
             />

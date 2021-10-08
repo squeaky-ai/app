@@ -66,6 +66,11 @@ export interface TagDeleteMutationInput {
   tagId: string;
 }
 
+export interface TagsDeleteMutationInput {
+  siteId: string;
+  tagIds: string[];
+}
+
 export interface TagUpdateMutationInput {
   siteId: string;
   tagId: string;

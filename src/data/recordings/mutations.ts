@@ -40,6 +40,18 @@ export const DELETE_TAG_MUTATION = gql`
   }
 `;
 
+export const DELETE_TAGS_MUTATION = gql`
+  mutation TagsDelete($siteId: ID!, $tagIds: [ID!]!) {
+    tagsDelete(input: { siteId: $siteId, tagIds: $tagIds }) {
+      id
+      tags {
+        id
+        name
+      }
+    }
+  }
+`;
+
 export const UPDATE_TAG_MUTATION = gql`
   mutation TagUpdate($siteId: ID!, $tagId: ID!, $name: String!) {
     tagUpdate(input: { siteId: $siteId, tagId: $tagId, name: $name }) {
