@@ -6,6 +6,11 @@
   line-height: 16px;
   width: 100%;
 
+  p {
+    font-size: 13px;
+    line-height: 16px;
+  }
+
   .row {
     align-items: center;
     background: var(--white);
@@ -57,6 +62,10 @@
           border-right: none;
         }
       }
+    }
+
+    &.fluid {
+      grid-template-columns: 1fr;
     }
   }
 

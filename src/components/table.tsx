@@ -10,9 +10,9 @@ export const Table: FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, clas
   );
 };
 
-export const Row: FC<React.HTMLAttributes<HTMLDivElement> & { head?: boolean }> = ({ children, className, head, ...rest }) => {
+export const Row: FC<React.HTMLAttributes<HTMLDivElement> & { head?: boolean, fluid?: boolean }> = ({ children, className, head, fluid, ...rest }) => {
   return (
-    <div className={classnames('row', className, { head })} {...rest}>
+    <div className={classnames('row', className, { head, fluid })} {...rest}>
       {children}
     </div>
   );

@@ -98,4 +98,23 @@
       margin-bottom: .5rem;
     }
   }
+
+  .tags-table {
+    .row {
+      &.head {
+        grid-template-columns: 60px 1fr 1fr;
+      }
+
+      &.fluid {
+        p {
+          margin: 0;
+          text-align: center;
+        }
+      }
+
+      .checkbox {
+        margin: 0;
+      }
+    }
+  }
 }
