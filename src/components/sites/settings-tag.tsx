@@ -10,13 +10,24 @@ import type { Tag as ITag } from 'types/recording';
 interface Props {
   tag: ITag;
   siteId: string;
+  selected: string[];
+  setSelected: (selected: string[]) => void;
 }
 
-export const SettingsTag: FC<Props> = ({ tag, siteId }) => {
+export const SettingsTag: FC<Props> = ({ tag, siteId, selected, setSelected }) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.target.checked
+      ? setSelected([...selected, tag.id])
+      : setSelected(selected.filter(s => s !== tag.id ));
+  };
+
   return (
     <Row key={tag.id}>
       <Cell>
-        <Checkbox />
+        <Checkbox 
+          checked={selected.includes(tag.id)}
+          onChange={handleChange}
+        />
       </Cell>
       <Cell>
         <Tag>{tag.name}</Tag>

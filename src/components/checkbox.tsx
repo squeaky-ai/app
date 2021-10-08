@@ -5,9 +5,10 @@ import { Label } from 'components/label';
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   invalid?: boolean;
+  partial?: boolean;
 }
 
-export const Checkbox: FC<Props> = ({ className, name, disabled, children, invalid, checked, ...rest }) => {
+export const Checkbox: FC<Props> = ({ className, name, disabled, children, invalid, checked, partial, ...rest }) => {
   const onKeyDown = (event: React.KeyboardEvent<HTMLLabelElement>) => {
     if (event.code === 'Space') {
       (event.target as HTMLElement).click();
@@ -15,10 +16,13 @@ export const Checkbox: FC<Props> = ({ className, name, disabled, children, inval
   };
 
   return (
-    <Label className={classnames('checkbox', className, { invalid, disabled })} tabIndex={0} onKeyDown={onKeyDown}>
+    <Label className={classnames('checkbox', className, { invalid, disabled, partial })} tabIndex={0} onKeyDown={onKeyDown}>
       <input type='checkbox' name={name} checked={checked} disabled={disabled} {...rest} />
       <span className='check' role='checkbox' aria-checked={checked}>
-        <i className='ri-check-line' />
+        {partial
+          ? <i className='ri-subtract-line' />
+          : <i className='ri-check-line' />
+        }
       </span>
       <span>{children}</span>
     </Label>

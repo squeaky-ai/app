@@ -1,11 +1,14 @@
 import React from 'react';
 import type { FC } from 'react';
+import classnames from 'classnames';
 import { useRouter } from 'next/router';
 import { gql, useQuery } from '@apollo/client';
 import { Drawer } from 'components/drawer';
 import { Container } from 'components/container';
 import { Checkbox } from 'components/checkbox';
 import { Table, Row, Cell } from 'components/table';
+import { Dropdown } from 'components/dropdown';
+import { Button } from 'components/button';
 import { SettingsTag } from 'components/sites/settings-tag';
 import { Sort } from 'components/sort';
 import type { Site } from 'types/site';
@@ -26,6 +29,7 @@ export const SettingsTags: FC = () => {
   const router = useRouter();
   const siteId = router.query.site_id;
   const [sort, setSort] = React.useState<string>('name__asc');
+  const [selected, setSelected] = React.useState<string[]>([]);
 
   const { data } = useQuery<{ site: Site }>(QUERY, {
     variables: { siteId }
@@ -38,14 +42,36 @@ export const SettingsTags: FC = () => {
     : b.name.localeCompare(a.name)
   );
 
+  const onSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.target.checked
+      ? setSelected(tags.map(t => t.id))
+      : setSelected([]);
+  };
+
   return (
     <Drawer title='Tags' name='tags'>
       <Container className='md'>
         <p>You can add tags to your recordings to better document and categorise your findings. The table below lists any tags you have already created. You can delete, merge or rename tags using the options in the table.</p>
 
+        {tags.length > 0 && (
+          <div className='bulk-actions'>
+            <Dropdown direction='down' buttonClassName={classnames({ disabled: selected.length === 0 })} button={<><i className='ri-checkbox-multiple-line' /> Bulk Actions</>}>
+              <Button>Merge</Button>
+              <Button>Delete</Button>
+            </Dropdown>
+          </div>
+        )}
+
         <Table className='tags-table'>
           <Row head>
-            <Cell><Checkbox /></Cell>
+            <Cell>
+              <Checkbox
+                checked={selected.length === tags.length && tags.length !== 0}
+                partial={selected.length !== 0 && selected.length !== tags.length}
+                disabled={tags.length === 0}
+                onChange={onSelectAll} 
+              />
+            </Cell>
             <Cell>
               Tag name
               <Sort 
@@ -64,7 +90,13 @@ export const SettingsTags: FC = () => {
           )}
 
           {results.map(tag => (
-            <SettingsTag key={tag.id} tag={tag} siteId={siteId as string} />
+            <SettingsTag 
+              key={tag.id} 
+              tag={tag} 
+              siteId={siteId as string} 
+              selected={selected}
+              setSelected={setSelected}
+            />
           ))}
         </Table>
       </Container>

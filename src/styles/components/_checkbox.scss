@@ -94,6 +94,17 @@
   &.disabled {
     pointer-events: none;
   }
+
+  &.partial {
+    .check {
+      background: var(--blue-500);
+      border-color: var(--blue-500);
+      
+      i {
+        display: block;
+      }
+    }
+  }
 }
 
 .checkbox-group {

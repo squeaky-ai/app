@@ -99,6 +99,42 @@
     }
   }
 
+  .bulk-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+
+    .dropdown {
+      & > .button {
+        background: none;
+        border: none;
+        border-radius: var(--border-radius-md);
+        padding: .5rem 2rem .5rem 1rem;
+
+        i:not(.arrow) {
+          color: var(--blue-500);
+          font-size: 1.25rem;
+          margin-right: .5rem;
+        }
+
+        .arrow {
+          right: .5rem;
+          top: .5rem;
+        }
+      }
+
+      &.open {
+        & > .button {
+          background: var(--gray-100);
+        }
+      }
+    }
+
+    .dropdown-menu {
+      transform: translate(0, 2.5rem);
+    }
+  }
+
   .tags-table {
     .row {
       grid-template-columns: 60px 1fr 1fr;
