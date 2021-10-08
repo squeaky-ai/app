@@ -83,16 +83,20 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
                 </div>
               </h3>
               <menu>
-                <div className='menu-item'>
-                  <RecordingsColumns 
-                    columns={columns}
-                    setColumns={setColumns}
-                  />
-                </div>
-                <Filters 
-                  filters={filters}
-                  updateFilters={updateFilters}
-                />
+                {!!site.recordings.items.length && (
+                  <>
+                    <div className='menu-item'>
+                      <RecordingsColumns 
+                        columns={columns}
+                        setColumns={setColumns}
+                      />
+                    </div>
+                    <Filters 
+                      filters={filters}
+                      updateFilters={updateFilters}
+                    />
+                  </>
+                )}
               </menu>
             </div>
 
