@@ -19,8 +19,9 @@ export const Dropdown: FC<Props> = ({ button, buttonClassName, menuClassName, cl
 
   const handleClick = (event: MouseEvent) => {
     const element = event.target as Element;
+    const isModal = !!element.closest('.modal');
 
-    if (ref.current && !ref.current.contains(element)) {
+    if (ref.current && !ref.current.contains(element) && !isModal) {
       setOpen(false);
     }
   };

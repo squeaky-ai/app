@@ -4,6 +4,10 @@ export const CREATE_TAG_MUTATION = gql`
   mutation TagCreate($siteId: ID!, $recordingId: ID!, $name: String!) {
     tagCreate(input: { siteId: $siteId, recordingId: $recordingId, name: $name }) {
       id
+      tags {
+        id
+        name
+      }
       recording(recordingId: $recordingId) {
         tags {
           id
@@ -43,6 +47,18 @@ export const DELETE_TAG_MUTATION = gql`
 export const DELETE_TAGS_MUTATION = gql`
   mutation TagsDelete($siteId: ID!, $tagIds: [ID!]!) {
     tagsDelete(input: { siteId: $siteId, tagIds: $tagIds }) {
+      id
+      tags {
+        id
+        name
+      }
+    }
+  }
+`;
+
+export const MERGE_TAGS_MUTATION = gql`
+  mutation TagsMerge($siteId: ID!, $tagIds: [ID!]!, $name: String!) {
+    tagsMerge(input: { siteId: $siteId, tagIds: $tagIds, name: $name }) {
       id
       tags {
         id

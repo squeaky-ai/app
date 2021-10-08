@@ -8,11 +8,11 @@ import { Container } from 'components/container';
 import { Checkbox } from 'components/checkbox';
 import { Table, Row, Cell } from 'components/table';
 import { Dropdown } from 'components/dropdown';
-import { Button } from 'components/button';
 import { SettingsTag } from 'components/sites/settings-tag';
 import { Sort } from 'components/sort';
 import type { Site } from 'types/site';
 import { SettingsTagsDelete } from './settings-tags-delete';
+import { SettingsTagsMerge } from './settings-tags-merge';
 
 const QUERY = gql`
   query GetSiteTags($siteId: ID!) {
@@ -49,6 +49,8 @@ export const SettingsTags: FC = () => {
       : setSelected([]);
   };
 
+  const selectedTags = selected.map(s => tags.find(t => t.id === s));
+
   return (
     <Drawer title='Tags' name='tags'>
       <Container className='md'>
@@ -57,8 +59,8 @@ export const SettingsTags: FC = () => {
         {tags.length > 0 && (
           <div className='bulk-actions'>
             <Dropdown direction='down' buttonClassName={classnames({ disabled: selected.length === 0 })} button={<><i className='ri-checkbox-multiple-line' /> Bulk Actions</>}>
-              <Button>Merge</Button>
-              <SettingsTagsDelete tags={selected.map(s => tags.find(t => t.id === s))} siteId={siteId} />
+              <SettingsTagsMerge tags={selectedTags} siteId={siteId} />
+              <SettingsTagsDelete tags={selectedTags} siteId={siteId} />
             </Dropdown>
           </div>
         )}

@@ -58,7 +58,7 @@ export const SettingsTagsDelete: FC<Props> = ({ tags, siteId }) => {
           </ModalContents>
           <ModalFooter>
             <Button type='button' className='tertiary' onClick={deleteTags}>
-              Delete Tag
+              Delete Tags
             </Button>
             <Button type='button' className='quaternary' onClick={closeModal}>
               Cancel
