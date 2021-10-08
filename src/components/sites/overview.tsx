@@ -11,6 +11,7 @@ import { useOverview } from 'hooks/use-overview';
 import { toTimeString } from 'lib/dates';
 import type { Site } from 'types/site';
 import { Pill } from 'components/pill';
+import { Spinner } from 'components/spinner';
 
 interface Props {
   site: Site;
@@ -24,6 +25,10 @@ export const Overview: FC<Props> = ({ site }) => {
 
   const notes = overview.notes?.items;
   const recording = overview.recordingLatest;
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <div className='overview-grid'>

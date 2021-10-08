@@ -8,6 +8,7 @@ import { Container } from 'components/container';
 import { Sort } from 'components/sort';
 import { PageSize } from 'components/sites/page-size';
 import { Tooltip } from 'components/tooltip';
+import { Spinner } from 'components/spinner';
 import { VisitorsItem } from 'components/sites/visitors-item';
 import { Table, Row, Cell } from 'components/table';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
@@ -131,6 +132,12 @@ export const Visitors: FC<Props> = ({ site, query, columns, filters }) => {
           />
         ))}
       </Table>
+
+      {loading && !items.length && (
+        <Row className='loading'>
+          <Spinner />
+        </Row>
+      )}
       
       <div className='visitors-footer'>
         <Pagination 

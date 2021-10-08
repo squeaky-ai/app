@@ -8,6 +8,7 @@ import { RecordingsItem } from 'components/sites/recordings-item';
 import { Table, Row, Cell } from 'components/table';
 import { Sort } from 'components/sort';
 import { PageSize } from 'components/sites/page-size';
+import { Spinner } from 'components/spinner';
 import { useRecordings } from 'hooks/use-recordings';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 import { BASE_PATH } from 'data/common/constants';
@@ -68,6 +69,7 @@ export const Recordings: FC<Props> = ({ query, filters, columns }) => {
           <Cell>Browser</Cell>
           <Cell />
         </Row>
+        
         {items.map(recording => (
           <RecordingsItem 
             recording={recording} 
@@ -77,6 +79,12 @@ export const Recordings: FC<Props> = ({ query, filters, columns }) => {
           />
         ))}
       </Table>
+
+      {loading && !items.length && (
+        <Row className='loading'>
+          <Spinner />
+        </Row>
+      )}
       
       <div className='recordings-footer'>
         <Pagination 
