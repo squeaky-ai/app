@@ -1,5 +1,5 @@
 import { cloneDeep, uniq } from 'lodash';
-import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
+import { ApolloClient, InMemoryCache } from '@apollo/client';
 
 import {
   SitesQueryResponse,
@@ -36,6 +36,7 @@ import {
   TEAM_INVITE_ACCEPT_MUTATION,
   TEAM_INVITE_RESEND_MUTATION,
   TEAM_UPDATE_MUTATION,
+  TEAM_LEAVE_MUTATION,
   TEAM_DELETE_MUTATION
 } from 'data/teams/mutations';
 
@@ -113,7 +114,6 @@ export const cache = new InMemoryCache({
     Query: {
       fields: {
         sites: { merge: ACCEPT_INCOMING },
-
       },
     },
     Site: {
@@ -367,13 +367,7 @@ export const teamUpdate = async (input: TeamUpdateInput): Promise<SiteMutationRe
 export const teamLeave = async (input: TeamLeaveInput): Promise<SiteMutationResponse> => {
   try {
     await client.mutate({
-      mutation: gql`
-        mutation TeamLeave($input: TeamLeaveInput!) {
-          teamLeave(input: $input) {
-            id
-          }
-        }
-      `,
+      mutation: TEAM_LEAVE_MUTATION,
       variables: { input }
     });
 
@@ -416,7 +410,12 @@ export const tagRemove = async (input: TagRemoveMutationInput): Promise<SiteMuta
   try {
     const { data } = await client.mutate({
       mutation: REMOVE_TAG_MUTATION,
-      variables: input
+      variables: input,
+      update(cache) {
+        const normalizedId = cache.identify({ id: input.tagId, __typename: 'Tag' });
+        cache.evict({ id: normalizedId });
+        cache.gc();
+      }
     });
 
     return { site: data.tagRemove };
@@ -430,7 +429,12 @@ export const tagDelete = async (input: TagDeleteMutationInput): Promise<SiteMuta
   try {
     const { data } = await client.mutate({
       mutation: DELETE_TAG_MUTATION,
-      variables: input
+      variables: input,
+      update(cache) {
+        const normalizedId = cache.identify({ id: input.tagId, __typename: 'Tag' });
+        cache.evict({ id: normalizedId });
+        cache.gc();
+      }
     });
 
     return { site: data.tagDelete };
@@ -458,7 +462,14 @@ export const tagsMerge = async (input: TagsMergeMutationInput): Promise<SiteMuta
   try {
     const { data } = await client.mutate({
       mutation: MERGE_TAGS_MUTATION,
-      variables: input
+      variables: input,
+      update(cache) {
+        input.tagIds.forEach(id => {
+          const normalizedId = cache.identify({ id, __typename: 'Tag' });
+          cache.evict({ id: normalizedId });
+          cache.gc();
+        });
+      }
     });
 
     return { site: data.tagsMerge };

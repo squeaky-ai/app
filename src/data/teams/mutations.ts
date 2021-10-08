@@ -101,6 +101,14 @@ export const TEAM_UPDATE_MUTATION = gql`
   }
 `;
 
+export const TEAM_LEAVE_MUTATION = gql`
+  mutation TeamLeave($input: TeamLeaveInput!) {
+    teamLeave(input: $input) {
+      id
+    }
+  }
+`;
+
 export const TEAM_DELETE_MUTATION = gql`
   mutation TeamDelete($input: TeamDeleteInput!) {
     teamDelete(input: $input) {
