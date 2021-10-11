@@ -83,7 +83,7 @@ export const Sidebar: FC = () => {
                 <span>Team</span>
               </a>
             </Link>
-            <Link href={`/sites/${siteId}/settings`}>
+            <Link href={`/sites/${siteId}/settings/details`}>
               <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/settings`) })} data-label='Settings'>
                 <i className='ri-settings-3-line' />
                 <span>Settings</span>

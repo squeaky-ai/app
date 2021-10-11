@@ -41,6 +41,10 @@ export const GET_SITE_QUERY = gql`
           email
         }
       }
+      ipBlacklist {
+        name
+        value
+      }
     }
   }
 `;

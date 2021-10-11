@@ -27,6 +27,7 @@ export interface Site {
   tags?: Tag[];
   verifiedAt?: string;
   daysSinceLastRecording?: number;
+  ipBlacklist: SiteIpBlacklist[];
   createdAt: string;
   updatedAt: string;
 }
@@ -56,4 +57,9 @@ export interface SiteDeleteMutationInput {
 
 export interface SiteVerifyMutationInput {
   siteId: string;
+}
+
+export interface SiteIpBlacklist {
+  name: string;
+  value: string;
 }
