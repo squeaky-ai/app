@@ -37,3 +37,27 @@ export const VERIFY_SITE_MUTATION = gql`
     }
   }
 `;
+
+export const CREATE_IP_BLACKLIST_MUTATION = gql`
+  mutation SiteIpBlacklistCreate($input: SiteIpBlacklistCreateInput!) {
+    ipBlacklistCreate(input: $input) {
+      id
+      ipBlacklist {
+        name
+        value
+      }
+    }
+  }
+`;
+
+export const DELETE_IP_BLACKLIST_MUTATION = gql`
+  mutation SiteIpBlacklistDelete($input: SiteIpBlacklistDeleteInput!) {
+    ipBlacklistDelete(input: $input) {
+      id
+      ipBlacklist {
+        name
+        value
+      }
+    }
+  }
+`;

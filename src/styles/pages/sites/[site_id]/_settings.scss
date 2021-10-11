@@ -170,4 +170,19 @@
       }
     }
   }
+
+  .ip-table {
+    margin-bottom: 1.5rem;
+
+    .row {
+      grid-template-columns: 1fr 1fr 1fr;
+
+      &.fluid {
+        p {
+          margin: 0;
+          text-align: center;
+        }
+      }
+    }
+  }
 }

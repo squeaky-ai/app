@@ -63,3 +63,14 @@ export interface SiteIpBlacklist {
   name: string;
   value: string;
 }
+
+export interface SiteIpBlacklistCreateMutationInput {
+  siteId: string;
+  name: string;
+  value: string;
+}
+
+export interface SiteIpBlacklistDeleteMutationInput {
+  siteId: string;
+  value: string;
+}
