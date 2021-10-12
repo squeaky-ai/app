@@ -61,3 +61,27 @@ export const DELETE_IP_BLACKLIST_MUTATION = gql`
     }
   }
 `;
+
+export const CREATE_DOMAIN_BLACKLIST_MUTATION = gql`
+  mutation SiteDomainBlacklistCreate($input: SiteDomainBlacklistCreateInput!) {
+    domainBlacklistCreate(input: $input) {
+      id
+      domainBlacklist {
+        type
+        value
+      }
+    }
+  }
+`;
+
+export const DELETE_DOMAIN_BLACKLIST_MUTATION = gql`
+  mutation SiteDomainBlacklistDelete($input: SiteDomainBlacklistDeleteInput!) {
+    domainBlacklistDelete(input: $input) {
+      id
+      domainBlacklist {
+        type
+        value
+      }
+    }
+  }
+`;

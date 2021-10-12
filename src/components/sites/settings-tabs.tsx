@@ -44,7 +44,7 @@ export const SettingsTabs: FC<Props> = ({ site, page }) => {
         <li className='tab'>
           <Link href={`/sites/${site.id}/settings/screening`}>
             <a className={classnames('button tab-button', { active: page === 'screening' })}>
-              IP Screening
+              Screening
             </a>
           </Link>
         </li>

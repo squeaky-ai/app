@@ -9,6 +9,8 @@ import {
   SiteVerifyMutationInput,
   SiteIpBlacklistCreateMutationInput,
   SiteIpBlacklistDeleteMutationInput,
+  SiteDomainBlacklistCreateMutationInput,
+  SiteDomainBlacklistDeleteMutationInput,
 } from 'types/site';
 
 import {
@@ -22,6 +24,8 @@ import {
   VERIFY_SITE_MUTATION,
   CREATE_IP_BLACKLIST_MUTATION,
   DELETE_IP_BLACKLIST_MUTATION,
+  CREATE_DOMAIN_BLACKLIST_MUTATION,
+  DELETE_DOMAIN_BLACKLIST_MUTATION,
 } from 'data/sites/mutations';
 
 import { 
@@ -269,6 +273,34 @@ export const ipBlacklistDelete = async (input: SiteIpBlacklistDeleteMutationInpu
     });
 
     return { site: data.ipBlacklist };
+  } catch(error: any) {
+    console.error(error);
+    return parseGraphQLError(error);
+  }
+};
+
+export const domainBlacklistCreate = async (input: SiteDomainBlacklistCreateMutationInput): Promise<SiteMutationResponse> => {
+  try {
+    const { data } = await client.mutate({
+      mutation: CREATE_DOMAIN_BLACKLIST_MUTATION,
+      variables: { input }
+    });
+
+    return { site: data.domainBlacklist };
+  } catch(error: any) {
+    console.error(error);
+    return parseGraphQLError(error);
+  }
+};
+
+export const domainBlacklistDelete = async (input: SiteDomainBlacklistDeleteMutationInput): Promise<SiteMutationResponse> => {
+  try {
+    const { data } = await client.mutate({
+      mutation: DELETE_DOMAIN_BLACKLIST_MUTATION,
+      variables: { input }
+    });
+
+    return { site: data.domainBlacklist };
   } catch(error: any) {
     console.error(error);
     return parseGraphQLError(error);

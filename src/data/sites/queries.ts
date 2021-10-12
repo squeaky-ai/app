@@ -45,6 +45,10 @@ export const GET_SITE_QUERY = gql`
         name
         value
       }
+      domainBlacklist {
+        type
+        value
+      }
     }
   }
 `;

@@ -10,14 +10,39 @@ import { Page } from 'components/sites/page';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { SettingsTabs } from 'components/sites/settings-tabs';
 import { Table, Row, Cell } from 'components/table';
-import { SettingsScreeningIpCreate } from 'components/sites/settings-screening-ip-create';
-import { SettingsScreeningIpDelete } from 'components/sites/settings-screening-ip-delete';
-import { OWNER, ADMIN } from 'data/teams/constants';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { Message } from 'components/message';
 import { Button } from 'components/button';
+import { SettingsScreeningIpCreate } from 'components/sites/settings-screening-ip-create';
+import { OWNER, ADMIN } from 'data/teams/constants';
+import { domainBlacklistDelete, ipBlacklistDelete } from 'lib/api/graphql';
+import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { useToasts } from 'hooks/use-toasts';
+import { SettingsScreeningDomainCreate } from 'components/sites/settings-screening-domain-create';
+import { SettingsScreeningEmailCreate } from 'components/sites/settings-screening-email-create';
 
 const SitesSettingsIp: NextPage<ServerSideProps> = ({ user }) => {
+  const toasts = useToasts();
+
+  const deleteIp = async (siteId: string, value: string) => {
+    try {
+      await ipBlacklistDelete({ siteId, value });
+
+      toasts.add({ type: 'success', body: 'IP deleted successfully' });
+    } catch {
+      toasts.add({ type: 'error', body: 'There was an issue deleting the IP' });
+    }
+  };
+
+  const deleteDomain = async (siteId: string, value: string) => {
+    try {
+      await domainBlacklistDelete({ siteId, value });
+
+      toasts.add({ type: 'success', body: 'Domain deleted successfully' });
+    } catch {
+      toasts.add({ type: 'error', body: 'There was an issue deleting the domain' });
+    }
+  };
+
   return (
     <>
       <Head>
@@ -61,9 +86,9 @@ const SitesSettingsIp: NextPage<ServerSideProps> = ({ user }) => {
 
                   {site.ipBlacklist.map(ip => (
                     <Row key={ip.value}>
-                      <Cell>{ip.name}</Cell>
+                      <Cell><b>{ip.name}</b></Cell>
                       <Cell>{ip.value}</Cell>
-                      <Cell><SettingsScreeningIpDelete siteId={site.id} ip={ip} /></Cell>
+                      <Cell><Button className='link tertiary' onClick={() => deleteIp(site.id, ip.value)}>Remove</Button></Cell>
                     </Row>
                   ))}
                 </Table>
@@ -78,15 +103,33 @@ const SitesSettingsIp: NextPage<ServerSideProps> = ({ user }) => {
               <Message 
                 type='info'
                 message={
-                  <p>This feature is only available if you have are usig the data linking feature in Squeaky. There is developer documentation for data linking <Link href='/developers'><a>here</a></Link>.</p>
+                  <p>This feature is only available if you have are using the data linking feature in Squeaky. There is developer documentation for data linking <Link href='/developers'><a>here</a></Link>.</p>
                 }
               />
 
               <p>If you’re using the data linking feature then you’ll be able to automatically screen out all visits and recordings from the user email address you synchronise with Squeaky from your app or website. You can do this on an domain level, or per email.</p>
+
+              {site.domainBlacklist.length > 0 && (
+                <Table className='ip-table'>
+                  <Row head>
+                    <Cell>Type</Cell>
+                    <Cell>Value</Cell>
+                    <Cell>Options</Cell>
+                  </Row>
+
+                  {site.domainBlacklist.map(ip => (
+                    <Row key={ip.value}>
+                      <Cell><b>{ip.type === 'domain' ? 'Domain' : 'Email'}</b></Cell>
+                      <Cell>{ip.value}</Cell>
+                      <Cell><Button className='link tertiary' onClick={() => deleteDomain(site.id, ip.value)}>Remove</Button></Cell>
+                    </Row>
+                  ))}
+                </Table>
+              )}
               
               <div className='actions'>
-                <Button className='secondary'>+ Add Domain</Button>
-                <Button className='secondary'>+ Add Email</Button>
+                <SettingsScreeningDomainCreate siteId={site.id} />
+                <SettingsScreeningEmailCreate siteId={site.id} />
               </div>
             </Container>
           </Main>

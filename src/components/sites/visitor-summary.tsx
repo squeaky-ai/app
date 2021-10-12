@@ -65,11 +65,11 @@ export const VisitorSummary: FC<Props> = ({ site, visitor }) => {
           </div>
           <div className='row'>
             <dt>First visited</dt>
-            <dd>{toNiceDate(Number(visitor.firstViewedAt))}</dd>
+            <dd>{toNiceDate(new Date(visitor.firstViewedAt).valueOf())}</dd>
           </div>
           <div className='row'>
             <dt>Last activity</dt>
-            <dd>{toNiceDate(Number(visitor.lastActivityAt))}</dd>
+            <dd>{toNiceDate(new Date(visitor.lastActivityAt).valueOf())}</dd>
           </div>
           <div className='row'>
             <dt>Language</dt>

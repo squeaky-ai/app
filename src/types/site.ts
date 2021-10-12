@@ -28,6 +28,7 @@ export interface Site {
   verifiedAt?: string;
   daysSinceLastRecording?: number;
   ipBlacklist: SiteIpBlacklist[];
+  domainBlacklist: SiteDomainBlacklist[];
   createdAt: string;
   updatedAt: string;
 }
@@ -64,6 +65,11 @@ export interface SiteIpBlacklist {
   value: string;
 }
 
+export interface SiteDomainBlacklist {
+  type: 'domain' | 'email';
+  value: string;
+}
+
 export interface SiteIpBlacklistCreateMutationInput {
   siteId: string;
   name: string;
@@ -71,6 +77,17 @@ export interface SiteIpBlacklistCreateMutationInput {
 }
 
 export interface SiteIpBlacklistDeleteMutationInput {
+  siteId: string;
+  value: string;
+}
+
+export interface SiteDomainBlacklistCreateMutationInput {
+  siteId: string;
+  type: 'domain' | 'email';
+  value: string
+}
+
+export interface SiteDomainBlacklistDeleteMutationInput {
   siteId: string;
   value: string;
 }
