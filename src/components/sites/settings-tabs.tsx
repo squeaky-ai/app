@@ -6,7 +6,7 @@ import { Site } from 'types/site';
 
 interface Props {
   site: Site;
-  page: 'details' | 'tracking-code' | 'privacy' | 'tags' | 'ip' | 'delete';
+  page: 'details' | 'tracking-code' | 'privacy' | 'tags' | 'screening' | 'delete';
 }
 
 export const SettingsTabs: FC<Props> = ({ site, page }) => {
@@ -42,8 +42,8 @@ export const SettingsTabs: FC<Props> = ({ site, page }) => {
           </Link>
         </li>
         <li className='tab'>
-          <Link href={`/sites/${site.id}/settings/ip`}>
-            <a className={classnames('button tab-button', { active: page === 'ip' })}>
+          <Link href={`/sites/${site.id}/settings/screening`}>
+            <a className={classnames('button tab-button', { active: page === 'screening' })}>
               IP Screening
             </a>
           </Link>

@@ -11,7 +11,7 @@ interface Props {
   siteId: string;
 }
 
-export const SettingsIpDelete: FC<Props> = ({ ip, siteId }) => {
+export const SettingsScreeningIpDelete: FC<Props> = ({ ip, siteId }) => {
   const ref = React.useRef<Modal>();
   const toasts = useToasts();
 
@@ -41,7 +41,7 @@ export const SettingsIpDelete: FC<Props> = ({ ip, siteId }) => {
 
   return (
     <>
-      <Button className='link tertiary' onClick={openModal}>Delete</Button>
+      <Button className='link tertiary' onClick={openModal}>Remove</Button>
 
       <Modal ref={ref}>
         <ModalBody aria-labelledby='ip-delete-title' aria-describedby='ip-delete-description'>

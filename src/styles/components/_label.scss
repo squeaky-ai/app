@@ -7,4 +7,8 @@
   a {
     font-weight: var(--font-weight-normal);
   }
+
+  & + .extra {
+    margin-bottom: .75rem;
+  }
 }

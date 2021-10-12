@@ -135,7 +135,7 @@
     }
 
     .dropdown-menu {
-      transform: translate(0, 2.5rem);
+      transform: translate(0, 2.5rem); 
     }
   }
 
@@ -171,8 +171,25 @@
     }
   }
 
+  .label {
+    &.section {
+      margin: 3rem 0 1.5rem 0;
+    }
+  }
+
+  .message {
+    p {
+      margin-bottom: 0;
+    }
+  }
+
   .ip-table {
     margin-bottom: 1.5rem;
+
+    .button {
+      font-size: 14px;
+      line-height: 16px;
+    }
 
     .row {
       grid-template-columns: 1fr 1fr 1fr;
@@ -183,6 +200,12 @@
           text-align: center;
         }
       }
+    }
+  }
+
+  .actions {
+    .button + .button {
+      margin-left: 1rem;
     }
   }
 }

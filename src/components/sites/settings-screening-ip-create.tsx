@@ -19,7 +19,7 @@ const IpSchema = Yup.object().shape({
   value: Yup.string().matches(IP_ADDRESS_REGES, 'Value must be formatted X.X.X.X')
 });
 
-export const SettingsIpCreate: FC<Props> = ({ siteId }) => {
+export const SettingsScreeningIpCreate: FC<Props> = ({ siteId }) => {
   const ref = React.useRef<Modal>();
   const toasts = useToasts();
 
@@ -33,7 +33,7 @@ export const SettingsIpCreate: FC<Props> = ({ siteId }) => {
 
   return (
     <>
-      <Button className='primary' onClick={openModal}>Create</Button>
+      <Button className='secondary' onClick={openModal}>+ Add IP Address</Button>
 
       <Modal ref={ref}>
         <Formik
@@ -70,25 +70,13 @@ export const SettingsIpCreate: FC<Props> = ({ siteId }) => {
             <form onSubmit={handleSubmit}>
               <ModalBody aria-labelledby='ip-create-title' aria-describedby='ip-create-description'>
                 <ModalHeader>
-                  <p id='ip-create-title'><b>Add IP</b></p>
+                  <p id='ip-create-title'><b>IP Address Screening</b></p>
                   <Button type='button' onClick={closeModal}>
                     <i className='ri-close-line' />
                   </Button>
                 </ModalHeader>
                 <ModalContents>
-                  <Label htmlFor='name'>Name</Label>
-                  <Input
-                    name='name' 
-                    type='name' 
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    placeholder='Office'
-                    value={values.name}
-                    invalid={touched.name && !!errors.name}
-                  />
-                  <span className='validation'>{errors.name}</span>
-
-                  <Label htmlFor='value'>Value</Label>
+                  <Label htmlFor='value'>IP Address</Label>
                   <Input
                     name='value' 
                     type='value' 
@@ -99,10 +87,23 @@ export const SettingsIpCreate: FC<Props> = ({ siteId }) => {
                     invalid={touched.value && !!errors.value}
                   />
                   <span className='validation'>{errors.value}</span>
+
+                  <Label htmlFor='name'>Name</Label>
+                  <p className='extra'>(Useful for finding and removing entries later)</p>
+                  <Input
+                    name='name' 
+                    type='name' 
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    placeholder='Office'
+                    value={values.name}
+                    invalid={touched.name && !!errors.name}
+                  />
+                  <span className='validation'>{errors.name}</span>
                 </ModalContents>
                 <ModalFooter>
                   <Button type='submit' className='primary' disabled={isSubmitting}>
-                    Create
+                    Save
                   </Button>
                   <Button type='button' className='quaternary' onClick={closeModal}>
                     Cancel
