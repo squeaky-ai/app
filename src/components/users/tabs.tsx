@@ -16,7 +16,6 @@ export const Tabs: FC<Props> = ({ page }) => {
         <li className='tab'>
           <Link href='/users/account'>
             <a className={classnames('button tab-button', { active: page === 'account' })}>
-              <i className='ri-account-circle-line' />
               Account
             </a>
           </Link>
@@ -24,7 +23,6 @@ export const Tabs: FC<Props> = ({ page }) => {
         <li className='tab'>
           <Link href='/users/password'>
             <a className={classnames('button tab-button', { active: page === 'password' })}>
-              <i className='ri-lock-line' />
               Password
             </a>
           </Link>
