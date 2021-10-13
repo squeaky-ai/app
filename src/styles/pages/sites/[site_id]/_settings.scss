@@ -7,6 +7,22 @@
 
   .site-tabs {
     margin-bottom: 3rem;
+
+    .badge {
+      margin-left: .5rem;
+
+      &.warning i {
+        color: var(--orange-500);
+      }
+
+      &.verified i {
+        color: var(--green-500);
+      }
+
+      &.unverified i {
+        color: var(--magenta-500);
+      }
+    }
   }
 
   .tracking {

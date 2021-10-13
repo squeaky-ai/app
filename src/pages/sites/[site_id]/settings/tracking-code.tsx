@@ -22,16 +22,18 @@ const SitesSettingsTrackingCode: NextPage<ServerSideProps> = ({ user }) => {
       </Head>
 
       <Page user={user} scope={[OWNER, ADMIN]}>
-        {({ site }) => (
+        {({ site, member }) => (
           <Main>
             <BreadCrumbs site={site} items={[{ name: 'Settings', href: `/sites/${site.id}/settings/details` }, { name: 'Tracking Code' }]} />
 
             <h3 className='title'>
-              Tracking Code
+              Site Settings
               <Access roles={[OWNER, ADMIN]} />
             </h3>
 
-            <SettingsTabs site={site} page='tracking-code' />
+            <SettingsTabs site={site} member={member} page='tracking-code' />
+
+            <h4>Tracking code</h4>
 
             <Container className='md'>
               {!site.verifiedAt && (

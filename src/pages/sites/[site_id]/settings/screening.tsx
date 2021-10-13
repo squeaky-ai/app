@@ -50,16 +50,16 @@ const SitesSettingsIp: NextPage<ServerSideProps> = ({ user }) => {
       </Head>
 
       <Page user={user} scope={[OWNER, ADMIN]}>
-        {({ site }) => (
+        {({ site, member }) => (
           <Main>
             <BreadCrumbs site={site} items={[{ name: 'Settings', href: `/sites/${site.id}/settings/details` }, { name: 'Screening' }]} />
 
             <h3 className='title'>
-              Screening
+              Site Settings
               <Access roles={[OWNER, ADMIN]} />
             </h3>
 
-            <SettingsTabs site={site} page='screening' />
+            <SettingsTabs site={site} member={member} page='screening' />
             
             <Container className='md'>
               <h4>Screening</h4>

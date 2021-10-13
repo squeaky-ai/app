@@ -67,16 +67,18 @@ const SitesSettingsTags: NextPage<ServerSideProps> = ({ user }) => {
       </Head>
 
       <Page user={user} scope={[OWNER, ADMIN]}>
-        {({ site }) => (
+        {({ site, member }) => (
           <Main>
             <BreadCrumbs site={site} items={[{ name: 'Settings', href: `/sites/${site.id}/settings/details` }, { name: 'Tags' }]} />
 
             <h3 className='title'>
-              Tags
+              Site Settings
               <Access roles={[OWNER, ADMIN]} />
             </h3>
 
-            <SettingsTabs site={site} page='tags' />
+            <SettingsTabs site={site} member={member} page='tags' />
+
+            <h4>Tags</h4>
 
             <Container className='md'>
               <p>You can add tags to your recordings to better document and categorise your findings. The table below lists any tags you have already created. You can delete, merge or rename tags using the options in the table.</p>

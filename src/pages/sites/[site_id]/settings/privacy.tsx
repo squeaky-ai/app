@@ -18,16 +18,18 @@ const SitesSettingsPrivacy: NextPage<ServerSideProps> = ({ user }) => {
       </Head>
 
       <Page user={user} scope={[OWNER, ADMIN]}>
-        {({ site }) => (
+        {({ site, member }) => (
           <Main>
             <BreadCrumbs site={site} items={[{ name: 'Settings', href: `/sites/${site.id}/settings/details` }, { name: 'Privacy' }]} />
 
             <h3 className='title'>
-              Privacy
+              Site Settings
               <Access roles={[OWNER, ADMIN]} />
             </h3>
 
-            <SettingsTabs site={site} page='privacy' />
+            <SettingsTabs site={site} member={member} page='privacy' />
+
+            <h4>Privacy</h4>
 
             <Container className='md'>
               <p>At Squeaky we <b>automatically anonymise all data that users input into forms</b>. If there are other types of content you don’t want to record then you can <b>manually apply the following class names</b> to the relevant elements in your codebase:</p>

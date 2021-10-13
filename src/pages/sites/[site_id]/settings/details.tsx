@@ -44,16 +44,18 @@ const SitesSettingsDetails: NextPage<ServerSideProps> = ({ user }) => {
       </Head>
 
       <Page user={user} scope={[OWNER, ADMIN]}>
-        {({ site }) => (
+        {({ site, member }) => (
           <Main>
             <BreadCrumbs site={site} items={[{ name: 'Settings' }, { name: 'Details' }]} />
 
             <h3 className='title'>
-              Site Details
+              Site Settings
               <Access roles={[OWNER, ADMIN]} />
             </h3>
 
-            <SettingsTabs site={site} page='details' />
+            <SettingsTabs site={site} page='details' member={member} />
+
+            <h4>Site details</h4>
 
             <Formik
               initialValues={{ name: site.name, protocol: `${site.url.split('://')[0]}://`, hostname: site.url.split('://')[1] }}
