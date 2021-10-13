@@ -6,7 +6,6 @@ import { last } from 'lodash';
 import { EventType, IncrementalSource } from 'rrweb';
 import { ActivityTimestamp } from 'components/sites/activity-timestamp';
 import { SidebarActivityVisibility } from 'components/sites/sidebar-activity-visibility';
-import { cssPath } from 'lib/css-path';
 import { Preference, Preferences } from 'lib/preferences';
 import type { Event } from 'types/event';
 import type { Recording } from 'types/recording';
@@ -60,17 +59,6 @@ export const SidebarActivity: FC<Props> = ({ recording, replayer }) => {
 
   const startedAt = activity[0]?.timestamp || 0;
 
-  const getCssSelector = (id: number) => {
-    const node = replayer?.getMirror().getNode(id);
-    if (!node) return 'Loading...';
-
-    const element = node.nodeType === Node.TEXT_NODE
-      ? node.parentNode
-      : node;
-
-    return cssPath(element) || 'html > body';
-  }
-
   const getPathName = (url: string) => new URL(url).pathname;
 
   return (
@@ -105,7 +93,7 @@ export const SidebarActivity: FC<Props> = ({ recording, replayer }) => {
                 <p className='title'>
                   {getMouseInteractionLabel(item.data.type)} <ActivityTimestamp timestamp={item.timestamp} offset={startedAt} replayer={replayer} />
                 </p>
-                <p className='info'>{getCssSelector(item.data.id)}</p>
+                <p className='info'>{(item.data as any).selector || 'Unknown'}</p>
               </>
             )}
           </li>
