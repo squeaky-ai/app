@@ -33,11 +33,11 @@ export const Analytics: FC<Props> = ({ period }) => {
         </div>
         <div className='card visitors'>
           <h4>Visitors</h4>
-          <h2>{analytics.visitorsCount.total}</h2>
+          <h2>{analytics.visitorsCount.total.toLocaleString()}</h2>
         </div>
         <div className='card views'>
           <h4>Page Views</h4>
-          <h2>{analytics.pageViews}</h2>
+          <h2>{analytics.pageViews.toLocaleString()}</h2>
         </div>
         <div className='card session-duration'>
           <h4>Average Session Duration</h4>

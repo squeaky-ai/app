@@ -39,4 +39,43 @@
       color: var(--green-500);
     }
   }
+
+  &.dismissable {
+    flex-direction: column;
+    padding: 1.5rem;
+    position: relative;
+
+    i {
+      display: inline-block;
+      margin: 0;
+    }
+
+    .close {
+      background: none;
+      border: none;
+      right: 1rem;
+      position: absolute;
+      top: 1rem;
+    }
+
+    p {
+      i {
+        font-size: 1.25rem;
+        vertical-align: middle;
+      }
+
+      &:first-of-type {
+        align-items: center;
+        display: flex;
+
+        i {
+          margin-right: .5rem;
+        }
+      }
+
+      &:last-of-type {
+        margin: 0;
+      }
+    }
+  }
 }

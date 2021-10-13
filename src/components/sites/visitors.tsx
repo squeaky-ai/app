@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
 import classnames from 'classnames';
 import { Pagination } from 'components/pagination';
@@ -13,9 +14,11 @@ import { VisitorsItem } from 'components/sites/visitors-item';
 import { Table, Row, Cell } from 'components/table';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 import { BASE_PATH } from 'data/common/constants';
+import { Preference } from 'lib/preferences';
 import { allColumns } from 'lib/visitors';
 import type { Site } from 'types/site';
 import type { Column, Filters, VisitorSortBy } from 'types/visitor';
+import { DismissableMessage } from 'components/message';
 
 interface Props {
   query: string;
@@ -58,6 +61,13 @@ export const Visitors: FC<Props> = ({ site, query, columns, filters }) => {
           </div>
         </Container>
       )}
+
+      <DismissableMessage
+        preference={Preference.VISITORS_LINKED_DATA_HIDE}
+        type='info'
+        heading={<p><i className='ri-link-m' /> Linked Data</p>}
+        message={<p>The columns using the <i className='ri-link-m' /> link icon are used to display linked user data from your website or web app. To discover how you can link Squeaky visitor records directly with data of logged in users, <Link href='/developers'><a target='_blank'>click here</a></Link>.</p>}
+      />
 
       <Table className={classnames('visitors-list hover', tableClassNames)}>
         <Row head style={rowStyle}>
