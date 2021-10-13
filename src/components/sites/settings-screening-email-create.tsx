@@ -5,6 +5,7 @@ import { Formik } from 'formik';
 import { Button } from 'components/button';
 import { Input } from 'components/input';
 import { Label } from 'components/label';
+import { Message } from 'components/message';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { useToasts } from 'hooks/use-toasts';
 import { domainBlacklistCreate } from 'lib/api/graphql';
@@ -85,6 +86,11 @@ export const SettingsScreeningEmailCreate: FC<Props> = ({ siteId }) => {
                     invalid={touched.value && !!errors.value}
                   />
                   <span className='validation'>{errors.value}</span>
+
+                  <Message 
+                    type='error'
+                    message={<p>This will also delete any historical visitors and/or recording data associated with this email address.</p>}
+                  />
                 </ModalContents>
                 <ModalFooter>
                   <Button type='submit' className='primary' disabled={isSubmitting}>

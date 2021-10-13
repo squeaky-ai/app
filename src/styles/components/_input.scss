@@ -73,3 +73,17 @@
     padding-left: 8.5rem;
   }
 }
+
+.icon-input {
+  position: relative;
+
+  span {
+    left: .75rem;
+    top: .4rem;
+    position: absolute;
+  }
+
+  input {
+    padding-left: 2.25rem;
+  }
+}

@@ -5,6 +5,7 @@ import { Formik } from 'formik';
 import { Button } from 'components/button';
 import { Input } from 'components/input';
 import { Label } from 'components/label';
+import { Message } from 'components/message';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { useToasts } from 'hooks/use-toasts';
 import { domainBlacklistCreate } from 'lib/api/graphql';
@@ -74,17 +75,27 @@ export const SettingsScreeningDomainCreate: FC<Props> = ({ siteId }) => {
                   </Button>
                 </ModalHeader>
                 <ModalContents>
+                  <p>To stop all recordings from visitors with a particular email domain e.g. any.email@yoursite.com, then you enter the domain name below.</p>
+
                   <Label htmlFor='value'>Domain</Label>
-                  <Input
-                    name='value' 
-                    type='value' 
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    placeholder='squeaky.ai'
-                    value={values.value}
-                    invalid={touched.value && !!errors.value}
+                  <div className='icon-input'>
+                    <span>@</span>
+                    <Input
+                      name='value' 
+                      type='value' 
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      placeholder='squeaky.ai'
+                      value={values.value}
+                      invalid={touched.value && !!errors.value}
+                    />
+                    <span className='validation'>{errors.value}</span>
+                  </div>
+
+                  <Message 
+                    type='error'
+                    message={<p>This will also delete any historical visitors and/or recording data associated with this domain.</p>}
                   />
-                  <span className='validation'>{errors.value}</span>
                 </ModalContents>
                 <ModalFooter>
                   <Button type='submit' className='primary' disabled={isSubmitting}>
