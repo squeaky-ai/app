@@ -38,14 +38,17 @@ export const Overview: FC<Props> = ({ site }) => {
           Visitors
         </h3>
         <h2>
-          {overview.analytics.visitorsCount.total}
-          <Pill type='tertiary'>{overview.analytics.visitorsCount.new} New</Pill>
+          {overview.analytics.visitorsCount.total.toLocaleString()}
         </h2>
-        <div className='link'>
-          <Link href={`/sites/${site_id}/visitors`}>
-            <a>View All</a>
-          </Link>
-          <i className='ri-arrow-right-line' />
+        <div className='bottom'>
+          <Pill type='tertiary'>{overview.analytics.visitorsCount.new} New</Pill>
+
+          <div className='link'>
+            <Link href={`/sites/${site_id}/visitors`}>
+              <a>View</a>
+            </Link>
+            <i className='ri-arrow-right-line' />
+          </div>
         </div>
       </Card>
 
@@ -55,14 +58,17 @@ export const Overview: FC<Props> = ({ site }) => {
           Recordings
         </h3>
         <h2>
-          {overview.analytics.recordingsCount.total}
-          <Pill type='tertiary'>{overview.analytics.recordingsCount.new} New</Pill>
+          {overview.analytics.recordingsCount.total.toLocaleString()}
         </h2>
-        <div className='link'>
-          <Link href={`/sites/${site_id}/recordings`}>
-            <a>View All</a>
-          </Link>
-          <i className='ri-arrow-right-line' />
+        <div className='bottom'>
+          <Pill type='tertiary'>{overview.analytics.recordingsCount.new} New</Pill>
+
+          <div className='link'>
+            <Link href={`/sites/${site_id}/recordings`}>
+              <a>View</a>
+            </Link>
+            <i className='ri-arrow-right-line' />
+          </div>
         </div>
       </Card>
 
@@ -71,7 +77,7 @@ export const Overview: FC<Props> = ({ site }) => {
           <i className='ri-pages-line' />
           Page Views
         </h3>
-        <h2>{overview.analytics.pageViews}</h2>
+        <h2>{overview.analytics.pageViews.toLocaleString()}</h2>
         <div className='link'>
           <Link href={`/sites/${site_id}/analytics`}>
             <a>Analytics</a>
