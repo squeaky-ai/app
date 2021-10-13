@@ -25,7 +25,7 @@ export const DismissableMessage: FC<Props & { preference: Preference, heading: s
   message, 
   ...rest 
 }) => {
-  const [show, setShow] = React.useState<boolean>(true);
+  const [show, setShow] = React.useState<boolean>(false);
 
   const handleDismiss = () => {
     setShow(false);
@@ -33,8 +33,8 @@ export const DismissableMessage: FC<Props & { preference: Preference, heading: s
   };
 
   React.useEffect(() => {
-    if (Preferences.getBoolean(preference)) {
-      setShow(false);
+    if (!Preferences.getBoolean(preference)) {
+      setShow(true);
     }
   }, []);
 
