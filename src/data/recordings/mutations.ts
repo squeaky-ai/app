@@ -56,18 +56,6 @@ export const DELETE_TAGS_MUTATION = gql`
   }
 `;
 
-export const MERGE_TAGS_MUTATION = gql`
-  mutation TagsMerge($siteId: ID!, $tagIds: [ID!]!, $name: String!) {
-    tagsMerge(input: { siteId: $siteId, tagIds: $tagIds, name: $name }) {
-      id
-      tags {
-        id
-        name
-      }
-    }
-  }
-`;
-
 export const UPDATE_TAG_MUTATION = gql`
   mutation TagUpdate($siteId: ID!, $tagId: ID!, $name: String!) {
     tagUpdate(input: { siteId: $siteId, tagId: $tagId, name: $name }) {

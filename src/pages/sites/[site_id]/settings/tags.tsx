@@ -17,7 +17,6 @@ import { Sort } from 'components/sort';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { SettingsTabs } from 'components/sites/settings-tabs';
 import { SettingsTagsDelete } from 'components/sites/settings-tags-delete';
-import { SettingsTagsMerge } from 'components/sites/settings-tags-merge';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import type { Site } from 'types/site';
 
@@ -81,12 +80,11 @@ const SitesSettingsTags: NextPage<ServerSideProps> = ({ user }) => {
             <h4>Tags</h4>
 
             <Container className='md'>
-              <p>You can add tags to your recordings to better document and categorise your findings. The table below lists any tags you have already created. You can delete, merge or rename tags using the options in the table.</p>
+              <p>You can add tags to your recordings to better document and categorise your findings. The table below lists any tags you have already created. You can delete or rename tags using the options in the table.</p>
 
               {tags.length > 0 && (
                 <div className='bulk-actions'>
                   <Dropdown direction='down' buttonClassName={classnames({ disabled: selected.length === 0 })} button={<><i className='ri-checkbox-multiple-line' /> Bulk Actions</>}>
-                    <SettingsTagsMerge tags={selectedTags} siteId={siteId} onCompleted={onCompleted} />
                     <SettingsTagsDelete tags={selectedTags} siteId={siteId} onCompleted={onCompleted} />
                   </Dropdown>
                 </div>
