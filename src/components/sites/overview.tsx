@@ -12,6 +12,7 @@ import { toTimeString } from 'lib/dates';
 import type { Site } from 'types/site';
 import { Pill } from 'components/pill';
 import { Spinner } from 'components/spinner';
+import { OverviewActiveVisitorsCount } from 'components/sites/overview-active-visitors-count';
 
 interface Props {
   site: Site;
@@ -32,6 +33,8 @@ export const Overview: FC<Props> = ({ site }) => {
 
   return (
     <div className='overview-grid'>
+      <OverviewActiveVisitorsCount site={site} />
+
       <Card className='visitors'>
         <h3 className='sub-heading'>
           <i className='ri-group-line' />

@@ -29,6 +29,7 @@ export const useOverview = (): UseOverview => {
   });
 
   const fallback: Overview = {
+    activeVisitorCount: 0,
     notes: {
       items: []
     },
