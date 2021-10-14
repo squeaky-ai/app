@@ -88,6 +88,7 @@ export const SettingsTags: FC = () => {
             </Cell>
             <Cell>Options</Cell>
           </Row>
+
           {tags.length === 0 && (
             <Row fluid>
               <p>There are currently no tags created for your site.</p>

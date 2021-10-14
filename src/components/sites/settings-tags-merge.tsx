@@ -50,6 +50,8 @@ export const SettingsTagsMerge: FC<Props> = ({ tags, siteId, onCompleted }) => {
                   tagIds: tags.map(t => t.id),
                   name: values.name,
                 });
+
+                closeModal();
           
                 toasts.add({ type: 'success', body: 'Tags merged successfully' });
               } catch {
