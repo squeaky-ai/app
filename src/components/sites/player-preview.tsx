@@ -32,6 +32,9 @@ export const PlayerPreview: FC<Props> = ({ recording }) => {
 
     replayer.play();
 
+    // Can't have users tabbing around in there!
+    ref.current.querySelector('iframe').setAttribute('tabindex', '-1');
+
     return () => {
       replayer?.pause();
     };

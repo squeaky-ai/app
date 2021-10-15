@@ -44,7 +44,7 @@ export const initReplayer = ({ failed, replayer, recording, dispatch }: InitArgs
     mouseTail: {
       lineWidth: 3,
       strokeStyle: '#F0438C'
-    } 
+    },
   });
 
   // TODO: The typing for this is a mess! Listen for some of
@@ -70,6 +70,10 @@ export const initReplayer = ({ failed, replayer, recording, dispatch }: InitArgs
   });
 
   replayer.play();
+
+
+  // Can't have users tabbing around in there!
+  element.querySelector('iframe').setAttribute('tabindex', '-1');
 
   return replayer;
 };
