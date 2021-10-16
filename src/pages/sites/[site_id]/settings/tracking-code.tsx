@@ -43,8 +43,8 @@ const SitesSettingsTrackingCode: NextPage<ServerSideProps> = ({ user }) => {
                     message='Your tracking code is not yet verified. Please following the instructions below to start using Squeaky on your site.'
                   />
 
-                  <p>Please paste the code below into the <code className='code'>&lt;head&gt;</code> section of your HTML on every page you wish to track on your website <a href={site.url} rel='noreferrer' target='_blank'>{site.url}</a>.</p>
-                  <p>This enables Squeaky to anonymously capture user behaviour, giving you valuable insights into their experience on your site.</p>
+                  <p>Please paste the code below into the <code className='code'>&lt;head&gt;</code> section of your HTML on every page you wish to track on your website <a href={site.url} rel='noreferrer' target='_blank'>{site.url}</a>. This is the code that enables Squeaky to anonymously capture user behaviour, giving you valuable insights into their experience on your site.</p>
+                  <p><b>Please note</b>: You’ll need to add it to a <b>publicly accessible page</b> (e.g. not behind a login) for us to verify the installation, if this isn’t possible please <a href='/contact-us/' target='_blank'>contact us</a> and we’ll arrange support you with a workaround.</p>
                 </>
               )}
 
