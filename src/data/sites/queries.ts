@@ -24,11 +24,6 @@ export const GET_SITE_QUERY = gql`
       ownerName
       daysSinceLastRecording
       recordingsCount
-      recordings(size: 1) {
-        items {
-          id
-        }
-      }
       team {
         id
         role
