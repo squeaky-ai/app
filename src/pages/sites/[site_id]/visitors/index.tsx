@@ -66,7 +66,7 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
 
       <Page user={user} scope={[]}>
         {({ site }) => (
-          <Main className={classnames({ empty: site.recordings.items.length === 0 })}>
+          <Main className={classnames({ empty: site.recordingsCount === 0 })}>
             <BreadCrumbs site={site} items={[{ name: 'Visitors' }]} />
 
             <div className='visitors-header'>
@@ -83,7 +83,7 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
                 </div>
               </h3>
               <menu>
-                {!!site.recordings.items.length && (
+                {site.recordingsCount > 0 && (
                   <>
                     <div className='menu-item'>
                       <VisitorsColumns 
@@ -116,7 +116,7 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
               </div>
             </Container>
 
-            {!!site.recordings.items.length && (
+            {site.recordingsCount > 0 && (
               <>
                 <Tags 
                   filters={filters} 

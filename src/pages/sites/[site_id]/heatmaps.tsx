@@ -25,7 +25,7 @@ const SitesHeatmaps: NextPage<ServerSideProps> = ({ user }) => {
 
       <Page user={user} scope={[]}>
         {({ site }) => (
-          <Main className={classnames({ empty: site.recordings.items.length === 0 })}>
+          <Main className={classnames({ empty: site.recordingsCount === 0 })}>
             <BreadCrumbs site={site} items={[{ name: 'Heatmaps' }]} />
 
             <div className='heatmaps-heading'>
@@ -49,7 +49,7 @@ const SitesHeatmaps: NextPage<ServerSideProps> = ({ user }) => {
               </div>
             </Container>
 
-            {!!site.recordings.items.length && page && (
+            {site.recordingsCount > 0 && page && (
               <Heatmaps page={page} />
             )}
           </Main>

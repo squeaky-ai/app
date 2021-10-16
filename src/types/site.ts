@@ -14,6 +14,7 @@ export interface Site {
   uuid: string;
   ownerName: string;
   team: Team[];
+  recordingsCount: number;
   notes?: PaginatedNotesResponse;
   languages?: string[];
   pages?: string[];

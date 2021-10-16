@@ -21,7 +21,7 @@ const SitesOverview: NextPage<ServerSideProps> = ({ user }) => (
 
     <Page user={user} scope={[]}>
       {({ site }) => (
-        <Main className={classnames({ empty: site.recordings.items.length === 0 })}>
+        <Main className={classnames({ empty: site.recordingsCount === 0 })}>
           <BreadCrumbs site={site} items={[{ name: 'Overview' }]} />
 
           <h3 className='title'>Overview</h3>
@@ -42,7 +42,7 @@ const SitesOverview: NextPage<ServerSideProps> = ({ user }) => (
             </div>
           </Container>
 
-          {!!site.recordings.items.length && (
+          {site.recordingsCount > 0 && (
             <Overview site={site} />
           )}
         </Main>

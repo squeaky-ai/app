@@ -57,7 +57,7 @@ const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
 
       <Page user={user} scope={[]}>
         {({ site }) => (
-          <Main className={classnames({ empty: site.recordings.items.length === 0})}>
+          <Main className={classnames({ empty: site.recordingsCount === 0})}>
             <BreadCrumbs site={site} items={[{ name: 'Analytics' }]} />
 
             <div className='heading'>
@@ -90,7 +90,7 @@ const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
               </div>
             </Container>
 
-            {!!site.recordings.items.length && (
+            {site.recordingsCount > 0 && (
               <Analytics period={period} />
             )}
           </Main>

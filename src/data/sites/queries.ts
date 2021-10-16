@@ -23,6 +23,7 @@ export const GET_SITE_QUERY = gql`
       planName
       ownerName
       daysSinceLastRecording
+      recordingsCount
       recordings(size: 1) {
         items {
           id
