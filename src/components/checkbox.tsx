@@ -15,8 +15,12 @@ export const Checkbox: FC<Props> = ({ className, name, disabled, children, inval
     }
   };
 
+  const onClick = (event: React.MouseEvent) => {
+    event.stopPropagation();
+  };
+
   return (
-    <Label className={classnames('checkbox', className, { invalid, disabled, partial })} tabIndex={0} onKeyDown={onKeyDown}>
+    <Label className={classnames('checkbox', className, { invalid, disabled, partial })} tabIndex={0} onKeyDown={onKeyDown} onClick={onClick}>
       <input type='checkbox' name={name} checked={checked} disabled={disabled} {...rest} />
       <span className='check' role='checkbox' aria-checked={checked}>
         {partial

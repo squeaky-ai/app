@@ -35,7 +35,7 @@ export const RecordingsItem: FC<Props> = ({ query, recording, style, selected, s
 
   const onRowClick = (event: React.MouseEvent) => {
     const element = event.target as HTMLElement;
-    const preventDefault = element.closest('button') || element.closest('.checkbox');
+    const preventDefault = element.closest('button');
 
     if (preventDefault) {
       event.preventDefault();
