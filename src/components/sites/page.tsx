@@ -28,10 +28,7 @@ export const Page: FC<Props> = ({ children, user, scope }) => {
   const { loading, site } = useSite();
 
   const member = getTeamMember(site, user);
-
-  const authorized = user.superuser 
-    ? true 
-    : scope.length ? scope.includes(member?.role) : true;
+  const authorized = scope.length ? scope.includes(member?.role) : true;
 
   return (
     <>
