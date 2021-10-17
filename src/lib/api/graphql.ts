@@ -65,6 +65,10 @@ import {
   USER_PASSWORD_MUTATION
 } from 'data/users/mutations';
 
+import { 
+  GET_RECORDINGS_QUERY 
+} from 'data/recordings/queries';
+
 import {
   CREATE_TAG_MUTATION,
   REMOVE_TAG_MUTATION,
@@ -76,7 +80,9 @@ import {
   UPDATE_NOTE_MUTATION,
   DELETE_RECORDING_MUTATION,
   VIEWED_RECORDING_MUTATION,
-  BOOKMARK_RECORDING_MUTATION
+  BOOKMARK_RECORDING_MUTATION,
+  DELETE_RECORDINGS_MUTATION,
+  VIEWED_RECORDINGS_MUTATION,
 } from 'data/recordings/mutations';
 
 import {
@@ -88,7 +94,9 @@ import {
   TagUpdateMutationInput,
   DeleteRecordingMutationInput,
   ViewedRecordingMutationInput,
-  BookmarkRecordingMutationInput
+  BookmarkRecordingMutationInput,
+  DeleteRecordingsMutationInput,
+  ViewedRecordingsMutationInput,
 } from 'types/recording';
 
 import {
@@ -611,6 +619,27 @@ export const recordingBookmarked = async (input: BookmarkRecordingMutationInput)
   });
 
   return { site: data.recordingBookmarked };
+};
+
+export const recordingsDelete = async (input: DeleteRecordingsMutationInput): Promise<SiteMutationResponse> => {
+  const { data } = await client.mutate({
+    mutation: DELETE_RECORDINGS_MUTATION,
+    variables: { input },
+    refetchQueries: [
+      GET_RECORDINGS_QUERY,
+    ],
+  });
+
+  return { site: data.recordingsDelete };
+};
+
+export const recordingsViewed = async (input: ViewedRecordingsMutationInput): Promise<SiteMutationResponse> => {
+  const { data } = await client.mutate({
+    mutation: VIEWED_RECORDINGS_MUTATION,
+    variables: { input }
+  });
+
+  return { site: data.recordingsViewed };
 };
 
 export const feedbackCreate = async (input: FeedbackCreateMutation): Promise<void> => {

@@ -15,7 +15,10 @@ import { Page } from 'components/sites/page';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { Filters } from 'components/sites/filters/recordings/filters';
 import { Tags } from 'components/sites/filters/recordings/tags';
+import { Dropdown } from 'components/dropdown';
 import { RecordingsColumns } from 'components/sites/recordings-columns';
+import { RecordingsDelete } from 'components/sites/recordings-delete';
+import { RecordingsStatus } from 'components/sites/recrdordings-status';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { BASE_PATH } from 'data/common/constants';
 import { defaultFilters, allColumns } from 'lib/recordings';
@@ -27,6 +30,7 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
   const [query, setQuery] = React.useState<string>('');
   const [columns, setColumns] = React.useState<Column[]>(allColumns);
   const [filters, setFilters] = React.useState<IFilters>(defaultFilters);
+  const [selected, setSelected] = React.useState<string[]>([]);
 
   const handleCancel = () => {
     setQuery('');
@@ -48,6 +52,8 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
   const clearFilters = () => {
     setFilters(defaultFilters);
   };
+
+  const onCompleted = () => setSelected([]);
 
   React.useEffect(() => {
     const existing = Preferences.getArray(Preference.RECORDINGS_COLUMNS);
@@ -91,6 +97,12 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
                         setColumns={setColumns}
                       />
                     </div>
+                    <div className='bulk-actions'>
+                      <Dropdown direction='down' buttonClassName={classnames({ disabled: selected.length === 0 })} button={<><i className='ri-checkbox-multiple-line' /> Bulk Actions</>}>
+                        <RecordingsStatus siteId={site.id} recordingIds={selected} onCompleted={onCompleted} />
+                        <RecordingsDelete siteId={site.id} recordingIds={selected} onCompleted={onCompleted} />
+                      </Dropdown>
+                    </div>
                     <Filters 
                       filters={filters}
                       updateFilters={updateFilters}
@@ -128,6 +140,8 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
                   query={query} 
                   filters={filters} 
                   columns={columns} 
+                  selected={selected}
+                  setSelected={setSelected}
                 />
               </>
             )}

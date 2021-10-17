@@ -33,6 +33,12 @@ export const defaultFilters: Filters = {
 
 export const allColumns: Column[] = [
   {
+    name: 'select',
+    label: 'Select',
+    width: '58px',
+    disabled: false,
+  },
+  {
     name: 'status',
     label: 'Status',
     width: '105px',

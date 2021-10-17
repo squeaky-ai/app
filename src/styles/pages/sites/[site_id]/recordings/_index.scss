@@ -112,6 +112,46 @@
           }
         }
       }
+
+      .bulk-actions {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 0;
+    
+        .dropdown {
+          & > .button {
+            background: none;
+            border: none;
+            border-radius: var(--border-radius-md);
+            padding: .5rem 1rem .5rem 1rem;
+    
+            i:not(.arrow) {
+              color: var(--blue-500);
+              font-size: 1.25rem;
+              margin-right: .5rem;
+            }
+
+            &:hover {
+              background: var(--gray-100);
+            }
+    
+            .arrow {
+              right: .5rem;
+              top: .5rem;
+            }
+          }
+    
+          &.open {
+            & > .button {
+              background: var(--gray-100);
+            }
+          }
+        }
+    
+        .dropdown-menu {
+          transform: translate(0, 3rem); 
+        }
+      }
     }
   }
 
@@ -249,7 +289,7 @@
       margin: 0 auto 2rem auto;
     }
 
-    &.hide-status {
+    &.hide-select {
       .row {
         .cell:nth-of-type(1) {
           display: none;
@@ -257,15 +297,15 @@
       }
     }
 
-    &.hide-visitor-id {
+    &.hide-status {
       .row {
-        .cell:nth-of-type(3) {
+        .cell:nth-of-type(2) {
           display: none;
         }
       }
     }
 
-    &.hide-date-time {
+    &.hide-visitor-id {
       .row {
         .cell:nth-of-type(4) {
           display: none;
@@ -273,7 +313,7 @@
       }
     }
 
-    &.hide-duration {
+    &.hide-date-time {
       .row {
         .cell:nth-of-type(5) {
           display: none;
@@ -281,7 +321,7 @@
       }
     }
 
-    &.hide-pages {
+    &.hide-duration {
       .row {
         .cell:nth-of-type(6) {
           display: none;
@@ -289,7 +329,7 @@
       }
     }
 
-    &.hide-start-exit {
+    &.hide-pages {
       .row {
         .cell:nth-of-type(7) {
           display: none;
@@ -297,7 +337,7 @@
       }
     }
 
-    &.hide-device {
+    &.hide-start-exit {
       .row {
         .cell:nth-of-type(8) {
           display: none;
@@ -305,9 +345,17 @@
       }
     }
 
-    &.hide-browser {
+    &.hide-device {
       .row {
         .cell:nth-of-type(9) {
+          display: none;
+        }
+      }
+    }
+
+    &.hide-browser {
+      .row {
+        .cell:nth-of-type(10) {
           display: none;
         }
       }

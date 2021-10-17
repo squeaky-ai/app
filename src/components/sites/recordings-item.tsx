@@ -23,9 +23,11 @@ interface Props {
   query?: string;
   recording: Recording;
   style?: React.CSSProperties;
+  selected: string[];
+  setSelected: (selected: string[]) => void;
 }
 
-export const RecordingsItem: FC<Props> = ({ query, recording, style }) => {
+export const RecordingsItem: FC<Props> = ({ query, recording, style, selected, setSelected }) => {
   const toast = useToasts();
   const router = useRouter();
   const ref = React.useRef<Modal>();
@@ -33,9 +35,9 @@ export const RecordingsItem: FC<Props> = ({ query, recording, style }) => {
 
   const onRowClick = (event: React.MouseEvent) => {
     const element = event.target as HTMLElement;
-    const ignored = element.closest('button');
+    const preventDefault = element.closest('button') || element.closest('.checkbox');
 
-    if (ignored) {
+    if (preventDefault) {
       event.preventDefault();
     }
   };
@@ -70,6 +72,12 @@ export const RecordingsItem: FC<Props> = ({ query, recording, style }) => {
     }
   };
 
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.target.checked
+      ? setSelected([...selected, recording.id])
+      : setSelected(selected.filter(s => s !== recording.id ));
+  };
+
   const openModal = () => {
     if (ref.current) ref.current.show();
   };
@@ -92,6 +100,12 @@ export const RecordingsItem: FC<Props> = ({ query, recording, style }) => {
     <>
       <Link href={`/sites/${router.query.site_id}/recordings/${recording.id}`}>
         <a className='row recording-row' onClick={onRowClick} style={style}>
+          <Cell>
+            <Checkbox 
+              checked={selected.includes(recording.id)}
+              onChange={handleChange}
+            />
+          </Cell>
           <Cell>
             {recording.viewed
               ? <Pill type='secondary'>Viewed</Pill>

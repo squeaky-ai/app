@@ -167,3 +167,31 @@ export const BOOKMARK_RECORDING_MUTATION = gql`
     }
   }
 `;
+
+export const DELETE_RECORDINGS_MUTATION = gql`
+  mutation DeletedRecordings($input: RecordingsDeleteInput!) {
+    recordingsDelete(input: $input) {
+      id
+      recordingsCount
+      recordings {
+        items {
+          id
+        }
+      }
+    }
+  }
+`;
+
+export const VIEWED_RECORDINGS_MUTATION = gql`
+  mutation ViewedRecordings($input: RecordingsViewedInput!) {
+    recordingsViewed(input: $input) {
+      id
+      recordings {
+        items {
+          id
+          viewed
+        }
+      }
+    }
+  }
+`;

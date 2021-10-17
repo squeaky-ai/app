@@ -93,6 +93,17 @@ export interface BookmarkRecordingMutationInput {
   bookmarked: boolean;
 }
 
+export interface DeleteRecordingsMutationInput {
+  siteId: string;
+  recordingIds: string[];
+}
+
+export interface ViewedRecordingsMutationInput {
+  siteId: string;
+  recordingIds: string[];
+  viewed: boolean;
+}
+
 export interface PaginatedEventsResponse {
   items: string[];
   pagination: EventPagination;

@@ -43,6 +43,10 @@
       text-decoration: underline;
     }
 
+    .checkbox {
+      margin: 0;
+    }
+
     &:last-of-type {
       border-radius: 0 0 var(--border-radius-md) var(--border-radius-md) ;
     }

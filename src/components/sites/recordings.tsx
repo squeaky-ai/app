@@ -9,6 +9,7 @@ import { Table, Row, Cell } from 'components/table';
 import { Sort } from 'components/sort';
 import { PageSize } from 'components/sites/page-size';
 import { Spinner } from 'components/spinner';
+import { Checkbox } from 'components/checkbox';
 import { useRecordings } from 'hooks/use-recordings';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 import { BASE_PATH } from 'data/common/constants';
@@ -19,9 +20,11 @@ interface Props {
   query: string;
   filters: Filters;
   columns: Column[];
+  selected: string[];
+  setSelected: (selected: string[]) => void;
 }
 
-export const Recordings: FC<Props> = ({ query, filters, columns }) => {
+export const Recordings: FC<Props> = ({ query, filters, columns, selected, setSelected }) => {
   const [page, setPage] = React.useState<number>(0);
   const [size, setSize] = React.useState<number>(25);
   const [sort, setSort] = React.useState<RecordingSortBy>('connected_at__desc');
@@ -45,6 +48,12 @@ export const Recordings: FC<Props> = ({ query, filters, columns }) => {
   const tableClassNames = allColumns
     .map(column => columns.find(c => c.name === column.name) ? '' : `hide-${column.name}`);
 
+  const onSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.target.checked
+      ? setSelected(items.map(t => t.id))
+      : setSelected([]);
+  };
+
   return (
     <>
       {!loading && (
@@ -58,6 +67,14 @@ export const Recordings: FC<Props> = ({ query, filters, columns }) => {
     
       <Table className={classnames('recordings-list hover', tableClassNames)}>
         <Row head style={rowStyle}>
+          <Cell>
+            <Checkbox
+              checked={selected.length === items.length && items.length !== 0}
+              partial={selected.length !== 0 && selected.length !== items.length && items.length !== 0}
+              disabled={items.length === 0}
+              onChange={onSelectAll} 
+            />
+          </Cell>
           <Cell>Status</Cell>
           <Cell>Recording ID</Cell>
           <Cell>User ID</Cell>
@@ -76,6 +93,8 @@ export const Recordings: FC<Props> = ({ query, filters, columns }) => {
             query={query} 
             key={recording.id} 
             style={rowStyle}
+            selected={selected}
+            setSelected={setSelected}
           />
         ))}
       </Table>
