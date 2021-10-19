@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import classnames from 'classnames';
 import { Checkbox } from 'components/checkbox';
 import { Dropdown } from 'components/dropdown';
 import { allColumns } from 'lib/recordings';
@@ -39,6 +40,7 @@ export const RecordingsColumns: FC<Props> = ({ columns, setColumns }) => {
             value={column.name}
             checked={isChecked(column.name)}
             disabled={column.disabled}
+            className={classnames({ hidden: column.hide })}
           >
             {column.label}
           </Checkbox>
