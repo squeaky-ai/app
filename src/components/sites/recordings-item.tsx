@@ -38,7 +38,7 @@ export const RecordingsItem: FC<Props> = ({ site, query, recording, style, selec
 
   const onRowClick = (event: React.MouseEvent) => {
     const element = event.target as HTMLElement;
-    const preventDefault = element.closest('button');
+    const preventDefault = element.closest('button') || element.closest('.modal');
 
     if (preventDefault) {
       event.preventDefault();
