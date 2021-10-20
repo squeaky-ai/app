@@ -6,6 +6,10 @@ import type { FC } from 'react';
 
 interface Props {
   className?: string;
+  // It may seem weird at first as the component usually closes this
+  // via the ref, but the modal can also be closed via the eventListeners
+  // so the hook is there to cover all cases
+  onClose?: VoidFunction;
 }
 
 interface State {
@@ -35,6 +39,7 @@ export class Modal extends React.Component<Props, State> {
 
   public hide = () => {
     this.setState({ show: false });
+    this.props.onClose && this.props.onClose();
   };
 
   private handleClick = (event: MouseEvent) => {

@@ -6,18 +6,16 @@ import { useRouter } from 'next/router';
 import { Highlighter } from 'components/highlighter';
 import { Pill } from 'components/pill';
 import { Checkbox } from 'components/checkbox';
-import { Button } from 'components/button';
 import { Tooltip } from 'components/tooltip';
 import { Browser } from 'components/browser';
 import { Dropdown } from 'components/dropdown';
 import { Device } from 'components/device';
-import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { Cell } from 'components/table';
 import { RecordingsShare } from 'components/sites/recordings-share';
+import { RecordingDelete } from 'components/sites/recording-delete';
 import { toNiceDate, toTimeString } from 'lib/dates';
 import { useToasts } from 'hooks/use-toasts';
-import { recordingDelete, recordingBookmarked } from 'lib/api/graphql';
-import { Preferences, Preference } from 'lib/preferences';
+import { recordingBookmarked } from 'lib/api/graphql';
 import type { Recording } from 'types/recording';
 import type { Site } from 'types/site';
 
@@ -33,8 +31,7 @@ interface Props {
 export const RecordingsItem: FC<Props> = ({ site, query, recording, style, selected, setSelected }) => {
   const toast = useToasts();
   const router = useRouter();
-  const ref = React.useRef<Modal>();
-  const [skipDeleteModal, setSkipDeleteModal] = React.useState<boolean>(false);
+  const rowActionsRef = React.useRef<Dropdown>();
 
   const onRowClick = (event: React.MouseEvent) => {
     const element = event.target as HTMLElement;
@@ -42,24 +39,6 @@ export const RecordingsItem: FC<Props> = ({ site, query, recording, style, selec
 
     if (preventDefault) {
       event.preventDefault();
-    }
-  };
-
-  const deleteRecording = async () => {
-    try {
-      await recordingDelete({ 
-        siteId: router.query.site_id as string, 
-        recordingId: recording.id 
-      });
-
-      if (skipDeleteModal) {
-        Preferences.setBoolean(Preference.RECORDINGS_DELETED_SKIP_PROMPT, true);
-      }
-
-      closeModal();
-      toast.add({ type: 'success', body: 'Recording deleted' });
-    } catch {
-      toast.add({ type: 'error', body: 'There was an error deleteing your recording. Please try again.' });
     }
   };
 
@@ -81,22 +60,8 @@ export const RecordingsItem: FC<Props> = ({ site, query, recording, style, selec
       : setSelected(selected.filter(s => s !== recording.id ));
   };
 
-  const openModal = () => {
-    if (ref.current) ref.current.show();
-  };
-
-  const closeModal = () => {
-    if (ref.current) ref.current.hide();
-  };
-
-  const handleDeleteClick = async () => {
-    const skipModal = Preferences.getBoolean(Preference.RECORDINGS_DELETED_SKIP_PROMPT);
-
-    if (skipModal) {
-      await deleteRecording();
-    } else {
-      openModal();
-    }
+  const onRowActionClose = () => {
+    if (rowActionsRef.current) rowActionsRef.current.close();
   };
 
   return (
@@ -181,44 +146,22 @@ export const RecordingsItem: FC<Props> = ({ site, query, recording, style, selec
             </Tooltip>
           </Cell>
           <Cell>
-            <Dropdown portal button={<i className='ri-more-2-fill' />} buttonClassName='options'>
-              <Button onClick={handleDeleteClick}>
-                <i className='ri-delete-bin-line' /> Delete
-              </Button>
+            <Dropdown portal button={<i className='ri-more-2-fill' />} buttonClassName='options' ref={rowActionsRef}>
+              <RecordingDelete 
+                site={site} 
+                recordingId={recording.id}
+                onClose={onRowActionClose}
+              />
               <RecordingsShare
                 button={<><i className='ri-share-line' /> Share</>}
                 site={site}
                 recordingId={recording.id}
+                onClose={onRowActionClose}
               />
             </Dropdown>
           </Cell>
         </a>
       </Link>
-
-      <Modal ref={ref}>
-        <ModalBody aria-labelledby='delete-recording-title' aria-describedby='delete-recording-description'>
-          <ModalHeader>
-            <p id='delete-recording-title'><b>Delete Recording</b></p>
-            <Button type='button' onClick={closeModal}>
-              <i className='ri-close-line' />
-            </Button>
-          </ModalHeader>
-          <ModalContents>
-            <p id='delete-recording-description'>Are you sure you wish to delete this recording?</p>
-            <Checkbox checked={skipDeleteModal} onChange={() => setSkipDeleteModal(!skipDeleteModal)}>
-              Don&apos;t show message again
-            </Checkbox>
-          </ModalContents>
-          <ModalFooter>
-            <Button type='button' className='tertiary' onClick={deleteRecording}>
-              Delete Recording
-            </Button>
-            <Button type='button' className='quaternary' onClick={closeModal}>
-              Cancel
-            </Button>
-          </ModalFooter>
-        </ModalBody>
-      </Modal>
     </>
   );
 };

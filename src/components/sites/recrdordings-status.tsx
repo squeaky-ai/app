@@ -12,13 +12,14 @@ interface Props {
   siteId: string;
   recordingIds: string[];
   onCompleted: VoidFunction;
+  onClose: VoidFunction;
 }
 
 const StatusSchema = Yup.object().shape({
   status: Yup.string().oneOf(['New', 'Viewed']),
 });
 
-export const RecordingsStatus: FC<Props> = ({ recordingIds, siteId, onCompleted }) => {
+export const RecordingsStatus: FC<Props> = ({ recordingIds, siteId, onCompleted, onClose }) => {
   const ref = React.useRef<Modal>();
   const toasts = useToasts();
 
@@ -34,7 +35,7 @@ export const RecordingsStatus: FC<Props> = ({ recordingIds, siteId, onCompleted 
     <>
       <Button className='link tertiary' onClick={openModal}>Update status</Button>
 
-      <Modal ref={ref}>
+      <Modal ref={ref} onClose={onClose}>
         <Formik
           initialValues={{ status: '' }}
           validationSchema={StatusSchema}

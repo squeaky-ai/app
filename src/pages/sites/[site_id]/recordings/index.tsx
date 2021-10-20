@@ -31,6 +31,7 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
   const [columns, setColumns] = React.useState<Column[]>(allColumns);
   const [filters, setFilters] = React.useState<IFilters>(defaultFilters);
   const [selected, setSelected] = React.useState<string[]>([]);
+  const bulkActionsRef = React.useRef<Dropdown>();
 
   const handleCancel = () => {
     setQuery('');
@@ -53,7 +54,14 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
     setFilters(defaultFilters);
   };
 
-  const onCompleted = () => setSelected([]);
+  const onCompleted = () => {
+    setSelected([]);
+    onBulkActionClose();
+  };
+
+  const onBulkActionClose = () => {
+    if (bulkActionsRef.current) bulkActionsRef.current.close();
+  };
 
   React.useEffect(() => {
     const existing = Preferences.getArray(Preference.RECORDINGS_COLUMNS);
@@ -92,9 +100,9 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
                 {site.recordingsCount > 0 && (
                   <>
                     <div className='bulk-actions'>
-                      <Dropdown direction='down' buttonClassName={classnames({ disabled: selected.length === 0 })} button={<><i className='ri-checkbox-multiple-line' /> Bulk Actions</>}>
-                        <RecordingsStatus siteId={site.id} recordingIds={selected} onCompleted={onCompleted} />
-                        <RecordingsDelete siteId={site.id} recordingIds={selected} onCompleted={onCompleted} />
+                      <Dropdown ref={bulkActionsRef} direction='down' buttonClassName={classnames({ disabled: selected.length === 0 })} button={<><i className='ri-checkbox-multiple-line' /> Bulk Actions</>}>
+                        <RecordingsStatus onClose={onBulkActionClose} siteId={site.id} recordingIds={selected} onCompleted={onCompleted} />
+                        <RecordingsDelete onClose={onBulkActionClose} siteId={site.id} recordingIds={selected} onCompleted={onCompleted} />
                       </Dropdown>
                     </div>
                     <div className='menu-item'>

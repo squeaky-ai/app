@@ -1,5 +1,4 @@
 import React from 'react';
-import type { FC } from 'react';
 import classnames from 'classnames';
 import FocusTrap from 'focus-trap-react';
 import { Button } from 'components/button';
@@ -13,27 +12,54 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   portal?: boolean;
 }
 
-export const Dropdown: FC<Props> = ({ button, buttonClassName, menuClassName, className, children, direction, portal }) => {
-  const ref = React.useRef<HTMLDivElement>();
-  const [open, setOpen] = React.useState(false);
+interface State {
+  open: boolean;
+}
 
-  const handleClick = (event: MouseEvent) => {
+export class Dropdown extends React.Component<Props, State> {
+  private ref: React.RefObject<HTMLDivElement>;
+
+  public constructor(props: Props) {
+    super(props);
+
+    this.state = { open: false };
+    this.ref = React.createRef()
+  }
+
+  public componentDidMount() {
+    document.addEventListener('click', this.handleClick);
+    document.addEventListener('keyup', this.handleKeyUp);
+
+    return () => {
+      document.removeEventListener('click', this.handleClick, true);
+      document.removeEventListener('keyup', this.handleKeyUp, true);
+    }
+  }
+
+  public close = () => {
+    this.setState({ open: false });
+  };
+
+  private handleClick = (event: MouseEvent) => {
     const element = event.target as Element;
     const isModal = !!element.closest('.modal');
 
-    if (ref.current && !ref.current.contains(element) && !isModal) {
-      setOpen(false);
+    if (this.ref.current && !this.ref.current.contains(element) && !isModal) {
+      this.setState({ open: false });
     }
   };
 
-  const handleKeyUp = (event: KeyboardEvent) => {
+  private handleKeyUp = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
-      setOpen(false);
+      this.setState({ open: false });
     }
   };
 
-  const coords = () => {
-    const { x, y, height, width } = ref.current.getBoundingClientRect();
+  private get coords() {
+    if (!this.ref.current) { 
+      return { top: 0, left: 0 };
+    }
+    const { x, y, height, width } = this.ref.current.getBoundingClientRect();
 
     const left = x + width;
     const top = y + height + 16;
@@ -41,47 +67,39 @@ export const Dropdown: FC<Props> = ({ button, buttonClassName, menuClassName, cl
     return { top, left };
   };
 
-  React.useEffect(() => {
-    document.addEventListener('click', handleClick);
-    document.addEventListener('keyup', handleKeyUp);
-
-    return () => {
-      document.removeEventListener('click', handleClick, true);
-      document.removeEventListener('keyup', handleKeyUp, true);
-    }
-  }, []);
-
-  return (
-    <div ref={ref} className={classnames('dropdown', className, { open })}>
-      <Button onClick={() => setOpen(!open)} className={buttonClassName}>
-        {button}
-        <i className='arrow ri-arrow-drop-down-line' />
-      </Button>
-
-      {portal
-        ? (
-          <Portal>
-            {open && (
-              <FocusTrap focusTrapOptions={{ clickOutsideDeactivates: true }}>
-                <div className={classnames('dropdown-menu', direction, menuClassName)} style={coords()}>
-                  {children}
-                </div>
-              </FocusTrap>
-            )}
-          </Portal>
-        )
-        : (
-          <>
-            {open && (
-              <FocusTrap focusTrapOptions={{ clickOutsideDeactivates: true }}>
-                <div className={classnames('dropdown-menu', direction, menuClassName)}>
-                  {children}
-                </div>
-              </FocusTrap>
-            )}
-          </>
-        )
-      }
-    </div>
-  );
-};
+  public render(): JSX.Element {
+    return (
+      <div ref={this.ref} className={classnames('dropdown', this.props.className, { open: this.state.open })}>
+        <Button onClick={() => this.setState({ open: !this.state.open })} className={this.props.buttonClassName}>
+          {this.props.button}
+          <i className='arrow ri-arrow-drop-down-line' />
+        </Button>
+  
+        {this.props.portal
+          ? (
+            <Portal>
+              {this.state.open && (
+                <FocusTrap focusTrapOptions={{ clickOutsideDeactivates: true }}>
+                  <div className={classnames('dropdown-menu', this.props.direction, this.props.menuClassName)} style={this.coords}>
+                    {this.props.children}
+                  </div>
+                </FocusTrap>
+              )}
+            </Portal>
+          )
+          : (
+            <>
+              {this.state.open && (
+                <FocusTrap focusTrapOptions={{ clickOutsideDeactivates: true }}>
+                  <div className={classnames('dropdown-menu', this.props.direction, this.props.menuClassName)}>
+                    {this.props.children}
+                  </div>
+                </FocusTrap>
+              )}
+            </>
+          )
+        }
+      </div>
+    );
+  }
+}

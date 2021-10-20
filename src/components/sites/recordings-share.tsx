@@ -11,9 +11,10 @@ interface Props {
   button: React.ReactChild;
   site: Site;
   recordingId: string;
+  onClose?: VoidFunction;
 }
 
-export const RecordingsShare: FC<Props> = ({ button, site, recordingId }) => {
+export const RecordingsShare: FC<Props> = ({ button, site, recordingId, onClose }) => {
   const ref = React.useRef<Modal>();
   const input = React.useRef<HTMLInputElement>();
 
@@ -50,7 +51,7 @@ export const RecordingsShare: FC<Props> = ({ button, site, recordingId }) => {
         {button}
       </Button>
 
-      <Modal ref={ref}>
+      <Modal ref={ref} onClose={onClose}>
         <ModalBody aria-labelledby='recordings-share-title' aria-describedby='recordings-share-description'>
           <ModalHeader>
             <p id='recordings-share-title'><b>Share Recording</b></p>

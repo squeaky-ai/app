@@ -9,9 +9,10 @@ interface Props {
   siteId: string;
   recordingIds: string[];
   onCompleted: VoidFunction;
+  onClose: VoidFunction;
 }
 
-export const RecordingsDelete: FC<Props> = ({ recordingIds, siteId, onCompleted }) => {
+export const RecordingsDelete: FC<Props> = ({ recordingIds, siteId, onCompleted, onClose }) => {
   const ref = React.useRef<Modal>();
   const toasts = useToasts();
 
@@ -44,7 +45,7 @@ export const RecordingsDelete: FC<Props> = ({ recordingIds, siteId, onCompleted 
     <>
       <Button className='link tertiary' onClick={openModal}>Delete recordings</Button>
 
-      <Modal ref={ref}>
+      <Modal ref={ref} onClose={onClose}>
         <ModalBody aria-labelledby='delete-recordings-title' aria-describedby='delete-recordings-description'>
           <ModalHeader>
             <p id='delete-recordings-title'><b>Delete Recordings</b></p>
