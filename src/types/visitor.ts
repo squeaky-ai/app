@@ -3,8 +3,6 @@ import type { Device } from 'types/device';
 import type { DateFilter } from 'types/common';
 
 export type VisitorSortBy =
-  'recordings_count__desc' |
-  'recordings_count__asc' |
   'first_viewed_at__desc' |
   'first_viewed_at__asc' |
   'last_activity_at__desc' |

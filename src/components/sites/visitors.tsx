@@ -12,13 +12,13 @@ import { Tooltip } from 'components/tooltip';
 import { Spinner } from 'components/spinner';
 import { VisitorsItem } from 'components/sites/visitors-item';
 import { Table, Row, Cell } from 'components/table';
+import { DismissableMessage } from 'components/message';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 import { BASE_PATH } from 'data/common/constants';
 import { Preference } from 'lib/preferences';
 import { allColumns } from 'lib/visitors';
 import type { Site } from 'types/site';
 import type { Column, Filters, VisitorSortBy } from 'types/visitor';
-import { DismissableMessage } from 'components/message';
 
 interface Props {
   query: string;
@@ -97,12 +97,6 @@ export const Visitors: FC<Props> = ({ site, query, columns, filters }) => {
           </Cell>
           <Cell>
             Recordings
-            <Sort 
-              name='recordings_count' 
-              order={sort} 
-              onAsc={() => setSort('recordings_count__asc')} 
-              onDesc={() => setSort('recordings_count__desc')} 
-            />
           </Cell>
           <Cell>
             First visited
