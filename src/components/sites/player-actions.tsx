@@ -84,7 +84,7 @@ export const PlayerActions: FC<Props> = ({ site, recording }) => {
         <RecordingsShare
           button={<i className='ri-share-line' />}
           site={site}
-          recordingId={recording.id}
+          recordingId={recording?.id}
         />
         <Button onClick={handleDeleteClick}>
           <i className='ri-delete-bin-line' />
