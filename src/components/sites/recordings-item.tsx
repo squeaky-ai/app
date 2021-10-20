@@ -13,13 +13,16 @@ import { Dropdown } from 'components/dropdown';
 import { Device } from 'components/device';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { Cell } from 'components/table';
+import { RecordingsShare } from 'components/sites/recordings-share';
 import { toNiceDate, toTimeString } from 'lib/dates';
 import { useToasts } from 'hooks/use-toasts';
 import { recordingDelete, recordingBookmarked } from 'lib/api/graphql';
 import { Preferences, Preference } from 'lib/preferences';
 import type { Recording } from 'types/recording';
+import type { Site } from 'types/site';
 
 interface Props {
+  site: Site;
   query?: string;
   recording: Recording;
   style?: React.CSSProperties;
@@ -27,7 +30,7 @@ interface Props {
   setSelected: (selected: string[]) => void;
 }
 
-export const RecordingsItem: FC<Props> = ({ query, recording, style, selected, setSelected }) => {
+export const RecordingsItem: FC<Props> = ({ site, query, recording, style, selected, setSelected }) => {
   const toast = useToasts();
   const router = useRouter();
   const ref = React.useRef<Modal>();
@@ -182,6 +185,11 @@ export const RecordingsItem: FC<Props> = ({ query, recording, style, selected, s
               <Button onClick={handleDeleteClick}>
                 <i className='ri-delete-bin-line' /> Delete
               </Button>
+              <RecordingsShare
+                button={<><i className='ri-share-line' /> Share</>}
+                site={site}
+                recordingId={recording.id}
+              />
             </Dropdown>
           </Cell>
         </a>

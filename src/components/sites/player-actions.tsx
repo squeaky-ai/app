@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import { Button } from 'components/button';
 import { Checkbox } from 'components/checkbox';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
+import { RecordingsShare } from 'components/sites/recordings-share';
 import { recordingDelete, recordingBookmarked } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
 import { Preferences, Preference } from 'lib/preferences';
@@ -80,6 +81,11 @@ export const PlayerActions: FC<Props> = ({ site, recording }) => {
         <Button onClick={handleBookmark} className={classnames('boookmark', { active: recording?.bookmarked })}>
           <i className='ri-bookmark-3-line' />
         </Button>
+        <RecordingsShare
+          button={<i className='ri-share-line' />}
+          site={site}
+          recordingId={recording.id}
+        />
         <Button onClick={handleDeleteClick}>
           <i className='ri-delete-bin-line' />
         </Button>

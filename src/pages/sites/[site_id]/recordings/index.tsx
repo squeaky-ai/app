@@ -91,17 +91,17 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
               <menu>
                 {site.recordingsCount > 0 && (
                   <>
-                    <div className='menu-item'>
-                      <RecordingsColumns 
-                        columns={columns}
-                        setColumns={setColumns}
-                      />
-                    </div>
                     <div className='bulk-actions'>
                       <Dropdown direction='down' buttonClassName={classnames({ disabled: selected.length === 0 })} button={<><i className='ri-checkbox-multiple-line' /> Bulk Actions</>}>
                         <RecordingsStatus siteId={site.id} recordingIds={selected} onCompleted={onCompleted} />
                         <RecordingsDelete siteId={site.id} recordingIds={selected} onCompleted={onCompleted} />
                       </Dropdown>
+                    </div>
+                    <div className='menu-item'>
+                      <RecordingsColumns 
+                        columns={columns}
+                        setColumns={setColumns}
+                      />
                     </div>
                     <Filters 
                       filters={filters}
@@ -137,6 +137,7 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
                 />
                 
                 <Recordings 
+                  site={site}
                   query={query} 
                   filters={filters} 
                   columns={columns} 

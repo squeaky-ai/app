@@ -15,8 +15,10 @@ import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 import { BASE_PATH } from 'data/common/constants';
 import { allColumns } from 'lib/recordings';
 import type { Filters, RecordingSortBy, Column } from 'types/recording';
+import type { Site } from 'types/site';
 
 interface Props {
+  site: Site;
   query: string;
   filters: Filters;
   columns: Column[];
@@ -24,7 +26,7 @@ interface Props {
   setSelected: (selected: string[]) => void;
 }
 
-export const Recordings: FC<Props> = ({ query, filters, columns, selected, setSelected }) => {
+export const Recordings: FC<Props> = ({ site, query, filters, columns, selected, setSelected }) => {
   const [page, setPage] = React.useState<number>(0);
   const [size, setSize] = React.useState<number>(25);
   const [sort, setSort] = React.useState<RecordingSortBy>('connected_at__desc');
@@ -89,6 +91,7 @@ export const Recordings: FC<Props> = ({ query, filters, columns, selected, setSe
         
         {items.map(recording => (
           <RecordingsItem 
+            site={site}
             recording={recording} 
             query={query} 
             key={recording.id} 

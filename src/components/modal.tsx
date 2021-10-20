@@ -78,8 +78,8 @@ export const ModalHeader: FC = ({ children, ...rest }) => (
   </div>
 );
 
-export const ModalContents: FC = ({ children, ...rest }) => (
-  <div className='modal-contents' {...rest}>
+export const ModalContents: FC<React.HTMLProps<HTMLDivElement>> = ({ children, className, ...rest }) => (
+  <div className={classnames('modal-contents', className)} {...rest}>
     {children}
   </div>
 );
