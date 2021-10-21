@@ -15,10 +15,7 @@ import { Page } from 'components/sites/page';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { Filters } from 'components/sites/filters/recordings/filters';
 import { Tags } from 'components/sites/filters/recordings/tags';
-import { Dropdown } from 'components/dropdown';
 import { RecordingsColumns } from 'components/sites/recordings-columns';
-import { RecordingsDelete } from 'components/sites/recordings-delete';
-import { RecordingsStatus } from 'components/sites/recrdordings-status';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { BASE_PATH } from 'data/common/constants';
 import { defaultFilters, allColumns } from 'lib/recordings';
@@ -26,12 +23,12 @@ import { Preferences, Preference } from 'lib/preferences';
 import { useFilters } from 'hooks/use-filters';
 import type { Filters as IFilters, Column } from 'types/recording';
 import type { ValueOf } from 'types/common';
+import { RecordingsBulkActions } from 'components/sites/recordings-bulk-actions';
 
 const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
   const [query, setQuery] = React.useState<string>('');
   const [columns, setColumns] = React.useState<Column[]>(allColumns);
   const [selected, setSelected] = React.useState<string[]>([]);
-  const bulkActionsRef = React.useRef<Dropdown>();
 
   const { filters, setFilters } = useFilters<IFilters>('recordings');
 
@@ -54,15 +51,6 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
 
   const clearFilters = () => {
     setFilters(defaultFilters);
-  };
-
-  const onCompleted = () => {
-    setSelected([]);
-    onBulkActionClose();
-  };
-
-  const onBulkActionClose = () => {
-    if (bulkActionsRef.current) bulkActionsRef.current.close();
   };
 
   React.useEffect(() => {
@@ -101,12 +89,11 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
               <menu>
                 {site.recordingsCount > 0 && (
                   <>
-                    <div className='bulk-actions'>
-                      <Dropdown ref={bulkActionsRef} direction='down' buttonClassName={classnames({ disabled: selected.length === 0 })} button={<><i className='ri-checkbox-multiple-line' /> Bulk Actions</>}>
-                        <RecordingsStatus onClose={onBulkActionClose} siteId={site.id} recordingIds={selected} onCompleted={onCompleted} />
-                        <RecordingsDelete onClose={onBulkActionClose} siteId={site.id} recordingIds={selected} onCompleted={onCompleted} />
-                      </Dropdown>
-                    </div>
+                    <RecordingsBulkActions
+                      site={site}
+                      selected={selected}
+                      setSelected={setSelected}
+                    />
                     <div className='menu-item'>
                       <RecordingsColumns 
                         columns={columns}

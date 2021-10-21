@@ -1,7 +1,6 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import classnames from 'classnames';
 import { useRouter } from 'next/router';
 import { gql, useQuery } from '@apollo/client';
 import { Main } from 'components/main';
@@ -11,14 +10,13 @@ import { OWNER, ADMIN } from 'data/teams/constants';
 import { Container } from 'components/container';
 import { Checkbox } from 'components/checkbox';
 import { Table, Row, Cell } from 'components/table';
-import { Dropdown } from 'components/dropdown';
 import { SettingsTag } from 'components/sites/settings-tag';
 import { Sort } from 'components/sort';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { SettingsTabs } from 'components/sites/settings-tabs';
-import { SettingsTagsDelete } from 'components/sites/settings-tags-delete';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import type { Site } from 'types/site';
+import { SettingsTagsBulkActions } from 'components/sites/settings-tags-bulk-actions';
 
 const QUERY = gql`
   query GetSiteTags($siteId: ID!) {
@@ -57,8 +55,6 @@ const SitesSettingsTags: NextPage<ServerSideProps> = ({ user }) => {
 
   const selectedTags = selected.map(s => tags.find(t => t.id === s));
 
-  const onCompleted = () => setSelected([]);
-
   return (
     <>
       <Head>
@@ -83,11 +79,11 @@ const SitesSettingsTags: NextPage<ServerSideProps> = ({ user }) => {
               <p>You can add tags to your recordings to better document and categorise your findings. The table below lists any tags you have already created. You can delete or rename tags using the options in the table.</p>
 
               {tags.length > 0 && (
-                <div className='bulk-actions'>
-                  <Dropdown direction='down' buttonClassName={classnames({ disabled: selected.length === 0 })} button={<><i className='ri-checkbox-multiple-line' /> Bulk Actions</>}>
-                    <SettingsTagsDelete tags={selectedTags} siteId={siteId} onCompleted={onCompleted} />
-                  </Dropdown>
-                </div>
+                <SettingsTagsBulkActions 
+                  site={site} 
+                  selected={selectedTags} 
+                  setSelected={setSelected} 
+                />
               )}
 
               <Table className='tags-table'>

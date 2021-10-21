@@ -25,11 +25,15 @@
         }
       }
 
-      .dropdown {
+      .dropdown,
+      .tooltip {
         & > .button {
+          align-items: center;
           background: none;
           border: none;
           border-radius: var(--border-radius-md);
+          display: flex;
+          font-weight: var(--font-weight-bold);
           height: 40px;
           margin-left: .5rem;
           padding: 0 1rem;
@@ -48,6 +52,11 @@
             }
           }
         }
+      }
+
+      .tooltip {
+        cursor: default;
+        opacity: .25;
       }
 
       .columns {
@@ -437,4 +446,8 @@
       }
     }
   }
+}
+
+.bulk-action-hint {
+  white-space: pre-wrap;
 }

@@ -124,11 +124,13 @@
     justify-content: flex-end;
     margin-bottom: 1rem;
 
-    .dropdown {
+    .dropdown,
+    .tooltip {
       & > .button {
         background: none;
         border: none;
         border-radius: var(--border-radius-md);
+        font-weight: var(--font-weight-bold);
         padding: .5rem 2rem .5rem 1rem;
 
         i:not(.arrow) {
@@ -148,6 +150,11 @@
           background: var(--gray-100);
         }
       }
+    }
+
+    .tooltip {
+      cursor: default;
+      opacity: .25;
     }
 
     .dropdown-menu {

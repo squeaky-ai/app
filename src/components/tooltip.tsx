@@ -7,11 +7,12 @@ import { Portal } from 'components/portal';
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   button: string | React.ReactNode;
   buttonClassName?: string;
+  portalClassName?: string;
   positionX?: 'left' | 'right';
   fluid?: boolean;
 }
 
-export const Tooltip: FC<Props> = ({ button, fluid, buttonClassName, positionX, className, children }) => {
+export const Tooltip: FC<Props> = ({ button, fluid, buttonClassName, portalClassName, positionX, className, children }) => {
   const ref = React.useRef<HTMLDivElement>();
   const [open, setOpen] = React.useState(false);
 
@@ -39,7 +40,7 @@ export const Tooltip: FC<Props> = ({ button, fluid, buttonClassName, positionX, 
       </Button>
       <Portal>
         {open && (
-          <div className={classnames('tooltip-menu', positionX, { fluid })} style={coords()}>
+          <div className={classnames('tooltip-menu', portalClassName, positionX, { fluid })} style={coords()}>
             {children}
           </div>
         )}
