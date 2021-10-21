@@ -19,14 +19,16 @@ import { Tags } from 'components/sites/filters/visitors/tags';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { defaultFilters, allColumns } from 'lib/visitors';
 import { BASE_PATH } from 'data/common/constants';
+import { useFilters } from 'hooks/use-filters';
 import { Preferences, Preference } from 'lib/preferences';
 import type { Filters as IFilters, Column } from 'types/visitor';
 import type { ValueOf } from 'types/common';
 
 const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
   const [query, setQuery] = React.useState<string>('');
-  const [filters, setFilters] = React.useState<IFilters>(defaultFilters);
   const [columns, setColumns] = React.useState<Column[]>(allColumns);
+
+  const { filters, setFilters } = useFilters<IFilters>('visitors');
 
   const handleCancel = () => {
     setQuery('');

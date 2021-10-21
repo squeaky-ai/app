@@ -23,15 +23,17 @@ import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { BASE_PATH } from 'data/common/constants';
 import { defaultFilters, allColumns } from 'lib/recordings';
 import { Preferences, Preference } from 'lib/preferences';
+import { useFilters } from 'hooks/use-filters';
 import type { Filters as IFilters, Column } from 'types/recording';
 import type { ValueOf } from 'types/common';
 
 const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
   const [query, setQuery] = React.useState<string>('');
   const [columns, setColumns] = React.useState<Column[]>(allColumns);
-  const [filters, setFilters] = React.useState<IFilters>(defaultFilters);
   const [selected, setSelected] = React.useState<string[]>([]);
   const bulkActionsRef = React.useRef<Dropdown>();
+
+  const { filters, setFilters } = useFilters<IFilters>('recordings');
 
   const handleCancel = () => {
     setQuery('');
