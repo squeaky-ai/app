@@ -1,6 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
-import { sum, slice } from 'lodash';
+import { sum, slice, orderBy } from 'lodash';
 import { Table, Row, Cell } from 'components/table';
 import type { AnalyticsPage } from 'types/analytics';
 
@@ -13,7 +13,7 @@ export const AnalyticsPages: FC<Props> = ({ pages }) => {
 
   const percentage = (count: number) => Number(((count / total) * 100).toFixed(2));
 
-  const results = slice(pages, 0, 10);
+  const results = orderBy(slice(pages, 0, 10), 'count', 'desc');
 
   return (
     <Table className='analytics-pages'>
