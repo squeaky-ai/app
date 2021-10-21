@@ -1,6 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
-import { clamp } from 'lodash';
+import { clamp, debounce } from 'lodash';
 import { Input } from 'components/input';
 import type { Recording } from 'types/recording';
 
@@ -15,6 +15,8 @@ interface Props {
 }
 
 export const Slider: FC<Props> = ({ max, min, step, value, recording, onChange }) => {
+  const [val, setVal] = React.useState<number>(0);
+
   const { totalPages, currentPage } = recording?.events?.pagination || { 
     totalPages: 0, 
     currentPage: 0 
@@ -23,10 +25,20 @@ export const Slider: FC<Props> = ({ max, min, step, value, recording, onChange }
   const progress = clamp(value / (max - min), min, max);
   const buffered = currentPage / totalPages;
 
+  const setValue = React.useCallback(debounce((number: number) => {
+    onChange(number);
+  }, 500), []);
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const number = Number(event.target.value);
-    onChange(number);
+    // Update the state here so the UI is responsive
+    setVal(number);
+    // Fire the debounced callback so the replayer can update
+    setValue(number);
   };
+
+  // Update the value when it changes in the parent
+  React.useEffect(() => { setVal(value) }, [value]);
 
   return (
     <div className='slider'>
@@ -38,7 +50,7 @@ export const Slider: FC<Props> = ({ max, min, step, value, recording, onChange }
         min={min} 
         max={max} 
         step={step} 
-        value={value}
+        value={val}
         onChange={handleChange} 
       />
     </div>

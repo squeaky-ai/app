@@ -41,6 +41,7 @@ export const initReplayer = ({ failed, replayer, recording, dispatch }: InitArgs
   replayer = new Replayer(events, {
     root: element,
     skipInactive: true,
+    maxSpeed: 25,
     mouseTail: {
       lineWidth: 3,
       strokeStyle: '#F0438C'
