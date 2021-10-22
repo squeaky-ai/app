@@ -2,9 +2,6 @@ import React from 'react';
 import type { FC } from 'react';
 import { useAnalytics } from 'hooks/use-analytics';
 import { Spinner } from 'components/spinner';
-import { Pill } from 'components/pill';
-import { Label } from 'components/label';
-import { Checkbox } from 'components/checkbox';
 import { Card } from 'components/card';
 import { getDateRange, toMinutesAndSeconds } from 'lib/dates';
 import { AnalyticsPages } from 'components/sites/analytics-pages';
@@ -23,9 +20,7 @@ interface Props {
 export const Analytics: FC<Props> = ({ period }) => {
   const { analytics } = useAnalytics(getDateRange(period));
 
-  const toTwoDecimalPlaces = (value: number) => {
-    return Number(value.toFixed(2));
-  };
+  const toTwoDecimalPlaces = (value: number) => value.toFixed(2);
 
   if (!analytics) {
     return <Spinner />;
@@ -53,7 +48,7 @@ export const Analytics: FC<Props> = ({ period }) => {
           <Card>
             <h4>Average Sessions Per Visitor</h4>
             <div className='numbered-grid blue'>
-              <h3>-</h3>
+              <h3>{toTwoDecimalPlaces(analytics.averageSessionsPerVisitor)}</h3>
             </div>
           </Card>
         </div>

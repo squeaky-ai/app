@@ -8,6 +8,7 @@ export const GET_ANALYTICS_QUERY = gql`
         pageViewCount
         averageSessionDuration
         pagesPerSession
+        averageSessionsPerVisitor
         visitorsCount {
           total
           new
@@ -23,6 +24,7 @@ export const GET_ANALYTICS_QUERY = gql`
         pages {
           path
           count
+          avg
         }
         browsers  {
           name

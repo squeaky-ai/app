@@ -12,6 +12,7 @@ export interface Analytics {
   dimensions: AnalyticsDimensions;
   recordingsCount: RecordingsVisitors;
   referrers: AnalyticsReferrer[];
+  averageSessionsPerVisitor: number;
 }
 
 export interface AnalyticsVisitors {
@@ -32,6 +33,7 @@ export interface PageViewRange {
 export interface AnalyticsPage {
   path: string;
   count: number;
+  avg: number;
 }
 
 export interface AnalyticsBrowser {
