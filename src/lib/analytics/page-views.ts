@@ -1,5 +1,5 @@
-import { range, sum } from 'lodash';
-import type { PageViewRange } from 'types/analytics';
+import { range } from 'lodash';
+import type { PageView } from 'types/analytics';
 import type { TimePeriod } from 'lib/dates';
 
 import { 
@@ -20,8 +20,8 @@ import {
 
 export interface AnalyticsData {
   date: string;
-  visitors: number;
-  pageViews: number;
+  all: number;
+  unique: number;
 }
 
 export interface DataForPeriod {
@@ -35,22 +35,24 @@ const getAmPmForHour = (hour: number): string => {
   return `${hour - 12}pm`;
 };
 
-const getDailyResults = (pageViews: PageViewRange[]): DataForPeriod => {
+const getDateFromTimestamp = (str: string) => new Date(Number(str));
+
+const getDailyResults = (pageViews: PageView[]): DataForPeriod => {
   const data = range(0, 24).map(i => {
     // Only interested in page views that happened this hour
-    const views = pageViews.filter(p => getHours(new Date(p.date)) === i);
+    const views = pageViews.filter(p => getHours(getDateFromTimestamp(p.timestamp)) === i);
 
     return {
       date: getAmPmForHour(i),
-      visitors: views.length,
-      pageViews: sum(views.map(v => v.pageViewCount))
+      all: views.length,
+      unique: views.filter(v => v.unique).length,
     };
   });
 
   return { data, interval: 1 };
 };
 
-const getWeeklyResults = (pageViews: PageViewRange[]): DataForPeriod => {
+const getWeeklyResults = (pageViews: PageView[]): DataForPeriod => {
   const now = new Date();
   const start = startOfWeek(now, { weekStartsOn: 1 });
 
@@ -59,19 +61,19 @@ const getWeeklyResults = (pageViews: PageViewRange[]): DataForPeriod => {
 
     // Only interested in page views that happened on this day
     // of the week
-    const views = pageViews.filter(p => isSameDay(new Date(p.date), date));
+    const views = pageViews.filter(p => isSameDay(getDateFromTimestamp(p.timestamp), date));
 
     return {
       date: format(date, 'EEE'),
-      visitors: views.length,
-      pageViews: sum(views.map(v => v.pageViewCount))
+      all: views.length,
+      unique: views.filter(v => v.unique).length,
     };
   });
 
   return { data, interval: 0 };
 };
 
-const getMonthlyResults = (pageViews: PageViewRange[]): DataForPeriod => {
+const getMonthlyResults = (pageViews: PageView[]): DataForPeriod => {
   const now = new Date();
   const start = startOfMonth(now);
   const daysThisMonth = getDaysInMonth(now);
@@ -81,19 +83,19 @@ const getMonthlyResults = (pageViews: PageViewRange[]): DataForPeriod => {
 
     // Only interested in page views that happened on this day
     // of the month
-    const views = pageViews.filter(p => getDate(new Date(p.date)) === getDate(date));
+    const views = pageViews.filter(p => getDate(getDateFromTimestamp(p.timestamp)) === getDate(date));
 
     return {
       date: format(date, 'd/M'),
-      visitors: views.length,
-      pageViews: sum(views.map(v => v.pageViewCount))
+      all: views.length,
+      unique: views.filter(v => v.unique).length,
     };
   });
 
   return { data, interval: 2 };
 };
 
-const getQuarterlyResults = (pageViews: PageViewRange[]): DataForPeriod => {
+const getQuarterlyResults = (pageViews: PageView[]): DataForPeriod => {
   const now = new Date();
   const start = startOfQuarter(now);
   const diff = differenceInDays(now, start);
@@ -103,19 +105,19 @@ const getQuarterlyResults = (pageViews: PageViewRange[]): DataForPeriod => {
 
     // Only interested in page views that happened on this day
     // of the quarter
-    const views = pageViews.filter(p => isSameDay(new Date(p.date), date));
+    const views = pageViews.filter(p => isSameDay(getDateFromTimestamp(p.timestamp), date));
 
     return {
       date: format(date, 'd/M'),
-      visitors: views.length,
-      pageViews: sum(views.map(v => v.pageViewCount))
+      all: views.length,
+      unique: views.filter(v => v.unique).length,
     };
   });
 
   return { data, interval: 3 };
 };
 
-const getYearlyResults = (pageViews: PageViewRange[]): DataForPeriod => {
+const getYearlyResults = (pageViews: PageView[]): DataForPeriod => {
   const now = new Date();
   const start = startOfYear(now);
 
@@ -124,19 +126,19 @@ const getYearlyResults = (pageViews: PageViewRange[]): DataForPeriod => {
 
     // Only interested in page views that happened on this day
     // of the year
-    const views = pageViews.filter(p => isSameMonth(new Date(p.date), date));
+    const views = pageViews.filter(p => isSameMonth(getDateFromTimestamp(p.timestamp), date));
 
     return {
       date: format(date, 'MMM'),
-      visitors: views.length,
-      pageViews: sum(views.map(v => v.pageViewCount))
+      all: views.length,
+      unique: views.filter(v => v.unique).length,
     };
   });
 
   return { data, interval: 0 };
 };
 
-export const formatResultsForPeriod = (period: TimePeriod, pageViews: PageViewRange[]): DataForPeriod => {
+export const formatResultsForPeriod = (period: TimePeriod, pageViews: PageView[]): DataForPeriod => {
   switch(period) {
     case 'today':
     case 'yesterday':

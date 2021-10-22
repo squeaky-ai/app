@@ -80,7 +80,7 @@ export const Overview: FC<Props> = ({ site }) => {
           <i className='ri-pages-line' />
           Page Views
         </h3>
-        <h2>{overview.analytics.pageViews.toLocaleString()}</h2>
+        <h2>{overview.analytics.pageViewCount.toLocaleString()}</h2>
         <div className='link'>
           <Link href={`/sites/${site_id}/analytics`}>
             <a>Analytics</a>

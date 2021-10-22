@@ -19,7 +19,7 @@ export const AnalyticsBrowsers: FC<Props> = ({ browsers }) => {
   const offsettedPercentage = (count: number) => offset + percentage(count);
 
   return (
-    <ul className='analytics-browsers'>
+    <ul>
       {ordered.map(browser => (
         <li key={browser.name}>
           <Browser name={browser.name} height={32} width={32} />

@@ -6,7 +6,7 @@ export const GET_OVERVIEW_QUERY = gql`
       id
       activeVisitorCount
       analytics(fromDate: $fromDate, toDate: $toDate) {
-        pageViews
+        pageViewCount
         visitorsCount {
           total
           new

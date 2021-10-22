@@ -38,7 +38,7 @@ export const useOverview = (): UseOverview => {
         total: 0,
         new: 0,
       },
-      pageViews: 0,
+      pageViewCount: 0,
       recordingsCount: {
         total: 0,
         new: 0,

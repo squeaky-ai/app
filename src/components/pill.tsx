@@ -5,10 +5,11 @@ import classnames from 'classnames';
 interface Props extends React.HTMLAttributes<HTMLSpanElement> {
   type?: 'primary' | 'secondary' | 'tertiary';
   small?: boolean;
+  large?: boolean;
 }
 
-export const Pill: FC<Props> = ({ children, className, type, small, ...rest }) => (
-  <span className={classnames('pill', type, className, { small })} {...rest}>
+export const Pill: FC<Props> = ({ children, className, type, small, large, ...rest }) => (
+  <span className={classnames('pill', type, className, { small, large })} {...rest}>
     {children}
   </span>
 );

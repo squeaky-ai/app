@@ -1,7 +1,8 @@
 export interface Analytics {
-  pageViewsRange: PageViewRange[];
+  visitors: Visitor[];
+  pageViews: PageView[];
   visitorsCount: AnalyticsVisitors;
-  pageViews: number;
+  pageViewCount: number;
   averageSessionDuration: number;
   pagesPerSession: number;
   pages: AnalyticsPage[];
@@ -10,6 +11,7 @@ export interface Analytics {
   devices: AnalyticsDevice[];
   dimensions: AnalyticsDimensions;
   recordingsCount: RecordingsVisitors;
+  referrers: AnalyticsReferrer[];
 }
 
 export interface AnalyticsVisitors {
@@ -51,4 +53,19 @@ export interface AnalyticsDimensions {
   min: number;
   max: number;
   avg: number;
+}
+
+export interface AnalyticsReferrer {
+  name: string;
+  count: number;
+}
+
+export interface Visitor {
+  new: boolean;
+  timestamp: string;
+}
+
+export interface PageView {
+  unique: boolean;
+  timestamp: string;
 }

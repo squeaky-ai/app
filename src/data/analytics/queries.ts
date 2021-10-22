@@ -5,16 +5,20 @@ export const GET_ANALYTICS_QUERY = gql`
     site(siteId: $siteId) {
       id
       analytics(fromDate: $fromDate, toDate: $toDate) {
-        pageViews
+        pageViewCount
         averageSessionDuration
         pagesPerSession
         visitorsCount {
           total
           new
         }
-        pageViewsRange {
-          date
-          pageViewCount
+        visitors {
+          new
+          timestamp
+        }
+        pageViews {
+          unique
+          timestamp
         }
         pages {
           path
@@ -36,6 +40,10 @@ export const GET_ANALYTICS_QUERY = gql`
           min
           max
           avg
+        }
+        referrers {
+          name
+          count
         }
       }
     }

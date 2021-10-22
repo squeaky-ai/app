@@ -1,13 +1,19 @@
 import React from 'react';
 import type { FC } from 'react';
 import { useAnalytics } from 'hooks/use-analytics';
-import { AnalyticsBrowsers } from 'components/sites/analytics-browsers';
-import { AnalyticsGraph } from 'components/sites/analytics-graph';
-import { AnalyticsLanguages } from 'components/sites/analytics-languages';
-import { AnalyticsPages } from 'components/sites/analytics-pages';
-import { AnalyticsDevices } from 'components/sites/analytics-devices';
 import { Spinner } from 'components/spinner';
-import { toMinutesAndSeconds, getDateRange } from 'lib/dates';
+import { Pill } from 'components/pill';
+import { Label } from 'components/label';
+import { Checkbox } from 'components/checkbox';
+import { Card } from 'components/card';
+import { getDateRange, toMinutesAndSeconds } from 'lib/dates';
+import { AnalyticsPages } from 'components/sites/analytics-pages';
+import { AnalyticsBrowsers } from 'components/sites/analytics-browsers';
+import { AnalyticsLanguages } from 'components/sites/analytics-languages';
+import { AnalyticsDevices } from 'components/sites/analytics-devices';
+import { AnalyticsReferrers } from 'components/sites/analytics-referrers';
+import { AnalyticsVisitors } from 'components/sites/analytics-visitors';
+import { AnalyticsPageViews } from 'components/sites/analytics-page-views';
 import type { TimePeriod } from 'lib/dates';
 
 interface Props {
@@ -28,51 +34,77 @@ export const Analytics: FC<Props> = ({ period }) => {
   return (
     <>
       <div className='analytics-grid'>
-        <div className='card graph'>
-          <AnalyticsGraph viewsAndVisitors={analytics.pageViewsRange} period={period} />
+        <div className='grid-item visitors-graph'>
+          <Card>
+            <AnalyticsVisitors visitors={analytics.visitors} period={period} />
+          </Card>
         </div>
-        <div className='card visitors'>
-          <h4>Visitors</h4>
-          <h2>{analytics.visitorsCount.total.toLocaleString()}</h2>
-        </div>
-        <div className='card views'>
-          <h4>Page Views</h4>
-          <h2>{analytics.pageViews.toLocaleString()}</h2>
-        </div>
-        <div className='card session-duration'>
-          <h4>Average Session Duration</h4>
-          <h2>{toMinutesAndSeconds(analytics.averageSessionDuration)}</h2>
-        </div>
-        <div className='card session-pages'>
-          <h4>Pages Per Session</h4>
-          <h2>{toTwoDecimalPlaces(analytics.pagesPerSession)}</h2>
-        </div>
-        <div className='card basic page-browser'>
-          <div className='grid'>
-            <div className='card basic pages'>
-              <h4>Pages</h4>
-              <AnalyticsPages pages={analytics.pages} />
+
+        <div className='grid-item average-session-duration'>
+          <Card>
+            <h4>Average Session Duration</h4>
+            <div className='numbered-grid blue'>
+              <h3>{toMinutesAndSeconds(analytics.averageSessionDuration)}</h3>
             </div>
-            <div className='card basic browser'>
-              <h4>Browser</h4>
-              <div className='card'>
-                <AnalyticsBrowsers browsers={analytics.browsers} />
-              </div>
-            </div>
-          </div>
+          </Card>
         </div>
-        <div className='card basic meta'>
-          <div className='card basic language'>
-            <h4>Language</h4>
-            <div className='card'>
-              <AnalyticsLanguages languages={analytics.languages} />
+
+        <div className='grid-item average-session-per-visitors'>
+          <Card>
+            <h4>Average Sessions Per Visitor</h4>
+            <div className='numbered-grid blue'>
+              <h3>-</h3>
             </div>
-          </div>
-          <div className='card basic devices'>
-            <h4>Devices</h4>
-            <AnalyticsDevices devices={analytics.devices} />
-          </div>
-          <div className='card viewport'>
+          </Card>
+        </div>
+
+        <div className='grid-item pages-per-session'>
+          <Card>
+            <h4>Pages Per Session</h4>
+            <div className='numbered-grid purple'>
+              <h3>{toTwoDecimalPlaces(analytics.pagesPerSession)}</h3>
+            </div>
+          </Card>
+        </div>
+
+        <div className='grid-item page-views'>
+          <Card>
+            <AnalyticsPageViews pageViews={analytics.pageViews} period={period} />
+          </Card>
+        </div>
+
+        <div className='grid-item pages'>
+          <h4>Pages</h4>
+          <AnalyticsPages pages={analytics.pages} />
+        </div>
+
+        <div className='grid-item browsers'>
+          <h4>Browser</h4>
+          <Card>
+            <AnalyticsBrowsers browsers={analytics.browsers} />
+          </Card> 
+        </div>
+
+        <div className='grid-item referrers'>
+          <h4>Traffic Sources</h4>
+          <AnalyticsReferrers referrers={analytics.referrers} />
+        </div>
+
+        <div className='grid-item languages'>
+          <h4>Language</h4>
+          <Card>
+            <AnalyticsLanguages languages={analytics.languages} />
+          </Card>   
+        </div>
+
+        <div className='grid-item devices'>
+          <h4>Devices</h4>
+          <AnalyticsDevices devices={analytics.devices} />
+        </div>
+
+        <div className='grid-item screen-widths'>
+          <h4>Screen Widths</h4>
+          <Card>
             <h4>
               Screen Width
               <i className='ri-arrow-left-line' />
@@ -92,7 +124,7 @@ export const Analytics: FC<Props> = ({ period }) => {
                 <h3>{analytics.dimensions.min}px</h3>
               </div>
             </div>
-          </div>
+          </Card>    
         </div>
       </div>
     </>

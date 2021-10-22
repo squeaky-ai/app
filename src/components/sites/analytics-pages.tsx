@@ -16,15 +16,17 @@ export const AnalyticsPages: FC<Props> = ({ pages }) => {
   const results = orderBy(slice(pages, 0, 10), 'count', 'desc');
 
   return (
-    <Table className='analytics-pages'>
+    <Table>
       <Row head>
         <Cell>Page</Cell>
         <Cell>Views</Cell>
+        <Cell>Average time on page</Cell>
       </Row>
       {results.map(page => (
         <Row key={page.path}>
           <Cell>{page.path}</Cell>
           <Cell><b>{page.count}</b> <span className='percentage'>({percentage(page.count)}%)</span></Cell>
+          <Cell>-</Cell>
         </Row>
       ))}
     </Table>

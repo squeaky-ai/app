@@ -25,17 +25,19 @@ export const useAnalytics = (range: TimeRange): UseAnalytics => {
       total: 0,
       new: 0,
     },
-    pageViewsRange: [],
+    visitors: [],
+    pageViews: [],
     visitorsCount: {
       total: 0,
       new: 0,
     },
-    pageViews: 0,
+    pageViewCount: 0,
     averageSessionDuration: 0,
     pagesPerSession: 0,
     pages: [],
     browsers: [],
     languages: [],
+    referrers: [],
     devices: [
       {
         type: 'mobile',

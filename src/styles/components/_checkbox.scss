@@ -21,11 +21,30 @@
     }
   }
 
-  &.tertiary {
+  &.tertiary,
+  &.magenta {
     input {
       &:checked + .check {
         background: var(--magenta-500);
         border-color: var(--magenta-500);
+      }
+    }
+  }
+
+  &.purple {
+    input {
+      &:checked + .check {
+        background: var(--purple-500);
+        border-color: var(--purple-500);
+      }
+    }
+  }
+
+  &.gray {
+    input {
+      &:checked + .check {
+        background: var(--gray-500);
+        border-color: var(--gray-500);
       }
     }
   }
