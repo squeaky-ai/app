@@ -1,4 +1,4 @@
-import { range } from 'lodash';
+import { range, sum } from 'lodash';
 import type { PageView } from 'types/analytics';
 import type { TimePeriod } from 'lib/dates';
 
@@ -44,8 +44,8 @@ const getDailyResults = (pageViews: PageView[]): DataForPeriod => {
 
     return {
       date: getAmPmForHour(i),
-      all: views.length,
-      unique: views.filter(v => v.unique).length,
+      all: sum(views.map(v => v.total)),
+      unique: sum(views.map(v => v.unique)),
     };
   });
 
@@ -65,8 +65,8 @@ const getWeeklyResults = (pageViews: PageView[]): DataForPeriod => {
 
     return {
       date: format(date, 'EEE'),
-      all: views.length,
-      unique: views.filter(v => v.unique).length,
+      all: sum(views.map(v => v.total)),
+      unique: sum(views.map(v => v.unique)),
     };
   });
 
@@ -87,8 +87,8 @@ const getMonthlyResults = (pageViews: PageView[]): DataForPeriod => {
 
     return {
       date: format(date, 'd/M'),
-      all: views.length,
-      unique: views.filter(v => v.unique).length,
+      all: sum(views.map(v => v.total)),
+      unique: sum(views.map(v => v.unique)),
     };
   });
 
@@ -109,8 +109,8 @@ const getQuarterlyResults = (pageViews: PageView[]): DataForPeriod => {
 
     return {
       date: format(date, 'd/M'),
-      all: views.length,
-      unique: views.filter(v => v.unique).length,
+      all: sum(views.map(v => v.total)),
+      unique: sum(views.map(v => v.unique)),
     };
   });
 
@@ -130,8 +130,8 @@ const getYearlyResults = (pageViews: PageView[]): DataForPeriod => {
 
     return {
       date: format(date, 'MMM'),
-      all: views.length,
-      unique: views.filter(v => v.unique).length,
+      all: sum(views.map(v => v.total)),
+      unique: sum(views.map(v => v.unique)),
     };
   });
 

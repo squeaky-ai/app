@@ -68,6 +68,7 @@ export interface Visitor {
 }
 
 export interface PageView {
-  unique: boolean;
+  total: number;
+  unique: number;
   timestamp: string;
 }

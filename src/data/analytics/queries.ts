@@ -18,6 +18,7 @@ export const GET_ANALYTICS_QUERY = gql`
           timestamp
         }
         pageViews {
+          total
           unique
           timestamp
         }
