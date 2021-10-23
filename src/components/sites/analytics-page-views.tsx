@@ -54,8 +54,8 @@ export const AnalyticsPageViews: FC<Props> = ({ pageViews, period }) => {
     return (
       <div className='custom-tooltip'>
         <p className='date'>{formatLabel(period, label)}</p>
-        <p className='all'>{payload[0].payload.all} All</p>
-        <p className='unique'>{payload[0].payload.unique} Unique</p>
+        <p className='all'>{payload[0].payload.all} All Page Views</p>
+        <p className='unique'>{payload[0].payload.unique} Unique Page Views</p>
       </div>
     );
   };

@@ -55,9 +55,9 @@ export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
     return (
       <div className='custom-tooltip'>
         <p className='date'>{formatLabel(period, label)}</p>
-        <p className='all'>{payload[0].payload.all} All</p>
-        <p className='existing'>{payload[0].payload.existing} Existing</p>
-        <p className='new'>{payload[0].payload.new} New</p>
+        <p className='all'>{payload[0].payload.all} All Visitors</p>
+        <p className='existing'>{payload[0].payload.existing} Existing Visitors</p>
+        <p className='new'>{payload[0].payload.new} New Visitors</p>
       </div>
     );
   };
