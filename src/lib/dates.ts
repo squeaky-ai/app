@@ -47,7 +47,7 @@ export const fromTimeString = (timeString: string) => {
   return date.valueOf();
 };
 
-export const toMinutesAndSeconds = (ms?: number) => {
+export const toHoursMinutesAndSeconds = (ms?: number) => {
   if (!ms) return '0h 0m 0s';
 
   const timeString = toTimeString(ms);

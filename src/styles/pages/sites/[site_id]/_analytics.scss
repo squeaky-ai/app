@@ -302,6 +302,21 @@
       }
     }
 
+    .chart-wrapper {
+      align-items: center;
+      display: flex;
+      width: 100%;
+
+      h3 {
+        flex-shrink: 0;
+      }
+
+      .chart {
+        flex: 1;
+        margin-left: 1.5rem;
+      }
+    }
+
     .graph-wrapper {
       height: 340px;
       width: 100%;

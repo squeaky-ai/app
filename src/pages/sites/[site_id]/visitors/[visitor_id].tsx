@@ -13,7 +13,7 @@ import { VisitorRecording } from 'components/sites/visitor-recordings';
 import { VisitorPages } from 'components/sites/visitors-pages';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useVisitor } from 'hooks/use-visitor';
-import { toMinutesAndSeconds } from 'lib/dates';
+import { toHoursMinutesAndSeconds } from 'lib/dates';
 import type { PageSortBy } from 'types/visitor';
 import type { RecordingSortBy } from 'types/recording';
 
@@ -73,7 +73,7 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
               </Card>
               <Card className='page-views'>
                 <h3>Average Session Duration</h3>
-                <h2>{toMinutesAndSeconds(visitor.averageSessionDuration || 0)}</h2>
+                <h2>{toHoursMinutesAndSeconds(visitor.averageSessionDuration || 0)}</h2>
               </Card>
             </div>
 

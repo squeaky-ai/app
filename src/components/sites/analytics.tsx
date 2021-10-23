@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import { useAnalytics } from 'hooks/use-analytics';
 import { Spinner } from 'components/spinner';
 import { Card } from 'components/card';
-import { getDateRange, toMinutesAndSeconds } from 'lib/dates';
+import { getDateRange } from 'lib/dates';
 import { AnalyticsPages } from 'components/sites/analytics-pages';
 import { AnalyticsBrowsers } from 'components/sites/analytics-browsers';
 import { AnalyticsLanguages } from 'components/sites/analytics-languages';
@@ -12,6 +12,7 @@ import { AnalyticsReferrers } from 'components/sites/analytics-referrers';
 import { AnalyticsVisitors } from 'components/sites/analytics-visitors';
 import { AnalyticsPageViews } from 'components/sites/analytics-page-views';
 import type { TimePeriod } from 'lib/dates';
+import { AnalyticsSessionDuration } from './analytics-session-duration';
 
 interface Props {
   period: TimePeriod;
@@ -39,7 +40,7 @@ export const Analytics: FC<Props> = ({ period }) => {
           <Card>
             <h4>Average Session Duration</h4>
             <div className='numbered-grid blue'>
-              <h3>{toMinutesAndSeconds(analytics.averageSessionDuration)}</h3>
+              <AnalyticsSessionDuration sessionDurations={analytics.sessionDurations} />
             </div>
           </Card>
         </div>

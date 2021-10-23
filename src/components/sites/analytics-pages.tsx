@@ -2,7 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import { sum, slice, orderBy } from 'lodash';
 import { Table, Row, Cell } from 'components/table';
-import { toMinutesAndSeconds } from 'lib/dates';
+import { toHoursMinutesAndSeconds } from 'lib/dates';
 import type { AnalyticsPage } from 'types/analytics';
 
 interface Props {
@@ -27,7 +27,7 @@ export const AnalyticsPages: FC<Props> = ({ pages }) => {
         <Row key={page.path}>
           <Cell>{page.path}</Cell>
           <Cell><b>{page.count}</b> <span className='percentage'>({percentage(page.count)}%)</span></Cell>
-          <Cell>{toMinutesAndSeconds(page.avg)}</Cell>
+          <Cell>{toHoursMinutesAndSeconds(page.avg)}</Cell>
         </Row>
       ))}
     </Table>
