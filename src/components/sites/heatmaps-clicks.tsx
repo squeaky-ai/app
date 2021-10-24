@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import { groupBy } from 'lodash';
+import { percentage } from 'lib/maths';
 import type { HeatmapsItem } from 'types/heatmaps';
 
 interface Props {
@@ -11,7 +12,6 @@ export const HeatmapsClicks: FC<Props> = ({ items }) => {
   const results = groupBy(items, 'id');
 
   const total = items.length;
-  const percentage = (count: number) => total ? Math.round((count / total) * 100) : 0;
 
   return (
     <div className='clicks-table'>
@@ -23,7 +23,7 @@ export const HeatmapsClicks: FC<Props> = ({ items }) => {
         {Object.entries(results).map(([id, coords]) => (
           <li key={id} className='row'>
             <p>ID: {id}</p>
-            <p>{percentage(coords.length)}% <i>({coords.length})</i></p>
+            <p>{percentage(total, coords.length)}% <i>({coords.length})</i></p>
           </li>
         ))}
       </ul>

@@ -7,6 +7,7 @@ interface Props extends React.HTMLAttributes<HTMLUListElement> {
   currentPage: number;
   pageSize: number;
   total: number;
+  scrollToTop?: boolean;
   setPage: (page: number) => void;
 }
 
@@ -47,7 +48,7 @@ const RenderItem: FC<RenderItemProps> = ({ page, type }) => {
   }
 }
 
-export const Pagination: FC<Props> = ({ currentPage, pageSize, total, setPage }) => {
+export const Pagination: FC<Props> = ({ currentPage, pageSize, total, setPage, scrollToTop = true }) => {
   if (total <= pageSize) {
     // Usuall the pagination sits along side the page size, if this
     // doesn't render anything at all, then the space-between flex
@@ -59,11 +60,13 @@ export const Pagination: FC<Props> = ({ currentPage, pageSize, total, setPage })
   const handlePageChange = (page: number) => {
     setPage(page - 1);
 
-    setTimeout(() => {
-      document
-        .getElementById('main')
-        .scrollTo({ top: 0, behavior: 'smooth' });
-    }, 250);
+    if (scrollToTop) {
+      setTimeout(() => {
+        document
+          .getElementById('main')
+          .scrollTo({ top: 0, behavior: 'smooth' });
+      }, 250);
+    }
   };
 
   return (

@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import { range } from 'lodash';
+import { percentage } from 'lib/maths';
 import type { HeatmapsItem } from 'types/heatmaps';
 
 interface Props {
@@ -9,13 +10,10 @@ interface Props {
 
 export const HeatmapsScrolls: FC<Props> = ({ items }) => {
   const total = items.length;
-  const percentage = (count: number) => total ? Math.round((count / total) * 100) : 0;
 
   const max = items.length === 0 
     ? 0 
     : Math.max(...items.map(i => i.y));
-
-  console.log(max);
 
   return (
     <div className='scrolls-table'>
@@ -28,7 +26,7 @@ export const HeatmapsScrolls: FC<Props> = ({ items }) => {
         {range(1, 21).map(i => {
           const size = Math.floor(max / (i * 5));
           const amountWhoMadeIt = items.filter(i => i.y >= size).length;
-          const percent = percentage(amountWhoMadeIt);
+          const percent = percentage(total, amountWhoMadeIt);
 
           return (
             <li key={i} className='row'>
