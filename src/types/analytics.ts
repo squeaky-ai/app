@@ -3,7 +3,7 @@ export interface Analytics {
   pageViews: PageView[];
   visitorsCount: AnalyticsVisitors;
   pageViewCount: number;
-  sessionDurations: SessionDuration[];
+  sessionDurations: SessionDuration;
   pagesPerSession: number;
   pages: AnalyticsPage[];
   browsers: AnalyticsBrowser[];
@@ -74,6 +74,6 @@ export interface PageView {
 }
 
 export interface SessionDuration {
-  duration: string;
-  timestamp: string;
+  average: string;
+  trend: string;
 }

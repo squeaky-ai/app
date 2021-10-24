@@ -1,0 +1,28 @@
+.trend {
+  align-items: center;
+  background: var(--gray-100);
+  border-radius: var(--border-radius-lg);
+  display: inline-flex;
+  padding: .25rem .75rem;
+
+  &.up {
+    i {
+      color: var(--green-500);
+    }
+  }
+
+  &.down {
+    i {
+      color: var(--magenta-500);
+    }
+  }
+
+  i {
+    font-size: 1.25rem;
+    margin-right: .25rem;
+  }
+
+  span {
+    font-weight: var(--font-weight-bold);
+  }
+}

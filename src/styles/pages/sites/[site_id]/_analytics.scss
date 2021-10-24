@@ -384,13 +384,15 @@
     }
 
     .numbered-grid {
-      align-items: flex-end;
-      display: flex;
       flex: 1;
 
       h3 {
         font-weight: var(--font-weight-bold);
         margin: 0;
+      }
+
+      .trend {
+        margin-top: 1.5rem;
       }
 
       &.blue {

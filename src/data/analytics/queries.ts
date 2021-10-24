@@ -7,8 +7,8 @@ export const GET_ANALYTICS_QUERY = gql`
       analytics(fromDate: $fromDate, toDate: $toDate) {
         pageViewCount
         sessionDurations {
-          duration
-          timestamp
+          average
+          trend
         }
         pagesPerSession
         averageSessionsPerVisitor

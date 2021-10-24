@@ -32,7 +32,10 @@ export const useAnalytics = (range: TimeRange): UseAnalytics => {
       new: 0,
     },
     pageViewCount: 0,
-    sessionDurations: [],
+    sessionDurations: {
+      average: '0',
+      trend: '0',
+    },
     pagesPerSession: 0,
     averageSessionsPerVisitor: 0,
     pages: [],
