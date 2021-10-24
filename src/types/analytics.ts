@@ -74,6 +74,6 @@ export interface PageView {
 }
 
 export interface SessionDuration {
-  duration: number;
+  duration: string;
   timestamp: string;
 }

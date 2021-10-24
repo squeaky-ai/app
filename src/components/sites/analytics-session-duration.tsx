@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const AnalyticsSessionDuration: FC<Props> = ({ sessionDurations }) => {
-  const avg = average(sessionDurations.map(s => s.duration));
+  const avg = average(sessionDurations.map(s => Number(s.duration)));
 
   return (
     <div className='chart-wrapper'>
