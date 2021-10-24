@@ -19,11 +19,11 @@ interface Props {
 }
 
 export const Analytics: FC<Props> = ({ period }) => {
-  const { analytics } = useAnalytics(getDateRange(period));
+  const { analytics, loading } = useAnalytics(getDateRange(period));
 
   const toTwoDecimalPlaces = (value: number) => value.toFixed(2);
 
-  if (!analytics) {
+  if (!analytics || loading) {
     return <Spinner />;
   }
 
