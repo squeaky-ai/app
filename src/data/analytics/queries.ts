@@ -6,6 +6,7 @@ export const GET_ANALYTICS_QUERY = gql`
       id
       analytics(fromDate: $fromDate, toDate: $toDate) {
         pageViewCount
+        dimensions
         sessionDurations {
           average
           trend
@@ -47,11 +48,6 @@ export const GET_ANALYTICS_QUERY = gql`
         devices {
           type
           count
-        }
-        dimensions {
-          min
-          max
-          avg
         }
         referrers {
           name

@@ -14,6 +14,7 @@ import { AnalyticsPageViews } from 'components/sites/analytics-page-views';
 import { AnalyticsSessionDuration } from 'components/sites/analytics-session-duration';
 import { AnalyticsSessionsPerVisitor } from 'components/sites/analytics-sessions-per-visitor';
 import { AnalyticsPagesPerSession } from 'components/sites/analytics-pages-per-session';
+import { AnalyticsScreenWidths } from 'components/sites/analytics-screen-widths';
 import { Error } from 'components/error';
 import type { TimePeriod } from 'lib/dates';
 
@@ -105,27 +106,7 @@ export const Analytics: FC<Props> = ({ period }) => {
 
         <div className='grid-item screen-widths'>
           <h4>Screen Widths</h4>
-          <Card>
-            <h4>
-              Screen Width
-              <i className='ri-arrow-left-line' />
-              <i className='ri-arrow-right-line' />
-            </h4>
-            <div className='items'>
-              <div className='item'>
-                <p>Largest</p>
-                <h3>{analytics.dimensions.max}px</h3>
-              </div>
-              <div className='item'>
-                <p>Average</p>
-                <h3>{analytics.dimensions.avg}px</h3>
-              </div>
-              <div className='item'>
-                <p>Smallest</p>
-                <h3>{analytics.dimensions.min}px</h3>
-              </div>
-            </div>
-          </Card>    
+          <AnalyticsScreenWidths dimensions={analytics.dimensions} /> 
         </div>
       </div>
     </>

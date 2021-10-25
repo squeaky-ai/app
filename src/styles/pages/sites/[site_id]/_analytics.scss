@@ -295,19 +295,21 @@
           margin-top: 2rem;
 
           .item {
-            background: var(--purple-100);
+            background: var(--gray-50);
             border-radius: var(--border-radius-md);
             padding: 1.5rem;
-            width: calc(33% - 1rem);
+            width: calc(25% - 1rem);
 
             p {
               font-weight: var(--font-weight-bold);
-              margin: 0 0 .5rem 0;
+              margin: 0 0 1rem 0;
+              text-align: center;
             }
 
             h3 {
-              color: var(--purple-500);
+              color: var(--blue-500);
               margin: 0;
+              text-align: center;
             }
           }
         }

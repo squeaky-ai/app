@@ -9,7 +9,7 @@ export interface Analytics {
   browsers: AnalyticsBrowser[];
   languages: AnalyticsLanguage[];
   devices: AnalyticsDevice[];
-  dimensions: AnalyticsDimensions;
+  dimensions: number[];
   recordingsCount: RecordingsVisitors;
   referrers: AnalyticsReferrer[];
   sessionsPerVisitor: SessionsPerVisitor;
@@ -49,12 +49,6 @@ export interface AnalyticsLanguage {
 export interface AnalyticsDevice {
   type: string;
   count: number;
-}
-
-export interface AnalyticsDimensions {
-  min: number;
-  max: number;
-  avg: number;
 }
 
 export interface AnalyticsReferrer {

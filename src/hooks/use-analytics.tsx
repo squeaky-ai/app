@@ -63,11 +63,7 @@ export const useAnalytics = (range: TimeRange): UseAnalytics => {
         count: 0
       }
     ],
-    dimensions: {
-      max: 0,
-      min: 0,
-      avg: 0
-    }
+    dimensions: [],
   };
 
   return { 
