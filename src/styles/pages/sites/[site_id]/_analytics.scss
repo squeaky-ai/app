@@ -236,6 +236,7 @@
 
         .card {
           align-items: center;
+          flex: 0;
           flex-direction: row;
           padding: 2rem;
 
@@ -287,6 +288,10 @@
               margin-left: 1rem;
             }
           }
+        }
+
+        .chart-wrapper {
+          height: 150px;
         }
 
         .items {
@@ -435,6 +440,14 @@
 
     .new {
       color: var(--magenta-500);
+    }
+
+    .width {
+      color: var(--gray-100);
+    }
+
+    .total-visitors {
+      color: var(--blue-500);
     }
   }
 }
