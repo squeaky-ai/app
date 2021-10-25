@@ -1,7 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import { Trend } from 'components/trend';
-import { toHoursMinutesAndSeconds } from 'lib/dates';
+import { toTwoDecimalPlaces } from 'lib/maths';
 import type { PagesPerSession } from 'types/analytics';
 
 interface Props {
@@ -15,7 +15,7 @@ export const AnalyticsPagesPerSession: FC<Props> = ({ pagesPerSession }) => {
 
   return (
     <>
-      <h3>{toHoursMinutesAndSeconds(average)}</h3>
+      <h3>{toTwoDecimalPlaces(average)}</h3>
       <Trend direction={direction} value={average.toFixed(2)} />
     </>
   );

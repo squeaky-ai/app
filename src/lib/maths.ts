@@ -9,3 +9,5 @@ export const average = (numbers: number[]): number => {
 export const percentage = (total: number, count: number) => total
   ? Number(((count / total) * 100).toFixed(2))
   : 0;
+
+export const toTwoDecimalPlaces = (value: number) => value ? value.toFixed(2) : '0.00';
