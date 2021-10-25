@@ -57,19 +57,19 @@ export const AnalyticsScreenWidths: FC<Props> = ({ dimensions }) => {
       <div className='items'>
         <div className='item'>
           <p>Smallest</p>
-          <h3>{min(dimensions) || 0}px</h3>
+          <h4>{min(dimensions) || 0}px</h4>
         </div>
         <div className='item'>
           <p>Average</p>
-          <h3>{Math.floor(average(dimensions)) || 0}px</h3>
+          <h4>{Math.floor(average(dimensions)) || 0}px</h4>
         </div>
         <div className='item'>
           <p>Most Frequent</p>
-          <h3>{frequent(dimensions)} px</h3>
+          <h4>{frequent(dimensions)}px</h4>
         </div>
         <div className='item'>
           <p>Largest</p>
-          <h3>{max(dimensions) || 0}px</h3>
+          <h4>{max(dimensions) || 0}px</h4>
         </div>
       </div>
     </Card>    
