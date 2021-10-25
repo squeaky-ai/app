@@ -60,7 +60,7 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, query, style }) => {
           <Highlighter value={query}>{attributes?.email || '-'}</Highlighter>
         </Cell>
         <Cell>
-          {visitor.recordingsCount?.total || '😰'}
+          {visitor.recordingsCount?.total || 0}
         </Cell>
         <Cell>
           <Highlighter value={query}>
