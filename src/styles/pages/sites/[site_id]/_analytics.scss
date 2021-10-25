@@ -294,6 +294,17 @@
           height: 150px;
         }
 
+        .axis {
+          align-items: center;
+          display: flex;
+          justify-content: space-between;
+
+          p {
+            color: var(--gray-700);
+            margin: 0;
+          }
+        }
+
         .items {
           display: flex;
           justify-content: space-between;

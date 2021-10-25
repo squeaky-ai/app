@@ -50,6 +50,10 @@ export const AnalyticsScreenWidths: FC<Props> = ({ dimensions }) => {
           </BarChart>
         </ResponsiveContainer>
       </div>
+      <div className='axis'>
+        <p>{min(dimensions) || 0}px</p>
+        <p>{max(dimensions) || 0}px</p>
+      </div>
       <div className='items'>
         <div className='item'>
           <p>Smallest</p>
