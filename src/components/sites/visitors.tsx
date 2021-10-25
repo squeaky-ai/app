@@ -13,6 +13,7 @@ import { Spinner } from 'components/spinner';
 import { VisitorsItem } from 'components/sites/visitors-item';
 import { Table, Row, Cell } from 'components/table';
 import { DismissableMessage } from 'components/message';
+import { Error } from 'components/error';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 import { BASE_PATH } from 'data/common/constants';
 import { Preference } from 'lib/preferences';
@@ -32,7 +33,7 @@ export const Visitors: FC<Props> = ({ site, query, columns, filters }) => {
   const [size, setSize] = React.useState<number>(25);
   const [sort, setSort] = React.useState<VisitorSortBy>('first_viewed_at__desc');
 
-  const { loading, visitors } = useVisitors({ 
+  const { loading, error, visitors } = useVisitors({ 
     page, 
     sort,
     size,
@@ -50,6 +51,10 @@ export const Visitors: FC<Props> = ({ site, query, columns, filters }) => {
 
   const tableClassNames = allColumns
     .map(column => columns.find(c => c.name === column.name) ? '' : `hide-${column.name}`);
+
+  if (error) {
+    return <Error />;
+  }
 
   return (
     <>

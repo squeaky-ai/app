@@ -11,6 +11,8 @@ import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { VisitorSummary } from 'components/sites/visitor-summary';
 import { VisitorRecording } from 'components/sites/visitor-recordings';
 import { VisitorPages } from 'components/sites/visitors-pages';
+import { Error } from 'components/error';
+import { NotFound } from 'components/sites/not-found';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useVisitor } from 'hooks/use-visitor';
 import { toHoursMinutesAndSeconds } from 'lib/dates';
@@ -25,7 +27,7 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
   const [recordingPage, setRecordingPage] = React.useState<number>(0);
   const [recordingSort, setRecordingSort] = React.useState<RecordingSortBy>('connected_at__desc');
 
-  const { visitor } = useVisitor({ 
+  const { visitor, error, loading } = useVisitor({ 
     recordingPage,
     recordingSort,
     pagesPage: pageviewPage,
@@ -36,8 +38,16 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
 
   const toTwoDecimalPlaces = (value: number) => Number(value.toFixed(2));
 
-  if (!visitor) {
-    return <Spinner />
+  if (error) {
+    return <Error />;
+  }
+
+  if (loading) {
+    return <Spinner />;
+  }
+
+  if (!loading && !visitor) {
+    return <NotFound />;
   }
 
   return (

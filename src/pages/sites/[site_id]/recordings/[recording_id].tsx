@@ -4,6 +4,8 @@ import Head from 'next/head';
 import type { Replayer } from 'rrweb';
 import { useRouter } from 'next/router';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { NotFound } from 'components/sites/not-found';
+import { Error } from 'components/error';
 import { PlayerWrapper } from 'components/sites/player-wrapper';
 import { useRecording } from 'hooks/use-recording';
 import { initReplayer } from 'lib/replayer';
@@ -30,7 +32,7 @@ const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
   const router = useRouter();
   const [state, dispatch] = React.useReducer(reducer, initialState);
 
-  const { recording, fetchMoreEvents } = useRecording();
+  const { recording, error, loading, fetchMoreEvents } = useRecording();
 
   const processNextBatchOfEvents = (page: number): void => {
     nextPageTimer = setTimeout(async () => {
@@ -89,6 +91,14 @@ const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
     // to load the next batch as the play time gets close
     processNextBatchOfEvents(2);
   }, [recording?.id]);
+
+  if (error) {
+    return <Error />;
+  }
+
+  if (!loading && !recording) {
+    return <NotFound />;
+  }
 
   return (
     <>

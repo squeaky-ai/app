@@ -6,6 +6,7 @@ import type { Recording, PaginatedEventsResponse } from 'types/recording';
 
 interface UseRecording {
   loading: boolean;
+  error: boolean;
   recording: Recording | null;
   fetchMoreEvents: (eventPage: number) => Promise<PaginatedEventsResponse>;
 }
@@ -13,7 +14,7 @@ interface UseRecording {
 export const useRecording = (): UseRecording => {
   const router = useRouter();
 
-  const { data, loading, fetchMore } = useQuery<{ site: Site }>(GET_RECORDING_QUERY, {
+  const { data, loading, error, fetchMore } = useQuery<{ site: Site }>(GET_RECORDING_QUERY, {
     variables: {
       siteId: router.query.site_id as string,
       recordingId: router.query.recording_id as string,
@@ -38,6 +39,7 @@ export const useRecording = (): UseRecording => {
 
   return {
     loading, 
+    error: !!error,
     recording: data 
       ? data.site.recording 
       : null,

@@ -7,18 +7,23 @@ import type { TimeRange } from 'lib/dates';
 
 interface UseAnalytics {
   loading: boolean;
+  error: boolean;
   analytics: Analytics;
 }
 
 export const useAnalytics = (range: TimeRange): UseAnalytics => {
   const router = useRouter();
 
-  const { data, loading, previousData } = useQuery<{ site: Site }>(GET_ANALYTICS_QUERY, {
+  const { data, loading, error, previousData } = useQuery<{ site: Site }>(GET_ANALYTICS_QUERY, {
     variables: {
       siteId: router.query.site_id as string,
       ...range,
     }
   });
+
+  if (error) {
+    console.error(error);
+  }
 
   const fallback: Analytics = {
     recordingsCount: {
@@ -67,6 +72,7 @@ export const useAnalytics = (range: TimeRange): UseAnalytics => {
 
   return { 
     loading, 
+    error: !!error,
     analytics: data
       ? data.site.analytics
       : previousData ? previousData.site.analytics : fallback

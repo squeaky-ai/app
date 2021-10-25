@@ -14,13 +14,14 @@ interface Props {
 
 interface UseRecordings {
   loading: boolean;
+  error: boolean;
   recordings: PaginatedRecordingsResponse;
 }
 
 export const useRecordings = ({ page, size, query, sort, filters }: Props): UseRecordings => {
   const router = useRouter();
 
-  const { data, loading, previousData } = useQuery<{ site: Site }>(GET_RECORDINGS_QUERY, {
+  const { data, loading, error, previousData } = useQuery<{ site: Site }>(GET_RECORDINGS_QUERY, {
     variables: { 
       siteId: router.query.site_id as string, 
       page, 
@@ -30,6 +31,10 @@ export const useRecordings = ({ page, size, query, sort, filters }: Props): UseR
       filters,
     }
   });
+
+  if (error) {
+    console.error(error);
+  }
 
   const fallback: PaginatedRecordingsResponse = { 
     items: [], 
@@ -42,6 +47,7 @@ export const useRecordings = ({ page, size, query, sort, filters }: Props): UseR
 
   return {
     loading,
+    error: !!error,
     recordings: data
       ? data.site.recordings
       // When every keypress is made, the state will turn to loading

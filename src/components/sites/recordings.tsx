@@ -10,6 +10,7 @@ import { Sort } from 'components/sort';
 import { PageSize } from 'components/sites/page-size';
 import { Spinner } from 'components/spinner';
 import { Checkbox } from 'components/checkbox';
+import { Error } from 'components/error';
 import { useRecordings } from 'hooks/use-recordings';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 import { BASE_PATH } from 'data/common/constants';
@@ -31,7 +32,7 @@ export const Recordings: FC<Props> = ({ site, query, filters, columns, selected,
   const [size, setSize] = React.useState<number>(25);
   const [sort, setSort] = React.useState<RecordingSortBy>('connected_at__desc');
 
-  const { loading, recordings } = useRecordings({ 
+  const { loading, error, recordings } = useRecordings({ 
     page, 
     sort,
     size,
@@ -55,6 +56,10 @@ export const Recordings: FC<Props> = ({ site, query, filters, columns, selected,
       ? setSelected(items.map(t => t.id))
       : setSelected([]);
   };
+
+  if (error) {
+    return <Error />;
+  }
 
   return (
     <>

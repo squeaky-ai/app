@@ -14,6 +14,7 @@ import { AnalyticsPageViews } from 'components/sites/analytics-page-views';
 import { AnalyticsSessionDuration } from 'components/sites/analytics-session-duration';
 import { AnalyticsSessionsPerVisitor } from 'components/sites/analytics-sessions-per-visitor';
 import { AnalyticsPagesPerSession } from 'components/sites/analytics-pages-per-session';
+import { Error } from 'components/error';
 import type { TimePeriod } from 'lib/dates';
 
 interface Props {
@@ -21,7 +22,11 @@ interface Props {
 }
 
 export const Analytics: FC<Props> = ({ period }) => {
-  const { analytics, loading } = useAnalytics(getDateRange(period));
+  const { analytics, error, loading } = useAnalytics(getDateRange(period));
+
+  if (error) {
+    return <Error />;
+  }
 
   if (!analytics || loading) {
     return <Spinner />;

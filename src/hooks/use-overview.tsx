@@ -8,6 +8,7 @@ import type { TimeRange } from 'lib/dates';
 
 interface UseOverview {
   loading: boolean;
+  error: boolean;
   overview: Overview;
 }
 
@@ -21,12 +22,16 @@ export const useOverview = (): UseOverview => {
     toDate: format(now, 'yyyy-MM-dd')
   };
 
-  const { data, loading, previousData } = useQuery<{ site: Site }>(GET_OVERVIEW_QUERY, {
+  const { data, loading, error, previousData } = useQuery<{ site: Site }>(GET_OVERVIEW_QUERY, {
     variables: {
       siteId: router.query.site_id as string,
       ...range,
     }
   });
+
+  if (error) {
+    console.error(error);
+  }
 
   const fallback: Overview = {
     activeVisitorCount: 0,
@@ -49,6 +54,7 @@ export const useOverview = (): UseOverview => {
 
   return {
     loading,
+    error: !!error,
     overview: (data
       ? data.site
       : previousData ? previousData.site : fallback) as Overview

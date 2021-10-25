@@ -14,13 +14,14 @@ interface Props {
 
 interface UseVisitors {
   loading: boolean;
+  error: boolean;
   visitors: PaginatedVisitorsResponse;
 }
 
 export const useVisitors = ({ page, size, query, sort, filters }: Props): UseVisitors => {
   const router = useRouter();
 
-  const { data, loading, previousData } = useQuery<{ site: Site }>(GET_VISITORS_QUERY, {
+  const { data, loading, error, previousData } = useQuery<{ site: Site }>(GET_VISITORS_QUERY, {
     variables: { 
       siteId: router.query.site_id as string, 
       page, 
@@ -30,6 +31,10 @@ export const useVisitors = ({ page, size, query, sort, filters }: Props): UseVis
       filters,
     }
   });
+
+  if (error) {
+    console.error(error);
+  }
 
   const fallback: PaginatedVisitorsResponse = { 
     items: [], 
@@ -42,6 +47,7 @@ export const useVisitors = ({ page, size, query, sort, filters }: Props): UseVis
 
   return {
     loading,
+    error: !!error,
     visitors: data
       ? data.site.visitors
       // When every keypress is made, the state will turn to loading

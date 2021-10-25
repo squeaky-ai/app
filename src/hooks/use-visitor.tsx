@@ -14,13 +14,14 @@ interface Props {
 
 interface UseVisitor {
   loading: boolean;
+  error: boolean;
   visitor: Visitor | null;
 }
 
 export const useVisitor = (props: Props): UseVisitor => {
   const router = useRouter();
 
-  const { data, loading, previousData } = useQuery<{ site: Site }>(GET_VISITOR_QUERY, {
+  const { data, loading, error, previousData } = useQuery<{ site: Site }>(GET_VISITOR_QUERY, {
     variables: { 
       siteId: router.query.site_id as string,
       visitorId: router.query.visitor_id as string,
@@ -28,8 +29,13 @@ export const useVisitor = (props: Props): UseVisitor => {
     }
   });
 
+  if (error) {
+    console.error(error);
+  }
+
   return {
     loading, 
+    error: !!error,
     visitor: data 
       ? data.site.visitor 
       : previousData ? previousData.site.visitor : null

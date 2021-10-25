@@ -12,6 +12,7 @@ import { toTimeString } from 'lib/dates';
 import type { Site } from 'types/site';
 import { Pill } from 'components/pill';
 import { Spinner } from 'components/spinner';
+import { Error } from 'components/error';
 import { OverviewActiveVisitorsCount } from 'components/sites/overview-active-visitors-count';
 
 interface Props {
@@ -20,12 +21,16 @@ interface Props {
 
 export const Overview: FC<Props> = ({ site }) => {
   const router = useRouter();
-  const { overview, loading } = useOverview();
+  const { overview, error, loading } = useOverview();
 
   const { site_id } = router.query;
 
   const notes = overview.notes?.items;
   const recording = overview.recordingLatest;
+
+  if (error) {
+    return <Error />;
+  }
 
   if (loading) {
     return <Spinner />;
