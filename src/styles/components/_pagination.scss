@@ -49,6 +49,7 @@
       }
 
       &.blank {
+        border-radius: 0;
         color: var(--gray-800);
         opacity: .5;
         pointer-events: none;
