@@ -22,6 +22,10 @@ export const useRecording = (): UseRecording => {
     }
   });
 
+  if (error) {
+    console.error(error);
+  }
+
   const fetchMoreEvents = async (eventPage: number) => {
     // This is a much ligher query so that the pagination
     // only needs to grab the bare essentials

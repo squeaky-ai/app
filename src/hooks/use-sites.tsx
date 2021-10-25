@@ -4,14 +4,20 @@ import type { Site } from 'types/site';
 
 interface UseSites {
   loading: boolean;
+  error: boolean;
   sites: Site[];
 }
 
 export const useSites = (): UseSites => {
-  const { loading, data } = useQuery(GET_SITES_QUERY);
+  const { loading, error, data } = useQuery(GET_SITES_QUERY);
+
+  if (error) {
+    console.error(error);
+  }
 
   return {
     loading, 
+    error: !!error,
     sites: data ? data.sites : []
   };
 };

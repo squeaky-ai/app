@@ -6,6 +6,7 @@ import type { Heatmaps, HeatmapsDevice, HeatmapsType } from 'types/heatmaps';
 
 interface UseHeatmaps{
   loading: boolean;
+  error: boolean;
   heatmaps: Heatmaps;
 }
 
@@ -18,12 +19,16 @@ interface Props {
 export const useHeatmaps = (props: Props): UseHeatmaps => {
   const router = useRouter();
 
-  const { data, loading, previousData } = useQuery<{ site: Site }>(GET_HEATMAPS_QUERY, {
+  const { data, loading, error, previousData } = useQuery<{ site: Site }>(GET_HEATMAPS_QUERY, {
     variables: {
       siteId: router.query.site_id as string,
       ...props,
     }
   });
+
+  if (error) {
+    console.error(error);
+  }
 
   const fallback: Heatmaps = {
     desktopCount: 0,
@@ -33,6 +38,7 @@ export const useHeatmaps = (props: Props): UseHeatmaps => {
 
   return {
     loading,
+    error: !!error,
     heatmaps: (data
       ? data.site.heatmaps
       : previousData ? previousData.site.heatmaps : fallback)
