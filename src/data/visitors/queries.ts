@@ -20,6 +20,8 @@ export const GET_VISITORS_QUERY = gql`
             deviceType
             viewportX
             viewportY
+            deviceX
+            deviceY
             browserName
             browserDetails
             useragent
@@ -57,6 +59,8 @@ export const GET_VISITOR_QUERY = gql`
           deviceType
           viewportX
           viewportY
+          deviceX
+          deviceY
           browserName
           browserDetails
           useragent
@@ -81,6 +85,8 @@ export const GET_VISITOR_QUERY = gql`
               deviceType
               viewportX
               viewportY
+              deviceX
+              deviceY
               browserName
               browserDetails
             }

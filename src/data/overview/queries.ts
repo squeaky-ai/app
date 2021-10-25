@@ -39,6 +39,8 @@ export const GET_OVERVIEW_QUERY = gql`
         device {
           viewportX
           viewportY
+          deviceX
+          deviceY
         }
         visitor {
           id

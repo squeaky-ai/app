@@ -76,21 +76,21 @@ export const VisitorSummary: FC<Props> = ({ site, visitor }) => {
             <dd>{visitor.language}</dd>
           </div>
           <div className='row'>
-            <dt>Device &amp; Viewport (px)</dt>
+            <dt>Device(s)</dt>
             <dd>
               {devices.length === 1 && (
                 <>
                   <Device deviceType={devices[0].deviceType} />
-                  {devices[0].viewportX} by {devices[0].viewportY} pixels
+                  {devices[0].deviceX} by {devices[0].deviceY} pixels
                 </>
               )}
               {devices.length > 1 && (
                  <Tooltip positionX='right' button={devices.length}>
                   <ul>
                     {devices.map(device => (
-                      <li key={`${device.viewportX}_${device.viewportY}_${device.deviceType}`}>
+                      <li key={`${device.deviceX}_${device.deviceY}_${device.deviceType}`}>
                         <Device deviceType={device.deviceType} />
-                        <span>{device.viewportX} x {device.viewportY}</span>
+                        <span>{device.deviceX} x {device.deviceY}</span>
                       </li>
                     ))}
                   </ul>

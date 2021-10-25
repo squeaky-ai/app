@@ -83,16 +83,16 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, query, style }) => {
               <Tooltip positionX='right' button={<Device deviceType={devices[0].deviceType} />}>
                 {devices[0].deviceType === 'Computer' ? 'Desktop or Laptop Device' : 'Mobile Device'}
               </Tooltip>
-              <Highlighter value={query}>{devices[0].viewportX}</Highlighter> x <Highlighter value={query}>{devices[0].viewportY}</Highlighter>
+              <Highlighter value={query}>{devices[0].deviceX}</Highlighter> x <Highlighter value={query}>{devices[0].deviceY}</Highlighter>
             </>
           )}
           {devices.length > 1 && (
             <Tooltip positionX='right' button={devices.length} buttonClassName='link'>
               <ul>
                 {devices.map(device => (
-                  <li key={`${device.viewportX}_${device.viewportY}_${device.deviceType}`}>
+                  <li key={`${device.deviceX}_${device.deviceY}_${device.deviceType}`}>
                     <Device deviceType={device.deviceType} />
-                    <span>{device.viewportX} x {device.viewportY}</span>
+                    <span>{device.deviceX} x {device.deviceY}</span>
                   </li>
                 ))}
               </ul>

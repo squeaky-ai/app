@@ -20,6 +20,8 @@ export const GET_RECORDINGS_QUERY = gql`
             deviceType
             viewportX
             viewportY
+            deviceX
+            deviceY
             browserName
             browserDetails
             useragent
@@ -62,6 +64,8 @@ export const GET_RECORDING_QUERY = gql`
           deviceType
           viewportX
           viewportY
+          deviceX
+          deviceY
           browserName
           browserDetails
           useragent

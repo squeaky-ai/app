@@ -92,7 +92,7 @@ export const SidebarInfo: FC<Props> = ({ site, recording, setActiveTab }) => {
         </div>
         <div className='row'>
           <dt>Viewport</dt>
-          <dd>{recording.device.viewportX} x {recording.device.viewportY} px</dd>
+          <dd>{recording.device.deviceX} x {recording.device.deviceY} px</dd>
         </div>
         <div className='row'>
           <dt>Browser</dt>
