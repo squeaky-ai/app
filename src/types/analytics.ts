@@ -4,7 +4,7 @@ export interface Analytics {
   visitorsCount: AnalyticsVisitors;
   pageViewCount: number;
   sessionDurations: SessionDuration;
-  pagesPerSession: number;
+  pagesPerSession: PagesPerSession;
   pages: AnalyticsPage[];
   browsers: AnalyticsBrowser[];
   languages: AnalyticsLanguage[];
@@ -12,7 +12,7 @@ export interface Analytics {
   dimensions: AnalyticsDimensions;
   recordingsCount: RecordingsVisitors;
   referrers: AnalyticsReferrer[];
-  averageSessionsPerVisitor: number;
+  sessionsPerVisitor: SessionsPerVisitor;
 }
 
 export interface AnalyticsVisitors {
@@ -76,4 +76,14 @@ export interface PageView {
 export interface SessionDuration {
   average: string;
   trend: string;
+}
+
+export interface SessionsPerVisitor {
+  average: number;
+  trend: number;
+}
+
+export interface PagesPerSession {
+  average: number;
+  trend: number;
 }

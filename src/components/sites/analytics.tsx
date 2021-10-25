@@ -11,8 +11,10 @@ import { AnalyticsDevices } from 'components/sites/analytics-devices';
 import { AnalyticsReferrers } from 'components/sites/analytics-referrers';
 import { AnalyticsVisitors } from 'components/sites/analytics-visitors';
 import { AnalyticsPageViews } from 'components/sites/analytics-page-views';
+import { AnalyticsSessionDuration } from 'components/sites/analytics-session-duration';
+import { AnalyticsSessionsPerVisitor } from 'components/sites/analytics-sessions-per-visitor';
+import { AnalyticsPagesPerSession } from 'components/sites/analytics-pages-per-session';
 import type { TimePeriod } from 'lib/dates';
-import { AnalyticsSessionDuration } from './analytics-session-duration';
 
 interface Props {
   period: TimePeriod;
@@ -20,8 +22,6 @@ interface Props {
 
 export const Analytics: FC<Props> = ({ period }) => {
   const { analytics, loading } = useAnalytics(getDateRange(period));
-
-  const toTwoDecimalPlaces = (value: number) => value.toFixed(2);
 
   if (!analytics || loading) {
     return <Spinner />;
@@ -49,7 +49,7 @@ export const Analytics: FC<Props> = ({ period }) => {
           <Card>
             <h4>Average Sessions Per Visitor</h4>
             <div className='numbered-grid blue'>
-              <h3>{toTwoDecimalPlaces(analytics.averageSessionsPerVisitor)}</h3>
+              <AnalyticsSessionsPerVisitor sessionsPerVisitor={analytics.sessionsPerVisitor} />
             </div>
           </Card>
         </div>
@@ -58,7 +58,7 @@ export const Analytics: FC<Props> = ({ period }) => {
           <Card>
             <h4>Pages Per Session</h4>
             <div className='numbered-grid purple'>
-              <h3>{toTwoDecimalPlaces(analytics.pagesPerSession)}</h3>
+              <AnalyticsPagesPerSession pagesPerSession={analytics.pagesPerSession} />
             </div>
           </Card>
         </div>

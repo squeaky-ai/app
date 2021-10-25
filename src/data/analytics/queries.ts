@@ -10,8 +10,14 @@ export const GET_ANALYTICS_QUERY = gql`
           average
           trend
         }
-        pagesPerSession
-        averageSessionsPerVisitor
+        pagesPerSession {
+          average
+          trend
+        }
+        sessionsPerVisitor {
+          average
+          trend
+        }
         visitorsCount {
           total
           new

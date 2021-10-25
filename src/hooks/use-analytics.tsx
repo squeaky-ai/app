@@ -36,8 +36,14 @@ export const useAnalytics = (range: TimeRange): UseAnalytics => {
       average: '0',
       trend: '0',
     },
-    pagesPerSession: 0,
-    averageSessionsPerVisitor: 0,
+    pagesPerSession:  {
+      average: 0,
+      trend: 0,
+    },
+    sessionsPerVisitor: {
+      average: 0,
+      trend: 0,
+    },
     pages: [],
     browsers: [],
     languages: [],
