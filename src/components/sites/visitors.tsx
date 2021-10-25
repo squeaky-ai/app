@@ -14,6 +14,7 @@ import { VisitorsItem } from 'components/sites/visitors-item';
 import { Table, Row, Cell } from 'components/table';
 import { DismissableMessage } from 'components/message';
 import { Error } from 'components/error';
+import { EmptyState } from 'components/sites/filters/common/empty-state';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 import { BASE_PATH } from 'data/common/constants';
 import { Preference } from 'lib/preferences';
@@ -74,7 +75,7 @@ export const Visitors: FC<Props> = ({ site, query, columns, filters }) => {
         message={<p>The columns using the <i className='ri-link-m' /> link icon are used to display linked user data from your website or web app. To discover how you can link Squeaky visitor records directly with data of logged in users, <Link href='/developers'><a target='_blank'>click here</a></Link>.</p>}
       />
 
-      <Table className={classnames('visitors-list hover', tableClassNames)}>
+      <Table className={classnames('visitors-list hover', tableClassNames, { hide: items.length === 0 })}>
         <Row head style={rowStyle}>
           <Cell>
             Status
@@ -146,6 +147,10 @@ export const Visitors: FC<Props> = ({ site, query, columns, filters }) => {
         <Row className='loading'>
           <Spinner />
         </Row>
+      )}
+
+      {!loading && items.length === 0 && (
+        <EmptyState search={query.length > 0} type='visitors' />
       )}
       
       <div className='visitors-footer'>

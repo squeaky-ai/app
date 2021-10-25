@@ -276,6 +276,12 @@
         max-width: 580px;
       }
     }
+
+
+    &.filters {
+      display: flex;
+      height: calc(100% - 15rem);
+    }
   }
 
   .empty {

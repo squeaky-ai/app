@@ -1,9 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
-import Image from 'next/image';
 import classnames from 'classnames';
 import { Pagination } from 'components/pagination';
-import { Container } from 'components/container';
 import { RecordingsItem } from 'components/sites/recordings-item';
 import { Table, Row, Cell } from 'components/table';
 import { Sort } from 'components/sort';
@@ -11,9 +9,9 @@ import { PageSize } from 'components/sites/page-size';
 import { Spinner } from 'components/spinner';
 import { Checkbox } from 'components/checkbox';
 import { Error } from 'components/error';
+import { EmptyState } from 'components/sites/filters/common/empty-state';
 import { useRecordings } from 'hooks/use-recordings';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
-import { BASE_PATH } from 'data/common/constants';
 import { allColumns } from 'lib/recordings';
 import type { Filters, RecordingSortBy, Column } from 'types/recording';
 import type { Site } from 'types/site';
@@ -62,17 +60,8 @@ export const Recordings: FC<Props> = ({ site, query, filters, columns, selected,
   }
 
   return (
-    <>
-      {!loading && (
-        <Container className='xl centered empty-state'>
-          <div className='empty-state-contents'>
-            <Image src={`${BASE_PATH}/empty-state-4.svg`} height={240} width={320} alt='Illustration to represent that there were no search results' />
-            <h4 className='sub-heading'>There are no recordings matching your search.</h4>
-          </div>
-        </Container>
-      )}
-    
-      <Table className={classnames('recordings-list hover', tableClassNames)}>
+    <>    
+      <Table className={classnames('recordings-list hover', tableClassNames, { hide: items.length === 0 })}>
         <Row head style={rowStyle}>
           <Cell>
             <Checkbox
@@ -111,6 +100,10 @@ export const Recordings: FC<Props> = ({ site, query, filters, columns, selected,
         <Row className='loading'>
           <Spinner />
         </Row>
+      )}
+
+      {!loading && items.length === 0 && (
+        <EmptyState search={query.length > 0} type='recordings' />
       )}
       
       <div className='recordings-footer'>

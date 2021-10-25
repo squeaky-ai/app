@@ -403,14 +403,20 @@
     }
 
     .numbered-grid {
+      display: flex;
       flex: 1;
+      flex-direction: column;
 
       h3 {
+        align-items: flex-end;
+        display: flex;
         font-weight: var(--font-weight-bold);
+        flex: 1;
         margin: 0;
       }
 
       .trend {
+        align-self: flex-start;
         margin-top: 1.5rem;
       }
 

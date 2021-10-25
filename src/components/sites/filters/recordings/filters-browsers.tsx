@@ -41,7 +41,7 @@ export const FiltersBrowsers: FC<Props> = ({ value, onClose, onUpdate }) => {
 
   const browsers = data ? data.site.browsers : [];
 
-  const results = browsers.sort((a, b) => a.localeCompare(b));
+  const results = [...browsers].sort((a, b) => a.localeCompare(b));
 
   return (
     <Formik

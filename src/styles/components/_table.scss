@@ -73,6 +73,10 @@
     }
   }
 
+  &.hide {
+    display: none;
+  }
+
   &.hover {
     .row:not(.head):hover {
       border: 1px solid var(--blue-500);
