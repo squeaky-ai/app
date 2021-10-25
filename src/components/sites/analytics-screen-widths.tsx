@@ -20,8 +20,10 @@ export const AnalyticsScreenWidths: FC<Props> = ({ dimensions }) => {
       </div>
     );
   };
+  
+  const round = (n: number) => Math.ceil(n / 10) * 10;
 
-  const groups = groupBy(dimensions);
+  const groups = groupBy(dimensions.map(round));
 
   const data = Object.values(groups).map(counts => ({ 
     count: counts.length,
