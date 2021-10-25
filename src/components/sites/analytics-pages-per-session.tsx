@@ -16,7 +16,7 @@ export const AnalyticsPagesPerSession: FC<Props> = ({ pagesPerSession }) => {
   return (
     <>
       <h3>{toTwoDecimalPlaces(average)}</h3>
-      <Trend direction={direction} value={average.toFixed(2)} />
+      <Trend direction={direction} value={trend.toFixed(2)} />
     </>
   );
 };
