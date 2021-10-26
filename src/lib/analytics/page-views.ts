@@ -35,7 +35,7 @@ const getAmPmForHour = (hour: number): string => {
   return `${hour - 12}pm`;
 };
 
-const getDateFromTimestamp = (str: string) => new Date(str);
+const getDateFromTimestamp = (str: string) => new Date(Number(str));
 
 const getDailyResults = (pageViews: PageView[]): DataForPeriod => {
   const data = range(0, 24).map(i => {
