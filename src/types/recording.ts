@@ -17,7 +17,7 @@ export interface Recording {
   sessionId: string;
   viewed: boolean;
   bookmarked: boolean;
-  duration: number;
+  duration: string;
   pageViews: string[];
   pageCount: number;
   startPage: string;

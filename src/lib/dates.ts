@@ -24,11 +24,11 @@ export type TimeRange = {
   toDate: string;
 }
 
-export const toTimeString = (ms?: number) => {
+export const toTimeString = (ms?: number | string) => {
   if (!ms) return '00:00:00';
 
   const date = new Date(0);
-  date.setMilliseconds(ms);
+  date.setMilliseconds(Number(ms));
   return date.toISOString().substr(11, 8);
 };
 
