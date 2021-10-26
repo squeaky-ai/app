@@ -7,7 +7,7 @@ ENV NODE_ENV=production
 COPY package.json /app
 COPY yarn.lock /app
 
-RUN yarn install --production=false
+RUN yarn install --production=false --ignore-engines
 
 COPY . /app
 
