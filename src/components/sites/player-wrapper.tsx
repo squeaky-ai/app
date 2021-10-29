@@ -9,9 +9,10 @@ import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { PlayerActions } from 'components/sites/player-actions';
 import { PlayerDetails } from 'components/sites/player-details';
 import { PlayerFooter } from 'components/sites/player-footer';
+import { Error } from 'components/error';
 import type { User } from 'types/user';
 import type { Recording } from 'types/recording';
-import type { PlayerState, Action } from 'types/player';
+import { PlayerState, Action, PlayerStatus } from 'types/player';
 
 interface Props {
   user: User;
@@ -21,45 +22,51 @@ interface Props {
   dispatch: React.Dispatch<Action>;
 }
 
-export const PlayerWrapper: FC<Props> = ({ user, state, replayer, recording, dispatch }) => (
-  <div className={classnames('player-page', { open: state.activeTab !== null })}>
-    <Page user={user} scope={[]}>
-      {({ site }) => (
-        <>
-          <Header className='site-header'>
-            <BreadCrumbs 
-              site={site} 
-              items={[{ name: 'Recordings', href: `/sites/${site.id}/recordings` }]} 
+export const PlayerWrapper: FC<Props> = ({ user, state, replayer, recording, dispatch }) => {
+  if (state.status === PlayerStatus.FAILED) {
+    return <Error />;
+  }
+
+  return (
+    <div className={classnames('player-page', { open: state.activeTab !== null })}>
+      <Page user={user} scope={[]}>
+        {({ site }) => (
+          <>
+            <Header className='site-header'>
+              <BreadCrumbs 
+                site={site} 
+                items={[{ name: 'Recordings', href: `/sites/${site.id}/recordings` }]} 
+              />
+
+              <PlayerDetails 
+                site={site} 
+                recording={recording} 
+              />
+
+              <PlayerActions 
+                site={site} 
+                recording={recording} 
+              />
+            </Header>
+
+            <Player 
+              site={site}
+              state={state}
+              replayer={replayer}
+              recording={recording}
+              dispatch={dispatch}
             />
 
-            <PlayerDetails 
-              site={site} 
-              recording={recording} 
+            <PlayerFooter 
+              state={state}
+              site={site}
+              replayer={replayer}
+              recording={recording}
+              dispatch={dispatch}
             />
-
-            <PlayerActions 
-              site={site} 
-              recording={recording} 
-            />
-          </Header>
-
-          <Player 
-            site={site}
-            state={state}
-            replayer={replayer}
-            recording={recording}
-            dispatch={dispatch}
-          />
-
-          <PlayerFooter 
-            state={state}
-            site={site}
-            replayer={replayer}
-            recording={recording}
-            dispatch={dispatch}
-          />
-        </>
-      )}
-    </Page>
-  </div>
-);
+          </>
+        )}
+      </Page>
+    </div>
+  );
+};

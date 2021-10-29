@@ -1,9 +1,16 @@
 import type { PlayerTab } from 'data/sites/enums';
 import type { ValueOf } from 'types/common';
 
+export enum PlayerStatus {
+  PLAYING,
+  PAUSED,
+  FAILED,
+  FINISHED,
+  LOADING,
+}
+
 export interface PlayerState {
-  failed: boolean;
-  playing: boolean;
+  status: PlayerStatus;
   playbackSpeed: number;
   activeTab: PlayerTab;
   skipInactivity: boolean;

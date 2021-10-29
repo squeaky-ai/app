@@ -1,7 +1,7 @@
 import React from 'react';
 import { Replayer } from 'rrweb';
 import type { Event } from 'types/event';
-import type { Action } from 'types/player';
+import { Action, PlayerStatus } from 'types/player';
 import type { Recording } from 'types/recording';
 
 interface InitArgs {
@@ -34,7 +34,7 @@ export const initReplayer = ({ failed, replayer, recording, dispatch }: InitArgs
   if (events.length === 0) {
     // Shouldn't be possible to create a recording without events
     // but someone could have deleted something
-    dispatch({ type: 'failed', value: true });
+    dispatch({ type: 'status', value: PlayerStatus.FAILED });
     return replayer;
   }
 
@@ -54,10 +54,10 @@ export const initReplayer = ({ failed, replayer, recording, dispatch }: InitArgs
   (replayer.on as any)('*', (type: string, x: any) => {
     switch(type) {
       case 'start':
-        dispatch({ type: 'playing', value: true });
+        dispatch({ type: 'status', value: PlayerStatus.PLAYING });
         break;
       case 'pause':
-        dispatch({ type: 'playing', value: false });
+        dispatch({ type: 'status', value: PlayerStatus.PAUSED });
         break;
       case 'state-change':
         if (x.speed) {
@@ -65,13 +65,12 @@ export const initReplayer = ({ failed, replayer, recording, dispatch }: InitArgs
         }
         break;
       case 'finish':
-        dispatch({ type: 'playing', value: false });
+        dispatch({ type: 'status', value: PlayerStatus.FINISHED });
         break;
     }
   });
 
   replayer.play();
-
 
   // Can't have users tabbing around in there!
   element.querySelector('iframe').setAttribute('tabindex', '-1');

@@ -20,7 +20,7 @@ export const PlayerPreview: FC<Props> = ({ recording }) => {
 
     if (items.length === 0) return undefined;
 
-    const replayer = new Replayer(items, {
+    new Replayer(items, {
       root: document.getElementById('preview-wrapper'),
       skipInactive: true,
       mouseTail: false,
@@ -30,14 +30,8 @@ export const PlayerPreview: FC<Props> = ({ recording }) => {
 
     setScale(`scale(${height / viewportY})`);
 
-    replayer.play();
-
     // Can't have users tabbing around in there!
     ref.current.querySelector('iframe').setAttribute('tabindex', '-1');
-
-    return () => {
-      replayer?.pause();
-    };
   }, []);
 
   return (

@@ -2,9 +2,10 @@ import React from 'react';
 import type { Replayer } from 'rrweb';
 import { debounce } from 'lodash';
 import { Spinner } from 'components/spinner';
+import { Buffering } from 'components/sites/buffering';
 import { recordingViewed } from 'lib/api/graphql';
 import type { Recording } from 'types/recording';
-import type { PlayerState, Action } from 'types/player';
+import { PlayerState, Action, PlayerStatus } from 'types/player';
 import type { Site } from 'types/site';
 
 const MAIN_PADDING_SIZE = 24;
@@ -97,10 +98,8 @@ export class Player extends React.Component<Props> {
     return (
       <main id='player'>
         <div className='player-container' style={{ transform: `scale(${this.props.state.zoom})` }}>
-          {this.props.state.failed
-            ? <h3>Oh no!</h3>
-            : this.props.replayer ? null : <Spinner />
-          }
+          {this.props.replayer ? null : <Spinner />}
+          {this.props.state.status === PlayerStatus.LOADING && <Buffering />}
         </div>
       </main>
     );

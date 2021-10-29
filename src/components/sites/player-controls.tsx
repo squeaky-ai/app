@@ -4,7 +4,8 @@ import type { Replayer } from 'rrweb';
 import { Button } from 'components/button';
 import { PlayerSpeed } from 'components/sites/player-speed';
 import { PlayerSlider } from 'components/sites/player-slider';
-import type { PlayerState, Action } from 'types/player';
+import { Spinner } from 'components/spinner';
+import { PlayerState, Action, PlayerStatus } from 'types/player';
 import type { Recording } from 'types/recording';
 
 interface Props {
@@ -16,9 +17,16 @@ interface Props {
 
 export const PlayerControls: FC<Props> = ({ state, replayer, recording, dispatch }) => {
   const handlePlayPause = () => {
-    state.playing
-      ? replayer.pause()
-      : replayer.play(replayer.getCurrentTime());
+    switch(state.status) {
+      case PlayerStatus.FINISHED:
+        replayer.play(0);
+        break;
+      case PlayerStatus.PLAYING:
+        replayer.pause();
+        break;
+      default:
+        replayer.play(replayer.getCurrentTime());
+    }   
   };
 
   const handlePlaybackSpeed = (speed: number) => {
@@ -36,19 +44,31 @@ export const PlayerControls: FC<Props> = ({ state, replayer, recording, dispatch
     replayer.play(ms);
   };
 
+  const PlayPauseIcon = () => {
+    switch(state.status) {
+      case PlayerStatus.PLAYING:
+        return <i className='ri-pause-fill' />;
+      case PlayerStatus.PAUSED:
+        return <i className='ri-play-fill' />;
+      case PlayerStatus.LOADING:
+        return <Spinner hideShowExtra />;
+      case PlayerStatus.FINISHED:
+        return <i className='ri-play-line' />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <>
       <Button className='control play-pause' onClick={handlePlayPause}>
-        {state.playing
-          ? <i className='ri-pause-fill' />
-          : <i className='ri-play-fill' />
-        }
+        <PlayPauseIcon />
       </Button>
 
       {replayer && (
         <PlayerSlider 
           replayer={replayer}
-          playing={state.playing}
+          status={state.status}
           playbackSpeed={state.playbackSpeed}
           recording={recording} 
           handleSlide={handleSetProgress} 

@@ -2,11 +2,12 @@ import React from 'react';
 import { Replayer } from 'rrweb';
 import { Slider } from 'components/sites/slider';
 import { toTimeString } from 'lib/dates';
+import { PlayerStatus } from 'types/player';
 import type { Recording } from 'types/recording';
 
 interface Props {
   replayer: Replayer;
-  playing: boolean;
+  status: PlayerStatus;
   playbackSpeed: number;
   recording: Recording;
   handleSlide: (seconds: number) => void;
@@ -30,8 +31,8 @@ export class PlayerSlider extends React.Component<Props, State> {
   }
 
   public componentDidUpdate(prevProps: Props) {
-    if (prevProps.playing !== this.props.playing) {
-      this.props.playing
+    if (prevProps.status !== this.props.status) {
+      this.props.status === PlayerStatus.PLAYING
         ? this.start()
         : this.stop();
     }

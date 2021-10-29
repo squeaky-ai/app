@@ -9,7 +9,7 @@ import { Error } from 'components/error';
 import { PlayerWrapper } from 'components/sites/player-wrapper';
 import { useRecording } from 'hooks/use-recording';
 import { initReplayer } from 'lib/replayer';
-import type { PlayerState, Action } from 'types/player';
+import { PlayerState, Action, PlayerStatus } from 'types/player';
 
 let replayer: Replayer = null;
 let nextPageTimer: NodeJS.Timer;
@@ -20,8 +20,7 @@ const reducer = (state: PlayerState, action: Action) => ({
 });
 
 const initialState: PlayerState = {
-  failed: false,
-  playing: false,
+  status: PlayerStatus.PLAYING,
   playbackSpeed: 1,
   activeTab: null,
   skipInactivity: true,
@@ -58,7 +57,7 @@ const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
     replayer = initReplayer({
       replayer,
       recording,
-      failed: state.failed,
+      failed: state.status === PlayerStatus.FAILED,
       dispatch,
     });
   });
@@ -74,7 +73,7 @@ const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
       document.querySelector('.replayer-wrapper')?.remove();
       // This could go on for a while and must be cancelled
       clearTimeout(nextPageTimer);
-      dispatch({ type: 'failed', value: false });
+      dispatch({ type: 'status', value: PlayerStatus.FAILED });
     };
   }, [router.query.recording_id]);
 
