@@ -65,7 +65,16 @@ export const initReplayer = ({ failed, replayer, recording, dispatch }: InitArgs
         }
         break;
       case 'finish':
-        dispatch({ type: 'status', value: PlayerStatus.FINISHED });
+        const hasFinished = replayer.getCurrentTime() >= Number(recording.duration);
+
+        // The replayer doesn't know internally whether the recording has
+        // actually finished, or is awaiting the next batch of events. We
+        // need to use the actual recording duration to see if it's got 
+        // more to load
+        dispatch({ 
+          type: 'status', 
+          value: hasFinished ? PlayerStatus.FINISHED : PlayerStatus.LOADING 
+        });
         break;
     }
   });

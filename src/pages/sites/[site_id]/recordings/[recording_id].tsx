@@ -45,6 +45,10 @@ const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
       // care of it
       const { items } = await fetchMoreEvents(page);
       items.forEach((e) => replayer.addEvent(JSON.parse(e)));
+
+      // Start replaying now that there is more stuff to show
+      replayer.play(replayer.getCurrentTime());
+
       // Recursively call it again, if it's been exceeded then
       // it will return early
       processNextBatchOfEvents(page + 1);
