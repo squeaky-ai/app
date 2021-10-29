@@ -16,6 +16,7 @@ interface Props {
 
 export const Slider: FC<Props> = ({ max, min, step, value, recording, onChange }) => {
   const [val, setVal] = React.useState<number>(0);
+  const [clicked, setClicked] = React.useState<boolean>(false);
 
   const { totalPages, currentPage } = recording?.events?.pagination || { 
     totalPages: 0, 
@@ -37,8 +38,14 @@ export const Slider: FC<Props> = ({ max, min, step, value, recording, onChange }
     setValue(number);
   };
 
-  // Update the value when it changes in the parent
-  React.useEffect(() => { setVal(value) }, [value]);
+  // Update the value when it changes in the parent but
+  // only if the user is currently clicking on the slider,
+  // otherwise it will fight with it
+  React.useEffect(() => {
+    if (!clicked) {
+      setVal(value);
+    }
+  }, [value]);
 
   return (
     <div className='slider'>
@@ -51,7 +58,9 @@ export const Slider: FC<Props> = ({ max, min, step, value, recording, onChange }
         max={max} 
         step={step} 
         value={val}
-        onChange={handleChange} 
+        onChange={handleChange}
+        onMouseDown={() => setClicked(true)}
+        onMouseUp={() => setClicked(false)}
       />
     </div>
   );
