@@ -5,9 +5,11 @@ import Image from 'next/image';
 import classnames from 'classnames';
 import { useRouter } from 'next/router';
 import { Button } from 'components/button';
+import { Divider } from 'components/divider';
 import { SidebarAccount } from 'components/app/sidebar-account';
 import { SidebarFeedback } from 'components/app/sidebar-feedback';
 import { BASE_PATH } from 'data/common/constants';
+import { SidebarSiteSettings } from './sidebar-site-settings';
 
 export const Sidebar: FC = () => {
   const router = useRouter();
@@ -15,7 +17,7 @@ export const Sidebar: FC = () => {
   const [position, setPosition] = React.useState<'left' | 'right'>('left');
 
   const path = router.asPath;
-  const siteId = router.query.site_id;
+  const siteId = router.query.site_id as string;
 
   const toggleOpen = () => setOpen(!open);
 
@@ -52,6 +54,7 @@ export const Sidebar: FC = () => {
                 <span>Overview</span>
               </a>
             </Link>
+            <Divider />
             <Link href={`/sites/${siteId}/visitors`}>
               <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/visitors`) })} data-label='Visitors'>
                 <i className='ri-group-line' />
@@ -76,28 +79,9 @@ export const Sidebar: FC = () => {
                 <span>Analytics</span>
               </a>
             </Link>
-            <div className='divider' />
-            <Link href={`/sites/${siteId}/team`}>
-              <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/team`) })} data-label='Team'>
-                <i className='ri-group-line' />
-                <span>Team</span>
-              </a>
-            </Link>
-            <Link href={`/sites/${siteId}/settings/details`}>
-              <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/settings`) })} data-label='Settings'>
-                <i className='ri-settings-3-line' />
-                <span>Settings</span>
-              </a>
-            </Link>
-            <Link href={`/sites/${siteId}/subscription`}>
-              <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/subscription`) })} data-label='Subscription'>
-                <i className='ri-bank-card-2-line' />
-                <span>Subscription</span>
-              </a>
-            </Link>
-            <div className='divider' />
+            <SidebarSiteSettings path={path} siteId={siteId} />
+            <Divider />
             <SidebarAccount path={path} />
-            <SidebarFeedback />
           </div>
         </div>
       </menu>
