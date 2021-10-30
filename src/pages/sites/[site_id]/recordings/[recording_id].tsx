@@ -77,7 +77,7 @@ const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
       document.querySelector('.replayer-wrapper')?.remove();
       // This could go on for a while and must be cancelled
       clearTimeout(nextPageTimer);
-      dispatch({ type: 'status', value: PlayerStatus.FAILED });
+      dispatch({ type: 'status', value: PlayerStatus.PLAYING });
     };
   }, [router.query.recording_id]);
 
