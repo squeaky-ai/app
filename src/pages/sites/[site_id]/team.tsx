@@ -1,6 +1,7 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { Spinner } from 'components/spinner';
 import { Container } from 'components/container';
 import { Main } from 'components/main';
 import { Access } from 'components/sites/access';
@@ -9,83 +10,97 @@ import { TeamRow } from 'components/sites/team-row';
 import { Page } from 'components/sites/page';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { Table, Row, Cell } from 'components/table';
+import { Error } from 'components/error';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { OWNER, ADMIN } from 'data/teams/constants';
+import { useTeam } from 'hooks/use-team';
 
-const SitesTeam: NextPage<ServerSideProps> = ({ user }) => (
-  <>
-    <Head>
-      <title>Squeaky | Site Team</title>
-    </Head>
+const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
+  const { loading, error, team } = useTeam();
 
-    <Page user={user} scope={[OWNER, ADMIN]}>
-      {({ site }) => (
-        <Main>
-          <BreadCrumbs site={site} items={[{ name: 'Team' }]} />
+  if (error) {
+    return <Error />;
+  }
 
-          <h3 className='title'>
-            Team
-            <Access roles={[OWNER, ADMIN]} />
-          </h3>
+  if (loading) {
+    return <Spinner />;
+  }
 
-          <Container className='md'>
-            <p>This page allows you to view, invite and manage the roles of any team members associated with this site. Adding members is always free of charge, regardless of their role.</p>
-          </Container>
+  return (
+    <>
+      <Head>
+        <title>Squeaky | Site Team</title>
+      </Head>
 
-          <Table>
-            <Row head>
-              <Cell>Name</Cell>
-              <Cell>Email address</Cell>
-              <Cell>Role</Cell>
-              <Cell>Options</Cell>
-            </Row>
-            {site.team.map(team => <TeamRow key={team.id} team={team} site={site} user={user} />)}
-          </Table>
+      <Page user={user} scope={[OWNER, ADMIN]}>
+        {({ site }) => (
+          <Main>
+            <BreadCrumbs site={site} items={[{ name: 'Team' }]} />
 
-          <InviteTeam site={site} />
+            <h3 className='title'>
+              Team
+              <Access roles={[OWNER, ADMIN]} />
+            </h3>
 
-          <h3>Roles</h3>
+            <Container className='md'>
+              <p>This page allows you to view, invite and manage the roles of any team members associated with this site. Adding members is always free of charge, regardless of their role.</p>
+            </Container>
 
-          <Container className='md'>
-            <p>Roles are site-specific and determine what level of control individual team members have over any site they are associated with, only admins and owners can edit roles.</p>
-          </Container>
+            <Table>
+              <Row head>
+                <Cell>Name</Cell>
+                <Cell>Email address</Cell>
+                <Cell>Role</Cell>
+                <Cell>Options</Cell>
+              </Row>
+              {team.members.map(t => <TeamRow key={t.id} team={t} site={site} user={user} />)}
+            </Table>
 
-          <div className='roles'>
-            <div className='role'>
-              <h4>Owner</h4>
-              <p>The site owner can:</p>
-              <ul>
-                <li>Manage site billing</li>
-                <li>Manage team members</li>
-                <li>Manage site settings</li>
-                <li>View session recordings and analytics</li>
-                <li>Edit or alter recordings, including deletion</li>
-              </ul>
+            <InviteTeam site={site} disabled={team.teamSizeExceeded} />
+
+            <h3>Roles</h3>
+
+            <Container className='md'>
+              <p>Roles are site-specific and determine what level of control individual team members have over any site they are associated with, only admins and owners can edit roles.</p>
+            </Container>
+
+            <div className='roles'>
+              <div className='role'>
+                <h4>Owner</h4>
+                <p>The site owner can:</p>
+                <ul>
+                  <li>Manage site billing</li>
+                  <li>Manage team members</li>
+                  <li>Manage site settings</li>
+                  <li>View session recordings and analytics</li>
+                  <li>Edit or alter recordings, including deletion</li>
+                </ul>
+              </div>
+              <div className='role'>
+                <h4>Admin</h4>
+                <p>Site admins can:</p>
+                <ul>
+                  <li>Manage team members (excluding owner)</li>
+                  <li>Manage site settings</li>
+                  <li>View session recordings and analytics</li>
+                  <li>Edit or alter recordings, including deletion</li>
+                </ul>
+              </div>
+              <div className='role'>
+                <h4>User</h4>
+                <p>Site users can:</p>
+                <ul>
+                  <li>View session recordings and analytics</li>
+                  <li>Edit or alter recordings, including deletion</li>
+                </ul>
+              </div>
             </div>
-            <div className='role'>
-              <h4>Admin</h4>
-              <p>Site admins can:</p>
-              <ul>
-                <li>Manage team members (excluding owner)</li>
-                <li>Manage site settings</li>
-                <li>View session recordings and analytics</li>
-                <li>Edit or alter recordings, including deletion</li>
-              </ul>
-            </div>
-            <div className='role'>
-              <h4>User</h4>
-              <p>Site users can:</p>
-              <ul>
-                <li>View session recordings and analytics</li>
-                <li>Edit or alter recordings, including deletion</li>
-              </ul>
-            </div>
-          </div>
-        </Main>
-      )}
-    </Page>
-  </>
-);
+          </Main>
+        )}
+      </Page>
+    </>
+  );
+};
 
 export default SitesTeam;
 export { getServerSideProps };

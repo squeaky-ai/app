@@ -27,14 +27,8 @@ export const GET_SITE_QUERY = gql`
       team {
         id
         role
-        roleName
-        status
         user {
           id
-          firstName
-          lastName
-          fullName
-          email
         }
       }
       ipBlacklist {

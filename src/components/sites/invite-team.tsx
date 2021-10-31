@@ -13,6 +13,7 @@ import type { Site } from 'types/site';
 
 interface Props {
   site: Site;
+  disabled: boolean;
 }
 
 const InviteSchema = Yup.object().shape({ 
@@ -20,7 +21,7 @@ const InviteSchema = Yup.object().shape({
   role: Yup.string().oneOf(['0', '1'], 'Please select a role')
 });
 
-export const InviteTeam: FC<Props> = ({ site }) => {
+export const InviteTeam: FC<Props> = ({ site, disabled }) => {
   const toast = useToasts();
   const ref = React.useRef<Modal>();
 
@@ -34,7 +35,7 @@ export const InviteTeam: FC<Props> = ({ site }) => {
 
   return (
     <>
-      <Button className='primary invite-member' onClick={openModal}>
+      <Button className='primary invite-member' onClick={openModal} disabled={disabled}>
         Invite New Member
       </Button>
 
