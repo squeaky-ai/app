@@ -10,7 +10,7 @@ export const GET_HEATMAPS_QUERY = gql`
         items {
           x
           y
-          id
+          selector
         }
       }
     }

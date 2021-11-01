@@ -7,7 +7,7 @@ export interface Heatmaps {
 export interface HeatmapsItem {
   x: number;
   y: number;
-  id: number;
+  selector: string;
 }
 
 export type HeatmapsDevice = 'Desktop' | 'Mobile';

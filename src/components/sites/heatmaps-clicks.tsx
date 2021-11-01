@@ -2,6 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import { groupBy } from 'lodash';
 import { percentage } from 'lib/maths';
+import { Tooltip } from 'components/tooltip';
 import type { HeatmapsItem } from 'types/heatmaps';
 
 interface Props {
@@ -9,7 +10,7 @@ interface Props {
 }
 
 export const HeatmapsClicks: FC<Props> = ({ items }) => {
-  const results = groupBy(items, 'id');
+  const results = groupBy(items, 'selector');
 
   const total = items.length;
 
@@ -20,9 +21,11 @@ export const HeatmapsClicks: FC<Props> = ({ items }) => {
         <p>Clicks</p>
       </div>
       <ul>
-        {Object.entries(results).map(([id, coords]) => (
-          <li key={id} className='row'>
-            <p>ID: {id}</p>
+        {Object.entries(results).map(([selector, coords]) => (
+          <li key={selector} className='row'>
+            <Tooltip button={selector} portalClassName='element-tooltip'>
+              {selector}
+            </Tooltip>
             <p>{percentage(total, coords.length)}% <i>({coords.length})</i></p>
           </li>
         ))}

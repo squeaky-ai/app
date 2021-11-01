@@ -107,11 +107,26 @@
         display: flex;
       }
 
-      p {
+      p,
+      .tooltip {
         font-size: 13px;
         line-height: 16px;
         margin: 0;
         padding: 1.5rem 0 1.5rem 1.5rem;
+      }
+
+      .tooltip {
+        width: 100%;
+
+        .button {
+          font-size: 13px;
+          line-height: 16px;
+          overflow: hidden;
+          text-align: left;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          width: 100%;
+        }
       }
 
       ul {
@@ -136,12 +151,21 @@
         flex-direction: column;
         height: 100%;
 
-        .row {
+        .head {
           p:first-of-type {
             flex: 1;
           }
+        }
 
-          p:last-of-type {
+        .row {
+          .tooltip {
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+
+          p {
             width: 140px;
           }
         }
@@ -187,4 +211,8 @@
       mix-blend-mode: multiply;
     }
   }
+}
+
+.element-tooltip {
+  white-space: pre-wrap;
 }
