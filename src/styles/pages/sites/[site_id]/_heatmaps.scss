@@ -7,22 +7,6 @@
     align-items: center;
     display: flex;
     margin: 0 0 3rem 0;
-
-    .heatmaps-pages {
-      align-items: center;
-      display: flex;
-      margin-left: 1.5rem;
-
-      .label,
-      .select,
-      .button {
-        margin: 0 .75rem 0 0;
-      }
-
-      .select {
-        width: 320px;
-      }
-    }
   }
 
   .title {
@@ -79,9 +63,19 @@
     .options {
       display: flex;
       grid-area: options;
+      justify-content: space-between;
+
+      .left,
+      .right {
+        display: flex;
+      }
   
       .button-group {
         margin-right: 1.5rem;
+
+        &:last-of-type {
+          margin-right: 0;
+        }
   
         .button {
           align-items: center;
@@ -199,6 +193,38 @@
         top: 50%;
         transform: translate(-50%, -50%);
       }
+    }
+  }
+
+  .heatmaps-pages {
+    align-items: center;
+    display: flex;
+
+    .select {
+      margin: 0;
+    }
+
+    .label {
+      margin: 0 .75rem 0 0;
+    }
+
+    .select {
+      width: 320px;
+    }
+  }
+
+  .heatmaps-period {
+    align-items: center;
+    display: flex;
+    margin-left: 1.5rem;
+
+    .select {
+      margin: 0;
+      width: 160px;
+    }
+
+    .label {
+      margin: 0 .75rem 0 0;
     }
   }
 

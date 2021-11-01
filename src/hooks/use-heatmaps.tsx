@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_HEATMAPS_QUERY } from 'data/heatmaps/queries';
 import type { Site } from 'types/site';
+import type { TimeRange } from 'lib/dates';
 import type { Heatmaps, HeatmapsDevice, HeatmapsType } from 'types/heatmaps';
 
 interface UseHeatmaps{
@@ -14,6 +15,7 @@ interface Props {
   device: HeatmapsDevice;
   type: HeatmapsType;
   page: string;
+  range: TimeRange;
 }
 
 export const useHeatmaps = (props: Props): UseHeatmaps => {
@@ -22,7 +24,10 @@ export const useHeatmaps = (props: Props): UseHeatmaps => {
   const { data, loading, error, previousData } = useQuery<{ site: Site }>(GET_HEATMAPS_QUERY, {
     variables: {
       siteId: router.query.site_id as string,
-      ...props,
+      device: props.device,
+      type: props.type,
+      page: props.page || '/',
+      ...props.range,
     }
   });
 

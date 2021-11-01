@@ -13,37 +13,11 @@ import { Analytics } from 'components/sites/analytics';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { BASE_PATH } from 'data/common/constants';
+import { TIME_PERIODS } from 'data/heatmaps/constants';
 import type { TimePeriod } from 'lib/dates';
 
-const timePeriods: { name: string, key: TimePeriod }[] = [
-  {
-    name: 'Today',
-    key: 'today'
-  },
-  {
-    name: 'Yesterday',
-    key: 'yesterday'
-  },
-  {
-    name: 'Past Week',
-    key: 'past_week'
-  },
-  {
-    name: 'Past Month',
-    key: 'past_month'
-  },
-  {
-    name: 'This Quarter',
-    key: 'this_quarter'
-  },
-  {
-    name: 'Year to Date',
-    key: 'year_to_date'
-  }
-];
-
 const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
-  const [period, setPeriod] = React.useState<TimePeriod>(timePeriods[0].key);
+  const [period, setPeriod] = React.useState<TimePeriod>(TIME_PERIODS[0].key);
 
   const handleDateChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setPeriod(event.target.value as TimePeriod);
@@ -65,7 +39,7 @@ const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
               <div className='period'>
                 <p><b>Period:</b></p>
                 <Select onChange={handleDateChange} value={period}>
-                  {timePeriods.map(p => (
+                  {TIME_PERIODS.map(p => (
                     <Option value={p.key} key={p.key}>
                       {p.name}
                     </Option>
