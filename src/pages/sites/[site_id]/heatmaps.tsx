@@ -4,8 +4,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Head from 'next/head';
 import classnames from 'classnames';
-import { useRouter } from 'next/router';
-import { gql, useQuery } from '@apollo/client';
 import { Main } from 'components/main';
 import { Page } from 'components/sites/page';
 import { Container } from 'components/container';
@@ -14,33 +12,17 @@ import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { EmptyStateHint } from 'components/sites/empty-state-hint';
 import { Heatmaps } from 'components/sites/heatmaps';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { usePages } from 'hooks/use-pages';
 import { BASE_PATH } from 'data/common/constants';
 import { TIME_PERIODS } from 'data/heatmaps/constants';
 import type { TimePeriod } from 'lib/dates';
-import type { Site } from 'types/site';
 
-const QUERY = gql`
-  query GetSitePages($siteId: ID!) {
-    site(siteId: $siteId) {
-      id
-      pages
-    }
-  }
-`;
 
 const SitesHeatmaps: NextPage<ServerSideProps> = ({ user }) => {
-  const router = useRouter();
-
   const [page, setPage] = React.useState<string>(null);
   const [period, setPeriod] = React.useState<TimePeriod>(TIME_PERIODS[0].key);
 
-  const { data, loading } = useQuery<{ site: Site }>(QUERY, {
-    variables: {
-      siteId: router.query.site_id as string
-    }
-  });
-
-  const pages = data ? data.site.pages : [];
+  const { pages, loading } = usePages();
 
   React.useEffect(() => {
     if (!page) setPage(pages[0]);
@@ -81,7 +63,7 @@ const SitesHeatmaps: NextPage<ServerSideProps> = ({ user }) => {
               <Spinner />
             )}
 
-            {site.recordingsCount > 0 && pages.length > 0 && (
+            {site.recordingsCount > 0 && page && (
               <Heatmaps 
                 page={page} 
                 pages={pages}

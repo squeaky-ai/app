@@ -24,7 +24,7 @@ export const HeatmapsScrolls: FC<Props> = ({ items }) => {
       </div>
       <ul>
         {range(1, 21).map(i => {
-          const size = Math.floor(max / (i * 5));
+          const size = Math.floor(((i * 5) / 100) * max);
           const amountWhoMadeIt = items.filter(i => i.y >= size).length;
           const percent = percentage(total, amountWhoMadeIt);
 

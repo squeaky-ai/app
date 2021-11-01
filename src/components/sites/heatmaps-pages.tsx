@@ -11,8 +11,6 @@ interface Props {
 
 
 export const HeatmapsPages: FC<Props> = ({ page, pages, setPage }) => {
-  const results = [...pages].sort((a, b) => a.localeCompare(b));
-
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setPage(event.target.value);
   };
@@ -21,9 +19,9 @@ export const HeatmapsPages: FC<Props> = ({ page, pages, setPage }) => {
     <div className='heatmaps-pages'>
       <Label htmlFor='page-search'>Page</Label>
       <Select name='page' onChange={handleChange} value={page}>
-        {results.map(page => (
-          <Option key={page} value={page}>
-            {page}
+        {pages.map(p => (
+          <Option key={p} value={p}>
+            {p}
           </Option>
         ))}
       </Select>

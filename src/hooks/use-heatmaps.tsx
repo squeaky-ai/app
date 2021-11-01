@@ -26,7 +26,7 @@ export const useHeatmaps = (props: Props): UseHeatmaps => {
       siteId: router.query.site_id as string,
       device: props.device,
       type: props.type,
-      page: props.page || '/',
+      page: props.page,
       ...props.range,
     }
   });
