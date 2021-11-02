@@ -56,7 +56,7 @@
     grid-gap: 2rem;
     grid-template-areas: 'options options'
                          'content data';
-    grid-template-columns: 1fr 330px;
+    grid-template-columns: minmax(0, 1fr) 330px;
     grid-template-rows: 40px minmax(0, 1fr);
     height: calc(100% - 168px);
 
@@ -184,7 +184,31 @@
       border: 1px solid var(--gray-200);
       border-radius: var(--border-radius-md);
       grid-area: content;
+      overflow: hidden;
       position: relative;
+
+      .screenshot {
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+        z-index: 0;
+
+        .overlay {
+          background: var(--gray-800);
+          content: ' ';
+          height: 100%;
+          left: 0;
+          opacity: .45;
+          position: absolute;
+          top: 0;
+          width: 100%;
+        }
+      }
+
+      img {
+        pointer-events: none;
+      }
 
       .spinner {
         left: 50%;
@@ -232,6 +256,7 @@
     height: 100%;
     position: absolute;
     width: 100%;
+    z-index: 1;
 
     circle {
       mix-blend-mode: multiply;
