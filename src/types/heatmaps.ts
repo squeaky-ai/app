@@ -1,6 +1,7 @@
 export interface Heatmaps {
   desktopCount: number;
   mobileCount: number;
+  screenshotUrl?: string;
   items: HeatmapsItem[];
 }
 

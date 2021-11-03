@@ -11,10 +11,8 @@ import { HeatmapsPeriods } from 'components/sites/heatmaps-periods';
 import { useHeatmaps } from 'hooks/use-heatmaps';
 import { getDateRange, TimePeriod } from 'lib/dates';
 import type { HeatmapsDevice, HeatmapsType } from 'types/heatmaps';
-import type { Site } from 'types/site';
 
 interface Props {
-  site: Site;
   page: string;
   pages: string[];
   period: TimePeriod;
@@ -22,7 +20,7 @@ interface Props {
   setPeriod: (page: TimePeriod) => void;
 }
 
-export const Heatmaps: FC<Props> = ({ site, page, pages, period, setPage, setPeriod }) => {
+export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod }) => {
   const [type, setType] = React.useState<HeatmapsType>('Click');
   const [device, setDevice] = React.useState<HeatmapsDevice>('Desktop');
 
@@ -64,10 +62,12 @@ export const Heatmaps: FC<Props> = ({ site, page, pages, period, setPage, setPer
       </div>
       <div className='content'>
         {type === 'Click' && <Clickmap items={heatmaps.items} />}
-        <div className='screenshot'>
-          <img src={`https://cdn.squeaky.ai/screenshots/${site.id}/${btoa(page)}.jpeg`} />
-          <div className='overlay' />
-        </div>
+        {heatmaps.screenshotUrl && (
+          <div className='screenshot'>
+            <img src={heatmaps.screenshotUrl} />
+            <div className='overlay' />
+          </div>
+        )}
       </div>
       <div className='data'>
         {type === 'Click' && <HeatmapsClicks items={heatmaps.items} />}

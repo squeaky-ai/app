@@ -38,6 +38,7 @@ export const useHeatmaps = (props: Props): UseHeatmaps => {
   const fallback: Heatmaps = {
     desktopCount: 0,
     mobileCount: 0,
+    screenshotUrl: null,
     items: [],
   };
 

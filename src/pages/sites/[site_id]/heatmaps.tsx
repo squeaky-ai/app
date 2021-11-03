@@ -65,7 +65,6 @@ const SitesHeatmaps: NextPage<ServerSideProps> = ({ user }) => {
 
             {site.recordingsCount > 0 && page && (
               <Heatmaps 
-                site={site}
                 page={page} 
                 pages={pages}
                 setPage={setPage} 
