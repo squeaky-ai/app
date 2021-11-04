@@ -55,13 +55,16 @@ export const HeatmapsPage: FC<Props> = ({ type, page, recordingId, items }) => {
 
     setTimeout(() => {
       // Inject all the crap into the iframe
-      inject(iframe);
+      inject(iframe.contentDocument);
     }, 500);
   };
 
-  const inject = (iframe: HTMLIFrameElement) => {
-    const doc = iframe.contentDocument;
+  const cleanup = (doc: Document) => {
+    const elems = doc.querySelectorAll('.__squeaky-click-tag, .__squeaky_scroll_overlay');
+    elems.forEach(elem => elem.remove());
+  };
 
+  const inject = (doc: Document) => {
     doc.documentElement.scrollTo(0, 0);
     doc.body.style.cssText += 'pointer-events: none; user-select: none;';
 
@@ -149,6 +152,15 @@ export const HeatmapsPage: FC<Props> = ({ type, page, recordingId, items }) => {
   React.useEffect(() => {
     init();
   }, [recording?.id]);
+
+  React.useEffect(() => {
+    const doc = document.querySelector('iframe')?.contentDocument;
+
+    if (doc) {
+      cleanup(doc);
+      inject(doc);
+    }
+  }, [type]);
 
   React.useEffect(() => {
     return () => {
