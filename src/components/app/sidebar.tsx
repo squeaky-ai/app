@@ -8,8 +8,9 @@ import { Button } from 'components/button';
 import { Divider } from 'components/divider';
 import { SidebarAccount } from 'components/app/sidebar-account';
 import { SidebarFeedback } from 'components/app/sidebar-feedback';
+import { SidebarSiteSettings } from 'components/app/sidebar-site-settings';
 import { BASE_PATH } from 'data/common/constants';
-import { SidebarSiteSettings } from './sidebar-site-settings';
+import { Preferences, Preference } from 'lib/preferences';
 
 export const Sidebar: FC = () => {
   const router = useRouter();
@@ -19,11 +20,20 @@ export const Sidebar: FC = () => {
   const path = router.asPath;
   const siteId = router.query.site_id as string;
 
-  const toggleOpen = () => setOpen(!open);
+  const toggleOpen = () => {
+    setOpen(!open);
+
+    Preferences.setBoolean(Preference.SIDEBAR_CLOSED, open);
+  };
 
   React.useEffect(() => {
     setPosition(path.startsWith('/sites/') ? 'right' : 'left');
   }, [path]);
+
+  React.useEffect(() => {
+    const closed = Preferences.getBoolean(Preference.SIDEBAR_CLOSED);
+    if (closed) setOpen(false);
+  }, []);
 
   return (
     <aside id='app-sidebar' className={classnames({ open })}>
