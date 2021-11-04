@@ -252,6 +252,36 @@
       margin: 0 .75rem 0 0;
     }
   }
+
+  .scroll-indicator {
+    align-items: center;
+    background: var(--gray-800);
+    border-radius: var(--border-radius-md);
+    display: flex;
+    flex-direction: column;
+    height: 14rem;
+    padding: .5rem;
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3.25rem; 
+
+    p {
+      color: var(--white);
+      font-size: 13px;
+      line-height: 16px;
+      margin: 0;
+    }
+
+    .gradient {
+      background: linear-gradient(180deg, #8249FB 4.17%, #F0438C 27.6%, #FF8A00 50.52%, #FDE50B 72.4%, #FFFFFF 94.79%);
+      border-radius: var(--border-radius-md);
+      flex: 1;
+      margin: .5rem 0;
+      width: 1rem;
+    }
+  }
 }
 
 .element-tooltip {

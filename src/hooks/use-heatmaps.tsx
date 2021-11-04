@@ -62,7 +62,7 @@ export const useHeatmaps = (props: Props): UseHeatmaps => {
 export const useRecording = (id: string): UseRecording => {
   const router = useRouter();
 
-  const { data, loading, error } = useQuery<{ site: Site }>(GET_RECORDING_QUERY, {
+  const { data, loading, previousData, error } = useQuery<{ site: Site }>(GET_RECORDING_QUERY, {
     variables: {
       siteId: router.query.site_id as string,
       recordingId: id || router.query.recording_id as string,
@@ -79,6 +79,6 @@ export const useRecording = (id: string): UseRecording => {
     error: !!error,
     recording: data 
       ? data.site.recording 
-      : null
+      : previousData ? previousData.site.recording : null
   };
 };

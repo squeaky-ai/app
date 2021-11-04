@@ -69,6 +69,7 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
         <>
           <div className='content'>
             <HeatmapsPage 
+              type={type}
               page={page}
               recordingId={heatmaps.recordingId} 
               items={heatmaps.items} 

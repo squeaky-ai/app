@@ -3,13 +3,15 @@ import type { FC } from 'react';
 import { groupBy } from 'lodash';
 import { Replayer } from 'rrweb';
 import { Spinner } from 'components/spinner';
-import type { Event } from 'types/event';
+import { ScrollIndicator } from 'components/sites/scroll-indicator';
 import { useRecording } from 'hooks/use-heatmaps';
 import { percentage } from 'lib/maths';
 import { HEATMAP_COLOURS } from 'data/heatmaps/constants';
+import type { Event } from 'types/event';
 import type { HeatmapsItem } from 'types/heatmaps';
 
 interface Props {
+  type: 'Click' | 'Scroll';
   page: string;
   recordingId: string;
   items: HeatmapsItem[];
@@ -17,7 +19,7 @@ interface Props {
 
 let replayer: Replayer;
 
-export const HeatmapsPage: FC<Props> = ({ page, recordingId, items }) => {
+export const HeatmapsPage: FC<Props> = ({ type, page, recordingId, items }) => {
   const ref = React.useRef<HTMLDivElement>(null);
   const [loading, setLoading] = React.useState<boolean>(true);
 
@@ -59,13 +61,23 @@ export const HeatmapsPage: FC<Props> = ({ page, recordingId, items }) => {
 
   const inject = (iframe: HTMLIFrameElement) => {
     const doc = iframe.contentDocument;
+
+    doc.documentElement.scrollTo(0, 0);
+    doc.body.style.cssText += 'pointer-events: none; user-select: none;';
+
+    type === 'Click' 
+      ? showClickMaps(doc)
+      : showScrollMaps(doc);
+
+    // Now that stuff isn't going to jump the spinner can be removed
+    setLoading(false);
+  };
+
+  const showClickMaps = (doc: Document) => {
     const counts = groupBy(items, 'selector');
 
     const total = items.length;
     const count = (selector: string) => counts[selector]?.length || 0;
-
-    doc.documentElement.scrollTo(0, 0);
-    doc.body.style.cssText += 'pointer-events: none; user-select: none;';
 
     const style = document.createElement('style');
     style.innerHTML = `
@@ -111,9 +123,26 @@ export const HeatmapsPage: FC<Props> = ({ page, recordingId, items }) => {
       `;
       doc.body.appendChild(tag);
     });
+  };
 
-    // Now that stuff isn't going to jump the spinner can be removed
-    setLoading(false);
+  const showScrollMaps = (doc: Document) => {
+    const style = document.createElement('style');
+    style.innerHTML = `
+      .__squeaky_scroll_overlay {
+        background: linear-gradient(180deg, #8249FB 4.17%, #F0438C 27.6%, #FF8A00 50.52%, #FDE50B 72.4%, #FFFFFF 94.79%);
+        left: 0;
+        mix-blend-mode: multiply;
+        position: absolute;
+        top: 0;
+        width: 100%;
+      }
+    `;
+    doc.head.appendChild(style);
+
+    const overlay = document.createElement('div');
+    overlay.classList.add('__squeaky_scroll_overlay');
+    overlay.style.height = `${doc.body.scrollHeight}px`;
+    doc.body.appendChild(overlay);
   };
 
   React.useEffect(() => {
@@ -134,6 +163,7 @@ export const HeatmapsPage: FC<Props> = ({ page, recordingId, items }) => {
     <div ref={ref} className='heatmaps-page' >
       {loading && <Spinner />}
       <div style={{ visibility: loading ? 'hidden' : 'visible' }} id='heatmaps-page-wrapper' />
+      {!loading && type === 'Scroll' && <ScrollIndicator />}
     </div>
   );
 };
