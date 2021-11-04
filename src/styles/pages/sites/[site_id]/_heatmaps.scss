@@ -39,15 +39,22 @@
         max-width: 580px;
       }
     }
+
+    &.show {
+      display: flex;
+      grid-area: empty-state;
+      height: 100%;
+
+      h4 {
+        max-width: 468px;
+        text-align: center;
+      }
+    }
   }
 
   .empty {
     .empty-state {
       display: flex;
-    }
-
-    .heatmaps-pages {
-      display: none;
     }
   }
 
@@ -59,6 +66,11 @@
     grid-template-columns: minmax(0, 1fr) 330px;
     grid-template-rows: 40px minmax(0, 1fr);
     height: calc(100% - 168px);
+
+    &.empty {
+      grid-template-areas: 'options options'
+                           'empty-state empty-state';
+    }
 
     .options {
       display: flex;
