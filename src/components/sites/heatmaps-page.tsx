@@ -135,6 +135,7 @@ export const HeatmapsPage: FC<Props> = ({ type, page, recordingId, items }) => {
         position: absolute;
         top: 0;
         width: 100%;
+        z-index: 99999999;
       }
     `;
     doc.head.appendChild(style);

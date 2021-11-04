@@ -14,6 +14,8 @@ export const HeatmapsClicks: FC<Props> = ({ items }) => {
 
   const total = items.length;
 
+  const clicks = Object.entries(results).sort((a, b) => b[1].length - a[1].length);
+
   return (
     <div className='clicks-table'>
       <div className='head row'>
@@ -21,7 +23,7 @@ export const HeatmapsClicks: FC<Props> = ({ items }) => {
         <p>Clicks</p>
       </div>
       <ul>
-        {Object.entries(results).map(([selector, coords]) => (
+        {clicks.map(([selector, coords]) => (
           <li key={selector} className='row'>
             <Tooltip button={selector} portalClassName='element-tooltip'>
               {selector}
