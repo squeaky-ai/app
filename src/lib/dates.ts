@@ -1,6 +1,7 @@
 import { get, range } from 'lodash';
 
-import { 
+import {
+  subDays,
   startOfToday, 
   startOfYesterday, 
   endOfYesterday, 
@@ -15,6 +16,8 @@ export type TimePeriod =
   'today' |
   'yesterday' |
   'past_week' |
+  'past_seven_days' |
+  'past_thirty_days' |
   'past_month' |
   'this_quarter' |
   'year_to_date';
@@ -99,6 +102,16 @@ export const getDateRange = (period: TimePeriod): TimeRange => {
       return {
         fromDate: formatDate(startOfYesterday()),
         toDate: formatDate(endOfYesterday())
+      };
+    case 'past_seven_days':
+      return {
+        fromDate: formatDate(subDays(now, 7)),
+        toDate: todaysDate
+      };
+    case 'past_thirty_days':
+      return {
+        fromDate: formatDate(subDays(now, 30)),
+        toDate: todaysDate
       };
     case 'past_week':
       return {

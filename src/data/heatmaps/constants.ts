@@ -10,19 +10,19 @@ export interface HeatmapColor {
 export const TIME_PERIODS: { name: string, key: TimePeriod }[] = [
   {
     name: 'Today',
-    key: 'today'
+    key: 'today',
   },
   {
     name: 'Yesterday',
-    key: 'yesterday'
+    key: 'yesterday',
   },
   {
-    name: 'Past Week',
-    key: 'past_week'
+    name: 'Past 7 Days',
+    key: 'past_seven_days',
   },
   {
-    name: 'Past Month',
-    key: 'past_month'
+    name: 'Past 30 Days',
+    key: 'past_thirty_days',
   },
 ];
 
