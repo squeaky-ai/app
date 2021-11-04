@@ -52,8 +52,6 @@ export const HeatmapsPage: FC<Props> = ({ page, recordingId, items }) => {
     replayer.pause(location);
 
     setTimeout(() => {
-      // Now that stuff isn't going to jump the spinner can be removed
-      setLoading(false);
       // Inject all the crap into the iframe
       inject(iframe);
     }, 150);
@@ -66,6 +64,7 @@ export const HeatmapsPage: FC<Props> = ({ page, recordingId, items }) => {
     const total = items.length;
     const count = (selector: string) => counts[selector]?.length || 0;
 
+    doc.documentElement.scrollTo(0, 0);
     doc.body.style.cssText += 'pointer-events: none; user-select: none;';
 
     const style = document.createElement('style');
@@ -82,6 +81,7 @@ export const HeatmapsPage: FC<Props> = ({ page, recordingId, items }) => {
         padding: .15rem;
         position: absolute;
         transform: translateX(-100%);
+        z-index: 99999999;
       }
     `;
     doc.head.appendChild(style);
@@ -111,6 +111,9 @@ export const HeatmapsPage: FC<Props> = ({ page, recordingId, items }) => {
       `;
       doc.body.appendChild(tag);
     });
+
+    // Now that stuff isn't going to jump the spinner can be removed
+    setLoading(false);
   };
 
   React.useEffect(() => {
