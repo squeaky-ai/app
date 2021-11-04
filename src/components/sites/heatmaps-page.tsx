@@ -54,7 +54,7 @@ export const HeatmapsPage: FC<Props> = ({ page, recordingId, items }) => {
     setTimeout(() => {
       // Inject all the crap into the iframe
       inject(iframe);
-    }, 150);
+    }, 500);
   };
 
   const inject = (iframe: HTMLIFrameElement) => {

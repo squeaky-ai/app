@@ -24,14 +24,6 @@ export const TIME_PERIODS: { name: string, key: TimePeriod }[] = [
     name: 'Past Month',
     key: 'past_month'
   },
-  {
-    name: 'This Quarter',
-    key: 'this_quarter'
-  },
-  {
-    name: 'Year to Date',
-    key: 'year_to_date'
-  }
 ];
 
 export const HEATMAP_COLOURS: HeatmapColor[] = [

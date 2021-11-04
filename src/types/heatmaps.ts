@@ -6,8 +6,8 @@ export interface Heatmaps {
 }
 
 export interface HeatmapsItem {
-  x: number;
-  y: number;
+  x?: number;
+  y?: number;
   selector: string;
 }
 
