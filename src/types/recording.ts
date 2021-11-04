@@ -20,6 +20,7 @@ export interface Recording {
   duration: string;
   pageViews: string[];
   pageCount: number;
+  pages?: Page[];
   startPage: string;
   exitPage: string;
   device: Device;
@@ -31,6 +32,12 @@ export interface Recording {
   connectedAt: number;
   disconnectedAt: number;
   visitor: Visitor;
+}
+
+export interface Page {
+  url: string;
+  enteredAt: string;
+  exitedAt: string;
 }
 
 export interface Tag {

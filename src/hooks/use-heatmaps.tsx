@@ -1,14 +1,21 @@
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
-import { GET_HEATMAPS_QUERY } from 'data/heatmaps/queries';
+import { GET_HEATMAPS_QUERY, GET_RECORDING_QUERY } from 'data/heatmaps/queries';
 import type { Site } from 'types/site';
 import type { TimeRange } from 'lib/dates';
 import type { Heatmaps, HeatmapsDevice, HeatmapsType } from 'types/heatmaps';
+import type { Recording } from 'types/recording';
 
-interface UseHeatmaps{
+interface UseHeatmaps {
   loading: boolean;
   error: boolean;
   heatmaps: Heatmaps;
+}
+
+interface UseRecording {
+  loading: boolean;
+  error: boolean;
+  recording: Recording | null;
 }
 
 interface Props {
@@ -38,7 +45,7 @@ export const useHeatmaps = (props: Props): UseHeatmaps => {
   const fallback: Heatmaps = {
     desktopCount: 0,
     mobileCount: 0,
-    screenshotUrl: null,
+    recordingId: null,
     items: [],
   };
 
@@ -48,5 +55,30 @@ export const useHeatmaps = (props: Props): UseHeatmaps => {
     heatmaps: (data
       ? data.site.heatmaps
       : previousData ? previousData.site.heatmaps : fallback)
+  };
+};
+
+
+export const useRecording = (id: string): UseRecording => {
+  const router = useRouter();
+
+  const { data, loading, error } = useQuery<{ site: Site }>(GET_RECORDING_QUERY, {
+    variables: {
+      siteId: router.query.site_id as string,
+      recordingId: id || router.query.recording_id as string,
+      eventPage: 1,
+    }
+  });
+
+  if (error) {
+    console.error(error);
+  }
+
+  return {
+    loading, 
+    error: !!error,
+    recording: data 
+      ? data.site.recording 
+      : null
   };
 };

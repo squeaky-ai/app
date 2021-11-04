@@ -11,13 +11,13 @@ interface UseRecording {
   fetchMoreEvents: (eventPage: number) => Promise<PaginatedEventsResponse>;
 }
 
-export const useRecording = (): UseRecording => {
+export const useRecording = (id?: string): UseRecording => {
   const router = useRouter();
 
   const { data, loading, error, fetchMore } = useQuery<{ site: Site }>(GET_RECORDING_QUERY, {
     variables: {
       siteId: router.query.site_id as string,
-      recordingId: router.query.recording_id as string,
+      recordingId: id || router.query.recording_id as string,
       eventPage: 1,
     }
   });

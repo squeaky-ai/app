@@ -3,11 +3,11 @@ import classnames from 'classnames';
 import type { FC } from 'react';
 import { Button } from 'components/button';
 import { Spinner } from 'components/spinner';
-import { Clickmap } from 'components/sites/clickmap';
 import { HeatmapsClicks } from 'components/sites/heatmaps-clicks';
 import { HeatmapsScrolls } from 'components/sites/heatmaps-scrolls';
 import { HeatmapsPages } from 'components/sites/heatmaps-pages';
 import { HeatmapsPeriods } from 'components/sites/heatmaps-periods';
+import { HeatmapsPage } from 'components/sites/heatmaps-page';
 import { useHeatmaps } from 'hooks/use-heatmaps';
 import { getDateRange, TimePeriod } from 'lib/dates';
 import type { HeatmapsDevice, HeatmapsType } from 'types/heatmaps';
@@ -61,12 +61,12 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
         </div>
       </div>
       <div className='content'>
-        {type === 'Click' && <Clickmap items={heatmaps.items} />}
-        {heatmaps.screenshotUrl && (
-          <div className='screenshot'>
-            <img src={heatmaps.screenshotUrl} />
-            <div className='overlay' />
-          </div>
+        {heatmaps.recordingId && (
+          <HeatmapsPage 
+            page={page}
+            recordingId={heatmaps.recordingId} 
+            items={heatmaps.items} 
+          />
         )}
       </div>
       <div className='data'>

@@ -1,7 +1,7 @@
 export interface Heatmaps {
   desktopCount: number;
   mobileCount: number;
-  screenshotUrl?: string;
+  recordingId: string | null;
   items: HeatmapsItem[];
 }
 
