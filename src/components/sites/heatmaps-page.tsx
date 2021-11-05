@@ -10,6 +10,7 @@ import { getClickMapData } from 'lib/heatmaps';
 
 interface Props {
   type: 'Click' | 'Scroll';
+  device: 'Desktop' | 'Mobile';
   page: string;
   recordingId: string;
   items: HeatmapsItem[];
@@ -17,7 +18,7 @@ interface Props {
 
 let replayer: Replayer;
 
-export const HeatmapsPage: FC<Props> = ({ type, page, recordingId, items }) => {
+export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items }) => {
   const ref = React.useRef<HTMLDivElement>(null);
   const [loading, setLoading] = React.useState<boolean>(true);
 
@@ -168,7 +169,12 @@ export const HeatmapsPage: FC<Props> = ({ type, page, recordingId, items }) => {
   return (
     <div ref={ref} className='heatmaps-page' >
       {loading && <Spinner />}
-      <div style={{ visibility: loading ? 'hidden' : 'visible' }} id='heatmaps-page-wrapper' />
+
+      <div 
+        style={{ visibility: loading ? 'hidden' : 'visible', width: device === 'Desktop' ? '100%' : '360px' }} 
+        id='heatmaps-page-wrapper' 
+      />
+
       {!loading && type === 'Scroll' && <ScrollIndicator />}
     </div>
   );
