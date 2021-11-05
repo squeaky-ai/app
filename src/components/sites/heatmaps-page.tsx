@@ -154,7 +154,7 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items
       cleanup(doc);
       inject(doc);
     }
-  }, [type]);
+  }, [type, device]);
 
   React.useEffect(() => {
     return () => {
