@@ -2,6 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import { Tooltip } from 'components/tooltip';
 import { Pill } from 'components/pill';
+import { Sort } from 'components/sort';
 import { getClickMapData } from 'lib/heatmaps';
 import type { HeatmapsItem } from 'types/heatmaps';
 
@@ -10,13 +11,26 @@ interface Props {
 }
 
 export const HeatmapsClicks: FC<Props> = ({ items }) => {
-  const clicks = getClickMapData(items);
+  const [order, setOrder] = React.useState('clicks__desc');
+
+  const clicks = getClickMapData(items).sort((a, b) => order === 'clicks__asc'
+    ? a.count - b.count
+    : b.count - a.count
+  );
 
   return (
     <div className='clicks-table'>
       <div className='head row'>
         <p>Element</p>
-        <p>Clicks</p>
+        <p>
+          Clicks
+          <Sort
+            name='clicks'
+            order={order}
+            onAsc={() => setOrder('clicks__asc')}
+            onDesc={() => setOrder('clicks__desc')}
+          />
+        </p>
       </div>
       <ul>
         {clicks.map(click => (
