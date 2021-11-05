@@ -5,12 +5,12 @@ import { Spinner } from 'components/spinner';
 import { ScrollIndicator } from 'components/sites/scroll-indicator';
 import { useRecording } from 'hooks/use-heatmaps';
 import type { Event } from 'types/event';
-import type { HeatmapsItem } from 'types/heatmaps';
+import type { HeatmapsItem, HeatmapsType, HeatmapsDevice } from 'types/heatmaps';
 import { getClickMapData } from 'lib/heatmaps';
 
 interface Props {
-  type: 'Click' | 'Scroll';
-  device: 'Desktop' | 'Mobile';
+  type: HeatmapsType;
+  device: HeatmapsDevice;
   page: string;
   recordingId: string;
   items: HeatmapsItem[];
@@ -61,6 +61,17 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items
   const cleanup = (doc: Document) => {
     const elems = doc.querySelectorAll('.__squeaky-click-tag, .__squeaky_scroll_overlay');
     elems.forEach(elem => elem.remove());
+  };
+
+  const deviceWidth = () => {
+    switch(device) {
+      case 'Tablet':
+        return '800px';
+      case 'Mobile':
+        return '360px';
+      default:
+        return '100%';
+    }
   };
 
   const inject = (doc: Document) => {
@@ -171,7 +182,7 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items
       {loading && <Spinner />}
 
       <div 
-        style={{ visibility: loading ? 'hidden' : 'visible', width: device === 'Desktop' ? '100%' : '360px' }} 
+        style={{ visibility: loading ? 'hidden' : 'visible', width: deviceWidth() }} 
         id='heatmaps-page-wrapper' 
       />
 

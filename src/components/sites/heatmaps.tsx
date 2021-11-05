@@ -13,7 +13,7 @@ import { HeatmapsPage } from 'components/sites/heatmaps-page';
 import { useHeatmaps } from 'hooks/use-heatmaps';
 import { getDateRange, TimePeriod } from 'lib/dates';
 import { BASE_PATH } from 'data/common/constants';
-import type { HeatmapsDevice, HeatmapsType } from 'types/heatmaps';
+import { HeatmapsDevice, HeatmapsType } from 'types/heatmaps';
 
 interface Props {
   page: string;
@@ -24,8 +24,8 @@ interface Props {
 }
 
 export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod }) => {
-  const [type, setType] = React.useState<HeatmapsType>('Click');
-  const [device, setDevice] = React.useState<HeatmapsDevice>('Desktop');
+  const [type, setType] = React.useState<HeatmapsType>(HeatmapsType.CLICK);
+  const [device, setDevice] = React.useState<HeatmapsDevice>(HeatmapsDevice.DESKTOP);
 
   const { loading, heatmaps } = useHeatmaps({ page, device, type, range: getDateRange(period) });
 
@@ -45,21 +45,25 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
 
         <div className='right'>
           <div className='button-group'>
-            <Button className={classnames(device === 'Desktop' ? 'primary' : 'blank')} onClick={() => setDevice('Desktop')}>
+            <Button className={classnames(device === HeatmapsDevice.DESKTOP ? 'primary' : 'blank')} onClick={() => setDevice(HeatmapsDevice.DESKTOP)}>
               <i className='ri-computer-line' />
               {heatmaps.desktopCount}
             </Button>
-            <Button className={classnames(device === 'Mobile' ? 'primary' : 'blank')} onClick={() => setDevice('Mobile')}>
+            <Button className={classnames(device === HeatmapsDevice.TABLET ? 'primary' : 'blank')} onClick={() => setDevice(HeatmapsDevice.TABLET)}>
+              <i className='ri-tablet-line' />
+              {heatmaps.tabletCount}
+            </Button>
+            <Button className={classnames(device === HeatmapsDevice.MOBILE ? 'primary' : 'blank')} onClick={() => setDevice(HeatmapsDevice.MOBILE)}>
               <i className='ri-smartphone-line' />
               {heatmaps.mobileCount}
             </Button>
           </div>
 
           <div className='button-group'>
-            <Button className={classnames(type === 'Click' ? 'primary' : 'blank')} onClick={() => setType('Click')}>
+            <Button className={classnames(type === 'Click' ? 'primary' : 'blank')} onClick={() => setType(HeatmapsType.CLICK)}>
               Click
             </Button>
-            <Button className={classnames(type === 'Scroll' ? 'primary' : 'blank')} onClick={() => setType('Scroll')}>
+            <Button className={classnames(type === 'Scroll' ? 'primary' : 'blank')} onClick={() => setType(HeatmapsType.SCROLL)}>
               Scroll
             </Button>
           </div>

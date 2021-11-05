@@ -44,6 +44,7 @@ export const useHeatmaps = (props: Props): UseHeatmaps => {
 
   const fallback: Heatmaps = {
     desktopCount: 0,
+    tabletCount: 0,
     mobileCount: 0,
     recordingId: null,
     items: [],

@@ -6,6 +6,7 @@ export const GET_HEATMAPS_QUERY = gql`
       id
       heatmaps(page: $page, device: $device, fromDate: $fromDate, toDate: $toDate, type: $type) {
         desktopCount
+        tabletCount
         mobileCount
         recordingId
         items {

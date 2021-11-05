@@ -1,5 +1,6 @@
 export interface Heatmaps {
   desktopCount: number;
+  tabletCount: number;
   mobileCount: number;
   recordingId: string | null;
   items: HeatmapsItem[];
@@ -11,6 +12,13 @@ export interface HeatmapsItem {
   selector: string;
 }
 
-export type HeatmapsDevice = 'Desktop' | 'Mobile';
+export enum HeatmapsDevice {
+  DESKTOP = 'Desktop',
+  TABLET = 'Tablet',
+  MOBILE = 'Mobile'
+}
 
-export type HeatmapsType = 'Click' | 'Scroll';
+export enum HeatmapsType {
+  CLICK = 'Click',
+  SCROLL = 'Scroll'
+}
