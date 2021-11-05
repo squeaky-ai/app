@@ -10,19 +10,11 @@ export const TIME_PERIODS: { name: string, key: TimePeriod }[] = [
     key: 'yesterday'
   },
   {
-    name: 'Past Week',
-    key: 'past_week'
+    name: 'Past 7 Days',
+    key: 'past_seven_days'
   },
   {
-    name: 'Past Month',
-    key: 'past_month'
+    name: 'Past 30 Days',
+    key: 'past_thirty_days'
   },
-  {
-    name: 'This Quarter',
-    key: 'this_quarter'
-  },
-  {
-    name: 'Year to Date',
-    key: 'year_to_date'
-  }
 ];

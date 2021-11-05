@@ -5,22 +5,14 @@ import {
   startOfToday, 
   startOfYesterday, 
   endOfYesterday, 
-  startOfWeek,
-  startOfMonth,
-  startOfQuarter,
-  startOfYear,
   format 
 } from 'date-fns';
 
 export type TimePeriod =
   'today' |
   'yesterday' |
-  'past_week' |
   'past_seven_days' |
-  'past_thirty_days' |
-  'past_month' |
-  'this_quarter' |
-  'year_to_date';
+  'past_thirty_days';
 
 export type TimeRange = {
   fromDate: string;
@@ -111,26 +103,6 @@ export const getDateRange = (period: TimePeriod): TimeRange => {
     case 'past_thirty_days':
       return {
         fromDate: formatDate(subDays(now, 30)),
-        toDate: todaysDate
-      };
-    case 'past_week':
-      return {
-        fromDate: formatDate(startOfWeek(now, { weekStartsOn: 1 })),
-        toDate: todaysDate
-      };
-    case 'past_month':
-      return {
-        fromDate: formatDate(startOfMonth(now)),
-        toDate: todaysDate
-      };
-    case 'this_quarter':
-      return {
-        fromDate: formatDate(startOfQuarter(now)),
-        toDate: todaysDate
-      };
-    case 'year_to_date':
-      return {
-        fromDate: formatDate(startOfYear(now)),
         toDate: todaysDate
       };
   }

@@ -17,7 +17,7 @@ import { TIME_PERIODS } from 'data/heatmaps/constants';
 import type { TimePeriod } from 'lib/dates';
 
 const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
-  const [period, setPeriod] = React.useState<TimePeriod>(TIME_PERIODS[0].key);
+  const [period, setPeriod] = React.useState<TimePeriod>('past_seven_days');
 
   const handleDateChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setPeriod(event.target.value as TimePeriod);

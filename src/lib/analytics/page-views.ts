@@ -2,20 +2,11 @@ import { range, sum } from 'lodash';
 import type { PageView } from 'types/analytics';
 import type { TimePeriod } from 'lib/dates';
 
-import { 
-  addDays, 
-  addMonths,
+import {
   getHours,
-  getDate, 
-  getDaysInMonth, 
-  startOfWeek, 
-  format, 
-  startOfMonth, 
-  startOfQuarter,
-  differenceInDays,
+  subDays,
+  format,
   isSameDay,
-  isSameMonth,
-  startOfYear
 } from 'date-fns';
 
 export interface AnalyticsData {
@@ -52,12 +43,11 @@ const getDailyResults = (pageViews: PageView[]): DataForPeriod => {
   return { data, interval: 1 };
 };
 
-const getWeeklyResults = (pageViews: PageView[]): DataForPeriod => {
+const getPastSevenDaysResults = (pageViews: PageView[]): DataForPeriod => {
   const now = new Date();
-  const start = startOfWeek(now, { weekStartsOn: 1 });
 
   const data = range(0, 7).map(i => {
-    const date = addDays(start, i);
+    const date = subDays(now, i);
 
     // Only interested in page views that happened on this day
     // of the week
@@ -73,20 +63,18 @@ const getWeeklyResults = (pageViews: PageView[]): DataForPeriod => {
   return { data, interval: 0 };
 };
 
-const getMonthlyResults = (pageViews: PageView[]): DataForPeriod => {
+const getPastThirtyDaysResults = (pageViews: PageView[]): DataForPeriod => {
   const now = new Date();
-  const start = startOfMonth(now);
-  const daysThisMonth = getDaysInMonth(now);
 
-  const data = range(0, daysThisMonth).map(i => {
-    const date = addDays(start, i);
+  const data = range(0, 30).map(i => {
+    const date = subDays(now, i);
 
     // Only interested in page views that happened on this day
-    // of the month
-    const views = pageViews.filter(p => getDate(getDateFromTimestamp(p.timestamp)) === getDate(date));
+    // of the week
+    const views = pageViews.filter(p => isSameDay(getDateFromTimestamp(p.timestamp), date));
 
     return {
-      date: format(date, 'd/M'),
+      date: format(date, 'EEE'),
       all: sum(views.map(v => v.total)),
       unique: sum(views.map(v => v.unique)),
     };
@@ -95,62 +83,15 @@ const getMonthlyResults = (pageViews: PageView[]): DataForPeriod => {
   return { data, interval: 2 };
 };
 
-const getQuarterlyResults = (pageViews: PageView[]): DataForPeriod => {
-  const now = new Date();
-  const start = startOfQuarter(now);
-  const diff = differenceInDays(now, start);
-
-  const data = range(0, diff).map(i => {
-    const date = addDays(start, i);
-
-    // Only interested in page views that happened on this day
-    // of the quarter
-    const views = pageViews.filter(p => isSameDay(getDateFromTimestamp(p.timestamp), date));
-
-    return {
-      date: format(date, 'd/M'),
-      all: sum(views.map(v => v.total)),
-      unique: sum(views.map(v => v.unique)),
-    };
-  });
-
-  return { data, interval: 3 };
-};
-
-const getYearlyResults = (pageViews: PageView[]): DataForPeriod => {
-  const now = new Date();
-  const start = startOfYear(now);
-
-  const data = range(0, 12).map(i => {
-    const date = addMonths(start, i);
-
-    // Only interested in page views that happened on this day
-    // of the year
-    const views = pageViews.filter(p => isSameMonth(getDateFromTimestamp(p.timestamp), date));
-
-    return {
-      date: format(date, 'MMM'),
-      all: sum(views.map(v => v.total)),
-      unique: sum(views.map(v => v.unique)),
-    };
-  });
-
-  return { data, interval: 0 };
-};
-
 export const formatResultsForPeriod = (period: TimePeriod, pageViews: PageView[]): DataForPeriod => {
   switch(period) {
     case 'today':
     case 'yesterday':
       return getDailyResults(pageViews);
-    case 'past_week':
-      return getWeeklyResults(pageViews);
-    case 'past_month':
-      return getMonthlyResults(pageViews);
-    case 'this_quarter':
-      return getQuarterlyResults(pageViews);
-    case 'year_to_date':
-      return getYearlyResults(pageViews);
+    case 'past_seven_days':
+      return getPastSevenDaysResults(pageViews);
+    case 'past_thirty_days':
+      return getPastThirtyDaysResults(pageViews);
     default:
       return {
         data: [],

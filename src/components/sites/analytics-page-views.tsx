@@ -6,7 +6,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tool
 import { Label } from 'components/label';
 import { Pill } from 'components/pill';
 import { Checkbox } from 'components/checkbox';
-import { toDayOfMonth, expandDay, expandMonth } from 'lib/dates';
+import { toDayOfMonth, expandDay } from 'lib/dates';
 import { formatResultsForPeriod } from 'lib/analytics/page-views';
 import type { PageView } from 'types/analytics';
 import type { TimePeriod } from 'lib/dates';
@@ -21,10 +21,10 @@ const formatLabel = (period: TimePeriod, label: string) => {
     case 'today':
     case 'yesterday':
       return label.replace(/(am|pm)$/, '.00$1');
-    case 'past_week':
+    case 'past_seven_days':
       return expandDay(label);
-    case 'year_to_date':
-      return expandMonth(label);
+    case 'past_thirty_days':
+      return expandDay(label);
     default:
       return toDayOfMonth(parse(label, 'd/M', new Date()));
   }
