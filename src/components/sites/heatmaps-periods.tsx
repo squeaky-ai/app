@@ -18,7 +18,7 @@ export const HeatmapsPeriods: FC<Props> = ({ period, setPeriod }) => {
 
   return (
     <div className='heatmaps-period'>
-      <Label htmlFor='periods-search'>Periods</Label>
+      <Label htmlFor='periods-search'>Period</Label>
       <Select onChange={handleChange} value={period}>
         {TIME_PERIODS.map(p => (
           <Option value={p.key} key={p.key}>

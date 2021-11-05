@@ -1,5 +1,6 @@
-import { range } from 'lodash';
+import { range, groupBy } from 'lodash';
 import { percentage } from 'lib/maths';
+import { HeatmapColor, HEATMAP_COLOURS } from 'data/heatmaps/constants';
 import type { HeatmapsItem } from 'types/heatmaps';
 
 interface ScrollMapData {
@@ -7,6 +8,13 @@ interface ScrollMapData {
   pixelsScrolled: number;
   percentThatMadeIt: number;
   amountThatMadeIt: number;
+}
+
+interface ClickMapData {
+  selector: string;
+  color: HeatmapColor;
+  count: number;
+  percentage: number;
 }
 
 export const getScrollMapData = (items: HeatmapsItem[]): ScrollMapData[] => {
@@ -27,5 +35,31 @@ export const getScrollMapData = (items: HeatmapsItem[]): ScrollMapData[] => {
       percentThatMadeIt,
       amountThatMadeIt,
     };
+  });
+};
+
+export const getClickMapData = (items: HeatmapsItem[]): ClickMapData[] => {
+  const results = groupBy(items, 'selector');
+
+  const total = items.length;
+
+  const max = Math.max(...Object.values(results).map(r => r.length));
+  const clicks = Object.entries(results).sort((a, b) => b[1].length - a[1].length);
+
+  const getColor = (count: number) => {
+    const percent = percentage(max, count);
+    const potentials = HEATMAP_COLOURS.filter(c => percent >= c.percentage);
+    return potentials[potentials.length - 1];
+  };
+
+  return clicks.map(([selector, coords]) => {
+    const color = getColor(coords.length);
+
+    return {
+      selector,
+      color,
+      count: coords.length,
+      percentage: percentage(total, coords.length),
+    }
   });
 };

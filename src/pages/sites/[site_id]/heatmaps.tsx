@@ -14,13 +14,12 @@ import { Heatmaps } from 'components/sites/heatmaps';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { usePages } from 'hooks/use-pages';
 import { BASE_PATH } from 'data/common/constants';
-import { TIME_PERIODS } from 'data/heatmaps/constants';
 import type { TimePeriod } from 'lib/dates';
 
 
 const SitesHeatmaps: NextPage<ServerSideProps> = ({ user }) => {
   const [page, setPage] = React.useState<string>(null);
-  const [period, setPeriod] = React.useState<TimePeriod>(TIME_PERIODS[0].key);
+  const [period, setPeriod] = React.useState<TimePeriod>('past_seven_days');
 
   const { pages, loading } = usePages();
 

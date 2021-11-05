@@ -1,14 +1,12 @@
 import React from 'react';
 import type { FC } from 'react';
-import { groupBy } from 'lodash';
 import { Replayer } from 'rrweb';
 import { Spinner } from 'components/spinner';
 import { ScrollIndicator } from 'components/sites/scroll-indicator';
 import { useRecording } from 'hooks/use-heatmaps';
-import { percentage } from 'lib/maths';
-import { HEATMAP_COLOURS } from 'data/heatmaps/constants';
 import type { Event } from 'types/event';
 import type { HeatmapsItem } from 'types/heatmaps';
+import { getClickMapData } from 'lib/heatmaps';
 
 interface Props {
   type: 'Click' | 'Scroll';
@@ -77,10 +75,7 @@ export const HeatmapsPage: FC<Props> = ({ type, page, recordingId, items }) => {
   };
 
   const showClickMaps = (doc: Document) => {
-    const counts = groupBy(items, 'selector');
-
-    const total = items.length;
-    const count = (selector: string) => counts[selector]?.length || 0;
+    const clickMapData = getClickMapData(items);
 
     const style = document.createElement('style');
     style.innerHTML = `
@@ -109,18 +104,16 @@ export const HeatmapsPage: FC<Props> = ({ type, page, recordingId, items }) => {
       elem.style.cssText += 'outline: 1px dashed #707070; outline-offset: 2px;';
 
       const { left, width, top } = elem.getBoundingClientRect();
-      const clickCount = count(item.selector);
 
-      const percent = percentage(total, clickCount);
-      const colors = HEATMAP_COLOURS.find(c => c.percentage >= percent);
+      const click = clickMapData.find(c => c.selector === item.selector);
 
       const tag = document.createElement('div');
       tag.classList.add('__squeaky-click-tag');
-      tag.innerHTML = clickCount.toString();
+      tag.innerHTML = click.count.toString();
       tag.style.cssText = `
-        background: ${colors.background};
-        border-color: ${colors.border};
-        color: ${colors.foreground};
+        background: ${click.color.background};
+        border-color: ${click.color.border};
+        color: ${click.color.foreground};
         left: ${left + width}px; 
         top: ${top}px;
       `;
