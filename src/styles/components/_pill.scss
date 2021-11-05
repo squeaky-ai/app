@@ -38,6 +38,6 @@
   }
 
   &.squared {
-    border-radius: 2px;
+    border-radius: var(--border-radius-sm);
   }
 }

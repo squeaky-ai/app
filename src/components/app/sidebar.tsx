@@ -78,9 +78,10 @@ export const Sidebar: FC = () => {
               </a>
             </Link>
             <Link href={`/sites/${siteId}/heatmaps`}>
-              <a style={{ display: 'none' }} className={classnames('link', { active: path.startsWith(`/sites/${siteId}/heatmaps`) })} data-label='Heatmaps'>
+              <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/heatmaps`) })} data-label='Heatmaps'>
                 <i className='ri-fire-line' />
                 <span>Heatmaps</span>
+                <span className='alpha'>ALPHA</span>
               </a>
             </Link>
             <Link href={`/sites/${siteId}/analytics`}>
@@ -104,3 +105,4 @@ export const Sidebar: FC = () => {
     </aside>
   );
 };
+ 

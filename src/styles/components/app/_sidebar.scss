@@ -250,6 +250,19 @@
 
       span {
         display: inline-block;
+
+        &.alpha {
+          align-items: center;
+          background: var(--blue-500);
+          border-radius: var(--border-radius-sm);
+          color: var(--white);
+          display: flex;
+          font-size: 10px;
+          justify-content: center;
+          line-height: 11px;
+          margin-left: .5rem;
+          padding: .15rem;
+        }
       }
 
       .arrow {
