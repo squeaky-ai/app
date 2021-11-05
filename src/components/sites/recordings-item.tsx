@@ -94,7 +94,11 @@ export const RecordingsItem: FC<Props> = ({ site, query, recording, style, selec
           </Cell>
           <Cell>
             <Highlighter value={query}>
-              {recording.visitor.visitorId}
+              <Link href={`/sites/${site.id}/visitors/${recording.visitor.id}`}>
+                <a>
+                  {recording.visitor.visitorId}
+                </a>
+              </Link>
             </Highlighter>
           </Cell>
           <Cell>

@@ -73,7 +73,7 @@ export const Recordings: FC<Props> = ({ site, query, filters, columns, selected,
           </Cell>
           <Cell>Status</Cell>
           <Cell>Recording ID</Cell>
-          <Cell>User ID</Cell>
+          <Cell>Visitor ID</Cell>
           <Cell>Date &amp; Time<Sort name='connected_at' order={sort} onAsc={() => setSort('connected_at__asc')} onDesc={() => setSort('connected_at__desc')} /></Cell>
           <Cell>Duration <Sort name='duration' order={sort} onAsc={() => setSort('duration__asc')} onDesc={() => setSort('duration__desc')} /></Cell>
           <Cell>Pages <Sort name='page_count' order={sort} onAsc={() => setSort('page_count__asc')} onDesc={() => setSort('page_count__desc')} /></Cell>
