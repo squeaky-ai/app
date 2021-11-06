@@ -31,7 +31,6 @@ export interface Site {
   daysSinceLastRecording?: number;
   ipBlacklist: SiteIpBlacklist[];
   domainBlacklist: SiteDomainBlacklist[];
-  activeVisitorCount?: number;
   createdAt: string;
   updatedAt: string;
 }
