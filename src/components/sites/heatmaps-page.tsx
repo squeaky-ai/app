@@ -26,7 +26,12 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items
   const { error, recording } = useRecording(recordingId);
 
   const init = () => {
-    if (replayer || !recording) return;
+    if (!recording) return;
+
+    if (replayer) {
+      document.getElementById('heatmaps-page-wrapper').innerHTML = '';
+      replayer = null;
+    }
 
     const items: Event[] = recording.events.items.map(e => JSON.parse(e));
     const root = document.getElementById('heatmaps-page-wrapper');
@@ -92,10 +97,13 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items
     if (doc) inject(doc);
   };
 
+  // Rebuild the replayer whenever the recording id changes
   React.useEffect(() => {
     init();
   }, [recording?.id]);
 
+  // Redraw the tags inside the iframe whenever the type or
+  // items change 
   React.useEffect(() => {
     draw();
   }, [type, items]);
