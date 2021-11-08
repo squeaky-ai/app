@@ -87,7 +87,7 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
               <menu>
                 {site.recordingsCount > 0 && (
                   <>
-                    <div className='menu-item'>
+                    <div className='menu-item columns'>
                       <VisitorsColumns 
                         columns={columns}
                         setColumns={setColumns}

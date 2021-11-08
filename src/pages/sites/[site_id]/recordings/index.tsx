@@ -94,7 +94,7 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
                       selected={selected}
                       setSelected={setSelected}
                     />
-                    <div className='menu-item'>
+                    <div className='menu-item columns'>
                       <RecordingsColumns 
                         columns={columns}
                         setColumns={setColumns}

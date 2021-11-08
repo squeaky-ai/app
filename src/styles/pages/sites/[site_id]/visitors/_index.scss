@@ -8,12 +8,18 @@
     @include breakpoint-md {
       align-items: flex-start;
       flex-direction: column;
+      margin-bottom: 1.5rem;
     }
 
     menu {
       align-items: center;
       display: flex;
       margin: 0;
+
+      @include breakpoint-md {
+        padding: 0;
+        width: 100%;
+      }
 
       .menu-item {
         position: relative;
@@ -27,6 +33,19 @@
           right: 0;
           top: calc(100% + .5rem);
           transform: none;
+        }
+
+        &.filters {
+          @include breakpoint-md {
+            width: 100%;
+
+            & .dropdown > .button {
+              border: 1px solid var(--blue-500);
+              justify-content: space-between;
+              margin: 0;
+              width: 100%;
+            }
+          }
         }
       }
 
@@ -56,6 +75,10 @@
       }
 
       .columns {
+        @include breakpoint-md {
+          display: none;
+        }
+
         .dropdown-menu {
           width: 240px;
         }
@@ -174,7 +197,7 @@
       width: 320px;
 
       @include breakpoint-md {
-        margin: 1rem 0 0 0;
+        margin: 1.5rem 0 .5rem 0;
         width: 100%;
       }
 

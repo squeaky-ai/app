@@ -45,7 +45,7 @@ export const Filters: FC<Props> = ({ filters, updateFilters }) => {
   };
 
   return ( 
-    <div className='menu-item'>
+    <div className='menu-item filters'>
       <Dropdown button={<><i className='ri-equalizer-line' /> Filters</>} dropdown-menu='down'>
         <Button onClick={() => handleFilterChange(FilterType.Status)} className={classnames({ open: openFilter === FilterType.Status})}>
           <i className='ri-arrow-drop-left-line' />
