@@ -13,6 +13,10 @@
     height: calc(100% - 11rem);
     width: 100%;
 
+    @include breakpoint-md {
+      height: auto;
+    }
+
     .empty-state-contents {
       align-items: center;
       display: flex;

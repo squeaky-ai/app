@@ -10,24 +10,44 @@ h1 {
   font-size: 64px;
   font-weight: var(--font-weight-block);
   line-height: 80px;
+
+  @include breakpoint-md {
+    font-size: 48px;
+    line-height: 64px;
+  }
 }
 
 h2 {
   font-size: 48px;
   font-weight: var(--font-weight-block);
   line-height: 64px;
+
+  @include breakpoint-md {
+    font-size: 32px;
+    line-height: 48px;
+  }
 }
 
 h3 {
   font-size: 32px;
   font-weight: var(--font-weight-bold);
   line-height: 48px;
+
+  @include breakpoint-md {
+    font-size: 24px;
+    line-height: 32px;
+  }
 }
 
 h4 {
   font-size: 24px;
   font-weight: var(--font-weight-bold);
   line-height: 32px;
+
+  @include breakpoint-md {
+    font-size: 16px;
+    line-height: 24px;
+  }
 }
 
 p {
@@ -38,16 +58,35 @@ p {
 
   &.small {
     font-size: 13px;
-    line-height: 16px;
+    line-height: 20px;
+  }
+
+  @include breakpoint-md {
+    font-size: 13px;
+    line-height: 20px;
   }
 }
 
 a {
   color: var(--blue-500);
+
+  @include breakpoint-md {
+    font-size: 13px;
+    line-height: 20px;
+  }
 }
 
 b {
   font-weight: var(--font-weight-bold);
+}
+
+ul {
+  li {
+    @include breakpoint-md {
+      font-size: 13px;
+      line-height: 20px;
+    }
+  }
 }
 
 code, pre {
@@ -62,12 +101,22 @@ code, pre {
   font-size: 16px;
   font-weight: var(--font-weight-bold);
   line-height: 24px;
+
+  @include breakpoint-md {
+    font-size: 13px;
+    line-height: 20px;
+  }
 }
 
 .label {
   font-size: 16px;
   font-weight: var(--font-weight-bold);
   line-height: 24px;
+
+  @include breakpoint-md {
+    font-size: 13px;
+    line-height: 20px;
+  }
 }
 
 .input,
@@ -76,6 +125,11 @@ code, pre {
   font-size: 16px;
   font-weight: var(--font-weight-normal);
   line-height: 24px;
+
+  @include breakpoint-md {
+    font-size: 13px;
+    line-height: 20px;
+  }
 
   &::placeholder {
     color: var(--gray-500);
@@ -87,6 +141,11 @@ code, pre {
   font: inherit;
   font-size: 16px;
   line-height: 24px;
+
+  @include breakpoint-md {
+    font-size: 13px;
+    line-height: 20px;
+  }
 }
 
 .sub-heading {
@@ -94,4 +153,9 @@ code, pre {
   font-size: 24px;
   font-weight: var(--font-weight-bold);
   line-height: 32px;
+
+  @include breakpoint-md {
+    font-size: 20px;
+    line-height: 24px;
+  }
 }

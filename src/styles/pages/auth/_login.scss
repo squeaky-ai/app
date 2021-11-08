@@ -6,6 +6,12 @@
   height: 100vh;
   width: 100vw;
 
+  @include breakpoint-md {
+    display: block;
+    height: auto;
+    width: 100%;
+  }
+
   .footer {
     display: none;
   }
@@ -23,10 +29,19 @@
     margin-bottom: 3rem;
     width: 528px;
 
+    @include breakpoint-md {
+      width: 100%;
+    }
+
     .logo {
       display: flex;
       justify-content: center;
       margin: 0 0 2rem 0;
+
+      @include breakpoint-md {
+        margin: 2rem auto;
+        width: 150px;
+      }
     }
   
     h2 {

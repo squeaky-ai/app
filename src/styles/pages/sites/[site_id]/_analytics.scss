@@ -14,6 +14,11 @@
     justify-content: space-between;
     margin: 0 0 3rem 0;
 
+    @include breakpoint-md {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
     .title {
       margin: 0;
     }
@@ -22,6 +27,11 @@
       align-items: center;
       display: flex;
 
+      @include breakpoint-md {
+        margin: 1rem 0 0 0;
+        width: 100%;
+      }
+
       p {
         margin: 0;
       }
@@ -29,6 +39,10 @@
       .select {
         margin: 0 0 0 1rem;
         width: 160px;
+
+        @include breakpoint-md {
+          width: 100%;
+        }
       }
     }
   }
@@ -40,6 +54,10 @@
     flex-direction: column;
     height: calc(100% - 11rem);
     width: 100%;
+
+    @include breakpoint-md {
+      height: auto;
+    }
 
     .empty-state-contents {
       align-items: center;
@@ -82,6 +100,22 @@
                          'devices screen-widths screen-widths';
     grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-template-rows: auto;
+
+    @include breakpoint-md {
+      grid-gap: 2rem;
+      grid-template-areas: 'visitors-graph '
+                           'average-session-duration'
+                           'average-session-per-visitors'
+                           'pages-per-session'
+                           'page-views'
+                           'pages'
+                           'browsers'
+                           'referrers'
+                           'languages'
+                           'devices'
+                           'screen-widths';
+      grid-template-columns: 100%;
+    }
 
     .grid-item {
       display: flex;
@@ -155,7 +189,7 @@
             p {
               color: var(--gray-500);
               font-size: 13px;
-              line-height: 16px;
+              line-height: 20px;
               margin: 0;
         
               b {
@@ -273,10 +307,6 @@
       &.screen-widths {
         grid-area: screen-widths;
 
-        & > h4 {
-          visibility: hidden;
-        }
-
         h4 {
           align-items: center;
           display: flex;
@@ -287,6 +317,14 @@
             &:first-of-type {
               margin-left: 1rem;
             }
+          }
+        }
+
+        & > h4 {
+          visibility: hidden;
+
+          @include breakpoint-md {
+            display: none;
           }
         }
 
@@ -310,11 +348,20 @@
           justify-content: space-between;
           margin-top: 2rem;
 
+          @include breakpoint-md {
+            flex-direction: column;
+          }
+
           .item {
             background: var(--gray-50);
             border-radius: var(--border-radius-md);
             padding: 1.5rem;
             width: calc(25% - 1rem);
+
+            @include breakpoint-md {
+              margin-top: 1.5rem;
+              width: 100%;
+            }
 
             p {
               font-weight: var(--font-weight-bold);
@@ -367,6 +414,10 @@
       flex: 1;
       flex-direction: column;
       padding: 3rem;
+
+      @include breakpoint-md {
+        padding: 2rem;
+      }
 
       h4 {
         margin: 0 0 1.5rem 0;

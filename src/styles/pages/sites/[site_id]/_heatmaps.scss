@@ -23,6 +23,10 @@
     height: calc(100% - 11rem);
     width: 100%;
 
+    @include breakpoint-md {
+      height: auto;
+    }
+
     .empty-state-contents {
       align-items: center;
       display: flex;
@@ -116,7 +120,7 @@
       p,
       .tooltip {
         font-size: 13px;
-        line-height: 16px;
+        line-height: 20px;
         margin: 0;
         padding: 1.5rem 0 1.5rem 1.5rem;
       }
@@ -126,7 +130,7 @@
 
         .button {
           font-size: 13px;
-          line-height: 16px;
+          line-height: 20px;
           overflow: hidden;
           text-align: left;
           text-overflow: ellipsis;
@@ -279,7 +283,7 @@
     p {
       color: var(--white);
       font-size: 13px;
-      line-height: 16px;
+      line-height: 20px;
       margin: 0;
     }
 

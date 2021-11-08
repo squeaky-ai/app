@@ -2,4 +2,8 @@
   background: var(--white);
   border-radius: var(--border-radius-md);
   padding: 4rem;
+
+  @include breakpoint-md {
+    padding: 2rem;
+  }
 }

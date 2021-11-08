@@ -1,5 +1,4 @@
 .page.sites {
-  background: var(--gray-50);
   flex: 1;
 
   .empty-state {
@@ -70,6 +69,7 @@
         height: 76px;
         margin-bottom: .75rem;
         padding: 1.5rem;
+        position: relative;
         text-decoration: none;
 
         &:hover {
@@ -81,8 +81,10 @@
         }
 
         @include breakpoint-md {
-          display: block;
+          align-items: flex-start;
+          flex-direction: column;
           height: auto;
+          padding-left: 5rem;
         }
       }
 
@@ -91,13 +93,8 @@
         margin-right: .75rem;
 
         @include breakpoint-md {
-          float: left;
-        }
-      }
-
-      .name {
-        @include breakpoint-md {
-          margin: .25rem 0 1rem 0;
+          left: 1.5rem;
+          position: absolute;
         }
       }
 
@@ -105,14 +102,24 @@
         flex: 1;
         margin: 0;
       }
+
+      .name {
+        @include breakpoint-md {
+          margin-bottom: .5rem;
+        }
+      }
       
       .pill {
-        margin-left: .5rem;
+        margin-left: .75rem;
         vertical-align: middle;
       }
 
       .url {
         color: var(--gray-500);
+
+        @include breakpoint-md {
+          margin-bottom: .25rem;
+        }
       }
     }
   }

@@ -9,7 +9,7 @@ import { Divider } from 'components/divider';
 import { SidebarAccount } from 'components/app/sidebar-account';
 import { SidebarFeedback } from 'components/app/sidebar-feedback';
 import { SidebarSiteSettings } from 'components/app/sidebar-site-settings';
-import { BASE_PATH } from 'data/common/constants';
+import { BASE_PATH, Breakpoints } from 'data/common/constants';
 import { Preferences, Preference } from 'lib/preferences';
 
 export const Sidebar: FC = () => {
@@ -19,19 +19,26 @@ export const Sidebar: FC = () => {
 
   const path = router.asPath;
   const siteId = router.query.site_id as string;
+  const isMobile = () => window.innerWidth < Breakpoints.TABLET;
 
   const toggleOpen = () => {
     setOpen(!open);
 
-    Preferences.setBoolean(Preference.SIDEBAR_CLOSED, open);
+    if (!isMobile()) {
+      Preferences.setBoolean(Preference.SIDEBAR_CLOSED, open);
+    }
   };
 
   React.useEffect(() => {
     setPosition(path.startsWith('/sites/') ? 'right' : 'left');
+
+    if (isMobile()) {
+      setOpen(false);
+    }
   }, [path]);
 
   React.useEffect(() => {
-    const closed = Preferences.getBoolean(Preference.SIDEBAR_CLOSED);
+    const closed = Preferences.getBoolean(Preference.SIDEBAR_CLOSED) || isMobile();
     if (closed) setOpen(false);
   }, []);
 

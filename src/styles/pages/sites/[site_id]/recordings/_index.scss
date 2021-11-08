@@ -258,6 +258,10 @@
     height: calc(100% - 11rem);
     width: 100%;
 
+    @include breakpoint-md {
+      height: auto;
+    }
+
     .empty-state-contents {
       align-items: center;
       background: var(--gray-50);
@@ -426,7 +430,7 @@
   .team-members {
     color: var(--gray-500);
     font-size: 14px;
-    line-height: 16px;
+    line-height: 20px;
     text-decoration: underline;
   }
 

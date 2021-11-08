@@ -13,6 +13,10 @@
     height: calc(100% - 11rem);
     width: 100%;
 
+    @include breakpoint-md {
+      height: auto;
+    }
+
     .empty-state-contents {
       align-items: center;
       display: flex;
@@ -61,12 +65,21 @@
                            'latest-notes';
       grid-template-columns: minmax(0, 1fr);
       grid-template-rows: 280px 280px 456px 280px 456px;
+
+      @include breakpoint-md {
+        grid-gap: 2rem;
+        grid-template-rows: 240px 240px 600px 220px 456px;
+      }
     }
 
     .card {
       background: var(--white);
       border: 1px solid var(--gray-150);
       padding: 3rem;
+
+      @include breakpoint-md {
+        padding: 2rem;
+      }
     }
 
     .sub-heading {
@@ -174,6 +187,10 @@
         display: flex;
         height: calc(100% - 4rem);
 
+        @include breakpoint-md {
+          flex-direction: column;
+        }
+
         .recording-preview {
           background: var(--gray-800);
           border: 1px solid var(--gray-150);
@@ -184,6 +201,10 @@
           flex: 1;
           overflow: hidden;
           position: relative;
+
+          @include breakpoint-md {
+            height: 250px;
+          }
         }
 
         .preview-container {
@@ -240,13 +261,18 @@
           padding: 0;
           width: 166px;
 
+          @include breakpoint-md {
+            margin: 2rem 0 0 0;
+            width: 100%;
+          }
+
           & > li {
             align-items: center;
             border-bottom: 1px solid var(--gray-150);
             display: flex;
             font-size: 13px;
             justify-content: space-between;
-            line-height: 16px;
+            line-height: 20px;
             list-style: none;
             padding: 1rem 0;
 
@@ -275,7 +301,7 @@
 
                 .button {
                   font-size: 13px;
-                  line-height: 16px;
+                  line-height: 20px;
                 }
 
                 .pages {
@@ -389,7 +415,7 @@
             .title {
               color: var(--gray-500);
               font-size: 13px;
-              line-height: 16px;
+              line-height: 20px;
               margin: 0 0 1rem 0;
 
               a {
@@ -413,7 +439,7 @@
               span {
                 color: var(--gray-500);
                 font-size: 13px;
-                line-height: 16px;
+                line-height: 20px;
               }
             }
 
