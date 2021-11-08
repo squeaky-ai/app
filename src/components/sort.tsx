@@ -30,10 +30,10 @@ export const Sort: FC<Props> = ({ name, order, onAsc, onDesc }) => {
   };
 
   return (
-    <div className={classnames('sort', order.toLowerCase())}>
+    <span className={classnames('sort', order.toLowerCase())}>
       <Button onClick={handleClick} className={classnames(key === name ? direction : '', { active: key === name })}>
         <i className='ri-arrow-up-line' />
       </Button>
-    </div>
+    </span>
   );
 };

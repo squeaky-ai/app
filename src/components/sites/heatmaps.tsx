@@ -31,7 +31,7 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
 
   const hasData = !!heatmaps.recordingId;
 
-  if (loading) {
+  if (loading && !hasData) {
     return <Spinner />;
   }
 
