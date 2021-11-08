@@ -75,25 +75,6 @@ export const getClickMapData = (items: HeatmapsItem[]): ClickMapData[] => {
 export const showClickMaps = (doc: Document, items: HeatmapsItem[]) => {
   const clickMapData = getClickMapData(items);
 
-  const style = document.createElement('style');
-  style.innerHTML = `
-    .__squeaky-click-tag {
-      background: white;
-      border: 1px solid #BFBFBF;
-      border-radius: 2px;
-      box-sizing: border-box;
-      box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
-      font-family: 'Poppins', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      padding: .15rem;
-      position: absolute;
-      transform: translateX(-100%);
-      z-index: 99999999;
-    }
-  `;
-  doc.head.appendChild(style);
-
   items.forEach(item => {
     const elem = doc.querySelector<HTMLElement>(item.selector);
 
@@ -110,10 +91,20 @@ export const showClickMaps = (doc: Document, items: HeatmapsItem[]) => {
     tag.innerHTML = click.count.toString();
     tag.style.cssText = `
       background: ${click.color.background};
-      border-color: ${click.color.border};
+      border: 1px solid ${click.color.border};
+      border-radius: 2px;
+      box-sizing: border-box;
+      box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
       color: ${click.color.foreground};
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
       left: ${left + width}px; 
+      padding: .15rem;
+      position: absolute;
       top: ${top}px;
+      transform: translateX(-100%);
+      z-index: 99999999;
     `;
     doc.body.appendChild(tag);
   });
@@ -122,22 +113,17 @@ export const showClickMaps = (doc: Document, items: HeatmapsItem[]) => {
 export const showScrollMaps = (doc: Document, items: HeatmapsItem[]) => {
   const scrollMapData = getScrollMapData(items);
 
-  const style = document.createElement('style');
-  style.innerHTML = `
-    .__squeaky_scroll_overlay {
-      background: linear-gradient(180deg, ${scrollMapData.map(s => `${s.color.background} ${s.increment}%`).join(', ')});
-      left: 0;
-      mix-blend-mode: multiply;
-      position: absolute;
-      top: 0;
-      width: 100%;
-      z-index: 99999999;
-    }
-  `;
-  doc.head.appendChild(style);
-
   const overlay = document.createElement('div');
-  overlay.classList.add('__squeaky_scroll_overlay');
-  overlay.style.height = `${doc.body.scrollHeight}px`;
+  overlay.classList.add('__squeaky-scroll-overlay');
+  overlay.style.cssText = `
+    background: linear-gradient(180deg, ${scrollMapData.map(s => `${s.color.background} ${s.increment}%`).join(', ')});
+    height: ${doc.body.scrollHeight}px;
+    left: 0;
+    mix-blend-mode: multiply;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 99999999;
+  `;
   doc.body.appendChild(overlay);
 };

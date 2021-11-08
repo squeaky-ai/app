@@ -63,7 +63,7 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items
   };
 
   const cleanup = (doc: Document) => {
-    const elems = doc.querySelectorAll('.__squeaky-click-tag, .__squeaky_scroll_overlay');
+    const elems = doc.querySelectorAll('*[class^=__squeaky');
     elems.forEach(elem => elem.remove());
   };
 
@@ -133,7 +133,7 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items
 
       <div 
         style={{ visibility: loading ? 'hidden' : 'visible', width: deviceWidth() }} 
-        id='heatmaps-page-wrapper' 
+        id='heatmaps-page-wrapper'
       />
 
       {!loading && type === 'Scroll' && <ScrollIndicator />}
