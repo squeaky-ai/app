@@ -8,6 +8,7 @@ interface ScrollMapData {
   pixelsScrolled: number;
   percentThatMadeIt: number;
   amountThatMadeIt: number;
+  color: HeatmapColor;
 }
 
 interface ClickMapData {
@@ -20,20 +21,27 @@ interface ClickMapData {
 export const getScrollMapData = (items: HeatmapsItem[]): ScrollMapData[] => {
   const total = items.length;
 
-  const max = items.length === 0 
-    ? 0 
-    : Math.max(...items.map(i => i.y));
+  const max = Math.max(...items.map(i => i.y));
+
+  const getColor = (count: number) => {
+    const percent = percentage(total, count);
+    const potentials = HEATMAP_COLOURS.filter(c => percent >= c.percentage);
+    return potentials[potentials.length - 1];
+  };
 
   return range(1, 21).map(i => {
     const pixelsScrolled = Math.floor(((i * 5) / 100) * max);
     const amountThatMadeIt = items.filter(i => i.y >= pixelsScrolled).length;
     const percentThatMadeIt = percentage(total, amountThatMadeIt);
 
+    const color = getColor(amountThatMadeIt);
+
     return {
       increment: i * 5,
       pixelsScrolled,
       percentThatMadeIt,
       amountThatMadeIt,
+      color,
     };
   });
 };
@@ -111,11 +119,13 @@ export const showClickMaps = (doc: Document, items: HeatmapsItem[]) => {
   });
 };
 
-export const showScrollMaps = (doc: Document) => {
+export const showScrollMaps = (doc: Document, items: HeatmapsItem[]) => {
+  const scrollMapData = getScrollMapData(items);
+
   const style = document.createElement('style');
   style.innerHTML = `
     .__squeaky_scroll_overlay {
-      background: linear-gradient(180deg, #8249FB 4.17%, #F0438C 27.6%, #FF8A00 50.52%, #FDE50B 72.4%, #FFFFFF 94.79%);
+      background: linear-gradient(180deg, ${scrollMapData.map(s => `${s.color.background} ${s.increment}%`).join(', ')});
       left: 0;
       mix-blend-mode: multiply;
       position: absolute;
