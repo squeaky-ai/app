@@ -47,6 +47,10 @@
         text-decoration: underline;
       }
     }
+    
+    @include breakpoint-md {
+      justify-content: space-between;
+    }
   }
 
   .sites-list {
@@ -75,11 +79,26 @@
         &:focus {
           outline-offset: 2px;
         }
+
+        @include breakpoint-md {
+          display: block;
+          height: auto;
+        }
       }
 
       .avatar {
         flex-shrink: 0;
         margin-right: .75rem;
+
+        @include breakpoint-md {
+          float: left;
+        }
+      }
+
+      .name {
+        @include breakpoint-md {
+          margin: .25rem 0 1rem 0;
+        }
       }
 
       p {

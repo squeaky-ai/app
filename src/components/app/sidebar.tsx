@@ -38,14 +38,20 @@ export const Sidebar: FC = () => {
   return (
     <aside id='app-sidebar' className={classnames({ open })}>
       <Link href='/sites'>
-        <a className='logo'>
-          {open
-            ? <Image src={`${BASE_PATH}/logo.svg`} alt='Logo' height={32} width={103} />
-            : <Image src={`${BASE_PATH}/logo-small.svg`} alt='Logo' height={32} width={24} />
-          }
+        <a className='logo large'>
+          <Image src={`${BASE_PATH}/logo.svg`} alt='Logo' height={32} width={103} />
+        </a>
+      </Link>
+      <Link href='/sites'>
+        <a className='logo small'>
+          <Image src={`${BASE_PATH}/logo-small.svg`} alt='Logo' height={32} width={24} />
         </a>
       </Link>
       <menu className={position}>
+        <Button className='menu-close' onClick={toggleOpen}>
+          <i className='ri-close-line' />
+        </Button>
+
         <div className='slider'>
           <div className='nav left'>
             <Link href='/sites'>
@@ -96,6 +102,9 @@ export const Sidebar: FC = () => {
           </div>
         </div>
       </menu>
+      <Button className='menu-toggle' onClick={toggleOpen}>
+        <i className='ri-menu-line' />
+      </Button>
       <footer>
         <Button className='link' onClick={toggleOpen} data-label={open ? 'Expand' : 'Collapse'}>
           <i className='ri-arrow-right-line' />

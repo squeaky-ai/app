@@ -3,4 +3,8 @@
   padding: 0 3rem 8rem 3rem;
   position: relative;
   width: 100%;
+
+  @include breakpoint-md {
+    padding: 0 2rem 8rem 2rem;
+  }
 }

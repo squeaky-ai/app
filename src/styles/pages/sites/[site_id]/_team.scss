@@ -54,6 +54,10 @@
     grid-gap: 2rem;
     grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
 
+    @include breakpoint-md {
+      grid-template-columns: 1fr;
+    }
+
     h4 {
       margin-bottom: 1rem;
     }

@@ -2,5 +2,9 @@
   &.app {
     display: flex;
     height: 100vh;
+
+    @include breakpoint-md {
+      display: block;
+    }
   }
 }

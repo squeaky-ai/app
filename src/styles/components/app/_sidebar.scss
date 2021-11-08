@@ -10,9 +10,44 @@
   width: 80px;
   z-index: 1;
 
+  @include breakpoint-md {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    width: 100%;
+  }
+
   .logo {
-    display: block;
     margin: 0 auto;
+
+    &.large {
+      display: none;
+    }
+
+    &.small {
+      display: block;
+    }
+
+    @include breakpoint-md {
+      margin: 0;
+      transform: translateY(3px);
+    }
+  }
+
+  .menu-toggle {
+    align-items: center;
+    display: none;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+
+    @include breakpoint-md {
+      background: none;
+      border: none;
+      display: flex;
+      font-size: 1.5rem;
+    }
   }
 
   .icon {
@@ -210,6 +245,27 @@
     }
   }
 
+  menu {
+    .menu-close {
+      display: none;
+      z-index: 10;
+    }
+
+    @include breakpoint-md {
+      display: none;
+
+      .menu-close {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        display: block;
+        position: absolute;
+        right: 1.5rem;
+        top: 1.5rem;
+      }
+    }
+  }
+
   footer {
     .link {
       justify-content: center;
@@ -224,16 +280,32 @@
         transition: transform .3s ease-in-out;
       }
     }
+
+    @include breakpoint-md {
+      display: none;
+    }
   }
 
   &.open {
     overflow: hidden;
     width: 240px;
 
+    @include breakpoint-md {
+      width: 100%;
+    }
+
     .logo {
       height: 32px;
       margin: 0 1rem;
       width: 103px;
+
+      &.large {
+        display: block;
+      }
+  
+      &.small {
+        display: none;
+      }
     }
 
     .icon {
@@ -306,9 +378,54 @@
     }
 
     menu {
+      &.left {
+        @include breakpoint-md {
+          .slider {
+            padding: 2rem;
+            width: 100%;
+          }
+
+          .right {
+            display: none;
+          }
+        }
+      }
+
       &.right {
         .slider {
           transform: translateX(-207px);
+
+          @include breakpoint-md {
+            padding: 2rem;
+            transform: translateX(0);
+            width: 100%;
+          }
+        }
+
+        @include breakpoint-md {
+          .left {
+            display: none;
+          }
+        }
+      }
+
+      @include breakpoint-md {
+        background: var(--white);
+        display: flex;
+        height: 100%;
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 10;
+
+        .slider {
+          .nav {
+            width: 100%;
+
+            .link {
+              width: 100%;
+            }
+          }
         }
       }
     }

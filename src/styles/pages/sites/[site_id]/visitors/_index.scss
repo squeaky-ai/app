@@ -5,6 +5,11 @@
     justify-content: space-between;
     margin: 0 0 3rem 0;
 
+    @include breakpoint-md {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
     menu {
       align-items: center;
       display: flex;
@@ -156,12 +161,22 @@
     display: flex;
     margin: 0;
 
+    @include breakpoint-md {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
     .search {
       align-items: center;
       display: flex;
       margin: 0 0 0 2rem;
       position: relative;
       width: 320px;
+
+      @include breakpoint-md {
+        margin: 1rem 0 0 0;
+        width: 100%;
+      }
 
       .input {
         margin: 0;

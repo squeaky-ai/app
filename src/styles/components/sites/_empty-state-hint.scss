@@ -22,4 +22,8 @@
       margin-bottom: 0;
     }
   }
+
+  @include breakpoint-md {
+    width: 100%;
+  }
 }
