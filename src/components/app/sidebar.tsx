@@ -55,10 +55,6 @@ export const Sidebar: FC = () => {
         </a>
       </Link>
       <menu className={position}>
-        <Button className='menu-close' onClick={toggleOpen}>
-          <i className='ri-close-line' />
-        </Button>
-
         <div className='slider'>
           <div className='nav left'>
             <Link href='/sites'>
@@ -110,7 +106,7 @@ export const Sidebar: FC = () => {
         </div>
       </menu>
       <Button className='menu-toggle' onClick={toggleOpen}>
-        <i className='ri-menu-line' />
+        {open ? <i className='ri-close-line' /> : <i className='ri-menu-line' />}
       </Button>
       <footer>
         <Button className='link' onClick={toggleOpen} data-label={open ? 'Expand' : 'Collapse'}>
