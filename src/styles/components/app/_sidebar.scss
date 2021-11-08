@@ -16,7 +16,7 @@
     flex-direction: row;
     height: 4rem;
     justify-content: space-between;
-    padding: 1rem 2rem;
+    padding: 1rem 1.5rem;
     width: 100%;
   }
 
@@ -250,7 +250,7 @@
   menu {
     @include breakpoint-md {
       display: none;
-      padding: 0;
+      padding: 1.5rem 0;
     }
   }
 
@@ -279,6 +279,7 @@
     width: 240px;
 
     @include breakpoint-md {
+      border-bottom-color: var(--white);
       width: 100%;
     }
 
@@ -330,6 +331,7 @@
           color: var(--white);
           display: flex;
           font-size: 10px;
+          flex: 0;
           justify-content: center;
           line-height: 11px;
           margin-left: .5rem;
@@ -381,7 +383,7 @@
       &.left {
         @include breakpoint-md {
           .slider {
-            padding: 2rem;
+            padding: 1rem;
             width: 100%;
           }
 
@@ -396,7 +398,7 @@
           transform: translateX(-207px);
 
           @include breakpoint-md {
-            padding: 2rem;
+            padding: 1rem;
             transform: translateX(0);
             width: 100%;
           }
@@ -415,7 +417,7 @@
         height: calc(100% - 4rem);
         position: fixed;
         right: 0;
-        top: calc(4rem + 1px);
+        top: 4rem;
         z-index: 10;
 
         .slider {
