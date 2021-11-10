@@ -259,9 +259,14 @@
         align-items: center;
         display: flex;
         justify-content: center;
+        position: relative;
 
         .replayer-mouse {
           display: none;
+        }
+
+        .spinner {
+          position: absolute;
         }
 
         iframe {
