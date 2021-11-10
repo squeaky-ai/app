@@ -54,13 +54,13 @@ const getPastSevenDaysResults = (pageViews: PageView[]): DataForPeriod => {
     const views = pageViews.filter(p => isSameDay(getDateFromTimestamp(p.timestamp), date));
 
     return {
-      date: format(date, 'EEE'),
+      date: format(date, 'd/M'),
       all: sum(views.map(v => v.total)),
       unique: sum(views.map(v => v.unique)),
     };
   });
 
-  return { data, interval: 0 };
+  return { data: data.reverse(), interval: 0 };
 };
 
 const getPastThirtyDaysResults = (pageViews: PageView[]): DataForPeriod => {
@@ -74,13 +74,13 @@ const getPastThirtyDaysResults = (pageViews: PageView[]): DataForPeriod => {
     const views = pageViews.filter(p => isSameDay(getDateFromTimestamp(p.timestamp), date));
 
     return {
-      date: format(date, 'EEE'),
+      date: format(date, 'd/M'),
       all: sum(views.map(v => v.total)),
       unique: sum(views.map(v => v.unique)),
     };
   });
 
-  return { data, interval: 2 };
+  return { data: data.reverse(), interval: 2 };
 };
 
 export const formatResultsForPeriod = (period: TimePeriod, pageViews: PageView[]): DataForPeriod => {

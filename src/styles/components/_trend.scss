@@ -5,6 +5,11 @@
   display: inline-flex;
   padding: .25rem .75rem;
 
+  @include breakpoint-md {
+    font-size: 13px;
+    line-height: 16px;
+  }
+
   &.up {
     i {
       color: var(--green-500);

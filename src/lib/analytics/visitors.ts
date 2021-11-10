@@ -65,7 +65,7 @@ const getPastSevenDaysResults = (pageViews: Visitor[]): DataForPeriod => {
     };
   });
 
-  return { data, interval: 0 };
+  return { data: data.reverse(), interval: 0 };
 };
 
 const getPastThirtyDaysResults = (pageViews: Visitor[]): DataForPeriod => {
@@ -86,7 +86,7 @@ const getPastThirtyDaysResults = (pageViews: Visitor[]): DataForPeriod => {
     };
   });
 
-  return { data, interval: 2 };
+  return { data: data.reverse(), interval: 2 };
 };
 
 export const formatResultsForPeriod = (period: TimePeriod, pageViews: Visitor[]): DataForPeriod => {
