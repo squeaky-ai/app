@@ -146,6 +146,22 @@
 
         .table .row {
           grid-template-columns: repeat(3, minmax(0, 1fr));
+
+          @include breakpoint-md {
+            align-items: flex-start;
+            flex-direction: column;
+            height: auto;
+            padding: 2rem;
+
+            .cell {
+              padding: 0;
+
+              &:first-of-type {
+                font-weight: var(--font-weight-bold);
+                margin-bottom: .5rem;
+              }
+            }
+          }
         }
       
         .percentage {
@@ -211,6 +227,22 @@
 
         .table .row {
           grid-template-columns: repeat(2, minmax(0, 1fr));
+
+          @include breakpoint-md {
+            align-items: flex-start;
+            flex-direction: column;
+            height: auto;
+            padding: 2rem;
+
+            .cell {
+              padding: 0;
+
+              &:first-of-type {
+                font-weight: var(--font-weight-bold);
+                margin-bottom: .5rem;
+              }
+            }
+          }
         }
       
         .percentage {
@@ -399,9 +431,33 @@
       }
     }
 
+    .analytics-graph {
+      @include breakpoint-md {
+        .heading {
+          margin-bottom: 2rem;
+
+          .actions {
+            display: none;
+          }
+        }
+
+        .title {
+          width: 100%;
+
+          h3 {
+            flex: 1;
+          }
+        }
+      }
+    }
+
     .graph-wrapper {
       height: 340px;
       width: 100%;
+
+      @include breakpoint-md {
+        height: 150px;
+      }
     }
   
     .recharts-surface {

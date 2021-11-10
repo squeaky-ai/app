@@ -75,6 +75,26 @@ export const getClickMapData = (items: HeatmapsItem[]): ClickMapData[] => {
 export const showClickMaps = (doc: Document, items: HeatmapsItem[]) => {
   const clickMapData = getClickMapData(items);
 
+  const style = document.createElement('style');
+  style.classList.add('__squeaky-click-map-style');
+  style.innerHTML = `
+    .__squeaky-click-tag {
+      background: white;
+      border: 1px solid #BFBFBF;
+      border-radius: 2px;
+      box-sizing: border-box;
+      box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      padding: .15rem;
+      position: absolute;
+      transform: translateX(-100%);
+      z-index: 99999999;
+    }
+  `;
+  doc.head.appendChild(style);
+
   items.forEach(item => {
     const elem = doc.querySelector<HTMLElement>(item.selector);
 
@@ -125,5 +145,18 @@ export const showScrollMaps = (doc: Document, items: HeatmapsItem[]) => {
     width: 100%;
     z-index: 99999999;
   `;
+
+  const indicator = document.createElement('div');
+  indicator.classList.add('__squeaky-scroll-indicator');
+  indicator.style.cssText = `
+    background: black;
+    height: 2px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  `;
+
   doc.body.appendChild(overlay);
+  doc.body.appendChild(indicator);
 };

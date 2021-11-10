@@ -55,6 +55,16 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items
     const iframe = root.querySelector('iframe');
     iframe.setAttribute('scrolling', 'true');
 
+    iframe.contentDocument.addEventListener('mousemove', (event: MouseEvent) => {
+      const element = event.target as HTMLElement;
+      const position = event.clientX + element.ownerDocument.scrollingElement.scrollTop;
+
+      const indicator = document.querySelector<HTMLElement>('.__squeaky-scroll-indicator');
+      if (indicator) {
+        indicator.style.transform = `translateY(${position}px)`;
+      }
+    });
+
     // Pause at the location where we think the page is
     replayer.pause(location);
 

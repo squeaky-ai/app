@@ -25,6 +25,7 @@
 
     @include breakpoint-md {
       height: auto;
+      margin-top: 2rem;
     }
 
     .empty-state-contents {
@@ -71,6 +72,10 @@
     grid-template-rows: 40px minmax(0, 1fr);
     height: calc(100% - 168px);
 
+    @include breakpoint-md {
+      display: block;
+    }
+
     &.empty {
       grid-template-areas: 'options options'
                            'empty-state empty-state';
@@ -81,9 +86,46 @@
       grid-area: options;
       justify-content: space-between;
 
+      @include breakpoint-md {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
       .left,
       .right {
         display: flex;
+      }
+
+      .left {
+        @include breakpoint-md {
+          align-items: flex-start;
+          flex-direction: column;
+          width: 100%;
+
+          .heatmaps-pages,
+          .heatmaps-period {
+            margin: 0 0 1rem 0;
+            width: 100%;
+
+            .label {
+              width: 60px;
+            }
+
+            .select {
+              flex: 1;
+            }
+          }
+        }
+      }
+
+      .right {
+        @include breakpoint-md {
+          flex-direction: column;
+
+          .button-group {
+            margin: 0 0 1rem 0;
+          }
+        }
       }
   
       .button-group {
@@ -207,6 +249,11 @@
       grid-area: content;
       overflow: hidden;
       position: relative;
+
+      @include breakpoint-md {
+        margin-bottom: 1rem;
+        min-height: 500px;
+      }
 
       .heatmaps-page {
         align-items: center;

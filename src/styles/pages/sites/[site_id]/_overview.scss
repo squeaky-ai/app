@@ -343,6 +343,10 @@
 
       .sub-heading {
         padding: 3rem 3rem 0 3rem;
+
+        @include breakpoint-md {
+          padding: 2rem 2rem 0 2rem;
+        }
       }
 
       .notes-empty-state {
@@ -369,6 +373,10 @@
 
       .divider {
         margin: 0 3rem .5rem 3rem;
+
+        @include breakpoint-md {
+          margin: 0 2rem .5rem 2rem;
+        }
       }
 
       .fader {
@@ -400,6 +408,10 @@
             background: var(--white);
             padding: 1rem 3rem;
             position: relative;
+
+            @include breakpoint-md {
+              padding: 1rem 2rem;
+            }
 
             &::after {
               background: var(--gray-100);
