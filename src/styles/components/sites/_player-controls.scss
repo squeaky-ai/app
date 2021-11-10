@@ -125,6 +125,10 @@
   }
 
   &.active {
+    .control-group:first-of-type {
+      width: auto;
+    }
+
     .control-group:last-of-type {
       background: white;
       border-left: 1px solid var(--gray-150);

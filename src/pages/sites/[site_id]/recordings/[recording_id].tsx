@@ -22,7 +22,7 @@ const reducer = (state: PlayerState, action: Action) => ({
 const initialState: PlayerState = {
   status: PlayerStatus.PLAYING,
   playbackSpeed: 1,
-  activeTab: null,
+  activeTab: 0,
   skipInactivity: true,
   zoom: 1,
 };
