@@ -353,15 +353,15 @@
       grid-template-columns: 105px 1fr 1fr 1fr 1fr 1fr 2fr 1fr 90px 70px;
       padding: 1rem;
 
-      &:not(.head) {
-        display: grid;
-        grid-gap: .75rem 1rem;
-        grid-template-areas: 'id blank status'
-                             'date pages duration';
-        grid-template-columns: 33% !important;
-      }
-
       @include breakpoint-md {
+        &:not(.head) {
+          display: grid;
+          grid-gap: .75rem 1rem;
+          grid-template-areas: 'id blank status'
+                               'date pages duration';
+          grid-template-columns: 33% !important;
+        }
+
         .cell {
           padding: 0;
 
