@@ -25,15 +25,6 @@ export const VisitorRecordingsItem: FC<Props> = ({ recording }) => {
   const router = useRouter();
   const ref = React.useRef<Modal>();
 
-  const onRowClick = (event: React.MouseEvent) => {
-    const element = event.target as HTMLElement;
-    const ignored = element.closest('button');
-
-    if (ignored) {
-      event.preventDefault();
-    }
-  };
-
   const deleteRecording = async () => {
     try {
       await recordingDelete({ 
@@ -70,81 +61,83 @@ export const VisitorRecordingsItem: FC<Props> = ({ recording }) => {
 
   return (
     <>
-      <Link href={`/sites/${router.query.site_id}/recordings/${recording.id}`}>
-        <a className='row recording-row' onClick={onRowClick}>
-          <Cell>
-            {recording.viewed
-              ? <Pill type='secondary'>Viewed</Pill>
-              : <Pill type='tertiary'>New</Pill>
+      <div className='row recording-row'>
+        <Cell>
+          {recording.viewed
+            ? <Pill type='secondary'>Viewed</Pill>
+            : <Pill type='tertiary'>New</Pill>
+          }
+        </Cell>
+        <Cell>
+          <Tooltip
+            button={
+              <span onClick={bookmarkRecording} className={classnames('bookmark', { active: recording.bookmarked })}>
+              <i className='ri-bookmark-3-line' />
+            </span>
             }
-          </Cell>
-          <Cell>
-            <Tooltip
-              button={
-                <span onClick={bookmarkRecording} className={classnames('bookmark', { active: recording.bookmarked })}>
-                <i className='ri-bookmark-3-line' />
-              </span>
-              }
-            >
-              {recording.bookmarked ? 'Bookmarked' : 'Not bookmarked'}
-            </Tooltip>
-            {recording.sessionId}
-          </Cell>
-          <Cell>
-            {toNiceDate(recording.connectedAt)}
-          </Cell>
-          <Cell>
-            {toTimeString(recording.duration)}
-          </Cell>
-          <Cell>
-            <Tooltip button={recording.pageCount} buttonClassName='link'>
-              <ul className='tooltip-list'>
-                {recording.pageViews.map((page, i) => (
-                  <li key={page + i}>{page}</li>
-                ))}
-              </ul>
-            </Tooltip>
-          </Cell>
-          <Cell>
-            <div className='start-exit-page'>
-              <div className='item'>
-                <div>START URL</div>
-                <div>
-                  <Tooltip fluid button={recording.startPage}>
-                    {recording.startPage}
-                  </Tooltip>
-                </div>
-              </div>
-              <div className='item'>
-                <div>EXIT URL</div>
-                <div>
-                  <Tooltip fluid button={recording.exitPage}>
-                    {recording.exitPage}
-                  </Tooltip>
-                </div>
+          >
+            {recording.bookmarked ? 'Bookmarked' : 'Not bookmarked'}
+          </Tooltip>
+          <Link href={`/sites/${router.query.site_id}/recordings/${recording.id}`}>
+            <a>
+              {recording.sessionId}
+            </a>
+          </Link>
+        </Cell>
+        <Cell>
+          {toNiceDate(recording.connectedAt)}
+        </Cell>
+        <Cell>
+          {toTimeString(recording.duration)}
+        </Cell>
+        <Cell>
+          <Tooltip button={recording.pageCount} buttonClassName='link'>
+            <ul className='tooltip-list'>
+              {recording.pageViews.map((page, i) => (
+                <li key={page + i}>{page}</li>
+              ))}
+            </ul>
+          </Tooltip>
+        </Cell>
+        <Cell>
+          <div className='start-exit-page'>
+            <div className='item'>
+              <div>START URL</div>
+              <div>
+                <Tooltip fluid button={recording.startPage}>
+                  {recording.startPage}
+                </Tooltip>
               </div>
             </div>
-          </Cell>
-          <Cell>
-            <Tooltip positionX='right' button={<Device deviceType={recording.device.deviceType} />}>
-              {recording.device.deviceType === 'Computer' ? 'Desktop or Laptop Device' : 'Mobile Device'}
-            </Tooltip>
-            {recording.device.viewportX} x {recording.device.viewportY}
-          </Cell>
-          <Cell>
-            <Tooltip positionX='right' className='browser-tooltip' button={<Browser name={recording.device.browserName} height={24} width={24} />}>
-              {recording.device.browserDetails}
-            </Tooltip>
-          </Cell>
-          <Cell>
-            <Dropdown portal button={<i className='ri-more-2-fill' />} buttonClassName='options'>
-              <Button onClick={openModal}>
-                <i className='ri-delete-bin-line' /> Delete
-              </Button>
-            </Dropdown>
-          </Cell>
-        </a>
-      </Link>
+            <div className='item'>
+              <div>EXIT URL</div>
+              <div>
+                <Tooltip fluid button={recording.exitPage}>
+                  {recording.exitPage}
+                </Tooltip>
+              </div>
+            </div>
+          </div>
+        </Cell>
+        <Cell>
+          <Tooltip positionX='right' button={<Device deviceType={recording.device.deviceType} />}>
+            {recording.device.deviceType === 'Computer' ? 'Desktop or Laptop Device' : 'Mobile Device'}
+          </Tooltip>
+          {recording.device.viewportX} x {recording.device.viewportY}
+        </Cell>
+        <Cell>
+          <Tooltip positionX='right' className='browser-tooltip' button={<Browser name={recording.device.browserName} height={24} width={24} />}>
+            {recording.device.browserDetails}
+          </Tooltip>
+        </Cell>
+        <Cell>
+          <Dropdown portal button={<i className='ri-more-2-fill' />} buttonClassName='options'>
+            <Button onClick={openModal}>
+              <i className='ri-delete-bin-line' /> Delete
+            </Button>
+          </Dropdown>
+        </Cell>
+      </div>
 
       <Modal ref={ref}>
         <ModalBody aria-labelledby='delete-recording-title' aria-describedby='delete-recording-description'>

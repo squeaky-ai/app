@@ -8,8 +8,6 @@ import type { Recording } from 'types/recording';
 import { PlayerState, Action, PlayerStatus } from 'types/player';
 import type { Site } from 'types/site';
 
-const MAIN_PADDING_SIZE = 24;
-
 interface Props {
   site: Site;
   state: PlayerState;
@@ -84,7 +82,7 @@ export class Player extends React.Component<Props> {
 
     // Keep shrinking the multiplier until the viewport of the player
     // window fits inside the bounds of the page
-    while((viewportX * multiplier) > (width - MAIN_PADDING_SIZE) || (viewportY * multiplier) > (height - MAIN_PADDING_SIZE)) {
+    while((viewportX * multiplier) > width || (viewportY * multiplier) > height) {
       multiplier -= .1;
     }
 
