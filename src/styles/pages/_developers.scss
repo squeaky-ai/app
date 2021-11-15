@@ -29,4 +29,22 @@
       margin-right: .5rem;
     }
   }
+
+  .code-wrapper {
+    position: relative;
+
+    .copy {
+      color: var(--gray-100);
+      display: none;
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+    }
+
+    &:hover {
+      .copy {
+        display: flex;
+      }
+    }
+  }
 }

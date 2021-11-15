@@ -10,10 +10,10 @@ interface Props {
 
 export const TrackingCode: FC<Props> = ({ site }) => {
   const ref = React.useRef<HTMLElement>();
-  const [loading, setLoading] = React.useState<boolean>(false);
+  const [copying, setCopying] = React.useState<boolean>(false);
 
   const copy = async () => {
-    setLoading(true);
+    setCopying(true);
 
     if (ref.current) {
       const text = ref.current.innerText;
@@ -21,7 +21,7 @@ export const TrackingCode: FC<Props> = ({ site }) => {
     }
 
     setTimeout(() => {
-      setLoading(false);
+      setCopying(false);
     }, 2000);
   };
 
@@ -31,7 +31,7 @@ export const TrackingCode: FC<Props> = ({ site }) => {
         Tracking code
         <Button className='link icon' onClick={copy}>
           <i className='ri-file-copy-line' />
-          {loading ? 'Copied!' : 'Copy to clipboard'}
+          {copying ? 'Copied!' : 'Copy to clipboard'}
         </Button>
       </Label>
       <pre className='code block simple'>
