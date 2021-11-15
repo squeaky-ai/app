@@ -1,6 +1,7 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import Image from 'next/image';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { useRouter } from 'next/router';
@@ -9,13 +10,12 @@ import { Label } from 'components/label';
 import { Input } from 'components/input';
 import { Button } from 'components/button';
 import { Main } from 'components/main';
-import { Message } from 'components/message';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { updateUser } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
+import { BASE_PATH } from 'data/common/constants';
 
 const NewSchema = Yup.object().shape({
-  email: Yup.string().email('Please enter a valid email address').required('Email is required'),
   firstName: Yup.string().required('First name is required'),
   lastName: Yup.string().required('Last name is required'),
 });
@@ -34,10 +34,12 @@ const UsersNew: NextPage<ServerSideProps> = ({ user }) => {
         <h3 className='title'>Account Settings</h3>
 
         <Container className='xsm'>
-          <Message 
-            type='info'
-            message='Please enter your name below to set up your user account.'
-          />
+          <div className='intro'>
+            <p>Please enter your name below to set up your user account...</p>
+            <div className='image'>
+              <Image src={`${BASE_PATH}/cupid.svg`} height={140} width={185} alt='New Account Image' />
+            </div>
+          </div>
 
           <Formik
             initialValues={{ email: user.email, firstName: '', lastName: '' }}
@@ -61,19 +63,6 @@ const UsersNew: NextPage<ServerSideProps> = ({ user }) => {
               values,
             }) => (
               <form onSubmit={handleSubmit}>
-                <Label htmlFor='email'>Email address</Label>
-                <Input
-                  name='email' 
-                  type='email' 
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  placeholder='e.g. jess@email.com'
-                  autoComplete='email'
-                  value={values.email}
-                  invalid={touched.email && !!errors.email}
-                />
-                <span className='validation'>{errors.email}</span>
-
                 <Label htmlFor='firstName'>First name</Label>
                 <Input
                   name='firstName' 

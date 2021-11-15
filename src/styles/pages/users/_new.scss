@@ -1,4 +1,30 @@
 .page.users.new {
-  display: flex;
   flex: 1;
+
+  .title {
+    margin: 3rem 0 1.5rem 0;
+  }
+
+  .intro {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+
+    .image {
+      flex-shrink: 0;
+
+      @include breakpoint-md {
+        display: none;
+      }
+    }
+
+    p {
+      margin: 0 1rem 0 0;
+
+      @include breakpoint-md {
+        margin: 0;
+      }
+    }
+  }
 }
