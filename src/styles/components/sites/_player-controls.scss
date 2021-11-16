@@ -130,7 +130,7 @@
     }
 
     .control-group:last-of-type {
-      background: white;
+      background: var(--white);
       border-left: 1px solid var(--gray-150);
       position: absolute;
       right: -18.5rem;
