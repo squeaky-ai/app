@@ -9,6 +9,7 @@ import { Formik } from 'formik';
 import { Container } from 'components/container';
 import { Card } from 'components/card';
 import { Label } from 'components/label';
+import { Logo } from 'components/logo';
 import { Input } from 'components/input';
 import { Button, DelayedButton } from 'components/button';
 import { Message } from 'components/message';
@@ -78,7 +79,7 @@ const Login: NextPage<ServerSideProps> = () => {
         <Container className='sm'>
           <Card>
             <a href='/' className='logo'>
-              <Image src={`${BASE_PATH}/logo.svg`} height={76} width={246} alt='Squeaky logo' />
+              <Logo src='logo' height={76} width={246} alt='Squeaky logo' />
             </a>
 
             {pageView === PageView.LOGIN && ( 

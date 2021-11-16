@@ -1,11 +1,11 @@
 import React from 'react';
 import type { NextPage } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import Head from 'next/head';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { useRouter } from 'next/router';
+import { Logo } from 'components/logo';
 import { Container } from 'components/container';
 import { Card } from 'components/card';
 import { Label } from 'components/label';
@@ -15,7 +15,6 @@ import { Password } from 'components/password';
 import { PASSWORD_REGEX } from 'data/users/constants';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { resetPassword, changePassword } from 'lib/api/auth';
-import { BASE_PATH } from 'data/common/constants';
 
 const ResetSchema = Yup.object().shape({
   email: Yup.string().email('Please enter a valid email address').required('Email is required')
@@ -53,7 +52,7 @@ const Reset: NextPage<ServerSideProps> = () => {
         <Container className='sm'>
           <Card>
             <a href='/' className='logo'>
-              <Image src={`${BASE_PATH}/logo.svg`} height={76} width={246} alt='Squeaky logo' />
+              <Logo src='logo' height={76} width={246} alt='Squeaky logo' />
             </a>
 
             {pageView == PageView.EMAIL && (

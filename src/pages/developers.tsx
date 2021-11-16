@@ -1,14 +1,13 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Image from 'next/image'
 import hljs from 'highlight.js';
+import { Logo } from 'components/logo';
 import { Container } from 'components/container';
 import { Code } from 'components/developers/code';
 import { Main } from 'components/main';
 import { Tabs } from 'components/tabs';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
-import { BASE_PATH } from 'data/common/constants';
 
 const Developers: NextPage<ServerSideProps> = () => {
   React.useEffect(() => {
@@ -26,7 +25,7 @@ const Developers: NextPage<ServerSideProps> = () => {
       <Main>
         <div className='hero'>
           <a href='/'>
-            <Image src={`${BASE_PATH}/logo.svg`} height={48} width={154} alt='Logo' />
+            <Logo src='logo' height={48} width={154} alt='Logo' />
           </a>
           <h1>Developers</h1>
           <p>Last Updated: <b>September 1st 2021</b></p>

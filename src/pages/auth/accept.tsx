@@ -14,6 +14,7 @@ import { Checkbox } from 'components/checkbox';
 import { Password } from 'components/password';
 import { Message } from 'components/message';
 import { Spinner } from 'components/spinner';
+import { Logo } from 'components/logo';
 import { PASSWORD_REGEX } from 'data/users/constants';
 import { signout } from 'lib/api/auth';
 import { userInvitation, teamInviteAccept } from 'lib/api/graphql';
@@ -83,7 +84,7 @@ const Accept: NextPage<ServerSideProps> = ({ user }) => {
         <Container className='sm'>
           <Card>
             <a href='/' className='logo'>
-              <Image src={`${BASE_PATH}/logo.svg`} height={76} width={246} alt='Squeaky logo' />
+              <Logo src='logo' height={76} width={246} alt='Squeaky logo' />
             </a>
 
             {loading && (

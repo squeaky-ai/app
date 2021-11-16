@@ -36,3 +36,19 @@
   --border-radius-c: 50%;
   --border-radius-o: 100%;
 }
+
+@media (prefers-color-scheme: dark) {
+  :root { 
+    --white: #222222;
+    --black: #ffffff;
+    --gray-900: #F7F7F7;
+    --gray-800: #F2F2F2;
+    --gray-700: #D7D7D7;
+    --gray-500: #BFBFBF;
+    --gray-300: #A0A0A0;
+    --gray-200: #707070;
+    --gray-150: #4D4D4D;
+    --gray-100: #222222;
+    --gray-50: #121212;
+  }
+}

@@ -1,7 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import classnames from 'classnames';
 import { useRouter } from 'next/router';
 import { Button } from 'components/button';
@@ -9,7 +8,8 @@ import { Divider } from 'components/divider';
 import { SidebarAccount } from 'components/app/sidebar-account';
 import { SidebarFeedback } from 'components/app/sidebar-feedback';
 import { SidebarSiteSettings } from 'components/app/sidebar-site-settings';
-import { BASE_PATH, Breakpoints } from 'data/common/constants';
+import { Logo } from 'components/logo';
+import { Breakpoints } from 'data/common/constants';
 import { Preferences, Preference } from 'lib/preferences';
 
 export const Sidebar: FC = () => {
@@ -46,12 +46,12 @@ export const Sidebar: FC = () => {
     <aside id='app-sidebar' className={classnames({ open })}>
       <Link href='/sites'>
         <a className='logo large'>
-          <Image src={`${BASE_PATH}/logo.svg`} alt='Logo' height={32} width={103} />
+          <Logo src='logo' alt='Logo' height={32} width={103} />
         </a>
       </Link>
       <Link href='/sites'>
         <a className='logo small'>
-          <Image src={`${BASE_PATH}/logo-small.svg`} alt='Logo' height={32} width={24} />
+          <Logo src='logo-small' alt='Logo' height={32} width={24} />
         </a>
       </Link>
       <menu className={position}>

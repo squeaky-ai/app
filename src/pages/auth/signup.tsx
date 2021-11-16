@@ -1,11 +1,11 @@
 import React from 'react';
 import type { NextPage } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import Head from 'next/head';
 import * as Yup from 'yup';
 import { useRouter } from 'next/router';
 import { Formik } from 'formik';
+import { Logo } from 'components/logo';
 import { Container } from 'components/container';
 import { Card } from 'components/card';
 import { Label } from 'components/label';
@@ -18,7 +18,6 @@ import { PASSWORD_REGEX } from 'data/users/constants';
 import { emailExists, signup, reconfirmAccount } from 'lib/api/auth';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useToasts } from 'hooks/use-toasts';
-import { BASE_PATH } from 'data/common/constants';
 
 enum PageView {
   EMAIL,
@@ -60,7 +59,7 @@ const Signup: NextPage<ServerSideProps> = () => {
         <Container className='sm'>
           <Card>
             <a href='/' className='logo'>
-              <Image src={`${BASE_PATH}/logo.svg`} height={76} width={246} alt='Squeaky logo' />
+              <Logo src='logo' height={76} width={246} alt='Squeaky logo' />
             </a>
 
             {pageView === PageView.EMAIL && (
