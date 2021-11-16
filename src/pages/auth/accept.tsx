@@ -1,6 +1,5 @@
 import React from 'react';
 import type { NextPage } from 'next';
-import Image from 'next/image';
 import Head from 'next/head';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
@@ -20,7 +19,6 @@ import { signout } from 'lib/api/auth';
 import { userInvitation, teamInviteAccept } from 'lib/api/graphql';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useToasts } from 'hooks/use-toasts';
-import { BASE_PATH } from 'data/common/constants';
 
 const AcceptSchema = Yup.object().shape({
   password: Yup.string().matches(PASSWORD_REGEX, 'Password must match the criteria defined below').required('Password is required'),
