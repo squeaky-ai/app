@@ -4,9 +4,11 @@ import classnames from 'classnames';
 import { useRouter } from 'next/router';
 import { Sidebar } from 'components/app/sidebar';
 import { BLANK_ROUTES } from 'data/common/constants';
+import { useDarkMode } from 'hooks/use-dark-mode';
 
 export const Page: FC = ({ children }) => {
   const router = useRouter();
+  const { darkModeEnabled } = useDarkMode();
   const isBlank = BLANK_ROUTES.includes(router.route);
 
   const slug = router.route
@@ -23,8 +25,10 @@ export const Page: FC = ({ children }) => {
   }
 
   React.useEffect(() => {
-    if (window && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      const icons = document.querySelectorAll('link[rel="icon"]');
+    const icons = document.querySelectorAll('link[rel="icon"]');
+
+    if (darkModeEnabled) {
+      document.documentElement.classList.add('dark-mode');
       
       icons.forEach(icon => {
         const href = icon.getAttribute('href');
@@ -35,8 +39,20 @@ export const Page: FC = ({ children }) => {
           icon.setAttribute('href', `${name}-dark.${extention}`);
         }
       });
+    } else {
+      document.documentElement.classList.remove('dark-mode');
+
+      icons.forEach(icon => {
+        const href = icon.getAttribute('href');
+        const isDark = href.includes('-dark');
+
+        if (!isDark) {
+          const [name, extention] = href.split('.');
+          icon.setAttribute('href', `${name.replace('-dark', '')}.${extention}`);
+        }
+      });
     }
-  }, []);
+  }, [darkModeEnabled]);
 
   if (isBlank) {
     return (

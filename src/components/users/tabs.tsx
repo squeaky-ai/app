@@ -6,7 +6,7 @@ import { User } from 'types/user';
 
 interface Props {
   user: User;
-  page: 'account' | 'password';
+  page: 'account' | 'password' | 'preferences';
 }
 
 export const Tabs: FC<Props> = ({ page }) => {
@@ -17,6 +17,13 @@ export const Tabs: FC<Props> = ({ page }) => {
           <Link href='/users/account'>
             <a className={classnames('button tab-button', { active: page === 'account' })}>
               Account
+            </a>
+          </Link>
+        </li>
+        <li className='tab'>
+          <Link href='/users/preferences'>
+            <a className={classnames('button tab-button', { active: page === 'preferences' })}>
+              Preferences
             </a>
           </Link>
         </li>
