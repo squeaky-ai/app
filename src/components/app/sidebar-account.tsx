@@ -2,6 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
 import classnames from 'classnames';
+import { useRouter } from 'next/router';
 import { Button } from 'components/button';
 import { signout } from 'lib/api/auth';
 
@@ -10,6 +11,7 @@ interface Props {
 }
 
 export const SidebarAccount: FC<Props> = ({ path }) => {
+  const router = useRouter();
   const [open, setOpen] = React.useState<boolean>(false);
 
   const toggleOpen = () => {
@@ -20,6 +22,11 @@ export const SidebarAccount: FC<Props> = ({ path }) => {
     await signout();
     location.href = '/';
   };
+
+  React.useEffect(() => {
+    const active = router.pathname.startsWith('/users');
+    setOpen(active);
+  }, [router.pathname]);
 
   return (
     <div className={classnames('link nested', { open })} data-label='Account'>

@@ -2,6 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
 import classnames from 'classnames';
+import { useRouter } from 'next/router';
 import { Button } from 'components/button';
 
 interface Props {
@@ -10,11 +11,17 @@ interface Props {
 }
 
 export const SidebarSiteFeedback: FC<Props> = ({ path, siteId }) => {
+  const router = useRouter();
   const [open, setOpen] = React.useState<boolean>(false);
 
   const toggleOpen = () => {
     setOpen(!open);
   };
+
+  React.useEffect(() => {
+    const active = router.pathname.startsWith('/sites/[site_id]/feedback/nps');
+    setOpen(active);
+  }, [router.pathname]);
 
   return (
     <div className={classnames('link nested', { open })} data-label='Feedback'>
