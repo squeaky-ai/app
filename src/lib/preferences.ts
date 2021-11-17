@@ -29,4 +29,8 @@ export class Preferences {
     localStorage.setItem(`preferences::${key}`, JSON.stringify(value));
     return value;
   }
+
+  public static getRaw(key: Preference): string {
+    return localStorage.getItem(`preferences::${key}`);
+  }
 }

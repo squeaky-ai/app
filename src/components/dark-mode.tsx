@@ -21,8 +21,14 @@ export const DarkModeProvider: FC = ({ children }) => {
   };
 
   React.useEffect(() => {
-    const enabled = Preferences.getBoolean(Preference.DARK_MODE_ENABLED) || false;
-    setEnabled(enabled);
+    const preference = Preferences.getRaw(Preference.DARK_MODE_ENABLED);
+
+    if (preference) {
+      setEnabled(preference === 'true');
+    } else {
+      const dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setEnabled(dark);
+    }
   }, []);
 
   return (
