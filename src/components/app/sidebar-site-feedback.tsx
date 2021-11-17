@@ -17,7 +17,7 @@ export const SidebarSiteFeedback: FC<Props> = ({ path, siteId }) => {
   };
 
   return (
-    <div style={{ display: 'none' }} className={classnames('link nested', { open })} data-label='Feedback'>
+    <div className={classnames('link nested', { open })} data-label='Feedback'>
       <Button onClick={toggleOpen}>
         <i className='ri-user-voice-line' />
         <span>Feedback</span>
