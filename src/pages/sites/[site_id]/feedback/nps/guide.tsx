@@ -9,14 +9,15 @@ import { Page } from 'components/sites/page';
 import { Container } from 'components/container';
 import { EmptyStateHint } from 'components/sites/empty-state-hint';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { NpsTabs } from 'components/sites/feedback/nps-tabs';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { BASE_PATH } from 'data/common/constants';
 
-const SitesFeedbackNps: NextPage<ServerSideProps> = ({ user }) => {
+const SitesFeedbackNpsGuide: NextPage<ServerSideProps> = ({ user }) => {
   return (
     <>
       <Head>
-        <title>Squeaky | Feedback | NPS</title>
+        <title>Squeaky | Feedback | NPS | Guide</title>
       </Head>
 
       <Page user={user} scope={[]}>
@@ -40,6 +41,12 @@ const SitesFeedbackNps: NextPage<ServerSideProps> = ({ user }) => {
                 />
               </div>
             </Container>
+
+            {!!site.verifiedAt && (
+              <>
+                <NpsTabs siteId={site.id} page='guide' />
+              </>
+            )}
           </Main>
         )}
       </Page>
@@ -47,5 +54,5 @@ const SitesFeedbackNps: NextPage<ServerSideProps> = ({ user }) => {
   );
 };
 
-export default SitesFeedbackNps;
+export default SitesFeedbackNpsGuide;
 export { getServerSideProps };

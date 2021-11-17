@@ -8,6 +8,7 @@ import { Main } from 'components/main';
 import { Page } from 'components/sites/page';
 import { Container } from 'components/container';
 import { EmptyStateHint } from 'components/sites/empty-state-hint';
+import { SentimentTabs } from 'components/sites/feedback/sentiment-tabs';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { BASE_PATH } from 'data/common/constants';
@@ -40,6 +41,12 @@ const SitesFeedbackSentiment: NextPage<ServerSideProps> = ({ user }) => {
                 />
               </div>
             </Container>
+
+            {!!site.verifiedAt && (
+              <>
+                <SentimentTabs siteId={site.id} page='feedback' />
+              </>
+            )}
           </Main>
         )}
       </Page>
