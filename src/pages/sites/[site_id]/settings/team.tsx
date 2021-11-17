@@ -15,7 +15,7 @@ import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { OWNER, ADMIN } from 'data/teams/constants';
 import { useTeam } from 'hooks/use-team';
 
-const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
+const SiteSettingsTeam: NextPage<ServerSideProps> = ({ user }) => {
   const { loading, error, team } = useTeam();
 
   if (error) {
@@ -29,7 +29,7 @@ const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
   return (
     <>
       <Head>
-        <title>Squeaky | Site Team</title>
+        <title>Squeaky | Site Settings | Team</title>
       </Head>
 
       <Page user={user} scope={[OWNER, ADMIN]}>
@@ -102,5 +102,5 @@ const SitesTeam: NextPage<ServerSideProps> = ({ user }) => {
   );
 };
 
-export default SitesTeam;
+export default SiteSettingsTeam;
 export { getServerSideProps };

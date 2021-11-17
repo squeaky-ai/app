@@ -69,6 +69,7 @@
     margin-bottom: .5rem;
     padding: 0;
     position: relative;
+    text-align: left;
     text-decoration: none;
     width: 100%;
 
@@ -120,8 +121,7 @@
       color: var(--blue-500);
     }
 
-    &.account,
-    &.feedback {
+    &.nested {
       flex-direction: column;
 
       .button {
@@ -136,9 +136,7 @@
         padding: 0;
         width: 100%;
       }
-    } 
 
-    &.account {
       .items {
         background: var(--white);
         border-radius: var(--border-radius-md);
@@ -349,7 +347,7 @@
         }
       }
 
-      &.account {
+      &.nested {
         height: auto;
 
         .items {

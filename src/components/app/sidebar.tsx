@@ -8,6 +8,7 @@ import { Divider } from 'components/divider';
 import { SidebarAccount } from 'components/app/sidebar-account';
 import { SidebarFeedback } from 'components/app/sidebar-feedback';
 import { SidebarSiteSettings } from 'components/app/sidebar-site-settings';
+import { SidebarSiteFeedback } from 'components/app/sidebar-site-feedback';
 import { Logo } from 'components/logo';
 import { Breakpoints } from 'data/common/constants';
 import { Preferences, Preference } from 'lib/preferences';
@@ -93,6 +94,7 @@ export const Sidebar: FC = () => {
                 <span className='alpha'>ALPHA</span>
               </a>
             </Link>
+            <SidebarSiteFeedback path={path} siteId={siteId} />
             <Link href={`/sites/${siteId}/analytics`}>
               <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/analytics`) })} data-label='Analytics'>
                 <i className='ri-line-chart-line' />

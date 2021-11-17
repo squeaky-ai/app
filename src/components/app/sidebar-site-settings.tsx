@@ -16,7 +16,7 @@ export const SidebarSiteSettings: FC<Props> = ({ path, siteId }) => {
     setOpen(!open);
   };
   return (
-    <div className={classnames('link account', { open })} data-label='Account'>
+    <div className={classnames('link nested', { open })} data-label='Account'>
       <Button onClick={toggleOpen}>
         <i className='ri-settings-3-line' />
         <span>Settings</span>
@@ -28,13 +28,13 @@ export const SidebarSiteSettings: FC<Props> = ({ path, siteId }) => {
             Site
           </a>
         </Link>
-        <Link href={`/sites/${siteId}/team`}>
-          <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/team`) })}>
+        <Link href={`/sites/${siteId}/settings/team`}>
+          <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/settings/team`) })}>
             Team
           </a>
         </Link>
-        <Link href={`/sites/${siteId}/subscription`}>
-          <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/subscription`) })} data-label='Subscription'>
+        <Link href={`/sites/${siteId}/settings/subscription`}>
+          <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/settings/subscription`) })} data-label='Subscription'>
             Subscription
           </a>
         </Link>

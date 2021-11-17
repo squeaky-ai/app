@@ -12,10 +12,10 @@ import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { BASE_PATH } from 'data/common/constants';
 
-const SitesSubscription: NextPage<ServerSideProps> = ({ user }) => (
+const SiteSettingsSubscription: NextPage<ServerSideProps> = ({ user }) => (
   <>
     <Head>
-      <title>Squeaky | Site Settings</title>
+      <title>Squeaky | Site Settings | Subscription</title>
     </Head>
 
     <Page user={user} scope={[OWNER]}>
@@ -49,5 +49,5 @@ const SitesSubscription: NextPage<ServerSideProps> = ({ user }) => (
   </>
 );
 
-export default SitesSubscription;
+export default SiteSettingsSubscription;
 export { getServerSideProps };

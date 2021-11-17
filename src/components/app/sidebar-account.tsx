@@ -22,7 +22,7 @@ export const SidebarAccount: FC<Props> = ({ path }) => {
   };
 
   return (
-    <div className={classnames('link account', { open })} data-label='Account'>
+    <div className={classnames('link nested', { open })} data-label='Account'>
       <Button onClick={toggleOpen}>
         <i className='ri-account-circle-line' />
         <span>Account</span>
