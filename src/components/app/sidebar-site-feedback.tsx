@@ -19,7 +19,7 @@ export const SidebarSiteFeedback: FC<Props> = ({ path, siteId }) => {
   };
 
   React.useEffect(() => {
-    const active = router.pathname.startsWith('/sites/[site_id]/feedback/nps');
+    const active = router.pathname.startsWith('/sites/[site_id]/feedback');
     setOpen(active);
   }, [router.pathname]);
 
