@@ -24,7 +24,7 @@ export const SidebarSiteSettings: FC<Props> = ({ path, siteId }) => {
       </Button>
       <div className='items'>
         <Link href={`/sites/${siteId}/settings/details`}>
-          <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/settings`) })}>
+          <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/settings/details`) })}>
             Site
           </a>
         </Link>

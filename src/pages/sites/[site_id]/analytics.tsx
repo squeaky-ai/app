@@ -9,7 +9,7 @@ import { EmptyStateHint } from 'components/sites/empty-state-hint';
 import { Container } from 'components/container';
 import { Page } from 'components/sites/page';
 import { Select, Option } from 'components/select';
-import { Analytics } from 'components/sites/analytics';
+import { Analytics } from 'components/sites/analytics/analytics';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { BASE_PATH } from 'data/common/constants';

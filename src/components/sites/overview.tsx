@@ -5,8 +5,8 @@ import { useRouter } from 'next/router';
 import { Card } from 'components/card';
 import { Tooltip } from 'components/tooltip';
 import { Divider } from 'components/divider';
-import { PlayerPreview } from 'components/sites/player-preview';
-import { VisitorStarred } from 'components/sites/visitor-starred';
+import { PlayerPreview } from 'components/sites/player/player-preview';
+import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
 import { useOverview } from 'hooks/use-overview';
 import { toTimeString } from 'lib/dates';
 import type { Site } from 'types/site';
@@ -113,7 +113,7 @@ export const Overview: FC<Props> = ({ site }) => {
               <li>
                 <span className='name'>Visitor ID</span>
                 <span className='value'>
-                  <VisitorStarred site={site} visitor={recording.visitor} />
+                  <VisitorsStarred site={site} visitor={recording.visitor} />
                 </span>
               </li>
               <li>

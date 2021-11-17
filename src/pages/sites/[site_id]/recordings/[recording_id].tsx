@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { NotFound } from 'components/sites/not-found';
 import { Error } from 'components/error';
-import { PlayerWrapper } from 'components/sites/player-wrapper';
+import { PlayerWrapper } from 'components/sites/player/player-wrapper';
 import { useRecording } from 'hooks/use-recording';
 import { initReplayer } from 'lib/replayer';
 import { PlayerState, Action, PlayerStatus } from 'types/player';

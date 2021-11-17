@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Avatar } from 'components/sites/avatar';
 import { Main } from 'components/main';
-import { CreateSite } from 'components/sites/create-site';
+import { CreateSite } from 'components/sites/recordings/create-site';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useSites } from 'hooks/use-sites';
 import { BASE_PATH } from 'data/common/constants';

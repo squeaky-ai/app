@@ -10,7 +10,7 @@ import { Container } from 'components/container';
 import { Spinner } from 'components/spinner';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { EmptyStateHint } from 'components/sites/empty-state-hint';
-import { Heatmaps } from 'components/sites/heatmaps';
+import { Heatmaps } from 'components/sites/heatmaps/heatmaps';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { usePages } from 'hooks/use-pages';
 import { BASE_PATH } from 'data/common/constants';

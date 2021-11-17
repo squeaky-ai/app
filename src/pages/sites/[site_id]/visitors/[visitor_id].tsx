@@ -8,9 +8,9 @@ import { Spinner } from 'components/spinner';
 import { Card } from 'components/card';
 import { Pill } from 'components/pill';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
-import { VisitorSummary } from 'components/sites/visitor-summary';
-import { VisitorRecording } from 'components/sites/visitor-recordings';
-import { VisitorPages } from 'components/sites/visitors-pages';
+import { VisitorsSummary } from 'components/sites/visitors/visitors-summary';
+import { VisitorsRecording } from 'components/sites/visitors/visitors-recordings';
+import { VisitorPages } from 'components/sites/visitors/visitors-pages';
 import { Error } from 'components/error';
 import { NotFound } from 'components/sites/not-found';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
@@ -69,7 +69,7 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
               } 
             />
 
-            <VisitorSummary site={site} visitor={visitor} />
+            <VisitorsSummary site={site} visitor={visitor} />
 
             <h4 className='sub-heading'>Recordings</h4>
 
@@ -87,7 +87,7 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
               </Card>
             </div>
 
-            <VisitorRecording 
+            <VisitorsRecording 
               visitor={visitor} 
               page={recordingPage} 
               setPage={setRecordingPage}

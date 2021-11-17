@@ -10,12 +10,13 @@ import { EmptyStateHint } from 'components/sites/empty-state-hint';
 import { Button } from 'components/button';
 import { Input } from 'components/input';
 import { Container } from 'components/container';
-import { Recordings } from 'components/sites/recordings';
+import { Recordings } from 'components/sites/recordings/recordings';
 import { Page } from 'components/sites/page';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { Filters } from 'components/sites/filters/recordings/filters';
 import { Tags } from 'components/sites/filters/recordings/tags';
-import { RecordingsColumns } from 'components/sites/recordings-columns';
+import { RecordingsColumns } from 'components/sites/recordings/recordings-columns';
+import { RecordingsBulkActions } from 'components/sites/recordings/recordings-bulk-actions';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { BASE_PATH } from 'data/common/constants';
 import { defaultFilters, allColumns } from 'lib/recordings';
@@ -23,7 +24,6 @@ import { Preferences, Preference } from 'lib/preferences';
 import { useFilters } from 'hooks/use-filters';
 import type { Filters as IFilters, Column } from 'types/recording';
 import type { ValueOf } from 'types/common';
-import { RecordingsBulkActions } from 'components/sites/recordings-bulk-actions';
 
 const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
   const [query, setQuery] = React.useState<string>('');
