@@ -26,13 +26,6 @@ export const SentimentTabs: FC<Props> = ({ siteId, page }) => {
             </a>
           </Link>
         </li>
-        <li className='tab'>
-          <Link href={`/sites/${siteId}/feedback/sentiment/guide`}>
-            <a className={classnames('button tab-button', { active: page === 'guide' })}>
-              Guide
-            </a>
-          </Link>
-        </li>
       </ul>
     </div>
   );

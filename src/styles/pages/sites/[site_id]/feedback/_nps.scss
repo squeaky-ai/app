@@ -54,4 +54,143 @@
       display: flex;
     }
   }
+
+  .nps-tabs {
+    margin-bottom: 3rem;
+  }
+
+  .outcomes {
+    margin: 4rem 0;
+
+    .items {
+      display: grid;
+      grid-gap: 1.5rem;
+      grid-template-columns: repeat(11, 1fr);
+    }
+
+    .labels {
+      display: grid;
+      grid-gap: 1.5rem;
+      grid-template-areas: 'detractor detractor detractor detractor detractor detractor detractor passive passive promoter promoter';
+      grid-template-columns: repeat(11, 1fr);
+
+      p {
+        font-size: 13px;
+        font-weight: var(--font-weight-bold);
+        line-height: 16px;
+        margin: 0;
+        text-align: center;
+        padding: 1rem 0;
+        position: relative;
+
+        &:after {
+          content: ' ';
+          display: block;
+          height: 1px;
+          left: 0;
+          position: absolute;
+          top: 1.5rem;
+          width: 100%;
+        }
+
+        span {
+          background: var(--gray-50);
+          padding: 0 .5rem;
+          position: relative;
+          z-index: 1;
+        }
+
+        &.detractor {
+          grid-area: detractor;
+
+          &:after {
+            background: var(--magenta-500);
+          }
+        }
+
+        &.passive {
+          grid-area: passive;
+
+          &:after {
+            background: var(--purple-500);
+          }
+        }
+
+        &.promoter {
+          grid-area: promoter;
+
+          &:after {
+            background: var(--blue-500);
+          }
+        }
+      }
+    }
+
+    .number {
+      align-items: center;
+      border-radius: var(--border-radius-md);
+      color: var(--white);
+      display: flex;
+      height: 2.5rem;
+      justify-content: center;
+      width: 2.5rem;
+
+      &.detractor {
+        background: var(--magenta-500);
+      }
+
+      &.passive {
+        background: var(--purple-500);
+      }
+
+      &.promoter {
+        background: var(--blue-500);
+      }
+    }
+  }
+
+  .definition {
+    margin: 0 0 1.5rem 0;
+    padding: 2rem;
+
+    p {
+      margin: 0;
+    }
+
+    .heading {
+      align-items: center;
+      display: flex;
+      font-weight: var(--font-weight-bold);
+      margin: 0 0 1.5rem 0;
+
+      i {
+        color: var(--gray-700);
+        font-weight: var(--font-weight-normal);
+        margin-left: .25rem;
+      }
+
+      .icon {
+        font-size: 24px;
+        margin: 0 .5rem 0 0;
+      }
+    }
+
+    &.promoter {
+      .heading, .heading .icon {
+        color: var(--blue-500);
+      }
+    }
+
+    &.passive {
+      .heading, .heading .icon {
+        color: var(--purple-500);
+      }
+    }
+
+    &.detractor {
+      .heading, .heading .icon {
+        color: var(--magenta-500);
+      }
+    }
+  }
 }

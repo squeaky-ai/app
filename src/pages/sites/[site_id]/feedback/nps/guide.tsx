@@ -12,6 +12,7 @@ import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { NpsTabs } from 'components/sites/feedback/nps-tabs';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { BASE_PATH } from 'data/common/constants';
+import { Card } from 'components/card';
 
 const SitesFeedbackNpsGuide: NextPage<ServerSideProps> = ({ user }) => {
   return (
@@ -45,6 +46,56 @@ const SitesFeedbackNpsGuide: NextPage<ServerSideProps> = ({ user }) => {
             {!!site.verifiedAt && (
               <>
                 <NpsTabs siteId={site.id} page='guide' />
+
+                <Container className='md'>
+                  <p>NPS® is a micro customer survey that combines a rating scale from 0 to 10 with a free text field that asks a visitor why they gave the rating they selected. Each time, the same question is always asked: "How likely are you to recommend X to a friend or colleague", where the name of the company, product or service is used to take the place of "X".</p>
+                  
+                  <h4>Outcomes</h4>
+
+                  <div className='outcomes'>
+                    <div className='items'>
+                      <div className='number detractor'>0</div>
+                      <div className='number detractor'>1</div>
+                      <div className='number detractor'>2</div>
+                      <div className='number detractor'>3</div>
+                      <div className='number detractor'>4</div>
+                      <div className='number detractor'>5</div>
+                      <div className='number detractor'>6</div>
+                      <div className='number passive'>7</div>
+                      <div className='number passive'>8</div>
+                      <div className='number promoter'>9</div>
+                      <div className='number promoter'>10</div>
+                    </div>
+                    <div className='labels'>
+                      <p className='detractor'><span>Detractors</span></p>
+                      <p className='passive'><span>Passives</span></p>
+                      <p className='promoter'><span>Promoters</span></p>
+                    </div>
+                  </div>
+
+                  <p>After collecting data, the Net Promoter Score® is determined based on the <b>three possible groups</b> that the vistors fall into: <b>Promoters</b>, <b>Passives</b> or <b>Detractors</b>.</p>
+
+                  <p>The total score for your company is based on the percentage of promoters minus the percentage of detractors. You will end up with a value is between -100 and +100. The lower the value, the less satisfied your visitors are and the less likely they would be to recommend your company.</p>
+
+                  <h4>Group definitions</h4>
+
+                  <p>The three groups that NPS® segments your visitors by are categorised as follows:</p>
+
+                  <Card className='definition promoter'>
+                    <p className='heading'><i className='icon ri-group-line'></i>Promoters <i>(9-10 points)</i></p>
+                    <p>These visitors are those who are actively recommending your brand or company, and therefore help you to win new customers. You should aim to attract as many promoters as possible.</p>
+                  </Card>
+
+                  <Card className='definition passive'>
+                    <p className='heading'><i className='icon ri-group-line'></i>Passives <i>(7-8 points)</i></p>
+                    <p>These visitors are not 100 percent satisfied with the experience, products or services you provide, and are unlikely to recommend you to others.</p>
+                  </Card>
+
+                  <Card className='definition detractor'>
+                    <p className='heading'><i className='icon ri-group-line'></i>Detractors <i>(0-6 points)</i></p>
+                    <p>These visitors are critical of your company, and likely to advise friends, acquaintances, and other potential customers not to use your business. Their comments should be taken seriously and help drive product improvements.</p>
+                  </Card>
+                </Container>
               </>
             )}
           </Main>
