@@ -24,6 +24,11 @@
     width: 100%;
   }
 
+  option {
+    background: var(--white);
+    color: var(--gray-800);
+  }
+
   i {
     display: flex;
     height: 2rem;

@@ -5,7 +5,7 @@ import { Container } from 'components/container';
 import { Main } from 'components/main';
 import { Tabs } from 'components/users/tabs';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
-import { Checkbox } from 'components/checkbox';
+import { Toggle } from 'components/toggle';
 import { useDarkMode } from 'hooks/use-dark-mode';
 
 const UsersPreferences: NextPage<ServerSideProps> = ({ user }) => {
@@ -27,9 +27,9 @@ const UsersPreferences: NextPage<ServerSideProps> = ({ user }) => {
         <Tabs user={user} page='preferences' /> 
 
         <Container className='xsm'>
-          <Checkbox checked={darkModeEnabled} onChange={toggleDarkMode}>
+          <Toggle checked={darkModeEnabled} onChange={toggleDarkMode}>
             Dark mode
-          </Checkbox>
+          </Toggle>
         </Container>
       </Main>
     </>
