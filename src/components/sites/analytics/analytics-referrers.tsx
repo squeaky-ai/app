@@ -4,6 +4,7 @@ import { sum, slice, orderBy } from 'lodash';
 import { Table, Row, Cell } from 'components/table';
 import { Pagination } from 'components/pagination';
 import { percentage } from 'lib/maths';
+import { Tooltip } from 'components/tooltip';
 import type { AnalyticsReferrer } from 'types/analytics';
 
 interface Props {
@@ -26,12 +27,22 @@ export const AnalyticsReferrers: FC<Props> = ({ referrers }) => {
           <Cell>Page</Cell>
           <Cell>Number of users</Cell>
         </Row>
-        {slice(sorted, offset, offset + limit).map(referrer => (
-          <Row key={referrer.name}>
-            <Cell>{referrer.name === 'Direct' ? <>Direct <i>(none)</i></> : referrer.name}</Cell>
-            <Cell><b>{referrer.count}</b> <span className='percentage'>({percentage(total, referrer.count)}%)</span></Cell>
-          </Row>
-        ))}
+        {slice(sorted, offset, offset + limit).map(referrer => {
+          const label = referrer.name === 'Direct' 
+            ? <>Direct <i>(none)</i></> 
+            : referrer.name;
+
+          return (
+            <Row key={referrer.name}>
+              <Cell>
+                <Tooltip button={label} fluid>
+                  {label}
+                </Tooltip>
+              </Cell>
+              <Cell><b>{referrer.count}</b> <span className='percentage'>({percentage(total, referrer.count)}%)</span></Cell>
+            </Row>
+          );
+        })}
       </Table>
 
       <Pagination

@@ -117,6 +117,18 @@
       grid-template-columns: 100%;
     }
 
+    .table {
+      .tooltip,
+      .tooltip .button {
+        display: block;
+        overflow: hidden;
+        text-align: left;
+        text-overflow: ellipsis;
+        width: 100%;
+        white-space: nowrap;
+      }
+    }
+
     .grid-item {
       display: flex;
       flex-direction: column;

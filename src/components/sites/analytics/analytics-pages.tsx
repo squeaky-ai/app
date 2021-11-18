@@ -4,6 +4,7 @@ import { sum, slice, orderBy } from 'lodash';
 import { Table, Row, Cell } from 'components/table';
 import { toHoursMinutesAndSeconds } from 'lib/dates';
 import { Pagination } from 'components/pagination';
+import { Tooltip } from 'components/tooltip';
 import { percentage } from 'lib/maths';
 import type { AnalyticsPage } from 'types/analytics';
 
@@ -30,7 +31,11 @@ export const AnalyticsPages: FC<Props> = ({ pages }) => {
         </Row>
         {slice(sorted, offset, offset + limit).map(page => (
           <Row key={page.path}>
-            <Cell>{page.path}</Cell>
+            <Cell>
+              <Tooltip button={page.path} fluid>
+                {page.path}
+              </Tooltip>
+            </Cell>
             <Cell><b>{page.count}</b> <span className='percentage'>({percentage(total, page.count)}%)</span></Cell>
             <Cell>{toHoursMinutesAndSeconds(page.avg)}</Cell>
           </Row>
