@@ -10,6 +10,7 @@ import { Container } from 'components/container';
 import { EmptyStateHint } from 'components/sites/empty-state-hint';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { NpsTabs } from 'components/sites/feedback/nps-tabs';
+import { Nps } from 'components/sites/feedback/nps';
 import { BASE_PATH } from 'data/common/constants';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
@@ -45,6 +46,7 @@ const SitesFeedbackNps: NextPage<ServerSideProps> = ({ user }) => {
             {!!site.verifiedAt && (
               <>
                 <NpsTabs siteId={site.id} page='feedback' />
+                <Nps />
               </>
             )}
           </Main>
