@@ -31,58 +31,58 @@ export const PlayerSidebar: FC<Props> = ({ state, site, replayer, recording, dis
     dispatch({ type: 'activeTab', value });
   };
 
-  if (!recording) {
-    // The page is likely loading
-    return null;
-  }
-
   return (
     <aside className={classnames('player-sidebar', { active: state.activeTab !== null })}>
-      <div className={classnames('sidebar info', { active: state.activeTab === PlayerTab.INFO })}>
-        <Label className='heading'>
-          Session Info 
-          <Button onClick={handleClose}><i className='ri-close-line' /></Button>
-        </Label>
-        <div className='contents'>
-          <SidebarInfo site={site} recording={recording} setActiveTab={setActiveTab} />
+
+      {recording && (
+        <>
+        <div className={classnames('sidebar info', { active: state.activeTab === PlayerTab.INFO })}>
+          <Label className='heading'>
+            Session Info 
+            <Button onClick={handleClose}><i className='ri-close-line' /></Button>
+          </Label>
+          <div className='contents'>
+            <SidebarInfo site={site} recording={recording} setActiveTab={setActiveTab} />
+          </div>
         </div>
-      </div>
-      <div className={classnames('sidebar activity', { active: state.activeTab === PlayerTab.ACTIVITY })}>
-        <Label className='heading'>
-          Activity 
-          <Button onClick={handleClose}><i className='ri-close-line' /></Button>
-        </Label>
-        <div className='contents'>
-          <SidebarActivity recording={recording} replayer={replayer} />
+        <div className={classnames('sidebar activity', { active: state.activeTab === PlayerTab.ACTIVITY })}>
+          <Label className='heading'>
+            Activity 
+            <Button onClick={handleClose}><i className='ri-close-line' /></Button>
+          </Label>
+          <div className='contents'>
+            <SidebarActivity recording={recording} replayer={replayer} />
+          </div>
         </div>
-      </div>
-      <div className={classnames('sidebar pages', { active: state.activeTab === PlayerTab.PAGES })}>
-        <Label className='heading'>
-          Pages 
-          <Button onClick={handleClose}><i className='ri-close-line' /></Button>
-        </Label>
-        <div className='contents'>
-          <SidebarPages recording={recording} replayer={replayer} />
+        <div className={classnames('sidebar pages', { active: state.activeTab === PlayerTab.PAGES })}>
+          <Label className='heading'>
+            Pages 
+            <Button onClick={handleClose}><i className='ri-close-line' /></Button>
+          </Label>
+          <div className='contents'>
+            <SidebarPages recording={recording} replayer={replayer} />
+          </div>
         </div>
-      </div>
-      <div className={classnames('sidebar notes', { active: state.activeTab === PlayerTab.NOTES })}>
-        <Label className='heading'>
-          Notes 
-          <Button onClick={handleClose}><i className='ri-close-line' /></Button>
-        </Label>
-        <div className='contents'>
-          <SidebarNotes recording={recording} replayer={replayer} />
+        <div className={classnames('sidebar notes', { active: state.activeTab === PlayerTab.NOTES })}>
+          <Label className='heading'>
+            Notes 
+            <Button onClick={handleClose}><i className='ri-close-line' /></Button>
+          </Label>
+          <div className='contents'>
+            <SidebarNotes recording={recording} replayer={replayer} />
+          </div>
         </div>
-      </div>
-      <div className={classnames('sidebar tags', { active: state.activeTab === PlayerTab.TAGS })}>
-        <Label className='heading'>
-          Tags 
-          <Button onClick={handleClose}><i className='ri-close-line' /></Button>
-        </Label>
-        <div className='contents'>
-          <SidebarTags recording={recording} />
+        <div className={classnames('sidebar tags', { active: state.activeTab === PlayerTab.TAGS })}>
+          <Label className='heading'>
+            Tags 
+            <Button onClick={handleClose}><i className='ri-close-line' /></Button>
+          </Label>
+          <div className='contents'>
+            <SidebarTags recording={recording} />
+          </div>
         </div>
-      </div>
+        </>
+      )}
     </aside>
   );
 };
