@@ -8,6 +8,7 @@ import { Main } from 'components/main';
 import { Page } from 'components/sites/page';
 import { Container } from 'components/container';
 import { NpsTabs } from 'components/sites/feedback/nps-tabs';
+import { NpsSettings } from 'components/sites/feedback/nps-settings';
 import { EmptyStateHint } from 'components/sites/empty-state-hint';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
@@ -45,6 +46,8 @@ const SitesFeedbackNpsSettings: NextPage<ServerSideProps> = ({ user }) => {
             {!!site.verifiedAt && (
               <>
                 <NpsTabs siteId={site.id} page='settings' />
+
+                <NpsSettings />
               </>
             )}
           </Main>

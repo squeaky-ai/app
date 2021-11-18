@@ -1,11 +1,17 @@
 .toggle {
-  align-items: center;
+  align-items: flex-start;
   cursor: pointer;
   display: flex;
-  font-weight: var(--font-weight-normal);
+  flex-direction: column;
   justify-content: flex-start;
 
+  span {
+    display: block;
+    margin-bottom: .75rem;
+  }
+
   .toggle-input {
+    display: block;
     height: 2rem;
     margin-right: 1rem;
     position: relative;
@@ -17,6 +23,7 @@
       border: 1px solid var(--gray-200);
       border-radius: var(--border-radius-o);
       display: flex;
+      font-weight: var(--font-weight-normal);
       height: 1.5rem;
       justify-content: center;
       left: 0;
@@ -38,6 +45,7 @@
 
     input {
       appearance: none;
+      background: var(--white);
       border: 1px solid var(--gray-200);
       border-radius: var(--border-radius-lg);
       cursor: pointer;

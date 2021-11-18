@@ -11,6 +11,7 @@ import { EmptyStateHint } from 'components/sites/empty-state-hint';
 import { SentimentTabs } from 'components/sites/feedback/sentiment-tabs';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
+import { SentimentSettings } from 'components/sites/feedback/sentiment-settings';
 import { BASE_PATH } from 'data/common/constants';
 
 const SitesFeedbackSentimentSettings: NextPage<ServerSideProps> = ({ user }) => {
@@ -45,6 +46,7 @@ const SitesFeedbackSentimentSettings: NextPage<ServerSideProps> = ({ user }) => 
             {!!site.verifiedAt && (
               <>
                 <SentimentTabs siteId={site.id} page='settings' />
+                <SentimentSettings />
               </>
             )}
           </Main>

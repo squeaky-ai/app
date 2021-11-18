@@ -26,9 +26,9 @@ const UsersPreferences: NextPage<ServerSideProps> = ({ user }) => {
 
         <Tabs user={user} page='preferences' /> 
 
-        <Container className='xsm'>
+        <Container className='md'>
           <Toggle checked={darkModeEnabled} onChange={toggleDarkMode}>
-            Dark mode
+            User Dark Mode
           </Toggle>
         </Container>
       </Main>
