@@ -46,7 +46,7 @@ const SitesFeedbackSentimentSettings: NextPage<ServerSideProps> = ({ user }) => 
             {!!site.verifiedAt && (
               <>
                 <SentimentTabs siteId={site.id} page='settings' />
-                <SentimentSettings />
+                <SentimentSettings site={site} />
               </>
             )}
           </Main>

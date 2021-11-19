@@ -4,6 +4,7 @@ import type { Analytics } from 'types/analytics';
 import type { PaginatedNotesResponse } from 'types/note';
 import type { PaginatedVisitorsResponse, Visitor } from 'types/visitor';
 import type { Heatmaps } from 'types/heatmaps';
+import type { Feedback } from 'types/feedback';
 
 export interface Site {
   id: string;
@@ -26,6 +27,7 @@ export interface Site {
   visitor?: Visitor;
   visitors?: PaginatedVisitorsResponse;
   analytics?: Analytics;
+  feedback?: Feedback;
   tags?: Tag[];
   verifiedAt?: string;
   daysSinceLastRecording?: number;

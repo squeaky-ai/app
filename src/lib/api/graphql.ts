@@ -106,11 +106,13 @@ import {
 } from 'types/note';
 
 import {
-  FEEDBACK_CREATE_MUTATION
+  FEEDBACK_CREATE_MUTATION, 
+  FEEDBACK_UPDATE_MUTATION,
 } from 'data/feedback/mutations';
 
 import {
-  FeedbackCreateMutation
+  FeedbackCreateMutation, 
+  FeedbackUpdateMutationInput,
 } from 'types/feedback';
 
 import { 
@@ -656,4 +658,13 @@ export const visitorStarred = async (input: VisitorStarredMutationInput): Promis
   });
 
   return { site: data.visitorStarred };
+};
+
+export const feedbackUpdate = async (input: FeedbackUpdateMutationInput): Promise<SiteMutationResponse> => {
+  const { data } = await client.mutate({
+    mutation: FEEDBACK_UPDATE_MUTATION,
+    variables: { input }
+  });
+
+  return { site: data.feedback };
 };

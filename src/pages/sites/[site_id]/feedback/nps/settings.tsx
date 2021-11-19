@@ -47,7 +47,7 @@ const SitesFeedbackNpsSettings: NextPage<ServerSideProps> = ({ user }) => {
               <>
                 <NpsTabs siteId={site.id} page='settings' />
 
-                <NpsSettings />
+                <NpsSettings site={site} />
               </>
             )}
           </Main>

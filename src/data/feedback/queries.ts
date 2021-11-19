@@ -1,16 +1,8 @@
 import { gql } from '@apollo/client';
 
-export const FEEDBACK_CREATE_MUTATION = gql`
-  mutation FeedbackCreate($input: FeedbackCreateInput!) {
-    feedbackCreate(input: $input) {
-      message
-    }
-  }
-`;
-
-export const FEEDBACK_UPDATE_MUTATION = gql`
-  mutation FeedbackUpdate($input: FeedbackUpdateInput!) {
-    feedbackUpdate(input: $input) {
+export const GET_FEEDBACK_QUERY = gql`
+  query GetFeedback($siteId: ID!) { 
+    site(siteId: $siteId) {
       id
       feedback {
         npsEnabled
