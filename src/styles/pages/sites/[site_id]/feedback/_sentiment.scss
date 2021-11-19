@@ -140,4 +140,120 @@
       }
     }
   }
+
+  .colors {
+    align-items: center;
+    display: flex;
+
+    .label {
+      margin: 0;
+
+      .check {
+        margin: 0;
+      }
+    }
+
+    .color-radio {
+      align-items: center;
+      display: flex;
+      height: 3rem;
+      justify-content: center;
+      position: relative;
+      width: 3rem;
+
+      .check {
+        background: none;
+        border: none;
+        border-radius: var(--border-radius-md);
+        height: 3rem;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 3rem;
+        z-index: 0;
+      }
+
+      input:checked + .check {
+        background: var(--white);
+        border: 1px solid var(--gray-200);
+
+        & + span .color i {
+          display: block;
+        }
+      }
+
+      &:hover {
+        .check {
+          background: var(--white);
+          border: 1px solid var(--gray-200);
+        }
+      }
+    }
+
+    .sentiment-settings {
+      h4 { 
+        margin: 3rem 0 1.5rem 0;
+      }
+    }
+
+    .color {
+      align-items: center;
+      border-radius: var(--border-radius-o);
+      display: flex;
+      height: 2rem;
+      justify-content: center;
+      position: relative;
+      width: 2rem;
+      z-index: 1;
+
+      i {
+        color: var(--white);
+        display: none;
+        font-size: 1.25rem;
+      }
+
+      &.blue {
+        background: var(--blue-500);
+      }
+
+      &.magenta {
+        background: var(--magenta-500);
+      }
+
+      &.purple {
+        background: var(--purple-500);
+      }
+
+      &.gray {
+        background: var(--gray-800);
+      }
+    }
+
+    p {
+      margin: 0 1.5rem;
+    }
+
+    .hex {
+      margin: 0 0 0 1rem;
+      width: 128px;
+    }
+  }
+
+  .sentiment-pages {
+    background: var(--white);
+    border: 1px solid var(--gray-150);
+    border-radius: var(--border-radius-md);
+    max-height: 22rem;
+    max-width: 22rem;
+    overflow-y: auto;
+    width: 100%;
+
+    .checkbox-group {
+      padding: 1rem;
+    }
+  }
+
+  .actions {
+    margin-top: 4.5rem;
+  }
 }
