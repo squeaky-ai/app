@@ -7,10 +7,11 @@ export interface FeedbackCreateMutation {
 export interface Feedback {
   npsEnabled: boolean;
   npsAccentColor?: string;
+  npsSchedule?: string;
   npsPhrase?: string;
   npsFollowUpEnabled?: boolean;
   npsContactConsentEnabled?: boolean;
-  npsLayout: boolean;
+  npsLayout: string;
   sentimentEnabled?: boolean;
   sentimentAccentColor?: string;
   sentimentExcludedPages: string[];
@@ -21,10 +22,11 @@ export interface FeedbackUpdateMutationInput {
   siteId: string;
   npsEnabled?: boolean;
   npsAccentColor?: string;
+  npsSchedule?: string;
   npsPhrase?: string;
   npsFollowUpEnabled?: boolean;
   npsContactConsentEnabled?: boolean;
-  npsLayout?: boolean;
+  npsLayout?: string;
   sentimentEnabled?: boolean;
   sentimentAccentColor?: string;
   sentimentExcludedPages?: string[];

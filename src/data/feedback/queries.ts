@@ -7,6 +7,7 @@ export const GET_FEEDBACK_QUERY = gql`
       feedback {
         npsEnabled
         npsAccentColor
+        npsSchedule
         npsPhrase
         npsFollowUpEnabled
         npsContactConsentEnabled

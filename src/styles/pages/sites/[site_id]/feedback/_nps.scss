@@ -59,6 +59,12 @@
     margin-bottom: 3rem;
   }
 
+  .nps-settings {
+    h4 { 
+      margin: 3rem 0 1.5rem 0;
+    }
+  }
+
   .outcomes {
     margin: 4rem 0;
 
@@ -353,6 +359,10 @@
       input:checked + .check {
         background: var(--white);
         border: 1px solid var(--gray-200);
+
+        & + span .color i {
+          display: block;
+        }
       }
 
       &:hover {
@@ -364,11 +374,20 @@
     }
 
     .color {
+      align-items: center;
       border-radius: var(--border-radius-o);
+      display: flex;
       height: 2rem;
+      justify-content: center;
       position: relative;
       width: 2rem;
       z-index: 1;
+
+      i {
+        color: var(--white);
+        display: none;
+        font-size: 1.25rem;
+      }
 
       &.blue {
         background: var(--blue-500);
@@ -424,5 +443,9 @@
       margin: 0 .5rem;
       width: 150px;
     }
+  }
+
+  .actions {
+    margin-top: 4.5rem;
   }
 }
