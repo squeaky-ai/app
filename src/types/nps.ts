@@ -6,6 +6,8 @@ export type NpsResponseSortBy =
 
 export interface Nps {
   responses: NpsResponse;
+  groups: NpsGroups;
+  stats: NpsStats;
 }
 
 export interface NpsResponse {
@@ -28,4 +30,15 @@ export interface NpsResponsePagination {
   pageSize: number;
   total: number;
   sort: NpsResponseSortBy;
+}
+
+export interface NpsGroups {
+  promoters: number;
+  passives: number;
+  detractors: number;
+}
+
+export interface NpsStats {
+  displays: number;
+  ratings: number;
 }

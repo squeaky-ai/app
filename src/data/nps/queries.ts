@@ -25,6 +25,15 @@ export const GET_NPS_QUERY = gql`
             sort
           }
         }
+        groups {
+          promoters
+          passives
+          detractors
+        }
+        stats {
+          displays
+          ratings
+        }
       }
     }
   }

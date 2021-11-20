@@ -9,6 +9,7 @@ import { Select, Option } from 'components/select';
 import { getDateRange, TimePeriod } from 'lib/dates';
 import { NpsResponses } from 'components/sites/feedback/nps-responses';
 import { TIME_PERIODS } from 'data/nps/constants';
+import { percentage } from 'lib/maths';
 import type { NpsResponseSortBy } from 'types/nps';
 
 export const Nps: FC = () => {
@@ -18,6 +19,8 @@ export const Nps: FC = () => {
   const [period, setPeriod] = React.useState<TimePeriod>('past_seven_days');
 
   const { nps, error, loading } = useNps({ page, size, sort, range: getDateRange(period) });
+
+  const hasResults = nps.responses.pagination.total > 0;
 
   const handleDateChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setPeriod(event.target.value as TimePeriod);
@@ -66,15 +69,24 @@ export const Nps: FC = () => {
         <div className='items'>
           <div className='item'>
             <p>Displays</p>
-            <NoData short />
+            {hasResults
+              ? <h3 className='blue'>{nps.stats.displays}</h3>
+              : <NoData short />
+            }
           </div>
           <div className='item'>
             <p>Ratings</p>
-            <NoData short />
+            {hasResults
+              ? <h3 className='blue'>{nps.stats.ratings}</h3>
+              : <NoData short />
+            }
           </div>
           <div className='item'>
             <p>Response Rate</p>
-            <NoData short />
+            {hasResults
+              ? <h3 className='purple'>{percentage(nps.stats.displays, nps.stats.ratings)}%</h3>
+              : <NoData short />
+            }
           </div>
         </div>
       </Card>
@@ -83,15 +95,24 @@ export const Nps: FC = () => {
         <div className='items'>
           <div className='item'>
             <p>Promoters</p>
-            <NoData short />
+            {hasResults
+              ? <h3 className='blue'>{nps.groups.promoters}</h3>
+              : <NoData short />
+            }
           </div>
           <div className='item'>
             <p>Passives</p>
-            <NoData short />
+            {hasResults
+              ? <h3 className='purple'>{nps.groups.passives}</h3>
+              : <NoData short />
+            }
           </div>
           <div className='item'>
             <p>Detractors</p>
-            <NoData short />
+            {hasResults
+              ? <h3 className='magenta'>{nps.groups.detractors}</h3>
+              : <NoData short />
+            }
           </div>
         </div>
       </Card>

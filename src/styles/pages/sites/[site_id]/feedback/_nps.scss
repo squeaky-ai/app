@@ -296,10 +296,38 @@
 
     .card-displays {
       grid-area: card-displays;
+
+      h3 {
+        margin: 0;
+
+        &.blue {
+          color: var(--blue-500);
+        }
+
+        &.purple {
+          color: var(--purple-500);
+        }
+      }
     }
 
     .card-results {
       grid-area: card-results;
+
+      h3 {
+        margin: 0;
+
+        &.blue {
+          color: var(--blue-500);
+        }
+
+        &.purple {
+          color: var(--purple-500);
+        }
+
+        &.magenta {
+          color: var(--magenta-500);
+        }
+      }
     }
 
     .heading-responses {
