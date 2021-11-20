@@ -2,13 +2,49 @@ import React from 'react';
 import type { FC } from 'react';
 import { Card } from 'components/card';
 import { NoData } from 'components/sites/feedback/no-data';
-import { NoResponses } from 'components/sites/feedback/no-responses';
+import { useNps } from 'hooks/use-nps';
+import { Error } from 'components/error';
+import { Spinner } from 'components/spinner';
+import { Select, Option } from 'components/select';
+import { getDateRange, TimePeriod } from 'lib/dates';
+import { NpsResponses } from 'components/sites/feedback/nps-responses';
+import { TIME_PERIODS } from 'data/nps/constants';
+import type { NpsResponseSortBy } from 'types/nps';
 
 export const Nps: FC = () => {
+  const [page, setPage] = React.useState<number>(0);
+  const [size, setSize] = React.useState<number>(25);
+  const [sort, setSort] = React.useState<NpsResponseSortBy>('timestamp__desc');
+  const [period, setPeriod] = React.useState<TimePeriod>('past_seven_days');
+
+  const { nps, error, loading } = useNps({ page, size, sort, range: getDateRange(period) });
+
+  const handleDateChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setPeriod(event.target.value as TimePeriod);
+  };
+
+  if (loading) {
+    return <Spinner />;
+  }
+
+  if (error) {
+    return <Error />;
+  }
+
   return (
     <div className='nps-grid'>
       <h4 className='heading-overview'>
         Overview
+        <div className='period'>
+          <p><b>Period:</b></p>
+          <Select onChange={handleDateChange} value={period}>
+            {TIME_PERIODS.map(p => (
+              <Option value={p.key} key={p.key}>
+                {p.name}
+              </Option>
+            ))}
+          </Select>
+        </div>
       </h4>
 
       <Card className='card-nps'>
@@ -64,9 +100,15 @@ export const Nps: FC = () => {
         Responses
       </h4>
 
-      <Card className='card-responses'>
-        <NoResponses />
-      </Card>
+      <NpsResponses 
+        page={page}
+        sort={sort}
+        size={size}
+        setPage={setPage}
+        setSort={setSort}
+        setSize={setSize}
+        responses={nps.responses}
+      />
     </div>
   );
 };

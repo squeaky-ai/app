@@ -251,8 +251,35 @@
     }
 
     .heading-overview {
+      align-items: center;
+      display: flex;
       grid-area: heading-overview;
+      justify-content: space-between;
       margin: 0;
+
+      .period {
+        align-items: center;
+        display: flex;
+        font-weight: var(--font-weight-normal);
+  
+        @include breakpoint-md {
+          margin: 1rem 0 0 0;
+          width: 100%;
+        }
+  
+        p {
+          margin: 0;
+        }
+  
+        .select {
+          margin: 0 0 0 1rem;
+          width: 160px;
+  
+          @include breakpoint-md {
+            width: 100%;
+          }
+        }
+      }
     }
 
     .card-nps {
@@ -282,6 +309,12 @@
 
     .card-responses {
       grid-area: card-responses;
+
+      &.has-results {
+        background: none;
+        border: none;
+        padding: 0;
+      }
     }
 
     .card {
@@ -447,5 +480,88 @@
 
   .actions {
     margin-top: 4.5rem;
+  }
+
+  .nps-table {
+    margin-bottom: 2rem;
+
+    .row {
+      grid-template-columns: 100px 1fr 1fr 1fr 2fr 80px;
+
+      .score {
+        margin: 0 0 0 .75rem;
+
+        &.score-0,
+        &.score-1,
+        &.score-2,
+        &.score-3,
+        &.score-4,
+        &.score-5,
+        &.score-6 {
+          color: var(--magenta-500);
+        }
+
+        &.score-7,
+        &.score-8 {
+          color: var(--purple-500);
+        }
+
+        &.score-9,
+        &.score-10 {
+          color: vaR(--blue-500);
+        }
+      }
+    }
+
+    .play {
+      color: var(--blue-500);
+      font-size: 1.25rem;
+      margin-right: .5rem;
+      vertical-align: middle;
+    }
+
+    .dropdown {
+      .options {
+        align-items: center;
+        background: none;
+        border: none;
+        border-radius: var(--border-radius-o);
+        display: flex;
+        height: 2rem;
+        flex-shrink: 0;
+        font-size: 1.25rem;
+        justify-content: center;
+        padding: 0;
+        width: 2rem;
+  
+        .arrow {
+          display: none;
+        }
+  
+        &:hover {
+          background: var(--gray-100);
+          color: var(--blue-500);
+        }
+      }
+  
+      .dropdown-menu {
+        z-index: 2;
+  
+        .button {
+          background: none;
+          border: none;
+  
+          i {
+            color: var(--blue-500);
+            font-size: 1.25rem;
+            margin-right: .5rem;
+          }
+  
+          &:hover {
+            background: var(--gray-100);
+          }
+        }
+      }
+    }
   }
 }

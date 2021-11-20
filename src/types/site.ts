@@ -5,6 +5,7 @@ import type { PaginatedNotesResponse } from 'types/note';
 import type { PaginatedVisitorsResponse, Visitor } from 'types/visitor';
 import type { Heatmaps } from 'types/heatmaps';
 import type { Feedback } from 'types/feedback';
+import type { Nps } from 'types/nps';
 
 export interface Site {
   id: string;
@@ -33,6 +34,7 @@ export interface Site {
   daysSinceLastRecording?: number;
   ipBlacklist: SiteIpBlacklist[];
   domainBlacklist: SiteDomainBlacklist[];
+  nps?: Nps;
   createdAt: string;
   updatedAt: string;
 }
