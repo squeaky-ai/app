@@ -44,6 +44,15 @@ export const useNps = ({ page, size, sort, range }: Props): UseNps => {
         total: 0, 
         sort: 'timestamp__desc' 
       } 
+    },
+    groups: {
+      promoters: 0,
+      passives: 0,
+      detractors: 0,
+    },
+    stats: {
+      displays: 0,
+      ratings: 0,
     }
   };
 
