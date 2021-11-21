@@ -284,6 +284,14 @@
 
     .card-nps {
       grid-area: card-nps;
+
+      .chart-wrapper {
+        height: 150px;
+
+        svg {
+          overflow: visible;
+        }
+      }
     }
 
     .card-response {
@@ -673,23 +681,7 @@
       }
     }
     
-    .all {
-      color: var(--purple-500);
-    }
-
-    .existing {
-      color: var(--blue-500);
-    }
-
-    .new {
-      color: var(--magenta-500);
-    }
-
-    .width {
-      color: var(--gray-100);
-    }
-
-    .total-visitors {
+    .score {
       color: var(--blue-500);
     }
   }
