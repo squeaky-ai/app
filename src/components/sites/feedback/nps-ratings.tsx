@@ -29,6 +29,7 @@ export const NpsRatings: FC<Props> = ({ ratings }) => {
             allowDecimals={false}
             tickLine={false}
             axisLine={false}
+            fontSize={13}
           />
 
           <XAxis 
@@ -36,6 +37,8 @@ export const NpsRatings: FC<Props> = ({ ratings }) => {
             interval={0}
             tickLine={false}
             axisLine={false}
+            fontSize={13}
+            tickMargin={10}
           />
 
           <Bar 

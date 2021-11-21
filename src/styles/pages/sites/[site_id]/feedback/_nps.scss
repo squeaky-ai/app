@@ -288,6 +288,14 @@
 
     .card-response {
       grid-area: card-response;
+
+      .chart-wrapper {
+        height: 150px;
+
+        svg {
+          overflow: visible;
+        }
+      }
     }
 
     .card-ratings {
@@ -384,7 +392,15 @@
       padding: 2rem;
 
       h4 {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
         margin: 0 0 2rem 0;
+
+        .trend {
+          font-size: 1rem;
+          height: 2rem;
+        }
       }
 
       .no-data {

@@ -37,6 +37,12 @@ export const GET_NPS_QUERY = gql`
         ratings {
           score
         }
+        replies {
+          trend
+          responses {
+            timestamp
+          }
+        }
       }
     }
   }

@@ -9,13 +9,15 @@ import { Select, Option } from 'components/select';
 import { getDateRange, TimePeriod } from 'lib/dates';
 import { NpsResponses } from 'components/sites/feedback/nps-responses';
 import { NpsRatings } from 'components/sites/feedback/nps-ratings';
+import { NpsReplies } from 'components/sites/feedback/nps-replies';
+import { NpsTrend } from 'components/sites/feedback/nps-trend';
 import { TIME_PERIODS } from 'data/nps/constants';
 import { percentage } from 'lib/maths';
 import type { NpsResponseSortBy } from 'types/nps';
 
 export const Nps: FC = () => {
   const [page, setPage] = React.useState<number>(0);
-  const [size, setSize] = React.useState<number>(25);
+  const [size, setSize] = React.useState<number>(10);
   const [sort, setSort] = React.useState<NpsResponseSortBy>('timestamp__desc');
   const [period, setPeriod] = React.useState<TimePeriod>('past_seven_days');
 
@@ -57,8 +59,14 @@ export const Nps: FC = () => {
       </Card>
 
       <Card className='card-response'>
-        <h4>Responses</h4>
-        <NoData />
+        <h4>
+          Responses
+          {hasResults && <NpsTrend value={nps.replies.trend} />}
+        </h4>
+        {hasResults
+          ? <NpsReplies replies={nps.replies} period={period} />
+          : <NoData />
+        }
       </Card>
 
       <Card className='card-ratings'>
