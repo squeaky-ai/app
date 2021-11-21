@@ -1,0 +1,70 @@
+import React from 'react';
+import type { FC } from 'react';
+import { groupBy } from 'lodash';
+import { EMOJIS } from 'data/sentiment/constants';
+import { percentage } from 'lib/maths';
+import type { SentimentReplies as ISentimentReplies } from 'types/sentiment';
+
+interface Props {
+  replies: ISentimentReplies;
+}
+
+export const SentimentReplies: FC<Props> = ({ replies }) => {
+  const groups = groupBy(replies.responses.map(r => r.score));
+
+  const getCount = (num: number) => (groups[num] || []).length;
+
+  const getPercentage = (num: number) => percentage(replies.total, getCount(num));
+
+  return (
+    <div className='sentiment-replies'>
+      <ul>
+        <li>
+          <div className='type'>
+            {EMOJIS[4]}
+          </div>
+          <div className='score'>
+            <div className='percentage' style={{ width: `${getPercentage(4) || 1}%` }} />
+            <p><b>{getCount(4)}</b> <span>({getPercentage(4)}%)</span></p>
+          </div>
+        </li>
+        <li>
+          <div className='type'>
+            {EMOJIS[3]}
+          </div>
+          <div className='score'>
+            <div className='percentage' style={{ width: `${getPercentage(3) || 1}%` }} />
+            <p><b>{getCount(3)}</b> <span>({getPercentage(3)}%)</span></p>
+          </div>
+        </li>
+        <li>
+          <div className='type'>
+            {EMOJIS[2]}
+          </div>
+          <div className='score'>
+            <div className='percentage' style={{ width: `${getPercentage(2) || 1}%` }} />
+            <p><b>{getCount(2)}</b> <span>({getPercentage(2)}%)</span></p>
+          </div>
+        </li>
+        <li>
+          <div className='type'>
+            {EMOJIS[1]}
+          </div>
+          <div className='score'>
+            <div className='percentage' style={{ width: `${getPercentage(1) || 1}%` }} />
+            <p><b>{getCount(1)}</b> <span>({getPercentage(1)}%)</span></p>
+          </div>
+        </li>
+        <li>
+          <div className='type'>
+            {EMOJIS[0]}
+          </div>
+          <div className='score'>
+            <div className='percentage' style={{ width: `${getPercentage(0) || 1}%` }} />
+            <p><b>{getCount(0)}</b> <span>({getPercentage(0)}%)</span></p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  );
+};

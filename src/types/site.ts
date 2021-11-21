@@ -6,6 +6,7 @@ import type { PaginatedVisitorsResponse, Visitor } from 'types/visitor';
 import type { Heatmaps } from 'types/heatmaps';
 import type { Feedback } from 'types/feedback';
 import type { Nps } from 'types/nps';
+import type { Sentiment } from 'types/sentiment';
 
 export interface Site {
   id: string;
@@ -35,6 +36,7 @@ export interface Site {
   ipBlacklist: SiteIpBlacklist[];
   domainBlacklist: SiteDomainBlacklist[];
   nps?: Nps;
+  sentiment?: Sentiment;
   createdAt: string;
   updatedAt: string;
 }
