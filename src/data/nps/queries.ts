@@ -43,6 +43,13 @@ export const GET_NPS_QUERY = gql`
             timestamp
           }
         }
+        scores {
+          trend
+          responses {
+            score
+            timestamp
+          }
+        }
       }
     }
   }

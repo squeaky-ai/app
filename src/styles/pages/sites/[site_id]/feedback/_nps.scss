@@ -643,6 +643,11 @@
     }
   }
 
+  .nps-responses-footer {
+    display: flex;
+    justify-content: space-between;
+  }
+
   .custom-tooltip {
     background: var(--gray-800);
     border-radius: var(--border-radius-md);

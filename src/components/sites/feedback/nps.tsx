@@ -11,6 +11,7 @@ import { NpsResponses } from 'components/sites/feedback/nps-responses';
 import { NpsRatings } from 'components/sites/feedback/nps-ratings';
 import { NpsReplies } from 'components/sites/feedback/nps-replies';
 import { NpsTrend } from 'components/sites/feedback/nps-trend';
+import { NpsScore } from 'components/sites/feedback/nps-score';
 import { TIME_PERIODS } from 'data/nps/constants';
 import { percentage } from 'lib/maths';
 import type { NpsResponseSortBy } from 'types/nps';
@@ -54,8 +55,14 @@ export const Nps: FC = () => {
       </h4>
 
       <Card className='card-nps'>
-        <h4>NPS®</h4>
-        <NoData />
+        <h4>
+          NPS®
+          {hasResults && <NpsTrend value={nps.scores.trend} />}
+        </h4>
+        {hasResults
+          ? <NpsScore scores={nps.scores} period={period} />
+          : <NoData />
+        }
       </Card>
 
       <Card className='card-response'>

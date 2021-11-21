@@ -59,6 +59,10 @@ export const useNps = ({ page, size, sort, range }: Props): UseNps => {
       trend: 0,
       responses: [],
     },
+    scores: {
+      trend: 0,
+      responses: [],
+    }
   };
 
   return {

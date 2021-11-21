@@ -10,6 +10,7 @@ export interface Nps {
   stats: NpsStats;
   ratings: NpsRating[];
   replies: NspReplies;
+  scores: NpsScores;
 }
 
 export interface NpsResponse {
@@ -55,5 +56,15 @@ export interface NspReplies {
 }
 
 export interface NpsReply {
+  timestamp: string;
+}
+
+export interface NpsScores {
+  trend: number;
+  responses: NpsScore[];
+}
+
+export interface NpsScore {
+  score: number;
   timestamp: string;
 }

@@ -75,6 +75,7 @@ export const NpsResponses: FC<Props> = ({ page, sort, size, setPage, setSort, se
               value={pagination.pageSize} 
               onChange={setSize}
               show={pagination.total > 10}
+              sizes={[10, 25, 50]}
             />
           </div>
         </>
