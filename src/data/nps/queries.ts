@@ -34,6 +34,9 @@ export const GET_NPS_QUERY = gql`
           displays
           ratings
         }
+        ratings {
+          score
+        }
       }
     }
   }

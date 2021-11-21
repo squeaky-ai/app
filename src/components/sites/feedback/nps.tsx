@@ -8,6 +8,7 @@ import { Spinner } from 'components/spinner';
 import { Select, Option } from 'components/select';
 import { getDateRange, TimePeriod } from 'lib/dates';
 import { NpsResponses } from 'components/sites/feedback/nps-responses';
+import { NpsRatings } from 'components/sites/feedback/nps-ratings';
 import { TIME_PERIODS } from 'data/nps/constants';
 import { percentage } from 'lib/maths';
 import type { NpsResponseSortBy } from 'types/nps';
@@ -62,7 +63,10 @@ export const Nps: FC = () => {
 
       <Card className='card-ratings'>
         <h4>Ratings</h4>
-        <NoData />
+        {hasResults
+          ? <NpsRatings ratings={nps.ratings} />
+          : <NoData />
+        }
       </Card>
 
       <Card className='card-displays'>
@@ -70,14 +74,14 @@ export const Nps: FC = () => {
           <div className='item'>
             <p>Displays</p>
             {hasResults
-              ? <h3 className='blue'>{nps.stats.displays}</h3>
+              ? <h3 className='blue'>{nps.stats.displays.toLocaleString()}</h3>
               : <NoData short />
             }
           </div>
           <div className='item'>
             <p>Ratings</p>
             {hasResults
-              ? <h3 className='blue'>{nps.stats.ratings}</h3>
+              ? <h3 className='blue'>{nps.stats.ratings.toLocaleString()}</h3>
               : <NoData short />
             }
           </div>
@@ -96,21 +100,21 @@ export const Nps: FC = () => {
           <div className='item'>
             <p>Promoters</p>
             {hasResults
-              ? <h3 className='blue'>{nps.groups.promoters}</h3>
+              ? <h3 className='blue'>{nps.groups.promoters.toLocaleString()}</h3>
               : <NoData short />
             }
           </div>
           <div className='item'>
             <p>Passives</p>
             {hasResults
-              ? <h3 className='purple'>{nps.groups.passives}</h3>
+              ? <h3 className='purple'>{nps.groups.passives.toLocaleString()}</h3>
               : <NoData short />
             }
           </div>
           <div className='item'>
             <p>Detractors</p>
             {hasResults
-              ? <h3 className='magenta'>{nps.groups.detractors}</h3>
+              ? <h3 className='magenta'>{nps.groups.detractors.toLocaleString()}</h3>
               : <NoData short />
             }
           </div>

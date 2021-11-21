@@ -292,6 +292,40 @@
 
     .card-ratings {
       grid-area: card-ratings;
+
+      .chart-wrapper {
+        height: 150px;
+
+        .recharts-bar-rectangles {
+          .recharts-bar-rectangle {
+            &:nth-of-type(1),
+            &:nth-of-type(2),
+            &:nth-of-type(3),
+            &:nth-of-type(4),
+            &:nth-of-type(5),
+            &:nth-of-type(6),
+            &:nth-of-type(7) {
+              path {
+                fill: var(--magenta-500);
+              }
+            }
+
+            &:nth-of-type(8),
+            &:nth-of-type(9) {
+              path {
+                fill: var(--purple-500);
+              }
+            }
+
+            &:nth-of-type(10),
+            &:nth-of-type(11) {
+              path {
+                fill: var(--blue-500);
+              }
+            }
+          }
+        }
+      }
     }
 
     .card-displays {
@@ -590,6 +624,41 @@
           }
         }
       }
+    }
+  }
+
+  .custom-tooltip {
+    background: var(--gray-800);
+    border-radius: var(--border-radius-md);
+    color: var(--gray-100);
+    padding: 1rem;
+
+    p {
+      margin: 0 0 .5rem 0;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+    
+    .all {
+      color: var(--purple-500);
+    }
+
+    .existing {
+      color: var(--blue-500);
+    }
+
+    .new {
+      color: var(--magenta-500);
+    }
+
+    .width {
+      color: var(--gray-100);
+    }
+
+    .total-visitors {
+      color: var(--blue-500);
     }
   }
 }

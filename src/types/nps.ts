@@ -8,6 +8,7 @@ export interface Nps {
   responses: NpsResponse;
   groups: NpsGroups;
   stats: NpsStats;
+  ratings: NpsRating[];
 }
 
 export interface NpsResponse {
@@ -41,4 +42,8 @@ export interface NpsGroups {
 export interface NpsStats {
   displays: number;
   ratings: number;
+}
+
+export interface NpsRating {
+  score: number;
 }
