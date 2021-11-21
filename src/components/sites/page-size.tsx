@@ -25,7 +25,7 @@ export const PageSize: FC<Props> = ({ show, value, sizes, onChange }) => {
       <Label htmlFor='page-size'>Items per page:</Label>
       <Select name='page-size' value={value} onChange={handleChange}>
         {values.map(v => (
-          <Option key={v} value={v}>v</Option>
+          <Option key={v} value={v}>{v}</Option>
         ))}
       </Select>
     </div>
