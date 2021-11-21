@@ -61,6 +61,7 @@ export interface NpsReply {
 
 export interface NpsScores {
   trend: number;
+  score: number;
   responses: NpsScore[];
 }
 

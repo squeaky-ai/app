@@ -45,6 +45,7 @@ export const GET_NPS_QUERY = gql`
         }
         scores {
           trend
+          score
           responses {
             score
             timestamp

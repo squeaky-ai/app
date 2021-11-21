@@ -11,7 +11,7 @@ export const NpsTrend: FC<Props> = ({ value }) => {
 
   return (
     <Trend 
-      value={`${direction === 'up' ? '+' : '-'}${value}`} 
+      value={`${direction === 'up' ? '+' : ''}${value}`} 
       direction={direction}
     />
   );
