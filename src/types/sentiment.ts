@@ -7,6 +7,7 @@ export type SentimentResponseSortBy =
 export interface Sentiment {
   responses: SentimentResponse;
   replies: SentimentReplies;
+  ratings: SentimentRatings;
 }
 
 export interface SentimentResponse {
@@ -37,4 +38,15 @@ export interface SentimentReplies {
 
 export interface SentimentReply {
   score: number;
+}
+
+export interface SentimentRatings {
+  score: number;
+  trend: number;
+  responses: SentimentRating[];
+}
+
+export interface SentimentRating {
+  score: number;
+  timestamp: string;
 }

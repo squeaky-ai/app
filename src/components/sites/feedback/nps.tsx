@@ -10,7 +10,7 @@ import { getDateRange, TimePeriod } from 'lib/dates';
 import { NpsResponses } from 'components/sites/feedback/nps-responses';
 import { NpsRatings } from 'components/sites/feedback/nps-ratings';
 import { NpsReplies } from 'components/sites/feedback/nps-replies';
-import { NpsTrend } from 'components/sites/feedback/nps-trend';
+import { FeedbackTrend } from 'components/sites/feedback/feedback-trend';
 import { NpsScore } from 'components/sites/feedback/nps-score';
 import { TIME_PERIODS } from 'data/nps/constants';
 import { percentage } from 'lib/maths';
@@ -57,7 +57,7 @@ export const Nps: FC = () => {
       <Card className='card-nps'>
         <h4>
           <span>NPS®<h3>{nps.scores.score}</h3></span>
-          {hasResults && <NpsTrend value={nps.scores.trend} />}
+          {hasResults && <FeedbackTrend value={nps.scores.trend} />}
         </h4>
         {hasResults
           ? <NpsScore scores={nps.scores} period={period} />
@@ -68,7 +68,7 @@ export const Nps: FC = () => {
       <Card className='card-response'>
         <h4>
           Responses
-          {hasResults && <NpsTrend value={nps.replies.trend} />}
+          {hasResults && <FeedbackTrend value={nps.replies.trend} />}
         </h4>
         {hasResults
           ? <NpsReplies replies={nps.replies} period={period} />

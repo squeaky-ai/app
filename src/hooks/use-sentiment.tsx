@@ -48,6 +48,11 @@ export const useSentiment = ({ page, size, sort, range }: Props): UseSentiment =
     replies: {
       total: 0,
       responses: [],
+    },
+    ratings: {
+      score: 0,
+      trend: 0,
+      responses: [],
     }
   };
 

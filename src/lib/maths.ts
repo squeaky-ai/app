@@ -1,6 +1,8 @@
 import { sum, groupBy, orderBy } from 'lodash';
 
 export const average = (numbers: number[]): number => {
+  if (numbers.length === 0) return 0;
+
   const total = sum(numbers);
   return total / numbers.length;
 };

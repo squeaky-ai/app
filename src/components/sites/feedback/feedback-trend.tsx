@@ -6,7 +6,7 @@ interface Props {
   value: number;
 }
 
-export const NpsTrend: FC<Props> = ({ value }) => {
+export const FeedbackTrend: FC<Props> = ({ value }) => {
   const direction = value >= 0 ? 'up' : 'down';
 
   return (

@@ -33,7 +33,6 @@ const getDateFromTimestamp = (str: string) => new Date(Number(str));
 
 const getDailyResults = (pageViews: Visitor[]): DataForPeriod => {
   const data = range(0, 24).map(i => {
-    // Only interested in page views that happened this hour
     const views = pageViews.filter(p => getHours(getDateFromTimestamp(p.timestamp)) === i);
 
     return {
@@ -53,8 +52,6 @@ const getPastSevenDaysResults = (pageViews: Visitor[]): DataForPeriod => {
   const data = range(0, 7).map(i => {
     const date = subDays(now, i);
 
-    // Only interested in page views that happened on this day
-    // of the month
     const views = pageViews.filter(p => getDate(getDateFromTimestamp(p.timestamp)) === getDate(date));
 
     return {
@@ -74,8 +71,6 @@ const getPastThirtyDaysResults = (pageViews: Visitor[]): DataForPeriod => {
   const data = range(0, 30).map(i => {
     const date = subDays(now, i);
 
-    // Only interested in page views that happened on this day
-    // of the month
     const views = pageViews.filter(p => getDate(getDateFromTimestamp(p.timestamp)) === getDate(date));
 
     return {

@@ -37,7 +37,6 @@ const getDateFromTimestamp = (str: string) => new Date(str);
 
 const getDailyResults = (scores: NpsScore[]): DataForPeriod => {
   const data = range(0, 24).map(i => {
-    // Only interested in page views that happened this hour
     const s = scores.filter(s => getHours(getDateFromTimestamp(s.timestamp)) === i);
 
     return {
@@ -55,8 +54,6 @@ const getPastSevenDaysResults = (scores: NpsScore[]): DataForPeriod => {
   const data = range(0, 7).map(i => {
     const date = subDays(now, i);
 
-    // Only interested in page views that happened on this day
-    // of the month
     const s = scores.filter(s => getDate(getDateFromTimestamp(s.timestamp)) === getDate(date));
 
     return {
@@ -74,8 +71,6 @@ const getPastThirtyDaysResults = (scores: NpsScore[]): DataForPeriod => {
   const data = range(0, 30).map(i => {
     const date = subDays(now, i);
 
-    // Only interested in page views that happened on this day
-    // of the month
     const s = scores.filter(s => getDate(getDateFromTimestamp(s.timestamp)) === getDate(date));
 
     return {

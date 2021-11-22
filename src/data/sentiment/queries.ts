@@ -30,6 +30,14 @@ export const GET_SENTIMENT_QUERY = gql`
             score
           }
         }
+        ratings {
+          score
+          trend
+          responses {
+            score
+            timestamp
+          }
+        }
       }
     }
   }

@@ -10,6 +10,7 @@ import { Select, Option } from 'components/select';
 import { SentimentResponses } from 'components/sites/feedback/sentiment-responses';
 import { SentimentReplies } from 'components/sites/feedback/sentiment-replies';
 import { SentimentRatings } from 'components/sites/feedback/sentiment-ratings';
+import { FeedbackTrend } from 'components/sites/feedback/feedback-trend'
 import { TIME_PERIODS } from 'data/nps/constants';
 import type { SentimentResponseSortBy } from 'types/sentiment';
 
@@ -52,9 +53,12 @@ export const Sentiment: FC = () => {
       </h4>
 
       <Card className='card-rating'>
-        <h4>Sentiment Rating</h4>
-        {hasResults 
-          ? <SentimentRatings />
+        <h4>
+          <span>Sentiment Rating<h3>{sentiment.ratings.score}</h3></span>
+          {hasResults && <FeedbackTrend value={sentiment.ratings.trend} />}
+        </h4>
+        {hasResults
+          ? <SentimentRatings period={period} ratings={sentiment.ratings.responses} />
           : <NoData />
         }
       </Card>
