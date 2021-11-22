@@ -2,7 +2,7 @@
   .title {
     align-items: center;
     display: flex;
-    margin: 0 0 3rem 0;
+    margin: 0 0 2rem 0;
   }
 
   .empty-state {
@@ -56,12 +56,12 @@
   }
 
   .nps-tabs {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
   }
 
   .nps-settings {
     h4 { 
-      margin: 3rem 0 1.5rem 0;
+      margin: 2rem 0 1.5rem 0;
     }
   }
 
@@ -228,7 +228,7 @@
 
   .nps-grid {
     display: grid;
-    grid-gap: 3rem;
+    grid-gap: 2rem;
     grid-template-areas: 'heading-overview heading-overview heading-overview heading-overview heading-overview heading-overview'
                          'card-nps card-nps card-response card-response card-ratings card-ratings'
                          'card-displays card-displays card-displays card-results card-results card-results'
@@ -448,7 +448,7 @@
         text-align: center;
     
         h4 {
-          margin: 3rem 0 0 0;
+          margin: 2rem 0 0 0;
         }
       }
     }

@@ -2,7 +2,7 @@
   .title {
     align-items: center;
     display: flex;
-    margin: 0 0 3rem 0;
+    margin: 0 0 2rem 0;
   }
 
   .empty-state {
@@ -43,18 +43,18 @@
 
   .overview-grid {
     display: grid;
-    grid-gap: 3rem;
+    grid-gap: 2rem;
     grid-template-areas: 'visitors recordings pageviews'
                          'latest-recording latest-recording latest-notes';
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-template-rows: 280px 456px;
+    grid-template-rows: auto 456px;
 
     @include breakpoint-lg {
       grid-template-areas: 'visitors recordings'
                            'latest-recording latest-recording'
                            'pageviews latest-notes';
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      grid-template-rows: 280px 456px 280px;
+      grid-template-rows: auto 456px auto;
     }
 
     @include breakpoint-md {
@@ -64,22 +64,17 @@
                            'pageviews'
                            'latest-notes';
       grid-template-columns: minmax(0, 1fr);
-      grid-template-rows: 280px 280px 456px 280px 456px;
+      grid-template-rows: auto auto 456px auto 456px;
 
       @include breakpoint-md {
-        grid-gap: 2rem;
-        grid-template-rows: 240px 240px 600px 220px 456px;
+        grid-gap: 1.5rem;
+        grid-template-rows: auto auto 600px auto 456px;
       }
     }
 
     .card {
       background: var(--white);
       border: 1px solid var(--gray-150);
-      padding: 3rem;
-
-      @include breakpoint-md {
-        padding: 2rem;
-      }
     }
 
     .sub-heading {
@@ -342,10 +337,10 @@
       position: relative;
 
       .sub-heading {
-        padding: 3rem 3rem 0 3rem;
+        padding: 2rem 2rem 0 2rem;
 
         @include breakpoint-md {
-          padding: 2rem 2rem 0 2rem;
+          padding: 1.5rem 1.5rem 0 1.5rem;
         }
       }
 
@@ -358,7 +353,7 @@
         flex-direction: column;
         justify-content: center;
         height: calc(100% - 10rem);
-        margin: 0 3rem 3rem 3rem;
+        margin: 0 2rem 2rem 2rem;
 
         i {
           color: var(--gray-300);
@@ -372,10 +367,10 @@
       }
 
       .divider {
-        margin: 0 3rem .5rem 3rem;
+        margin: 0 2rem .5rem 2rem;
 
         @include breakpoint-md {
-          margin: 0 2rem .5rem 2rem;
+          margin: 0 1.5rem .5rem 1.5rem;
         }
       }
 
@@ -392,7 +387,7 @@
       }
 
       .notes-list {
-        height: calc(100% - 7.5rem);
+        height: calc(100% - 6.5rem);
         overflow-y: auto;
         scrollbar-width: none;
 
@@ -406,11 +401,11 @@
 
           li {
             background: var(--white);
-            padding: 1rem 3rem;
+            padding: 1rem 2rem;
             position: relative;
 
             @include breakpoint-md {
-              padding: 1rem 2rem;
+              padding: 1rem 1.5rem;
             }
 
             &::after {
