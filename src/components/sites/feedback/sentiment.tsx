@@ -54,8 +54,8 @@ export const Sentiment: FC = () => {
 
       <Card className='card-rating'>
         <h4>
-          <span>Sentiment Rating<h3>{sentiment.ratings.score}</h3></span>
-          {hasResults && <FeedbackTrend value={sentiment.ratings.trend} />}
+          <span>Sentiment Rating<h3>{sentiment.ratings.score.toFixed(2)}</h3></span>
+          {hasResults && <FeedbackTrend value={Number(sentiment.ratings.trend.toFixed(2))} />}
         </h4>
         {hasResults
           ? <SentimentRatings period={period} ratings={sentiment.ratings.responses} />

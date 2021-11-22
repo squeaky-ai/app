@@ -321,6 +321,14 @@
     .checkbox-group {
       padding: 1rem;
     }
+
+    .checkbox {
+      span:nth-of-type(2) {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
   }
 
   .actions {
@@ -436,5 +444,10 @@
         }
       }
     }
+  }
+
+  .sentiment-responses-footer {
+    display: flex;
+    justify-content: space-between;
   }
 }
