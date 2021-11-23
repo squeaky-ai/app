@@ -1,7 +1,7 @@
 .page.sites.visitor {
   .visitor-view {
     .title {
-      margin-bottom: 2rem;
+      margin-bottom: 3rem;
 
       i {
         color: var(--gray-500);
@@ -10,19 +10,19 @@
     }
     
     .sub-heading {
-      margin: 2rem 0 2rem 0;
+      margin: 3rem 0 2rem 0;
     }
 
     .summary {
       border: 1px solid var(--gray-150);
       font-size: 13px;
       line-height: 20px;
-      margin: 2rem 0;
-      padding: 2rem;
+      margin: 3rem 0;
+      padding: 3rem;
 
       .summary-data {
         display: grid;
-        grid-gap: 2rem;
+        grid-gap: 3rem;
         grid-template-areas: 'linked default';
         grid-template-columns: repeat(2, 1fr);
 
@@ -116,12 +116,13 @@
 
     .visitor-highlights {
       display: grid;
-      grid-gap: 2rem;
+      grid-gap: 3rem;
       grid-template-areas: 'recordings pageviews';
       grid-template-columns: repeat(2, 1fr);
-      margin-bottom: 2rem;
+      margin-bottom: 3rem;
 
       @include breakpoint-md {
+        grid-gap: 2rem;
         grid-template-areas: 'recordings'
                              'pageviews';
         grid-template-columns: repeat(1, 1fr);
@@ -176,18 +177,19 @@
       text-align: center;
 
       h4 {
-        margin: 2rem 0 0 0;
+        margin: 3rem 0 0 0;
       }
     }
 
     .stats {
       display: grid;
-      grid-gap: 2rem;
+      grid-gap: 3rem;
       grid-template-areas: 'session-duration per-session';
       grid-template-columns: repeat(2, minmax(0, 1fr));
       margin-bottom: 3rem;
 
       @include breakpoint-lg {
+        grid-gap: 2rem;
         grid-template-areas: 'session-duration'
                              'per-session';
         grid-template-columns: minmax(0, 1fr);

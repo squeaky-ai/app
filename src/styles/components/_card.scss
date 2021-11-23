@@ -1,9 +1,9 @@
 .card {
   background: var(--white);
   border-radius: var(--border-radius-md);
-  padding: 2rem;
+  padding: 3rem;
 
   @include breakpoint-md {
-    padding: 1.5rem;
+    padding: 2rem;
   }
 }

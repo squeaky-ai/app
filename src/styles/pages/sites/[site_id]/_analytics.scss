@@ -1,9 +1,9 @@
 .page.sites.analytics {
   .title {
-    margin: 0 0 2rem 0;
+    margin: 0 0 3rem 0;
 
     &.empty {
-      margin: 2rem 0 1rem 0;
+      margin: 3rem 0 1rem 0;
       width: 100%;
     }
   }
@@ -12,7 +12,7 @@
     align-items: center;
     display: flex;
     justify-content: space-between;
-    margin: 0 0 2rem 0;
+    margin: 0 0 3rem 0;
 
     @include breakpoint-md {
       align-items: flex-start;
@@ -91,7 +91,7 @@
 
   .analytics-grid {
     display: grid;
-    grid-gap: 2rem;
+    grid-gap: 3rem;
     grid-template-areas: 'visitors-graph visitors-graph visitors-graph'
                          'average-session-duration average-session-per-visitors pages-per-session'
                          'page-views page-views page-views'
@@ -102,7 +102,7 @@
     grid-template-rows: auto;
 
     @include breakpoint-md {
-      grid-gap: 1.5rem;
+      grid-gap: 2rem;
       grid-template-areas: 'visitors-graph '
                            'average-session-duration'
                            'average-session-per-visitors'
