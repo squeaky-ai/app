@@ -692,12 +692,18 @@ export type Query = {
   site?: Maybe<Site>;
   sites: Array<Maybe<Site>>;
   user?: Maybe<User>;
+  userExists: Scalars['Boolean'];
   userInvitation?: Maybe<UsersInvitation>;
 };
 
 
 export type QuerySiteArgs = {
   siteId: Scalars['ID'];
+};
+
+
+export type QueryUserExistsArgs = {
+  email: Scalars['String'];
 };
 
 

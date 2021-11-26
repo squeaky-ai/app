@@ -68,16 +68,6 @@ export const signout = async (): Promise<void> => {
   }
 };
 
-export const emailExists = async (email: string): Promise<Response<boolean>> => {
-  try {
-    const response = await axios.get<{ exists: boolean }>(`/api/auth/email_exists.json?email=${email}`);
-    return { body: response.data.exists };
-  } catch(error: any) {
-    console.error(error.response.status, error.response.data);
-    return { error: error.response.data };
-  }
-}
-
 export const resetPassword = async(email: string): Promise<Response<any>> => {
   try {
     const response = await axios.post('/api/auth/reset_password.json', { user: { email } });
