@@ -48,7 +48,7 @@ const SitesFeedbackNpsGuide: NextPage<ServerSideProps> = ({ user }) => {
                 <NpsTabs siteId={site.id} page='guide' />
 
                 <Container className='md'>
-                  <p>NPS® is a micro customer survey that combines a rating scale from 0 to 10 with a free text field that asks a visitor why they gave the rating they selected. Each time, the same question is always asked: "How likely are you to recommend X to a friend or colleague", where the name of the company, product or service is used to take the place of "X".</p>
+                  <p>NPS® is a micro customer survey that combines a rating scale from 0 to 10 with a free text field that asks a visitor why they gave the rating they selected. Each time, the same question is always asked: &quot;How likely are you to recommend X to a friend or colleague&quot;, where the name of the company, product or service is used to take the place of &quot;X&quot;.</p>
                   
                   <h4>Outcomes</h4>
 

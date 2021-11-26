@@ -28,7 +28,7 @@ const UsersPreferences: NextPage<ServerSideProps> = ({ user }) => {
 
         <Container className='md'>
           <Toggle checked={darkModeEnabled} onChange={toggleDarkMode}>
-            User Dark Mode
+            Use Dark Mode
           </Toggle>
         </Container>
       </Main>

@@ -244,7 +244,7 @@ export const NpsSettings: FC<Props> = ({ site }) => {
                     onChange={handleChange}
                     checked={values.npsFollowUpEnabled}
                   >
-                    Include follow up question "What's the main reason for your score?"
+                    Include follow up question &quot;What&apos;s the main reason for your score?&quot;
                   </Checkbox>
                   <Checkbox
                     name='npsContactConsentEnabled'
