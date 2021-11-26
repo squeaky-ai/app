@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_FEEDBACK_QUERY } from 'data/feedback/queries';
+import { useToasts } from 'hooks/use-toasts';
 import type { Feedback } from 'types/graphql';
 
 interface UseFeedback {
@@ -11,6 +12,7 @@ interface UseFeedback {
 
 export const useFeedback = (): UseFeedback => {
   const router = useRouter();
+  const toasts = useToasts();
 
   const { loading, error, data } = useQuery(GET_FEEDBACK_QUERY, {
     variables: {
@@ -19,7 +21,7 @@ export const useFeedback = (): UseFeedback => {
   });
 
   if (error) {
-    console.error(error);
+    toasts.add({ type: 'error', body: 'An error has occurred' });
   }
 
   const fallback: Feedback = {

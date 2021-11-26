@@ -62,7 +62,6 @@ const Accept: NextPage<ServerSideProps> = ({ user }) => {
             }
           }
         } catch(error) {
-          console.error(error);
           toast.add({ type: 'error', body: 'There was an error accepting the invitation' });
         }
 

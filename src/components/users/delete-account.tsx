@@ -22,13 +22,12 @@ export const DeleteAccount: FC = () => {
   };
 
   const deleteAccount = async () => {
-    const success = await userDelete();
-
-    if (success) {
+    try {
+      await userDelete();
       setDeleted(true);
       closeModal();
       cache.reset();
-    } else {
+    } catch(error) {
       toasts.add({ type: 'error', body: 'There was an issue deleting your accout, please contact us' });
     }
   };

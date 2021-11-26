@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
+import { useToasts } from 'hooks/use-toasts';
 import { GET_ANALYTICS_QUERY } from 'data/analytics/queries';
 import type { Site } from 'types/graphql';
 import type { TimeRange } from 'lib/dates';
@@ -13,6 +14,7 @@ interface UseAnalytics {
 
 export const useAnalytics = (range: TimeRange): UseAnalytics => {
   const router = useRouter();
+  const toasts = useToasts();
 
   const { data, loading, error, previousData } = useQuery<{ site: Site }>(GET_ANALYTICS_QUERY, {
     variables: {
@@ -22,7 +24,7 @@ export const useAnalytics = (range: TimeRange): UseAnalytics => {
   });
 
   if (error) {
-    console.error(error);
+    toasts.add({ type: 'error', body: 'An error has occurred' });
   }
 
   const fallback: Analytics = {

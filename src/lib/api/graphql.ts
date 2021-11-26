@@ -303,14 +303,12 @@ export const userInvitation = async (token: string): Promise<UsersInvitation> =>
   return data.userInvitation;
 };
 
-export const userDelete = async (): Promise<boolean> => {
-  try {
-    await client.mutate({ mutation: USER_DELETE_MUTATION });
-    return true;
-  } catch(error: any) {
-    console.error(error);
-    return false;
-  }
+export const userDelete = async (): Promise<null> => {
+  const { data } = await client.mutate({ 
+    mutation: USER_DELETE_MUTATION 
+  });
+
+  return data;
 };
 
 export const userPassword = async (input: UsersPasswordInput): Promise<User> => {

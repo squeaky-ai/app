@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
+import { useToasts } from 'hooks/use-toasts';
 import { GET_SENTIMENT_QUERY } from 'data/sentiment/queries';
 import { FeedbackSentimentResponseSort } from 'types/graphql';
 import type { TimeRange } from 'lib/dates';
@@ -21,6 +22,7 @@ interface UseSentiment {
 
 export const useSentiment = ({ page, size, sort, range }: Props): UseSentiment => {
   const router = useRouter();
+  const toasts = useToasts();
 
   const { data, loading, error, previousData } = useQuery<{ site: Site }>(GET_SENTIMENT_QUERY, {
     variables: { 
@@ -33,7 +35,7 @@ export const useSentiment = ({ page, size, sort, range }: Props): UseSentiment =
   });
 
   if (error) {
-    console.error(error);
+    toasts.add({ type: 'error', body: 'An error has occurred' });
   }
 
   const fallback: Sentiment = {

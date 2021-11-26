@@ -65,14 +65,17 @@ export const CreateSite: FC<Props> = ({ children, className }) => {
 
                   const site = await createSite(name, url);
 
-                  setSubmitting(false);
-
                   closeModal();
                   await router.push(`/sites/${site.id}/overview`);
-                } catch(error) {
-                  console.error(error);
-                  toasts.add({ type: 'error', body: 'There was an error creating your site' });
+                } catch(error: any) {
+                  if (/already registered/.test(error)) {
+                    setErrors({ hostname: 'This site is already registered' });
+                  } else {
+                    toasts.add({ type: 'error', body: 'There was an error creating your site' });
+                  }
                 }
+
+                setSubmitting(false);
               })();
             }}
           >

@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
+import { useToasts } from 'hooks/use-toasts';
 import { GET_SITE_QUERY } from 'data/sites/queries';
 import type { Site } from 'types/graphql';
 
@@ -11,6 +12,7 @@ interface UseSite {
 
 export const useSite = (): UseSite => {
   const router = useRouter();
+  const toasts = useToasts();
 
   const { loading, error, data } = useQuery(GET_SITE_QUERY, {
     variables: {
@@ -19,7 +21,7 @@ export const useSite = (): UseSite => {
   });
 
   if (error) {
-    console.error(error);
+    toasts.add({ type: 'error', body: 'An error has occurred' });
   }
 
   return {

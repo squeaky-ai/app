@@ -55,7 +55,6 @@ const UsersPassword: NextPage<ServerSideProps> = ({ user }) => {
                   await login({ email: user.email, password: values.newPassword });
                   toasts.add({ type: 'success', body: 'Your new password has been saved successfully.' });
                 } catch(error) {
-                  console.error(error);
                   toasts.add({ type: 'error', body: 'There was an error changing your password' });
                 }
                 setSubmitting(false);

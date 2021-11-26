@@ -70,18 +70,22 @@ const SitesSettingsDetails: NextPage<ServerSideProps> = ({ user }) => {
                       return setErrors({ 'hostname': 'URL must be a valid hostname' });
                     }
 
+                    await updateSite({ siteId: site.id, name, url });
+
                     if (url !== site.url) {
                       toast.add({ type: 'error', body: 'Please note, your tracking code will need to be updated as you’ve changed your URL.' });
                     }
 
-                    await updateSite({ siteId: site.id, name, url });
-                    setSubmitting(false);
-
                     toast.add({ type: 'success', body: 'Your site changes have been successfully saved.' });
-                  } catch(error) {
-                    console.error(error);
-                    toast.add({ type: 'error', body: 'There was an error updating your site' });
+                  } catch(error: any) {
+                    if (/already registered/.test(error)) {
+                      setErrors({ hostname: 'This site is already registered' });
+                    } else {
+                      toast.add({ type: 'error', body: 'There was an error updating your site' });
+                    }
                   }
+
+                  setSubmitting(false);
                 })();
               }}
             >
