@@ -2,13 +2,11 @@ import React from 'react';
 import type { FC } from 'react';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-import { useRouter } from 'next/router';
-import { gql, useQuery } from '@apollo/client';
 import { Button } from 'components/button';
 import { Input } from 'components/input';
 import { Spinner } from 'components/spinner';
 import { Checkbox } from 'components/checkbox';
-import type { Site } from 'types/site';
+import { usePages } from 'hooks/use-pages';
 
 interface Props {
   value: string[];
@@ -16,34 +14,17 @@ interface Props {
   onUpdate: (value: string[]) => void;
 }
 
-const QUERY = gql`
-  query GetSitePages($siteId: ID!) {
-    site(siteId: $siteId) {
-      id
-      pages
-    }
-  }
-`;
-
 const PagesSchema = Yup.object().shape({
   pages: Yup.array(),
 });
 
 export const FiltersPages: FC<Props> = ({ value, onClose, onUpdate }) => {
-  const router = useRouter();
   const [search, setSearch] = React.useState<string>('');
-
-  const { data, loading } = useQuery<{ site: Site }>(QUERY, {
-    variables: {
-      siteId: router.query.site_id as string
-    }
-  });
+  const { pages, loading } = usePages();
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearch(event.target.value);
   };
-
-  const pages = data ? data.site.pages : [];
 
   const results = pages
     .filter(l => l.toLowerCase().includes(search.toLowerCase()))

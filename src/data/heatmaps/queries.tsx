@@ -20,7 +20,7 @@ export const GET_HEATMAPS_QUERY = gql`
 `;
 
 export const GET_RECORDING_QUERY = gql`
-  query GetRecording($siteId: ID!, $recordingId: ID!) { 
+  query GetHeatmapsRecording($siteId: ID!, $recordingId: ID!) { 
     site(siteId: $siteId) {
       id
       recording(recordingId: $recordingId) {

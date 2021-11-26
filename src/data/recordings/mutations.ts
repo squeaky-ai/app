@@ -123,7 +123,7 @@ export const UPDATE_NOTE_MUTATION = gql`
 `;
 
 export const DELETE_RECORDING_MUTATION = gql`
-  mutation DeleteRecording($input: RecordingDeleteInput!) {
+  mutation DeleteRecording($input: RecordingsDeleteInput!) {
     recordingDelete(input: $input) {
       id
       recordings {
@@ -141,7 +141,7 @@ export const DELETE_RECORDING_MUTATION = gql`
 `;
 
 export const VIEWED_RECORDING_MUTATION = gql`
-  mutation ViewedRecording($input: RecordingViewedInput!) {
+  mutation ViewedRecording($input: RecordingsViewedInput!) {
     recordingViewed(input: $input) {
       id
       recordings {
@@ -155,7 +155,7 @@ export const VIEWED_RECORDING_MUTATION = gql`
 `;
 
 export const BOOKMARK_RECORDING_MUTATION = gql`
-  mutation BookmarkRecording($input: RecordingBookmarkedInput!) {
+  mutation BookmarkRecording($input: RecordingsBookmarkedInput!) {
     recordingBookmarked(input: $input) {
       id
       recordings {
@@ -169,7 +169,7 @@ export const BOOKMARK_RECORDING_MUTATION = gql`
 `;
 
 export const DELETE_RECORDINGS_MUTATION = gql`
-  mutation DeletedRecordings($input: RecordingsDeleteInput!) {
+  mutation DeletedRecordings($input: RecordingsDeleteBulkInput!) {
     recordingsDelete(input: $input) {
       id
       recordingsCount
@@ -183,7 +183,7 @@ export const DELETE_RECORDINGS_MUTATION = gql`
 `;
 
 export const VIEWED_RECORDINGS_MUTATION = gql`
-  mutation ViewedRecordings($input: RecordingsViewedInput!) {
+  mutation ViewedRecordings($input: RecordingsViewedBulkInput!) {
     recordingsViewed(input: $input) {
       id
       recordings {

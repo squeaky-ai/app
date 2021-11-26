@@ -21,7 +21,7 @@ export interface Site {
   recordingsCount: number;
   notes?: PaginatedNotesResponse;
   languages?: string[];
-  pages?: string[];
+  pageUrls?: string[];
   browsers?: string[];
   heatmaps?: Heatmaps;
   recording?: Recording;
