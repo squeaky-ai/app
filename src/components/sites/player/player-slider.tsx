@@ -87,7 +87,7 @@ export class PlayerSlider extends React.Component<Props, State> {
 
   private get durationInSeconds() {
     return this.props.recording
-      ? this.getSeconds(this.props.recording.disconnectedAt - this.props.recording.connectedAt)
+      ? this.getSeconds(Number(this.props.recording.disconnectedAt) - Number(this.props.recording.connectedAt))
       : 0
   }
 

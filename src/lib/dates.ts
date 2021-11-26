@@ -70,7 +70,7 @@ export const toIsoDate = (date?: Date) => {
   return date.toISOString().split('T')[0];
 };
 
-export const toNiceDate = (timestamp?: number) => {
+export const toNiceDate = (timestamp?: number | string) => {
   if (!timestamp) return 'Unknown';
 
   const date = new Date(Number(timestamp));

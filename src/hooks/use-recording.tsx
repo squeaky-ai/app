@@ -2,13 +2,13 @@ import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { GET_RECORDING_QUERY, GET_RECORDING_EVENTS_QUERY } from 'data/recordings/queries';
 import type { Site } from 'types/graphql';
-import type { Recording, PaginatedEventsResponse } from 'types/graphql';
+import type { Recording, RecordingsEvents } from 'types/graphql';
 
 interface UseRecording {
   loading: boolean;
   error: boolean;
   recording: Recording | null;
-  fetchMoreEvents: (eventPage: number) => Promise<PaginatedEventsResponse>;
+  fetchMoreEvents: (eventPage: number) => Promise<RecordingsEvents>;
 }
 
 export const useRecording = (id?: string): UseRecording => {

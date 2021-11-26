@@ -4,7 +4,7 @@ import { Checkbox } from 'components/checkbox';
 import { Dropdown } from 'components/dropdown';
 import { allColumns } from 'lib/visitors';
 import { Preferences, Preference } from 'lib/preferences';
-import type { Column } from 'types/graphql';
+import type { Column } from 'types/visitors';
 
 interface Props {
   columns: Column[];

@@ -1,21 +1,21 @@
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_VISITORS_QUERY } from 'data/visitors/queries';
-import type { Site } from 'types/graphql';
-import type { Filters, PaginatedVisitorsResponse, VisitorSortBy } from 'types/graphql';
+import { VisitorsSort } from 'types/graphql';
+import type { Site, VisitorsFilters, Visitors } from 'types/graphql';
 
 interface Props {
   page: number;
   size?: number;
   query?: string;
-  sort?: VisitorSortBy;
-  filters?: Filters;
+  sort?: VisitorsSort;
+  filters?: VisitorsFilters;
 }
 
 interface UseVisitors {
   loading: boolean;
   error: boolean;
-  visitors: PaginatedVisitorsResponse;
+  visitors: Visitors;
 }
 
 export const useVisitors = ({ page, size, query, sort, filters }: Props): UseVisitors => {
@@ -36,12 +36,12 @@ export const useVisitors = ({ page, size, query, sort, filters }: Props): UseVis
     console.error(error);
   }
 
-  const fallback: PaginatedVisitorsResponse = { 
+  const fallback: Visitors = { 
     items: [], 
     pagination: { 
       pageSize: 0, 
       total: 0, 
-      sort: 'first_viewed_at__desc' 
+      sort: VisitorsSort.FirstViewedAtDesc,
     } 
   };
 

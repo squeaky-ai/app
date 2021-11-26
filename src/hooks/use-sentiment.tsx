@@ -1,15 +1,15 @@
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_SENTIMENT_QUERY } from 'data/sentiment/queries';
-import type { Site } from 'types/graphql';
+import { FeedbackSentimentResponseSort } from 'types/graphql';
 import type { TimeRange } from 'lib/dates';
-import type { Sentiment, SentimentResponseSortBy } from 'types/graphql';
+import type { Site, Sentiment } from 'types/graphql';
 
 interface Props {
   page: number;
   size?: number;
   query?: string;
-  sort?: SentimentResponseSortBy;
+  sort?: FeedbackSentimentResponseSort;
   range: TimeRange;
 }
 
@@ -42,7 +42,7 @@ export const useSentiment = ({ page, size, sort, range }: Props): UseSentiment =
       pagination: { 
         pageSize: 0, 
         total: 0, 
-        sort: 'timestamp__desc' 
+        sort: FeedbackSentimentResponseSort.TimestampDesc, 
       } 
     },
     replies: {

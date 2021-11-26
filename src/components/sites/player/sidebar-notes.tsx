@@ -14,8 +14,7 @@ import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'compo
 import { TIMESTAMP_REGEX } from 'data/sites/constants';
 import { toTimeString, fromTimeString } from 'lib/dates';
 import { noteDelete, noteCreate, noteUpdate } from 'lib/api/graphql';
-import type { Note as INote } from 'types/note';
-import type { Recording } from 'types/graphql';
+import type { Recording, Note as INote } from 'types/graphql';
 
 interface Props {
   replayer: Replayer;

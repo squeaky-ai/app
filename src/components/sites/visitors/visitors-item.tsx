@@ -10,7 +10,8 @@ import { Cell } from 'components/table';
 import { Pill } from 'components/pill';
 import { getAttributes, groupVisitorBrowsers, groupVisitorDevices } from 'lib/visitors';
 import type { Site } from 'types/graphql';
-import type { Visitor, ExternalAttributes } from 'types/graphql';
+import type { ExternalAttributes } from 'types/visitors';
+import type { Visitor } from 'types/graphql';
 
 interface Props {
   site: Site;

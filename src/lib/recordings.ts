@@ -1,6 +1,8 @@
-import type { Filters, Column } from 'types/graphql';
+import { FiltersSize, FiltersStart } from 'types/graphql';
+import type { Column } from 'types/recordings';
+import type { RecordingsFilters } from 'types/graphql';
 
-export const defaultFilters: Filters = {
+export const defaultFilters: RecordingsFilters = {
   browsers: [],
   devices: [],
   languages: [],
@@ -11,14 +13,14 @@ export const defaultFilters: Filters = {
   status: null,
   date: {
     rangeType: null,
-    fromType: 'Before',
+    fromType: FiltersStart.Before,
     fromDate: null,
     betweenFromDate: null,
     betweenToDate: null,
   },
   duration: {
     rangeType: null,
-    fromType: 'GreaterThan',
+    fromType: FiltersSize.GreaterThan,
     fromDuration: null,
     betweenFromDuration: null,
     betweenToDuration: null,

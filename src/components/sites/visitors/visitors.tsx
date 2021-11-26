@@ -19,20 +19,22 @@ import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 import { BASE_PATH } from 'data/common/constants';
 import { Preference } from 'lib/preferences';
 import { allColumns } from 'lib/visitors';
+import { VisitorsSort } from 'types/graphql';
 import type { Site } from 'types/graphql';
-import type { Column, Filters, VisitorSortBy } from 'types/graphql';
+import type { Column } from 'types/visitors';
+import type { VisitorsFilters } from 'types/graphql';
 
 interface Props {
   query: string;
   site: Site;
   columns: Column[];
-  filters: Filters;
+  filters: VisitorsFilters;
 }
 
 export const Visitors: FC<Props> = ({ site, query, columns, filters }) => {
   const [page, setPage] = React.useState<number>(0);
   const [size, setSize] = React.useState<number>(25);
-  const [sort, setSort] = React.useState<VisitorSortBy>('first_viewed_at__desc');
+  const [sort, setSort] = React.useState<VisitorsSort>(VisitorsSort.FirstViewedAtDesc);
 
   const { loading, error, visitors } = useVisitors({ 
     page, 
@@ -109,8 +111,8 @@ export const Visitors: FC<Props> = ({ site, query, columns, filters }) => {
             <Sort 
               name='first_viewed_at' 
               order={sort} 
-              onAsc={() => setSort('first_viewed_at__asc')} 
-              onDesc={() => setSort('first_viewed_at__desc')} 
+              onAsc={() => setSort(VisitorsSort.FirstViewedAtAsc)} 
+              onDesc={() => setSort(VisitorsSort.FirstViewedAtDesc)} 
             />
           </Cell>
           <Cell>
@@ -118,8 +120,8 @@ export const Visitors: FC<Props> = ({ site, query, columns, filters }) => {
             <Sort 
               name='last_activity_at' 
               order={sort} 
-              onAsc={() => setSort('last_activity_at__asc')} 
-              onDesc={() => setSort('last_activity_at__desc')} 
+              onAsc={() => setSort(VisitorsSort.LastActivityAtAsc)} 
+              onDesc={() => setSort(VisitorsSort.LastActivityAtDesc)} 
             />
           </Cell>
           <Cell>

@@ -1,15 +1,14 @@
 import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { GET_VISITOR_QUERY } from 'data/visitors/queries';
-import type { Site } from 'types/graphql';
-import type { Visitor, PageSortBy } from 'types/graphql';
-import type { RecordingSortBy } from 'types/graphql';
+import { RecordingsSort } from 'types/graphql';
+import type { Site, Visitor, VisitorsPagesSort } from 'types/graphql';
 
 interface Props {
   recordingPage: number;
-  recordingSort: RecordingSortBy;
+  recordingSort: RecordingsSort;
   pagesPage: number;
-  pagesSort: PageSortBy;
+  pagesSort: VisitorsPagesSort;
 }
 
 interface UseVisitor {
