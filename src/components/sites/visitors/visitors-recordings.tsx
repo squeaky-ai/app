@@ -6,15 +6,15 @@ import { Sort } from 'components/sort';
 import { VisitorsRecordingsItem } from 'components/sites/visitors/visitors-recordings-item';
 import { Table, Row, Cell } from 'components/table';
 import { BASE_PATH } from 'data/common/constants';
-import type { Visitor } from 'types/visitor';
-import type { RecordingSortBy } from 'types/recording';
+import { RecordingsSort } from 'types/graphql';
+import type { Visitor } from 'types/graphql';
 
 interface Props {
   visitor: Visitor;
-  sort: RecordingSortBy;
+  sort: RecordingsSort;
   page: number;
   setPage: (value: number) => void;
-  setSort: (value: RecordingSortBy) => void;
+  setSort: (value: RecordingsSort) => void;
 }
 
 export const VisitorsRecording: FC<Props> = ({ visitor, page, sort, setPage, setSort }) => {
@@ -36,8 +36,8 @@ export const VisitorsRecording: FC<Props> = ({ visitor, page, sort, setPage, set
               <Sort 
                 name='connected_at' 
                 order={sort} 
-                onAsc={() => setSort('connected_at__asc')} 
-                onDesc={() => setSort('connected_at__desc')} 
+                onAsc={() => setSort(RecordingsSort.ConnectedAtAsc)} 
+                onDesc={() => setSort(RecordingsSort.ConnectedAtDesc)} 
               />
             </Cell>
             <Cell>
@@ -45,8 +45,8 @@ export const VisitorsRecording: FC<Props> = ({ visitor, page, sort, setPage, set
               <Sort 
                 name='duration' 
                 order={sort} 
-                onAsc={() => setSort('duration__asc')} 
-                onDesc={() => setSort('duration__desc')} 
+                onAsc={() => setSort(RecordingsSort.DurationAsc)} 
+                onDesc={() => setSort(RecordingsSort.DurationDesc)} 
               />
             </Cell>
             <Cell>
@@ -54,8 +54,8 @@ export const VisitorsRecording: FC<Props> = ({ visitor, page, sort, setPage, set
               <Sort 
                 name='page_count' 
                 order={sort} 
-                onAsc={() => setSort('page_count__asc')} 
-                onDesc={() => setSort('page_count__desc')} 
+                onAsc={() => setSort(RecordingsSort.PageCountAsc)} 
+                onDesc={() => setSort(RecordingsSort.PageCountDesc)} 
               />
             </Cell>
             <Cell>

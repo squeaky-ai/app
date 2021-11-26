@@ -15,8 +15,8 @@ import { Option, Select } from 'components/select';
 import { Button } from 'components/button';
 import { HEX_REGEX } from 'data/common/constants';
 import { useToasts } from 'hooks/use-toasts';
-import type { FeedbackUpdateMutationInput } from 'types/feedback';
-import type { Site } from 'types/site';
+import type { FeedbackUpdateInput } from 'types/graphql';
+import type { Site } from 'types/graphql';
 
 interface Props {
   site: Site;
@@ -38,7 +38,7 @@ export const NpsSettings: FC<Props> = ({ site }) => {
   const toasts = useToasts();
   const { loading, error, feedback } = useFeedback();
 
-  const onUpdate = async (input: Partial<FeedbackUpdateMutationInput>): Promise<void> => {
+  const onUpdate = async (input: Partial<FeedbackUpdateInput>): Promise<void> => {
     await feedbackUpdate({
       siteId: site.id,
       ...input,
@@ -85,7 +85,7 @@ export const NpsSettings: FC<Props> = ({ site }) => {
             onSubmit={(values, { setSubmitting }) => {
               (async () => {
                 const params: Pick<
-                  FeedbackUpdateMutationInput, 
+                  FeedbackUpdateInput, 
                   'npsAccentColor' | 
                   'npsSchedule' | 
                   'npsPhrase' | 
@@ -244,7 +244,7 @@ export const NpsSettings: FC<Props> = ({ site }) => {
                     onChange={handleChange}
                     checked={values.npsFollowUpEnabled}
                   >
-                    Include follow up question "What's the main reason for your score?"
+                    Include follow up question &quot;What&apos;s the main reason for your score?&quot;
                   </Checkbox>
                   <Checkbox
                     name='npsContactConsentEnabled'

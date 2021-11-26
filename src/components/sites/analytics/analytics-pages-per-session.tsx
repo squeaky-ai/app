@@ -2,7 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import { Trend } from 'components/trend';
 import { toTwoDecimalPlaces } from 'lib/maths';
-import type { PagesPerSession } from 'types/analytics';
+import type { AnalyticsPagesPerSession as PagesPerSession } from 'types/graphql';
 
 interface Props {
   pagesPerSession: PagesPerSession;

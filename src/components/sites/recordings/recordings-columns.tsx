@@ -5,7 +5,7 @@ import { Checkbox } from 'components/checkbox';
 import { Dropdown } from 'components/dropdown';
 import { allColumns } from 'lib/recordings';
 import { Preferences, Preference } from 'lib/preferences';
-import type { Column } from 'types/recording';
+import type { Column } from 'types/recordings';
 
 interface Props {
   columns: Column[];

@@ -8,8 +8,8 @@ import { Browser } from 'components/browser';
 import { Device } from 'components/device';
 import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
 import { getAttributes, normalizeKey } from 'lib/visitors';
-import type { Recording } from 'types/recording';
-import type { Site } from 'types/site';
+import type { Recording } from 'types/graphql';
+import type { Site } from 'types/graphql';
 
 interface Props {
   site: Site;

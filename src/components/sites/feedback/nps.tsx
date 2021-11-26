@@ -14,12 +14,12 @@ import { FeedbackTrend } from 'components/sites/feedback/feedback-trend';
 import { NpsScore } from 'components/sites/feedback/nps-score';
 import { TIME_PERIODS } from 'data/nps/constants';
 import { percentage } from 'lib/maths';
-import type { NpsResponseSortBy } from 'types/nps';
+import { FeedbackNpsResponseSort } from 'types/graphql';
 
 export const Nps: FC = () => {
   const [page, setPage] = React.useState<number>(0);
   const [size, setSize] = React.useState<number>(10);
-  const [sort, setSort] = React.useState<NpsResponseSortBy>('timestamp__desc');
+  const [sort, setSort] = React.useState<FeedbackNpsResponseSort>(FeedbackNpsResponseSort.TimestampDesc);
   const [period, setPeriod] = React.useState<TimePeriod>('past_seven_days');
 
   const { nps, error, loading } = useNps({ page, size, sort, range: getDateRange(period) });

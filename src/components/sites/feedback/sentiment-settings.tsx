@@ -13,8 +13,8 @@ import { Button } from 'components/button';
 import { Container } from 'components/container';
 import { HEX_REGEX } from 'data/common/constants';
 import { useToasts } from 'hooks/use-toasts';
-import type { FeedbackUpdateMutationInput } from 'types/feedback';
-import type { Site } from 'types/site';
+import type { FeedbackUpdateInput } from 'types/graphql';
+import type { Site } from 'types/graphql';
 import { SentimentPages } from 'components/sites/feedback/sentiment-pages';
 
 interface Props {
@@ -33,7 +33,7 @@ export const SentimentSettings: FC<Props> = ({ site }) => {
   const toasts = useToasts();
   const { loading, error, feedback } = useFeedback();
 
-  const onUpdate = async (input: Partial<FeedbackUpdateMutationInput>): Promise<void> => {
+  const onUpdate = async (input: Partial<FeedbackUpdateInput>): Promise<void> => {
     await feedbackUpdate({
       siteId: site.id,
       ...input,
@@ -70,7 +70,7 @@ export const SentimentSettings: FC<Props> = ({ site }) => {
             onSubmit={(values, { setSubmitting }) => {
               (async () => {
                 const params: Pick<
-                  FeedbackUpdateMutationInput, 
+                  FeedbackUpdateInput, 
                   'sentimentAccentColor' | 
                   'sentimentExcludedPages' | 
                   'sentimentLayout'

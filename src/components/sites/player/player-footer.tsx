@@ -6,9 +6,9 @@ import { PlayerZoom } from 'components/sites/player/player-zoom';
 import { PlayerTabs } from 'components/sites/player/player-tabs';
 import { PlayerSidebar } from 'components/sites/player/player-sidebar';
 import { PlayerControls } from 'components/sites/player/player-controls';
-import type { Recording } from 'types/recording';
+import type { Recording } from 'types/graphql';
 import type { PlayerState, Action } from 'types/player';
-import type { Site } from 'types/site';
+import type { Site } from 'types/graphql';
 
 interface Props {
   state: PlayerState;

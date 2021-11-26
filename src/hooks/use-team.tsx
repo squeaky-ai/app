@@ -1,7 +1,8 @@
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
+import { useToasts } from 'hooks/use-toasts';
 import { GET_TEAM_QUERY } from 'data/teams/queries';
-import type { Team as TeamMember } from 'types/team';
+import type { Team as TeamMember } from 'types/graphql';
 
 interface Team {
   members: TeamMember[];
@@ -16,6 +17,7 @@ interface UseSite {
 
 export const useTeam = (): UseSite => {
   const router = useRouter();
+  const toasts = useToasts();
 
   const { loading, error, data } = useQuery(GET_TEAM_QUERY, {
     variables: {
@@ -24,7 +26,7 @@ export const useTeam = (): UseSite => {
   });
 
   if (error) {
-    console.error(error);
+    toasts.add({ type: 'error', body: 'An error has occurred' });
   }
 
   const fallback: Team = {

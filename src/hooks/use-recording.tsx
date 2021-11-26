@@ -1,18 +1,20 @@
 import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
+import { useToasts } from 'hooks/use-toasts';
 import { GET_RECORDING_QUERY, GET_RECORDING_EVENTS_QUERY } from 'data/recordings/queries';
-import type { Site } from 'types/site';
-import type { Recording, PaginatedEventsResponse } from 'types/recording';
+import type { Site } from 'types/graphql';
+import type { Recording, RecordingsEvents } from 'types/graphql';
 
 interface UseRecording {
   loading: boolean;
   error: boolean;
   recording: Recording | null;
-  fetchMoreEvents: (eventPage: number) => Promise<PaginatedEventsResponse>;
+  fetchMoreEvents: (eventPage: number) => Promise<RecordingsEvents>;
 }
 
 export const useRecording = (id?: string): UseRecording => {
   const router = useRouter();
+  const toasts = useToasts();
 
   const { data, loading, error, fetchMore } = useQuery<{ site: Site }>(GET_RECORDING_QUERY, {
     variables: {
@@ -23,7 +25,7 @@ export const useRecording = (id?: string): UseRecording => {
   });
 
   if (error) {
-    console.error(error);
+    toasts.add({ type: 'error', body: 'An error has occurred' });
   }
 
   const fetchMoreEvents = async (eventPage: number) => {

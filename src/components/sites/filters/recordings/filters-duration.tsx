@@ -8,13 +8,13 @@ import { Option, Select } from 'components/select';
 import { Input } from 'components/input';
 import { toTimeString, fromTimeString } from 'lib/dates';
 import { MM_SS_REGEX } from 'data/common/constants';
-import type { Filters } from 'types/recording';
+import type { RecordingsFilters } from 'types/graphql';
 import type { ValueOf } from 'types/common';
 
 interface Props {
-  value: Filters['duration'];
+  value: RecordingsFilters['duration'];
   onClose: VoidFunction;
-  onUpdate: (value: ValueOf<Filters>) => void;
+  onUpdate: (value: ValueOf<RecordingsFilters>) => void;
 }
 
 const TimeStampSchema = Yup.string().matches(MM_SS_REGEX, 'Timestamp must be formatted as 00:00');

@@ -12,6 +12,11 @@ $ cd squeaky
 $ yarn install
 ```
 
+### Fetching the latest GraphQL types
+```shell
+$ yarn codegen
+```
+
 ### Run the server
 ```shell
 $ yarn dev

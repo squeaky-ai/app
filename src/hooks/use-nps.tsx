@@ -1,15 +1,16 @@
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_NPS_QUERY } from 'data/nps/queries';
-import type { Site } from 'types/site';
+import { useToasts } from 'hooks/use-toasts';
+import { FeedbackNpsResponseSort } from 'types/graphql';
 import type { TimeRange } from 'lib/dates';
-import type { Nps, NpsResponseSortBy } from 'types/nps';
+import type { Site, Nps } from 'types/graphql';
 
 interface Props {
   page: number;
   size?: number;
   query?: string;
-  sort?: NpsResponseSortBy;
+  sort?: FeedbackNpsResponseSort;
   range: TimeRange;
 }
 
@@ -21,6 +22,7 @@ interface UseNps {
 
 export const useNps = ({ page, size, sort, range }: Props): UseNps => {
   const router = useRouter();
+  const toasts = useToasts();
 
   const { data, loading, error, previousData } = useQuery<{ site: Site }>(GET_NPS_QUERY, {
     variables: { 
@@ -33,7 +35,7 @@ export const useNps = ({ page, size, sort, range }: Props): UseNps => {
   });
 
   if (error) {
-    console.error(error);
+    toasts.add({ type: 'error', body: 'An error has occurred' });
   }
 
   const fallback: Nps = {
@@ -42,7 +44,7 @@ export const useNps = ({ page, size, sort, range }: Props): UseNps => {
       pagination: { 
         pageSize: 0, 
         total: 0, 
-        sort: 'timestamp__desc' 
+        sort: FeedbackNpsResponseSort.TimestampDesc, 
       } 
     },
     groups: {

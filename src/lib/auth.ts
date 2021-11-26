@@ -2,7 +2,7 @@ import { camelCase } from 'lodash';
 import type { GetServerSideProps } from 'next';
 import { session } from 'lib/api/auth';
 import { BLANK_ROUTES } from 'data/common/constants';
-import type { User } from 'types/user';
+import type { User } from 'types/graphql';
 
 export interface ServerSideProps {
   user: User | null;

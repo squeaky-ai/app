@@ -12,9 +12,8 @@ import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'compo
 import { Row, Cell } from 'components/table';
 import { teamUpdate } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
-import type { Team } from 'types/team';
-import type { User } from 'types/user';
-import type { Site } from 'types/site';
+import type { User, Team } from 'types/graphql';
+import type { Site } from 'types/graphql';
 
 interface Props {
   user: User;
@@ -28,10 +27,10 @@ export const TeamRow: FC<Props> = ({ user, site, team }) => {
   const ref = React.useRef<Modal>();
   const [role, setRole] = React.useState(team.role);
 
-  const self = Number(team.user.id) === user.id;
+  const self = team.user.id.toString() === user.id;
   const owner = team.role === OWNER;
   const invited = team.status === INVITED;
-  const userRole = site.team.find(t => Number(t.user.id) === user.id);
+  const userRole = site.team.find(t => t.user.id.toString() === user.id);
 
   const roleNames: { [key: number]: string } = {
     0: 'a User',
@@ -53,11 +52,8 @@ export const TeamRow: FC<Props> = ({ user, site, team }) => {
   };
 
   const changeRole = async () => {
-    const { error } = await teamUpdate({ siteId: site.id, teamId: team.id, role });
-
-    if (error) {
-      toast.add({ type: 'error', body: 'There was an unexpected error when changing the user role. Please try again.' });
-    } else {
+    try {
+      await teamUpdate({ siteId: site.id, teamId: team.id, role });
       toast.add({ type: 'success', body: 'Role change complete' });
 
       // They can no longer view this page as they won't be authenticated
@@ -68,6 +64,8 @@ export const TeamRow: FC<Props> = ({ user, site, team }) => {
 
       // Calling closeModal() would revert the role change in the UI
       if (ref.current) ref.current.hide();
+    } catch(error) {
+      toast.add({ type: 'error', body: 'There was an unexpected error when changing the user role. Please try again.' });      
     }
   };
 

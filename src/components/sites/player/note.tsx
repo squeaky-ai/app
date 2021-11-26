@@ -13,7 +13,7 @@ import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'compo
 import { ActivityTimestamp } from 'components/sites/player/activity-timestamp';
 import { TIMESTAMP_REGEX } from 'data/sites/constants';
 import { toTimeString, fromTimeString } from 'lib/dates';
-import { Note as INote } from 'types/note';
+import { Note as INote } from 'types/graphql';
 
 interface Props {
   note: INote;

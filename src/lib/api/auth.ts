@@ -1,6 +1,6 @@
 import axios from 'axios';
 import getConfig from 'next/config';
-import type { User } from 'types/user';
+import type { User } from 'types/graphql';
 
 type LoginInput = {
   email: string;
@@ -67,16 +67,6 @@ export const signout = async (): Promise<void> => {
     return null;
   }
 };
-
-export const emailExists = async (email: string): Promise<Response<boolean>> => {
-  try {
-    const response = await axios.get<{ exists: boolean }>(`/api/auth/email_exists.json?email=${email}`);
-    return { body: response.data.exists };
-  } catch(error: any) {
-    console.error(error.response.status, error.response.data);
-    return { error: error.response.data };
-  }
-}
 
 export const resetPassword = async(email: string): Promise<Response<any>> => {
   try {

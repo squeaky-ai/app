@@ -5,8 +5,8 @@ import classnames from 'classnames';
 import { useRouter } from 'next/router';
 import { Tooltip } from 'components/tooltip';
 import { visitorStarred } from 'lib/api/graphql';
-import type { Visitor } from 'types/visitor';
-import type { Site } from 'types/site';
+import type { Visitor } from 'types/graphql';
+import type { Site } from 'types/graphql';
 
 interface Props {
   site: Site;

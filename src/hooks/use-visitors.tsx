@@ -1,25 +1,27 @@
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
+import { useToasts } from 'hooks/use-toasts';
 import { GET_VISITORS_QUERY } from 'data/visitors/queries';
-import type { Site } from 'types/site';
-import type { Filters, PaginatedVisitorsResponse, VisitorSortBy } from 'types/visitor';
+import { VisitorsSort } from 'types/graphql';
+import type { Site, VisitorsFilters, Visitors } from 'types/graphql';
 
 interface Props {
   page: number;
   size?: number;
   query?: string;
-  sort?: VisitorSortBy;
-  filters?: Filters;
+  sort?: VisitorsSort;
+  filters?: VisitorsFilters;
 }
 
 interface UseVisitors {
   loading: boolean;
   error: boolean;
-  visitors: PaginatedVisitorsResponse;
+  visitors: Visitors;
 }
 
 export const useVisitors = ({ page, size, query, sort, filters }: Props): UseVisitors => {
   const router = useRouter();
+  const toasts = useToasts();
 
   const { data, loading, error, previousData } = useQuery<{ site: Site }>(GET_VISITORS_QUERY, {
     variables: { 
@@ -33,15 +35,15 @@ export const useVisitors = ({ page, size, query, sort, filters }: Props): UseVis
   });
 
   if (error) {
-    console.error(error);
+    toasts.add({ type: 'error', body: 'An error has occurred' });
   }
 
-  const fallback: PaginatedVisitorsResponse = { 
+  const fallback: Visitors = { 
     items: [], 
     pagination: { 
       pageSize: 0, 
       total: 0, 
-      sort: 'first_viewed_at__desc' 
+      sort: VisitorsSort.FirstViewedAtDesc,
     } 
   };
 

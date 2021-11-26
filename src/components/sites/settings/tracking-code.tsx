@@ -2,7 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import { Label } from 'components/label';
 import { Button } from 'components/button';
-import type { Site } from 'types/site';
+import type { Site } from 'types/graphql';
 
 interface Props {
   site: Site;

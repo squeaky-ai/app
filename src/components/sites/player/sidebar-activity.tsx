@@ -8,7 +8,7 @@ import { ActivityTimestamp } from 'components/sites/player/activity-timestamp';
 import { SidebarActivityVisibility } from 'components/sites/player/sidebar-activity-visibility';
 import { Preference, Preferences } from 'lib/preferences';
 import type { Event } from 'types/event';
-import type { Recording } from 'types/recording';
+import type { Recording } from 'types/graphql';
 
 import { 
   ActivityName,

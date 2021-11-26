@@ -6,7 +6,7 @@ import { toHoursMinutesAndSeconds } from 'lib/dates';
 import { Pagination } from 'components/pagination';
 import { Tooltip } from 'components/tooltip';
 import { percentage } from 'lib/maths';
-import type { AnalyticsPage } from 'types/analytics';
+import type { AnalyticsPage } from 'types/graphql';
 
 interface Props {
   pages: AnalyticsPage[];

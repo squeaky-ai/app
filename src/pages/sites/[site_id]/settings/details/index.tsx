@@ -62,26 +62,30 @@ const SitesSettingsDetails: NextPage<ServerSideProps> = ({ user }) => {
               validationSchema={DetailsSchema}
               onSubmit={(values, { setSubmitting, setErrors }) => {
                 (async () => {
-                  const { name, protocol, hostname } = values;
-                  const url = `${protocol}${hostname}`;
+                  try {
+                    const { name, protocol, hostname } = values;
+                    const url = `${protocol}${hostname}`;
 
-                  if (!validateUrl(url)) {
-                    return setErrors({ 'hostname': 'URL must be a valid hostname' });
-                  }
+                    if (!validateUrl(url)) {
+                      return setErrors({ 'hostname': 'URL must be a valid hostname' });
+                    }
 
-                  if (url !== site.url) {
-                    toast.add({ type: 'error', body: 'Please note, your tracking code will need to be updated as you’ve changed your URL.' });
-                  }
+                    await updateSite({ siteId: site.id, name, url });
 
-                  const { error } = await updateSite({ siteId: site.id, name, url });
-                  setSubmitting(false);
+                    if (url !== site.url) {
+                      toast.add({ type: 'error', body: 'Please note, your tracking code will need to be updated as you’ve changed your URL.' });
+                    }
 
-                  if (error) {
-                    const [key, value] = Object.entries(error)[0];
-                    setErrors({ [key]: value });
-                  } else {
                     toast.add({ type: 'success', body: 'Your site changes have been successfully saved.' });
+                  } catch(error: any) {
+                    if (/already registered/.test(error)) {
+                      setErrors({ hostname: 'This site is already registered' });
+                    } else {
+                      toast.add({ type: 'error', body: 'There was an error updating your site' });
+                    }
                   }
+
+                  setSubmitting(false);
                 })();
               }}
             >

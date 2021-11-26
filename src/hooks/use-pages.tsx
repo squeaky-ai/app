@@ -1,6 +1,6 @@
 import { gql, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
-import type { Site } from 'types/site';
+import type { Site } from 'types/graphql';
 
 interface UsePages {
   loading: boolean;
@@ -12,7 +12,7 @@ const QUERY = gql`
   query GetSitePages($siteId: ID!) {
     site(siteId: $siteId) {
       id
-      pages
+      pageUrls
     }
   }
 `;
@@ -26,7 +26,7 @@ export const usePages = (): UsePages => {
     }
   });
 
-  const pages = data ? data.site.pages : [];
+  const pages = data ? data.site.pageUrls : [];
 
   return {
     loading,

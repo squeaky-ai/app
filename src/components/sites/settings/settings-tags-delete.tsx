@@ -4,7 +4,7 @@ import { Button } from 'components/button';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { tagsDelete } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
-import type { Tag as ITag } from 'types/recording';
+import type { Tag as ITag } from 'types/graphql';
 
 interface Props {
   tags: ITag[];

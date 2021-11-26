@@ -34,26 +34,26 @@ const Accept: NextPage<ServerSideProps> = ({ user }) => {
   React.useEffect(() => {
     if (router.query.token) {
       (async () => {
-        const newUser = router.query.new_user !== 'false';
+        try {
+          const newUser = router.query.new_user !== 'false';
 
-        const invitation = await userInvitation(router.query.token as string);
+          const invitation = await userInvitation(router.query.token as string);
 
-        if (user && user.email !== invitation.email) {
-          // If they are already logged in to a different account
-          // then they need to be logged out first
-          await signout();
-        }
+          if (user && user.email !== invitation.email) {
+            // If they are already logged in to a different account
+            // then they need to be logged out first
+            await signout();
+          }
 
-        if (invitation.hasPending) {
-          // New users need to finish off creating their account
-          setEmail(invitation.email);
+          if (invitation.hasPending) {
+            // New users need to finish off creating their account
+            setEmail(invitation.email);
 
-          // Existing users can accept straight away and go to 
-          // the login page or the site page
-          if (!newUser) {
-            const { error } = await teamInviteAccept({ token: router.query.token as string });
+            // Existing users can accept straight away and go to 
+            // the login page or the site page
+            if (!newUser) {
+              await teamInviteAccept({ token: router.query.token as string });
 
-            if (!error) {
               toast.add({ type: 'success', body: 'Invitation accepted' });
 
               return user
@@ -61,6 +61,8 @@ const Accept: NextPage<ServerSideProps> = ({ user }) => {
                 : await router.push('/auth/login');
             }
           }
+        } catch(error) {
+          toast.add({ type: 'error', body: 'There was an error accepting the invitation' });
         }
 
         return setLoading(false);
@@ -107,14 +109,14 @@ const Accept: NextPage<ServerSideProps> = ({ user }) => {
                   validationSchema={AcceptSchema}
                   onSubmit={(values, { setSubmitting }) => {
                     (async () => {
-                      const { error } = await teamInviteAccept({ password: values.password, token: router.query.token as string });
-                      setSubmitting(false);
-
-                      if (error) {
-                        toast.add({ type: 'error', body: 'There was an error accepting the invitation' });
-                      } else {
+                      try {
+                        await teamInviteAccept({ password: values.password, token: router.query.token as string });
+                        setSubmitting(false);
+                      
                         toast.add({ type: 'success', body: 'Invitation accepted succesfully' });
                         await router.push('/auth/login');
+                      } catch(error) {
+                        toast.add({ type: 'error', body: 'There was an error accepting the invitation' });
                       }
                     })();
                   }}

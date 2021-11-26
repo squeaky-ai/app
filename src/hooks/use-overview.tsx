@@ -1,8 +1,9 @@
 import { format } from 'date-fns';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
+import { useToasts } from 'hooks/use-toasts';
 import { GET_OVERVIEW_QUERY } from 'data/overview/queries';
-import type { Site } from 'types/site';
+import type { Site } from 'types/graphql';
 import type { Overview } from 'types/overview';
 import type { TimeRange } from 'lib/dates';
 
@@ -14,6 +15,7 @@ interface UseOverview {
 
 export const useOverview = (): UseOverview => {
   const router = useRouter();
+  const toasts = useToasts();
 
   const now = new Date();
 
@@ -30,7 +32,7 @@ export const useOverview = (): UseOverview => {
   });
 
   if (error) {
-    console.error(error);
+    toasts.add({ type: 'error', body: 'An error has occurred' });
   }
 
   const fallback: Overview = {

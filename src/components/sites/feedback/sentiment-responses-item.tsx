@@ -7,10 +7,10 @@ import { Dropdown } from 'components/dropdown';
 import { SentimentResponsesDelete } from 'components/sites/feedback/sentiment-responses-delete';
 import { toNiceDate } from 'lib/dates';
 import { EMOJIS } from 'data/sentiment/constants';
-import type { SentimentResponseItem } from 'types/sentiment';
+import type { FeedbackSentimentResponseItem } from 'types/graphql';
 
 interface Props {
-  response: SentimentResponseItem;
+  response: FeedbackSentimentResponseItem;
 }
 
 export const SentimentResponsesItem: FC<Props> = ({ response }) => {

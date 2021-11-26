@@ -3,15 +3,15 @@ import type { FC } from 'react';
 import { Sort } from 'components/sort';
 import { Pagination } from 'components/pagination';
 import { Table, Row, Cell } from 'components/table';
-import type { Visitor } from 'types/visitor';
-import type { PageSortBy } from 'types/visitor';
+import { VisitorsPagesSort } from 'types/graphql';
+import type { Visitor } from 'types/graphql';
 
 interface Props {
   visitor: Visitor;
-  sort: PageSortBy;
+  sort: VisitorsPagesSort;
   page: number;
   setPage: (value: number) => void;
-  setSort: (sort: PageSortBy) => void;
+  setSort: (sort: VisitorsPagesSort) => void;
 }
 
 export const VisitorPages: FC<Props> = ({ visitor, page, sort, setPage, setSort }) => {
@@ -29,8 +29,8 @@ export const VisitorPages: FC<Props> = ({ visitor, page, sort, setPage, setSort 
             <Sort 
               name='views_count' 
               order={sort} 
-              onAsc={() => setSort('views_count__asc')} 
-              onDesc={() => setSort('views_count__desc')} 
+              onAsc={() => setSort(VisitorsPagesSort.ViewsCountAsc)} 
+              onDesc={() => setSort(VisitorsPagesSort.ViewsCountDesc)} 
             />
           </Cell>
         </Row>

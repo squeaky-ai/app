@@ -8,7 +8,7 @@ import { Label } from 'components/label';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { tagUpdate } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
-import type { Tag as ITag } from 'types/recording';
+import type { Tag as ITag } from 'types/graphql';
 
 interface Props {
   tag: ITag;

@@ -10,6 +10,7 @@ import { Option, Select } from 'components/select';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { createSite } from 'lib/api/graphql';
 import { HOSTNAME_REGEX } from 'data/sites/constants';
+import { useToasts } from 'hooks/use-toasts';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
@@ -21,6 +22,7 @@ const CreateSchema = Yup.object().shape({
 
 export const CreateSite: FC<Props> = ({ children, className }) => {
   const router = useRouter();
+  const toasts = useToasts();
   const ref = React.useRef<Modal>();
 
   const openModal = () => {
@@ -53,24 +55,27 @@ export const CreateSite: FC<Props> = ({ children, className }) => {
             validationSchema={CreateSchema}
             onSubmit={(values, { setSubmitting, setErrors }) => {
               (async () => {
-                const { name, protocol, hostname } = values;
-                const url = `${protocol}${hostname}`;
+                try {
+                  const { name, protocol, hostname } = values;
+                  const url = `${protocol}${hostname}`;
 
-                if (!validateUrl(url)) {
-                  return setErrors({ 'hostname': 'URL must be a valid hostname' });
-                }
+                  if (!validateUrl(url)) {
+                    return setErrors({ 'hostname': 'URL must be a valid hostname' });
+                  }
 
-                const { site, error } = await createSite(name, url);
+                  const site = await createSite(name, url);
 
-                setSubmitting(false);
-
-                if (error) {
-                  const [key, value] = Object.entries(error)[0];
-                  setErrors({ [key]: value });
-                } else {
                   closeModal();
                   await router.push(`/sites/${site.id}/overview`);
-                }            
+                } catch(error: any) {
+                  if (/already registered/.test(error)) {
+                    setErrors({ hostname: 'This site is already registered' });
+                  } else {
+                    toasts.add({ type: 'error', body: 'There was an error creating your site' });
+                  }
+                }
+
+                setSubmitting(false);
               })();
             }}
           >

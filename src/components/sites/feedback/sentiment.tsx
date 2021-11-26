@@ -12,12 +12,12 @@ import { SentimentReplies } from 'components/sites/feedback/sentiment-replies';
 import { SentimentRatings } from 'components/sites/feedback/sentiment-ratings';
 import { FeedbackTrend } from 'components/sites/feedback/feedback-trend'
 import { TIME_PERIODS } from 'data/nps/constants';
-import type { SentimentResponseSortBy } from 'types/sentiment';
+import { FeedbackSentimentResponseSort } from 'types/graphql';
 
 export const Sentiment: FC = () => {
   const [page, setPage] = React.useState<number>(0);
   const [size, setSize] = React.useState<number>(10);
-  const [sort, setSort] = React.useState<SentimentResponseSortBy>('timestamp__desc');
+  const [sort, setSort] = React.useState<FeedbackSentimentResponseSort>(FeedbackSentimentResponseSort.TimestampDesc);
   const [period, setPeriod] = React.useState<TimePeriod>('past_seven_days');
 
   const { sentiment, loading, error } = useSentiment({ page, size, sort, range: getDateRange(period) });

@@ -4,11 +4,12 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { Radio } from 'components/radio';
 import { Button } from 'components/button';
+import { FiltersStatus as FilterStatus } from 'types/graphql';
 
 interface Props {
-  value: 'New' | 'Viewed' | null;
+  value: FilterStatus | null;
   onClose: VoidFunction;
-  onUpdate: (value: 'New' | 'Viewed' | null) => void;
+  onUpdate: (value: FilterStatus | null) => void;
 }
 
 const StatusSchema = Yup.object().shape({

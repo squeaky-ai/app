@@ -41,24 +41,22 @@ const UsersPassword: NextPage<ServerSideProps> = ({ user }) => {
           <Formik
             initialValues={{ currentPassword: '', newPassword: '' }}
             validationSchema={PasswordSchema}
-            onSubmit={(values, { setErrors, setSubmitting }) => {
+            onSubmit={(values, { setSubmitting }) => {
               (async () => {
-                const { error } = await userPassword({
-                  currentPassword: values.currentPassword,
-                  password: values.newPassword,
-                  passwordConfirmation: values.newPassword
-                });
+                try {
+                  await userPassword({
+                    currentPassword: values.currentPassword,
+                    password: values.newPassword,
+                    passwordConfirmation: values.newPassword
+                  });
 
-                if (error) {
-                  const [key, value] = Object.entries(error)[0];
-                  setErrors({ [key]: value });
-                } else {
                   // The user would need to log back in after changing their password
                   // so we can log them in here to save that step
                   await login({ email: user.email, password: values.newPassword });
                   toasts.add({ type: 'success', body: 'Your new password has been saved successfully.' });
+                } catch(error) {
+                  toasts.add({ type: 'error', body: 'There was an error changing your password' });
                 }
-
                 setSubmitting(false);
               })();
             }}

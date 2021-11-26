@@ -3,8 +3,8 @@ import type { FC } from 'react';
 import { Dropdown } from 'components/dropdown';
 import { Tooltip } from 'components/tooltip';
 import { SettingsTagsDelete } from 'components/sites/settings/settings-tags-delete';
-import type { Tag } from 'types/recording';
-import type { Site } from 'types/site';
+import type { Tag } from 'types/graphql';
+import type { Site } from 'types/graphql';
 
 interface Props {
   site: Site;

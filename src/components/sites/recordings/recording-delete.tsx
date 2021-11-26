@@ -6,7 +6,7 @@ import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'compo
 import { recordingDelete } from 'lib/api/graphql';
 import { Preferences, Preference } from 'lib/preferences';
 import { useToasts } from 'hooks/use-toasts';
-import type { Site } from 'types/site';
+import type { Site } from 'types/graphql';
 
 interface Props {
   site: Site;

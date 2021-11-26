@@ -9,8 +9,9 @@ import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
 import { Cell } from 'components/table';
 import { Pill } from 'components/pill';
 import { getAttributes, groupVisitorBrowsers, groupVisitorDevices } from 'lib/visitors';
-import type { Site } from 'types/site';
-import type { Visitor, ExternalAttributes } from 'types/visitor';
+import type { Site } from 'types/graphql';
+import type { ExternalAttributes } from 'types/visitors';
+import type { Visitor } from 'types/graphql';
 
 interface Props {
   site: Site;

@@ -9,7 +9,7 @@ import { PlayerPreview } from 'components/sites/player/player-preview';
 import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
 import { useOverview } from 'hooks/use-overview';
 import { toTimeString } from 'lib/dates';
-import type { Site } from 'types/site';
+import type { Site } from 'types/graphql';
 import { Pill } from 'components/pill';
 import { Spinner } from 'components/spinner';
 import { Error } from 'components/error';

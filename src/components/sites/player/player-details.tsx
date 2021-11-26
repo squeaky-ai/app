@@ -3,8 +3,8 @@ import type { FC } from 'react';
 import classnames from 'classnames';
 import { useRouter } from 'next/router';
 import { Button } from 'components/button';
-import type { Site } from 'types/site';
-import type { Recording } from 'types/recording';
+import type { Site } from 'types/graphql';
+import type { Recording } from 'types/graphql';
 import { Pill } from 'components/pill';
 
 interface Props {

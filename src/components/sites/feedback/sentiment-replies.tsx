@@ -3,10 +3,10 @@ import type { FC } from 'react';
 import { groupBy, first } from 'lodash';
 import { EMOJIS } from 'data/sentiment/constants';
 import { percentage } from 'lib/maths';
-import type { SentimentReplies as ISentimentReplies } from 'types/sentiment';
+import type { FeedbackSentimentReplies } from 'types/graphql';
 
 interface Props {
-  replies: ISentimentReplies;
+  replies: FeedbackSentimentReplies;
 }
 
 export const SentimentReplies: FC<Props> = ({ replies }) => {

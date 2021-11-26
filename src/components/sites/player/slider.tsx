@@ -2,7 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import { clamp, debounce } from 'lodash';
 import { Input } from 'components/input';
-import type { Recording } from 'types/recording';
+import type { Recording } from 'types/graphql';
 
 interface Props {
   min: number;

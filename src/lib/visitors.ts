@@ -1,6 +1,7 @@
 import { capitalize } from 'lodash';
-import type { Device } from 'types/device';
-import type { Filters, Visitor, Column } from 'types/visitor';
+import { FiltersStart, FiltersRange } from 'types/graphql';
+import type { Column } from 'types/visitors';
+import type { VisitorsFilters, Visitor, RecordingsDevice } from 'types/graphql';
 
 export function getAttributes<T>(visitor: Visitor): T {
   try {
@@ -23,8 +24,8 @@ export function normalizeKey(key: string): string {
   }
 };
 
-export function groupVisitorBrowsers(devices: Device[]): Device[] {
-  const out: Device[] = [];
+export function groupVisitorBrowsers(devices: RecordingsDevice[]): RecordingsDevice[] {
+  const out: RecordingsDevice[] = [];
 
   for (const device of devices) {
     if (!out.find(a => a.browserName === device.browserName)) {
@@ -35,33 +36,33 @@ export function groupVisitorBrowsers(devices: Device[]): Device[] {
   return out;
 }
 
-export function groupVisitorDevices(devices: Device[]): Device[] {
+export function groupVisitorDevices(devices: RecordingsDevice[]): RecordingsDevice[] {
   return devices.reduce((acc, device) => {
     if (!acc.find(a => a.useragent === device.useragent)) {
       acc.push(device);
     }
 
     return acc;
-  }, [] as Device[]);
+  }, [] as RecordingsDevice[]);
 }
 
-export const defaultFilters: Filters = {
+export const defaultFilters: VisitorsFilters = {
   status: null,
   recordings: {
-    rangeType: 'GreaterThan',
+    rangeType: FiltersRange.GreaterThan,
     count: null
   },
   languages: [],
   firstVisited: {
     rangeType: null,
-    fromType: 'Before',
+    fromType: FiltersStart.Before,
     fromDate: null,
     betweenFromDate: null,
     betweenToDate: null,
   },
   lastActivity: {
     rangeType: null,
-    fromType: 'Before',
+    fromType: FiltersStart.Before,
     fromDate: null,
     betweenFromDate: null,
     betweenToDate: null,

@@ -1,5 +1,5 @@
 import { range } from 'lodash';
-import type { Visitor } from 'types/analytics';
+import type { AnalyticsVisitor } from 'types/graphql';
 import type { TimePeriod } from 'lib/dates';
 
 // [@_______] has claimed 1x free lunch from @lemonjs for fixing this mess
@@ -31,7 +31,7 @@ const getAmPmForHour = (hour: number): string => {
 
 const getDateFromTimestamp = (str: string) => new Date(Number(str));
 
-const getDailyResults = (pageViews: Visitor[]): DataForPeriod => {
+const getDailyResults = (pageViews: AnalyticsVisitor[]): DataForPeriod => {
   const data = range(0, 24).map(i => {
     const views = pageViews.filter(p => getHours(getDateFromTimestamp(p.timestamp)) === i);
 
@@ -46,7 +46,7 @@ const getDailyResults = (pageViews: Visitor[]): DataForPeriod => {
   return { data, interval: 1 };
 };
 
-const getPastSevenDaysResults = (pageViews: Visitor[]): DataForPeriod => {
+const getPastSevenDaysResults = (pageViews: AnalyticsVisitor[]): DataForPeriod => {
   const now = new Date();
 
   const data = range(0, 7).map(i => {
@@ -65,7 +65,7 @@ const getPastSevenDaysResults = (pageViews: Visitor[]): DataForPeriod => {
   return { data: data.reverse(), interval: 0 };
 };
 
-const getPastThirtyDaysResults = (pageViews: Visitor[]): DataForPeriod => {
+const getPastThirtyDaysResults = (pageViews: AnalyticsVisitor[]): DataForPeriod => {
   const now = new Date();
 
   const data = range(0, 30).map(i => {
@@ -84,7 +84,7 @@ const getPastThirtyDaysResults = (pageViews: Visitor[]): DataForPeriod => {
   return { data: data.reverse(), interval: 2 };
 };
 
-export const formatResultsForPeriod = (period: TimePeriod, pageViews: Visitor[]): DataForPeriod => {
+export const formatResultsForPeriod = (period: TimePeriod, pageViews: AnalyticsVisitor[]): DataForPeriod => {
   switch(period) {
     case 'today':
     case 'yesterday':

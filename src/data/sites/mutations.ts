@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const CREATE_SITE_MUTATION = gql`
-  mutation SiteCreate($input: SiteCreateInput!) {
+  mutation SiteCreate($input: SitesCreateInput!) {
     siteCreate(input: $input) {
       id
       name
@@ -11,7 +11,7 @@ export const CREATE_SITE_MUTATION = gql`
 `;
 
 export const UPDATE_SITE_MUTATION = gql`
-  mutation SiteUpdate($input: SiteUpdateInput!) {
+  mutation SiteUpdate($input: SitesUpdateInput!) {
     siteUpdate(input: $input) {
       id
       name
@@ -22,7 +22,7 @@ export const UPDATE_SITE_MUTATION = gql`
 `;
 
 export const DELETE_SITE_MUTATION = gql`
-  mutation SiteDelete($input: SiteDeleteInput!) {
+  mutation SiteDelete($input: SitesDeleteInput!) {
     siteDelete(input: $input) {
       id
     }
@@ -30,7 +30,7 @@ export const DELETE_SITE_MUTATION = gql`
 `;
 
 export const VERIFY_SITE_MUTATION = gql`
-  mutation SiteVerify($input: SiteVerifyInput!) {
+  mutation SiteVerify($input: SitesVerifyInput!) {
     siteVerify(input: $input) {
       id
       verifiedAt
@@ -39,7 +39,7 @@ export const VERIFY_SITE_MUTATION = gql`
 `;
 
 export const CREATE_IP_BLACKLIST_MUTATION = gql`
-  mutation SiteIpBlacklistCreate($input: SiteIpBlacklistCreateInput!) {
+  mutation SiteIpBlacklistCreate($input: SitesIpBlacklistCreateInput!) {
     ipBlacklistCreate(input: $input) {
       id
       ipBlacklist {
@@ -51,7 +51,7 @@ export const CREATE_IP_BLACKLIST_MUTATION = gql`
 `;
 
 export const DELETE_IP_BLACKLIST_MUTATION = gql`
-  mutation SiteIpBlacklistDelete($input: SiteIpBlacklistDeleteInput!) {
+  mutation SiteIpBlacklistDelete($input: SitesIpBlacklistDeleteInput!) {
     ipBlacklistDelete(input: $input) {
       id
       ipBlacklist {
@@ -63,7 +63,7 @@ export const DELETE_IP_BLACKLIST_MUTATION = gql`
 `;
 
 export const CREATE_DOMAIN_BLACKLIST_MUTATION = gql`
-  mutation SiteDomainBlacklistCreate($input: SiteDomainBlacklistCreateInput!) {
+  mutation SiteDomainBlacklistCreate($input: SitesDomainBlacklistCreateInput!) {
     domainBlacklistCreate(input: $input) {
       id
       domainBlacklist {
@@ -75,7 +75,7 @@ export const CREATE_DOMAIN_BLACKLIST_MUTATION = gql`
 `;
 
 export const DELETE_DOMAIN_BLACKLIST_MUTATION = gql`
-  mutation SiteDomainBlacklistDelete($input: SiteDomainBlacklistDeleteInput!) {
+  mutation SiteDomainBlacklistDelete($input: SitesDomainBlacklistDeleteInput!) {
     domainBlacklistDelete(input: $input) {
       id
       domainBlacklist {

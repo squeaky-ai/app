@@ -1,7 +1,7 @@
 import { range } from 'lodash';
 import { average } from 'lib/maths';
 import type { TimePeriod } from 'lib/dates';
-import type { SentimentRating } from 'types/sentiment';
+import type { FeedbackSentimentRating } from 'types/graphql';
 
 import {
   getHours,
@@ -30,7 +30,7 @@ const getDateFromTimestamp = (str: string) => new Date(str);
 
 const avg = (nums: number[]) => Math.ceil(average(nums));
 
-const getDailyResults = (ratings: SentimentRating[]): DataForPeriod => {
+const getDailyResults = (ratings: FeedbackSentimentRating[]): DataForPeriod => {
   const data = range(0, 24).map(i => {
     const scores = ratings.filter(r => getHours(getDateFromTimestamp(r.timestamp)) === i);
 
@@ -43,7 +43,7 @@ const getDailyResults = (ratings: SentimentRating[]): DataForPeriod => {
   return { data, interval: 1 };
 };
 
-const getPastSevenDaysResults = (ratings: SentimentRating[]): DataForPeriod => {
+const getPastSevenDaysResults = (ratings: FeedbackSentimentRating[]): DataForPeriod => {
   const now = new Date();
 
   const data = range(0, 7).map(i => {
@@ -60,7 +60,7 @@ const getPastSevenDaysResults = (ratings: SentimentRating[]): DataForPeriod => {
   return { data: data.reverse(), interval: 0 };
 };
 
-const getPastThirtyDaysResults = (ratings: SentimentRating[]): DataForPeriod => {
+const getPastThirtyDaysResults = (ratings: FeedbackSentimentRating[]): DataForPeriod => {
   const now = new Date();
 
   const data = range(0, 30).map(i => {
@@ -77,7 +77,7 @@ const getPastThirtyDaysResults = (ratings: SentimentRating[]): DataForPeriod => 
   return { data: data.reverse(), interval: 2 };
 };
 
-export const formatResultsForPeriod = (period: TimePeriod, ratings: SentimentRating[]): DataForPeriod => {
+export const formatResultsForPeriod = (period: TimePeriod, ratings: FeedbackSentimentRating[]): DataForPeriod => {
   switch(period) {
     case 'today':
     case 'yesterday':

@@ -2,13 +2,11 @@ import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
 import { Button } from 'components/button';
-import type { PageSortBy } from 'types/visitor';
-import type { RecordingSortBy } from 'types/recording';
-import type { VisitorSortBy } from 'types/visitor';
+import { RecordingsSort, VisitorsSort, VisitorsPagesSort } from 'types/graphql';
 
 interface Props {
   name: string;
-  order: RecordingSortBy | VisitorSortBy | PageSortBy | string;
+  order: RecordingsSort | VisitorsSort | VisitorsPagesSort | string;
   onAsc: VoidFunction;
   onDesc: VoidFunction;
 }

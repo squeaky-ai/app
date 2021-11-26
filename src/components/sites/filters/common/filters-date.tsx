@@ -8,7 +8,7 @@ import { Option, Select } from 'components/select';
 import { DatePicker } from 'components/date-picker';
 import { DD_MM_YYYY_REGEX } from 'data/common/constants';
 import { valueOrDefaults } from 'lib/recordings';
-import type { DateFilter } from 'types/common';
+import type { FiltersDate as DateFilter } from 'types/graphql';
 
 interface Props {
   value: DateFilter;

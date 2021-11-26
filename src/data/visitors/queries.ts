@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const GET_VISITORS_QUERY = gql`
-  query GetVisitors($siteId: ID!, $page: Int, $size: Int, $query: String, $sort: VisitorSort, $filters: VisitorsFilters) {
+  query GetVisitors($siteId: ID!, $page: Int, $size: Int, $query: String, $sort: VisitorsSort, $filters: VisitorsFilters) {
     site(siteId: $siteId) {
       id
       name
@@ -40,7 +40,7 @@ export const GET_VISITORS_QUERY = gql`
 `;
 
 export const GET_VISITOR_QUERY = gql`
-  query GetVisitor($siteId: ID!, $visitorId: ID!, $recordingPage: Int, $recordingSort: RecordingSort, $pagesPage: Int, $pagesSort: VisitorPagesSort) {
+  query GetVisitor($siteId: ID!, $visitorId: ID!, $recordingPage: Int, $recordingSort: RecordingsSort, $pagesPage: Int, $pagesSort: VisitorsPagesSort) {
     site(siteId: $siteId) {
       id
       name

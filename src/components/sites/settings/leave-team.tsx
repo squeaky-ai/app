@@ -5,7 +5,7 @@ import { Button } from 'components/button';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { teamLeave } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
-import type { Site } from 'types/site';
+import type { Site } from 'types/graphql';
 
 interface Props {
   site: Site;
@@ -25,13 +25,12 @@ export const LeaveTeam: FC<Props> = ({ site }) => {
   };
 
   const leaveTeam = async () => {
-    const { error } = await teamLeave({ siteId: site.id });
-
-    if (error) {
-      toast.add({ type: 'error', body: 'There was an unexpected error when leaving the team. Please try again.' });
-    } else {
+    try {
+      await teamLeave({ siteId: site.id });
       toast.add({ type: 'success', body: `You have successfully left the ${site.name} team` });
       await router.push('/sites');
+    } catch(error) {
+      toast.add({ type: 'error', body: 'There was an unexpected error when leaving the team. Please try again.' });
     }
   };
 

@@ -10,8 +10,8 @@ import { PlayerActions } from 'components/sites/player/player-actions';
 import { PlayerDetails } from 'components/sites/player/player-details';
 import { PlayerFooter } from 'components/sites/player/player-footer';
 import { Error } from 'components/error';
-import type { User } from 'types/user';
-import type { Recording } from 'types/recording';
+import type { User } from 'types/graphql';
+import type { Recording } from 'types/graphql';
 import { PlayerState, Action, PlayerStatus } from 'types/player';
 
 interface Props {

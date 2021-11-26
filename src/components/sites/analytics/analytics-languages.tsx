@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import { sum } from 'lodash';
 import { percentage } from 'lib/maths';
 import { Button } from 'components/button';
-import type { AnalyticsLanguage } from 'types/analytics';
+import type { AnalyticsLanguage } from 'types/graphql';
 
 interface Props {
   languages: AnalyticsLanguage[];

@@ -16,8 +16,8 @@ import { RecordingDelete } from 'components/sites/recordings/recording-delete';
 import { toNiceDate, toTimeString } from 'lib/dates';
 import { useToasts } from 'hooks/use-toasts';
 import { recordingBookmarked } from 'lib/api/graphql';
-import type { Recording } from 'types/recording';
-import type { Site } from 'types/site';
+import type { Recording } from 'types/graphql';
+import type { Site } from 'types/graphql';
 
 interface Props {
   site: Site;

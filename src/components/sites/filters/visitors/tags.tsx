@@ -6,12 +6,12 @@ import { TagsStatus } from 'components/sites/filters/common/tags-status';
 import { TagsDate } from 'components/sites/filters/visitors/tags-date';
 import { TagsLanguages } from 'components/sites/filters/common/tags-languages';
 import { TagsRecordings } from 'components/sites/filters/visitors/tags-recordings';
-import type { Filters } from 'types/visitor';
+import type { VisitorsFilters } from 'types/graphql';
 import type { ValueOf } from 'types/common';
 
 interface Props {
-  filters: Filters;
-  updateFilters: (key: keyof Filters, value: ValueOf<Filters>) => void;
+  filters: VisitorsFilters;
+  updateFilters: (key: keyof VisitorsFilters, value: ValueOf<VisitorsFilters>) => void;
   clearFilters: VoidFunction;
 }
 

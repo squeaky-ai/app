@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import { sum } from 'lodash';
 import { Card } from 'components/card';
 import { percentage } from 'lib/maths';
-import type { AnalyticsDevice } from 'types/analytics';
+import type { AnalyticsDevice } from 'types/graphql';
 
 interface Props {
   devices: AnalyticsDevice[];

@@ -1,7 +1,7 @@
 import { range, groupBy } from 'lodash';
 import { percentage } from 'lib/maths';
 import { HeatmapColor, HEATMAP_COLOURS } from 'data/heatmaps/constants';
-import type { HeatmapsItem } from 'types/heatmaps';
+import type { HeatmapsItem } from 'types/graphql';
 
 interface ScrollMapData {
   increment: number;

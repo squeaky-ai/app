@@ -1,25 +1,27 @@
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
+import { useToasts } from 'hooks/use-toasts';
 import { GET_RECORDINGS_QUERY } from 'data/recordings/queries';
-import type { Site } from 'types/site';
-import type { Filters, PaginatedRecordingsResponse, RecordingSortBy } from 'types/recording';
+import { RecordingsSort } from 'types/graphql';
+import type { Site, RecordingsFilters, Recordings } from 'types/graphql';
 
 interface Props {
   page: number;
   size?: number;
   query?: string;
-  sort?: RecordingSortBy;
-  filters?: Filters;
+  sort?: RecordingsSort;
+  filters?: RecordingsFilters;
 }
 
 interface UseRecordings {
   loading: boolean;
   error: boolean;
-  recordings: PaginatedRecordingsResponse;
+  recordings: Recordings;
 }
 
 export const useRecordings = ({ page, size, query, sort, filters }: Props): UseRecordings => {
   const router = useRouter();
+  const toasts = useToasts();
 
   const { data, loading, error, previousData } = useQuery<{ site: Site }>(GET_RECORDINGS_QUERY, {
     variables: { 
@@ -33,15 +35,15 @@ export const useRecordings = ({ page, size, query, sort, filters }: Props): UseR
   });
 
   if (error) {
-    console.error(error);
+    toasts.add({ type: 'error', body: 'An error has occurred' });
   }
 
-  const fallback: PaginatedRecordingsResponse = { 
+  const fallback: Recordings = { 
     items: [], 
     pagination: { 
       pageSize: 0, 
       total: 0, 
-      sort: 'connected_at__desc' 
+      sort: RecordingsSort.ConnectedAtDesc 
     } 
   };
 

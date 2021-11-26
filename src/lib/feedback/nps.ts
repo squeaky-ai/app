@@ -1,7 +1,7 @@
 import { range } from 'lodash';
 import { percentage } from 'lib/maths';
 import type { TimePeriod } from 'lib/dates';
-import type { NpsScore } from 'types/nps';
+import type { FeedbackNpsScore } from 'types/graphql';
 
 import {
   getHours,
@@ -26,7 +26,7 @@ const getAmPmForHour = (hour: number): string => {
   return `${hour - 12}pm`;
 };
 
-const getNps = (scores: NpsScore[]) => {
+const getNps = (scores: FeedbackNpsScore[]) => {
   const promoters = scores.filter(s => s.score >= 9).length;
   const detractors = scores.filter(s => s.score <= 6).length;
   
@@ -35,7 +35,7 @@ const getNps = (scores: NpsScore[]) => {
 
 const getDateFromTimestamp = (str: string) => new Date(str);
 
-const getDailyResults = (scores: NpsScore[]): DataForPeriod => {
+const getDailyResults = (scores: FeedbackNpsScore[]): DataForPeriod => {
   const data = range(0, 24).map(i => {
     const s = scores.filter(s => getHours(getDateFromTimestamp(s.timestamp)) === i);
 
@@ -48,7 +48,7 @@ const getDailyResults = (scores: NpsScore[]): DataForPeriod => {
   return { data, interval: 1 };
 };
 
-const getPastSevenDaysResults = (scores: NpsScore[]): DataForPeriod => {
+const getPastSevenDaysResults = (scores: FeedbackNpsScore[]): DataForPeriod => {
   const now = new Date();
 
   const data = range(0, 7).map(i => {
@@ -65,7 +65,7 @@ const getPastSevenDaysResults = (scores: NpsScore[]): DataForPeriod => {
   return { data: data.reverse(), interval: 0 };
 };
 
-const getPastThirtyDaysResults = (scores: NpsScore[]): DataForPeriod => {
+const getPastThirtyDaysResults = (scores: FeedbackNpsScore[]): DataForPeriod => {
   const now = new Date();
 
   const data = range(0, 30).map(i => {
@@ -82,7 +82,7 @@ const getPastThirtyDaysResults = (scores: NpsScore[]): DataForPeriod => {
   return { data: data.reverse(), interval: 2 };
 };
 
-export const formatResultsForPeriod = (period: TimePeriod, scores: NpsScore[]): DataForPeriod => {
+export const formatResultsForPeriod = (period: TimePeriod, scores: FeedbackNpsScore[]): DataForPeriod => {
   switch(period) {
     case 'today':
     case 'yesterday':

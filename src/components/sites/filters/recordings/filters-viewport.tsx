@@ -6,13 +6,13 @@ import { Button } from 'components/button';
 import { Input } from 'components/input';
 import { Label } from 'components/label';
 import { valueOrDefaults, numbersOrNull } from 'lib/recordings';
-import type { Filters } from 'types/recording';
+import type { RecordingsFilters } from 'types/graphql';
 import type { ValueOf } from 'types/common';
 
 interface Props {
-  value: Filters['viewport'];
+  value: RecordingsFilters['viewport'];
   onClose: VoidFunction;
-  onUpdate: (value: ValueOf<Filters>) => void;
+  onUpdate: (value: ValueOf<RecordingsFilters>) => void;
 }
 
 const ViewportSchema = Yup.object().shape({
@@ -24,7 +24,7 @@ const ViewportSchema = Yup.object().shape({
 
 export const FiltersViewport: FC<Props> = ({ value, onClose, onUpdate }) => (
   <Formik
-    initialValues={valueOrDefaults<Filters['viewport']>(value)}
+    initialValues={valueOrDefaults<RecordingsFilters['viewport']>(value)}
     validationSchema={ViewportSchema}
     onSubmit={(values, { setSubmitting }) => {
       setSubmitting(false);

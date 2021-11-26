@@ -3,10 +3,10 @@ import type { FC } from 'react';
 import { Label } from 'components/label';
 import { Tag } from 'components/tag';
 import type { ValueOf } from 'types/common';
-import type { Filters as RecordingsFilters } from 'types/recording';
-import type { Filters as VisitorFilters } from 'types/visitor';
+import type { RecordingsFilters } from 'types/graphql';
+import type { VisitorsFilters } from 'types/graphql';
 
-type Filters = RecordingsFilters | VisitorFilters;
+type Filters = RecordingsFilters | VisitorsFilters;
 
 interface Props {
   filters: Filters;

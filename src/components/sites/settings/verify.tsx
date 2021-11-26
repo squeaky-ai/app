@@ -4,7 +4,7 @@ import { Button } from 'components/button';
 import { Message } from 'components/message';
 import { verifySite } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
-import type { Site } from 'types/site';
+import type { Site } from 'types/graphql';
 
 interface Props {
   site: Site;
@@ -18,9 +18,9 @@ export const Verify: FC<Props> = ({ site }) => {
   const siteVerify = async () => {
     setLoading(true);
 
-    const response = await verifySite({ siteId: site.id });
+    const { verifiedAt } = await verifySite({ siteId: site.id });
 
-    if (!response.site?.verifiedAt) {
+    if (!verifiedAt) {
       setFailed(true);
       toast.add({ type: 'error', body: 'The tracking code could not be found' });
     } else {

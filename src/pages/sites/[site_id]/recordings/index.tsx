@@ -22,7 +22,8 @@ import { BASE_PATH } from 'data/common/constants';
 import { defaultFilters, allColumns } from 'lib/recordings';
 import { Preferences, Preference } from 'lib/preferences';
 import { useFilters } from 'hooks/use-filters';
-import type { Filters as IFilters, Column } from 'types/recording';
+import type { Column } from 'types/recordings';
+import type { RecordingsFilters } from 'types/graphql';
 import type { ValueOf } from 'types/common';
 
 const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
@@ -30,7 +31,7 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
   const [columns, setColumns] = React.useState<Column[]>(allColumns);
   const [selected, setSelected] = React.useState<string[]>([]);
 
-  const { filters, setFilters } = useFilters<IFilters>('recordings');
+  const { filters, setFilters } = useFilters<RecordingsFilters>('recordings');
 
   const handleCancel = () => {
     setQuery('');
@@ -45,7 +46,7 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
     setQuery(element.value);
   }, 200);
 
-  const updateFilters = (key: keyof IFilters, value: ValueOf<IFilters>) => {
+  const updateFilters = (key: keyof RecordingsFilters, value: ValueOf<RecordingsFilters>) => {
     setFilters({ ...filters, [key]: value });
   };
 

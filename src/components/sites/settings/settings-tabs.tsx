@@ -4,8 +4,8 @@ import Link from 'next/link';
 import classnames from 'classnames';
 import { OWNER } from 'data/teams/constants';
 import { MAX_DAYS_BEFORE_POTENTIAL_ISSUE } from 'data/sites/constants';
-import type { Site } from 'types/site';
-import type { Team } from 'types/team';
+import type { Site } from 'types/graphql';
+import type { Team } from 'types/graphql';
 
 interface Props {
   site: Site;

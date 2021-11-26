@@ -16,7 +16,7 @@ import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { SettingsTagsBulkActions } from 'components/sites/settings/settings-tags-bulk-actions';
 import { SettingsTabs } from 'components/sites/settings/settings-tabs';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
-import type { Site } from 'types/site';
+import type { Site } from 'types/graphql';
 
 const QUERY = gql`
   query GetSiteTags($siteId: ID!) {

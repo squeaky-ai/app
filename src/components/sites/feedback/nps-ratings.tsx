@@ -2,10 +2,10 @@ import React from 'react';
 import type { FC } from 'react';
 import { groupBy, range } from 'lodash';
 import { ResponsiveContainer, CartesianGrid, BarChart, Bar, YAxis, XAxis } from 'recharts';
-import type { NpsRating } from 'types/nps';
+import type { FeedbackNpsRatings } from 'types/graphql';
 
 interface Props {
-  ratings: NpsRating[]; 
+  ratings: FeedbackNpsRatings[]; 
 }
 
 export const NpsRatings: FC<Props> = ({ ratings }) => {

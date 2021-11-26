@@ -14,7 +14,7 @@ import { Cell } from 'components/table';
 import { toNiceDate, toTimeString } from 'lib/dates';
 import { useToasts } from 'hooks/use-toasts';
 import { recordingDelete, recordingBookmarked } from 'lib/api/graphql';
-import type { Recording } from 'types/recording';
+import type { Recording } from 'types/graphql';
 
 interface Props {
   recording: Recording;

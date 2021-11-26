@@ -3,7 +3,7 @@ import { Replayer } from 'rrweb';
 import { Slider } from 'components/sites/player/slider';
 import { toTimeString } from 'lib/dates';
 import { PlayerStatus } from 'types/player';
-import type { Recording } from 'types/recording';
+import type { Recording } from 'types/graphql';
 
 interface Props {
   replayer: Replayer;
@@ -87,7 +87,7 @@ export class PlayerSlider extends React.Component<Props, State> {
 
   private get durationInSeconds() {
     return this.props.recording
-      ? this.getSeconds(this.props.recording.disconnectedAt - this.props.recording.connectedAt)
+      ? this.getSeconds(Number(this.props.recording.disconnectedAt) - Number(this.props.recording.connectedAt))
       : 0
   }
 

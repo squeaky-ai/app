@@ -13,12 +13,12 @@ import { FiltersDevice } from 'components/sites/filters/recordings/filters-devic
 import { FiltersBrowsers } from 'components/sites/filters/recordings/filters-browsers';
 import { FiltersViewport } from 'components/sites/filters/recordings/filters-viewport';
 import { FiltersLanguage } from 'components/sites/filters/common/filters-language';
-import type { Filters as IFilters } from 'types/recording';
+import type { RecordingsFilters } from 'types/graphql';
 import type { ValueOf } from 'types/common';
 
 interface Props {
-  filters: IFilters;
-  updateFilters: (key: keyof IFilters, value: ValueOf<IFilters>) => void;
+  filters: RecordingsFilters;
+  updateFilters: (key: keyof RecordingsFilters, value: ValueOf<RecordingsFilters>) => void;
 }
 
 enum FilterType {
@@ -46,7 +46,7 @@ export const Filters: FC<Props> = ({ filters, updateFilters }) => {
     setOpenFilter(null);
   };
   
-  const handleUpdate = (key: keyof IFilters) => (value: ValueOf<IFilters>) => {
+  const handleUpdate = (key: keyof RecordingsFilters) => (value: ValueOf<RecordingsFilters>) => {
     updateFilters(key, value);
     setOpenFilter(null);
   };

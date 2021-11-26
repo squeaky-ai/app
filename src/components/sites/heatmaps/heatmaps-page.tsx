@@ -7,7 +7,7 @@ import { ScrollIndicator } from 'components/sites/scroll-indicator';
 import { useRecording } from 'hooks/use-heatmaps';
 import { showClickMaps, showScrollMaps } from 'lib/heatmaps';
 import type { Event } from 'types/event';
-import type { HeatmapsItem, HeatmapsType, HeatmapsDevice } from 'types/heatmaps';
+import type { HeatmapsItem, HeatmapsType, HeatmapsDevice } from 'types/graphql';
 
 interface Props {
   type: HeatmapsType;

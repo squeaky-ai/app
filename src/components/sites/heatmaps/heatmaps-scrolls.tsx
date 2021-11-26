@@ -1,7 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import { getScrollMapData } from 'lib/heatmaps';
-import type { HeatmapsItem } from 'types/heatmaps';
+import type { HeatmapsItem } from 'types/graphql';
 
 interface Props {
   items: HeatmapsItem[];

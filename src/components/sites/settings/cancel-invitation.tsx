@@ -4,8 +4,8 @@ import { Button } from 'components/button';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { teamInviteCancel } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
-import type { Site } from 'types/site';
-import type { Team } from 'types/team';
+import type { Site } from 'types/graphql';
+import type { Team } from 'types/graphql';
 
 interface Props {
   site: Site;
@@ -25,13 +25,12 @@ export const CancelInvitation: FC<Props> = ({ site, team }) => {
   };
 
   const cancelInvitation = async () => {
-    const { error } = await teamInviteCancel({ siteId: site.id, teamId: team.id });
-
-    if (error) {
-      toast.add({ type: 'error', body: 'There was an unexpected error when cancelling your invitation. Please try again.' });
-    } else {
+    try {
+      await teamInviteCancel({ siteId: site.id, teamId: team.id });
       toast.add({ type: 'success', body: 'Invitation cancelled' });
       closeModal();
+    } catch(error) {
+      toast.add({ type: 'error', body: 'There was an unexpected error when cancelling your invitation. Please try again.' });
     }
   };
 

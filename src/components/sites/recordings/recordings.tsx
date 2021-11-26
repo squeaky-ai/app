@@ -13,13 +13,14 @@ import { EmptyState } from 'components/sites/filters/common/empty-state';
 import { useRecordings } from 'hooks/use-recordings';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 import { allColumns } from 'lib/recordings';
-import type { Filters, RecordingSortBy, Column } from 'types/recording';
-import type { Site } from 'types/site';
+import { RecordingsSort } from 'types/graphql';
+import type { Column } from 'types/recordings';
+import type { Site, RecordingsFilters } from 'types/graphql';
 
 interface Props {
   site: Site;
   query: string;
-  filters: Filters;
+  filters: RecordingsFilters;
   columns: Column[];
   selected: string[];
   setSelected: (selected: string[]) => void;
@@ -28,7 +29,7 @@ interface Props {
 export const Recordings: FC<Props> = ({ site, query, filters, columns, selected, setSelected }) => {
   const [page, setPage] = React.useState<number>(0);
   const [size, setSize] = React.useState<number>(25);
-  const [sort, setSort] = React.useState<RecordingSortBy>('connected_at__desc');
+  const [sort, setSort] = React.useState<RecordingsSort>(RecordingsSort.ConnectedAtDesc);
 
   const { loading, error, recordings } = useRecordings({ 
     page, 
@@ -74,9 +75,9 @@ export const Recordings: FC<Props> = ({ site, query, filters, columns, selected,
           <Cell>Status</Cell>
           <Cell>Recording ID</Cell>
           <Cell>Visitor ID</Cell>
-          <Cell>Date &amp; Time<Sort name='connected_at' order={sort} onAsc={() => setSort('connected_at__asc')} onDesc={() => setSort('connected_at__desc')} /></Cell>
-          <Cell>Duration <Sort name='duration' order={sort} onAsc={() => setSort('duration__asc')} onDesc={() => setSort('duration__desc')} /></Cell>
-          <Cell>Pages <Sort name='page_count' order={sort} onAsc={() => setSort('page_count__asc')} onDesc={() => setSort('page_count__desc')} /></Cell>
+          <Cell>Date &amp; Time<Sort name='connected_at' order={sort} onAsc={() => setSort(RecordingsSort.ConnectedAtAsc)} onDesc={() => setSort(RecordingsSort.ConnectedAtDesc)} /></Cell>
+          <Cell>Duration <Sort name='duration' order={sort} onAsc={() => setSort(RecordingsSort.DurationAsc)} onDesc={() => setSort(RecordingsSort.DurationDesc)} /></Cell>
+          <Cell>Pages <Sort name='page_count' order={sort} onAsc={() => setSort(RecordingsSort.PageCountAsc)} onDesc={() => setSort(RecordingsSort.PageCountDesc)} /></Cell>
           <Cell>Start &amp; Exit URL</Cell>
           <Cell>Device &amp; Viewport (px)</Cell>
           <Cell>Browser</Cell>

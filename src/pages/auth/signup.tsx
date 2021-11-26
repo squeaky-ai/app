@@ -3,6 +3,7 @@ import type { NextPage } from 'next';
 import Link from 'next/link';
 import Head from 'next/head';
 import * as Yup from 'yup';
+import { gql, useLazyQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { Formik } from 'formik';
 import { Logo } from 'components/logo';
@@ -15,7 +16,7 @@ import { Checkbox } from 'components/checkbox';
 import { Message } from 'components/message';
 import { Password } from 'components/password';
 import { PASSWORD_REGEX } from 'data/users/constants';
-import { emailExists, signup, reconfirmAccount } from 'lib/api/auth';
+import { signup, reconfirmAccount } from 'lib/api/auth';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useToasts } from 'hooks/use-toasts';
 
@@ -25,6 +26,12 @@ enum PageView {
   EMAIL_TAKEN,
   VERIFY
 }
+
+const USER_EXISTS = gql`
+  query UserExists($email: String!) {
+    userExists(email: $email)
+  }
+`;
 
 const EmailSchema = Yup.object().shape({
   email: Yup.string().email('Please enter a valid email address').required('Email is required'),
@@ -40,6 +47,8 @@ const Signup: NextPage<ServerSideProps> = () => {
   const router = useRouter();
   const [pageView, setPageView] = React.useState(PageView.EMAIL);
   const [email, setEmail] = React.useState<string>(null);
+
+  const [checkEmailExists] = useLazyQuery(USER_EXISTS);
 
   const resendConfirmation = async () => {
     const { error } = await reconfirmAccount(email);
@@ -70,10 +79,11 @@ const Signup: NextPage<ServerSideProps> = () => {
                   validationSchema={EmailSchema}
                   onSubmit={(values, { setSubmitting }) => {
                     (async () => {
-                      const { body } = await emailExists(values.email);
+                      const { data } = await checkEmailExists({ variables: { email: values.email } });
+                      console.log(data.userExists);
                       setSubmitting(false);
                       setEmail(values.email);
-                      setPageView(body ? PageView.EMAIL_TAKEN : PageView.PASSWORD);
+                      setPageView(data.userExists ? PageView.EMAIL_TAKEN : PageView.PASSWORD);
                     })();
                   }}
                 >
