@@ -2,9 +2,9 @@ import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
 import { Button } from 'components/button';
-import type { PageSortBy } from 'types/visitor';
-import type { RecordingSortBy } from 'types/recording';
-import type { VisitorSortBy } from 'types/visitor';
+import type { PageSortBy } from 'types/graphql';
+import type { RecordingSortBy } from 'types/graphql';
+import type { VisitorSortBy } from 'types/graphql';
 
 interface Props {
   name: string;

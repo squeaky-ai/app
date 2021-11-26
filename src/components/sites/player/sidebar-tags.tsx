@@ -8,7 +8,7 @@ import { Button } from 'components/button';
 import { Input } from 'components/input';
 import { Tag } from 'components/tag';
 import { tagCreate, tagRemove } from 'lib/api/graphql';
-import type { Recording, Tag as ITag } from 'types/recording';
+import type { Recording, Tag as ITag } from 'types/graphql';
 
 interface Props {
   recording: Recording;

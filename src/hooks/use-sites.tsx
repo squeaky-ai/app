@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { GET_SITES_QUERY } from 'data/sites/queries';
-import type { Site } from 'types/site';
+import type { Site } from 'types/graphql';
 
 interface UseSites {
   loading: boolean;

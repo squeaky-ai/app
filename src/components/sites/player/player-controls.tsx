@@ -6,7 +6,7 @@ import { PlayerSpeed } from 'components/sites/player/player-speed';
 import { PlayerSlider } from 'components/sites/player/player-slider';
 import { Spinner } from 'components/spinner';
 import { PlayerState, Action, PlayerStatus } from 'types/player';
-import type { Recording } from 'types/recording';
+import type { Recording } from 'types/graphql';
 
 interface Props {
   state: PlayerState;

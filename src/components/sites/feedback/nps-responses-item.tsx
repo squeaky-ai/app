@@ -7,10 +7,10 @@ import { Row, Cell } from 'components/table';
 import { Dropdown } from 'components/dropdown';
 import { NpsResponsesDelete } from 'components/sites/feedback/nps-responses-delete';
 import { toNiceDate } from 'lib/dates';
-import type { NpsResponseItem } from 'types/nps';
+import type { FeedbackNpsResponseItem } from 'types/graphql';
 
 interface Props {
-  response: NpsResponseItem;
+  response: FeedbackNpsResponseItem;
 }
 
 export const NpsResponsesItem: FC<Props> = ({ response }) => {

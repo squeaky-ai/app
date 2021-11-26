@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_SITE_QUERY } from 'data/sites/queries';
-import type { Site } from 'types/site';
+import type { Site } from 'types/graphql';
 
 interface UseSite {
   loading: boolean;

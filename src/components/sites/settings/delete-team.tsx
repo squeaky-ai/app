@@ -4,8 +4,8 @@ import { Button } from 'components/button';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { teamDelete } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
-import type { Site } from 'types/site';
-import type { Team } from 'types/team';
+import type { Site } from 'types/graphql';
+import type { Team } from 'types/graphql';
 
 interface Props {
   site: Site;

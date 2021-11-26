@@ -3,12 +3,12 @@ import type { FC } from 'react';
 import { ResponsiveContainer, CartesianGrid, LineChart, Line, YAxis, XAxis } from 'recharts';
 import { formatResultsForPeriod } from 'lib/feedback/ratings';
 import { EMOJIS } from 'data/sentiment/constants';
-import type { SentimentRating } from 'types/sentiment';
+import type { FeedbackSentimentRating } from 'types/graphql';
 import type { TimePeriod } from 'lib/dates';
 
 interface Props {
   period: TimePeriod;
-  ratings: SentimentRating[];
+  ratings: FeedbackSentimentRating[];
 }
 
 export const SentimentRatings: FC<Props> = ({ period, ratings }) => {

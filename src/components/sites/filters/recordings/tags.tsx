@@ -12,12 +12,12 @@ import { TagsDevices } from 'components/sites/filters/recordings/tags-devices';
 import { TagsBrowsers } from 'components/sites/filters/recordings/tags-browsers';
 import { TagsLanguages } from 'components/sites/filters/common/tags-languages';
 import { TagsViewport } from 'components/sites/filters/recordings/tags-viewport';
-import type { Filters } from 'types/recording';
+import type { RecordingsFilters } from 'types/graphql';
 import type { ValueOf } from 'types/common';
 
 interface Props {
-  filters: Filters;
-  updateFilters: (key: keyof Filters, value: ValueOf<Filters>) => void;
+  filters: RecordingsFilters;
+  updateFilters: (key: keyof RecordingsFilters, value: ValueOf<RecordingsFilters>) => void;
   clearFilters: VoidFunction;
 }
 

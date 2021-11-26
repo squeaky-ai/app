@@ -2,7 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import { Replayer } from 'rrweb';
 import type { Event } from 'types/event';
-import type { Recording } from 'types/recording';
+import type { Recording } from 'types/graphql';
 
 interface Props {
   recording: Recording;

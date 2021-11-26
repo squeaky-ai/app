@@ -4,7 +4,7 @@ import { Dropdown } from 'components/dropdown';
 import { Tooltip } from 'components/tooltip';
 import { RecordingsDelete } from 'components/sites/recordings/recordings-delete';
 import { RecordingsStatus } from 'components/sites/recordings/recordings-status';
-import type { Site } from 'types/site';
+import type { Site } from 'types/graphql';
 
 interface Props {
   site: Site;

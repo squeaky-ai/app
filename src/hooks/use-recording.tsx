@@ -1,8 +1,8 @@
 import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { GET_RECORDING_QUERY, GET_RECORDING_EVENTS_QUERY } from 'data/recordings/queries';
-import type { Site } from 'types/site';
-import type { Recording, PaginatedEventsResponse } from 'types/recording';
+import type { Site } from 'types/graphql';
+import type { Recording, PaginatedEventsResponse } from 'types/graphql';
 
 interface UseRecording {
   loading: boolean;

@@ -1,5 +1,5 @@
 import { range, sum } from 'lodash';
-import type { PageView } from 'types/analytics';
+import type { PageView } from 'types/graphql';
 import type { TimePeriod } from 'lib/dates';
 
 import {

@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_SENTIMENT_QUERY } from 'data/sentiment/queries';
-import type { Site } from 'types/site';
+import type { Site } from 'types/graphql';
 import type { TimeRange } from 'lib/dates';
-import type { Sentiment, SentimentResponseSortBy } from 'types/sentiment';
+import type { Sentiment, SentimentResponseSortBy } from 'types/graphql';
 
 interface Props {
   page: number;

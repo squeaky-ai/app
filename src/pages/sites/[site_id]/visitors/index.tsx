@@ -21,14 +21,15 @@ import { defaultFilters, allColumns } from 'lib/visitors';
 import { BASE_PATH } from 'data/common/constants';
 import { useFilters } from 'hooks/use-filters';
 import { Preferences, Preference } from 'lib/preferences';
-import type { Filters as IFilters, Column } from 'types/visitor';
+import type { VisitorsFilters } from 'types/graphql';
+import type { Column } from 'types/visitors';
 import type { ValueOf } from 'types/common';
 
 const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
   const [query, setQuery] = React.useState<string>('');
   const [columns, setColumns] = React.useState<Column[]>(allColumns);
 
-  const { filters, setFilters } = useFilters<IFilters>('visitors');
+  const { filters, setFilters } = useFilters<VisitorsFilters>('visitors');
 
   const handleCancel = () => {
     setQuery('');
@@ -43,7 +44,7 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
     setQuery(element.value);
   }, 200);
 
-  const updateFilters = (key: keyof IFilters, value: ValueOf<IFilters>) => {
+  const updateFilters = (key: keyof VisitorsFilters, value: ValueOf<VisitorsFilters>) => {
     setFilters({ ...filters, [key]: value });
   };
 

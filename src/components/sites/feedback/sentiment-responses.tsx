@@ -8,17 +8,17 @@ import { PageSize } from 'components/sites/page-size';
 import { Pagination } from 'components/pagination';
 import { NoResponses } from 'components/sites/feedback/no-responses';
 import { SentimentResponsesItem } from 'components/sites/feedback/sentiment-responses-item';
-import type { SentimentResponse } from 'types/sentiment';
-import type { SentimentResponseSortBy } from 'types/sentiment';
+import { FeedbackSentimentResponseSort } from 'types/graphql';
+import type { FeedbackSentimentResponse } from 'types/graphql';
 
 interface Props {
   page: number;
-  sort: SentimentResponseSortBy;
+  sort: FeedbackSentimentResponseSort;
   size: number;
   setPage: (page: number) => void;
-  setSort: (sort: SentimentResponseSortBy) => void;
+  setSort: (sort: FeedbackSentimentResponseSort) => void;
   setSize: (size: number) => void;
-  responses: SentimentResponse;
+  responses: FeedbackSentimentResponse;
 }
 
 export const SentimentResponses: FC<Props> = ({ page, sort, size, setPage, setSort, setSize, responses }) => {
@@ -50,8 +50,8 @@ export const SentimentResponses: FC<Props> = ({ page, sort, size, setPage, setSo
                 <Sort 
                   name='duration' 
                   order={sort} 
-                  onAsc={() => setSort('timestamp__asc')} 
-                  onDesc={() => setSort('timestamp__desc')} 
+                  onAsc={() => setSort(FeedbackSentimentResponseSort.TimestampAsc)} 
+                  onDesc={() => setSort(FeedbackSentimentResponseSort.TimestampDesc)} 
                 />
               </Cell>
               <Cell>

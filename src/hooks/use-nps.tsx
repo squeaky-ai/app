@@ -1,15 +1,15 @@
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_NPS_QUERY } from 'data/nps/queries';
-import type { Site } from 'types/site';
+import { FeedbackNpsResponseSort } from 'types/graphql';
 import type { TimeRange } from 'lib/dates';
-import type { Nps, NpsResponseSortBy } from 'types/nps';
+import type { Site, Nps } from 'types/graphql';
 
 interface Props {
   page: number;
   size?: number;
   query?: string;
-  sort?: NpsResponseSortBy;
+  sort?: FeedbackNpsResponseSort;
   range: TimeRange;
 }
 
@@ -42,7 +42,7 @@ export const useNps = ({ page, size, sort, range }: Props): UseNps => {
       pagination: { 
         pageSize: 0, 
         total: 0, 
-        sort: 'timestamp__desc' 
+        sort: FeedbackNpsResponseSort.TimestampDesc, 
       } 
     },
     groups: {

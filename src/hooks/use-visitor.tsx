@@ -1,9 +1,9 @@
 import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { GET_VISITOR_QUERY } from 'data/visitors/queries';
-import type { Site } from 'types/site';
-import type { Visitor, PageSortBy } from 'types/visitor';
-import type { RecordingSortBy } from 'types/recording';
+import type { Site } from 'types/graphql';
+import type { Visitor, PageSortBy } from 'types/graphql';
+import type { RecordingSortBy } from 'types/graphql';
 
 interface Props {
   recordingPage: number;

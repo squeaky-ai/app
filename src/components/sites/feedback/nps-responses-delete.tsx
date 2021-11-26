@@ -3,10 +3,10 @@ import type { FC } from 'react';
 import { Button } from 'components/button';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { useToasts } from 'hooks/use-toasts';
-import type { NpsResponseItem } from 'types/nps';
+import type { FeedbackNpsResponseItem } from 'types/graphql';
 
 interface Props {
-  response: NpsResponseItem;
+  response: FeedbackNpsResponseItem;
   onClose: VoidFunction;
 }
 

@@ -1,7 +1,7 @@
 import { range } from 'lodash';
 import { average } from 'lib/maths';
 import type { TimePeriod } from 'lib/dates';
-import type { SentimentRating } from 'types/sentiment';
+import type { SentimentRating } from 'types/graphql';
 
 import {
   getHours,

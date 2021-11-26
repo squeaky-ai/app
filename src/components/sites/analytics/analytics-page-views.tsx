@@ -8,7 +8,7 @@ import { Pill } from 'components/pill';
 import { Checkbox } from 'components/checkbox';
 import { toDayOfMonth, expandDay } from 'lib/dates';
 import { formatResultsForPeriod } from 'lib/analytics/page-views';
-import type { PageView } from 'types/analytics';
+import type { AnalyticsPageViews as PageView } from 'types/graphql';
 import type { TimePeriod } from 'lib/dates';
 
 interface Props {

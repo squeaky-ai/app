@@ -13,8 +13,8 @@ import { EmptyState } from 'components/sites/filters/common/empty-state';
 import { useRecordings } from 'hooks/use-recordings';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 import { allColumns } from 'lib/recordings';
-import type { Filters, RecordingSortBy, Column } from 'types/recording';
-import type { Site } from 'types/site';
+import type { Filters, RecordingSortBy, Column } from 'types/graphql';
+import type { Site } from 'types/graphql';
 
 interface Props {
   site: Site;

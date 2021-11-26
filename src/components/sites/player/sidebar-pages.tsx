@@ -7,7 +7,7 @@ import { EventType } from 'rrweb';
 import { groupBy } from 'lodash';
 import { ActivityTimestamp } from 'components/sites/player/activity-timestamp';
 import type { Event } from 'types/event';
-import type { Recording } from 'types/recording';
+import type { Recording } from 'types/graphql';
 
 interface Props {
   replayer: Replayer;

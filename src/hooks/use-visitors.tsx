@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_VISITORS_QUERY } from 'data/visitors/queries';
-import type { Site } from 'types/site';
-import type { Filters, PaginatedVisitorsResponse, VisitorSortBy } from 'types/visitor';
+import type { Site } from 'types/graphql';
+import type { Filters, PaginatedVisitorsResponse, VisitorSortBy } from 'types/graphql';
 
 interface Props {
   page: number;

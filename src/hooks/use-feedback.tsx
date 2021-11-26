@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_FEEDBACK_QUERY } from 'data/feedback/queries';
-import type { Feedback } from 'types/feedback';
+import type { Feedback } from 'types/graphql';
 
 interface UseFeedback {
   loading: boolean;

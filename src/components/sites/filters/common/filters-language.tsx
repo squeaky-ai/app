@@ -8,7 +8,7 @@ import { Button } from 'components/button';
 import { Input } from 'components/input';
 import { Spinner } from 'components/spinner';
 import { Checkbox } from 'components/checkbox';
-import type { Site } from 'types/site';
+import type { Site } from 'types/graphql';
 
 interface Props {
   value: string[];

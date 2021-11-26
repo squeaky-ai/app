@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_TEAM_QUERY } from 'data/teams/queries';
-import type { Team as TeamMember } from 'types/team';
+import type { Team as TeamMember } from 'types/graphql';
 
 interface Team {
   members: TeamMember[];

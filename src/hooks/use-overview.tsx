@@ -2,7 +2,7 @@ import { format } from 'date-fns';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_OVERVIEW_QUERY } from 'data/overview/queries';
-import type { Site } from 'types/site';
+import type { Site } from 'types/graphql';
 import type { Overview } from 'types/overview';
 import type { TimeRange } from 'lib/dates';
 

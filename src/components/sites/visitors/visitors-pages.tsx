@@ -3,8 +3,8 @@ import type { FC } from 'react';
 import { Sort } from 'components/sort';
 import { Pagination } from 'components/pagination';
 import { Table, Row, Cell } from 'components/table';
-import type { Visitor } from 'types/visitor';
-import type { PageSortBy } from 'types/visitor';
+import type { Visitor } from 'types/graphql';
+import type { PageSortBy } from 'types/graphql';
 
 interface Props {
   visitor: Visitor;

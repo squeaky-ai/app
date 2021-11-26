@@ -1,6 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
-import type { Site } from 'types/site';
+import type { Site } from 'types/graphql';
 import { Button } from 'components/button';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { Label } from 'components/label';

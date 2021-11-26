@@ -2,11 +2,11 @@ import React from 'react';
 import type { FC } from 'react';
 import { ResponsiveContainer, CartesianGrid, LineChart, Line, YAxis, XAxis } from 'recharts';
 import { formatResultsForPeriod } from 'lib/feedback/responses';
-import type { NspReplies } from 'types/nps';
+import type { FeedbackNpsReplies } from 'types/graphql';
 import type { TimePeriod } from 'lib/dates';
 
 interface Props {
-  replies: NspReplies; 
+  replies: FeedbackNpsReplies; 
   period: TimePeriod;
 }
 

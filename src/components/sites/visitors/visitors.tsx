@@ -19,8 +19,8 @@ import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 import { BASE_PATH } from 'data/common/constants';
 import { Preference } from 'lib/preferences';
 import { allColumns } from 'lib/visitors';
-import type { Site } from 'types/site';
-import type { Column, Filters, VisitorSortBy } from 'types/visitor';
+import type { Site } from 'types/graphql';
+import type { Column, Filters, VisitorSortBy } from 'types/graphql';
 
 interface Props {
   query: string;

@@ -1,7 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
-import type { Site } from 'types/site';
+import type { Site } from 'types/graphql';
 
 interface Item {
   href?: string;

@@ -4,10 +4,9 @@ import { Label } from 'components/label';
 import { Tag } from 'components/tag';
 import { defaultFilters } from 'lib/recordings';
 import type { ValueOf } from 'types/common';
-import type { Filters as RecordingsFilters } from 'types/recording';
-import type { Filters as VisitorFilters } from 'types/visitor';
+import type { RecordingsFilters, VisitorsFilters } from 'types/graphql';
 
-type Filters = RecordingsFilters | VisitorFilters;
+type Filters = RecordingsFilters | VisitorsFilters;
 
 interface Props {
   filters: Filters;

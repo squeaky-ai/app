@@ -8,12 +8,12 @@ import { Pill } from 'components/pill';
 import { Checkbox } from 'components/checkbox';
 import { toDayOfMonth, expandDay } from 'lib/dates';
 import { formatResultsForPeriod } from 'lib/analytics/visitors';
-import type { Visitor } from 'types/analytics';
+import type { AnalyticsVisitor } from 'types/graphql';
 import type { TimePeriod } from 'lib/dates';
 
 interface Props {
   period: TimePeriod;
-  visitors: Visitor[];
+  visitors: AnalyticsVisitor[];
 }
 
 const formatLabel = (period: TimePeriod, label: string) => {

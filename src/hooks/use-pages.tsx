@@ -1,6 +1,6 @@
 import { gql, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
-import type { Site } from 'types/site';
+import type { Site } from 'types/graphql';
 
 interface UsePages {
   loading: boolean;

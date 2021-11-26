@@ -1,7 +1,7 @@
 import { range } from 'lodash';
 import { percentage } from 'lib/maths';
 import type { TimePeriod } from 'lib/dates';
-import type { NpsScore } from 'types/nps';
+import type { NpsScore } from 'types/graphql';
 
 import {
   getHours,

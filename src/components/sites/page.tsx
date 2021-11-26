@@ -3,9 +3,8 @@ import type { FC, ReactElement } from 'react';
 import { useSite } from 'hooks/use-site';
 import { NotFound } from 'components/sites/not-found';
 import { Unauthorized } from 'components/sites/unauthorized';
-import type { User } from 'types/user';
-import type { Site } from 'types/site';
-import type { Team } from 'types/team';
+import type { User, Team } from 'types/graphql';
+import type { Site } from 'types/graphql';
 
 interface Children {
   site: Site;

@@ -8,17 +8,17 @@ import { PageSize } from 'components/sites/page-size';
 import { Pagination } from 'components/pagination';
 import { NoResponses } from 'components/sites/feedback/no-responses';
 import { NpsResponsesItem } from 'components/sites/feedback/nps-responses-item';
-import type { NpsResponse } from 'types/nps';
-import type { NpsResponseSortBy } from 'types/nps';
+import { FeedbackNpsResponseSort } from 'types/graphql';
+import type { FeedbackNpsResponse } from 'types/graphql';
 
 interface Props {
   page: number;
-  sort: NpsResponseSortBy;
+  sort: FeedbackNpsResponseSort;
   size: number;
   setPage: (page: number) => void;
-  setSort: (sort: NpsResponseSortBy) => void;
+  setSort: (sort: FeedbackNpsResponseSort) => void;
   setSize: (size: number) => void;
-  responses: NpsResponse;
+  responses: FeedbackNpsResponse;
 }
 
 export const NpsResponses: FC<Props> = ({ page, sort, size, setPage, setSort, setSize, responses }) => {
@@ -50,8 +50,8 @@ export const NpsResponses: FC<Props> = ({ page, sort, size, setPage, setSort, se
                 <Sort 
                   name='duration' 
                   order={sort} 
-                  onAsc={() => setSort('timestamp__asc')} 
-                  onDesc={() => setSort('timestamp__desc')} 
+                  onAsc={() => setSort(FeedbackNpsResponseSort.TimestampAsc)} 
+                  onDesc={() => setSort(FeedbackNpsResponseSort.TimestampDesc)} 
                 />
               </Cell>
               <Cell>

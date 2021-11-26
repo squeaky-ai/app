@@ -1,6 +1,6 @@
 import { capitalize } from 'lodash';
 import type { Device } from 'types/device';
-import type { Filters, Visitor, Column } from 'types/visitor';
+import type { Filters, Visitor, Column } from 'types/graphql';
 
 export function getAttributes<T>(visitor: Visitor): T {
   try {

@@ -16,16 +16,15 @@ import { NotFound } from 'components/sites/not-found';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useVisitor } from 'hooks/use-visitor';
 import { toHoursMinutesAndSeconds } from 'lib/dates';
-import type { PageSortBy } from 'types/visitor';
-import type { RecordingSortBy } from 'types/recording';
+import { VisitorsPagesSort, RecordingsSort } from 'types/graphql';
 
 const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
   const router = useRouter();
 
   const [pageviewPage, setPageviewPage] = React.useState<number>(1);
-  const [pageviewSort, setPageviewSort] = React.useState<PageSortBy>('views_count__desc');
   const [recordingPage, setRecordingPage] = React.useState<number>(0);
-  const [recordingSort, setRecordingSort] = React.useState<RecordingSortBy>('connected_at__desc');
+  const [pageviewSort, setPageviewSort] = React.useState<VisitorsPagesSort>(VisitorsPagesSort.ViewsCountDesc);
+  const [recordingSort, setRecordingSort] = React.useState<RecordingsSort>(RecordingsSort.ConnectedAtDesc);
 
   const { visitor, error, loading } = useVisitor({ 
     recordingPage,

@@ -10,8 +10,8 @@ import { RecordingsShare } from 'components/sites/recordings/recordings-share';
 import { recordingDelete, recordingBookmarked } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
 import { Preferences, Preference } from 'lib/preferences';
-import type { Site } from 'types/site';
-import type { Recording } from 'types/recording';
+import type { Site } from 'types/graphql';
+import type { Recording } from 'types/graphql';
 
 interface Props {
   site: Site;

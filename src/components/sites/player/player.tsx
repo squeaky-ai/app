@@ -4,9 +4,9 @@ import { debounce } from 'lodash';
 import { Spinner } from 'components/spinner';
 import { Buffering } from 'components/sites/player/buffering';
 import { recordingViewed } from 'lib/api/graphql';
-import type { Recording } from 'types/recording';
+import type { Recording } from 'types/graphql';
 import { PlayerState, Action, PlayerStatus } from 'types/player';
-import type { Site } from 'types/site';
+import type { Site } from 'types/graphql';
 
 interface Props {
   site: Site;

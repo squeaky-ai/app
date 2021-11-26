@@ -22,7 +22,7 @@ import { BASE_PATH } from 'data/common/constants';
 import { defaultFilters, allColumns } from 'lib/recordings';
 import { Preferences, Preference } from 'lib/preferences';
 import { useFilters } from 'hooks/use-filters';
-import type { Filters as IFilters, Column } from 'types/recording';
+import type { Filters as IFilters, Column } from 'types/graphql';
 import type { ValueOf } from 'types/common';
 
 const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {

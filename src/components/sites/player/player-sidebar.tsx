@@ -10,9 +10,9 @@ import { SidebarActivity } from 'components/sites/player/sidebar-activity';
 import { SidebarNotes } from 'components/sites/player/sidebar-notes';
 import { SidebarTags } from 'components/sites/player/sidebar-tags';
 import { SidebarPages } from 'components/sites/player/sidebar-pages';
-import type { Recording } from 'types/recording';
+import type { Recording } from 'types/graphql';
 import type { PlayerState, Action } from 'types/player';
-import type { Site } from 'types/site';
+import type { Site } from 'types/graphql';
 
 interface Props {
   state: PlayerState;

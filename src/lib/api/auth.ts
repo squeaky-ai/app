@@ -1,6 +1,6 @@
 import axios from 'axios';
 import getConfig from 'next/config';
-import type { User } from 'types/user';
+import type { User } from 'types/graphql';
 
 type LoginInput = {
   email: string;

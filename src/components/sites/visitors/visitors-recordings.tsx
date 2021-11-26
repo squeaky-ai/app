@@ -6,8 +6,8 @@ import { Sort } from 'components/sort';
 import { VisitorsRecordingsItem } from 'components/sites/visitors/visitors-recordings-item';
 import { Table, Row, Cell } from 'components/table';
 import { BASE_PATH } from 'data/common/constants';
-import type { Visitor } from 'types/visitor';
-import type { RecordingSortBy } from 'types/recording';
+import type { Visitor } from 'types/graphql';
+import type { RecordingSortBy } from 'types/graphql';
 
 interface Props {
   visitor: Visitor;

@@ -4,7 +4,7 @@ import { sum, orderBy, first } from 'lodash';
 import { Browser } from 'components/browser';
 import { Button } from 'components/button';
 import { percentage } from 'lib/maths';
-import { AnalyticsBrowser } from 'types/analytics';
+import { AnalyticsBrowser } from 'types/graphql';
 
 interface Props {
   browsers: AnalyticsBrowser[];

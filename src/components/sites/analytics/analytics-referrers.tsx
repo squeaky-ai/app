@@ -5,7 +5,7 @@ import { Table, Row, Cell } from 'components/table';
 import { Pagination } from 'components/pagination';
 import { percentage } from 'lib/maths';
 import { Tooltip } from 'components/tooltip';
-import type { AnalyticsReferrer } from 'types/analytics';
+import type { AnalyticsReferrer } from 'types/graphql';
 
 interface Props {
   referrers: AnalyticsReferrer[];

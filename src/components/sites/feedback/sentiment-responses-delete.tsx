@@ -3,10 +3,10 @@ import type { FC } from 'react';
 import { Button } from 'components/button';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { useToasts } from 'hooks/use-toasts';
-import type { SentimentResponseItem } from 'types/sentiment';
+import type { FeedbackSentimentResponseItem } from 'types/graphql';
 
 interface Props {
-  response: SentimentResponseItem;
+  response: FeedbackSentimentResponseItem;
   onClose: VoidFunction;
 }
 

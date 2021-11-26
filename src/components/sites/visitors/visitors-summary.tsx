@@ -9,8 +9,8 @@ import { Browser } from 'components/browser';
 import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
 import { Pill } from 'components/pill';
 import { getAttributes, normalizeKey, groupVisitorBrowsers, groupVisitorDevices } from 'lib/visitors';
-import type { Site } from 'types/site';
-import type { Visitor } from 'types/visitor';
+import type { Site } from 'types/graphql';
+import type { Visitor } from 'types/graphql';
 
 interface Props {
   site: Site;

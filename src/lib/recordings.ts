@@ -1,4 +1,4 @@
-import type { Filters, Column } from 'types/recording';
+import type { Filters, Column } from 'types/graphql';
 
 export const defaultFilters: Filters = {
   browsers: [],

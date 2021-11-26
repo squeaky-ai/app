@@ -2,7 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import { Trend } from 'components/trend';
 import { toHoursMinutesAndSeconds } from 'lib/dates';
-import type { SessionDuration } from 'types/analytics';
+import type { AnalyticsSessionDurations as SessionDuration } from 'types/graphql';
 
 interface Props {
   sessionDurations: SessionDuration;

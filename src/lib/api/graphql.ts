@@ -11,7 +11,7 @@ import {
   SiteIpBlacklistDeleteMutationInput,
   SiteDomainBlacklistCreateMutationInput,
   SiteDomainBlacklistDeleteMutationInput,
-} from 'types/site';
+} from 'types/graphql';
 
 import {
   GET_SITES_QUERY
@@ -28,7 +28,7 @@ import {
   DELETE_DOMAIN_BLACKLIST_MUTATION,
 } from 'data/sites/mutations';
 
-import { 
+import {
   TeamInviteInput,
   TeamInviteCancelInput, 
   TeamInviteResendInput,
@@ -36,7 +36,7 @@ import {
   TeamInviteAcceptInput,
   TeamLeaveInput, 
   TeamDeleteInput,
-} from 'types/team';
+} from 'types/graphql';
 
 import { 
   TEAM_INVITE_MUTATION, 
@@ -48,12 +48,10 @@ import {
   TEAM_DELETE_MUTATION
 } from 'data/teams/mutations';
 
-import { 
-  UserMutationInput, 
-  UserMutationResponse,
-  UserPasswordMutationInput,
-  UserInvitationQueryResponse
-} from 'types/user';
+import {
+  UsersUpdateInput,
+  UsersPasswordInput,
+} from 'types/graphql';
 
 import { 
   USER_INVITATION_QUERY
@@ -97,7 +95,7 @@ import {
   BookmarkRecordingMutationInput,
   DeleteRecordingsMutationInput,
   ViewedRecordingsMutationInput,
-} from 'types/recording';
+} from 'types/graphql';
 
 import {
   NoteCreateMutationInput,
@@ -121,7 +119,7 @@ import {
 
 import {
   VisitorStarredMutationInput
-} from 'types/visitor';
+} from 'types/graphql';
 
 const ACCEPT_INCOMING = <E, I>(_existing: E, incoming: I[]): I[] => cloneDeep(incoming);
 
@@ -315,7 +313,7 @@ export const domainBlacklistDelete = async (input: SiteDomainBlacklistDeleteMuta
   }
 };
 
-export const updateUser = async (input: UserMutationInput): Promise<UserMutationResponse> => {
+export const updateUser = async (input: UsersUpdateInput): Promise<UserMutationResponse> => {
   try {
     const { data } = await client.mutate({
       mutation: UPDATE_USER_MUTATION,
@@ -409,7 +407,7 @@ export const userDelete = async (): Promise<boolean> => {
   }
 };
 
-export const userPassword = async (input: UserPasswordMutationInput): Promise<UserMutationResponse> => {
+export const userPassword = async (input: UsersPasswordInput): Promise<UserMutationResponse> => {
   try {
     const { data } = await client.mutate({
       mutation: USER_PASSWORD_MUTATION,

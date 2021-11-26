@@ -4,11 +4,11 @@ import { Label } from 'components/label';
 import { Tag } from 'components/tag';
 import { defaultFilters } from 'lib/visitors';
 import type { ValueOf } from 'types/common';
-import type { Filters } from 'types/visitor';
+import type { VisitorsFilters } from 'types/graphql';
 
 interface Props {
-  filters: Filters;
-  updateFilters: (key: keyof Filters, value: ValueOf<Filters>) => void;
+  filters: VisitorsFilters;
+  updateFilters: (key: keyof VisitorsFilters, value: ValueOf<VisitorsFilters>) => void;
 }
 
 export const TagsRecordings: FC<Props> = ({ filters, updateFilters }) => {

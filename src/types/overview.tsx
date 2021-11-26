@@ -1,9 +1,7 @@
-import type { Analytics } from 'types/analytics';
-import type { Recording } from 'types/recording'
-import type { PaginatedNotesResponse } from 'types/note';
+import type { Analytics, Recording, Notes } from 'types/graphql';
 
 export interface Overview {
-  notes: Pick<PaginatedNotesResponse, 'items'>;
+  notes: Pick<Notes, 'items'>;
   analytics: Pick<Analytics, 'visitorsCount' | 'pageViewCount' | 'recordingsCount'>;
   recordingLatest: Recording | null;
 }

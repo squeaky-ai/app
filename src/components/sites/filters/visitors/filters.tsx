@@ -8,12 +8,12 @@ import { FiltersDate } from 'components/sites/filters/common/filters-date';
 import { FiltersStatus } from 'components/sites/filters/common/filters-status';
 import { FiltersLanguage } from 'components/sites/filters/common/filters-language';
 import { FiltersRecordings } from 'components/sites/filters/visitors/filters-recordings';
-import type { Filters as IFilters } from 'types/visitor';
+import type { VisitorsFilters } from 'types/graphql';
 import type { ValueOf } from 'types/common';
 
 interface Props {
-  filters: IFilters;
-  updateFilters: (key: keyof IFilters, value: ValueOf<IFilters>) => void;
+  filters: VisitorsFilters;
+  updateFilters: (key: keyof VisitorsFilters, value: ValueOf<VisitorsFilters>) => void;
 }
 
 enum FilterType {
@@ -39,7 +39,7 @@ export const Filters: FC<Props> = ({ filters, updateFilters }) => {
     setOpenFilter(null);
   };
   
-  const handleUpdate = (key: keyof IFilters) => (value: ValueOf<IFilters>) => {
+  const handleUpdate = (key: keyof VisitorsFilters) => (value: ValueOf<VisitorsFilters>) => {
     updateFilters(key, value);
     setOpenFilter(null);
   };

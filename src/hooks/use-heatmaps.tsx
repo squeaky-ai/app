@@ -1,10 +1,9 @@
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_HEATMAPS_QUERY, GET_RECORDING_QUERY } from 'data/heatmaps/queries';
-import type { Site } from 'types/site';
+import type { Site } from 'types/graphql';
 import type { TimeRange } from 'lib/dates';
-import type { Heatmaps, HeatmapsDevice, HeatmapsType } from 'types/heatmaps';
-import type { Recording } from 'types/recording';
+import type { Recording, Heatmaps, HeatmapsDevice, HeatmapsType } from 'types/graphql';
 
 interface UseHeatmaps {
   loading: boolean;
