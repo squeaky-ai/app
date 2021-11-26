@@ -52,11 +52,8 @@ export const TeamRow: FC<Props> = ({ user, site, team }) => {
   };
 
   const changeRole = async () => {
-    const { error } = await teamUpdate({ siteId: site.id, teamId: team.id, role });
-
-    if (error) {
-      toast.add({ type: 'error', body: 'There was an unexpected error when changing the user role. Please try again.' });
-    } else {
+    try {
+      await teamUpdate({ siteId: site.id, teamId: team.id, role });
       toast.add({ type: 'success', body: 'Role change complete' });
 
       // They can no longer view this page as they won't be authenticated
@@ -67,6 +64,8 @@ export const TeamRow: FC<Props> = ({ user, site, team }) => {
 
       // Calling closeModal() would revert the role change in the UI
       if (ref.current) ref.current.hide();
+    } catch(error) {
+      toast.add({ type: 'error', body: 'There was an unexpected error when changing the user role. Please try again.' });      
     }
   };
 

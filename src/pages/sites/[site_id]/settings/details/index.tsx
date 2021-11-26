@@ -62,25 +62,25 @@ const SitesSettingsDetails: NextPage<ServerSideProps> = ({ user }) => {
               validationSchema={DetailsSchema}
               onSubmit={(values, { setSubmitting, setErrors }) => {
                 (async () => {
-                  const { name, protocol, hostname } = values;
-                  const url = `${protocol}${hostname}`;
+                  try {
+                    const { name, protocol, hostname } = values;
+                    const url = `${protocol}${hostname}`;
 
-                  if (!validateUrl(url)) {
-                    return setErrors({ 'hostname': 'URL must be a valid hostname' });
-                  }
+                    if (!validateUrl(url)) {
+                      return setErrors({ 'hostname': 'URL must be a valid hostname' });
+                    }
 
-                  if (url !== site.url) {
-                    toast.add({ type: 'error', body: 'Please note, your tracking code will need to be updated as you’ve changed your URL.' });
-                  }
+                    if (url !== site.url) {
+                      toast.add({ type: 'error', body: 'Please note, your tracking code will need to be updated as you’ve changed your URL.' });
+                    }
 
-                  const { error } = await updateSite({ siteId: site.id, name, url });
-                  setSubmitting(false);
+                    await updateSite({ siteId: site.id, name, url });
+                    setSubmitting(false);
 
-                  if (error) {
-                    const [key, value] = Object.entries(error)[0];
-                    setErrors({ [key]: value });
-                  } else {
                     toast.add({ type: 'success', body: 'Your site changes have been successfully saved.' });
+                  } catch(error) {
+                    console.error(error);
+                    toast.add({ type: 'error', body: 'There was an error updating your site' });
                   }
                 })();
               }}

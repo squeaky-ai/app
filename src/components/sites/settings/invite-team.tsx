@@ -46,20 +46,19 @@ export const InviteTeam: FC<Props> = ({ site, disabled }) => {
             validationSchema={InviteSchema}
             onSubmit={(values, { setSubmitting }) => {
               (async () => {
-                const { error } = await teamInvite({ 
-                  siteId: site.id, 
-                  email: values.email, 
-                  role: Number(values.role) 
-                });
+                try {
+                  await teamInvite({ 
+                    siteId: site.id, 
+                    email: values.email, 
+                    role: Number(values.role) 
+                  });
 
-                setSubmitting(false); 
-
-                if (error) {
-                  toast.add({ type: 'error', body: 'There was an unexpected error when sending your invitation. Please try again.' });
-                } else {
-                  toast.add({ type: 'success', body: 'Invitation sent' });
-
+                  setSubmitting(false); 
                   closeModal();
+
+                  toast.add({ type: 'success', body: 'Invitation sent' });
+                } catch(error) {
+                  toast.add({ type: 'error', body: 'There was an unexpected error when sending your invitation. Please try again.' });
                 }
               })();
             }}

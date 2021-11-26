@@ -18,9 +18,9 @@ export const Verify: FC<Props> = ({ site }) => {
   const siteVerify = async () => {
     setLoading(true);
 
-    const response = await verifySite({ siteId: site.id });
+    const { verifiedAt } = await verifySite({ siteId: site.id });
 
-    if (!response.site?.verifiedAt) {
+    if (!verifiedAt) {
       setFailed(true);
       toast.add({ type: 'error', body: 'The tracking code could not be found' });
     } else {

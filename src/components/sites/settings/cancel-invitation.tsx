@@ -25,13 +25,13 @@ export const CancelInvitation: FC<Props> = ({ site, team }) => {
   };
 
   const cancelInvitation = async () => {
-    const { error } = await teamInviteCancel({ siteId: site.id, teamId: team.id });
-
-    if (error) {
-      toast.add({ type: 'error', body: 'There was an unexpected error when cancelling your invitation. Please try again.' });
-    } else {
+    try {
+      await teamInviteCancel({ siteId: site.id, teamId: team.id });
       toast.add({ type: 'success', body: 'Invitation cancelled' });
       closeModal();
+    } catch(error) {
+      console.error(error);
+      toast.add({ type: 'error', body: 'There was an unexpected error when cancelling your invitation. Please try again.' });
     }
   };
 

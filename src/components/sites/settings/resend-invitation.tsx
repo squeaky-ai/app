@@ -25,13 +25,12 @@ export const ResendInvitation: FC<Props> = ({ site, team }) => {
   };
 
   const resendInvitation = async () => {
-    const { error } = await teamInviteResend({ siteId: site.id, teamId: team.id });
-
-    if (error) {
-      toast.add({ type: 'error', body: 'There was an unexpected error when sending your invitation. Please try again.' });
-    } else {
+    try {
+      await teamInviteResend({ siteId: site.id, teamId: team.id });
       toast.add({ type: 'success', body: 'Invitation resent' });
       closeModal();
+    } catch(error) {
+      toast.add({ type: 'error', body: 'There was an unexpected error when sending your invitation. Please try again.' });
     }
   };
 

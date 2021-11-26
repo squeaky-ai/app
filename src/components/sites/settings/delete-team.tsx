@@ -25,13 +25,12 @@ export const DeleteTeam: FC<Props> = ({ site, team }) => {
   };
 
   const deleteTeam = async () => {
-    const { error } = await teamDelete({ siteId: site.id, teamId: team.id });
-
-    if (error) {
-      toast.add({ type: 'error', body: 'There was an unexpected error when removing your user. Please try again.' });
-    } else {
+    try {
+      await teamDelete({ siteId: site.id, teamId: team.id });
       toast.add({ type: 'success', body: 'User removed successfully' });
       closeModal();
+    } catch(error) {
+      toast.add({ type: 'error', body: 'There was an unexpected error when removing your user. Please try again.' });
     }
   };
 

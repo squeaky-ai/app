@@ -41,12 +41,13 @@ const UsersAccount: NextPage<ServerSideProps> = ({ user }) => {
             validationSchema={AccountSchema}
             onSubmit={(values, { setSubmitting }) => {
               (async () => {
-                const { error } = await updateUser(values);
-                setSubmitting(false);
-
-                error
-                  ? toast.add({ type: 'error', body: 'There was an unexpected error when updating your account details. Please try again.' })
-                  : toast.add({ type: 'success', body: 'Settings saved successfully' });
+                try {
+                  await updateUser(values);
+                  setSubmitting(false);
+                  toast.add({ type: 'success', body: 'Settings saved successfully' });
+                } catch(error) {
+                  toast.add({ type: 'error', body: 'There was an unexpected error when updating your account details. Please try again.' });
+                }
               })();
             }}
           >
