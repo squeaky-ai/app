@@ -24,12 +24,6 @@ export const defaultFilters: RecordingsFilters = {
     fromDuration: null,
     betweenFromDuration: null,
     betweenToDuration: null,
-  },
-  viewport: {
-    minHeight: null,
-    maxHeight: null,
-    maxWidth: null,
-    minWidth: null,
   }
 };
 

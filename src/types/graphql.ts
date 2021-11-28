@@ -335,13 +335,6 @@ export type FiltersSuccess = {
   message: Scalars['String'];
 };
 
-export type FiltersViewport = {
-  maxHeight?: InputMaybe<Scalars['Int']>;
-  maxWidth?: InputMaybe<Scalars['Int']>;
-  minHeight?: InputMaybe<Scalars['Int']>;
-  minWidth?: InputMaybe<Scalars['Int']>;
-};
-
 export type Heatmaps = {
   __typename?: 'Heatmaps';
   desktopCount: Scalars['Int'];
@@ -809,7 +802,6 @@ export type RecordingsFilters = {
   startUrl?: InputMaybe<Scalars['String']>;
   status?: InputMaybe<FiltersStatus>;
   unvisitedPages: Array<Scalars['String']>;
-  viewport: FiltersViewport;
   visitedPages: Array<Scalars['String']>;
 };
 
