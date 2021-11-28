@@ -11,6 +11,7 @@ import { FiltersPage } from 'components/sites/filters/common/filters-page';
 import { FiltersPages } from 'components/sites/filters/common/filters-pages';
 import { FiltersDevice } from 'components/sites/filters/recordings/filters-device';
 import { FiltersBrowsers } from 'components/sites/filters/recordings/filters-browsers';
+import { FiltersViewport } from 'components/sites/filters/recordings/filters-viewport';
 import { FiltersLanguage } from 'components/sites/filters/common/filters-language';
 import type { RecordingsFilters } from 'types/graphql';
 import type { ValueOf } from 'types/common';
@@ -30,6 +31,7 @@ enum FilterType {
   UnvisitedPages,
   Device,
   Browser,
+  Viewport,
   Language
 }
 
@@ -87,6 +89,10 @@ export const Filters: FC<Props> = ({ filters, updateFilters }) => {
         <Button onClick={() => handleFilterChange(FilterType.Browser)} className={classnames({ open: openFilter === FilterType.Browser})}>
           <i className='ri-arrow-drop-left-line' />
           Browser
+        </Button>
+        <Button onClick={() => handleFilterChange(FilterType.Viewport)} className={classnames({ open: openFilter === FilterType.Viewport})}>
+          <i className='ri-arrow-drop-left-line' />
+          Viewport
         </Button>
         <Button onClick={() => handleFilterChange(FilterType.Language)} className={classnames({ open: openFilter === FilterType.Language})}>
           <i className='ri-arrow-drop-left-line' />
@@ -146,6 +152,12 @@ export const Filters: FC<Props> = ({ filters, updateFilters }) => {
             <>
               <Label>Browser</Label>
               <FiltersBrowsers value={filters.browsers} onUpdate={handleUpdate('browsers')}  onClose={handleFilterClose} />
+            </>
+          )}
+          {openFilter === FilterType.Viewport && (
+            <>
+              <Label>Viewport</Label>
+              <FiltersViewport value={filters.viewport} onUpdate={handleUpdate('viewport')}  onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.Language && (

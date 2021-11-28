@@ -11,6 +11,7 @@ import { TagsUnvisitedPages } from 'components/sites/filters/recordings/tags-unv
 import { TagsDevices } from 'components/sites/filters/recordings/tags-devices';
 import { TagsBrowsers } from 'components/sites/filters/recordings/tags-browsers';
 import { TagsLanguages } from 'components/sites/filters/common/tags-languages';
+import { TagsViewport } from 'components/sites/filters/recordings/tags-viewport';
 import type { RecordingsFilters } from 'types/graphql';
 import type { ValueOf } from 'types/common';
 
@@ -30,6 +31,8 @@ export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
   const hasUnvisitedPages = filters.unvisitedPages.length > 0;
   const hasDevices = filters.devices.length > 0;
   const hasBrowsers = filters.browsers.length > 0;
+  const hasViewportWidth = !!(filters.viewport.minWidth || filters.viewport.maxWidth);
+  const hasViewportHeight = !!(filters.viewport.minHeight || filters.viewport.maxHeight);
   const hasLanguages = filters.languages.length > 0;
 
   const hasFilters = (
@@ -42,6 +45,8 @@ export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
     hasUnvisitedPages ||
     hasDevices ||
     hasBrowsers ||
+    hasViewportWidth ||
+    hasViewportHeight ||
     hasLanguages
   );
 
@@ -83,6 +88,10 @@ export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
 
       {hasBrowsers && (
         <TagsBrowsers filters={filters} updateFilters={updateFilters} />
+      )}
+
+      {(hasViewportWidth || hasViewportHeight) && (
+        <TagsViewport filters={filters} updateFilters={updateFilters} />
       )}
 
       {hasLanguages && (
