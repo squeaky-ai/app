@@ -6,7 +6,7 @@
   flex-direction: column;
   padding: 2rem 1rem;
   transition: width .3s ease-in-out;
-  width: 80px;
+  width: 72px;
   z-index: 1;
 
   @include breakpoint-md {
@@ -188,10 +188,6 @@
             justify-content: flex-start;
           }
         }
-
-        .arrow {
-          transform: rotate(180deg);
-        }
       }
     }
   }
@@ -236,7 +232,7 @@
 
     &.right {
       .slider {
-        transform: translateX(-47px);
+        transform: translateX(-40px);
 
         .left {
           opacity: 0;
@@ -265,7 +261,7 @@
     .link {
       flex-shrink: 0;
       justify-content: center;
-      width: 3rem;
+      width: 2.5rem;
 
       span {
         text-align: left;
