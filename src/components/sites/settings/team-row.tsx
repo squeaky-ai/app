@@ -30,7 +30,7 @@ export const TeamRow: FC<Props> = ({ user, site, team }) => {
   const self = team.user.id.toString() === user.id;
   const owner = team.role === OWNER;
   const invited = team.status === INVITED;
-  const userRole = site.team.find(t => t.user.id.toString() === user.id);
+  const userRole = site.team.find(t => t.user.id.toString() === user.id.toString());
 
   const roleNames: { [key: number]: string } = {
     0: 'a User',
