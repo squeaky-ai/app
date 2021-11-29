@@ -11,7 +11,6 @@ import { Container } from 'components/container';
 import { Radio } from 'components/radio';
 import { Input } from 'components/input';
 import { Checkbox } from 'components/checkbox';
-import { Option, Select } from 'components/select';
 import { Button } from 'components/button';
 import { HEX_REGEX } from 'data/common/constants';
 import { useToasts } from 'hooks/use-toasts';
