@@ -26,8 +26,7 @@ const DEFAULT_COLORS = ['#0074E0', '#F0438C', '#8249FB', '#222222'];
 
 const NpsSchema = Yup.object().shape({
   npsAccentColor: Yup.string().matches(HEX_REGEX, 'Accent color is requied'),
-  npsFrequencyTimes: Yup.number().required('Frequency is required'),
-  npsFrequencyPer: Yup.string().oneOf(['day', 'month', 'year'], 'Please select frequency'),
+  npsSchedule: Yup.string().oneOf(['once', 'monthly'], 'Please select frequency'),
   npsPhrase: Yup.string().required('Accent color is requied'),
   npsFollowUpEnabled: Yup.boolean(),
   npsContactConsentEnabled: Yup.boolean(),
@@ -49,12 +48,6 @@ export const NpsSettings: FC<Props> = ({ site }) => {
     await onUpdate({ npsEnabled: !feedback.npsEnabled });
   };
 
-  const getFrequencyParts = (frequency?: string) => {
-    if (!frequency) return [1, 'month'];
-
-    return frequency.split('_');
-  };
-
   if (loading) {
     return <Spinner />;
   }
@@ -74,8 +67,7 @@ export const NpsSettings: FC<Props> = ({ site }) => {
           <Formik
             initialValues={{ 
               npsAccentColor: feedback.npsAccentColor || '#0074E0', 
-              npsFrequencyTimes: getFrequencyParts(feedback.npsSchedule)[0], 
-              npsFrequencyPer: getFrequencyParts(feedback.npsSchedule)[1],
+              npsSchedule: feedback.npsSchedule || 'once',
               npsPhrase: feedback.npsPhrase || site.name,
               npsFollowUpEnabled: feedback.npsFollowUpEnabled ?? true,
               npsContactConsentEnabled: feedback.npsContactConsentEnabled ?? false,
@@ -98,7 +90,7 @@ export const NpsSettings: FC<Props> = ({ site }) => {
                   npsContactConsentEnabled: values.npsContactConsentEnabled,
                   npsFollowUpEnabled: values.npsFollowUpEnabled,
                   npsLayout: values.npsLayout,
-                  npsSchedule: `${values.npsFrequencyTimes}_${values.npsFrequencyPer}`,
+                  npsSchedule: values.npsSchedule,
                 };
                 
                 try {
@@ -192,28 +184,25 @@ export const NpsSettings: FC<Props> = ({ site }) => {
 
                 <h4>Scheduling</h4>
 
-                <p>Use the options below to set the frequency with which your visitors are asked to complete the NPS survey. Typically companies do this once per month, or once every 3 months.</p>
+                <p>Use the options below to set the frequency with which your visitors are asked to complete the NPS survey.</p>
 
-                <p><b>Frequeny per visitor</b></p>
-
-                <div className='frequency'>
-                  <Input
-                    name='npsFrequencyTimes'
-                    value={values.npsFrequencyTimes}
+                <div className='radio-group schedule'>
+                  <Radio
+                    name='npsSchedule'
+                    value='once'
                     onChange={handleChange}
-                    onBlur={handleBlur}
-                    invalid={touched.npsFrequencyTimes && !!errors.npsFrequencyTimes}
-                  />
-                  times per
-                  <Select
-                    name='npsFrequencyPer'
-                    value={values.npsFrequencyPer}
-                    onChange={handleChange}
+                    checked={values.npsSchedule === 'once'}
                   >
-                    <Option value='day'>Day</Option>
-                    <Option value='month'>Month</Option>
-                    <Option value='year'>Year</Option>
-                  </Select>
+                    One-time
+                  </Radio>
+                  <Radio
+                    name='npsSchedule'
+                    value='monthly'
+                    onChange={handleChange}
+                    checked={values.npsSchedule === 'monthly'}
+                  >
+                    Once a month
+                  </Radio>
                 </div>
 
                 <h4>Form options</h4>
