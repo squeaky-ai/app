@@ -5,10 +5,12 @@ import type { ImageProps } from 'next/image';
 import { BASE_PATH } from 'data/common/constants';
 import { useDarkMode } from 'hooks/use-dark-mode';
 
-interface Props extends ImageProps {}
+interface Props extends ImageProps {
+  dark?: boolean;
+}
 
-export const Logo: FC<Props> = ({ src, ...props }) => {
+export const Logo: FC<Props> = ({ src, dark, ...props }) => {
   const { darkModeEnabled } = useDarkMode();
 
-  return <Image src={`${BASE_PATH}/${src}${darkModeEnabled ? '-dark' : ''}.svg`} {...props} />;
+  return <Image src={`${BASE_PATH}/${src}${dark ?? darkModeEnabled ? '-dark' : ''}.svg`} {...props} />;
 };

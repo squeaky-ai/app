@@ -6,12 +6,13 @@ import { useRouter } from 'next/router';
 import { Button } from 'components/button';
 import { Divider } from 'components/divider';
 import { SidebarAccount } from 'components/app/sidebar-account';
-import { SidebarFeedback } from 'components/app/sidebar-feedback';
 import { SidebarSiteSettings } from 'components/app/sidebar-site-settings';
 import { SidebarSiteFeedback } from 'components/app/sidebar-site-feedback';
 import { Logo } from 'components/logo';
 import { Breakpoints } from 'data/common/constants';
 import { Preferences, Preference } from 'lib/preferences';
+import { SidebarDarkmode } from 'components/app/sidebar-darkmode';
+import { SidebarCollapse } from 'components/app/sidebar-collapse';
 
 export const Sidebar: FC = () => {
   const router = useRouter();
@@ -47,12 +48,12 @@ export const Sidebar: FC = () => {
     <aside id='app-sidebar' className={classnames({ open })}>
       <Link href='/sites'>
         <a className='logo large'>
-          <Logo src='logo' alt='Logo' height={32} width={103} />
+          <Logo src='logo' alt='Logo' height={32} width={103} dark />
         </a>
       </Link>
       <Link href='/sites'>
         <a className='logo small'>
-          <Logo src='logo-small' alt='Logo' height={32} width={24} />
+          <Logo src='logo-small' alt='Logo' height={32} width={24} dark />
         </a>
       </Link>
       <menu className={position}>
@@ -64,8 +65,6 @@ export const Sidebar: FC = () => {
                 <span>All Sites</span>
               </a>
             </Link>
-            <SidebarAccount path={path} />
-            <SidebarFeedback />
           </div>
           <div className='nav right'>
             <Link href={`/sites/${siteId}/overview`}>
@@ -87,23 +86,22 @@ export const Sidebar: FC = () => {
                 <span>Recordings</span>
               </a>
             </Link>
-            <Link href={`/sites/${siteId}/heatmaps`}>
-              <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/heatmaps`) })} data-label='Heatmaps'>
-                <i className='ri-fire-line' />
-                <span>Heatmaps</span>
-                <span className='alpha'>ALPHA</span>
-              </a>
-            </Link>
-            <SidebarSiteFeedback path={path} siteId={siteId} />
+            <Divider />
             <Link href={`/sites/${siteId}/analytics`}>
               <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/analytics`) })} data-label='Analytics'>
                 <i className='ri-line-chart-line' />
                 <span>Analytics</span>
               </a>
             </Link>
-            <SidebarSiteSettings path={path} siteId={siteId} />
+            <SidebarSiteFeedback path={path} siteId={siteId} />
+            <Link href={`/sites/${siteId}/heatmaps`}>
+              <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/heatmaps`) })} data-label='Heatmaps'>
+                <i className='ri-fire-line' />
+                <span>Heatmaps</span>
+              </a>
+            </Link>
             <Divider />
-            <SidebarAccount path={path} />
+            <SidebarSiteSettings path={path} siteId={siteId} />
           </div>
         </div>
       </menu>
@@ -111,10 +109,9 @@ export const Sidebar: FC = () => {
         {open ? <i className='ri-close-line' /> : <i className='ri-menu-line' />}
       </Button>
       <footer>
-        <Button className='link' onClick={toggleOpen} data-label={open ? 'Expand' : 'Collapse'}>
-          <i className='ri-arrow-right-line' />
-          <span>Collapse</span>
-        </Button>
+        <SidebarAccount path={path} />
+        <SidebarDarkmode />
+        <SidebarCollapse open={open} toggleOpen={toggleOpen} />
       </footer>
     </aside>
   );

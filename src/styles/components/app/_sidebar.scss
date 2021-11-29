@@ -1,6 +1,5 @@
 #app-sidebar {
-  background: var(--white);
-  border-right: 1px solid var(--gray-150);
+  background: var(--gray-blue-800);
   flex-direction: row;
   flex-shrink: 0;
   display: flex;
@@ -38,7 +37,7 @@
 
   .menu-toggle {
     align-items: center;
-    color: var(--gray-800);
+    color: var(--gray-blue-200);
     display: none;
     justify-content: center;
     margin: 0;
@@ -59,13 +58,14 @@
 
   .link {
     align-items: center;
-    background: var(--white);
+    background: var(--gray-blue-800);
     border-radius: var(--border-radius-md);
-    color: var(--gray-700);
+    color: var(--gray-blue-200);
     display: flex;
-    font-weight: var(--font-weight-bold);
-    height: 3rem;
+    height: 2.5rem;
+    font-size: 14px;
     justify-content: center;
+    line-height: 24px;
     margin-bottom: .5rem;
     padding: 0;
     position: relative;
@@ -74,10 +74,9 @@
     width: 100%;
 
     i {
-      color: var(--gray-200);
+      color: var(--blue-300);
       display: block;
-      font-size: 1.5rem;
-      font-weight: var(--font-weight-normal);
+      font-size: 1rem;
       margin: 0;
     }
 
@@ -109,16 +108,20 @@
     }
 
     &:hover {
-      background: var(--gray-50);
+      background: var(--gray-blue-600);
 
       &:after {
         display: block;
       }
     }
 
-    &.active,
-    &.active i {
-      color: var(--blue-500);
+    &.active {
+      background: var(--gray-blue-600);
+      color: var(--blue-50);
+
+      i {
+        color: var(--blue-50);
+      }
     }
 
     &.nested {
@@ -128,9 +131,12 @@
         align-items: center;
         background: none;
         border: none;
-        color: var(--gray-700);
+        color: var(--gray-blue-200);
         display: flex;
+        font-size: 14px;
+        font-weight: var(--font-weight-normal);
         justify-content: center;
+        line-height: 24px;
         margin: 0;
         text-align: left;
         padding: 0;
@@ -142,6 +148,8 @@
         border-radius: var(--border-radius-md);
         box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.15);
         display: none;
+        font-size: 14px;
+        line-height: 24px;
         left: calc(100% + 2rem);
         top: 0;
         padding: .5rem;
@@ -167,7 +175,7 @@
       }
 
       &.open {
-        background: var(--gray-50);
+        background: var(--gray-blue-600);
 
         &:after {
           display: none;
@@ -189,7 +197,8 @@
   }
 
   .divider {
-    margin: 1rem 0;
+    background: var(--gray-blue-600);
+    margin: .5rem 0;
   }
 
   menu {
@@ -254,16 +263,16 @@
 
   footer {
     .link {
+      flex-shrink: 0;
       justify-content: center;
-      margin-bottom: 0;
+      width: 3rem;
 
       span {
         text-align: left;
       }
 
       i {
-        color: var(--gray-200);
-        transition: transform .3s ease-in-out;
+        color: var(--blue-300);
       }
     }
 
@@ -274,10 +283,10 @@
 
   &.open {
     overflow: hidden;
-    width: 240px;
+    width: 216px;
 
     @include breakpoint-md {
-      border-bottom-color: var(--white);
+      border-bottom-color: var(--gray-blue-600);
       width: 100%;
     }
 
@@ -313,7 +322,7 @@
 
     .link {    
       padding: .75rem 1rem;
-      width: 207px;
+      width: 184px;
 
       i:not(.arrow) {
         margin-right: 1rem;
@@ -321,20 +330,6 @@
 
       span {
         display: inline-block;
-
-        &.alpha {
-          align-items: center;
-          background: var(--blue-500);
-          border-radius: var(--border-radius-sm);
-          color: var(--white);
-          display: flex;
-          font-size: 10px;
-          flex: 0;
-          justify-content: center;
-          line-height: 11px;
-          margin-left: .5rem;
-          padding: .15rem;
-        }
       }
 
       .arrow {
@@ -358,7 +353,7 @@
           width: 100%;
 
           .button {
-            color: var(--gray-700);
+            color: var(--gray-blue-200);
             font-size: 13px;
             font-weight: var(--font-weight-normal);
             line-height: 20px;
@@ -366,11 +361,15 @@
             padding: 0;
 
             &.active {
-              color: var(--blue-500);
+              color: var(--gray-50);
             }
 
             &:last-child {
               margin-bottom: 0;
+            }
+
+            &:hover {
+              background: transparent;
             }
           }
         }
@@ -393,7 +392,7 @@
 
       &.right {
         .slider {
-          transform: translateX(-207px);
+          transform: translateX(-184px);
 
           @include breakpoint-md {
             padding: 1rem;
@@ -410,7 +409,7 @@
       }
 
       @include breakpoint-md {
-        background: var(--white);
+        background: var(--gray-blue-800);
         display: flex;
         height: calc(100% - 4rem);
         position: fixed;
@@ -430,13 +429,30 @@
       }
     }
 
-    footer { 
-      .link {
-        justify-content: flex-start;
+    footer {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 1rem;
 
-        i {
-          transform: rotate(180deg);
+      .link {
+        align-items: center;
+        border: 1px solid var(--gray-blue-600);
+        justify-content: center;
+        padding: 0;
+        width: 2.5rem;
+
+        i:not(.arrow) {
+          color: var(--blue-300);
+          margin: 0;
         }
+      }
+
+      @include breakpoint-md {
+        bottom: 1.5rem;
+        padding: 0;
+        position: absolute;
+        width: calc(100% - 3rem);
+        z-index: 10;
       }
     }
   }

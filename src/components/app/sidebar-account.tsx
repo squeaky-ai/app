@@ -2,47 +2,15 @@ import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
 import classnames from 'classnames';
-import { useRouter } from 'next/router';
-import { Button } from 'components/button';
-import { signout } from 'lib/api/auth';
 
 interface Props {
   path: string;
 }
 
-export const SidebarAccount: FC<Props> = ({ path }) => {
-  const router = useRouter();
-  const [open, setOpen] = React.useState<boolean>(false);
-
-  const toggleOpen = () => {
-    setOpen(!open);
-  };
-
-  const handleSignOut = async () => {
-    await signout();
-    location.href = '/';
-  };
-
-  React.useEffect(() => {
-    const active = router.pathname.startsWith('/users');
-    setOpen(active);
-  }, [router.pathname]);
-
-  return (
-    <div className={classnames('link nested', { open })} data-label='Account'>
-      <Button onClick={toggleOpen}>
-        <i className='ri-account-circle-line' />
-        <span>Account</span>
-        <i className='arrow ri-arrow-drop-down-line' />
-      </Button>
-      <div className='items'>
-        <Link href='/users/account'>
-          <a className={classnames('button', { active: path.startsWith('/users') })}>
-            Settings
-          </a>
-        </Link>
-        <Button onClick={handleSignOut}>Log out</Button>
-      </div>
-    </div>
-  );
-};
+export const SidebarAccount: FC<Props> = ({ path }) => (
+  <Link href='/users/account'>
+    <a className={classnames('link', { active: path.startsWith('/users') })} data-label='Account'>
+      <i className='ri-account-circle-line' />
+    </a>
+  </Link>
+);

@@ -14,6 +14,7 @@ import { Tabs } from 'components/users/tabs';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { updateUser } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
+import { signout } from 'lib/api/auth';
 
 const AccountSchema = Yup.object().shape({
   email: Yup.string().email('Please enter a valid email address').required('Email is required'),
@@ -24,6 +25,11 @@ const AccountSchema = Yup.object().shape({
 const UsersAccount: NextPage<ServerSideProps> = ({ user }) => {
   const toast = useToasts();
 
+  const handleSignOut = async () => {
+    await signout();
+    location.href = '/';
+  };
+
   return (
     <>
       <Head>
@@ -31,7 +37,13 @@ const UsersAccount: NextPage<ServerSideProps> = ({ user }) => {
       </Head>
 
       <Main>
-        <h3 className='title'>Account Settings</h3>
+        <h3 className='title'>
+          Account Settings
+          <Button className='button signout link' onClick={handleSignOut}>
+            <i className='ri-logout-box-line' />
+            Log out
+          </Button>
+        </h3>
 
         <Tabs user={user} page='account' /> 
 
