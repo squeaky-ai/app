@@ -24,7 +24,7 @@ export const SidebarSiteFeedback: FC<Props> = ({ path, siteId }) => {
   }, [router.pathname]);
 
   return (
-    <div style={{ display: 'none' }} className={classnames('link nested', { open })} data-label='Feedback'>
+    <div className={classnames('link nested', { open })} data-label='Feedback'>
       <Button onClick={toggleOpen}>
         <i className='ri-user-voice-line' />
         <span>Feedback</span>
@@ -32,7 +32,7 @@ export const SidebarSiteFeedback: FC<Props> = ({ path, siteId }) => {
       </Button>
       <div className='items'>
         <Link href={`/sites/${siteId}/feedback/nps`}>
-          <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/feedback/nps`) })}>
+          <a style={{ display: 'none' }} className={classnames('button', { active: path.startsWith(`/sites/${siteId}/feedback/nps`) })}>
             NPS®
           </a>
         </Link>
