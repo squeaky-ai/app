@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { Row, Cell } from 'components/table';
 import { Dropdown } from 'components/dropdown';
@@ -25,7 +26,9 @@ export const SentimentResponsesItem: FC<Props> = ({ response }) => {
     <Row>
       <Cell>
         <p className='score'>
-          {EMOJIS[response.score]}
+          <div className='emoji'>
+            <Image src={EMOJIS[response.score]} height={24} width={24} />
+          </div>
         </p>
       </Cell>
       <Cell>

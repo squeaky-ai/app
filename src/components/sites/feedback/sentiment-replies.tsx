@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import Image from 'next/image';
 import { groupBy, first } from 'lodash';
 import { EMOJIS } from 'data/sentiment/constants';
 import { percentage } from 'lib/maths';
@@ -32,7 +33,9 @@ export const SentimentReplies: FC<Props> = ({ replies }) => {
       <ul>
         <li>
           <div className='type'>
-            {EMOJIS[4]}
+            <div className='emoji'>
+              <Image src={EMOJIS[4]} height={24} width={24} />
+            </div>
           </div>
           <div className='score'>
             <div className='percentage' style={{ width: `${offsettedPercentage(4)}%` }} />
@@ -41,7 +44,9 @@ export const SentimentReplies: FC<Props> = ({ replies }) => {
         </li>
         <li>
           <div className='type'>
-            {EMOJIS[3]}
+            <div className='emoji'>
+              <Image src={EMOJIS[3]} height={24} width={24} />
+            </div>
           </div>
           <div className='score'>
             <div className='percentage' style={{ width: `${offsettedPercentage(3)}%` }} />
@@ -50,7 +55,9 @@ export const SentimentReplies: FC<Props> = ({ replies }) => {
         </li>
         <li>
           <div className='type'>
-            {EMOJIS[2]}
+            <div className='emoji'>
+              <Image src={EMOJIS[2]} height={24} width={24} />
+            </div>
           </div>
           <div className='score'>
             <div className='percentage' style={{ width: `${offsettedPercentage(2)}%` }} />
@@ -59,7 +66,9 @@ export const SentimentReplies: FC<Props> = ({ replies }) => {
         </li>
         <li>
           <div className='type'>
-            {EMOJIS[1]}
+            <div className='emoji'>
+              <Image src={EMOJIS[1]} height={24} width={24} />
+            </div>
           </div>
           <div className='score'>
             <div className='percentage' style={{ width: `${offsettedPercentage(1)}%` }} />
@@ -68,7 +77,9 @@ export const SentimentReplies: FC<Props> = ({ replies }) => {
         </li>
         <li>
           <div className='type'>
-            {EMOJIS[0]}
+            <div className='emoji'>
+              <Image src={EMOJIS[0]} height={24} width={24} />
+            </div>
           </div>
           <div className='score'>
             <div className='percentage' style={{ width: `${offsettedPercentage(0)}%` }} />

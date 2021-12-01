@@ -342,9 +342,13 @@
       grid-template-columns: 100px 1fr 1fr 1fr 2fr 80px;
 
       .score {
-        font-size: 1.5rem;
-        line-height: 2rem;
         margin: 0 0 0 .5rem;
+
+        .emoji {
+          height: 24px;
+          vertical-align: middle;
+          width: 24px;
+        }
       }
     }
 
@@ -416,9 +420,13 @@
         }
 
         .type {
-          font-size: 1.5rem;
-          line-height: 2rem;
           margin-right: 1rem;
+
+          .emoji {
+            height: 24px;
+            vertical-align: middle;
+            width: 24px;
+          }
         }
 
         .score {

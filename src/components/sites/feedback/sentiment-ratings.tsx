@@ -26,7 +26,19 @@ export const SentimentRatings: FC<Props> = ({ period, ratings }) => {
             axisLine={false}
             fontSize={20}
             tickMargin={10}
-            tickFormatter={(x) => EMOJIS[x]}
+            tick={(props) => ( 
+              <image 
+                {...props} 
+                href={EMOJIS[props.payload.value]} 
+                height={24} 
+                width={24} 
+                transform={
+                  props.payload.value === 4
+                    ? 'translate(-24, -24)'
+                    : 'translate(-24, -12)'
+                }
+              />
+            )}
           />
 
           <XAxis 

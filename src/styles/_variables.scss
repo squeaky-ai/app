@@ -27,6 +27,9 @@
   --gray-blue-800: #001A39;
   --light-blue-300: #B1E4FD;
 
+  // Modals
+  --modal-background: rgba(255, 255, 255, 0.85);
+
   // Font weights
   --font-weight-normal: 400;
   --font-weight-bold: 600;
@@ -56,5 +59,7 @@
     --gray-blue-600: #2b2b2b;
     --gray-blue-800: #222222;
     --light-blue-300: #0074E0;
+
+    --modal-background: rgba(0, 0, 0, 0.85);
   }
 }
