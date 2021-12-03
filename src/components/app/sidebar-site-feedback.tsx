@@ -32,7 +32,7 @@ export const SidebarSiteFeedback: FC<Props> = ({ path, siteId }) => {
       </Button>
       <div className='items'>
         <Link href={`/sites/${siteId}/feedback/nps`}>
-          <a style={{ display: 'none' }} className={classnames('button', { active: path.startsWith(`/sites/${siteId}/feedback/nps`) })}>
+          <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/feedback/nps`) })}>
             NPS®
           </a>
         </Link>
