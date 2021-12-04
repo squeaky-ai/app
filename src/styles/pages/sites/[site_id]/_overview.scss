@@ -2,7 +2,7 @@
   .title {
     align-items: center;
     display: flex;
-    margin: 0 0 3rem 0;
+    margin: 0 0 2rem 0;
   }
 
   .empty-state {
@@ -26,7 +26,7 @@
       width: 100%;
 
       h4 {
-        margin: 3rem 0;
+        margin: 2rem 0;
       }
 
       .message {
@@ -43,7 +43,7 @@
 
   .overview-grid {
     display: grid;
-    grid-gap: 3rem;
+    grid-gap: 2rem;
     grid-template-areas: 'visitors recordings pageviews'
                          'latest-recording latest-recording latest-notes';
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -70,11 +70,6 @@
         grid-gap: 1.5rem;
         grid-template-rows: auto auto 600px auto 456px;
       }
-    }
-
-    .card {
-      background: var(--white);
-      border: 1px solid var(--gray-150);
     }
 
     .sub-heading {
@@ -337,7 +332,7 @@
       position: relative;
 
       .sub-heading {
-        padding: 3rem 2rem 0 2rem;
+        padding: 2rem 2rem 0 2rem;
 
         @include breakpoint-md {
           padding: 2rem 1.5rem 0 1.5rem;
@@ -367,7 +362,7 @@
       }
 
       .divider {
-        margin: 0 3rem .5rem 3rem;
+        margin: 0 2rem .5rem 2rem;
 
         @include breakpoint-md {
           margin: 0 2rem .5rem 2rem;
@@ -387,7 +382,7 @@
       }
 
       .notes-list {
-        height: calc(100% - 7.5rem);
+        height: calc(100% - 6.5rem);
         overflow-y: auto;
         scrollbar-width: none;
 
@@ -401,7 +396,7 @@
 
           li {
             background: var(--white);
-            padding: 1rem 3rem;
+            padding: 1rem 2rem;
             position: relative;
 
             @include breakpoint-md {
@@ -414,9 +409,9 @@
               content: ' ';
               display: block;
               height: 1px;
-              left: 3rem;
+              left: 2rem;
               position: absolute;
-              width: calc(100% - 6rem);
+              width: calc(100% - 4rem);
             }
 
             .title {

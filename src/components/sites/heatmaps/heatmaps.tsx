@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import { Button } from 'components/button';
 import { Spinner } from 'components/spinner';
 import { Container } from 'components/container';
+import { Card } from 'components/card';
 import { HeatmapsClicks } from 'components/sites/heatmaps/heatmaps-clicks';
 import { HeatmapsScrolls } from 'components/sites/heatmaps/heatmaps-scrolls';
 import { HeatmapsPages } from 'components/sites/heatmaps/heatmaps-pages';
@@ -71,7 +72,7 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
       </div>
       {hasData && (
         <>
-          <div className='content'>
+          <Card className='content'>
             <HeatmapsPage 
               type={type}
               device={device}
@@ -79,11 +80,11 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
               recordingId={heatmaps.recordingId} 
               items={heatmaps.items} 
             />
-          </div>
-          <div className='data'>
+          </Card>
+          <Card className='data'>
             {type === 'Click' && <HeatmapsClicks items={heatmaps.items} />}
             {type === 'Scroll' && <HeatmapsScrolls items={heatmaps.items} />}
-          </div>
+          </Card>
         </>
       )}
       {!hasData && (

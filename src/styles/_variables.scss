@@ -30,6 +30,11 @@
   // Modals
   --modal-background: rgba(255, 255, 255, 0.85);
 
+  // Shadows
+  --box-shadow-sm: 0 0 .5rem 0 rgba(0, 26, 57, .1);
+  --box-shadow-md: 0 0 .125rem rgba(0, 26, 57, .25);
+  --box-shadow-lg: 0 0 .75rem rgba(0, 0, 0, 0.15);
+
   // Font weights
   --font-weight-normal: 400;
   --font-weight-bold: 600;

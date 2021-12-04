@@ -11,8 +11,8 @@
 
   &.block {
     background: var(--white);
-    border: 1px solid var(--gray-200);
     border-radius: var(--border-radius-md);
+    box-shadow: var(--box-shadow-md);
     margin: 0 0 1.5rem 0;
     overflow: hidden;
     padding: 0;
