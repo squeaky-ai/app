@@ -84,8 +84,8 @@ export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
       <div className='graph-wrapper'>
         <ResponsiveContainer>
           <LineChart data={results} margin={{ top: 0, left: -15, right: 0, bottom: 0 }}>
-            <XAxis dataKey='date' interval={interval} stroke='var(--gray-800)' tickLine={false} tickMargin={10} />
-            <YAxis stroke='var(--gray-800)' tickLine={false} tickMargin={10} />
+            <XAxis dataKey='date' interval={interval} stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} />
+            <YAxis stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} />
 
             <CartesianGrid strokeDasharray='3 3' vertical={false} />
 
@@ -93,7 +93,7 @@ export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
   
             <Line dataKey='all' fillOpacity={1} stroke='#8249FB' strokeWidth={2} />
             <Line dataKey='existing' fillOpacity={1} stroke='#0074E0' strokeWidth={2} />
-            <Line dataKey='new' fillOpacity={1} stroke='#F0438C' strokeWidth={2} />
+            <Line dataKey='new' fillOpacity={1} stroke='#F96155' strokeWidth={2} />
           </LineChart>
         </ResponsiveContainer>
       </div>

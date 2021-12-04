@@ -22,7 +22,7 @@
     border-color: var(--gray-100) transparent transparent transparent;
     border-style: solid;
     border-width: 1px;
-    color: var(--gray-700);
+    color: var(--gray-blue-700);
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     height: 4rem;
@@ -48,7 +48,7 @@
       font-size: 13px;
 
       &:not(.link) {
-        color: var(--gray-700);
+        color: var(--gray-blue-700);
       }
     }
 
@@ -78,7 +78,7 @@
       }
 
       .cell {
-        color: var(--gray-800);
+        color: var(--gray-blue-800);
 
         &:last-of-type {
           border-right: none;

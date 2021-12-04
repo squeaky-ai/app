@@ -44,7 +44,7 @@ export const initReplayer = ({ failed, replayer, recording, dispatch }: InitArgs
     maxSpeed: 25,
     mouseTail: {
       lineWidth: 3,
-      strokeStyle: '#F0438C'
+      strokeStyle: '#F96155'
     },
   });
 

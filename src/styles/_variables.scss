@@ -1,10 +1,6 @@
 :root {
   // Colors
   --white: #ffffff;
-  --black: #000000;
-  --gray-900: #121212;
-  --gray-800: #222222;
-  --gray-700: #4D4D4D;
   --gray-500: #707070;
   --gray-300: #A0A0A0;
   --gray-200: #BFBFBF;
@@ -15,16 +11,18 @@
   --blue-500: #0074E0;
   --blue-300: #4097E8;
   --blue-50: #ECF6FF;
-  --yellow-500: #FDE50B;
-  --magenta-500: #F0438C;
-  --magenta-50: #FFE3EF;
-  --green-500: #2CE21C;
-  --orange-500: #FF8A00;
+  --yellow-500: #FBC73B;
+  --rose-500: #F96155;
+  --rose-50: #FFEDDC;
+  --green-500: #32D05F;
+  --orange-500: #FA9116;
   --purple-500: #8249FB;
   --purple-50: #F4F0FF;
-  --gray-blue-200: #BACADF;
-  --gray-blue-600: #153B67;
+  --gray-blue-900: #001125;
   --gray-blue-800: #001A39;
+  --gray-blue-700: #032349;
+  --gray-blue-600: #153B67;
+  --gray-blue-200: #BACADF;
   --light-blue-300: #B1E4FD;
 
   // Modals
@@ -51,18 +49,17 @@
   &.dark-mode {
     --white: #1a1a1a;
     --black: #ffffff;
-    --gray-900: #F7F7F7;
-    --gray-800: #F2F2F2;
-    --gray-700: #D7D7D7;
+    --gray-blue-800: #F2F2F2;
+    --gray-blue-700: #D7D7D7;
     --gray-500: #BFBFBF;
     --gray-300: #A0A0A0;
     --gray-200: #707070;
     --gray-150: #2b2b2b;
-    --gray-100: #222222;
+    --gray-100: #001A39;
     --gray-50: #121212;
     --gray-blue-200: #D7D7D7;
     --gray-blue-600: #2b2b2b;
-    --gray-blue-800: #222222;
+    --gray-blue-800: #001A39;
     --light-blue-300: #0074E0;
 
     --modal-background: rgba(0, 0, 0, 0.85);

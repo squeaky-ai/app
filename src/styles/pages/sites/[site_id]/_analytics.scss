@@ -221,7 +221,7 @@
               margin: 0;
         
               b {
-                color: var(--gray-800);
+                color: var(--gray-blue-800);
               }
             }
           }
@@ -340,7 +340,7 @@
             margin: 0;
 
             span {
-              color: var(--gray-700);
+              color: var(--gray-blue-700);
               font-size: 13px;
               font-weight: var(--font-weight-normal);
             }
@@ -382,7 +382,7 @@
           justify-content: space-between;
 
           p {
-            color: var(--gray-700);
+            color: var(--gray-blue-700);
             margin: 0;
           }
         }
@@ -548,7 +548,7 @@
   }
 
   .custom-tooltip {
-    background: var(--gray-800);
+    background: var(--gray-blue-800);
     border-radius: var(--border-radius-md);
     color: var(--gray-100);
     padding: 1rem;
@@ -570,7 +570,7 @@
     }
 
     .new {
-      color: var(--magenta-500);
+      color: var(--rose-500);
     }
 
     .width {

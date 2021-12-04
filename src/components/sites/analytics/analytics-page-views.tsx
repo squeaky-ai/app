@@ -81,8 +81,8 @@ export const AnalyticsPageViews: FC<Props> = ({ pageViews, period }) => {
       <div className='graph-wrapper'>
         <ResponsiveContainer>
           <LineChart data={results} margin={{ top: 0, left: -15, right: 0, bottom: 0 }}>
-            <XAxis dataKey='date' interval={interval} stroke='var(--gray-800)' tickLine={false} tickMargin={10} />
-            <YAxis stroke='var(--gray-800)' tickLine={false} tickMargin={10} />
+            <XAxis dataKey='date' interval={interval} stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} />
+            <YAxis stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} />
 
             <CartesianGrid strokeDasharray='3 3' vertical={false} />
 

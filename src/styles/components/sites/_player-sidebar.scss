@@ -35,13 +35,13 @@
       .button {
         background: none;
         border: none;
-        color: var(--gray-700);
+        color: var(--gray-blue-700);
         font-size: 1.5rem;
         margin: 0;
         padding: 0;
 
         &:hover {
-          color: var(--gray-800);
+          color: var(--gray-blue-800);
         }
 
         i {
@@ -112,7 +112,7 @@
         }
 
         dd {
-          color: var(--gray-800);
+          color: var(--gray-blue-800);
           padding-right: 0;
         }
       }

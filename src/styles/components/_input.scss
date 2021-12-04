@@ -2,7 +2,7 @@
   background: var(--white);
   border: 1px solid var(--gray-200);
   border-radius: var(--border-radius-md);
-  color: var(--gray-800);
+  color: var(--gray-blue-800);
   height: 40px;
   margin: 0 0 1.5rem 0; 
   outline: none;
@@ -10,7 +10,7 @@
   width: 100%;
 
   & + .validation {
-    color: var(--magenta-500);
+    color: var(--rose-500);
     font-size: 13px;
     line-height: 20px;
     display: none;
@@ -18,7 +18,7 @@
   }
 
   &.invalid {
-    border-color: var(--magenta-500);
+    border-color: var(--rose-500);
     margin-bottom: 0;
 
     & + .validation {

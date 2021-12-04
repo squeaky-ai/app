@@ -16,7 +16,7 @@
       pointer-events: none;
 
       .button {
-        color: var(--gray-800);
+        color: var(--gray-blue-800);
         text-decoration: none;
       }
     }
@@ -37,20 +37,20 @@
 
       &.back {
         border-radius: var(--border-radius-md) 0 0 var(--border-radius-md);
-        color: var(--gray-800);
+        color: var(--gray-blue-800);
         text-decoration: none;
       }
 
       &.forward {
         border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
         border-right-width: 1px;
-        color: var(--gray-800);
+        color: var(--gray-blue-800);
         text-decoration: none;
       }
 
       &.blank {
         border-radius: 0;
-        color: var(--gray-800);
+        color: var(--gray-blue-800);
         opacity: .5;
         pointer-events: none;
         text-decoration: none;

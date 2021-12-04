@@ -110,7 +110,7 @@
           grid-area: detractor;
 
           &:after {
-            background: var(--magenta-500);
+            background: var(--rose-500);
           }
         }
 
@@ -142,7 +142,7 @@
       width: 2.5rem;
 
       &.detractor {
-        background: var(--magenta-500);
+        background: var(--rose-500);
       }
 
       &.passive {
@@ -170,7 +170,7 @@
       margin: 0 0 1.5rem 0;
 
       i {
-        color: var(--gray-700);
+        color: var(--gray-blue-700);
         font-weight: var(--font-weight-normal);
         margin-left: .25rem;
       }
@@ -195,7 +195,7 @@
 
     &.detractor {
       .heading, .heading .icon {
-        color: var(--magenta-500);
+        color: var(--rose-500);
       }
     }
   }
@@ -322,7 +322,7 @@
             &:nth-of-type(6),
             &:nth-of-type(7) {
               path {
-                fill: var(--magenta-500);
+                fill: var(--rose-500);
               }
             }
 
@@ -375,7 +375,7 @@
         }
 
         &.magenta {
-          color: var(--magenta-500);
+          color: var(--rose-500);
         }
       }
     }
@@ -530,7 +530,7 @@
       }
 
       &.magenta {
-        background: var(--magenta-500);
+        background: var(--rose-500);
       }
 
       &.purple {
@@ -538,7 +538,7 @@
       }
 
       &.gray {
-        background: var(--gray-800);
+        background: var(--gray-blue-800);
       }
     }
 
@@ -601,7 +601,7 @@
         &.score-4,
         &.score-5,
         &.score-6 {
-          color: var(--magenta-500);
+          color: var(--rose-500);
         }
 
         &.score-7,
@@ -674,7 +674,7 @@
   }
 
   .custom-tooltip {
-    background: var(--gray-800);
+    background: var(--gray-blue-800);
     border-radius: var(--border-radius-md);
     color: var(--gray-100);
     padding: 1rem;

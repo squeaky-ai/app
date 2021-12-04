@@ -1,5 +1,5 @@
 html, body {
-  color: var(--gray-800);
+  color: var(--gray-blue-800);
   font-family: 'Poppins', sans-serif;
   font-smooth: always;
   -webkit-font-smoothing: antialiased;
@@ -90,7 +90,7 @@ ul {
 }
 
 code, pre {
-  color: var(--gray-800);
+  color: var(--gray-blue-800);
   font-family: 'Monaco', 'Consolas' 'Courier New', monospace;
   font-size: 16px;
   line-height: 24px;
@@ -149,7 +149,7 @@ code, pre {
 }
 
 .sub-heading {
-  color: var(--gray-800);
+  color: var(--gray-blue-800);
   font-size: 24px;
   font-weight: var(--font-weight-bold);
   line-height: 32px;

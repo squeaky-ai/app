@@ -116,7 +116,7 @@
         width: 210px;
 
         & > .button {
-          color: var(--gray-800);
+          color: var(--gray-blue-800);
           height: 40px;
           margin-left: 0;
           padding: 0 .5rem;
@@ -127,7 +127,7 @@
           }
 
           i {
-            color: var(--gray-800);
+            color: var(--gray-blue-800);
             font-size: 1.5rem;
           }
         }
@@ -228,7 +228,7 @@
 
     .clear-filters {
       align-items: center;
-      color: var(--magenta-500);
+      color: var(--rose-500);
       display: flex;
       height: 2rem;
       margin: 0 0 .75rem .5rem;
@@ -270,7 +270,7 @@
       .button {
         background: none;
         border: none;
-        color: var(--gray-800);
+        color: var(--gray-blue-800);
         font-size: 1.25rem;
         padding: 0;
         position: absolute;
@@ -380,7 +380,7 @@
           }
 
           &:nth-of-type(3) {
-            color: var(--gray-800);
+            color: var(--gray-blue-800);
             font-weight: var(--font-weight-bold);
             grid-area: id;
             text-decoration: none;

@@ -316,7 +316,7 @@
 
   .scroll-indicator {
     align-items: center;
-    background: var(--gray-800);
+    background: var(--gray-blue-800);
     border-radius: var(--border-radius-md);
     display: flex;
     flex-direction: column;
@@ -336,7 +336,7 @@
     }
 
     .gradient {
-      background: linear-gradient(180deg, #8249FB 4.17%, #F0438C 27.6%, #FF8A00 50.52%, #FDE50B 72.4%, #FFFFFF 94.79%);
+      background: linear-gradient(180deg, #8249FB 4.17%, #F96155 27.6%, #FA9116 50.52%, #FBC73B 72.4%, #FFFFFF 94.79%);
       border-radius: var(--border-radius-md);
       flex: 1;
       margin: .5rem 0;

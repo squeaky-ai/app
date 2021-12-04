@@ -21,7 +21,7 @@ interface Props {
   site: Site;
 }
 
-const DEFAULT_COLORS = ['#0074E0', '#F0438C', '#8249FB', '#222222'];
+const DEFAULT_COLORS = ['#0074E0', '#F96155', '#8249FB', '#001A39'];
 
 const SentimentSchema = Yup.object().shape({
   sentimentAccentColor: Yup.string().matches(HEX_REGEX, 'Accent color is requied'),
@@ -121,8 +121,8 @@ export const SentimentSettings: FC<Props> = ({ site }) => {
                   <Radio 
                     name='sentimentAccentColor'
                     className='color-radio' 
-                    value='#F0438C' 
-                    checked={values.sentimentAccentColor === '#F0438C'}
+                    value='#F96155' 
+                    checked={values.sentimentAccentColor === '#F96155'}
                     onChange={handleChange}
                   >
                     <div className='color magenta'>
@@ -143,8 +143,8 @@ export const SentimentSettings: FC<Props> = ({ site }) => {
                   <Radio
                     name='sentimentAccentColor'
                     className='color-radio' 
-                    value='#222222' 
-                    checked={values.sentimentAccentColor === '#222222'}
+                    value='#001A39' 
+                    checked={values.sentimentAccentColor === '#001A39'}
                     onChange={handleChange}
                   >
                     <div className='color gray'>
@@ -161,7 +161,7 @@ export const SentimentSettings: FC<Props> = ({ site }) => {
                   <Input 
                     name='sentimentAccentColor'
                     className='hex'
-                    placeholder='e.g. #2CE21C' 
+                    placeholder='e.g. #32D05F' 
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={DEFAULT_COLORS.includes(values.sentimentAccentColor) ? '' : values.sentimentAccentColor}

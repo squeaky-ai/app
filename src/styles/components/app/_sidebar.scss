@@ -94,7 +94,7 @@
     }
 
     &:after {
-      background: var(--gray-800);
+      background: var(--gray-blue-800);
       border-radius: var(--border-radius-md);
       color: var(--white);
       content: attr(data-label);
@@ -158,14 +158,14 @@
 
         .button {
           border-radius: var(--border-radius-md);
-          color: var(--gray-800);
+          color: var(--gray-blue-800);
           font-weight: var(--font-weight-normal);
           margin: 0;
           padding: .5rem .75rem;
 
           &:hover {
             background: var(--gray-50);
-            color: var(--gray-700);
+            color: var(--gray-blue-700);
           }
 
           &.active {

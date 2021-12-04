@@ -21,7 +21,7 @@ interface Props {
   site: Site;
 }
 
-const DEFAULT_COLORS = ['#0074E0', '#F0438C', '#8249FB', '#222222'];
+const DEFAULT_COLORS = ['#0074E0', '#F96155', '#8249FB', '#001A39'];
 
 const NpsSchema = Yup.object().shape({
   npsAccentColor: Yup.string().matches(HEX_REGEX, 'Accent color is requied'),
@@ -133,8 +133,8 @@ export const NpsSettings: FC<Props> = ({ site }) => {
                   <Radio 
                     name='npsAccentColor'
                     className='color-radio' 
-                    value='#F0438C' 
-                    checked={values.npsAccentColor === '#F0438C'}
+                    value='#F96155' 
+                    checked={values.npsAccentColor === '#F96155'}
                     onChange={handleChange}
                   >
                     <div className='color magenta'>
@@ -155,8 +155,8 @@ export const NpsSettings: FC<Props> = ({ site }) => {
                   <Radio
                     name='npsAccentColor'
                     className='color-radio' 
-                    value='#222222' 
-                    checked={values.npsAccentColor === '#222222'}
+                    value='#001A39' 
+                    checked={values.npsAccentColor === '#001A39'}
                     onChange={handleChange}
                   >
                     <div className='color gray'>
@@ -173,7 +173,7 @@ export const NpsSettings: FC<Props> = ({ site }) => {
                   <Input 
                     name='npsAccentColor'
                     className='hex'
-                    placeholder='e.g. #2CE21C' 
+                    placeholder='e.g. #32D05F' 
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={DEFAULT_COLORS.includes(values.npsAccentColor) ? '' : values.npsAccentColor}

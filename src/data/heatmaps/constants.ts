@@ -40,7 +40,7 @@ export const HEATMAP_COLOURS: HeatmapColor[] = [
     percentage: 10
   },
   {
-    background: '#FDE50B',
+    background: '#FBC73B',
     border: '#BFBFBF',
     foreground: '#000000',
     percentage: 20
@@ -52,7 +52,7 @@ export const HEATMAP_COLOURS: HeatmapColor[] = [
     percentage: 30
   },
   {
-    background: '#FF8A00',
+    background: '#FA9116',
     border: '#BFBFBF',
     foreground: '#000000',
     percentage: 40
@@ -64,7 +64,7 @@ export const HEATMAP_COLOURS: HeatmapColor[] = [
     percentage: 50
   },
   {
-    background: '#F0438C',
+    background: '#F96155',
     border: '#BFBFBF',
     foreground: '#FFFFFF',
     percentage: 60
