@@ -1,11 +1,10 @@
 import React from 'react';
 import type { FC } from 'react';
-import Image from 'next/image';
 import { Pagination } from 'components/pagination';
 import { Sort } from 'components/sort';
+import { Illustration } from 'components/illustration';
 import { VisitorsRecordingsItem } from 'components/sites/visitors/visitors-recordings-item';
 import { Table, Row, Cell } from 'components/table';
-import { BASE_PATH } from 'data/common/constants';
 import { RecordingsSort } from 'types/graphql';
 import type { Visitor } from 'types/graphql';
 
@@ -73,7 +72,7 @@ export const VisitorsRecording: FC<Props> = ({ visitor, page, sort, setPage, set
 
       {items.length === 0 && (
         <div className='no-visitor-recordings'>
-          <Image src={`${BASE_PATH}/empty-state-1.svg`} height={160} width={210} />
+          <Illustration src='illustration-1' height={160} width={210} />
           <h4>There are currently no recordings for this visitor.</h4>
         </div>
       )}

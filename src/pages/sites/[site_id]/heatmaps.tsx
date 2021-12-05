@@ -1,11 +1,11 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Link from 'next/link';
-import Image from 'next/image';
 import Head from 'next/head';
 import classnames from 'classnames';
 import { Main } from 'components/main';
 import { Page } from 'components/sites/page';
+import { Illustration } from 'components/illustration';
 import { Container } from 'components/container';
 import { Spinner } from 'components/spinner';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
@@ -13,7 +13,6 @@ import { EmptyStateHint } from 'components/sites/empty-state-hint';
 import { Heatmaps } from 'components/sites/heatmaps/heatmaps';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { usePages } from 'hooks/use-pages';
-import { BASE_PATH } from 'data/common/constants';
 import type { TimePeriod } from 'lib/dates';
 
 
@@ -44,7 +43,7 @@ const SitesHeatmaps: NextPage<ServerSideProps> = ({ user }) => {
 
             <Container className='xl centered empty-state'>
               <div className='empty-state-contents'>
-                <Image src={`${BASE_PATH}/empty-state-8.svg`} height={240} width={320} alt='Illustration to represent the empty recordings page' />
+                <Illustration src='illustration-8' height={240} width={320} alt='Illustration to represent the empty recordings page' />
                 <h4>There are currently no heatmaps available.</h4>
                 <EmptyStateHint
                   title='Collecting Heatmap Data'

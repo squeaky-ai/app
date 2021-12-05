@@ -1,11 +1,11 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Image from 'next/image';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { useRouter } from 'next/router';
 import { Container } from 'components/container';
+import { Illustration } from 'components/illustration';
 import { Label } from 'components/label';
 import { Input } from 'components/input';
 import { Button } from 'components/button';
@@ -13,7 +13,6 @@ import { Main } from 'components/main';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { updateUser } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
-import { BASE_PATH } from 'data/common/constants';
 
 const NewSchema = Yup.object().shape({
   firstName: Yup.string().required('First name is required'),
@@ -37,7 +36,7 @@ const UsersNew: NextPage<ServerSideProps> = ({ user }) => {
           <div className='intro'>
             <p>Please enter your name below to set up your user account...</p>
             <div className='image'>
-              <Image src={`${BASE_PATH}/cupid.svg`} height={140} width={185} alt='New Account Image' />
+              <Illustration src='illustration-11' height={140} width={185} alt='New Account Image' />
             </div>
           </div>
 

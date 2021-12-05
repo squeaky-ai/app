@@ -1,10 +1,10 @@
 import React from 'react';
 import type { FC } from 'react';
-import Image from 'next/image';
 import classnames from 'classnames';
 import { Button } from 'components/button';
 import { Spinner } from 'components/spinner';
 import { Container } from 'components/container';
+import { Illustration } from 'components/illustration';
 import { Card } from 'components/card';
 import { HeatmapsClicks } from 'components/sites/heatmaps/heatmaps-clicks';
 import { HeatmapsScrolls } from 'components/sites/heatmaps/heatmaps-scrolls';
@@ -13,7 +13,6 @@ import { HeatmapsPeriods } from 'components/sites/heatmaps/heatmaps-periods';
 import { HeatmapsPage } from 'components/sites/heatmaps/heatmaps-page';
 import { useHeatmaps } from 'hooks/use-heatmaps';
 import { getDateRange, TimePeriod } from 'lib/dates';
-import { BASE_PATH } from 'data/common/constants';
 import { HeatmapsDevice, HeatmapsType } from 'types/graphql';
 
 interface Props {
@@ -90,7 +89,7 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
       {!hasData && (
         <Container className='xl centered empty-state show'>
           <div className='empty-state-contents'>
-            <Image src={`${BASE_PATH}/empty-state-2.svg`} height={240} width={320} alt='Illustration to represent the empty recordings page' />
+            <Illustration src='illustration-2' height={240} width={320} alt='Illustration to represent the empty recordings page' />
             <h4>There is no heatmap data available for your chosen page, period or device</h4>
           </div>
         </Container>

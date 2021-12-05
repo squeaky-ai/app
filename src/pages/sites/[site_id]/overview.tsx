@@ -1,17 +1,16 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Link from 'next/link';
-import Image from 'next/image';
 import Head from 'next/head';
 import classnames from 'classnames';
 import { Main } from 'components/main';
+import { Illustration } from 'components/illustration';
 import { Page } from 'components/sites/page';
 import { Container } from 'components/container';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { EmptyStateHint } from 'components/sites/empty-state-hint';
 import { Overview } from 'components/sites/overview';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
-import { BASE_PATH } from 'data/common/constants';
 
 const SitesOverview: NextPage<ServerSideProps> = ({ user }) => (
   <>
@@ -28,7 +27,7 @@ const SitesOverview: NextPage<ServerSideProps> = ({ user }) => (
 
           <Container className='xl centered empty-state'>
             <div className='empty-state-contents'>
-              <Image src={`${BASE_PATH}/empty-state-5.svg`} height={240} width={320} alt='Illustration to represent the empty recordings page' />
+              <Illustration src='illustration-5' height={240} width={320} alt='Illustration to represent the empty recordings page' />
               <h4>There is currently no dashboard data</h4>
               <EmptyStateHint
                 title='Accessing The Dashboard'

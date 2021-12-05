@@ -2,10 +2,10 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import Image from 'next/image';
 import classnames from 'classnames';
 import { debounce } from 'lodash';
 import { Main } from 'components/main';
+import { Illustration } from 'components/illustration';
 import { EmptyStateHint } from 'components/sites/empty-state-hint';
 import { Button } from 'components/button';
 import { Input } from 'components/input';
@@ -18,7 +18,6 @@ import { Tags } from 'components/sites/filters/recordings/tags';
 import { RecordingsColumns } from 'components/sites/recordings/recordings-columns';
 import { RecordingsBulkActions } from 'components/sites/recordings/recordings-bulk-actions';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
-import { BASE_PATH } from 'data/common/constants';
 import { defaultFilters, allColumns } from 'lib/recordings';
 import { Preferences, Preference } from 'lib/preferences';
 import { useFilters } from 'hooks/use-filters';
@@ -112,7 +111,7 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
 
             <Container className='xl centered empty-state'>
               <div className='empty-state-contents'>
-                <Image src={`${BASE_PATH}/empty-state-2.svg`} height={240} width={320} alt='Illustration to represent the empty recordings page' />
+                <Illustration src='illustration-2' height={240} width={320} alt='Illustration to represent the empty recordings page' />
                 <h4>There are currently no recordings available</h4>
                 <EmptyStateHint
                   title='Collecting Session Recordings'

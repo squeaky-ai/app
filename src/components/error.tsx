@@ -1,14 +1,13 @@
 import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import { Illustration } from 'components/illustration';
 import { Container } from 'components/container';
-import { BASE_PATH } from 'data/common/constants';
 
 export const Error: FC = () => (
   <div className='server-error'>
     <Container className='md'>
-      <Image src={`${BASE_PATH}/error-state.svg`} height={256} width={256} alt='Page not found' />
+      <Illustration src='illustration-10' height={256} width={256} alt='Page not found' />
       <h2>Internal Server Error</h2>
       <p>Something has gone wrong on our side, sorry!</p>
       <Link href='/sites'>

@@ -2,8 +2,8 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import Image from 'next/image';
 import classnames from 'classnames';
+import { Illustration } from 'components/illustration';
 import { Main } from 'components/main';
 import { Page } from 'components/sites/page';
 import { Container } from 'components/container';
@@ -11,7 +11,6 @@ import { EmptyStateHint } from 'components/sites/empty-state-hint';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { NpsTabs } from 'components/sites/feedback/nps-tabs';
 import { Nps } from 'components/sites/feedback/nps';
-import { BASE_PATH } from 'data/common/constants';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
 const SitesFeedbackNps: NextPage<ServerSideProps> = ({ user }) => {
@@ -30,7 +29,7 @@ const SitesFeedbackNps: NextPage<ServerSideProps> = ({ user }) => {
           
             <Container className='xl centered empty-state'>
               <div className='empty-state-contents'>
-                <Image src={`${BASE_PATH}/empty-state-9.svg`} height={240} width={320} alt='Illustration to represent the empty NPS page' />
+                <Illustration src='illustration-9' height={240} width={320} alt='Illustration to represent the empty NPS page' />
                 <h4>Awaiting tracking code installation</h4>
                 <EmptyStateHint
                   title='Collecting Session Recordings'

@@ -2,13 +2,12 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Avatar } from 'components/sites/avatar';
 import { Main } from 'components/main';
+import { Illustration } from 'components/illustration';
 import { CreateSite } from 'components/sites/recordings/create-site';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useSites } from 'hooks/use-sites';
-import { BASE_PATH } from 'data/common/constants';
 
 const Sites: NextPage<ServerSideProps> = () => {
   const { loading, sites } = useSites();
@@ -22,7 +21,7 @@ const Sites: NextPage<ServerSideProps> = () => {
       {!loading && sites.length === 0 && (
         <div className='empty-state welcome'>
           <div className='contents'>
-            <Image src={`${BASE_PATH}/empty-state-1.svg`} height={256} width={500} alt='Illustration to welcome the user to Squeaky' />
+            <Illustration src='illustration-1' height={256} width={500} alt='Illustration to welcome the user to Squeaky' />
             <h2>Welcome to Squeaky</h2>
             <p>It’s time to discover what your users are really getting up to! Add your first site by clicking the button below.</p>
             <CreateSite className='button primary icon'>

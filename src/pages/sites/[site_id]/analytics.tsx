@@ -1,10 +1,10 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Image from 'next/image';
 import classnames from 'classnames';
 import Link from 'next/link';
 import { Main } from 'components/main';
+import { Illustration } from 'components/illustration';
 import { EmptyStateHint } from 'components/sites/empty-state-hint';
 import { Container } from 'components/container';
 import { Page } from 'components/sites/page';
@@ -12,7 +12,6 @@ import { Select, Option } from 'components/select';
 import { Analytics } from 'components/sites/analytics/analytics';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
-import { BASE_PATH } from 'data/common/constants';
 import { TIME_PERIODS } from 'data/heatmaps/constants';
 import type { TimePeriod } from 'lib/dates';
 
@@ -50,7 +49,7 @@ const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
 
             <Container className='xl centered empty-state'>
               <div className='empty-state-contents'>
-                <Image src={`${BASE_PATH}/empty-state-3.svg`} height={240} width={320} alt='Illustration to represent the empty analytics page' />
+                <Illustration src='illustration-3' height={240} width={320} alt='Illustration to represent the empty analytics page' />
                 <h4>There are currently no analytics available</h4>
                 <EmptyStateHint
                   title='Collecting Analytics Data'

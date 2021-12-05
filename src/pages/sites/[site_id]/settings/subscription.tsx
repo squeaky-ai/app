@@ -1,8 +1,8 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Image from 'next/image';
 import { Main } from 'components/main';
+import { Illustration } from 'components/illustration';
 import { Access } from 'components/sites/access';
 import { Page } from 'components/sites/page';
 import { EmptyStateHint } from 'components/sites/empty-state-hint';
@@ -10,7 +10,6 @@ import { Container } from 'components/container';
 import { OWNER } from 'data/teams/constants';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
-import { BASE_PATH } from 'data/common/constants';
 
 const SiteSettingsSubscription: NextPage<ServerSideProps> = ({ user }) => (
   <>
@@ -30,7 +29,7 @@ const SiteSettingsSubscription: NextPage<ServerSideProps> = ({ user }) => (
 
           <Container className='xl centered empty-state'>
             <div className='empty-state-contents'>
-              <Image src={`${BASE_PATH}/empty-state-7.svg`} height={240} width={400} alt='Illustration to represent the empty recordings page' />
+              <Illustration src='illustration-7' height={240} width={400} alt='Illustration to represent the empty recordings page' />
               <h4>Squeaky is free during beta testing!</h4>
               <EmptyStateHint
                 title='Help Squeaky'

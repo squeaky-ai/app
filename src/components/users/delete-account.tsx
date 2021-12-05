@@ -1,12 +1,11 @@
 import React from 'react';
 import type { FC } from 'react';
-import Image from 'next/image';
 import { Button } from 'components/button';
 import { Container } from 'components/container';
+import { Illustration } from 'components/illustration';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { cache, userDelete } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
-import { BASE_PATH } from 'data/common/constants';
 
 export const DeleteAccount: FC = () => {
   const toasts = useToasts();
@@ -41,7 +40,7 @@ export const DeleteAccount: FC = () => {
       {deleted && (
         <div className='deleted-overaly'>
           <Container className='sm'>
-            <Image src={`${BASE_PATH}/account-deleted.svg`} height={256} width={256} alt='Illustraion to represent that the account has been deleted' />
+            <Illustration src='illustration-14' height={256} width={256} alt='Illustraion to represent that the account has been deleted' />
             <h2>Account Deleted</h2>
             <p>We’re sorry to see you go, but thanks so much for taking the time to use Squeaky. If you have any feedback please let us know:</p>
             <a href='/contact-us/' className='button primary'>

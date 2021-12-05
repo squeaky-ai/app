@@ -1,11 +1,11 @@
 import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import classnames from 'classnames';
 import { Pagination } from 'components/pagination';
 import { useVisitors } from 'hooks/use-visitors';
 import { Container } from 'components/container';
+import { Illustration } from 'components/illustration';
 import { Sort } from 'components/sort';
 import { PageSize } from 'components/sites/page-size';
 import { Tooltip } from 'components/tooltip';
@@ -16,7 +16,6 @@ import { DismissableMessage } from 'components/message';
 import { Error } from 'components/error';
 import { EmptyState } from 'components/sites/filters/common/empty-state';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
-import { BASE_PATH } from 'data/common/constants';
 import { Preference } from 'lib/preferences';
 import { allColumns } from 'lib/visitors';
 import { VisitorsSort } from 'types/graphql';
@@ -64,7 +63,7 @@ export const Visitors: FC<Props> = ({ site, query, columns, filters }) => {
       {!loading && (
         <Container className='xl centered empty-state'>
           <div className='empty-state-contents'>
-            <Image src={`${BASE_PATH}/empty-state-4.svg`} height={240} width={320} alt='Illustration to represent that there were no search results' />
+            <Illustration src='illustration-4' height={240} width={320} alt='Illustration to represent that there were no search results' />
             <h5>There are no visitors matching your search.</h5>
           </div>
         </Container>

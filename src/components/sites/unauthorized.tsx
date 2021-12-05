@@ -1,14 +1,13 @@
 import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import { Illustration } from 'components/illustration';
 import { Container } from 'components/container';
-import { BASE_PATH } from 'data/common/constants';
 
 export const Unauthorized: FC = () => (
   <div className='unauthorized'>
     <Container className='md'>
-      <Image src={`${BASE_PATH}/error-state.svg`} height={256} width={256} alt='Unauthorized state' />
+      <Illustration src='illustration-15' height={256} width={256} alt='Unauthorized state' />
       <h2>No Access</h2>
       <p>You role does not authorize you to view the requested page.</p>
       <Link href='/sites'>

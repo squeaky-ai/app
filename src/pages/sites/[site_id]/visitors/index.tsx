@@ -2,9 +2,9 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import Image from 'next/image';
 import classnames from 'classnames';
 import { debounce } from 'lodash';
+import { Illustration } from 'components/illustration';
 import { Main } from 'components/main';
 import { Page } from 'components/sites/page';
 import { Button } from 'components/button';
@@ -18,7 +18,6 @@ import { Filters } from 'components/sites/filters/visitors/filters';
 import { Tags } from 'components/sites/filters/visitors/tags';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { defaultFilters, allColumns } from 'lib/visitors';
-import { BASE_PATH } from 'data/common/constants';
 import { useFilters } from 'hooks/use-filters';
 import { Preferences, Preference } from 'lib/preferences';
 import type { VisitorsFilters } from 'types/graphql';
@@ -105,7 +104,7 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
 
             <Container className='xl centered empty-state'>
               <div className='empty-state-contents'>
-                <Image src={`${BASE_PATH}/empty-state-6.svg`} height={240} width={320} alt='Illustration to represent the empty recordings page' />
+                <Illustration src='illustration-6' height={240} width={320} alt='Illustration to represent the empty recordings page' />
                 <h4>There are currently no visitor records</h4>
                 <EmptyStateHint
                   title='Creating Visitor Records'

@@ -2,8 +2,8 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import Image from 'next/image';
 import classnames from 'classnames';
+import { Illustration } from 'components/illustration';
 import { Main } from 'components/main';
 import { Page } from 'components/sites/page';
 import { Container } from 'components/container';
@@ -12,7 +12,6 @@ import { SentimentTabs } from 'components/sites/feedback/sentiment-tabs';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { Sentiment } from 'components/sites/feedback/sentiment';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
-import { BASE_PATH } from 'data/common/constants';
 
 const SitesFeedbackSentiment: NextPage<ServerSideProps> = ({ user }) => {
   return (
@@ -30,7 +29,7 @@ const SitesFeedbackSentiment: NextPage<ServerSideProps> = ({ user }) => {
           
             <Container className='xl centered empty-state'>
               <div className='empty-state-contents'>
-                <Image src={`${BASE_PATH}/empty-state-9.svg`} height={240} width={320} alt='Illustration to represent the empty sentiment page' />
+                <Illustration src='illustration-9' height={240} width={320} alt='Illustration to represent the empty sentiment page' />
                 <h4>Awaiting tracking code installation</h4>
                 <EmptyStateHint
                   title='Collecting Session Recordings'
