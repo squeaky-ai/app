@@ -9,7 +9,7 @@ html, body {
 h1 {
   font-size: 64px;
   font-weight: var(--font-weight-block);
-  line-height: 80px;
+  line-height: 72px;
 
   @include breakpoint-md {
     font-size: 48px;
@@ -50,6 +50,12 @@ h4 {
   }
 }
 
+h5 {
+  font-size: 18px;
+  font-weight: var(--font-weight-block);
+  line-height: 24px;
+}
+
 p {
   font-size: 16px;
   font-weight: var(--font-weight-normal);
@@ -77,7 +83,7 @@ a {
 }
 
 b {
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-block);
 }
 
 ul {
@@ -99,7 +105,7 @@ code, pre {
 .button {
   font: inherit;
   font-size: 16px;
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-block);
   line-height: 24px;
 
   @include breakpoint-md {
@@ -110,7 +116,7 @@ code, pre {
 
 .label {
   font-size: 16px;
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-block);
   line-height: 24px;
 
   @include breakpoint-md {
@@ -145,17 +151,5 @@ code, pre {
   @include breakpoint-md {
     font-size: 13px;
     line-height: 20px;
-  }
-}
-
-.sub-heading {
-  color: var(--gray-blue-800);
-  font-size: 24px;
-  font-weight: var(--font-weight-bold);
-  line-height: 32px;
-
-  @include breakpoint-md {
-    font-size: 20px;
-    line-height: 24px;
   }
 }

@@ -38,10 +38,10 @@ export const Overview: FC<Props> = ({ site }) => {
   return (
     <div className='overview-grid'>
       <Card className='visitors'>
-        <h3 className='sub-heading'>
+        <h5>
           <i className='ri-group-line' />
           Visitors
-        </h3>
+        </h5>
         <h2>
           {overview.analytics.visitorsCount.total.toLocaleString()}
         </h2>
@@ -58,10 +58,10 @@ export const Overview: FC<Props> = ({ site }) => {
       </Card>
 
       <Card className='recordings'>
-        <h3 className='sub-heading'>
+        <h5>
           <i className='ri-vidicon-line' />
           Recordings
-        </h3>
+        </h5>
         <h2>
           {overview.analytics.recordingsCount.total.toLocaleString()}
         </h2>
@@ -78,10 +78,10 @@ export const Overview: FC<Props> = ({ site }) => {
       </Card>
 
       <Card className='pageviews'>
-        <h3 className='sub-heading'>
+        <h5>
           <i className='ri-pages-line' />
           Page Views
-        </h3>
+        </h5>
         <h2>{overview.analytics.pageViewCount.toLocaleString()}</h2>
         <div className='link'>
           <Link href={`/sites/${site_id}/analytics`}>
@@ -92,9 +92,9 @@ export const Overview: FC<Props> = ({ site }) => {
       </Card>
 
       <Card className='latest-recording'>
-        <h3 className='sub-heading'>
+        <h5>
           Latest Recording
-        </h3>
+        </h5>
 
         {recording && (
           <div className='preview'>
@@ -161,10 +161,10 @@ export const Overview: FC<Props> = ({ site }) => {
       </Card>
 
       <Card className='latest-notes'>
-        <h3 className='sub-heading'>
+        <h5>
           <i className='ri-sticky-note-line' />
           Latest Notes
-        </h3>
+        </h5>
 
         {notes.length === 0 && (
           <div className='notes-empty-state'>

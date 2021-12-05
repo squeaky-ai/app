@@ -69,7 +69,7 @@ export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
     <div className='analytics-graph'>
       <div className='heading'>
         <div className='title'>
-          <h4>Visitors</h4>
+          <h5>Visitors</h5>
           <h3>{totalCount}</h3>
           <Pill type='tertiary' large>{newCount} New</Pill>
         </div>

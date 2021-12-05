@@ -32,11 +32,11 @@ export const AnalyticsScreenWidths: FC<Props> = ({ dimensions }) => {
 
   return (
     <Card>
-      <h4>
+      <h5>
         Screen Width
         <i className='ri-arrow-left-line' />
         <i className='ri-arrow-right-line' />
-      </h4>
+      </h5>
       <div className='chart-wrapper'>
         <ResponsiveContainer>
           <BarChart data={data} height={150}>

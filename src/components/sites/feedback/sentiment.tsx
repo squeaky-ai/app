@@ -53,10 +53,10 @@ export const Sentiment: FC = () => {
       </h4>
 
       <Card className='card-rating'>
-        <h4>
+        <h5>
           <span>Sentiment Rating<h3>{sentiment.ratings.score.toFixed(2)}</h3></span>
           {hasResults && <FeedbackTrend value={Number(sentiment.ratings.trend.toFixed(2))} />}
-        </h4>
+        </h5>
         {hasResults
           ? <SentimentRatings period={period} ratings={sentiment.ratings.responses} />
           : <NoData />
@@ -64,12 +64,12 @@ export const Sentiment: FC = () => {
       </Card>
 
       <Card className='card-response'>
-        <h4>
+        <h5>
           Responses
           <span>
             {hasResults && <h3>{sentiment.replies.total}</h3>}
           </span>
-        </h4>
+        </h5>
         {hasResults  
           ? <SentimentReplies replies={sentiment.replies} />
           : <NoData />

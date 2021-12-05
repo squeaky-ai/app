@@ -56,7 +56,7 @@
   }
 
   .sentiment-tabs {
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
   }
 
   .sentiment-grid {
@@ -126,7 +126,7 @@
     .card-response {
       grid-area: card-response;
 
-      h4 { 
+      h5 { 
         align-items: center;
         display: flex;
 
@@ -153,8 +153,8 @@
     }
 
     .card {
-      h4 {
-        align-items: center;
+      h5 {
+        align-items: flex-end;
         display: flex;
         margin: 0 0 2rem 0;
 
@@ -171,6 +171,7 @@
 
           h3 {
             color: var(--blue-500);
+            line-height: 2rem;
             margin: 0 0 0 .75rem;
           }
         }

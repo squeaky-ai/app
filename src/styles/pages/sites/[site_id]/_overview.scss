@@ -72,7 +72,7 @@
       }
     }
 
-    .sub-heading {
+    h5 {
       align-items: center;
       display: flex;
       margin: 0 0 2rem 0;
@@ -138,7 +138,7 @@
     .pageviews {
       grid-area: pageviews;
 
-      .sub-heading {
+      h5 {
         i {
           color: var(--rose-500)
         }
@@ -331,7 +331,7 @@
       padding: 0;
       position: relative;
 
-      .sub-heading {
+      h5 {
         padding: 2rem 2rem 0 2rem;
 
         @include breakpoint-md {

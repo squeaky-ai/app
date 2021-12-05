@@ -65,7 +65,7 @@ export const Visitors: FC<Props> = ({ site, query, columns, filters }) => {
         <Container className='xl centered empty-state'>
           <div className='empty-state-contents'>
             <Image src={`${BASE_PATH}/empty-state-4.svg`} height={240} width={320} alt='Illustration to represent that there were no search results' />
-            <h4 className='sub-heading'>There are no visitors matching your search.</h4>
+            <h5>There are no visitors matching your search.</h5>
           </div>
         </Container>
       )}

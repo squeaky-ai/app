@@ -44,7 +44,7 @@ export const Analytics: FC<Props> = ({ period }) => {
 
         <div className='grid-item average-session-duration'>
           <Card>
-            <h4>Average Session Duration</h4>
+            <h5>Average Session Duration</h5>
             <div className='numbered-grid blue'>
               <AnalyticsSessionDuration sessionDurations={analytics.sessionDurations} />
             </div>
@@ -53,7 +53,7 @@ export const Analytics: FC<Props> = ({ period }) => {
 
         <div className='grid-item average-session-per-visitors'>
           <Card>
-            <h4>Average Sessions Per Visitor</h4>
+            <h5>Average Sessions Per Visitor</h5>
             <div className='numbered-grid blue'>
               <AnalyticsSessionsPerVisitor sessionsPerVisitor={analytics.sessionsPerVisitor} />
             </div>
@@ -62,7 +62,7 @@ export const Analytics: FC<Props> = ({ period }) => {
 
         <div className='grid-item pages-per-session'>
           <Card>
-            <h4>Pages Per Session</h4>
+            <h5>Pages Per Session</h5>
             <div className='numbered-grid purple'>
               <AnalyticsPagesPerSession pagesPerSession={analytics.pagesPerSession} />
             </div>

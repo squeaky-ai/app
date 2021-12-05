@@ -67,7 +67,7 @@ export const AnalyticsPageViews: FC<Props> = ({ pageViews, period }) => {
     <div className='analytics-graph'>
       <div className='heading'>
         <div className='title'>
-          <h4>Page Views</h4>
+          <h5>Page Views</h5>
           <h3>{totalCount}</h3>
           <Pill type='tertiary' large>{uniqueCount} Unique</Pill>
         </div>
