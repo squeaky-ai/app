@@ -5,12 +5,22 @@ import Link from 'next/link';
 import { Avatar } from 'components/sites/avatar';
 import { Main } from 'components/main';
 import { Illustration } from 'components/illustration';
+import { Spinner } from 'components/spinner';
+import { Error } from 'components/error';
 import { CreateSite } from 'components/sites/recordings/create-site';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useSites } from 'hooks/use-sites';
 
 const Sites: NextPage<ServerSideProps> = () => {
-  const { loading, sites } = useSites();
+  const { loading, error, sites } = useSites();
+
+  if (error) {
+    return <Error />;
+  }
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <>
