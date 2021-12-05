@@ -1,18 +1,15 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Link from 'next/link';
 import classnames from 'classnames';
 import { debounce } from 'lodash';
-import { Illustration } from 'components/illustration';
 import { Main } from 'components/main';
 import { Page } from 'components/sites/page';
+import { EmptyState } from 'components/sites/empty-state';
 import { Button } from 'components/button';
 import { Input } from 'components/input';
-import { Container } from 'components/container';
 import { Visitors } from 'components/sites/visitors/visitors';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
-import { EmptyStateHint } from 'components/sites/empty-state-hint';
 import { VisitorsColumns } from 'components/sites/visitors/visitors-columns';
 import { Filters } from 'components/sites/filters/visitors/filters';
 import { Tags } from 'components/sites/filters/visitors/tags';
@@ -102,21 +99,12 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
               </menu>
             </div>
 
-            <Container className='xl centered empty-state'>
-              <div className='empty-state-contents'>
-                <Illustration src='illustration-6' height={240} width={320} alt='Illustration to represent the empty recordings page' />
-                <h4>There are currently no visitor records</h4>
-                <EmptyStateHint
-                  title='Creating Visitor Records'
-                  body={
-                    <>
-                      <p>New to Squeaky? Please <Link href={`/sites/${site.id}/settings/details/tracking-code`}><a>install your tracking code</a></Link> to begin recording user sessions for your website or web app.</p>
-                      <p>If you have only recently installed or updated your tracking code it may take up to an hour before user records become available.</p>
-                    </>
-                  }
-                />
-              </div>
-            </Container>
+            <EmptyState
+              title='There are currently no visitor records'
+              subtitle='Creating Visitor Records'
+              illustration={6}
+              videoName='Visitors Intro'
+            />
 
             {site.recordingsCount > 0 && (
               <>

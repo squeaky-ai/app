@@ -15,48 +15,6 @@
     margin: 0;
   }
 
-  .empty-state {
-    align-items: center;
-    display: none;
-    flex: 1;
-    flex-direction: column;
-    height: calc(100% - 11rem);
-    width: 100%;
-
-    @include breakpoint-md {
-      height: auto;
-      margin-top: 2rem;
-    }
-
-    .empty-state-contents {
-      align-items: center;
-      display: flex;
-      flex: 1;
-      flex-direction: column;
-      justify-content: center;
-      width: 100%;
-
-      h4 {
-        margin: 2rem 0;
-      }
-
-      .message {
-        max-width: 580px;
-      }
-    }
-
-    &.show {
-      display: flex;
-      grid-area: empty-state;
-      height: 100%;
-
-      h4 {
-        max-width: 468px;
-        text-align: center;
-      }
-    }
-  }
-
   .empty {
     .empty-state {
       display: flex;

@@ -2,11 +2,8 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import classnames from 'classnames';
-import Link from 'next/link';
 import { Main } from 'components/main';
-import { Illustration } from 'components/illustration';
-import { EmptyStateHint } from 'components/sites/empty-state-hint';
-import { Container } from 'components/container';
+import { EmptyState } from 'components/sites/empty-state';
 import { Page } from 'components/sites/page';
 import { Select, Option } from 'components/select';
 import { Analytics } from 'components/sites/analytics/analytics';
@@ -47,21 +44,12 @@ const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
               </div>
             </div>
 
-            <Container className='xl centered empty-state'>
-              <div className='empty-state-contents'>
-                <Illustration src='illustration-3' height={240} width={320} alt='Illustration to represent the empty analytics page' />
-                <h4>There are currently no analytics available</h4>
-                <EmptyStateHint
-                  title='Collecting Analytics Data'
-                  body={
-                    <>
-                      <p>New to Squeaky? Please <Link href={`/sites/${site.id}/settings/details/tracking-code`}><a>install your tracking code</a></Link> to begin recording user sessions for your website or web app.</p>
-                      <p>If you have only recently installed or updated your tracking code it may take up to an hour before analytics data becomes available.</p>
-                    </>
-                  }
-                />
-              </div>
-            </Container>
+            <EmptyState
+              title='There are currently no analytics available'
+              subtitle='Collecting Analytics Data'
+              illustration={3}
+              videoName='Analytics Intro'
+            />
 
             {site.recordingsCount > 0 && (
               <Analytics period={period} />

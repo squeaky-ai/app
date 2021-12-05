@@ -19,7 +19,7 @@ const Sites: NextPage<ServerSideProps> = () => {
       </Head>
 
       {!loading && sites.length === 0 && (
-        <div className='empty-state welcome'>
+        <div className='welcome'>
           <div className='contents'>
             <Illustration src='illustration-1' height={256} width={500} alt='Illustration to welcome the user to Squeaky' />
             <h2>Welcome to Squeaky</h2>

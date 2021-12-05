@@ -1,15 +1,12 @@
 import React from 'react';
 import type { NextPage } from 'next';
-import Link from 'next/link';
 import Head from 'next/head';
 import classnames from 'classnames';
 import { Main } from 'components/main';
 import { Page } from 'components/sites/page';
-import { Illustration } from 'components/illustration';
-import { Container } from 'components/container';
+import { EmptyState } from 'components/sites/empty-state';
 import { Spinner } from 'components/spinner';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
-import { EmptyStateHint } from 'components/sites/empty-state-hint';
 import { Heatmaps } from 'components/sites/heatmaps/heatmaps';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { usePages } from 'hooks/use-pages';
@@ -41,21 +38,12 @@ const SitesHeatmaps: NextPage<ServerSideProps> = ({ user }) => {
               <h3 className='title'>Heatmaps</h3>
             </div>
 
-            <Container className='xl centered empty-state'>
-              <div className='empty-state-contents'>
-                <Illustration src='illustration-8' height={240} width={320} alt='Illustration to represent the empty recordings page' />
-                <h4>There are currently no heatmaps available.</h4>
-                <EmptyStateHint
-                  title='Collecting Heatmap Data'
-                  body={
-                    <>
-                      <p>New to Squeaky? Please <Link href={`/sites/${site.id}/settings/details/tracking-code`}><a>install your tracking code</a></Link> to begin recording user sessions for your website or web app.</p>
-                      <p>If you have only recently installed or updated your tracking code it may take up to an hour before data for your dashboard becomes available.</p>
-                    </>
-                  }
-                />
-              </div>
-            </Container>
+            <EmptyState 
+              title='There are currently no heatmaps available.'
+              subtitle='Collecting Heatmap Data'
+              illustration={8}
+              videoName='Heatmap Intro'
+            />
 
             {loading && pages.length === 0 && (
               <Spinner />

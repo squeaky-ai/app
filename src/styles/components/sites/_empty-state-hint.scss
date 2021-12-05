@@ -2,13 +2,14 @@
   background: var(--white);
   border: 2px solid var(--blue-500);
   border-radius: var(--border-radius-md);
-  padding: 1.5rem;
+  padding: 2rem;
   width: 560px;
 
   p {
     &.empty-state-heading {
       align-items: center;
       display: flex;
+      justify-content: space-between;
       margin: 0 0 1.5rem 0;
 
       i {
@@ -18,8 +19,45 @@
       }
     }
 
+    span {
+      align-items: center;
+      display: flex;
+
+      @include breakpoint-md {
+        align-items: flex-start;
+        width: 100%;
+      }
+    }
+
     &:last-of-type {
       margin-bottom: 0;
+    }
+
+    .video {
+      align-items: center;
+      background: var(--blue-50);
+      border: none;
+      border-radius: var(--border-radius-md);
+      color: var(--blue-500);
+      display: flex;
+      font-size: 13px;
+      height: 2.5rem;
+      line-height: 16px;
+      padding: 0 1rem;
+
+      i {
+        font-size: 16px;
+      }
+
+      @include breakpoint-md {
+        justify-content: center;
+        margin: 1.5rem 0 0 0;
+        width: 100%;
+      }
+    }
+
+    @include breakpoint-md {
+      flex-direction: column;
     }
   }
 

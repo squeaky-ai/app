@@ -5,44 +5,6 @@
     margin: 0 0 2rem 0;
   }
 
-  .empty-state {
-    align-items: center;
-    display: none;
-    flex: 1;
-    flex-direction: column;
-    height: calc(100% - 11rem);
-    width: 100%;
-
-    @include breakpoint-md {
-      height: auto;
-    }
-
-    .empty-state-contents {
-      align-items: center;
-      background: var(--gray-50);
-      border-radius: var(--border-radius-md);
-      display: flex;
-      flex: 1;
-      flex-direction: column;
-      justify-content: center;
-      width: 100%;
-
-      h4 {
-        margin: 2rem 0;
-      }
-
-      .message {
-        max-width: 580px;
-      }
-    }
-
-
-    &.filters {
-      display: flex;
-      height: calc(100% - 15rem);
-    }
-  }
-
   .empty {
     .title {
       .search {
