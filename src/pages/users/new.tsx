@@ -10,6 +10,7 @@ import { Label } from 'components/label';
 import { Input } from 'components/input';
 import { Button } from 'components/button';
 import { Main } from 'components/main';
+import { signout } from 'lib/api/auth';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { updateUser } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
@@ -23,6 +24,11 @@ const UsersNew: NextPage<ServerSideProps> = ({ user }) => {
   const router = useRouter();
   const toast = useToasts();
 
+  const handleSignOut = async () => {
+    await signout();
+    location.href = '/';
+  };
+
   return (
     <>
       <Head>
@@ -30,7 +36,13 @@ const UsersNew: NextPage<ServerSideProps> = ({ user }) => {
       </Head>
 
       <Main>
-        <h3 className='title'>Account Settings</h3>
+        <h3 className='title'>
+          Account Settings
+          <Button className='button signout link' onClick={handleSignOut}>
+            <i className='ri-logout-box-line' />
+            Log out
+          </Button>
+        </h3>
 
         <Container className='xsm'>
           <div className='intro'>

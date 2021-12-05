@@ -2,7 +2,20 @@
   flex: 1;
 
   .title {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
     margin: 2rem 0 1.5rem 0;
+  }
+
+  .signout {
+    align-items: center;
+    display: flex;
+    font-weight: var(--font-weight-bold);
+
+    i {
+      font-size: 1.25rem;
+    }
   }
 
   .intro {
