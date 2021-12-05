@@ -64,13 +64,13 @@ const Signup: NextPage<ServerSideProps> = () => {
         <title>Squeaky | Sign up</title>
       </Head>
 
-      <div className='center'>
-        <Container className='sm'>
-          <Card>
-            <a href='/' className='logo'>
-              <Logo src='logo' height={76} width={246} alt='Squeaky logo' />
-            </a>
+      <a href='/' className='logo'>
+        <Logo src='logo' height={48} width={156} alt='Squeaky logo' dark />
+      </a>
 
+      <div className='center'>
+        <Container className='lg'>
+          <Card>
             {pageView === PageView.EMAIL && (
               <>
                 <h2>Sign Up</h2>
@@ -80,7 +80,6 @@ const Signup: NextPage<ServerSideProps> = () => {
                   onSubmit={(values, { setSubmitting }) => {
                     (async () => {
                       const { data } = await checkEmailExists({ variables: { email: values.email } });
-                      console.log(data.userExists);
                       setSubmitting(false);
                       setEmail(values.email);
                       setPageView(data.userExists ? PageView.EMAIL_TAKEN : PageView.PASSWORD);
@@ -206,11 +205,25 @@ const Signup: NextPage<ServerSideProps> = () => {
               </div>
             )}
           </Card>
-        </Container>
 
-        <div className='footer-link'>
-          <p>Already have an account? <Link href='/auth/login'><a>Log in</a></Link></p>
-        </div>
+          <aside>
+            <h2>Meaningful insights in minutes</h2>
+            <ol>
+              <li><span>1</span>Unlock your customer experience data</li>
+              <li><span>2</span>Discover opportunities to improve your user journeys</li>
+              <li><span>3</span>Find new ways to improve conversion and retention</li>
+              <li><span>4</span>Walk in your customers footsteps</li>
+            </ol>
+            <div className='highlight'>
+              <i className='ri-check-line' />
+              <p>No credit card or technical skills required</p>
+            </div>
+          </aside>
+        </Container>
+      </div>
+
+      <div className='footer-link'>
+        <p>Already have an account? <Link href='/auth/login'><a>Log in</a></Link></p>
       </div>
     </>
   ); 

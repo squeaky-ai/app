@@ -73,13 +73,13 @@ const Login: NextPage<ServerSideProps> = () => {
         <title>Squeaky | Log in</title>
       </Head>
 
+      <a href='/' className='logo'>
+        <Logo src='logo' height={48} width={156} alt='Squeaky logo' dark />
+      </a>
+
       <div className='center'>
         <Container className='sm'>
           <Card>
-            <a href='/' className='logo'>
-              <Logo src='logo' height={76} width={246} alt='Squeaky logo' />
-            </a>
-
             {pageView === PageView.LOGIN && ( 
               <>
                 <h2>Log In</h2>
@@ -195,10 +195,10 @@ const Login: NextPage<ServerSideProps> = () => {
             )}
           </Card>
         </Container>
+      </div>
 
-        <div className='footer-link'>
-          <p>New to Squeaky? <Link href='/auth/signup'><a>Sign up</a></Link></p>
-        </div>
+      <div className='footer-link'>
+        <p>New to Squeaky? <Link href='/auth/signup'><a>Sign up</a></Link></p>
       </div>
     </>
   );

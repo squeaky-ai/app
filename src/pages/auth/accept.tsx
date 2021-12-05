@@ -80,12 +80,13 @@ const Accept: NextPage<ServerSideProps> = ({ user }) => {
         <title>Squeaky | Accept Invitation</title>
       </Head>
 
+      <a href='/' className='logo'>
+        <Logo src='logo' height={48} width={156} alt='Squeaky logo' dark />
+      </a>
+
       <div className='center'>
         <Container className='sm'>
           <Card>
-            <a href='/' className='logo'>
-              <Logo src='logo' height={76} width={246} alt='Squeaky logo' />
-            </a>
 
             {loading && (
               <Spinner />

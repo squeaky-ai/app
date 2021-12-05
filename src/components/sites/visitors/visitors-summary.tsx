@@ -24,10 +24,10 @@ export const VisitorsSummary: FC<Props> = ({ site, visitor }) => {
 
   return (
     <Card className='summary'>
-      <h3 className='title'>
+      <h4 className='title'>
         <i className='ri-user-line' />
         {visitor.visitorId}
-      </h3>
+      </h4>
 
       <div className='summary-data'>
         <div className='linked'>

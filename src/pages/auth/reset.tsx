@@ -48,13 +48,13 @@ const Reset: NextPage<ServerSideProps> = () => {
         <title>Squeaky | Reset Password</title>
       </Head>
 
+      <a href='/' className='logo'>
+        <Logo src='logo' height={48} width={156} alt='Squeaky logo' dark />
+      </a>
+
       <div className='center'>
         <Container className='sm'>
           <Card>
-            <a href='/' className='logo'>
-              <Logo src='logo' height={76} width={246} alt='Squeaky logo' />
-            </a>
-
             {pageView == PageView.EMAIL && (
               <>
                 <h2>Reset Password</h2> 
