@@ -1,6 +1,6 @@
 .button {
   appearance: none;
-  color: var(--gray-blue-800);
+  color: var(--body-color);
   cursor: pointer;
   text-decoration: none;
 
@@ -88,7 +88,7 @@
     background: var(--white);
     border: 1px solid var(--gray-200);
     border-radius: var(--border-radius-md);
-    color: var(--gray-blue-800);
+    color: var(--body-color);
     height: 40px;
     margin: 0;
     padding: .34rem 1rem;

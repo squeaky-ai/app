@@ -50,7 +50,7 @@
     }
 
     &.active {
-      color: var(--gray-blue-800);
+      color: var(--body-color);
 
       &::after {
         display: block;

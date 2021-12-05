@@ -100,7 +100,7 @@
         width: 210px;
 
         & > .button {
-          color: var(--gray-blue-800);
+          color: var(--body-color);
           height: 40px;
           margin-left: 0;
           padding: 0 .5rem;
@@ -111,7 +111,7 @@
           }
 
           i {
-            color: var(--gray-blue-800);
+            color: var(--body-color);
             font-size: 1.5rem;
           }
         }
@@ -210,7 +210,7 @@
       .button {
         background: none;
         border: none;
-        color: var(--gray-blue-800);
+        color: var(--body-color);
         font-size: 1.25rem;
         padding: 0;
         position: absolute;

@@ -26,6 +26,10 @@
   --gray-blue-50: #E4EDFA;
   --light-blue-300: #B1E4FD;
 
+  // Fixed
+  --body-color: #001A39;
+  --sidebar-background: #001A39;
+
   // Modals
   --modal-background: rgba(255, 255, 255, 0.85);
 
@@ -48,20 +52,33 @@
   --border-radius-o: 100%;
 
   &.dark-mode {
-    --white: #1a1a1a;
-    --black: #ffffff;
-    --gray-blue-800: #F2F2F2;
-    --gray-blue-700: #D7D7D7;
-    --gray-500: #BFBFBF;
+    --white: #001A39;    //
+    --gray-500: #BACADF; //
     --gray-300: #A0A0A0;
-    --gray-200: #707070;
-    --gray-150: #2b2b2b;
-    --gray-100: #001A39;
-    --gray-50: #121212;
-    --gray-blue-200: #D7D7D7;
-    --gray-blue-600: #2b2b2b;
+    --gray-200: #032349; //
+    --gray-150: #153B67; //
+    --gray-100: #153B67; //
+    --gray-50: #001125;  //
+    --blue-700: #005EB6;
+    --blue-500: #0074E0;
+    --blue-300: #4097E8;
+    --blue-50: #ECF6FF;
+    --yellow-500: #FBC73B;
+    --rose-500: #F96155;
+    --rose-50: #FFEDDC;
+    --green-500: #32D05F;
+    --orange-500: #FA9116;
+    --purple-500: #8249FB;
+    --purple-50: #F4F0FF;
+    --gray-blue-900: #001125;
     --gray-blue-800: #001A39;
-    --light-blue-300: #0074E0;
+    --gray-blue-700: #BACADF; //
+    --gray-blue-600: #153B67;
+    --gray-blue-200: #BACADF;
+    --gray-blue-50: #E4EDFA;
+    --light-blue-300: #B1E4FD;
+
+    --body-color: #ffffff;
 
     --modal-background: rgba(0, 0, 0, 0.85);
   }
