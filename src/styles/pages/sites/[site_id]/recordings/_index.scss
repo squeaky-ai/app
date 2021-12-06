@@ -313,7 +313,6 @@
 
     .row {
       grid-template-columns: 105px 1fr 1fr 1fr 1fr 1fr 2fr 1fr 90px 70px;
-      padding: 1rem;
 
       @include breakpoint-md {
         &:not(.head) {
