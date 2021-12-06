@@ -28,11 +28,6 @@ module.exports = {
     webHost: WEB_HOST_NAME,
     basePath: BASE_PATH,
   },
-  sassOptions: {
-    prependData: `
-      $asset-prefix: '${ASSET_PREFIX}';
-    `
-  },
   async rewrites() {
     return IS_DEV ? [
       {
