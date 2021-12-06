@@ -70,141 +70,143 @@ const Signup: NextPage<ServerSideProps> = () => {
 
       <div className='center'>
         <Container className='lg'>
-          <Card>
-            {pageView === PageView.EMAIL && (
-              <>
-                <h2>Sign Up</h2>
-                <Formik
-                  initialValues={{ email: (router.query.email || '') as string, terms: false }}
-                  validationSchema={EmailSchema}
-                  onSubmit={(values, { setSubmitting }) => {
-                    (async () => {
-                      const { data } = await checkEmailExists({ variables: { email: values.email } });
-                      setSubmitting(false);
-                      setEmail(values.email);
-                      setPageView(data.userExists ? PageView.EMAIL_TAKEN : PageView.PASSWORD);
-                    })();
-                  }}
-                >
-                  {({
-                    errors,
-                    handleBlur,
-                    handleChange,
-                    handleSubmit,
-                    isSubmitting,
-                    touched,
-                    values,
-                    isValid,
-                    dirty,
-                  }) => (
-                    <form onSubmit={handleSubmit}>
-                      <Label htmlFor='email'>Email</Label>
-                      <Input
-                        name='email' 
-                        type='email' 
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        placeholder='e.g. jess@email.com'
-                        autoComplete='email'
-                        value={values.email}
-                        invalid={touched.email && !!errors.email}
-                      />
-                      <span className='validation'>{errors.email}</span>
+          <main>
+            <Card>
+              {pageView === PageView.EMAIL && (
+                <>
+                  <h2>Sign Up</h2>
+                  <Formik
+                    initialValues={{ email: (router.query.email || '') as string, terms: false }}
+                    validationSchema={EmailSchema}
+                    onSubmit={(values, { setSubmitting }) => {
+                      (async () => {
+                        const { data } = await checkEmailExists({ variables: { email: values.email } });
+                        setSubmitting(false);
+                        setEmail(values.email);
+                        setPageView(data.userExists ? PageView.EMAIL_TAKEN : PageView.PASSWORD);
+                      })();
+                    }}
+                  >
+                    {({
+                      errors,
+                      handleBlur,
+                      handleChange,
+                      handleSubmit,
+                      isSubmitting,
+                      touched,
+                      values,
+                      isValid,
+                      dirty,
+                    }) => (
+                      <form onSubmit={handleSubmit}>
+                        <Label htmlFor='email'>Email</Label>
+                        <Input
+                          name='email' 
+                          type='email' 
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          placeholder='e.g. jess@email.com'
+                          autoComplete='email'
+                          value={values.email}
+                          invalid={touched.email && !!errors.email}
+                        />
+                        <span className='validation'>{errors.email}</span>
 
-                      <Checkbox name='terms' onChange={handleChange} checked={values.terms} invalid={touched.terms && !!errors.terms}>
-                        I have read and accept the <Link href='/terms'><a target='_blank'>Terms Of Use</a></Link>
-                      </Checkbox>
-                      <span className='validation'>{errors.terms}</span>
+                        <Checkbox name='terms' onChange={handleChange} checked={values.terms} invalid={touched.terms && !!errors.terms}>
+                          I have read and accept the <Link href='/terms'><a target='_blank'>Terms Of Use</a></Link>
+                        </Checkbox>
+                        <span className='validation'>{errors.terms}</span>
 
-                      <Button type='submit' disabled={isSubmitting || !(dirty && isValid)} className='primary'>
-                        Continue
-                      </Button>
-                    </form>
-                  )}
-                </Formik>
-              </>
-            )}
+                        <Button type='submit' disabled={isSubmitting || !(dirty && isValid)} className='primary'>
+                          Continue
+                        </Button>
+                      </form>
+                    )}
+                  </Formik>
+                </>
+              )}
 
-            {pageView === PageView.PASSWORD && (
-              <>
-                <h2>Sign Up</h2>
-                <Formik
-                  initialValues={{ email, password: '' }}
-                  validationSchema={PasswordSchema}
-                  onSubmit={(values, { setSubmitting }) => {
-                    (async () => {
-                      const { body } = await signup({ email: values.email, password: values.password });
-                      setSubmitting(false);
+              {pageView === PageView.PASSWORD && (
+                <>
+                  <h2>Sign Up</h2>
+                  <Formik
+                    initialValues={{ email, password: '' }}
+                    validationSchema={PasswordSchema}
+                    onSubmit={(values, { setSubmitting }) => {
+                      (async () => {
+                        const { body } = await signup({ email: values.email, password: values.password });
+                        setSubmitting(false);
 
-                      if (body) {
-                        setPageView(PageView.VERIFY);
-                      }
-                    })();
-                  }}
-                >
-                  {({
-                    errors,
-                    handleBlur,
-                    handleChange,
-                    handleSubmit,
-                    isSubmitting,
-                    touched,
-                    values,
-                    isValid,
-                    dirty,
-                  }) => (
-                    <form onSubmit={handleSubmit}>
-                      <Label htmlFor='email'>Email</Label>
-                      <p>{values.email}</p>
+                        if (body) {
+                          setPageView(PageView.VERIFY);
+                        }
+                      })();
+                    }}
+                  >
+                    {({
+                      errors,
+                      handleBlur,
+                      handleChange,
+                      handleSubmit,
+                      isSubmitting,
+                      touched,
+                      values,
+                      isValid,
+                      dirty,
+                    }) => (
+                      <form onSubmit={handleSubmit}>
+                        <Label htmlFor='email'>Email</Label>
+                        <p>{values.email}</p>
 
-                      <Label htmlFor='password'>Create password</Label>
-                      <Input
-                        name='password' 
-                        type='password' 
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        autoComplete='new-password'
-                        value={values.password}
-                        invalid={touched.password && !!errors.password}
-                      />
-                      <span className='validation'>{errors.password}</span>
+                        <Label htmlFor='password'>Create password</Label>
+                        <Input
+                          name='password' 
+                          type='password' 
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          autoComplete='new-password'
+                          value={values.password}
+                          invalid={touched.password && !!errors.password}
+                        />
+                        <span className='validation'>{errors.password}</span>
 
-                      <Password password={values.password} />
+                        <Password password={values.password} />
 
-                      <Button type='submit' disabled={isSubmitting || !(dirty && isValid)} className='primary'>
-                        Sign up
-                      </Button>
-                    </form>
-                  )}
-                </Formik>
-              </>
-            )}
+                        <Button type='submit' disabled={isSubmitting || !(dirty && isValid)} className='primary'>
+                          Sign up
+                        </Button>
+                      </form>
+                    )}
+                  </Formik>
+                </>
+              )}
 
-            {pageView === PageView.EMAIL_TAKEN && (
-              <div className='email-taken'>
-                <Message type='info' message={`A user with the email address ${email || ''} already exists. Please choose from the options below.`} />
-                <Link href='/auth/login'>
-                  <a className='button primary'>Go To Login Page</a>
-                </Link>
-                <Button className='secondary' onClick={() => setPageView(PageView.EMAIL)}>
-                  Sign Up With A Different Email
-                </Button>
-              </div>
-            )}
-
-            {pageView === PageView.VERIFY && (
-              <div className='verify'>
-                <div className='check'>
-                  <i className='ri-check-line' />
+              {pageView === PageView.EMAIL_TAKEN && (
+                <div className='email-taken'>
+                  <Message type='info' message={`A user with the email address ${email || ''} already exists. Please choose from the options below.`} />
+                  <Link href='/auth/login'>
+                    <a className='button primary'>Go To Login Page</a>
+                  </Link>
+                  <Button className='secondary' onClick={() => setPageView(PageView.EMAIL)}>
+                    Sign Up With A Different Email
+                  </Button>
                 </div>
-                <h4>Sign Up Complete</h4>
-                <p>To log in to your account, please open the verification email sent to <b>{email}</b> and click the link provided.</p>
-                <DelayedButton delay={10} initialDelayed={false} className='secondary' onClick={resendConfirmation}>
-                  Resend Verification Email
-                </DelayedButton>
-              </div>
-            )}
-          </Card>
+              )}
+
+              {pageView === PageView.VERIFY && (
+                <div className='verify'>
+                  <div className='check'>
+                    <i className='ri-check-line' />
+                  </div>
+                  <h4>Sign Up Complete</h4>
+                  <p>To log in to your account, please open the verification email sent to <b>{email}</b> and click the link provided.</p>
+                  <DelayedButton delay={10} initialDelayed={false} className='secondary' onClick={resendConfirmation}>
+                    Resend Verification Email
+                  </DelayedButton>
+                </div>
+              )}
+            </Card>
+          </main>
 
           <aside>
             <h2>Meaningful insights in minutes</h2>

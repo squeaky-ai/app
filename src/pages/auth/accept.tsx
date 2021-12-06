@@ -86,85 +86,86 @@ const Accept: NextPage<ServerSideProps> = ({ user }) => {
 
       <div className='center'>
         <Container className='sm'>
-          <Card>
+          <main>
+            <Card>
+              {loading && (
+                <Spinner />
+              )}
 
-            {loading && (
-              <Spinner />
-            )}
+              {!loading && !email && (
+                <div className='invalid-invidation'>
+                  <Message 
+                    type='error'
+                    message='Your invitation link is no longer valid, please contact the site owner to request a new invitation'
+                  />
+                </div>
+              )}
 
-            {!loading && !email && (
-              <div className='invalid-invidation'>
-                <Message 
-                  type='error'
-                  message='Your invitation link is no longer valid, please contact the site owner to request a new invitation'
-                />
-              </div>
-            )}
+              {!loading && email && (
+                <>
+                  <h2>Sign Up</h2>
 
-            {!loading && email && (
-              <>
-                <h2>Sign Up</h2>
+                  <Formik
+                    initialValues={{ password: '', terms: false }}
+                    validationSchema={AcceptSchema}
+                    onSubmit={(values, { setSubmitting }) => {
+                      (async () => {
+                        try {
+                          await teamInviteAccept({ password: values.password, token: router.query.token as string });
+                          setSubmitting(false);
+                        
+                          toast.add({ type: 'success', body: 'Invitation accepted succesfully' });
+                          await router.push('/auth/login');
+                        } catch(error) {
+                          toast.add({ type: 'error', body: 'There was an error accepting the invitation' });
+                        }
+                      })();
+                    }}
+                  >
+                    {({
+                      errors,
+                      handleBlur,
+                      handleChange,
+                      handleSubmit,
+                      isSubmitting,
+                      touched,
+                      values,
+                      isValid,
+                      dirty,
+                    }) => (
+                      <form onSubmit={handleSubmit}>
+                        <Label>Email</Label>
+                        <p>{email}</p>
 
-                <Formik
-                  initialValues={{ password: '', terms: false }}
-                  validationSchema={AcceptSchema}
-                  onSubmit={(values, { setSubmitting }) => {
-                    (async () => {
-                      try {
-                        await teamInviteAccept({ password: values.password, token: router.query.token as string });
-                        setSubmitting(false);
-                      
-                        toast.add({ type: 'success', body: 'Invitation accepted succesfully' });
-                        await router.push('/auth/login');
-                      } catch(error) {
-                        toast.add({ type: 'error', body: 'There was an error accepting the invitation' });
-                      }
-                    })();
-                  }}
-                >
-                  {({
-                    errors,
-                    handleBlur,
-                    handleChange,
-                    handleSubmit,
-                    isSubmitting,
-                    touched,
-                    values,
-                    isValid,
-                    dirty,
-                  }) => (
-                    <form onSubmit={handleSubmit}>
-                      <Label>Email</Label>
-                      <p>{email}</p>
+                        <Label htmlFor='password'>Create password</Label>
+                        <Input
+                          name='password' 
+                          type='password' 
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          autoComplete='new-password'
+                          value={values.password}
+                          invalid={touched.password && !!errors.password}
+                        />
+                        <span className='validation'>{errors.password}</span>
 
-                      <Label htmlFor='password'>Create password</Label>
-                      <Input
-                        name='password' 
-                        type='password' 
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        autoComplete='new-password'
-                        value={values.password}
-                        invalid={touched.password && !!errors.password}
-                      />
-                      <span className='validation'>{errors.password}</span>
+                        <Password password={values.password} />
 
-                      <Password password={values.password} />
+                        <Checkbox name='terms' onChange={handleChange} checked={values.terms} invalid={touched.terms && !!errors.terms}>
+                          I have read and accept the <a href='/terms-of-use/' target='_blank'>Terms Of Use</a>
+                        </Checkbox>
+                        <span className='validation'>{errors.terms}</span>
 
-                      <Checkbox name='terms' onChange={handleChange} checked={values.terms} invalid={touched.terms && !!errors.terms}>
-                        I have read and accept the <a href='/terms-of-use/' target='_blank'>Terms Of Use</a>
-                      </Checkbox>
-                      <span className='validation'>{errors.terms}</span>
-
-                      <Button  type='submit' disabled={isSubmitting || !(dirty && isValid)} className='primary'>
-                        Sign Up
-                      </Button>
-                    </form>
-                  )}
-                </Formik>
-              </>
-            )}
-          </Card>
+                        <Button  type='submit' disabled={isSubmitting || !(dirty && isValid)} className='primary'>
+                          Sign Up
+                        </Button>
+                      </form>
+                    )}
+                  </Formik>
+                </>
+              )}
+            </Card>
+          </main>
         </Container>
       </div>
     </>

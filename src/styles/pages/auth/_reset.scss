@@ -1,6 +1,6 @@
 .page.auth.reset {
   background-color: var(--gray-blue-800);
-  background-image: url('/squiggle.svg');
+  background-image: url($asset-prefix + '/squiggle.svg');
   background-repeat: repeat-y;
   background-size: 423px 50px;
   display: flex;

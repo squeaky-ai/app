@@ -1,6 +1,6 @@
 .page.auth.signup {
   background-color: var(--gray-blue-800);
-  background-image: url('/squiggle.svg');
+  background-image: url($asset-prefix + '/squiggle.svg');
   background-repeat: repeat-y;
   background-size: 423px 50px;
   display: flex;
@@ -26,6 +26,7 @@
   }
 
   .container {
+    align-items: center;
     display: flex;
 
     @include breakpoint-md {
