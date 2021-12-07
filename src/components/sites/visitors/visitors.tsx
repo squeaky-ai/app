@@ -18,9 +18,10 @@ import { EmptyState } from 'components/sites/filters/common/empty-state';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 import { Preference } from 'lib/preferences';
 import { allColumns } from 'lib/visitors';
+import { getColumnStyles } from 'lib/tables';
 import { VisitorsSort } from 'types/graphql';
 import type { Site } from 'types/graphql';
-import type { Column } from 'types/visitors';
+import type { Column } from 'types/common';
 import type { VisitorsFilters } from 'types/graphql';
 
 interface Props {
@@ -44,15 +45,7 @@ export const Visitors: FC<Props> = ({ site, query, columns, filters }) => {
   });
 
   const { items, pagination } = visitors;
-
-  const rowStyle: React.CSSProperties = { 
-    gridTemplateColumns: allColumns
-      .map(column => columns.find(c => c.name === column.name)?.width || '')
-      .join(' ')
-  };
-
-  const tableClassNames = allColumns
-    .map(column => columns.find(c => c.name === column.name) ? '' : `hide-${column.name}`);
+  const { rowStyle, tableClassNames } = getColumnStyles(allColumns, columns);
 
   if (error) {
     return <Error />;

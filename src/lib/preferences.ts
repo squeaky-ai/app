@@ -6,6 +6,7 @@ export enum Preference {
   VISITORS_COLUMNS = 'VISITORS_COLUMNS',
   VISITORS_LINKED_DATA_HIDE = 'VISITORS_LINKED_DATA_HIDE',
   NPS_COLUMNS = 'NPS_COLUMNS',
+  SENTIMENT_COLUMNS = 'SENTIMENT_COLUMNS',
   SIDEBAR_CLOSED = 'SIDEBAR_CLOSED',
   DARK_MODE_ENABLED = 'DARK_MODE_ENABLED',
 }
@@ -33,5 +34,9 @@ export class Preferences {
 
   public static getRaw(key: Preference): string {
     return localStorage.getItem(`preferences::${key}`);
+  }
+
+  public static delete(key: Preference): void {
+    localStorage.removeItem(`preferences::${key}`);
   }
 }

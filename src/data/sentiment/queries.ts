@@ -14,6 +14,13 @@ export const GET_SENTIMENT_QUERY = gql`
               id
               visitorId
             }
+            device {
+              viewportX
+              viewportY
+              browserName
+              browserDetails
+              deviceType
+            }
             sessionId
             recordingId
             timestamp

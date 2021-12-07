@@ -239,6 +239,7 @@ export type FeedbackSentimentResponse = {
 export type FeedbackSentimentResponseItem = {
   __typename?: 'FeedbackSentimentResponseItem';
   comment?: Maybe<Scalars['String']>;
+  device: RecordingsDevice;
   id: Scalars['ID'];
   recordingId: Scalars['String'];
   score: Scalars['Int'];

@@ -15,11 +15,11 @@ import { Filters } from 'components/sites/filters/visitors/filters';
 import { Tags } from 'components/sites/filters/visitors/tags';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { defaultFilters, allColumns } from 'lib/visitors';
+import { getColumnPreferences } from 'lib/tables';
 import { useFilters } from 'hooks/use-filters';
-import { Preferences, Preference } from 'lib/preferences';
+import { Preference } from 'lib/preferences';
 import type { VisitorsFilters } from 'types/graphql';
-import type { Column } from 'types/visitors';
-import type { ValueOf } from 'types/common';
+import type { Column, ValueOf } from 'types/common';
 
 const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
   const [query, setQuery] = React.useState<string>('');
@@ -49,12 +49,7 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
   };
 
   React.useEffect(() => {
-    const existing = Preferences.getArray(Preference.VISITORS_COLUMNS);
-
-    if (existing.length > 0) {
-      const columns = existing.map(e => allColumns.find(a => a.name === e));
-      setColumns(columns);
-    }
+    getColumnPreferences(Preference.VISITORS_COLUMNS, allColumns, setColumns);
   }, []);
 
   return (

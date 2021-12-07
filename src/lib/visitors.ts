@@ -1,6 +1,6 @@
 import { capitalize } from 'lodash';
 import { FiltersStart, FiltersRange } from 'types/graphql';
-import type { Column } from 'types/visitors';
+import type { Column } from 'types/common';
 import type { VisitorsFilters, Visitor, RecordingsDevice } from 'types/graphql';
 
 export function getAttributes<T>(visitor: Visitor): T {
@@ -71,69 +71,69 @@ export const defaultFilters: VisitorsFilters = {
 
 export const allColumns: Column[] = [
   {
-    name: 'status',
     label: 'Status',
     width: '105px',
     disabled: false,
+    position: 1,
   },
   {
-    name: 'visitor-id',
     label: 'Visitor ID',
     width: '1fr',
     disabled: true,
+    position: 2,
   },
   {
-    name: 'user-id',
     label: 'User ID',
     width: '1fr',
     disabled: false,
+    position: 3,
   },
   {
-    name: 'name',
     label: 'Name',
     width: '1fr',
     disabled: false,
+    position: 4,
   },
   {
-    name: 'email',
     label: 'Email',
     width: '1fr',
     disabled: false,
+    position: 5,
   },
   {
-    name: 'recordings',
     label: 'Recordings',
     width: '1fr',
     disabled: false,
+    position: 6,
   },
   {
-    name: 'first-visited',
     label: 'First visited',
     width: '1fr',
     disabled: false,
+    position: 7,
   },
   {
-    name: 'last-activity',
     label: 'Last activity',
     width: '1fr',
     disabled: false,
+    position: 8,
   },
   {
-    name: 'language',
     label: 'Language',
     width: '1fr',
     disabled: false,
+    position: 9,
   },
   {
-    name: 'device-viewport',
     label: 'Device & Viewport',
     width: '1fr',
     disabled: false,
+    position: 10,
   },
   {
-    name: 'browser',
     label: 'Browser',
     width: '90px',
     disabled: false,
+    position: 11,
   },
 ];

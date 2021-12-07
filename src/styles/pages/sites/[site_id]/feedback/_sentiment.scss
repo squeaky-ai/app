@@ -100,8 +100,64 @@
     }
 
     .heading-responses {
+      align-items: center;
+      display: flex;
       grid-area: heading-responses;
+      justify-content: space-between;
       margin: 0;
+
+      .dropdown {
+        & > .button {
+          background: none;
+          border: none;
+          border-radius: var(--border-radius-md);
+          height: 40px;
+          margin-left: .5rem;
+          padding: 0 1rem;
+  
+          &:hover {
+            background: var(--gray-100);
+          }
+  
+          i {
+            position: static;
+  
+            &:not(.arrow) {
+              color: var(--blue-500);
+              font-size: 1.25rem;
+              margin-right: .5rem;
+            }
+          }
+        }
+      }
+
+      .columns {
+        position: relative;
+
+        @include breakpoint-md {
+          display: none;
+        }
+
+        .dropdown-menu {
+          left: auto;
+          right: 0;
+          top: 3rem;
+          transform: none;
+          width: 250px;
+        }
+
+        .filters-columns {
+          padding: 1rem;
+
+          .checkbox {
+            margin-bottom: .5rem;
+
+            &:last-of-type {
+              margin-bottom: 0;
+            }
+          }
+        }
+      }
     }
 
     .card-responses {

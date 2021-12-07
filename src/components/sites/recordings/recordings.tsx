@@ -13,8 +13,9 @@ import { EmptyState } from 'components/sites/filters/common/empty-state';
 import { useRecordings } from 'hooks/use-recordings';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 import { allColumns } from 'lib/recordings';
+import { getColumnStyles } from 'lib/tables';
 import { RecordingsSort } from 'types/graphql';
-import type { Column } from 'types/recordings';
+import type { Column } from 'types/common';
 import type { Site, RecordingsFilters } from 'types/graphql';
 
 interface Props {
@@ -40,15 +41,7 @@ export const Recordings: FC<Props> = ({ site, query, filters, columns, selected,
   });
 
   const { items, pagination } = recordings;
-
-  const rowStyle: React.CSSProperties = { 
-    gridTemplateColumns: allColumns
-      .map(column => columns.find(c => c.name === column.name)?.width || '')
-      .join(' ')
-  };
-
-  const tableClassNames = allColumns
-    .map(column => columns.find(c => c.name === column.name) ? '' : `hide-${column.name}`);
+  const { rowStyle, tableClassNames } = getColumnStyles(allColumns, columns);
 
   const onSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.target.checked

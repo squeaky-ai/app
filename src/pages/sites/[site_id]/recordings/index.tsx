@@ -16,11 +16,11 @@ import { RecordingsColumns } from 'components/sites/recordings/recordings-column
 import { RecordingsBulkActions } from 'components/sites/recordings/recordings-bulk-actions';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { defaultFilters, allColumns } from 'lib/recordings';
-import { Preferences, Preference } from 'lib/preferences';
+import { Preference } from 'lib/preferences';
+import { getColumnPreferences } from 'lib/tables';
 import { useFilters } from 'hooks/use-filters';
-import type { Column } from 'types/recordings';
 import type { RecordingsFilters } from 'types/graphql';
-import type { ValueOf } from 'types/common';
+import type { Column, ValueOf } from 'types/common';
 
 const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
   const [query, setQuery] = React.useState<string>('');
@@ -51,12 +51,7 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
   };
 
   React.useEffect(() => {
-    const existing = Preferences.getArray(Preference.RECORDINGS_COLUMNS);
-
-    if (existing.length > 0) { 
-      const columns = existing.map(e => allColumns.find(a => a.name === e));
-      setColumns(columns);
-    }
+    getColumnPreferences(Preference.RECORDINGS_COLUMNS, allColumns, setColumns);
   }, []);
 
   return (

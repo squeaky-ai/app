@@ -4,7 +4,7 @@ import { Checkbox } from 'components/checkbox';
 import { Dropdown } from 'components/dropdown';
 import { allColumns } from 'lib/visitors';
 import { Preferences, Preference } from 'lib/preferences';
-import type { Column } from 'types/visitors';
+import type { Column } from 'types/common';
 
 interface Props {
   columns: Column[];
@@ -12,18 +12,18 @@ interface Props {
 }
 
 export const VisitorsColumns: FC<Props> = ({ columns, setColumns }) => {
-  const isChecked = (name: string) => {
-    return !!columns.find(c => c.name === name);
+  const isChecked = (position: number) => {
+    return !!columns.find(c => c.position === position);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = allColumns.find(c => c.name === event.target.value);
+    const value = allColumns.find(c => c.position.toString() === event.target.value);
 
     const result = event.target.checked
       ? [...columns, value]
-      : columns.filter(c => c.name !== value.name);
+      : columns.filter(c => c.position !== value.position);
 
-    Preferences.setArray(Preference.VISITORS_COLUMNS, result.map(r => r.name));
+    Preferences.setArray(Preference.VISITORS_COLUMNS, result.map(r => r.position));
 
     setColumns(result);
   };
@@ -33,11 +33,11 @@ export const VisitorsColumns: FC<Props> = ({ columns, setColumns }) => {
       <form className='filters-columns'>
         {allColumns.map(column => 
           <Checkbox 
-            key={column.name}
+            key={column.position}
             name='columns'
             onChange={handleChange}
-            value={column.name}
-            checked={isChecked(column.name)}
+            value={column.position}
+            checked={isChecked(column.position)}
             disabled={column.disabled}
           >
             {column.label}

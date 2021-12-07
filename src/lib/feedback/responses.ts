@@ -1,6 +1,5 @@
 import { range } from 'lodash';
 import type { TimePeriod } from 'lib/dates';
-import type { Column } from 'types/feedback';
 
 import {
   getHours,
@@ -18,63 +17,6 @@ export interface DataForPeriod {
   data: FeedbackData[];
   interval: number;
 }
-
-export const allColumns: Column[] = [
-  {
-    name: 'score',
-    label: 'Score',
-    width: '100px',
-    disabled: true,
-  },
-  {
-    name: 'visitor-id',
-    label: 'Visitor ID',
-    width: '1fr',
-    disabled: false,
-  },
-  {
-    name: 'recording-id',
-    label: 'Recording ID',
-    width: '1fr',
-    disabled: false,
-  },
-  {
-    name: 'date-time',
-    label: 'Date & Time',
-    width: '1fr',
-    disabled: false,
-  },
-  {
-    name: 'follow-up',
-    label: 'Follow-up Response',
-    width: '1fr',
-    disabled: false,
-  },
-  {
-    name: 'email',
-    label: 'Email',
-    width: '1fr',
-    disabled: false,
-  },
-  {
-    name: 'device-viewport',
-    label: 'Device & Viewport',
-    width: '1fr',
-    disabled: false,
-  },
-  {
-    name: 'browser',
-    label: 'Browser',
-    width: '90px',
-    disabled: false,
-  },
-  {
-    name: 'options',
-    label: 'Options',
-    width: '70px',
-    disabled: true,
-  },
-];
 
 const getAmPmForHour = (hour: number): string => {
   if (hour == 24) return '12pm';

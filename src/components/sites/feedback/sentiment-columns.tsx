@@ -2,7 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import { Checkbox } from 'components/checkbox';
 import { Dropdown } from 'components/dropdown';
-import { allColumns } from 'lib/recordings';
+import { allColumns } from 'lib/feedback/sentiment';
 import { Preferences, Preference } from 'lib/preferences';
 import type { Column } from 'types/common';
 
@@ -11,7 +11,7 @@ interface Props {
   setColumns: (columns: Column[]) => void;
 }
 
-export const RecordingsColumns: FC<Props> = ({ columns, setColumns }) => {
+export const SentimentColumns: FC<Props> = ({ columns, setColumns }) => {
   const isChecked = (position: number) => {
     return !!columns.find(c => c.position === position);
   };
@@ -23,7 +23,7 @@ export const RecordingsColumns: FC<Props> = ({ columns, setColumns }) => {
       ? [...columns, value]
       : columns.filter(c => c.position !== value.position);
 
-    Preferences.setArray(Preference.RECORDINGS_COLUMNS, result.map(r => r.position));
+    Preferences.setArray(Preference.SENTIMENT_COLUMNS, result.map(r => r.position));
 
     setColumns(result);
   };

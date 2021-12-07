@@ -1,5 +1,5 @@
 import { FiltersSize, FiltersStart } from 'types/graphql';
-import type { Column } from 'types/recordings';
+import type { Column } from 'types/common';
 import type { RecordingsFilters } from 'types/graphql';
 
 export const defaultFilters: RecordingsFilters = {
@@ -35,81 +35,71 @@ export const defaultFilters: RecordingsFilters = {
 
 export const allColumns: Column[] = [
   {
-    name: 'select',
     label: 'Select',
     width: '58px',
     disabled: false,
-    hide: true,
+    position: 1,
   },
   {
-    name: 'status',
     label: 'Status',
     width: '105px',
     disabled: false,
-    hide: false,
+    position: 2,
   },
   {
-    name: 'recording-id',
     label: 'Recording ID',
     width: '1fr',
     disabled: true,
-    hide: true,
+    position: 3,
   },
   {
-    name: 'visitor-id',
     label: 'User ID',
     width: '1fr',
     disabled: false,
-    hide: false,
+    position: 4,
   },
   {
-    name: 'date-time',
+  
     label: 'Date & Time',
     width: '1fr',
     disabled: false,
-    hide: false,
+    position: 5,
   },
   {
-    name: 'duration',
     label: 'Duration',
     width: '1fr',
     disabled: false,
-    hide: false,
+    position: 6,
   },
   {
-    name: 'pages',
     label: 'Pages',
     width: '1fr',
     disabled: false,
-    hide: false,
+    position: 7,
   },
   {
-    name: 'start-exit',
     label: 'Start & Exit URL',
     width: '2fr',
     disabled: false,
-    hide: false,
+    position: 8,
   },
   {
-    name: 'device',
     label: 'Device',
     width: '1fr',
     disabled: false,
-    hide: false,
+    position: 9,
   },
   {
-    name: 'browser',
     label: 'Browser',
     width: '90px',
     disabled: false,
-    hide: false,
+    position: 10,
   },
   {
-    name: 'options',
     label: 'Options',
     width: '70px',
     disabled: true,
-    hide: false,
+    position: 11,
   },
 ];
 

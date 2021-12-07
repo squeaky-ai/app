@@ -15,10 +15,11 @@ import { NpsScore } from 'components/sites/feedback/nps-score';
 import { NpsColumns } from 'components/sites/feedback/nps-columns';
 import { TIME_PERIODS } from 'data/nps/constants';
 import { percentage } from 'lib/maths';
-import { allColumns } from 'lib/feedback/responses';
-import { Preferences, Preference } from 'lib/preferences';
+import { allColumns } from 'lib/feedback/nps';
+import { getColumnPreferences } from 'lib/tables';
+import { Preference } from 'lib/preferences';
 import { FeedbackNpsResponseSort } from 'types/graphql';
-import type { Column } from 'types/feedback';
+import type { Column } from 'types/common';
 
 export const Nps: FC = () => {
   const [page, setPage] = React.useState<number>(0);
@@ -36,12 +37,7 @@ export const Nps: FC = () => {
   };
 
   React.useEffect(() => {
-    const existing = Preferences.getArray(Preference.NPS_COLUMNS);
-
-    if (existing.length > 0) {
-      const columns = existing.map(e => allColumns.find(a => a.name === e));
-      setColumns(columns);
-    }
+    getColumnPreferences(Preference.NPS_COLUMNS, allColumns, setColumns);
   }, []);
 
   if (loading) {
@@ -152,10 +148,12 @@ export const Nps: FC = () => {
 
       <h5 className='heading-responses'>
         Responses
-        <NpsColumns 
-          columns={columns}
-          setColumns={setColumns}
-        />
+        {hasResults && (
+          <NpsColumns 
+            columns={columns}
+            setColumns={setColumns}
+          />
+        )}
       </h5>
 
       <NpsResponses 

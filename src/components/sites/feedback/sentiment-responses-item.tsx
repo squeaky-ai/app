@@ -4,6 +4,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { Row, Cell } from 'components/table';
+import { Device } from 'components/device';
+import { Browser } from 'components/browser';
+import { Tooltip } from 'components/tooltip';
 import { Dropdown } from 'components/dropdown';
 import { SentimentResponsesDelete } from 'components/sites/feedback/sentiment-responses-delete';
 import { toNiceDate } from 'lib/dates';
@@ -12,9 +15,10 @@ import type { FeedbackSentimentResponseItem } from 'types/graphql';
 
 interface Props {
   response: FeedbackSentimentResponseItem;
+  style?: React.CSSProperties;
 }
 
-export const SentimentResponsesItem: FC<Props> = ({ response }) => {
+export const SentimentResponsesItem: FC<Props> = ({ response, style }) => {
   const router = useRouter();
   const rowActionsRef = React.useRef<Dropdown>();
 
@@ -23,7 +27,7 @@ export const SentimentResponsesItem: FC<Props> = ({ response }) => {
   };
 
   return (
-    <Row>
+    <Row style={style}>
       <Cell>
         <p className='score'>
           <div className='emoji'>
@@ -51,6 +55,17 @@ export const SentimentResponsesItem: FC<Props> = ({ response }) => {
       </Cell>
       <Cell>
         {response.comment || '-'}
+      </Cell>
+      <Cell>
+        <Tooltip positionX='right' button={<Device deviceType={response.device.deviceType} />}>
+          {response.device.deviceType === 'Computer' ? 'Desktop or Laptop Device' : 'Mobile Device'}
+        </Tooltip>
+        {response.device.viewportX} x {response.device.viewportY}
+      </Cell>
+      <Cell>
+        <Tooltip positionX='right' className='browser-tooltip' button={<Browser name={response.device.browserName} height={24} width={24} />}>
+          {response.device.browserDetails}
+        </Tooltip>
       </Cell>
       <Cell>
         <Dropdown portal button={<i className='ri-more-2-fill' />} buttonClassName='options' ref={rowActionsRef}>

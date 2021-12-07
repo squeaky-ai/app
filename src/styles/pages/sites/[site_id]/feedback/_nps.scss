@@ -634,62 +634,6 @@
       }
     }
 
-    &.hide-visitor-id {
-      .row {
-        .cell:nth-of-type(2) {
-          display: none;
-        }
-      }
-    }
-
-    &.hide-recording-id {
-      .row {
-        .cell:nth-of-type(3) {
-          display: none;
-        }
-      }
-    }
-
-    &.hide-date-time {
-      .row {
-        .cell:nth-of-type(4) {
-          display: none;
-        }
-      }
-    }
-
-    &.hide-follow-up {
-      .row {
-        .cell:nth-of-type(5) {
-          display: none;
-        }
-      }
-    }
-
-    &.hide-email {
-      .row {
-        .cell:nth-of-type(6) {
-          display: none;
-        }
-      }
-    }
-
-    &.hide-device-viewport {
-      .row {
-        .cell:nth-of-type(7) {
-          display: none;
-        }
-      }
-    }
-
-    &.hide-browser {
-      .row {
-        .cell:nth-of-type(8) {
-          display: none;
-        }
-      }
-    }
-
     .play {
       color: var(--blue-500);
       font-size: 1.25rem;

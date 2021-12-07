@@ -11,14 +11,20 @@ import { SentimentResponses } from 'components/sites/feedback/sentiment-response
 import { SentimentReplies } from 'components/sites/feedback/sentiment-replies';
 import { SentimentRatings } from 'components/sites/feedback/sentiment-ratings';
 import { FeedbackTrend } from 'components/sites/feedback/feedback-trend'
+import { SentimentColumns } from 'components/sites/feedback/sentiment-columns';
 import { TIME_PERIODS } from 'data/nps/constants';
+import { allColumns } from 'lib/feedback/sentiment';
+import { getColumnPreferences } from 'lib/tables';
+import { Preference } from 'lib/preferences';
 import { FeedbackSentimentResponseSort } from 'types/graphql';
+import type { Column } from 'types/common';
 
 export const Sentiment: FC = () => {
   const [page, setPage] = React.useState<number>(0);
   const [size, setSize] = React.useState<number>(10);
   const [sort, setSort] = React.useState<FeedbackSentimentResponseSort>(FeedbackSentimentResponseSort.TimestampDesc);
   const [period, setPeriod] = React.useState<TimePeriod>('past_seven_days');
+  const [columns, setColumns] = React.useState<Column[]>(allColumns);
 
   const { sentiment, loading, error } = useSentiment({ page, size, sort, range: getDateRange(period) });
   
@@ -27,6 +33,10 @@ export const Sentiment: FC = () => {
   const handleDateChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setPeriod(event.target.value as TimePeriod);
   };
+
+  React.useEffect(() => {
+    getColumnPreferences(Preference.SENTIMENT_COLUMNS, allColumns, setColumns);
+  }, []);
 
   if (loading) {
     return <Spinner />;
@@ -78,6 +88,12 @@ export const Sentiment: FC = () => {
 
       <h4 className='heading-responses'>
         Responses
+        {hasResults && (
+          <SentimentColumns 
+            columns={columns}
+            setColumns={setColumns}
+          />
+        )}
       </h4>
 
       <SentimentResponses
@@ -88,6 +104,7 @@ export const Sentiment: FC = () => {
         setSort={setSort}
         setSize={setSize}
         responses={sentiment.responses}
+        columns={columns}
       />
     </div>
   );

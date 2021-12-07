@@ -8,8 +8,11 @@ import { PageSize } from 'components/sites/page-size';
 import { Pagination } from 'components/pagination';
 import { NoResponses } from 'components/sites/feedback/no-responses';
 import { SentimentResponsesItem } from 'components/sites/feedback/sentiment-responses-item';
+import { allColumns } from 'lib/feedback/sentiment';
+import { getColumnStyles } from 'lib/tables';
 import { FeedbackSentimentResponseSort } from 'types/graphql';
 import type { FeedbackSentimentResponse } from 'types/graphql';
+import type { Column } from 'types/common';
 
 interface Props {
   page: number;
@@ -19,12 +22,14 @@ interface Props {
   setSort: (sort: FeedbackSentimentResponseSort) => void;
   setSize: (size: number) => void;
   responses: FeedbackSentimentResponse;
+  columns: Column[];
 }
 
-export const SentimentResponses: FC<Props> = ({ page, sort, size, setPage, setSort, setSize, responses }) => {
+export const SentimentResponses: FC<Props> = ({ page, sort, size, setPage, setSort, setSize, responses, columns }) => {
   const { items, pagination } = responses;
 
   const hasResults = pagination.total > 0;
+  const { rowStyle, tableClassNames } = getColumnStyles(allColumns, columns);
 
   return (
     <Card className={classnames('card-responses', { 'has-results': hasResults })}>
@@ -34,8 +39,8 @@ export const SentimentResponses: FC<Props> = ({ page, sort, size, setPage, setSo
 
       {hasResults && (
         <>
-          <Table className='sentiment-table'>
-            <Row head>
+          <Table className={classnames('sentiment-table', tableClassNames)}>
+            <Row style={rowStyle} head>
               <Cell>
                 Rating
               </Cell>
@@ -57,10 +62,16 @@ export const SentimentResponses: FC<Props> = ({ page, sort, size, setPage, setSo
               <Cell>
                 Follow-up response
               </Cell>
+              <Cell>
+                Device &amp; Viewport
+              </Cell>
+              <Cell>
+                Browser
+              </Cell>
               <Cell />
             </Row>
             {items.map(i => (
-              <SentimentResponsesItem key={i.id} response={i} />
+              <SentimentResponsesItem key={i.id} response={i} style={rowStyle} />
             ))}
           </Table>
           <div className='sentiment-responses-footer'>

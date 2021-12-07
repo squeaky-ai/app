@@ -8,10 +8,11 @@ import { PageSize } from 'components/sites/page-size';
 import { Pagination } from 'components/pagination';
 import { NoResponses } from 'components/sites/feedback/no-responses';
 import { NpsResponsesItem } from 'components/sites/feedback/nps-responses-item';
-import { allColumns } from 'lib/feedback/responses';
+import { allColumns } from 'lib/feedback/nps';
+import { getColumnStyles } from 'lib/tables';
 import { FeedbackNpsResponseSort } from 'types/graphql';
 import type { FeedbackNpsResponse } from 'types/graphql';
-import type { Column } from 'types/feedback';
+import type { Column } from 'types/common';
 
 interface Props {
   page: number;
@@ -28,15 +29,7 @@ export const NpsResponses: FC<Props> = ({ page, sort, size, setPage, setSort, se
   const { items, pagination } = responses;
 
   const hasResults = pagination.total > 0;
-
-  const rowStyle: React.CSSProperties = { 
-    gridTemplateColumns: allColumns
-      .map(column => columns.find(c => c.name === column.name)?.width || '')
-      .join(' ')
-  };
-
-  const tableClassNames = allColumns
-    .map(column => columns.find(c => c.name === column.name) ? '' : `hide-${column.name}`);
+  const { rowStyle, tableClassNames } = getColumnStyles(allColumns, columns);
 
   return (
     <Card className={classnames('card-responses', { 'has-results': hasResults })}>
