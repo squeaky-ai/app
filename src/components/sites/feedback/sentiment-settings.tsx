@@ -12,6 +12,7 @@ import { Input } from 'components/input';
 import { Button } from 'components/button';
 import { Container } from 'components/container';
 import { HEX_REGEX } from 'data/common/constants';
+import { SentimentPreview } from 'components/sites/feedback/sentiment-preview';
 import { useToasts } from 'hooks/use-toasts';
 import type { FeedbackUpdateInput } from 'types/graphql';
 import type { Site } from 'types/graphql';
@@ -223,6 +224,8 @@ export const SentimentSettings: FC<Props> = ({ site }) => {
                   <Button disabled={isSubmitting || !isValid} type='submit' className='primary'>
                     Save Changes
                   </Button>
+
+                  <SentimentPreview feedback={values} />
                 </div>
               </form>
             )}

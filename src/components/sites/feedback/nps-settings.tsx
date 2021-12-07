@@ -12,6 +12,7 @@ import { Radio } from 'components/radio';
 import { Input } from 'components/input';
 import { Checkbox } from 'components/checkbox';
 import { Button } from 'components/button';
+import { NpsPreview } from 'components/sites/feedback/nps-preview';
 import { HEX_REGEX } from 'data/common/constants';
 import { useToasts } from 'hooks/use-toasts';
 import type { FeedbackUpdateInput } from 'types/graphql';
@@ -270,6 +271,8 @@ export const NpsSettings: FC<Props> = ({ site }) => {
                   <Button disabled={isSubmitting || !isValid} type='submit' className='primary'>
                     Save Changes
                   </Button>
+
+                  <NpsPreview feedback={values} />
                 </div>
               </form>
             )}

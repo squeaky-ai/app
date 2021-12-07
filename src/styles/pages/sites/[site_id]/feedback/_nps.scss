@@ -600,7 +600,22 @@
   }
 
   .actions {
+    display: flex;
+    justify-content: space-between;
     margin-top: 4.5rem;
+
+    .icon {
+      i {
+        color: var(--blue-500);
+        margin: 0 .5rem 0 0;
+      }
+
+      &:hover {
+        i {
+          color: var(--white);
+        }
+      }
+    }
   }
 
   .nps-table {
@@ -707,6 +722,98 @@
     
     .score {
       color: var(--blue-500);
+    }
+  }
+
+  .nps-preview {
+    background: var(--white);
+    bottom: 0;
+    box-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.1);
+    left: 0;
+    padding: 3rem 0;
+    position: fixed;
+    width: 100%;
+    z-index: 3;
+
+    &.boxed {
+      border-radius: var(--border-radius-md);
+      bottom: 1.5rem;
+      left: 50%;
+      margin-left: -16.5rem;
+      width: 33rem;
+    }
+
+    .nps-wrapper {
+      margin: 0 auto;
+      max-width: 32rem;
+      padding: 0 2rem;
+      position: relative;
+
+      .close {
+        align-items: center;
+        background: var(--nps-accent-color);
+        border: none;
+        border-radius: var(--border-radius-o);
+        display: flex;
+        height: 2rem;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        right: -1rem;
+        top: -4rem;
+        width: 2rem;
+
+        i {
+          color: var(--white);
+          font-size: 1.25rem;
+        }
+        
+        &:hover {
+          filter: brightness(85%);
+        }
+      }
+
+      p {
+        color: var(--gray-800);
+        font-weight: var(--font-weight-block);
+        margin: 0 0 3rem 0;
+        text-align: center;
+      }
+
+      .labels {
+        align-items: center;
+        color: var(--gray-500);
+        display: flex;
+        font-size: 13px;
+        font-weight: var(--font-weight-bold);
+        justify-content: space-between;
+        line-height: 16px;
+      }
+
+      .options {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        margin: .75rem 0 0 0;
+
+        .button {
+          background: var(--gray-100);
+          border: none;
+          border-radius: var(--border-radius-sm);
+          color: var(--gray-800);
+          flex-shrink: 0;
+          height: 2rem;
+          margin: 0;
+          padding: 0;
+          width: 2rem;
+
+          &:hover {
+            background: var(--nps-accent-color);
+            color: var(--white);
+          }
+        }
+      }
     }
   }
 }
