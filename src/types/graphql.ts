@@ -163,6 +163,8 @@ export type FeedbackNpsResponseItem = {
   __typename?: 'FeedbackNpsResponseItem';
   comment?: Maybe<Scalars['String']>;
   contact: Scalars['Boolean'];
+  device: RecordingsDevice;
+  email?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   recordingId: Scalars['String'];
   score: Scalars['Int'];

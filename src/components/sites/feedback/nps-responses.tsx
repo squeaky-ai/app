@@ -8,8 +8,10 @@ import { PageSize } from 'components/sites/page-size';
 import { Pagination } from 'components/pagination';
 import { NoResponses } from 'components/sites/feedback/no-responses';
 import { NpsResponsesItem } from 'components/sites/feedback/nps-responses-item';
+import { allColumns } from 'lib/feedback/responses';
 import { FeedbackNpsResponseSort } from 'types/graphql';
 import type { FeedbackNpsResponse } from 'types/graphql';
+import type { Column } from 'types/feedback';
 
 interface Props {
   page: number;
@@ -19,12 +21,22 @@ interface Props {
   setSort: (sort: FeedbackNpsResponseSort) => void;
   setSize: (size: number) => void;
   responses: FeedbackNpsResponse;
+  columns: Column[];
 }
 
-export const NpsResponses: FC<Props> = ({ page, sort, size, setPage, setSort, setSize, responses }) => {
+export const NpsResponses: FC<Props> = ({ page, sort, size, setPage, setSort, setSize, responses, columns }) => {
   const { items, pagination } = responses;
 
   const hasResults = pagination.total > 0;
+
+  const rowStyle: React.CSSProperties = { 
+    gridTemplateColumns: allColumns
+      .map(column => columns.find(c => c.name === column.name)?.width || '')
+      .join(' ')
+  };
+
+  const tableClassNames = allColumns
+    .map(column => columns.find(c => c.name === column.name) ? '' : `hide-${column.name}`);
 
   return (
     <Card className={classnames('card-responses', { 'has-results': hasResults })}>
@@ -34,8 +46,8 @@ export const NpsResponses: FC<Props> = ({ page, sort, size, setPage, setSort, se
 
       {hasResults && (
         <>
-          <Table className='nps-table'>
-            <Row head>
+          <Table className={classnames('nps-table', tableClassNames)}>
+            <Row head style={rowStyle}>
               <Cell>
                 Score
               </Cell>
@@ -57,10 +69,19 @@ export const NpsResponses: FC<Props> = ({ page, sort, size, setPage, setSort, se
               <Cell>
                 Follow-up response
               </Cell>
+              <Cell>
+                Email
+              </Cell>
+              <Cell>
+                Device &amp; Viewport
+              </Cell>
+              <Cell>
+                Browser
+              </Cell>
               <Cell />
             </Row>
             {items.map(i => (
-              <NpsResponsesItem key={i.id} response={i} />
+              <NpsResponsesItem key={i.id} response={i} style={rowStyle} />
             ))}
           </Table>
           <div className='nps-responses-footer'>

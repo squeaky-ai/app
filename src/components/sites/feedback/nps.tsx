@@ -12,15 +12,20 @@ import { NpsRatings } from 'components/sites/feedback/nps-ratings';
 import { NpsReplies } from 'components/sites/feedback/nps-replies';
 import { FeedbackTrend } from 'components/sites/feedback/feedback-trend';
 import { NpsScore } from 'components/sites/feedback/nps-score';
+import { NpsColumns } from 'components/sites/feedback/nps-columns';
 import { TIME_PERIODS } from 'data/nps/constants';
 import { percentage } from 'lib/maths';
+import { allColumns } from 'lib/feedback/responses';
+import { Preferences, Preference } from 'lib/preferences';
 import { FeedbackNpsResponseSort } from 'types/graphql';
+import type { Column } from 'types/feedback';
 
 export const Nps: FC = () => {
   const [page, setPage] = React.useState<number>(0);
   const [size, setSize] = React.useState<number>(10);
   const [sort, setSort] = React.useState<FeedbackNpsResponseSort>(FeedbackNpsResponseSort.TimestampDesc);
   const [period, setPeriod] = React.useState<TimePeriod>('past_seven_days');
+  const [columns, setColumns] = React.useState<Column[]>(allColumns);
 
   const { nps, error, loading } = useNps({ page, size, sort, range: getDateRange(period) });
 
@@ -29,6 +34,15 @@ export const Nps: FC = () => {
   const handleDateChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setPeriod(event.target.value as TimePeriod);
   };
+
+  React.useEffect(() => {
+    const existing = Preferences.getArray(Preference.NPS_COLUMNS);
+
+    if (existing.length > 0) {
+      const columns = existing.map(e => allColumns.find(a => a.name === e));
+      setColumns(columns);
+    }
+  }, []);
 
   if (loading) {
     return <Spinner />;
@@ -138,6 +152,10 @@ export const Nps: FC = () => {
 
       <h5 className='heading-responses'>
         Responses
+        <NpsColumns 
+          columns={columns}
+          setColumns={setColumns}
+        />
       </h5>
 
       <NpsResponses 
@@ -148,6 +166,7 @@ export const Nps: FC = () => {
         setSort={setSort}
         setSize={setSize}
         responses={nps.responses}
+        columns={columns}
       />
     </div>
   );

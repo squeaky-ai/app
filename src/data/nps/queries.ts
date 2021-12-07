@@ -11,9 +11,17 @@ export const GET_NPS_QUERY = gql`
             score
             comment
             contact
+            email
             visitor {
               id
               visitorId
+            }
+            device {
+              viewportX
+              viewportY
+              browserName
+              browserDetails
+              deviceType
             }
             sessionId
             recordingId
