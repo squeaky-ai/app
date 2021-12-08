@@ -24,6 +24,8 @@ export const NpsRatings: FC<Props> = ({ ratings }) => {
     <div className='chart-wrapper'>
       <ResponsiveContainer>
         <BarChart data={data} height={150} margin={{ left: -35 }}>
+          <CartesianGrid strokeDasharray='3 3' vertical={false} />
+
           <YAxis 
             dataKey='count'
             allowDecimals={false}
@@ -46,8 +48,6 @@ export const NpsRatings: FC<Props> = ({ ratings }) => {
             fill='#4097E8'
             barSize={4}
           />
-
-          <CartesianGrid strokeDasharray='3 3' vertical={false} />
         </BarChart>
       </ResponsiveContainer>
     </div>

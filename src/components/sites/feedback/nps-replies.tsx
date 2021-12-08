@@ -17,6 +17,8 @@ export const NpsReplies: FC<Props> = ({ period, replies }) => {
     <div className='chart-wrapper'>
       <ResponsiveContainer>
         <LineChart data={data} height={150} margin={{ left: -35 }}>
+          <CartesianGrid strokeDasharray='3 3' vertical={false} />
+
           <YAxis 
             dataKey='count'
             allowDecimals={false}
@@ -34,8 +36,6 @@ export const NpsReplies: FC<Props> = ({ period, replies }) => {
           />
 
           <Line dataKey='count' fillOpacity={1} stroke='#4097E8' strokeWidth={2} />
-
-          <CartesianGrid strokeDasharray='3 3' vertical={false} />
         </LineChart>
       </ResponsiveContainer>
     </div>

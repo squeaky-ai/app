@@ -28,6 +28,8 @@ export const NpsScore: FC<Props> = ({ period, scores }) => {
     <div className='chart-wrapper'>
       <ResponsiveContainer>
         <LineChart data={data} height={150} margin={{ left: -35 }}>
+          <CartesianGrid strokeDasharray='3 3' vertical={false} />
+        
           <YAxis 
             dataKey='score'
             allowDecimals={false}
@@ -49,8 +51,6 @@ export const NpsScore: FC<Props> = ({ period, scores }) => {
           <Line dataKey='score' fillOpacity={1} stroke='#4097E8' strokeWidth={2} />
 
           <Tooltip content={<CustomTooltip />} />
-
-          <CartesianGrid strokeDasharray='3 3' vertical={false} />
         </LineChart>
       </ResponsiveContainer>
     </div>

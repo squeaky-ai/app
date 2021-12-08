@@ -19,6 +19,8 @@ export const SentimentRatings: FC<Props> = ({ period, ratings }) => {
     <div className='chart-wrapper'>
       <ResponsiveContainer>
         <LineChart data={data} height={250} margin={{ left: -15 }}>
+          <CartesianGrid strokeDasharray='3 3' vertical={false} />
+
           <YAxis 
             dataKey='score'
             allowDecimals={false}
@@ -50,8 +52,6 @@ export const SentimentRatings: FC<Props> = ({ period, ratings }) => {
           />
 
           <Line dataKey='score' fillOpacity={1} stroke='#4097E8' strokeWidth={2} />
-
-          <CartesianGrid strokeDasharray='3 3' vertical={false} />
         </LineChart>
       </ResponsiveContainer>
     </div>
