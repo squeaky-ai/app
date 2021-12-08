@@ -66,7 +66,7 @@ export const Nps: FC = () => {
 
       <Card className='card-nps'>
         <h5>
-          <span>NPS®<h3>{nps.scores.score}</h3></span>
+          <span>NPS®<h3>{hasResults ? nps.scores.score : ''}</h3></span>
           {hasResults && <FeedbackTrend value={nps.scores.trend} />}
         </h5>
         {hasResults

@@ -64,7 +64,7 @@ export const Sentiment: FC = () => {
 
       <Card className='card-rating'>
         <h5>
-          <span>Sentiment Rating<h3>{sentiment.ratings.score.toFixed(2)}</h3></span>
+          <span>Sentiment Rating<h3>{hasResults ? sentiment.ratings.score.toFixed(2) : ''}</h3></span>
           {hasResults && <FeedbackTrend value={Number(sentiment.ratings.trend.toFixed(2))} />}
         </h5>
         {hasResults

@@ -28,6 +28,7 @@
 
     &.small {
       display: block;
+      width: 1.125rem;
     }
 
     @include breakpoint-md {
@@ -357,7 +358,7 @@
             padding: 0;
 
             &.active {
-              color: var(--gray-50);
+              color: var(--blue-300);
             }
 
             &:last-child {
