@@ -40,7 +40,9 @@ export const Nps: FC = () => {
     getColumnPreferences(Preference.NPS_COLUMNS, allColumns, setColumns);
   }, []);
 
-  if (loading) {
+  // If you just check loading it will flash when changing
+  // sort/pagination
+  if (loading && nps.responses.items.length === 0) {
     return <Spinner />;
   }
 

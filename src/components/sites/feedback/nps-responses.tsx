@@ -53,10 +53,10 @@ export const NpsResponses: FC<Props> = ({ page, sort, size, setPage, setSort, se
               <Cell>
                 Date &amp; Time
                 <Sort 
-                  name='duration' 
+                  name='timestamp' 
                   order={sort} 
                   onAsc={() => setSort(FeedbackNpsResponseSort.TimestampAsc)} 
-                  onDesc={() => setSort(FeedbackNpsResponseSort.TimestampDesc)} 
+                  onDesc={() => setSort(FeedbackNpsResponseSort.TimestampDesc)}
                 />
               </Cell>
               <Cell>

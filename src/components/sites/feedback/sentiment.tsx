@@ -38,7 +38,9 @@ export const Sentiment: FC = () => {
     getColumnPreferences(Preference.SENTIMENT_COLUMNS, allColumns, setColumns);
   }, []);
 
-  if (loading) {
+  // If you just check loading it will flash when changing
+  // sort/pagination
+  if (loading && sentiment.responses.items.length === 0) {
     return <Spinner />;
   }
 

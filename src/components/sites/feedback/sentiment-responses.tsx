@@ -53,7 +53,7 @@ export const SentimentResponses: FC<Props> = ({ page, sort, size, setPage, setSo
               <Cell>
                 Date &amp; Time
                 <Sort 
-                  name='duration' 
+                  name='timestamp' 
                   order={sort} 
                   onAsc={() => setSort(FeedbackSentimentResponseSort.TimestampAsc)} 
                   onDesc={() => setSort(FeedbackSentimentResponseSort.TimestampDesc)} 
