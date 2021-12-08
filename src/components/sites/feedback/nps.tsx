@@ -67,10 +67,11 @@ export const Nps: FC = () => {
       </h4>
 
       <Card className='card-nps'>
-        <h5>
-          <span>NPS®<h3>{hasResults ? nps.scores.score : ''}</h3></span>
+        <div className='heading'>
+          <h5>NPS®</h5>
+          <h3>{hasResults ? nps.scores.score : ''}</h3>
           {hasResults && <FeedbackTrend value={nps.scores.trend} />}
-        </h5>
+        </div>
         {hasResults
           ? <NpsScore scores={nps.scores} period={period} />
           : <NoData />
@@ -78,10 +79,10 @@ export const Nps: FC = () => {
       </Card>
 
       <Card className='card-response'>
-        <h5>
-          Responses
+        <div className='heading'>
+          <h5>Responses</h5>
           {hasResults && <FeedbackTrend value={nps.replies.trend} />}
-        </h5>
+        </div>
         {hasResults
           ? <NpsReplies replies={nps.replies} period={period} />
           : <NoData />
@@ -89,7 +90,9 @@ export const Nps: FC = () => {
       </Card>
 
       <Card className='card-ratings'>
-        <h5>Ratings</h5>
+        <div className='heading'>
+          <h5>Ratings</h5>
+        </div>
         {hasResults
           ? <NpsRatings ratings={nps.ratings} />
           : <NoData />
@@ -148,7 +151,7 @@ export const Nps: FC = () => {
         </div>
       </Card>
 
-      <h5 className='heading-responses'>
+      <h4 className='heading-responses'>
         Responses
         {hasResults && (
           <NpsColumns 
@@ -156,7 +159,7 @@ export const Nps: FC = () => {
             setColumns={setColumns}
           />
         )}
-      </h5>
+      </h4>
 
       <NpsResponses 
         page={page}
