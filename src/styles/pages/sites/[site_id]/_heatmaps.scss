@@ -39,6 +39,15 @@
                            'empty-state empty-state';
     }
 
+    .empty-state {
+      grid-area: empty-state;
+      height: 100%;
+
+      h4 {
+        text-align: center;
+      }
+    }
+
     .options {
       display: flex;
       grid-area: options;
