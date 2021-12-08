@@ -326,12 +326,28 @@
     }
   }
 
+  .sentiment-pages-wrapper {
+    display: flex;
+
+    @include breakpoint-md {
+      flex-direction: column;
+    }
+  }
+
   .sentiment-pages {
+    background: var(--white);
+    border: 1px solid var(--gray-150);
     border-radius: var(--border-radius-md);
+    flex-shrink: 0;
     max-height: 22rem;
     max-width: 22rem;
     overflow-y: auto;
     width: 100%;
+
+
+    @include breakpoint-md {
+      max-width: 100%;
+    }
 
     .checkbox-group {
       padding: 1rem;
@@ -343,6 +359,14 @@
         text-overflow: ellipsis;
         white-space: nowrap;
       }
+    }
+  }
+
+  .sentiment-hint {
+    margin-left: 2rem;
+
+    @include breakpoint-md {
+      margin: 1.5rem 0 0 0;
     }
   }
 

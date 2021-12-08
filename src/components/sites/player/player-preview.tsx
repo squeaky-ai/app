@@ -28,8 +28,6 @@ export const PlayerPreview: FC<Props> = ({ recording }) => {
 
     const { width } = ref.current.getBoundingClientRect();
 
-    console.log(width, viewportX);
-
     setScale(`scale(${width / viewportX})`);
 
     // Can't have users tabbing around in there!
