@@ -14,7 +14,7 @@ import { VisitorsColumns } from 'components/sites/visitors/visitors-columns';
 import { Filters } from 'components/sites/filters/visitors/filters';
 import { Tags } from 'components/sites/filters/visitors/tags';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
-import { defaultFilters, allColumns } from 'lib/visitors';
+import { FILTERS, COLUMNS } from 'data/visitors/constants';
 import { getColumnPreferences } from 'lib/tables';
 import { useFilters } from 'hooks/use-filters';
 import { Preference } from 'lib/preferences';
@@ -23,7 +23,7 @@ import type { Column, ValueOf } from 'types/common';
 
 const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
   const [query, setQuery] = React.useState<string>('');
-  const [columns, setColumns] = React.useState<Column[]>(allColumns);
+  const [columns, setColumns] = React.useState<Column[]>(COLUMNS);
 
   const { filters, setFilters } = useFilters<VisitorsFilters>('visitors');
 
@@ -45,11 +45,11 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
   };
 
   const clearFilters = () => {
-    setFilters(defaultFilters);
+    setFilters(FILTERS);
   };
 
   React.useEffect(() => {
-    getColumnPreferences(Preference.VISITORS_COLUMNS, allColumns, setColumns);
+    getColumnPreferences(Preference.VISITORS_COLUMNS, COLUMNS, setColumns);
   }, []);
 
   return (

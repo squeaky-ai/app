@@ -13,7 +13,7 @@ import { SentimentRatings } from 'components/sites/feedback/sentiment-ratings';
 import { FeedbackTrend } from 'components/sites/feedback/feedback-trend'
 import { SentimentColumns } from 'components/sites/feedback/sentiment-columns';
 import { TIME_PERIODS } from 'data/nps/constants';
-import { allColumns } from 'lib/feedback/sentiment';
+import { COLUMNS } from 'data/sentiment/constants';
 import { getColumnPreferences } from 'lib/tables';
 import { Preference } from 'lib/preferences';
 import { FeedbackSentimentResponseSort } from 'types/graphql';
@@ -24,7 +24,7 @@ export const Sentiment: FC = () => {
   const [size, setSize] = React.useState<number>(10);
   const [sort, setSort] = React.useState<FeedbackSentimentResponseSort>(FeedbackSentimentResponseSort.TimestampDesc);
   const [period, setPeriod] = React.useState<TimePeriod>('past_seven_days');
-  const [columns, setColumns] = React.useState<Column[]>(allColumns);
+  const [columns, setColumns] = React.useState<Column[]>(COLUMNS);
 
   const { sentiment, loading, error } = useSentiment({ page, size, sort, range: getDateRange(period) });
   
@@ -35,7 +35,7 @@ export const Sentiment: FC = () => {
   };
 
   React.useEffect(() => {
-    getColumnPreferences(Preference.SENTIMENT_COLUMNS, allColumns, setColumns);
+    getColumnPreferences(Preference.SENTIMENT_COLUMNS, COLUMNS, setColumns);
   }, []);
 
   // If you just check loading it will flash when changing

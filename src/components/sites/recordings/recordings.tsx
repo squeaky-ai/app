@@ -12,7 +12,7 @@ import { Error } from 'components/error';
 import { EmptyState } from 'components/sites/filters/common/empty-state';
 import { useRecordings } from 'hooks/use-recordings';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
-import { allColumns } from 'lib/recordings';
+import { COLUMNS } from 'data/recordings/constants';
 import { getColumnStyles } from 'lib/tables';
 import { RecordingsSort } from 'types/graphql';
 import type { Column } from 'types/common';
@@ -41,7 +41,7 @@ export const Recordings: FC<Props> = ({ site, query, filters, columns, selected,
   });
 
   const { items, pagination } = recordings;
-  const { rowStyle, tableClassNames } = getColumnStyles(allColumns, columns);
+  const { rowStyle, tableClassNames } = getColumnStyles(COLUMNS, columns);
 
   const onSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.target.checked

@@ -1,6 +1,6 @@
 import React from 'react';
-import { defaultFilters as defaultVisitorsFilters } from 'lib/visitors';
-import { defaultFilters as defaultRecordingsFilters } from 'lib/recordings';
+import { FILTERS as VISITORS_FILTERS } from 'data/visitors/constants';
+import { FILTERS as RECORDINGS_FILTERS } from 'data/recordings/constants';
 
 type FiltersType = 'recordings' | 'visitors';
 
@@ -22,8 +22,8 @@ const getDefaultFilters = <T>(type: FiltersType): T => {
 
   return (
     type === 'recordings' 
-      ? defaultRecordingsFilters
-      : defaultVisitorsFilters
+      ? RECORDINGS_FILTERS
+      : VISITORS_FILTERS
   ) as unknown as T;
 };
 

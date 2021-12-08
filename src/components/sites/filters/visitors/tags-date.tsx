@@ -2,7 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import { Label } from 'components/label';
 import { Tag } from 'components/tag';
-import { defaultFilters } from 'lib/visitors';
+import { FILTERS } from 'data/visitors/constants';
 import type { ValueOf } from 'types/common';
 import type { VisitorsFilters } from 'types/graphql';
 
@@ -14,7 +14,7 @@ interface Props {
 
 export const TagsDate: FC<Props> = ({ name, filters, updateFilters }) => {
   const onDeleteTag = () => {
-    updateFilters(name, defaultFilters[name]);
+    updateFilters(name, FILTERS[name]);
   };
 
   return (

@@ -1,52 +1,7 @@
 import type { Event } from 'types/event';
 import { EventType, IncrementalSource, MouseInteractions } from 'rrweb';
 import type { metaEvent } from 'rrweb/typings/types';
-
-export type ActivityName =
-  'page_view' |
-  'click' |
-  'focus' |
-  'blur' |
-  'touch' |
-  'hover' |
-  'scroll' |
-  'unknown';
-
-export interface Activity {
-  name: string;
-  value: ActivityName;
-}
-
-export const activities: Activity[] = [
-  {
-    name: 'Page views',
-    value: 'page_view',
-  },
-  {
-    name: 'Clicks',
-    value: 'click',
-  },
-  {
-    name: 'Focus',
-    value: 'focus',
-  },
-  {
-    name: 'Blur',
-    value: 'blur',
-  },
-  {
-    name: 'Touch',
-    value: 'touch',
-  },
-  {
-    name: 'Hover',
-    value: 'hover',
-  },
-  {
-    name: 'Scrolling',
-    value: 'scroll',
-  },
-];
+import type { ActivityName } from 'types/event';
 
 type EventWithTimestamp<T> = T & { id: number; timestamp: number; delay?: number; };
 

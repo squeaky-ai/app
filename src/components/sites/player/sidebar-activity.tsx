@@ -7,12 +7,11 @@ import { EventType, IncrementalSource } from 'rrweb';
 import { ActivityTimestamp } from 'components/sites/player/activity-timestamp';
 import { SidebarActivityVisibility } from 'components/sites/player/sidebar-activity-visibility';
 import { Preference, Preferences } from 'lib/preferences';
-import type { Event } from 'types/event';
+import { ACTIVITIES } from 'data/recordings/constants';
+import type { Event, ActivityName } from 'types/event';
 import type { Recording } from 'types/graphql';
 
-import { 
-  ActivityName,
-  activities, 
+import {
   getActivityName, 
   getMouseInteractionLabel, 
   getMouseInteractionIcon, 
@@ -32,7 +31,7 @@ export const SidebarActivity: FC<Props> = ({ recording, replayer }) => {
   const [active, setActive] = React.useState<ActivityName[]>(
     // If they have anything stored in the preferences then
     // show that, otherwise default to showing all of the types
-    savedActive.length === 0 ? activities.map(a => a.value) : savedActive
+    savedActive.length === 0 ? ACTIVITIES.map(a => a.value) : savedActive
   );
 
   const events: Event[] = recording.events.items.map(i => JSON.parse(i));

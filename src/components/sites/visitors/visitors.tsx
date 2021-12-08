@@ -17,7 +17,7 @@ import { Error } from 'components/error';
 import { EmptyState } from 'components/sites/filters/common/empty-state';
 import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 import { Preference } from 'lib/preferences';
-import { allColumns } from 'lib/visitors';
+import { COLUMNS } from 'data/visitors/constants';
 import { getColumnStyles } from 'lib/tables';
 import { VisitorsSort } from 'types/graphql';
 import type { Site } from 'types/graphql';
@@ -45,7 +45,7 @@ export const Visitors: FC<Props> = ({ site, query, columns, filters }) => {
   });
 
   const { items, pagination } = visitors;
-  const { rowStyle, tableClassNames } = getColumnStyles(allColumns, columns);
+  const { rowStyle, tableClassNames } = getColumnStyles(COLUMNS, columns);
 
   if (error) {
     return <Error />;

@@ -59,7 +59,7 @@ export const Sidebar: FC = () => {
   };
 
   const onBodyClick = (event: MouseEvent) => {
-    if (ref && !ref.current.contains(event.target as HTMLElement)) {
+    if (ref.current && !ref.current.contains(event.target as HTMLElement)) {
       closeIfMenuIsClosed();
     }
   };

@@ -8,7 +8,7 @@ import { PageSize } from 'components/sites/page-size';
 import { Pagination } from 'components/pagination';
 import { NoResponses } from 'components/sites/feedback/no-responses';
 import { SentimentResponsesItem } from 'components/sites/feedback/sentiment-responses-item';
-import { allColumns } from 'lib/feedback/sentiment';
+import { COLUMNS } from 'data/sentiment/constants';
 import { getColumnStyles } from 'lib/tables';
 import { FeedbackSentimentResponseSort } from 'types/graphql';
 import type { FeedbackSentimentResponse } from 'types/graphql';
@@ -29,7 +29,7 @@ export const SentimentResponses: FC<Props> = ({ page, sort, size, setPage, setSo
   const { items, pagination } = responses;
 
   const hasResults = pagination.total > 0;
-  const { rowStyle, tableClassNames } = getColumnStyles(allColumns, columns);
+  const { rowStyle, tableClassNames } = getColumnStyles(COLUMNS, columns);
 
   return (
     <Card className={classnames('card-responses', { 'has-results': hasResults })}>

@@ -5,8 +5,9 @@ import { Formik } from 'formik';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { Button } from 'components/button';
 import { Checkbox } from 'components/checkbox';
-import { activities, ActivityName } from 'lib/activity';
+import { ACTIVITIES } from 'data/recordings/constants';
 import { Preference, Preferences } from 'lib/preferences';
+import type { ActivityName } from 'types/event';
 
 interface Props {
   active: ActivityName[];
@@ -33,7 +34,7 @@ export const SidebarActivityVisibility: FC<Props> = ({ active, setActive }) => {
       <Button className='secondary activity-visibility' onClick={openModal}>
         <i className='ri-eye-line' />
         Show
-        <span>{active.length}/{activities.length}</span>
+        <span>{active.length}/{ACTIVITIES.length}</span>
       </Button>
 
       <Modal ref={ref}>
@@ -66,7 +67,7 @@ export const SidebarActivityVisibility: FC<Props> = ({ active, setActive }) => {
                 <ModalContents>
                   <p id='sidebar-activity-visibility-description'>Please select all activity types you want to see in your activity feed. Your settings are maintained across all recordings.</p>
                   <div className='checkbox-group'>
-                    {activities.map(activity => (
+                    {ACTIVITIES.map(activity => (
                       <Checkbox 
                         key={activity.value}
                         name='checked'

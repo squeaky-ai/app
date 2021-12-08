@@ -2,7 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import { Label } from 'components/label';
 import { Tag } from 'components/tag';
-import { defaultFilters } from 'lib/recordings';
+import { FILTERS } from 'data/recordings/constants';
 import type { ValueOf } from 'types/common';
 import type { RecordingsFilters, VisitorsFilters } from 'types/graphql';
 
@@ -15,7 +15,7 @@ interface Props {
 
 export const TagsStatus: FC<Props> = ({ filters, updateFilters }) => {
   const onDeleteTag = () => {
-    updateFilters('status', defaultFilters.status);
+    updateFilters('status', FILTERS.status);
   };
 
   return (

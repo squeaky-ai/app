@@ -2,7 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import { Label } from 'components/label';
 import { Tag } from 'components/tag';
-import { defaultFilters } from 'lib/recordings';
+import { FILTERS } from 'data/recordings/constants';
 import { toTimeString } from 'lib/dates';
 import type { ValueOf } from 'types/common';
 import type { RecordingsFilters } from 'types/graphql';
@@ -16,7 +16,7 @@ export const TagsDuration: FC<Props> = ({ filters, updateFilters }) => {
   const formatTimeString = (value: number) => toTimeString(value).slice(3);
 
   const onDeleteTag = () => {
-    updateFilters('duration', defaultFilters.duration);
+    updateFilters('duration', FILTERS.duration);
   };
 
   return (

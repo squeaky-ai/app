@@ -8,7 +8,7 @@ import { PageSize } from 'components/sites/page-size';
 import { Pagination } from 'components/pagination';
 import { NoResponses } from 'components/sites/feedback/no-responses';
 import { NpsResponsesItem } from 'components/sites/feedback/nps-responses-item';
-import { allColumns } from 'lib/feedback/nps';
+import { COLUMNS } from 'data/nps/constants';
 import { getColumnStyles } from 'lib/tables';
 import { FeedbackNpsResponseSort } from 'types/graphql';
 import type { FeedbackNpsResponse } from 'types/graphql';
@@ -29,7 +29,7 @@ export const NpsResponses: FC<Props> = ({ page, sort, size, setPage, setSort, se
   const { items, pagination } = responses;
 
   const hasResults = pagination.total > 0;
-  const { rowStyle, tableClassNames } = getColumnStyles(allColumns, columns);
+  const { rowStyle, tableClassNames } = getColumnStyles(COLUMNS, columns);
 
   return (
     <Card className={classnames('card-responses', { 'has-results': hasResults })}>

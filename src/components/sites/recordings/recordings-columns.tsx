@@ -2,7 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import { Checkbox } from 'components/checkbox';
 import { Dropdown } from 'components/dropdown';
-import { allColumns } from 'lib/recordings';
+import { COLUMNS } from 'data/recordings/constants';
 import { Preferences, Preference } from 'lib/preferences';
 import type { Column } from 'types/common';
 
@@ -17,7 +17,7 @@ export const RecordingsColumns: FC<Props> = ({ columns, setColumns }) => {
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = allColumns.find(c => c.position.toString() === event.target.value);
+    const value = COLUMNS.find(c => c.position.toString() === event.target.value);
 
     const result = event.target.checked
       ? [...columns, value]
@@ -31,7 +31,7 @@ export const RecordingsColumns: FC<Props> = ({ columns, setColumns }) => {
   return (
     <Dropdown className='columns' button={<><i className='ri-layout-column-line' /> Columns</>}>
       <form className='filters-columns'>
-        {allColumns.map(column => 
+        {COLUMNS.map(column => 
           <Checkbox 
             key={column.position}
             name='columns'
