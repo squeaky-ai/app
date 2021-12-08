@@ -26,17 +26,21 @@ export const PlayerPreview: FC<Props> = ({ recording }) => {
       mouseTail: false,
     });
 
-    const { height } = ref.current.getBoundingClientRect();
+    const { width } = ref.current.getBoundingClientRect();
 
-    setScale(`scale(${height / viewportY})`);
+    console.log(width, viewportX);
+
+    setScale(`scale(${width / viewportX})`);
 
     // Can't have users tabbing around in there!
     ref.current.querySelector('iframe').setAttribute('tabindex', '-1');
   }, []);
 
   return (
-    <div ref={ref} className='preview-container' style={{ transform: scale }}>
-      <div id='preview-wrapper' style={{ width: `${viewportX}px`, height: `${viewportY}px` }} />
+    <div ref={ref}>
+      <div className='preview-container' style={{ transform: scale }}>
+        <div id='preview-wrapper' style={{ width: `${viewportX}px`, height: `${viewportY}px` }} />
+      </div>
     </div>
   );
 };
