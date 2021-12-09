@@ -13,7 +13,7 @@ import { SentimentRatings } from 'components/sites/feedback/sentiment-ratings';
 import { FeedbackTrend } from 'components/sites/feedback/feedback-trend'
 import { SentimentColumns } from 'components/sites/feedback/sentiment-columns';
 import { TIME_PERIODS } from 'data/nps/constants';
-import { COLUMNS } from 'data/sentiment/constants';
+import { COLUMNS, DEFAULT_COLUMNS } from 'data/sentiment/constants';
 import { getColumnPreferences } from 'lib/tables';
 import { Preference } from 'lib/preferences';
 import { FeedbackSentimentResponseSort } from 'types/graphql';
@@ -24,7 +24,7 @@ export const Sentiment: FC = () => {
   const [size, setSize] = React.useState<number>(10);
   const [sort, setSort] = React.useState<FeedbackSentimentResponseSort>(FeedbackSentimentResponseSort.TimestampDesc);
   const [period, setPeriod] = React.useState<TimePeriod>('past_seven_days');
-  const [columns, setColumns] = React.useState<Column[]>(COLUMNS);
+  const [columns, setColumns] = React.useState<Column[]>(DEFAULT_COLUMNS);
 
   const { sentiment, loading, error } = useSentiment({ page, size, sort, range: getDateRange(period) });
   

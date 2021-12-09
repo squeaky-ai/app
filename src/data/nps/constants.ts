@@ -47,7 +47,7 @@ export const COLUMNS: Column[] = [
     position: 4,
   },
   {
-    label: 'Follow-up Response',
+    label: 'Follow-up response',
     width: '1fr',
     disabled: false,
     position: 5,
@@ -77,3 +77,13 @@ export const COLUMNS: Column[] = [
     position: 9,
   },
 ];
+
+export const DEFAULT_COLUMNS = COLUMNS.filter(c => [
+  'Score', 
+  'Visitor ID', 
+  'Recording ID',
+  'Date & Time', 
+  'Follow-up response', 
+  'Email',
+  'Options',
+].includes(c.label));

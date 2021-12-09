@@ -15,7 +15,7 @@ import { NpsScore } from 'components/sites/feedback/nps-score';
 import { NpsColumns } from 'components/sites/feedback/nps-columns';
 import { TIME_PERIODS } from 'data/nps/constants';
 import { percentage } from 'lib/maths';
-import { COLUMNS } from 'data/nps/constants';
+import { COLUMNS, DEFAULT_COLUMNS } from 'data/nps/constants';
 import { getColumnPreferences } from 'lib/tables';
 import { Preference } from 'lib/preferences';
 import { FeedbackNpsResponseSort } from 'types/graphql';
@@ -26,7 +26,7 @@ export const Nps: FC = () => {
   const [size, setSize] = React.useState<number>(10);
   const [sort, setSort] = React.useState<FeedbackNpsResponseSort>(FeedbackNpsResponseSort.TimestampDesc);
   const [period, setPeriod] = React.useState<TimePeriod>('past_seven_days');
-  const [columns, setColumns] = React.useState<Column[]>(COLUMNS);
+  const [columns, setColumns] = React.useState<Column[]>(DEFAULT_COLUMNS);
 
   const { nps, error, loading } = useNps({ page, size, sort, range: getDateRange(period) });
 

@@ -59,3 +59,12 @@ export const COLUMNS: Column[] = [
     position: 8,
   },
 ];
+
+export const DEFAULT_COLUMNS = COLUMNS.filter(c => [
+  'Rating', 
+  'Visitor ID', 
+  'Recording ID',
+  'Date & Time', 
+  'Follow-up response', 
+  'Options',
+].includes(c.label));

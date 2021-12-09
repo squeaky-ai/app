@@ -104,6 +104,16 @@ export const COLUMNS: Column[] = [
   },
 ];
 
+export const DEFAULT_COLUMNS = COLUMNS.filter(c => [
+  'Select', 
+  'Status', 
+  'Recording ID',
+  'Duration', 
+  'Pages', 
+  'Start & Exit URL',
+  'Options',
+].includes(c.label));
+
 export const FILTERS: RecordingsFilters = {
   browsers: [],
   devices: [],

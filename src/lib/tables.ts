@@ -3,7 +3,7 @@ import { Column } from 'types/common';
 
 export function getColumnPreferences(
   preference: Preference,
-  columns: Column[], 
+  columns: Column[],
   callback: (cols: Column[]) => void,
 ) {
   try {

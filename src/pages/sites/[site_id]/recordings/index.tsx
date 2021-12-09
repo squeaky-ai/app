@@ -15,7 +15,7 @@ import { Tags } from 'components/sites/filters/recordings/tags';
 import { RecordingsColumns } from 'components/sites/recordings/recordings-columns';
 import { RecordingsBulkActions } from 'components/sites/recordings/recordings-bulk-actions';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
-import { FILTERS, COLUMNS } from 'data/recordings/constants';
+import { FILTERS, COLUMNS, DEFAULT_COLUMNS } from 'data/recordings/constants';
 import { Preference } from 'lib/preferences';
 import { getColumnPreferences } from 'lib/tables';
 import { useFilters } from 'hooks/use-filters';
@@ -24,7 +24,7 @@ import type { Column, ValueOf } from 'types/common';
 
 const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
   const [query, setQuery] = React.useState<string>('');
-  const [columns, setColumns] = React.useState<Column[]>(COLUMNS);
+  const [columns, setColumns] = React.useState<Column[]>(DEFAULT_COLUMNS);
   const [selected, setSelected] = React.useState<string[]>([]);
 
   const { filters, setFilters } = useFilters<RecordingsFilters>('recordings');
