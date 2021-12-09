@@ -93,6 +93,14 @@
               margin-bottom: 0;
             }
           }
+
+          .label {
+            .link {
+              color: var(--blue-500);
+              margin-left: .25rem;
+              vertical-align: middle;
+            }
+          }
         }
       }
 

@@ -28,6 +28,18 @@ export const VisitorsColumns: FC<Props> = ({ columns, setColumns }) => {
     setColumns(result);
   };
 
+  const getLabel = (label: string) => {
+    switch(label) {
+      case 'User ID':
+      case 'Name':
+      case 'Email':
+        // Append the linked icon for the linked labels
+        return <>{label}<i className='link ri-link-m' /></>
+      default:
+        return label;
+    }
+  };
+
   return (
     <Dropdown className='columns' button={<><i className='ri-layout-column-line' /> Columns</>}>
       <form className='filters-columns'>
@@ -40,7 +52,7 @@ export const VisitorsColumns: FC<Props> = ({ columns, setColumns }) => {
             checked={isChecked(column.position)}
             disabled={column.disabled}
           >
-            {column.label}
+            {getLabel(column.label)}
           </Checkbox>
         )}
       </form>
