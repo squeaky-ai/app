@@ -732,7 +732,6 @@
     bottom: 0;
     box-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.1);
     left: 0;
-    padding: 3rem 0;
     position: fixed;
     width: 100%;
     z-index: 3;
@@ -747,8 +746,7 @@
 
     .nps-wrapper {
       margin: 0 auto;
-      max-width: 32rem;
-      padding: 0 2rem;
+      max-width: 33rem;
       position: relative;
 
       .close {
@@ -763,7 +761,7 @@
         padding: 0;
         position: absolute;
         right: -1rem;
-        top: -4rem;
+        top: -1rem;
         width: 2rem;
 
         i {
@@ -813,6 +811,117 @@
           &:hover {
             background: var(--nps-accent-color);
             color: var(--white);
+          }
+        }
+      }
+
+      .page-0 {
+        padding: 3rem;
+      }
+
+      .page-1 {
+        display: flex;
+        flex-direction: column;
+
+        .options {
+          margin: 3rem;
+        }
+
+        .reason {
+          margin: 0 3rem 2rem 3rem;
+        }
+
+        .input {
+          &:focus {
+            border-color: var(--nps-accent-color);
+          }
+        }
+
+        .textarea {
+          height: 4rem;
+          margin: 0;
+          resize: none;
+
+          &:focus {
+            border-color: var(--nps-accent-color);
+          }
+        }
+
+        .radio-group {
+          display: flex;
+
+          .radio {
+            input:checked + .check {
+              border-color: var(--nps-accent-color);
+            }
+
+            &:hover {
+              .check {
+                border-color: var(--nps-accent-color);
+              }
+            }
+
+            margin: 0 1rem 0 0;
+          }
+        }
+
+        .footer {
+          align-items: center;
+          border-top: 1px solid var(--gray-150);
+          display: flex;
+          justify-content: space-between;
+          margin-top: 1rem;
+          padding: 1rem 3rem;
+
+          p {
+            align-items: center;
+            color: var(--gray-500);
+            display: flex;
+            font-size: 13px;
+            font-weight: var(--font-weight-normal);
+            line-height: 16px;
+            margin: 0;
+
+            .logo {
+              margin: .85rem 0 0 .25rem;
+            }
+          }
+
+          .button {
+            background: var(--nps-accent-color);
+            border-color: var(--nps-accent-color);
+
+            &:hover {
+              filter: brightness(85%);
+            }
+          }
+        }
+      }
+
+      .page-5 {
+        padding: 3rem 2rem;
+        text-align: center;
+
+        i {
+          color: var(--nps-accent-color);
+          font-size: 1.75rem;
+        }
+
+        h4 {
+          display: block;
+          margin: 1rem auto 1.5rem auto;
+        }
+        
+        p {
+          font-weight: var(--font-weight-normal);
+          margin: 0 0 1.5rem 0;
+        }
+
+        .button {
+          border-color: var(--nps-accent-color);
+
+          &:hover {
+            background-color: var(--nps-accent-color);
           }
         }
       }
