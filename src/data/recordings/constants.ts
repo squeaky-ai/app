@@ -54,7 +54,7 @@ export const COLUMNS: Column[] = [
     position: 3,
   },
   {
-    label: 'User ID',
+    label: 'Visitor ID',
     width: '1fr',
     disabled: false,
     position: 4,
