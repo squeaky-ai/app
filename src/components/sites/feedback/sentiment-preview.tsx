@@ -6,6 +6,7 @@ import { Button } from 'components/button';
 import type { Feedback } from 'types/graphql';
 import { TextArea } from 'components/textarea';
 import { Label } from 'components/label';
+import { BASE_PATH } from 'data/common/constants';
 
 interface Props {
   feedback: Omit<Feedback, 'npsEnabled' | 'sentimentEnabled' | 'sentimentExcludedPages'>;
@@ -60,31 +61,31 @@ export const SentimentPreview: FC<Props> = ({ feedback }) => {
                     <Label onClick={() => setPage(1)}>
                       <input type='radio' name='rating' value='0' /> 
                       <div className='image'>
-                        <Image src='/emojis/experience-0.svg' height={32} width={32} />
+                        <Image src={`${BASE_PATH}/emojis/experience-0.svg`} height={32} width={32} />
                       </div>
                     </Label>
                     <Label onClick={() => setPage(1)}>
                       <input type='radio' name='rating' value='1' /> 
                       <div className='image'>
-                        <Image src='/emojis/experience-1.svg' height={32} width={32} />
+                        <Image src={`${BASE_PATH}/emojis/experience-1.svg`} height={32} width={32} />
                       </div>
                     </Label>
                     <Label onClick={() => setPage(1)}>
                       <input type='radio' name='rating' value='2' /> 
                       <div className='image'>
-                        <Image src='/emojis/experience-2.svg' height={32} width={32} />
+                        <Image src={`${BASE_PATH}/emojis/experience-2.svg`} height={32} width={32} />
                       </div>
                     </Label>
                     <Label onClick={() => setPage(1)}>
                       <input type='radio' name='rating' value='3' /> 
                       <div className='image'>
-                        <Image src='/emojis/experience-3.svg' height={32} width={32} />
+                        <Image src={`${BASE_PATH}/emojis/experience-3.svg`} height={32} width={32} />
                       </div>
                     </Label>
                     <Label onClick={() => setPage(1)}>
                       <input type='radio' name='rating' value='4' /> 
                       <div className='image'>
-                        <Image src='/emojis/experience-4.svg' height={32} width={32} />
+                        <Image src={`${BASE_PATH}/emojis/experience-4.svg`} height={32} width={32} />
                       </div>
                     </Label>
                   </div>
@@ -95,7 +96,7 @@ export const SentimentPreview: FC<Props> = ({ feedback }) => {
                     <p>
                       Powered by
                       <span className='logo'>
-                        <Image src='/logo.svg' height={20} width={64} />
+                        <Image src={`${BASE_PATH}/logo.svg`} height={20} width={64} />
                       </span>
                     </p>
                     <Button type='button' className='primary' onClick={() => setPage(2)}>
