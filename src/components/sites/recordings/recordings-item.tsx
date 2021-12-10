@@ -13,6 +13,7 @@ import { Device } from 'components/device';
 import { Cell } from 'components/table';
 import { RecordingsShare } from 'components/sites/recordings/recordings-share';
 import { RecordingDelete } from 'components/sites/recordings/recording-delete';
+import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
 import { toNiceDate, toTimeString } from 'lib/dates';
 import { useToasts } from 'hooks/use-toasts';
 import { recordingBookmarked } from 'lib/api/graphql';
@@ -55,6 +56,8 @@ export const RecordingsItem: FC<Props> = ({ site, query, recording, style, selec
     if (rowActionsRef.current) rowActionsRef.current.close();
   };
 
+  console.log(recording);
+
   return (
     <div className='row recording-row' style={style}>
       <Cell>
@@ -88,13 +91,7 @@ export const RecordingsItem: FC<Props> = ({ site, query, recording, style, selec
         </Highlighter>
       </Cell>
       <Cell>
-        <Highlighter value={query}>
-          <Link href={`/sites/${site.id}/visitors/${recording.visitor.id}`}>
-            <a>
-              {recording.visitor.visitorId}
-            </a>
-          </Link>
-        </Highlighter>
+        <VisitorsStarred site={site} visitor={recording.visitor} link />
       </Cell>
       <Cell>
         <Highlighter value={query}>

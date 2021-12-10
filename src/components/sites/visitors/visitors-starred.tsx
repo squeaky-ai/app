@@ -39,7 +39,6 @@ export const VisitorsStarred: FC<Props> = ({ site, link, visitor }) => {
       {link
         ? <Link href={`/sites/${router.query.site_id}/visitors/${visitor.id}`}><a>{visitor.visitorId}</a></Link>
         :visitor.visitorId
-
       }
     </>
   );

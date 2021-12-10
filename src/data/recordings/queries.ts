@@ -32,6 +32,7 @@ export const GET_RECORDINGS_QUERY = gql`
           visitor {
             id
             visitorId
+            starred
           }
         }
         pagination {
