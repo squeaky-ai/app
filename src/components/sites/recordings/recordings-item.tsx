@@ -56,8 +56,6 @@ export const RecordingsItem: FC<Props> = ({ site, query, recording, style, selec
     if (rowActionsRef.current) rowActionsRef.current.close();
   };
 
-  console.log(recording);
-
   return (
     <div className='row recording-row' style={style}>
       <Cell>
