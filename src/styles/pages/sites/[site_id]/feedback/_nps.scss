@@ -731,6 +731,7 @@
     background: var(--white);
     bottom: 0;
     box-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.1);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     left: 0;
     position: fixed;
     width: 100%;
@@ -776,7 +777,7 @@
 
       p {
         color: var(--gray-800);
-        font-weight: var(--font-weight-block);
+        font-weight: 600;
         margin: 0 0 3rem 0;
         text-align: center;
       }
@@ -878,7 +879,7 @@
             color: var(--gray-500);
             display: flex;
             font-size: 13px;
-            font-weight: var(--font-weight-normal);
+            font-weight: 400;
             line-height: 16px;
             margin: 0;
 
@@ -913,12 +914,12 @@
         }
         
         p {
-          font-weight: var(--font-weight-normal);
+          font-weight: 400;
           margin: 0 0 1.5rem 0;
         }
 
         .button {
-          border-color: var(--nps-accent-color);
+          border: 2px solid var(--nps-accent-color);
 
           &:hover {
             background-color: var(--nps-accent-color);
