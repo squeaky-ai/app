@@ -25,21 +25,23 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
     setShow(!show);
   };
 
-  const handleNextPage = () => {
-    if (page === 0 && !feedback.npsFollowUpEnabled) {
-      return setPage(5);
-    }
+  const handleRatingChange = () => {
+    if (page !== 0) return;
 
+    setPage(feedback.npsFollowUpEnabled ? 1 : 4);
+  };
+
+  const handleNextPage = () => {
     if (page === 1 && !feedback.npsContactConsentEnabled) {
-      return setPage(5);
+      return setPage(4);
     }
 
     if (page === 2 && !contact) {
-      return setPage(5);
+      return setPage(4);
     }
 
     if (page === 3) {
-      return setPage(5);
+      return setPage(4);
     }
 
     setPage(page + 1);
@@ -69,55 +71,47 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
             <Button type='button' className='close' onClick={toggleShow}>
               <i className='ri-close-line' />
             </Button>
-            {page === 0 && (
-              <div className='page-0'>
-                <p>How likely is it that you would recommend {feedback.npsPhrase} to a friend or colleague?</p>
+
+            {page < 4 && (
+              <div className={`page-${page}`}>
+                <p className='heading'>How likely is it that you would recommend {feedback.npsPhrase} to a friend or colleague?</p>
+
                 <div className='labels'>
                   <span>Not likely</span>
                   <span>Extremely likely</span>
                 </div>
-                <div className='options'>
-                  {range(0, 10).map(i => (
-                    <Button type='button' key={i} onClick={handleNextPage}>
-                      {i}
-                    </Button>
-                  ))}
-                </div>
-              </div>
-            )}
 
-            {[1, 2, 3].includes(page) && (
-              <div className='page-1'>
                 <div className='options'>
                   {range(0, 10).map(i => (
-                    <Button type='button' key={i} onClick={handleNextPage}>
-                      {i}
-                    </Button>
+                    <Label key={i} onClick={handleRatingChange}>
+                      <input type='radio' name='rating' value={i} />
+                      <span className='rating'>{i}</span>
+                    </Label>
                   ))}
                 </div>
+
                 <div className='reason'>
                   <Label>What's the main reason for your score?</Label>
                   <TextArea placeholder='Please type here ...' />
                 </div>
-                {[2, 3].includes(page) && (
-                  <div className='reason'>
-                    <Label>Would you like to here back from us regarding your feedback?</Label>
-                    <div className='radio-group'>
-                      <Radio name='contact' checked={contact} onChange={() => setContact(true)}>
-                        Yes
-                      </Radio>
-                      <Radio name='contact' checked={!contact} onChange={() => setContact(false)}>
-                        No
-                      </Radio>
-                    </div>
+
+                <div className='respond'>
+                  <Label>Would you like to here back from us regarding your feedback?</Label>
+                  <div className='radio-group'>
+                    <Radio name='contact' checked={contact} onChange={() => setContact(true)}>
+                      Yes
+                    </Radio>
+                    <Radio name='contact' checked={!contact} onChange={() => setContact(false)}>
+                      No
+                    </Radio>
                   </div>
-                )}
-                {[3].includes(page) && (
-                  <div className='reason'>
-                    <Label>Email address</Label>
-                    <Input placeholder='e.g. jess@squeaky.ai' />
-                  </div>
-                )}
+                </div>
+
+                <div className='email'>
+                  <Label>Email address</Label>
+                  <Input placeholder='e.g. jess@squeaky.ai' />
+                </div>
+
                 <div className='footer'>
                   <p>
                     Powered by
@@ -132,8 +126,8 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
               </div>
             )}
 
-            {page === 5 && (
-              <div className='page-5'>
+            {page === 4 && (
+              <div className='page-4'>
                 <i className='ri-checkbox-circle-line' />
                 <h4>Feedback sent</h4>
                 <p>Thank you for sharing your feedback and helping to make our service better.</p>
