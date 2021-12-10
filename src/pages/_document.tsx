@@ -27,7 +27,7 @@ class Document extends NextDocument {
           <meta property='og:image:width' content='1200' />
           <meta property='og:image:height' content='630' />
           <meta property='og:site_name' content='Squeaky.ai' />
-          <meta name='theme-color' content='#0074E0' />
+          <meta name='theme-color' content='#0768C1' />
           <link rel='preconnect' href='https://fonts.gstatic.com' />
           <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&amp;display=swap' />
           <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css' />

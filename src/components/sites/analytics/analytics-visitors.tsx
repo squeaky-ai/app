@@ -92,7 +92,7 @@ export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
             <Tooltip content={<CustomTooltip />} />
   
             <Line dataKey='all' fillOpacity={1} stroke='#8249FB' strokeWidth={2} />
-            <Line dataKey='existing' fillOpacity={1} stroke='#0074E0' strokeWidth={2} />
+            <Line dataKey='existing' fillOpacity={1} stroke='#0768C1' strokeWidth={2} />
             <Line dataKey='new' fillOpacity={1} stroke='#F96155' strokeWidth={2} />
           </LineChart>
         </ResponsiveContainer>

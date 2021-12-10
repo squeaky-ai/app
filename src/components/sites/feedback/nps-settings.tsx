@@ -22,7 +22,7 @@ interface Props {
   site: Site;
 }
 
-const DEFAULT_COLORS = ['#0074E0', '#F96155', '#8249FB', '#001A39'];
+const DEFAULT_COLORS = ['#0768C1', '#F96155', '#8249FB', '#001A39'];
 
 const NpsSchema = Yup.object().shape({
   npsAccentColor: Yup.string().matches(HEX_REGEX, 'Accent color is requied'),
@@ -66,7 +66,7 @@ export const NpsSettings: FC<Props> = ({ site }) => {
         <Container className='md'>
           <Formik
             initialValues={{ 
-              npsAccentColor: feedback.npsAccentColor || '#0074E0', 
+              npsAccentColor: feedback.npsAccentColor || '#0768C1', 
               npsSchedule: feedback.npsSchedule || 'once',
               npsPhrase: feedback.npsPhrase || site.name,
               npsFollowUpEnabled: feedback.npsFollowUpEnabled ?? true,
@@ -123,8 +123,8 @@ export const NpsSettings: FC<Props> = ({ site }) => {
                   <Radio 
                     name='npsAccentColor'
                     className='color-radio' 
-                    value='#0074E0' 
-                    checked={values.npsAccentColor === '#0074E0'}
+                    value='#0768C1' 
+                    checked={values.npsAccentColor === '#0768C1'}
                     onChange={handleChange}
                   >
                     <div className='color blue'>

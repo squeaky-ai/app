@@ -22,7 +22,7 @@ interface Props {
   site: Site;
 }
 
-const DEFAULT_COLORS = ['#0074E0', '#F96155', '#8249FB', '#001A39'];
+const DEFAULT_COLORS = ['#0768C1', '#F96155', '#8249FB', '#001A39'];
 
 const SentimentSchema = Yup.object().shape({
   sentimentAccentColor: Yup.string().matches(HEX_REGEX, 'Accent color is requied'),
@@ -63,7 +63,7 @@ export const SentimentSettings: FC<Props> = ({ site }) => {
         <Container className='md'>
           <Formik
             initialValues={{ 
-              sentimentAccentColor: feedback.sentimentAccentColor || '#0074E0', 
+              sentimentAccentColor: feedback.sentimentAccentColor || '#0768C1', 
               sentimentExcludedPages: feedback.sentimentExcludedPages || [],
               sentimentLayout: feedback.sentimentLayout || 'right_middle',
             }}
@@ -111,8 +111,8 @@ export const SentimentSettings: FC<Props> = ({ site }) => {
                   <Radio 
                     name='sentimentAccentColor'
                     className='color-radio' 
-                    value='#0074E0' 
-                    checked={values.sentimentAccentColor === '#0074E0'}
+                    value='#0768C1' 
+                    checked={values.sentimentAccentColor === '#0768C1'}
                     onChange={handleChange}
                   >
                     <div className='color blue'>
