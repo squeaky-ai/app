@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import { Button } from 'components/button';
 import type { Feedback } from 'types/graphql';
 import { TextArea } from 'components/textarea';
+import { Label } from 'components/label';
 
 interface Props {
   feedback: Omit<Feedback, 'npsEnabled' | 'sentimentEnabled' | 'sentimentExcludedPages'>;
@@ -56,21 +57,36 @@ export const SentimentPreview: FC<Props> = ({ feedback }) => {
                   <p className='heading'>How would you rate your experience?</p>
 
                   <div className='emojis'>
-                    <Button type='button' onClick={() => setPage(1)}>
-                      <Image src='/emojis/experience-0.svg' height={32} width={32} />
-                    </Button>
-                    <Button type='button' onClick={() => setPage(1)}>
-                      <Image src='/emojis/experience-1.svg' height={32} width={32} />
-                    </Button>
-                    <Button type='button' onClick={() => setPage(1)}>
-                      <Image src='/emojis/experience-2.svg' height={32} width={32} />
-                    </Button>
-                    <Button type='button' onClick={() => setPage(1)}>
-                      <Image src='/emojis/experience-3.svg' height={32} width={32} />
-                    </Button>
-                    <Button type='button' onClick={() => setPage(1)}>
-                      <Image src='/emojis/experience-4.svg' height={32} width={32} />
-                    </Button>
+                    <Label onClick={() => setPage(1)}>
+                      <input type='radio' name='rating' value='0' /> 
+                      <div className='image'>
+                        <Image src='/emojis/experience-0.svg' height={32} width={32} />
+                      </div>
+                    </Label>
+                    <Label onClick={() => setPage(1)}>
+                      <input type='radio' name='rating' value='1' /> 
+                      <div className='image'>
+                        <Image src='/emojis/experience-1.svg' height={32} width={32} />
+                      </div>
+                    </Label>
+                    <Label onClick={() => setPage(1)}>
+                      <input type='radio' name='rating' value='2' /> 
+                      <div className='image'>
+                        <Image src='/emojis/experience-2.svg' height={32} width={32} />
+                      </div>
+                    </Label>
+                    <Label onClick={() => setPage(1)}>
+                      <input type='radio' name='rating' value='3' /> 
+                      <div className='image'>
+                        <Image src='/emojis/experience-3.svg' height={32} width={32} />
+                      </div>
+                    </Label>
+                    <Label onClick={() => setPage(1)}>
+                      <input type='radio' name='rating' value='4' /> 
+                      <div className='image'>
+                        <Image src='/emojis/experience-4.svg' height={32} width={32} />
+                      </div>
+                    </Label>
                   </div>
 
                   <TextArea placeholder='Tell us about your experience...' />

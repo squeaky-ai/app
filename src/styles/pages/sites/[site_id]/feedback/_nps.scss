@@ -777,7 +777,7 @@
 
       p {
         color: var(--gray-800);
-        font-weight: 600;
+        font-weight: var(--font-weight-block);
         margin: 0 0 3rem 0;
         text-align: center;
       }
@@ -879,7 +879,7 @@
             color: var(--gray-500);
             display: flex;
             font-size: 13px;
-            font-weight: 400;
+            font-weight: var(--font-weight-normal);
             line-height: 16px;
             margin: 0;
 
@@ -914,7 +914,7 @@
         }
         
         p {
-          font-weight: 400;
+          font-weight: var(--font-weight-normal);
           margin: 0 0 1.5rem 0;
         }
 

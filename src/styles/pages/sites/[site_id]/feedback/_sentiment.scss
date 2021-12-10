@@ -519,7 +519,7 @@
       border: none;
       color: var(--white);
       display: flex;
-      font-weight: 600;
+      font-weight: var(--font-weight-block);
       height: 2.5rem;
       left: 0;
       padding: 0 .75rem;
@@ -572,7 +572,7 @@
       }
 
       .heading {
-        font-weight: 600;
+        font-weight: var(--font-weight-block);
         text-align: center;
         margin: 0 0 1rem 0;
         padding: 3rem 3rem 0 3rem;
@@ -583,11 +583,12 @@
         justify-content: space-between;
         padding: 2rem;
 
-        .button {
-          background: none;
-          border: none;
-          margin: 0;
-          padding: 0;
+        .label {
+          cursor: pointer;
+
+          input {
+            display: none;
+          }
 
           &:hover {
             transform: scale(1.1);
@@ -599,7 +600,8 @@
         background: none;
         border: none;
         display: none;
-        height: 90px;
+        height: 6.625rem;
+        margin: 0;
         padding: 2rem;
         resize: none;
       }
@@ -616,7 +618,7 @@
           color: var(--gray-500);
           display: flex;
           font-size: 13px;
-          font-weight: 400;
+          font-weight: var(--font-weight-normal);
           line-height: 16px;
           margin: 0;
 
@@ -643,6 +645,14 @@
 
         .emojis {
           border-bottom: 1px solid var(--gray-150);
+
+          .image {
+            opacity: .5;
+          }
+
+          input:checked + .image {
+            opacity: 1;
+          }
         }
 
         .textarea {
@@ -673,7 +683,7 @@
         }
         
         p {
-          font-weight: 400;
+          font-weight: var(--font-weight-normal);
           margin: 0 0 1.25rem 0;
         }
 
