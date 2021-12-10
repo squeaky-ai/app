@@ -1,8 +1,10 @@
 import React from 'react';
 import type { FC } from 'react';
+import Image from 'next/image';
 import classnames from 'classnames';
 import { Button } from 'components/button';
 import type { Feedback } from 'types/graphql';
+import { TextArea } from 'components/textarea';
 
 interface Props {
   feedback: Omit<Feedback, 'npsEnabled' | 'sentimentEnabled' | 'sentimentExcludedPages'>;
@@ -12,10 +14,14 @@ export const SentimentPreview: FC<Props> = ({ feedback }) => {
   const ref = React.useRef<HTMLDivElement>(null);
   const [show, setShow] = React.useState<boolean>(false);
   const [open, setOpen] = React.useState<boolean>(false);
+  const [page, setPage] = React.useState<number>(0);
 
   const toggleShow = () => setShow(!show);
 
-  const toggleOpen = () => setOpen(!open);
+  const toggleOpen = () => {
+    setPage(0);
+    setOpen(!open);
+  };
 
   React.useEffect(() => {
     if (ref.current) {
@@ -44,6 +50,55 @@ export const SentimentPreview: FC<Props> = ({ feedback }) => {
               <Button type='button' className='close' onClick={toggleOpen}>
                 <i className='ri-close-line' />
               </Button>
+
+              {[0, 1].includes(page) && (
+                <div className={`page-${page}`}>
+                  <p className='heading'>How would you rate your experience?</p>
+
+                  <div className='emojis'>
+                    <Button type='button' onClick={() => setPage(1)}>
+                      <Image src='/emojis/experience-0.svg' height={32} width={32} />
+                    </Button>
+                    <Button type='button' onClick={() => setPage(1)}>
+                      <Image src='/emojis/experience-1.svg' height={32} width={32} />
+                    </Button>
+                    <Button type='button' onClick={() => setPage(1)}>
+                      <Image src='/emojis/experience-2.svg' height={32} width={32} />
+                    </Button>
+                    <Button type='button' onClick={() => setPage(1)}>
+                      <Image src='/emojis/experience-3.svg' height={32} width={32} />
+                    </Button>
+                    <Button type='button' onClick={() => setPage(1)}>
+                      <Image src='/emojis/experience-4.svg' height={32} width={32} />
+                    </Button>
+                  </div>
+
+                  <TextArea placeholder='Tell us about your experience...' />
+
+                  <div className='footer'>
+                    <p>
+                      Powered by
+                      <span className='logo'>
+                        <Image src='/logo.svg' height={20} width={64} />
+                      </span>
+                    </p>
+                    <Button type='button' className='primary' onClick={() => setPage(2)}>
+                      Submit
+                    </Button>
+                  </div>
+                </div>
+              )}
+
+              {[2].includes(page) && (
+                <div className='page-2'>
+                  <i className='ri-checkbox-circle-line' />
+                  <h4>Feedback sent</h4>
+                  <p>Thank you for sharing your feedback and helping to make our service better.</p>
+                  <Button type='button' className='secondary' onClick={toggleOpen}>
+                    Close
+                  </Button>
+                </div>
+              )}
             </div>
           )}
         </div>
