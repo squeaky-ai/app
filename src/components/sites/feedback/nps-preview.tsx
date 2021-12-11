@@ -28,20 +28,16 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
   const handleRatingChange = () => {
     if (page !== 0) return;
 
-    setPage(feedback.npsFollowUpEnabled ? 1 : 3);
+    setPage(feedback.npsFollowUpEnabled ? 1 : 2);
   };
 
   const handleNextPage = () => {
     if (page === 1 && !feedback.npsContactConsentEnabled) {
-      return setPage(3);
+      return setPage(2);
     }
 
     if (page === 1 && !contact) {
-      return setPage(3);
-    }
-
-    if (page === 3) {
-      return setPage(3);
+      return setPage(2);
     }
 
     setPage(page + 1);
@@ -50,6 +46,7 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
   const handleClose = () => {
     setShow(false);
     setPage(0);
+    setContact(false);
   };
 
   React.useEffect(() => {
@@ -72,7 +69,7 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
               <i className='ri-close-line' />
             </Button>
 
-            {page < 3 && (
+            {page < 2 && (
               <div className={`page-${page}`}>
                 <p className='heading'>How likely is it that you would recommend {feedback.npsPhrase} to a friend or colleague?</p>
 
@@ -109,10 +106,12 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
                   </div>
                 )}
 
-                <div className='email'>
-                  <Label>Email address</Label>
-                  <Input placeholder='e.g. jess@squeaky.ai' />
-                </div>
+                {contact && (
+                  <div className='email'>
+                    <Label>Email address</Label>
+                    <Input placeholder='e.g. jess@squeaky.ai' />
+                  </div>
+                )}
 
                 <div className='footer'>
                   <p>
@@ -128,8 +127,8 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
               </div>
             )}
 
-            {page === 3 && (
-              <div className='page-3'>
+            {page === 2 && (
+              <div className='page-2'>
                 <i className='ri-checkbox-circle-line' />
                 <h4>Feedback sent</h4>
                 <p>Thank you for sharing your feedback and helping to make our service better.</p>

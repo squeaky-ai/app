@@ -864,7 +864,6 @@
       }
 
       .email {
-        display: none;
         padding: 1rem 3rem;
       }
 
@@ -900,8 +899,7 @@
         }
       }
 
-      .page-1,
-      .page-2 {
+      .page-1 {
         .heading {
           display: none;
         }
@@ -928,12 +926,6 @@
       }
 
       .page-2 {
-        .email {
-          display: block;
-        }
-      }
-
-      .page-3 {
         padding: 3rem 2rem;
         text-align: center;
 
