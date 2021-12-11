@@ -28,20 +28,20 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
   const handleRatingChange = () => {
     if (page !== 0) return;
 
-    setPage(feedback.npsFollowUpEnabled ? 1 : 4);
+    setPage(feedback.npsFollowUpEnabled ? 1 : 3);
   };
 
   const handleNextPage = () => {
     if (page === 1 && !feedback.npsContactConsentEnabled) {
-      return setPage(4);
+      return setPage(3);
     }
 
-    if (page === 2 && !contact) {
-      return setPage(4);
+    if (page === 1 && !contact) {
+      return setPage(3);
     }
 
     if (page === 3) {
-      return setPage(4);
+      return setPage(3);
     }
 
     setPage(page + 1);
@@ -72,7 +72,7 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
               <i className='ri-close-line' />
             </Button>
 
-            {page < 4 && (
+            {page < 3 && (
               <div className={`page-${page}`}>
                 <p className='heading'>How likely is it that you would recommend {feedback.npsPhrase} to a friend or colleague?</p>
 
@@ -94,18 +94,20 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
                   <Label>What&apos;s the main reason for your score?</Label>
                   <TextArea placeholder='Please type here ...' />
                 </div>
-
-                <div className='respond'>
-                  <Label>Would you like to here back from us regarding your feedback?</Label>
-                  <div className='radio-group'>
-                    <Radio name='contact' checked={contact} onChange={() => setContact(true)}>
-                      Yes
-                    </Radio>
-                    <Radio name='contact' checked={!contact} onChange={() => setContact(false)}>
-                      No
-                    </Radio>
+                
+                {feedback.npsContactConsentEnabled && (
+                  <div className='respond'>
+                    <Label>Would you like to here back from us regarding your feedback?</Label>
+                    <div className='radio-group'>
+                      <Radio name='contact' checked={contact} onChange={() => setContact(true)}>
+                        Yes
+                      </Radio>
+                      <Radio name='contact' checked={!contact} onChange={() => setContact(false)}>
+                        No
+                      </Radio>
+                    </div>
                   </div>
-                </div>
+                )}
 
                 <div className='email'>
                   <Label>Email address</Label>
@@ -126,8 +128,8 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
               </div>
             )}
 
-            {page === 4 && (
-              <div className='page-4'>
+            {page === 3 && (
+              <div className='page-3'>
                 <i className='ri-checkbox-circle-line' />
                 <h4>Feedback sent</h4>
                 <p>Thank you for sharing your feedback and helping to make our service better.</p>

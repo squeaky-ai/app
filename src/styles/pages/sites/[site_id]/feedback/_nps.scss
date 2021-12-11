@@ -901,9 +901,7 @@
       }
 
       .page-1,
-      .page-2,
-      .page-3,
-      .page-4 {
+      .page-2 {
         .heading {
           display: none;
         }
@@ -916,6 +914,10 @@
           padding-top: 3rem;
         }
 
+        .respond {
+          display: block;
+        }
+
         .reason {
           display: block;
         }
@@ -925,20 +927,13 @@
         }
       }
 
-      .page-2,
-      .page-3 {
-        .respond {
-          display: block;
-        }
-      }
-
-      .page-3 {
+      .page-2 {
         .email {
           display: block;
         }
       }
 
-      .page-4 {
+      .page-3 {
         padding: 3rem 2rem;
         text-align: center;
 

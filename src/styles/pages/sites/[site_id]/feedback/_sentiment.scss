@@ -541,6 +541,10 @@
       &:hover {
         filter: brightness(85%);
       }
+
+      &.show {
+        visibility: hidden;
+      }
     }
 
     .popout {
