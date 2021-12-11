@@ -20,6 +20,11 @@ export const NpsRatings: FC<Props> = ({ ratings }) => {
     }
   });
 
+  // The graph looks crap if there's only a handful 
+  // of results. So grab the max count, and dynamically
+  // change the interval of the graph
+  const max = Math.max(...data.map(d => d.count));
+
   return (
     <div className='chart-wrapper'>
       <ResponsiveContainer>
@@ -31,6 +36,7 @@ export const NpsRatings: FC<Props> = ({ ratings }) => {
             allowDecimals={false}
             tickLine={false}
             axisLine={false}
+            interval={max < 5 ? 0 : 'preserveEnd'}
             fontSize={13}
           />
 

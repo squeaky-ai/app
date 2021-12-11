@@ -1,6 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
-import { ResponsiveContainer, CartesianGrid, LineChart, Line, YAxis, XAxis } from 'recharts';
+import { ResponsiveContainer, CartesianGrid, LineChart, Line, YAxis, XAxis, Tooltip, TooltipProps } from 'recharts';
 import { formatResultsForPeriod } from 'lib/feedback/responses';
 import type { FeedbackNpsReplies } from 'types/graphql';
 import type { TimePeriod } from 'lib/dates';
@@ -11,7 +11,25 @@ interface Props {
 }
 
 export const NpsReplies: FC<Props> = ({ period, replies }) => {
-  const { data } = formatResultsForPeriod(period, replies.responses.map(r => r.timestamp));
+  const { data } = formatResultsForPeriod(period, replies.responses);
+
+  // The graph looks crap if there's only a handful 
+  // of results. So grab the max count, and dynamically
+  // change the interval of the graph
+  const max = Math.max(...data.map(d => d.count));
+
+  const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload }) => {
+    if (!active || payload?.length < 1) return null;
+  
+    return (
+      <div className='custom-tooltip'>
+        <p>Outcome type</p>
+        <p className='promoters'>{payload[0].payload.promoters} Promoters</p>
+        <p className='passives'>{payload[0].payload.passives} Passives</p>
+        <p className='detractors'>{payload[0].payload.detractors} Detractors</p>
+      </div>
+    );
+  };
 
   return (
     <div className='chart-wrapper'>
@@ -24,6 +42,7 @@ export const NpsReplies: FC<Props> = ({ period, replies }) => {
             allowDecimals={false}
             tickLine={false}
             axisLine={false}
+            interval={max < 5 ? 0 : 'preserveEnd'}
             fontSize={13}
           />
 
@@ -34,6 +53,8 @@ export const NpsReplies: FC<Props> = ({ period, replies }) => {
             fontSize={13}
             tickMargin={10}
           />
+
+          <Tooltip content={<CustomTooltip />} />
 
           <Line dataKey='count' fillOpacity={1} stroke='#4097E8' strokeWidth={2} />
         </LineChart>

@@ -150,6 +150,7 @@ export type FeedbackNpsReplies = {
 
 export type FeedbackNpsReply = {
   __typename?: 'FeedbackNpsReply';
+  score: Scalars['Int'];
   timestamp: Scalars['String'];
 };
 

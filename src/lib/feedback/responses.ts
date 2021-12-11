@@ -1,5 +1,6 @@
 import { range } from 'lodash';
 import type { TimePeriod } from 'lib/dates';
+import type { FeedbackNpsReply } from 'types/graphql';
 
 import {
   getHours,
@@ -11,6 +12,9 @@ import {
 export interface FeedbackData {
   date: string;
   count: number;
+  promoters: number;
+  passives: number;
+  detractors: number;
 }
 
 export interface DataForPeriod {
@@ -26,62 +30,73 @@ const getAmPmForHour = (hour: number): string => {
 
 const getDateFromTimestamp = (str: string) => new Date(str);
 
-const getDailyResults = (timestamps: string[]): DataForPeriod => {
+const getNpsCounts = (replies: FeedbackNpsReply[]): Pick<FeedbackData, 'promoters' | 'passives' | 'detractors'> => {
+  return {
+    promoters: replies.filter(r => r.score >= 9).length,
+    passives: replies.filter(r => [7, 8].includes(r.score)).length,
+    detractors: replies.filter(r => r.score <= 6).length,
+  };
+};
+
+const getDailyResults = (replies: FeedbackNpsReply[]): DataForPeriod => {
   const data = range(0, 24).map(i => {
-    const count = timestamps.filter(t => getHours(getDateFromTimestamp(t)) === i).length;
+    const matches = replies.filter(r => getHours(getDateFromTimestamp(r.timestamp)) === i);
 
     return {
       date: getAmPmForHour(i),
-      count,
+      count: matches.length,
+      ...getNpsCounts(matches),
     };
   });
 
   return { data, interval: 1 };
 };
 
-const getPastSevenDaysResults = (timestamps: string[]): DataForPeriod => {
+const getPastSevenDaysResults = (replies: FeedbackNpsReply[]): DataForPeriod => {
   const now = new Date();
 
   const data = range(0, 7).map(i => {
     const date = subDays(now, i);
 
-    const count = timestamps.filter(t => getDate(getDateFromTimestamp(t)) === getDate(date)).length;
+    const matches = replies.filter(r => getDate(getDateFromTimestamp(r.timestamp)) === getDate(date));
 
     return {
       date: format(date, 'd/M'),
-      count,
+      count: matches.length,
+      ...getNpsCounts(matches),
     };
   });
 
   return { data: data.reverse(), interval: 0 };
 };
 
-const getPastThirtyDaysResults = (timestamps: string[]): DataForPeriod => {
+const getPastThirtyDaysResults = (replies: FeedbackNpsReply[]): DataForPeriod => {
   const now = new Date();
 
   const data = range(0, 30).map(i => {
     const date = subDays(now, i);
 
-    const count = timestamps.filter(t => getDate(getDateFromTimestamp(t)) === getDate(date)).length;
+    const matches = replies.filter(r => getDate(getDateFromTimestamp(r.timestamp)) === getDate(date));
 
     return {
       date: format(date, 'd/M'),
-      count,
+      count: matches.length,
+      ...getNpsCounts(matches),
     };
   });
 
   return { data: data.reverse(), interval: 2 };
 };
 
-export const formatResultsForPeriod = (period: TimePeriod, timestamps: string[]): DataForPeriod => {
+export const formatResultsForPeriod = (period: TimePeriod, replies: FeedbackNpsReply[]): DataForPeriod => {
   switch(period) {
     case 'today':
     case 'yesterday':
-      return getDailyResults(timestamps);
+      return getDailyResults(replies);
     case 'past_seven_days':
-      return getPastSevenDaysResults(timestamps);
+      return getPastSevenDaysResults(replies);
     case 'past_thirty_days':
-      return getPastThirtyDaysResults(timestamps);
+      return getPastThirtyDaysResults(replies);
     default:
       return {
         data: [],

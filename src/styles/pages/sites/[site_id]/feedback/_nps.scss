@@ -25,6 +25,10 @@
     }
   }
 
+  .recharts-surface {
+    overflow: visible;
+  }
+
   .outcomes {
     margin: 4rem 0;
 
@@ -735,6 +739,18 @@
     
     .score {
       color: var(--blue-500);
+    }
+
+    .promoters {
+      color: var(--blue-500);
+    }
+
+    .passives {
+      color: var(--purple-500);
+    }
+
+    .detractors {
+      color: var(--rose-500);
     }
   }
 
