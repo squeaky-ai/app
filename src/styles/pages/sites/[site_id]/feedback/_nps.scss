@@ -653,6 +653,16 @@
           color: vaR(--blue-500);
         }
       }
+
+      .tooltip,
+      .tooltip .button {
+        display: block;
+        overflow: hidden;
+        text-align: left;
+        text-overflow: ellipsis;
+        width: 100%;
+        white-space: nowrap;
+      }
     }
 
     .play {
@@ -954,4 +964,8 @@
       }
     }
   }
+}
+
+.nps-comment-tooltip {
+  white-space: normal;
 }

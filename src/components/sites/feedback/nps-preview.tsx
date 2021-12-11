@@ -94,7 +94,7 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
                 
                 {feedback.npsContactConsentEnabled && (
                   <div className='respond'>
-                    <Label>Would you like to here back from us regarding your feedback?</Label>
+                    <Label>Would you like to hear back from us regarding your feedback?</Label>
                     <div className='radio-group'>
                       <Radio name='contact' checked={contact} onChange={() => setContact(true)}>
                         Yes

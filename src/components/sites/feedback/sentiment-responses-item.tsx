@@ -54,7 +54,13 @@ export const SentimentResponsesItem: FC<Props> = ({ response, style }) => {
         {toNiceDate(new Date(response.timestamp).valueOf())}
       </Cell>
       <Cell>
-        {response.comment || '-'}
+        {response.comment && (
+          <Tooltip button={response.comment} portalClassName='sentiment-comment-tooltip'>
+            {response.comment}
+          </Tooltip>
+        )}
+
+        {!response.comment && '-'}
       </Cell>
       <Cell>
         <Tooltip positionX='right' button={<Device deviceType={response.device.deviceType} />}>

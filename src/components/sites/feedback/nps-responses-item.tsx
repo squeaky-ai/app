@@ -51,10 +51,21 @@ export const NpsResponsesItem: FC<Props> = ({ response, style }) => {
         {toNiceDate(new Date(response.timestamp).valueOf())}
       </Cell>
       <Cell>
-        {response.comment || '-'}
+        {response.comment && (
+          <Tooltip button={response.comment} portalClassName='nps-comment-tooltip'>
+            {response.comment}
+          </Tooltip>
+        )}
+
+        {!response.comment && '-'}
       </Cell>
       <Cell>
-        {response.contact ? response.email : '-'}
+        {response.contact && response.email && (
+          <Tooltip button={response.email} fluid>
+            {response.email}
+          </Tooltip>
+        )}
+        {(!response.contact || !response.email) && '-'}
       </Cell>
       <Cell>
         <Tooltip positionX='right' button={<Device deviceType={response.device.deviceType} />}>
