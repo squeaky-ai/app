@@ -110,7 +110,7 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items
   // Rebuild the replayer whenever the recording id changes
   React.useEffect(() => {
     init();
-  }, [recording?.id]);
+  }, [recording?.id, page]);
 
   // Redraw the tags inside the iframe whenever the type or
   // items change 
