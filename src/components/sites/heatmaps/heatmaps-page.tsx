@@ -29,8 +29,7 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items
     if (!recording) return;
 
     if (replayer) {
-      document.getElementById('heatmaps-page-wrapper').innerHTML = '';
-      replayer = null;
+      destroy();
     }
 
     const items: Event[] = recording.events.items.map(e => JSON.parse(e));
@@ -38,18 +37,22 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items
 
     if (items.length === 0) return;
 
-    replayer = new Replayer(items, {
-      root,
-      skipInactive: true,
-      mouseTail: false,
-    });
-
     // Find where exactly this page is in the list, and try and find
     // a timestamp that is just before the user navigates away. This
     // should ensure that we have the complete page
     const offset = items[0].timestamp;
     const timestamp = recording.pages.find(p => p.url === page)?.exitedAt;
     const location = Number(timestamp) - offset - 50;
+
+    if (!timestamp) {
+      return destroy();
+    }
+
+    replayer = new Replayer(items, {
+      root,
+      skipInactive: true,
+      mouseTail: false,
+    });
 
     // They need to be able to scroll
     const iframe = root.querySelector('iframe');
@@ -100,11 +103,16 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items
 
     // Now that stuff isn't going to jump the spinner can be removed
     setLoading(false);
-  }, 50);
+  }, 250);
 
   const draw = () => {
     const doc = document.querySelector('iframe')?.contentDocument;
     if (doc) inject(doc);
+  };
+
+  const destroy = () => {
+    document.getElementById('heatmaps-page-wrapper').innerHTML = '';
+    replayer = null;
   };
 
   // Rebuild the replayer whenever the recording id or page changes.

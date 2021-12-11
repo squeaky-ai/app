@@ -65,7 +65,7 @@ export const useRecording = (id: string): UseRecording => {
   const router = useRouter();
   const toasts = useToasts();
 
-  const { data, loading, previousData, error } = useQuery<{ site: Site }>(GET_RECORDING_QUERY, {
+  const { data, loading, error } = useQuery<{ site: Site }>(GET_RECORDING_QUERY, {
     variables: {
       siteId: router.query.site_id as string,
       recordingId: id || router.query.recording_id as string,
@@ -82,6 +82,6 @@ export const useRecording = (id: string): UseRecording => {
     error: !!error,
     recording: data 
       ? data.site.recording 
-      : previousData ? previousData.site.recording : null
+      : null
   };
 };
