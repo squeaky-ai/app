@@ -91,7 +91,7 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
                 </div>
 
                 <div className='reason'>
-                  <Label>What's the main reason for your score?</Label>
+                  <Label>What&apos;s the main reason for your score?</Label>
                   <TextArea placeholder='Please type here ...' />
                 </div>
 

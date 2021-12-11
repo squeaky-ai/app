@@ -68,7 +68,7 @@ export const AnalyticsPageViews: FC<Props> = ({ pageViews, period }) => {
       <div className='heading'>
         <div className='title'>
           <h5>Page Views</h5>
-          <h3>{totalCount}</h3>
+          <h3>{totalCount.toLocaleString()}</h3>
           <Pill type='tertiary' large>{uniqueCount} Unique</Pill>
         </div>
 
