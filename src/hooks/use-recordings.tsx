@@ -8,7 +8,6 @@ import type { Site, RecordingsFilters, Recordings } from 'types/graphql';
 interface Props {
   page: number;
   size?: number;
-  query?: string;
   sort?: RecordingsSort;
   filters?: RecordingsFilters;
 }
@@ -19,7 +18,7 @@ interface UseRecordings {
   recordings: Recordings;
 }
 
-export const useRecordings = ({ page, size, query, sort, filters }: Props): UseRecordings => {
+export const useRecordings = ({ page, size, sort, filters }: Props): UseRecordings => {
   const router = useRouter();
   const toasts = useToasts();
 
@@ -28,7 +27,6 @@ export const useRecordings = ({ page, size, query, sort, filters }: Props): UseR
       siteId: router.query.site_id as string, 
       page, 
       size,
-      query,
       sort,
       filters,
     }

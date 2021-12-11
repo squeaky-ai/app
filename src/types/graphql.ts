@@ -948,7 +948,6 @@ export type SiteRecordingArgs = {
 export type SiteRecordingsArgs = {
   filters?: InputMaybe<RecordingsFilters>;
   page?: InputMaybe<Scalars['Int']>;
-  query?: InputMaybe<Scalars['String']>;
   size?: InputMaybe<Scalars['Int']>;
   sort?: InputMaybe<RecordingsSort>;
 };
@@ -968,7 +967,6 @@ export type SiteVisitorArgs = {
 export type SiteVisitorsArgs = {
   filters?: InputMaybe<VisitorsFilters>;
   page?: InputMaybe<Scalars['Int']>;
-  query?: InputMaybe<Scalars['String']>;
   size?: InputMaybe<Scalars['Int']>;
   sort?: InputMaybe<VisitorsSort>;
 };

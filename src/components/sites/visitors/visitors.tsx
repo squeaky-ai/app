@@ -15,7 +15,6 @@ import { Table, Row, Cell } from 'components/table';
 import { DismissableMessage } from 'components/message';
 import { Error } from 'components/error';
 import { EmptyState } from 'components/sites/filters/common/empty-state';
-import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 import { Preference } from 'lib/preferences';
 import { COLUMNS } from 'data/visitors/constants';
 import { getColumnStyles } from 'lib/tables';
@@ -25,13 +24,12 @@ import type { Column } from 'types/common';
 import type { VisitorsFilters } from 'types/graphql';
 
 interface Props {
-  query: string;
   site: Site;
   columns: Column[];
   filters: VisitorsFilters;
 }
 
-export const Visitors: FC<Props> = ({ site, query, columns, filters }) => {
+export const Visitors: FC<Props> = ({ site, columns, filters }) => {
   const [page, setPage] = React.useState<number>(0);
   const [size, setSize] = React.useState<number>(25);
   const [sort, setSort] = React.useState<VisitorsSort>(VisitorsSort.FirstViewedAtDesc);
@@ -40,7 +38,6 @@ export const Visitors: FC<Props> = ({ site, query, columns, filters }) => {
     page, 
     sort,
     size,
-    query: query.length < MIN_SEARCH_CHARS ? '' : query, // No point in searching if it's below this value
     filters,
   });
 
@@ -131,7 +128,6 @@ export const Visitors: FC<Props> = ({ site, query, columns, filters }) => {
             site={site} 
             visitor={v} 
             key={v.visitorId} 
-            query={query} 
             style={rowStyle}
           />
         ))}
@@ -144,7 +140,7 @@ export const Visitors: FC<Props> = ({ site, query, columns, filters }) => {
       )}
 
       {!loading && items.length === 0 && (
-        <EmptyState search={query.length > 0} type='visitors' />
+        <EmptyState type='visitors' />
       )}
       
       <div className='visitors-footer'>

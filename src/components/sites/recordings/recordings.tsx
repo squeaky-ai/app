@@ -11,7 +11,6 @@ import { Checkbox } from 'components/checkbox';
 import { Error } from 'components/error';
 import { EmptyState } from 'components/sites/filters/common/empty-state';
 import { useRecordings } from 'hooks/use-recordings';
-import { MIN_SEARCH_CHARS } from 'data/sites/constants';
 import { COLUMNS } from 'data/recordings/constants';
 import { getColumnStyles } from 'lib/tables';
 import { RecordingsSort } from 'types/graphql';
@@ -20,14 +19,13 @@ import type { Site, RecordingsFilters } from 'types/graphql';
 
 interface Props {
   site: Site;
-  query: string;
   filters: RecordingsFilters;
   columns: Column[];
   selected: string[];
   setSelected: (selected: string[]) => void;
 }
 
-export const Recordings: FC<Props> = ({ site, query, filters, columns, selected, setSelected }) => {
+export const Recordings: FC<Props> = ({ site, filters, columns, selected, setSelected }) => {
   const [page, setPage] = React.useState<number>(0);
   const [size, setSize] = React.useState<number>(25);
   const [sort, setSort] = React.useState<RecordingsSort>(RecordingsSort.ConnectedAtDesc);
@@ -36,7 +34,6 @@ export const Recordings: FC<Props> = ({ site, query, filters, columns, selected,
     page, 
     sort,
     size,
-    query: query.length < MIN_SEARCH_CHARS ? '' : query, // No point in searching if it's below this value
     filters,
   });
 
@@ -81,7 +78,6 @@ export const Recordings: FC<Props> = ({ site, query, filters, columns, selected,
           <RecordingsItem 
             site={site}
             recording={recording} 
-            query={query} 
             key={recording.id} 
             style={rowStyle}
             selected={selected}
@@ -97,7 +93,7 @@ export const Recordings: FC<Props> = ({ site, query, filters, columns, selected,
       )}
 
       {!loading && items.length === 0 && (
-        <EmptyState search={query.length > 0} type='recordings' />
+        <EmptyState type='recordings' />
       )}
       
       <div className='recordings-footer'>

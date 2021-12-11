@@ -8,7 +8,6 @@ import type { Site, VisitorsFilters, Visitors } from 'types/graphql';
 interface Props {
   page: number;
   size?: number;
-  query?: string;
   sort?: VisitorsSort;
   filters?: VisitorsFilters;
 }
@@ -19,7 +18,7 @@ interface UseVisitors {
   visitors: Visitors;
 }
 
-export const useVisitors = ({ page, size, query, sort, filters }: Props): UseVisitors => {
+export const useVisitors = ({ page, size, sort, filters }: Props): UseVisitors => {
   const router = useRouter();
   const toasts = useToasts();
 
@@ -28,7 +27,6 @@ export const useVisitors = ({ page, size, query, sort, filters }: Props): UseVis
       siteId: router.query.site_id as string, 
       page, 
       size,
-      query,
       sort,
       filters,
     }

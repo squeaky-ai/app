@@ -1,11 +1,11 @@
 import { gql } from '@apollo/client';
 
 export const GET_VISITORS_QUERY = gql`
-  query GetVisitors($siteId: ID!, $page: Int, $size: Int, $query: String, $sort: VisitorsSort, $filters: VisitorsFilters) {
+  query GetVisitors($siteId: ID!, $page: Int, $size: Int, $sort: VisitorsSort, $filters: VisitorsFilters) {
     site(siteId: $siteId) {
       id
       name
-      visitors(page: $page, size: $size, query: $query, sort: $sort, filters: $filters) {
+      visitors(page: $page, size: $size, sort: $sort, filters: $filters) {
         items {
           id
           visitorId

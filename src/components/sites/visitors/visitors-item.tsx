@@ -2,7 +2,6 @@ import React from 'react';
 import type { FC } from 'react';
 import { Tooltip } from 'components/tooltip';
 import { Browser } from 'components/browser';
-import { Highlighter } from 'components/highlighter';
 import { Device } from 'components/device';
 import { toNiceDate } from 'lib/dates';
 import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
@@ -15,12 +14,11 @@ import type { Visitor } from 'types/graphql';
 
 interface Props {
   site: Site;
-  query: string;
   visitor: Visitor;
   style?: React.CSSProperties;
 }
 
-export const VisitorsItem: FC<Props> = ({ site, visitor, query, style }) => {
+export const VisitorsItem: FC<Props> = ({ site, visitor, style }) => {
   const attributes = getAttributes<ExternalAttributes>(visitor);
   const devices = groupVisitorDevices(visitor.devices);
   const browsers = groupVisitorBrowsers(visitor.devices);
@@ -38,31 +36,25 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, query, style }) => {
         <VisitorsStarred site={site} visitor={visitor} link />
       </Cell>
       <Cell>
-        <Highlighter value={query}>{attributes?.id || '-'}</Highlighter>
+        {attributes?.id || '-'}
       </Cell>
       <Cell>
-        <Highlighter value={query}>{attributes?.name || '-'}</Highlighter>
+        {attributes?.name || '-'}
       </Cell>
       <Cell>
-        <Highlighter value={query}>{attributes?.email || '-'}</Highlighter>
+        {attributes?.email || '-'}
       </Cell>
       <Cell>
         {visitor.recordingsCount?.total || 0}
       </Cell>
       <Cell>
-        <Highlighter value={query}>
-          {toTimeStringDate(visitor.firstViewedAt)}
-        </Highlighter>
+        {toTimeStringDate(visitor.firstViewedAt)}
       </Cell>
       <Cell>
-        <Highlighter value={query}>
-          {toTimeStringDate(visitor.lastActivityAt)}
-        </Highlighter>
+        {toTimeStringDate(visitor.lastActivityAt)}
       </Cell>
       <Cell>
-        <Highlighter value={query}>
-          {visitor.language}
-        </Highlighter>
+        {visitor.language}
       </Cell>
       <Cell>
         {devices.length === 1 && (
@@ -70,7 +62,7 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, query, style }) => {
             <Tooltip positionX='right' button={<Device deviceType={devices[0].deviceType} />}>
               {devices[0].deviceType === 'Computer' ? 'Desktop or Laptop Device' : 'Mobile Device'}
             </Tooltip>
-            <Highlighter value={query}>{devices[0].deviceX}</Highlighter> x <Highlighter value={query}>{devices[0].deviceY}</Highlighter>
+            {devices[0].deviceX} x {devices[0].deviceY}
           </>
         )}
         {devices.length > 1 && (
