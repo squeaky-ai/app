@@ -107,8 +107,11 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items
     if (doc) inject(doc);
   };
 
-  // Rebuild the replayer whenever the recording id changes
+  // Rebuild the replayer whenever the recording id or page changes.
+  // The loading state should start again as it can take some time
+  // between pages if the recording itself needs to change
   React.useEffect(() => {
+    setLoading(true);
     init();
   }, [recording?.id, page]);
 
