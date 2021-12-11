@@ -648,14 +648,17 @@
         }
       }
 
-      .tooltip,
-      .tooltip .button {
-        display: block;
-        overflow: hidden;
-        text-align: left;
-        text-overflow: ellipsis;
-        width: 100%;
-        white-space: nowrap;
+      .tooltip {
+        display: inline-block;
+
+        &.button {
+          display: block;
+          overflow: hidden;
+          text-align: left;
+          text-overflow: ellipsis;
+          width: 100%;
+          white-space: nowrap;
+        }
       }
     }
 
