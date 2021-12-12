@@ -1,5 +1,6 @@
 import { range } from 'lodash';
 import { average } from 'lib/maths';
+import { groupBy } from 'lodash';
 import type { TimePeriod } from 'lib/dates';
 import type { FeedbackSentimentRating } from 'types/graphql';
 
@@ -13,6 +14,11 @@ import {
 export interface FeedbackData {
   date: string;
   score: number;
+  0: number;
+  1: number;
+  2: number;
+  3: number;
+  4: number;
 }
 
 export interface DataForPeriod {
@@ -30,6 +36,20 @@ const getDateFromTimestamp = (str: string) => new Date(str);
 
 const avg = (nums: number[]) => Math.ceil(average(nums));
 
+const groupScoreCounts = (ratings: FeedbackSentimentRating[]): Omit<FeedbackData, 'date' | 'score'> => {
+  const groups = groupBy(ratings.map(r => r.score));
+
+  const count = (num: number) => (groups[num] || []).length;
+
+  return {
+    0: count(0),
+    1: count(1),
+    2: count(2),
+    3: count(3),
+    4: count(4),
+  }
+};
+
 const getDailyResults = (ratings: FeedbackSentimentRating[]): DataForPeriod => {
   const data = range(0, 24).map(i => {
     const scores = ratings.filter(r => getHours(getDateFromTimestamp(r.timestamp)) === i);
@@ -37,6 +57,7 @@ const getDailyResults = (ratings: FeedbackSentimentRating[]): DataForPeriod => {
     return {
       date: getAmPmForHour(i),
       score: avg(scores.map(s => s.score)),
+      ...groupScoreCounts(scores),
     };
   });
 
@@ -54,6 +75,7 @@ const getPastSevenDaysResults = (ratings: FeedbackSentimentRating[]): DataForPer
     return {
       date: format(date, 'd/M'),
       score: avg(scores.map(s => s.score)),
+      ...groupScoreCounts(scores),
     };
   });
 
@@ -71,6 +93,7 @@ const getPastThirtyDaysResults = (ratings: FeedbackSentimentRating[]): DataForPe
     return {
       date: format(date, 'd/M'),
       score: avg(scores.map(s => s.score)),
+      ...groupScoreCounts(scores),
     };
   });
 

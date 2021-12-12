@@ -30,9 +30,9 @@ export const SentimentResponsesItem: FC<Props> = ({ response, style }) => {
     <Row style={style}>
       <Cell>
         <p className='score'>
-          <div className='emoji'>
+          <span className='emoji'>
             <Image src={EMOJIS[response.score]} height={24} width={24} />
-          </div>
+          </span>
         </p>
       </Cell>
       <Cell>
