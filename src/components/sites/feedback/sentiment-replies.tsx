@@ -1,7 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import Image from 'next/image';
-import { groupBy, first } from 'lodash';
+import { groupBy, first, orderBy } from 'lodash';
 import { EMOJIS } from 'data/sentiment/constants';
 import { percentage } from 'lib/maths';
 import type { FeedbackSentimentReplies } from 'types/graphql';
@@ -17,7 +17,7 @@ export const SentimentReplies: FC<Props> = ({ replies }) => {
 
   const getPercentage = (num: number) => percentage(replies.total, getCount(num));
 
-  const biggest = first(Object.entries(groups).sort(([, value]) => value.length)[0]);
+  const biggest = first(orderBy(Object.entries(groups), ([, value]) => value.length, 'desc')[0])
 
   const offset = 100 - getPercentage(Number(biggest) || 0);
 
