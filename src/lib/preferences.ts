@@ -8,7 +8,6 @@ export enum Preference {
   NPS_COLUMNS = 'NPS_COLUMNS',
   SENTIMENT_COLUMNS = 'SENTIMENT_COLUMNS',
   SIDEBAR_CLOSED = 'SIDEBAR_CLOSED',
-  DARK_MODE_ENABLED = 'DARK_MODE_ENABLED',
 }
 
 export class Preferences {

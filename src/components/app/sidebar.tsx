@@ -11,7 +11,7 @@ import { SidebarNested } from 'components/app/sidebar-nested';
 import { Logo } from 'components/logo';
 import { Breakpoints } from 'data/common/constants';
 import { Preferences, Preference } from 'lib/preferences';
-import { SidebarDarkmode } from 'components/app/sidebar-darkmode';
+import { SidebarLogout } from 'components/app/sidebar-logout';
 import { SidebarCollapse } from 'components/app/sidebar-collapse';
 
 export const Sidebar: FC = () => {
@@ -90,12 +90,12 @@ export const Sidebar: FC = () => {
     <aside ref={ref} id='app-sidebar' className={classnames({ open })}>
       <Link href='/sites'>
         <a className='logo large'>
-          <Logo src='logo' alt='Logo' height={32} width={103} dark />
+          <Logo src='logo' alt='Logo' height={32} width={103} />
         </a>
       </Link>
       <Link href='/sites'>
         <a className='logo small'>
-          <Logo src='logo-small' alt='Logo' height={32} width={24} dark />
+          <Logo src='logo-small' alt='Logo' height={32} width={24} />
         </a>
       </Link>
       <menu className={position}>
@@ -191,7 +191,7 @@ export const Sidebar: FC = () => {
       </Button>
       <footer>
         <SidebarAccount path={path} />
-        <SidebarDarkmode />
+        <SidebarLogout />
         <SidebarCollapse open={open} toggleOpen={toggleOpen} />
       </footer>
     </aside>
