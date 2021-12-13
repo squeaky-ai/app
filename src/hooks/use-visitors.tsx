@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
-import { useToasts } from 'hooks/use-toasts';
 import { GET_VISITORS_QUERY } from 'data/visitors/queries';
 import { VisitorsSort } from 'types/graphql';
 import type { Site, VisitorsFilters, Visitors } from 'types/graphql';
@@ -20,7 +19,6 @@ interface UseVisitors {
 
 export const useVisitors = ({ page, size, sort, filters }: Props): UseVisitors => {
   const router = useRouter();
-  const toasts = useToasts();
 
   const { data, loading, error, previousData } = useQuery<{ site: Site }>(GET_VISITORS_QUERY, {
     variables: { 
@@ -31,10 +29,6 @@ export const useVisitors = ({ page, size, sort, filters }: Props): UseVisitors =
       filters,
     }
   });
-
-  if (error) {
-    toasts.add({ type: 'error', body: 'An error has occurred' });
-  }
 
   const fallback: Visitors = { 
     items: [], 

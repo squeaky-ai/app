@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
-import { useToasts } from 'hooks/use-toasts';
 import { GET_RECORDINGS_QUERY } from 'data/recordings/queries';
 import { RecordingsSort } from 'types/graphql';
 import type { Site, RecordingsFilters, Recordings } from 'types/graphql';
@@ -20,7 +19,6 @@ interface UseRecordings {
 
 export const useRecordings = ({ page, size, sort, filters }: Props): UseRecordings => {
   const router = useRouter();
-  const toasts = useToasts();
 
   const { data, loading, error, previousData } = useQuery<{ site: Site }>(GET_RECORDINGS_QUERY, {
     variables: { 
@@ -31,10 +29,6 @@ export const useRecordings = ({ page, size, sort, filters }: Props): UseRecordin
       filters,
     }
   });
-
-  if (error) {
-    toasts.add({ type: 'error', body: 'An error has occurred' });
-  }
 
   const fallback: Recordings = { 
     items: [], 
