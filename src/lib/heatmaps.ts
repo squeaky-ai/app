@@ -90,13 +90,15 @@ export const showClickMaps = (doc: Document, items: HeatmapsItem[]) => {
       elem = elem.parentElement;
     }
 
+    const currentElementPosition = getComputedStyle(elem).position;
+
     // Add a an outline to the clicked element and set 
     // it's position to relative if it isn't absolute 
     // or fixed
     elem.style.cssText += `
       outline: 1px dashed #707070 !important; 
       outline-offset: 2px !important;
-      position: ${['absolute', 'fixed'].includes(elem.style.position) ? elem.style.position : 'relative'};
+      position: ${['absolute', 'fixed'].includes(currentElementPosition) ? currentElementPosition : 'relative'};
     `;
 
     elem.querySelector('.__squeaky_click_tag')?.remove();
