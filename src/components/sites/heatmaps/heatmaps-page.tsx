@@ -82,6 +82,8 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items
 
   const deviceWidth = () => {
     switch(device) {
+      case 'Desktop':
+        return '1280px';
       case 'Tablet':
         return '800px';
       case 'Mobile':

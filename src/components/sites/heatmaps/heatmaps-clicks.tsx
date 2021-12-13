@@ -20,33 +20,44 @@ export const HeatmapsClicks: FC<Props> = ({ items }) => {
 
   return (
     <div className='clicks-table'>
-      <div className='head row'>
-        <p>Element</p>
-        <p>
-          Clicks
-          <Sort
-            name='clicks'
-            order={order}
-            onAsc={() => setOrder('clicks__asc')}
-            onDesc={() => setOrder('clicks__desc')}
-          />
-        </p>
-      </div>
-      <ul>
-        {clicks.map(click => (
-          <li key={click.selector} className='row'>
-            <Tooltip button={click.selector} portalClassName='element-tooltip'>
-              {click.selector}
-            </Tooltip>
+      {clicks.length === 0 && (
+        <div className='empty'>
+          <i className='ri-time-line' />
+          <p>No data available</p>
+        </div>
+      )}
+
+      {clicks.length > 0 && (
+        <>
+          <div className='head row'>
+            <p>Element</p>
             <p>
-              <Pill small style={{ backgroundColor: click.color.background, color: click.color.foreground, borderColor: click.color.border }} squared>
-                {click.count}
-              </Pill>
-              {click.percentage}%
+              Clicks
+              <Sort
+                name='clicks'
+                order={order}
+                onAsc={() => setOrder('clicks__asc')}
+                onDesc={() => setOrder('clicks__desc')}
+              />
             </p>
-          </li>
-        ))}
-      </ul>
+          </div>
+            <ul>
+              {clicks.map(click => (
+                <li key={click.selector} className='row'>
+                  <Tooltip button={click.selector} portalClassName='element-tooltip'>
+                    {click.selector}
+                  </Tooltip>
+                  <p>
+                    <Pill small style={{ backgroundColor: click.color.background, color: click.color.foreground, borderColor: click.color.border }} squared>
+                      {click.count}
+                    </Pill>
+                    {click.percentage}%
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
     </div>
   );
 };

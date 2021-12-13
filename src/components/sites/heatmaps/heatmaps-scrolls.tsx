@@ -12,20 +12,32 @@ export const HeatmapsScrolls: FC<Props> = ({ items }) => {
 
   return (
     <div className='scrolls-table'>
-      <div className='head row'>
-        <p>% scrolled</p>
-        <p>Pixels scrolled</p>
-        <p>Users</p>
-      </div>
-      <ul>
-        {scrollMap.map(map => (
-          <li key={map.increment} className='row'>
-            <p>{map.increment}%</p>
-            <p>{map.pixelsScrolled}px</p>
-            <p>{map.percentThatMadeIt}% <i>({map.amountThatMadeIt})</i></p>
-          </li>
-        ))}
-      </ul>
+      {items.length === 0 && (
+        <div className='empty'>
+          <i className='ri-time-line' />
+          <p>No data available</p>
+        </div>
+      )}
+
+      
+      {items.length > 0 && (
+        <>
+          <div className='head row'>
+            <p>% scrolled</p>
+            <p>Pixels scrolled</p>
+            <p>Users</p>
+          </div>
+            <ul>
+              {scrollMap.map(map => (
+                <li key={map.increment} className='row'>
+                  <p>{map.increment}%</p>
+                  <p>{map.pixelsScrolled}px</p>
+                  <p>{map.percentThatMadeIt}% <i>({map.amountThatMadeIt})</i></p>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
     </div>
   );
 };

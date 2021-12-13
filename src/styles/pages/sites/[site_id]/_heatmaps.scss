@@ -179,6 +179,25 @@
           margin-right: .5rem;
         }
 
+        .empty {
+          align-items: center;
+          display: flex;
+          flex: 1;
+          flex-direction: column;
+          justify-content: center;
+
+          i {
+            color: var(--gray-300);
+            font-size: 2rem;
+          }
+
+          p {
+            font-size: 16px;
+            margin: 0;
+            padding: 1rem 0 0 0;
+          }
+        }
+
         .row {
           .tooltip {
             flex: 1;
@@ -202,6 +221,25 @@
           p {
             flex: 1;
             white-space: nowrap;
+          }
+        }
+
+        .empty {
+          align-items: center;
+          display: flex;
+          flex: 1;
+          flex-direction: column;
+          justify-content: center;
+
+          i {
+            color: var(--gray-300);
+            font-size: 2rem;
+          }
+
+          p {
+            font-size: 16px;
+            margin: 0;
+            padding: 1rem 0 0 0;
           }
         }
       }
@@ -238,6 +276,10 @@
           pointer-events: all !important;
           width: 100%;
         }
+      }
+
+      #heatmaps-page-wrapper {
+        flex-shrink: 0;
       }
 
       .heatmaps-page,
