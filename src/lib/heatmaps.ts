@@ -92,6 +92,8 @@ export const showClickMaps = (doc: Document, items: HeatmapsItem[]) => {
       position: ${['absolute', 'fixed'].includes(elem.style.position) ? elem.style.position : 'relative'};
     `;
 
+    elem.querySelector('.__squeaky_click_tag')?.remove();
+
     const click = clickMapData.find(c => c.selector === item.selector);
 
     // Create an insert a tag into the clicked
@@ -108,9 +110,11 @@ export const showClickMaps = (doc: Document, items: HeatmapsItem[]) => {
       box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 2px;
       box-sizing: border-box;
       color: ${click.color.foreground};
-      font-size: 12px;
-      font-weight: 600;
       display: block;
+      font-size: 12px !important;
+      font-weight: 600;
+      flex-shrink: 0;
+      height: 1.5rem;
       padding: .15rem;
       position: absolute;
       right: 0;
