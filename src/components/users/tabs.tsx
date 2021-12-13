@@ -21,13 +21,6 @@ export const Tabs: FC<Props> = ({ page }) => {
           </Link>
         </li>
         <li className='tab'>
-          <Link href='/users/preferences'>
-            <a className={classnames('button tab-button', { active: page === 'preferences' })}>
-              Preferences
-            </a>
-          </Link>
-        </li>
-        <li className='tab'>
           <Link href='/users/password'>
             <a className={classnames('button tab-button', { active: page === 'password' })}>
               Password
