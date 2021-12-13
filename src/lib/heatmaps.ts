@@ -104,17 +104,19 @@ export const showClickMaps = (doc: Document, items: HeatmapsItem[]) => {
     tag.innerText = click.count.toString();
 
     tag.style.cssText = `
+      align-items: center;
       background: ${click.color.background};
       border: 1px solid ${click.color.border};
       border-radius: 2px;
       box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 2px;
       box-sizing: border-box;
       color: ${click.color.foreground};
-      display: block;
+      display: flex;
       font-size: 12px !important;
       font-weight: 600;
       flex-shrink: 0;
       height: 1.5rem;
+      justify-content: center;
       padding: .15rem;
       position: absolute;
       right: 0;
