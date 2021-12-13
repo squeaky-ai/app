@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
+import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { Dropdown } from 'components/dropdown';
 import { Label } from 'components/label';
@@ -46,25 +47,25 @@ export const Filters: FC<Props> = ({ filters, updateFilters }) => {
 
   return ( 
     <div className='menu-item filters'>
-      <Dropdown button={<><i className='ri-equalizer-line' /> Filters</>} dropdown-menu='down'>
+      <Dropdown button={<><Icon name='equalizer-line' /> Filters</>} dropdown-menu='down'>
         <Button onClick={() => handleFilterChange(FilterType.Status)} className={classnames({ open: openFilter === FilterType.Status})}>
-          <i className='ri-arrow-drop-left-line' />
+          <Icon name='arrow-drop-left-line' />
           Status
         </Button>
         <Button onClick={() => handleFilterChange(FilterType.Recordings)} className={classnames({ open: openFilter === FilterType.Recordings})}>
-          <i className='ri-arrow-drop-left-line' />
+          <Icon name='arrow-drop-left-line' />
           Recordings
         </Button>
         <Button onClick={() => handleFilterChange(FilterType.FirstVisited)} className={classnames({ open: openFilter === FilterType.FirstVisited})}>
-          <i className='ri-arrow-drop-left-line' />
+          <Icon name='arrow-drop-left-line' />
           First visited
         </Button>
         <Button onClick={() => handleFilterChange(FilterType.LastActivity)} className={classnames({ open: openFilter === FilterType.LastActivity})}>
-          <i className='ri-arrow-drop-left-line' />
+          <Icon name='arrow-drop-left-line' />
           Last activity
         </Button>
         <Button onClick={() => handleFilterChange(FilterType.Language)} className={classnames({ open: openFilter === FilterType.Language})}>
-          <i className='ri-arrow-drop-left-line' />
+          <Icon name='arrow-drop-left-line' />
           Language
         </Button>
 

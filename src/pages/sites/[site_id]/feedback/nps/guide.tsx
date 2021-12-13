@@ -3,6 +3,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import classnames from 'classnames';
+import { Icon } from 'components/icon';
 import { Main } from 'components/main';
 import { Page } from 'components/sites/page';
 import { Illustration } from 'components/illustration';
@@ -81,17 +82,17 @@ const SitesFeedbackNpsGuide: NextPage<ServerSideProps> = ({ user }) => {
                   <p>The three groups that NPS® segments your visitors by are categorised as follows:</p>
 
                   <Card className='definition promoter'>
-                    <p className='heading'><i className='icon ri-group-line'></i>Promoters <i>(9-10 points)</i></p>
+                    <p className='heading'><Icon name='group-line' />Promoters <i>(9-10 points)</i></p>
                     <p>These visitors are those who are actively recommending your brand or company, and therefore help you to win new customers. You should aim to attract as many promoters as possible.</p>
                   </Card>
 
                   <Card className='definition passive'>
-                    <p className='heading'><i className='icon ri-group-line'></i>Passives <i>(7-8 points)</i></p>
+                    <p className='heading'><Icon name='group-line' />Passives <i>(7-8 points)</i></p>
                     <p>These visitors are not 100 percent satisfied with the experience, products or services you provide, and are unlikely to recommend you to others.</p>
                   </Card>
 
                   <Card className='definition detractor'>
-                    <p className='heading'><i className='icon ri-group-line'></i>Detractors <i>(0-6 points)</i></p>
+                    <p className='heading'><Icon name='group-line' />Detractors <i>(0-6 points)</i></p>
                     <p>These visitors are critical of your company, and likely to advise friends, acquaintances, and other potential customers not to use your business. Their comments should be taken seriously and help drive product improvements.</p>
                   </Card>
                 </Container>

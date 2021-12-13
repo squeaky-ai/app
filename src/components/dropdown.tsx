@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import FocusTrap from 'focus-trap-react';
 import { Button } from 'components/button';
 import { Portal } from 'components/portal';
+import { Icon } from 'components/icon';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   button: string | React.ReactNode;
@@ -72,7 +73,7 @@ export class Dropdown extends React.Component<Props, State> {
       <div ref={this.ref} className={classnames('dropdown', this.props.className, { open: this.state.open })}>
         <Button onClick={() => this.setState({ open: !this.state.open })} className={this.props.buttonClassName}>
           {this.props.button}
-          <i className='arrow ri-arrow-drop-down-line' />
+          <Icon name='arrow-drop-down-line' className='arrow' />
         </Button>
   
         {this.props.portal

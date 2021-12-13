@@ -5,6 +5,7 @@ import type { metaEvent } from 'rrweb/typings/types';
 import classnames from 'classnames';
 import { EventType } from 'rrweb';
 import { groupBy } from 'lodash';
+import { Icon } from 'components/icon';
 import { ActivityTimestamp } from 'components/sites/player/activity-timestamp';
 import type { Event } from 'types/event';
 import type { Recording } from 'types/graphql';
@@ -55,7 +56,7 @@ export const SidebarPages: FC<Props> = ({ recording, replayer }) => {
             {(events as Event[]).map(event => (
               <div key={event.id} className='event'>
                 <ActivityTimestamp offset={offset} timestamp={event.timestamp} replayer={replayer} />
-                <i className='ri-arrow-right-line' />
+                <Icon name='arrow-right-line' />
                 <ActivityTimestamp offset={offset} timestamp={timeToNextPageView(event)} replayer={replayer} />
               </div>
             ))}

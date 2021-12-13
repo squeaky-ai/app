@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
+import { Icon } from 'components/icon';
 import { Label } from 'components/label';
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -24,8 +25,8 @@ export const Checkbox: FC<Props> = ({ className, name, disabled, children, inval
       <input type='checkbox' name={name} checked={checked} disabled={disabled} {...rest} />
       <span className='check' role='checkbox' aria-checked={checked}>
         {partial
-          ? <i className='ri-subtract-line' />
-          : <i className='ri-check-line' />
+          ? <Icon name='subtract-line' />
+          : <Icon name='check-line' />
         }
       </span>
       <span>{children}</span>

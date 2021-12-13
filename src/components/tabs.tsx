@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
+import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 
 type Tab = {
@@ -23,7 +24,7 @@ export const Tabs: FC<Props> = ({ tabs }) => {
         {tabs.map(tab => (
           <li className='tab' key={tab.page}>
             <Button className={classnames('tab-button', { active: page.page === tab.page })} onClick={() => setPage(tab)}>
-              <i className={tab.icon} />
+              <Icon name={tab.icon} />
               {tab.name}
             </Button>
           </li>

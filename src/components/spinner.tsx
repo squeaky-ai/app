@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
+import { Icon } from 'components/icon';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   hideShowExtra?: boolean;
@@ -22,7 +23,7 @@ export const Spinner: FC<Props> = ({ hideShowExtra, className, ...rest }) => {
   return (
     <div className={classnames('spinner', className)} {...rest}>
       <div className='icon'>
-        <i className='ri-loader-4-line' />
+        <Icon name='loader-4-line' />
       </div>
       {showExtra && <p>Still working on it...</p>}
     </div>

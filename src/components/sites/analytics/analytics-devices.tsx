@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import { sum } from 'lodash';
+import { Icon } from 'components/icon';
 import { Card } from 'components/card';
 import { percentage } from 'lib/maths';
 import type { AnalyticsDevice } from 'types/graphql';
@@ -17,7 +18,7 @@ export const AnalyticsDevices: FC<Props> = ({ devices }) => {
   return (
     <>
       <Card>
-        <i className='ri-computer-line' />
+        <Icon name='computer-line' />
         <div className='stats'>
           <p><b>Desktop / Laptop</b></p>
           <h3>{desktop.count} <span>{percentage(total, desktop.count) || 0}%</span></h3>
@@ -25,7 +26,7 @@ export const AnalyticsDevices: FC<Props> = ({ devices }) => {
       </Card>
 
       <Card>
-        <i className='ri-tablet-line' />
+        <Icon name='tablet-line' />
         <div className='stats'>
           <p><b>Tablet / Mobile</b></p>
           <h3>{mobile.count} <span>{percentage(total, mobile.count) || 0}%</span></h3>

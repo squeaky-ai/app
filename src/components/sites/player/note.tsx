@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import type { Replayer } from 'rrweb';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
+import { Icon } from 'components/icon';
 import { Dropdown } from 'components/dropdown';
 import { Button } from 'components/button';
 import { Label } from 'components/label';
@@ -62,7 +63,7 @@ export const Note: FC<Props> = ({ note, handleDelete, handleUpdate, replayer }) 
             ? <ActivityTimestamp timestamp={note.timestamp} offset={0} replayer={replayer} />
             : <i className='no-timestamp'>No timestamp</i>
           }
-          <Dropdown button={<i className='ri-more-2-fill' />} buttonClassName='kebab'>
+          <Dropdown button={<Icon name='more-2-fill' />} buttonClassName='kebab'>
             <Button onClick={openModal}>Edit</Button>
             <NoteDelete handleDelete={onDelete}>Delete</NoteDelete>
           </Dropdown>
@@ -71,7 +72,7 @@ export const Note: FC<Props> = ({ note, handleDelete, handleUpdate, replayer }) 
           {note.body}
         </p>
         <p className='user'>
-          <i className='ri-account-circle-line' />
+          <Icon name='account-circle-line' />
           <span>
             {note.user
               ? note.user.fullName
@@ -112,7 +113,7 @@ export const Note: FC<Props> = ({ note, handleDelete, handleUpdate, replayer }) 
               <ModalHeader>
                 <p id='add-note-title'><b>Edit Note</b></p>
                 <Button type='button' onClick={closeModal}>
-                  <i className='ri-close-line' />
+                  <Icon name='close-line' />
                 </Button>
               </ModalHeader>
               <ModalContents>

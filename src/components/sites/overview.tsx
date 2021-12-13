@@ -2,6 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { Icon } from 'components/icon';
 import { Card } from 'components/card';
 import { Tooltip } from 'components/tooltip';
 import { Divider } from 'components/divider';
@@ -39,7 +40,7 @@ export const Overview: FC<Props> = ({ site }) => {
     <div className='overview-grid'>
       <Card className='visitors'>
         <h5>
-          <i className='ri-group-line' />
+          <Icon name='group-line' />
           Visitors
         </h5>
         <h2>
@@ -52,14 +53,14 @@ export const Overview: FC<Props> = ({ site }) => {
             <Link href={`/sites/${site_id}/visitors`}>
               <a>View</a>
             </Link>
-            <i className='ri-arrow-right-line' />
+            <Icon name='arrow-right-line' />
           </div>
         </div>
       </Card>
 
       <Card className='recordings'>
         <h5>
-          <i className='ri-vidicon-line' />
+          <Icon name='vidicon-line' />
           Recordings
         </h5>
         <h2>
@@ -72,14 +73,14 @@ export const Overview: FC<Props> = ({ site }) => {
             <Link href={`/sites/${site_id}/recordings`}>
               <a>View</a>
             </Link>
-            <i className='ri-arrow-right-line' />
+            <Icon name='arrow-right-line' />
           </div>
         </div>
       </Card>
 
       <Card className='pageviews'>
         <h5>
-          <i className='ri-pages-line' />
+          <Icon name='pages-line' />
           Page Views
         </h5>
         <h2>{overview.analytics.pageViewCount.toLocaleString()}</h2>
@@ -87,7 +88,7 @@ export const Overview: FC<Props> = ({ site }) => {
           <Link href={`/sites/${site_id}/analytics`}>
             <a>Analytics</a>
           </Link>
-          <i className='ri-arrow-right-line' />
+          <Icon name='arrow-right-line' />
         </div>
       </Card>
 
@@ -103,7 +104,7 @@ export const Overview: FC<Props> = ({ site }) => {
                 <PlayerPreview recording={recording} />
                 <div className='play-button-wrapper'>
                   <div className='play-button'>
-                    <i className='ri-play-fill' />
+                    <Icon name='play-fill' />
                     Play
                   </div>
                 </div>
@@ -154,7 +155,7 @@ export const Overview: FC<Props> = ({ site }) => {
 
         {!recording && !loading && (
           <div className='preview-empty-state'>
-            <i className='ri-time-line' />
+            <Icon name='time-line' />
             <p>No data available</p>
           </div>
         )}
@@ -162,13 +163,13 @@ export const Overview: FC<Props> = ({ site }) => {
 
       <Card className='latest-notes'>
         <h5>
-          <i className='ri-sticky-note-line' />
+          <Icon name='sticky-note-line' />
           Latest Notes
         </h5>
 
         {notes.length === 0 && (
           <div className='notes-empty-state'>
-            <i className='ri-time-line' />
+            <Icon name='time-line' />
             <p>No data available</p>
           </div>
         )}
@@ -186,7 +187,7 @@ export const Overview: FC<Props> = ({ site }) => {
                     </p>
                     <p className='body'>{note.body}</p>
                     <p className='user'>
-                      <i className='ri-account-circle-line' />
+                      <Icon name='account-circle-line' />
                       <span>
                         {note.user
                           ? note.user.fullName

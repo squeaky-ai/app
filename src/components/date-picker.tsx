@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
-import { Input } from './input';
+import { Input } from 'components/input';
+import { Icon } from 'components/icon';
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   invalid?: boolean;
@@ -9,7 +10,7 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 export const DatePicker: FC<Props> = (props) => {
   return (
     <div className='date-picker'>
-      <i className='ri-calendar-line' />
+      <Icon name='calendar-line' />
       <Input placeholder='DD/MM/YYYY' {...props} />
     </div>
   );

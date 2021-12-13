@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import { Button } from 'components/button';
+import { Icon } from 'components/icon';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { recordingsDelete } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
@@ -50,7 +51,7 @@ export const RecordingsDelete: FC<Props> = ({ recordingIds, siteId, onCompleted,
           <ModalHeader>
             <p id='delete-recordings-title'><b>Delete Recordings</b></p>
             <Button type='button' onClick={closeModal}>
-              <i className='ri-close-line' />
+              <Icon name='close-line' />
             </Button>
           </ModalHeader>
           <ModalContents>

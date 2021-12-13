@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import { Button } from 'components/button';
+import { Icon } from 'components/icon';
 import ReactPagination from 'rc-pagination';
 
 interface Props extends React.HTMLAttributes<HTMLUListElement> {
@@ -21,13 +22,13 @@ const RenderItem: FC<RenderItemProps> = ({ page, type }) => {
     case 'prev':
       return (
         <Button className='back'>
-          <i className='ri-arrow-drop-left-line' />
+          <Icon name='arrow-drop-left-line' />
         </Button>
       );
     case 'next':
       return (
         <Button className='forward'>
-          <i className='ri-arrow-drop-right-line' />
+          <Icon name='arrow-drop-right-line' />
         </Button>
       );
     case 'jump-next':

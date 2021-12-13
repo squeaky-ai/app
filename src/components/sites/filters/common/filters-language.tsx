@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { useRouter } from 'next/router';
 import { gql, useQuery } from '@apollo/client';
+import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { Input } from 'components/input';
 import { Spinner } from 'components/spinner';
@@ -69,7 +70,7 @@ export const FiltersLanguage: FC<Props> = ({ value, onClose, onUpdate }) => {
           <div className='row'>
             <div className='search' role='search' aria-label='Filter recordings'>
               <Input type='search' placeholder='Search...' onChange={handleSearch} />
-              <i className='ri-search-line' /> 
+              <Icon name='search-line' /> 
             </div>
           </div>
           <div className='row languages'>

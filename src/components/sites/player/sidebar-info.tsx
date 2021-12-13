@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
+import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { PlayerTab } from 'data/sites/enums';
 import { toNiceDate, toTimeString } from 'lib/dates';
@@ -25,7 +26,7 @@ export const SidebarInfo: FC<Props> = ({ site, recording, setActiveTab }) => {
       <div className='attributes'>
         {!attributes && (
           <p className='no-attributes'>
-            <i className='ri-link-m' />
+            <Icon name='link-m' />
             <span>No Linked Data</span>
             <Link href='/developers'>
               <a target='_blank'>Settings</a>
@@ -36,7 +37,7 @@ export const SidebarInfo: FC<Props> = ({ site, recording, setActiveTab }) => {
         {attributes && (
           <>
             <p className='heading'>
-              <i className='ri-link-m' />
+              <Icon name='link-m' />
               <span>Linked Data</span>
             </p>
             <dl className='datalist'>

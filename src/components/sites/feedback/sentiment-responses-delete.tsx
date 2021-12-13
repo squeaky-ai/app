@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { useToasts } from 'hooks/use-toasts';
@@ -36,7 +37,7 @@ export const SentimentResponsesDelete: FC<Props> = ({ onClose }) => {
   return (
     <>
       <Button onClick={openModal}>
-        <i className='ri-delete-bin-line' /> Delete
+        <Icon name='delete-bin-line' /> Delete
       </Button>
             
       <Modal ref={ref} onClose={onClose}>
@@ -44,7 +45,7 @@ export const SentimentResponsesDelete: FC<Props> = ({ onClose }) => {
           <ModalHeader>
             <p id='delete-response-title'><b>Delete Response</b></p>
             <Button type='button' onClick={closeModal}>
-              <i className='ri-close-line' />
+              <Icon name='close-line' />
             </Button>
           </ModalHeader>
           <ModalContents>

@@ -2,6 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
 import { Button } from 'components/button';
+import { Icon } from 'components/icon';
 import { Preference, Preferences } from 'lib/preferences';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
@@ -11,7 +12,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 export const Message: FC<Props> = ({ children, className, type, message, ...rest }) => (
   <div className={classnames('message', type, className)} {...rest}>
-    <i className='ri-error-warning-line' />
+    <Icon name='error-warning-line' />
     {message}
   </div>  
 );
@@ -43,7 +44,7 @@ export const DismissableMessage: FC<Props & { preference: Preference, heading: s
   return (
     <div className={classnames('message dismissable', type, className)} {...rest}>
       <Button className='close' onClick={handleDismiss}>
-        <i className='ri-close-line' />
+        <Icon name='close-line' />
       </Button>
       {heading}
       {message}

@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
+import { Icon } from 'components/icon';
 
 interface ContextProps {
   toasts: ToastItem[];
@@ -38,7 +39,7 @@ const Toast: FC<ToastItem & Dismiss> = ({ id, type, body, remove }) => {
 
   return (
     <div className={classnames('toast', type)} onClick={dismiss}>
-      <i className='ri-information-line' />
+      <Icon name='information-line' />
       <p>{body}</p>
     </div>
   );

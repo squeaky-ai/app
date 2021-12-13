@@ -2,6 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
+import { Icon } from 'components/icon';
 import { Label } from 'components/label';
 import { Input } from 'components/input';
 import { Button } from 'components/button';
@@ -76,7 +77,7 @@ export const InviteTeam: FC<Props> = ({ site, disabled }) => {
                 <ModalHeader>
                   <p id='invite-team-title'><b>Invite New Team Member</b></p>
                   <Button type='button' onClick={closeModal}>
-                    <i className='ri-close-line' />
+                    <Icon name='close-line' />
                   </Button>
                 </ModalHeader>
                 <ModalContents>

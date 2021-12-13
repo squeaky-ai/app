@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
+import { Icon } from 'components/icon';
 import { Card } from 'components/card';
 import { toNiceDate } from 'lib/dates';
 import { Device } from 'components/device';
@@ -25,14 +26,14 @@ export const VisitorsSummary: FC<Props> = ({ site, visitor }) => {
   return (
     <Card className='summary'>
       <h4 className='title'>
-        <i className='ri-user-line' />
+        <Icon name='user-line' />
         {visitor.visitorId}
       </h4>
 
       <div className='summary-data'>
         <div className='linked'>
           <p className='heading'>
-            <i className='ri-link-m' />
+            <Icon name='link-m' />
             Linked Data
           </p>
           {!attributes && (

@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import { Button } from 'components/button';
+import { Icon } from 'components/icon';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { signout } from 'lib/api/auth';
 
@@ -22,8 +23,8 @@ export const SidebarLogout: FC = () => {
 
   return (
     <>
-      <Button className='link' onClick={openModal} data-label='Log out'>
-        <i className='ri-logout-circle-line' />
+      <Button className='link logout' onClick={openModal} data-label='Log out'>
+        <Icon name='logout-box-line' />
       </Button>
 
       <Modal ref={ref} className='sm'>
@@ -31,7 +32,7 @@ export const SidebarLogout: FC = () => {
           <ModalHeader>
             <p id='logout-title'><b>Logout</b></p>
             <Button type='button' onClick={closeModal}>
-              <i className='ri-close-line' />
+              <Icon name='close-line' />
             </Button>
           </ModalHeader>
           <ModalContents>

@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import { Icon } from 'components/icon';
 import { Dropdown } from 'components/dropdown';
 import { Label } from 'components/label';
 import { Radio } from 'components/radio';
@@ -48,7 +49,7 @@ export const PlayerSpeed: FC<Props> = ({
   handleSkipInactivity
 }) => {
   const name = playbackSpeed > 5 
-    ? <i className='ri-speed-line skip' /> 
+    ? <Icon name='speed-line skip' /> 
     : `${playbackSpeed.toString()}x`;
 
   const handleSkipChange = () => handleSkipInactivity(!skipInactivity);

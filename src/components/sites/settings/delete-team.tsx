@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { teamDelete } from 'lib/api/graphql';
@@ -43,7 +44,7 @@ export const DeleteTeam: FC<Props> = ({ site, team }) => {
           <ModalHeader>
             <p id='delete-team-title'><b>Remove User</b></p>
             <Button type='button' onClick={closeModal}>
-              <i className='ri-close-line' />
+              <Icon name='close-line' />
             </Button>
           </ModalHeader>
           <ModalContents>

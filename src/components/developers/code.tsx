@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 
 interface Props {
@@ -31,7 +32,7 @@ export const Code: FC<Props> = ({ lang, children }) => {
         </code>
       </pre>
       <Button className='link icon copy' onClick={copy}>
-        <i className='ri-file-copy-line' />
+        <Icon name='file-copy-line' />
         {copying ? 'Copied!' : 'Copy'}
       </Button>
     </div>

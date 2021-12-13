@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import type { Site } from 'types/graphql';
+import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { Label } from 'components/label';
@@ -56,7 +57,7 @@ export const RecordingsShare: FC<Props> = ({ button, site, recordingId, onClose 
           <ModalHeader>
             <p id='recordings-share-title'><b>Share Recording</b></p>
             <Button type='button' onClick={closeModal}>
-              <i className='ri-close-line' />
+              <Icon name='close-line' />
             </Button>
           </ModalHeader>
           <ModalContents className='recording-share-modal'>
@@ -78,7 +79,7 @@ export const RecordingsShare: FC<Props> = ({ button, site, recordingId, onClose 
                 ref={input}
               />
               <Button onClick={copy}>
-                <i className={loading ? 'ri-check-line' : 'ri-file-copy-line'} />
+                <Icon name={loading ? 'check-line' : 'file-copy-line'} />
               </Button>
             </div>
           </ModalContents>

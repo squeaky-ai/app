@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import { Icon } from 'components/icon';
 import { Label } from 'components/label';
 import { Button } from 'components/button';
 import type { Site } from 'types/graphql';
@@ -30,7 +31,7 @@ export const TrackingCode: FC<Props> = ({ site }) => {
       <Label>
         Tracking code
         <Button className='link icon' onClick={copy}>
-          <i className='ri-file-copy-line' />
+          <Icon name='file-copy-line' />
           {copying ? 'Copied!' : 'Copy to clipboard'}
         </Button>
       </Label>

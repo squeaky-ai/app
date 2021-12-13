@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { Checkbox } from 'components/checkbox';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
@@ -60,7 +61,7 @@ export const RecordingDelete: FC<Props> = ({ site, recordingId, onClose }) => {
   return (
     <>
       <Button onClick={handleDeleteClick}>
-        <i className='ri-delete-bin-line' /> Delete
+        <Icon name='delete-bin-line' /> Delete
       </Button>
             
       <Modal ref={ref} onClose={onClose}>
@@ -68,7 +69,7 @@ export const RecordingDelete: FC<Props> = ({ site, recordingId, onClose }) => {
           <ModalHeader>
             <p id='delete-recording-title'><b>Delete Recording</b></p>
             <Button type='button' onClick={closeModal}>
-              <i className='ri-close-line' />
+              <Icon name='close-line' />
             </Button>
           </ModalHeader>
           <ModalContents>

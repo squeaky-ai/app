@@ -2,6 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
 import classnames from 'classnames';
+import { Icon } from 'components/icon';
 import { Pagination } from 'components/pagination';
 import { useVisitors } from 'hooks/use-visitors';
 import { Container } from 'components/container';
@@ -62,8 +63,8 @@ export const Visitors: FC<Props> = ({ site, columns, filters }) => {
       <DismissableMessage
         preference={Preference.VISITORS_LINKED_DATA_HIDE}
         type='info'
-        heading={<p><i className='ri-link-m' /> Linked Data</p>}
-        message={<p>The columns using the <i className='ri-link-m' /> link icon are used to display linked user data from your website or web app. To discover how you can link Squeaky visitor records directly with data of logged in users, <Link href='/developers'><a target='_blank'>click here</a></Link>.</p>}
+        heading={<p><Icon name='link-m' /> Linked Data</p>}
+        message={<p>The columns using the <Icon name='link-m' /> link icon are used to display linked user data from your website or web app. To discover how you can link Squeaky visitor records directly with data of logged in users, <Link href='/developers'><a target='_blank'>click here</a></Link>.</p>}
       />
 
       <Table className={classnames('visitors-list hover', tableClassNames, { hide: items.length === 0 })}>
@@ -75,19 +76,19 @@ export const Visitors: FC<Props> = ({ site, columns, filters }) => {
             Visitor ID
           </Cell>
           <Cell className='linked'>
-            <Tooltip button={<i className='ri-link-m' />}>
+            <Tooltip button={<Icon name='link-m' />}>
               Linked Data
             </Tooltip>
             User ID
           </Cell>
           <Cell className='linked'>
-            <Tooltip button={<i className='ri-link-m' />}>
+            <Tooltip button={<Icon name='link-m' />}>
               Linked Data
             </Tooltip>
             Name
           </Cell>
           <Cell className='linked'>
-            <Tooltip button={<i className='ri-link-m' />}>
+            <Tooltip button={<Icon name='link-m' />}>
               Linked Data
             </Tooltip>
             Email

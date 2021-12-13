@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import { Button } from 'components/button';
+import { Icon } from 'components/icon';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { tagsDelete } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
@@ -48,7 +49,7 @@ export const SettingsTagsDelete: FC<Props> = ({ tags, siteId, onCompleted }) => 
           <ModalHeader>
             <p id='delete-tags-title'><b>Delete Tags</b></p>
             <Button type='button' onClick={closeModal}>
-              <i className='ri-close-line' />
+              <Icon name='close-line' />
             </Button>
           </ModalHeader>
           <ModalContents>

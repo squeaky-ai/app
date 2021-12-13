@@ -2,6 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import { min, max, groupBy } from 'lodash';
 import { ResponsiveContainer, Tooltip, TooltipProps, BarChart, Bar, XAxis } from 'recharts';
+import { Icon } from 'components/icon';
 import { Card } from 'components/card';
 import { average, frequent } from 'lib/maths';
 
@@ -34,8 +35,8 @@ export const AnalyticsScreenWidths: FC<Props> = ({ dimensions }) => {
     <Card>
       <h5>
         Screen Width
-        <i className='ri-arrow-left-line' />
-        <i className='ri-arrow-right-line' />
+        <Icon name='arrow-left-line' />
+        <Icon name='arrow-right-line' />
       </h5>
       <div className='chart-wrapper'>
         <ResponsiveContainer>

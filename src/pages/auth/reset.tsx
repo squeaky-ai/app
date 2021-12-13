@@ -5,6 +5,7 @@ import Head from 'next/head';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { useRouter } from 'next/router';
+import { Icon } from 'components/icon';
 import { Logo } from 'components/logo';
 import { Container } from 'components/container';
 import { Card } from 'components/card';
@@ -114,7 +115,7 @@ const Reset: NextPage<ServerSideProps> = () => {
 
               {pageView == PageView.VERIFY && (
                 <div className='verify'>
-                  <i className='ri-checkbox-circle-line' />
+                  <Icon name='checkbox-circle-line' />
                   <h4>Check Your Email</h4>
                   <p>If you have an existing Squeaky account you will receive password reset instructions at the email address <b>{email}</b>.</p>
                   <DelayedButton delay={10} initialDelayed={false} className='secondary' onClick={() => resetPassword(email)}>
@@ -179,7 +180,7 @@ const Reset: NextPage<ServerSideProps> = () => {
               {pageView === PageView.COMPLETE && (
                 <div className='complete'>
                   <div className='check'>
-                    <i className='ri-check-line' />
+                    <Icon name='check-line' />
                   </div>
                   <h4>Password Reset Successfully</h4>
                   <Link href='/auth/login'>

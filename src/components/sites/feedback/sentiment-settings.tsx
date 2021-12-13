@@ -2,6 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
+import { Icon } from 'components/icon';
 import { Toggle } from 'components/toggle';
 import { Spinner } from 'components/spinner';
 import { Error } from 'components/error';
@@ -116,7 +117,7 @@ export const SentimentSettings: FC<Props> = ({ site }) => {
                     onChange={handleChange}
                   >
                     <div className='color blue'>
-                      <i className='ri-check-line' />
+                      <Icon name='check-line' />
                     </div>
                   </Radio>
                   <Radio 
@@ -127,7 +128,7 @@ export const SentimentSettings: FC<Props> = ({ site }) => {
                     onChange={handleChange}
                   >
                     <div className='color magenta'>
-                      <i className='ri-check-line' />
+                      <Icon name='check-line' />
                     </div>
                   </Radio>
                   <Radio
@@ -138,7 +139,7 @@ export const SentimentSettings: FC<Props> = ({ site }) => {
                     onChange={handleChange}
                   >
                     <div className='color purple'>
-                      <i className='ri-check-line' />
+                      <Icon name='check-line' />
                     </div>
                   </Radio>
                   <Radio
@@ -149,7 +150,7 @@ export const SentimentSettings: FC<Props> = ({ site }) => {
                     onChange={handleChange}
                   >
                     <div className='color gray'>
-                      <i className='ri-check-line' />
+                      <Icon name='check-line' />
                     </div>
                   </Radio>
 

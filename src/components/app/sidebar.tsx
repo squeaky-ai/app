@@ -4,6 +4,7 @@ import Link from 'next/link';
 import classnames from 'classnames';
 import { uniq, without } from 'lodash';
 import { useRouter } from 'next/router';
+import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { Divider } from 'components/divider';
 import { SidebarAccount } from 'components/app/sidebar-account';
@@ -103,7 +104,7 @@ export const Sidebar: FC = () => {
           <div className='nav left'>
             <Link href='/sites'>
               <a className={classnames('link', { active: path.startsWith('/sites') })} data-label='All Sites'>
-                <i className='ri-window-line' />
+                <Icon name='window-line' />
                 <span>All Sites</span>
               </a>
             </Link>
@@ -111,33 +112,33 @@ export const Sidebar: FC = () => {
           <div className='nav right'>
             <Link href={`/sites/${siteId}/overview`}>
               <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/overview`) })} data-label='Overview'>
-                <i className='ri-dashboard-3-line' />
+                <Icon name='dashboard-3-line' />
                 <span>Overview</span>
               </a>
             </Link>
             <Divider />
             <Link href={`/sites/${siteId}/visitors`}>
               <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/visitors`) })} data-label='Visitors'>
-                <i className='ri-group-line' />
+                <Icon name='group-line' />
                 <span>Visitors</span>
               </a>
             </Link>
             <Link href={`/sites/${siteId}/recordings`}>
               <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/recordings`) })} data-label='Recordings'>
-                <i className='ri-vidicon-line' />
+                <Icon name='vidicon-line' />
                 <span>Recordings</span>
               </a>
             </Link>
             <Divider />
             <Link href={`/sites/${siteId}/analytics`}>
               <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/analytics`) })} data-label='Analytics'>
-                <i className='ri-line-chart-line' />
+                <Icon name='line-chart-line' />
                 <span>Analytics</span>
               </a>
             </Link>
             <SidebarNested 
               name='Feedback'
-              icon='ri-user-voice-line'
+              icon='user-voice-line'
               collapse={() => collapse('feedback')}
               expand={() => expand('feedback')}
               expanded={expanded.includes('feedback')}
@@ -155,14 +156,14 @@ export const Sidebar: FC = () => {
             </SidebarNested>
             <Link href={`/sites/${siteId}/heatmaps`}>
               <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/heatmaps`) })} data-label='Heatmaps'>
-                <i className='ri-fire-line' />
+                <Icon name='fire-line' />
                 <span>Heatmaps</span>
               </a>
             </Link>
             <Divider />
             <SidebarNested 
               name='Settings'
-              icon='ri-settings-3-line'
+              icon='settings-3-line'
               collapse={() => collapse('settings')}
               expand={() => expand('settings')}
               expanded={expanded.includes('settings')}
@@ -187,7 +188,7 @@ export const Sidebar: FC = () => {
         </div>
       </menu>
       <Button className='menu-toggle' onClick={toggleOpen}>
-        {open ? <i className='ri-close-line' /> : <i className='ri-menu-line' />}
+        {open ? <Icon name='close-line' /> : <Icon name='menu-line' />}
       </Button>
       <footer>
         <SidebarAccount path={path} />

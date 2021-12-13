@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { TagsDate } from 'components/sites/filters/recordings/tags-date';
 import { TagsDuration } from 'components/sites/filters/recordings/tags-duration';
@@ -99,7 +100,7 @@ export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
       )}
 
       <Button className='link clear-filters' onClick={clearFilters}>
-        <i className='ri-close-line' />
+        <Icon name='close-line' />
         Clear Filters
       </Button>
     </div>

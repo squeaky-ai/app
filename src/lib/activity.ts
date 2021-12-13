@@ -76,17 +76,17 @@ export function getMouseInteractionIcon (type: MouseInteractions): string {
     case MouseInteractions.MouseDown:
     case MouseInteractions.DblClick:
     case MouseInteractions.Click:
-      return 'ri-cursor-line';
+      return 'cursor-line';
     case MouseInteractions.Focus:
     case MouseInteractions.Blur:
-      return 'ri-input-method-line';
+      return 'input-method-line';
     case MouseInteractions.TouchEnd:
     case MouseInteractions.TouchStart:
     case MouseInteractions.TouchMove_Departed:
-      return 'ri-drag-drop-line';
+      return 'drag-drop-line';
     case MouseInteractions.ContextMenu:
-      return 'ri-menu-line';
+      return 'menu-line';
     default:
-      return 'ri-question-line';
+      return 'question-line';
   }
 };

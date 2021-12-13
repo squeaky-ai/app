@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import Link from 'next/link';
 import classnames from 'classnames';
 import { useRouter } from 'next/router';
+import { Icon } from 'components/icon';
 import { Pill } from 'components/pill';
 import { Button } from 'components/button';
 import { Device } from 'components/device';
@@ -72,7 +73,7 @@ export const VisitorsRecordingsItem: FC<Props> = ({ recording }) => {
           <Tooltip
             button={
               <span onClick={bookmarkRecording} className={classnames('bookmark', { active: recording.bookmarked })}>
-              <i className='ri-bookmark-3-line' />
+              <Icon name='bookmark-3-line' />
             </span>
             }
           >
@@ -131,9 +132,9 @@ export const VisitorsRecordingsItem: FC<Props> = ({ recording }) => {
           </Tooltip>
         </Cell>
         <Cell>
-          <Dropdown portal button={<i className='ri-more-2-fill' />} buttonClassName='options'>
+          <Dropdown portal button={<Icon name='more-2-fill' />} buttonClassName='options'>
             <Button onClick={openModal}>
-              <i className='ri-delete-bin-line' /> Delete
+              <Icon name='delete-bin-line' /> Delete
             </Button>
           </Dropdown>
         </Cell>
@@ -144,7 +145,7 @@ export const VisitorsRecordingsItem: FC<Props> = ({ recording }) => {
           <ModalHeader>
             <p id='delete-recording-title'><b>Delete Recording</b></p>
             <Button type='button' onClick={closeModal}>
-              <i className='ri-close-line' />
+              <Icon name='close-line' />
             </Button>
           </ModalHeader>
           <ModalContents>

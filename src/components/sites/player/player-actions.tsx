@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import Link from 'next/link';
 import classnames from 'classnames';
 import { useRouter } from 'next/router';
+import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { Checkbox } from 'components/checkbox';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
@@ -79,19 +80,19 @@ export const PlayerActions: FC<Props> = ({ site, recording }) => {
     <>
       <div className='recording-actions'>
         <Button onClick={handleBookmark} className={classnames('boookmark', { active: recording?.bookmarked })}>
-          <i className='ri-bookmark-3-line' />
+          <Icon name='bookmark-3-line' />
         </Button>
         <RecordingsShare
-          button={<i className='ri-share-line' />}
+          button={<Icon name='share-line' />}
           site={site}
           recordingId={recording?.id}
         />
         <Button onClick={handleDeleteClick}>
-          <i className='ri-delete-bin-line' />
+          <Icon name='delete-bin-line' />
         </Button>
         <Link href={`/sites/${site.id}/recordings`}>
           <a className='button close'>
-            <i className='ri-close-line' />
+            <Icon name='close-line' />
           </a>
         </Link>
       </div>
@@ -101,7 +102,7 @@ export const PlayerActions: FC<Props> = ({ site, recording }) => {
           <ModalHeader>
             <p id='delete-recording-title'><b>Delete Recording</b></p>
             <Button type='button' onClick={closeModal}>
-              <i className='ri-close-line' />
+              <Icon name='close-line' />
             </Button>
           </ModalHeader>
           <ModalContents>

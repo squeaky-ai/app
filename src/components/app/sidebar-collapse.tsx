@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 
 interface Props {
@@ -9,6 +10,6 @@ interface Props {
 
 export const SidebarCollapse: FC<Props> = ({ open, toggleOpen }) => (
   <Button className='link' onClick={toggleOpen} data-label={open ? 'Collapse' : 'Expand'}>
-    <i className={`ri-arrow-${open ? 'left' : 'right'}-line`} />
+    <Icon name={`arrow-${open ? 'left' : 'right'}-line`} />
   </Button>
 );

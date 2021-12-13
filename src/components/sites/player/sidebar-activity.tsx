@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import type { Replayer } from 'rrweb';
 import classnames from 'classnames';
 import { last } from 'lodash';
+import { Icon } from 'components/icon';
 import { EventType, IncrementalSource } from 'rrweb';
 import { ActivityTimestamp } from 'components/sites/player/activity-timestamp';
 import { SidebarActivityVisibility } from 'components/sites/player/sidebar-activity-visibility';
@@ -69,7 +70,7 @@ export const SidebarActivity: FC<Props> = ({ recording, replayer }) => {
           <li className={classnames('icon', { hidden: !active.includes(getActivityName(item)) })} key={`${item.timestamp}_${index}`}>
             {isPageViewEvent(item) && (
               <>
-                <i className='ri-compass-discover-line' />
+                <Icon name='compass-discover-line' />
                 <p className='title'>
                   Page view <ActivityTimestamp timestamp={item.timestamp} offset={startedAt} replayer={replayer} />
                 </p>
@@ -79,7 +80,7 @@ export const SidebarActivity: FC<Props> = ({ recording, replayer }) => {
 
             {isScrollEvent(item) && (
               <>
-                <i className='ri-mouse-line' />
+                <Icon name='mouse-line' />
                 <p className='title'>
                   Scrolled <ActivityTimestamp timestamp={item.timestamp} offset={startedAt} replayer={replayer} />
                 </p>
@@ -88,7 +89,7 @@ export const SidebarActivity: FC<Props> = ({ recording, replayer }) => {
 
             {item.type === EventType.IncrementalSnapshot && item.data.source === IncrementalSource.MouseInteraction && (
               <>
-                <i className={getMouseInteractionIcon(item.data.type)} />
+                <Icon name={getMouseInteractionIcon(item.data.type)} />
                 <p className='title'>
                   {getMouseInteractionLabel(item.data.type)} <ActivityTimestamp timestamp={item.timestamp} offset={startedAt} replayer={replayer} />
                 </p>

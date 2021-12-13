@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
+import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { Spinner } from 'components/spinner';
 import { Container } from 'components/container';
@@ -46,15 +47,15 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
         <div className='right'>
           <div className='button-group'>
             <Button className={classnames(device === HeatmapsDevice.Desktop ? 'primary' : 'blank')} onClick={() => setDevice(HeatmapsDevice.Desktop)}>
-              <i className='ri-computer-line' />
+              <Icon name='computer-line' />
               {heatmaps.desktopCount}
             </Button>
             <Button className={classnames(device === HeatmapsDevice.Tablet ? 'primary' : 'blank')} onClick={() => setDevice(HeatmapsDevice.Tablet)}>
-              <i className='ri-tablet-line' />
+              <Icon name='tablet-line' />
               {heatmaps.tabletCount}
             </Button>
             <Button className={classnames(device === HeatmapsDevice.Mobile ? 'primary' : 'blank')} onClick={() => setDevice(HeatmapsDevice.Mobile)}>
-              <i className='ri-smartphone-line' />
+              <Icon name='smartphone-line' />
               {heatmaps.mobileCount}
             </Button>
           </div>

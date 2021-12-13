@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import { useRouter } from 'next/router';
+import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { teamLeave } from 'lib/api/graphql';
@@ -43,7 +44,7 @@ export const LeaveTeam: FC<Props> = ({ site }) => {
           <ModalHeader>
             <p id='leave-team-title'><b>Leave site</b></p>
             <Button type='button' onClick={closeModal}>
-              <i className='ri-close-line' />
+              <Icon name='close-line' />
             </Button>
           </ModalHeader>
           <ModalContents>

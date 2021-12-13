@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import Image from 'next/image';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
+import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { Label } from 'components/label';
 import { Input } from 'components/input';
@@ -75,7 +76,7 @@ export const SidebarFeedback: FC = () => {
                 <ModalHeader>
                   <p id='feedback-title'><b>Feedback</b></p>
                   <Button type='button' onClick={closeModal}>
-                    <i className='ri-close-line' />
+                    <Icon name='close-line' />
                   </Button>
                 </ModalHeader>
                 <ModalContents>

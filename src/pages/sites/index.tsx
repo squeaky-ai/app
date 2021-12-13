@@ -2,6 +2,7 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
+import { Icon } from 'components/icon';
 import { Avatar } from 'components/sites/avatar';
 import { Main } from 'components/main';
 import { Illustration } from 'components/illustration';
@@ -36,7 +37,7 @@ const Sites: NextPage<ServerSideProps> = () => {
             <p>It’s time to discover what your users are really getting up to! Add your first site by clicking the button below.</p>
             <CreateSite className='button primary icon'>
               Add Site
-              <i className='ri-arrow-right-line' />
+              <Icon name='arrow-right-line' />
             </CreateSite>
           </div>
         </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
 import classnames from 'classnames';
+import { Icon } from 'components/icon';
 import { OWNER } from 'data/teams/constants';
 import { MAX_DAYS_BEFORE_POTENTIAL_ISSUE } from 'data/sites/constants';
 import type { Site } from 'types/graphql';
@@ -30,9 +31,9 @@ export const SettingsTabs: FC<Props> = ({ site, page, member }) => {
               Tracking code
               {site.verifiedAt 
                 ? site.daysSinceLastRecording >= MAX_DAYS_BEFORE_POTENTIAL_ISSUE
-                  ? <span className='badge warning'><i className='ri-error-warning-line' /></span> 
-                  : <span className='badge verified'><i className='ri-checkbox-circle-line' /></span> 
-                : <span className='badge unverified'><i className='ri-error-warning-line' /></span>}
+                  ? <span className='badge warning'><Icon name='error-warning-line' /></span> 
+                  : <span className='badge verified'><Icon name='checkbox-circle-line' /></span> 
+                : <span className='badge unverified'><Icon name='error-warning-line' /></span>}
             </a>
           </Link>
         </li>

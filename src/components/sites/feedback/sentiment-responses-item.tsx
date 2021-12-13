@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { Icon } from 'components/icon';
 import { Row, Cell } from 'components/table';
 import { Device } from 'components/device';
 import { Browser } from 'components/browser';
@@ -43,7 +44,7 @@ export const SentimentResponsesItem: FC<Props> = ({ response, style }) => {
         </Link>
       </Cell>
       <Cell>
-        <i className='ri-play-fill play' />
+        <Icon name='play-fill play' />
         <Link href={`/sites/${router.query.site_id}/recordings/${response.recordingId}`}>
           <a>
             {response.sessionId}
@@ -74,7 +75,7 @@ export const SentimentResponsesItem: FC<Props> = ({ response, style }) => {
         </Tooltip>
       </Cell>
       <Cell>
-        <Dropdown portal button={<i className='ri-more-2-fill' />} buttonClassName='options' ref={rowActionsRef}>
+        <Dropdown portal button={<Icon name='more-2-fill' />} buttonClassName='options' ref={rowActionsRef}>
           <SentimentResponsesDelete 
             response={response}
             onClose={onRowActionClose}

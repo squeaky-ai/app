@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import { Icon } from 'components/icon';
 import { Dropdown } from 'components/dropdown';
 import { Tooltip } from 'components/tooltip';
 import { SettingsTagsDelete } from 'components/sites/settings/settings-tags-delete';
@@ -27,13 +28,13 @@ export const SettingsTagsBulkActions: FC<Props> = ({ site, selected, setSelected
   return (
     <div className='bulk-actions'>
       {selected.length === 0 && (
-        <Tooltip className='dropdown' portalClassName='bulk-action-hint' button={<><i className='ri-checkbox-multiple-line' /> Bulk Actions <i className='arrow ri-arrow-drop-down-line' /></>}>
+        <Tooltip className='dropdown' portalClassName='bulk-action-hint' button={<><Icon name='checkbox-multiple-line' /> Bulk Actions <Icon className='arrow' name='arrow-drop-down-line' /></>}>
           Please select multiple rows to use bulk actions
         </Tooltip>
       )}
 
       {selected.length > 0 && (
-        <Dropdown direction='down' button={<><i className='ri-checkbox-multiple-line' /> Bulk Actions</>}>
+        <Dropdown direction='down' button={<><Icon name='checkbox-multiple-line' /> Bulk Actions</>}>
           <SettingsTagsDelete tags={selected} siteId={site.id} onCompleted={onCompleted} />
         </Dropdown>
       )}

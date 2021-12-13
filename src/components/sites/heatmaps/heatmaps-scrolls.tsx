@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import { Icon } from 'components/icon';
 import { getScrollMapData } from 'lib/heatmaps';
 import type { HeatmapsItem } from 'types/graphql';
 
@@ -14,7 +15,7 @@ export const HeatmapsScrolls: FC<Props> = ({ items }) => {
     <div className='scrolls-table'>
       {items.length === 0 && (
         <div className='empty'>
-          <i className='ri-time-line' />
+          <Icon name='time-line' />
           <p>No data available</p>
         </div>
       )}

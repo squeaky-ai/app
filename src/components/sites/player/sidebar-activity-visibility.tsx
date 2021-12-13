@@ -2,6 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
+import { Icon } from 'components/icon';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { Button } from 'components/button';
 import { Checkbox } from 'components/checkbox';
@@ -32,7 +33,7 @@ export const SidebarActivityVisibility: FC<Props> = ({ active, setActive }) => {
   return (
     <>
       <Button className='secondary activity-visibility' onClick={openModal}>
-        <i className='ri-eye-line' />
+        <Icon name='eye-line' />
         Show
         <span>{active.length}/{ACTIVITIES.length}</span>
       </Button>
@@ -61,7 +62,7 @@ export const SidebarActivityVisibility: FC<Props> = ({ active, setActive }) => {
                 <ModalHeader>
                   <p id='sidebar-activity-visibility-title'><b>Activity Visibility</b></p>
                   <Button type='button' onClick={closeModal}>
-                    <i className='ri-close-line' />
+                    <Icon name='close-line' />
                   </Button>
                 </ModalHeader>
                 <ModalContents>

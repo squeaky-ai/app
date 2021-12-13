@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import { Icon } from 'components/icon';
 import { Checkbox } from 'components/checkbox';
 import { Dropdown } from 'components/dropdown';
 import { COLUMNS } from 'data/recordings/constants';
@@ -29,7 +30,7 @@ export const RecordingsColumns: FC<Props> = ({ columns, setColumns }) => {
   };
 
   return (
-    <Dropdown className='columns' button={<><i className='ri-layout-column-line' /> Columns</>}>
+    <Dropdown className='columns' button={<><Icon name='layout-column-line' /> Columns</>}>
       <form className='filters-columns'>
         {COLUMNS.map(column => 
           <Checkbox 

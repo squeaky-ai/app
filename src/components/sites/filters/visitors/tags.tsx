@@ -1,8 +1,8 @@
 import React from 'react';
 import type { FC } from 'react';
+import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { TagsStatus } from 'components/sites/filters/common/tags-status';
-
 import { TagsDate } from 'components/sites/filters/visitors/tags-date';
 import { TagsLanguages } from 'components/sites/filters/common/tags-languages';
 import { TagsRecordings } from 'components/sites/filters/visitors/tags-recordings';
@@ -55,7 +55,7 @@ export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
       )}
 
       <Button className='link clear-filters' onClick={clearFilters}>
-        <i className='ri-close-line' />
+        <Icon name='close-line' />
         Clear Filters
       </Button>
     </div>

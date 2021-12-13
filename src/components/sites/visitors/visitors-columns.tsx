@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import { Icon } from 'components/icon';
 import { Checkbox } from 'components/checkbox';
 import { Dropdown } from 'components/dropdown';
 import { COLUMNS } from 'data/visitors/constants';
@@ -34,14 +35,14 @@ export const VisitorsColumns: FC<Props> = ({ columns, setColumns }) => {
       case 'Name':
       case 'Email':
         // Append the linked icon for the linked labels
-        return <>{label}<i className='link ri-link-m' /></>
+        return <>{label}<Icon className='link' name='link-m' /></>
       default:
         return label;
     }
   };
 
   return (
-    <Dropdown className='columns' button={<><i className='ri-layout-column-line' /> Columns</>}>
+    <Dropdown className='columns' button={<><Icon name='layout-column-line' /> Columns</>}>
       <form className='filters-columns'>
         {COLUMNS.map(column => 
           <Checkbox 

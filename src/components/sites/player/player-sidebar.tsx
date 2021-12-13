@@ -2,6 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import type { Replayer } from 'rrweb';
 import classnames from 'classnames';
+import { Icon } from 'components/icon';
 import { PlayerTab } from 'data/sites/enums';
 import { Label } from 'components/label';
 import { Button } from 'components/button';
@@ -39,7 +40,7 @@ export const PlayerSidebar: FC<Props> = ({ state, site, replayer, recording, dis
         <div className={classnames('sidebar info', { active: state.activeTab === PlayerTab.INFO })}>
           <Label className='heading'>
             Session Info 
-            <Button onClick={handleClose}><i className='ri-close-line' /></Button>
+            <Button onClick={handleClose}><Icon name='close-line' /></Button>
           </Label>
           <div className='contents'>
             <SidebarInfo site={site} recording={recording} setActiveTab={setActiveTab} />
@@ -48,7 +49,7 @@ export const PlayerSidebar: FC<Props> = ({ state, site, replayer, recording, dis
         <div className={classnames('sidebar activity', { active: state.activeTab === PlayerTab.ACTIVITY })}>
           <Label className='heading'>
             Activity 
-            <Button onClick={handleClose}><i className='ri-close-line' /></Button>
+            <Button onClick={handleClose}><Icon name='close-line' /></Button>
           </Label>
           <div className='contents'>
             <SidebarActivity recording={recording} replayer={replayer} />
@@ -57,7 +58,7 @@ export const PlayerSidebar: FC<Props> = ({ state, site, replayer, recording, dis
         <div className={classnames('sidebar pages', { active: state.activeTab === PlayerTab.PAGES })}>
           <Label className='heading'>
             Pages 
-            <Button onClick={handleClose}><i className='ri-close-line' /></Button>
+            <Button onClick={handleClose}><Icon name='close-line' /></Button>
           </Label>
           <div className='contents'>
             <SidebarPages recording={recording} replayer={replayer} />
@@ -66,7 +67,7 @@ export const PlayerSidebar: FC<Props> = ({ state, site, replayer, recording, dis
         <div className={classnames('sidebar notes', { active: state.activeTab === PlayerTab.NOTES })}>
           <Label className='heading'>
             Notes 
-            <Button onClick={handleClose}><i className='ri-close-line' /></Button>
+            <Button onClick={handleClose}><Icon name='close-line' /></Button>
           </Label>
           <div className='contents'>
             <SidebarNotes recording={recording} replayer={replayer} />
@@ -75,7 +76,7 @@ export const PlayerSidebar: FC<Props> = ({ state, site, replayer, recording, dis
         <div className={classnames('sidebar tags', { active: state.activeTab === PlayerTab.TAGS })}>
           <Label className='heading'>
             Tags 
-            <Button onClick={handleClose}><i className='ri-close-line' /></Button>
+            <Button onClick={handleClose}><Icon name='close-line' /></Button>
           </Label>
           <div className='contents'>
             <SidebarTags recording={recording} />

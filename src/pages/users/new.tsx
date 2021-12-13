@@ -4,6 +4,7 @@ import Head from 'next/head';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { useRouter } from 'next/router';
+import { Icon } from 'components/icon';
 import { Container } from 'components/container';
 import { Illustration } from 'components/illustration';
 import { Label } from 'components/label';
@@ -39,7 +40,7 @@ const UsersNew: NextPage<ServerSideProps> = ({ user }) => {
         <h3 className='title'>
           Account Settings
           <Button className='button signout link' onClick={handleSignOut}>
-            <i className='ri-logout-box-line' />
+            <Icon name='logout-box-line' />
             Log out
           </Button>
         </h3>

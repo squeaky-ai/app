@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import Link from 'next/link';
 import classnames from 'classnames';
 import { useRouter } from 'next/router';
+import { Icon } from 'components/icon';
 import { Pill } from 'components/pill';
 import { Checkbox } from 'components/checkbox';
 import { Tooltip } from 'components/tooltip';
@@ -72,7 +73,7 @@ export const RecordingsItem: FC<Props> = ({ site, recording, style, selected, se
         <Tooltip
           button={
             <span onClick={bookmarkRecording} className={classnames('bookmark', { active: recording.bookmarked })}>
-            <i className='ri-bookmark-3-line' />
+            <Icon name='bookmark-3-line' />
           </span>
           }
         >
@@ -134,14 +135,14 @@ export const RecordingsItem: FC<Props> = ({ site, recording, style, selected, se
         </Tooltip>
       </Cell>
       <Cell>
-        <Dropdown portal button={<i className='ri-more-2-fill' />} buttonClassName='options' ref={rowActionsRef}>
+        <Dropdown portal button={<Icon name='more-2-fill' />} buttonClassName='options' ref={rowActionsRef}>
           <RecordingDelete 
             site={site} 
             recordingId={recording.id}
             onClose={onRowActionClose}
           />
           <RecordingsShare
-            button={<><i className='ri-share-line' /> Share</>}
+            button={<><Icon name='share-line' /> Share</>}
             site={site}
             recordingId={recording.id}
             onClose={onRowActionClose}

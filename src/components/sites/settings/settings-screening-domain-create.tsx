@@ -2,6 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
+import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { Input } from 'components/input';
 import { Label } from 'components/label';
@@ -71,7 +72,7 @@ export const SettingsScreeningDomainCreate: FC<Props> = ({ siteId }) => {
                 <ModalHeader>
                   <p id='domain-create-title'><b>Domain Screening</b></p>
                   <Button type='button' onClick={closeModal}>
-                    <i className='ri-close-line' />
+                    <Icon name='close-line' />
                   </Button>
                 </ModalHeader>
                 <ModalContents>

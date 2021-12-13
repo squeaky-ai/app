@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
+import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -17,7 +18,7 @@ export const Access: FC<Props> = ({ className, roles }) => {
 
   return (
     <Button className={classnames('access', className, { open })} onClick={() => setOpen(!open)}>
-      <i className='ri-lock-line' />
+      <Icon name='lock-line' />
       <span className='description'>
         Visible to {roles.map(r => roleNames[r]).join(' & ')}
        </span>

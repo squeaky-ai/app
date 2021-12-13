@@ -1,15 +1,15 @@
 import React from 'react';
 import type { FC } from 'react';
-import classnames from 'classnames';
+import { Icon } from 'components/icon';
 
 interface Props {
   deviceType: string;
 }
 
 export const deviceIcon = (deviceType: string) => deviceType === 'Computer'
-  ? 'ri-computer-line' 
-  : 'ri-smartphone-line';
+  ? 'computer-line' 
+  : 'smartphone-line';
 
 export const Device: FC<Props> = ({ deviceType }) => (
-  <i className={classnames('device', deviceIcon(deviceType))} />
+  <Icon name={deviceIcon(deviceType)} className='device' />
 );

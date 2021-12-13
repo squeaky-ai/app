@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
+import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 
 interface Props {
@@ -26,9 +27,9 @@ export const SidebarNested: FC<Props> = ({
   return (
     <div className={classnames('link nested', { open: expanded })} data-label={name}>
       <Button onClick={toggleExpanded}>
-        <i className={icon} />
+        <Icon name={icon} />
         <span>{name}</span>
-        <i className='arrow ri-arrow-drop-down-line' />
+        <Icon className='arrow' name='arrow-drop-down-line' />
       </Button>
       <div className='items'>
         {children}

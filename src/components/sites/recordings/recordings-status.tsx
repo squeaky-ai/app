@@ -2,6 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
+import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { Radio } from 'components/radio';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
@@ -72,7 +73,7 @@ export const RecordingsStatus: FC<Props> = ({ recordingIds, siteId, onCompleted,
                 <ModalHeader>
                   <p id='update-recordings-title'><b>Update Statuses</b></p>
                   <Button type='button' onClick={closeModal}>
-                    <i className='ri-close-line' />
+                    <Icon name='close-line' />
                   </Button>
                 </ModalHeader>
                 <ModalContents>

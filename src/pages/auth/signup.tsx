@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import { gql, useLazyQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { Formik } from 'formik';
+import { Icon } from 'components/icon';
 import { Logo } from 'components/logo';
 import { Container } from 'components/container';
 import { Card } from 'components/card';
@@ -196,7 +197,7 @@ const Signup: NextPage<ServerSideProps> = () => {
               {pageView === PageView.VERIFY && (
                 <div className='verify'>
                   <div className='check'>
-                    <i className='ri-check-line' />
+                    <Icon name='check-line' />
                   </div>
                   <h4>Sign Up Complete</h4>
                   <p>To log in to your account, please open the verification email sent to <b>{email}</b> and click the link provided.</p>
@@ -217,7 +218,7 @@ const Signup: NextPage<ServerSideProps> = () => {
               <li><span>4</span>Walk in your customers footsteps</li>
             </ol>
             <div className='highlight'>
-              <i className='ri-check-line' />
+              <Icon name='check-line' />
               <p>No credit card or technical skills required</p>
             </div>
           </aside>

@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import classnames from 'classnames';
 import Image from 'next/image';
 import { range } from 'lodash';
+import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { Label } from 'components/label';
 import { TextArea } from 'components/textarea';
@@ -58,7 +59,7 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
   return (
     <>
       <Button type='button' className='icon secondary' onClick={toggleShow}>
-        <i className='ri-eye-line' />
+        <Icon name='eye-line' />
         {show ? 'Hide' : 'Preview'}
       </Button>
 
@@ -66,7 +67,7 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
         <div ref={ref} className={classnames('nps-preview', { boxed: feedback.npsLayout === 'boxed' })}>
           <div className='nps-wrapper'>
             <Button type='button' className='close' onClick={toggleShow}>
-              <i className='ri-close-line' />
+              <Icon name='close-line' />
             </Button>
 
             {page < 2 && (
@@ -129,7 +130,7 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
 
             {page === 2 && (
               <div className='page-2'>
-                <i className='ri-checkbox-circle-line' />
+                <Icon name='checkbox-circle-line' />
                 <h4>Feedback sent</h4>
                 <p>Thank you for sharing your feedback and helping to make our service better.</p>
                 <Button type='button' className='secondary' onClick={handleClose}>

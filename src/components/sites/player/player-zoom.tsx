@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import type { PlayerState, Action } from 'types/player';
 
@@ -30,11 +31,11 @@ export const PlayerZoom: FC<Props> = ({ state, dispatch }) => {
   return (
     <>
       <Button className='control' onClick={handleZoomOut} disabled={state.zoom === min}>
-        <i className='ri-zoom-out-line' />
+        <Icon name='zoom-out-line' />
       </Button>
       <p className='zoom-level'>{Math.round(state.zoom * 100)}%</p>
       <Button className='control' onClick={handleZoomIn} disabled={state.zoom === max}>
-        <i className='ri-zoom-in-line' />
+        <Icon name='zoom-in-line' />
       </Button>
     </>
   );

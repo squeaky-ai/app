@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { tagDelete } from 'lib/api/graphql';
@@ -45,7 +46,7 @@ export const SettingsTagDelete: FC<Props> = ({ tag, siteId }) => {
           <ModalHeader>
             <p id='delete-tag-title'><b>Delete Tag</b></p>
             <Button type='button' onClick={closeModal}>
-              <i className='ri-close-line' />
+              <Icon name='close-line' />
             </Button>
           </ModalHeader>
           <ModalContents>

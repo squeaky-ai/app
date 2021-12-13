@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
+import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { PlayerTab } from 'data/sites/enums';
 import type { PlayerState, Action } from 'types/player';
@@ -13,27 +14,27 @@ interface Props {
 const tabs = [
   {
     key: 'info',
-    icon: 'ri-information-line',
+    icon: 'information-line',
     name: PlayerTab.INFO
   },
   {
     key: 'activity',
-    icon: 'ri-time-line',
+    icon: 'time-line',
     name: PlayerTab.ACTIVITY
   },
   {
     key: 'pages',
-    icon: 'ri-pages-line',
+    icon: 'pages-line',
     name: PlayerTab.PAGES
   },
   {
     key: 'notes',
-    icon: 'ri-sticky-note-line',
+    icon: 'sticky-note-line',
     name: PlayerTab.NOTES
   },
   {
     key: 'tags',
-    icon: 'ri-price-tag-3-line',
+    icon: 'price-tag-3-line',
     name: PlayerTab.TAGS
   },
 ];
@@ -48,7 +49,7 @@ export const PlayerTabs: FC<Props> = ({ state, dispatch }) => {
     <>
       {tabs.map(tab => (
         <Button key={tab.key} className={classnames('control', { active: state.activeTab === tab.name })} onClick={() => handleSetActive(tab.name)}>
-          <i className={tab.icon} />
+          <Icon name={tab.icon} />
         </Button>
       ))}
     </>

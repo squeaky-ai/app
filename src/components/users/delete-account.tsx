@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { Container } from 'components/container';
 import { Illustration } from 'components/illustration';
@@ -55,7 +56,7 @@ export const DeleteAccount: FC = () => {
           <ModalHeader>
             <p id='delete-account-title'><b>Delete account</b></p>
             <Button type='button' onClick={closeModal}>
-              <i className='ri-close-line' />
+              <Icon name='close-line' />
             </Button>
           </ModalHeader>
           <ModalContents>

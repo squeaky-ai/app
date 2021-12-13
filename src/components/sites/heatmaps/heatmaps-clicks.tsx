@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import { Icon } from 'components/icon';
 import { Tooltip } from 'components/tooltip';
 import { Pill } from 'components/pill';
 import { Sort } from 'components/sort';
@@ -22,7 +23,7 @@ export const HeatmapsClicks: FC<Props> = ({ items }) => {
     <div className='clicks-table'>
       {clicks.length === 0 && (
         <div className='empty'>
-          <i className='ri-time-line' />
+          <Icon name='time-line' />
           <p>No data available</p>
         </div>
       )}

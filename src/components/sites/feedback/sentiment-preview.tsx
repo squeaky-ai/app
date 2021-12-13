@@ -2,6 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import Image from 'next/image';
 import classnames from 'classnames';
+import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import type { Feedback } from 'types/graphql';
 import { TextArea } from 'components/textarea';
@@ -34,7 +35,7 @@ export const SentimentPreview: FC<Props> = ({ feedback }) => {
   return (
     <>
       <Button type='button' className='icon secondary' onClick={toggleShow}>
-        <i className='ri-eye-line' />
+        <Icon name='eye-line' />
         {show ? 'Hide' : 'Preview'}
       </Button>
 
@@ -50,7 +51,7 @@ export const SentimentPreview: FC<Props> = ({ feedback }) => {
           {open && (
             <div className='popout'>
               <Button type='button' className='close' onClick={toggleOpen}>
-                <i className='ri-close-line' />
+                <Icon name='close-line' />
               </Button>
 
               {[0, 1].includes(page) && (
@@ -108,7 +109,7 @@ export const SentimentPreview: FC<Props> = ({ feedback }) => {
 
               {[2].includes(page) && (
                 <div className='page-2'>
-                  <i className='ri-checkbox-circle-line' />
+                  <Icon name='checkbox-circle-line' />
                   <h4>Feedback sent</h4>
                   <p>Thank you for sharing your feedback and helping to make our service better.</p>
                   <Button type='button' className='secondary' onClick={toggleOpen}>

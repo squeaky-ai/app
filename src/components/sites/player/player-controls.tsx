@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import type { Replayer } from 'rrweb';
+import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { PlayerSpeed } from 'components/sites/player/player-speed';
 import { PlayerSlider } from 'components/sites/player/player-slider';
@@ -47,13 +48,13 @@ export const PlayerControls: FC<Props> = ({ state, replayer, recording, dispatch
   const PlayPauseIcon = () => {
     switch(state.status) {
       case PlayerStatus.PLAYING:
-        return <i className='ri-pause-fill' />;
+        return <Icon name='pause-fill' />;
       case PlayerStatus.PAUSED:
-        return <i className='ri-play-fill' />;
+        return <Icon name='play-fill' />;
       case PlayerStatus.LOADING:
         return <Spinner hideShowExtra />;
       case PlayerStatus.FINISHED:
-        return <i className='ri-play-line' />;
+        return <Icon name='play-line' />;
       default:
         return null;
     }

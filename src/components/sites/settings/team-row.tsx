@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import { useRouter } from 'next/router';
+import { Icon } from 'components/icon';
 import { Select, Option } from 'components/select';
 import { OWNER, INVITED, MEMBER } from 'data/teams/constants';
 import { CancelInvitation } from 'components/sites/settings/cancel-invitation';
@@ -119,7 +120,7 @@ export const TeamRow: FC<Props> = ({ user, site, team }) => {
           <ModalHeader>
             <p id='change-role-title'><b>Change role</b></p>
             <Button type='button' onClick={closeModal}>
-              <i className='ri-close-line' />
+              <Icon name='close-line' />
             </Button>
           </ModalHeader>
           <ModalContents>

@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { useRouter } from 'next/router';
+import { Icon } from 'components/icon';
 import { Label } from 'components/label';
 import { Input } from 'components/input';
 import { Button } from 'components/button';
@@ -94,7 +95,7 @@ export const CreateSite: FC<Props> = ({ children, className }) => {
                 <ModalHeader>
                   <p id='create-site-title'><b>Add Site</b></p>
                   <Button type='button' onClick={closeModal}>
-                    <i className='ri-close-line' />
+                    <Icon name='close-line' />
                   </Button>
                 </ModalHeader>
                 <ModalContents>

@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import Link from 'next/link';
 import classnames from 'classnames';
 import { useRouter } from 'next/router';
+import { Icon } from 'components/icon';
 import { Tooltip } from 'components/tooltip';
 import { visitorStarred } from 'lib/api/graphql';
 import type { Visitor } from 'types/graphql';
@@ -30,7 +31,7 @@ export const VisitorsStarred: FC<Props> = ({ site, link, visitor }) => {
       <Tooltip
         button={
           <span onClick={starVisitor} className={classnames('visitor-starred', { active: visitor.starred })}>
-            {visitor.starred ? <i className='star ri-star-fill' /> : <i className='star ri-star-line' />}
+            {visitor.starred ? <Icon className='star' name='star-fill' /> : <Icon className='star' name='star-line' />}
           </span>
         }
       >

@@ -2,6 +2,7 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import hljs from 'highlight.js';
+import { Icon } from 'components/icon';
 import { Logo } from 'components/logo';
 import { Container } from 'components/container';
 import { Code } from 'components/developers/code';
@@ -41,11 +42,11 @@ const Developers: NextPage<ServerSideProps> = () => {
               {
                 page: 'ruby',
                 name: 'Ruby on Rails',
-                icon: 'ri-vip-diamond-line',
+                icon: 'vip-diamond-line',
                 body: (
                   <>
                     <p className='filename'>
-                      <i className='ri-file-code-line' />
+                      <Icon name='file-code-line' />
                       app/views/layouts/application.html.erb
                     </p>
                     <Code lang='html'>
@@ -76,11 +77,11 @@ const Developers: NextPage<ServerSideProps> = () => {
               {
                 page: 'react',
                 name: 'React (Next.js)',
-                icon: 'ri-reactjs-line',
+                icon: 'reactjs-line',
                 body: (
                   <>
                     <p className='filename'>
-                      <i className='ri-file-code-line' />
+                      <Icon name='file-code-line' />
                       pages/_document.tsx
                     </p>
                     <Code lang='typescript'>
@@ -172,11 +173,11 @@ export default Document;`}
               {
                 page: 'ruby',
                 name: 'Ruby on Rails',
-                icon: 'ri-vip-diamond-line',
+                icon: 'vip-diamond-line',
                 body: (
                   <>
                     <p className='filename'>
-                      <i className='ri-file-code-line' />
+                      <Icon name='file-code-line' />
                       app/views/layouts/application.html.erb
                     </p>
                     <Code lang='html'>
@@ -203,11 +204,11 @@ export default Document;`}
               {
                 page: 'react',
                 name: 'React (Next.js)',
-                icon: 'ri-reactjs-line',
+                icon: 'reactjs-line',
                 body: (
                   <>
                     <p className='filename'>
-                      <i className='ri-file-code-line' />
+                      <Icon name='file-code-line' />
                       pages/_app.tsx
                     </p>
                     <Code lang='typescript'>

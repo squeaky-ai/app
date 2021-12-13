@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { useRouter } from 'next/router';
+import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { Label } from 'components/label';
 import { Input } from 'components/input';
@@ -123,7 +124,7 @@ export const SidebarNotes: FC<Props> = ({ recording, replayer }) => {
               <ModalHeader>
                 <p id='add-note-title'><b>Add Note</b></p>
                 <Button type='button' onClick={closeModal}>
-                  <i className='ri-close-line' />
+                  <Icon name='close-line' />
                 </Button>
               </ModalHeader>
               <ModalContents>
