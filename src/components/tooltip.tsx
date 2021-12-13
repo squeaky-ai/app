@@ -12,7 +12,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   fluid?: boolean;
 }
 
-export const Tooltip: FC<Props> = ({ button, fluid, buttonClassName, portalClassName, positionX, className, children }) => {
+export const Tooltip: FC<Props> = ({ button, fluid, buttonClassName, portalClassName, positionX, className, children, onClick }) => {
   const ref = React.useRef<HTMLDivElement>();
   const [open, setOpen] = React.useState(false);
 
@@ -34,7 +34,7 @@ export const Tooltip: FC<Props> = ({ button, fluid, buttonClassName, portalClass
   };
 
   return (
-    <div ref={ref} className={classnames('tooltip', className)}>
+    <div ref={ref} className={classnames('tooltip', className)} onClick={onClick}>
       <Button onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} className={buttonClassName}>
         {button}
       </Button>

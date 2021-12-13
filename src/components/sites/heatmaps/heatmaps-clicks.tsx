@@ -4,7 +4,7 @@ import { Icon } from 'components/icon';
 import { Tooltip } from 'components/tooltip';
 import { Pill } from 'components/pill';
 import { Sort } from 'components/sort';
-import { getClickMapData } from 'lib/heatmaps';
+import { ClickMapData, getClickMapData } from 'lib/heatmaps';
 import type { HeatmapsItem } from 'types/graphql';
 
 interface Props {
@@ -18,6 +18,16 @@ export const HeatmapsClicks: FC<Props> = ({ items }) => {
     ? a.count - b.count
     : b.count - a.count
   );
+
+  const scrollToView = (click: ClickMapData) => {
+    const iframe: HTMLIFrameElement = document.querySelector('#heatmaps-page-wrapper iframe');
+
+    if (!iframe) return;
+
+    const element = iframe.contentDocument.querySelector(click.selector);
+
+    element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
 
   return (
     <div className='clicks-table'>
@@ -45,7 +55,7 @@ export const HeatmapsClicks: FC<Props> = ({ items }) => {
             <ul>
               {clicks.map(click => (
                 <li key={click.selector} className='row'>
-                  <Tooltip button={click.selector} portalClassName='element-tooltip'>
+                  <Tooltip button={click.selector} portalClassName='element-tooltip' onClick={() => scrollToView(click)}>
                     {click.selector}
                   </Tooltip>
                   <p>

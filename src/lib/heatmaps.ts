@@ -11,7 +11,7 @@ interface ScrollMapData {
   color: HeatmapColor;
 }
 
-interface ClickMapData {
+export interface ClickMapData {
   selector: string;
   color: HeatmapColor;
   count: number;
@@ -79,16 +79,23 @@ export const showClickMaps = (doc: Document, items: HeatmapsItem[]) => {
   doc.querySelectorAll('.__squeaky_click_tag').forEach(d => d.remove());
 
   items.forEach(item => {
-    const elem = doc.querySelector<HTMLElement>(item.selector);
+    let elem = doc.querySelector<HTMLElement>(item.selector);
 
     if (!elem || ['html', 'html > body'].includes(item.selector)) return;
 
-    // Add a an outline to the clicked element
-    // and set it's position to relative if it
-    // isn't absolute or fixed
+    // These things don't have a innerHTML so the next
+    // best thing is to use the parent, even if it's
+    // not that accurate
+    if (['input', 'select'].includes(elem.tagName.toLowerCase())) {
+      elem = elem.parentElement;
+    }
+
+    // Add a an outline to the clicked element and set 
+    // it's position to relative if it isn't absolute 
+    // or fixed
     elem.style.cssText += `
-      outline: 1px dashed #707070; 
-      outline-offset: 2px; 
+      outline: 1px dashed #707070 !important; 
+      outline-offset: 2px !important;
       position: ${['absolute', 'fixed'].includes(elem.style.position) ? elem.style.position : 'relative'};
     `;
 
@@ -144,17 +151,5 @@ export const showScrollMaps = (doc: Document, items: HeatmapsItem[]) => {
     z-index: 99999999;
   `;
 
-  const indicator = document.createElement('div');
-  indicator.classList.add('__squeaky-scroll-indicator');
-  indicator.style.cssText = `
-    background: black;
-    height: 2px;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-  `;
-
   doc.body.appendChild(overlay);
-  doc.body.appendChild(indicator);
 };
