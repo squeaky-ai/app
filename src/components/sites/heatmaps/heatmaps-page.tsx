@@ -1,7 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
 import { Replayer } from 'rrweb';
-import { debounce } from 'lodash';
 import { Spinner } from 'components/spinner';
 import { ScrollIndicator } from 'components/sites/scroll-indicator';
 import { useRecording } from 'hooks/use-heatmaps';
@@ -132,17 +131,8 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items
   }, [type, items]);
 
   React.useEffect(() => {
-    // Watch for the replayer wrapper to resize and redraw
-    // when it does so that the stuff that's injected is
-    // always in the correct place
-    const container = document.getElementById('heatmaps-page-wrapper');
-    const observer = new ResizeObserver(debounce(() => draw(), 50));
-
-    observer.observe(container);
-
     return () => {
       replayer = null;
-      observer.unobserve(container);
     };
   }, []);
 

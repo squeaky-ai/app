@@ -75,58 +75,50 @@ export const getClickMapData = (items: HeatmapsItem[]): ClickMapData[] => {
 export const showClickMaps = (doc: Document, items: HeatmapsItem[]) => {
   const clickMapData = getClickMapData(items);
 
-  const style = document.createElement('style');
-  style.classList.add('__squeaky-click-map-style');
-  style.innerHTML = `
-    .__squeaky-click-tag {
-      background: white;
-      border: 1px solid #BFBFBF;
-      border-radius: 2px;
-      box-sizing: border-box;
-      box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
-      font-family: 'Poppins', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      padding: .15rem;
-      position: absolute;
-      transform: translateX(-100%);
-      z-index: 99999999;
-    }
-  `;
-  doc.head.appendChild(style);
+  // Remove any existing tags from the iframe
+  doc.querySelectorAll('.__squeaky_click_tag').forEach(d => d.remove());
 
   items.forEach(item => {
     const elem = doc.querySelector<HTMLElement>(item.selector);
 
     if (!elem || ['html', 'html > body'].includes(item.selector)) return;
 
-    elem.style.cssText += 'outline: 1px dashed #707070; outline-offset: 2px;';
-
-    const { left, width, top } = elem.getBoundingClientRect();
+    // Add a an outline to the clicked element
+    // and set it's position to relative if it
+    // isn't absolute or fixed
+    elem.style.cssText += `
+      outline: 1px dashed #707070; 
+      outline-offset: 2px; 
+      position: ${['absolute', 'fixed'].includes(elem.style.position) ? elem.style.position : 'relative'};
+    `;
 
     const click = clickMapData.find(c => c.selector === item.selector);
 
+    // Create an insert a tag into the clicked
+    // element that displays the click count
     const tag = document.createElement('div');
-    tag.classList.add('__squeaky-click-tag');
-    tag.innerHTML = click.count.toString();
+
+    tag.className = '__squeaky_click_tag';
+    tag.innerText = click.count.toString();
+
     tag.style.cssText = `
       background: ${click.color.background};
       border: 1px solid ${click.color.border};
       border-radius: 2px;
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 2px;
       box-sizing: border-box;
-      box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
       color: ${click.color.foreground};
-      font-family: 'Poppins', sans-serif;
       font-size: 12px;
       font-weight: 600;
-      left: ${left + width}px; 
+      display: block;
       padding: .15rem;
       position: absolute;
-      top: ${top}px;
-      transform: translateX(-100%);
-      z-index: 99999999;
+      right: 0;
+      top: 0;
+      z-index: 9999999;
     `;
-    doc.body.appendChild(tag);
+
+    elem.appendChild(tag);
   });
 };
 
