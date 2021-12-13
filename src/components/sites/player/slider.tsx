@@ -49,8 +49,8 @@ export const Slider: FC<Props> = ({ max, min, step, value, recording, onChange }
 
   return (
     <div className='slider'>
-      <div className='bar buffered' style={{ width: `${buffered * 100}%` }} />
-      <div className='bar progress' style={{ width: `${progress * 100}%` }} />
+      <div className='bar buffered' style={{ width: `${clamp(buffered * 100, 0, 100)}%` }} />
+      <div className='bar progress' style={{ width: `${clamp(progress * 100, 0, 100)}%` }} />
 
       <Input 
         type='range' 
