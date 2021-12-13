@@ -1239,7 +1239,7 @@ export type Visitor = {
   pagesPerSession: Scalars['Float'];
   recordings: Recordings;
   recordingsCount?: Maybe<VisitorsRecordingsCount>;
-  starred: Scalars['Boolean'];
+  starred?: Maybe<Scalars['Boolean']>;
   viewed?: Maybe<Scalars['Boolean']>;
   visitorId: Scalars['String'];
 };
