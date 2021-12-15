@@ -20,7 +20,7 @@ import { FeedbackSentimentResponseSort } from 'types/graphql';
 import type { Column } from 'types/common';
 
 export const Sentiment: FC = () => {
-  const [page, setPage] = React.useState<number>(0);
+  const [page, setPage] = React.useState<number>(1);
   const [size, setSize] = React.useState<number>(10);
   const [sort, setSort] = React.useState<FeedbackSentimentResponseSort>(FeedbackSentimentResponseSort.TimestampDesc);
   const [period, setPeriod] = React.useState<TimePeriod>('past_seven_days');

@@ -31,7 +31,7 @@ interface Props {
 }
 
 export const Visitors: FC<Props> = ({ site, columns, filters }) => {
-  const [page, setPage] = React.useState<number>(0);
+  const [page, setPage] = React.useState<number>(1);
   const [size, setSize] = React.useState<number>(25);
   const [sort, setSort] = React.useState<VisitorsSort>(VisitorsSort.FirstViewedAtDesc);
 
@@ -146,7 +146,7 @@ export const Visitors: FC<Props> = ({ site, columns, filters }) => {
       
       <div className='visitors-footer'>
         <Pagination 
-          currentPage={page + 1} 
+          currentPage={page} 
           pageSize={pagination.pageSize}
           total={pagination.total}
           setPage={setPage}

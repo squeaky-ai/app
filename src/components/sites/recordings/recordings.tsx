@@ -26,7 +26,7 @@ interface Props {
 }
 
 export const Recordings: FC<Props> = ({ site, filters, columns, selected, setSelected }) => {
-  const [page, setPage] = React.useState<number>(0);
+  const [page, setPage] = React.useState<number>(1);
   const [size, setSize] = React.useState<number>(25);
   const [sort, setSort] = React.useState<RecordingsSort>(RecordingsSort.ConnectedAtDesc);
 
@@ -98,12 +98,12 @@ export const Recordings: FC<Props> = ({ site, filters, columns, selected, setSel
       
       <div className='recordings-footer'>
         <Pagination 
-          currentPage={page + 1} 
+          currentPage={page}
           pageSize={pagination.pageSize}
           total={pagination.total}
           setPage={setPage}
         />
-        <PageSize 
+        <PageSize
           value={pagination.pageSize} 
           onChange={setSize}
           show={pagination.total > 25}

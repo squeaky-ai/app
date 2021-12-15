@@ -79,7 +79,7 @@ export const NpsResponses: FC<Props> = ({ page, sort, size, setPage, setSort, se
           </Table>
           <div className='nps-responses-footer'>
             <Pagination
-              currentPage={page + 1}
+              currentPage={page}
               pageSize={size}
               setPage={setPage}
               total={pagination.total}

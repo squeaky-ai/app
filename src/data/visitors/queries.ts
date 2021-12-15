@@ -10,7 +10,7 @@ export const GET_VISITORS_QUERY = gql`
           id
           visitorId
           viewed
-          recordingsCount {
+          recordingCount {
             total
           }
           firstViewedAt
@@ -48,7 +48,7 @@ export const GET_VISITOR_QUERY = gql`
         id
         visitorId
         viewed
-        recordingsCount {
+        recordingCount {
           total
           new
         }

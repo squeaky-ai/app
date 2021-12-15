@@ -1237,8 +1237,8 @@ export type Visitor = {
   pageViewsCount?: Maybe<VisitorsPagesCount>;
   pages: VisitorsPages;
   pagesPerSession: Scalars['Float'];
+  recordingCount?: Maybe<VisitorsRecordingCount>;
   recordings: Recordings;
-  recordingsCount?: Maybe<VisitorsRecordingsCount>;
   starred?: Maybe<Scalars['Boolean']>;
   viewed?: Maybe<Scalars['Boolean']>;
   visitorId: Scalars['String'];
@@ -1312,8 +1312,8 @@ export type VisitorsPagination = {
   total: Scalars['Int'];
 };
 
-export type VisitorsRecordingsCount = {
-  __typename?: 'VisitorsRecordingsCount';
+export type VisitorsRecordingCount = {
+  __typename?: 'VisitorsRecordingCount';
   new: Scalars['Int'];
   total: Scalars['Int'];
 };

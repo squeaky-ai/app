@@ -78,7 +78,7 @@ export const VisitorsRecording: FC<Props> = ({ visitor, page, sort, setPage, set
       )}
 
       <Pagination 
-        currentPage={page + 1} 
+        currentPage={page} 
         pageSize={pagination.pageSize}
         total={pagination.total}
         setPage={setPage}

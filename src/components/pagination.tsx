@@ -59,7 +59,7 @@ export const Pagination: FC<Props> = ({ currentPage, pageSize, total, setPage, s
   }
 
   const handlePageChange = (page: number) => {
-    setPage(page - 1);
+    setPage(page);
 
     if (scrollToTop) {
       setTimeout(() => {

@@ -13,12 +13,12 @@ interface Props {
 }
 
 export const AnalyticsPages: FC<Props> = ({ pages }) => {
-  const [page, setPage] = React.useState<number>(0);
+  const [page, setPage] = React.useState<number>(1);
 
   const total = sum(pages.map(p => p.count));
 
   const limit = 10;
-  const offset = page * limit;
+  const offset = (page - 1) * limit;
   const sorted = orderBy(pages, 'count', 'desc');
 
   return (
@@ -43,8 +43,8 @@ export const AnalyticsPages: FC<Props> = ({ pages }) => {
       </Table>
 
       <Pagination
-        currentPage={page + 1}
-        pageSize={10}
+        currentPage={page}
+        pageSize={limit}
         setPage={setPage}
         total={pages.length}
         scrollToTop={false}

@@ -76,7 +76,7 @@ export const SentimentResponses: FC<Props> = ({ page, sort, size, setPage, setSo
           </Table>
           <div className='sentiment-responses-footer'>
             <Pagination
-              currentPage={page + 1}
+              currentPage={page}
               pageSize={size}
               setPage={setPage}
               total={pagination.total}

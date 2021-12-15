@@ -76,8 +76,8 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
               <Card className='recordings'>
                 <h5>Recordings</h5>
                 <h2>
-                  {visitor.recordingsCount?.total || 0}
-                  <Pill type='tertiary'>{visitor.recordingsCount.new} New</Pill>
+                  {visitor.recordingCount?.total || 0}
+                  <Pill type='tertiary'>{visitor.recordingCount.new} New</Pill>
                 </h2>
               </Card>
               <Card className='page-views'>

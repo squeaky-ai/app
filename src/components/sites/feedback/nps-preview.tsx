@@ -17,7 +17,7 @@ interface Props {
 
 export const NpsPreview: FC<Props> = ({ feedback }) => {
   const ref = React.useRef<HTMLDivElement>(null);
-  const [page, setPage] = React.useState<number>(0);
+  const [page, setPage] = React.useState<number>(1);
   const [show, setShow] = React.useState<boolean>(false);
   const [contact, setContact] = React.useState<boolean>(false);
 
