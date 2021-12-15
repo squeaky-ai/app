@@ -27,7 +27,7 @@ const QUERY = gql`
 `;
 
 const LanguagesSchema = Yup.object().shape({
-  languages: Yup.array(),
+  locales: Yup.array(),
 });
 
 export const FiltersLanguage: FC<Props> = ({ value, onClose, onUpdate }) => {
@@ -52,11 +52,11 @@ export const FiltersLanguage: FC<Props> = ({ value, onClose, onUpdate }) => {
 
   return (
     <Formik
-      initialValues={{ languages: value }}
+      initialValues={{ locales: value }}
       validationSchema={LanguagesSchema}
       onSubmit={(values, { setSubmitting }) => {
         setSubmitting(false);
-        onUpdate(values.languages);
+        onUpdate(values.locales);
       }}
     >
       {({
@@ -75,14 +75,14 @@ export const FiltersLanguage: FC<Props> = ({ value, onClose, onUpdate }) => {
           </div>
           <div className='row languages'>
             {loading && <Spinner />}
-            {results.map(language => (
+            {results.map((language) => (
               <Checkbox 
                 key={language}
-                name='languages'
+                name='locales'
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={language}
-                checked={values.languages.includes(language)}
+                checked={values.locales.includes(language)}
               >
                 {language}
               </Checkbox>
