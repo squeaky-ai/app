@@ -95,6 +95,12 @@ export const Visitors: FC<Props> = ({ site, columns, filters }) => {
           </Cell>
           <Cell>
             Recordings
+            <Sort 
+              name='recordings' 
+              order={sort} 
+              onAsc={() => setSort(VisitorsSort.RecordingsAsc)} 
+              onDesc={() => setSort(VisitorsSort.RecordingsDesc)} 
+            />
           </Cell>
           <Cell>
             First visited
