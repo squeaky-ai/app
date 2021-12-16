@@ -75,9 +75,6 @@ export const getClickMapData = (items: HeatmapsItem[]): ClickMapData[] => {
 export const showClickMaps = (doc: Document, items: HeatmapsItem[]) => {
   const clickMapData = getClickMapData(items);
 
-  // Remove any existing tags from the iframe
-  doc.querySelectorAll('.__squeaky_click_tag').forEach(d => d.remove());
-
   items.forEach(item => {
     let elem = doc.querySelector<HTMLElement>(item.selector);
 
@@ -95,13 +92,8 @@ export const showClickMaps = (doc: Document, items: HeatmapsItem[]) => {
     // Add a an outline to the clicked element and set 
     // it's position to relative if it isn't absolute 
     // or fixed
-    elem.style.cssText += `
-      outline: 1px dashed #8249FB !important; 
-      outline-offset: 2px !important;
-      position: ${['absolute', 'fixed'].includes(currentElementPosition) ? currentElementPosition : 'relative'};
-    `;
-
-    elem.querySelector('.__squeaky_click_tag')?.remove();
+    elem.style.cssText += `position: ${['absolute', 'fixed'].includes(currentElementPosition) ? currentElementPosition : 'relative'};`;
+    elem.classList.add('__squeaky_outline');
 
     const click = clickMapData.find(c => c.selector === item.selector);
 
@@ -142,7 +134,7 @@ export const showScrollMaps = (doc: Document, items: HeatmapsItem[]) => {
   const scrollMapData = getScrollMapData(items);
 
   const overlay = document.createElement('div');
-  overlay.classList.add('__squeaky-scroll-overlay');
+  overlay.classList.add('__squeaky_scroll_overlay');
   overlay.style.cssText = `
     background: linear-gradient(180deg, ${scrollMapData.map(s => `${s.color.background} ${s.increment}%`).join(', ')});
     height: ${doc.body.scrollHeight}px;

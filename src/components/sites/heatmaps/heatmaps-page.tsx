@@ -65,8 +65,12 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items
   };
 
   const cleanup = (doc: Document) => {
-    const elems = doc.querySelectorAll('*[class^=__squeaky');
-    elems.forEach(elem => elem.remove());
+    // Remove any existing tags from the iframe
+    doc.querySelectorAll('.__squeaky_click_tag').forEach(d => d.remove());
+    // Remove any existing overlays from the iframe
+    doc.querySelectorAll('.__squeaky_scroll_overlay').forEach(d => d.remove());
+    // Remove any existing outlines from the iframe
+    doc.querySelectorAll('.__squeaky_outline').forEach(elem => elem.classList.remove('__squeaky_outline'));
   };
 
   const deviceWidth = () => {
@@ -87,7 +91,18 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items
 
     doc.documentElement.scrollTo(0, 0);
     doc.body.style.cssText += 'pointer-events: none; user-select: none;';
-    doc.head.innerHTML += `<style>.squeaky-hide { visibility: hidden; }</style>`;
+    doc.head.innerHTML += `
+      <style>
+        .squeaky-hide { 
+          visibility: hidden; 
+        }
+
+        .__squeaky_outline {  
+          outline: 1px dashed #8249FB !important; 
+          outline-offset: 2px !important;
+        }
+      </style>
+    `;
 
     type === 'Click' 
       ? showClickMaps(doc, items)

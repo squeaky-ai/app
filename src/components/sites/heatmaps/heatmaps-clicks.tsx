@@ -41,7 +41,6 @@ export const HeatmapsClicks: FC<Props> = ({ items, selected, setSelected }) => {
     const unselect = click.selector === selected;
 
     setSelected(unselect ? null : click.selector);
-
     setScale('.__squeaky_click_tag', 1);
 
     if (!unselect) setScale(`${click.selector} .__squeaky_click_tag`, 2);
