@@ -69,7 +69,7 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, style }) => {
           <Tooltip positionX='right' button={devices.length} buttonClassName='link'>
             <ul>
               {devices.map(device => (
-                <li key={`${device.deviceX}_${device.deviceY}_${device.deviceType}`}>
+                <li key={`${device.deviceX}_${device.deviceY}`}>
                   <Device deviceType={device.deviceType} />
                   <span>{device.deviceX} x {device.deviceY}</span>
                 </li>

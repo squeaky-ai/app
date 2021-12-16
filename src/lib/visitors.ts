@@ -35,8 +35,10 @@ export function groupVisitorBrowsers(devices: RecordingsDevice[]): RecordingsDev
 }
 
 export function groupVisitorDevices(devices: RecordingsDevice[]): RecordingsDevice[] {
+  const viewport = ({ deviceX, deviceY }: RecordingsDevice) => `${deviceX}_${deviceY}`;
+
   return devices.reduce((acc, device) => {
-    if (!acc.find(a => a.useragent === device.useragent)) {
+    if (!acc.find(a => viewport(a) === viewport(device))) {
       acc.push(device);
     }
 
