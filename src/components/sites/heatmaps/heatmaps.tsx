@@ -27,6 +27,7 @@ interface Props {
 export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod }) => {
   const [type, setType] = React.useState<HeatmapsType>(HeatmapsType.Click);
   const [device, setDevice] = React.useState<HeatmapsDevice>(HeatmapsDevice.Desktop);
+  const [selected, setSelected] = React.useState<string>(null);
 
   const { loading, heatmaps } = useHeatmaps({ page, device, type, range: getDateRange(period) });
 
@@ -82,7 +83,7 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
             />
           </Card>
           <Card className='data'>
-            {type === 'Click' && <HeatmapsClicks items={heatmaps.items} />}
+            {type === 'Click' && <HeatmapsClicks items={heatmaps.items} selected={selected} setSelected={setSelected} />}
             {type === 'Scroll' && <HeatmapsScrolls items={heatmaps.items} />}
           </Card>
         </>

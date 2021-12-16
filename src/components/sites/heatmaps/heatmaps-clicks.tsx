@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import classnames from 'classnames';
 import { Icon } from 'components/icon';
 import { Tooltip } from 'components/tooltip';
 import { Pill } from 'components/pill';
@@ -9,9 +10,11 @@ import type { HeatmapsItem } from 'types/graphql';
 
 interface Props {
   items: HeatmapsItem[];
+  selected: string;
+  setSelected: (selected: string) => void;
 }
 
-export const HeatmapsClicks: FC<Props> = ({ items }) => {
+export const HeatmapsClicks: FC<Props> = ({ items, selected, setSelected }) => {
   const [order, setOrder] = React.useState('clicks__desc');
 
   const clicks = getClickMapData(items).sort((a, b) => order === 'clicks__asc'
@@ -19,14 +22,36 @@ export const HeatmapsClicks: FC<Props> = ({ items }) => {
     : b.count - a.count
   );
 
+  const getIframeDocument = (): Document => document
+    .querySelector<HTMLIFrameElement>('#heatmaps-page-wrapper iframe')
+    .contentDocument;
+
   const scrollToView = (click: ClickMapData) => {
-    const iframe: HTMLIFrameElement = document.querySelector('#heatmaps-page-wrapper iframe');
+    const doc = getIframeDocument();
 
-    if (!iframe) return;
+    const element = doc.querySelector(click.selector);
 
-    const element = iframe.contentDocument.querySelector(click.selector);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      handleSelected(click);
+    }
+  };
 
-    element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  const handleSelected = (click: ClickMapData) => {
+    const unselect = click.selector === selected;
+
+    setSelected(unselect ? null : click.selector);
+
+    setScale('.__squeaky_click_tag', 1);
+
+    if (!unselect) setScale(`${click.selector} .__squeaky_click_tag`, 2);
+  };
+
+  const setScale = (selector: string, scale: number) => {
+    const doc = getIframeDocument();
+    const element = doc.querySelectorAll<HTMLElement>(selector);
+
+    element.forEach(elem => elem.style.transform = `scale(${scale})`);
   };
 
   return (
@@ -54,8 +79,8 @@ export const HeatmapsClicks: FC<Props> = ({ items }) => {
           </div>
             <ul>
               {clicks.map(click => (
-                <li key={click.selector} className='row'>
-                  <Tooltip button={click.selector} portalClassName='element-tooltip' onClick={() => scrollToView(click)}>
+                <li key={click.selector} className={classnames('row', { selected: click.selector === selected })} onClick={() => scrollToView(click)}>
+                  <Tooltip button={click.selector} portalClassName='element-tooltip'>
                     {click.selector}
                   </Tooltip>
                   <p>

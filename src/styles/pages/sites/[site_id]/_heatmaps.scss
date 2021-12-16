@@ -209,6 +209,15 @@
           p {
             width: 140px;
           }
+
+          &:not(.head) {
+            cursor: pointer;
+          }
+
+          &:not(.head):hover,
+          &.selected {
+            background: var(--gray-100);
+          }
         }
       }
 
@@ -355,5 +364,6 @@
 }
 
 .element-tooltip {
+  margin-top: -1rem;
   white-space: pre-wrap;
 }

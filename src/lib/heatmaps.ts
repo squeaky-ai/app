@@ -96,7 +96,7 @@ export const showClickMaps = (doc: Document, items: HeatmapsItem[]) => {
     // it's position to relative if it isn't absolute 
     // or fixed
     elem.style.cssText += `
-      outline: 1px dashed #707070 !important; 
+      outline: 1px dashed #8249FB !important; 
       outline-offset: 2px !important;
       position: ${['absolute', 'fixed'].includes(currentElementPosition) ? currentElementPosition : 'relative'};
     `;
@@ -115,21 +115,22 @@ export const showClickMaps = (doc: Document, items: HeatmapsItem[]) => {
     tag.style.cssText = `
       align-items: center;
       background: ${click.color.background};
-      border: 1px solid ${click.color.border};
+      border: 1px solid #001A39;
       border-radius: 2px;
-      box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 2px;
+      box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
       box-sizing: border-box;
       color: ${click.color.foreground};
       display: flex;
       font-size: 12px !important;
       font-weight: 600;
       flex-shrink: 0;
-      height: 1.5rem;
+      height: 1rem;
       justify-content: center;
       padding: .15rem;
       position: absolute;
       right: 0;
       top: 0;
+      transform-origin: center center;
       z-index: 9999999;
     `;
 
