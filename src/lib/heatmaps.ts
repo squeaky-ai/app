@@ -83,7 +83,7 @@ export const showClickMaps = (doc: Document, items: HeatmapsItem[]) => {
     // These things don't have a innerHTML so the next
     // best thing is to use the parent, even if it's
     // not that accurate
-    if (['input', 'select'].includes(elem.tagName.toLowerCase())) {
+    if (['input', 'select', 'img', 'svg'].includes(elem.tagName.toLowerCase())) {
       elem = elem.parentElement;
     }
 
