@@ -1,4 +1,4 @@
-import { range, groupBy } from 'lodash';
+import { range, groupBy, debounce, findLast } from 'lodash';
 import { percentage } from 'lib/maths';
 import { HeatmapColor, HEATMAP_COLOURS } from 'data/heatmaps/constants';
 import type { HeatmapsItem } from 'types/graphql';
@@ -147,4 +147,83 @@ export const showScrollMaps = (doc: Document, items: HeatmapsItem[]) => {
   `;
 
   doc.body.appendChild(overlay);
+
+  const percentageMarker = document.createElement('div');
+  percentageMarker.classList.add('__squeaky_percentage_marker');
+
+  const percentangeText = document.createElement('p');
+
+  const percentageAmount = document.createElement('b');
+  percentageAmount.innerText = '0.00%';
+
+  percentangeText.appendChild(percentageAmount);
+  percentangeText.innerHTML += 'Percentage of visitors who reached this';
+
+  percentageMarker.appendChild(percentangeText);
+
+  doc.addEventListener('mousemove', onIframeScroll(doc, scrollMapData));
+
+  doc.body.appendChild(percentageMarker);
 };
+
+const onIframeScroll = (doc: Document, data: ScrollMapData[]) => debounce((event: MouseEvent) => {
+  const marker = doc.querySelector<HTMLDivElement>('.__squeaky_percentage_marker');
+  if (!marker) return;
+
+  marker.style.top = `${event.clientY - 20}px`;
+
+  const position = event.clientY + doc.scrollingElement.scrollTop;
+  const match = findLast(data, s => position >= s.pixelsScrolled);
+
+  const text = marker.querySelector<HTMLElement>('p b');
+  if (text) text.innerText = `${match?.percentThatMadeIt || 0}%`;
+}, 15);
+
+export const iframeStyles = `
+  <style>
+    .squeaky-hide { 
+      visibility: hidden; 
+    }
+
+    .__squeaky_outline {  
+      outline: 1px dashed #8249FB !important; 
+      outline-offset: 2px !important;
+    }
+
+    .__squeaky_percentage_marker {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      left: 0;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 99999999;
+    }
+
+    .__squeaky_percentage_marker p {
+      background: #001125;
+      border-radius: .5rem;
+      color: white;
+      display: inline-block;
+      font-size: 13px;
+      font-family: Helvetica, sans-serif;
+      line-height: 16px;
+      margin: 0;
+      padding: .5rem 1rem;
+      z-index: 1;
+    }
+
+    .__squeaky_percentage_marker b {
+      margin-right: .5rem;
+    }
+
+    .__squeaky_percentage_marker::after {
+      border: 2px dashed #001A39;
+      content: ' ';
+      display: block;
+      position: absolute;
+      width: 100%;
+    }
+  </style>
+`;

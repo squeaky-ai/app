@@ -4,7 +4,7 @@ import { Replayer } from 'rrweb';
 import { Spinner } from 'components/spinner';
 import { ScrollIndicator } from 'components/sites/scroll-indicator';
 import { useRecording } from 'hooks/use-heatmaps';
-import { showClickMaps, showScrollMaps } from 'lib/heatmaps';
+import { showClickMaps, showScrollMaps, iframeStyles } from 'lib/heatmaps';
 import type { Event } from 'types/event';
 import type { HeatmapsItem, HeatmapsType, HeatmapsDevice } from 'types/graphql';
 
@@ -71,6 +71,8 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items
     doc.querySelectorAll('.__squeaky_scroll_overlay').forEach(d => d.remove());
     // Remove any existing outlines from the iframe
     doc.querySelectorAll('.__squeaky_outline').forEach(elem => elem.classList.remove('__squeaky_outline'));
+    // Remove any scroll markers from the iframe
+    doc.querySelectorAll('.__squeaky_percentage_marker').forEach(d => d.remove());
   };
 
   const deviceWidth = () => {
@@ -91,18 +93,7 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items
 
     doc.documentElement.scrollTo(0, 0);
     doc.body.style.cssText += 'pointer-events: none; user-select: none;';
-    doc.head.innerHTML += `
-      <style>
-        .squeaky-hide { 
-          visibility: hidden; 
-        }
-
-        .__squeaky_outline {  
-          outline: 1px dashed #8249FB !important; 
-          outline-offset: 2px !important;
-        }
-      </style>
-    `;
+    doc.head.innerHTML += iframeStyles;
 
     type === 'Click' 
       ? showClickMaps(doc, items)
