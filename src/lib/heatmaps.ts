@@ -29,7 +29,7 @@ export const getScrollMapData = (items: HeatmapsItem[]): ScrollMapData[] => {
     return potentials[potentials.length - 1];
   };
 
-  return range(1, 21).map(i => {
+  return range(0, 21).map(i => {
     const pixelsScrolled = Math.floor(((i * 5) / 100) * max);
     const amountThatMadeIt = items.filter(i => i.y >= pixelsScrolled).length;
     const percentThatMadeIt = percentage(total, amountThatMadeIt);

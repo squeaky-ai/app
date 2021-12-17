@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const HeatmapsScrolls: FC<Props> = ({ items }) => {
-  const scrollMap = getScrollMapData(items);
+  const scrollMap = getScrollMapData(items).slice(1);
 
   return (
     <div className='scrolls-table'>
