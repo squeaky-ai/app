@@ -10,13 +10,16 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   portalClassName?: string;
   positionX?: 'left' | 'right';
   fluid?: boolean;
+  delayInMilliseconds?: number;
 }
 
-export const Tooltip: FC<Props> = ({ button, fluid, buttonClassName, portalClassName, positionX, className, children, onClick }) => {
+export const Tooltip: FC<Props> = ({ button, fluid, delayInMilliseconds, buttonClassName, portalClassName, positionX, className, children, onClick }) => {
   const ref = React.useRef<HTMLDivElement>();
   const [open, setOpen] = React.useState(false);
 
-  const handleMouseOver = () => {
+  const delay = (delayInMilliseconds || 25) / 100;
+
+  const handleMouseIn = () => {
     setOpen(true);
   };
 
@@ -24,23 +27,23 @@ export const Tooltip: FC<Props> = ({ button, fluid, buttonClassName, portalClass
     setOpen(false);
   };
 
-  const coords = () => {
+  const style = (): React.CSSProperties => {
     const { x, y, height, width } = ref.current.getBoundingClientRect();
 
     const left = positionX === 'right' ? x + width : x;
     const top = y + height + 16;
 
-    return { left, top };
+    return { left, top, animationDelay: `${delay}s` };
   };
 
   return (
     <div ref={ref} className={classnames('tooltip', className)} onClick={onClick}>
-      <Button onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} className={buttonClassName}>
+      <Button onMouseEnter={handleMouseIn} onMouseOut={handleMouseOut} className={buttonClassName}>
         {button}
       </Button>
       <Portal>
         {open && (
-          <div className={classnames('tooltip-menu', portalClassName, positionX, { fluid })} style={coords()}>
+          <div className={classnames('tooltip-menu', portalClassName, positionX, { fluid })} style={style()}>
             {children}
           </div>
         )}
