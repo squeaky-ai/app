@@ -1,4 +1,4 @@
-import { range, groupBy, debounce, findLast } from 'lodash';
+import { range, groupBy, findLast } from 'lodash';
 import { percentage } from 'lib/maths';
 import { HeatmapColor, HEATMAP_COLOURS } from 'data/heatmaps/constants';
 import type { HeatmapsItem } from 'types/graphql';
@@ -154,12 +154,37 @@ export const showScrollMaps = (doc: Document, items: HeatmapsItem[]) => {
 
   doc.body.appendChild(overlay);
 
-  const percentageMarker = document.createElement('div');
-  percentageMarker.classList.add('__squeaky_percentage_marker');
+  createScrollingScrollMarker(doc, scrollMapData);
+  createFixedScrollMarker(doc, scrollMapData, 25);
+  createFixedScrollMarker(doc, scrollMapData, 50);
+  createFixedScrollMarker(doc, scrollMapData, 75);
+  createFixedScrollMarker(doc, scrollMapData, 95);
+};
 
-  const percentangeText = document.createElement('p');
+const createFixedScrollMarker = (doc: Document, scrollMapData: ScrollMapData[], percentage: number) => {
+  const scroll = scrollMapData.find(s => s.increment === percentage);
 
-  const percentageAmount = document.createElement('b');
+  if (!scroll) return;
+
+  const marker = doc.createElement('div');
+  marker.classList.add('__squeaky_fixed_percentage_marker');
+  marker.style.top = `${scroll.pixelsScrolled}px`;
+
+  const text = doc.createElement('p');
+  text.innerText = `${percentage}%`;
+
+  marker.appendChild(text);
+
+  doc.body.appendChild(marker);
+};
+
+const createScrollingScrollMarker = (doc: Document, scrollMapData: ScrollMapData[]) => {
+  const percentageMarker = doc.createElement('div');
+  percentageMarker.id = '__squeaky_scrolling_percentage_marker';
+
+  const percentangeText = doc.createElement('p');
+
+  const percentageAmount = doc.createElement('b');
   percentageAmount.innerText = '0.00%';
 
   percentangeText.appendChild(percentageAmount);
@@ -172,8 +197,8 @@ export const showScrollMaps = (doc: Document, items: HeatmapsItem[]) => {
   doc.body.appendChild(percentageMarker);
 };
 
-const onIframeScroll = (doc: Document, data: ScrollMapData[]) => debounce((event: MouseEvent) => {
-  const marker = doc.querySelector<HTMLDivElement>('.__squeaky_percentage_marker');
+const onIframeScroll = (doc: Document, data: ScrollMapData[]) => (event: MouseEvent) => {
+  const marker = doc.getElementById('__squeaky_scrolling_percentage_marker');
   if (!marker) return;
 
   marker.style.top = `${event.clientY - 20}px`;
@@ -183,12 +208,12 @@ const onIframeScroll = (doc: Document, data: ScrollMapData[]) => debounce((event
 
   const text = marker.querySelector<HTMLElement>('p b');
   if (text) text.innerText = `${match?.percentThatMadeIt || 0}%`;
-}, 15);
+};
 
 export const iframeStyles = `
   <style>
     .squeaky-hide { 
-      visibility: hidden; 
+      visibility: hidden;
     }
 
     .__squeaky_outline {  
@@ -196,7 +221,7 @@ export const iframeStyles = `
       outline-offset: 2px !important;
     }
 
-    .__squeaky_percentage_marker {
+    #__squeaky_scrolling_percentage_marker {
       align-items: center;
       display: flex;
       justify-content: center;
@@ -207,7 +232,7 @@ export const iframeStyles = `
       z-index: 99999999;
     }
 
-    .__squeaky_percentage_marker p {
+    #__squeaky_scrolling_percentage_marker p {
       background: #001125;
       border-radius: .5rem;
       color: white;
@@ -220,11 +245,44 @@ export const iframeStyles = `
       z-index: 1;
     }
 
-    .__squeaky_percentage_marker b {
+    #__squeaky_scrolling_percentage_marker b {
       margin-right: .5rem;
     }
 
-    .__squeaky_percentage_marker::after {
+    #__squeaky_scrolling_percentage_marker::after {
+      border: 2px dashed #001A39;
+      content: ' ';
+      display: block;
+      position: absolute;
+      width: 100%;
+    }
+
+    .__squeaky_fixed_percentage_marker {
+      align-items: center;
+      display: flex;
+      justify-content: flex-start;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: 99999999;
+    }
+
+    .__squeaky_fixed_percentage_marker p {
+      background: #001125;
+      border-radius: .5rem;
+      color: white;
+      display: inline-block;
+      font-size: 13px;
+      font-family: Helvetica, sans-serif;
+      font-weight: 600;
+      line-height: 16px;
+      margin: 0 0 0 1.5rem;
+      padding: .5rem 1rem;
+      z-index: 1;
+    }
+
+    .__squeaky_fixed_percentage_marker::after {
       border: 2px dashed #001A39;
       content: ' ';
       display: block;

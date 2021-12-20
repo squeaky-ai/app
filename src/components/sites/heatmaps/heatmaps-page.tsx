@@ -67,14 +67,11 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items
   };
 
   const cleanup = (doc: Document) => {
-    // Remove any existing tags from the iframe
     doc.querySelectorAll('.__squeaky_click_tag').forEach(d => d.remove());
-    // Remove any existing overlays from the iframe
     doc.querySelectorAll('.__squeaky_scroll_overlay').forEach(d => d.remove());
-    // Remove any existing outlines from the iframe
     doc.querySelectorAll('.__squeaky_outline').forEach(elem => elem.classList.remove('__squeaky_outline'));
-    // Remove any scroll markers from the iframe
-    doc.querySelectorAll('.__squeaky_percentage_marker').forEach(d => d.remove());
+    doc.querySelectorAll('#__squeaky_scrolling_percentage_marker').forEach(d => d.remove());
+    doc.querySelectorAll('.__squeaky_fixed_percentage_marker').forEach(d => d.remove());
   };
 
   const deviceWidth = (() => {
@@ -162,9 +159,7 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items
   return (
     <div ref={ref} className='heatmaps-page'>
       {loading && <Spinner />}
-
       <div style={wrapperStyles} id='heatmaps-page-wrapper' />
-
       {!loading && type === 'Scroll' && <ScrollIndicator />}
     </div>
   );
