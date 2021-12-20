@@ -79,6 +79,12 @@ export const GET_RECORDING_QUERY = gql`
           starred
           attributes
         }
+        pages {
+          id
+          url
+          enteredAt
+          exitedAt
+        }
         tags {
           id
           name
