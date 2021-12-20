@@ -47,7 +47,7 @@ export const Overview: FC<Props> = ({ site }) => {
           {overview.analytics.visitorsCount.total.toLocaleString()}
         </h2>
         <div className='bottom'>
-          <Pill type='tertiary'>{overview.analytics.visitorsCount.new} New</Pill>
+          <Pill type='tertiary'>{overview.analytics.visitorsCount.new.toLocaleString()} New</Pill>
 
           <div className='link'>
             <Link href={`/sites/${site_id}/visitors`}>
@@ -67,7 +67,7 @@ export const Overview: FC<Props> = ({ site }) => {
           {overview.analytics.recordingsCount.total.toLocaleString()}
         </h2>
         <div className='bottom'>
-          <Pill type='tertiary'>{overview.analytics.recordingsCount.new} New</Pill>
+          <Pill type='tertiary'>{overview.analytics.recordingsCount.new.toLocaleString()} New</Pill>
 
           <div className='link'>
             <Link href={`/sites/${site_id}/recordings`}>

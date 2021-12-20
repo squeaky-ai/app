@@ -21,7 +21,7 @@ export const AnalyticsDevices: FC<Props> = ({ devices }) => {
         <Icon name='computer-line' />
         <div className='stats'>
           <p><b>Desktop / Laptop</b></p>
-          <h3>{desktop.count} <span>{percentage(total, desktop.count) || 0}%</span></h3>
+          <h3>{desktop.count.toLocaleString()} <span>{percentage(total, desktop.count) || 0}%</span></h3>
         </div>
       </Card>
 
@@ -29,7 +29,7 @@ export const AnalyticsDevices: FC<Props> = ({ devices }) => {
         <Icon name='tablet-line' />
         <div className='stats'>
           <p><b>Tablet / Mobile</b></p>
-          <h3>{mobile.count} <span>{percentage(total, mobile.count) || 0}%</span></h3>
+          <h3>{mobile.count.toLocaleString()} <span>{percentage(total, mobile.count) || 0}%</span></h3>
         </div>
       </Card>
     </>

@@ -70,8 +70,8 @@ export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
       <div className='heading'>
         <div className='title'>
           <h5>Visitors</h5>
-          <h3>{totalCount}</h3>
-          <Pill type='tertiary' large>{newCount} New</Pill>
+          <h3>{totalCount.toLocaleString()}</h3>
+          <Pill type='tertiary' large>{newCount.toLocaleString()} New</Pill>
         </div>
 
         <div className='actions'>
