@@ -4,9 +4,10 @@ import { Replayer } from 'rrweb';
 import { Spinner } from 'components/spinner';
 import { ScrollIndicator } from 'components/sites/scroll-indicator';
 import { useRecording } from 'hooks/use-heatmaps';
-import { showClickMaps, showScrollMaps, iframeStyles } from 'lib/heatmaps';
+import { DeviceWidths, showClickMaps, showScrollMaps, iframeStyles } from 'lib/heatmaps';
+import { HeatmapsDevice } from 'types/graphql';
 import type { Event } from 'types/event';
-import type { HeatmapsItem, HeatmapsType, HeatmapsDevice } from 'types/graphql';
+import type { HeatmapsItem, HeatmapsType } from 'types/graphql';
 
 interface Props {
   type: HeatmapsType;
@@ -20,6 +21,7 @@ let replayer: Replayer;
 
 export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items }) => {
   const ref = React.useRef<HTMLDivElement>(null);
+  const [scale, setScale] = React.useState<number>(1);
   const [loading, setLoading] = React.useState<boolean>(true);
 
   const { error, recording } = useRecording(recordingId);
@@ -75,18 +77,18 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items
     doc.querySelectorAll('.__squeaky_percentage_marker').forEach(d => d.remove());
   };
 
-  const deviceWidth = () => {
+  const deviceWidth = (() => {
     switch(device) {
       case 'Desktop':
-        return '1280px';
+        return `${DeviceWidths.DESKTOP}px`;
       case 'Tablet':
-        return '800px';
+        return `${DeviceWidths.TABLET}px`;
       case 'Mobile':
-        return '360px';
+        return `${DeviceWidths.MOBILE}px`;
       default:
         return '100%';
     }
-  };
+  })();
 
   const inject = (doc: Document) => setTimeout(() => {
     cleanup(doc);
@@ -108,6 +110,24 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items
     if (doc) inject(doc);
   };
 
+  const shrink = () => {
+    if (device === HeatmapsDevice.Desktop) {
+      const { width } = ref.current.getBoundingClientRect();
+      const value = Math.min(width / DeviceWidths.DESKTOP, 1);
+      setScale(value);
+    } else {
+      setScale(1);
+    }
+  };
+
+  // Has JS gone too far?
+  const wrapperStyles = ((): React.CSSProperties => ({
+    height: scale === 1 ? '100%' : `${(1 / scale) * 100}%`,
+    transform: `scale(${scale})`,
+    visibility: loading ? 'hidden' : 'visible', 
+    width: deviceWidth,
+  }))();
+
   const destroy = () => {
     document.getElementById('heatmaps-page-wrapper').innerHTML = '';
     replayer = null;
@@ -119,12 +139,14 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items
   React.useEffect(() => {
     setLoading(true);
     init();
+    shrink();
   }, [recording?.id, page]);
 
   // Redraw the tags inside the iframe whenever the type or
   // items change 
   React.useEffect(() => {
     draw();
+    shrink();
   }, [type, items]);
 
   React.useEffect(() => {
@@ -141,10 +163,7 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items
     <div ref={ref} className='heatmaps-page'>
       {loading && <Spinner />}
 
-      <div 
-        style={{ visibility: loading ? 'hidden' : 'visible', width: deviceWidth() }} 
-        id='heatmaps-page-wrapper'
-      />
+      <div style={wrapperStyles} id='heatmaps-page-wrapper' />
 
       {!loading && type === 'Scroll' && <ScrollIndicator />}
     </div>

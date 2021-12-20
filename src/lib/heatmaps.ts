@@ -18,6 +18,12 @@ export interface ClickMapData {
   percentage: number;
 }
 
+export enum DeviceWidths {
+  DESKTOP = 1280,
+  TABLET = 800,
+  MOBILE = 380,
+}
+
 export const getScrollMapData = (items: HeatmapsItem[]): ScrollMapData[] => {
   const total = items.length;
 
