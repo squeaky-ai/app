@@ -155,11 +155,9 @@ export const showScrollMaps = (doc: Document, items: HeatmapsItem[]) => {
   doc.body.appendChild(overlay);
 
   createScrollingScrollMarker(doc, scrollMapData);
-  createFixedScrollMarker(doc, scrollMapData, 5);
   createFixedScrollMarker(doc, scrollMapData, 25);
   createFixedScrollMarker(doc, scrollMapData, 50);
   createFixedScrollMarker(doc, scrollMapData, 75);
-  createFixedScrollMarker(doc, scrollMapData, 95);
 };
 
 const createFixedScrollMarker = (doc: Document, scrollMapData: ScrollMapData[], percentage: number) => {
