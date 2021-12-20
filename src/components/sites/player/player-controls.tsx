@@ -66,8 +66,9 @@ export const PlayerControls: FC<Props> = ({ state, replayer, recording, dispatch
         <PlayPauseIcon />
       </Button>
 
-      {replayer && (
+      {replayer && recording && (
         <PlayerSlider 
+          key={recording.id}
           replayer={replayer}
           status={state.status}
           playbackSpeed={state.playbackSpeed}

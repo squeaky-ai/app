@@ -19,45 +19,48 @@ interface State {
 
 export class PlayerSlider extends React.Component<Props, State> {
   private timer: number;
+  private duration: number;
 
   public constructor(props: Props) {
     super(props);
 
     this.state = { value: 0 };
+
+    this.duration = this.props.replayer.getMetaData().totalTime;
   }
 
-  public componentDidMount() {
-    this.start();
+  public componentWillUnmount(): void {
+    this.stop();
   }
 
-  public componentDidUpdate(prevProps: Props) {
+  public componentDidMount(): void {
+    this.restart();
+  }
+
+  public componentDidUpdate(prevProps: Props): void {
     if (prevProps.status !== this.props.status) {
       this.props.status === PlayerStatus.PLAYING
-        ? this.start()
+        ? this.restart()
         : this.stop();
     }
 
     if (prevProps.playbackSpeed !== this.props.playbackSpeed) {
-      // Start and stop to pick up the latest value
-      this.stop();
-      this.start();
+      this.restart();
     }
   }
 
-  private start = () => {
+  private restart = (): void => {
     this.stop();
 
     const update = () => {
-      const { replayer } = this.props;
-
-      const currentTime = replayer.getCurrentTime();
+      const currentTime = this.props.replayer.getCurrentTime();
       const seconds = this.getSeconds(currentTime);
 
       if (seconds !== this.state.value) {
         this.setState({ value: seconds });
       }
 
-      if (currentTime < this.meta.totalTime) {
+      if (currentTime < this.duration) {
         this.timer = requestAnimationFrame(update);
       }
     };
@@ -65,37 +68,31 @@ export class PlayerSlider extends React.Component<Props, State> {
     this.timer = requestAnimationFrame(update);
   };
 
-  private stop = () => {
+  private stop = (): void => {
     if (this.timer) {
       cancelAnimationFrame(this.timer);
       this.timer = null;
     }
   };
 
-  private onSlide = (value: number) => {
+  private onSlide = (value: number): void => {
     this.setState({ value });
     this.props.handleSlide(value * 1000);
   };
 
-  private getSeconds = (ms: number) => {
+  private getSeconds = (ms: number): number => {
     return Math.floor(ms / 1000);
   };
 
-  private get meta() {
-    return this.props.replayer.getMetaData();
+  private get durationInSeconds(): number {
+    return this.getSeconds(this.duration);
   }
 
-  private get durationInSeconds() {
-    return this.props.recording
-      ? this.getSeconds(Number(this.props.recording.disconnectedAt) - Number(this.props.recording.connectedAt))
-      : 0
-  }
-
-  private get currentTimeString() {
+  private get currentTimeString(): string {
     return toTimeString(this.state.value * 1000);
   };
 
-  private get totalTimeString() {
+  private get totalTimeString(): string {
     return toTimeString(this.durationInSeconds * 1000);
   }
 
