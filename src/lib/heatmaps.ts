@@ -162,7 +162,7 @@ export const showScrollMaps = (doc: Document, items: HeatmapsItem[]) => {
 };
 
 const createFixedScrollMarker = (doc: Document, scrollMapData: ScrollMapData[], percentage: number) => {
-  const scroll = scrollMapData.find(s => s.increment === percentage);
+  const scroll = findLast(scrollMapData, s => s.percentThatMadeIt >= percentage);
 
   if (!scroll) return;
 
