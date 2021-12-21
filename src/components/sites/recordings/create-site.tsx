@@ -67,7 +67,7 @@ export const CreateSite: FC<Props> = ({ children, className }) => {
                   const site = await createSite(name, url);
 
                   closeModal();
-                  await router.push(`/sites/${site.id}/overview`);
+                  await router.push(`/sites/${site.id}/settings/details/tracking-code`);
                 } catch(error: any) {
                   if (/already registered/.test(error)) {
                     setErrors({ hostname: 'This site is already registered' });
