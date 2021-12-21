@@ -155,7 +155,7 @@
 
       .tooltip {
         margin-left: .75rem;
-        width: 100%;
+        width: calc(100% - .75rem);
 
         .button {
           color: var(--gray-500);
