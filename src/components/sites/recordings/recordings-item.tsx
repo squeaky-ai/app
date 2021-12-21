@@ -1,8 +1,5 @@
 import React from 'react';
 import type { FC } from 'react';
-import Link from 'next/link';
-import classnames from 'classnames';
-import { useRouter } from 'next/router';
 import { Icon } from 'components/icon';
 import { Pill } from 'components/pill';
 import { Checkbox } from 'components/checkbox';
@@ -11,12 +8,11 @@ import { Browser } from 'components/browser';
 import { Dropdown } from 'components/dropdown';
 import { Device } from 'components/device';
 import { Cell } from 'components/table';
+import { RecordingStarred } from 'components/sites/recordings/recordings-starred';
 import { RecordingsShare } from 'components/sites/recordings/recordings-share';
 import { RecordingDelete } from 'components/sites/recordings/recording-delete';
 import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
 import { toNiceDate, toTimeString } from 'lib/dates';
-import { useToasts } from 'hooks/use-toasts';
-import { recordingBookmarked } from 'lib/api/graphql';
 import type { Recording } from 'types/graphql';
 import type { Site } from 'types/graphql';
 
@@ -29,21 +25,7 @@ interface Props {
 }
 
 export const RecordingsItem: FC<Props> = ({ site, recording, style, selected, setSelected }) => {
-  const toast = useToasts();
-  const router = useRouter();
   const rowActionsRef = React.useRef<Dropdown>();
-
-  const bookmarkRecording = async () => {
-    try {
-      await recordingBookmarked({ 
-        siteId: router.query.site_id as string, 
-        recordingId: recording.id,
-        bookmarked: !recording.bookmarked,
-      });
-    } catch {
-      toast.add({ type: 'error', body: 'There was an error bookmarking your recording. Please try again.' });
-    }
-  };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.target.checked
@@ -70,20 +52,7 @@ export const RecordingsItem: FC<Props> = ({ site, recording, style, selected, se
         }
       </Cell>
       <Cell className='primary'>
-        <Tooltip
-          button={
-            <span onClick={bookmarkRecording} className={classnames('bookmark', { active: recording.bookmarked })}>
-            <Icon name='bookmark-3-line' />
-          </span>
-          }
-        >
-          {recording.bookmarked ? 'Bookmarked' : 'Not bookmarked'}
-        </Tooltip>
-        <Link href={`/sites/${router.query.site_id}/recordings/${recording.id}`}>
-          <a>
-            {recording.sessionId}
-          </a>
-        </Link>
+        <RecordingStarred site={site} recording={recording} link />
       </Cell>
       <Cell>
         <VisitorsStarred site={site} visitor={recording.visitor} link />

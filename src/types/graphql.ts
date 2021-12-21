@@ -732,6 +732,7 @@ export type Recording = {
   pageViews: Array<Maybe<Scalars['String']>>;
   pages: Array<Maybe<Page>>;
   previousRecording?: Maybe<Recording>;
+  referrer?: Maybe<Scalars['String']>;
   sessionId: Scalars['String'];
   siteId: Scalars['ID'];
   startPage: Scalars['String'];

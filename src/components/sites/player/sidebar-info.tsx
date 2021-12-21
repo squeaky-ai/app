@@ -5,9 +5,11 @@ import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { PlayerTab } from 'data/sites/enums';
 import { toNiceDate, toTimeString } from 'lib/dates';
+import { Tooltip } from 'components/tooltip';
 import { Browser } from 'components/browser';
 import { Device } from 'components/device';
 import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
+import { RecordingStarred } from 'components/sites/recordings/recordings-starred';
 import { getAttributes, normalizeKey } from 'lib/visitors';
 import type { Recording } from 'types/graphql';
 import type { Site } from 'types/graphql';
@@ -53,20 +55,16 @@ export const SidebarInfo: FC<Props> = ({ site, recording, setActiveTab }) => {
       </div>
       <dl className='datalist'>
         <div className='row'>
-          <dt>Session #</dt>
-          <dd>{recording.sessionId}</dd>
+          <dt>Recording #</dt>
+          <dd className='recording-id'><RecordingStarred site={site} recording={recording} /></dd>
         </div>
         <div className='row'>
           <dt>Visitor</dt>
-          <dd><VisitorsStarred site={site} visitor={recording.visitor} link /></dd>
+          <dd className='visitor-id'><VisitorsStarred site={site} visitor={recording.visitor} link /></dd>
         </div>
         <div className='row'>
           <dt>Date</dt>
           <dd>{toNiceDate(recording.connectedAt)}</dd>
-        </div>
-        <div className='row'>
-          <dt>Language</dt>
-          <dd>{recording.language}</dd>
         </div>
         <div className='row'>
           <dt>Duration</dt>
@@ -77,12 +75,31 @@ export const SidebarInfo: FC<Props> = ({ site, recording, setActiveTab }) => {
           <dd><Button onClick={() => setActiveTab(PlayerTab.PAGES)} className='pages'>{recording.pageCount}</Button></dd>
         </div>
         <div className='row'>
+          <dt>Traffic Source</dt>
+          <dd>
+            {!recording.referrer && '-'}
+            {!!recording.referrer && (
+              <Tooltip button={recording.referrer} positionX='right' fluid>
+                {recording.referrer}
+              </Tooltip>
+            )}
+          </dd>
+        </div>
+        <div className='row'>
           <dt>Start URL</dt>
-          <dd>{recording.startPage}</dd>
+          <dd>
+            <Tooltip button={recording.startPage} positionX='right' fluid>
+              {recording.startPage}
+            </Tooltip>
+          </dd>
         </div>
         <div className='row'>
           <dt>Exit URL</dt>
-          <dd>{recording.exitPage}</dd>
+          <dd>
+            <Tooltip button={recording.exitPage} positionX='right' fluid>
+              {recording.exitPage}
+            </Tooltip>
+          </dd>
         </div>
         <div className='row'>
           <dt>Device</dt>
@@ -99,10 +116,14 @@ export const SidebarInfo: FC<Props> = ({ site, recording, setActiveTab }) => {
           <dt>Browser</dt>
           <dd>
             <span className='browser'>
-              <Browser name={recording.device.browserName} />
+              <Browser height={16} width={16} name={recording.device.browserName} />
             </span>
             {recording.device.browserName}
           </dd>
+        </div>
+        <div className='row'>
+          <dt>Language</dt>
+          <dd>{recording.language}</dd>
         </div>
       </dl>
     </>

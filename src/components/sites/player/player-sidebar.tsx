@@ -39,7 +39,7 @@ export const PlayerSidebar: FC<Props> = ({ state, site, replayer, recording, dis
         <>
         <div className={classnames('sidebar info', { active: state.activeTab === PlayerTab.INFO })}>
           <Label className='heading'>
-            Session Info 
+            Recording Info 
             <Button onClick={handleClose}><Icon name='close-line' /></Button>
           </Label>
           <div className='contents'>
