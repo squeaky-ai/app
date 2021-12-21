@@ -1,7 +1,7 @@
 import { range } from 'lodash';
 import { percentage } from 'lib/maths';
 import type { TimePeriod } from 'lib/dates';
-import type { FeedbackNpsScore } from 'types/graphql';
+import type { FeedbackNpsResponseItem, FeedbackNpsScore } from 'types/graphql';
 
 import {
   getHours,
@@ -96,5 +96,18 @@ export const formatResultsForPeriod = (period: TimePeriod, scores: FeedbackNpsSc
         data: [],
         interval: 1
       };
+  }
+};
+
+export const npsColor = (nps: FeedbackNpsResponseItem) => {
+  switch(nps.score) {
+    case 7:
+    case 8:
+      return 'purple';
+    case 9:
+    case 10:
+      return 'blue';
+    default:
+      return 'rose';
   }
 };

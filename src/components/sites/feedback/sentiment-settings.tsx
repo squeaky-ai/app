@@ -127,7 +127,7 @@ export const SentimentSettings: FC<Props> = ({ site }) => {
                     checked={values.sentimentAccentColor === '#F96155'}
                     onChange={handleChange}
                   >
-                    <div className='color magenta'>
+                    <div className='color rose'>
                       <Icon name='check-line' />
                     </div>
                   </Radio>

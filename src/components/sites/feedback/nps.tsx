@@ -144,7 +144,7 @@ export const Nps: FC = () => {
           <div className='item'>
             <p>Detractors</p>
             {hasResults
-              ? <h3 className='magenta'>{nps.groups.detractors.toLocaleString()}</h3>
+              ? <h3 className='rose'>{nps.groups.detractors.toLocaleString()}</h3>
               : <NoData short />
             }
           </div>

@@ -35,6 +35,12 @@ export const GET_RECORDINGS_QUERY = gql`
             visitorId
             starred
           }
+          nps {
+            score
+          }
+          sentiment {
+            score
+          }
         }
         pagination {
           pageSize
@@ -109,6 +115,7 @@ export const GET_RECORDING_QUERY = gql`
           score
           comment
           email
+          contact
         }
         sentiment {
           score

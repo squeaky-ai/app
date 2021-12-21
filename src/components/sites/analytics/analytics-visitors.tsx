@@ -78,7 +78,7 @@ export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
           <Label>Show:</Label>
           <Checkbox checked={show.includes('all')} onChange={() => handleClick('all')} className='purple'>All</Checkbox>
           <Checkbox checked={show.includes('existing')} onChange={() => handleClick('existing')}>Existing</Checkbox>
-          <Checkbox checked={show.includes('new')} onChange={() => handleClick('new')} className='magenta'>New</Checkbox>
+          <Checkbox checked={show.includes('new')} onChange={() => handleClick('new')} className='rose'>New</Checkbox>
         </div>
       </div>
       <div className='graph-wrapper'>

@@ -139,7 +139,7 @@ export const NpsSettings: FC<Props> = ({ site }) => {
                     checked={values.npsAccentColor === '#F96155'}
                     onChange={handleChange}
                   >
-                    <div className='color magenta'>
+                    <div className='color rose'>
                       <Icon name='check-line' />
                     </div>
                   </Radio>

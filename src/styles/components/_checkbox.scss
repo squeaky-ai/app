@@ -22,7 +22,7 @@
   }
 
   &.tertiary,
-  &.magenta {
+  &.rose {
     input {
       &:checked + .check {
         background: var(--rose-500);

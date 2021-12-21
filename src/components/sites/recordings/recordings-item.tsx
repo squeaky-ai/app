@@ -1,5 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
+import Image from 'next/image';
+import classnames from 'classnames';
 import { Icon } from 'components/icon';
 import { Pill } from 'components/pill';
 import { Checkbox } from 'components/checkbox';
@@ -13,6 +15,8 @@ import { RecordingsShare } from 'components/sites/recordings/recordings-share';
 import { RecordingDelete } from 'components/sites/recordings/recording-delete';
 import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
 import { toNiceDate, toTimeString } from 'lib/dates';
+import { npsColor } from 'lib/feedback/nps';
+import { EMOJIS } from 'data/sentiment/constants';
 import type { Recording } from 'types/graphql';
 import type { Site } from 'types/graphql';
 
@@ -112,10 +116,19 @@ export const RecordingsItem: FC<Props> = ({ site, recording, style, selected, se
         </Tooltip>
       </Cell>
       <Cell>
-        -
+        {!!recording.nps && (
+          <p className={classnames('nps-score', npsColor(recording.nps))}>{recording.nps.score}</p>
+        )}
+        {!recording.nps && '-'}
       </Cell>
       <Cell>
-        -
+        {!!recording.sentiment && (
+          <div className='emoji'>
+            <Image height={24} width={24} src={EMOJIS[recording.sentiment.score]} />
+          </div>
+        )}
+
+        {!recording.sentiment && '-'}
       </Cell>
       <Cell>
         <Dropdown portal button={<Icon name='more-2-fill' />} buttonClassName='options' ref={rowActionsRef}>
