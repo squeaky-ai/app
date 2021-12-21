@@ -145,7 +145,7 @@ export const showScrollMaps = (doc: Document, items: HeatmapsItem[]) => {
     background: linear-gradient(180deg, ${scrollMapData.map(s => `${s.color.background} ${s.increment}%`).join(', ')});
     height: ${doc.body.scrollHeight}px;
     left: 0;
-    mix-blend-mode: multiply;
+    opacity: .7;
     position: absolute;
     top: 0;
     width: 100%;
