@@ -172,11 +172,16 @@
       &.recording-id,
       &.visitor-id {
         .tooltip {
-          width: auto;
+          margin: 0 .25rem 0 0;
+          width: 1.25rem;
 
           i {
             font-size: 16px;
           }
+        }
+
+        .visitor-starred {
+          margin: 0;
         }
       }
 
@@ -192,7 +197,6 @@
 
       .bookmark {
         line-height: 16px;
-        margin-right: .25rem;
 
         i {
           color: var(--gray-150);
