@@ -104,6 +104,15 @@ export const GET_RECORDING_QUERY = gql`
         nextRecording {
           id
         }
+        nps {
+          score
+          comment
+          email
+        }
+        sentiment {
+          score
+          comment
+        }
         events(page: $eventPage) {
           items
           pagination {

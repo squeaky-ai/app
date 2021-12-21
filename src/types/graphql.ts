@@ -728,11 +728,13 @@ export type Recording = {
   language: Scalars['String'];
   nextRecording?: Maybe<Recording>;
   notes: Array<Maybe<Note>>;
+  nps?: Maybe<FeedbackNpsResponseItem>;
   pageCount: Scalars['Int'];
   pageViews: Array<Maybe<Scalars['String']>>;
   pages: Array<Maybe<Page>>;
   previousRecording?: Maybe<Recording>;
   referrer?: Maybe<Scalars['String']>;
+  sentiment?: Maybe<FeedbackSentimentResponseItem>;
   sessionId: Scalars['String'];
   siteId: Scalars['ID'];
   startPage: Scalars['String'];

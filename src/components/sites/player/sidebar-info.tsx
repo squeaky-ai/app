@@ -10,6 +10,8 @@ import { Browser } from 'components/browser';
 import { Device } from 'components/device';
 import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
 import { RecordingStarred } from 'components/sites/recordings/recordings-starred';
+import { SidebarNps } from 'components/sites/player/sidebar-nps';
+import { SidebarSentiment } from 'components/sites/player/sidebar-sentiment';
 import { getAttributes, normalizeKey } from 'lib/visitors';
 import type { Recording } from 'types/graphql';
 import type { Site } from 'types/graphql';
@@ -126,6 +128,9 @@ export const SidebarInfo: FC<Props> = ({ site, recording, setActiveTab }) => {
           <dd>{recording.language}</dd>
         </div>
       </dl>
+
+      {!!recording.nps && <SidebarNps nps={recording.nps} />}
+      {!!recording.sentiment && <SidebarSentiment sentiment={recording.sentiment} />}
     </>
   );
 };
