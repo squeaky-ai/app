@@ -19,7 +19,7 @@ export const SidebarSentiment: FC<Props> = ({ sentiment }) => {
       </p>
       <p>
         {sentiment.comment 
-          ? <>"{sentiment.comment}"</>
+          ? <>&quot;{sentiment.comment}&quot;</>
           : '-'
         }
       </p>

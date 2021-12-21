@@ -25,7 +25,7 @@ export const SidebarNps: FC<Props> = ({ nps }) => {
       <p className='heading'>NPS Score: <span className={color}>{nps.score}</span></p>
       <p>
         {nps.comment 
-          ? <>"{nps.comment}"</>
+          ? <>&quot;{nps.comment}&quot;</>
           : '-'
         }  
       </p>
