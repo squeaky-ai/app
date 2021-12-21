@@ -4,9 +4,12 @@ import { Tooltip } from 'components/tooltip';
 import { Browser } from 'components/browser';
 import { Device } from 'components/device';
 import { toNiceDate } from 'lib/dates';
+import { Icon } from 'components/icon';
 import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
+import { VisitorsDelete } from 'components/sites/visitors/visitors-delete';
 import { Cell } from 'components/table';
 import { Pill } from 'components/pill';
+import { Dropdown } from 'components/dropdown';
 import { getAttributes, groupVisitorBrowsers, groupVisitorDevices } from 'lib/visitors';
 import type { Site } from 'types/graphql';
 import type { ExternalAttributes } from 'types/visitors';
@@ -19,11 +22,17 @@ interface Props {
 }
 
 export const VisitorsItem: FC<Props> = ({ site, visitor, style }) => {
+  const rowActionsRef = React.useRef<Dropdown>();
+
   const attributes = getAttributes<ExternalAttributes>(visitor);
   const devices = groupVisitorDevices(visitor.devices);
   const browsers = groupVisitorBrowsers(visitor.devices);
 
   const toTimeStringDate = (value: string) => toNiceDate(new Date(value).valueOf());
+
+  const onRowActionClose = () => {
+    if (rowActionsRef.current) rowActionsRef.current.close();
+  };
 
   return (
     <div className='row' style={style}>
@@ -96,6 +105,15 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, style }) => {
             </ul>
           </Tooltip>
         )}
+      </Cell>
+      <Cell>
+        <Dropdown portal button={<Icon name='more-2-fill' />} buttonClassName='options' ref={rowActionsRef}>
+          <VisitorsDelete 
+            site={site} 
+            visitorId={visitor.id}
+            onClose={onRowActionClose}
+          />
+        </Dropdown>
       </Cell>
     </div>
   );

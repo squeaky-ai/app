@@ -30,6 +30,7 @@ import {
   User,
   UsersInvitation,
   VisitorsStarredInput,
+  VisitorsDeleteInput,
 } from 'types/graphql';
 
 import {
@@ -105,7 +106,8 @@ import {
 } from 'data/feedback/mutations';
 
 import { 
-  VISITOR_STARRED_MUTATION
+  VISITOR_STARRED_MUTATION,
+  VISITOR_DELETE_MUTATION,
 } from 'data/visitors/mutations';
 
 const ACCEPT_INCOMING = <E, I>(_existing: E, incoming: I[]): I[] => cloneDeep(incoming);
@@ -505,4 +507,18 @@ export const feedbackUpdate = async (input: FeedbackUpdateInput): Promise<Site> 
   });
 
   return data.feedback;
+};
+
+export const visitorDelete = async (input: VisitorsDeleteInput): Promise<Site> => {
+  const { data } = await client.mutate({
+    mutation: VISITOR_DELETE_MUTATION,
+    variables: input,
+    update(cache) {
+      const normalizedId = cache.identify({ id: input.visitorId, __typename: 'Visitor' });
+      cache.evict({ id: normalizedId });
+      cache.gc();
+    }
+  });
+
+  return data.visitorDelete;
 };

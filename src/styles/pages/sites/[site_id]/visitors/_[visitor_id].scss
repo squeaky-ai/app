@@ -7,6 +7,32 @@
         color: var(--gray-500);
         margin-right: .5rem;
       }
+
+      .delete-visitor {
+        align-items: center;
+        background: none;
+        border: none;
+        border-radius: var(--border-radius-o);
+        display: flex;
+        justify-content: center;
+        height: 2rem;
+        margin-left: .75rem;
+        width: 2rem;
+
+        i {
+          color: var(--rose-500);
+          font-size: 1.25rem;
+          margin: 0;
+        }
+
+        span {
+          display: none;
+        }
+
+        &:hover {
+          background: var(--gray-100);
+        }
+      }
     }
     
     h5 {

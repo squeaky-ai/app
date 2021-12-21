@@ -92,6 +92,12 @@ export const COLUMNS: Column[] = [
     disabled: false,
     position: 11,
   },
+  {
+    label: 'Options',
+    width: '70px',
+    disabled: true,
+    position: 12,
+  },
 ];
 
 export const DEFAULT_COLUMNS = COLUMNS.filter(c => [
@@ -100,5 +106,6 @@ export const DEFAULT_COLUMNS = COLUMNS.filter(c => [
   'Email',
   'Recordings', 
   'Last activity', 
-  'Device & Viewport'
+  'Device & Viewport',
+  'Options',
 ].includes(c.label));

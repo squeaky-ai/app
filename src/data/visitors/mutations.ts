@@ -12,3 +12,14 @@ export const VISITOR_STARRED_MUTATION = gql`
     }
   }
 `;
+
+export const VISITOR_DELETE_MUTATION = gql`
+  mutation VisitorDelete($siteId: ID!, $visitorId: ID!) {
+    visitorDelete(input: { siteId: $siteId, visitorId: $visitorId }) {
+      id
+      visitor(visitorId: $visitorId) {
+        id
+      }
+    }
+  }
+`;
