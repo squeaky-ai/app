@@ -73,6 +73,14 @@ export const RecordingsItem: FC<Props> = ({ site, recording, style, selected, se
         </Tooltip>
       </Cell>
       <Cell>
+        {!recording.referrer && <span className='direct'>Direct (none)</span>}
+        {!!recording.referrer && (
+          <Tooltip className='referrer' fluid button={recording.referrer}>
+            {recording.referrer}
+          </Tooltip>
+        )}
+      </Cell>
+      <Cell>
         <div className='start-exit-page'>
           <div className='item'>
             <div>START URL</div>
@@ -102,6 +110,12 @@ export const RecordingsItem: FC<Props> = ({ site, recording, style, selected, se
         <Tooltip positionX='right' className='browser-tooltip' button={<Browser name={recording.device.browserName} height={24} width={24} />}>
           {recording.device.browserDetails}
         </Tooltip>
+      </Cell>
+      <Cell>
+        -
+      </Cell>
+      <Cell>
+        -
       </Cell>
       <Cell>
         <Dropdown portal button={<Icon name='more-2-fill' />} buttonClassName='options' ref={rowActionsRef}>

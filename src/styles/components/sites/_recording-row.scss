@@ -29,6 +29,22 @@
     height: 1.5rem;
   }
 
+  .direct {
+    color: var(--gray-500);
+  }
+
+  .referrer {
+    width: 100%;
+
+    .button {
+      overflow: hidden;
+      text-align: left;
+      text-overflow: ellipsis;
+      white-space: hidden;
+      width: 100%;
+    }
+  }
+
   .start-exit-page {
     .item {
       display: flex;

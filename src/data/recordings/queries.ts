@@ -16,6 +16,7 @@ export const GET_RECORDINGS_QUERY = gql`
           exitPage
           pageViews
           pageCount
+          referrer
           device {
             deviceType
             viewportX

@@ -79,28 +79,46 @@ export const COLUMNS: Column[] = [
     position: 7,
   },
   {
-    label: 'Start & Exit URL',
+    label: 'Traffic Source',
     width: '2fr',
     disabled: false,
     position: 8,
   },
   {
+    label: 'Start & Exit URL',
+    width: '2fr',
+    disabled: false,
+    position: 9,
+  },
+  {
     label: 'Device',
     width: '1fr',
     disabled: false,
-    position: 9,
+    position: 10,
   },
   {
     label: 'Browser',
     width: '90px',
     disabled: false,
-    position: 10,
+    position: 11,
+  },
+  {
+    label: 'NPS Rating',
+    width: '90px',
+    disabled: false,
+    position: 12,
+  },
+  {
+    label: 'Sentiment Rating',
+    width: '90px',
+    disabled: false,
+    position: 13,
   },
   {
     label: 'Options',
     width: '70px',
     disabled: true,
-    position: 11,
+    position: 14,
   },
 ];
 
