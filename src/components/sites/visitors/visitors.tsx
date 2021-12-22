@@ -5,8 +5,6 @@ import classnames from 'classnames';
 import { Icon } from 'components/icon';
 import { Pagination } from 'components/pagination';
 import { useVisitors } from 'hooks/use-visitors';
-import { Container } from 'components/container';
-import { Illustration } from 'components/illustration';
 import { Sort } from 'components/sort';
 import { PageSize } from 'components/sites/page-size';
 import { Tooltip } from 'components/tooltip';
@@ -15,8 +13,8 @@ import { VisitorsItem } from 'components/sites/visitors/visitors-item';
 import { Table, Row, Cell } from 'components/table';
 import { DismissableMessage } from 'components/message';
 import { Error } from 'components/error';
-import { EmptyState } from 'components/sites/filters/common/empty-state';
 import { Preference } from 'lib/preferences';
+import { NoResults } from 'components/sites/no-results';
 import { COLUMNS } from 'data/visitors/constants';
 import { getColumnStyles } from 'lib/tables';
 import { VisitorsSort } from 'types/graphql';
@@ -51,13 +49,8 @@ export const Visitors: FC<Props> = ({ site, columns, filters }) => {
 
   return (
     <>
-      {!loading && (
-        <Container className='xl centered empty-state'>
-          <div className='empty-state-contents'>
-            <Illustration src='illustration-4' height={240} width={320} alt='Illustration to represent that there were no search results' />
-            <h5>There are no visitors matching your search.</h5>
-          </div>
-        </Container>
+      {!loading && !visitors.items.length && (
+        <NoResults title='There are no visitors matching your selected filters.' />
       )}
 
       <DismissableMessage
@@ -145,10 +138,6 @@ export const Visitors: FC<Props> = ({ site, columns, filters }) => {
         <Row className='loading'>
           <Spinner />
         </Row>
-      )}
-
-      {!loading && items.length === 0 && (
-        <EmptyState type='visitors' />
       )}
       
       <div className='visitors-footer'>

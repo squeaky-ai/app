@@ -9,7 +9,7 @@ import { PageSize } from 'components/sites/page-size';
 import { Spinner } from 'components/spinner';
 import { Checkbox } from 'components/checkbox';
 import { Error } from 'components/error';
-import { EmptyState } from 'components/sites/filters/common/empty-state';
+import { NoResults } from 'components/sites/no-results';
 import { useRecordings } from 'hooks/use-recordings';
 import { COLUMNS } from 'data/recordings/constants';
 import { getColumnStyles } from 'lib/tables';
@@ -52,6 +52,16 @@ export const Recordings: FC<Props> = ({ site, filters, columns, selected, setSel
 
   return (
     <>    
+      {loading && !items.length && (
+        <Row className='loading'>
+          <Spinner />
+        </Row>
+      )}
+
+      {!loading && !items.length && (
+        <NoResults title='There are no recordings matching your selected filters.' />
+      )}
+
       <Table className={classnames('recordings-list hover', tableClassNames, { hide: items.length === 0 })}>
         <Row head style={rowStyle}>
           <Cell>
@@ -88,16 +98,6 @@ export const Recordings: FC<Props> = ({ site, filters, columns, selected, setSel
           />
         ))}
       </Table>
-
-      {loading && !items.length && (
-        <Row className='loading'>
-          <Spinner />
-        </Row>
-      )}
-
-      {!loading && items.length === 0 && (
-        <EmptyState type='recordings' />
-      )}
       
       <div className='recordings-footer'>
         <Pagination 

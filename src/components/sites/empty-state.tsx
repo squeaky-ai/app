@@ -19,7 +19,7 @@ export const EmptyState: FC<Props> = ({ title, subtitle, videoName, illustration
   return (
     <Container className='xl centered empty-state'>
       <div className='empty-state-contents'>
-        <Illustration src={`illustration-${illustration}`} height={240} width={320} alt='Illustration to represent the empty pag' />
+        <Illustration src={`illustration-${illustration}`} height={240} width={320} alt='Illustration to represent the empty page' />
         <h4>{title}</h4>
         <EmptyStateHint
           title={subtitle}
