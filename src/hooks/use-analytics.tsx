@@ -1,9 +1,8 @@
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_ANALYTICS_QUERY } from 'data/analytics/queries';
-import type { Site } from 'types/graphql';
-import type { TimeRange } from 'lib/dates';
-import type { Analytics } from 'types/graphql';
+import type { Site, Analytics } from 'types/graphql';
+import type { TimeRange } from 'types/common';
 
 interface UseAnalytics {
   loading: boolean;

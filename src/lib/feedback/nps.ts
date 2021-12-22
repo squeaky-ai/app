@@ -1,6 +1,6 @@
 import { range } from 'lodash';
 import { percentage } from 'lib/maths';
-import type { TimePeriod } from 'lib/dates';
+import type { TimePeriod } from 'types/common';
 import type { FeedbackNpsResponseItem, FeedbackNpsScore } from 'types/graphql';
 
 import {

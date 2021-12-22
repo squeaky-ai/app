@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import { ResponsiveContainer, CartesianGrid, LineChart, Line, YAxis, XAxis, Tooltip, TooltipProps } from 'recharts';
 import { formatResultsForPeriod } from 'lib/feedback/nps';
 import type { FeedbackNpsScores } from 'types/graphql';
-import type { TimePeriod } from 'lib/dates';
+import type { TimePeriod } from 'types/common';
 
 interface Props {
   scores: FeedbackNpsScores;

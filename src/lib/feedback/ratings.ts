@@ -1,7 +1,7 @@
 import { range } from 'lodash';
 import { average } from 'lib/maths';
 import { groupBy } from 'lodash';
-import type { TimePeriod } from 'lib/dates';
+import type { TimePeriod } from 'types/common';
 import type { FeedbackSentimentRating } from 'types/graphql';
 
 import {

@@ -9,7 +9,7 @@ import { Checkbox } from 'components/checkbox';
 import { toDayOfMonth, expandDay } from 'lib/dates';
 import { formatResultsForPeriod } from 'lib/analytics/visitors';
 import type { AnalyticsVisitor } from 'types/graphql';
-import type { TimePeriod } from 'lib/dates';
+import type { TimePeriod } from 'types/common';
 
 interface Props {
   period: TimePeriod;

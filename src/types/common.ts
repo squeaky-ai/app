@@ -6,3 +6,26 @@ export interface Column {
   disabled: boolean;
   position: number;
 }
+
+export type RelativeTime =
+  'today' |
+  'yesterday' |
+  'past_seven_days' |
+  'past_fourteen_days' |
+  'past_thirty_days' |
+  'past_six_months' |
+  'past_year';
+
+export type AbsoluteTime = {
+  type?: 'Before' | 'After' | 'Between';
+  fromDate?: string;
+  betweenFromDate?: string;
+  betweenToDate?: string;
+}
+
+export type TimeRange = { 
+  fromDate?: string;
+  toDate?: string;
+}
+
+export type TimePeriod = RelativeTime | AbsoluteTime;

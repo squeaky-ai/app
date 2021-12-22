@@ -10,7 +10,7 @@ import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { Heatmaps } from 'components/sites/heatmaps/heatmaps';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { usePages } from 'hooks/use-pages';
-import type { TimePeriod } from 'lib/dates';
+import type { TimePeriod } from 'types/common';
 
 
 const SitesHeatmaps: NextPage<ServerSideProps> = ({ user }) => {

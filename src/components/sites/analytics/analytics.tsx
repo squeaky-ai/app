@@ -17,7 +17,7 @@ import { AnalyticsPagesPerSession } from 'components/sites/analytics/analytics-p
 import { AnalyticsScreenWidths } from 'components/sites/analytics/analytics-screen-widths';
 import { Error } from 'components/error';
 import { NoResults } from 'components/sites/no-results';
-import type { TimePeriod } from 'lib/dates';
+import type { TimePeriod } from 'types/common';
 
 interface Props {
   period: TimePeriod;

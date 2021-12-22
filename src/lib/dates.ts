@@ -2,22 +2,14 @@ import { get, range } from 'lodash';
 
 import {
   subDays,
+  subMonths,
   startOfToday, 
   startOfYesterday, 
   endOfYesterday, 
   format 
 } from 'date-fns';
 
-export type TimePeriod =
-  'today' |
-  'yesterday' |
-  'past_seven_days' |
-  'past_thirty_days';
-
-export type TimeRange = {
-  fromDate: string;
-  toDate: string;
-}
+import { TimePeriod, TimeRange } from 'types/common';
 
 export const toTimeString = (ms?: number | string) => {
   if (!ms) return '00:00:00';
@@ -100,11 +92,28 @@ export const getDateRange = (period: TimePeriod): TimeRange => {
         fromDate: formatDate(subDays(now, 7)),
         toDate: todaysDate
       };
+    case 'past_fourteen_days':
+      return {
+        fromDate: formatDate(subDays(now, 14)),
+        toDate: todaysDate
+      };
     case 'past_thirty_days':
       return {
         fromDate: formatDate(subDays(now, 30)),
         toDate: todaysDate
       };
+    case 'past_six_months':
+      return {
+        fromDate: formatDate(subMonths(now, 6)),
+        toDate: todaysDate
+      };
+    case 'past_year':
+      return {
+        fromDate: formatDate(subMonths(now, 12)),
+        toDate: todaysDate
+      };
+    default:
+      return period;
   }
 };
 

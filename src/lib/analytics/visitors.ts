@@ -1,8 +1,6 @@
 import { range } from 'lodash';
 import type { AnalyticsVisitor } from 'types/graphql';
-import type { TimePeriod } from 'lib/dates';
-
-// [@_______] has claimed 1x free lunch from @lemonjs for fixing this mess
+import type { TimePeriod } from 'types/common';
 
 import {
   getHours,

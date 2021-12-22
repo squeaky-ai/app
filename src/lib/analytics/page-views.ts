@@ -1,6 +1,6 @@
 import { range, sum } from 'lodash';
 import type { AnalyticsPageViews } from 'types/graphql';
-import type { TimePeriod } from 'lib/dates';
+import type { TimePeriod } from 'types/common';
 
 import {
   getHours,

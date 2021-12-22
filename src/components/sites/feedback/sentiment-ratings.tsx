@@ -6,7 +6,7 @@ import { ResponsiveContainer, CartesianGrid, LineChart, Line, YAxis, XAxis, Tool
 import { formatResultsForPeriod } from 'lib/feedback/ratings';
 import { EMOJIS } from 'data/sentiment/constants';
 import type { FeedbackSentimentRating } from 'types/graphql';
-import type { TimePeriod } from 'lib/dates';
+import type { TimePeriod } from 'types/common';
 
 interface Props {
   period: TimePeriod;

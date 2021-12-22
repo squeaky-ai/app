@@ -1,5 +1,5 @@
 import { range } from 'lodash';
-import type { TimePeriod } from 'lib/dates';
+import type { TimePeriod } from 'types/common';
 import type { FeedbackNpsReply } from 'types/graphql';
 
 import {

@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client';
 import { GET_OVERVIEW_QUERY } from 'data/overview/queries';
 import type { Site } from 'types/graphql';
 import type { Overview } from 'types/overview';
-import type { TimeRange } from 'lib/dates';
+import type { TimeRange } from 'types/common';
 
 interface UseOverview {
   loading: boolean;
