@@ -1,13 +1,11 @@
 import React from 'react';
 import type { FC } from 'react';
 import { sum } from 'lodash';
-import { parse } from 'date-fns';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, TooltipProps } from 'recharts';
 import { Label } from 'components/label';
 import { Pill } from 'components/pill';
 import { Checkbox } from 'components/checkbox';
-import { toDayOfMonth, expandDay } from 'lib/dates';
-import { formatResultsForPeriod } from 'lib/analytics/page-views';
+import { formatChartData, formatLabel } from 'lib/charts';
 import type { AnalyticsPageViews as PageView } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 
@@ -16,19 +14,10 @@ interface Props {
   pageViews: PageView[];
 }
 
-const formatLabel = (period: TimePeriod, label: string) => {
-  switch(period) {
-    case 'today':
-    case 'yesterday':
-      return label.replace(/(am|pm)$/, '.00$1');
-    case 'past_seven_days':
-      return expandDay(label);
-    case 'past_thirty_days':
-      return expandDay(label);
-    default:
-      return toDayOfMonth(parse(label, 'd/M', new Date()));
-  }
-};
+const sumOfPageViewType = (
+  pageviews: PageView[], 
+  key: keyof PageView
+) => sum(pageviews.map(v => v[key]));
 
 export const AnalyticsPageViews: FC<Props> = ({ pageViews, period }) => {
   const [show, setShow] = React.useState<string[]>(['all', 'unique']);
@@ -39,13 +28,12 @@ export const AnalyticsPageViews: FC<Props> = ({ pageViews, period }) => {
       : setShow([...show, value]);
   };
 
-  // Turn away now, you don't want to look
-  const { data, interval } = formatResultsForPeriod(period, pageViews);
+  const { data, interval } = formatChartData<PageView>(period, pageViews);
 
   const results = data.map(d => ({
-    date: d.date,
-    all: show.includes('all') ? d.all : 0,
-    unique: show.includes('unique') ? d.unique : 0,
+    date: d.key,
+    all: show.includes('all') ? sumOfPageViewType(d.data, 'total') : 0,
+    unique: show.includes('unique') ? sumOfPageViewType(d.data, 'unique') : 0,
   }));
 
   const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload, label }) => {
@@ -60,8 +48,8 @@ export const AnalyticsPageViews: FC<Props> = ({ pageViews, period }) => {
     );
   };
 
-  const totalCount = sum(data.map(d => d.all));
-  const uniqueCount = sum(data.map(d => d.unique));
+  const totalCount = sum(results.map(d => d.all));
+  const uniqueCount = sum(results.map(d => d.unique));
 
   return (
     <div className='analytics-graph'>

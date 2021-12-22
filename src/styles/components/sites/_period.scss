@@ -110,6 +110,10 @@
 
             .select {
               margin: 0 1rem 0 0;
+
+              select {
+                font-weight: var(--font-weight-normal);
+              }
             }
         
             .radio {
