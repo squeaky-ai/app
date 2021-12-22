@@ -1,5 +1,4 @@
 import { range, minBy } from 'lodash';
-import { expandDay } from 'lib/dates';
 import type { AbsoluteTime, TimePeriod } from 'types/common';
 
 import {
@@ -162,12 +161,8 @@ export const formatLabel = (period: TimePeriod, label: string) => {
     case 'today':
     case 'yesterday':
       return label.replace(/(am|pm)$/, '.00$1');
-    case 'past_seven_days':
-      return expandDay(label);
-    case 'past_thirty_days':
-      return expandDay(label);
     default:
-      return 'TODO'
+      return label;
   }
 };
 

@@ -27,8 +27,6 @@ const convertEpochToIsoStrings = (visitors: AnalyticsVisitor[]) => visitors.map(
 export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
   const [show, setShow] = React.useState<string[]>(['all', 'existing', 'new']);
 
-  console.log(visitors);
-
   const handleClick = (value: string) => {
     show.includes(value)
       ? setShow(show.filter(s => s !== value))
