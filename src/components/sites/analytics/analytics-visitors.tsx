@@ -28,7 +28,7 @@ export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
       : setShow([...show, value]);
   };
 
-  const { data, interval } = formatChartData<AnalyticsVisitor>(period, visitors);
+  const { data, interval } = formatChartData<AnalyticsVisitor>(period, visitors); 
 
   const results = data.map(d => ({
     date: d.key,

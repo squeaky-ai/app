@@ -1,11 +1,10 @@
 import { range, minBy } from 'lodash';
-import { toDayOfMonth, expandDay } from 'lib/dates';
+import { expandDay } from 'lib/dates';
 import type { AbsoluteTime, TimePeriod } from 'types/common';
 
 import {
-  parse,
   getHours,
-  getDate,
+  getDayOfYear,
   getMonth,
   format,
   subDays,
@@ -35,10 +34,12 @@ const getAmPmForHour = (hour: number): string => {
   return `${hour - 12}pm`;
 };
 
-const getDateFromTimestamp = (timestamp: string | number) => new Date(timestamp);
+const getDateFromTimestamp = (timestamp: string | number) => new Date(Number(timestamp));
+
+const toSlashyDate = (s: string) => s.split('/').reverse().join('-');
 
 const getDateGroupForRange = (from: Date, to: Date): [DateGroup, number] => {
-  const days = differenceInDays(from, to);
+  const days = differenceInDays(to, from);
 
   if (days === 1) {
     return ['hourly', null];
@@ -55,7 +56,7 @@ const getDurationForAbsoluteDate = (period: AbsoluteTime, input: ChartInput[]): 
   // The after duration need to be from the time
   // specified until todays date
   if (period.type === 'After') {
-    const from = new Date(period.fromDate);
+    const from = new Date(toSlashyDate(period.fromDate));
     const to = new Date();
 
     return getDateGroupForRange(from, to);
@@ -65,16 +66,16 @@ const getDurationForAbsoluteDate = (period: AbsoluteTime, input: ChartInput[]): 
   // specified until the earliest date we have data
   // for
   if (period.type === 'Before') {
-    const from = new Date(minBy(input, i => Number(i.timestamp)).timestamp);
-    const to = new Date(period.fromDate);
+    const from = new Date(Number(minBy(input, i => Number(i.timestamp)).timestamp));
+    const to = new Date(toSlashyDate(period.fromDate));
 
     return getDateGroupForRange(from, to);
   }
 
   // For between the duration needs to be between the 
   // two specified dates
-  const from = new Date(period.betweenFromDate);
-  const to = new Date(period.betweenToDate);
+  const from = new Date(toSlashyDate(period.betweenFromDate));
+  const to = new Date(toSlashyDate(period.betweenToDate));
 
   return getDateGroupForRange(from, to);
 };
@@ -104,7 +105,6 @@ const getDurationForPeriod = (period: TimePeriod, input: ChartInput[]): [DateGro
 // Yesterday, or single absolute today
 const getHourlyResults = <T extends ChartInput>(input: T[]): DataForPeriod<T> => {
   const data = range(0, 24).map(i => {
-    // Get all the values that fall within the particular hour
     const values = input.filter(s => getHours(getDateFromTimestamp(s.timestamp)) === i);
 
     return {
@@ -125,9 +125,7 @@ const getDailyResults = <T extends ChartInput>(input: T[], days: number): DataFo
 
   const data = range(0, days).map(i => {
     const date = subDays(now, i);
-
-    // Get all the values that fall within the given day of the week
-    const values = input.filter(s => getDate(getDateFromTimestamp(s.timestamp)) === getDate(date));
+    const values = input.filter(s => getDayOfYear(getDateFromTimestamp(s.timestamp)) === getDayOfYear(date));
 
     return {
       key: format(date, 'd/M'),
@@ -152,12 +150,12 @@ const getMonthlyResults = <T extends ChartInput>(input: T[], months: number): Da
     const values = input.filter(s => getMonth(getDateFromTimestamp(s.timestamp)) === getMonth(date));
 
     return {
-      key: format(date, 'MMM/yyyy'),
+      key: format(date, 'MMM yyyy'),
       data: values,
     };
   });
 
-  return { data: data.reverse(), interval: 2 };
+  return { data: data.reverse(), interval: 0 };
 };
 
 export const formatLabel = (period: TimePeriod, label: string) => {
@@ -170,7 +168,7 @@ export const formatLabel = (period: TimePeriod, label: string) => {
     case 'past_thirty_days':
       return expandDay(label);
     default:
-      return toDayOfMonth(parse(label, 'd/M', new Date()));
+      return 'TODO'
   }
 };
 
@@ -182,9 +180,8 @@ export const formatChartData = <T extends ChartInput>(period: TimePeriod, input:
   }
 
   if (group === 'daily') {
-    getDailyResults(input, duration);
+    return getDailyResults(input, duration);
   }
 
-  // Everything else
   return getMonthlyResults(input, duration);
 };

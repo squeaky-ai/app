@@ -9,7 +9,7 @@ import {
   format 
 } from 'date-fns';
 
-import { TimePeriod, TimeRange } from 'types/common';
+import { AbsoluteTime, TimePeriod, TimeRange } from 'types/common';
 
 export const toTimeString = (ms?: number | string) => {
   if (!ms) return '00:00:00';
@@ -69,51 +69,76 @@ export const toNiceDate = (timestamp?: number | string) => {
   return date.toUTCString().split(':').slice(0, 2).join(':');
 };
 
+const formatDateForGraphQL = (date: Date) => format(date, 'yyyy-M-dd');
+
+const expandAbsoluteDateToRange = (date: AbsoluteTime): TimeRange => {
+  const now = new Date();
+  const todaysDate = formatDateForGraphQL(now);
+
+  const toSlashyDate = (s: string) => s.split('/').reverse().join('-');
+
+  if (date.type === 'After') {
+    return {
+      fromDate: toSlashyDate(date.fromDate),
+      toDate: todaysDate,
+    };
+  }
+
+  if (date.type === 'Before') {
+    return {
+      fromDate: '2021-01-01',
+      toDate: toSlashyDate(date.fromDate),
+    };
+  }
+
+  return {
+    fromDate: toSlashyDate(date.betweenFromDate),
+    toDate: toSlashyDate(date.betweenToDate),
+  }
+};
+
 export const getDateRange = (period: TimePeriod): TimeRange => {
   const now = new Date();
-
-  const formatDate = (date: Date) => format(date, 'yyyy-M-dd');
-
-  const todaysDate = formatDate(now);
+  const todaysDate = formatDateForGraphQL(now);
 
   switch(period) {
     case 'today':
       return {
-        fromDate: formatDate(startOfToday()),
+        fromDate: formatDateForGraphQL(startOfToday()),
         toDate: todaysDate
       };
     case 'yesterday':
       return {
-        fromDate: formatDate(startOfYesterday()),
-        toDate: formatDate(endOfYesterday())
+        fromDate: formatDateForGraphQL(startOfYesterday()),
+        toDate: formatDateForGraphQL(endOfYesterday())
       };
     case 'past_seven_days':
       return {
-        fromDate: formatDate(subDays(now, 7)),
+        fromDate: formatDateForGraphQL(subDays(now, 7)),
         toDate: todaysDate
       };
     case 'past_fourteen_days':
       return {
-        fromDate: formatDate(subDays(now, 14)),
+        fromDate: formatDateForGraphQL(subDays(now, 14)),
         toDate: todaysDate
       };
     case 'past_thirty_days':
       return {
-        fromDate: formatDate(subDays(now, 30)),
+        fromDate: formatDateForGraphQL(subDays(now, 30)),
         toDate: todaysDate
       };
     case 'past_six_months':
       return {
-        fromDate: formatDate(subMonths(now, 6)),
+        fromDate: formatDateForGraphQL(subMonths(now, 6)),
         toDate: todaysDate
       };
     case 'past_year':
       return {
-        fromDate: formatDate(subMonths(now, 12)),
+        fromDate: formatDateForGraphQL(subMonths(now, 12)),
         toDate: todaysDate
       };
     default:
-      return period;
+      return expandAbsoluteDateToRange(period);
   }
 };
 
