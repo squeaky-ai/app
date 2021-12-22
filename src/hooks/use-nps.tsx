@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_NPS_QUERY } from 'data/nps/queries';
 import { FeedbackNpsResponseSort } from 'types/graphql';
-import type { TimeRange } from 'lib/dates';
+import type { TimeRange } from 'types/common';
 import type { Site, Nps } from 'types/graphql';
 
 interface Props {

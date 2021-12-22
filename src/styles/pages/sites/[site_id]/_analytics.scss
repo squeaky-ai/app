@@ -22,29 +22,6 @@
     .title {
       margin: 0;
     }
-
-    .period {
-      align-items: center;
-      display: flex;
-
-      @include breakpoint-md {
-        margin: 1rem 0 0 0;
-        width: 100%;
-      }
-
-      p {
-        margin: 0;
-      }
-
-      .select {
-        margin: 0 0 0 1rem;
-        width: 160px;
-
-        @include breakpoint-md {
-          width: 100%;
-        }
-      }
-    }
   }
 
   .empty {

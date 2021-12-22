@@ -1,34 +1,28 @@
 import React from 'react';
 import type { FC } from 'react';
 import { sum } from 'lodash';
-import { parse } from 'date-fns';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, TooltipProps } from 'recharts';
 import { Label } from 'components/label';
 import { Pill } from 'components/pill';
 import { Checkbox } from 'components/checkbox';
-import { toDayOfMonth, expandDay } from 'lib/dates';
-import { formatResultsForPeriod } from 'lib/analytics/visitors';
+import { formatChartData, formatLabel } from 'lib/charts';
 import type { AnalyticsVisitor } from 'types/graphql';
-import type { TimePeriod } from 'lib/dates';
+import type { TimePeriod } from 'types/common';
 
 interface Props {
   period: TimePeriod;
   visitors: AnalyticsVisitor[];
 }
 
-const formatLabel = (period: TimePeriod, label: string) => {
-  switch(period) {
-    case 'today':
-    case 'yesterday':
-      return label.replace(/(am|pm)$/, '.00$1');
-    case 'past_seven_days':
-      return expandDay(label);
-    case 'past_thirty_days':
-      return expandDay(label);
-    default:
-      return toDayOfMonth(parse(label, 'd/M', new Date()));
-  }
-};
+const sumOfVisitorsType = (
+  visitors: AnalyticsVisitor[], 
+  isNew: boolean,
+) => visitors.filter(v => isNew ? v.new : !v.new).length;
+
+const convertEpochToIsoStrings = (visitors: AnalyticsVisitor[]) => visitors.map(v => ({ 
+  ...v, 
+  timestamp: new Date(Number(v.timestamp)).toISOString() 
+}));
 
 export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
   const [show, setShow] = React.useState<string[]>(['all', 'existing', 'new']);
@@ -39,14 +33,13 @@ export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
       : setShow([...show, value]);
   };
 
-  // Turn away now, you don't want to look
-  const { data, interval } = formatResultsForPeriod(period, visitors);
+  const { data } = formatChartData<AnalyticsVisitor>(period, convertEpochToIsoStrings(visitors)); 
 
   const results = data.map(d => ({
-    date: d.date,
-    all: show.includes('all') ? d.all : 0,
-    existing: show.includes('existing') ? d.existing : 0,
-    new: show.includes('new') ? d.new : 0
+    date: d.key,
+    all: show.includes('all') ? d.data.length : 0,
+    existing: show.includes('existing') ? sumOfVisitorsType(d.data, false) : 0,
+    new: show.includes('new') ? sumOfVisitorsType(d.data, true) : 0
   }));
 
   const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload, label }) => {
@@ -62,8 +55,8 @@ export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
     );
   };
 
-  const totalCount = sum(data.map(d => d.all));
-  const newCount = sum(data.map(d => d.new));
+  const totalCount = sum(results.map(d => d.all));
+  const newCount = sum(results.map(d => d.new));
 
   return (
     <div className='analytics-graph'>
@@ -86,7 +79,7 @@ export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
           <LineChart data={results} margin={{ top: 0, left: -15, right: 0, bottom: 0 }}>
             <CartesianGrid strokeDasharray='3 3' vertical={false} />
 
-            <XAxis dataKey='date' interval={interval} stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} />
+            <XAxis dataKey='date' interval={0} stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} />
             <YAxis stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} />
 
             <Tooltip content={<CustomTooltip />} />

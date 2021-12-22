@@ -1,16 +1,25 @@
 import React from 'react';
 import type { FC } from 'react';
 import Image from 'next/image';
-import { omit } from 'lodash';
+import { average } from 'lib/maths';
+import { omit, groupBy } from 'lodash';
 import { ResponsiveContainer, CartesianGrid, LineChart, Line, YAxis, XAxis, Tooltip, TooltipProps } from 'recharts';
-import { formatResultsForPeriod } from 'lib/feedback/ratings';
+import { formatChartData } from 'lib/charts';
 import { EMOJIS } from 'data/sentiment/constants';
 import type { FeedbackSentimentRating } from 'types/graphql';
-import type { TimePeriod } from 'lib/dates';
+import type { TimePeriod } from 'types/common';
 
 interface Props {
   period: TimePeriod;
   ratings: FeedbackSentimentRating[];
+}
+
+interface FeedbackData {
+  0: number;
+  1: number;
+  2: number;
+  3: number;
+  4: number;
 }
 
 const getAxisProps = (props: any) => omit(props, [
@@ -19,8 +28,30 @@ const getAxisProps = (props: any) => omit(props, [
   'visibleTicksCount',
 ]);
 
+const avg = (nums: number[]) => Math.ceil(average(nums));
+
+const groupScoreCounts = (ratings: FeedbackSentimentRating[]): FeedbackData => {
+  const groups = groupBy(ratings.map(r => r.score));
+
+  const count = (num: number) => (groups[num] || []).length;
+
+  return {
+    0: count(0),
+    1: count(1),
+    2: count(2),
+    3: count(3),
+    4: count(4),
+  }
+};
+
 export const SentimentRatings: FC<Props> = ({ period, ratings }) => {
-  const { data } = formatResultsForPeriod(period, ratings);
+  const { data } = formatChartData<FeedbackSentimentRating>(period, ratings);
+
+  const results = data.map(d => ({
+    date: d.key,
+    score: avg(d.data.map(s => s.score)),
+    ...groupScoreCounts(d.data),
+  }));
 
   const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload }) => {
     if (!active || payload?.length < 1) return null;
@@ -40,7 +71,7 @@ export const SentimentRatings: FC<Props> = ({ period, ratings }) => {
   return (
     <div className='chart-wrapper'>
       <ResponsiveContainer>
-        <LineChart data={data} height={250} margin={{ left: -15 }}>
+        <LineChart data={results} height={250} margin={{ left: -15 }}>
           <CartesianGrid strokeDasharray='3 3' vertical={false} />
 
           <YAxis 

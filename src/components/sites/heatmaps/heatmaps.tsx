@@ -7,14 +7,15 @@ import { Spinner } from 'components/spinner';
 import { Container } from 'components/container';
 import { Illustration } from 'components/illustration';
 import { Card } from 'components/card';
+import { Period } from 'components/sites/period/period';
 import { HeatmapsClicks } from 'components/sites/heatmaps/heatmaps-clicks';
 import { HeatmapsScrolls } from 'components/sites/heatmaps/heatmaps-scrolls';
 import { HeatmapsPages } from 'components/sites/heatmaps/heatmaps-pages';
-import { HeatmapsPeriods } from 'components/sites/heatmaps/heatmaps-periods';
 import { HeatmapsPage } from 'components/sites/heatmaps/heatmaps-page';
 import { useHeatmaps } from 'hooks/use-heatmaps';
-import { getDateRange, TimePeriod } from 'lib/dates';
+import { getDateRange } from 'lib/dates';
 import { HeatmapsDevice, HeatmapsType } from 'types/graphql';
+import type { TimePeriod } from 'types/common';
 
 interface Props {
   page: string;
@@ -42,7 +43,7 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
       <div className='options'>
         <div className='left'>
           <HeatmapsPages page={page} pages={pages} setPage={setPage} />
-          <HeatmapsPeriods period={period} setPeriod={setPeriod} />
+          <Period period={period} onChange={setPeriod} />
         </div>
 
         <div className='right'>

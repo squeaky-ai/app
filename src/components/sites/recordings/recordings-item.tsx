@@ -15,7 +15,7 @@ import { RecordingsShare } from 'components/sites/recordings/recordings-share';
 import { RecordingDelete } from 'components/sites/recordings/recording-delete';
 import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
 import { toNiceDate, toTimeString } from 'lib/dates';
-import { npsColor } from 'lib/feedback/nps';
+import { npsColor } from 'lib/feedback';
 import { EMOJIS } from 'data/sentiment/constants';
 import type { Recording } from 'types/graphql';
 import type { Site } from 'types/graphql';

@@ -5,19 +5,14 @@ import classnames from 'classnames';
 import { Main } from 'components/main';
 import { EmptyState } from 'components/sites/empty-state';
 import { Page } from 'components/sites/page';
-import { Select, Option } from 'components/select';
 import { Analytics } from 'components/sites/analytics/analytics';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
+import { Period } from 'components/sites/period/period';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
-import { TIME_PERIODS } from 'data/heatmaps/constants';
-import type { TimePeriod } from 'lib/dates';
+import type { TimePeriod } from 'types/common';
 
 const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
   const [period, setPeriod] = React.useState<TimePeriod>('past_seven_days');
-
-  const handleDateChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setPeriod(event.target.value as TimePeriod);
-  };
   
   return (
     <>
@@ -32,16 +27,7 @@ const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
 
             <div className='heading'>
               <h3 className='title'>Analytics</h3>
-              <div className='period'>
-                <p><b>Period:</b></p>
-                <Select onChange={handleDateChange} value={period}>
-                  {TIME_PERIODS.map(p => (
-                    <Option value={p.key} key={p.key}>
-                      {p.name}
-                    </Option>
-                  ))}
-                </Select>
-              </div>
+              <Period period={period} onChange={setPeriod} />
             </div>
 
             <EmptyState

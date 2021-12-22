@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_SENTIMENT_QUERY } from 'data/sentiment/queries';
 import { FeedbackSentimentResponseSort } from 'types/graphql';
-import type { TimeRange } from 'lib/dates';
+import type { TimeRange } from 'types/common';
 import type { Site, Sentiment } from 'types/graphql';
 
 interface Props {

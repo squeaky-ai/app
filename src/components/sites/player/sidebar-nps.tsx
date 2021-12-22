@@ -1,6 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
-import { npsColor } from 'lib/feedback/nps';
+import { npsColor } from 'lib/feedback';
 import type { FeedbackNpsResponseItem } from 'types/graphql';
 
 interface Props {
