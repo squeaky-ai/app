@@ -16,6 +16,7 @@ import { AnalyticsSessionsPerVisitor } from 'components/sites/analytics/analytic
 import { AnalyticsPagesPerSession } from 'components/sites/analytics/analytics-pages-per-session';
 import { AnalyticsScreenWidths } from 'components/sites/analytics/analytics-screen-widths';
 import { Error } from 'components/error';
+import { NoResults } from 'components/sites/no-results';
 import type { TimePeriod } from 'lib/dates';
 
 interface Props {
@@ -29,8 +30,12 @@ export const Analytics: FC<Props> = ({ period }) => {
     return <Error />;
   }
 
-  if (!analytics || loading) {
+  if (loading) {
     return <Spinner />;
+  }
+
+  if (!analytics.visitors.length) {
+    return <NoResults title='There is no analytics data available for your chosen period' illustration={2} />
   }
 
   return (

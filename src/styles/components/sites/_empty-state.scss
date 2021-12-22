@@ -31,4 +31,11 @@
   &.show {
     display: flex;
   }
+
+  &.no-results {
+    h4 {
+      max-width: 28rem;
+      text-align: center;
+    }
+  }
 }
