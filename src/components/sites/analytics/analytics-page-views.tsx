@@ -19,6 +19,11 @@ const sumOfPageViewType = (
   key: keyof PageView
 ) => sum(pageviews.map(v => v[key]));
 
+const convertEpochToIsoStrings = (visitors: PageView[]) => visitors.map(v => ({ 
+  ...v, 
+  timestamp: new Date(Number(v.timestamp)).toISOString() 
+}));
+
 export const AnalyticsPageViews: FC<Props> = ({ pageViews, period }) => {
   const [show, setShow] = React.useState<string[]>(['all', 'unique']);
 
@@ -28,7 +33,7 @@ export const AnalyticsPageViews: FC<Props> = ({ pageViews, period }) => {
       : setShow([...show, value]);
   };
 
-  const { data, interval } = formatChartData<PageView>(period, pageViews);
+  const { data } = formatChartData<PageView>(period, convertEpochToIsoStrings(pageViews));
 
   const results = data.map(d => ({
     date: d.key,
@@ -71,7 +76,7 @@ export const AnalyticsPageViews: FC<Props> = ({ pageViews, period }) => {
           <LineChart data={results} margin={{ top: 0, left: -15, right: 0, bottom: 0 }}>
             <CartesianGrid strokeDasharray='3 3' vertical={false} />
 
-            <XAxis dataKey='date' interval={interval} stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} />
+            <XAxis dataKey='date' interval={0} stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} />
             <YAxis stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} />
 
             <Tooltip content={<CustomTooltip />} />

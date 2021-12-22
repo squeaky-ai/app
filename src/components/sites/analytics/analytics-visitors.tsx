@@ -17,10 +17,17 @@ interface Props {
 const sumOfVisitorsType = (
   visitors: AnalyticsVisitor[], 
   isNew: boolean,
-) => visitors.filter(v => isNew ? v.new : !v.new).length
+) => visitors.filter(v => isNew ? v.new : !v.new).length;
+
+const convertEpochToIsoStrings = (visitors: AnalyticsVisitor[]) => visitors.map(v => ({ 
+  ...v, 
+  timestamp: new Date(Number(v.timestamp)).toISOString() 
+}));
 
 export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
   const [show, setShow] = React.useState<string[]>(['all', 'existing', 'new']);
+
+  console.log(visitors);
 
   const handleClick = (value: string) => {
     show.includes(value)
@@ -28,7 +35,7 @@ export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
       : setShow([...show, value]);
   };
 
-  const { data, interval } = formatChartData<AnalyticsVisitor>(period, visitors); 
+  const { data } = formatChartData<AnalyticsVisitor>(period, convertEpochToIsoStrings(visitors)); 
 
   const results = data.map(d => ({
     date: d.key,
@@ -74,7 +81,7 @@ export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
           <LineChart data={results} margin={{ top: 0, left: -15, right: 0, bottom: 0 }}>
             <CartesianGrid strokeDasharray='3 3' vertical={false} />
 
-            <XAxis dataKey='date' interval={interval} stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} />
+            <XAxis dataKey='date' interval={0} stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} />
             <YAxis stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} />
 
             <Tooltip content={<CustomTooltip />} />

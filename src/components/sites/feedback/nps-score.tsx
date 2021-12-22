@@ -50,7 +50,7 @@ export const NpsScore: FC<Props> = ({ period, scores }) => {
             axisLine={false}
             fontSize={13}
             domain={[-100, 100]}
-            interval={1}
+            interval={0}
           />
 
           <XAxis 

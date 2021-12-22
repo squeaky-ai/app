@@ -26,7 +26,7 @@ export const NpsReplies: FC<Props> = ({ period, replies }) => {
   const { data } = formatChartData<FeedbackNpsReply>(period, replies.responses);
 
   const results = data.map(d => ({
-    data: d.key,
+    date: d.key,
     count: d.data.length,
     ...getNpsCounts(d.data),
   }));

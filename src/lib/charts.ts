@@ -15,7 +15,7 @@ import {
 type DateGroup = 'hourly' | 'daily' | 'monthly';
 
 export interface ChartInput {
-  timestamp: number | string;
+  timestamp: string;
 }
 
 export interface ChartData<T extends ChartInput> {
@@ -25,7 +25,6 @@ export interface ChartData<T extends ChartInput> {
 
 export interface DataForPeriod<T extends ChartInput> {
   data: ChartData<T>[];
-  interval: number;
 }
 
 const getAmPmForHour = (hour: number): string => {
@@ -34,7 +33,7 @@ const getAmPmForHour = (hour: number): string => {
   return `${hour - 12}pm`;
 };
 
-const getDateFromTimestamp = (timestamp: string | number) => new Date(Number(timestamp));
+const getDateFromTimestamp = (timestamp: string) => new Date(timestamp);
 
 const toSlashyDate = (s: string) => s.split('/').reverse().join('-');
 
@@ -113,7 +112,7 @@ const getHourlyResults = <T extends ChartInput>(input: T[]): DataForPeriod<T> =>
     };
   });
 
-  return { data, interval: 1 };
+  return { data };
 };
 
 // Group the results for a graph where the axis 
@@ -133,7 +132,7 @@ const getDailyResults = <T extends ChartInput>(input: T[], days: number): DataFo
     };
   });
 
-  return { data: data.reverse(), interval: 0 };
+  return { data: data.reverse() };
 };
 
 // Group the results for a graph where the axis 
@@ -155,7 +154,7 @@ const getMonthlyResults = <T extends ChartInput>(input: T[], months: number): Da
     };
   });
 
-  return { data: data.reverse(), interval: 0 };
+  return { data: data.reverse() };
 };
 
 export const formatLabel = (period: TimePeriod, label: string) => {
