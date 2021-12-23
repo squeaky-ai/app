@@ -8,11 +8,11 @@ import { Page } from 'components/sites/page';
 import { Analytics } from 'components/sites/analytics/analytics';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { Period } from 'components/sites/period/period';
+import { usePeriod } from 'hooks/use-period';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
-import type { TimePeriod } from 'types/common';
 
 const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
-  const [period, setPeriod] = React.useState<TimePeriod>('past_fourteen_days');
+  const { period, setPeriod } = usePeriod('analytics');
   
   return (
     <>

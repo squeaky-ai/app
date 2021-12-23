@@ -17,13 +17,15 @@ import { FILTERS, COLUMNS, DEFAULT_COLUMNS } from 'data/recordings/constants';
 import { Preference } from 'lib/preferences';
 import { getColumnPreferences } from 'lib/tables';
 import { useFilters } from 'hooks/use-filters';
+import { usePeriod } from 'hooks/use-period';
 import type { RecordingsFilters } from 'types/graphql';
-import type { TimePeriod, Column, ValueOf } from 'types/common';
+import type { Column, ValueOf } from 'types/common';
 
 const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
   const [columns, setColumns] = React.useState<Column[]>(DEFAULT_COLUMNS);
-  const [period, setPeriod] = React.useState<TimePeriod>('past_fourteen_days');
   const [selected, setSelected] = React.useState<string[]>([]);
+
+  const { period, setPeriod } = usePeriod('recordings');
 
   const { filters, setFilters } = useFilters<RecordingsFilters>('recordings');
 

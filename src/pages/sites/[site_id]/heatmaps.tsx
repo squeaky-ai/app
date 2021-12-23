@@ -10,12 +10,13 @@ import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { Heatmaps } from 'components/sites/heatmaps/heatmaps';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { usePages } from 'hooks/use-pages';
-import type { TimePeriod } from 'types/common';
+import { usePeriod } from 'hooks/use-period';
 
 
 const SitesHeatmaps: NextPage<ServerSideProps> = ({ user }) => {
   const [page, setPage] = React.useState<string>(null);
-  const [period, setPeriod] = React.useState<TimePeriod>('past_seven_days');
+
+  const { period, setPeriod } = usePeriod('heatmaps');
 
   const { pages, loading } = usePages();
 
