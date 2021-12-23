@@ -17,7 +17,7 @@ export type RelativeTime =
   'past_year';
 
 export type AbsoluteTime = {
-  type?: 'Before' | 'After' | 'Between';
+  fromType?: 'Before' | 'After' | 'Between';
   fromDate?: string;
   betweenFromDate?: string;
   betweenToDate?: string;

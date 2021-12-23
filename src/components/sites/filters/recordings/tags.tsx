@@ -2,7 +2,6 @@ import React from 'react';
 import type { FC } from 'react';
 import { Icon } from 'components/icon';
 import { Button } from 'components/button';
-import { TagsDate } from 'components/sites/filters/recordings/tags-date';
 import { TagsDuration } from 'components/sites/filters/recordings/tags-duration';
 import { TagsStatus } from 'components/sites/filters/common/tags-status';
 import { TagsStartUrl } from 'components/sites/filters/recordings/tags-start-page';
@@ -23,7 +22,6 @@ interface Props {
 }
 
 export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
-  const hasDateRange = filters.date.rangeType !== null;
   const hasStatus = filters.status !== null;
   const hasDuration = filters.duration.rangeType !== null;
   const hasStartUrl = filters.startUrl !== null;
@@ -37,7 +35,6 @@ export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
   const hasLanguages = filters.languages.length > 0;
 
   const hasFilters = (
-    hasDateRange ||
     hasStatus ||
     hasDuration ||
     hasStartUrl ||
@@ -55,10 +52,6 @@ export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
 
   return (
     <div className='filter-tags'>
-      {hasDateRange && (
-        <TagsDate filters={filters} updateFilters={updateFilters} />
-      )}
-
       {hasStatus && (
         <TagsStatus filters={filters} updateFilters={updateFilters} />
       )}

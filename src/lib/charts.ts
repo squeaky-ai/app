@@ -53,7 +53,7 @@ const getDateGroupForRange = (from: Date, to: Date): [DateGroup, number] => {
 const getDurationForAbsoluteDate = (period: AbsoluteTime, input: ChartInput[]): [DateGroup, number] => {
   // The after duration need to be from the time
   // specified until todays date
-  if (period.type === 'After') {
+  if (period.fromType === 'After') {
     const from = new Date(toSlashyDate(period.fromDate));
     const to = new Date();
 
@@ -63,7 +63,7 @@ const getDurationForAbsoluteDate = (period: AbsoluteTime, input: ChartInput[]): 
   // The before duration needs to be from the time
   // specified until the earliest date we have data
   // for
-  if (period.type === 'Before') {
+  if (period.fromType === 'Before') {
     const from = new Date(Number(minBy(input, i => Number(i.timestamp)).timestamp));
     const to = new Date(toSlashyDate(period.fromDate));
 

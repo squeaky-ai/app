@@ -5,7 +5,6 @@ import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { Dropdown } from 'components/dropdown';
 import { Label } from 'components/label';
-import { FiltersDate } from 'components/sites/filters/common/filters-date';
 import { FiltersStatus } from 'components/sites/filters/common/filters-status';
 import { FiltersDuration } from 'components/sites/filters/recordings/filters-duration';
 import { FiltersPage } from 'components/sites/filters/common/filters-page';
@@ -23,7 +22,6 @@ interface Props {
 }
 
 enum FilterType {
-  Date,
   Status,
   Duration,
   StartUrl,
@@ -55,10 +53,6 @@ export const Filters: FC<Props> = ({ filters, updateFilters }) => {
   return ( 
     <div className='menu-item filters'>
       <Dropdown button={<><Icon name='equalizer-line' /> Filters</>} dropdown-menu='down'>
-        <Button onClick={() => handleFilterChange(FilterType.Date)} className={classnames({ open: openFilter === FilterType.Date})}>
-          <Icon name='arrow-drop-left-line' />
-          Date
-        </Button>
         <Button onClick={() => handleFilterChange(FilterType.Status)} className={classnames({ open: openFilter === FilterType.Status})}>
           <Icon name='arrow-drop-left-line' />
           Status
@@ -101,12 +95,6 @@ export const Filters: FC<Props> = ({ filters, updateFilters }) => {
         </Button>
 
         <div className={classnames('popout filters', { open: openFilter !== null })}>
-          {openFilter === FilterType.Date && (
-            <>
-              <Label>Date</Label>
-              <FiltersDate value={filters.date} onUpdate={handleUpdate('date')} onClose={handleFilterClose} />
-            </>
-          )}
           {openFilter === FilterType.Status && (
             <>
               <Label>Status</Label>

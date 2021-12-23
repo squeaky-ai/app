@@ -77,14 +77,14 @@ const expandAbsoluteDateToRange = (date: AbsoluteTime): TimeRange => {
 
   const toSlashyDate = (s: string) => s.split('/').reverse().join('-');
 
-  if (date.type === 'After') {
+  if (date.fromType === 'After') {
     return {
       fromDate: toSlashyDate(date.fromDate),
       toDate: todaysDate,
     };
   }
 
-  if (date.type === 'Before') {
+  if (date.fromType === 'Before') {
     return {
       fromDate: '2021-01-01',
       toDate: toSlashyDate(date.fromDate),

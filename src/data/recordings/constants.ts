@@ -1,4 +1,4 @@
-import { FiltersSize, FiltersStart } from 'types/graphql';
+import { FiltersSize } from 'types/graphql';
 import type { Activity } from 'types/event';
 import type { Column } from 'types/common';
 import type { RecordingsFilters } from 'types/graphql';
@@ -141,13 +141,6 @@ export const FILTERS: RecordingsFilters = {
   visitedPages: [],
   unvisitedPages: [],
   status: null,
-  date: {
-    rangeType: null,
-    fromType: FiltersStart.Before,
-    fromDate: null,
-    betweenFromDate: null,
-    betweenToDate: null,
-  },
   duration: {
     rangeType: null,
     fromType: FiltersSize.GreaterThan,
