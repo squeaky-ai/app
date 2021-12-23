@@ -19,7 +19,7 @@ export const BreadCrumbs: FC<Props> = ({ site, items }) => (
       <a>All Sites</a>
     </Link>
     <span>/</span>
-    <Link href={`/sites/${site.id}/overview`}>
+    <Link href={`/sites/${site.id}/dashboard`}>
       <a>{site.name}</a>
     </Link>
     <span>/</span>

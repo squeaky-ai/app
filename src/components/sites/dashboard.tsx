@@ -8,7 +8,7 @@ import { Tooltip } from 'components/tooltip';
 import { Divider } from 'components/divider';
 import { PlayerPreview } from 'components/sites/player/player-preview';
 import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
-import { useOverview } from 'hooks/use-overview';
+import { useDashboard } from 'hooks/use-dashboard';
 import { toTimeString } from 'lib/dates';
 import type { Site } from 'types/graphql';
 import { Pill } from 'components/pill';
@@ -19,14 +19,14 @@ interface Props {
   site: Site;
 }
 
-export const Overview: FC<Props> = ({ site }) => {
+export const Dashboard: FC<Props> = ({ site }) => {
   const router = useRouter();
-  const { overview, error, loading } = useOverview();
+  const { dashboard, error, loading } = useDashboard();
 
   const { site_id } = router.query;
 
-  const notes = overview.notes?.items;
-  const recording = overview.recordingLatest;
+  const notes = dashboard.notes?.items;
+  const recording = dashboard.recordingLatest;
 
   if (error) {
     return <Error />;
@@ -37,17 +37,17 @@ export const Overview: FC<Props> = ({ site }) => {
   }
 
   return (
-    <div className='overview-grid'>
+    <div className='dashboard-grid'>
       <Card className='visitors'>
         <h5>
           <Icon name='group-line' />
           Visitors
         </h5>
         <h2>
-          {overview.analytics.visitorsCount.total.toLocaleString()}
+          {dashboard.analytics.visitorsCount.total.toLocaleString()}
         </h2>
         <div className='bottom'>
-          <Pill type='tertiary'>{overview.analytics.visitorsCount.new.toLocaleString()} New</Pill>
+          <Pill type='tertiary'>{dashboard.analytics.visitorsCount.new.toLocaleString()} New</Pill>
 
           <div className='link'>
             <Link href={`/sites/${site_id}/visitors`}>
@@ -64,10 +64,10 @@ export const Overview: FC<Props> = ({ site }) => {
           Recordings
         </h5>
         <h2>
-          {overview.analytics.recordingsCount.total.toLocaleString()}
+          {dashboard.analytics.recordingsCount.total.toLocaleString()}
         </h2>
         <div className='bottom'>
-          <Pill type='tertiary'>{overview.analytics.recordingsCount.new.toLocaleString()} New</Pill>
+          <Pill type='tertiary'>{dashboard.analytics.recordingsCount.new.toLocaleString()} New</Pill>
 
           <div className='link'>
             <Link href={`/sites/${site_id}/recordings`}>
@@ -83,7 +83,7 @@ export const Overview: FC<Props> = ({ site }) => {
           <Icon name='pages-line' />
           Page Views
         </h5>
-        <h2>{overview.analytics.pageViewCount.toLocaleString()}</h2>
+        <h2>{dashboard.analytics.pageViewCount.toLocaleString()}</h2>
         <div className='link'>
           <Link href={`/sites/${site_id}/analytics`}>
             <a>Analytics</a>

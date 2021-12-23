@@ -1,18 +1,18 @@
 import { format } from 'date-fns';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
-import { GET_OVERVIEW_QUERY } from 'data/overview/queries';
+import { GET_DASHBOARD_QUERY } from 'data/dashboard/queries';
 import type { Site } from 'types/graphql';
-import type { Overview } from 'types/overview';
+import type { Dashboard } from 'types/dashboard';
 import type { TimeRange } from 'types/common';
 
-interface UseOverview {
+interface UseDashboard {
   loading: boolean;
   error: boolean;
-  overview: Overview;
+  dashboard: Dashboard;
 }
 
-export const useOverview = (): UseOverview => {
+export const useDashboard = (): UseDashboard => {
   const router = useRouter();
 
   const now = new Date();
@@ -22,14 +22,14 @@ export const useOverview = (): UseOverview => {
     toDate: format(now, 'yyyy-MM-dd')
   };
 
-  const { data, loading, error, previousData } = useQuery<{ site: Site }>(GET_OVERVIEW_QUERY, {
+  const { data, loading, error, previousData } = useQuery<{ site: Site }>(GET_DASHBOARD_QUERY, {
     variables: {
       siteId: router.query.site_id as string,
       ...range,
     }
   });
 
-  const fallback: Overview = {
+  const fallback: Dashboard = {
     notes: {
       items: []
     },
@@ -50,8 +50,8 @@ export const useOverview = (): UseOverview => {
   return {
     loading,
     error: !!error,
-    overview: (data
+    dashboard: (data
       ? data.site
-      : previousData ? previousData.site : fallback) as Overview
+      : previousData ? previousData.site : fallback) as Dashboard
   };
 };

@@ -110,10 +110,10 @@ export const Sidebar: FC = () => {
             </Link>
           </div>
           <div className='nav right'>
-            <Link href={`/sites/${siteId}/overview`}>
-              <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/overview`) })} data-label='Overview'>
+            <Link href={`/sites/${siteId}/dashboard`}>
+              <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/dashboard`) })} data-label='Dashboard'>
                 <Icon name='dashboard-3-line' />
-                <span>Overview</span>
+                <span>Dashboard</span>
               </a>
             </Link>
             <Divider />

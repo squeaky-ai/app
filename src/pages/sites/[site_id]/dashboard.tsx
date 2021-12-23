@@ -6,31 +6,31 @@ import { Main } from 'components/main';
 import { EmptyState } from 'components/sites/empty-state';
 import { Page } from 'components/sites/page';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
-import { Overview } from 'components/sites/overview';
+import { Dashboard } from 'components/sites/dashboard';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
-const SitesOverview: NextPage<ServerSideProps> = ({ user }) => (
+const SitesDashboard: NextPage<ServerSideProps> = ({ user }) => (
   <>
     <Head>
-      <title>Squeaky | Site Overview</title>
+      <title>Squeaky | Site Dashboard</title>
     </Head>
 
     <Page user={user} scope={[]}>
       {({ site }) => (
         <Main className={classnames({ empty: site.recordingsCount === 0 })}>
-          <BreadCrumbs site={site} items={[{ name: 'Overview' }]} />
+          <BreadCrumbs site={site} items={[{ name: 'Dashboard' }]} />
 
-          <h3 className='title'>Overview</h3>
+          <h3 className='title'>Dashboard</h3>
 
           <EmptyState
             title='There is currently no dashboard data'
             subtitle='Accessing The Dashboard'
             illustration={5}
-            videoName='Overview Intro'
+            videoName='Dashboard Intro'
           />
 
           {site.recordingsCount > 0 && (
-            <Overview site={site} />
+            <Dashboard site={site} />
           )}
         </Main>
       )}
@@ -38,5 +38,5 @@ const SitesOverview: NextPage<ServerSideProps> = ({ user }) => (
   </>
 );
 
-export default SitesOverview;
+export default SitesDashboard;
 export { getServerSideProps };
