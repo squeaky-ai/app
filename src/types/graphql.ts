@@ -814,7 +814,6 @@ export type RecordingsEvents = {
 
 export type RecordingsFilters = {
   browsers: Array<Scalars['String']>;
-  date: FiltersDate;
   devices: Array<Scalars['String']>;
   duration: FiltersDuration;
   exitUrl?: InputMaybe<Scalars['String']>;
@@ -957,9 +956,11 @@ export type SiteRecordingArgs = {
 
 export type SiteRecordingsArgs = {
   filters?: InputMaybe<RecordingsFilters>;
+  fromDate: Scalars['String'];
   page?: InputMaybe<Scalars['Int']>;
   size?: InputMaybe<Scalars['Int']>;
   sort?: InputMaybe<RecordingsSort>;
+  toDate: Scalars['String'];
 };
 
 

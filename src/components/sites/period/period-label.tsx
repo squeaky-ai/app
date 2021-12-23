@@ -19,13 +19,13 @@ export const PeriodLabel: FC<Props> = ({ period }) => {
     return <span>{TIME_PERIODS.find(t => t.key === period).name}</span>;
   }
 
-  const { type, fromDate, betweenFromDate, betweenToDate } = period;
+  const { fromType, fromDate, betweenFromDate, betweenToDate } = period;
 
-  if (type === 'Before') {
+  if (fromType === 'Before') {
     return <span>{`Before ${fromDate}`}</span>;
   }
 
-  if (type === 'After') {
+  if (fromType === 'After') {
     return <span>{`After ${fromDate}`}</span>;
   }
 

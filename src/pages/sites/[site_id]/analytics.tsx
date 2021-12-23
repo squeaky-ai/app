@@ -12,7 +12,7 @@ import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import type { TimePeriod } from 'types/common';
 
 const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
-  const [period, setPeriod] = React.useState<TimePeriod>('past_seven_days');
+  const [period, setPeriod] = React.useState<TimePeriod>('past_fourteen_days');
   
   return (
     <>

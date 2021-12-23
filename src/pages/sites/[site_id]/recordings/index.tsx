@@ -12,15 +12,17 @@ import { Tags } from 'components/sites/filters/recordings/tags';
 import { RecordingsColumns } from 'components/sites/recordings/recordings-columns';
 import { RecordingsBulkActions } from 'components/sites/recordings/recordings-bulk-actions';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { Period } from 'components/sites/period/period';
 import { FILTERS, COLUMNS, DEFAULT_COLUMNS } from 'data/recordings/constants';
 import { Preference } from 'lib/preferences';
 import { getColumnPreferences } from 'lib/tables';
 import { useFilters } from 'hooks/use-filters';
 import type { RecordingsFilters } from 'types/graphql';
-import type { Column, ValueOf } from 'types/common';
+import type { TimePeriod, Column, ValueOf } from 'types/common';
 
 const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
   const [columns, setColumns] = React.useState<Column[]>(DEFAULT_COLUMNS);
+  const [period, setPeriod] = React.useState<TimePeriod>('past_fourteen_days');
   const [selected, setSelected] = React.useState<string[]>([]);
 
   const { filters, setFilters } = useFilters<RecordingsFilters>('recordings');
@@ -53,6 +55,7 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
               <menu>
                 {site.recordingsCount > 0 && (
                   <>
+                    <Period period={period} onChange={setPeriod} />
                     <RecordingsBulkActions
                       site={site}
                       selected={selected}
@@ -90,7 +93,8 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
                 
                 <Recordings 
                   site={site} 
-                  filters={filters} 
+                  filters={filters}
+                  period={period}
                   columns={columns} 
                   selected={selected}
                   setSelected={setSelected}

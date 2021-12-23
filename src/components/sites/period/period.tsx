@@ -34,19 +34,27 @@ const getAbsolutePeriod = (period: TimePeriod): AbsoluteTime => {
 };
 
 export const Period: FC<Props> = ({ period, onChange }) => {
+  const ref = React.useRef<Dropdown>(null);
+
   const [openPeriod, setOpenPeriod] = React.useState<PeriodType | null>(null);
 
-  const handleFilterChange = (filter: PeriodType): void => {
-    setOpenPeriod(openPeriod === filter ? null : filter);
+  const handleFilterChange = (period: PeriodType): void => {
+    setOpenPeriod(openPeriod === period ? null : period);
   };
 
   const handleFilterClose = () => {
     setOpenPeriod(null);
+    if (ref.current) ref.current.close();
+  };
+
+  const handleDateChange = (period: TimePeriod) => {
+    onChange(period);
+    handleFilterClose();
   };
 
   return (
     <div className='period'>
-      <Dropdown button={<><Icon name='calendar-line' /> Period: <PeriodLabel period={period} /></>} dropdown-menu='down'>
+      <Dropdown ref={ref} button={<><Icon name='calendar-line' /> Period: <PeriodLabel period={period} /></>} dropdown-menu='down'>
         <Button onClick={() => handleFilterChange(PeriodType.Relative)} className={classnames({ open: openPeriod === PeriodType.Relative})}>
           <Icon name='arrow-drop-left-line' />
           Relative
@@ -60,13 +68,13 @@ export const Period: FC<Props> = ({ period, onChange }) => {
           {openPeriod === PeriodType.Relative && (
             <>
               <Label>Relative</Label>
-              <Relative date={getRelativePeriod(period)} onClose={handleFilterClose} onChange={onChange} />
+              <Relative date={getRelativePeriod(period)} onClose={handleFilterClose} onChange={handleDateChange} />
             </>
           )}
           {openPeriod === PeriodType.Absolute && (
             <>
               <Label>Absolute</Label>
-              <Absolute date={getAbsolutePeriod(period)} onClose={handleFilterClose} onChange={onChange} />
+              <Absolute date={getAbsolutePeriod(period)} onClose={handleFilterClose} onChange={handleDateChange} />
             </>
           )}
         </div>

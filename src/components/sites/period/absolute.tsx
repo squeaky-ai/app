@@ -15,7 +15,7 @@ interface Props {
 }
 
 const AbsoluteSchema = Yup.object().shape({
-  type: Yup.string().oneOf(['Before', 'After', 'Between']),
+  fromType: Yup.string().oneOf(['Before', 'After', 'Between']),
   fromDate: Yup.string(),
   betweenFromDate: Yup.string(),
   betweenToDate: Yup.string(),
@@ -25,7 +25,7 @@ export const Absolute: FC<Props> = ({ date, onClose, onChange }) => {
   return (
     <div className='absolute'>
       <Formik
-        initialValues={date || { type: '', fromDate: '', betweenFromDate: '', betweenToDate: '' }}
+        initialValues={date || { fromType: '', fromDate: '', betweenFromDate: '', betweenToDate: '' }}
         validationSchema={AbsoluteSchema}
         onSubmit={(values, { setSubmitting }) => {
           (async () => {
@@ -45,13 +45,13 @@ export const Absolute: FC<Props> = ({ date, onClose, onChange }) => {
           <form onSubmit={handleSubmit}>
             <div className='row'>
               <Radio 
-                name='type'
+                name='fromType'
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value='Before'
-                checked={values.type ? values.type !== 'Between' : false}
+                checked={values.fromType ? values.fromType !== 'Between' : false}
               />
-              <Select name='type' onChange={handleChange} value={values.type}>
+              <Select name='fromType' onChange={handleChange} value={values.fromType}>
                 <Option value='Before'>Before</Option>
                 <Option value='After'>After</Option>
               </Select>
@@ -66,11 +66,11 @@ export const Absolute: FC<Props> = ({ date, onClose, onChange }) => {
             </div>
             <div className='row'>
               <Radio 
-                name='type'
+                name='fromType'
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value='Between'
-                checked={values.type === 'Between'}
+                checked={values.fromType === 'Between'}
               />
               <p>Between</p>
               <DatePicker 
