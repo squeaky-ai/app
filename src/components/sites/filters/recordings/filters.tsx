@@ -13,6 +13,10 @@ import { FiltersDevice } from 'components/sites/filters/recordings/filters-devic
 import { FiltersBrowsers } from 'components/sites/filters/recordings/filters-browsers';
 import { FiltersViewport } from 'components/sites/filters/recordings/filters-viewport';
 import { FiltersLanguage } from 'components/sites/filters/common/filters-language';
+import { FiltersBookmarked } from 'components/sites/filters/recordings/filters-bookmarked';
+import { FiltersReferrers } from 'components/sites/filters/recordings/filters-referrers';
+import { FiltersTags } from 'components/sites/filters/recordings/filters-tags';
+import { FiltersStarred } from 'components/sites/filters/recordings/filters-starred';
 import type { RecordingsFilters } from 'types/graphql';
 import type { ValueOf } from 'types/common';
 
@@ -24,6 +28,7 @@ interface Props {
 enum FilterType {
   Status,
   Duration,
+  Referrer,
   StartUrl,
   ExitUrl,
   VisitedPages,
@@ -31,6 +36,9 @@ enum FilterType {
   Device,
   Browser,
   Viewport,
+  Tags,
+  Bookmarked,
+  Starred,
   Language
 }
 
@@ -61,6 +69,10 @@ export const Filters: FC<Props> = ({ filters, updateFilters }) => {
           <Icon name='arrow-drop-left-line' />
           Duration
         </Button>
+        <Button onClick={() => handleFilterChange(FilterType.Referrer)} className={classnames({ open: openFilter === FilterType.Referrer})}>
+          <Icon name='arrow-drop-left-line' />
+          Traffic source
+        </Button>
         <Button onClick={() => handleFilterChange(FilterType.StartUrl)} className={classnames({ open: openFilter === FilterType.StartUrl})}>
           <Icon name='arrow-drop-left-line' />
           Start URL
@@ -89,6 +101,18 @@ export const Filters: FC<Props> = ({ filters, updateFilters }) => {
           <Icon name='arrow-drop-left-line' />
           Viewport
         </Button>
+        <Button onClick={() => handleFilterChange(FilterType.Tags)} className={classnames({ open: openFilter === FilterType.Tags})}>
+          <Icon name='arrow-drop-left-line' />
+          Tags
+        </Button>
+        <Button onClick={() => handleFilterChange(FilterType.Bookmarked)} className={classnames({ open: openFilter === FilterType.Bookmarked})}>
+          <Icon name='arrow-drop-left-line' />
+          Bookmarked
+        </Button>
+        <Button onClick={() => handleFilterChange(FilterType.Starred)} className={classnames({ open: openFilter === FilterType.Starred})}>
+          <Icon name='arrow-drop-left-line' />
+          Starred
+        </Button>
         <Button onClick={() => handleFilterChange(FilterType.Language)} className={classnames({ open: openFilter === FilterType.Language})}>
           <Icon name='arrow-drop-left-line' />
           Language
@@ -105,6 +129,12 @@ export const Filters: FC<Props> = ({ filters, updateFilters }) => {
             <>
               <Label>Duration</Label>
               <FiltersDuration value={filters.duration} onUpdate={handleUpdate('duration')}  onClose={handleFilterClose} />
+            </>
+          )}
+          {openFilter === FilterType.Referrer && (
+            <>
+              <Label>Traffic Source</Label>
+              <FiltersReferrers value={filters.referrers} onUpdate={handleUpdate('referrers')}  onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.StartUrl && (
@@ -147,6 +177,24 @@ export const Filters: FC<Props> = ({ filters, updateFilters }) => {
             <>
               <Label>Viewport</Label>
               <FiltersViewport value={filters.viewport} onUpdate={handleUpdate('viewport')}  onClose={handleFilterClose} />
+            </>
+          )}
+          {openFilter === FilterType.Tags && (
+            <>
+              <Label>Tags</Label>
+              <FiltersTags value={filters.tags} onUpdate={handleUpdate('tags')}  onClose={handleFilterClose} />
+            </>
+          )}
+          {openFilter === FilterType.Bookmarked && (
+            <>
+              <Label>Bookmarked Status</Label>
+              <FiltersBookmarked value={filters.bookmarked} onUpdate={handleUpdate('bookmarked')}  onClose={handleFilterClose} />
+            </>
+          )}
+          {openFilter === FilterType.Starred && (
+            <>
+              <Label>Starred Status</Label>
+              <FiltersStarred value={filters.starred} onUpdate={handleUpdate('starred')}  onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.Language && (

@@ -12,6 +12,10 @@ import { TagsDevices } from 'components/sites/filters/recordings/tags-devices';
 import { TagsBrowsers } from 'components/sites/filters/recordings/tags-browsers';
 import { TagsLanguages } from 'components/sites/filters/common/tags-languages';
 import { TagsViewport } from 'components/sites/filters/recordings/tags-viewport';
+import { TagsBookmarked } from 'components/sites/filters/recordings/tags-bookmarked';
+import { TagsReferrers } from 'components/sites/filters/recordings/tags-referrers';
+import { TagsStarred } from 'components/sites/filters/recordings/tags-starred';
+import { TagsTags } from 'components/sites/filters/recordings/tags-tags';
 import type { RecordingsFilters } from 'types/graphql';
 import type { ValueOf } from 'types/common';
 
@@ -33,6 +37,10 @@ export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
   const hasViewportWidth = !!(filters.viewport.minWidth || filters.viewport.maxWidth);
   const hasViewportHeight = !!(filters.viewport.minHeight || filters.viewport.maxHeight);
   const hasLanguages = filters.languages.length > 0;
+  const hasBookmarked = filters.bookmarked !== null;
+  const hasReferrers = filters.referrers.length > 0;
+  const hasStarred = filters.starred !== null;
+  const hasTags = filters.tags.length > 0;
 
   const hasFilters = (
     hasStatus ||
@@ -45,7 +53,11 @@ export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
     hasBrowsers ||
     hasViewportWidth ||
     hasViewportHeight ||
-    hasLanguages
+    hasLanguages ||
+    hasBookmarked ||
+    hasReferrers ||
+    hasStarred ||
+    hasTags
   );
 
   if (!hasFilters) return null;
@@ -90,6 +102,22 @@ export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
 
       {hasLanguages && (
         <TagsLanguages filters={filters} updateFilters={updateFilters} />
+      )}
+
+      {hasBookmarked && (
+        <TagsBookmarked filters={filters} updateFilters={updateFilters} />
+      )}
+
+      {hasReferrers && (
+        <TagsReferrers filters={filters} updateFilters={updateFilters} />
+      )}
+
+      {hasStarred && (
+        <TagsStarred filters={filters} updateFilters={updateFilters} />
+      )}
+
+      {hasTags && (
+        <TagsTags filters={filters} updateFilters={updateFilters} />
       )}
 
       <Button className='link clear-filters' onClick={clearFilters}>

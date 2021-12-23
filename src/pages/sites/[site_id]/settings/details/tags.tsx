@@ -2,7 +2,6 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { gql, useQuery } from '@apollo/client';
 import { Main } from 'components/main';
 import { Access } from 'components/sites/access';
 import { Page } from 'components/sites/page';
@@ -16,19 +15,8 @@ import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { SettingsTagsBulkActions } from 'components/sites/settings/settings-tags-bulk-actions';
 import { SettingsTabs } from 'components/sites/settings/settings-tabs';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
-import type { Site } from 'types/graphql';
+import { useTags } from 'hooks/use-tags';
 
-const QUERY = gql`
-  query GetSiteTags($siteId: ID!) {
-    site(siteId: $siteId) {
-      id
-      tags {
-        id
-        name
-      }
-    }
-  }
-`;
 
 const SitesSettingsTags: NextPage<ServerSideProps> = ({ user }) => {
   const router = useRouter();
@@ -36,11 +24,7 @@ const SitesSettingsTags: NextPage<ServerSideProps> = ({ user }) => {
   const [sort, setSort] = React.useState<string>('name__asc');
   const [selected, setSelected] = React.useState<string[]>([]);
 
-  const { data } = useQuery<{ site: Site }>(QUERY, {
-    variables: { siteId }
-  });
-
-  const tags = data ? data.site.tags : [];
+  const { tags } = useTags();
 
   const results = [...tags].sort((a, b) => sort === 'name__asc'
     ? a.name.localeCompare(b.name)

@@ -141,6 +141,10 @@ export const FILTERS: RecordingsFilters = {
   visitedPages: [],
   unvisitedPages: [],
   status: null,
+  referrers: [],
+  tags: [],
+  bookmarked: null,
+  starred: null,
   duration: {
     rangeType: null,
     fromType: FiltersSize.GreaterThan,
@@ -153,5 +157,5 @@ export const FILTERS: RecordingsFilters = {
     maxHeight: null,
     maxWidth: null,
     minWidth: null,
-  }
+  },
 };

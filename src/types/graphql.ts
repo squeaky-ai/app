@@ -813,13 +813,17 @@ export type RecordingsEvents = {
 };
 
 export type RecordingsFilters = {
+  bookmarked?: InputMaybe<Scalars['Boolean']>;
   browsers: Array<Scalars['String']>;
   devices: Array<Scalars['String']>;
   duration: FiltersDuration;
   exitUrl?: InputMaybe<Scalars['String']>;
   languages: Array<Scalars['String']>;
+  referrers: Array<Scalars['String']>;
+  starred?: InputMaybe<Scalars['Boolean']>;
   startUrl?: InputMaybe<Scalars['String']>;
   status?: InputMaybe<FiltersStatus>;
+  tags: Array<Scalars['Int']>;
   unvisitedPages: Array<Scalars['String']>;
   viewport: FiltersViewport;
   visitedPages: Array<Scalars['String']>;
@@ -909,6 +913,7 @@ export type Site = {
   recordingLatest?: Maybe<Recording>;
   recordings: Recordings;
   recordingsCount: Scalars['Int'];
+  referrers: Array<Maybe<Scalars['String']>>;
   sentiment: Sentiment;
   tags: Array<Maybe<Tag>>;
   team: Array<Team>;

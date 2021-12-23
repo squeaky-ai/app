@@ -100,6 +100,7 @@
     .row {
       align-items: flex-start;
       flex-direction: column;
+      margin-bottom: 0;
 
       .checkbox:not(:last-of-type) {
         margin-bottom: .5rem;
@@ -160,6 +161,77 @@
 
     .input {
       width: 130px;
+    }
+  }
+
+  .filters-tags {
+    width: 320px;
+
+    .tags {
+      align-items: flex-start;
+      flex-direction: column;
+      max-height: 300px;
+      overflow-y: scroll;
+
+      .checkbox {
+        margin-bottom: .5rem;
+      }
+
+      .tag {
+        height: 2rem;
+        margin: 0;
+      }
+    }
+  }
+
+  .filters-bookmarked {
+    width: 200px;
+
+    .row {
+      align-items: flex-start;
+      flex-direction: column;
+      margin: 0;
+
+      .checkbox:not(:last-of-type) {
+        margin-bottom: .5rem;
+      }
+    }
+  }
+
+  .filters-starred {
+    width: 200px;
+
+    .row {
+      align-items: flex-start;
+      flex-direction: column;
+      margin: 0;
+
+      .checkbox:not(:last-of-type) {
+        margin-bottom: .5rem;
+      }
+    }
+  }
+
+  .filters-referrers {
+    width: 320px;
+
+    .referrers {
+      align-items: flex-start;
+      flex-direction: column;
+      max-height: 300px;
+      overflow-x: hidden;
+      overflow-y: scroll;
+
+      .checkbox {
+        margin-bottom: .5rem;
+        width: 100%;
+      }
+
+      span:nth-of-type(2) {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
     }
   }
 }
