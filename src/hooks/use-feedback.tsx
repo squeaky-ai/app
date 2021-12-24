@@ -18,6 +18,7 @@ export const useFeedback = (): UseFeedback => {
   });
 
   const fallback: Feedback = {
+    id: null,
     npsEnabled: false,
     npsAccentColor: null,
     npsPhrase: null,

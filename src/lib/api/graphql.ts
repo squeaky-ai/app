@@ -1,9 +1,7 @@
-import { cloneDeep, uniq } from 'lodash';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 
 import {
   Query,
-  FeedbackCreateInput,
   FeedbackUpdateInput,
   NotesCreateInput,
   NotesDeleteInput,
@@ -11,7 +9,6 @@ import {
   RecordingsBookmarkedInput,
   RecordingsDeleteBulkInput,
   RecordingsDeleteInput,
-  RecordingsEvents,
   RecordingsViewedBulkInput,
   RecordingsViewedInput,
   Site,
@@ -31,6 +28,12 @@ import {
   UsersInvitation,
   VisitorsStarredInput,
   VisitorsDeleteInput,
+  Team,
+  Tag,
+  Note,
+  Recording,
+  Visitor,
+  Feedback,
 } from 'types/graphql';
 
 import {
@@ -101,7 +104,6 @@ import {
 } from 'data/recordings/mutations';
 
 import {
-  FEEDBACK_CREATE_MUTATION, 
   FEEDBACK_UPDATE_MUTATION,
 } from 'data/feedback/mutations';
 
@@ -110,54 +112,7 @@ import {
   VISITOR_DELETE_MUTATION,
 } from 'data/visitors/mutations';
 
-const ACCEPT_INCOMING = <E, I>(_existing: E, incoming: I[]): I[] => cloneDeep(incoming);
-
-export const cache = new InMemoryCache({
-  typePolicies: {
-    Query: {
-      fields: {
-        sites: { merge: ACCEPT_INCOMING },
-      },
-    },
-    Site: {
-      fields: {
-        team: { merge: ACCEPT_INCOMING },
-        recordings: { merge: ACCEPT_INCOMING },
-        tags: { merge: ACCEPT_INCOMING },
-      }
-    },
-    Recording: {
-      fields: {
-        notes: { merge: ACCEPT_INCOMING },
-        tags: { merge: ACCEPT_INCOMING },
-        events: {
-          // Is Apollo even designed for humans to work with? This is madness!
-          // In order to build up the list of events, the caching by any of the
-          // arguments (in this case, page) needs to be disabled. The fetchMore
-          // function is used in conjunction with these merging rules to build
-          // the full list
-          keyArgs: false,
-          merge(existing: RecordingsEvents, incoming: RecordingsEvents) {
-            if (!incoming) return existing;
-            if (!existing) return incoming;
-
-            return {
-              ...incoming,
-              // A small amount of the events may have been loaded to show a preview,
-              // in this case the events will be merged with the existing ones which
-              // causes duplicates. I'm sure this is horrendous for performance but
-              // we can cross that bridge another day
-              items: uniq([...existing.items, ...incoming.items]),
-            };
-          }
-        }
-      }
-    },
-    Visitor: {
-      merge: ACCEPT_INCOMING
-    },
-  }
-});
+export const cache = new InMemoryCache();
 
 export const client = new ApolloClient({
   cache,
@@ -165,6 +120,7 @@ export const client = new ApolloClient({
   ssrMode: typeof window === 'undefined',
 });
 
+// Done
 export const createSite = async (name: string, url: string): Promise<Site> => {
   const { data } = await client.mutate({
     mutation: CREATE_SITE_MUTATION,
@@ -181,6 +137,7 @@ export const createSite = async (name: string, url: string): Promise<Site> => {
   return data.siteCreate;
 };
 
+// Done
 export const updateSite = async (input: SitesUpdateInput): Promise<Site> => {
   const { data } = await client.mutate({
     mutation: UPDATE_SITE_MUTATION,
@@ -190,6 +147,7 @@ export const updateSite = async (input: SitesUpdateInput): Promise<Site> => {
   return data.siteUpdate;
 };
 
+// Done
 export const deleteSite = async (input: SitesDeleteInput): Promise<null> => {
   await client.mutate({
     mutation: DELETE_SITE_MUTATION,
@@ -206,6 +164,7 @@ export const deleteSite = async (input: SitesDeleteInput): Promise<null> => {
   return null;
 };
 
+// Done
 export const verifySite = async (input: SitesVerifyInput): Promise<Site> => {
   const { data } = await client.mutate({
     mutation: VERIFY_SITE_MUTATION,
@@ -215,6 +174,7 @@ export const verifySite = async (input: SitesVerifyInput): Promise<Site> => {
   return data.siteVerify;
 };
 
+// Done
 export const ipBlacklistCreate = async (input: SitesIpBlacklistCreateInput): Promise<Site> => {
   const { data } = await client.mutate({
     mutation: CREATE_IP_BLACKLIST_MUTATION,
@@ -224,6 +184,7 @@ export const ipBlacklistCreate = async (input: SitesIpBlacklistCreateInput): Pro
   return data.ipBlacklist;
 };
 
+// Done
 export const ipBlacklistDelete = async (input: SitesIpBlacklistDeleteInput): Promise<Site> => {
   const { data } = await client.mutate({
     mutation: DELETE_IP_BLACKLIST_MUTATION,
@@ -233,6 +194,7 @@ export const ipBlacklistDelete = async (input: SitesIpBlacklistDeleteInput): Pro
   return data.ipBlacklist;
 };
 
+// Done
 export const domainBlacklistCreate = async (input: SitesDomainBlacklistCreateInput): Promise<Site> => {
   const { data } = await client.mutate({
     mutation: CREATE_DOMAIN_BLACKLIST_MUTATION,
@@ -242,6 +204,7 @@ export const domainBlacklistCreate = async (input: SitesDomainBlacklistCreateInp
   return data.domainBlacklist;
 };
 
+// Done
 export const domainBlacklistDelete = async (input: SitesDomainBlacklistDeleteInput): Promise<Site> => {
   const { data } = await client.mutate({
     mutation: DELETE_DOMAIN_BLACKLIST_MUTATION,
@@ -251,6 +214,7 @@ export const domainBlacklistDelete = async (input: SitesDomainBlacklistDeleteInp
   return data.domainBlacklist;
 };
 
+// Done
 export const updateUser = async (input: UsersUpdateInput): Promise<User> => {
   const { data } = await client.mutate({
     mutation: UPDATE_USER_MUTATION,
@@ -260,25 +224,41 @@ export const updateUser = async (input: UsersUpdateInput): Promise<User> => {
   return data.userUpdate;
 };
 
-export const teamInvite = async (input: TeamInviteInput): Promise<Site> => {
+// Done
+export const teamInvite = async (input: TeamInviteInput): Promise<Team> => {
   const { data } = await client.mutate({
     mutation: TEAM_INVITE_MUTATION,
     variables: { input }
   });
 
+  cache.modify({
+    id: cache.identify({ id: input.siteId, __typename: 'Site' }),
+    fields: {
+      team(existingTeamRefs = []) {
+        return [{ _ref: `Team:${data.id}` }, ...existingTeamRefs];
+      },
+    },
+  });
+
   return data.teamInvite;
 };
 
-export const teamInviteCancel = async (input: TeamInviteCancelInput): Promise<Site> => {
+// Done
+export const teamInviteCancel = async (input: TeamInviteCancelInput): Promise<null> => {
   const { data } = await client.mutate({
     mutation: TEAM_INVITE_CANCEL_MUTATION,
-    variables: { input }
+    variables: { input },
+    update(cache) {
+      const normalizedId = cache.identify({ id: input.teamId, __typename: 'Team' });
+      cache.evict({ id: normalizedId });
+      cache.gc();
+    }
   });
 
   return data.teamInviteCancel;
 };
 
-export const teamInviteAccept = async (input: TeamInviteAcceptInput): Promise<Site> => {
+export const teamInviteAccept = async (input: TeamInviteAcceptInput): Promise<Team> => {
   const { data } = await client.mutate({
     mutation: TEAM_INVITE_ACCEPT_MUTATION,
     variables: { input }
@@ -287,7 +267,8 @@ export const teamInviteAccept = async (input: TeamInviteAcceptInput): Promise<Si
   return data.teamInviteCancel;
 };
 
-export const teamInviteResend = async (input: TeamInviteResendInput): Promise<Site> => {
+// Done
+export const teamInviteResend = async (input: TeamInviteResendInput): Promise<Team> => {
   const { data } = await client.mutate({
     mutation: TEAM_INVITE_RESEND_MUTATION,
     variables: { input }
@@ -322,7 +303,8 @@ export const userPassword = async (input: UsersPasswordInput): Promise<User> => 
   return data.userPassword;
 }
 
-export const teamUpdate = async (input: TeamUpdateInput): Promise<Site> => {
+// Done
+export const teamUpdate = async (input: TeamUpdateInput): Promise<Team> => {
   const { data } = await client.mutate({
     mutation: TEAM_UPDATE_MUTATION,
     variables: { input }
@@ -340,25 +322,42 @@ export const teamLeave = async (input: TeamLeaveInput): Promise<null> => {
   return null;
 };
 
-export const teamDelete = async (input: TeamDeleteInput): Promise<Site> => {
+// Done
+export const teamDelete = async (input: TeamDeleteInput): Promise<null> => {
   const { data } = await client.mutate({
     mutation: TEAM_DELETE_MUTATION,
-    variables: { input }
+    variables: { input },
+    update(cache) {
+      const normalizedId = cache.identify({ id: input.teamId, __typename: 'Team' });
+      cache.evict({ id: normalizedId });
+      cache.gc();
+    }
   });
 
   return data.teamDelete;
 };
 
-export const tagCreate = async (input: TagsCreateInput): Promise<Site> => {
+// Done
+export const tagCreate = async (input: TagsCreateInput): Promise<Tag> => {
   const { data } = await client.mutate({
     mutation: CREATE_TAG_MUTATION,
     variables: input
   });
 
+  cache.modify({
+    id: cache.identify({ id: input.recordingId, __typename: 'Recording' }),
+    fields: {
+      tags(existingTagRefs = []) {
+        return [{ _ref: `Tag:${data.id}` }, ...existingTagRefs];
+      },
+    },
+  });
+
   return data.tagCreate;
 };
 
-export const tagRemove = async (input: TagsRemoveInput): Promise<Site> => {
+// Done
+export const tagRemove = async (input: TagsRemoveInput): Promise<null> => {
   const { data } = await client.mutate({
     mutation: REMOVE_TAG_MUTATION,
     variables: input,
@@ -372,7 +371,8 @@ export const tagRemove = async (input: TagsRemoveInput): Promise<Site> => {
   return data.tagRemove;
 };
 
-export const tagDelete = async (input: TagsDeleteInput): Promise<Site> => {
+// Done
+export const tagDelete = async (input: TagsDeleteInput): Promise<null> => {
   const { data } = await client.mutate({
     mutation: DELETE_TAG_MUTATION,
     variables: input,
@@ -386,16 +386,26 @@ export const tagDelete = async (input: TagsDeleteInput): Promise<Site> => {
   return data.tagDelete;
 };
 
-export const tagsDelete = async (input: TagsDeleteBulkInput): Promise<Site> => {
+// Done
+export const tagsDelete = async (input: TagsDeleteBulkInput): Promise<null> => {
   const { data } = await client.mutate({
     mutation: DELETE_TAGS_MUTATION,
-    variables: input
+    variables: input,
+    update(cache) {
+      input.tagIds.forEach(id => {
+        const normalizedId = cache.identify({ id, __typename: 'Tag' });
+        cache.evict({ id: normalizedId });
+      });
+
+      cache.gc();
+    }
   });
 
   return data.tagsDelete;
 };
 
-export const tagUpdate = async (input: TagsUpdateInput): Promise<Site> => {
+// Done
+export const tagUpdate = async (input: TagsUpdateInput): Promise<Tag> => {
   const { data } = await client.mutate({
     mutation: UPDATE_TAG_MUTATION,
     variables: input
@@ -404,25 +414,42 @@ export const tagUpdate = async (input: TagsUpdateInput): Promise<Site> => {
   return data.tagUpdate;
 };
 
-export const noteCreate = async (input: NotesCreateInput): Promise<Site> => {
+// Done
+export const noteCreate = async (input: NotesCreateInput): Promise<Note> => {
   const { data } = await client.mutate({
     mutation: CREATE_NOTE_MUTATION,
     variables: input
   });
 
+  cache.modify({
+    id: cache.identify({ id: input.recordingId, __typename: 'Recording' }),
+    fields: {
+      notes(existingNoteRefs = []) {
+        return [{ _ref: `Note:${data.id}` }, ...existingNoteRefs];
+      },
+    },
+  });
+
   return data.noteCreate;
 };
 
-export const noteDelete = async (input: NotesDeleteInput): Promise<Site> => {
+// Done
+export const noteDelete = async (input: NotesDeleteInput): Promise<null> => {
   const { data } = await client.mutate({
     mutation: DELETE_NOTE_MUTATION,
-    variables: input
+    variables: input,
+    update(cache) {
+      const normalizedId = cache.identify({ id: input.noteId, __typename: 'Note' });
+      cache.evict({ id: normalizedId });
+      cache.gc();
+    }
   });
 
   return data.noteDelete;
 };
 
-export const noteUpdate = async (input: NotesUpdateInput): Promise<Site> => {
+// Done
+export const noteUpdate = async (input: NotesUpdateInput): Promise<Note> => {
   const { data } = await client.mutate({
     mutation: UPDATE_NOTE_MUTATION,
     variables: input
@@ -431,7 +458,8 @@ export const noteUpdate = async (input: NotesUpdateInput): Promise<Site> => {
   return data.noteUpdate;
 };
 
-export const recordingViewed = async (input: RecordingsViewedInput): Promise<Site> => {
+// Done
+export const recordingViewed = async (input: RecordingsViewedInput): Promise<Recording> => {
   const { data } = await client.mutate({
     mutation: VIEWED_RECORDING_MUTATION,
     variables: { input }
@@ -440,7 +468,8 @@ export const recordingViewed = async (input: RecordingsViewedInput): Promise<Sit
   return data.recordingViewed;
 };
 
-export const recordingDelete = async (input: RecordingsDeleteInput): Promise<Site> => {
+// Done
+export const recordingDelete = async (input: RecordingsDeleteInput): Promise<null> => {
   const { data } = await client.mutate({
     mutation: DELETE_RECORDING_MUTATION,
     variables: { input },
@@ -454,7 +483,8 @@ export const recordingDelete = async (input: RecordingsDeleteInput): Promise<Sit
   return data.recordingDelete;
 };
 
-export const recordingBookmarked = async (input: RecordingsBookmarkedInput): Promise<Site> => {
+// Done
+export const recordingBookmarked = async (input: RecordingsBookmarkedInput): Promise<Recording> => {
   const { data } = await client.mutate({
     mutation: BOOKMARK_RECORDING_MUTATION,
     variables: { input }
@@ -463,7 +493,8 @@ export const recordingBookmarked = async (input: RecordingsBookmarkedInput): Pro
   return data.recordingBookmarked;
 };
 
-export const recordingsDelete = async (input: RecordingsDeleteBulkInput): Promise<Site> => {
+// Done
+export const recordingsDelete = async (input: RecordingsDeleteBulkInput): Promise<null> => {
   const { data } = await client.mutate({
     mutation: DELETE_RECORDINGS_MUTATION,
     variables: { input },
@@ -475,7 +506,8 @@ export const recordingsDelete = async (input: RecordingsDeleteBulkInput): Promis
   return data.recordingsDelete;
 };
 
-export const recordingsViewed = async (input: RecordingsViewedBulkInput): Promise<Site> => {
+// Done
+export const recordingsViewed = async (input: RecordingsViewedBulkInput): Promise<Recording[]> => {
   const { data } = await client.mutate({
     mutation: VIEWED_RECORDINGS_MUTATION,
     variables: { input }
@@ -484,14 +516,8 @@ export const recordingsViewed = async (input: RecordingsViewedBulkInput): Promis
   return data.recordingsViewed;
 };
 
-export const feedbackCreate = async (input: FeedbackCreateInput): Promise<void> => {
-  await client.mutate({
-    mutation: FEEDBACK_CREATE_MUTATION,
-    variables: { input }
-  });
-};
-
-export const visitorStarred = async (input: VisitorsStarredInput): Promise<Site> => {
+// Done
+export const visitorStarred = async (input: VisitorsStarredInput): Promise<Visitor> => {
   const { data } = await client.mutate({
     mutation: VISITOR_STARRED_MUTATION,
     variables: input
@@ -500,7 +526,8 @@ export const visitorStarred = async (input: VisitorsStarredInput): Promise<Site>
   return data.visitorStarred;
 };
 
-export const feedbackUpdate = async (input: FeedbackUpdateInput): Promise<Site> => {
+// Done
+export const feedbackUpdate = async (input: FeedbackUpdateInput): Promise<Feedback> => {
   const { data } = await client.mutate({
     mutation: FEEDBACK_UPDATE_MUTATION,
     variables: { input }
@@ -509,7 +536,8 @@ export const feedbackUpdate = async (input: FeedbackUpdateInput): Promise<Site> 
   return data.feedback;
 };
 
-export const visitorDelete = async (input: VisitorsDeleteInput): Promise<Site> => {
+// Done
+export const visitorDelete = async (input: VisitorsDeleteInput): Promise<null> => {
   const { data } = await client.mutate({
     mutation: VISITOR_DELETE_MUTATION,
     variables: input,

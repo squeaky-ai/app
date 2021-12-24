@@ -59,6 +59,7 @@ export const InviteTeam: FC<Props> = ({ site, disabled }) => {
 
                   toast.add({ type: 'success', body: 'Invitation sent' });
                 } catch(error) {
+                  console.error(error);
                   toast.add({ type: 'error', body: 'There was an unexpected error when sending your invitation. Please try again.' });
                 }
               })();

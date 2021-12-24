@@ -6,6 +6,9 @@ export const CREATE_SITE_MUTATION = gql`
       id
       name
       url
+      plan
+      ownerName
+      planName
     }
   }
 `;

@@ -5,6 +5,7 @@ export const GET_FEEDBACK_QUERY = gql`
     site(siteId: $siteId) {
       id
       feedback {
+        id
         npsEnabled
         npsAccentColor
         npsSchedule

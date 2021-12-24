@@ -10,7 +10,7 @@ import { Label } from 'components/label';
 import { BASE_PATH } from 'data/common/constants';
 
 interface Props {
-  feedback: Omit<Feedback, 'npsEnabled' | 'sentimentEnabled' | 'sentimentExcludedPages'>;
+  feedback: Omit<Feedback, 'id' | 'npsEnabled' | 'sentimentEnabled' | 'sentimentExcludedPages'>;
 }
 
 export const SentimentPreview: FC<Props> = ({ feedback }) => {
