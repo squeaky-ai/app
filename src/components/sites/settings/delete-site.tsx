@@ -31,7 +31,6 @@ export const DeleteSite: FC<Props> = ({ site }) => {
       toast.add({ type: 'success', body: 'Site deleted' });
       await router.push('/sites');
     } catch(error) {
-      console.log(error);
       toast.add({ type: 'error', body: 'There was an unexpected error deleting your site' });
     }
   };
