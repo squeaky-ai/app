@@ -2,8 +2,10 @@
   .recordings-header {
     align-items: center;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     margin: 0 0 2rem 0;
+    white-space: nowrap;
 
     @include breakpoint-md {
       align-items: flex-start;
@@ -15,11 +17,19 @@
       align-items: center;
       display: flex;
       margin: 0;
+      padding: 0;
 
       @include breakpoint-md {
+        flex-direction: column;
         margin: 0;
         padding: 0;
         width: 100%;
+      }
+
+      .period {
+        @include breakpoint-md {
+          margin: 1.5rem 0;
+        }
       }
 
       .menu-item {
