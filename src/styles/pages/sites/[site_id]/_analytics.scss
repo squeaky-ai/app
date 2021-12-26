@@ -189,7 +189,7 @@
         grid-area: referrers;
 
         .table .row {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
+          grid-template-columns: 1fr 200px;
 
           @include breakpoint-md {
             align-items: flex-start;
