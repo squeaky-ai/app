@@ -26,10 +26,10 @@ const Developers: NextPage<ServerSideProps> = () => {
       <Main>
         <div className='hero'>
           <a href='/'>
-            <Logo src='logo' height={48} width={154} alt='Logo' />
+            <Logo dark src='logo' height={48} width={154} alt='Logo' />
           </a>
           <h1>Developers</h1>
-          <p>Last Updated: <b>September 1st 2021</b></p>
+          <p>Last Updated: <b>September 1st 2021</b></p>
         </div>
         <Container className='md centered'>
           <h4>Tracking Code</h4>
