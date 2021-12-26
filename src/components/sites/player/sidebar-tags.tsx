@@ -9,6 +9,7 @@ import { Input } from 'components/input';
 import { Tag } from 'components/tag';
 import { tagCreate, tagRemove } from 'lib/api/graphql';
 import type { Recording, Tag as ITag } from 'types/graphql';
+import { useTags } from 'hooks/use-tags';
 
 interface Props {
   recording: Recording;
@@ -24,8 +25,13 @@ enum PageView {
 }
 
 export const SidebarTags: FC<Props> = ({ recording }) => {
+  const ref = React.useRef<HTMLFormElement>(null);
+
   const router = useRouter();
   const [page, setPage] = React.useState<PageView>(PageView.EMPTY);
+  const [focus, setFocus] = React.useState<boolean>(false);
+
+  const { tags } = useTags();
 
   const siteId = router.query.site_id + '';
 
@@ -71,20 +77,63 @@ export const SidebarTags: FC<Props> = ({ recording }) => {
             handleBlur,
             handleChange,
             handleSubmit,
+            setValues,
             values,
-          }) => (
-            <form onSubmit={handleSubmit}>
-              <Input
-                name='name' 
-                type='text' 
-                onBlur={handleBlur}
-                onChange={handleChange}
-                placeholder='Add tag ...'
-                value={values.name}
-              />
-              <p>↩️ Hit enter to submit</p>
-            </form>
-          )}
+          }) => {
+            const results = tags
+              .filter(t => t.name.toLowerCase().includes(values.name.toLowerCase()))
+              .sort((a, b) => a.name.localeCompare(b.name));
+
+            const handleTagClick = async (event: React.MouseEvent<HTMLDivElement>) => {
+              event.preventDefault();
+              const element = event.target as HTMLElement;
+
+              await tagCreate({
+                siteId,
+                recordingId: recording.id, 
+                name: element.innerText
+              });
+
+              setValues({ name: '' });
+            };
+
+            const onInputBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+              handleBlur(event);
+              // Give the tag enough time to be clicked
+              setTimeout(() => setFocus(false), 100); 
+            };
+
+            const onInputFocus = () => {
+              setFocus(true);
+            };
+
+            return (
+              <form ref={ref} onSubmit={handleSubmit}>
+                <Input
+                  name='name' 
+                  type='text' 
+                  onBlur={onInputBlur}
+                  onFocus={onInputFocus}
+                  onChange={handleChange}
+                  placeholder='Add tag ...'
+                  value={values.name}
+                />
+                <p>Hit enter to submit</p>
+
+                <div className={classnames('tag-results', { show: focus && results.length > 0 })}>
+                  <ul>
+                    {results.map(tag => (
+                      <li key={tag.id}>
+                        <Tag onClick={handleTagClick}>
+                          {tag.name}
+                        </Tag>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </form>
+            );
+          }}
         </Formik>
         <div className='tag-list'>
           {recording.tags.map(tag => (

@@ -324,16 +324,24 @@ export const teamDelete = async (input: TeamDeleteInput): Promise<null> => {
 };
 
 export const tagCreate = async (input: TagsCreateInput): Promise<Tag> => {
-  const { data } = await client.mutate({
+  const { data } = await client.mutate<{ tagCreate: Tag }>({
     mutation: CREATE_TAG_MUTATION,
     variables: input,
+    optimisticResponse: {
+      tagCreate: {
+        id: 'temp-id',
+        __typename: 'Tag',
+        name: input.name,
+        createdAt: new Date().toISOString(),
+      },
+    },
   });
 
   cache.modify({
     id: cache.identify({ id: input.recordingId, __typename: 'Recording' }),
     fields: {
       tags(existingTagRefs = []) {
-        return [{ _ref: `Tag:${data.id}` }, ...existingTagRefs];
+        return [{ _ref: `Tag:${data.tagCreate.id}` }, ...existingTagRefs];
       },
     },
   });
@@ -395,19 +403,28 @@ export const tagUpdate = async (input: TagsUpdateInput): Promise<Tag> => {
   return data.tagUpdate;
 };
 
-export const noteCreate = async (input: NotesCreateInput): Promise<Note> => {
-  const { data } = await client.mutate({
+export const noteCreate = async (input: NotesCreateInput, fullName: string): Promise<Note> => {
+  const { data } = await client.mutate<{ noteCreate: Note }>({
     mutation: CREATE_NOTE_MUTATION,
-    variables: input
+    variables: input,
+    optimisticResponse: {
+      noteCreate: {
+        id: 'temp-id',
+        __typename: 'Note',
+        body: input.body,
+        timestamp: input.timestamp,
+        user: { fullName }
+      } as any
+    }
   });
 
   cache.modify({
     id: cache.identify({ id: input.recordingId, __typename: 'Recording' }),
     fields: {
       notes(existingNoteRefs = []) {
-        return [{ _ref: `Note:${data.id}` }, ...existingNoteRefs];
+        return [{ _ref: `Note:${data.noteCreate.id}` }, ...existingNoteRefs];
       },
-    },
+    }
   });
 
   return data.noteCreate;

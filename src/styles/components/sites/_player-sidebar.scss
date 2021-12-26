@@ -359,7 +359,7 @@
 
       .tag-state {
         display: none;
-      }  
+      }
     }
 
     .create-state {
@@ -376,6 +376,51 @@
           font-size: 13px;
           line-height: 20px;
           margin: 0 0 1.5rem 0;
+        }
+      }
+    }
+
+    form {
+      position: relative;
+    }
+
+    .tag-results {
+      background: var(--white);
+      border-radius: var(--border-radius-md);
+      box-shadow: var(--box-shadow-lg);
+      display: none;
+      left: 0;
+      overflow: hidden;
+      position: absolute;
+      top: 5rem;
+      width: 100%;
+
+      &.show {
+        display: flex;
+      }
+
+      ul {
+        height: 100%;
+        margin: 0;
+        max-height: 218px;
+        overflow-y: auto;
+        padding: 1rem;
+        width: 100%;
+
+        li {
+          display: flex;
+          list-style: none;
+          width: 100%;
+
+          .tag {
+            cursor: pointer;
+          }
+
+          &:last-of-type {
+            .tag {
+              margin-bottom: 0;
+            }
+          }
         }
       }
     }

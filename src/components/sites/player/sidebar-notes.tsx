@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import type { Replayer } from 'rrweb';
 import classnames from 'classnames';
 import * as Yup from 'yup';
+import { sortBy } from 'lodash';
 import { Formik } from 'formik';
 import { useRouter } from 'next/router';
 import { Icon } from 'components/icon';
@@ -15,11 +16,12 @@ import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'compo
 import { TIMESTAMP_REGEX } from 'data/sites/constants';
 import { toTimeString, fromTimeString } from 'lib/dates';
 import { noteDelete, noteCreate, noteUpdate } from 'lib/api/graphql';
-import type { Recording, Note as INote } from 'types/graphql';
+import type { Recording, Note as INote, User } from 'types/graphql';
 
 interface Props {
   replayer: Replayer;
   recording: Recording;
+  user: User;
 }
 
 const NoteSchema = Yup.object().shape({
@@ -27,13 +29,13 @@ const NoteSchema = Yup.object().shape({
   body: Yup.string().required('Note is required')
 });
 
-export const SidebarNotes: FC<Props> = ({ recording, replayer }) => {
+export const SidebarNotes: FC<Props> = ({ recording, replayer, user }) => {
   const router = useRouter();
   const ref = React.useRef<Modal>();
 
   const siteId = router.query.site_id + '';
 
-  const notes = recording.notes || [];
+  const notes = sortBy(recording.notes || [], note => note.timestamp); 
 
   const openModal = () => {
     if (ref.current) {
@@ -98,12 +100,12 @@ export const SidebarNotes: FC<Props> = ({ recording, replayer }) => {
               (async () => {
                 setSubmitting(false);
 
-                await noteCreate({ 
+                await noteCreate({
                   siteId, 
                   recordingId: recording.id, 
                   body: values.body,
                   timestamp: fromTimeString(values.timestamp) || null,
-                });
+                }, `${user.firstName} ${user.lastName}`);
 
                 closeModal();
               })();
