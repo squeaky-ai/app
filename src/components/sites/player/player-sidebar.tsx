@@ -11,20 +11,19 @@ import { SidebarActivity } from 'components/sites/player/sidebar-activity';
 import { SidebarNotes } from 'components/sites/player/sidebar-notes';
 import { SidebarTags } from 'components/sites/player/sidebar-tags';
 import { SidebarPages } from 'components/sites/player/sidebar-pages';
-import type { Recording, User } from 'types/graphql';
+import type { Recording } from 'types/graphql';
 import type { PlayerState, Action } from 'types/player';
 import type { Site } from 'types/graphql';
 
 interface Props {
   state: PlayerState;
   site: Site;
-  user: User;
   replayer: Replayer;
   recording: Recording;
   dispatch: React.Dispatch<Action>;
 }
 
-export const PlayerSidebar: FC<Props> = ({ state, site, user, replayer, recording, dispatch }) => {
+export const PlayerSidebar: FC<Props> = ({ state, site, replayer, recording, dispatch }) => {
   const handleClose = () => {
     dispatch({ type: 'activeTab', value: null });
   };
@@ -71,7 +70,7 @@ export const PlayerSidebar: FC<Props> = ({ state, site, user, replayer, recordin
             <Button onClick={handleClose}><Icon name='close-line' /></Button>
           </Label>
           <div className='contents'>
-            <SidebarNotes user={user} recording={recording} replayer={replayer} />
+            <SidebarNotes recording={recording} replayer={replayer} />
           </div>
         </div>
         <div className={classnames('sidebar tags', { active: state.activeTab === PlayerTab.TAGS })}>

@@ -16,12 +16,11 @@ import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'compo
 import { TIMESTAMP_REGEX } from 'data/sites/constants';
 import { toTimeString, fromTimeString } from 'lib/dates';
 import { noteDelete, noteCreate, noteUpdate } from 'lib/api/graphql';
-import type { Recording, Note as INote, User } from 'types/graphql';
+import type { Recording, Note as INote } from 'types/graphql';
 
 interface Props {
   replayer: Replayer;
   recording: Recording;
-  user: User;
 }
 
 const NoteSchema = Yup.object().shape({
@@ -29,7 +28,7 @@ const NoteSchema = Yup.object().shape({
   body: Yup.string().required('Note is required')
 });
 
-export const SidebarNotes: FC<Props> = ({ recording, replayer, user }) => {
+export const SidebarNotes: FC<Props> = ({ recording, replayer }) => {
   const router = useRouter();
   const ref = React.useRef<Modal>();
 
@@ -105,7 +104,7 @@ export const SidebarNotes: FC<Props> = ({ recording, replayer, user }) => {
                   recordingId: recording.id, 
                   body: values.body,
                   timestamp: fromTimeString(values.timestamp) || null,
-                }, `${user.firstName} ${user.lastName}`);
+                });
 
                 closeModal();
               })();
