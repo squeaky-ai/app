@@ -898,7 +898,6 @@ export type Site = {
   sentiment: Sentiment;
   tags: Array<Maybe<Tag>>;
   team: Array<Team>;
-  teamSizeExceeded: Scalars['Boolean'];
   updatedAt?: Maybe<Scalars['String']>;
   url: Scalars['String'];
   uuid: Scalars['String'];

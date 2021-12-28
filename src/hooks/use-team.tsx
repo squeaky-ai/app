@@ -5,7 +5,6 @@ import type { Team as TeamMember } from 'types/graphql';
 
 interface Team {
   members: TeamMember[];
-  teamSizeExceeded: boolean;
 }
 
 interface UseSite {
@@ -25,14 +24,13 @@ export const useTeam = (): UseSite => {
 
   const fallback: Team = {
     members: [],
-    teamSizeExceeded: true,
   };
 
   return {
     loading,
     error: !!error,
     team: data 
-      ? { members: data.site.team, teamSizeExceeded: data.site.teamSizeExceeded } 
+      ? { members: data.site.team } 
       : fallback
   };
 };

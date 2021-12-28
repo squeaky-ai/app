@@ -14,7 +14,6 @@ import type { Site } from 'types/graphql';
 
 interface Props {
   site: Site;
-  disabled: boolean;
 }
 
 const InviteSchema = Yup.object().shape({ 
@@ -22,7 +21,7 @@ const InviteSchema = Yup.object().shape({
   role: Yup.string().oneOf(['0', '1'], 'Please select a role')
 });
 
-export const InviteTeam: FC<Props> = ({ site, disabled }) => {
+export const InviteTeam: FC<Props> = ({ site }) => {
   const toast = useToasts();
   const ref = React.useRef<Modal>();
 
@@ -36,7 +35,7 @@ export const InviteTeam: FC<Props> = ({ site, disabled }) => {
 
   return (
     <>
-      <Button className='primary invite-member' onClick={openModal} disabled={disabled}>
+      <Button className='primary invite-member' onClick={openModal}>
         Invite New Member
       </Button>
 

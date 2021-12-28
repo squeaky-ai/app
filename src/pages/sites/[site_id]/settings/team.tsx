@@ -56,7 +56,7 @@ const SiteSettingsTeam: NextPage<ServerSideProps> = ({ user }) => {
               {team.members.map(t => <TeamRow key={t.id} team={t} site={site} user={user} />)}
             </Table>
 
-            <InviteTeam site={site} disabled={team.teamSizeExceeded} />
+            <InviteTeam site={site} />
 
             <h3>Roles</h3>
 
