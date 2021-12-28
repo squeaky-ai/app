@@ -6,6 +6,7 @@ import { Radio } from 'components/radio';
 import { DatePicker } from 'components/date-picker';
 import { Button } from 'components/button';
 import { Select, Option } from 'components/select';
+import { DD_MM_YYYY_REGEX } from 'data/common/constants';
 import type { AbsoluteTime } from 'types/common';
 
 interface Props {
@@ -14,11 +15,13 @@ interface Props {
   onChange: (range: AbsoluteTime) => void;
 }
 
+const DateStringSchema = Yup.string().matches(DD_MM_YYYY_REGEX, 'Date must be formatted as dd/mm/yyyy');
+
 const AbsoluteSchema = Yup.object().shape({
   fromType: Yup.string().oneOf(['Before', 'After', 'Between']),
-  fromDate: Yup.string(),
-  betweenFromDate: Yup.string(),
-  betweenToDate: Yup.string(),
+  fromDate: DateStringSchema,
+  betweenFromDate: DateStringSchema,
+  betweenToDate: DateStringSchema,
 });
 
 export const Absolute: FC<Props> = ({ date, onClose, onChange }) => {
