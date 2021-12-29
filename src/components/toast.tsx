@@ -72,7 +72,7 @@ export class ToastProvider extends React.Component<{}, State> {
 
         <ToastContainer>
           {this.state.toasts.map(toast => (
-            <Toast key={toast.body} {...toast} remove={this.remove} />
+            <Toast key={toast.id} {...toast} remove={this.remove} />
           ))}
         </ToastContainer>
       </Provider>

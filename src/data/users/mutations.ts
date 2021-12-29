@@ -25,3 +25,17 @@ export const USER_PASSWORD_MUTATION = gql`
     }
   }
 `;
+
+export const UPDATE_USER_COMMUNICATION = gql`
+  mutation UserCommunication($input: UsersCommunicationInput!) {
+    userCommunication(input: $input) {
+      id
+      knowledgeSharingEmail
+      marketingAndSpecialOffersEmail
+      monthlyReviewEmail
+      onboardingEmail
+      productUpdatesEmail
+      weeklyReviewEmail
+    }
+  }
+`;

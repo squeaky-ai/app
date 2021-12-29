@@ -34,6 +34,8 @@ import {
   Recording,
   Visitor,
   Feedback,
+  UsersCommunication,
+  UsersCommunicationInput,
 } from 'types/graphql';
 
 import {
@@ -80,7 +82,8 @@ import {
 import { 
   UPDATE_USER_MUTATION,
   USER_DELETE_MUTATION,
-  USER_PASSWORD_MUTATION
+  USER_PASSWORD_MUTATION,
+  UPDATE_USER_COMMUNICATION,
 } from 'data/users/mutations';
 
 import { 
@@ -213,6 +216,15 @@ export const updateUser = async (input: UsersUpdateInput): Promise<User> => {
   });
 
   return data.userUpdate;
+};
+
+export const updateUserCommunication = async (input: UsersCommunicationInput): Promise<UsersCommunication> => {
+  const { data } = await client.mutate({
+    mutation: UPDATE_USER_COMMUNICATION,
+    variables: { input }
+  });
+
+  return data;
 };
 
 export const teamInvite = async (input: TeamInviteInput): Promise<Team> => {

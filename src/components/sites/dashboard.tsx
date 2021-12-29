@@ -8,12 +8,12 @@ import { Tooltip } from 'components/tooltip';
 import { Divider } from 'components/divider';
 import { PlayerPreview } from 'components/sites/player/player-preview';
 import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
-import { useDashboard } from 'hooks/use-dashboard';
-import { toTimeString } from 'lib/dates';
-import type { Site } from 'types/graphql';
 import { Pill } from 'components/pill';
 import { Spinner } from 'components/spinner';
 import { Error } from 'components/error';
+import { useDashboard } from 'hooks/use-dashboard';
+import { toTimeString } from 'lib/dates';
+import type { Site } from 'types/graphql';
 
 interface Props {
   site: Site;

@@ -11,6 +11,7 @@ interface UseFeedback {
 
 export const useFeedback = (): UseFeedback => {
   const router = useRouter();
+
   const { loading, error, data } = useQuery(GET_FEEDBACK_QUERY, {
     variables: {
       siteId: router.query.site_id as string
