@@ -59,7 +59,7 @@ const UsersPreferences: NextPage<ServerSideProps> = ({ user }) => {
               <Toggle checked={communication.onboardingEmail} onChange={handleToggle('onboardingEmail')}>
                 Onboarding
               </Toggle>
-              <p>In your first week using Squeaky we'll sending you 4-6 emails with tips on how to get set up and start making the most of the data you're capturing.</p>
+              <p>In your first week using Squeaky we&apos;ll sending you 4-6 emails with tips on how to get set up and start making the most of the data you&apos;re capturing.</p>
             </li>
             <li>
               <Toggle checked={communication.weeklyReviewEmail} onChange={handleToggle('weeklyReviewEmail')}>
