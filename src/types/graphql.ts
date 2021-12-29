@@ -399,7 +399,7 @@ export type Mutation = {
   teamLeave?: Maybe<Team>;
   teamTransfer: Site;
   teamUpdate: Team;
-  userCommunication?: Maybe<UsersCommunication>;
+  userCommunication?: Maybe<User>;
   userDelete?: Maybe<User>;
   userPassword: User;
   userUpdate: User;
