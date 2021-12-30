@@ -114,12 +114,12 @@ export const getDateRange = (period: TimePeriod): TimeRange => {
       };
     case 'past_seven_days':
       return {
-        fromDate: formatDateForGraphQL(subDays(now, 7)),
+        fromDate: formatDateForGraphQL(subDays(now, 6)),
         toDate: todaysDate
       };
     case 'past_fourteen_days':
       return {
-        fromDate: formatDateForGraphQL(subDays(now, 14)),
+        fromDate: formatDateForGraphQL(subDays(now, 13)),
         toDate: todaysDate
       };
     case 'past_thirty_days':
@@ -129,12 +129,12 @@ export const getDateRange = (period: TimePeriod): TimeRange => {
       };
     case 'past_six_months':
       return {
-        fromDate: formatDateForGraphQL(subMonths(now, 6)),
+        fromDate: formatDateForGraphQL(subMonths(now, 5)),
         toDate: todaysDate
       };
     case 'past_year':
       return {
-        fromDate: formatDateForGraphQL(subMonths(now, 12)),
+        fromDate: formatDateForGraphQL(subMonths(now, 11)),
         toDate: todaysDate
       };
     default:
