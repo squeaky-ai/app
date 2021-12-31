@@ -39,12 +39,26 @@ export const Unlock: FC<Props> = ({ site, page }) => {
     }
   })();
 
+  const button: string = (() => {
+    switch(page) {
+      case 'visitors':  
+      case 'analytics':
+      case 'heatmaps':
+        return 'Unlock Data';
+      case 'recordings':
+        return 'Unlock Recordings';
+      case 'nps':
+      case 'sentiment':
+        return 'Unlock Feedback'
+    }
+  })();
+
   return (
     <div className='unlock'>
       <Icon name='information-line' />
       {message}
       <Link href={`/sites/${site.id}/settings/subscription`}>
-        <a className='button'>Unlock Recordings</a>
+        <a className='button'>{button}</a>
       </Link>
     </div>
   );
