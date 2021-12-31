@@ -55,7 +55,7 @@ export const Unlock: FC<Props> = ({ site, page }) => {
 
   return (
     <div className='unlock'>
-      <Icon name='information-line' />
+      <Icon name='error-warning-line' />
       {message}
       <Link href={`/sites/${site.id}/settings/subscription`}>
         <a className='button'>{button}</a>

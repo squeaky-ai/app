@@ -151,6 +151,19 @@
     }
   }
 
+  .linked-data {
+    padding: 1rem; 
+
+    p:first-of-type {
+      margin: 0 0 1rem 0;
+    }
+
+    p:last-of-type {
+      font-size: 13px;
+      line-height: 20px;
+    }
+  }
+
   .filter-tags {
     display: flex;
     flex-wrap: wrap;

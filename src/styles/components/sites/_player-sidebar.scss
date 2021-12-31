@@ -160,7 +160,7 @@
         .button {
           color: var(--gray-500);
           font-size: 13px;
-          line-height: 16px;
+          line-height: 20px;
           overflow: hidden;
           text-align: right;
           text-overflow: ellipsis;
@@ -196,7 +196,7 @@
       }
 
       .bookmark {
-        line-height: 16px;
+        line-height: 20px;
 
         i {
           color: var(--gray-150);
@@ -544,7 +544,7 @@
     p {
       color: var(--gray-500);
       font-size: 13px;
-      line-height: 16px;
+      line-height: 20px;
       margin: 0 0 .75rem 0;
 
       &.heading {

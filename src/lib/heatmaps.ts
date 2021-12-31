@@ -238,7 +238,7 @@ export const iframeStyles = `
       display: inline-block;
       font-size: 13px;
       font-family: Helvetica, sans-serif;
-      line-height: 16px;
+      line-height: 20px;
       margin: 0;
       padding: .5rem 1rem;
       z-index: 1;
@@ -275,7 +275,7 @@ export const iframeStyles = `
       font-size: 13px;
       font-family: Helvetica, sans-serif;
       font-weight: 600;
-      line-height: 16px;
+      line-height: 20px;
       margin: 0 0 0 1.5rem;
       padding: .5rem 1rem;
       z-index: 1;
