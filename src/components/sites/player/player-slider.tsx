@@ -66,7 +66,7 @@ export class PlayerSlider extends React.Component<Props, State> {
   };
 
   private get duration() {
-    return this.props.replayer.getMetaData().totalTime
+    return this.props.recording.duration;
   }
 
   private stop = (): void => {

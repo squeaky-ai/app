@@ -1,3 +1,4 @@
+import { uniq } from 'lodash';
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
 
 import {
@@ -9,6 +10,7 @@ import {
   RecordingsBookmarkedInput,
   RecordingsDeleteBulkInput,
   RecordingsDeleteInput,
+  RecordingsEvents,
   RecordingsViewedBulkInput,
   RecordingsViewedInput,
   Site,
@@ -115,7 +117,35 @@ import {
   VISITOR_DELETE_MUTATION,
 } from 'data/visitors/mutations';
 
-export const cache = new InMemoryCache();
+export const cache = new InMemoryCache({
+  typePolicies: {
+    Recording: {
+      fields: {
+        events: {
+          // Is Apollo even designed for humans to work with? This is madness!
+          // In order to build up the list of events, the caching by any of the
+          // arguments (in this case, page) needs to be disabled. The fetchMore
+          // function is used in conjunction with these merging rules to build
+          // the full list
+          keyArgs: false,
+          merge(existing: RecordingsEvents, incoming: RecordingsEvents) {
+            if (!incoming) return existing;
+            if (!existing) return incoming;
+
+            return {
+              ...incoming,
+              // A small amount of the events may have been loaded to show a preview,
+              // in this case the events will be merged with the existing ones which
+              // causes duplicates. I'm sure this is horrendous for performance but
+              // we can cross that bridge another day
+              items: uniq([...existing.items, ...incoming.items]),
+            };
+          }
+        }
+      }
+    }
+  }
+});
 
 export const client = new ApolloClient({
   cache,

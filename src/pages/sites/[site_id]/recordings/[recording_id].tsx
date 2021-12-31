@@ -10,7 +10,7 @@ import { PlayerState, Action, PlayerStatus } from 'types/player';
 
 const reducer = (state: PlayerState, action: Action) => ({ 
   ...state,
-  [action.type]: action.value 
+  [action.type]: action.value, 
 });
 
 const initialState: PlayerState = {
