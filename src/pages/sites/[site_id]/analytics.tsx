@@ -7,6 +7,7 @@ import { EmptyState } from 'components/sites/empty-state';
 import { Page } from 'components/sites/page';
 import { Analytics } from 'components/sites/analytics/analytics';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
+import { Unlock } from 'components/sites/unlock';
 import { Period } from 'components/sites/period/period';
 import { usePeriod } from 'hooks/use-period';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
@@ -36,6 +37,8 @@ const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
               illustration={3}
               videoName='Analytics Intro'
             />
+
+            <Unlock site={site} />
 
             {site.recordingsCount > 0 && (
               <Analytics period={period} />

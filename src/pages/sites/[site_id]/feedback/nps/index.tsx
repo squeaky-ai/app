@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import { Main } from 'components/main';
 import { Page } from 'components/sites/page';
 import { EmptyState } from 'components/sites/empty-state';
+import { Unlock } from 'components/sites/unlock';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { NpsTabs } from 'components/sites/feedback/nps-tabs';
 import { Nps } from 'components/sites/feedback/nps';
@@ -30,6 +31,8 @@ const SitesFeedbackNps: NextPage<ServerSideProps> = ({ user }) => {
               illustration={9}
               videoName='Feedback Intro'
             />
+
+            <Unlock site={site} />
 
             {!!site.verifiedAt && (
               <>

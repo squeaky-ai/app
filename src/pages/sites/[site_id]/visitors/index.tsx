@@ -9,6 +9,7 @@ import { Visitors } from 'components/sites/visitors/visitors';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { VisitorsColumns } from 'components/sites/visitors/visitors-columns';
 import { Filters } from 'components/sites/filters/visitors/filters';
+import { Unlock } from 'components/sites/unlock';
 import { Tags } from 'components/sites/filters/visitors/tags';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { FILTERS, COLUMNS, DEFAULT_COLUMNS } from 'data/visitors/constants';
@@ -72,6 +73,8 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
               illustration={6}
               videoName='Visitors Intro'
             />
+
+            <Unlock site={site} />
 
             {site.recordingsCount > 0 && (
               <>

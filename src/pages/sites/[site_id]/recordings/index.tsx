@@ -13,6 +13,7 @@ import { RecordingsColumns } from 'components/sites/recordings/recordings-column
 import { RecordingsBulkActions } from 'components/sites/recordings/recordings-bulk-actions';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { Period } from 'components/sites/period/period';
+import { Unlock } from 'components/sites/unlock';
 import { FILTERS, COLUMNS, DEFAULT_COLUMNS } from 'data/recordings/constants';
 import { Preference } from 'lib/preferences';
 import { getColumnPreferences } from 'lib/tables';
@@ -84,6 +85,8 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
               illustration={2}
               videoName='Recordings Intro'
             />
+
+            <Unlock site={site} />
 
             {site.recordingsCount > 0 && (
               <>

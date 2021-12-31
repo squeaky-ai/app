@@ -6,6 +6,7 @@ import { Main } from 'components/main';
 import { Page } from 'components/sites/page';
 import { EmptyState } from 'components/sites/empty-state';
 import { Spinner } from 'components/spinner';
+import { Unlock } from 'components/sites/unlock';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { Heatmaps } from 'components/sites/heatmaps/heatmaps';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
@@ -49,6 +50,8 @@ const SitesHeatmaps: NextPage<ServerSideProps> = ({ user }) => {
             {loading && pages.length === 0 && (
               <Spinner />
             )}
+
+            <Unlock site={site} />
 
             {site.recordingsCount > 0 && page && (
               <Heatmaps 

@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import { EmptyState } from 'components/sites/empty-state';
 import { Main } from 'components/main';
 import { Page } from 'components/sites/page';
+import { Unlock } from 'components/sites/unlock';
 import { SentimentTabs } from 'components/sites/feedback/sentiment-tabs';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { Sentiment } from 'components/sites/feedback/sentiment';
@@ -30,6 +31,8 @@ const SitesFeedbackSentiment: NextPage<ServerSideProps> = ({ user }) => {
               illustration={9}
               videoName='Feedback Intro'
             />
+
+            <Unlock site={site} />
 
             {!!site.verifiedAt && (
               <>
