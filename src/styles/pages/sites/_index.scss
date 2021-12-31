@@ -102,6 +102,10 @@
       p {
         flex: 1;
         margin: 0;
+        overflow: hidden;
+        padding-right: 1.5rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .name {
