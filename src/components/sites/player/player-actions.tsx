@@ -79,7 +79,7 @@ export const PlayerActions: FC<Props> = ({ site, recording }) => {
   return (
     <>
       <div className='recording-actions'>
-        <Button onClick={handleBookmark} className={classnames('boookmark', { active: recording?.bookmarked })}>
+        <Button onClick={handleBookmark} className={classnames('boookmark', { active: recording?.bookmarked })} disabled={!recording}>
           <Icon name='bookmark-3-line' />
         </Button>
         <RecordingsShare
@@ -87,7 +87,7 @@ export const PlayerActions: FC<Props> = ({ site, recording }) => {
           site={site}
           recordingId={recording?.id}
         />
-        <Button onClick={handleDeleteClick}>
+        <Button onClick={handleDeleteClick} disabled={!recording}>
           <Icon name='delete-bin-line' />
         </Button>
         <Link href={`/sites/${site.id}/recordings`}>

@@ -24,6 +24,7 @@ export const PlayerFooter: FC<Props> = ({ state, site, replayer, recording, disp
       <div className='control-group'>
         <PlayerZoom 
           state={state} 
+          recording={recording}
           dispatch={dispatch} 
         />
       </div>
@@ -36,10 +37,7 @@ export const PlayerFooter: FC<Props> = ({ state, site, replayer, recording, disp
         />
       </div>
       <div className='control-group'>
-        <PlayerTabs 
-          state={state}
-          dispatch={dispatch}
-        />
+        <PlayerTabs state={state} dispatch={dispatch} />
       </div>
     </footer>
 

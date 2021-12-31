@@ -5,6 +5,7 @@ import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { PlayerSpeed } from 'components/sites/player/player-speed';
 import { PlayerSlider } from 'components/sites/player/player-slider';
+import { PlayerSliderLoading } from 'components/sites/player/player-slider-loading';
 import { Spinner } from 'components/spinner';
 import { PlayerState, Action, PlayerStatus } from 'types/player';
 import type { Recording } from 'types/graphql';
@@ -62,7 +63,7 @@ export const PlayerControls: FC<Props> = ({ state, replayer, recording, dispatch
 
   return (
     <>
-      <Button className='control play-pause' onClick={handlePlayPause}>
+      <Button className='control play-pause' onClick={handlePlayPause} disabled={!recording}>
         <PlayPauseIcon />
       </Button>
 
@@ -77,7 +78,12 @@ export const PlayerControls: FC<Props> = ({ state, replayer, recording, dispatch
         />
       )}
 
-      <PlayerSpeed 
+      {(!replayer || !recording) && (
+        <PlayerSliderLoading />
+      )}
+
+      <PlayerSpeed
+        recording={recording}
         playbackSpeed={state.playbackSpeed} 
         skipInactivity={state.skipInactivity}
         handlePlaybackSpeed={handlePlaybackSpeed} 

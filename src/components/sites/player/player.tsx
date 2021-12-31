@@ -1,23 +1,23 @@
 import React from 'react';
 import type { Replayer } from 'rrweb';
 import { debounce } from 'lodash';
-import { Spinner } from 'components/spinner';
 import { Buffering } from 'components/sites/player/buffering';
 import { recordingViewed } from 'lib/api/graphql';
-import type { Recording } from 'types/graphql';
+import { initReplayer } from 'lib/replayer';
 import { PlayerState, Action, PlayerStatus } from 'types/player';
+import type { Recording } from 'types/graphql';
 import type { Site } from 'types/graphql';
 
 interface Props {
   site: Site;
   state: PlayerState;
-  replayer: Replayer;
   recording: Recording;
   dispatch: React.Dispatch<Action>;
 }
 
 export class Player extends React.Component<Props> {
   private container: Element;
+  public replayer: Replayer;
 
   private observer = new ResizeObserver(debounce(() => {
     this.squidgeToFit();
@@ -28,6 +28,11 @@ export class Player extends React.Component<Props> {
   }
 
   public componentDidMount() {
+    this.replayer = initReplayer({
+      dispatch: this.props.dispatch,
+      recording: this.props.recording,
+    });
+
     this.squidgeToFit();
     this.container = document.getElementById('player');
 
@@ -40,6 +45,12 @@ export class Player extends React.Component<Props> {
 
   public componentWillUnmount() {
     this.observer.disconnect();
+
+    this.replayer?.pause();
+    this.replayer = null;
+    // Clean up the contents of the div (this is not controlled
+    // by react, it's injected by the player)
+    document.querySelector('.replayer-wrapper')?.remove();
   }
 
   public componentDidUpdate(prevProps: Props) {
@@ -96,7 +107,6 @@ export class Player extends React.Component<Props> {
     return (
       <main id='player'>
         <div className='player-container' style={{ transform: `scale(${this.props.state.zoom})` }}>
-          {this.props.replayer ? null : <Spinner />}
           {this.props.state.status === PlayerStatus.LOADING && <Buffering />}
         </div>
       </main>

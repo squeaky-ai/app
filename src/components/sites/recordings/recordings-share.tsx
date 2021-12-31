@@ -48,7 +48,7 @@ export const RecordingsShare: FC<Props> = ({ button, site, recordingId, onClose 
 
   return (
     <>
-      <Button onClick={openModal}>
+      <Button onClick={openModal} disabled={!recordingId}>
         {button}
       </Button>
 

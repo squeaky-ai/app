@@ -5,28 +5,18 @@ import { Action, PlayerStatus } from 'types/player';
 import type { Recording } from 'types/graphql';
 
 interface InitArgs {
-  failed: boolean;
-  replayer?: Replayer;
   recording: Recording;
   dispatch: React.Dispatch<Action>;
 }
 
-export const initReplayer = ({ failed, replayer, recording, dispatch }: InitArgs): Replayer => {
-  if (replayer || !recording || failed) { 
-    // We don't want to be creating more than 1! But at the same
-    // time there are multiple times when it could be ready to
-    // init, so the responsibility falls here to make sure it
-    // returns early
-    return replayer;
-  }
-
+export const initReplayer = ({ recording, dispatch }: InitArgs): Replayer => {
   const element = document.querySelector('.player-container');
 
   if (!element) {
     // The recording is ready, but the DOM is not. We should 
     // wait until the div exists before trying to init the replayer
     // or it will cry
-    return replayer;
+    return null;
   }
 
   const events: Event[] = recording.events.items.map(i => JSON.parse(i));
@@ -35,10 +25,10 @@ export const initReplayer = ({ failed, replayer, recording, dispatch }: InitArgs
     // Shouldn't be possible to create a recording without events
     // but someone could have deleted something
     dispatch({ type: 'status', value: PlayerStatus.FAILED });
-    return replayer;
+    return null;
   }
 
-  replayer = new Replayer(events, {
+  const replayer = new Replayer(events, {
     root: element,
     skipInactive: true,
     maxSpeed: 25,

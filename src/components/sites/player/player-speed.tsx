@@ -6,8 +6,10 @@ import { Label } from 'components/label';
 import { Radio } from 'components/radio';
 import { Divider } from 'components/divider';
 import { Checkbox } from 'components/checkbox';
+import type { Recording } from 'types/graphql';
 
 interface Props {
+  recording: Recording;
   playbackSpeed: number;
   skipInactivity: boolean;
   handlePlaybackSpeed: (speed: number) => void;
@@ -43,6 +45,7 @@ const speeds = [
 ];
 
 export const PlayerSpeed: FC<Props> = ({ 
+  recording,
   playbackSpeed,
   skipInactivity,
   handlePlaybackSpeed,
@@ -55,7 +58,7 @@ export const PlayerSpeed: FC<Props> = ({
   const handleSkipChange = () => handleSkipInactivity(!skipInactivity);
 
   return (
-    <Dropdown button={name} buttonClassName='speed' menuClassName='playback-speed-menu' direction='up' portal>
+    <Dropdown button={name} buttonClassName='speed' buttonDisabled={!recording} menuClassName='playback-speed-menu' direction='up' portal>
       <Label>Playback Speed</Label>
 
       {speeds.map(speed => (

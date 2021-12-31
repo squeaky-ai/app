@@ -19,14 +19,11 @@ interface State {
 
 export class PlayerSlider extends React.Component<Props, State> {
   private timer: number;
-  private duration: number;
 
   public constructor(props: Props) {
     super(props);
 
     this.state = { value: 0 };
-
-    this.duration = this.props.replayer.getMetaData().totalTime;
   }
 
   public componentWillUnmount(): void {
@@ -67,6 +64,10 @@ export class PlayerSlider extends React.Component<Props, State> {
 
     this.timer = requestAnimationFrame(update);
   };
+
+  private get duration() {
+    return this.props.replayer.getMetaData().totalTime
+  }
 
   private stop = (): void => {
     if (this.timer) {
