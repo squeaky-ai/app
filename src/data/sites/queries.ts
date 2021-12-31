@@ -6,7 +6,6 @@ export const GET_SITES_QUERY = gql`
       id
       name
       url
-      planName
       ownerName
     }
   }
@@ -20,7 +19,6 @@ export const GET_SITE_QUERY = gql`
       url
       verifiedAt
       uuid
-      planName
       ownerName
       daysSinceLastRecording
       recordingsCount
@@ -38,6 +36,21 @@ export const GET_SITE_QUERY = gql`
       domainBlacklist {
         type
         value
+      }
+    }
+  }
+`;
+
+export const GET_PLAN_QUERY = gql`
+  query GetSitePlan($siteId: ID!) {
+    site(siteId: $siteId) {
+      id
+      plan {
+        type
+        name
+        exceeded
+        recordingsLimit
+        recordingsLocked
       }
     }
   }
