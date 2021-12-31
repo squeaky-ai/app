@@ -7,19 +7,42 @@ import { usePlan } from 'hooks/use-plan';
 
 interface Props {
   site: Site;
+  page: 'visitors' | 'recordings' | 'analytics' | 'heatmaps' | 'nps' | 'sentiment';
 }
 
-export const Unlock: FC<Props> = ({ site }) => {
+export const Unlock: FC<Props> = ({ site, page }) => {
   const { plan } = usePlan({ site });
 
   if (!plan.exceeded) {
     return null;
   }
 
+  const limit = plan.recordingsLimit.toLocaleString();
+
+  const lockedRecordings = plan.recordingsLocked.toLocaleString();
+
+  const lockedVisitors = plan.visitorsLocked.toLocaleString();
+
+  const message: JSX.Element = (() => {
+    switch(page) {
+      case 'visitors':
+        return <p>You&apos;ve reached your monthly recording limit of <b>{limit}</b> recordings. <Link href={`/sites/${site.id}/settings/subscription`}><a>Upgrade</a></Link> to unlock the <b>{lockedRecordings}</b> visits you&apos;ve missed, including <b>{lockedVisitors}</b> new visitors.</p>;
+      case 'recordings':
+        return <p>You&apos;ve reached your monthly recording limit of <b>{limit}</b> recordings. <Link href={`/sites/${site.id}/settings/subscription`}><a>Upgrade</a></Link> to unlock the <b>{lockedRecordings}</b> visits you&apos;ve missed.</p>
+      case 'analytics':
+        return <p>You&apos;ve reached your monthly recording limit of <b>{limit}</b> recordings. <Link href={`/sites/${site.id}/settings/subscription`}><a>Upgrade</a></Link> to access the analytics data for visits you&apos;ve missed.</p>
+      case 'heatmaps':
+        return <p>You&apos;ve reached your monthly recording limit of <b>{limit}</b> recordings. <Link href={`/sites/${site.id}/settings/subscription`}><a>Upgrade</a></Link> to include <b>{lockedRecordings}</b> visits missing from your heatmaps data.</p>
+      case 'nps':
+      case 'sentiment':
+        return <p>You&apos;ve reached your monthly recording limit of <b>{limit}</b> recordings. <Link href={`/sites/${site.id}/settings/subscription`}><a>Upgrade</a></Link> to unlock any feedback you might have missed.</p>
+    }
+  })();
+
   return (
     <div className='unlock'>
       <Icon name='information-line' />
-      <p>You&apos;ve reached your monthly recording limit of <b>{plan.recordingsLimit}</b> recordings. <Link href={`/sites/${site.id}/settings/subscription`}><a>Upgrade</a></Link> to unlock the <b>{plan.recordingsLocked}</b> visits you&apos;ve missed.</p>
+      {message}
       <Link href={`/sites/${site.id}/settings/subscription`}>
         <a className='button'>Unlock Recordings</a>
       </Link>

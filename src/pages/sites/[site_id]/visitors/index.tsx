@@ -74,7 +74,7 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
               videoName='Visitors Intro'
             />
 
-            <Unlock site={site} />
+            <Unlock site={site} page='visitors' />
 
             {site.recordingsCount > 0 && (
               <>

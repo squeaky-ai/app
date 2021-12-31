@@ -51,6 +51,7 @@ export const GET_PLAN_QUERY = gql`
         exceeded
         recordingsLimit
         recordingsLocked
+        visitorsLocked
       }
     }
   }

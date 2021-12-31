@@ -86,7 +86,7 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
               videoName='Recordings Intro'
             />
 
-            <Unlock site={site} />
+            <Unlock site={site} page='recordings' />
 
             {site.recordingsCount > 0 && (
               <>

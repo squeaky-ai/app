@@ -25,6 +25,7 @@ export const usePlan = (props: Props): UsePlan => {
     exceeded: false,
     recordingsLimit: 500,
     recordingsLocked: 0,
+    visitorsLocked: 0,
   };
 
   return {

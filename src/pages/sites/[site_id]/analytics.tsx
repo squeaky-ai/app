@@ -38,7 +38,7 @@ const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
               videoName='Analytics Intro'
             />
 
-            <Unlock site={site} />
+            <Unlock site={site} page='analytics' />
 
             {site.recordingsCount > 0 && (
               <Analytics period={period} />
