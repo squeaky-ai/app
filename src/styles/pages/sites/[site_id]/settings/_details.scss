@@ -76,6 +76,37 @@
     }
   }
 
+  .status-heading {
+    align-items: center;
+    display: flex;
+    font-size: 16px;
+    font-weight: var(--font-weight-normal);
+    line-height: 24px;
+
+    .icon {
+      font-size: 1.25rem;
+      margin: 0 .25rem 0 1.5rem;
+    }
+
+    &.inactive {
+      .icon {
+        color: var(--rose-500);
+      }
+    }
+
+    &.verified {
+      .icon {
+        color: var(--green-500);
+      }
+    }
+
+    &.warning {
+      .icon {
+        color: var(--orange-500);
+      }
+    }
+  }
+
   .unverified-badge {
     align-items: center;
     display: flex;

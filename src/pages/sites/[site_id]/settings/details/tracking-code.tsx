@@ -11,10 +11,16 @@ import { Page } from 'components/sites/page';
 import { OWNER, ADMIN } from 'data/teams/constants';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
+import { Icon } from 'components/icon';
 import { SettingsTabs } from 'components/sites/settings/settings-tabs';
 import { MAX_DAYS_BEFORE_POTENTIAL_ISSUE } from 'data/sites/constants';
+import type { Site } from 'types/graphql';
 
 const SitesSettingsTrackingCode: NextPage<ServerSideProps> = ({ user }) => {
+  const hasPotentialIssue = (site: Site) => site.verifiedAt && site.daysSinceLastRecording >= MAX_DAYS_BEFORE_POTENTIAL_ISSUE;
+
+  const isWorkingFine = (site: Site) => site.verifiedAt && site.daysSinceLastRecording < MAX_DAYS_BEFORE_POTENTIAL_ISSUE;
+
   return (
     <>
       <Head>
@@ -35,6 +41,12 @@ const SitesSettingsTrackingCode: NextPage<ServerSideProps> = ({ user }) => {
 
             <h4>
               Tracking code
+              {site.verifiedAt
+                ? hasPotentialIssue(site)
+                  ? <span className='status-heading warning'><Icon name='information-line' /><i>Potential Issue</i></span>
+                  : <span className='status-heading verified'><Icon name='information-line' /><i>Verified and active</i></span>
+                : <span className='status-heading inactive'><Icon name='information-line' /><i>Inactive</i></span>
+              }
             </h4>
 
             <Container className='md'>
@@ -50,7 +62,7 @@ const SitesSettingsTrackingCode: NextPage<ServerSideProps> = ({ user }) => {
                 </>
               )}
 
-              {site.verifiedAt && site.daysSinceLastRecording >= MAX_DAYS_BEFORE_POTENTIAL_ISSUE && (
+              {hasPotentialIssue(site) && (
                 <>
                   <Message
                     type='warning'
@@ -62,7 +74,7 @@ const SitesSettingsTrackingCode: NextPage<ServerSideProps> = ({ user }) => {
               )}
 
 
-              {site.verifiedAt && site.daysSinceLastRecording < MAX_DAYS_BEFORE_POTENTIAL_ISSUE && (
+              {isWorkingFine(site) && (
                 <p>You can paste the code below into the <code className='code'>&lt;head&gt;</code> section of your HTML on any page that you wish to track on <a href={site.url} target='_blank' rel='noreferrer'>{site.url}</a>.</p>
               )}
 
