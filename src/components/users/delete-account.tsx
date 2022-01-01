@@ -43,7 +43,7 @@ export const DeleteAccount: FC = () => {
           <Container className='sm'>
             <Illustration src='illustration-14' height={256} width={256} alt='Illustraion to represent that the account has been deleted' />
             <h2>Account Deleted</h2>
-            <p>We’re sorry to see you go, but thanks so much for taking the time to use Squeaky. If you have any feedback please let us know:</p>
+            <p>We&apos;re sorry to see you go, but thanks so much for taking the time to use Squeaky. If you have any feedback please let us know:</p>
             <a href='/contact-us/' className='button primary'>
               Contact Us
             </a>

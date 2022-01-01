@@ -52,7 +52,7 @@ export const LeaveTeam: FC<Props> = ({ site }) => {
           </ModalContents>
           <ModalFooter>
             <Button type='button' className='tertiary' onClick={leaveTeam}>
-              Yes, I’m leaving
+              Yes, I&apos;m leaving
             </Button>
             <Button type='button' className='quaternary' onClick={closeModal}>
               Cancel

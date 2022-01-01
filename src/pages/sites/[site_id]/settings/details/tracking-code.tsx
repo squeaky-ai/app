@@ -33,7 +33,9 @@ const SitesSettingsTrackingCode: NextPage<ServerSideProps> = ({ user }) => {
 
             <SettingsTabs site={site} member={member} page='tracking-code' />
 
-            <h4>Tracking code</h4>
+            <h4>
+              Tracking code
+            </h4>
 
             <Container className='md'>
               {!site.verifiedAt && (
@@ -44,7 +46,7 @@ const SitesSettingsTrackingCode: NextPage<ServerSideProps> = ({ user }) => {
                   />
 
                   <p>Please paste the code below into the <code className='code'>&lt;head&gt;</code> section of your HTML on every page you wish to track on your website <a href={site.url} rel='noreferrer' target='_blank'>{site.url}</a>. This is the code that enables Squeaky to anonymously capture user behaviour, giving you valuable insights into their experience on your site.</p>
-                  <p><b>Please note</b>: You’ll need to add the tracking code to a <b>publicly accessible page</b> (e.g. not behind a login) for us to verify the installation, if this isn’t possible please <a href='/contact-us/' target='_blank'>contact us</a> and we’ll arrange support you with a workaround.</p>
+                  <p><b>Please note</b>: You&apos;ll need to add the tracking code to a <b>publicly accessible page</b> (e.g. not behind a login) for us to verify the installation, if this isn&apos;t possible please <a href='/contact-us/' target='_blank'>contact us</a> and we&apos;ll arrange support you with a workaround.</p>
                 </>
               )}
 

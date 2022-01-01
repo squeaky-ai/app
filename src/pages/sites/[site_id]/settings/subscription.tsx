@@ -36,7 +36,7 @@ const SiteSettingsSubscription: NextPage<ServerSideProps> = ({ user }) => (
                 body={
                   <>
                     <p>Right now, your feedback is worth more to us than money, but before long we will start to charge for our service.</p>
-                    <p>If you’ve got ideas or feedback on how we might approach pricing, please email <a href='mailto:hello@squeaky.com'>hello@squeaky.com</a> and let us know.</p>
+                    <p>If you&apos;ve got ideas or feedback on how we might approach pricing, please email <a href='mailto:hello@squeaky.com'>hello@squeaky.com</a> and let us know.</p>
                   </>
                 }
               />

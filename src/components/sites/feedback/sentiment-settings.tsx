@@ -173,7 +173,7 @@ export const SentimentSettings: FC<Props> = ({ site }) => {
 
                 <h4>Visibility</h4>
 
-                <p>By default <b>your feedback widget will display on all pages</b> of your site, if you’d like to hide the widget on any specific pages you can check the boxes for them below.</p>
+                <p>By default <b>your feedback widget will display on all pages</b> of your site, if you&apos;d like to hide the widget on any specific pages you can check the boxes for them below.</p>
 
                 <p><b>Hide feedback widget on:</b></p>
 

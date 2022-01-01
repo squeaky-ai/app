@@ -64,7 +64,7 @@ const SitesSettingsIp: NextPage<ServerSideProps> = ({ user }) => {
             <Container className='md'>
               <h4>Screening</h4>
 
-              <p>Sometimes you don’t want to record particular visitors e.g. if members of your team are using your product, you may not want these visits to influence your recordings or analytics. Luckily, we have a few options below to help you screen out these visitors in advance.</p>
+              <p>Sometimes you don&apos;t want to record particular visitors e.g. if members of your team are using your product, you may not want these visits to influence your recordings or analytics. Luckily, we have a few options below to help you screen out these visitors in advance.</p>
 
               <Label className='section'>
                 <span>IP Address</span>
@@ -107,7 +107,7 @@ const SitesSettingsIp: NextPage<ServerSideProps> = ({ user }) => {
                 }
               />
 
-              <p>If you’re using the data linking feature then you’ll be able to automatically screen out all visits and recordings from the user email address you synchronise with Squeaky from your app or website. You can do this on an domain level, or per email.</p>
+              <p>If you&apos;re using the data linking feature then you&apos;ll be able to automatically screen out all visits and recordings from the user email address you synchronise with Squeaky from your app or website. You can do this on an domain level, or per email.</p>
 
               {site.domainBlacklist.length > 0 && (
                 <Table className='ip-table'>

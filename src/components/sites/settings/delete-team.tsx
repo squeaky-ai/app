@@ -49,7 +49,7 @@ export const DeleteTeam: FC<Props> = ({ site, team }) => {
           </ModalHeader>
           <ModalContents>
             <p id='delete-team-description'>Are you sure you wish to remove {team.user.fullName} from your site?</p>
-            <p>If {team.user.firstName} has created any video notes or other similar content it will be relabeled as ‘Removed User’.</p>
+            <p>If {team.user.firstName} has created any video notes or other similar content it will be relabeled as &apos;Removed User&apos;.</p>
           </ModalContents>
           <ModalFooter>
             <Button type='button' className='tertiary' onClick={deleteTeam}>

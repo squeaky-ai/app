@@ -61,7 +61,7 @@ const Reset: NextPage<ServerSideProps> = () => {
                 <>
                   <h2>Reset Password</h2> 
 
-                  <p>If you’d like to reset your password, please enter your email address below and click the reset password button.</p>
+                  <p>If you&apos;d like to reset your password, please enter your email address below and click the reset password button.</p>
 
                   <Formik
                     initialValues={{ email: '' }}
