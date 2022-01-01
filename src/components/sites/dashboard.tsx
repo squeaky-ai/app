@@ -11,6 +11,7 @@ import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
 import { Pill } from 'components/pill';
 import { Spinner } from 'components/spinner';
 import { Error } from 'components/error';
+import { ActiveUsers } from './active-users';
 import { useDashboard } from 'hooks/use-dashboard';
 import { toTimeString } from 'lib/dates';
 import type { Site } from 'types/graphql';
@@ -203,6 +204,22 @@ export const Dashboard: FC<Props> = ({ site }) => {
             <div className='fader' />
           </>
         )}
+      </Card>
+
+      <Card className='active-users'>
+        <h5>
+          <Icon name='time-line' />
+          Active Users
+        </h5>
+        <h2 className='purple'>
+          <ActiveUsers />
+        </h2>
+        <div className='link'>
+          <Link href={`/sites/${site_id}/analytics`}>
+            <a>Analytics</a>
+          </Link>
+          <Icon name='arrow-right-line' />
+        </div>
       </Card>
     </div>
   );

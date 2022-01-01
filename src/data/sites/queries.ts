@@ -56,3 +56,12 @@ export const GET_PLAN_QUERY = gql`
     }
   }
 `;
+
+export const GET_ACTIVE_USERS_QUERY = gql`
+  query GetActiveUserCount($siteId: ID!) {
+    site(siteId: $siteId) {
+      id
+      activeUserCount
+    }
+  }
+`;

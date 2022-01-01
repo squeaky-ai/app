@@ -423,5 +423,12 @@
         }
       }
     }
+
+    .active-users {
+      h2,
+      h5 .icon {
+        color: var(--purple-500);
+      }
+    }
   }
 }
