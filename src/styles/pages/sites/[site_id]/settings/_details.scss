@@ -46,6 +46,54 @@
     }
   }
 
+  .tracking-code {
+    display: flex;
+
+    .installation-guide {
+      background: var(--white);
+      border-radius: var(--border-radius-lg);
+      height: 27.5rem;
+      margin: 0 0 0 3rem;
+      padding: 2rem;
+      width: 21rem;
+
+      h4 {
+        align-items: center;
+        display: flex;
+        margin: 0 0 1.5rem 0;
+
+        .icon {
+          color: var(--blue-500);
+          font-size: 1.25rem;
+          margin-right: .75rem;
+        }
+      }
+
+      p {
+        margin: 0 0 1.5rem 0;
+      }
+
+      .platforms {
+        display: grid;
+        grid-gap: 1rem;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 5.125rem);
+
+        a {
+          align-items: center;
+          background: var(--gray-50);
+          border-radius: var(--border-radius-md);
+          display: flex;
+          justify-content: center;
+
+          &:hover {
+            background: var(--gray-100);
+          }
+        }
+      }
+    }
+  }
+
   h4 {
     align-items: center;
     display: flex;
@@ -73,6 +121,33 @@
       color: var(--green-500);
       font-size: 1.5rem;
       margin-right: .5rem;
+    }
+  }
+
+  .verification-failed {
+    flex-direction: column;
+    padding: 1.5rem 1rem;
+
+    .heading {
+      align-items: center;
+      display: flex;
+    }
+
+    p:not(.heading) {
+      margin: .75rem 0 0 2rem;
+    }
+
+    ul {
+      margin: .75rem 0 0 3.25rem;
+      padding: 0;
+
+      li {
+        margin-bottom: 1rem;
+
+        &:last-of-type {
+          margin: 0;
+        }
+      }
     }
   }
 

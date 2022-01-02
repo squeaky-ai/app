@@ -1,7 +1,8 @@
 import React from 'react';
 import type { FC } from 'react';
+import Link from 'next/link';
 import { Button } from 'components/button';
-import { Message } from 'components/message';
+import { Icon } from 'components/icon';
 import { verifySite } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
 import type { Site } from 'types/graphql';
@@ -34,10 +35,15 @@ export const Verify: FC<Props> = ({ site }) => {
   return (
     <>
       {failed && (
-        <Message
-          type='error'
-          message={<span>We were unable to verify your installation. Please ensure you&apos;ve correctly copied to code above into the <code className='code'>&lt;head&gt;</code> section of your HTML, and you&apos;ve published the changes to a <b>publicly accessible page</b> (e.g. not behind a login) on the web.</span>}
-        />
+        <div className='message error verification-failed'>
+          <p className='heading'><Icon name='error-warning-line' /> <b>We were unable to verify your installation</b></p>
+          <p>However, there&apos;s no need to worry!</p>
+          <ul>
+            <li>Firstly, please ensure you&apos;ve correctly copied the code above into the <code className='code'>&lt;head&gt;</code> section of your HTML and you&apos;ve published the changes to the web. If you need help with this step, please see our <Link href='https://squeaky.notion.site/Install-your-tracking-code-6ab27212bb5c434196f494ac43349b72'><a target='_blank' rel='noreferrer'>installation guides</a></Link>.</li>
+            <li>Providing you&apos;ve successfully completed the step above, <b>we will automatically verify your installation</b> the moment your website&apos;s first session recording is received. This typically takes up to 30 minutes, but we&apos;ll email you the moment your first recording arrives.</li>
+          </ul>
+          <p>For more information, please check the <Link href='https://squeaky.notion.site/Install-your-tracking-code-6ab27212bb5c434196f494ac43349b72'><a target='_blank' rel='noreferrer'>troubleshooting page</a></Link> in our help centre</p>
+        </div>  
       )}
 
       <Button className='primary' onClick={siteVerify}>
