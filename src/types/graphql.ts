@@ -30,6 +30,7 @@ export type Analytics = {
   sessionsPerVisitor: AnalyticsSessionsPerVisitor;
   visitors: Array<Maybe<AnalyticsVisitor>>;
   visitorsCount: AnalyticsVisitorsCount;
+  visitsAt: Array<Maybe<Scalars['String']>>;
 };
 
 export type AnalyticsBrowser = {
@@ -879,6 +880,7 @@ export type SentimentDeleteInput = {
 
 export type Site = {
   __typename?: 'Site';
+  activeUserCount: Scalars['Int'];
   analytics: Analytics;
   browsers: Array<Maybe<Scalars['String']>>;
   createdAt: Scalars['String'];

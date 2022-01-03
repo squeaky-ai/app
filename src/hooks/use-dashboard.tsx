@@ -43,6 +43,7 @@ export const useDashboard = (): UseDashboard => {
         total: 0,
         new: 0,
       },
+      visitsAt: [],
     },
     recordingLatest: null,
   };

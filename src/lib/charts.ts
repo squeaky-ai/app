@@ -26,7 +26,7 @@ export interface DataForPeriod<T extends ChartInput> {
   data: ChartData<T>[];
 }
 
-const getAmPmForHour = (hour: number): string => {
+export const getAmPmForHour = (hour: number): string => {
   if (hour == 24) return '12pm';
   if (hour <= 12) return `${hour}am`;
   return `${hour - 12}pm`;

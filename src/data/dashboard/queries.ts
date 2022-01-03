@@ -6,6 +6,7 @@ export const GET_DASHBOARD_QUERY = gql`
       id
       analytics(fromDate: $fromDate, toDate: $toDate) {
         pageViewCount
+        visitsAt
         visitorsCount {
           total
           new

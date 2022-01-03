@@ -425,9 +425,35 @@
     }
 
     .active-users {
+      height: 232px;
+
       h2,
       h5 .icon {
         color: var(--purple-500);
+      }
+    }
+
+    .visits-at {
+      display: grid;
+      grid-gap: .5rem;
+      grid-template-columns: repeat(8, 1fr);
+      grid-template-rows: repeat(25, 1.5rem);
+
+      .visit {
+        background: var(--gray-100);
+        flex-shrink: 0;
+      }
+
+      .x-label {
+        color: var(--gray-500);
+        font-size: 14px;
+      }
+
+      .y-label {
+        background: none;
+        color: var(--gray-500);
+        font-size: 14px;
+        text-align: right;
       }
     }
   }

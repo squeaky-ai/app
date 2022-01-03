@@ -8,6 +8,7 @@ import { Tooltip } from 'components/tooltip';
 import { Divider } from 'components/divider';
 import { PlayerPreview } from 'components/sites/player/player-preview';
 import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
+import { AnalyticsVisitsAt } from 'components/sites/analytics/analyics-visits-at';
 import { Pill } from 'components/pill';
 import { Spinner } from 'components/spinner';
 import { Error } from 'components/error';
@@ -204,6 +205,10 @@ export const Dashboard: FC<Props> = ({ site }) => {
             <div className='fader' />
           </>
         )}
+      </Card>
+
+      <Card className='visits'>
+        <AnalyticsVisitsAt visitsAt={dashboard.analytics.visitsAt} />
       </Card>
 
       <Card className='active-users'>

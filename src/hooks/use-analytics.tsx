@@ -59,6 +59,7 @@ export const useAnalytics = (range: TimeRange): UseAnalytics => {
       }
     ],
     dimensions: [],
+    visitsAt: [],
   };
 
   return { 
