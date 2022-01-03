@@ -52,10 +52,10 @@
     .installation-guide {
       background: var(--white);
       border-radius: var(--border-radius-lg);
-      height: 27.5rem;
-      margin: 0 0 0 3rem;
+      height: 26rem;
+      margin: -3.75rem 0 0 3rem;
       padding: 2rem;
-      width: 21rem;
+      width: 21.5rem;
 
       h4 {
         align-items: center;
@@ -76,8 +76,8 @@
       .platforms {
         display: grid;
         grid-gap: 1rem;
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(2, 5.125rem);
+        grid-template-columns: repeat(3, 82px);
+        grid-template-rows: repeat(2, 82px);
 
         a {
           align-items: center;
