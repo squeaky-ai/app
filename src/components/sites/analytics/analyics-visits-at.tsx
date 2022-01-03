@@ -45,11 +45,16 @@ export const AnalyticsVisitsAt: FC<Props> = ({ visitsAt }) => {
     <div className='visits-at'>
       {orderedDayAndHourCounts.map((count, i) => {
         const day = i % 8;
+        const row = (i + 1) / 8;
         const isLabel = day === 7;
-        const hour = Math.ceil((i + 1) / 8);
+        const hour = Math.ceil((i + 1) / 8) - 1;
 
         if (isLabel) {
-          return <div key={i} className='visit y-label'>{getAmPmForHour(hour)}</div>
+          return (
+            <div key={i} className='visit y-label'>
+              {row % 2 === 1 ? getAmPmForHour(hour) : null}
+            </div>
+          );
         }
 
         return (
