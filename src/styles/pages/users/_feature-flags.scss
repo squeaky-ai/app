@@ -1,0 +1,14 @@
+.page.users.feature-flags {
+  flex: 1;
+  margin: 0;
+
+  .title {
+    margin: 2rem 0;
+  }
+
+  .options {
+    .toggle {
+      margin-bottom: 2rem;
+    }
+  }
+}

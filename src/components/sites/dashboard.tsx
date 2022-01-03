@@ -15,6 +15,8 @@ import { Error } from 'components/error';
 import { ActiveUsers } from './active-users';
 import { useDashboard } from 'hooks/use-dashboard';
 import { toTimeString } from 'lib/dates';
+import { useFeatureFlags } from 'hooks/use-feature-flags';
+import { FeatureFlag } from 'lib/feature-flags';
 import type { Site } from 'types/graphql';
 
 interface Props {
@@ -24,6 +26,7 @@ interface Props {
 export const Dashboard: FC<Props> = ({ site }) => {
   const router = useRouter();
   const { dashboard, error, loading } = useDashboard();
+  const { featureFlagEnabled } = useFeatureFlags();
 
   const { site_id } = router.query;
 
@@ -207,25 +210,29 @@ export const Dashboard: FC<Props> = ({ site }) => {
         )}
       </Card>
 
-      <Card className='visits'>
-        <AnalyticsVisitsAt visitsAt={dashboard.analytics.visitsAt} />
-      </Card>
+      {featureFlagEnabled(FeatureFlag.VISITOR_HOTSPOT) && (
+        <Card className='visits'>
+          <AnalyticsVisitsAt visitsAt={dashboard.analytics.visitsAt} />
+        </Card>
+      )}
 
-      <Card className='active-users'>
-        <h5>
-          <Icon name='time-line' />
-          Active Users
-        </h5>
-        <h2 className='purple'>
-          <ActiveUsers />
-        </h2>
-        <div className='link'>
-          <Link href={`/sites/${site_id}/analytics`}>
-            <a>Analytics</a>
-          </Link>
-          <Icon name='arrow-right-line' />
-        </div>
-      </Card>
+      {featureFlagEnabled(FeatureFlag.ACTIVE_VISITORS) && (
+        <Card className='active-users'>
+          <h5>
+            <Icon name='time-line' />
+            Active Users
+          </h5>
+          <h2 className='purple'>
+            <ActiveUsers />
+          </h2>
+          <div className='link'>
+            <Link href={`/sites/${site_id}/analytics`}>
+              <a>Analytics</a>
+            </Link>
+            <Icon name='arrow-right-line' />
+          </div>
+        </Card>
+      )}
     </div>
   );
 };
