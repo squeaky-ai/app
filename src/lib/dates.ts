@@ -142,6 +142,20 @@ export const getDateRange = (period: TimePeriod): TimeRange => {
   }
 };
 
+export const getDayByIndex = (index: number) => {
+  const days = {
+    0: 'Monday',
+    1: 'Tuesday',
+    2: 'Wednesday',
+    3: 'Thursday',
+    4: 'Firday',
+    5: 'Saturday',
+    6: 'Sunday',
+  };
+
+  return get(days, index, '');
+};
+
 export const expandDay = (day: string) => {
   const days = {
     Mon: 'Monday',
@@ -150,7 +164,7 @@ export const expandDay = (day: string) => {
     Thu: 'Thursday',
     Fri: 'Firday',
     Sat: 'Saturday',
-    Sun: 'Sunday'
+    Sun: 'Sunday',
   };
 
   return get(days, day, '');

@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import { groupBy, range } from 'lodash';
 import { percentage } from 'lib/maths';
 import { getAmPmForHour } from 'lib/charts';
+import { getDayByIndex } from 'lib/dates';
 import { getDay, getHours } from 'date-fns';
 import { ANALYTICS_COLOURS } from 'data/analytics/constants';
 
@@ -43,10 +44,11 @@ export const AnalyticsVisitsAt: FC<Props> = ({ visitsAt }) => {
   return (
     <div className='visits-at'>
       {orderedDayAndHourCounts.map((count, i) => {
-        const isLabel = (i + 1) % 8 === 0;
+        const day = i % 8;
+        const isLabel = day === 7;
+        const hour = Math.ceil((i + 1) / 8);
 
         if (isLabel) {
-          const hour = Math.round((i + 1) /  8);
           return <div key={i} className='visit y-label'>{getAmPmForHour(hour)}</div>
         }
 
@@ -54,7 +56,8 @@ export const AnalyticsVisitsAt: FC<Props> = ({ visitsAt }) => {
           <div 
             key={i} 
             className='visit' 
-            style={{ background: getBackgroundColor(count).background }} 
+            style={{ background: getBackgroundColor(count).background }}
+            data-label={`${getDayByIndex(day)} ${getAmPmForHour(hour)}-${getAmPmForHour(hour === 24 ? 1 : hour + 1)} ${count} Vistors`}
           />
         );
       })}
