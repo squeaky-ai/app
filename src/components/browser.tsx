@@ -43,6 +43,7 @@ export const Browser: FC<Props> = ({ height, name, width }) => (
       width={width ||16} 
       src={getIconSrc(name)} 
       alt={`${name} icon`} 
+      unoptimized
     />
   </span>
 );

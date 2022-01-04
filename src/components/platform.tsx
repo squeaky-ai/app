@@ -34,5 +34,5 @@ const getPlatformSrc = (platform: PlatformType) => {
 };
 
 export const Platform: FC<Props> = ({ platform, ...props }) => {
-  return <Image src={getPlatformSrc(platform)} {...props} alt='Platform logo' />;
+  return <Image src={getPlatformSrc(platform)} {...props} alt='Platform logo' unoptimized />;
 };
