@@ -49,6 +49,10 @@
   .tracking-code {
     display: flex;
 
+    .label {
+      margin-bottom: 1rem;
+    }
+
     .installation-guide {
       background: var(--white);
       border-radius: var(--border-radius-lg);
