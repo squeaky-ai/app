@@ -6,6 +6,7 @@ import { Label } from 'components/label';
 import { Pill } from 'components/pill';
 import { Checkbox } from 'components/checkbox';
 import { formatChartData, formatLabel } from 'lib/charts';
+import { convertEpochToIsoStrings } from 'lib/dates';
 import type { AnalyticsPageViews as PageView } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 
@@ -18,11 +19,6 @@ const sumOfPageViewType = (
   pageviews: PageView[], 
   key: keyof PageView
 ) => sum(pageviews.map(v => v[key]));
-
-const convertEpochToIsoStrings = (visitors: PageView[]) => visitors.map(v => ({ 
-  ...v, 
-  timestamp: new Date(Number(v.timestamp)).toISOString() 
-}));
 
 export const AnalyticsPageViews: FC<Props> = ({ pageViews, period }) => {
   const [show, setShow] = React.useState<string[]>(['all', 'unique']);

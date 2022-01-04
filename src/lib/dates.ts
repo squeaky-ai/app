@@ -188,3 +188,8 @@ export const expandMonth = (month: string) => {
 
   return get(months, month, '');
 };
+
+export const convertEpochToIsoStrings = <T extends { timestamp: string }>(data: T[]) => data.map(d => ({ 
+  ...d, 
+  timestamp: new Date(Number(d.timestamp)).toISOString() 
+}));

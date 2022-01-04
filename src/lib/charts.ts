@@ -70,7 +70,7 @@ const getDurationForAbsoluteDate = (period: AbsoluteTime, input: ChartInput[]): 
   // specified until the earliest date we have data
   // for
   if (period.fromType === 'Before') {
-    const from = new Date(Number(minBy(input, i => Number(i.timestamp)).timestamp));
+    const from = new Date(minBy(input, i => new Date(i.timestamp).valueOf()).timestamp);
     const to = new Date(toSlashyDate(period.fromDate));
 
     return getDateGroupForRange(from, to);

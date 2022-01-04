@@ -6,6 +6,7 @@ import { Label } from 'components/label';
 import { Pill } from 'components/pill';
 import { Checkbox } from 'components/checkbox';
 import { formatChartData, formatLabel } from 'lib/charts';
+import { convertEpochToIsoStrings } from 'lib/dates';
 import type { AnalyticsVisitor } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 
@@ -18,11 +19,6 @@ const sumOfVisitorsType = (
   visitors: AnalyticsVisitor[], 
   isNew: boolean,
 ) => visitors.filter(v => isNew ? v.new : !v.new).length;
-
-const convertEpochToIsoStrings = (visitors: AnalyticsVisitor[]) => visitors.map(v => ({ 
-  ...v, 
-  timestamp: new Date(Number(v.timestamp)).toISOString() 
-}));
 
 export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
   const [show, setShow] = React.useState<string[]>(['all', 'existing', 'new']);
