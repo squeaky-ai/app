@@ -9,9 +9,11 @@ import {
   subDays,
   subMonths,
   differenceInDays,
+  subWeeks,
+  getWeek,
 } from 'date-fns';
 
-type DateGroup = 'hourly' | 'daily' | 'monthly';
+type DateGroup = 'hourly' | 'daily' | 'weekly' | 'monthly';
 
 export interface ChartInput {
   timestamp: string;
@@ -43,8 +45,12 @@ const getDateGroupForRange = (from: Date, to: Date): [DateGroup, number] => {
     return ['hourly', null];
   }
 
-  if (days <= 30) {
+  if (days <= 21) {
     return ['daily', days];
+  }
+
+  if (days > 21 && days < 90) {
+    return ['weekly', Math.ceil(days / 7)];
   }
   
   return ['monthly', days / 30];
@@ -88,7 +94,7 @@ const getDurationForPeriod = (period: TimePeriod, input: ChartInput[]): [DateGro
     case 'past_fourteen_days':
       return ['daily', 14];
     case 'past_thirty_days':
-      return ['daily', 30];
+      return ['weekly', 4];
     case 'past_six_months':
       return ['monthly', 6];
     case 'past_year':
@@ -114,10 +120,6 @@ const getHourlyResults = <T extends ChartInput>(input: T[]): DataForPeriod<T> =>
   return { data };
 };
 
-// Group the results for a graph where the axis 
-// should be the days of the week, .i.e. Week,
-// fornight or an absolute date with a range no
-// larger than a few weeks
 const getDailyResults = <T extends ChartInput>(input: T[], days: number): DataForPeriod<T> => {
   const now = new Date();
 
@@ -134,10 +136,23 @@ const getDailyResults = <T extends ChartInput>(input: T[], days: number): DataFo
   return { data: data.reverse() };
 };
 
-// Group the results for a graph where the axis 
-// should be the months of the year, .i.e. 6 months
-// or more, or a range where the showing months 
-// instead of weeks makes sense
+
+const getWeeklyResults = <T extends ChartInput>(input: T[], weeks: number): DataForPeriod<T> => {
+  const now = new Date();
+
+  const data = range(0, weeks).map(i => {
+    const date = subWeeks(now, i);
+    const values = input.filter(s => getWeek(getDateFromTimestamp(s.timestamp)) === getWeek(date));
+
+    return {
+      key: format(date, 'd/M'),
+      data: values,
+    };
+  });
+
+  return { data: data.reverse() };
+};
+
 const getMonthlyResults = <T extends ChartInput>(input: T[], months: number): DataForPeriod<T> => {
   const now = new Date();
 
@@ -175,6 +190,10 @@ export const formatChartData = <T extends ChartInput>(period: TimePeriod, input:
 
   if (group === 'daily') {
     return getDailyResults(input, duration);
+  }
+
+  if (group === 'weekly') {
+    return getWeeklyResults(input, duration); 
   }
 
   return getMonthlyResults(input, duration);
