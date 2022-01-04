@@ -6,7 +6,6 @@ import { Label } from 'components/label';
 import { Pill } from 'components/pill';
 import { Checkbox } from 'components/checkbox';
 import { formatChartData, formatLabel } from 'lib/charts';
-import { convertEpochToIsoStrings } from 'lib/dates';
 import type { AnalyticsVisitor } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 
@@ -29,7 +28,7 @@ export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
       : setShow([...show, value]);
   };
 
-  const { data } = formatChartData<AnalyticsVisitor>(period, convertEpochToIsoStrings(visitors)); 
+  const { data } = formatChartData<AnalyticsVisitor>(period, visitors);
 
   const results = data.map(d => ({
     date: d.key,

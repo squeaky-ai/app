@@ -41,9 +41,9 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items
     // Find where exactly this page is in the list, and try and find
     // a timestamp that is just before the user navigates away. This
     // should ensure that we have the complete page
-    const offset = items[0].timestamp;
+    const offset = new Date(items[0].timestamp).valueOf();
     const timestamp = recording.pages.find(p => p.url === page)?.exitedAt;
-    const location = Number(timestamp) - offset - 50;
+    const location = new Date(timestamp).valueOf() - offset - 50;
 
     if (!timestamp) {
       return destroy();

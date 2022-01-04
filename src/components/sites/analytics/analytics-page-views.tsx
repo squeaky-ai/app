@@ -6,7 +6,6 @@ import { Label } from 'components/label';
 import { Pill } from 'components/pill';
 import { Checkbox } from 'components/checkbox';
 import { formatChartData, formatLabel } from 'lib/charts';
-import { convertEpochToIsoStrings } from 'lib/dates';
 import type { AnalyticsPageViews as PageView } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 
@@ -29,7 +28,7 @@ export const AnalyticsPageViews: FC<Props> = ({ pageViews, period }) => {
       : setShow([...show, value]);
   };
 
-  const { data } = formatChartData<PageView>(period, convertEpochToIsoStrings(pageViews));
+  const { data } = formatChartData<PageView>(period, pageViews);
 
   const results = data.map(d => ({
     date: d.key,

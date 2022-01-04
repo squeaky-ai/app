@@ -28,7 +28,7 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, style }) => {
   const devices = groupVisitorDevices(visitor.devices);
   const browsers = groupVisitorBrowsers(visitor.devices);
 
-  const toTimeStringDate = (value: string) => toNiceDate(new Date(value).valueOf());
+  const toTimeStringDate = (value: string) => toNiceDate(value);
 
   const onRowActionClose = () => {
     if (rowActionsRef.current) rowActionsRef.current.close();

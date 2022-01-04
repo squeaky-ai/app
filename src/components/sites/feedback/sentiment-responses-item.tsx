@@ -51,7 +51,7 @@ export const SentimentResponsesItem: FC<Props> = ({ response, style }) => {
         </Link>
       </Cell>
       <Cell>
-        {toNiceDate(new Date(response.timestamp).valueOf())}
+        {toNiceDate(response.timestamp)}
       </Cell>
       <Cell>
         {response.comment && (

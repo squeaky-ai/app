@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const GET_SENTIMENT_QUERY = gql`
-  query GetSentiment($siteId: ID!, $page: Int!, $size: Int!, $sort: FeedbackSentimentResponseSort!, $fromDate: String!, $toDate: String!) {
+  query GetSentiment($siteId: ID!, $page: Int!, $size: Int!, $sort: FeedbackSentimentResponseSort!, $fromDate: ISO8601Date!, $toDate: ISO8601Date!) {
     site(siteId: $siteId) {
       id
       sentiment(fromDate: $fromDate, toDate: $toDate) {

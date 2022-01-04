@@ -62,14 +62,14 @@ export const toIsoDate = (date?: Date) => {
   return date.toISOString().split('T')[0];
 };
 
-export const toNiceDate = (timestamp?: number | string) => {
+export const toNiceDate = (timestamp: string) => {
   if (!timestamp) return 'Unknown';
 
-  const date = new Date(Number(timestamp));
+  const date = new Date(timestamp);
   return date.toUTCString().split(':').slice(0, 2).join(':');
 };
 
-const formatDateForGraphQL = (date: Date) => format(date, 'yyyy-M-dd');
+const formatDateForGraphQL = (date: Date) => format(date, 'yyyy-MM-dd');
 
 const expandAbsoluteDateToRange = (date: AbsoluteTime): TimeRange => {
   const now = new Date();
@@ -189,7 +189,3 @@ export const expandMonth = (month: string) => {
   return get(months, month, '');
 };
 
-export const convertEpochToIsoStrings = <T extends { timestamp: string }>(data: T[]) => data.map(d => ({ 
-  ...d, 
-  timestamp: new Date(Number(d.timestamp)).toISOString() 
-}));
