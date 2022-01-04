@@ -100,6 +100,36 @@
 
     .visitors {
       grid-area: visitors;
+
+      h5 {
+        span:not(.pill) {
+          flex: 1;
+        }
+
+        .pill {
+          align-items: center;
+          background: var(--gray-50);
+          border: none;
+          color: var(--purple-500);
+          cursor: pointer;
+          display: inline-flex;
+          padding: .15rem .75rem;
+
+          .icon {
+            color: var(--purple-500);
+            margin-right: .25rem;
+          }
+
+          &:hover {
+            background: var(--purple-500);
+            color: var(--white);
+
+            .icon {
+              color: var(--white);
+            }
+          }
+        }
+      }
     }
 
     .recordings {

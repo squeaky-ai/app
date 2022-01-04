@@ -49,7 +49,17 @@ export const Dashboard: FC<Props> = ({ site, period }) => {
       <Card className='visitors'>
         <h5>
           <Icon name='group-line' />
-          Visitors
+          <span>Visitors</span>
+          {featureFlagEnabled(FeatureFlag.ACTIVE_VISITORS) && (
+            <Tooltip button={
+              <Pill className='small'>
+                <Icon name='flashlight-line' />
+                <ActiveUsers />
+              </Pill>
+            }>
+              Active users
+            </Tooltip>
+          )}
         </h5>
         <h2>
           {dashboard.analytics.visitorsCount.total.toLocaleString()}
@@ -216,24 +226,6 @@ export const Dashboard: FC<Props> = ({ site, period }) => {
       {featureFlagEnabled(FeatureFlag.VISITOR_HOTSPOT) && (
         <Card className='visits'>
           <AnalyticsVisitsAt visitsAt={dashboard.analytics.visitsAt} />
-        </Card>
-      )}
-
-      {featureFlagEnabled(FeatureFlag.ACTIVE_VISITORS) && (
-        <Card className='active-users'>
-          <h5>
-            <Icon name='time-line' />
-            Active Users
-          </h5>
-          <h2 className='purple'>
-            <ActiveUsers />
-          </h2>
-          <div className='link'>
-            <Link href={`/sites/${site_id}/analytics`}>
-              <a>Analytics</a>
-            </Link>
-            <Icon name='arrow-right-line' />
-          </div>
         </Card>
       )}
     </div>
