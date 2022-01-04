@@ -1,4 +1,3 @@
-import { format } from 'date-fns';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_DASHBOARD_QUERY } from 'data/dashboard/queries';
@@ -6,26 +5,23 @@ import type { Site } from 'types/graphql';
 import type { Dashboard } from 'types/dashboard';
 import type { TimeRange } from 'types/common';
 
+interface Props {
+  range: TimeRange;
+}
+
 interface UseDashboard {
   loading: boolean;
   error: boolean;
   dashboard: Dashboard;
 }
 
-export const useDashboard = (): UseDashboard => {
+export const useDashboard = (props: Props): UseDashboard => {
   const router = useRouter();
-
-  const now = new Date();
-
-  const range: TimeRange = {
-    fromDate: '2021-08-01 ', // earliest thing in the db
-    toDate: format(now, 'yyyy-MM-dd')
-  };
 
   const { data, loading, error, previousData } = useQuery<{ site: Site }>(GET_DASHBOARD_QUERY, {
     variables: {
       siteId: router.query.site_id as string,
-      ...range,
+      ...props.range,
     }
   });
 

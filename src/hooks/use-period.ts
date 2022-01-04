@@ -2,6 +2,7 @@ import React from 'react';
 import type { TimePeriod } from 'types/common';
 
 type ComponentType = 
+  'dashboard' |
   'recordings' | 
   'heatmaps' | 
   'analytics' |
@@ -28,6 +29,8 @@ const getDefaultFilters = (type: ComponentType) => {
     case 'analytics':
     case 'recordings':
       return 'past_fourteen_days';
+    case 'dashboard':
+      return 'past_year';
     default:
       return 'past_seven_days';
   }

@@ -17,15 +17,18 @@ import { useDashboard } from 'hooks/use-dashboard';
 import { toTimeString } from 'lib/dates';
 import { useFeatureFlags } from 'hooks/use-feature-flags';
 import { FeatureFlag } from 'lib/feature-flags';
+import { getDateRange } from 'lib/dates';
 import type { Site } from 'types/graphql';
+import type { TimePeriod } from 'types/common';
 
 interface Props {
   site: Site;
+  period: TimePeriod;
 }
 
-export const Dashboard: FC<Props> = ({ site }) => {
+export const Dashboard: FC<Props> = ({ site, period }) => {
   const router = useRouter();
-  const { dashboard, error, loading } = useDashboard();
+  const { dashboard, error, loading } = useDashboard({ range: getDateRange(period) });
   const { featureFlagEnabled } = useFeatureFlags();
 
   const { site_id } = router.query;
