@@ -10,7 +10,7 @@ interface Props {
 
 export const PlayerPreview: FC<Props> = ({ recording }) => {
   const ref = React.useRef<HTMLDivElement>(null);
-  const [scale, setScale] = React.useState<string>('');
+  const [zoom, setZoom] = React.useState<number>(1);
 
   const { device, events } = recording;
   const { viewportX, viewportY } = device;
@@ -26,9 +26,14 @@ export const PlayerPreview: FC<Props> = ({ recording }) => {
       mouseTail: false,
     });
 
-    const { width } = ref.current.getBoundingClientRect();
+    const { height, width } = ref.current.getBoundingClientRect();
 
-    setScale(`scale(${width / viewportX})`);
+    const constraint = Math.min(
+      width / viewportX,
+      height / viewportY,
+    );
+
+    setZoom(Number(constraint.toFixed(1)));
 
     // Can't have users tabbing around in there!
     ref.current.querySelector('iframe').setAttribute('tabindex', '-1');
@@ -36,9 +41,7 @@ export const PlayerPreview: FC<Props> = ({ recording }) => {
 
   return (
     <div ref={ref}>
-      <div className='preview-container' style={{ transform: scale }}>
-        <div id='preview-wrapper' style={{ width: `${viewportX}px`, height: `${viewportY}px` }} />
-      </div>
+      <div id='preview-wrapper' className='preview-container' style={{ transform: `scale(${zoom})` }} />
     </div>
   );
 };
