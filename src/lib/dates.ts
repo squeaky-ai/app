@@ -162,7 +162,7 @@ export const expandDay = (day: string) => {
     Tue: 'Tuesday',
     Wed: 'Wednesday',
     Thu: 'Thursday',
-    Fri: 'Firday',
+    Fri: 'Friday',
     Sat: 'Saturday',
     Sun: 'Sunday',
   };

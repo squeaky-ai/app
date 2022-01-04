@@ -225,6 +225,10 @@ export const Dashboard: FC<Props> = ({ site, period }) => {
 
       {featureFlagEnabled(FeatureFlag.VISITOR_HOTSPOT) && (
         <Card className='visits'>
+          <h5>
+            <Icon name='group-line' />
+            Visitors by time of day
+          </h5>
           <AnalyticsVisitsAt visitsAt={dashboard.analytics.visitsAt} />
         </Card>
       )}
