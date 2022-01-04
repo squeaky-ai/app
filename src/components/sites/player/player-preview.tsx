@@ -12,31 +12,34 @@ export const PlayerPreview: FC<Props> = ({ recording }) => {
   const ref = React.useRef<HTMLDivElement>(null);
   const [zoom, setZoom] = React.useState<number>(1);
 
-  const { device, events } = recording;
-  const { viewportX, viewportY } = device;
+  const { events } = recording;
+
+  const squidgeToFit = (replayer: Replayer) => setTimeout(() => {
+    const { height, width } = ref.current.getBoundingClientRect();
+
+    const constraint = Math.min(
+      width / Number(replayer.iframe.width),
+      height / Number(replayer.iframe.height),
+    );
+
+    setZoom(constraint);
+
+    // Can't have users tabbing around in there!
+    ref.current.querySelector('iframe').setAttribute('tabindex', '-1');
+  }, 0);
 
   React.useEffect(() => {
     const items: Event[] = events.items.map(e => JSON.parse(e));
 
     if (items.length === 0) return undefined;
 
-    new Replayer(items, {
+    const replayer = new Replayer(items, {
       root: document.getElementById('preview-wrapper'),
       skipInactive: true,
       mouseTail: false,
     });
 
-    const { height, width } = ref.current.getBoundingClientRect();
-
-    const constraint = Math.min(
-      width / viewportX,
-      height / viewportY,
-    );
-
-    setZoom(Number(constraint.toFixed(1)));
-
-    // Can't have users tabbing around in there!
-    ref.current.querySelector('iframe').setAttribute('tabindex', '-1');
+    squidgeToFit(replayer);
   }, []);
 
   return (
