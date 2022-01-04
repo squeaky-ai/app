@@ -126,7 +126,8 @@
           color: var(--purple-500);
           cursor: pointer;
           display: inline-flex;
-          padding: .15rem .75rem;
+          padding: .2rem .75rem .15rem .5rem;
+          pointer-events: none;
 
           .icon {
             color: var(--purple-500);
@@ -523,4 +524,8 @@
       }
     }
   }
+}
+
+.active-users-portal {
+  padding: .5rem;
 }

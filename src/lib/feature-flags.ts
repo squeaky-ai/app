@@ -1,6 +1,5 @@
 export enum FeatureFlag {
   VISITOR_HOTSPOT = 'VISITOR_HOTSPOT',
-  ACTIVE_VISITORS = 'ACTIVE_VISITORS',
 }
 
 export class FeatureFlags {

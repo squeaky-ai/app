@@ -50,16 +50,14 @@ export const Dashboard: FC<Props> = ({ site, period }) => {
         <h5>
           <Icon name='group-line' />
           <span>Visitors</span>
-          {featureFlagEnabled(FeatureFlag.ACTIVE_VISITORS) && (
-            <Tooltip button={
-              <Pill className='small'>
-                <Icon name='flashlight-line' />
-                <ActiveUsers />
-              </Pill>
-            }>
-              Active users
-            </Tooltip>
-          )}
+          <Tooltip portalClassName='active-users-portal' button={
+            <Pill className='small'>
+              <Icon name='flashlight-line' />
+              <ActiveUsers />
+            </Pill>
+          }>
+            Active users
+          </Tooltip>
         </h5>
         <h2>
           {dashboard.analytics.visitorsCount.total.toLocaleString()}
