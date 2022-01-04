@@ -89,18 +89,15 @@ export class Player extends React.Component<Props> {
     const { width, height } = this.container.getBoundingClientRect();
     const { viewportX, viewportY } = this.props.recording.device;
 
-    let multiplier = 1;
-
-    // Keep shrinking the multiplier until the viewport of the player
-    // window fits inside the bounds of the page
-    while((viewportX * multiplier) > width || (viewportY * multiplier) > height) {
-      multiplier -= .1;
-    }
+    const constraint = Math.min(
+      width / viewportX,
+      height / viewportY,
+    );
 
     // Once JS gets to .4, the precision goes to shit and it ends up
     // as 0.40000000000000013, so it must be fixed (to a string?! 🤦‍♂️)
     // and then cast back to a number
-    this.props.dispatch({ type: 'zoom', value: Number(multiplier.toFixed(1)) });
+    this.props.dispatch({ type: 'zoom', value: Number(constraint.toFixed(1)) });
   };
 
   public render(): JSX.Element {
