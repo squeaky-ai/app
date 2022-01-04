@@ -12,6 +12,16 @@
     }
   }
 
+  .period {
+    .dropdown-menu {
+      & > .button:nth-of-type(2) {
+        cursor: default;
+        opacity: .25;
+        pointer-events: none;
+      }
+    }
+  }
+
   .dashboard-grid {
     display: grid;
     grid-gap: 2rem;
