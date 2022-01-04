@@ -12,6 +12,10 @@ export type Scalars = {
   Float: number;
   /** Represents non-fractional signed whole numeric values. Since the value may exceed the size of a 32-bit integer, it's encoded as a string. */
   BigInt: any;
+  /** An ISO 8601-encoded date */
+  ISO8601Date: any;
+  /** An ISO 8601-encoded datetime */
+  ISO8601DateTime: any;
 };
 
 export type Analytics = {
@@ -30,7 +34,7 @@ export type Analytics = {
   sessionsPerVisitor: AnalyticsSessionsPerVisitor;
   visitors: Array<Maybe<AnalyticsVisitor>>;
   visitorsCount: AnalyticsVisitorsCount;
-  visitsAt: Array<Maybe<Scalars['String']>>;
+  visitsAt: Array<Maybe<Scalars['ISO8601DateTime']>>;
 };
 
 export type AnalyticsBrowser = {
@@ -60,7 +64,7 @@ export type AnalyticsPage = {
 
 export type AnalyticsPageViews = {
   __typename?: 'AnalyticsPageViews';
-  timestamp: Scalars['BigInt'];
+  timestamp: Scalars['ISO8601DateTime'];
   total: Scalars['Int'];
   unique: Scalars['Int'];
 };
@@ -98,7 +102,7 @@ export type AnalyticsSessionsPerVisitor = {
 export type AnalyticsVisitor = {
   __typename?: 'AnalyticsVisitor';
   new?: Maybe<Scalars['Boolean']>;
-  timestamp: Scalars['BigInt'];
+  timestamp: Scalars['ISO8601DateTime'];
 };
 
 export type AnalyticsVisitorsCount = {
@@ -144,7 +148,7 @@ export type FeedbackNpsReplies = {
 export type FeedbackNpsReply = {
   __typename?: 'FeedbackNpsReply';
   score: Scalars['Int'];
-  timestamp: Scalars['String'];
+  timestamp: Scalars['ISO8601DateTime'];
 };
 
 export type FeedbackNpsResponse = {
@@ -163,7 +167,7 @@ export type FeedbackNpsResponseItem = {
   recordingId: Scalars['String'];
   score: Scalars['Int'];
   sessionId: Scalars['String'];
-  timestamp: Scalars['String'];
+  timestamp: Scalars['ISO8601DateTime'];
   visitor: Visitor;
 };
 
@@ -184,7 +188,7 @@ export enum FeedbackNpsResponseSort {
 export type FeedbackNpsScore = {
   __typename?: 'FeedbackNpsScore';
   score: Scalars['Int'];
-  timestamp: Scalars['String'];
+  timestamp: Scalars['ISO8601DateTime'];
 };
 
 export type FeedbackNpsScores = {
@@ -203,7 +207,7 @@ export type FeedbackNpsStats = {
 export type FeedbackSentimentRating = {
   __typename?: 'FeedbackSentimentRating';
   score: Scalars['Int'];
-  timestamp: Scalars['String'];
+  timestamp: Scalars['ISO8601DateTime'];
 };
 
 export type FeedbackSentimentRatings = {
@@ -238,7 +242,7 @@ export type FeedbackSentimentResponseItem = {
   recordingId: Scalars['String'];
   score: Scalars['Int'];
   sessionId: Scalars['String'];
-  timestamp: Scalars['String'];
+  timestamp: Scalars['ISO8601DateTime'];
   visitor: Visitor;
 };
 
@@ -275,9 +279,9 @@ export type FeedbackUpdateInput = {
 };
 
 export type FiltersDate = {
-  betweenFromDate?: InputMaybe<Scalars['String']>;
-  betweenToDate?: InputMaybe<Scalars['String']>;
-  fromDate?: InputMaybe<Scalars['String']>;
+  betweenFromDate?: InputMaybe<Scalars['ISO8601Date']>;
+  betweenToDate?: InputMaybe<Scalars['ISO8601Date']>;
+  fromDate?: InputMaybe<Scalars['ISO8601Date']>;
   fromType?: InputMaybe<FiltersStart>;
   rangeType?: InputMaybe<FiltersRange>;
 };
@@ -601,12 +605,12 @@ export type MutationVisitorStarredArgs = {
 export type Note = {
   __typename?: 'Note';
   body: Scalars['String'];
-  createdAt: Scalars['String'];
+  createdAt: Scalars['ISO8601DateTime'];
   id: Scalars['ID'];
   recordingId: Scalars['Int'];
   sessionId?: Maybe<Scalars['String']>;
   timestamp?: Maybe<Scalars['Int']>;
-  updatedAt?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['ISO8601DateTime']>;
   user?: Maybe<User>;
 };
 
@@ -679,8 +683,8 @@ export type NpsDeleteInput = {
 
 export type Page = {
   __typename?: 'Page';
-  enteredAt: Scalars['BigInt'];
-  exitedAt: Scalars['BigInt'];
+  enteredAt: Scalars['ISO8601DateTime'];
+  exitedAt: Scalars['ISO8601DateTime'];
   id: Scalars['ID'];
   url: Scalars['String'];
 };
@@ -712,9 +716,9 @@ export type QueryUserInvitationArgs = {
 export type Recording = {
   __typename?: 'Recording';
   bookmarked: Scalars['Boolean'];
-  connectedAt?: Maybe<Scalars['String']>;
+  connectedAt?: Maybe<Scalars['ISO8601DateTime']>;
   device: RecordingsDevice;
-  disconnectedAt?: Maybe<Scalars['String']>;
+  disconnectedAt?: Maybe<Scalars['ISO8601DateTime']>;
   duration: Scalars['BigInt'];
   events: RecordingsEvents;
   exitPage: Scalars['String'];
@@ -883,7 +887,7 @@ export type Site = {
   activeUserCount: Scalars['Int'];
   analytics: Analytics;
   browsers: Array<Maybe<Scalars['String']>>;
-  createdAt: Scalars['String'];
+  createdAt: Scalars['ISO8601DateTime'];
   daysSinceLastRecording: Scalars['Int'];
   domainBlacklist: Array<Maybe<SitesDomainBlacklist>>;
   feedback?: Maybe<Feedback>;
@@ -905,26 +909,26 @@ export type Site = {
   sentiment: Sentiment;
   tags: Array<Maybe<Tag>>;
   team: Array<Team>;
-  updatedAt?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['ISO8601DateTime']>;
   url: Scalars['String'];
   uuid: Scalars['String'];
-  verifiedAt?: Maybe<Scalars['String']>;
+  verifiedAt?: Maybe<Scalars['ISO8601DateTime']>;
   visitor?: Maybe<Visitor>;
   visitors: Visitors;
 };
 
 
 export type SiteAnalyticsArgs = {
-  fromDate: Scalars['String'];
-  toDate: Scalars['String'];
+  fromDate: Scalars['ISO8601Date'];
+  toDate: Scalars['ISO8601Date'];
 };
 
 
 export type SiteHeatmapsArgs = {
   device?: HeatmapsDevice;
-  fromDate: Scalars['String'];
+  fromDate: Scalars['ISO8601Date'];
   page: Scalars['String'];
-  toDate: Scalars['String'];
+  toDate: Scalars['ISO8601Date'];
   type?: HeatmapsType;
 };
 
@@ -936,8 +940,8 @@ export type SiteNotesArgs = {
 
 
 export type SiteNpsArgs = {
-  fromDate: Scalars['String'];
-  toDate: Scalars['String'];
+  fromDate: Scalars['ISO8601Date'];
+  toDate: Scalars['ISO8601Date'];
 };
 
 
@@ -948,17 +952,17 @@ export type SiteRecordingArgs = {
 
 export type SiteRecordingsArgs = {
   filters?: InputMaybe<RecordingsFilters>;
-  fromDate: Scalars['String'];
+  fromDate: Scalars['ISO8601Date'];
   page?: InputMaybe<Scalars['Int']>;
   size?: InputMaybe<Scalars['Int']>;
   sort?: InputMaybe<RecordingsSort>;
-  toDate: Scalars['String'];
+  toDate: Scalars['ISO8601Date'];
 };
 
 
 export type SiteSentimentArgs = {
-  fromDate: Scalars['String'];
-  toDate: Scalars['String'];
+  fromDate: Scalars['ISO8601Date'];
+  toDate: Scalars['ISO8601Date'];
 };
 
 
@@ -1119,12 +1123,12 @@ export type TagsUpdateInput = {
 
 export type Team = {
   __typename?: 'Team';
-  createdAt: Scalars['String'];
+  createdAt: Scalars['ISO8601DateTime'];
   id: Scalars['ID'];
   role: Scalars['Int'];
   roleName: Scalars['String'];
   status: Scalars['Int'];
-  updatedAt?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['ISO8601DateTime']>;
   user: User;
 };
 
@@ -1196,14 +1200,14 @@ export type TeamUpdateInput = {
 export type User = {
   __typename?: 'User';
   communication?: Maybe<UsersCommunication>;
-  createdAt: Scalars['String'];
+  createdAt: Scalars['ISO8601DateTime'];
   email: Scalars['String'];
   firstName?: Maybe<Scalars['String']>;
   fullName?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   lastName?: Maybe<Scalars['String']>;
   superuser: Scalars['Boolean'];
-  updatedAt?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['ISO8601DateTime']>;
 };
 
 export type UsersCommunication = {
@@ -1264,10 +1268,10 @@ export type Visitor = {
   attributes?: Maybe<Scalars['String']>;
   averageSessionDuration: Scalars['Int'];
   devices: Array<RecordingsDevice>;
-  firstViewedAt?: Maybe<Scalars['String']>;
+  firstViewedAt?: Maybe<Scalars['ISO8601DateTime']>;
   id: Scalars['ID'];
   language?: Maybe<Scalars['String']>;
-  lastActivityAt?: Maybe<Scalars['String']>;
+  lastActivityAt?: Maybe<Scalars['ISO8601DateTime']>;
   pageViewsCount?: Maybe<VisitorsPagesCount>;
   pages: VisitorsPages;
   pagesPerSession: Scalars['Float'];

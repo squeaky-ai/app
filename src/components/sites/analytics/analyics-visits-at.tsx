@@ -15,7 +15,7 @@ interface Props {
 type DateGroups = Record<string, Record<string, Date[]>>;
 
 export const AnalyticsVisitsAt: FC<Props> = ({ visitsAt }) => {
-  const visits = visitsAt.map(v => new Date(Number(v)));
+  const visits = visitsAt.map(v => new Date(v));
 
   const groupedByDay = groupBy(visits, v => getDay(v));
 

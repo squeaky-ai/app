@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const GET_RECORDINGS_QUERY = gql`
-  query GetRecordings($siteId: ID!, $page: Int, $size: Int, $sort: RecordingsSort, $filters: RecordingsFilters, $fromDate: String!, $toDate: String!) {
+  query GetRecordings($siteId: ID!, $page: Int, $size: Int, $sort: RecordingsSort, $filters: RecordingsFilters, $fromDate: ISO8601Date!, $toDate: ISO8601Date!) {
     site(siteId: $siteId) {
       id
       name

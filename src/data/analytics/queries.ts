@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const GET_ANALYTICS_QUERY = gql`
-  query GetAnalytics($siteId: ID!, $fromDate: String!, $toDate: String!) { 
+  query GetAnalytics($siteId: ID!, $fromDate: ISO8601Date!, $toDate: ISO8601Date!) { 
     site(siteId: $siteId) {
       id
       analytics(fromDate: $fromDate, toDate: $toDate) {

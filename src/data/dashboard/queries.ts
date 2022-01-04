@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const GET_DASHBOARD_QUERY = gql`
-  query GetDashboard($siteId: ID!, $fromDate: String!, $toDate: String!) { 
+  query GetDashboard($siteId: ID!, $fromDate: ISO8601Date!, $toDate: ISO8601Date!) { 
     site(siteId: $siteId) {
       id
       analytics(fromDate: $fromDate, toDate: $toDate) {
