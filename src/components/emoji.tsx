@@ -36,5 +36,5 @@ const getEmojiSrc = (emoji: EmojiType) => {
 };
 
 export const Emoji: FC<Props> = ({ emoji, ...props }) => {
-  return <Image src={getEmojiSrc(emoji)} {...props} />;
+  return <Image src={getEmojiSrc(emoji)} {...props} alt='Emoji' />;
 };
