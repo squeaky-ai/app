@@ -50,7 +50,7 @@ export const Visitors: FC<Props> = ({ site, columns, filters }) => {
   return (
     <>
       {!loading && !visitors.items.length && (
-        <NoResults title='There are no visitors matching your selected filters.' />
+        <NoResults illustration='illustration-13' title='There are no visitors matching your selected filters.' />
       )}
 
       <DismissableMessage

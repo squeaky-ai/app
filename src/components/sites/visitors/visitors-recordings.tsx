@@ -72,7 +72,7 @@ export const VisitorsRecording: FC<Props> = ({ visitor, page, sort, setPage, set
 
       {items.length === 0 && (
         <div className='no-visitor-recordings'>
-          <Illustration src='illustration-1' height={160} width={210} />
+          <Illustration illustration='illustration-1' height={160} width={210} />
           <h4>There are currently no recordings for this visitor.</h4>
         </div>
       )}

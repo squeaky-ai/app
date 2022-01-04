@@ -82,7 +82,7 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
             <EmptyState
               title='There are currently no recordings available'
               subtitle='Collecting Session Recordings'
-              illustration={2}
+              illustration='illustration-2'
               videoName='Recordings Intro'
             />
 

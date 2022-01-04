@@ -26,7 +26,7 @@ const Developers: NextPage<ServerSideProps> = () => {
       <Main>
         <div className='hero'>
           <a href='/'>
-            <Logo dark src='logo' height={48} width={154} alt='Logo' />
+            <Logo logo='dark' height={48} width={154} alt='Logo' />
           </a>
           <h1>Developers</h1>
           <p>Last Updated: <b>September 1st 2021</b></p>

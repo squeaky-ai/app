@@ -70,7 +70,7 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
             <EmptyState
               title='There are currently no visitor records'
               subtitle='Creating Visitor Records'
-              illustration={6}
+              illustration='illustration-6'
               videoName='Visitors Intro'
             />
 

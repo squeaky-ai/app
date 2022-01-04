@@ -34,7 +34,7 @@ const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
             <EmptyState
               title='There are currently no analytics available'
               subtitle='Collecting Analytics Data'
-              illustration={3}
+              illustration='illustration-3'
               videoName='Analytics Intro'
             />
 

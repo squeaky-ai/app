@@ -12,7 +12,7 @@ const NotFound: NextPage = () => (
 
     <Container className='lg error-state'>
       <Container className='md'>
-        <Illustration src='illustration-10' height={256} width={256} alt='Error state' />
+        <Illustration illustration='illustration-10' height={256} width={256} alt='Error state' />
         <h2>404</h2>
         <p>The page you are looking for cannot be found.</p>
         <a href='/' className='button primary'>

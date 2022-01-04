@@ -30,7 +30,7 @@ const SitesFeedbackNpsGuide: NextPage<ServerSideProps> = ({ user }) => {
           
             <Container className='xl centered empty-state'>
               <div className='empty-state-contents'>
-                <Illustration src='illustration-9' height={240} width={320} alt='Illustration to represent the empty NPS page' />
+                <Illustration illustration='illustration-9' height={240} width={320} alt='Illustration to represent the empty NPS page' />
                 <h4>Awaiting tracking code installation</h4>
                 <EmptyStateHint
                   title='Collecting Session Recordings'

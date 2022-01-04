@@ -25,7 +25,7 @@ const SitesDashboard: NextPage<ServerSideProps> = ({ user }) => (
           <EmptyState
             title='There is currently no dashboard data'
             subtitle='Accessing The Dashboard'
-            illustration={5}
+            illustration='illustration-5'
             videoName='Dashboard Intro'
           />
 

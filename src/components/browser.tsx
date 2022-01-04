@@ -1,7 +1,14 @@
 import React from 'react';
 import type { FC } from 'react';
 import Image from 'next/image';
-import { BASE_PATH } from 'data/common/constants';
+
+import chrome from '../../public/browsers/chrome.svg';
+import firefox from '../../public/browsers/firefox.svg';
+import ie from '../../public/browsers/internet-explorer.svg';
+import edge from '../../public/browsers/edge.svg';
+import opera from '../../public/browsers/opera.svg';
+import safari from '../../public/browsers/safari.svg';
+import unknown from '../../public/browsers/unknown.svg';
 
 interface Props {
   height?: number;
@@ -9,23 +16,23 @@ interface Props {
   width?: number;
 }
 
-const getIconName = (name: string) => {
+const getIconSrc = (name: string) => {
   switch(name) {
     case 'Chrome':
-      return 'chrome.svg';
+      return chrome;
     case 'Firefox':
     case 'Mozilla':
-      return 'firefox.svg';
+      return firefox;
     case 'Internet Explorer':
-      return 'internet-explorer.svg';
+      return ie;
     case 'Edge':
-      return 'edge.svg';
+      return edge;
     case 'Opera':
-      return 'opera.svg';
+      return opera;
     case 'Safari':
-      return 'safari.svg';
+      return safari;
     default:
-      return 'unknown.svg';
+      return unknown;
   }
 };
 
@@ -34,7 +41,7 @@ export const Browser: FC<Props> = ({ height, name, width }) => (
     <Image 
       height={height || 16} 
       width={width ||16} 
-      src={`${BASE_PATH}/browsers/${getIconName(name)}`} 
+      src={getIconSrc(name)} 
       alt={`${name} icon`} 
     />
   </span>

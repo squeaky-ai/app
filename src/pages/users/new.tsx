@@ -49,7 +49,7 @@ const UsersNew: NextPage<ServerSideProps> = ({ user }) => {
           <div className='intro'>
             <p>Please enter your name below to set up your user account...</p>
             <div className='image'>
-              <Illustration src='illustration-11' height={140} width={185} alt='New Account Image' />
+              <Illustration illustration='illustration-11' height={140} width={185} alt='New Account Image' />
             </div>
           </div>
 

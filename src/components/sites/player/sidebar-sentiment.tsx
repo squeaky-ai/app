@@ -1,7 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
-import Image from 'next/image';
-import { EMOJIS } from 'data/sentiment/constants';
+import { Emoji, EmojiType } from 'components/emoji';
 import type { FeedbackSentimentResponseItem } from 'types/graphql';
 
 interface Props {
@@ -14,7 +13,7 @@ export const SidebarSentiment: FC<Props> = ({ sentiment }) => {
       <p className='heading'>
         Sentiment Rating: 
         <span className='emoji'>
-          <Image height={16} width={16} src={EMOJIS[sentiment.score]} />
+          <Emoji height={16} width={16} emoji={`emoji-${sentiment.score + 1}` as EmojiType} />
         </span>
       </p>
       <p>

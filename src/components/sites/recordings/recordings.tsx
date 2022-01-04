@@ -62,7 +62,7 @@ export const Recordings: FC<Props> = ({ site, filters, period, columns, selected
       )}
 
       {!loading && !items.length && (
-        <NoResults title='There are no recordings matching your selected filters.' />
+        <NoResults illustration='illustration-13' title='There are no recordings matching your selected filters.' />
       )}
 
       <Table className={classnames('recordings-list hover', tableClassNames, { hide: items.length === 0 })}>

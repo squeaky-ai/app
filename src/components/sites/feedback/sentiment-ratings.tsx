@@ -1,11 +1,11 @@
 import React from 'react';
 import type { FC } from 'react';
-import Image from 'next/image';
 import { average } from 'lib/maths';
 import { omit, groupBy } from 'lodash';
 import { ResponsiveContainer, CartesianGrid, LineChart, Line, YAxis, XAxis, Tooltip, TooltipProps } from 'recharts';
 import { formatChartData } from 'lib/charts';
-import { EMOJIS } from 'data/sentiment/constants';
+import { Emoji } from 'components/emoji';
+import { BASE_PATH } from 'data/common/constants';
 import type { FeedbackSentimentRating } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 
@@ -59,11 +59,11 @@ export const SentimentRatings: FC<Props> = ({ period, ratings }) => {
     return (
       <div className='custom-tooltip'>
         <p>Ratings</p>
-        <p><Image height={16} width={16} src={EMOJIS[4]} /> <span>{payload[0].payload[4]}</span></p>
-        <p><Image height={16} width={16} src={EMOJIS[3]} /> <span>{payload[0].payload[3]}</span></p>
-        <p><Image height={16} width={16} src={EMOJIS[2]} /> <span>{payload[0].payload[2]}</span></p>
-        <p><Image height={16} width={16} src={EMOJIS[1]} /> <span>{payload[0].payload[1]}</span></p>
-        <p><Image height={16} width={16} src={EMOJIS[0]} /> <span>{payload[0].payload[0]}</span></p>
+        <p><Emoji height={16} width={16} emoji='emoji-5' /> <span>{payload[0].payload[4]}</span></p>
+        <p><Emoji height={16} width={16} emoji='emoji-4' /> <span>{payload[0].payload[3]}</span></p>
+        <p><Emoji height={16} width={16} emoji='emoji-3' /> <span>{payload[0].payload[2]}</span></p>
+        <p><Emoji height={16} width={16} emoji='emoji-2' /> <span>{payload[0].payload[1]}</span></p>
+        <p><Emoji height={16} width={16} emoji='emoji-1' /> <span>{payload[0].payload[0]}</span></p>
       </div>
     );
   };
@@ -84,7 +84,7 @@ export const SentimentRatings: FC<Props> = ({ period, ratings }) => {
             tick={(props) => ( 
               <image 
                 {...getAxisProps(props)} 
-                href={EMOJIS[props.payload.value]} 
+                href={`${BASE_PATH}/emojis/emoji-${props.payload.value + 1}.svg`}
                 height={24} 
                 width={24} 
                 transform={

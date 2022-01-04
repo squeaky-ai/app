@@ -1,7 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { Icon } from 'components/icon';
 import { Row, Cell } from 'components/table';
@@ -9,9 +8,9 @@ import { Device } from 'components/device';
 import { Browser } from 'components/browser';
 import { Tooltip } from 'components/tooltip';
 import { Dropdown } from 'components/dropdown';
+import { Emoji, EmojiType } from 'components/emoji';
 import { SentimentResponsesDelete } from 'components/sites/feedback/sentiment-responses-delete';
 import { toNiceDate } from 'lib/dates';
-import { EMOJIS } from 'data/sentiment/constants';
 import type { FeedbackSentimentResponseItem } from 'types/graphql';
 
 interface Props {
@@ -32,7 +31,7 @@ export const SentimentResponsesItem: FC<Props> = ({ response, style }) => {
       <Cell>
         <p className='score'>
           <span className='emoji'>
-            <Image src={EMOJIS[response.score]} height={24} width={24} />
+            <Emoji emoji={`emoji-${response.score + 1}` as EmojiType} height={24} width={24} />
           </span>
         </p>
       </Cell>

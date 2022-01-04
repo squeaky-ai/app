@@ -1,12 +1,12 @@
 import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
-import Image from 'next/image';
 import { range } from 'lodash';
 import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { Label } from 'components/label';
 import { TextArea } from 'components/textarea';
+import { Logo } from 'components/logo';
 import { Radio } from 'components/radio';
 import { Input } from 'components/input';
 import type { Feedback } from 'types/graphql';
@@ -118,7 +118,7 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
                   <p>
                     Powered by
                     <span className='logo'>
-                      <Image src='/logo.svg' height={20} width={64} />
+                      <Logo logo='main' height={20} width={64} />
                     </span>
                   </p>
                   <Button type='button' className='primary' onClick={handleNextPage}>

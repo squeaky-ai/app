@@ -12,7 +12,7 @@ const InternalServerError: NextPage = () => (
 
     <Container className='lg error-state'>
       <Container className='md'>
-        <Illustration src='illustration-10' height={256} width={256} alt='Error state' />
+        <Illustration illustration='illustration-10' height={256} width={256} alt='Error state' />
         <h2>500</h2>
         <p>A internal server error has occurred.</p>
         <a href='/' className='button primary'>

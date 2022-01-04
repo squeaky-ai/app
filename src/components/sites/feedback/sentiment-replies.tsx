@@ -1,8 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
-import Image from 'next/image';
 import { groupBy, first, orderBy } from 'lodash';
-import { EMOJIS } from 'data/sentiment/constants';
+import { Emoji } from 'components/emoji';
 import { percentage } from 'lib/maths';
 import type { FeedbackSentimentReplies } from 'types/graphql';
 
@@ -34,7 +33,7 @@ export const SentimentReplies: FC<Props> = ({ replies }) => {
         <li>
           <div className='type'>
             <div className='emoji'>
-              <Image src={EMOJIS[4]} height={24} width={24} />
+              <Emoji emoji='emoji-5' height={24} width={24} />
             </div>
           </div>
           <div className='score'>
@@ -45,7 +44,7 @@ export const SentimentReplies: FC<Props> = ({ replies }) => {
         <li>
           <div className='type'>
             <div className='emoji'>
-              <Image src={EMOJIS[3]} height={24} width={24} />
+              <Emoji emoji='emoji-4' height={24} width={24} />
             </div>
           </div>
           <div className='score'>
@@ -56,7 +55,7 @@ export const SentimentReplies: FC<Props> = ({ replies }) => {
         <li>
           <div className='type'>
             <div className='emoji'>
-              <Image src={EMOJIS[2]} height={24} width={24} />
+              <Emoji emoji='emoji-3' height={24} width={24} />
             </div>
           </div>
           <div className='score'>
@@ -67,7 +66,7 @@ export const SentimentReplies: FC<Props> = ({ replies }) => {
         <li>
           <div className='type'>
             <div className='emoji'>
-              <Image src={EMOJIS[1]} height={24} width={24} />
+              <Emoji emoji='emoji-2' height={24} width={24} />
             </div>
           </div>
           <div className='score'>
@@ -78,7 +77,7 @@ export const SentimentReplies: FC<Props> = ({ replies }) => {
         <li>
           <div className='type'>
             <div className='emoji'>
-              <Image src={EMOJIS[0]} height={24} width={24} />
+              <Emoji emoji='emoji-1' height={24} width={24} />
             </div>
           </div>
           <div className='score'>

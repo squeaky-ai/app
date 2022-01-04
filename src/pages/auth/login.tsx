@@ -74,7 +74,7 @@ const Login: NextPage<ServerSideProps> = () => {
       </Head>
 
       <a href='/' className='logo'>
-        <Logo src='logo' height={48} width={156} alt='Squeaky logo' />
+        <Logo logo='main' height={48} width={156} alt='Squeaky logo' />
       </a>
 
       <div className='center'>

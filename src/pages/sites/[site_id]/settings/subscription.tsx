@@ -29,7 +29,7 @@ const SiteSettingsSubscription: NextPage<ServerSideProps> = ({ user }) => (
 
           <Container className='xl centered empty-state'>
             <div className='empty-state-contents'>
-              <Illustration src='illustration-7' height={240} width={400} alt='Illustration to represent the empty recordings page' />
+              <Illustration illustration='illustration-7' height={240} width={400} alt='Illustration to represent the empty recordings page' />
               <h4>Squeaky is free during beta testing!</h4>
               <EmptyStateHint
                 title='Help Squeaky'

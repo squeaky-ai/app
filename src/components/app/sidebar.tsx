@@ -91,12 +91,12 @@ export const Sidebar: FC = () => {
     <aside ref={ref} id='app-sidebar' className={classnames({ open })}>
       <Link href='/sites'>
         <a className='logo large'>
-          <Logo src='logo' alt='Logo' height={32} width={103} />
+          <Logo logo='main' alt='Logo' height={32} width={103} />
         </a>
       </Link>
       <Link href='/sites'>
         <a className='logo small'>
-          <Logo src='logo-small' alt='Logo' height={32} width={24} />
+          <Logo logo='small' alt='Logo' height={32} width={24} />
         </a>
       </Link>
       <menu className={position}>

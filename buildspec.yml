@@ -20,7 +20,7 @@ phases:
       - CID=$(docker create app)
       - docker cp ${CID}:/app/.next/static /tmp/
       - docker rm ${CID}
-      - aws s3 cp --recursive /tmp/static s3://cdn.squeaky.ai/_next/static
+      - aws s3 sync --recursive /tmp/static s3://cdn.squeaky.ai/_next/static --delete
 
   post_build:
     commands:

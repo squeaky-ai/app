@@ -28,7 +28,7 @@ const SitesFeedbackSentiment: NextPage<ServerSideProps> = ({ user }) => {
             <EmptyState
               title='Awaiting tracking code installation'
               subtitle='Collecting Visitor Feedback'
-              illustration={9}
+              illustration='illustration-9'
               videoName='Feedback Intro'
             />
 

@@ -32,7 +32,7 @@ const Sites: NextPage<ServerSideProps> = () => {
       {!loading && sites.length === 0 && (
         <div className='welcome'>
           <div className='contents'>
-            <Illustration src='illustration-1' height={256} width={500} alt='Illustration to welcome the user to Squeaky' />
+            <Illustration illustration='illustration-1' height={256} width={500} alt='Illustration to welcome the user to Squeaky' />
             <h2>Welcome to Squeaky</h2>
             <p>It&apos;s time to discover what your users are really getting up to! Add your first site by clicking the button below.</p>
             <CreateSite className='button primary icon'>

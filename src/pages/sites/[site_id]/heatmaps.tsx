@@ -43,7 +43,7 @@ const SitesHeatmaps: NextPage<ServerSideProps> = ({ user }) => {
             <EmptyState 
               title='There are currently no heatmaps available.'
               subtitle='Collecting Heatmap Data'
-              illustration={8}
+              illustration='illustration-8'
               videoName='Heatmap Intro'
             />
 

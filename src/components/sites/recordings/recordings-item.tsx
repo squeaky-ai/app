@@ -1,6 +1,5 @@
 import React from 'react';
 import type { FC } from 'react';
-import Image from 'next/image';
 import classnames from 'classnames';
 import { Icon } from 'components/icon';
 import { Pill } from 'components/pill';
@@ -14,9 +13,9 @@ import { RecordingStarred } from 'components/sites/recordings/recordings-starred
 import { RecordingsShare } from 'components/sites/recordings/recordings-share';
 import { RecordingDelete } from 'components/sites/recordings/recording-delete';
 import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
+import { Emoji, EmojiType } from 'components/emoji';
 import { toNiceDate, toTimeString } from 'lib/dates';
 import { npsColor } from 'lib/feedback';
-import { EMOJIS } from 'data/sentiment/constants';
 import type { Recording } from 'types/graphql';
 import type { Site } from 'types/graphql';
 
@@ -124,7 +123,7 @@ export const RecordingsItem: FC<Props> = ({ site, recording, style, selected, se
       <Cell>
         {!!recording.sentiment && (
           <div className='emoji'>
-            <Image height={24} width={24} src={EMOJIS[recording.sentiment.score]} />
+            <Emoji height={24} width={24} emoji={`emoji-${recording.sentiment.score + 1}` as EmojiType} />
           </div>
         )}
 

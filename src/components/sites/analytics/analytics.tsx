@@ -35,7 +35,7 @@ export const Analytics: FC<Props> = ({ period }) => {
   }
 
   if (!analytics.visitors.length) {
-    return <NoResults title='There is no analytics data available for your chosen period' illustration={2} />
+    return <NoResults title='There is no analytics data available for your chosen period' illustration='illustration-2' />
   }
 
   return (

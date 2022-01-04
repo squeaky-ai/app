@@ -2,7 +2,6 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Link from 'next/link';
 import Head from 'next/head';
-import Image from 'next/image';
 import { Message } from 'components/message';
 import { Container } from 'components/container';
 import { Verify } from 'components/sites/settings/verify';
@@ -14,9 +13,9 @@ import { OWNER, ADMIN } from 'data/teams/constants';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { Icon } from 'components/icon';
+import { Platform } from 'components/platform';
 import { SettingsTabs } from 'components/sites/settings/settings-tabs';
 import { MAX_DAYS_BEFORE_POTENTIAL_ISSUE } from 'data/sites/constants';
-import { BASE_PATH } from 'data/common/constants';
 import type { Site } from 'types/graphql';
 
 const SitesSettingsTrackingCode: NextPage<ServerSideProps> = ({ user }) => {
@@ -94,32 +93,32 @@ const SitesSettingsTrackingCode: NextPage<ServerSideProps> = ({ user }) => {
                   <div className='platforms'>
                     <Link href='https://squeaky.notion.site/Wordpress-571e94c409f94748a6c40f67b5d79543'>
                       <a target='_blank' rel='noreferrer'>
-                        <Image src={`${BASE_PATH}/platforms/wordpress.png`} height={48} width={48} alt='Wordpress Logo' />
+                        <Platform platform='wordpress' height={48} width={48} alt='Wordpress Logo' />
                       </a>
                     </Link>
                     <Link href='https://squeaky.notion.site/Shopify-63eef790b11f4ce59108c5f720ff21c5'>
                       <a target='_blank' rel='noreferrer'>
-                        <Image src={`${BASE_PATH}/platforms/shopify.png`} height={48} width={48} alt='Shopify Logo' />
+                        <Platform platform='shopify' height={48} width={48} alt='Shopify Logo' />
                       </a>
                     </Link>
                     <Link href='https://squeaky.notion.site/Wix-9b6351ec3cdd48b3ae94f5f8b4f3b8db'>
                       <a target='_blank' rel='noreferrer'>
-                        <Image src={`${BASE_PATH}/platforms/wix.png`} height={48} width={48} alt='Wix Logo' />
+                        <Platform platform='wix' height={48} width={48} alt='Wix Logo' />
                       </a>
                     </Link>
                     <Link href='https://squeaky.notion.site/Webflow-ea17dbafc682462d9c5f53a62cc963f9'>
                       <a target='_blank' rel='noreferrer'>
-                        <Image src={`${BASE_PATH}/platforms/webflow.png`} height={48} width={48} alt='Webflow Logo' />
+                        <Platform platform='webflow' height={48} width={48} alt='Webflow Logo' />
                       </a>
                     </Link>
                     <Link href='https://squeaky.notion.site/Magento-49302bba0c7a48d3aef93e38e8e79643'>
                       <a target='_blank' rel='noreferrer'>
-                        <Image src={`${BASE_PATH}/platforms/magento.png`} height={48} width={48} alt='Magento Logo' />
+                        <Platform platform='magento' height={48} width={48} alt='Magento Logo' />
                       </a>
                     </Link>
                     <Link href='https://squeaky.notion.site/Drupal-401bce8e455246019e9e429641979c53'>
                       <a target='_blank' rel='noreferrer'>
-                        <Image src={`${BASE_PATH}/platforms/drupal.png`} height={48} width={48} alt='Drupal Logo' />
+                        <Platform platform='drupal' height={48} width={48} alt='Drupal Logo' />
                       </a>
                     </Link>
                   </div>

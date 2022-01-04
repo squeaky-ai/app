@@ -7,7 +7,7 @@ import { Container } from 'components/container';
 export const Error: FC = () => (
   <div className='server-error'>
     <Container className='md'>
-      <Illustration src='illustration-10' height={256} width={256} alt='Page not found' />
+      <Illustration illustration='illustration-10' height={256} width={256} alt='Page not found' />
       <h2>Internal Server Error</h2>
       <p>Something has gone wrong on our side, sorry!</p>
       <Link href='/sites'>

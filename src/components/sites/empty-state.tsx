@@ -2,14 +2,14 @@ import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
 import { Container } from 'components/container';
-import { Illustration } from 'components/illustration';
+import { Illustration, IllustrationType } from 'components/illustration';
 import { EmptyStateHint } from 'components/sites/empty-state-hint';
 import { useRouter } from 'next/router';
 
 interface Props {
   title: string;
   subtitle: string;
-  illustration: number;
+  illustration: IllustrationType;
   videoName?: string;
 }
 
@@ -19,7 +19,7 @@ export const EmptyState: FC<Props> = ({ title, subtitle, videoName, illustration
   return (
     <Container className='xl centered empty-state'>
       <div className='empty-state-contents'>
-        <Illustration src={`illustration-${illustration}`} height={240} width={320} alt='Illustration to represent the empty page' />
+        <Illustration illustration={illustration} height={240} width={320} alt='Illustration to represent the empty page' />
         <h4>{title}</h4>
         <EmptyStateHint
           title={subtitle}
