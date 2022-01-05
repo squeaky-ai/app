@@ -37,6 +37,7 @@
 
         &.filters {
           @include breakpoint-md {
+            margin-top: 1.5rem;
             width: 100%;
 
             & .dropdown > .button {

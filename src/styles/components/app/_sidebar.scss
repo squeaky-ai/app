@@ -318,6 +318,14 @@
       margin: 0 1rem 0 0;
     }
 
+    .menu-toggle {
+      @include breakpoint-md {
+        .icon {
+          margin: 0;
+        }
+      }
+    }
+
     .link {    
       padding: .75rem 1rem;
       text-align: left;
@@ -375,6 +383,10 @@
           padding: 1rem 1rem .75rem 3.5rem;
           position: static;
           width: 100%;
+
+          @include breakpoint-md {
+            padding-left: 2.5rem;
+          }
 
           .button {
             color: var(--gray-blue-200);

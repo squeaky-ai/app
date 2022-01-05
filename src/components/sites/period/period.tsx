@@ -54,7 +54,7 @@ export const Period: FC<Props> = ({ period, onChange }) => {
 
   return (
     <div className='period'>
-      <Dropdown ref={ref} button={<><Icon name='calendar-line' /> Period: <PeriodLabel period={period} /></>} dropdown-menu='down'>
+      <Dropdown ref={ref} button={<><Icon name='calendar-line' /> <b>Period:</b> <PeriodLabel period={period} /></>} dropdown-menu='down'>
         <Button onClick={() => handleFilterChange(PeriodType.Relative)} className={classnames({ open: openPeriod === PeriodType.Relative})}>
           <Icon name='arrow-drop-left-line' />
           Relative
