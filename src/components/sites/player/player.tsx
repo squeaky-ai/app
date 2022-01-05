@@ -91,8 +91,8 @@ export class Player extends React.Component<Props> {
     const { width: viewportX, height: viewportY } = this.replayer.iframe;
     
     const constraint = Math.min(
-      width / Number(viewportX),
-      height / Number(viewportY),
+      (width - 48) / Number(viewportX),
+      (height - 48) / Number(viewportY),
     );
 
     console.log({ width, height, viewportX, viewportY, constraint, value: Number(constraint.toFixed(1)) });
