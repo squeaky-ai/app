@@ -74,6 +74,7 @@ export const GET_VISITOR_QUERY = gql`
         recordings(page: $recordingPage, size: 10, sort: $recordingSort) {
           items {
             id
+            language
             duration
             viewed
             bookmarked
@@ -81,6 +82,7 @@ export const GET_VISITOR_QUERY = gql`
             exitPage
             pageViews
             pageCount
+            referrer
             device {
               deviceType
               viewportX
@@ -89,10 +91,22 @@ export const GET_VISITOR_QUERY = gql`
               deviceY
               browserName
               browserDetails
+              useragent
             }
             sessionId
             connectedAt
             disconnectedAt
+            visitor {
+              id
+              visitorId
+              starred
+            }
+            nps {
+              score
+            }
+            sentiment {
+              score
+            }
           }
           pagination {
             pageSize

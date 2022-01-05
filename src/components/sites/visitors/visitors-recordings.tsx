@@ -1,71 +1,77 @@
 import React from 'react';
 import type { FC } from 'react';
+import classnames from 'classnames';
 import { Pagination } from 'components/pagination';
 import { Sort } from 'components/sort';
+import { Checkbox } from 'components/checkbox';
 import { Illustration } from 'components/illustration';
-import { VisitorsRecordingsItem } from 'components/sites/visitors/visitors-recordings-item';
+import { RecordingsItem } from 'components/sites/recordings/recordings-item';
 import { Table, Row, Cell } from 'components/table';
-import { RecordingsSort } from 'types/graphql';
+import { getColumnStyles } from 'lib/tables';
+import { RecordingsSort, Site } from 'types/graphql';
+import { COLUMNS } from 'data/recordings/constants';
 import type { Visitor } from 'types/graphql';
+import type { Column } from 'types/common';
 
 interface Props {
   visitor: Visitor;
   sort: RecordingsSort;
   page: number;
+  site: Site;
+  columns: Column[];
+  selected: string[];
   setPage: (value: number) => void;
   setSort: (value: RecordingsSort) => void;
+  setSelected: (selected: string[]) => void;
 }
 
-export const VisitorsRecording: FC<Props> = ({ visitor, page, sort, setPage, setSort }) => {
+export const VisitorsRecording: FC<Props> = ({ site, visitor, page, sort, columns, selected, setSelected, setPage, setSort }) => {
   const { items, pagination } = visitor.recordings;
+
+  const { rowStyle, tableClassNames } = getColumnStyles(COLUMNS, columns);
+
+  const onSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.target.checked
+      ? setSelected(items.map(t => t.id))
+      : setSelected([]);
+  };
 
   return (
     <>
       {items.length > 0 && (
-        <Table className='visitor-recordings-table hover'>
-          <Row head>
+        <Table className={classnames('visitor-recordings-table hover', tableClassNames)}>
+          <Row head style={rowStyle}>
             <Cell>
-              Status
-            </Cell>
-            <Cell>
-              Recording ID
-            </Cell>
-            <Cell>
-              Date &amp; Time
-              <Sort 
-                name='connected_at' 
-                order={sort} 
-                onAsc={() => setSort(RecordingsSort.ConnectedAtAsc)} 
-                onDesc={() => setSort(RecordingsSort.ConnectedAtDesc)} 
+              <Checkbox
+                checked={selected.length === items.length && items.length !== 0}
+                partial={selected.length !== 0 && selected.length !== items.length && items.length !== 0}
+                disabled={items.length === 0}
+                onChange={onSelectAll} 
               />
             </Cell>
-            <Cell>
-              Duration
-              <Sort 
-                name='duration' 
-                order={sort} 
-                onAsc={() => setSort(RecordingsSort.DurationAsc)} 
-                onDesc={() => setSort(RecordingsSort.DurationDesc)} 
-              />
-            </Cell>
-            <Cell>
-              Pages
-              <Sort 
-                name='page_count' 
-                order={sort} 
-                onAsc={() => setSort(RecordingsSort.PageCountAsc)} 
-                onDesc={() => setSort(RecordingsSort.PageCountDesc)} 
-              />
-            </Cell>
-            <Cell>
-              Start &amp; Exit URL
-            </Cell>
+            <Cell>Status</Cell>
+            <Cell>Recording ID</Cell>
+            <Cell>Visitor ID</Cell>
+            <Cell>Date &amp; Time<Sort name='connected_at' order={sort} onAsc={() => setSort(RecordingsSort.ConnectedAtAsc)} onDesc={() => setSort(RecordingsSort.ConnectedAtDesc)} /></Cell>
+            <Cell>Duration <Sort name='duration' order={sort} onAsc={() => setSort(RecordingsSort.DurationAsc)} onDesc={() => setSort(RecordingsSort.DurationDesc)} /></Cell>
+            <Cell>Pages <Sort name='page_count' order={sort} onAsc={() => setSort(RecordingsSort.PageCountAsc)} onDesc={() => setSort(RecordingsSort.PageCountDesc)} /></Cell>
+            <Cell>Traffic Source</Cell>
+            <Cell>Start &amp; Exit URL</Cell>
             <Cell>Device &amp; Viewport (px)</Cell>
             <Cell>Browser</Cell>
+            <Cell>NPS</Cell>
+            <Cell>Sentiment</Cell>
             <Cell />
           </Row>
           {items.map(recording => (
-            <VisitorsRecordingsItem key={recording.id} recording={recording} />
+            <RecordingsItem 
+              site={site}
+              recording={recording} 
+              key={recording.id} 
+              style={rowStyle}
+              selected={selected}
+              setSelected={setSelected}
+            />
           ))}
         </Table>
       )}
