@@ -95,12 +95,7 @@ export class Player extends React.Component<Props> {
       (height - 48) / Number(viewportY),
     );
 
-    console.log({ width, height, viewportX, viewportY, constraint, value: Number(constraint.toFixed(1)) });
-
-    // Once JS gets to .4, the precision goes to shit and it ends up
-    // as 0.40000000000000013, so it must be fixed (to a string?! 🤦‍♂️)
-    // and then cast back to a number
-    this.props.dispatch({ type: 'zoom', value: Number(constraint.toFixed(1)) });
+    this.props.dispatch({ type: 'zoom', value: constraint });
   };
 
   public render(): JSX.Element {
