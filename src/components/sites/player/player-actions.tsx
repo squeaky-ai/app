@@ -1,6 +1,5 @@
 import React from 'react';
 import type { FC } from 'react';
-import Link from 'next/link';
 import classnames from 'classnames';
 import { useRouter } from 'next/router';
 import { Icon } from 'components/icon';
@@ -10,6 +9,7 @@ import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'compo
 import { RecordingsShare } from 'components/sites/recordings/recordings-share';
 import { recordingDelete, recordingBookmarked } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
+import { useHistory } from 'hooks/use-history';
 import { Preferences, Preference } from 'lib/preferences';
 import type { Site } from 'types/graphql';
 import type { Recording } from 'types/graphql';
@@ -22,6 +22,7 @@ interface Props {
 export const PlayerActions: FC<Props> = ({ site, recording }) => {
   const toast = useToasts();
   const router = useRouter();
+  const { history } = useHistory();
   const ref = React.useRef<Modal>();
   const [skipDeleteModal, setSkipDeleteModal] = React.useState<boolean>(false);
 
@@ -31,6 +32,14 @@ export const PlayerActions: FC<Props> = ({ site, recording }) => {
 
   const closeModal = () => {
     if (ref.current) ref.current.hide();
+  };
+
+  const onBackButton = () => {
+    // The last url will be the current one,
+    // so go back one further
+    const prevRoute = history[history.length - 2];
+
+    router.push(prevRoute || `/sites/${site.id}/recordings`);
   };
 
   const deleteRecording = async () => {
@@ -90,11 +99,9 @@ export const PlayerActions: FC<Props> = ({ site, recording }) => {
         <Button onClick={handleDeleteClick} disabled={!recording}>
           <Icon name='delete-bin-line' />
         </Button>
-        <Link href={`/sites/${site.id}/recordings`}>
-          <a className='button close'>
-            <Icon name='close-line' />
-          </a>
-        </Link>
+        <Button className='close' onClick={onBackButton}>
+          <Icon name='close-line' />
+        </Button>
       </div>
 
       <Modal ref={ref}>

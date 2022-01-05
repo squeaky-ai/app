@@ -27,7 +27,7 @@ export const Page: FC = ({ children }) => {
       <div className={classnames('page', ...slug)}>
         {children}
       </div>
-    )
+    );
   }
 
   return (
