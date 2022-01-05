@@ -2,15 +2,15 @@ import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_ACTIVE_USERS_QUERY } from 'data/sites/queries';
 
-interface UseActiveUsers {
+interface UseActiveVisitors {
   loading: boolean;
   error: boolean;
-  activeUsers: number;
+  activeVisitors: number;
   startPolling: (interval: number) => void;
   stopPolling: VoidFunction;
 }
 
-export const useActiveUsers = (): UseActiveUsers => {
+export const useActiveVisitors = (): UseActiveVisitors => {
   const router = useRouter();
 
   const variables = {
@@ -24,7 +24,7 @@ export const useActiveUsers = (): UseActiveUsers => {
   return {
     loading,
     error: !!error,
-    activeUsers: data ? data.site.activeUserCount : 0,
+    activeVisitors: data ? data.site.activeUserCount : 0,
     startPolling,
     stopPolling,
   };

@@ -12,7 +12,7 @@ import { AnalyticsVisitsAt } from 'components/sites/analytics/analyics-visits-at
 import { Pill } from 'components/pill';
 import { Spinner } from 'components/spinner';
 import { Error } from 'components/error';
-import { ActiveUsers } from './active-users';
+import { ActiveVisitors } from './active-visitors';
 import { useDashboard } from 'hooks/use-dashboard';
 import { toTimeString } from 'lib/dates';
 import { useFeatureFlags } from 'hooks/use-feature-flags';
@@ -53,10 +53,10 @@ export const Dashboard: FC<Props> = ({ site, period }) => {
           <Tooltip portalClassName='active-users-portal' button={
             <Pill className='small'>
               <Icon name='flashlight-line' />
-              <ActiveUsers />
+              <ActiveVisitors />
             </Pill>
           }>
-            Active users
+            Active visitors
           </Tooltip>
         </h5>
         <h2>
