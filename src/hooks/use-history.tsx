@@ -1,8 +1,8 @@
 import React from 'react';
-import { HistoryContext } from 'components/history';
+import { HistoryItem, HistoryContext } from 'components/history';
 
 interface UseHistory {
-  history: string[];
+  history: HistoryItem[];
 }
 
 export const useHistory = (): UseHistory => {

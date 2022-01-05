@@ -39,7 +39,7 @@ export const PlayerActions: FC<Props> = ({ site, recording }) => {
     // so go back one further
     const prevRoute = history[history.length - 2];
 
-    router.push(prevRoute || `/sites/${site.id}/recordings`);
+    router.push(prevRoute?.path || `/sites/${site.id}/recordings`);
   };
 
   const deleteRecording = async () => {
