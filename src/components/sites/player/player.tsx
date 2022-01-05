@@ -87,12 +87,15 @@ export class Player extends React.Component<Props> {
     if (!this.container) return;
 
     const { width, height } = this.container.getBoundingClientRect();
-    const { viewportX, viewportY } = this.props.recording.device;
 
+    const { width: viewportX, height: viewportY } = this.replayer.iframe;
+    
     const constraint = Math.min(
-      width / viewportX,
-      height / viewportY,
+      width / Number(viewportX),
+      height / Number(viewportY),
     );
+
+    console.log({ width, height, viewportX, viewportY, constraint, value: Number(constraint.toFixed(1)) });
 
     // Once JS gets to .4, the precision goes to shit and it ends up
     // as 0.40000000000000013, so it must be fixed (to a string?! 🤦‍♂️)
