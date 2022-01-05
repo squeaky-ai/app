@@ -26,8 +26,6 @@ export const HistoryProvider: FC = ({ children }) => {
     }
   }, [router.pathname]);
 
-  console.log(history);
-
   return (
     <Provider value={{ history }}>
       {children}
