@@ -19,7 +19,7 @@ h1 {
 
 h2 {
   font-size: 48px;
-  font-weight: var(--font-weight-block);
+  font-weight: var(--font-weight-bold);
   line-height: 64px;
 
   @include breakpoint-md {
