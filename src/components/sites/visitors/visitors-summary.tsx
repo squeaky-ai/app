@@ -11,7 +11,7 @@ import { Browser } from 'components/browser';
 import { VisitorsDelete } from 'components/sites/visitors/visitors-delete';
 import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
 import { Pill } from 'components/pill';
-import { getAttributes, normalizeKey, groupVisitorBrowsers, groupVisitorDevices } from 'lib/visitors';
+import { getLinkedData, normalizeKey, groupVisitorBrowsers, groupVisitorDevices } from 'lib/visitors';
 import type { Site } from 'types/graphql';
 import type { Visitor } from 'types/graphql';
 
@@ -23,7 +23,7 @@ interface Props {
 export const VisitorsSummary: FC<Props> = ({ site, visitor }) => {
   const router = useRouter();
 
-  const attributes = getAttributes(visitor);
+  const linkedData = getLinkedData(visitor);
   const devices = groupVisitorDevices(visitor.devices);
   const browsers = groupVisitorBrowsers(visitor.devices);
 
@@ -45,16 +45,16 @@ export const VisitorsSummary: FC<Props> = ({ site, visitor }) => {
             <Icon name='link-m' />
             Linked Data
           </p>
-          {!attributes && (
+          {!linkedData && (
             <>
               <p>There is no linked data for this visitor.</p>
               <p><Link href='/developers'><a target='_blank'>Click here</a></Link> to discover how you can link Squeaky visitor records directly with data of logged in users in your application.</p>
             </>
           )}
 
-          {attributes && (
+          {linkedData && (
             <div className='attributes'>
-              {Object.entries(attributes).map(([key, value]) => (
+              {Object.entries(linkedData).map(([key, value]) => (
                 <div className='row' key={key}>
                   <dt>{normalizeKey(key)}</dt>
                   <dd>{value}</dd>

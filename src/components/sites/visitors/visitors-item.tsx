@@ -10,7 +10,7 @@ import { VisitorsDelete } from 'components/sites/visitors/visitors-delete';
 import { Cell } from 'components/table';
 import { Pill } from 'components/pill';
 import { Dropdown } from 'components/dropdown';
-import { getAttributes, groupVisitorBrowsers, groupVisitorDevices } from 'lib/visitors';
+import { getLinkedData, groupVisitorBrowsers, groupVisitorDevices } from 'lib/visitors';
 import type { Site } from 'types/graphql';
 import type { ExternalAttributes } from 'types/visitors';
 import type { Visitor } from 'types/graphql';
@@ -24,7 +24,7 @@ interface Props {
 export const VisitorsItem: FC<Props> = ({ site, visitor, style }) => {
   const rowActionsRef = React.useRef<Dropdown>();
 
-  const attributes = getAttributes<ExternalAttributes>(visitor);
+  const linkedData = getLinkedData<ExternalAttributes>(visitor);
   const devices = groupVisitorDevices(visitor.devices);
   const browsers = groupVisitorBrowsers(visitor.devices);
 
@@ -45,13 +45,13 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, style }) => {
         <VisitorsStarred site={site} visitor={visitor} link />
       </Cell>
       <Cell>
-        {attributes?.id || '-'}
+        {linkedData?.id || '-'}
       </Cell>
       <Cell>
-        {attributes?.name || '-'}
+        {linkedData?.name || '-'}
       </Cell>
       <Cell>
-        {attributes?.email || '-'}
+        {linkedData?.email || '-'}
       </Cell>
       <Cell>
         {visitor.recordingCount?.total || 0}

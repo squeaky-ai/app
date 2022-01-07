@@ -12,7 +12,7 @@ import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
 import { RecordingStarred } from 'components/sites/recordings/recordings-starred';
 import { SidebarNps } from 'components/sites/player/sidebar-nps';
 import { SidebarSentiment } from 'components/sites/player/sidebar-sentiment';
-import { getAttributes, normalizeKey } from 'lib/visitors';
+import { getLinkedData, normalizeKey } from 'lib/visitors';
 import type { Recording } from 'types/graphql';
 import type { Site } from 'types/graphql';
 
@@ -23,12 +23,12 @@ interface Props {
 }
 
 export const SidebarInfo: FC<Props> = ({ site, recording, setActiveTab }) => {
-  const attributes = getAttributes(recording.visitor);
+  const linkedData = getLinkedData(recording.visitor);
 
   return (
     <>
       <div className='attributes'>
-        {!attributes && (
+        {!linkedData && (
           <p className='no-attributes'>
             <Icon name='link-m' />
             <span>No Linked Data</span>
@@ -38,14 +38,14 @@ export const SidebarInfo: FC<Props> = ({ site, recording, setActiveTab }) => {
           </p>
         )}
 
-        {attributes && (
+        {linkedData && (
           <>
             <p className='heading'>
               <Icon name='link-m' />
               <span>Linked Data</span>
             </p>
             <dl className='datalist'>
-              {Object.entries(attributes).map(([key, value]) => (
+              {Object.entries(linkedData).map(([key, value]) => (
                 <div className='row' key={key}>
                   <dt>{normalizeKey(key)}</dt>
                   <dd>{value}</dd>

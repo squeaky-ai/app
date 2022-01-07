@@ -27,7 +27,7 @@ export const GET_VISITORS_QUERY = gql`
             useragent
           }
           starred
-          attributes
+          linkedData
         }
         pagination {
           pageSize
@@ -70,7 +70,7 @@ export const GET_VISITOR_QUERY = gql`
           unique
         }
         starred
-        attributes
+        linkedData
         recordings(page: $recordingPage, size: 10, sort: $recordingSort) {
           items {
             id

@@ -1,9 +1,9 @@
 import { capitalize } from 'lodash';
 import type { Visitor, RecordingsDevice } from 'types/graphql';
 
-export function getAttributes<T>(visitor: Visitor): T {
+export function getLinkedData<T>(visitor: Visitor): T {
   try {
-    return JSON.parse(visitor.attributes);
+    return JSON.parse(visitor.linkedData);
   } catch {
     return null;
   }

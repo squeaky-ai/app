@@ -1265,13 +1265,13 @@ export type UsersUpdateInput = {
 
 export type Visitor = {
   __typename?: 'Visitor';
-  attributes?: Maybe<Scalars['String']>;
   averageSessionDuration: Scalars['Int'];
   devices: Array<RecordingsDevice>;
   firstViewedAt?: Maybe<Scalars['ISO8601DateTime']>;
   id: Scalars['ID'];
   language?: Maybe<Scalars['String']>;
   lastActivityAt?: Maybe<Scalars['ISO8601DateTime']>;
+  linkedData?: Maybe<Scalars['String']>;
   pageViewsCount?: Maybe<VisitorsPagesCount>;
   pages: VisitorsPages;
   pagesPerSession: Scalars['Float'];

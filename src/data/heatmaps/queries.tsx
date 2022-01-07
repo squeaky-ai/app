@@ -35,7 +35,7 @@ export const GET_RECORDING_QUERY = gql`
           id
           visitorId
           starred
-          attributes
+          linkedData
         }
         pages {
           url
