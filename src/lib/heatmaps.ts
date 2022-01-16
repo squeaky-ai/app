@@ -187,7 +187,7 @@ const createScrollingScrollMarker = (doc: Document, scrollMapData: ScrollMapData
   percentageAmount.innerText = '0.00%';
 
   percentangeText.appendChild(percentageAmount);
-  percentangeText.innerHTML += 'Percentage of visitors who reached this';
+  percentangeText.innerHTML += 'of visitors reached this point';
 
   percentageMarker.appendChild(percentangeText);
 
@@ -245,7 +245,7 @@ export const iframeStyles = `
     }
 
     #__squeaky_scrolling_percentage_marker b {
-      margin-right: .5rem;
+      margin-right: .25rem;
     }
 
     #__squeaky_scrolling_percentage_marker::after {
