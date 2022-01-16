@@ -1,36 +1,48 @@
 import React from 'react';
 import type { FC } from 'react';
+import { range } from 'lodash';
+import { format, subMonths } from 'date-fns';
 import { Card } from 'components/card';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, TooltipProps } from 'recharts';
-import { formatChartData, formatLabel } from 'lib/charts';
 import type { User } from 'types/graphql';
 
 interface Props {
   users: User[];
 }
 
-const addTimestampsToUsers = (users: User[]) => users.map(user => ({
-  ...user,
-  timestamp: user.createdAt,
-}));
+interface Total {
+  count: number;
+  date: string;
+}
+
+const getAccumulatingTotal = (users: User[]): Total[] => {
+  const now = new Date();
+
+  const results = range(0, 11).map(month => {
+    const thisMonth = subMonths(now, month);
+    const values = users.filter(user => new Date(user.createdAt) <= thisMonth);
+    
+    return {
+      date: format(thisMonth, 'MMM yy'),
+      count: values.length,
+    }
+  });
+
+  return results.reverse();
+};
 
 export const UsersGrowth: FC<Props> = ({ users }) => {
-  const period = 'past_fourteen_days';
-
-  const { data } = formatChartData(period, addTimestampsToUsers(users));
-
-  const results = data.map(d => ({
-    date: d.key,
-    count: d.data.length,
-  }));
+  const data = getAccumulatingTotal(users);
 
   const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload, label }) => {
     if (!active || payload?.length < 1) return null;
+
+    const newUserCount = payload[0].payload.count;
   
     return (
       <div className='custom-tooltip'>
-        <p className='date'>{formatLabel(period, label)}</p>
-        <p className='count'>{payload[0].payload.count} New Users</p>
+        <p className='date'>{label}</p>
+        <p className='count'>{newUserCount} New Users {newUserCount > 0 ? '🎉' : ''}</p>
       </div>
     );
   };
@@ -40,7 +52,7 @@ export const UsersGrowth: FC<Props> = ({ users }) => {
       <h5>User Growth</h5>
       <div className='chart-wrapper'>
       <ResponsiveContainer>
-          <LineChart data={results} margin={{ top: 15, left: -15, right: 15, bottom: 0 }}>
+          <LineChart data={data} margin={{ top: 15, left: -15, right: 15, bottom: 0 }}>
             <CartesianGrid strokeDasharray='3 3' vertical={false} />
 
             <XAxis 
