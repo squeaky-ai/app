@@ -136,8 +136,9 @@ export const showClickMaps = (doc: Document, items: HeatmapsItem[]) => {
   });
 };
 
-export const showScrollMaps = (doc: Document, items: HeatmapsItem[]) => {
+export const showScrollMaps = (doc: Document, items: HeatmapsItem[], scale: number) => {
   const scrollMapData = getScrollMapData(items);
+  const unscale = 1 / scale;
 
   const overlay = document.createElement('div');
   overlay.classList.add('__squeaky_scroll_overlay');
@@ -154,13 +155,13 @@ export const showScrollMaps = (doc: Document, items: HeatmapsItem[]) => {
 
   doc.body.appendChild(overlay);
 
-  createScrollingScrollMarker(doc, scrollMapData);
-  createFixedScrollMarker(doc, scrollMapData, 25);
-  createFixedScrollMarker(doc, scrollMapData, 50);
-  createFixedScrollMarker(doc, scrollMapData, 75);
+  createScrollingScrollMarker(doc, scrollMapData, unscale);
+  createFixedScrollMarker(doc, scrollMapData, 25, unscale);
+  createFixedScrollMarker(doc, scrollMapData, 50, unscale);
+  createFixedScrollMarker(doc, scrollMapData, 75, unscale);
 };
 
-const createFixedScrollMarker = (doc: Document, scrollMapData: ScrollMapData[], percentage: number) => {
+const createFixedScrollMarker = (doc: Document, scrollMapData: ScrollMapData[], percentage: number, scale: number) => {
   const scroll = findLast(scrollMapData, s => s.percentThatMadeIt >= percentage);
 
   if (!scroll) return;
@@ -168,6 +169,7 @@ const createFixedScrollMarker = (doc: Document, scrollMapData: ScrollMapData[], 
   const marker = doc.createElement('div');
   marker.classList.add('__squeaky_fixed_percentage_marker');
   marker.style.top = `${scroll.pixelsScrolled}px`;
+  marker.style.transform = `scale(${scale})`;
 
   const text = doc.createElement('p');
   text.innerText = `${percentage}%`;
@@ -177,9 +179,10 @@ const createFixedScrollMarker = (doc: Document, scrollMapData: ScrollMapData[], 
   doc.body.appendChild(marker);
 };
 
-const createScrollingScrollMarker = (doc: Document, scrollMapData: ScrollMapData[]) => {
+const createScrollingScrollMarker = (doc: Document, scrollMapData: ScrollMapData[], scale: number) => {
   const percentageMarker = doc.createElement('div');
   percentageMarker.id = '__squeaky_scrolling_percentage_marker';
+  percentageMarker.style.transform = `scale(${scale})`;
 
   const percentangeText = doc.createElement('p');
 
@@ -263,6 +266,7 @@ export const iframeStyles = `
       left: 0;
       position: absolute;
       top: 0;
+      transform-origin: left top;
       width: 100%;
       z-index: 99999999;
     }

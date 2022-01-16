@@ -96,7 +96,7 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items
 
     type === 'Click' 
       ? showClickMaps(doc, items)
-      : showScrollMaps(doc, items);
+      : showScrollMaps(doc, items, scale);
 
     // Now that stuff isn't going to jump the spinner can be removed
     setLoading(false);
