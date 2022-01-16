@@ -1,7 +1,16 @@
 .page.__admin {
   background: var(--gray-100);
   min-height: 100vh;
-  padding: 3rem 0;
+
+  .header {
+    background: var(--gray-blue-800);
+    margin: 0 0 3rem 0;
+
+    .logo {
+      display: block;
+      transform: translateY(.2rem);
+    }
+  }
 
   h3 {
     align-items: center;

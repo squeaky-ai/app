@@ -9,10 +9,11 @@ import { Tabs } from 'components/admin/tabs';
 import { Spinner } from 'components/spinner';
 import { UsersTable } from 'components/admin/users-table';
 import { SitesTable } from 'components/admin/sites-table';
+import { UsersGrowth } from 'components/admin/users-growth';
+import { Logo } from 'components/logo';
 import { useAdmin } from 'hooks/use-admin';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import type { AdminTab } from 'types/admin';
-import { UsersGrowth } from 'components/admin/users-growth';
 
 const Admin: NextPage<ServerSideProps> = () => {
   const [tab, setTab] = React.useState<AdminTab>('users');
@@ -28,6 +29,12 @@ const Admin: NextPage<ServerSideProps> = () => {
       <Head>
         <title>Squeaky | Admin</title>
       </Head>
+
+      <header className='header'>
+        <a href='/' className='logo'>
+          <Logo logo='main' height={32} width={103} />
+        </a>
+      </header>
 
       <Container className='lg centered'>
         <h3>
