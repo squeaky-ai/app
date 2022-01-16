@@ -2,6 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
 import { Cell, Row } from 'components/table';
+import { Pill } from 'components/pill';
 import type { Site } from 'types/graphql';
 
 interface Props {
@@ -16,11 +17,25 @@ export const SitesTableRow: FC<Props> = ({ site }) => (
       </Link>
     </Cell>
     <Cell>{site.name}</Cell>
-    <Cell>{site.url}</Cell>
+    <Cell>
+      <a href={site.url} target='_blank' rel='noreferrer'>
+        {site.url}
+      </a>
+    </Cell>
     <Cell>{site.ownerName}</Cell>
     <Cell>{site.plan.name}</Cell>
-    <Cell>{site.plan.exceeded ? 'Yes' : 'No'}</Cell>
-    <Cell>{site.verifiedAt ? 'Verified' : 'Unverified'}</Cell>
+    <Cell>
+      {site.plan.exceeded 
+        ? <Pill className='tertiary'>Yes</Pill> 
+        : <Pill className='secondary'>No</Pill>
+      }
+    </Cell>
+    <Cell>
+      {site.verifiedAt 
+        ? <Pill className='primary'>Verified</Pill> 
+        : <Pill className='tertiary'>Unverified</Pill> 
+      }
+    </Cell>
     <Cell>{site.team.length}</Cell>
   </Row>
 );
