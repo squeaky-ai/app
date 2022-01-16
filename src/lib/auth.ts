@@ -25,17 +25,27 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const url = resolvedUrl.split('?')[0];
 
   const user = cookies.session ? await getUser(headers.cookie) : null;
-  const isPublic = BLANK_ROUTES.includes(url);
+  const isBlankPage = BLANK_ROUTES.includes(url);
+  const isAdminOnlyPage = url.startsWith('/__admin');
+
+  if (isAdminOnlyPage && !user?.superuser) {
+    return {
+      redirect: {
+        destination: '/auth/login',
+        permanent: false,
+      },
+    }; 
+  }
 
   // If the user doesn't exist and they're trying to access
   // a logged in page then we should redirect them to the 
   // login page
-  if (!user && !isPublic) {
+  if (!user && !isBlankPage) {
     return {
       redirect: {
         destination: '/auth/login',
-        permanent: false
-      }
+        permanent: false,
+      },
     };
   }
 
@@ -46,8 +56,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
       redirect: {
         destination: '/users/new',
-        permanent: false
-      }
+        permanent: false,
+      },
     }
   }
 

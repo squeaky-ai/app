@@ -689,13 +689,23 @@ export type Page = {
   url: Scalars['String'];
 };
 
+export type Plan = {
+  __typename?: 'Plan';
+  maxMonthlyRecordings?: Maybe<Scalars['Int']>;
+  monthlyPrice?: Maybe<Scalars['Int']>;
+  name: Scalars['String'];
+};
+
 export type Query = {
   __typename?: 'Query';
+  plans: Array<Plan>;
   site?: Maybe<Site>;
   sites: Array<Maybe<Site>>;
+  sitesAdmin: Array<Maybe<Site>>;
   user?: Maybe<User>;
   userExists: Scalars['Boolean'];
   userInvitation?: Maybe<UsersInvitation>;
+  usersAdmin: Array<Maybe<User>>;
 };
 
 

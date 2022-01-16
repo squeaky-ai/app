@@ -4,6 +4,7 @@ import type { RelativeTime } from 'types/common';
 const { publicRuntimeConfig } = getConfig();
 
 export const BLANK_ROUTES = [
+  '/__admin',
   '/ping',
   '/developers',
   '/auth/login',

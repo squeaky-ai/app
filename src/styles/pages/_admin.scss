@@ -1,0 +1,39 @@
+.page.__admin {
+  background: var(--gray-100);
+  min-height: 100vh;
+  padding: 3rem 0;
+
+  h3 {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 2rem 0;
+
+    a {
+      align-items: center;
+      display: flex;
+      font-size: 1rem;
+      text-decoration: none;
+
+      .icon {
+        margin-left: .25rem;
+      }
+    }
+  }
+
+  .table {
+    margin-top: 2rem;
+  }
+
+  .users-table {
+    .row {
+      grid-template-columns: 100px 1fr 1fr 1fr 1fr;
+    }
+  }
+
+  .sites-table {
+    .row {
+      grid-template-columns: 100px 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    }
+  }
+}
