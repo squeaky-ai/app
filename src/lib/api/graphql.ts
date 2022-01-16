@@ -38,6 +38,8 @@ import {
   Feedback,
   UsersCommunication,
   UsersCommunicationInput,
+  NpsDeleteInput,
+  SentimentDeleteInput,
 } from 'types/graphql';
 
 import {
@@ -116,6 +118,14 @@ import {
   VISITOR_STARRED_MUTATION,
   VISITOR_DELETE_MUTATION,
 } from 'data/visitors/mutations';
+
+import { 
+  NPS_DELETE_MUTATION,
+} from 'data/nps/mutations';
+
+import {
+  SENTIMENT_DELETE_MUTATION,
+} from 'data/sentiment/mutations';
 
 export const cache = new InMemoryCache({
   typePolicies: {
@@ -585,4 +595,32 @@ export const visitorDelete = async (input: VisitorsDeleteInput): Promise<null> =
   });
 
   return data.visitorDelete;
+};
+
+export const npsDelete = async (input: NpsDeleteInput): Promise<null> => {
+  const { data } = await client.mutate({
+    mutation: NPS_DELETE_MUTATION,
+    variables: { input },
+    update(cache) {
+      const normalizedId = cache.identify({ id: input.npsId, __typename: 'FeedbackNpsResponseItem' });
+      cache.evict({ id: normalizedId });
+      cache.gc();
+    }
+  });
+
+  return data.npsDelete
+};
+
+export const sentimentDelete = async (input: SentimentDeleteInput): Promise<null> => {
+  const { data } = await client.mutate({
+    mutation: SENTIMENT_DELETE_MUTATION,
+    variables: { input },
+    update(cache) {
+      const normalizedId = cache.identify({ id: input.sentimentId, __typename: 'FeedbackSentimentResponseItem' });
+      cache.evict({ id: normalizedId });
+      cache.gc();
+    }
+  });
+
+  return data.npsDelete
 };

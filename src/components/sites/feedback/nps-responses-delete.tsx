@@ -1,9 +1,11 @@
 import React from 'react';
 import type { FC } from 'react';
+import { useRouter } from 'next/router';
 import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { useToasts } from 'hooks/use-toasts';
+import { npsDelete } from 'lib/api/graphql';
 import type { FeedbackNpsResponseItem } from 'types/graphql';
 
 interface Props {
@@ -11,8 +13,10 @@ interface Props {
   onClose: VoidFunction;
 }
 
-export const NpsResponsesDelete: FC<Props> = ({ onClose }) => {
+export const NpsResponsesDelete: FC<Props> = ({ response, onClose }) => {
   const toasts = useToasts();
+  const router = useRouter();
+
   const ref = React.useRef<Modal>();
 
   const openModal = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -27,6 +31,7 @@ export const NpsResponsesDelete: FC<Props> = ({ onClose }) => {
 
   const deleteResponse = async () => {
     try {
+      await npsDelete({ npsId: response.id, siteId: router.query.site_id as string });
       closeModal();
       toasts.add({ type: 'success', body: 'Response deleted' });
     } catch {
