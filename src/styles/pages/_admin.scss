@@ -25,6 +25,22 @@
     margin-top: 2rem;
   }
 
+  .card {
+    margin: 2rem 0 0 0;
+
+    h5 {
+      margin: 0 0 1rem 0;
+    }
+  }
+
+  .chart-wrapper {
+    height: 250px;
+
+    svg {
+      overflow: visible;
+    }
+  }
+
   .users-table {
     .row {
       grid-template-columns: 100px 1fr 1fr 1fr 1fr;
@@ -34,6 +50,23 @@
   .sites-table {
     .row {
       grid-template-columns: 100px 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    }
+  }
+
+  .custom-tooltip {
+    background: var(--gray-blue-800);
+    border-radius: var(--border-radius-md);
+    color: var(--gray-100);
+    padding: 1rem;
+
+    p {
+      align-items: center;
+      display: flex;
+      margin: 0 0 .5rem 0;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
     }
   }
 }

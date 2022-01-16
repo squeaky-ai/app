@@ -12,6 +12,7 @@ import { SitesTable } from 'components/admin/sites-table';
 import { useAdmin } from 'hooks/use-admin';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import type { AdminTab } from 'types/admin';
+import { UsersGrowth } from 'components/admin/users-growth';
 
 const Admin: NextPage<ServerSideProps> = () => {
   const [tab, setTab] = React.useState<AdminTab>('users');
@@ -45,7 +46,10 @@ const Admin: NextPage<ServerSideProps> = () => {
         )}
 
         {!loading && tab === 'users' && (
-          <UsersTable users={admin.usersAdmin} />
+          <>
+            <UsersGrowth users={admin.usersAdmin} />
+            <UsersTable users={admin.usersAdmin} />
+          </>
         )}
 
         {!loading && tab === 'sites' && (
