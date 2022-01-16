@@ -23,6 +23,7 @@ export const GET_ADMIN_QUERY = gql`
           id
         }
       }
+      createdAt
     }
     usersAdmin {
       id

@@ -11,6 +11,7 @@ import { UsersTable } from 'components/admin/users-table';
 import { SitesTable } from 'components/admin/sites-table';
 import { UsersGrowth } from 'components/admin/users-growth';
 import { Logo } from 'components/logo';
+import { SitesGrowth } from 'components/admin/sites-growth';
 import { useAdmin } from 'hooks/use-admin';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import type { AdminTab } from 'types/admin';
@@ -60,7 +61,10 @@ const Admin: NextPage<ServerSideProps> = () => {
         )}
 
         {!loading && tab === 'sites' && (
-          <SitesTable sites={admin.sitesAdmin} />
+          <>
+            <SitesGrowth sites={admin.sitesAdmin} />
+            <SitesTable sites={admin.sitesAdmin} />
+          </>
         )}
       </Container>
     </>
