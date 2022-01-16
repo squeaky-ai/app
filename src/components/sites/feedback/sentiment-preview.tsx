@@ -97,7 +97,7 @@ export const SentimentPreview: FC<Props> = ({ feedback }) => {
                     <p>
                       Powered by
                       <span className='logo'>
-                        <Logo logo='main' height={20} width={64} />
+                        <Logo logo='dark' height={20} width={64} />
                       </span>
                     </p>
                     <Button type='button' className='primary' onClick={() => setPage(2)}>
