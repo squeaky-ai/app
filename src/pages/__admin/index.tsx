@@ -56,7 +56,7 @@ const Admin: NextPage<ServerSideProps> = () => {
         {!loading && tab === 'users' && (
           <>
             <UsersGrowth users={admin.usersAdmin} />
-            <UsersTable users={admin.usersAdmin} />
+            <UsersTable users={admin.usersAdmin} sites={admin.sitesAdmin} />
           </>
         )}
 

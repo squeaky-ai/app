@@ -3,11 +3,12 @@ import type { FC } from 'react';
 import { Table, Cell, Row } from 'components/table';
 import { Sort } from 'components/sort';
 import { UsersTableRow } from 'components/admin/users-table-row';
-import type { User } from 'types/graphql';
+import type { User, Site } from 'types/graphql';
 import type { UserSort } from 'types/admin';
 
 interface Props {
   users: User[];
+  sites: Site[];
 }
 
 const sortUsers = (sort: UserSort) => (a: User, b: User) => {
@@ -27,7 +28,11 @@ const sortUsers = (sort: UserSort) => (a: User, b: User) => {
   }
 };
 
-export const UsersTable: FC<Props> = ({ users }) => {
+const getUsersSites = (user: User, sites: Site[]) => {
+  return sites.filter(site => !!site.team.find(t => t.user.id === user.id));
+};
+
+export const UsersTable: FC<Props> = ({ users, sites }) => {
   const [sort, setSort] = React.useState<UserSort>('created_at__desc');
 
   const results = [...users].sort(sortUsers(sort));
@@ -55,6 +60,7 @@ export const UsersTable: FC<Props> = ({ users }) => {
             onDesc={() => setSort('superuser__desc')} 
           />
         </Cell>
+        <Cell>Sites</Cell>
         <Cell>
           Created At
           <Sort 
@@ -66,7 +72,7 @@ export const UsersTable: FC<Props> = ({ users }) => {
         </Cell>
       </Row>
       {results.map(user => (
-        <UsersTableRow key={user.id} user={user} />
+        <UsersTableRow key={user.id} user={user} sites={getUsersSites(user, sites)} />
       ))}
     </Table>
   );

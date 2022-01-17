@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import Link from 'next/link';
 import { Cell, Row } from 'components/table';
 import { Pill } from 'components/pill';
+import { toNiceDate } from 'lib/dates';
 import type { Site } from 'types/graphql';
 
 interface Props {
@@ -37,5 +38,6 @@ export const SitesTableRow: FC<Props> = ({ site }) => (
       }
     </Cell>
     <Cell>{site.team.length}</Cell>
+    <Cell>{toNiceDate(site.createdAt)}</Cell>
   </Row>
 );

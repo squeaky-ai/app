@@ -24,11 +24,15 @@ const sortSites = (sort: SitesSort) => (a: Site, b: Site) => {
       return a.team.length - b.team.length;
     case 'team_count__desc':
       return b.team.length - a.team.length;
+    case 'created_at__asc':
+      return new Date(a.createdAt).valueOf() - new Date(b.createdAt).valueOf();
+    case 'created_at__desc':
+      return new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf();
   }
 };
 
 export const SitesTable: FC<Props> = ({ sites }) => {
-  const [sort, setSort] = React.useState<SitesSort>('name__asc');
+  const [sort, setSort] = React.useState<SitesSort>('created_at__desc');
 
   const results = [...sites].sort(sortSites(sort));
 
@@ -65,6 +69,15 @@ export const SitesTable: FC<Props> = ({ sites }) => {
             order={sort} 
             onAsc={() => setSort('team_count__asc')} 
             onDesc={() => setSort('team_count__desc')} 
+          />
+        </Cell>
+        <Cell>
+          Created At
+          <Sort 
+            name='created_at' 
+            order={sort} 
+            onAsc={() => setSort('created_at__asc')} 
+            onDesc={() => setSort('created_at__desc')} 
           />
         </Cell>
       </Row>

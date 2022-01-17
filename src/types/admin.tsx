@@ -21,4 +21,6 @@ export type SitesSort =
   'plan_name__asc' |
   'plan_name__desc' |
   'team_count__asc' |
-  'team_count__desc';
+  'team_count__desc' |
+  'created_at__asc' |
+  'created_at__desc';
