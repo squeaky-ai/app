@@ -429,6 +429,9 @@
         margin: 0;
       }
 
+      a {
+        color: var(--blue-300);
+      }
 
       @include breakpoint-md {
         display: none;
