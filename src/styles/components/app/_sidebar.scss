@@ -193,6 +193,10 @@
     }
   }
 
+  .feedback {
+    display: none;
+  }
+
   .divider {
     background: var(--gray-blue-600);
     margin: .5rem 0;
@@ -410,6 +414,24 @@
             }
           }
         }
+      }
+    }
+
+    .feedback {
+      color: var(--white);
+      display: block;
+      padding: 2rem 1rem;
+      white-space: nowrap;
+
+      p, a {
+        font-size: 13px;
+        line-height: 16px;
+        margin: 0;
+      }
+
+
+      @include breakpoint-md {
+        display: none;
       }
     }
 

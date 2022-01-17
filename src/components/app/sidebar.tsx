@@ -190,6 +190,10 @@ export const Sidebar: FC = () => {
       <Button className='menu-toggle' onClick={toggleOpen}>
         {open ? <Icon name='close-line' /> : <Icon name='menu-line' />}
       </Button>
+      <div className='feedback'>
+        <p>Send feedback to:</p>
+        <a href='mailto:hello@squeaky.ai'>hello@squeaky.ai</a>
+      </div>
       <footer>
         <SidebarAccount path={path} />
         <SidebarLogout />
