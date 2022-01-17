@@ -26,7 +26,7 @@ export const UsersTableRow: FC<Props> = ({ user, sites }) => (
       {sites.map((site, index) => (
         <React.Fragment key={site.id}>
           <Link href={`/sites/${site.id}/dashboard`}>
-            <a>{site.name}</a>
+            <a target='_blank'>{site.name}</a>
           </Link>
           {index === sites.length -1 ? '' : ', '}
         </React.Fragment>
