@@ -27,6 +27,8 @@ export const GET_RECORDINGS_QUERY = gql`
             browserDetails
             useragent
           }
+          countryCode
+          countryName
           sessionId
           connectedAt
           disconnectedAt
@@ -79,6 +81,8 @@ export const GET_RECORDING_QUERY = gql`
           browserDetails
           useragent
         }
+        countryCode
+        countryName
         connectedAt
         disconnectedAt
         visitor {

@@ -97,28 +97,34 @@ export const COLUMNS: Column[] = [
     position: 10,
   },
   {
-    label: 'Browser',
-    width: '90px',
+    label: 'Country',
+    width: '100px',
     disabled: false,
     position: 11,
   },
   {
-    label: 'NPS Rating',
+    label: 'Browser',
     width: '90px',
     disabled: false,
     position: 12,
   },
   {
-    label: 'Sentiment Rating',
+    label: 'NPS Rating',
     width: '90px',
     disabled: false,
     position: 13,
   },
   {
+    label: 'Sentiment Rating',
+    width: '90px',
+    disabled: false,
+    position: 14,
+  },
+  {
     label: 'Options',
     width: '70px',
     disabled: true,
-    position: 14,
+    position: 15,
   },
 ];
 

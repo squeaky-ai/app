@@ -7,6 +7,7 @@ import { PlayerTab } from 'data/sites/enums';
 import { toNiceDate, toTimeString } from 'lib/dates';
 import { Tooltip } from 'components/tooltip';
 import { Browser } from 'components/browser';
+import { Flag } from 'components/flag';
 import { Device } from 'components/device';
 import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
 import { RecordingStarred } from 'components/sites/recordings/recordings-starred';
@@ -126,6 +127,17 @@ export const SidebarInfo: FC<Props> = ({ site, recording, setActiveTab }) => {
         <div className='row'>
           <dt>Language</dt>
           <dd>{recording.language}</dd>
+        </div>
+        <div className='row'>
+          <dt>Country</dt>
+          <dd>
+            {!!recording.countryCode && (
+              <Tooltip button={<Flag code={recording.countryCode} />}>
+                {recording.countryName}
+              </Tooltip>
+            )}
+            {!recording.countryCode && '-'}
+          </dd>
         </div>
       </dl>
 

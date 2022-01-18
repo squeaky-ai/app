@@ -38,6 +38,10 @@
     display: flex;
   }
 
+  .flag {
+    pointer-events: none;
+  }
+
   .nps-score {
     font-size: 16px;
     font-weight: var(--font-weight-bold);

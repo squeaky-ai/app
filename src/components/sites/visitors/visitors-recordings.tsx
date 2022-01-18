@@ -58,6 +58,7 @@ export const VisitorsRecording: FC<Props> = ({ site, visitor, page, sort, column
             <Cell>Traffic Source</Cell>
             <Cell>Start &amp; Exit URL</Cell>
             <Cell>Device &amp; Viewport (px)</Cell>
+            <Cell>Country</Cell>
             <Cell>Browser</Cell>
             <Cell>NPS</Cell>
             <Cell>Sentiment</Cell>

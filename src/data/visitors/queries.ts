@@ -93,6 +93,8 @@ export const GET_VISITOR_QUERY = gql`
               browserDetails
               useragent
             }
+            countryCode
+            countryName
             sessionId
             connectedAt
             disconnectedAt

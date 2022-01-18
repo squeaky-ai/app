@@ -84,6 +84,7 @@ export const Recordings: FC<Props> = ({ site, filters, period, columns, selected
           <Cell>Traffic Source</Cell>
           <Cell>Start &amp; Exit URL</Cell>
           <Cell>Device &amp; Viewport (px)</Cell>
+          <Cell>Country</Cell>
           <Cell>Browser</Cell>
           <Cell>NPS</Cell>
           <Cell>Sentiment</Cell>

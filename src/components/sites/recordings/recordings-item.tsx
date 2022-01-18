@@ -9,6 +9,7 @@ import { Browser } from 'components/browser';
 import { Dropdown } from 'components/dropdown';
 import { Device } from 'components/device';
 import { Cell } from 'components/table';
+import { Flag } from 'components/flag';
 import { RecordingStarred } from 'components/sites/recordings/recordings-starred';
 import { RecordingsShare } from 'components/sites/recordings/recordings-share';
 import { RecordingDelete } from 'components/sites/recordings/recording-delete';
@@ -108,6 +109,14 @@ export const RecordingsItem: FC<Props> = ({ site, recording, style, selected, se
           {recording.device.deviceType === 'Computer' ? 'Desktop or Laptop Device' : 'Mobile Device'}
         </Tooltip>
         {recording.device.viewportX} x {recording.device.viewportY}
+      </Cell>
+      <Cell>
+        {!!recording.countryCode && (
+          <Tooltip button={<Flag code={recording.countryCode} />}>
+            {recording.countryName}
+          </Tooltip>
+        )}
+        {!recording.countryCode && '-'}
       </Cell>
       <Cell>
         <Tooltip positionX='right' className='browser-tooltip' button={<Browser name={recording.device.browserName} height={24} width={24} />}>
