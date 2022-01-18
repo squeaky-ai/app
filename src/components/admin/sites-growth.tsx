@@ -42,7 +42,7 @@ export const SitesGrowth: FC<Props> = ({ sites }) => {
     return (
       <div className='custom-tooltip'>
         <p className='date'>{label}</p>
-        <p className='count'>{sitesCount} sites {sitesCount > 0 ? '🎉' : ''}</p>
+        <p className='count'>{sitesCount} sites</p>
       </div>
     );
   };
