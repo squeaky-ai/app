@@ -42,6 +42,7 @@ export const useDashboard = (props: Props): UseDashboard => {
       visitsAt: [],
     },
     recordingLatest: null,
+    countries: [],
   };
 
   return {

@@ -51,6 +51,11 @@ export const GET_DASHBOARD_QUERY = gql`
           items
         }
       }
+      countries {
+        name
+        code
+        count
+      }
     }
   }
 `;

@@ -13,16 +13,22 @@ type Names = Record<FeatureFlag, string>;
 
 export const allFeatureFlags = [
   FeatureFlag.VISITOR_HOTSPOT,
+  FeatureFlag.VISITOR_COUNTRIES,
 ];
 
 export const featureFlagNames: Names = {
   [FeatureFlag.VISITOR_HOTSPOT]: 'Visitor hotspot',
+  [FeatureFlag.VISITOR_COUNTRIES]: 'Visitor countries',
 };
 
 export const useFeatureFlags = (): UseFeatureFlags => {
   const [state, setState] = React.useState<State>([
     {
       key: FeatureFlag.VISITOR_HOTSPOT,
+      value: false,
+    },
+    {
+      key: FeatureFlag.VISITOR_COUNTRIES,
       value: false,
     },
   ]);
