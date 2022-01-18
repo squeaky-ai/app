@@ -35,7 +35,7 @@ export const COLUMNS: Column[] = [
   {
     label: 'Visitor ID',
     width: '1fr',
-    disabled: true,
+    disabled: false,
     position: 2,
   },
   {
@@ -93,10 +93,16 @@ export const COLUMNS: Column[] = [
     position: 11,
   },
   {
+    label: 'Country',
+    width: '110px',
+    disabled: false,
+    position: 12,
+  },
+  {
     label: 'Options',
     width: '70px',
-    disabled: true,
-    position: 12,
+    disabled: false,
+    position: 13,
   },
 ];
 

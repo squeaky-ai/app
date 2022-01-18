@@ -5,7 +5,7 @@ export const COLUMNS: Column[] = [
   {
     label: 'Score',
     width: '100px',
-    disabled: true,
+    disabled: false,
     position: 1,
   },
   {
@@ -53,7 +53,7 @@ export const COLUMNS: Column[] = [
   {
     label: 'Options',
     width: '70px',
-    disabled: true,
+    disabled: false,
     position: 9,
   },
 ];

@@ -1,9 +1,9 @@
 .flag {
   border-radius: var(--border-radius-sm);
   display: inline-block;
-  height: 1rem;
+  font-size: 1rem;
   overflow: hidden;
+  margin: 0 .5rem 0 0;
   position: relative;
   vertical-align: middle;
-  width: 1rem;
 }

@@ -9,7 +9,6 @@ import { Divider } from 'components/divider';
 import { PlayerPreview } from 'components/sites/player/player-preview';
 import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
 import { AnalyticsVisitsAt } from 'components/sites/analytics/analyics-visits-at';
-import { AnalyticsCountries } from 'components/sites/analytics/analytics-countries';
 import { Pill } from 'components/pill';
 import { Spinner } from 'components/spinner';
 import { Error } from 'components/error';
@@ -229,18 +228,6 @@ export const Dashboard: FC<Props> = ({ site, period }) => {
             Visitors by time of day
           </h5>
           <AnalyticsVisitsAt visitsAt={dashboard.analytics.visitsAt} />
-        </Card>
-      )}
-
-      {featureFlagEnabled(FeatureFlag.VISITOR_COUNTRIES) && (
-        <Card className='countries'>
-          <h5>
-            <Icon name='earth-line' />
-            Visitor countries
-          </h5>
-          <div className='scroll'>
-            <AnalyticsCountries countries={dashboard.countries} />
-          </div>
         </Card>
       )}
     </div>

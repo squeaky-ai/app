@@ -1,5 +1,5 @@
 import { capitalize } from 'lodash';
-import type { Visitor, RecordingsDevice } from 'types/graphql';
+import type { Visitor, RecordingsDevice, RecordingsCountry } from 'types/graphql';
 
 export function getLinkedData<T>(visitor: Visitor): T {
   try {
@@ -28,6 +28,18 @@ export function groupVisitorBrowsers(devices: RecordingsDevice[]): RecordingsDev
   for (const device of devices) {
     if (!out.find(a => a.browserName === device.browserName)) {
       out.push(device);
+    }
+  }
+
+  return out;
+}
+
+export function groupVisitorCountries(countries: RecordingsCountry[]): RecordingsCountry[] {
+  const out: RecordingsCountry[] = [];
+
+  for (const country of countries) {
+    if (!out.find(a => a.code === country.code)) {
+      out.push(country);
     }
   }
 

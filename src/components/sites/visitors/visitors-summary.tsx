@@ -8,10 +8,11 @@ import { toNiceDate } from 'lib/dates';
 import { Device } from 'components/device';
 import { Tooltip } from 'components/tooltip';
 import { Browser } from 'components/browser';
+import { Flag } from 'components/flag';
 import { VisitorsDelete } from 'components/sites/visitors/visitors-delete';
 import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
 import { Pill } from 'components/pill';
-import { getLinkedData, normalizeKey, groupVisitorBrowsers, groupVisitorDevices } from 'lib/visitors';
+import { getLinkedData, normalizeKey, groupVisitorBrowsers, groupVisitorDevices, groupVisitorCountries } from 'lib/visitors';
 import type { Site } from 'types/graphql';
 import type { Visitor } from 'types/graphql';
 
@@ -26,6 +27,7 @@ export const VisitorsSummary: FC<Props> = ({ site, visitor }) => {
   const linkedData = getLinkedData(visitor);
   const devices = groupVisitorDevices(visitor.devices);
   const browsers = groupVisitorBrowsers(visitor.devices);
+  const countries = groupVisitorCountries(visitor.countries);
 
   const onVisitorDelete = async () => {
     await router.push(`/sites/${site.id}/visitors`);
@@ -124,6 +126,28 @@ export const VisitorsSummary: FC<Props> = ({ site, visitor }) => {
                       <li key={device.browserName}>
                         <Browser name={device.browserName} height={20} width={20} />
                         <span>{device.browserName}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </Tooltip>
+              )}
+            </dd>
+          </div>
+          <div className='row'>
+            <dt>Country</dt>
+            <dd>
+              {countries.length === 1 && (
+                <Tooltip positionX='right' button={<Flag code={countries[0].code} />}>
+                  {countries[0].name}
+                </Tooltip>
+              )}
+              {countries.length > 1 && (
+                <Tooltip fluid positionX='right' button={countries.length} buttonClassName='link'>
+                  <ul>
+                    {countries.map(country => (
+                      <li key={country.code}>
+                        <Flag code={country.code} />
+                        <span>{country.name}</span>
                       </li>
                     ))}
                   </ul>

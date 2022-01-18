@@ -50,7 +50,7 @@ export const COLUMNS: Column[] = [
   {
     label: 'Recording ID',
     width: '165px',
-    disabled: true,
+    disabled: false,
     position: 3,
   },
   {
@@ -123,7 +123,7 @@ export const COLUMNS: Column[] = [
   {
     label: 'Options',
     width: '70px',
-    disabled: true,
+    disabled: false,
     position: 15,
   },
 ];

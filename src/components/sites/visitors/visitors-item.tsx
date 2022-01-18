@@ -10,7 +10,8 @@ import { VisitorsDelete } from 'components/sites/visitors/visitors-delete';
 import { Cell } from 'components/table';
 import { Pill } from 'components/pill';
 import { Dropdown } from 'components/dropdown';
-import { getLinkedData, groupVisitorBrowsers, groupVisitorDevices } from 'lib/visitors';
+import { Flag } from 'components/flag';
+import { getLinkedData, groupVisitorBrowsers, groupVisitorDevices, groupVisitorCountries } from 'lib/visitors';
 import type { Site } from 'types/graphql';
 import type { ExternalAttributes } from 'types/visitors';
 import type { Visitor } from 'types/graphql';
@@ -27,6 +28,7 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, style }) => {
   const linkedData = getLinkedData<ExternalAttributes>(visitor);
   const devices = groupVisitorDevices(visitor.devices);
   const browsers = groupVisitorBrowsers(visitor.devices);
+  const countries = groupVisitorCountries(visitor.countries);
 
   const toTimeStringDate = (value: string) => toNiceDate(value);
 
@@ -100,6 +102,25 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, style }) => {
                 <li key={device.browserName}>
                   <Browser name={device.browserName} height={20} width={20} />
                   <span>{device.browserName}</span>
+                </li>
+              ))}
+            </ul>
+          </Tooltip>
+        )}
+      </Cell>
+      <Cell>
+        {countries.length === 1 && (
+          <Tooltip positionX='right' button={<Flag code={countries[0].code} />}>
+            {countries[0].name}
+          </Tooltip>
+        )}
+        {countries.length > 1 && (
+          <Tooltip fluid positionX='right' button={countries.length} buttonClassName='link'>
+            <ul>
+              {countries.map(country => (
+                <li key={country.code}>
+                  <Flag code={country.code} />
+                  <span>{country.name}</span>
                 </li>
               ))}
             </ul>

@@ -534,27 +534,6 @@
         }
       }
     }
-
-    .countries {
-      .scroll {
-        height: 180px;
-        overflow-y: auto;
-      }
-
-      .table {
-        box-shadow: none;
-
-        .row {
-          grid-template-columns: 1fr 140px;
-          height: 2.5rem;
-          padding: 0;
-
-          .flag {
-            margin: 0 .5rem 0 0;
-          }
-        }
-      }
-    }
   }
 }
 

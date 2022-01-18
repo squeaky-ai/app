@@ -26,6 +26,10 @@ export const GET_VISITORS_QUERY = gql`
             browserDetails
             useragent
           }
+          countries {
+            code
+            name
+          }
           starred
           linkedData
         }
@@ -64,6 +68,10 @@ export const GET_VISITOR_QUERY = gql`
           browserName
           browserDetails
           useragent
+        }
+        countries {
+          code
+          name
         }
         pageViewsCount {
           total
