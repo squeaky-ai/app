@@ -25,7 +25,7 @@ export type Analytics = {
   dimensions: Array<Maybe<AnalyticsDimension>>;
   languages: Array<Maybe<AnalyticsLanguage>>;
   pageViewCount: Scalars['Int'];
-  pageViews: Array<Maybe<AnalyticsPageViews>>;
+  pageViews: AnalyticsPageViews;
   pages: AnalyticsPages;
   pagesPerSession: AnalyticsPagesPerSession;
   recordingsCount: AnalyticsRecordingsCount;
@@ -94,11 +94,18 @@ export type AnalyticsPage = {
   percentage: Scalars['Int'];
 };
 
+export type AnalyticsPageView = {
+  __typename?: 'AnalyticsPageView';
+  dateKey: Scalars['String'];
+  totalCount: Scalars['Int'];
+  uniqueCount: Scalars['Int'];
+};
+
 export type AnalyticsPageViews = {
   __typename?: 'AnalyticsPageViews';
-  timestamp: Scalars['ISO8601DateTime'];
-  total: Scalars['Int'];
-  unique: Scalars['Int'];
+  groupRange: Scalars['Int'];
+  groupType: Scalars['String'];
+  items: Array<Maybe<AnalyticsPageView>>;
 };
 
 export type AnalyticsPages = {

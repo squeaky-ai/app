@@ -37,9 +37,13 @@ export const GET_ANALYTICS_QUERY = gql`
           }
         }
         pageViews {
-          total
-          unique
-          timestamp
+          groupType
+          groupRange
+          items {
+            dateKey
+            totalCount
+            uniqueCount
+          }
         }
         pages(size: 10, page: $pagesPage) {
           items {

@@ -1,12 +1,12 @@
 import React from 'react';
 import type { FC } from 'react';
-import { range, sum } from 'lodash';
-import { subDays, getDayOfYear, getWeek, subWeeks, subMonths, format } from 'date-fns';
+import { sum } from 'lodash';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, TooltipProps } from 'recharts';
 import { Label } from 'components/label';
 import { Pill } from 'components/pill';
 import { Checkbox } from 'components/checkbox';
-import { formatLabel, getAmPmForHour } from 'lib/charts';
+import { formatLabel } from 'lib/charts';
+import { formatResultsForGroupType } from 'lib/charts-v2';
 import type { AnalyticsVisitor, AnalyticsVisitors as AnalyticsVisitorsType } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 
@@ -15,56 +15,7 @@ interface Props {
   visitors: AnalyticsVisitorsType;
 }
 
-const emptyAnalyticsVisitor = (dateKey: string) => ({ dateKey, allCount: 0, existingCount: 0, newCount: 0 });
-
-const padDateKey = (i: number, pad = 2) => i.toString().padStart(pad, '0');
-
-const findMatchOrDefault = (dateKey: string, label: string, items: AnalyticsVisitor[]) => {
-  const match = items.find(i => i.dateKey === dateKey) || emptyAnalyticsVisitor(dateKey);
-
-  return { ...match, dateKey: label };
-};
-
-const formatResultsForGroupType = (visitors: AnalyticsVisitorsType): AnalyticsVisitor[] => {
-  const now = new Date();
-  const { groupRange, groupType, items } = visitors;
-
-  switch(groupType) {
-    case 'hourly':
-      return range(0, groupRange).map(i => {
-        const dateKey = padDateKey(i);
-        const label = getAmPmForHour(i);
-
-        return findMatchOrDefault(dateKey, label, items);
-      });
-    case 'daily':
-      return range(0, groupRange + 1).map(i => {
-        const date = subDays(now, i);
-        const dateKey = padDateKey(getDayOfYear(date), 3);
-        const label = format(date, 'd/M');
-
-        return findMatchOrDefault(dateKey, label, items);
-      }).reverse();
-    case 'weekly':
-      return range(0, groupRange + 1).map(i => {
-        const date = subWeeks(now, i);
-        const dateKey = padDateKey(getWeek(date), 2);
-        const label = format(date, 'd/M');
-
-        return findMatchOrDefault(dateKey, label, items);
-      }).reverse();
-    case 'monthly':
-      return range(0, groupRange + 1).map(i => {
-        const date = subMonths(now, i);
-        const dateKey = format(date, 'yyyy/MM');
-        const label = dateKey;
-
-        return findMatchOrDefault(dateKey, label, items);
-      }).reverse();
-    default:
-      return items;
-  }
-};
+const fallback = { allCount: 0, existingCount: 0, newCount: 0 };
 
 export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
   const [show, setShow] = React.useState<string[]>(['all', 'existing', 'new']);
@@ -75,7 +26,7 @@ export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
       : setShow([...show, value]);
   };
 
-  const results = formatResultsForGroupType(visitors).map(d => ({
+  const results = formatResultsForGroupType<AnalyticsVisitor>(visitors, fallback).map(d => ({
     dateKey: d.dateKey,
     allCount: show.includes('all') ? d.allCount : 0,
     existingCount: show.includes('existing') ? d.existingCount : 0,

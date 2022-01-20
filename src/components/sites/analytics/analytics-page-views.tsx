@@ -5,19 +5,17 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tool
 import { Label } from 'components/label';
 import { Pill } from 'components/pill';
 import { Checkbox } from 'components/checkbox';
-import { formatChartData, formatLabel } from 'lib/charts';
-import type { AnalyticsPageViews as PageView } from 'types/graphql';
+import { formatLabel } from 'lib/charts';
+import { formatResultsForGroupType } from 'lib/charts-v2';
+import type { AnalyticsPageView, AnalyticsPageViews as AnalyticsPageViewsType } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 
 interface Props {
   period: TimePeriod;
-  pageViews: PageView[];
+  pageViews: AnalyticsPageViewsType;
 }
 
-const sumOfPageViewType = (
-  pageviews: PageView[], 
-  key: keyof PageView
-) => sum(pageviews.map(v => v[key]));
+const fallback = { totalCount: 0, uniqueCount: 0 };
 
 export const AnalyticsPageViews: FC<Props> = ({ pageViews, period }) => {
   const [show, setShow] = React.useState<string[]>(['all', 'unique']);
@@ -28,12 +26,10 @@ export const AnalyticsPageViews: FC<Props> = ({ pageViews, period }) => {
       : setShow([...show, value]);
   };
 
-  const { data } = formatChartData<PageView>(period, pageViews);
-
-  const results = data.map(d => ({
-    date: d.key,
-    all: show.includes('all') ? sumOfPageViewType(d.data, 'total') : 0,
-    unique: show.includes('unique') ? sumOfPageViewType(d.data, 'unique') : 0,
+  const results = formatResultsForGroupType<AnalyticsPageView>(pageViews, fallback).map(d => ({
+    dateKey: d.dateKey,
+    totalCount: show.includes('all') ? d.totalCount : 0,
+    uniqueCount: show.includes('unique') ? d.uniqueCount : 0
   }));
 
   const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload, label }) => {
@@ -42,14 +38,14 @@ export const AnalyticsPageViews: FC<Props> = ({ pageViews, period }) => {
     return (
       <div className='custom-tooltip'>
         <p className='date'>{formatLabel(period, label)}</p>
-        <p className='all'>{payload[0].payload.all} All Page Views</p>
-        <p className='unique'>{payload[0].payload.unique} Unique Page Views</p>
+        {show.includes('all') && <p className='all'>{payload[0].payload.totalCount} All Page Views</p>}
+        {show.includes('unique') && <p className='unique'>{payload[0].payload.uniqueCount} Unique Page Views</p>}
       </div>
     );
   };
 
-  const totalCount = sum(results.map(d => d.all));
-  const uniqueCount = sum(results.map(d => d.unique));
+  const totalCount = sum(pageViews.items.map(d => d.totalCount));
+  const uniqueCount = sum(pageViews.items.map(d => d.uniqueCount));
 
   return (
     <div className='analytics-graph'>
@@ -71,13 +67,13 @@ export const AnalyticsPageViews: FC<Props> = ({ pageViews, period }) => {
           <LineChart data={results} margin={{ top: 0, left: -15, right: 0, bottom: 0 }}>
             <CartesianGrid strokeDasharray='3 3' vertical={false} />
 
-            <XAxis dataKey='date' interval={0} stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} />
+            <XAxis dataKey='dateKey' interval={0} stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} />
             <YAxis stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} />
 
             <Tooltip content={<CustomTooltip />} />
   
-            <Line dataKey='all' fillOpacity={1} stroke='#8249FB' strokeWidth={2} />
-            <Line dataKey='unique' fillOpacity={1} stroke='#707070' strokeWidth={2} />
+            <Line dataKey='totalCount' fillOpacity={1} stroke='#8249FB' strokeWidth={2} />
+            <Line dataKey='uniqueCount' fillOpacity={1} stroke='#707070' strokeWidth={2} />
           </LineChart>
         </ResponsiveContainer>
       </div>
