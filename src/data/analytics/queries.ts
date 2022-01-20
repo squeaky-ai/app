@@ -27,8 +27,14 @@ export const GET_ANALYTICS_QUERY = gql`
           new
         }
         visitors {
-          new
-          timestamp
+          groupType
+          groupRange
+          items {
+            dateKey
+            allCount
+            existingCount
+            newCount
+          }
         }
         pageViews {
           total

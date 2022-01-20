@@ -43,7 +43,7 @@ export const Analytics: FC<Props> = ({ period }) => {
     return <Spinner />;
   }
 
-  if (!analytics.visitors.length) {
+  if (!analytics.visitors.items.length) {
     return <NoResults title='There is no analytics data available for your chosen period' illustration='illustration-2' />
   }
 

@@ -32,7 +32,7 @@ export type Analytics = {
   referrers: AnalyticsReferrers;
   sessionDurations: AnalyticsSessionDurations;
   sessionsPerVisitor: AnalyticsSessionsPerVisitor;
-  visitors: Array<Maybe<AnalyticsVisitor>>;
+  visitors: AnalyticsVisitors;
   visitorsCount: AnalyticsVisitorsCount;
   visitsAt: Array<Maybe<Scalars['ISO8601DateTime']>>;
 };
@@ -146,8 +146,17 @@ export type AnalyticsSessionsPerVisitor = {
 
 export type AnalyticsVisitor = {
   __typename?: 'AnalyticsVisitor';
-  new?: Maybe<Scalars['Boolean']>;
-  timestamp: Scalars['ISO8601DateTime'];
+  allCount: Scalars['Int'];
+  dateKey: Scalars['String'];
+  existingCount: Scalars['Int'];
+  newCount: Scalars['Int'];
+};
+
+export type AnalyticsVisitors = {
+  __typename?: 'AnalyticsVisitors';
+  groupRange: Scalars['Int'];
+  groupType: Scalars['String'];
+  items: Array<Maybe<AnalyticsVisitor>>;
 };
 
 export type AnalyticsVisitorsCount = {

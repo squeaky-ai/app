@@ -1,23 +1,70 @@
 import React from 'react';
 import type { FC } from 'react';
-import { sum } from 'lodash';
+import { range, sum } from 'lodash';
+import { subDays, getDayOfYear, getWeek, subWeeks, subMonths, format } from 'date-fns';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, TooltipProps } from 'recharts';
 import { Label } from 'components/label';
 import { Pill } from 'components/pill';
 import { Checkbox } from 'components/checkbox';
-import { formatChartData, formatLabel } from 'lib/charts';
-import type { AnalyticsVisitor } from 'types/graphql';
+import { formatLabel, getAmPmForHour } from 'lib/charts';
+import type { AnalyticsVisitor, AnalyticsVisitors as AnalyticsVisitorsType } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 
 interface Props {
   period: TimePeriod;
-  visitors: AnalyticsVisitor[];
+  visitors: AnalyticsVisitorsType;
 }
 
-const sumOfVisitorsType = (
-  visitors: AnalyticsVisitor[], 
-  isNew: boolean,
-) => visitors.filter(v => isNew ? v.new : !v.new).length;
+const emptyAnalyticsVisitor = (dateKey: string) => ({ dateKey, allCount: 0, existingCount: 0, newCount: 0 });
+
+const padDateKey = (i: number, pad = 2) => i.toString().padStart(pad, '0');
+
+const findMatchOrDefault = (dateKey: string, label: string, items: AnalyticsVisitor[]) => {
+  const match = items.find(i => i.dateKey === dateKey) || emptyAnalyticsVisitor(dateKey);
+
+  return { ...match, dateKey: label };
+};
+
+const formatResultsForGroupType = (visitors: AnalyticsVisitorsType): AnalyticsVisitor[] => {
+  const now = new Date();
+  const { groupRange, groupType, items } = visitors;
+
+  switch(groupType) {
+    case 'hourly':
+      return range(0, groupRange).map(i => {
+        const dateKey = padDateKey(i);
+        const label = getAmPmForHour(i);
+
+        return findMatchOrDefault(dateKey, label, items);
+      });
+    case 'daily':
+      return range(0, groupRange + 1).map(i => {
+        const date = subDays(now, i);
+        const dateKey = padDateKey(getDayOfYear(date), 3);
+        const label = format(date, 'd/M');
+
+        return findMatchOrDefault(dateKey, label, items);
+      }).reverse();
+    case 'weekly':
+      return range(0, groupRange + 1).map(i => {
+        const date = subWeeks(now, i);
+        const dateKey = padDateKey(getWeek(date), 2);
+        const label = format(date, 'd/M');
+
+        return findMatchOrDefault(dateKey, label, items);
+      }).reverse();
+    case 'monthly':
+      return range(0, groupRange + 1).map(i => {
+        const date = subMonths(now, i);
+        const dateKey = format(date, 'yyyy/MM');
+        const label = dateKey;
+
+        return findMatchOrDefault(dateKey, label, items);
+      }).reverse();
+    default:
+      return items;
+  }
+};
 
 export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
   const [show, setShow] = React.useState<string[]>(['all', 'existing', 'new']);
@@ -28,13 +75,11 @@ export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
       : setShow([...show, value]);
   };
 
-  const { data } = formatChartData<AnalyticsVisitor>(period, visitors);
-
-  const results = data.map(d => ({
-    date: d.key,
-    all: show.includes('all') ? d.data.length : 0,
-    existing: show.includes('existing') ? sumOfVisitorsType(d.data, false) : 0,
-    new: show.includes('new') ? sumOfVisitorsType(d.data, true) : 0
+  const results = formatResultsForGroupType(visitors).map(d => ({
+    dateKey: d.dateKey,
+    allCount: show.includes('all') ? d.allCount : 0,
+    existingCount: show.includes('existing') ? d.existingCount : 0,
+    newCount: show.includes('new') ? d.newCount : 0
   }));
 
   const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload, label }) => {
@@ -43,15 +88,15 @@ export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
     return (
       <div className='custom-tooltip'>
         <p className='date'>{formatLabel(period, label)}</p>
-        <p className='all'>{payload[0].payload.all} All Visitors</p>
-        <p className='existing'>{payload[0].payload.existing} Existing Visitors</p>
-        <p className='new'>{payload[0].payload.new} New Visitors</p>
+        {show.includes('all') && <p className='all'>{payload[0].payload.allCount} All Visitors</p>}
+        {show.includes('existing') && <p className='existing'>{payload[0].payload.existingCount} Existing Visitors</p>}
+        {show.includes('new') && <p className='new'>{payload[0].payload.newCount} New Visitors</p>}
       </div>
     );
   };
 
-  const totalCount = sum(results.map(d => d.all));
-  const newCount = sum(results.map(d => d.new));
+  const totalCount = sum(visitors.items.map(d => d.allCount));
+  const newCount = sum(visitors.items.map(d => d.newCount));
 
   return (
     <div className='analytics-graph'>
@@ -74,14 +119,14 @@ export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
           <LineChart data={results} margin={{ top: 0, left: -15, right: 0, bottom: 0 }}>
             <CartesianGrid strokeDasharray='3 3' vertical={false} />
 
-            <XAxis dataKey='date' interval={0} stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} />
+            <XAxis dataKey='dateKey' interval={0} stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} />
             <YAxis stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} />
 
             <Tooltip content={<CustomTooltip />} />
   
-            <Line dataKey='all' fillOpacity={1} stroke='#8249FB' strokeWidth={2} />
-            <Line dataKey='existing' fillOpacity={1} stroke='#0768C1' strokeWidth={2} />
-            <Line dataKey='new' fillOpacity={1} stroke='#F96155' strokeWidth={2} />
+            <Line dataKey='allCount' fillOpacity={1} stroke='#8249FB' strokeWidth={2} />
+            <Line dataKey='existingCount' fillOpacity={1} stroke='#0768C1' strokeWidth={2} />
+            <Line dataKey='newCount' fillOpacity={1} stroke='#F96155' strokeWidth={2} />
           </LineChart>
         </ResponsiveContainer>
       </div>
