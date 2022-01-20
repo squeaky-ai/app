@@ -1,46 +1,46 @@
 import React from 'react';
 import type { FC } from 'react';
-import { sum, orderBy, first } from 'lodash';
 import { Browser } from 'components/browser';
-import { Button } from 'components/button';
-import { percentage } from 'lib/maths';
-import { AnalyticsBrowser } from 'types/graphql';
+import { Pagination } from 'components/pagination';
+import { Card } from 'components/card';
+import { AnalyticsBrowsers as AnalyticsBrowsersType } from 'types/graphql';
 
 interface Props {
-  browsers: AnalyticsBrowser[];
+  browsers: AnalyticsBrowsersType;
+  page: number;
+  setPage: (page: number) => void;
 }
 
-export const AnalyticsBrowsers: FC<Props> = ({ browsers }) => {
-  const [showAll, setShowAll] = React.useState<boolean>(false);
+export const AnalyticsBrowsers: FC<Props> = ({ browsers, page, setPage }) => {
+  const { total, pageSize } = browsers.pagination;
 
-  const limit = 9;
-  const total = sum(browsers.map(b => b.count));
-  const ordered = orderBy(browsers, 'count', 'desc');
+  const offset = 100 - browsers.items[0]?.percentage || 0;
 
-  const offset = 100 - percentage(total, first(ordered)?.count || 0);
-  const results = showAll ? ordered : ordered.slice(0, limit);
-
-  const offsettedPercentage = (count: number) => offset + percentage(total, count);
+  const offsettedPercentage = (percent: number) => offset + percent;
 
   return (
     <>
-      <ul>
-        {results.map(browser => (
-          <li key={browser.name}>
-            <Browser name={browser.name} height={32} width={32} />
-            <div className='contents'>
-              <div className='percentage' style={{ width: `${offsettedPercentage(browser.count)}%` }} />
-              <p><b>{percentage(total, browser.count)}%</b> {browser.name}</p>
-            </div>
-          </li>
-        ))}
-      </ul>
-
-      {browsers.length > limit && (
-        <Button onClick={() => setShowAll(!showAll)} className='link show-all'>
-          Show {showAll ? 'Less' : 'All'}
-        </Button>
-      )}
+      <Card>
+        <ul>
+          {browsers.items.map(browser => (
+            <li key={browser.browser}>
+              <Browser name={browser.browser} height={32} width={32} />
+              <div className='contents'>
+                <div className='percentage' style={{ width: `${offsettedPercentage(browser.percentage)}%` }} />
+                <p><b>{browser.percentage}%</b> {browser.browser}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </Card>
+      
+      <Pagination
+        currentPage={page}
+        pageSize={pageSize}
+        total={total}
+        setPage={setPage}
+        scrollToTop={false}
+      />
     </>
   );
 };

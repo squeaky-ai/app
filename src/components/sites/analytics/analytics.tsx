@@ -24,13 +24,22 @@ interface Props {
 }
 
 export const Analytics: FC<Props> = ({ period }) => {
-  const { analytics, error, loading } = useAnalytics(getDateRange(period));
+  const [pagesPage, setPagesPage] = React.useState<number>(1);
+  const [browsersPage, setBrowsersPage] = React.useState<number>(1);
+  const [referrersPage, setReferrersPage] = React.useState<number>(1);
+
+  const { analytics, error, loading } = useAnalytics({
+    range: getDateRange(period),
+    pagesPage,
+    browsersPage,
+    referrersPage,
+  });
 
   if (error) {
     return <Error />;
   }
 
-  if (loading) {
+  if (loading && !analytics) {
     return <Spinner />;
   }
 
@@ -82,19 +91,17 @@ export const Analytics: FC<Props> = ({ period }) => {
 
         <div className='grid-item pages'>
           <h4>Pages</h4>
-          <AnalyticsPages pages={analytics.pages} />
+          <AnalyticsPages pages={analytics.pages} page={pagesPage} setPage={setPagesPage} />
         </div>
 
         <div className='grid-item browsers'>
           <h4>Browser</h4>
-          <Card>
-            <AnalyticsBrowsers browsers={analytics.browsers} />
-          </Card> 
+          <AnalyticsBrowsers browsers={analytics.browsers} page={browsersPage} setPage={setBrowsersPage} />
         </div>
 
         <div className='grid-item referrers'>
           <h4>Traffic Sources</h4>
-          <AnalyticsReferrers referrers={analytics.referrers} />
+          <AnalyticsReferrers referrers={analytics.referrers} page={referrersPage} setPage={setReferrersPage} />
         </div>
 
         <div className='grid-item languages'>

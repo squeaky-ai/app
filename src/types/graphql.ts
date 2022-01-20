@@ -20,16 +20,16 @@ export type Scalars = {
 
 export type Analytics = {
   __typename?: 'Analytics';
-  browsers: Array<Maybe<AnalyticsBrowser>>;
+  browsers: AnalyticsBrowsers;
   devices: Array<AnalyticsDevice>;
-  dimensions: Array<Maybe<Scalars['Int']>>;
+  dimensions: Array<Maybe<AnalyticsDimension>>;
   languages: Array<Maybe<AnalyticsLanguage>>;
   pageViewCount: Scalars['Int'];
   pageViews: Array<Maybe<AnalyticsPageViews>>;
-  pages: Array<Maybe<AnalyticsPage>>;
+  pages: AnalyticsPages;
   pagesPerSession: AnalyticsPagesPerSession;
   recordingsCount: AnalyticsRecordingsCount;
-  referrers: Array<Maybe<AnalyticsReferrer>>;
+  referrers: AnalyticsReferrers;
   sessionDurations: AnalyticsSessionDurations;
   sessionsPerVisitor: AnalyticsSessionsPerVisitor;
   visitors: Array<Maybe<AnalyticsVisitor>>;
@@ -37,16 +37,47 @@ export type Analytics = {
   visitsAt: Array<Maybe<Scalars['ISO8601DateTime']>>;
 };
 
+
+export type AnalyticsBrowsersArgs = {
+  page?: InputMaybe<Scalars['Int']>;
+  size?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type AnalyticsPagesArgs = {
+  page?: InputMaybe<Scalars['Int']>;
+  size?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type AnalyticsReferrersArgs = {
+  page?: InputMaybe<Scalars['Int']>;
+  size?: InputMaybe<Scalars['Int']>;
+};
+
 export type AnalyticsBrowser = {
   __typename?: 'AnalyticsBrowser';
+  browser: Scalars['String'];
   count: Scalars['Int'];
-  name: Scalars['String'];
+  percentage: Scalars['Int'];
+};
+
+export type AnalyticsBrowsers = {
+  __typename?: 'AnalyticsBrowsers';
+  items: Array<Maybe<AnalyticsBrowser>>;
+  pagination: CommonPagination;
 };
 
 export type AnalyticsDevice = {
   __typename?: 'AnalyticsDevice';
   count: Scalars['Int'];
   type: Scalars['String'];
+};
+
+export type AnalyticsDimension = {
+  __typename?: 'AnalyticsDimension';
+  count: Scalars['Int'];
+  deviceX: Scalars['Int'];
 };
 
 export type AnalyticsLanguage = {
@@ -60,6 +91,7 @@ export type AnalyticsPage = {
   avg: Scalars['Int'];
   count: Scalars['Int'];
   path: Scalars['String'];
+  percentage: Scalars['Int'];
 };
 
 export type AnalyticsPageViews = {
@@ -67,6 +99,12 @@ export type AnalyticsPageViews = {
   timestamp: Scalars['ISO8601DateTime'];
   total: Scalars['Int'];
   unique: Scalars['Int'];
+};
+
+export type AnalyticsPages = {
+  __typename?: 'AnalyticsPages';
+  items: Array<Maybe<AnalyticsPage>>;
+  pagination: CommonPagination;
 };
 
 export type AnalyticsPagesPerSession = {
@@ -84,7 +122,14 @@ export type AnalyticsRecordingsCount = {
 export type AnalyticsReferrer = {
   __typename?: 'AnalyticsReferrer';
   count: Scalars['Int'];
-  name?: Maybe<Scalars['String']>;
+  percentage: Scalars['Int'];
+  referrer?: Maybe<Scalars['String']>;
+};
+
+export type AnalyticsReferrers = {
+  __typename?: 'AnalyticsReferrers';
+  items: Array<Maybe<AnalyticsReferrer>>;
+  pagination: CommonPagination;
 };
 
 export type AnalyticsSessionDurations = {
@@ -108,6 +153,12 @@ export type AnalyticsVisitor = {
 export type AnalyticsVisitorsCount = {
   __typename?: 'AnalyticsVisitorsCount';
   new: Scalars['Int'];
+  total: Scalars['Int'];
+};
+
+export type CommonPagination = {
+  __typename?: 'CommonPagination';
+  pageSize: Scalars['Int'];
   total: Scalars['Int'];
 };
 

@@ -138,51 +138,49 @@
 
         .card {
           flex: 0;
-        }
 
-        ul {
-          margin: 0;
-          padding: 0;
-
-          li {
-            align-items: center;
-            display: flex;
-            list-style: none;
-            margin: 0 0 1.5rem 0;
-
-            &:last-of-type {
-              margin-bottom: 0;
-            }
-        
-            .contents {
-              flex: 1;
-              margin-left: 1.5rem;
-            }
-        
-            .percentage {
-              background: var(--purple-500);
-              border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
-              height: .5rem;
-              margin: 0 0 .5rem 0;
-            }
-        
-            p {
-              color: var(--gray-500);
-              font-size: 13px;
-              line-height: 20px;
-              margin: 0;
-        
-              b {
-                color: var(--gray-blue-800);
+          ul {
+            margin: 0;
+            padding: 0;
+  
+            li {
+              align-items: center;
+              display: flex;
+              list-style: none;
+              margin: 0 0 1.5rem 0;
+  
+              &:last-of-type {
+                margin-bottom: 0;
+              }
+          
+              .contents {
+                flex: 1;
+                margin-left: 1.5rem;
+              }
+          
+              .percentage {
+                background: var(--purple-500);
+                border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
+                height: .5rem;
+                margin: 0 0 .5rem 0;
+              }
+          
+              p {
+                color: var(--gray-500);
+                font-size: 13px;
+                line-height: 20px;
+                margin: 0;
+          
+                b {
+                  color: var(--gray-blue-800);
+                }
               }
             }
           }
         }
 
-        .show-all {
+        .rc-pagination {
           margin-top: 1.5rem;
-          text-align: left;
-          text-decoration: underline;
         }
       }
 

@@ -1,54 +1,45 @@
 import React from 'react';
 import type { FC } from 'react';
-import { sum, slice, orderBy } from 'lodash';
 import { Table, Row, Cell } from 'components/table';
 import { toHoursMinutesAndSeconds } from 'lib/dates';
 import { Pagination } from 'components/pagination';
 import { Tooltip } from 'components/tooltip';
-import { percentage } from 'lib/maths';
-import type { AnalyticsPage } from 'types/graphql';
+import type { AnalyticsPages as AnalyticsPagesType } from 'types/graphql';
 
 interface Props {
-  pages: AnalyticsPage[];
+  pages: AnalyticsPagesType;
+  page: number;
+  setPage: (page: number) => void;
 }
 
-export const AnalyticsPages: FC<Props> = ({ pages }) => {
-  const [page, setPage] = React.useState<number>(1);
-
-  const total = sum(pages.map(p => p.count));
-
-  const limit = 10;
-  const offset = (page - 1) * limit;
-  const sorted = orderBy(pages, 'count', 'desc');
-
-  return (
-    <>
-      <Table>
-        <Row head>
-          <Cell>Page</Cell>
-          <Cell>Views</Cell>
-          <Cell>Average time on page</Cell>
+export const AnalyticsPages: FC<Props> = ({ pages, page, setPage }) => (
+  <>
+    <Table>
+      <Row head>
+        <Cell>Page</Cell>
+        <Cell>Views</Cell>
+        <Cell>Average time on page</Cell>
+      </Row>
+      {pages.items.map(page => (
+        <Row key={page.path}>
+          <Cell>
+            <Tooltip button={page.path} fluid>
+              {page.path}
+            </Tooltip>
+          </Cell>
+          <Cell><b>{page.count}</b> <span className='percentage'>({page.percentage}%)</span></Cell>
+          <Cell>{toHoursMinutesAndSeconds(page.avg)}</Cell>
         </Row>
-        {slice(sorted, offset, offset + limit).map(page => (
-          <Row key={page.path}>
-            <Cell>
-              <Tooltip button={page.path} fluid>
-                {page.path}
-              </Tooltip>
-            </Cell>
-            <Cell><b>{page.count}</b> <span className='percentage'>({percentage(total, page.count)}%)</span></Cell>
-            <Cell>{toHoursMinutesAndSeconds(page.avg)}</Cell>
-          </Row>
-        ))}
-      </Table>
+      ))}
+    </Table>
 
-      <Pagination
-        currentPage={page}
-        pageSize={limit}
-        setPage={setPage}
-        total={pages.length}
-        scrollToTop={false}
-      />
-    </>
-  );
-};
+    <Pagination
+      currentPage={page}
+      pageSize={pages.pagination.pageSize}
+      total={pages.pagination.total}
+      setPage={setPage}
+      scrollToTop={false}
+    />
+  </>
+);
+
