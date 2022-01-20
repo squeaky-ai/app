@@ -1,6 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
-import { min, max, sum, groupBy } from 'lodash';
+import { min, max } from 'lodash';
 import { ResponsiveContainer, Tooltip, TooltipProps, BarChart, Bar, XAxis } from 'recharts';
 import { Icon } from 'components/icon';
 import { Card } from 'components/card';
@@ -22,18 +22,6 @@ export const AnalyticsScreenWidths: FC<Props> = ({ dimensions }) => {
       </div>
     );
   };
-  
-  const round = (d: AnalyticsDimension) => ({
-    ...d,
-    deviceX: Math.ceil(d.deviceX / 10) * 10
-  });
-
-  const groups = groupBy(dimensions.map(round));
-
-  const data = Object.values(groups).map(counts => ({ 
-    count: sum(counts.map(c => c.count)),
-    width: counts[0].deviceX,
-  }));
 
   const allWidths = dimensions.map(d => d.deviceX);
 
@@ -46,8 +34,8 @@ export const AnalyticsScreenWidths: FC<Props> = ({ dimensions }) => {
       </h5>
       <div className='chart-wrapper'>
         <ResponsiveContainer>
-          <BarChart data={data} height={150}>
-            <XAxis dataKey='width' hide />
+          <BarChart data={dimensions} height={150}>
+            <XAxis dataKey='deviceX' hide />
             <Bar 
               dataKey='count' 
               fill='#4097E8'
