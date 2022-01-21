@@ -23,6 +23,7 @@
     border: 1px solid var(--gray-200);
     border-radius: var(--border-radius-o);
     display: flex;
+    flex-shrink: 0;
     height: 1.5rem;
     justify-content: center;
     margin-right: .75rem;

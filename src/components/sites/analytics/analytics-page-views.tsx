@@ -1,10 +1,12 @@
 import React from 'react';
 import type { FC } from 'react';
 import { sum } from 'lodash';
+import { ScaleType } from 'recharts/types/util/types';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, TooltipProps } from 'recharts';
 import { Label } from 'components/label';
 import { Pill } from 'components/pill';
 import { Checkbox } from 'components/checkbox';
+import { ChartScale } from 'components/sites/analytics/chart-scale';
 import { formatLabel } from 'lib/charts';
 import { formatResultsForGroupType } from 'lib/charts-v2';
 import type { AnalyticsPageView, AnalyticsPageViews as AnalyticsPageViewsType } from 'types/graphql';
@@ -19,6 +21,7 @@ const fallback = { totalCount: 0, uniqueCount: 0 };
 
 export const AnalyticsPageViews: FC<Props> = ({ pageViews, period }) => {
   const [show, setShow] = React.useState<string[]>(['all', 'unique']);
+  const [scale, setScale] = React.useState<ScaleType>('linear');
 
   const handleClick = (value: string) => {
     show.includes(value)
@@ -60,6 +63,7 @@ export const AnalyticsPageViews: FC<Props> = ({ pageViews, period }) => {
           <Label>Show:</Label>
           <Checkbox checked={show.includes('all')} onChange={() => handleClick('all')} className='purple'>All</Checkbox>
           <Checkbox checked={show.includes('unique')} onChange={() => handleClick('unique')} className='gray'>Unique</Checkbox>
+          <ChartScale scale={scale} setScale={setScale} />
         </div>
       </div>
       <div className='graph-wrapper'>
@@ -68,7 +72,7 @@ export const AnalyticsPageViews: FC<Props> = ({ pageViews, period }) => {
             <CartesianGrid strokeDasharray='3 3' vertical={false} />
 
             <XAxis dataKey='dateKey' interval={0} stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} />
-            <YAxis stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} />
+            <YAxis stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} scale={scale} />
 
             <Tooltip content={<CustomTooltip />} />
   
