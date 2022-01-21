@@ -1,6 +1,6 @@
 .flag {
-  border-radius: var(--border-radius-sm);
-  border: 1px solid var(--gray-100);
+  border-radius: var(--border-radius-x-sm);
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
   display: inline-block;
   font-size: 1rem;
   overflow: hidden;

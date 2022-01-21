@@ -256,6 +256,10 @@
             color: var(--blue-500);
           }
         }
+
+        .flag {
+          pointer-events: none;
+        }
     
         .dropdown-menu {
           z-index: 2;
