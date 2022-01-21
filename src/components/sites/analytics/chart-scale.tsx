@@ -19,7 +19,7 @@ export const ChartScale: FC<Props> = ({ scale, setScale }) => (
         <Radio name='scale' checked={scale === 'log'} onChange={() => setScale('log')}>
           Logarithmic
         </Radio>
-        <Radio name='scale' checked={scale === 'linear'} onChange={() => setScale('linear')}>
+        <Radio name='scale' checked={scale === 'auto'} onChange={() => setScale('auto')}>
           Linear
         </Radio>
       </div>

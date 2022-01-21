@@ -21,7 +21,7 @@ const fallback = { allCount: 0, existingCount: 0, newCount: 0 };
 
 export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
   const [show, setShow] = React.useState<string[]>(['all', 'existing', 'new']);
-  const [scale, setScale] = React.useState<ScaleType>('linear');
+  const [scale, setScale] = React.useState<ScaleType>('auto');
 
   const handleClick = (value: string) => {
     show.includes(value)

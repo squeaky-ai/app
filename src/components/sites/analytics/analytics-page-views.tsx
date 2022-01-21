@@ -21,7 +21,7 @@ const fallback = { totalCount: 0, uniqueCount: 0 };
 
 export const AnalyticsPageViews: FC<Props> = ({ pageViews, period }) => {
   const [show, setShow] = React.useState<string[]>(['all', 'unique']);
-  const [scale, setScale] = React.useState<ScaleType>('linear');
+  const [scale, setScale] = React.useState<ScaleType>('auto');
 
   const handleClick = (value: string) => {
     show.includes(value)
