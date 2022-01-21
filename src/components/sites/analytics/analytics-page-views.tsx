@@ -29,10 +29,12 @@ export const AnalyticsPageViews: FC<Props> = ({ pageViews, period }) => {
       : setShow([...show, value]);
   };
 
+  const doNotAllowZero = (num: number) => num === 0 && scale === 'log' ? null : num;
+
   const results = formatResultsForGroupType<AnalyticsPageView>(pageViews, fallback).map(d => ({
     dateKey: d.dateKey,
-    totalCount: show.includes('all') ? d.totalCount : 0,
-    uniqueCount: show.includes('unique') ? d.uniqueCount : 0
+    totalCount: doNotAllowZero(show.includes('all') ? d.totalCount : 0),
+    uniqueCount: doNotAllowZero(show.includes('unique') ? d.uniqueCount : 0),
   }));
 
   const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload, label }) => {
@@ -72,7 +74,7 @@ export const AnalyticsPageViews: FC<Props> = ({ pageViews, period }) => {
             <CartesianGrid strokeDasharray='3 3' vertical={false} />
 
             <XAxis dataKey='dateKey' interval={0} stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} />
-            <YAxis stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} scale={scale} />
+            <YAxis stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} domain={['auto', 'auto']} scale={scale} />
 
             <Tooltip content={<CustomTooltip />} />
   

@@ -29,11 +29,13 @@ export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
       : setShow([...show, value]);
   };
 
+  const doNotAllowZero = (num: number) => num === 0 && scale === 'log' ? null : num;
+
   const results = formatResultsForGroupType<AnalyticsVisitor>(visitors, fallback).map(d => ({
     dateKey: d.dateKey,
-    allCount: show.includes('all') ? d.allCount : 0,
-    existingCount: show.includes('existing') ? d.existingCount : 0,
-    newCount: show.includes('new') ? d.newCount : 0
+    allCount: doNotAllowZero(show.includes('all') ? d.allCount : 0),
+    existingCount: doNotAllowZero(show.includes('existing') ? d.existingCount : 0),
+    newCount: doNotAllowZero(show.includes('new') ? d.newCount : 0),
   }));
 
   const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload, label }) => {
@@ -75,7 +77,7 @@ export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
             <CartesianGrid strokeDasharray='3 3' vertical={false} />
 
             <XAxis dataKey='dateKey' interval={0} stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} />
-            <YAxis stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} scale={scale} />
+            <YAxis stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} domain={['auto', 'auto']} scale={scale} />
 
             <Tooltip content={<CustomTooltip />} />
   
