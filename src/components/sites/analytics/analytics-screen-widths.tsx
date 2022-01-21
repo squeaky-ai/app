@@ -1,10 +1,9 @@
 import React from 'react';
 import type { FC } from 'react';
-import { min, max } from 'lodash';
+import { min, max, orderBy } from 'lodash';
 import { ResponsiveContainer, Tooltip, TooltipProps, BarChart, Bar, XAxis } from 'recharts';
 import { Icon } from 'components/icon';
 import { Card } from 'components/card';
-import { average, frequent } from 'lib/maths';
 import type { AnalyticsDimension } from 'types/graphql';
 
 interface Props {
@@ -24,6 +23,7 @@ export const AnalyticsScreenWidths: FC<Props> = ({ dimensions }) => {
   };
 
   const allWidths = dimensions.map(d => d.deviceX);
+  const mostCommon = orderBy(dimensions, dimensions => dimensions.count, 'desc')[0]?.deviceX || 0;
 
   return (
     <Card>
@@ -55,12 +55,8 @@ export const AnalyticsScreenWidths: FC<Props> = ({ dimensions }) => {
           <h4>{min(allWidths) || 0}px</h4>
         </div>
         <div className='item'>
-          <p>Average</p>
-          <h4>{Math.floor(average(allWidths)) || 0}px</h4>
-        </div>
-        <div className='item'>
-          <p>Most Frequent</p>
-          <h4>{frequent(allWidths)}px</h4>
+          <p>Most Common</p>
+          <h4>{mostCommon}px</h4>
         </div>
         <div className='item'>
           <p>Largest</p>
