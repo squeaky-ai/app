@@ -6,5 +6,7 @@ interface Props {
 }
 
 export const Flag: FC<Props> = ({ code }) => (
-  <span className={`fi fi-${code.toLowerCase()} flag`} />
+  <span className='flag'>
+    <span className={`fi fi-${code.toLowerCase()}`} />
+  </span>
 );

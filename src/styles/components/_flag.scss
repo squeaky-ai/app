@@ -1,9 +1,15 @@
 .flag {
   border-radius: var(--border-radius-sm);
+  border: 1px solid var(--gray-100);
   display: inline-block;
   font-size: 1rem;
   overflow: hidden;
   margin: 0 .5rem 0 0;
+  overflow: hidden;
   position: relative;
   vertical-align: middle;
+
+  span {
+    display: block;
+  }
 }
