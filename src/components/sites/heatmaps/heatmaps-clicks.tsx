@@ -5,7 +5,7 @@ import { Icon } from 'components/icon';
 import { Tooltip } from 'components/tooltip';
 import { Pill } from 'components/pill';
 import { Sort } from 'components/sort';
-import { ClickMapData, getClickMapData } from 'lib/heatmaps';
+import { ClickMapData, getClickMapData, getElement, getElements } from 'lib/heatmaps';
 import type { HeatmapsItem } from 'types/graphql';
 
 interface Props {
@@ -29,7 +29,7 @@ export const HeatmapsClicks: FC<Props> = ({ items, selected, setSelected }) => {
   const scrollToView = (click: ClickMapData) => {
     const doc = getIframeDocument();
 
-    const element = doc.querySelector(click.selector);
+    const element = getElement(doc, click.selector);
 
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -48,7 +48,7 @@ export const HeatmapsClicks: FC<Props> = ({ items, selected, setSelected }) => {
 
   const setScale = (selector: string, scale: number) => {
     const doc = getIframeDocument();
-    const element = doc.querySelectorAll<HTMLElement>(selector);
+    const element = getElements(doc, selector);
 
     element.forEach(elem => elem.style.transform = `scale(${scale})`);
   };

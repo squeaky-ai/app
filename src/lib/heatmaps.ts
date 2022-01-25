@@ -24,6 +24,22 @@ export enum DeviceWidths {
   MOBILE = 380,
 }
 
+export const getElement = (doc: Document, selector: string) => {
+  try {
+    return doc.querySelector<HTMLElement>(selector);
+  } catch {
+    return null;
+  }
+};
+
+export const getElements = (doc: Document, selector: string) => {
+  try {
+    return doc.querySelectorAll<HTMLElement>(selector);
+  } catch {
+    return null;
+  }
+};
+
 export const getScrollMapData = (items: HeatmapsItem[]): ScrollMapData[] => {
   const total = items.length;
 
@@ -80,7 +96,7 @@ export const showClickMaps = (doc: Document, items: HeatmapsItem[]) => {
   const clickMapData = getClickMapData(items);
 
   items.forEach(item => {
-    let elem = doc.querySelector<HTMLElement>(item.selector);
+    let elem = getElement(doc, item.selector);
 
     if (!elem || ['html', 'html > body'].includes(item.selector)) return;
 

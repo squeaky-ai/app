@@ -4,7 +4,7 @@ import { Replayer } from 'rrweb';
 import { Spinner } from 'components/spinner';
 import { ScrollIndicator } from 'components/sites/scroll-indicator';
 import { useRecording } from 'hooks/use-heatmaps';
-import { DeviceWidths, showClickMaps, showScrollMaps, iframeStyles } from 'lib/heatmaps';
+import { DeviceWidths, showClickMaps, showScrollMaps, iframeStyles, getElements } from 'lib/heatmaps';
 import { HeatmapsDevice } from 'types/graphql';
 import type { Event } from 'types/event';
 import type { HeatmapsItem, HeatmapsType } from 'types/graphql';
@@ -67,11 +67,11 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items
   };
 
   const cleanup = (doc: Document) => {
-    doc.querySelectorAll('.__squeaky_click_tag').forEach(d => d.remove());
-    doc.querySelectorAll('.__squeaky_scroll_overlay').forEach(d => d.remove());
-    doc.querySelectorAll('.__squeaky_outline').forEach(elem => elem.classList.remove('__squeaky_outline'));
-    doc.querySelectorAll('#__squeaky_scrolling_percentage_marker').forEach(d => d.remove());
-    doc.querySelectorAll('.__squeaky_fixed_percentage_marker').forEach(d => d.remove());
+    getElements(doc, '.__squeaky_click_tag').forEach(d => d.remove());
+    getElements(doc, '.__squeaky_scroll_overlay').forEach(d => d.remove());
+    getElements(doc, '.__squeaky_outline').forEach(elem => elem.classList.remove('__squeaky_outline'));
+    getElements(doc, '#__squeaky_scrolling_percentage_marker').forEach(d => d.remove());
+    getElements(doc, '.__squeaky_fixed_percentage_marker').forEach(d => d.remove());
   };
 
   const deviceWidth = (() => {
