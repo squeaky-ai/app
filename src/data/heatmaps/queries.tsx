@@ -13,6 +13,7 @@ export const GET_HEATMAPS_QUERY = gql`
           x
           y
           selector
+          count
         }
       }
     }

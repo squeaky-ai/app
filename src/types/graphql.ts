@@ -425,6 +425,7 @@ export enum HeatmapsDevice {
 
 export type HeatmapsItem = {
   __typename?: 'HeatmapsItem';
+  count?: Maybe<Scalars['Int']>;
   selector?: Maybe<Scalars['String']>;
   x?: Maybe<Scalars['Int']>;
   y?: Maybe<Scalars['Int']>;

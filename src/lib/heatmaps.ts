@@ -1,4 +1,4 @@
-import { range, groupBy, findLast } from 'lodash';
+import { range, orderBy, findLast } from 'lodash';
 import { percentage } from 'lib/maths';
 import { HeatmapColor, HEATMAP_COLOURS } from 'data/heatmaps/constants';
 import type { HeatmapsItem } from 'types/graphql';
@@ -53,12 +53,10 @@ export const getScrollMapData = (items: HeatmapsItem[]): ScrollMapData[] => {
 };
 
 export const getClickMapData = (items: HeatmapsItem[]): ClickMapData[] => {
-  const results = groupBy(items, 'selector');
-
   const total = items.length;
 
-  const max = Math.max(...Object.values(results).map(r => r.length));
-  const clicks = Object.entries(results).sort((a, b) => b[1].length - a[1].length);
+  const max = Math.max(...items.map(i => i.count));
+  const clicks = orderBy(items, 'count', 'desc');
 
   const getColor = (count: number) => {
     const percent = percentage(max, count);
@@ -66,14 +64,14 @@ export const getClickMapData = (items: HeatmapsItem[]): ClickMapData[] => {
     return potentials[potentials.length - 1];
   };
 
-  return clicks.map(([selector, coords]) => {
-    const color = getColor(coords.length);
+  return clicks.map(({ selector, count }) => {
+    const color = getColor(count);
 
     return {
       selector,
       color,
-      count: coords.length,
-      percentage: percentage(total, coords.length),
+      count,
+      percentage: percentage(total, count),
     }
   });
 };
