@@ -98,7 +98,7 @@ export const showClickMaps = (doc: Document, items: HeatmapsItem[]) => {
   items.forEach(item => {
     let elem = getElement(doc, item.selector);
 
-    if (!elem || ['html', 'html > body'].includes(item.selector)) return;
+    if (!elem) return;
 
     // These things don't have a innerHTML so the next
     // best thing is to use the parent, even if it's
