@@ -1,4 +1,4 @@
-import { range, orderBy, findLast } from 'lodash';
+import { range, orderBy, findLast, sumBy } from 'lodash';
 import { percentage } from 'lib/maths';
 import { HeatmapColor, HEATMAP_COLOURS } from 'data/heatmaps/constants';
 import type { HeatmapsItem } from 'types/graphql';
@@ -69,7 +69,7 @@ export const getScrollMapData = (items: HeatmapsItem[]): ScrollMapData[] => {
 };
 
 export const getClickMapData = (items: HeatmapsItem[]): ClickMapData[] => {
-  const total = items.length;
+  const total = sumBy(items, 'count');
 
   const max = Math.max(...items.map(i => i.count));
   const clicks = orderBy(items, 'count', 'desc');

@@ -17,10 +17,12 @@ interface Props {
 export const HeatmapsClicks: FC<Props> = ({ items, selected, setSelected }) => {
   const [order, setOrder] = React.useState('clicks__desc');
 
-  const clicks = getClickMapData(items).sort((a, b) => order === 'clicks__asc'
-    ? a.count - b.count
-    : b.count - a.count
-  );
+  const clicks = getClickMapData(items)
+    .filter(c => c.selector)
+    .sort((a, b) => order === 'clicks__asc'
+      ? a.count - b.count
+      : b.count - a.count
+    );
 
   const getIframeDocument = (): Document => document
     .querySelector<HTMLIFrameElement>('#heatmaps-page-wrapper iframe')
