@@ -144,13 +144,13 @@ export const getDateRange = (period: TimePeriod): TimeRange => {
 
 export const getDayByIndex = (index: number) => {
   const days = {
-    0: 'Monday',
-    1: 'Tuesday',
-    2: 'Wednesday',
-    3: 'Thursday',
-    4: 'Firday',
-    5: 'Saturday',
-    6: 'Sunday',
+    0: 'Sunday',
+    1: 'Monday',
+    2: 'Tuesday',
+    3: 'Wednesday',
+    4: 'Thursday',
+    5: 'Firday',
+    6: 'Saturday',
   };
 
   return get(days, index, '');
