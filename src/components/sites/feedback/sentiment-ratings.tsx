@@ -5,7 +5,6 @@ import { omit, groupBy } from 'lodash';
 import { ResponsiveContainer, CartesianGrid, LineChart, Line, YAxis, XAxis, Tooltip, TooltipProps } from 'recharts';
 import { formatChartData } from 'lib/charts';
 import { Emoji } from 'components/emoji';
-import { BASE_PATH } from 'data/common/constants';
 import type { FeedbackSentimentRating } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 
@@ -84,7 +83,7 @@ export const SentimentRatings: FC<Props> = ({ period, ratings }) => {
             tick={(props) => ( 
               <image 
                 {...getAxisProps(props)} 
-                href={`${BASE_PATH}/emojis/emoji-${props.payload.value + 1}.svg`}
+                href={`/emojis/emoji-${props.payload.value + 1}.svg`}
                 height={24} 
                 width={24} 
                 transform={

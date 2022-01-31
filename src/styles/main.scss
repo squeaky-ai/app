@@ -63,10 +63,6 @@
 @import './components/tooltip';
 @import './components/trend';
 
-@import './pages/auth/accept';
-@import './pages/auth/reset';
-@import './pages/auth/login';
-@import './pages/auth/signup';
 @import './pages/sites/[site_id]/feedback/nps';
 @import './pages/sites/[site_id]/feedback/sentiment';
 @import './pages/sites/[site_id]/recordings/_[recording_id]';
@@ -89,4 +85,3 @@
 @import './pages/admin';
 @import './pages/404';
 @import './pages/500';
-@import './pages/developers';

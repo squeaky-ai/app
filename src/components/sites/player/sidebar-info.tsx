@@ -1,6 +1,5 @@
 import React from 'react';
 import type { FC } from 'react';
-import Link from 'next/link';
 import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { PlayerTab } from 'data/sites/enums';
@@ -33,9 +32,7 @@ export const SidebarInfo: FC<Props> = ({ site, recording, setActiveTab }) => {
           <p className='no-attributes'>
             <Icon name='link-m' />
             <span>No Linked Data</span>
-            <Link href='/developers'>
-              <a target='_blank'>Settings</a>
-            </Link>
+            <a href='/developers' target='_blank'>Settings</a>
           </p>
         )}
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import type { FC } from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Icon } from 'components/icon';
 import { Card } from 'components/card';
@@ -50,7 +49,7 @@ export const VisitorsSummary: FC<Props> = ({ site, visitor }) => {
           {!linkedData && (
             <>
               <p>There is no linked data for this visitor.</p>
-              <p><Link href='/developers'><a target='_blank'>Click here</a></Link> to discover how you can link Squeaky visitor records directly with data of logged in users in your application.</p>
+              <p><a target='_blank' href='/developers'>Click here</a> to discover how you can link Squeaky visitor records directly with data of logged in users in your application.</p>
             </>
           )}
 

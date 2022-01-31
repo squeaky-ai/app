@@ -1,8 +1,10 @@
+import getConfig from 'next/config';
 import { camelCase } from 'lodash';
 import type { GetServerSideProps } from 'next';
 import { session } from 'lib/api/auth';
-import { BLANK_ROUTES } from 'data/common/constants';
 import type { User } from 'types/graphql';
+
+const { publicRuntimeConfig } = getConfig();
 
 export interface ServerSideProps {
   user: User | null;
@@ -25,34 +27,33 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const url = resolvedUrl.split('?')[0];
 
   const user = cookies.session ? await getUser(headers.cookie) : null;
-  const isBlankPage = BLANK_ROUTES.includes(url);
   const isAdminOnlyPage = url.startsWith('/__admin');
-
-  if (isAdminOnlyPage && !user?.superuser) {
-    return {
-      redirect: {
-        destination: '/auth/login',
-        permanent: false,
-      },
-    }; 
-  }
 
   // If the user doesn't exist and they're trying to access
   // a logged in page then we should redirect them to the 
   // login page
-  if (!user && !isBlankPage) {
+  if (!user) {
     return {
       redirect: {
-        destination: '/auth/login',
+        destination: `${publicRuntimeConfig.webHost}/auth/login`,
         permanent: false,
       },
     };
   }
 
+  if (isAdminOnlyPage && !user?.superuser) {
+    return {
+      redirect: {
+        destination: `${publicRuntimeConfig.webHost}/auth/login`,
+        permanent: false,
+      },
+    }; 
+  }
+
   // A bunch of the site expects the users first and last
   // name to exist so we should trap them here until they've
   // filled it out
-  if (user && (!user?.firstName || !user?.lastName) && url !== '/users/new') {
+  if ((!user?.firstName || !user?.lastName) && url !== '/users/new') {
     return {
       redirect: {
         destination: '/users/new',

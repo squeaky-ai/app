@@ -103,7 +103,7 @@ const SitesSettingsIp: NextPage<ServerSideProps> = ({ user }) => {
               <Message 
                 type='info'
                 message={
-                  <p>This feature is only available if you have are using the data linking feature in Squeaky. There is developer documentation for data linking <Link href='/developers'><a>here</a></Link>.</p>
+                  <p>This feature is only available if you have are using the data linking feature in Squeaky. There is developer documentation for data linking <a href='/developers'>here</a>.</p>
                 }
               />
 

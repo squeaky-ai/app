@@ -1,19 +1,4 @@
-import getConfig from 'next/config';
 import type { RelativeTime } from 'types/common';
-
-const { publicRuntimeConfig } = getConfig();
-
-export const BLANK_ROUTES = [
-  '/__admin',
-  '/ping',
-  '/developers',
-  '/auth/login',
-  '/auth/signup',
-  '/auth/reset',
-  '/auth/accept',
-];
-
-export const BASE_PATH = publicRuntimeConfig.basePath;
 
 export const MM_SS_REGEX = /\d\d:\d\d/;
 
@@ -28,7 +13,7 @@ export enum Breakpoints {
 }
 
 export const TIME_PERIODS: { name: string, key: RelativeTime }[] = [
-  {
+{
     name: 'Today',
     key: 'today',
   },
