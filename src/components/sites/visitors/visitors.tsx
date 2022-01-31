@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import Link from 'next/link';
 import classnames from 'classnames';
 import { Icon } from 'components/icon';
 import { Pagination } from 'components/pagination';
@@ -57,7 +58,7 @@ export const Visitors: FC<Props> = ({ site, columns, filters }) => {
         type='info'
         className='linked-data'
         heading={<p><Icon name='link-m' /> Linked Data</p>}
-        message={<p>The columns using the <Icon name='link-m' /> link icon are used to display linked user data from your website or web app. To discover how you can link Squeaky visitor records directly with data of logged in users, <a target='_blank' href='/developers'>click here</a>.</p>}
+        message={<p>The columns using the <Icon name='link-m' /> link icon are used to display linked user data from your website or web app. To discover how you can link Squeaky visitor records directly with data of logged in users, <Link ><a target='_blank'>click here</a></Link>.</p>}
       />
 
       <Table className={classnames('visitors-list hover', tableClassNames, { hide: items.length === 0 })}>

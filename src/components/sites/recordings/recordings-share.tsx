@@ -75,7 +75,7 @@ export const RecordingsShare: FC<Props> = ({ button, site, recordingId, onClose 
               <input
                 className='input' 
                 readOnly
-                value={`https://app.squeaky.ai/app/sites/${site.id}/recordings/${recordingId}`}
+                value={`https://squeaky.ai/app/sites/${site.id}/recordings/${recordingId}`}
                 ref={input}
               />
               <Button onClick={copy}>
