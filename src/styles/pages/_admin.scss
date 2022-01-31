@@ -1,7 +1,13 @@
 .page.__admin {
   background: var(--gray-100);
+  display: block;
+  height: auto;
   min-height: 100vh;
   padding-bottom: 5rem;
+
+  #app-sidebar {
+    display: none;
+  }
 
   .header {
     background: var(--gray-blue-800);
