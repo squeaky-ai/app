@@ -9,7 +9,7 @@ const BASE_PATH = IS_DEV ? '' : '/app';
 // In production all the assets are served from S3/
 // Cloudfront, but in development they are loaded from
 // disk
-const ASSET_PREFIX = IS_DEV ? '' : 'https://cdn.squeaky.ai';
+const ASSET_PREFIX = IS_DEV ? '' : 'https://cdn.squeaky.ai/app';
 
 // In production we point to the squeaky.ai/api but in
 // development we use a local running instance
