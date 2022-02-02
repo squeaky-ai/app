@@ -4,7 +4,11 @@
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
+  height: 100vh;
+  left: 0;
   padding: 2rem 1rem;
+  position: sticky;
+  top: 0;
   transition: width .3s ease-in-out;
   width: 72px;
   z-index: 1;
@@ -289,6 +293,7 @@
 
     @include breakpoint-md {
       border-bottom-color: var(--gray-blue-600);
+      height: 100vh;
       width: 100%;
     }
 
@@ -323,8 +328,14 @@
     }
 
     .menu-toggle {
+      position: absolute;
+      right: 1.5rem;
+      top: 1.5rem;
+      z-index: 10;
+
       @include breakpoint-md {
         .icon {
+          color: var(--white);
           margin: 0;
         }
       }

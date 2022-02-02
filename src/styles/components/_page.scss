@@ -1,11 +1,8 @@
 .page {
-  &.app {
-    display: flex;
-    height: 100vh;
+  display: flex;
 
-    @include breakpoint-md {
-      display: block;
-      height: auto;
-    }
+  @include breakpoint-md {
+    display: block;
+    height: auto;
   }
 }
