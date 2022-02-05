@@ -65,3 +65,34 @@ export const GET_ACTIVE_USERS_QUERY = gql`
     }
   }
 `;
+
+export const GET_BILLING_QUERY = gql`
+  query GetSiteBilling($siteId: ID!) {
+    site(siteId: $siteId) {
+      id
+      billing {
+        customerId
+        status
+        cardType
+        country
+        expiry
+        cardNumber
+        billingAddress
+        billingName
+        billingEmail
+        transactions {
+          amount
+          currency
+          invoiceWebUrl
+          invoicePdfUrl
+          interval
+          plan {
+            name
+          }
+          periodStartAt
+          periodEndAt
+        }
+      }
+    }
+  }
+`;
