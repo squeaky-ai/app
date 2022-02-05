@@ -22,6 +22,9 @@ export const GET_SITE_QUERY = gql`
       ownerName
       daysSinceLastRecording
       recordingsCount
+      plan {
+        name
+      }
       team {
         id
         role
@@ -92,6 +95,15 @@ export const GET_BILLING_QUERY = gql`
           periodStartAt
           periodEndAt
         }
+      }
+    }
+    plans {
+      name
+      maxMonthlyRecordings
+      pricing {
+        id
+        currency
+        amount
       }
     }
   }

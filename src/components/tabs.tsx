@@ -7,7 +7,7 @@ import { Button } from 'components/button';
 type Tab = {
   page: string;
   name: string;
-  icon: string;
+  icon?: string;
   body: React.ReactNode;
 }
 
@@ -24,7 +24,7 @@ export const Tabs: FC<Props> = ({ tabs }) => {
         {tabs.map(tab => (
           <li className='tab' key={tab.page}>
             <Button className={classnames('tab-button', { active: page.page === tab.page })} onClick={() => setPage(tab)}>
-              <Icon name={tab.icon} />
+              {tab.icon ? <Icon name={tab.icon} /> : null}
               {tab.name}
             </Button>
           </li>

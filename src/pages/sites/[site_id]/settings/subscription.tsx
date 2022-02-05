@@ -52,7 +52,7 @@ const SiteSettingsSubscription: NextPage<ServerSideProps> = ({ user }) => {
             )}
 
             {featureFlagEnabled(FeatureFlag.BILLING) && (
-              <Billing />
+              <Billing site={site} />
             )}
           </Main>
         )}
