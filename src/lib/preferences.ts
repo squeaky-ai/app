@@ -8,9 +8,15 @@ export enum Preference {
   NPS_COLUMNS = 'NPS_COLUMNS',
   SENTIMENT_COLUMNS = 'SENTIMENT_COLUMNS',
   SIDEBAR_CLOSED = 'SIDEBAR_CLOSED',
+  CURRENCY = 'CURRENCY',
 }
 
 export class Preferences {
+  public static getString(key: Preference): string {
+    const value = localStorage.getItem(`preferences::${key}`);
+    return value;
+  }
+
   public static getBoolean(key: Preference): boolean {
     const value = localStorage.getItem(`preferences::${key}`);
     return value === 'true';
@@ -19,6 +25,11 @@ export class Preferences {
   public static getArray<T>(key: Preference): T[] {
     const value = localStorage.getItem(`preferences::${key}`);
     return value ? JSON.parse(value) : [];
+  }
+
+  public static setString(key: Preference, value: string): string {
+    localStorage.setItem(`preferences::${key}`, value);
+    return value;
   }
 
   public static setBoolean(key: Preference, value: boolean): boolean {

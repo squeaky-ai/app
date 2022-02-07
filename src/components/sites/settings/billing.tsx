@@ -11,6 +11,8 @@ import { Container } from 'components/container';
 import { Checkout } from 'components/sites/settings/checkout';
 import { Select, Option } from 'components/select';
 import { Label } from 'components/label';
+import { Preferences, Preference } from 'lib/preferences';
+import { CURRENCY_SYMBOLS } from 'data/common/constants';
 import { PlansCurrency } from 'types/graphql';
 import type { Plan, Site } from 'types/graphql';
 
@@ -27,6 +29,11 @@ export const Billing: FC<Props> = ({ site }) => {
 
   const [currency, setCurrency] = React.useState<PlansCurrency>(PlansCurrency.Eur);
 
+  React.useEffect(() => {
+    const cur = Preferences.getString(Preference.CURRENCY);
+    if (cur) setCurrency(cur as PlansCurrency);
+  }, []);
+
   if (loading) {
     return <Spinner />;
   }
@@ -39,6 +46,7 @@ export const Billing: FC<Props> = ({ site }) => {
 
   const handleCurrencyChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;
+    Preferences.setString(Preference.CURRENCY, value);
     setCurrency(value as PlansCurrency);
   };
 
@@ -109,7 +117,7 @@ export const Billing: FC<Props> = ({ site }) => {
                             <b>{plan.name}</b>
                           </p>
                           <p className='pricing'>
-                            <b>${getPricingForCurrency(plan, currency)}</b> per month
+                            <b>{CURRENCY_SYMBOLS[currency]}{getPricingForCurrency(plan, currency)}</b> per month
                           </p>
                           <Checkout 
                             site={site}
