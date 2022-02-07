@@ -105,6 +105,9 @@ export const GET_BILLING_QUERY = gql`
         currency
         amount
       }
+      dataStorageMonths
+      support
+      responseTimeHours
     }
   }
 `;

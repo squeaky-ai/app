@@ -9,73 +9,151 @@
     display: flex;
   }
 
-  .plan-card {
-    display: flex;
+  .plan-table {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    margin: 2rem 0;
 
-    .details {
-      flex: 1;
+    .col {
+      background: var(--white);
 
-      h4 {
-        align-items: center;
-        display: flex;
-        margin: 0 0 1rem 0;
-
-        span {
-          color: var(--gray-500);
-          font-size: 18px;
-          line-height: 32px;
-          margin: 0 0 0 1rem;
+      &.current {
+        background: var(--gray-50);
+        
+        .cell {
+          border-left: 1px solid var(--gray-150);
+          border-right: 1px solid var(--gray-150);
         }
       }
 
-      p {
-        color: var(--blue-700);
-        font-size: 13px;
-        line-height: 16px;
-        margin: 0 0 1.5rem 0;
-        text-transform: uppercase;
+      &:first-of-type {
+        .cell {
+          border-left: 1px solid var(--gray-150);
+
+          &:nth-of-type(2) {
+            border-top: 1px solid var(--gray-150);
+            border-top-left-radius: var(--border-radius-md);
+          }
+
+          &:last-of-type {
+            border-bottom-left-radius: var(--border-radius-md);
+          }
+        }
       }
 
-      ul {
-        margin: 0;
-        padding: 0;
+      &:nth-of-type(2) {
+        .head {
+          border-left: 1px solid var(--gray-150);
+          border-top-left-radius: var(--border-radius-md);
+        }
+      }
 
-        li {
-          align-items: center;
-          display: flex;
-          list-style: none;
-          margin: 0 0 .25rem 0;
+      &:last-of-type {
 
-          .icon {
-            color: var(--blue-700);
-            margin: 0 .5rem 0 0;
+        .cell {
+          border-right: 1px solid var(--gray-150);
+
+          &:first-of-type {
+            border-top-right-radius: var(--border-radius-md);            
           }
+
+          &:last-of-type {
+            border-bottom-right-radius: var(--border-radius-md);
+          }
+        }
+      }
+
+      &.y-labels {
+        .cell {
+          text-align: left;
         }
       }
     }
 
-    .change {
-      .button {
-        background: var(--yellow-500);
-        border-color: var(--yellow-500);
-        color: var(--gray-blue-800);
-        margin: 0 0 1rem 0;
+    .cell {
+      border-color: var(--gray-100);
+      border-style: solid;
+      border-width: 1px 1px 0 0;
+      font-size: 13px;
+      height: 3rem;
+      line-height: 16px;
+      padding: 1rem;
 
-        &:hover {
-          opacity: .85;
+      &:last-of-type {
+        border-bottom: 1px solid var(--gray-150);
+      }
+
+      &.head {
+        border-top: 1px solid var(--gray-150);
+        height: 11rem;
+        padding: 1.5rem;
+
+        &.blank {
+          background: var(--gray-50);
+          border: none;
+        }
+
+        p {
+          margin: 0 0 1rem 0;
+
+          &.pricing {
+            color: var(--gray-300);
+            font-size: 13px;
+            line-height: 16px;
+            margin: 0 0 1.5rem 0;
+
+            b {
+              color: var(--gray-500);
+              font-size: 18px;
+              line-height: 24px;
+            }
+          }
+        }
+
+        .button {
+          width: 100%;
         }
       }
 
-      p {
-        align-items: center;
-        color: var(--gray-blue-700);
-        display: flex;
-        font-size: 13px;
-        line-height: 16px;
+      &:not(.head) {
+        text-align: center;
 
         .icon {
-          margin-right: .25rem;
+          color: var(--blue-500);
+          font-size: 24px;
         }
+      }
+    }
+  }
+
+  .enterprise {
+    align-items: center;
+    background: var(--gray-blue-700);
+    border-radius: var(--border-radius-md);
+    display: flex;
+    padding: 2rem;
+
+    .icon {
+      align-self: flex-start;
+      color: var(--blue-300);
+      flex-shrink: 0;
+      font-size: 1.5rem;
+      margin: 0 1rem 0 0;
+    }
+
+    p {
+      color: var(--blue-50);
+      margin: 0 3rem 0 0;
+    }
+
+    .button {
+      background: var(--yellow-500);
+      border-color: var(--yellow-500);
+      color: var(--gray-blue-800);
+      flex-shrink: 0;
+
+      &:hover {
+        opacity: .85;
       }
     }
   }
