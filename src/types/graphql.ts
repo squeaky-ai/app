@@ -807,6 +807,7 @@ export type Page = {
 export type Plan = {
   __typename?: 'Plan';
   dataStorageMonths?: Maybe<Scalars['Int']>;
+  id: Scalars['ID'];
   maxMonthlyRecordings?: Maybe<Scalars['Int']>;
   name: Scalars['String'];
   pricing?: Maybe<Array<PlanPrice>>;

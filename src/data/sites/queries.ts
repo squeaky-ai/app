@@ -23,7 +23,7 @@ export const GET_SITE_QUERY = gql`
       daysSinceLastRecording
       recordingsCount
       plan {
-        name
+        type
       }
       team {
         id
@@ -49,6 +49,7 @@ export const GET_PLAN_QUERY = gql`
     site(siteId: $siteId) {
       id
       plan {
+        id
         type
         name
         exceeded
@@ -98,6 +99,7 @@ export const GET_BILLING_QUERY = gql`
       }
     }
     plans {
+      id
       name
       maxMonthlyRecordings
       pricing {

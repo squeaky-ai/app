@@ -9,6 +9,21 @@
     display: flex;
   }
 
+  .currency-select {
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+    
+    .label {
+      margin: 0 1rem 0 0;
+    }
+
+    .select {
+      margin: 0;
+      width: 150px;
+    }
+  }
+
   .plan-table {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -16,15 +31,7 @@
 
     .col {
       background: var(--white);
-
-      &.current {
-        background: var(--gray-50);
-        
-        .cell {
-          border-left: 1px solid var(--gray-150);
-          border-right: 1px solid var(--gray-150);
-        }
-      }
+      position: relative;
 
       &:first-of-type {
         .cell {
@@ -49,7 +56,6 @@
       }
 
       &:last-of-type {
-
         .cell {
           border-right: 1px solid var(--gray-150);
 
@@ -59,6 +65,54 @@
 
           &:last-of-type {
             border-bottom-right-radius: var(--border-radius-md);
+          }
+        }
+      }
+
+      &.current {
+        background: var(--gray-50);
+
+        &:before {
+          background: var(--gray-50);
+          border-color: var(--gray-150);
+          border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
+          border-style: solid;
+          border-width: 1px 1px 0 1px;
+          content: '';
+          display: block;
+          height: 5px;
+          left: 0;
+          position: absolute;
+          top: -4px;
+          width: calc(100% - 2px);
+        }
+
+        &:after {
+          background: var(--gray-50);
+          border-color: var(--gray-150);
+          border-radius: 0 0 var(--border-radius-md) var(--border-radius-md);
+          border-style: solid;
+          border-width: 0 1px 1px 1px;
+          content: '';
+          display: block;
+          height: 5px;
+          left: 0;
+          position: absolute;
+          top: 100%;
+          width: calc(100% - 2px);
+        }
+        
+        .cell {
+          border-left: 1px solid var(--gray-150);
+          border-radius: 0;
+          border-right: 1px solid var(--gray-150);
+
+          &:first-of-type {
+            border-top: none;
+          }
+
+          &:last-of-type {
+            border-bottom: none;
           }
         }
       }

@@ -8,6 +8,9 @@ import { Tabs } from 'components/tabs';
 import { Button } from 'components/button';
 import { Icon } from 'components/icon';
 import { Container } from 'components/container';
+import { Checkout } from 'components/sites/settings/checkout';
+import { Select, Option } from 'components/select';
+import { Label } from 'components/label';
 import { PlansCurrency } from 'types/graphql';
 import type { Plan, Site } from 'types/graphql';
 
@@ -15,18 +18,29 @@ interface Props {
   site: Site;
 }
 
-const getPricingForCurrency = (plan: Plan, currency: PlansCurrency = PlansCurrency.Usd) => {
+const getPricingForCurrency = (plan: Plan, currency: PlansCurrency) => {
   return (plan.pricing || []).find(p => p.currency === currency)?.amount || 0;
 };
 
 export const Billing: FC<Props> = ({ site }) => {
   const { loading, billing } = useBilling();
 
+  const [currency, setCurrency] = React.useState<PlansCurrency>(PlansCurrency.Eur);
+
   if (loading) {
     return <Spinner />;
   }
 
-  const planIndex = billing.plans.findIndex(plan => plan.name === site.plan.name);
+  // It could either:
+  // - not exist (they've never checked out)
+  // - be new (as they clicked this button before but didn't actually make it through)
+  const isFirstTimeCheckout = [undefined, 'new'].includes(billing.billing?.status);
+  const planIndex = billing.plans.findIndex(plan => Number(plan.id) === site.plan.type);
+
+  const handleCurrencyChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const { value } = event.target;
+    setCurrency(value as PlansCurrency);
+  };
 
   return (
     <div className='billing'>
@@ -40,6 +54,15 @@ export const Billing: FC<Props> = ({ site }) => {
                 <Container className='md'>
                   <p>All plans come with access to our entire range of customer experience products, including analytics, recordings, feedback and heatmap data. To learn more about our full array of features, <Link href='/features'><a target='_blank'>see here</a></Link>.</p>
                 </Container>
+
+                <div className='currency-select'>
+                  <Label htmlFor='currency'>Currency</Label>
+                  <Select name='currency' value={currency} onChange={handleCurrencyChange}>
+                    <Option value={PlansCurrency.Eur}>Euro</Option>
+                    <Option value={PlansCurrency.Gbp}>Pound</Option>
+                    <Option value={PlansCurrency.Usd}>Dollar</Option>
+                  </Select>
+                </div>
 
                 <div className='plan-table'>
                   <div className='col y-labels'>
@@ -86,14 +109,16 @@ export const Billing: FC<Props> = ({ site }) => {
                             <b>{plan.name}</b>
                           </p>
                           <p className='pricing'>
-                            <b>${getPricingForCurrency(plan)}</b> per month
+                            <b>${getPricingForCurrency(plan, currency)}</b> per month
                           </p>
-                          <Button className={isDowngrade ? 'quaternary' : 'primary'} disabled={isCurrent}>
-                            {isCurrent
-                              ? 'Current Plan'
-                              : isDowngrade ? 'Downgrade' : 'Upgrade'
-                            }
-                          </Button>
+                          <Checkout 
+                            site={site}
+                            plan={plan}
+                            currency={currency}
+                            isCurrent={isCurrent} 
+                            isDowngrade={isDowngrade}
+                            isFirstTimeCheckout={isFirstTimeCheckout}
+                          />
                         </div>
                         <div className='cell'>
                           Up to <b>{plan.maxMonthlyRecordings.toLocaleString()}</b>
