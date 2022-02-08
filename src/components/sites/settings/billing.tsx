@@ -30,7 +30,7 @@ export const Billing: FC<Props> = ({ site }) => {
   // It could either:
   // - not exist (they've never checked out)
   // - be new (as they clicked this button before but didn't actually make it through)
-  const hasBilling = [undefined, 'new'].includes(billing.billing?.status);
+  const hasBilling = ![undefined, 'new'].includes(billing.billing?.status);
 
   return (
     <div className='billing'>

@@ -104,7 +104,7 @@ export const BillingPlansTable: FC<Props> = ({ site, billing, currency, hasBilli
                   currency={currency}
                   isCurrent={isCurrent} 
                   isDowngrade={isDowngrade}
-                  isFirstTimeCheckout={hasBilling}
+                  isFirstTimeCheckout={!hasBilling}
                 />
               </div>
               <div className='cell'>
