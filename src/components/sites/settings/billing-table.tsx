@@ -38,7 +38,7 @@ export const BillingTable: FC<Props> = ({ site, billing, currency, hasBilling })
           <Table className='billing-table'>
             <Row className='head'>
               <Cell><b>Plan</b></Cell>
-              <Cell>{plan.name} Plan, {CURRENCY_SYMBOLS[currency]}{pricing?.amount || 0}</Cell>
+              <Cell>{plan.name} Plan, {CURRENCY_SYMBOLS[currency]}{(pricing?.amount || 0)}</Cell>
               <Cell><Button className='link'>Change plan</Button></Cell>
             </Row>
             <Row>

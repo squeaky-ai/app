@@ -1,11 +1,11 @@
 import React from 'react';
 import type { FC } from 'react';
-import { gql, useMutation } from '@apollo/client';
 import { Button } from 'components/button';
 import { Icon } from 'components/icon';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
-import { useToasts } from 'hooks/use-toasts';
-import { Plan, PlansCurrency, Site, SubscriptionsCheckout } from 'types/graphql';
+import { Plan, PlansCurrency, Site } from 'types/graphql';
+import { CheckoutButton } from 'components/sites/settings/checkout-button';
+import { ChangePlanButton } from 'components/sites/settings/change-plan-button';
 
 interface Props {
   site: Site;
@@ -16,24 +16,13 @@ interface Props {
   isFirstTimeCheckout: boolean;
 }
 
-const MUTATION = gql`
-  mutation SubscriptionsCreate($input: SubscriptionsCreateInput!) {
-    subscriptionsCreate(input: $input) {
-      customerId
-      redirectUrl
-    }
-  }
-`;
-
 export const Checkout: FC<Props> = ({ site, plan, currency, isCurrent, isDowngrade, isFirstTimeCheckout }) => {
   const ref = React.useRef<Modal>();
-  const toasts = useToasts();
 
   const isUpgrading = !isFirstTimeCheckout && !isDowngrade;
   const isDowngrading = !isFirstTimeCheckout && isDowngrade;
 
   const [loading, setLoading] = React.useState<boolean>(false);
-  const [checkout] = useMutation<{ subscriptionsCreate: SubscriptionsCheckout }>(MUTATION);
 
   const openModal = () => {
     if (ref.current) ref.current.show();
@@ -43,34 +32,9 @@ export const Checkout: FC<Props> = ({ site, plan, currency, isCurrent, isDowngra
     if (ref.current) ref.current.hide();
   };
 
-  const handleCheckout = async () => {
-    setLoading(true);
-    
-    try {
-      const { data } = await checkout({
-        variables: {
-          input: {
-            siteId: site.id,
-            pricingId: plan.pricing.find(p => p.currency === currency).id,
-          }
-        },
-      });
-
-      if (data) {
-        location.href = data.subscriptionsCreate.redirectUrl;
-      }
-    } catch {
-      toasts.add({ type: 'error', body: 'There was an error checking out' });
-    }
-  };
-
-  const handlePlanChange = () => {
-    console.log(plan);
-  };
-
   return (
     <>
-      <Button className={isDowngrade ? 'quaternary' : 'primary'} disabled={isCurrent || loading} onClick={openModal}>
+      <Button className={isDowngrade ? 'quaternary' : 'primary'} disabled={isCurrent} onClick={openModal}>
         {isCurrent
           ? 'Current Plan'
           : isDowngrade ? 'Downgrade' : 'Upgrade'
@@ -119,22 +83,37 @@ export const Checkout: FC<Props> = ({ site, plan, currency, isCurrent, isDowngra
           </ModalContents>
           <ModalFooter>
             {isFirstTimeCheckout && (
-              <Button type='button' onClick={handleCheckout} className='primary icon-left' disabled={loading}>
-                <Icon name='lock-line' />
-                {loading ? 'Loading...' : 'Proceed to checkout'}
-              </Button>
+              <CheckoutButton
+                site={site}
+                plan={plan}
+                loading={loading}
+                currency={currency}
+                setLoading={setLoading}
+              />
             )}
 
             {isDowngrading && (
-              <Button type='button' onClick={handlePlanChange} className='tertiary' disabled={loading}>
-                {loading ? 'Loading...' : 'Downgrade plan'}
-              </Button>
+              <ChangePlanButton
+                site={site}
+                plan={plan}
+                loading={loading}
+                currency={currency}
+                label='Downgrade plan'
+                buttonClassName='tertiary'
+                setLoading={setLoading}
+              />
             )}
 
             {isUpgrading && (
-              <Button type='button' onClick={handlePlanChange} className='primary' disabled={loading}>
-                {loading ? 'Loading...' : 'Upgrade plan'}
-              </Button>
+              <ChangePlanButton
+                site={site}
+                plan={plan}
+                loading={loading}
+                currency={currency}
+                label='Updgrade plan'
+                buttonClassName='primary'
+                setLoading={setLoading}
+              />
             )}
 
             <Button type='button' className='quaternary' onClick={closeModal}>
