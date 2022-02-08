@@ -211,4 +211,34 @@
       }
     }
   }
+
+  .billing-table {
+    .head {
+      .cell {
+        font-weight: var(--font-weight-normal);
+      }
+    }
+
+    .row {
+      grid-template-columns: 1fr 1fr 128px;
+    }
+
+    .link {
+      font-size: 13px;
+      line-height: 16px;
+      text-decoration: underline;
+    }
+  }
+
+  .transactions-table {
+    .head {
+      .cell {
+        font-weight: var(--font-weight-normal);
+      }
+    }
+
+    .row {
+      grid-template-columns: 1fr 1fr 1fr 128px;
+    }
+  }
 }

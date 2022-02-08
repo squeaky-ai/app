@@ -85,6 +85,7 @@ export const GET_BILLING_QUERY = gql`
         billingName
         billingEmail
         transactions {
+          id
           amount
           currency
           invoiceWebUrl
