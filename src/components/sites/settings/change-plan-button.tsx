@@ -24,7 +24,7 @@ const MUTATION = gql`
     subscriptionsUpdate(input: $input) {
       id
       plan {
-        id
+        name
         type
       }
     }
