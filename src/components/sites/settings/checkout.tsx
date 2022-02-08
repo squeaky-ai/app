@@ -101,6 +101,7 @@ export const Checkout: FC<Props> = ({ site, plan, currency, isCurrent, isDowngra
                 label='Downgrade plan'
                 buttonClassName='tertiary'
                 setLoading={setLoading}
+                onChange={closeModal}
               />
             )}
 
@@ -113,6 +114,7 @@ export const Checkout: FC<Props> = ({ site, plan, currency, isCurrent, isDowngra
                 label='Updgrade plan'
                 buttonClassName='primary'
                 setLoading={setLoading}
+                onChange={closeModal}
               />
             )}
 

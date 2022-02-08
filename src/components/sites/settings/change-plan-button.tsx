@@ -16,17 +16,22 @@ interface Props {
   currency: PlansCurrency;
   buttonClassName: string;
   setLoading: (loading: boolean) => void;
+  onChange: VoidFunction;
 }
 
 const MUTATION = gql`
   mutation SubscriptionsUpdate($input: SubscriptionsUpdateInput!) {
     subscriptionsUpdate(input: $input) {
       id
+      plan {
+        id
+        type
+      }
     }
   }
 `;
 
-export const ChangePlanButton: FC<Props> = ({ site, plan, label, loading, currency, buttonClassName, setLoading }) => {
+export const ChangePlanButton: FC<Props> = ({ site, plan, label, loading, currency, buttonClassName, setLoading, onChange }) => {
   const toasts = useToasts();
 
   const [changePlan] = useMutation<{ subscriptionsUpdate: SiteBilling }>(MUTATION);
@@ -43,6 +48,8 @@ export const ChangePlanButton: FC<Props> = ({ site, plan, label, loading, curren
           }
         },
       });
+
+      onChange();
     } catch {
       toasts.add({ type: 'error', body: 'There was an error checking out' });
     } finally {
