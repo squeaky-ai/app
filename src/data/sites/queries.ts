@@ -24,6 +24,7 @@ export const GET_SITE_QUERY = gql`
       recordingsCount
       plan {
         type
+        name
       }
       team {
         id

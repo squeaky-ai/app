@@ -1,8 +1,8 @@
 import React from 'react';
+import type { FC } from 'react';
 import FocusTrap from 'focus-trap-react';
 import classnames from 'classnames';
 import { Portal } from 'components/portal';
-import type { FC } from 'react';
 
 interface Props {
   className?: string;

@@ -16,7 +16,7 @@ interface Props {
   currency: PlansCurrency;
   buttonClassName: string;
   setLoading: (loading: boolean) => void;
-  onChange: VoidFunction;
+  onChange: (name: string) => void;
 }
 
 const MUTATION = gql`
@@ -49,7 +49,7 @@ export const ChangePlanButton: FC<Props> = ({ site, plan, label, loading, curren
         },
       });
 
-      onChange();
+      onChange(plan.name);
     } catch {
       toasts.add({ type: 'error', body: 'There was an error checking out' });
     } finally {

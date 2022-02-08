@@ -14,9 +14,10 @@ interface Props {
   isCurrent: boolean;
   isDowngrade: boolean;
   isFirstTimeCheckout: boolean;
+  showPlanChangeMessage: (name: string) => void;
 }
 
-export const Checkout: FC<Props> = ({ site, plan, currency, isCurrent, isDowngrade, isFirstTimeCheckout }) => {
+export const Checkout: FC<Props> = ({ site, plan, currency, isCurrent, isDowngrade, isFirstTimeCheckout, showPlanChangeMessage }) => {
   const ref = React.useRef<Modal>();
 
   const isUpgrading = !isFirstTimeCheckout && !isDowngrade;
@@ -30,6 +31,11 @@ export const Checkout: FC<Props> = ({ site, plan, currency, isCurrent, isDowngra
 
   const closeModal = () => {
     if (ref.current) ref.current.hide();
+  };
+
+  const onPlanChange = (name: string) => {
+    closeModal();
+    showPlanChangeMessage(name);
   };
 
   return (
@@ -101,7 +107,7 @@ export const Checkout: FC<Props> = ({ site, plan, currency, isCurrent, isDowngra
                 label='Downgrade plan'
                 buttonClassName='tertiary'
                 setLoading={setLoading}
-                onChange={closeModal}
+                onChange={onPlanChange}
               />
             )}
 
@@ -114,7 +120,7 @@ export const Checkout: FC<Props> = ({ site, plan, currency, isCurrent, isDowngra
                 label='Updgrade plan'
                 buttonClassName='primary'
                 setLoading={setLoading}
-                onChange={closeModal}
+                onChange={onPlanChange}
               />
             )}
 

@@ -242,3 +242,62 @@
     }
   }
 }
+
+.plan-changed {
+  align-items: center;
+  background: var(--modal-background);
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 3;
+
+  .plan-changed-body {
+    background-color: var(--gray-blue-700);
+    background-image: url('../../../../../../public/plan-squiggles.svg');
+    background-position: top right;
+    border: 2px solid var(--blue-500);
+    border-radius: var(--border-radius-lg);
+    display: flex;
+    max-width: 30rem;
+    padding: 2rem;
+    position: relative;
+    width: 100%;
+
+    .star {
+      color: var(--blue-300);
+      font-size: 1.25rem;
+    }
+
+    .content {
+      flex: 1;
+
+      p {
+        color: var(--white);
+        margin: 0;
+        padding: 0 1rem 0 .5rem;
+
+        &:first-of-type {
+          margin: 0 0 .75rem 0;
+        }
+      }
+    }
+    
+    .close {
+      background: none;
+      border: none;
+      padding: 0;
+      position: absolute;
+      right: 2rem;
+      top: 2rem;
+
+      .icon {
+        color: var(--white);
+        font-size: 1.5rem;
+      }
+    }
+  }
+}

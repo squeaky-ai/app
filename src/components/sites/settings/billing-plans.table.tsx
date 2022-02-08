@@ -21,13 +21,14 @@ interface Props {
   hasBilling: boolean;
   currency: PlansCurrency;
   handleCurrencyChange: (currency: PlansCurrency) => void;
+  showPlanChangeMessage: (name: string) => void;
 }
 
 const getPricingForCurrency = (plan: Plan, currency: PlansCurrency) => {
   return (plan.pricing || []).find(p => p.currency === currency)?.amount || 0;
 };
 
-export const BillingPlansTable: FC<Props> = ({ site, billing, currency, hasBilling, handleCurrencyChange }) => {
+export const BillingPlansTable: FC<Props> = ({ site, billing, currency, hasBilling, handleCurrencyChange, showPlanChangeMessage }) => {
   const planIndex = billing.plans.findIndex(plan => Number(plan.id) === site.plan.type);
 
   const onCurrencyChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -105,6 +106,7 @@ export const BillingPlansTable: FC<Props> = ({ site, billing, currency, hasBilli
                   isCurrent={isCurrent} 
                   isDowngrade={isDowngrade}
                   isFirstTimeCheckout={!hasBilling}
+                  showPlanChangeMessage={showPlanChangeMessage}
                 />
               </div>
               <div className='cell'>
