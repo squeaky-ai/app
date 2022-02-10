@@ -1,9 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
-import classnames from 'classnames';
 import { gql, useMutation } from '@apollo/client';
 import { Button } from 'components/button';
-import { Icon } from 'components/icon';
 import { useToasts } from 'hooks/use-toasts';
 import { PlansCurrency } from 'types/graphql';
 import type { Plan, Site, SiteBilling } from 'types/graphql';
@@ -58,8 +56,7 @@ export const ChangePlanButton: FC<Props> = ({ site, plan, label, loading, curren
   };
 
   return (
-    <Button type='button' onClick={handleChangePlan} className={classnames(buttonClassName, 'icon-left')} disabled={loading}>
-      <Icon name='lock-line' />
+    <Button type='button' onClick={handleChangePlan} className={buttonClassName} disabled={loading}>
       {loading ? 'Loading...' : label}
     </Button>
   )
