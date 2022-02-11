@@ -17,6 +17,7 @@ import { Preference } from 'lib/preferences';
 import { NoResults } from 'components/sites/no-results';
 import { COLUMNS } from 'data/visitors/constants';
 import { getColumnStyles } from 'lib/tables';
+import { formatFilterDates } from 'lib/visitors';
 import { VisitorsSort } from 'types/graphql';
 import type { Site } from 'types/graphql';
 import type { Column } from 'types/common';
@@ -37,7 +38,7 @@ export const Visitors: FC<Props> = ({ site, columns, filters }) => {
     page, 
     sort,
     size,
-    filters,
+    filters: formatFilterDates(filters),
   });
 
   const { items, pagination } = visitors;

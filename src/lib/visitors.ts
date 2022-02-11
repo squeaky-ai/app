@@ -1,5 +1,6 @@
 import { capitalize } from 'lodash';
-import type { Visitor, RecordingsDevice, RecordingsCountry } from 'types/graphql';
+import { toSlashyDate } from 'lib/dates';
+import type { Visitor, RecordingsDevice, RecordingsCountry, VisitorsFilters, FiltersDate } from 'types/graphql';
 
 export function getLinkedData<T>(visitor: Visitor): T {
   try {
@@ -57,3 +58,16 @@ export function groupVisitorDevices(devices: RecordingsDevice[]): RecordingsDevi
     return acc;
   }, [] as RecordingsDevice[]);
 }
+
+const replaceDateTypes = (dateFilters: FiltersDate): FiltersDate => ({
+  ...dateFilters,
+  fromDate: toSlashyDate(dateFilters.fromDate),
+  betweenFromDate: toSlashyDate(dateFilters.betweenFromDate),
+  betweenToDate: toSlashyDate(dateFilters.betweenToDate),
+});
+
+export const formatFilterDates = (filters: VisitorsFilters): VisitorsFilters => ({
+  ...filters,
+  firstVisited: replaceDateTypes(filters.firstVisited),
+  lastActivity: replaceDateTypes(filters.lastActivity),
+});

@@ -34,6 +34,8 @@ export const fromTimeString = (timeString: string) => {
   return date.valueOf();
 };
 
+export const toSlashyDate = (s: string) => s ? s.split('/').reverse().join('-') : null;
+
 export const toHoursMinutesAndSeconds = (ms?: number) => {
   if (!ms) return '0h 0m 0s';
 
@@ -74,8 +76,6 @@ const formatDateForGraphQL = (date: Date) => format(date, 'yyyy-MM-dd');
 const expandAbsoluteDateToRange = (date: AbsoluteTime): TimeRange => {
   const now = new Date();
   const todaysDate = formatDateForGraphQL(now);
-
-  const toSlashyDate = (s: string) => s.split('/').reverse().join('-');
 
   if (date.fromType === 'After') {
     return {

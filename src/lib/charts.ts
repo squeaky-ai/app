@@ -1,4 +1,5 @@
 import { range, minBy } from 'lodash';
+import { toSlashyDate } from 'lib/dates';
 import type { AbsoluteTime, TimePeriod } from 'types/common';
 
 import {
@@ -35,8 +36,6 @@ export const getAmPmForHour = (hour: number): string => {
 };
 
 const getDateFromTimestamp = (timestamp: string) => new Date(timestamp);
-
-const toSlashyDate = (s: string) => s.split('/').reverse().join('-');
 
 const getDateGroupForRange = (from: Date, to: Date): [DateGroup, number] => {
   const days = differenceInDays(to, from);
