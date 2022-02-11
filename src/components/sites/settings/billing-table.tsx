@@ -9,6 +9,7 @@ import { CURRENCY_SYMBOLS } from 'data/common/constants';
 import { Transactions } from 'components/sites/settings/transactions';
 import type { Billing } from 'types/billing';
 import type { PlansCurrency, Site } from 'types/graphql';
+import { BillingPortalButton } from './billing-portal-button';
 
 interface Props {
   site: Site;
@@ -64,7 +65,9 @@ export const BillingTable: FC<Props> = ({ site, billing, currency, hasBilling })
                   : '-'
                 } 
               </Cell>
-              <Cell />
+              <Cell>
+                <BillingPortalButton site={site} />
+              </Cell>
             </Row>
           </Table>
           

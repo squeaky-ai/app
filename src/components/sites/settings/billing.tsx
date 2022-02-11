@@ -8,6 +8,7 @@ import { Preferences, Preference } from 'lib/preferences';
 import { BillingTable } from 'components/sites/settings/billing-table';
 import { BillingPlansTable } from 'components/sites/settings/billing-plans.table';
 import { PlanChanged } from 'components/sites/settings/plan-changed';
+import { useToasts } from 'hooks/use-toasts';
 import { PlansCurrency } from 'types/graphql';
 import type { Site } from 'types/graphql';
 
@@ -19,6 +20,7 @@ export const Billing: FC<Props> = ({ site }) => {
   const ref = React.useRef<PlanChanged>(null);
 
   const router = useRouter();
+  const toasts = useToasts();
 
   const { loading, billing } = useBilling();
 
@@ -28,13 +30,22 @@ export const Billing: FC<Props> = ({ site }) => {
     if (ref.current) ref.current.show(name);
   };
 
+  const removeQueryParams = () => {
+    router.replace(router.asPath.split('?')[0], undefined, { shallow: true });
+  };
+
   React.useEffect(() => {
     const cur = Preferences.getString(Preference.CURRENCY);
     if (cur) setCurrency(cur as PlansCurrency);
 
-    if (router.query.success) {
+    if (router.query.billing_setup_success === '1') {
       showPlanChangeMessage(site.plan.name);
-      router.replace(router.asPath.replace('?success=1', ''), undefined, { shallow: true });
+      removeQueryParams();
+    }
+
+    if (router.query.billing_setup_success === '0') {
+      toasts.add({ type: 'error', body: 'There was an issue setting up billing, please contact support' });
+      removeQueryParams();
     }
   }, []);
 

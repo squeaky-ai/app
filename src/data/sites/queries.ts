@@ -82,7 +82,6 @@ export const GET_BILLING_QUERY = gql`
         country
         expiry
         cardNumber
-        billingAddress
         billingName
         billingEmail
         transactions {
