@@ -58,7 +58,7 @@ export const Billing: FC<Props> = ({ site }) => {
           {!site.plan.billingValid && (
             <Message
               type='error'
-              message={<p><b>Attention</b>: We had trouble processing your subscription using your chosen payment method. You've been temporarily placed on the free plan. To restore your subscription and unlock your missing data, please update your payment details.</p>}
+              message={<p><b>Attention</b>: We had trouble processing your subscription using your chosen payment method. You&apos;ve been temporarily placed on the free plan. To restore your subscription and unlock your missing data, please update your payment details.</p>}
               button={<BillingPortalButton site={site} message='Manage billing' buttonClassName='primary' />}
             />
           )}
