@@ -7,21 +7,22 @@ import { Container } from 'components/container';
 import { Table, Row, Cell } from 'components/table';
 import { CURRENCY_SYMBOLS } from 'data/common/constants';
 import { Transactions } from 'components/sites/settings/transactions';
+import { BillingPortalButton } from 'components/sites/settings/billing-portal-button';
 import type { Billing } from 'types/billing';
-import type { PlansCurrency, Site } from 'types/graphql';
-import { BillingPortalButton } from './billing-portal-button';
+import type { Site } from 'types/graphql';
 
 interface Props {
   site: Site;
   billing: Billing;
   hasBilling: boolean;
-  currency: PlansCurrency;
 }
 
-export const BillingTable: FC<Props> = ({ site, billing, currency, hasBilling }) => {
+export const BillingTable: FC<Props> = ({ site, billing, hasBilling }) => {
   const router = useRouter();
 
   const plan = billing.plans.find(plan => Number(plan.id) === site.plan.type);
+
+  const currency = billing.billing?.transactions[0]?.currency;
 
   const pricing = plan.pricing
     ? plan.pricing.find(p => p.currency === currency)

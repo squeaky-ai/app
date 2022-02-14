@@ -4,15 +4,13 @@ import { useRouter } from 'next/router';
 import { useBilling } from 'hooks/use-billing';
 import { Spinner } from 'components/spinner';
 import { Tabs } from 'components/tabs';
-import { Preferences, Preference } from 'lib/preferences';
 import { BillingTable } from 'components/sites/settings/billing-table';
 import { BillingPlansTable } from 'components/sites/settings/billing-plans.table';
 import { PlanChanged } from 'components/sites/settings/plan-changed';
+import { BillingPortalButton } from 'components/sites/settings/billing-portal-button';
 import { Message } from 'components/message';
 import { useToasts } from 'hooks/use-toasts';
-import { PlansCurrency } from 'types/graphql';
 import type { Site } from 'types/graphql';
-import { BillingPortalButton } from './billing-portal-button';
 
 interface Props {
   site: Site;
@@ -26,8 +24,6 @@ export const Billing: FC<Props> = ({ site }) => {
 
   const { loading, billing } = useBilling();
 
-  const [currency, setCurrency] = React.useState<PlansCurrency>(PlansCurrency.Eur);
-
   const showPlanChangeMessage = (name: string) => {
     if (ref.current) ref.current.show(name);
   };
@@ -37,9 +33,6 @@ export const Billing: FC<Props> = ({ site }) => {
   };
 
   React.useEffect(() => {
-    const cur = Preferences.getString(Preference.CURRENCY);
-    if (cur) setCurrency(cur as PlansCurrency);
-
     if (router.query.billing_setup_success === '1') {
       showPlanChangeMessage(site.plan.name);
       removeQueryParams();
@@ -80,8 +73,6 @@ export const Billing: FC<Props> = ({ site }) => {
                     site={site}
                     billing={billing} 
                     hasBilling={hasBilling}
-                    currency={currency}
-                    handleCurrencyChange={setCurrency}
                     showPlanChangeMessage={showPlanChangeMessage}
                   />
                 )
@@ -93,8 +84,7 @@ export const Billing: FC<Props> = ({ site }) => {
                   <BillingTable 
                     site={site}
                     billing={billing} 
-                    hasBilling={hasBilling} 
-                    currency={currency}
+                    hasBilling={hasBilling}
                   />
                 )
               }

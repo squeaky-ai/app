@@ -9,7 +9,6 @@ import { Container } from 'components/container';
 import { Checkout } from 'components/sites/settings/checkout';
 import { Select, Option } from 'components/select';
 import { CURRENCY_SYMBOLS } from 'data/common/constants';
-import { Preferences, Preference } from 'lib/preferences';
 import { PlansCurrency, Site } from 'types/graphql';
 import type { Billing } from 'types/billing';
 import type { Plan } from 'types/graphql';
@@ -19,8 +18,6 @@ interface Props {
   site: Site;
   billing: Billing;
   hasBilling: boolean;
-  currency: PlansCurrency;
-  handleCurrencyChange: (currency: PlansCurrency) => void;
   showPlanChangeMessage: (name: string) => void;
 }
 
@@ -28,28 +25,48 @@ const getPricingForCurrency = (plan: Plan, currency: PlansCurrency) => {
   return (plan.pricing || []).find(p => p.currency === currency)?.amount || 0;
 };
 
-export const BillingPlansTable: FC<Props> = ({ site, billing, currency, hasBilling, handleCurrencyChange, showPlanChangeMessage }) => {
+export const BillingPlansTable: FC<Props> = ({ site, billing, hasBilling, showPlanChangeMessage }) => {
+  const [currency, setCurrency] = React.useState<PlansCurrency>(PlansCurrency.Eur);
+
   const planIndex = billing.plans.findIndex(plan => Number(plan.id) === site.plan.type);
+
+  // If they have transactions we do two things:
+  // a) we set the currency to the currency that they have in their billing
+  // b) we hide the currency change select
+  // This is because we don't want to be changing the currency without
+  // changing the payment method. If this comes up they can remove their
+  // payment method and add a new one.
+  const hasTransactions = billing.billing?.transactions?.length;
 
   const onCurrencyChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;
-    Preferences.setString(Preference.CURRENCY, value);
-    handleCurrencyChange(value as PlansCurrency);
+    setCurrency(value as PlansCurrency);
   };
+
+  React.useEffect(() => {
+    if (hasTransactions) {
+      // They should see the table in the currency they're already using
+      setCurrency(billing.billing.transactions[0].currency);
+    }
+  }, [billing.billing]);
 
   return (
     <>
-      <Container className='md'>
-        <p>All plans come with access to our entire range of customer experience products, including analytics, recordings, feedback and heatmap data. To learn more about our full array of features, <Link href='/features'><a target='_blank'>see here</a></Link>.</p>
-      </Container>
+      <div className='currencies'>
+        <Container className='md'>
+          <p>All plans come with access to our entire range of customer experience products, including analytics, recordings, feedback and heatmap data. To learn more about our full array of features, <Link href='/features'><a target='_blank'>see here</a></Link>.</p>
+        </Container>
 
-      <div className='currency-select'>
-        <Label htmlFor='currency'>Currency</Label>
-        <Select name='currency' value={currency} onChange={onCurrencyChange}>
-          <Option value={PlansCurrency.Eur}>Euro</Option>
-          <Option value={PlansCurrency.Gbp}>Pound</Option>
-          <Option value={PlansCurrency.Usd}>Dollar</Option>
-        </Select>
+        {!hasTransactions && (
+          <div className='currency-select'>
+            <Label htmlFor='currency'>Currency</Label>
+            <Select name='currency' value={currency} onChange={onCurrencyChange}>
+              <Option value={PlansCurrency.Eur}>Euro (€)</Option>
+              <Option value={PlansCurrency.Gbp}>GBP (£)</Option>
+              <Option value={PlansCurrency.Usd}>USD ($)</Option>
+            </Select>
+          </div>
+        )}
       </div>
 
       <div className='plan-table'>
