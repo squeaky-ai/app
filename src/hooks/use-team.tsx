@@ -19,7 +19,8 @@ export const useTeam = (): UseSite => {
   const { loading, error, data } = useQuery(GET_TEAM_QUERY, {
     variables: {
       siteId: router.query.site_id as string
-    }
+    },
+    pollInterval: 5000,
   });
 
   const fallback: Team = {
