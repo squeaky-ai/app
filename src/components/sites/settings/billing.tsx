@@ -8,9 +8,11 @@ import { Preferences, Preference } from 'lib/preferences';
 import { BillingTable } from 'components/sites/settings/billing-table';
 import { BillingPlansTable } from 'components/sites/settings/billing-plans.table';
 import { PlanChanged } from 'components/sites/settings/plan-changed';
+import { Message } from 'components/message';
 import { useToasts } from 'hooks/use-toasts';
 import { PlansCurrency } from 'types/graphql';
 import type { Site } from 'types/graphql';
+import { BillingPortalButton } from './billing-portal-button';
 
 interface Props {
   site: Site;
@@ -60,6 +62,14 @@ export const Billing: FC<Props> = ({ site }) => {
 
       {!loading && (
         <div className='billing'>
+          {!site.plan.billingValid && (
+            <Message
+              type='error'
+              message={<p><b>Attention</b>: We had trouble processing your subscription using your chosen payment method. You've been temporarily placed on the free plan. To restore your subscription and unlock your missing data, please update your payment details.</p>}
+              button={<BillingPortalButton site={site} message='Manage billing' buttonClassName='primary' />}
+            />
+          )}
+
           <Tabs
             tabs={[
               {

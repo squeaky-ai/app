@@ -212,6 +212,15 @@
     }
   }
 
+  .message {
+    &.error {
+      p {
+        font-size: 13px;
+        line-height: 20px;
+      }
+    }
+  }
+
   .billing-table {
     .head {
       .cell {

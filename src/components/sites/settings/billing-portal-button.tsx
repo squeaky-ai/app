@@ -7,6 +7,8 @@ import type { Site, SubscriptionsCheckout } from 'types/graphql';
 
 interface Props {
   site: Site;
+  message?: string;
+  buttonClassName: string;
 }
 
 const MUTATION = gql`
@@ -17,7 +19,7 @@ const MUTATION = gql`
   }
 `;
 
-export const BillingPortalButton: FC<Props> = ({ site }) => {
+export const BillingPortalButton: FC<Props> = ({ site, message, buttonClassName }) => {
   const toasts = useToasts();
 
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -44,8 +46,8 @@ export const BillingPortalButton: FC<Props> = ({ site }) => {
   };
 
   return (
-    <Button type='button' className='link' onClick={handlePortalRedirect} disabled={loading}>
-      {loading ? 'Loading...' : 'Update'}
+    <Button type='button' className={buttonClassName} onClick={handlePortalRedirect} disabled={loading}>
+      {loading ? 'Loading...' : message || 'Update'}
     </Button>
   )
 };

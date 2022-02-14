@@ -8,12 +8,14 @@ import { Preference, Preferences } from 'lib/preferences';
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   type: 'success' | 'info' | 'warning' | 'error';
   message: string | React.ReactNode;
+  button?: React.ReactNode;
 }
 
-export const Message: FC<Props> = ({ children, className, type, message, ...rest }) => (
+export const Message: FC<Props> = ({ children, className, type, message, button, ...rest }) => (
   <div className={classnames('message', type, className)} {...rest}>
     <Icon name='error-warning-line' />
     {message}
+    {button}
   </div>  
 );
 

@@ -66,7 +66,7 @@ export const BillingTable: FC<Props> = ({ site, billing, currency, hasBilling })
                 } 
               </Cell>
               <Cell>
-                <BillingPortalButton site={site} />
+                <BillingPortalButton site={site} buttonClassName='link' />
               </Cell>
             </Row>
           </Table>
