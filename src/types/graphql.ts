@@ -1228,6 +1228,7 @@ export type SitesIpBlacklistDeleteInput = {
 
 export type SitesPlan = {
   __typename?: 'SitesPlan';
+  billingValid: Scalars['Boolean'];
   exceeded: Scalars['Boolean'];
   name: Scalars['String'];
   recordingsLimit: Scalars['Int'];

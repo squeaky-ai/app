@@ -25,6 +25,7 @@ export const GET_SITE_QUERY = gql`
       plan {
         type
         name
+        billingValid
       }
       team {
         id
@@ -54,6 +55,7 @@ export const GET_PLAN_QUERY = gql`
         type
         name
         exceeded
+        billingValid
         recordingsLimit
         recordingsLocked
         visitorsLocked

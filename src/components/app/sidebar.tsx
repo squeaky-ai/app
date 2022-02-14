@@ -10,8 +10,10 @@ import { Divider } from 'components/divider';
 import { SidebarAccount } from 'components/app/sidebar-account';
 import { SidebarNested } from 'components/app/sidebar-nested';
 import { Logo } from 'components/logo';
+import { useSidebar } from 'hooks/use-sidebar';
 import { Breakpoints } from 'data/common/constants';
 import { Preferences, Preference } from 'lib/preferences';
+import { OWNER, ADMIN } from 'data/teams/constants';
 import { SidebarLogout } from 'components/app/sidebar-logout';
 import { SidebarCollapse } from 'components/app/sidebar-collapse';
 
@@ -22,6 +24,8 @@ export const Sidebar: FC = () => {
   const [open, setOpen] = React.useState<boolean>(true);
   const [expanded, setExpanded] = React.useState<string[]>([]);
   const [position, setPosition] = React.useState<'left' | 'right'>('left');
+
+  const { sidebar } = useSidebar();
 
   const path = router.asPath;
   const pathname = router.pathname;
@@ -160,30 +164,40 @@ export const Sidebar: FC = () => {
                 <span>Heatmaps</span>
               </a>
             </Link>
-            <Divider />
-            <SidebarNested 
-              name='Settings'
-              icon='settings-3-line'
-              collapse={() => collapse('settings')}
-              expand={() => expand('settings')}
-              expanded={expanded.includes('settings')}
-            >
-              <Link href={`/sites/${siteId}/settings/details`}>
-                <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/settings/details`) })}>
-                  Site
-                </a>
-              </Link>
-              <Link href={`/sites/${siteId}/settings/team`}>
-                <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/settings/team`) })}>
-                  Team
-                </a>
-              </Link>
-              <Link href={`/sites/${siteId}/settings/subscription`}>
-                <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/settings/subscription`) })} data-label='Subscription'>
-                  Subscription
-                </a>
-              </Link>
-            </SidebarNested>
+            {[OWNER, ADMIN].includes(sidebar.role) && (
+              <>
+              <Divider />
+                <SidebarNested 
+                  name='Settings'
+                  icon='settings-3-line'
+                  collapse={() => collapse('settings')}
+                  expand={() => expand('settings')}
+                  expanded={expanded.includes('settings')}
+                  warning={!sidebar.validBilling}
+                >
+                  <Link href={`/sites/${siteId}/settings/details`}>
+                    <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/settings/details`) })}>
+                      Site
+                    </a>
+                  </Link>
+                  <Link href={`/sites/${siteId}/settings/team`}>
+                    <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/settings/team`) })}>
+                      Team
+                    </a>
+                  </Link>
+                  {sidebar.role === OWNER && (
+                    <Link href={`/sites/${siteId}/settings/subscription`}>
+                      <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/settings/subscription`) })} data-label='Subscription'>
+                        Subscription
+                        {!sidebar.validBilling && (
+                          <Icon name='error-warning-fill' className='warning' />
+                        )}
+                      </a>
+                    </Link>
+                  )}
+                </SidebarNested>
+              </>
+            )}
           </div>
         </div>
       </menu>

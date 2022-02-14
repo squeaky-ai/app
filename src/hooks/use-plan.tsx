@@ -23,6 +23,7 @@ export const usePlan = (props: Props): UsePlan => {
     name: '',
     type: 0,
     exceeded: false,
+    billingValid: true,
     recordingsLimit: 500,
     recordingsLocked: 0,
     visitorsLocked: 0,

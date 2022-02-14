@@ -3,6 +3,7 @@ import type { FC, ReactElement } from 'react';
 import { useSite } from 'hooks/use-site';
 import { NotFound } from 'components/sites/not-found';
 import { Unauthorized } from 'components/sites/unauthorized';
+import { useSidebar } from 'hooks/use-sidebar';
 import type { User, Team } from 'types/graphql';
 import type { Site } from 'types/graphql';
 
@@ -25,9 +26,23 @@ export const getTeamMember = (site: Site, user: User): Team | null => {
 
 export const Page: FC<Props> = ({ children, user, scope }) => {
   const { loading, site } = useSite();
+  const { setSidebar } = useSidebar();
 
   const member = getTeamMember(site, user);
   const authorized = scope.length ? scope.includes(member?.role) : true;
+
+  React.useEffect(() => {
+    if (site) {
+      // This is really jank to do here. In the old days you'd use a
+      // selector inside of the sidebar and fetch the data once it's
+      // there, but Apollo doesn't have a way of reading directly from
+      // the cache and being notified of changes.
+      setSidebar({ 
+        role: member?.role, 
+        validBilling: site.plan.billingValid 
+      });
+    }
+  }, [site]);
 
   return (
     <>

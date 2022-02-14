@@ -287,6 +287,23 @@
     }
   }
 
+  .warning {
+    &.icon {
+      color: var(--yellow-500);
+    }
+
+    &.closed {
+      background: var(--yellow-500);
+      border-radius: var(--border-radius-o);
+      display: block;
+      height: .5rem;
+      left: 1.65rem;
+      position: absolute;
+      top: .25rem;
+      width: .5rem;
+    }
+  }
+
   &.open {
     overflow: hidden;
     width: 216px;
@@ -357,7 +374,7 @@
       }
 
       span {
-        display: inline-block;
+        display: inline-flex;
       }
 
       .arrow {
@@ -379,6 +396,7 @@
         .button {
           height: 2.5rem;
           padding: 0.75rem 1rem;
+          position: relative;
           text-align: left;
 
           &:focus-visible {
@@ -528,6 +546,20 @@
         position: absolute;
         width: calc(100% - 3rem);
         z-index: 10;
+      }
+    }
+
+    .warning {
+      &.icon {
+        color: var(--yellow-500);
+        display: inline-block;
+        height: auto;
+        margin: 0 0 0 .5rem;
+        vertical-align: middle;
+      }
+      
+      &.closed {
+        display: none;
       }
     }
   }
