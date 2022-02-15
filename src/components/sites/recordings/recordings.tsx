@@ -14,20 +14,21 @@ import { useRecordings } from 'hooks/use-recordings';
 import { COLUMNS } from 'data/recordings/constants';
 import { getDateRange } from 'lib/dates';
 import { getColumnStyles } from 'lib/tables';
-import { RecordingsSort } from 'types/graphql';
+import { RecordingsSort, } from 'types/graphql';
 import type { TimePeriod, Column } from 'types/common';
-import type { Site, RecordingsFilters } from 'types/graphql';
+import type { Site, Team, RecordingsFilters } from 'types/graphql';
 
 interface Props {
   site: Site;
   filters: RecordingsFilters;
   period: TimePeriod;
   columns: Column[];
+  member: Team;
   selected: string[];
   setSelected: (selected: string[]) => void;
 }
 
-export const Recordings: FC<Props> = ({ site, filters, period, columns, selected, setSelected }) => {
+export const Recordings: FC<Props> = ({ site, filters, period, columns, member, selected, setSelected }) => {
   const [page, setPage] = React.useState<number>(1);
   const [size, setSize] = React.useState<number>(25);
   const [sort, setSort] = React.useState<RecordingsSort>(RecordingsSort.ConnectedAtDesc);
@@ -98,6 +99,7 @@ export const Recordings: FC<Props> = ({ site, filters, period, columns, selected
             key={recording.id} 
             style={rowStyle}
             selected={selected}
+            member={member}
             setSelected={setSelected}
           />
         ))}

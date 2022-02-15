@@ -17,18 +17,18 @@ import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
 import { Emoji, EmojiType } from 'components/emoji';
 import { toNiceDate, toTimeString } from 'lib/dates';
 import { npsColor } from 'lib/feedback';
-import type { Recording } from 'types/graphql';
-import type { Site } from 'types/graphql';
+import type { Site, Recording, Team } from 'types/graphql';
 
 interface Props {
   site: Site;
   recording: Recording;
   style?: React.CSSProperties;
   selected: string[];
+  member: Team;
   setSelected: (selected: string[]) => void;
 }
 
-export const RecordingsItem: FC<Props> = ({ site, recording, style, selected, setSelected }) => {
+export const RecordingsItem: FC<Props> = ({ site, recording, style, member, selected, setSelected }) => {
   const rowActionsRef = React.useRef<Dropdown>();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -148,6 +148,7 @@ export const RecordingsItem: FC<Props> = ({ site, recording, style, selected, se
           <RecordingsShare
             button={<><Icon name='share-line' /> Share</>}
             site={site}
+            member={member}
             recordingId={recording.id}
             onClose={onRowActionClose}
           />

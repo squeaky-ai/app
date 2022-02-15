@@ -1,21 +1,25 @@
 import React from 'react';
 import type { FC } from 'react';
-import type { Site } from 'types/graphql';
+import Link from 'next/link';
 import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { Label } from 'components/label';
 import { Tooltip } from 'components/tooltip';
 import { useToasts } from 'hooks/use-toasts';
+import { MEMBER } from 'data/teams/constants';
+import { pluralise } from 'lib/text';
+import type { Site, Team } from 'types/graphql';
 
 interface Props {
   button: React.ReactChild;
   site: Site;
   recordingId: string;
+  member: Team;
   onClose?: VoidFunction;
 }
 
-export const RecordingsShare: FC<Props> = ({ button, site, recordingId, onClose }) => {
+export const RecordingsShare: FC<Props> = ({ button, site, member, recordingId, onClose }) => {
   const ref = React.useRef<Modal>();
   const input = React.useRef<HTMLInputElement>();
 
@@ -46,6 +50,8 @@ export const RecordingsShare: FC<Props> = ({ button, site, recordingId, onClose 
     }
   };
 
+  const memberShareText = `${site.team.length} ${pluralise('member', site.team)}`;
+
   return (
     <>
       <Button onClick={openModal} disabled={!recordingId}>
@@ -62,7 +68,21 @@ export const RecordingsShare: FC<Props> = ({ button, site, recordingId, onClose 
           </ModalHeader>
           <ModalContents className='recording-share-modal'>
             <Label id='recordings-share-description'>Share with team members</Label>
-            <Tooltip button={<p className='team-members'>{site.team.length} members</p>}>
+            <Tooltip 
+              button={
+                <>
+                  {member.role === MEMBER && (
+                    <p className='team-members'>{memberShareText}</p>
+                  )}
+
+                  {member.role !== MEMBER && (
+                    <Link href={`/sites/${site.id}/settings/team`}>
+                      <a className='team-members'>{memberShareText}</a>
+                    </Link>
+                  )}
+                </>
+              }
+            >
               <ul>
                 {site.team.map(t => (
                   <li key={t.id}>

@@ -80,7 +80,7 @@ export const PlayerWrapper: FC<Props> = ({ user, state, recording, dispatch, fet
   return (
     <div className={classnames('player-page', { open: state.activeTab !== null })}>
       <Page user={user} scope={[]}>
-        {({ site }) => (
+        {({ site, member }) => (
           <>
             <Header className='site-header'>
               <BreadCrumbs 
@@ -89,7 +89,7 @@ export const PlayerWrapper: FC<Props> = ({ user, state, recording, dispatch, fet
               />
 
               <PlayerDetails site={site} recording={recording} />
-              <PlayerActions site={site} recording={recording} />
+              <PlayerActions site={site} member={member} recording={recording} />
             </Header>
 
             {!recording && (

@@ -8,9 +8,9 @@ import { Illustration } from 'components/illustration';
 import { RecordingsItem } from 'components/sites/recordings/recordings-item';
 import { Table, Row, Cell } from 'components/table';
 import { getColumnStyles } from 'lib/tables';
-import { RecordingsSort, Site } from 'types/graphql';
+import { RecordingsSort } from 'types/graphql';
 import { COLUMNS } from 'data/recordings/constants';
-import type { Visitor } from 'types/graphql';
+import type { Visitor, Site, Team } from 'types/graphql';
 import type { Column } from 'types/common';
 
 interface Props {
@@ -20,12 +20,13 @@ interface Props {
   site: Site;
   columns: Column[];
   selected: string[];
+  member: Team;
   setPage: (value: number) => void;
   setSort: (value: RecordingsSort) => void;
   setSelected: (selected: string[]) => void;
 }
 
-export const VisitorsRecording: FC<Props> = ({ site, visitor, page, sort, columns, selected, setSelected, setPage, setSort }) => {
+export const VisitorsRecording: FC<Props> = ({ site, visitor, page, sort, columns, selected, member, setSelected, setPage, setSort }) => {
   const { items, pagination } = visitor.recordings;
 
   const { rowStyle, tableClassNames } = getColumnStyles(COLUMNS, columns);
@@ -70,6 +71,7 @@ export const VisitorsRecording: FC<Props> = ({ site, visitor, page, sort, column
               recording={recording} 
               key={recording.id} 
               style={rowStyle}
+              member={member}
               selected={selected}
               setSelected={setSelected}
             />

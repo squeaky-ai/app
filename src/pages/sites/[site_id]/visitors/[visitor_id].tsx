@@ -68,7 +68,7 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
       </Head>
 
       <Page user={user} scope={[]}>
-        {({ site }) => (
+        {({ site, member }) => (
           <Main className='visitor-view'>
             <BreadCrumbs 
               site={site} 
@@ -120,6 +120,7 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
               setPage={setRecordingPage}
               sort={recordingSort}
               setSort={setRecordingSort}
+              member={member}
               columns={columns}
               selected={selected}
               setSelected={setSelected}
@@ -144,7 +145,7 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
             <VisitorPages 
               visitor={visitor} 
               page={pageviewPage} 
-              setPage={setPageviewPage} 
+              setPage={setPageviewPage}
               sort={pageviewSort}
               setSort={setPageviewSort}
             />

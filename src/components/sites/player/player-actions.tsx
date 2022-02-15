@@ -11,15 +11,15 @@ import { recordingDelete, recordingBookmarked } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
 import { useHistory } from 'hooks/use-history';
 import { Preferences, Preference } from 'lib/preferences';
-import type { Site } from 'types/graphql';
-import type { Recording } from 'types/graphql';
+import type { Recording, Site, Team } from 'types/graphql';
 
 interface Props {
   site: Site;
   recording: Recording;
+  member: Team;
 }
 
-export const PlayerActions: FC<Props> = ({ site, recording }) => {
+export const PlayerActions: FC<Props> = ({ site, recording, member }) => {
   const toast = useToasts();
   const router = useRouter();
   const { history } = useHistory();
@@ -95,6 +95,7 @@ export const PlayerActions: FC<Props> = ({ site, recording }) => {
           button={<Icon name='share-line' />}
           site={site}
           recordingId={recording?.id}
+          member={member}
         />
         <Button onClick={handleDeleteClick} disabled={!recording}>
           <Icon name='delete-bin-line' />
