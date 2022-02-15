@@ -64,12 +64,6 @@ const UsersPreferences: NextPage<ServerSideProps> = ({ user }) => {
                 <p>Receive 1 email per week that contains a snapshot of your key analytics data and user feedback from the past week.</p>
               </li>
               <li>
-                <Toggle checked={communication.monthlyReviewEmail} onChange={handleToggle('monthlyReviewEmail')}>
-                  Monthly Review
-                </Toggle>
-                <p>Receive 1 email per month that contains a snapshot of your key analytics data and user feedback from the past month.</p>
-              </li>
-              <li>
                 <Toggle checked={communication.productUpdatesEmail} onChange={handleToggle('productUpdatesEmail')}>
                   Product Updates
                 </Toggle>
