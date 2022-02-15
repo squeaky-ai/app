@@ -101,7 +101,7 @@ export const InviteTeam: FC<Props> = ({ site }) => {
                 </ModalContents>
                 <ModalFooter>
                   <Button disabled={isSubmitting} type='submit' className='primary'>
-                    Continue
+                    Send invitation
                   </Button>
                   <Button type='button' className='quaternary' onClick={closeModal}>
                     Cancel
