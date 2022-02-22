@@ -15,7 +15,7 @@ interface Props {
   button: React.ReactChild;
   site: Site;
   recordingId: string;
-  member: Team;
+  member?: Team;
   onClose?: VoidFunction;
 }
 
@@ -52,6 +52,10 @@ export const RecordingsShare: FC<Props> = ({ button, site, member, recordingId, 
 
   const memberShareText = `${site.team.length} ${pluralise('member', site.team)}`;
 
+  const isMember = member
+    ? member.role === MEMBER
+    : true;
+
   return (
     <>
       <Button onClick={openModal} disabled={!recordingId}>
@@ -71,11 +75,11 @@ export const RecordingsShare: FC<Props> = ({ button, site, member, recordingId, 
             <Tooltip 
               button={
                 <>
-                  {member.role === MEMBER && (
+                  {isMember && (
                     <p className='team-members'>{memberShareText}</p>
                   )}
 
-                  {member.role !== MEMBER && (
+                  {!isMember && (
                     <Link href={`/sites/${site.id}/settings/team`}>
                       <a className='team-members'>{memberShareText}</a>
                     </Link>
