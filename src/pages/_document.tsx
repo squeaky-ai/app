@@ -27,7 +27,7 @@ class Document extends NextDocument {
           <meta property='og:image:width' content='1200' />
           <meta property='og:image:height' content='630' />
           <meta property='og:site_name' content='Squeaky.ai' />
-          <meta name='theme-color' content='#0768C1' />
+          <meta name='theme-color' content='#001a39' />
           <link rel='apple-touch-icon' sizes='180x180' href={`${BASE_PATH}/apple-touch-icon.png`} />
           <link rel='icon' type='image/png' sizes='32x32' href={`${BASE_PATH}/favicon-32x32.png`} />
           <link rel='icon' type='image/png' sizes='16x16' href={`${BASE_PATH}/favicon-16x16.png`} />
