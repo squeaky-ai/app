@@ -2,9 +2,7 @@ const { API_HOST, NODE_ENV } = process.env;
 
 const IS_DEV = NODE_ENV !== 'production';
 
-// In production the whole app runs under the /app
-// subdomain but it's annoying in development
-const BASE_PATH = IS_DEV ? '' : '/app';
+const BASE_PATH = '/app'
 
 // In production all the assets are served from S3/
 // Cloudfront, but in development they are loaded from
