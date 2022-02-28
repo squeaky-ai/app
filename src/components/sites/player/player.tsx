@@ -16,8 +16,9 @@ interface Props {
 }
 
 export class Player extends React.Component<Props> {
-  private container: Element;
   public replayer: Replayer;
+
+  private container: Element;
 
   private observer = new ResizeObserver(debounce(() => {
     this.squidgeToFit();
@@ -35,6 +36,7 @@ export class Player extends React.Component<Props> {
 
     this.squidgeToFit();
     this.container = document.getElementById('player');
+    this.hijackConsoleWarn();
 
     // The recording might already be in the cache 
     // so kick things off right away
@@ -97,6 +99,18 @@ export class Player extends React.Component<Props> {
 
     this.props.dispatch({ type: 'zoom', value: constraint });
   };
+
+  private hijackConsoleWarn() {
+    const iframeWindow = this.replayer.iframe.contentWindow as Window & typeof globalThis;
+
+    // Spy on rrweb warning of elements being missing
+    // so we can tell the user that something is wrong
+    iframeWindow.console.warn = (...args) => {
+      if (args.toString().includes('[replayer]')) {
+        this.props.dispatch({ type: 'incomplete', value: true });
+      }
+    };
+  }
 
   public render(): JSX.Element {
     return (

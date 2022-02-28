@@ -89,7 +89,7 @@ export const PlayerWrapper: FC<Props> = ({ user, state, recording, dispatch, fet
               />
 
               <PlayerDetails site={site} recording={recording} />
-              <PlayerActions site={site} member={member} recording={recording} />
+              <PlayerActions site={site} member={member} recording={recording} state={state} />
             </Header>
 
             {!recording && (

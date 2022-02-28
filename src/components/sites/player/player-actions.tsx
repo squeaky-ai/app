@@ -12,14 +12,17 @@ import { useToasts } from 'hooks/use-toasts';
 import { useHistory } from 'hooks/use-history';
 import { Preferences, Preference } from 'lib/preferences';
 import type { Recording, Site, Team } from 'types/graphql';
+import type { PlayerState } from 'types/player';
+import { Tooltip } from 'components/tooltip';
 
 interface Props {
   site: Site;
   recording: Recording;
   member: Team;
+  state: PlayerState;
 }
 
-export const PlayerActions: FC<Props> = ({ site, recording, member }) => {
+export const PlayerActions: FC<Props> = ({ site, recording, member, state }) => {
   const toast = useToasts();
   const router = useRouter();
   const { history } = useHistory();
@@ -88,6 +91,11 @@ export const PlayerActions: FC<Props> = ({ site, recording, member }) => {
   return (
     <>
       <div className='recording-actions'>
+        {state.incomplete && (
+          <Tooltip buttonClassName='incomplete' fluid button={<Icon name='error-warning-line' />}>
+            This session is incomplete and playback may be affected
+          </Tooltip>
+        )}
         <Button onClick={handleBookmark} className={classnames('boookmark', { active: recording?.bookmarked })} disabled={!recording}>
           <Icon name='bookmark-3-line' />
         </Button>

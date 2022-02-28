@@ -18,6 +18,7 @@ const initialState: PlayerState = {
   playbackSpeed: 1,
   activeTab: 0,
   skipInactivity: true,
+  incomplete: false,
   zoom: 1,
 };
 

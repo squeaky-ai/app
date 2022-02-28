@@ -74,6 +74,13 @@
           color: var(--blue-500);
         }
       }
+
+      .incomplete {
+        .icon {
+          color: var(--rose-500);
+          pointer-events: none;
+        }
+      }
     }
   }
 
