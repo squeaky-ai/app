@@ -382,7 +382,7 @@ export const teamDelete = async (input: TeamDeleteInput): Promise<null> => {
 export const tagCreate = async (input: TagsCreateInput): Promise<Tag> => {
   const { data } = await client.mutate<{ tagCreate: Tag }>({
     mutation: CREATE_TAG_MUTATION,
-    variables: input,
+    variables: { input },
   });
 
   cache.modify({
@@ -410,7 +410,7 @@ export const tagCreate = async (input: TagsCreateInput): Promise<Tag> => {
 export const tagRemove = async (input: TagsRemoveInput): Promise<null> => {
   const { data } = await client.mutate({
     mutation: REMOVE_TAG_MUTATION,
-    variables: input,
+    variables: { input },
     update(cache) {
       const normalizedId = cache.identify({ id: input.tagId, __typename: 'Tag' });
       cache.evict({ id: normalizedId });
@@ -424,7 +424,7 @@ export const tagRemove = async (input: TagsRemoveInput): Promise<null> => {
 export const tagDelete = async (input: TagsDeleteInput): Promise<null> => {
   const { data } = await client.mutate({
     mutation: DELETE_TAG_MUTATION,
-    variables: input,
+    variables: { input },
     update(cache) {
       const normalizedId = cache.identify({ id: input.tagId, __typename: 'Tag' });
       cache.evict({ id: normalizedId });
@@ -438,7 +438,7 @@ export const tagDelete = async (input: TagsDeleteInput): Promise<null> => {
 export const tagsDelete = async (input: TagsDeleteBulkInput): Promise<null> => {
   const { data } = await client.mutate({
     mutation: DELETE_TAGS_MUTATION,
-    variables: input,
+    variables: { input },
     update(cache) {
       input.tagIds.forEach(id => {
         const normalizedId = cache.identify({ id, __typename: 'Tag' });
@@ -455,7 +455,7 @@ export const tagsDelete = async (input: TagsDeleteBulkInput): Promise<null> => {
 export const tagUpdate = async (input: TagsUpdateInput): Promise<Tag> => {
   const { data } = await client.mutate({
     mutation: UPDATE_TAG_MUTATION,
-    variables: input
+    variables: { input },
   });
 
   return data.tagUpdate;
@@ -464,7 +464,7 @@ export const tagUpdate = async (input: TagsUpdateInput): Promise<Tag> => {
 export const noteCreate = async (input: NotesCreateInput): Promise<Note> => {
   const { data } = await client.mutate<{ noteCreate: Note }>({
     mutation: CREATE_NOTE_MUTATION,
-    variables: input,
+    variables: { input },
   });
 
   cache.modify({
@@ -496,7 +496,7 @@ export const noteCreate = async (input: NotesCreateInput): Promise<Note> => {
 export const noteDelete = async (input: NotesDeleteInput): Promise<null> => {
   const { data } = await client.mutate({
     mutation: DELETE_NOTE_MUTATION,
-    variables: input,
+    variables: { input },
     update(cache) {
       const normalizedId = cache.identify({ id: input.noteId, __typename: 'Note' });
       cache.evict({ id: normalizedId });
@@ -510,7 +510,7 @@ export const noteDelete = async (input: NotesDeleteInput): Promise<null> => {
 export const noteUpdate = async (input: NotesUpdateInput): Promise<Note> => {
   const { data } = await client.mutate({
     mutation: UPDATE_NOTE_MUTATION,
-    variables: input
+    variables: { input },
   });
 
   return data.noteUpdate;
@@ -572,7 +572,7 @@ export const recordingsViewed = async (input: RecordingsViewedBulkInput): Promis
 export const visitorStarred = async (input: VisitorsStarredInput): Promise<Visitor> => {
   const { data } = await client.mutate({
     mutation: VISITOR_STARRED_MUTATION,
-    variables: input
+    variables: { input },
   });
 
   return data.visitorStarred;
@@ -581,7 +581,7 @@ export const visitorStarred = async (input: VisitorsStarredInput): Promise<Visit
 export const feedbackUpdate = async (input: FeedbackUpdateInput): Promise<Feedback> => {
   const { data } = await client.mutate({
     mutation: FEEDBACK_UPDATE_MUTATION,
-    variables: { input }
+    variables: { input },
   });
 
   return data.feedback;
@@ -590,7 +590,7 @@ export const feedbackUpdate = async (input: FeedbackUpdateInput): Promise<Feedba
 export const visitorDelete = async (input: VisitorsDeleteInput): Promise<null> => {
   const { data } = await client.mutate({
     mutation: VISITOR_DELETE_MUTATION,
-    variables: input,
+    variables: { input },
     update(cache) {
       const normalizedId = cache.identify({ id: input.visitorId, __typename: 'Visitor' });
       cache.evict({ id: normalizedId });

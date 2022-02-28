@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const CREATE_TAG_MUTATION = gql`
-  mutation TagCreate($siteId: ID!, $recordingId: ID!, $name: String!) {
-    tagCreate(input: { siteId: $siteId, recordingId: $recordingId, name: $name }) {
+  mutation TagCreate($input: TagsCreateInput!) {
+    tagCreate(input: $input) {
       id
       name
     }
@@ -10,32 +10,32 @@ export const CREATE_TAG_MUTATION = gql`
 `;
 
 export const REMOVE_TAG_MUTATION = gql`
-  mutation TagRemove($siteId: ID!, $recordingId: ID!, $tagId: ID!) {
-    tagRemove(input: { siteId: $siteId, recordingId: $recordingId, tagId: $tagId }) {
+  mutation TagRemove($input: TagsRemoveInput!) {
+    tagRemove(input: $input) {
       id
     }
   }
 `;
 
 export const DELETE_TAG_MUTATION = gql`
-  mutation TagDelete($siteId: ID!, $tagId: ID!) {
-    tagDelete(input: { siteId: $siteId, tagId: $tagId }) {
+  mutation TagDelete($input: TagsDeleteInput!) {
+    tagDelete(input: $input) {
       id
     }
   }
 `;
 
 export const DELETE_TAGS_MUTATION = gql`
-  mutation TagsDelete($siteId: ID!, $tagIds: [ID!]!) {
-    tagsDelete(input: { siteId: $siteId, tagIds: $tagIds }) {
+  mutation TagsDelete($input: TagsDeleteBulkInput!) {
+    tagsDelete(input: $input) {
       id
     }
   }
 `;
 
 export const UPDATE_TAG_MUTATION = gql`
-  mutation TagUpdate($siteId: ID!, $tagId: ID!, $name: String!) {
-    tagUpdate(input: { siteId: $siteId, tagId: $tagId, name: $name }) {
+  mutation TagUpdate($input: TagsUpdateInput!) {
+    tagUpdate(input: $input) {
       id
       name
     }
@@ -43,8 +43,8 @@ export const UPDATE_TAG_MUTATION = gql`
 `;
 
 export const CREATE_NOTE_MUTATION = gql`
-  mutation NoteCreate($siteId: ID!, $recordingId: ID!, $body: String!, $timestamp: Int) {
-    noteCreate(input: { siteId: $siteId, recordingId: $recordingId, body: $body, timestamp: $timestamp }) {
+  mutation NoteCreate($input: NotesCreateInput!) {
+    noteCreate(input: $input) {
       id
       body
       timestamp
@@ -56,16 +56,16 @@ export const CREATE_NOTE_MUTATION = gql`
 `;
 
 export const DELETE_NOTE_MUTATION = gql`
-  mutation NoteDelete($siteId: ID!, $recordingId: ID!, $noteId: ID!) {
-    noteDelete(input: { siteId: $siteId, recordingId: $recordingId, noteId: $noteId }) {
+  mutation NoteDelete($input: NotesDeleteInput!) {
+    noteDelete(input: $input) {
       id
     }
   }
 `;
 
 export const UPDATE_NOTE_MUTATION = gql`
-  mutation NoteUpdate($siteId: ID!, $recordingId: ID!, $noteId: ID!, $body: String, $timestamp: Int) {
-    noteUpdate(input: { siteId: $siteId, recordingId: $recordingId, noteId: $noteId, body: $body, timestamp: $timestamp }) {
+  mutation NoteUpdate($input: NotesUpdateInput!) {
+    noteUpdate(input: $input) {
       id
       body
       timestamp
