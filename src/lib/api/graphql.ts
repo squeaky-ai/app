@@ -1,5 +1,5 @@
 import { uniq } from 'lodash';
-import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
+import { ApolloClient, InMemoryCache, TypedDocumentNode, gql } from '@apollo/client';
 
 import {
   Query,
@@ -162,6 +162,10 @@ export const client = new ApolloClient({
   uri: '/api/graphql',
   ssrMode: typeof window === 'undefined',
 });
+
+export const getGqlString = (document: TypedDocumentNode): string => {
+  return document.loc?.source?.body;
+};
 
 export const createSite = async (name: string, url: string): Promise<Site> => {
   const { data } = await client.mutate({
