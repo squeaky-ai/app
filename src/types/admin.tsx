@@ -5,6 +5,7 @@ export type AdminTab = 'users' | 'sites';
 export type Admin = {
   usersAdmin: User[];
   sitesAdmin: Site[];
+  activeUsersAdmin: number;
 }
 
 export type UserSort = 

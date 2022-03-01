@@ -40,12 +40,18 @@ const Admin: NextPage<ServerSideProps> = () => {
       <Container className='lg centered'>
         <h3>
           Admin Dashboard
-          <Link href='/sites'>
-            <a>
-              Squeaky App
-              <Icon name='arrow-right-line' />
-            </a>
-          </Link>
+          <div>
+            <p>
+              Active visitors: <b>{admin.activeUsersAdmin}</b>
+            </p>
+            <span className='divider' />
+            <Link href='/sites'>
+              <a>
+                Squeaky App
+                <Icon name='arrow-right-line' />
+              </a>
+            </Link>
+          </div>
         </h3> 
         <Tabs tab={tab} setTab={setTab} />
 

@@ -2,6 +2,7 @@ import { gql } from '@apollo/client';
 
 export const GET_ADMIN_QUERY = gql`
   query GetAdmin { 
+    activeUsersAdmin
     sitesAdmin {
       id
       name
