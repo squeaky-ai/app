@@ -3,12 +3,12 @@ import type { FC } from 'react';
 import Image from 'next/image';
 import type { ImageProps } from 'next/image';
 
-import wordpress from '../../public/platforms/wordpress.png';
-import shopify from '../../public/platforms/shopify.png';
-import wix from '../../public/platforms/wix.png';
-import webflow from '../../public/platforms/webflow.png';
-import magento from '../../public/platforms/magento.png';
-import drupal from '../../public/platforms/drupal.png';
+import wordpress from '../../public/platforms/wordpress.webp';
+import shopify from '../../public/platforms/shopify.webp';
+import wix from '../../public/platforms/wix.webp';
+import webflow from '../../public/platforms/webflow.webp';
+import magento from '../../public/platforms/magento.webp';
+import drupal from '../../public/platforms/drupal.webp';
 
 type PlatformType = 'wordpress' | 'shopify' | 'wix' | 'webflow' | 'magento' | 'drupal';
 
