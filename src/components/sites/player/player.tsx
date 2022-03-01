@@ -2,6 +2,7 @@ import React from 'react';
 import type { Replayer } from 'rrweb';
 import { debounce } from 'lodash';
 import { Buffering } from 'components/sites/player/buffering';
+import { PlayerIncomplete } from './player-incomplete';
 import { recordingViewed } from 'lib/api/graphql';
 import { initReplayer } from 'lib/replayer';
 import { PlayerState, Action, PlayerStatus } from 'types/player';
@@ -106,7 +107,7 @@ export class Player extends React.Component<Props> {
     // Spy on rrweb warning of elements being missing
     // so we can tell the user that something is wrong
     iframeWindow.console.warn = (...args) => {
-      if (args.toString().includes('[replayer]')) {
+      if (/Node with id .* not found/.test(args.toString())) {
         this.props.dispatch({ type: 'incomplete', value: true });
       }
     };
@@ -114,11 +115,19 @@ export class Player extends React.Component<Props> {
 
   public render(): JSX.Element {
     return (
-      <main id='player'>
-        <div className='player-container' style={{ transform: `scale(${this.props.state.zoom})` }}>
-          {this.props.state.status === PlayerStatus.LOADING && <Buffering />}
-        </div>
-      </main>
+      <>
+        <main id='player'>
+          <div className='player-container' style={{ transform: `scale(${this.props.state.zoom})` }}>
+            {this.props.state.status === PlayerStatus.LOADING && <Buffering />}
+          </div>
+        </main>
+
+
+        <PlayerIncomplete 
+          show={this.props.state.incomplete} 
+          replayer={this.replayer}
+        />
+      </>
     );
   }
 }
