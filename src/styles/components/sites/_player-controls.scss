@@ -70,6 +70,12 @@
         width: 100%;
       }
 
+      &.incomplete {
+        .icon {
+          color: var(--rose-500);
+        }
+      }
+
       &.active {
         i {
           color: var(--blue-500);

@@ -2,7 +2,6 @@ import React from 'react';
 import type { Replayer } from 'rrweb';
 import { debounce } from 'lodash';
 import { Buffering } from 'components/sites/player/buffering';
-import { PlayerIncomplete } from './player-incomplete';
 import { recordingViewed } from 'lib/api/graphql';
 import { initReplayer } from 'lib/replayer';
 import { PlayerState, Action, PlayerStatus } from 'types/player';
@@ -112,8 +111,6 @@ export class Player extends React.Component<Props> {
         this.props.dispatch({ type: 'incomplete', value: true });
       }
 
-      console.log('!!');
-
       this.originalConsoleWarn(args);
     };
   }
@@ -130,12 +127,6 @@ export class Player extends React.Component<Props> {
             {this.props.state.status === PlayerStatus.LOADING && <Buffering />}
           </div>
         </main>
-
-
-        <PlayerIncomplete 
-          show={this.props.state.incomplete} 
-          replayer={this.replayer}
-        />
       </>
     );
   }
