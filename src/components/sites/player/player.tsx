@@ -20,6 +20,7 @@ export class Player extends React.Component<Props> {
   public replayer: Replayer;
 
   private container: Element;
+  private originalConsoleWarn = console.warn;
 
   private observer = new ResizeObserver(debounce(() => {
     this.squidgeToFit();
@@ -48,6 +49,8 @@ export class Player extends React.Component<Props> {
 
   public componentWillUnmount() {
     this.observer.disconnect();
+
+    this.unhijackConsoleWarn();
 
     this.replayer?.pause();
     this.replayer = null;
@@ -102,18 +105,21 @@ export class Player extends React.Component<Props> {
   };
 
   private hijackConsoleWarn() {
-    const iframeWindow = this.replayer.iframe.contentWindow as Window & typeof globalThis;
-
     // Spy on rrweb warning of elements being missing
     // so we can tell the user that something is wrong
-    iframeWindow.console.warn = (message, ...args) => {
-      console.log('args1', message);
-      console.log('args2', args[0]);
-      console.log('args3', args[1]);
-      if (/Node with id .* not found/.test(message)) {
+    console.warn = (...args) => {
+      if (/Node with id .* not found/.test(args.toString())) {
         this.props.dispatch({ type: 'incomplete', value: true });
       }
+
+      console.log('!!');
+
+      this.originalConsoleWarn(args);
     };
+  }
+
+  private unhijackConsoleWarn() {
+    console.warn = this.originalConsoleWarn;
   }
 
   public render(): JSX.Element {
