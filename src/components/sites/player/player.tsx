@@ -106,8 +106,11 @@ export class Player extends React.Component<Props> {
 
     // Spy on rrweb warning of elements being missing
     // so we can tell the user that something is wrong
-    iframeWindow.console.warn = (...args) => {
-      if (/Node with id .* not found/.test(args.toString())) {
+    iframeWindow.console.warn = (message, ...args) => {
+      console.log('args1', message);
+      console.log('args2', args[0]);
+      console.log('args3', args[1]);
+      if (/Node with id .* not found/.test(message)) {
         this.props.dispatch({ type: 'incomplete', value: true });
       }
     };
