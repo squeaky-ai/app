@@ -25,7 +25,6 @@ export const GET_SITE_QUERY = gql`
       plan {
         type
         name
-        exceeded
         billingValid
       }
       team {
@@ -52,7 +51,6 @@ export const GET_PLAN_QUERY = gql`
     site(siteId: $siteId) {
       id
       plan {
-        id
         type
         name
         exceeded
