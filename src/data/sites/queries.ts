@@ -25,6 +25,7 @@ export const GET_SITE_QUERY = gql`
       plan {
         type
         name
+        exceeded
         billingValid
       }
       team {
