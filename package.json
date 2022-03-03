@@ -13,32 +13,32 @@
     "codegen": "graphql-codegen"
   },
   "dependencies": {
-    "@apollo/client": "^3.5.8",
-    "axios": "^0.25.0",
+    "@apollo/client": "^3.5.10",
+    "axios": "^0.26.0",
     "classnames": "^2.3.1",
     "date-fns": "^2.28.0",
-    "flag-icons": "^6.0.3",
-    "focus-trap-react": "^8.9.1",
+    "flag-icons": "^6.1.1",
+    "focus-trap-react": "^8.9.2",
     "formik": "^2.2.9",
     "graphql": "^16.3.0",
     "lodash": "^4.17.21",
-    "next": "^12.0.10",
+    "next": "^12.1.0",
     "rc-pagination": "^3.1.15",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "recharts": "^2.1.8",
+    "recharts": "^2.1.9",
     "remixicon": "^2.5.0",
-    "rrweb": "^1.1.1",
-    "sass": "^1.49.4",
+    "rrweb": "^1.1.2",
+    "sass": "^1.49.9",
     "yup": "^0.32.11"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^2.4.0",
-    "@graphql-codegen/typescript": "^2.4.2",
-    "@types/react": "^17.0.38",
-    "@types/react-dom": "^17.0.11",
-    "eslint": "8.8.0",
-    "eslint-config-next": "^12.0.10",
-    "typescript": "^4.5.5"
+    "@graphql-codegen/cli": "^2.6.2",
+    "@graphql-codegen/typescript": "^2.4.5",
+    "@types/react": "^17.0.39",
+    "@types/react-dom": "^17.0.13",
+    "eslint": "8.10.0",
+    "eslint-config-next": "^12.1.0",
+    "typescript": "^4.6.2"
   }
 }
