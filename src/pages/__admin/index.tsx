@@ -2,6 +2,7 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
+import { sum } from 'lodash';
 import { Icon } from 'components/icon';
 import { Container } from 'components/container';
 import { Error } from 'components/error';
@@ -42,7 +43,7 @@ const Admin: NextPage<ServerSideProps> = () => {
           Admin Dashboard
           <div>
             <p>
-              Active visitors: <b>{admin.activeUsersAdmin}</b>
+              Active visitors: <b>{sum(admin.activeVisitorsAdmin.map(m => m.count))}</b>
             </p>
             <span className='divider' />
             <Link href='/sites'>
@@ -69,7 +70,7 @@ const Admin: NextPage<ServerSideProps> = () => {
         {!loading && tab === 'sites' && (
           <>
             <SitesGrowth sites={admin.sitesAdmin} />
-            <SitesTable sites={admin.sitesAdmin} />
+            <SitesTable sites={admin.sitesAdmin} activeVisitors={admin.activeVisitorsAdmin} />
           </>
         )}
       </Container>

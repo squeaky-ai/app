@@ -8,9 +8,10 @@ import type { Site } from 'types/graphql';
 
 interface Props {
   site: Site;
+  activeVisitors: number;
 }
 
-export const SitesTableRow: FC<Props> = ({ site }) => (
+export const SitesTableRow: FC<Props> = ({ site, activeVisitors }) => (
   <Row>
     <Cell>
       <Link href={`/sites/${site.id}/dashboard`}>
@@ -39,5 +40,6 @@ export const SitesTableRow: FC<Props> = ({ site }) => (
     </Cell>
     <Cell>{site.team.length}</Cell>
     <Cell>{toNiceDate(site.createdAt)}</Cell>
+    <Cell>{activeVisitors}</Cell>
   </Row>
 );

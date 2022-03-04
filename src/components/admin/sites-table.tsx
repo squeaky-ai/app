@@ -3,11 +3,12 @@ import type { FC } from 'react';
 import { Table, Cell, Row } from 'components/table';
 import { Sort } from 'components/sort';
 import { SitesTableRow } from 'components/admin/sites-table-row';
-import type { Site } from 'types/graphql';
 import type { SitesSort } from 'types/admin';
+import type { ActiveVisitorCount, Site } from 'types/graphql';
 
 interface Props {
   sites: Site[];
+  activeVisitors: ActiveVisitorCount[];
 }
 
 const sortSites = (sort: SitesSort) => (a: Site, b: Site) => {
@@ -31,7 +32,7 @@ const sortSites = (sort: SitesSort) => (a: Site, b: Site) => {
   }
 };
 
-export const SitesTable: FC<Props> = ({ sites }) => {
+export const SitesTable: FC<Props> = ({ sites, activeVisitors }) => {
   const [sort, setSort] = React.useState<SitesSort>('created_at__desc');
 
   const results = [...sites].sort(sortSites(sort));
@@ -80,9 +81,14 @@ export const SitesTable: FC<Props> = ({ sites }) => {
             onDesc={() => setSort('created_at__desc')} 
           />
         </Cell>
+        <Cell>Active Visitors</Cell>
       </Row>
       {results.map(site => (
-        <SitesTableRow key={site.id} site={site} />
+        <SitesTableRow 
+          key={site.id} 
+          site={site}
+          activeVisitors={activeVisitors.find(a => a.siteId === site.uuid)?.count || 0}
+        />
       ))}
     </Table>
   );

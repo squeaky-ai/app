@@ -18,6 +18,12 @@ export type Scalars = {
   ISO8601DateTime: any;
 };
 
+export type ActiveVisitorCount = {
+  __typename?: 'ActiveVisitorCount';
+  count: Scalars['Int'];
+  siteId: Scalars['ID'];
+};
+
 export type Analytics = {
   __typename?: 'Analytics';
   browsers: AnalyticsBrowsers;
@@ -934,6 +940,7 @@ export enum PlansCurrency {
 
 export type Query = {
   __typename?: 'Query';
+  activeVisitorsAdmin: Array<Maybe<ActiveVisitorCount>>;
   feedback?: Maybe<Feedback>;
   plans: Array<Plan>;
   site?: Maybe<Site>;

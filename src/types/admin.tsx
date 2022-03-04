@@ -1,11 +1,11 @@
-import type { User, Site } from 'types/graphql';
+import type { User, Site, ActiveVisitorCount } from 'types/graphql';
 
 export type AdminTab = 'users' | 'sites';
 
 export type Admin = {
   usersAdmin: User[];
   sitesAdmin: Site[];
-  activeUsersAdmin: number;
+  activeVisitorsAdmin: ActiveVisitorCount[];
 }
 
 export type UserSort = 

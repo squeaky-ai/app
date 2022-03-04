@@ -14,7 +14,7 @@ export const useAdmin = (): UseAdmin => {
   const fallback: Admin = {
     sitesAdmin: [],
     usersAdmin: [],
-    activeUsersAdmin: 0,
+    activeVisitorsAdmin: [],
   };
 
   return {
