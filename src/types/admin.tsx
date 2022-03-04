@@ -24,4 +24,6 @@ export type SitesSort =
   'team_count__asc' |
   'team_count__desc' |
   'created_at__asc' |
-  'created_at__desc';
+  'created_at__desc' | 
+  'active_visitors__asc' |
+  'active_visitors__desc';

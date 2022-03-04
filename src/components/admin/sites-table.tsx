@@ -11,29 +11,37 @@ interface Props {
   activeVisitors: ActiveVisitorCount[];
 }
 
-const sortSites = (sort: SitesSort) => (a: Site, b: Site) => {
-  switch(sort) {
-    case 'name__asc':
-      return a.name.localeCompare(b.name );
-    case 'name__desc':
-      return b.name.localeCompare(a.name);
-    case 'plan_name__asc':
-      return a.plan.name.localeCompare(b.plan.name);
-    case 'plan_name__desc':
-      return b.plan.name.localeCompare(a.plan.name);
-    case 'team_count__asc':
-      return a.team.length - b.team.length;
-    case 'team_count__desc':
-      return b.team.length - a.team.length;
-    case 'created_at__asc':
-      return new Date(a.createdAt).valueOf() - new Date(b.createdAt).valueOf();
-    case 'created_at__desc':
-      return new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf();
-  }
-};
-
 export const SitesTable: FC<Props> = ({ sites, activeVisitors }) => {
   const [sort, setSort] = React.useState<SitesSort>('created_at__desc');
+
+  const getSiteActiveVisitorsCount = (uuid: string) => {
+    return activeVisitors.find(a => a.siteId === uuid)?.count || 0;
+  };
+
+  const sortSites = (sort: SitesSort) => (a: Site, b: Site) => {
+    switch(sort) {
+      case 'name__asc':
+        return a.name.localeCompare(b.name );
+      case 'name__desc':
+        return b.name.localeCompare(a.name);
+      case 'plan_name__asc':
+        return a.plan.name.localeCompare(b.plan.name);
+      case 'plan_name__desc':
+        return b.plan.name.localeCompare(a.plan.name);
+      case 'team_count__asc':
+        return a.team.length - b.team.length;
+      case 'team_count__desc':
+        return b.team.length - a.team.length;
+      case 'created_at__asc':
+        return new Date(a.createdAt).valueOf() - new Date(b.createdAt).valueOf();
+      case 'created_at__desc':
+        return new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf();
+      case 'active_visitors__asc':
+        return getSiteActiveVisitorsCount(a.uuid) - getSiteActiveVisitorsCount(b.uuid);
+      case 'active_visitors__desc':
+        return getSiteActiveVisitorsCount(b.uuid) - getSiteActiveVisitorsCount(a.uuid);
+    }
+  };
 
   const results = [...sites].sort(sortSites(sort));
 
@@ -81,13 +89,21 @@ export const SitesTable: FC<Props> = ({ sites, activeVisitors }) => {
             onDesc={() => setSort('created_at__desc')} 
           />
         </Cell>
-        <Cell>Active Visitors</Cell>
+        <Cell>
+          Active Visitors
+          <Sort 
+            name='active_visitors' 
+            order={sort} 
+            onAsc={() => setSort('active_visitors__asc')} 
+            onDesc={() => setSort('active_visitors__desc')} 
+          />
+        </Cell>
       </Row>
       {results.map(site => (
         <SitesTableRow 
           key={site.id} 
           site={site}
-          activeVisitors={activeVisitors.find(a => a.siteId === site.uuid)?.count || 0}
+          activeVisitors={getSiteActiveVisitorsCount(site.uuid)}
         />
       ))}
     </Table>
