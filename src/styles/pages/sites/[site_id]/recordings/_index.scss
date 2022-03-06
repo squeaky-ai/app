@@ -26,9 +26,26 @@
         width: 100%;
       }
 
+      @include breakpoint-md {
+        flex-direction: row;
+        margin: 1rem 0 0 0;
+      }
+
       .period {
         @include breakpoint-md {
           margin: 1.5rem 0;
+        }
+
+        @include breakpoint-sm {
+          margin: 0;
+          padding: 0;
+
+          .dropdown {
+            .button {
+              margin: 0 1rem 0 0;
+              padding: 0;
+            }
+          }
         }
       }
 
@@ -269,60 +286,10 @@
 
   .recordings-list {
     margin-bottom: 2rem;
+    min-width: 1024px;
 
     .row {
       grid-template-columns: 58px 105px 165px 1fr 1fr 1fr 1fr 2fr 1fr 90px 70px;
-
-      @include breakpoint-md {
-        &:not(.head) {
-          display: grid;
-          grid-gap: .75rem 1rem;
-          grid-template-areas: 'id blank status'
-                               'date pages duration';
-          grid-template-columns: 33% !important;
-        }
-
-        .cell {
-          padding: 0;
-
-          &:nth-of-type(1),
-          &:nth-of-type(4),
-          &:nth-of-type(8),
-          &:nth-of-type(9),
-          &:nth-of-type(10),
-          &:nth-of-type(11) {
-            display: none;
-          }
-
-          &:nth-of-type(2) {
-            grid-area: status;
-            text-align: right;
-          }
-
-          &:nth-of-type(3) {
-            color: var(--gray-blue-800);
-            font-weight: var(--font-weight-bold);
-            grid-area: id;
-            text-decoration: none;
-  
-            .tooltip {
-              display: none;
-            }
-          }
-
-          &:nth-of-type(5) {
-            grid-area: date;
-          }
-
-          &:nth-of-type(6) {
-            grid-area: duration;
-          }
-
-          &:nth-of-type(7) {
-            grid-area: pages;
-          }
-        }
-      }
     }
   
     & + .button {

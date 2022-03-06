@@ -10,7 +10,7 @@ import { PageSize } from 'components/sites/page-size';
 import { Tooltip } from 'components/tooltip';
 import { Spinner } from 'components/spinner';
 import { VisitorsItem } from 'components/sites/visitors/visitors-item';
-import { Table, Row, Cell } from 'components/table';
+import { TableWrapper, Table, Row, Cell } from 'components/table';
 import { DismissableMessage } from 'components/message';
 import { Error } from 'components/error';
 import { Preference } from 'lib/preferences';
@@ -62,82 +62,84 @@ export const Visitors: FC<Props> = ({ site, columns, filters }) => {
         message={<p>The columns using the <Icon name='link-m' /> link icon are used to display linked user data from your website or web app. To discover how you can link Squeaky visitor records directly with data of logged in users, <Link href='/developers'><a target='_blank'>click here</a></Link>.</p>}
       />
 
-      <Table className={classnames('visitors-list hover', tableClassNames, { hide: items.length === 0 })}>
-        <Row head style={rowStyle}>
-          <Cell>
-            Status
-          </Cell>
-          <Cell>
-            Visitor ID
-          </Cell>
-          <Cell className='linked'>
-            <Tooltip button={<Icon name='link-m' />}>
-              Linked Data
-            </Tooltip>
-            User ID
-          </Cell>
-          <Cell className='linked'>
-            <Tooltip button={<Icon name='link-m' />}>
-              Linked Data
-            </Tooltip>
-            Name
-          </Cell>
-          <Cell className='linked'>
-            <Tooltip button={<Icon name='link-m' />}>
-              Linked Data
-            </Tooltip>
-            Email
-          </Cell>
-          <Cell>
-            Recordings
-            <Sort 
-              name='recordings' 
-              order={sort} 
-              onAsc={() => setSort(VisitorsSort.RecordingsAsc)} 
-              onDesc={() => setSort(VisitorsSort.RecordingsDesc)} 
+      <TableWrapper>
+        <Table className={classnames('visitors-list hover', tableClassNames, { hide: items.length === 0 })}>
+          <Row head style={rowStyle}>
+            <Cell>
+              Status
+            </Cell>
+            <Cell>
+              Visitor ID
+            </Cell>
+            <Cell className='linked'>
+              <Tooltip button={<Icon name='link-m' />}>
+                Linked Data
+              </Tooltip>
+              User ID
+            </Cell>
+            <Cell className='linked'>
+              <Tooltip button={<Icon name='link-m' />}>
+                Linked Data
+              </Tooltip>
+              Name
+            </Cell>
+            <Cell className='linked'>
+              <Tooltip button={<Icon name='link-m' />}>
+                Linked Data
+              </Tooltip>
+              Email
+            </Cell>
+            <Cell>
+              Recordings
+              <Sort 
+                name='recordings' 
+                order={sort} 
+                onAsc={() => setSort(VisitorsSort.RecordingsAsc)} 
+                onDesc={() => setSort(VisitorsSort.RecordingsDesc)} 
+              />
+            </Cell>
+            <Cell>
+              First visited
+              <Sort 
+                name='first_viewed_at' 
+                order={sort} 
+                onAsc={() => setSort(VisitorsSort.FirstViewedAtAsc)} 
+                onDesc={() => setSort(VisitorsSort.FirstViewedAtDesc)} 
+              />
+            </Cell>
+            <Cell>
+              Last activity
+              <Sort 
+                name='last_activity_at' 
+                order={sort} 
+                onAsc={() => setSort(VisitorsSort.LastActivityAtAsc)} 
+                onDesc={() => setSort(VisitorsSort.LastActivityAtDesc)} 
+              />
+            </Cell>
+            <Cell>
+              Language
+            </Cell>
+            <Cell>
+              Device &amp; viewport
+            </Cell>
+            <Cell>
+              Browser
+            </Cell>
+            <Cell>
+              Country
+            </Cell>
+            <Cell />
+          </Row>
+          {items.map(v => (
+            <VisitorsItem 
+              site={site} 
+              visitor={v} 
+              key={v.visitorId} 
+              style={rowStyle}
             />
-          </Cell>
-          <Cell>
-            First visited
-            <Sort 
-              name='first_viewed_at' 
-              order={sort} 
-              onAsc={() => setSort(VisitorsSort.FirstViewedAtAsc)} 
-              onDesc={() => setSort(VisitorsSort.FirstViewedAtDesc)} 
-            />
-          </Cell>
-          <Cell>
-            Last activity
-            <Sort 
-              name='last_activity_at' 
-              order={sort} 
-              onAsc={() => setSort(VisitorsSort.LastActivityAtAsc)} 
-              onDesc={() => setSort(VisitorsSort.LastActivityAtDesc)} 
-            />
-          </Cell>
-          <Cell>
-            Language
-          </Cell>
-          <Cell>
-            Device &amp; viewport
-          </Cell>
-          <Cell>
-            Browser
-          </Cell>
-          <Cell>
-            Country
-          </Cell>
-          <Cell />
-        </Row>
-        {items.map(v => (
-          <VisitorsItem 
-            site={site} 
-            visitor={v} 
-            key={v.visitorId} 
-            style={rowStyle}
-          />
-        ))}
-      </Table>
+          ))}
+        </Table>
+      </TableWrapper>
 
       {loading && !items.length && (
         <Row className='loading'>

@@ -51,6 +51,15 @@
         width: 1px;
       }
     }
+
+    @include breakpoint-sm {
+      align-items: flex-start;
+      flex-direction: column;
+
+      div {
+        margin-top: 1rem;
+      }
+    }
   }
 
   .table {
@@ -78,12 +87,16 @@
   }
 
   .users-table {
+    min-width: 1024px;
+
     .row {
       grid-template-columns: 100px 1fr 1fr 1fr 1fr 1fr;
     }
   }
 
   .sites-table {
+    min-width: 1024px;
+
     .row {
       grid-template-columns: 100px 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     }

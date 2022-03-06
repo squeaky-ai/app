@@ -25,3 +25,11 @@ export const Cell: FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, class
     </div>
   );
 };
+
+export const TableWrapper: FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, className, ...rest }) => {
+  return (
+    <div className={classnames('table-wrapper', className)} {...rest}>
+      {children}
+    </div>
+  );
+};

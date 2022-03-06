@@ -1,6 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
-import { Table, Cell, Row } from 'components/table';
+import { TableWrapper, Table, Cell, Row } from 'components/table';
 import { Sort } from 'components/sort';
 import { SitesTableRow } from 'components/admin/sites-table-row';
 import type { SitesSort } from 'types/admin';
@@ -46,66 +46,68 @@ export const SitesTable: FC<Props> = ({ sites, activeVisitors }) => {
   const results = [...sites].sort(sortSites(sort));
 
   return (
-    <Table className='sites-table'>
-      <Row className='head'>
-        <Cell>ID</Cell>
-        <Cell>
-          Name
-          <Sort 
-            name='name' 
-            order={sort} 
-            onAsc={() => setSort('name__asc')} 
-            onDesc={() => setSort('name__desc')} 
+    <TableWrapper>
+      <Table className='sites-table'>
+        <Row className='head'>
+          <Cell>ID</Cell>
+          <Cell>
+            Name
+            <Sort 
+              name='name' 
+              order={sort} 
+              onAsc={() => setSort('name__asc')} 
+              onDesc={() => setSort('name__desc')} 
+            />
+          </Cell>
+          <Cell>Url</Cell>
+          <Cell>Owner Name</Cell>
+          <Cell>
+            Plan Name
+            <Sort 
+              name='plan_name' 
+              order={sort} 
+              onAsc={() => setSort('plan_name__asc')} 
+              onDesc={() => setSort('plan_name__desc')} 
+            />
+          </Cell>
+          <Cell>Plan Exceeded</Cell>
+          <Cell>Tracking Code Status</Cell>
+          <Cell>
+            Team Count
+            <Sort 
+              name='team_count' 
+              order={sort} 
+              onAsc={() => setSort('team_count__asc')} 
+              onDesc={() => setSort('team_count__desc')} 
+            />
+          </Cell>
+          <Cell>
+            Created At
+            <Sort 
+              name='created_at' 
+              order={sort} 
+              onAsc={() => setSort('created_at__asc')} 
+              onDesc={() => setSort('created_at__desc')} 
+            />
+          </Cell>
+          <Cell>
+            Active Visitors
+            <Sort 
+              name='active_visitors' 
+              order={sort} 
+              onAsc={() => setSort('active_visitors__asc')} 
+              onDesc={() => setSort('active_visitors__desc')} 
+            />
+          </Cell>
+        </Row>
+        {results.map(site => (
+          <SitesTableRow 
+            key={site.id} 
+            site={site}
+            activeVisitors={getSiteActiveVisitorsCount(site.uuid)}
           />
-        </Cell>
-        <Cell>Url</Cell>
-        <Cell>Owner Name</Cell>
-        <Cell>
-          Plan Name
-          <Sort 
-            name='plan_name' 
-            order={sort} 
-            onAsc={() => setSort('plan_name__asc')} 
-            onDesc={() => setSort('plan_name__desc')} 
-          />
-        </Cell>
-        <Cell>Plan Exceeded</Cell>
-        <Cell>Tracking Code Status</Cell>
-        <Cell>
-          Team Count
-          <Sort 
-            name='team_count' 
-            order={sort} 
-            onAsc={() => setSort('team_count__asc')} 
-            onDesc={() => setSort('team_count__desc')} 
-          />
-        </Cell>
-        <Cell>
-          Created At
-          <Sort 
-            name='created_at' 
-            order={sort} 
-            onAsc={() => setSort('created_at__asc')} 
-            onDesc={() => setSort('created_at__desc')} 
-          />
-        </Cell>
-        <Cell>
-          Active Visitors
-          <Sort 
-            name='active_visitors' 
-            order={sort} 
-            onAsc={() => setSort('active_visitors__asc')} 
-            onDesc={() => setSort('active_visitors__desc')} 
-          />
-        </Cell>
-      </Row>
-      {results.map(site => (
-        <SitesTableRow 
-          key={site.id} 
-          site={site}
-          activeVisitors={getSiteActiveVisitorsCount(site.uuid)}
-        />
-      ))}
-    </Table>
+        ))}
+      </Table>
+    </TableWrapper>
   );
 };

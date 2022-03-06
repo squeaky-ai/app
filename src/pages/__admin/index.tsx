@@ -12,6 +12,7 @@ import { UsersTable } from 'components/admin/users-table';
 import { SitesTable } from 'components/admin/sites-table';
 import { UsersGrowth } from 'components/admin/users-growth';
 import { Logo } from 'components/logo';
+import { Main } from 'components/main';
 import { SitesGrowth } from 'components/admin/sites-growth';
 import { useAdmin } from 'hooks/use-admin';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
@@ -38,42 +39,44 @@ const Admin: NextPage<ServerSideProps> = () => {
         </a>
       </header>
 
-      <Container className='lg centered'>
-        <h3>
-          Admin Dashboard
-          <div>
-            <p>
-              Active visitors: <b>{sum(admin.activeVisitorsAdmin.map(m => m.count))}</b>
-            </p>
-            <span className='divider' />
-            <Link href='/sites'>
-              <a>
-                Squeaky App
-                <Icon name='arrow-right-line' />
-              </a>
-            </Link>
-          </div>
-        </h3> 
-        <Tabs tab={tab} setTab={setTab} />
+      <Main>
+        <Container className='lg centered'>
+          <h3>
+            Admin Dashboard
+            <div>
+              <p>
+                Active visitors: <b>{sum(admin.activeVisitorsAdmin.map(m => m.count))}</b>
+              </p>
+              <span className='divider' />
+              <Link href='/sites'>
+                <a>
+                  Squeaky App
+                  <Icon name='arrow-right-line' />
+                </a>
+              </Link>
+            </div>
+          </h3> 
+          <Tabs tab={tab} setTab={setTab} />
 
-        {loading && (
-          <Spinner />
-        )}
+          {loading && (
+            <Spinner />
+          )}
 
-        {!loading && tab === 'users' && (
-          <>
-            <UsersGrowth users={admin.usersAdmin} />
-            <UsersTable users={admin.usersAdmin} sites={admin.sitesAdmin} />
-          </>
-        )}
+          {!loading && tab === 'users' && (
+            <>
+              <UsersGrowth users={admin.usersAdmin} />
+              <UsersTable users={admin.usersAdmin} sites={admin.sitesAdmin} />
+            </>
+          )}
 
-        {!loading && tab === 'sites' && (
-          <>
-            <SitesGrowth sites={admin.sitesAdmin} />
-            <SitesTable sites={admin.sitesAdmin} activeVisitors={admin.activeVisitorsAdmin} />
-          </>
-        )}
-      </Container>
+          {!loading && tab === 'sites' && (
+            <>
+              <SitesGrowth sites={admin.sitesAdmin} />
+              <SitesTable sites={admin.sitesAdmin} activeVisitors={admin.activeVisitorsAdmin} />
+            </>
+          )}
+        </Container>
+      </Main>
     </>
   );
 };
