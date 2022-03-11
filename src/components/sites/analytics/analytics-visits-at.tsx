@@ -23,7 +23,7 @@ export const AnalyticsVisitsAt: FC<Props> = ({ visitsAt }) => {
   const getCountForIndex = (index: number): number => {
     const [hour, day] = getHourAndDayForIndex(index);
 
-    const match = visitsAt.find(v => getDayByIndex(day).substring(0, 3) === v.day && v.hour === hour);
+    const match = visitsAt.find(v => getDayByIndex(day).substring(0, 3) === v.day && v.hour === hour - 1);
 
     return match?.count || 0;
   };
