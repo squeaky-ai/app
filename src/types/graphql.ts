@@ -41,7 +41,7 @@ export type Analytics = {
   sessionsPerVisitor: AnalyticsSessionsPerVisitor;
   visitors: AnalyticsVisitors;
   visitorsCount: AnalyticsVisitorsCount;
-  visitsAt: Array<Maybe<Scalars['ISO8601DateTime']>>;
+  visitsAt: Array<Maybe<AnalyticsVisitAt>>;
 };
 
 
@@ -162,6 +162,13 @@ export type AnalyticsSessionsPerVisitor = {
   __typename?: 'AnalyticsSessionsPerVisitor';
   average: Scalars['Float'];
   trend: Scalars['Float'];
+};
+
+export type AnalyticsVisitAt = {
+  __typename?: 'AnalyticsVisitAt';
+  count: Scalars['Int'];
+  day: Scalars['String'];
+  hour: Scalars['Int'];
 };
 
 export type AnalyticsVisitor = {

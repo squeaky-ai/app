@@ -1,30 +1,19 @@
 import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
-import { groupBy, range } from 'lodash';
+import { range } from 'lodash';
 import { percentage } from 'lib/maths';
 import { getAmPmForHour } from 'lib/charts';
 import { getDayByIndex } from 'lib/dates';
-import { getDay, getHours } from 'date-fns';
 import { ANALYTICS_COLOURS } from 'data/analytics/constants';
+import { AnalyticsVisitAt } from 'types/graphql';
 
 interface Props {
-  visitsAt: string[];
+  visitsAt: AnalyticsVisitAt[];
 }
 
-type DateGroups = Record<string, Record<string, Date[]>>;
-
 export const AnalyticsVisitsAt: FC<Props> = ({ visitsAt }) => {
-  const visits = visitsAt.map(v => new Date(v));
-
-  const groupedByDay = groupBy(visits, v => getDay(v));
-
-  const groupedByDayAndHour = Object.entries(groupedByDay).reduce((acc, [day, dates]) => {
-    acc[day] = groupBy(dates, d => getHours(d));
-    return acc;
-  }, {} as DateGroups);
-
-  const getAndHourForIndex = (index: number) => {
+  const getHourAndDayForIndex = (index: number) => {
     const hour = index % 25;
     const day = Math.ceil((index + 1) / 25) - 1;
 
@@ -32,11 +21,11 @@ export const AnalyticsVisitsAt: FC<Props> = ({ visitsAt }) => {
   };
     
   const getCountForIndex = (index: number): number => {
-    const [hour, day] = getAndHourForIndex(index);
-        
-    const hours = groupedByDayAndHour[day] || {};
+    const [hour, day] = getHourAndDayForIndex(index);
 
-    return hours[hour]?.length || 0;
+    const match = visitsAt.find(v => getDayByIndex(day).substring(0, 3) === v.day && v.hour === hour);
+
+    return match?.count || 0;
   };
 
   const getBackgroundColor = (count: number) => {
@@ -52,7 +41,7 @@ export const AnalyticsVisitsAt: FC<Props> = ({ visitsAt }) => {
   return (
     <div className='card visits-at'>
       {orderedDayAndHourCounts.map((count, index) => {
-        const [hour, day] = getAndHourForIndex(index);
+        const [hour, day] = getHourAndDayForIndex(index);
 
         const isYLabel = hour === 0;
         const isXLabel = day === 7;

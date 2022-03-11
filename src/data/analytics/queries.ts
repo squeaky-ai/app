@@ -6,7 +6,11 @@ export const GET_ANALYTICS_QUERY = gql`
       id
       analytics(fromDate: $fromDate, toDate: $toDate) {
         pageViewCount
-        visitsAt
+        visitsAt {
+          day
+          hour
+          count
+        }
         dimensions {
           deviceX
           count
