@@ -381,6 +381,7 @@
   
         .visits-at {
           display: grid;
+          flex: 0;
           grid-gap: .5rem;
           grid-template-columns: repeat(25, minmax(0, 1fr));
           grid-template-rows: repeat(8, 1.25rem);
