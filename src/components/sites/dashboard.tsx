@@ -8,15 +8,12 @@ import { Tooltip } from 'components/tooltip';
 import { Divider } from 'components/divider';
 import { PlayerPreview } from 'components/sites/player/player-preview';
 import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
-import { AnalyticsVisitsAt } from 'components/sites/analytics/analytics-visits-at';
 import { Pill } from 'components/pill';
 import { Spinner } from 'components/spinner';
 import { Error } from 'components/error';
 import { ActiveVisitors } from './active-visitors';
 import { useDashboard } from 'hooks/use-dashboard';
 import { toTimeString } from 'lib/dates';
-import { useFeatureFlags } from 'hooks/use-feature-flags';
-import { FeatureFlag } from 'lib/feature-flags';
 import { getDateRange } from 'lib/dates';
 import type { Site } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
@@ -29,7 +26,6 @@ interface Props {
 export const Dashboard: FC<Props> = ({ site, period }) => {
   const router = useRouter();
   const { dashboard, error, loading } = useDashboard({ range: getDateRange(period) });
-  const { featureFlagEnabled } = useFeatureFlags();
 
   const { site_id } = router.query;
 
@@ -220,16 +216,6 @@ export const Dashboard: FC<Props> = ({ site, period }) => {
           </>
         )}
       </Card>
-
-      {featureFlagEnabled(FeatureFlag.VISITOR_HOTSPOT) && (
-        <Card className='visits'>
-          <h5>
-            <Icon name='group-line' />
-            Visitors by time of day
-          </h5>
-          <AnalyticsVisitsAt visitsAt={dashboard.analytics.visitsAt} />
-        </Card>
-      )}
     </div>
   );
 };

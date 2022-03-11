@@ -39,7 +39,8 @@
                          'page-views page-views page-views'
                          'pages pages browsers'
                          'referrers referrers languages'
-                         'devices screen-widths screen-widths';
+                         'devices screen-widths screen-widths'
+                         'visits-at visits-at countries';
     grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-template-rows: auto;
 
@@ -55,7 +56,9 @@
                            'referrers'
                            'languages'
                            'devices'
-                           'screen-widths';
+                           'screen-widths'
+                           'visits-at'
+                           'countries';
       grid-template-columns: 100%;
     }
 
@@ -370,6 +373,106 @@
               text-align: center;
             }
           }
+        }
+      }
+
+      &.time-of-day {
+        grid-area: visits-at;
+  
+        .visits-at {
+          display: grid;
+          grid-gap: .5rem;
+          grid-template-columns: repeat(25, minmax(0, 1fr));
+          grid-template-rows: repeat(8, 1.25rem);
+  
+          .visit {
+            background: var(--gray-100);
+            flex-shrink: 0;
+            position: relative;
+  
+            &::after {
+              background: var(--gray-blue-800);
+              border-radius: var(--border-radius-md);
+              color: var(--white);
+              content: attr(data-label);
+              display: none;
+              font-size: 13px;
+              line-height: 20px;
+              left: 2rem;
+              padding: .25rem .5rem;
+              position: absolute;
+              pointer-events: none;
+              white-space: nowrap;
+              z-index: 1;
+            }
+  
+            &:not(.label):hover {
+              background: var(--gray-blue-600);
+        
+              &:after {
+                display: block;
+              }
+            }
+          }
+  
+          .label {
+            align-items: center;
+            background: none;
+            display: inline-flex;
+            font-size: 12px;
+            font-weight: var(--font-weight-normal);
+            margin: 0;
+            padding: 0;
+  
+            &.hidden {
+              visibility: hidden;
+            }
+          }
+        }
+      }
+
+      &.countries {
+        .card {
+          flex: 0;
+        }
+
+        ul {
+          margin: 0;
+          padding: 0;
+
+          li {
+            align-items: center;
+            display: flex;
+            list-style: none;
+            margin: 0 0 .5rem 0;
+
+            &:last-of-type {
+              margin-bottom: 0;
+            }
+
+            h2 {
+              color: var(--blue-500);
+              font-size: 2rem;
+              margin: 0 2rem 0 0;
+              width: 2rem;
+            }
+
+            p {
+              font-weight: var(--font-weight-bold);
+              margin: 0;
+
+              &.count {
+                color: var(--gray-500);
+                font-weight: var(--font-weight-normal);
+              }
+            }
+          }
+        }
+
+        .show-all {
+          margin-top: 1.5rem;
+          text-align: left;
+          text-decoration: underline;
         }
       }
     }

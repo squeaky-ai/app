@@ -27,6 +27,7 @@ export type ActiveVisitorCount = {
 export type Analytics = {
   __typename?: 'Analytics';
   browsers: AnalyticsBrowsers;
+  countries: Array<Maybe<AnalyticsCountry>>;
   devices: Array<AnalyticsDevice>;
   dimensions: Array<Maybe<AnalyticsDimension>>;
   languages: Array<Maybe<AnalyticsLanguage>>;
@@ -72,6 +73,12 @@ export type AnalyticsBrowsers = {
   __typename?: 'AnalyticsBrowsers';
   items: Array<Maybe<AnalyticsBrowser>>;
   pagination: CommonPagination;
+};
+
+export type AnalyticsCountry = {
+  __typename?: 'AnalyticsCountry';
+  count: Scalars['Int'];
+  name: Scalars['String'];
 };
 
 export type AnalyticsDevice = {

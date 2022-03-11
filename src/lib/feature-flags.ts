@@ -1,5 +1,4 @@
 export enum FeatureFlag {
-  VISITOR_HOTSPOT = 'VISITOR_HOTSPOT',
   BILLING = 'BILLING'
 }
 

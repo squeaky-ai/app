@@ -39,7 +39,6 @@ export const useDashboard = (props: Props): UseDashboard => {
         total: 0,
         new: 0,
       },
-      visitsAt: [],
     },
     recordingLatest: null,
   };

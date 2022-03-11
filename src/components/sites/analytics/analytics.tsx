@@ -15,6 +15,8 @@ import { AnalyticsSessionDuration } from 'components/sites/analytics/analytics-s
 import { AnalyticsSessionsPerVisitor } from 'components/sites/analytics/analytics-sessions-per-visitor';
 import { AnalyticsPagesPerSession } from 'components/sites/analytics/analytics-pages-per-session';
 import { AnalyticsScreenWidths } from 'components/sites/analytics/analytics-screen-widths';
+import { AnalyticsVisitsAt } from 'components/sites/analytics/analytics-visits-at';
+import { AnalyticsCountries } from 'components/sites/analytics/analytics-countries';
 import { Error } from 'components/error';
 import { NoResults } from 'components/sites/no-results';
 import type { TimePeriod } from 'types/common';
@@ -119,6 +121,18 @@ export const Analytics: FC<Props> = ({ period }) => {
         <div className='grid-item screen-widths'>
           <h4>Screen Widths</h4>
           <AnalyticsScreenWidths dimensions={analytics.dimensions} /> 
+        </div>
+
+        <div className='grid-item time-of-day'>
+          <h4>Visitors By Time of Day</h4>  
+          <AnalyticsVisitsAt visitsAt={analytics.visitsAt} />
+        </div>
+
+        <div className='grid-item countries'>
+          <h4>Countries</h4>
+          <Card>
+            <AnalyticsCountries countries={analytics.countries} />
+          </Card>
         </div>
       </div>
     </>
