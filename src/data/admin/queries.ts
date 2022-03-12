@@ -40,6 +40,16 @@ export const GET_ADMIN_QUERY = gql`
   }
 `;
 
+export const GET_ADMIN_BLOG_QUERY = gql`
+  query GetAdminBlog { 
+    activeVisitorsAdmin {
+      siteId
+      count
+    }
+    blogImagesAdmin
+  }
+`;
+
 export const GET_ADMIN_ACTIVE_VISITORS_QUERY = gql`
   query GetActiveVisitorsAdmin { 
     activeVisitorsAdmin {

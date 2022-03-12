@@ -1,10 +1,15 @@
 import type { User, Site, ActiveVisitorCount } from 'types/graphql';
 
-export type AdminTab = 'users' | 'sites';
+export type AdminTab = 'users' | 'sites' | 'blog';
 
 export type Admin = {
   usersAdmin: User[];
   sitesAdmin: Site[];
+  activeVisitorsAdmin: ActiveVisitorCount[];
+}
+
+export type AdminBlog = {
+  blogImagesAdmin: string[];
   activeVisitorsAdmin: ActiveVisitorCount[];
 }
 
@@ -27,3 +32,34 @@ export type SitesSort =
   'created_at__desc' | 
   'active_visitors__asc' |
   'active_visitors__desc';
+
+export type BlogAuthor = {
+  name: string;
+  image: string;
+}
+
+export type BlogInput = {
+  title: string;
+  tags: string;
+  author: 'chris' | 'lewis';
+  category: string;
+  date: string;
+  time: string;
+  draft: boolean;
+  metaImage: string;
+  metaDescription: string;
+  body: string;
+}
+
+export type BlogOutput = {
+  title: string;
+  tags: string[];
+  author: BlogAuthor;
+  category: string;
+  date: string;
+  draft: boolean;
+  metaImage: string;
+  metaDescription: string;
+  body: string;
+  slug: string;
+}
