@@ -132,6 +132,123 @@
       grid-template-columns: 1fr 1fr;
     }
 
+    .images {
+      display: flex;
+      margin: 0 0 1.5rem 0;
+
+      .image-container {
+        height: 6rem;
+        margin: 0 1rem 1rem 0;
+        width: 10rem;
+
+        &:focus {
+          outline: none;
+        }
+
+        .check {
+          display: none;
+        }
+
+        img {
+          display: block;
+          height: 6rem;
+          object-fit: cover;
+          width: 10rem;
+        }
+
+        &.selected,
+        &:hover {
+          .clip {
+            border: 2px solid var(--blue-500);
+          }
+        }
+
+        &.upload {
+          align-items: center;
+          display: flex;
+          justify-content: center;
+
+          .input {
+            display: none;
+          }
+
+          .icon {
+            color: var(--blue-500);
+            font-size: 1.5rem;
+            margin: 0;
+          }
+        }
+      }
+
+      .image {
+        position: relative;
+
+        .clip {
+          border: 2px solid transparent;
+          border-radius: var(--border-radius-md);
+          overflow: hidden;
+        }
+
+        .delete-image {
+          align-items: center;
+          background: var(--rose-500);
+          border: none;
+          border-radius: var(--border-radius-o);
+          color: var(--white);
+          display: none;
+          justify-content: center;
+          height: 1.5rem;
+          padding: 0;
+          position: absolute;
+          right: -.5rem;
+          top: -.5rem;
+          width: 1.5rem;
+        }
+
+        &:hover {
+          .delete-image {
+            display: flex;
+          }
+        }
+      }
+    }
+
+    .code {
+      border: 1px solid var(--gray-200);
+      height: 500px;
+      position: relative;
+
+      &:focus-within {
+        border-color: var(--blue-500);
+      }
+
+      code {
+        display: block;
+        height: 500px;
+        padding: 2rem;
+      }
+
+      .dragging {
+        align-items: center;
+        background: rgba(255, 255, 255, 0.8);
+        color: var(--gray-blue-800);
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: center;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 1;
+
+        .icon {
+          font-size: 1.5rem;
+          margin: 0 0 1rem 0;
+        }
+      }
+    }
+
     .hint {
       justify-content: flex-start;
 

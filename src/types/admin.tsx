@@ -8,6 +8,11 @@ export type Admin = {
   activeVisitorsAdmin: ActiveVisitorCount[];
 }
 
+export type AdminBlog = {
+  blogImagesAdmin: string[];
+  activeVisitorsAdmin: ActiveVisitorCount[];
+}
+
 export type UserSort = 
   'name__asc' |
   'name__desc' |
