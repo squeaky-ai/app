@@ -34,5 +34,14 @@ module.exports = {
         basePath: false,
       }
     ] : [];
-  }
+  },
+  async redirects() {
+    return [
+      {
+        source: '/__admin',
+        destination: '/__admin/users',
+        permanent: true,
+      },
+    ]
+  },
 };
