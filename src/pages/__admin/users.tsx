@@ -22,15 +22,19 @@ const Admin: NextPage<ServerSideProps> = () => {
         <title>Squeaky | Admin | Users</title>
       </Head>
 
-      <Page tab='users' activeVisitors={admin.activeVisitorsAdmin}>
-        {loading && (
-          <Spinner />
-        )}
-
-        {!loading && (
+      <Page tab='users'>
+        {() => (
           <>
-            <UsersGrowth users={admin.usersAdmin} />
-            <UsersTable users={admin.usersAdmin} sites={admin.sitesAdmin} />          
+            {loading && (
+              <Spinner />
+            )}
+
+            {!loading && (
+              <>
+                <UsersGrowth users={admin.usersAdmin} />
+                <UsersTable users={admin.usersAdmin} sites={admin.sitesAdmin} />          
+              </>
+            )}
           </>
         )}
       </Page>

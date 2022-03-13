@@ -259,5 +259,95 @@
         margin: 0 0 0 .5rem;
       }
     }
+
+    .rich-text-wrapper {
+      border: none;
+      margin: 0 0 2rem 0;
+
+      .rich-text-toolbar {
+        border: none;
+        margin: 0 0 1rem 0;
+        padding: 0;
+
+        & > div {
+          margin: 0 1rem 0 0;
+
+          &:nth-of-type(2),
+          &:nth-of-type(5) {
+            display: none;
+          }
+
+          &:nth-of-type(6) {
+            span {
+              span {
+                border: 1px solid var(--gray-200);
+                border-radius: var(--border-radius-sm);
+                height: 2rem;
+              }
+            }
+          }
+
+          div:first-child > button {
+            border-top-left-radius: var(--border-radius-sm);
+            border-bottom-left-radius: var(--border-radius-sm);
+          }
+
+          div:last-child > button {
+            border-top-right-radius: var(--border-radius-sm);
+            border-bottom-right-radius: var(--border-radius-sm);
+          }
+
+          button {
+            background: none;
+            border-color: var(--gray-200);
+            border-style: solid;
+            height: 2rem;
+            width: 2rem;
+
+            &[class*="isActive"] {
+              background: var(--gray-200);
+            }
+          }
+        }
+      }
+
+      .rich-text-editor {
+        figure {
+          margin: 0 0 1rem 0;
+        }
+      }
+
+      .upload {
+        align-items: center;
+        background: none;
+        border: 1px solid var(--gray-200);
+        border-radius: var(--border-radius-sm);
+        cursor: pointer;
+        display: inline-flex;
+        height: 2rem;
+        justify-content: center;
+        padding: 0;
+        width: 2rem;
+
+        .input {
+          display: none;
+        }
+
+        .icon {
+          font-size: 1rem;
+          font-weight: var(--font-weight-normal);
+        }
+      }
+
+      .DraftEditor-editorContainer {
+        border: 1px solid var(--gray-200);
+        border-radius: var(--border-radius-md);
+
+        .public-DraftEditor-content {
+          min-height: 40rem;
+          padding: .75rem;
+        }
+      }
+    }
   }
 }

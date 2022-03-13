@@ -9,13 +9,20 @@ import { Container } from 'components/container';
 import { Tabs } from 'components/admin/tabs';
 import type { AdminTab } from 'types/admin';
 import { ActiveVisitorCount } from 'types/graphql';
+import { useAdminActiveVisitors } from 'hooks/use-admin-active-visitors';
+
+interface Children {
+  activeVisitorCount: ActiveVisitorCount[];
+}
 
 interface Props {
   tab: AdminTab;
-  activeVisitors: ActiveVisitorCount[];
+  children: (site: Children) => React.ReactElement;
 }
 
-export const Page: FC<Props> = ({ tab, children, activeVisitors }) => {
+export const Page: FC<Props> = ({ tab, children }) => {
+  const { activeVisitorCount } = useAdminActiveVisitors();
+
   return (
     <>
       <header className='header'>
@@ -30,7 +37,7 @@ export const Page: FC<Props> = ({ tab, children, activeVisitors }) => {
             Admin Dashboard
             <div>
               <p>
-                Active visitors: <b>{sum(activeVisitors.map(m => m.count))}</b>
+                Active visitors: <b>{sum(activeVisitorCount.map(m => m.count))}</b>
               </p>
               <span className='divider' />
               <Link href='/sites'>
@@ -43,7 +50,7 @@ export const Page: FC<Props> = ({ tab, children, activeVisitors }) => {
           </h3> 
           <Tabs tab={tab} />
 
-          {children}
+          {children({ activeVisitorCount })}
         </Container>
       </Main>
     </>

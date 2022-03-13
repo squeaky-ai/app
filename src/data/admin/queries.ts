@@ -2,10 +2,6 @@ import { gql } from '@apollo/client';
 
 export const GET_ADMIN_QUERY = gql`
   query GetAdmin { 
-    activeVisitorsAdmin {
-      siteId
-      count
-    }
     sitesAdmin {
       id
       name
@@ -42,10 +38,6 @@ export const GET_ADMIN_QUERY = gql`
 
 export const GET_ADMIN_BLOG_QUERY = gql`
   query GetAdminBlog { 
-    activeVisitorsAdmin {
-      siteId
-      count
-    }
     blogImagesAdmin
   }
 `;
