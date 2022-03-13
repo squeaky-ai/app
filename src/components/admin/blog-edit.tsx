@@ -1,7 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
-import { gql, useMutation } from '@apollo/client';
 import * as Yup from 'yup';
 import dynamic from 'next/dynamic';
 import { Formik } from 'formik';
@@ -17,7 +16,7 @@ import { Button } from 'components/button';
 import { Select, Option } from 'components/select';
 import { exportBlogPost, getInitialValues } from 'lib/admin/blog';
 import { YYYY_MM_DD_REGEX, HH_MM_REGEX } from 'data/common/constants';
-import type { BlogPost, AdminBlogSignImage } from 'types/graphql';
+import type { BlogPost } from 'types/graphql';
 import type { BlogInput } from 'types/admin';
 import type { Props as EditorProps } from 'components/admin/rich-text';
 
@@ -36,16 +35,6 @@ interface Props {
   refetchImages: VoidFunction;
 }
 
-
-const MUTATION = gql`
-  mutation AdminBlogSignImage($input: AdminBlogSignImageInput!) {
-    adminBlogSignImage(input: $input) {
-      url
-      fields
-    }
-  }
-`;
-
 const BlogSchema = Yup.object().shape({
   title: Yup.string().required('Title is requied'),
   tags: Yup.string().required('Tags are requied'),
@@ -60,8 +49,6 @@ const BlogSchema = Yup.object().shape({
 });
 
 export const BlogEdit: FC<Props> = ({ post, images, onChange, refetchImages }) => {
-  const [createSignedLink] = useMutation<{ adminBlogSignImage: AdminBlogSignImage }>(MUTATION);
-
   return (
     <Formik<BlogInput>
       initialValues={getInitialValues(post)}
@@ -188,7 +175,7 @@ export const BlogEdit: FC<Props> = ({ post, images, onChange, refetchImages }) =
                       <Image path={image} refetchImages={refetchImages} />
                     </Radio>
                   ))}
-                  <UploadImage refetchImages={refetchImages} createSignedLink={createSignedLink} />
+                  <UploadImage refetchImages={refetchImages} />
                 </div>
 
 
@@ -207,8 +194,8 @@ export const BlogEdit: FC<Props> = ({ post, images, onChange, refetchImages }) =
                 <Label htmlFor='body'>Body</Label>
                 <Editor 
                   value={values.body}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
+                  onChange={(value) => setFieldValue('body', value)}
+                  refetchImages={refetchImages}
                 />
 
                 <Button className='primary submit' type='submit'>
