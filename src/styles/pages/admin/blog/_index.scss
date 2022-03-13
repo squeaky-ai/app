@@ -1,0 +1,40 @@
+.page.__admin.blog {
+  .posts-header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0 0 0;
+
+    .button,
+    .back {
+      align-items: center;
+      display: flex;
+    }
+
+    .back {
+      text-decoration: none;
+
+      .icon {
+        margin: 0 .25rem 0 0;
+      }
+    }
+  }
+
+  .posts-table {
+    min-width: 1024px;
+
+    .row {
+      grid-template-columns: 60px 1fr 1fr 1fr 1fr 1fr  1fr 1fr;
+    }
+
+    .author {
+      img {
+        border-radius: var(--border-radius-o);
+        display: inline-block;
+        margin: 0 .5rem 0 0;
+        overflow: hidden;
+        vertical-align: middle;
+      }
+    }
+  }
+}

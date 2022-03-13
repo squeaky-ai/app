@@ -1,16 +1,14 @@
-import type { User, Site, ActiveVisitorCount } from 'types/graphql';
+import type { User, Site } from 'types/graphql';
 
 export type AdminTab = 'users' | 'sites' | 'blog';
 
 export type Admin = {
   usersAdmin: User[];
   sitesAdmin: Site[];
-  activeVisitorsAdmin: ActiveVisitorCount[];
 }
 
 export type AdminBlog = {
   blogImagesAdmin: string[];
-  activeVisitorsAdmin: ActiveVisitorCount[];
 }
 
 export type UserSort = 
@@ -49,17 +47,4 @@ export type BlogInput = {
   metaImage: string;
   metaDescription: string;
   body: string;
-}
-
-export type BlogOutput = {
-  title: string;
-  tags: string[];
-  author: BlogAuthor;
-  category: string;
-  date: string;
-  draft: boolean;
-  metaImage: string;
-  metaDescription: string;
-  body: string;
-  slug: string;
 }

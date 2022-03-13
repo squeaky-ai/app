@@ -40,6 +40,8 @@ import {
   UsersCommunicationInput,
   NpsDeleteInput,
   SentimentDeleteInput,
+  BlogPost,
+  AdminBlogPostDeleteInput,
 } from 'types/graphql';
 
 import {
@@ -67,6 +69,8 @@ import {
   TeamDeleteInput,
   UsersUpdateInput,
   UsersPasswordInput,
+  AdminBlogPostCreateInput,
+  AdminBlogPostUpdateInput,
 } from 'types/graphql';
 
 import { 
@@ -126,6 +130,16 @@ import {
 import {
   SENTIMENT_DELETE_MUTATION,
 } from 'data/sentiment/mutations';
+
+import {
+  ADMIN_BLOG_POST_CREATE_MUTATION,
+  ADMIN_BLOG_POST_UPDATE_MUTATION,
+  ADMIN_BLOG_POST_DELETE_MUTATION,
+} from 'data/blog/mutations';
+
+import { 
+  GET_BLOG_POSTS_QUERY 
+} from 'data/blog/queries';
 
 export const cache = new InMemoryCache({
   typePolicies: {
@@ -627,4 +641,46 @@ export const sentimentDelete = async (input: SentimentDeleteInput): Promise<null
   });
 
   return data.npsDelete
+};
+
+export const createBlogPost = async (input: AdminBlogPostCreateInput): Promise<BlogPost> => {
+  const { data } = await client.mutate({
+    mutation: ADMIN_BLOG_POST_CREATE_MUTATION,
+    variables: { input },
+  });
+
+  const { blogPosts } = cache.readQuery<Query>({ query: GET_BLOG_POSTS_QUERY });
+
+  cache.writeQuery({
+    query: GET_BLOG_POSTS_QUERY,
+    data: {
+      blogPosts: {
+        ...blogPosts,
+        posts: [...blogPosts.posts, data.adminBlogPostCreate],
+      }
+    }
+  });
+
+  return data.adminBlogPostCreate;
+};
+
+export const updateBlogPost = async (input: AdminBlogPostUpdateInput): Promise<BlogPost> => {
+  const { data } = await client.mutate({
+    mutation: ADMIN_BLOG_POST_UPDATE_MUTATION,
+    variables: { input },
+  });
+
+  return data.adminBlogPostUpdate;
+};
+
+export const deleteBlogPost = async (input: AdminBlogPostDeleteInput): Promise<void> => {
+  await client.mutate({
+    mutation: ADMIN_BLOG_POST_DELETE_MUTATION,
+    variables: { input },
+    update(cache) {
+      const normalizedId = cache.identify({ id: input.id, __typename: 'BlogPost' });
+      cache.evict({ id: normalizedId });
+      cache.gc();
+    }
+  });
 };
