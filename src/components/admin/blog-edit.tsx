@@ -15,7 +15,6 @@ import { TextArea } from 'components/textarea';
 import { Button } from 'components/button';
 import { Select, Option } from 'components/select';
 import { exportBlogPost, getInitialValues } from 'lib/admin/blog';
-import { YYYY_MM_DD_REGEX, HH_MM_REGEX } from 'data/common/constants';
 import type { BlogPost } from 'types/graphql';
 import type { BlogInput } from 'types/admin';
 import type { Props as EditorProps } from 'components/admin/rich-text';
@@ -31,7 +30,7 @@ const Editor = dynamic<EditorProps>(
 interface Props {
   post?: BlogPost;
   images: string[];
-  onChange: (post: BlogPost) => void;
+  onChange: (post: Omit<BlogPost, 'createdAt' | 'updatedAt'>) => void;
   refetchImages: VoidFunction;
 }
 
@@ -40,9 +39,7 @@ const BlogSchema = Yup.object().shape({
   tags: Yup.string().required('Tags are requied'),
   author: Yup.string().oneOf(['chris', 'lewis']),
   category: Yup.string().required('Category is requied'),
-  date: Yup.string().matches(YYYY_MM_DD_REGEX, 'Date must be YYYY-MM-DD'),
   draft: Yup.boolean(),
-  time: Yup.string().matches(HH_MM_REGEX, 'Time must be HH:MM'),
   metaImage: Yup.string().required('Meta image is required'),
   metaDescription: Yup.string().required('Meta description is required'),
   body: Yup.string().required('Body is required'),
@@ -56,7 +53,6 @@ export const BlogEdit: FC<Props> = ({ post, images, onChange, refetchImages }) =
       onSubmit={(values, { setSubmitting }) => {
         (async () => {
           setSubmitting(false);
-          console.log(values);
           const update = exportBlogPost(values);
           onChange({ ...update, id: post?.id });
         })();
@@ -126,35 +122,6 @@ export const BlogEdit: FC<Props> = ({ post, images, onChange, refetchImages }) =
                       <Option value='chris'>Chris Pattison</Option>
                       <Option value='lewis'>Lewis Monteith</Option>
                     </Select>    
-                  </div>
-                </div>                
-
-                <div className='input-group'>
-                  <div>
-                    <Label htmlFor='date'>Date</Label>
-                    <Input 
-                      type='text' 
-                      name='date' 
-                      placeholder='e.g. 2022-03-22'  
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      value={values.date}
-                      invalid={touched.date && !!errors.date}
-                    />
-                    <span className='validation'>{errors.date}</span>
-                  </div>
-                  <div>
-                    <Label htmlFor='time'>Time</Label>
-                    <Input 
-                      type='text'
-                      name='time'
-                      placeholder='e.g. 16:30'  
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      value={values.time}
-                      invalid={touched.time && !!errors.time}
-                    />
-                    <span className='validation'>{errors.time}</span>
                   </div>
                 </div>
 

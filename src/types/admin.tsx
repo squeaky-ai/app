@@ -41,8 +41,6 @@ export type BlogInput = {
   tags: string;
   author: 'chris' | 'lewis';
   category: string;
-  date: string;
-  time: string;
   draft: boolean;
   metaImage: string;
   metaDescription: string;

@@ -19,7 +19,7 @@ const AdminBlogEdit: NextPage<ServerSideProps> = () => {
 
   const { post, loading, refetch } = useBlogPost();
 
-  const handleUpdate = async (post: BlogPost) => {
+  const handleUpdate = async (post: Omit<BlogPost, 'createdAt' | 'updatedAt'>) => {
     try {
       await updateBlogPost({ ...post, author: getAuthorKey(post.author) });
       toasts.add({ type: 'success', body: 'Blog post updated' });

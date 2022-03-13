@@ -263,6 +263,8 @@
     .rich-text-wrapper {
       border: none;
       margin: 0 0 2rem 0;
+      position: relative;
+      z-index: 0;
 
       .rich-text-toolbar {
         border: none;

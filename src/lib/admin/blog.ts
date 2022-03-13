@@ -41,7 +41,7 @@ const getSlug = (args: Pick<BlogInput, 'title' | 'category'>) => {
   return `/${category}/${title}`;
 };
 
-export const exportBlogPost = (input: BlogInput): Omit<BlogPost, 'id'> => ({
+export const exportBlogPost = (input: BlogInput): Omit<BlogPost, 'id' | 'createdAt' | 'updatedAt'> => ({
   title: input.title.trim(),
   tags: input.tags.split(',').map(part => part.trim()).filter(part => !!part),
   author: getAuthorByKey(input.author),
@@ -51,8 +51,6 @@ export const exportBlogPost = (input: BlogInput): Omit<BlogPost, 'id'> => ({
   metaImage: `https://cdn.squeaky.ai/${input.metaImage}`,
   body: input.body,
   slug: getSlug(input),
-  createdAt: `${input.date}T${input.time}:00Z`,
-  updatedAt: `${input.date}T${input.time}:00Z`,
 });
 
 export const uploadFile = async (
@@ -81,26 +79,13 @@ export const uploadFile = async (
   });
 };
 
-const splitDateString = (date = new Date()): [string, string] => {
-  const parts = date.toLocaleString().split(', ');
-
-  return [
-    parts[0].split('/').reverse().join('-'),
-    parts[1].slice(0, 5),
-  ];
-};
-
 export const getInitialValues = (post: BlogPost): BlogInput => {
   if (!post) {
-    const [dateString, timeString] = splitDateString();
-
     return {
       title: '',
       tags: '',
       author: 'chris',
       category: '',
-      date: dateString,
-      time: timeString,
       draft: true,
       metaImage: '',
       metaDescription: '',
@@ -108,15 +93,11 @@ export const getInitialValues = (post: BlogPost): BlogInput => {
     };
   };
 
-  const [dateString, timeString] = splitDateString(new Date(post.createdAt));
-
   return {
     title: post.title,
     tags: post.tags.join(', '),
     author: getAuthorKey(post.author),
     category: post.category,
-    date: dateString,
-    time: timeString,
     draft: post.draft,
     metaImage: post.metaImage.replace('https://cdn.squeaky.ai/', ''),
     metaDescription: post.metaDescription,

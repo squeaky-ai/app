@@ -20,7 +20,7 @@ const AdminBlogCreate: NextPage<ServerSideProps> = () => {
 
   const { admin, loading, refetch } = useAdminBlog();
 
-  const handleCreate = async (post: Omit<BlogPost, 'id'>) => {
+  const handleCreate = async (post: Omit<BlogPost, 'id' | 'createdAt' | 'updatedAt'>) => {
     try {
       await createBlogPost({ ...post, author: getAuthorKey(post.author) });
       toasts.add({ type: 'success', body: 'Blog post created' });

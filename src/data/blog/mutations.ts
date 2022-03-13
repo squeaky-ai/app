@@ -16,8 +16,6 @@ export const ADMIN_BLOG_POST_CREATE_MUTATION = gql`
       metaDescription
       slug
       body
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -38,8 +36,6 @@ export const ADMIN_BLOG_POST_UPDATE_MUTATION = gql`
       metaDescription
       slug
       body
-      createdAt
-      updatedAt
     }
   }
 `;
