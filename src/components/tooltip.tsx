@@ -28,10 +28,11 @@ export const Tooltip: FC<Props> = ({ button, fluid, delayInMilliseconds, buttonC
   };
 
   const style = (): React.CSSProperties => {
+    const { scrollY } = window;
     const { x, y, height, width } = ref.current.getBoundingClientRect();
 
     const left = positionX === 'right' ? x + width : x;
-    const top = y + height + 16;
+    const top = scrollY + y + height + 16;
 
     return { left, top, animationDelay: `${delay}s` };
   };
