@@ -41,7 +41,7 @@ export const AnalyticsReferrers: FC<Props> = ({ referrers, page, setPage }) => (
               />
 
               <FiltersVisitorsLink 
-                action={{}} // TODO
+                action={{ referrers: [referrer.referrer === 'Direct' ? 'none' : referrer.referrer] }}
                 hint='View visitors that came from this traffic source'
               />
             </Cell>

@@ -9,6 +9,9 @@ export const FILTERS: VisitorsFilters = {
     count: null
   },
   languages: [],
+  visitedPages: [],
+  unvisitedPages: [],
+  referrers: [],
   firstVisited: {
     rangeType: null,
     fromType: FiltersStart.Before,

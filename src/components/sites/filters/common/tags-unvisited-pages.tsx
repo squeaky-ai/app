@@ -3,11 +3,13 @@ import type { FC } from 'react';
 import { Label } from 'components/label';
 import { Tag } from 'components/tag';
 import type { ValueOf } from 'types/common';
-import type { RecordingsFilters } from 'types/graphql';
+import type { RecordingsFilters, VisitorsFilters } from 'types/graphql';
+
+type Filters = RecordingsFilters | VisitorsFilters;
 
 interface Props {
-  filters: RecordingsFilters;
-  updateFilters: (key: keyof RecordingsFilters, value: ValueOf<RecordingsFilters>) => void;
+  filters: Filters;
+  updateFilters: (key: keyof Filters, value: ValueOf<Filters>) => void;
 }
 
 export const TagsUnvisitedPages: FC<Props> = ({ filters, updateFilters }) => {

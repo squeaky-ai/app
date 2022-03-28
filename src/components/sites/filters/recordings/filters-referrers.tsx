@@ -8,13 +8,13 @@ import { Spinner } from 'components/spinner';
 import { Button } from 'components/button';
 import { Input } from 'components/input';
 import { useReferrers } from 'hooks/use-referrers';
-import type { RecordingsFilters } from 'types/graphql';
+import type { RecordingsFilters, VisitorsFilters } from 'types/graphql';
 import type { ValueOf } from 'types/common';
 
 interface Props {
   value: RecordingsFilters['referrers'];
   onClose: VoidFunction;
-  onUpdate: (value: ValueOf<RecordingsFilters>) => void;
+  onUpdate: (value: ValueOf<RecordingsFilters | VisitorsFilters>) => void;
 }
 
 const ReferrersSchema = Yup.object().shape({

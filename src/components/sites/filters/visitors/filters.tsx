@@ -9,6 +9,8 @@ import { FiltersDate } from 'components/sites/filters/common/filters-date';
 import { FiltersStatus } from 'components/sites/filters/common/filters-status';
 import { FiltersLanguage } from 'components/sites/filters/common/filters-language';
 import { FiltersRecordings } from 'components/sites/filters/visitors/filters-recordings';
+import { FiltersPages } from 'components/sites/filters/common/filters-pages';
+import { FiltersReferrers } from 'components/sites/filters/recordings/filters-referrers';
 import type { VisitorsFilters } from 'types/graphql';
 import type { ValueOf } from 'types/common';
 
@@ -26,7 +28,8 @@ enum FilterType {
   ExitUrl,
   VisitedPages,
   UnvisitedPages,
-  Language
+  Language,
+  Referrer,
 }
 
 export const Filters: FC<Props> = ({ filters, updateFilters }) => {
@@ -68,6 +71,18 @@ export const Filters: FC<Props> = ({ filters, updateFilters }) => {
           <Icon name='arrow-drop-left-line' />
           Language
         </Button>
+        <Button onClick={() => handleFilterChange(FilterType.VisitedPages)} className={classnames({ open: openFilter === FilterType.VisitedPages})}>
+          <Icon name='arrow-drop-left-line' />
+          Visited pages
+        </Button>
+        <Button onClick={() => handleFilterChange(FilterType.UnvisitedPages)} className={classnames({ open: openFilter === FilterType.UnvisitedPages})}>
+          <Icon name='arrow-drop-left-line' />
+          Unvisited pages
+        </Button>
+        <Button onClick={() => handleFilterChange(FilterType.Referrer)} className={classnames({ open: openFilter === FilterType.Referrer})}>
+          <Icon name='arrow-drop-left-line' />
+          Traffic source
+        </Button>
 
         <div className={classnames('popout filters', { open: openFilter !== null })}>
           {openFilter === FilterType.Status && (
@@ -98,6 +113,24 @@ export const Filters: FC<Props> = ({ filters, updateFilters }) => {
             <>
               <Label>Language</Label>
               <FiltersLanguage value={filters.languages} onUpdate={handleUpdate('languages')}  onClose={handleFilterClose} />
+            </>
+          )}
+          {openFilter === FilterType.VisitedPages && (
+            <>
+              <Label>Visited pages</Label>
+              <FiltersPages value={filters.visitedPages} onUpdate={handleUpdate('visitedPages')}  onClose={handleFilterClose} />
+            </>
+          )}
+          {openFilter === FilterType.UnvisitedPages && (
+            <>
+              <Label>Unvisited pages</Label>
+              <FiltersPages value={filters.unvisitedPages} onUpdate={handleUpdate('unvisitedPages')}  onClose={handleFilterClose} />
+            </>
+          )}
+          {openFilter === FilterType.Referrer && (
+            <>
+              <Label>Traffic Source</Label>
+              <FiltersReferrers value={filters.referrers} onUpdate={handleUpdate('referrers')}  onClose={handleFilterClose} />
             </>
           )}
         </div>

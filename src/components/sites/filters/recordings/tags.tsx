@@ -6,14 +6,14 @@ import { TagsDuration } from 'components/sites/filters/recordings/tags-duration'
 import { TagsStatus } from 'components/sites/filters/common/tags-status';
 import { TagsStartUrl } from 'components/sites/filters/recordings/tags-start-page';
 import { TagsExitUrl } from 'components/sites/filters/recordings/tags-exit-url';
-import { TagsVisitedPages } from 'components/sites/filters/recordings/tags-visited-pages';
-import { TagsUnvisitedPages } from 'components/sites/filters/recordings/tags-unvisited-pages';
+import { TagsVisitedPages } from 'components/sites/filters/common/tags-visited-pages';
+import { TagsUnvisitedPages } from 'components/sites/filters/common/tags-unvisited-pages';
 import { TagsDevices } from 'components/sites/filters/recordings/tags-devices';
 import { TagsBrowsers } from 'components/sites/filters/recordings/tags-browsers';
 import { TagsLanguages } from 'components/sites/filters/common/tags-languages';
 import { TagsViewport } from 'components/sites/filters/recordings/tags-viewport';
 import { TagsBookmarked } from 'components/sites/filters/recordings/tags-bookmarked';
-import { TagsReferrers } from 'components/sites/filters/recordings/tags-referrers';
+import { TagsReferrers } from 'components/sites/filters/common/tags-referrers';
 import { TagsStarred } from 'components/sites/filters/recordings/tags-starred';
 import { TagsTags } from 'components/sites/filters/recordings/tags-tags';
 import type { RecordingsFilters } from 'types/graphql';

@@ -6,6 +6,9 @@ import { TagsStatus } from 'components/sites/filters/common/tags-status';
 import { TagsDate } from 'components/sites/filters/visitors/tags-date';
 import { TagsLanguages } from 'components/sites/filters/common/tags-languages';
 import { TagsRecordings } from 'components/sites/filters/visitors/tags-recordings';
+import { TagsVisitedPages } from 'components/sites/filters/common/tags-visited-pages';
+import { TagsUnvisitedPages } from 'components/sites/filters/common/tags-unvisited-pages';
+import { TagsReferrers } from 'components/sites/filters/common/tags-referrers';
 import type { VisitorsFilters } from 'types/graphql';
 import type { ValueOf } from 'types/common';
 
@@ -21,13 +24,19 @@ export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
   const hasFirstVisited = filters.firstVisited.rangeType !== null;
   const hasLastActivity = filters.lastActivity.rangeType !== null;
   const hasLanguages = filters.languages.length > 0;
+  const hasVisitedPages = filters.visitedPages.length > 0;
+  const hasUnvisitedPages = filters.unvisitedPages.length > 0;
+  const hasReferrers = filters.referrers.length > 0;
 
   const hasFilters = (
     hasStatus ||
     hasRecordings ||
     hasFirstVisited ||
     hasLastActivity ||
-    hasLanguages
+    hasLanguages || 
+    hasVisitedPages ||
+    hasUnvisitedPages ||
+    hasReferrers
   );
 
   if (!hasFilters) return null;
@@ -52,6 +61,18 @@ export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
 
       {hasLanguages && (
         <TagsLanguages filters={filters} updateFilters={updateFilters} />
+      )}
+
+      {hasVisitedPages && (
+        <TagsVisitedPages filters={filters} updateFilters={updateFilters} />
+      )}
+
+      {hasUnvisitedPages && (
+        <TagsUnvisitedPages filters={filters} updateFilters={updateFilters} />
+      )}
+
+      {hasReferrers && (
+        <TagsReferrers filters={filters} updateFilters={updateFilters} />
       )}
 
       <Button className='link clear-filters' onClick={clearFilters}>

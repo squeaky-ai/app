@@ -1812,7 +1812,10 @@ export type VisitorsFilters = {
   languages: Array<Scalars['String']>;
   lastActivity: FiltersDate;
   recordings: FiltersRecordings;
+  referrers: Array<Scalars['String']>;
   status?: InputMaybe<FiltersStatus>;
+  unvisitedPages: Array<Scalars['String']>;
+  visitedPages: Array<Scalars['String']>;
 };
 
 export type VisitorsPage = {

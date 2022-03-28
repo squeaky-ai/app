@@ -39,7 +39,7 @@ export const AnalyticsPages: FC<Props> = ({ pages, page, setPage }) => (
             />
 
             <FiltersVisitorsLink 
-              action={{}} // TODO
+              action={{ visitedPages: [page.path] }}
               hint='View visitors that visited this page'
             />
           </Cell>
