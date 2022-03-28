@@ -6,6 +6,7 @@ import { AnalyticsSessionDuration } from 'components/sites/analytics/analytics-s
 import { AnalyticsSessionsPerVisitor } from 'components/sites/analytics/analytics-sessions-per-visitor';
 import { AnalyticsPagesPerSession } from 'components/sites/analytics/analytics-pages-per-session';
 import { AnalyticsVisitsAt } from 'components/sites/analytics/analytics-visits-at';
+import { AnalyticsTimeAverages } from 'components/sites/analytics/analytics-time-averages';
 import { AnalyticsPageViews } from 'components/sites/analytics/analytics-page-views';
 import { AnalyticsPages } from 'components/sites/analytics/analytics-pages';
 import { Error } from 'components/error';
@@ -87,9 +88,7 @@ export const AnalyticsTraffic: FC<Props> = ({ site, period }) => {
 
         <div className='grid-item time-averages'>
           <Card>
-            <p>Average busiest day</p>
-            <p>Average busiest time</p>
-            <p>Average quietest day</p>
+            <AnalyticsTimeAverages visitsAt={analytics.visitsAt} />
           </Card>
         </div>
 

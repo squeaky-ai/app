@@ -146,6 +146,32 @@
 
       &.time-averages {
         grid-area: time-averages;
+
+        .time-averages {
+          p {
+            font-size: 13px;
+            font-weight: var(--font-weight-bold);
+            line-height: 16px;
+            margin: 0 0 .75rem 0;
+          }
+
+          h4 {
+            align-items: center;
+            color: var(--blue-500);
+            display: flex;
+            margin: 0 0 2.5rem 0;
+
+            .icon {
+              font-size: 1.25rem;
+              margin: 0 .5rem 0 0;
+            }
+
+            &:last-of-type {
+              color: var(--rose-500);
+              margin: 0;
+            }
+          }
+        }
       }
 
       &.pages-per-session {
