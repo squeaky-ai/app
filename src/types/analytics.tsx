@@ -11,3 +11,13 @@ export type AnalyticsTraffic = Pick<Analytics,
   'pageViews' |
   'pages'
 >
+
+export type AnalyticsAudience = Pick<Analytics,
+  'dimensions' |
+  'browsers' |
+  'languages' |
+  'countries' |
+  'devices' |
+  'referrers' |
+  'visitors'
+>

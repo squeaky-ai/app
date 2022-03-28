@@ -134,7 +134,7 @@ export const Sidebar: FC = () => {
               </a>
             </Link>
             <Divider />
-            <Link href={`/sites/${siteId}/analytics`}>
+            <Link href={`/sites/${siteId}/analytics/traffic`}>
               <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/analytics`) })} data-label='Analytics'>
                 <Icon name='line-chart-line' />
                 <span>Analytics</span>

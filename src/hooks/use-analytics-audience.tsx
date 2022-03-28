@@ -1,28 +1,26 @@
-import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
-import { GET_ANALYTICS_QUERY } from 'data/analytics/queries';
-import type { Site, Analytics } from 'types/graphql';
+import { GET_ANALYTICS_AUDIENCE_QUERY } from 'data/analytics/queries';
+import type { Site } from 'types/graphql';
 import type { TimeRange } from 'types/common';
+import type { AnalyticsAudience } from 'types/analytics';
 
 interface UseAnalytics {
   loading: boolean;
   error: boolean;
-  analytics: Analytics | null;
+  analytics: AnalyticsAudience | null;
 }
 
 interface Props {
+  site: Site;
   range: TimeRange;
-  pagesPage: number;
   browsersPage: number;
   referrersPage: number;
 }
 
-export const useAnalytics = (props: Props): UseAnalytics => {
-  const router = useRouter();
-
-  const { data, loading, error, previousData } = useQuery<{ site: Site }>(GET_ANALYTICS_QUERY, {
+export const useAnalyticsAudience = (props: Props): UseAnalytics => {
+  const { data, loading, error, previousData } = useQuery<{ site: Site }>(GET_ANALYTICS_AUDIENCE_QUERY, {
     variables: {
-      siteId: router.query.site_id as string,
+      siteId: props.site.id,
       ...props,
       ...props.range,
     }
