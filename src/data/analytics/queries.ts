@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
-export const GET_ANALYTICS_QUERY = gql`
-  query GetAnalytics($siteId: ID!, $fromDate: ISO8601Date!, $toDate: ISO8601Date!, $pagesPage: Int!, $browsersPage: Int!, $referrersPage: Int!) { 
+export const GET_ANALYTICS_TRAFFIC_QUERY = gql`
+  query GetAnalytics($siteId: ID!, $fromDate: ISO8601Date!, $toDate: ISO8601Date!, $pagesPage: Int!) { 
     site(siteId: $siteId) {
       id
       analytics(fromDate: $fromDate, toDate: $toDate) {
@@ -9,10 +9,6 @@ export const GET_ANALYTICS_QUERY = gql`
         visitsAt {
           day
           hour
-          count
-        }
-        dimensions {
-          deviceX
           count
         }
         sessionDurations {
@@ -62,6 +58,30 @@ export const GET_ANALYTICS_QUERY = gql`
             pageSize
           }
         }
+      }
+    }
+  }
+`;
+
+export const GET_ANALYTICS_AUDIENCE_QUERY = gql`
+  query GetAnalytics($siteId: ID!, $fromDate: ISO8601Date!, $toDate: ISO8601Date!, $browsersPage: Int!, $referrersPage: Int!) { 
+    site(siteId: $siteId) {
+      id
+      analytics(fromDate: $fromDate, toDate: $toDate) {
+        visitors {
+          groupType
+          groupRange
+          items {
+            dateKey
+            allCount
+            existingCount
+            newCount
+          }
+        }
+        dimensions {
+          deviceX
+          count
+        }
         browsers(size: 10, page: $browsersPage) {
           items {
             browser
@@ -79,6 +99,7 @@ export const GET_ANALYTICS_QUERY = gql`
         }
         countries {
           name
+          code
           count
         }
         devices {

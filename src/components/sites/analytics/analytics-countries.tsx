@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import { sum } from 'lodash';
 import { percentage } from 'lib/maths';
 import { Button } from 'components/button';
+import { Flag } from 'components/flag';
 import type { AnalyticsCountry } from 'types/graphql';
 
 interface Props {
@@ -19,9 +20,11 @@ export const AnalyticsCountries: FC<Props> = ({ countries }) => {
   return (
     <>
       <ul>
-        {results.map((country, index) => (
+        {results.map(country => (
           <li key={country.name}>
-            <h2>{index + 1}</h2>
+            <h2>
+              <Flag code={country.code} />
+            </h2>
             <div className='details'>
               <p>{country.name}</p>
               <p className='count'>{percentage(total, country.count)}%</p>

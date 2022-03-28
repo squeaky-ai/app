@@ -39,7 +39,7 @@ export const AnalyticsVisitsAt: FC<Props> = ({ visitsAt }) => {
   const maxCount = Math.max(...Object.values(orderedDayAndHourCounts));
 
   return (
-    <div className='card visits-at'>
+    <div className='visits-at'>
       {orderedDayAndHourCounts.map((count, index) => {
         const [hour, day] = getHourAndDayForIndex(index);
 

@@ -135,6 +135,7 @@ export type AnalyticsBrowsers = {
 
 export type AnalyticsCountry = {
   __typename?: 'AnalyticsCountry';
+  code: Scalars['String'];
   count: Scalars['Int'];
   name: Scalars['String'];
 };

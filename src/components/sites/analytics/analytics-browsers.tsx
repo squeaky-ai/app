@@ -21,6 +21,7 @@ export const AnalyticsBrowsers: FC<Props> = ({ browsers, page, setPage }) => {
   return (
     <>
       <Card>
+        <h4>Browser</h4>
         <ul>
           {browsers.items.map(browser => (
             <li key={browser.browser}>

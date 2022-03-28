@@ -5,31 +5,34 @@ import classnames from 'classnames';
 import { Main } from 'components/main';
 import { EmptyState } from 'components/sites/empty-state';
 import { Page } from 'components/sites/page';
-import { Analytics } from 'components/sites/analytics/analytics';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { Unlock } from 'components/sites/unlock';
 import { Period } from 'components/sites/period/period';
 import { usePeriod } from 'hooks/use-period';
+import { Tabs } from 'components/sites/analytics/tabs';
+import { AnalyticsAudience } from 'components/sites/analytics/analytics-audience';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
-const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
+const SitesAnalyticsAudience: NextPage<ServerSideProps> = ({ user }) => {
   const { period, setPeriod } = usePeriod('analytics');
   
   return (
     <>
       <Head>
-        <title>Squeaky | Site Analytics</title> 
+        <title>Squeaky | Site Analytics | Audience</title> 
       </Head>
 
       <Page user={user} scope={[]}>
         {({ site }) => (
-          <Main className={classnames({ empty: site.recordingsCount === 0})}>
+          <Main className={classnames({ empty: site.recordingsCount === 0 })}>
             <BreadCrumbs site={site} items={[{ name: 'Analytics' }]} />
 
             <div className='heading'>
               <h3 className='title'>Analytics</h3>
               <Period period={period} onChange={setPeriod} />
             </div>
+
+            <Tabs site={site} tab='audience' />
 
             <EmptyState
               title='There are currently no analytics available'
@@ -41,7 +44,7 @@ const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
             <Unlock site={site} page='analytics' />
 
             {site.recordingsCount > 0 && (
-              <Analytics period={period} />
+              <AnalyticsAudience period={period} site={site} />
             )}
           </Main>
         )}
@@ -50,5 +53,5 @@ const SitesAnalytics: NextPage<ServerSideProps> = ({ user }) => {
   );
 };
 
-export default SitesAnalytics;
+export default SitesAnalyticsAudience;
 export { getServerSideProps };
