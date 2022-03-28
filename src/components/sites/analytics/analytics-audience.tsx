@@ -46,21 +46,20 @@ export const AnalyticsAudience: FC<Props> = ({ site, period }) => {
   return (
     <div className='analytics-audience'>
       <div className='grid-item countries'>
-        <h4>Countries</h4>
         <Card>
+          <h4>Countries</h4>
           <AnalyticsCountries countries={analytics.countries} />
         </Card>
       </div>
 
       <div className='grid-item languages'>
-        <h4>Language</h4>
         <Card>
+          <h4>Language</h4>
           <AnalyticsLanguages languages={analytics.languages} />
         </Card>   
       </div>
 
       <div className='grid-item browsers'>
-        <h4>Browser</h4>
         <AnalyticsBrowsers browsers={analytics.browsers} page={browsersPage} setPage={setBrowsersPage} />
       </div>
 

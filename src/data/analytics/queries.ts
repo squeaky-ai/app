@@ -99,6 +99,7 @@ export const GET_ANALYTICS_AUDIENCE_QUERY = gql`
         }
         countries {
           name
+          code
           count
         }
         devices {
