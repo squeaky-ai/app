@@ -44,7 +44,7 @@ const SitesAnalyticsTraffic: NextPage<ServerSideProps> = ({ user }) => {
             <Unlock site={site} page='analytics' />
 
             {site.recordingsCount > 0 && (
-              <AnalyticsTraffic site={site} />
+              <AnalyticsTraffic period={period} site={site} />
             )}
           </Main>
         )}

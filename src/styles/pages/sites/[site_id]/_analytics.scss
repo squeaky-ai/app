@@ -46,7 +46,7 @@
 
     @include breakpoint-md {
       grid-gap: 1.5rem;
-      grid-template-areas: 'visitors-graph '
+      grid-template-areas: 'visitors-graph'
                            'average-session-duration'
                            'average-session-per-visitors'
                            'pages-per-session'

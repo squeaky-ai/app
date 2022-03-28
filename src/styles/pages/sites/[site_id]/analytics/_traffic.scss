@@ -1,3 +1,371 @@
 .page.sites.analytics.traffic {
+  .title {
+    margin: 0 0 2rem 0;
 
+    &.empty {
+      margin: 2rem 0 1rem 0;
+      width: 100%;
+    }
+  }
+
+  .heading {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 2rem 0;
+
+    .title {
+      margin: 0;
+    }
+  }
+
+  .empty {
+    .heading {
+      .period {
+        display: none;
+      }
+    }
+
+    .empty-state {
+      display: flex;
+    }
+  }
+
+  .analytics-traffic {
+    display: grid;
+    grid-gap: 2rem;
+    grid-template-areas: 'visitors-graph visitors-graph visitors-graph'
+                         'average-session-duration average-session-per-visitors pages-per-session'
+                         'time-of-day time-of-day time-averages'
+                         'page-views page-views page-views'
+                         'pages pages pages';
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: auto;
+    margin: 3rem 0 0 0;
+
+    @include breakpoint-md {
+      grid-gap: 1.5rem;
+      grid-template-areas: 'visitors-graph'
+                           'average-session-duration'
+                           'average-session-per-visitors'
+                           'pages-per-session'
+                           'time-of-day'
+                           'time-averages'
+                           'page-views'
+                           'pages';
+      grid-template-columns: 100%;
+    }
+
+    .table {
+      .tooltip,
+      .tooltip .button {
+        display: block;
+        overflow: hidden;
+        text-align: left;
+        text-overflow: ellipsis;
+        width: 100%;
+        white-space: nowrap;
+      }
+    }
+
+    .grid-item {
+      display: flex;
+      flex-direction: column;
+
+      h4 {
+        margin: 2rem 0 1.5rem 0;
+      }
+
+      &.visitors-graph {
+        grid-area: visitors-graph;
+      }
+
+      &.average-session-duration {
+        grid-area: average-session-duration;
+      }
+
+      &.average-session-per-visitors {
+        grid-area: average-session-per-visitors;
+      }
+
+      &.time-of-day {
+        grid-area: time-of-day;
+
+        .visits-at {
+          display: grid;
+          flex: 0;
+          grid-gap: .5rem;
+          grid-template-columns: repeat(25, minmax(0, 1fr));
+          grid-template-rows: repeat(8, 1.25rem);
+  
+          .visit {
+            background: var(--gray-100);
+            flex-shrink: 0;
+            position: relative;
+  
+            &::after {
+              background: var(--gray-blue-800);
+              border-radius: var(--border-radius-md);
+              color: var(--white);
+              content: attr(data-label);
+              display: none;
+              font-size: 13px;
+              line-height: 20px;
+              left: 2rem;
+              padding: .25rem .5rem;
+              position: absolute;
+              pointer-events: none;
+              white-space: nowrap;
+              z-index: 1;
+            }
+  
+            &:not(.label):hover {
+              background: var(--gray-blue-600);
+        
+              &:after {
+                display: block;
+              }
+            }
+          }
+  
+          .label {
+            align-items: center;
+            background: none;
+            display: inline-flex;
+            font-size: 12px;
+            font-weight: var(--font-weight-normal);
+            margin: 0;
+            padding: 0;
+  
+            &.hidden {
+              visibility: hidden;
+            }
+          }
+        }
+      }
+
+      &.time-averages {
+        grid-area: time-averages;
+      }
+
+      &.pages-per-session {
+        grid-area: pages-per-session;
+      }
+
+      &.page-views {
+        grid-area: page-views;
+      }
+
+      &.pages {
+        grid-area: pages;
+
+        h4 {
+          margin: 0 0 2rem 0;
+        }
+
+        .table {
+          @include breakpoint-md {
+            box-shadow: none;
+          }
+
+          .row {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+  
+            @include breakpoint-md {
+              align-items: flex-start;
+              flex-direction: column;
+              height: auto;
+              padding: 1rem;
+  
+              .cell {
+                padding: 0;
+  
+                &:first-of-type {
+                  font-weight: var(--font-weight-bold);
+                  margin-bottom: .5rem;
+                }
+              }
+            }
+          }
+        }
+      
+        .percentage {
+          color: var(--gray-500);
+        }
+      }
+
+      .rc-pagination {
+        margin-top: 1.5rem;
+      }
+  
+      .chart-wrapper {
+        align-items: center;
+        display: flex;
+        width: 100%;
+  
+        h3 {
+          flex-shrink: 0;
+        }
+  
+        .chart {
+          flex: 1;
+          margin-left: 1.5rem;
+        }
+      }
+  
+      .analytics-graph {
+        .title {
+          align-items: flex-end;
+  
+          h3 {
+            line-height: 2rem;
+          }
+        }
+  
+        @include breakpoint-md {
+          .heading {
+            margin-bottom: 2rem;
+  
+            .actions {
+              display: none;
+            }
+          }
+  
+          .title {
+            width: 100%;
+  
+            h3 {
+              flex: 1;
+            }
+          }
+        }
+      }
+  
+      .graph-wrapper {
+        height: 340px;
+        width: 100%;
+  
+        @include breakpoint-md {
+          height: 150px;
+        }
+      }
+    
+      .recharts-surface {
+        overflow: visible;
+      }
+  
+      .card {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+  
+        h5 {
+          align-items: center;
+          display: flex;
+          margin: 0 0 1.5rem 0;
+
+          .icon {
+            color: var(--blue-500);
+            font-weight: var(--font-weight-normal);
+            margin: 0 .5rem 0 0;
+          }
+        }
+      }
+  
+      .heading {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+  
+        .title {
+          h3 {
+            color: var(--purple-500);
+            margin: 0 1rem;
+          }
+  
+          h5 {
+            margin: 0;
+          }
+        }
+  
+        .actions {
+          display: flex;
+  
+          .label {
+            margin: 0 1.5rem 0 0;
+          }
+  
+          .checkbox:last-of-type {
+            margin-right: 0;
+          }
+        }
+      }
+  
+      .numbered-grid {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+  
+        h3 {
+          align-items: flex-end;
+          display: flex;
+          font-weight: var(--font-weight-bold);
+          flex: 1;
+          margin: 0;
+        }
+  
+        .trend {
+          align-self: flex-start;
+          margin-top: 1.5rem;
+        }
+  
+        &.blue {
+          h3 {
+            color: var(--blue-500);
+          }
+        }
+  
+        &.purple {
+          h3 {
+            color: var(--purple-500);
+          }
+        }
+      }
+    }
+  
+    .custom-tooltip {
+      background: var(--gray-blue-800);
+      border-radius: var(--border-radius-md);
+      color: var(--gray-100);
+      padding: 1rem;
+  
+      p {
+        margin: 0 0 .5rem 0;
+  
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+      }
+      
+      .all {
+        color: var(--purple-500);
+      }
+  
+      .existing {
+        color: var(--blue-500);
+      }
+  
+      .new {
+        color: var(--rose-500);
+      }
+  
+      .width {
+        color: var(--gray-100);
+      }
+  
+      .total-visitors {
+        color: var(--blue-500);
+      }
+    }
+  }
 }
