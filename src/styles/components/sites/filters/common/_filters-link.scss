@@ -1,0 +1,15 @@
+.filters-link {
+  height: 1.25rem;
+  width: 1.25rem;
+
+  .icon {
+    color: var(--gray-200);
+    font-size: 1.25rem;
+  }
+
+  &:hover {
+    .icon {
+      color: var(--blue-500);
+    }
+  }
+}

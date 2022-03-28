@@ -130,7 +130,7 @@
         grid-area: referrers;
 
         .table .row {
-          grid-template-columns: 1fr 200px;
+          grid-template-columns: 1fr 200px 100px;
 
           @include breakpoint-md {
             align-items: flex-start;
@@ -146,6 +146,15 @@
                 margin-bottom: .5rem;
               }
             }
+          }
+        }
+
+        .filters-links {
+          display: flex;
+          align-items: flex-end;
+
+          .button {
+            text-align: right;
           }
         }
         

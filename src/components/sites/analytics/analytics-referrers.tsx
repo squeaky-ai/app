@@ -3,6 +3,8 @@ import type { FC } from 'react';
 import { Table, Row, Cell } from 'components/table';
 import { Pagination } from 'components/pagination';
 import { Tooltip } from 'components/tooltip';
+import { FiltersVisitorsLink } from 'components/sites/filters/common/filters-visitors-link';
+import { FiltersRecordingsLink } from 'components/sites/filters/common/filters-recordings-link';
 import type { AnalyticsReferrers as AnalyticsReferrersType } from 'types/graphql';
 
 interface Props {
@@ -17,6 +19,7 @@ export const AnalyticsReferrers: FC<Props> = ({ referrers, page, setPage }) => (
       <Row head>
         <Cell>Page</Cell>
         <Cell>Number of users</Cell>
+        <Cell />
       </Row>
       {referrers.items.map(referrer => {
         const label = referrer.referrer === 'Direct' 
@@ -31,6 +34,17 @@ export const AnalyticsReferrers: FC<Props> = ({ referrers, page, setPage }) => (
               </Tooltip>
             </Cell>
             <Cell><b>{referrer.count}</b> <span className='percentage'>({referrer.percentage}%)</span></Cell>
+            <Cell className='filters-links'>
+              <FiltersRecordingsLink 
+                action={{ referrers: [referrer.referrer === 'Direct' ? 'none' : referrer.referrer] }}
+                hint='View recordings that came from this traffic source'
+              />
+
+              <FiltersVisitorsLink 
+                action={{}} // TODO
+                hint='View visitors that came from this traffic source'
+              />
+            </Cell>
           </Row>
         );
       })}
