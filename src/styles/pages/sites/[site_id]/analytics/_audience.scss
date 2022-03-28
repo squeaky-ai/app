@@ -19,6 +19,10 @@
     }
   }
 
+  .analytics-tabs {
+    margin: 0 0 3rem 0;
+  }
+
   .empty {
     .heading {
       .period {
@@ -39,7 +43,6 @@
                          'devices screen-widths screen-widths';
     grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-template-rows: auto;
-    margin: 3rem 0 0 0;
 
     @include breakpoint-md {
       grid-gap: 1.5rem;
@@ -144,6 +147,10 @@
               }
             }
           }
+        }
+        
+        .rc-pagination {
+          margin: 1.5rem 0 0 0;
         }
       
         .percentage {

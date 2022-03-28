@@ -32,6 +32,8 @@ const SitesAnalyticsTraffic: NextPage<ServerSideProps> = ({ user }) => {
               <Period period={period} onChange={setPeriod} />
             </div>
 
+            <Unlock site={site} page='analytics' />
+
             <Tabs site={site} tab='traffic' />
 
             <EmptyState
@@ -40,8 +42,6 @@ const SitesAnalyticsTraffic: NextPage<ServerSideProps> = ({ user }) => {
               illustration='illustration-3'
               videoName='Analytics Intro'
             />
-
-            <Unlock site={site} page='analytics' />
 
             {site.recordingsCount > 0 && (
               <AnalyticsTraffic period={period} site={site} />
