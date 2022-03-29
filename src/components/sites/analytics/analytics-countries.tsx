@@ -13,7 +13,7 @@ interface Props {
 export const AnalyticsCountries: FC<Props> = ({ countries }) => {
   const [showAll, setShowAll] = React.useState<boolean>(false);
 
-  const limit = 6;
+  const limit = 5;
   const total = sum(countries.map(b => b.count));
   const results = showAll ? countries : countries.slice(0, limit);
 

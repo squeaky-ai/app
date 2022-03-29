@@ -65,6 +65,10 @@
         width: 100%;
         white-space: nowrap;
       }
+
+      .row {
+        height: 3rem;
+      }
     }
 
     .grid-item {
@@ -129,6 +133,10 @@
       &.referrers {
         grid-area: referrers;
 
+        h4 {
+          margin: 0 0 1.5rem 0;
+        }
+
         .table .row {
           grid-template-columns: 1fr 200px 100px;
 
@@ -188,10 +196,9 @@
               margin-bottom: 0;
             }
 
-            h2 {
+            h3 {
               color: var(--purple-500);
-              font-size: 2rem;
-              margin: 0 2rem 0 0;
+              margin: 0 1.5rem 0 0;
               width: 2rem;
             }
 
@@ -216,6 +223,10 @@
 
       &.devices {
         grid-area: devices;
+
+        h4 {
+          margin: 0 0 1.5rem 0;
+        }
 
         .card {
           align-items: center;
@@ -305,6 +316,10 @@
 
       &.screen-widths {
         grid-area: screen-widths;
+
+        h4 {
+          margin: 0 0 1.5rem 0;
+        }
 
         h5 {
           align-items: center;

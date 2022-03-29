@@ -12,7 +12,7 @@ interface Props {
 export const AnalyticsLanguages: FC<Props> = ({ languages }) => {
   const [showAll, setShowAll] = React.useState<boolean>(false);
 
-  const limit = 6;
+  const limit = 5;
   const total = sum(languages.map(b => b.count));
   const results = showAll ? languages : languages.slice(0, limit);
 
@@ -21,7 +21,7 @@ export const AnalyticsLanguages: FC<Props> = ({ languages }) => {
       <ul>
         {results.map((language, index) => (
           <li key={language.name}>
-            <h2>{index + 1}</h2>
+            <h3>{index + 1}</h3>
             <div className='details'>
               <p>{language.name}</p>
               <p className='count'>{percentage(total, language.count)}%</p>
