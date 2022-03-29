@@ -22,9 +22,9 @@ export const AnalyticsCountries: FC<Props> = ({ countries }) => {
       <ul>
         {results.map(country => (
           <li key={country.name}>
-            <h2>
+            <div className='flag-wrapper'>
               <Flag code={country.code} />
-            </h2>
+            </div>
             <div className='details'>
               <p>{country.name}</p>
               <p className='count'>{percentage(total, country.count)}%</p>
