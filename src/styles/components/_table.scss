@@ -91,6 +91,9 @@
 }
 
 .table-wrapper {
-  overflow-x: auto;
   width: 100%;
+
+  @include breakpoint-md {
+    overflow-x: auto;
+  }
 }
