@@ -1,6 +1,4 @@
-export enum FeatureFlag {
-  BILLING = 'BILLING'
-}
+export enum FeatureFlag {}
 
 export class FeatureFlags {
   public static get(key: FeatureFlag): boolean {

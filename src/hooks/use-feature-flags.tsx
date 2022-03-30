@@ -11,21 +11,12 @@ type UseFeatureFlags = {
 
 type Names = Record<FeatureFlag, string>;
 
-export const allFeatureFlags = [
-  FeatureFlag.BILLING,
-];
+export const allFeatureFlags: FeatureFlag[] = [];
 
-export const featureFlagNames: Names = {
-  [FeatureFlag.BILLING]: 'Billing',
-};
+export const featureFlagNames: Names = {};
 
 export const useFeatureFlags = (): UseFeatureFlags => {
-  const [state, setState] = React.useState<State>([
-    {
-      key: FeatureFlag.BILLING,
-      value: false,
-    },
-  ]);
+  const [state, setState] = React.useState<State>([]);
 
   const handleChange = (key: FeatureFlag, value: boolean) => {
     FeatureFlags.set(key, value);
