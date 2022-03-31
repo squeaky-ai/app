@@ -169,7 +169,7 @@ export const BillingPlansTable: FC<Props> = ({ site, billing, hasBilling, showPl
 
       <div className='enterprise'>
         <Icon name='building-line' />
-        <p>If you have <b>more than 100k visits per month</b>, or you&apos;re looking to <b>learn more about our Enterprise features</b>, like SSO, Audit Trails, Enterprise SLA&apos;s etc, the please get in touch.</p>
+        <p>If you have <b>more than 200k visits per month</b>, or you&apos;re looking to <b>learn more about our Enterprise features</b>, like SSO, Audit Trails, Enterprise SLA&apos;s etc, the please get in touch.</p>
         <Button className='primary'>
           Discuss Enterprise Plans
         </Button>
