@@ -1,6 +1,8 @@
 import { range } from 'lodash';
 import { subDays, getDayOfYear, getWeek, subWeeks, subMonths, format } from 'date-fns';
 import { getAmPmForHour } from 'lib/charts';
+import { fromSlashyDate } from 'lib/dates';
+import type { TimePeriod } from 'types/common';
 
 interface Result<T> {
   groupType: string;
@@ -20,8 +22,22 @@ const findMatchOrDefault = <T extends Item>(dateKey: string, label: string, item
   return { ...match, dateKey: label } as T;
 };
 
-export const formatResultsForGroupType = <T extends Item>(visitors: Result<T>, fallback: Omit<T, 'dateKey'>): T[] => {
+const getEndDateForPeriod = (period: TimePeriod): Date => {
   const now = new Date();
+
+  if (typeof period === 'string') {
+    return now;
+  }
+
+  if (period.fromType === 'After') {
+    return now;
+  }
+
+  return fromSlashyDate(period.fromDate || period.betweenToDate);
+};
+
+export const formatResultsForGroupType = <T extends Item>(visitors: Result<T>, period: TimePeriod, fallback: Omit<T, 'dateKey'>): T[] => {
+  const endDate = getEndDateForPeriod(period);
   const { groupRange, groupType, items } = visitors;
 
   switch(groupType) {
@@ -34,7 +50,7 @@ export const formatResultsForGroupType = <T extends Item>(visitors: Result<T>, f
       });
     case 'daily':
       return range(0, groupRange + 1).map(i => {
-        const date = subDays(now, i);
+        const date = subDays(endDate, i);
         const dateKey = padDateKey(getDayOfYear(date), 3);
         const label = format(date, 'd/M');
 
@@ -42,7 +58,7 @@ export const formatResultsForGroupType = <T extends Item>(visitors: Result<T>, f
       }).reverse();
     case 'weekly':
       return range(0, groupRange + 1).map(i => {
-        const date = subWeeks(now, i);
+        const date = subWeeks(endDate, i);
         const dateKey = padDateKey(getWeek(date), 2);
         const label = format(date, 'd/M');
 
@@ -50,7 +66,7 @@ export const formatResultsForGroupType = <T extends Item>(visitors: Result<T>, f
       }).reverse();
     case 'monthly':
       return range(0, groupRange + 1).map(i => {
-        const date = subMonths(now, i);
+        const date = subMonths(endDate, i);
         const dateKey = format(date, 'yyyy/MM');
         const label = dateKey;
 

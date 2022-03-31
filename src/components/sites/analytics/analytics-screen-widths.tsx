@@ -12,7 +12,7 @@ interface Props {
 
 export const AnalyticsScreenWidths: FC<Props> = ({ dimensions }) => {
   const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload, label }) => {
-    if (!active || !payload || payload?.length < 1) return null;
+    if (!active || !payload[0]) return null;
   
     return (
       <div className='custom-tooltip'>

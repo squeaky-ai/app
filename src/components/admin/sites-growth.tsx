@@ -35,7 +35,7 @@ export const SitesGrowth: FC<Props> = ({ sites }) => {
   const data = getAccumulatingTotal(sites);
 
   const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload, label }) => {
-    if (!active || payload?.length < 1) return null;
+    if (!active || !payload[0]) return null;
 
     const sitesCount = payload[0].payload.count;
   

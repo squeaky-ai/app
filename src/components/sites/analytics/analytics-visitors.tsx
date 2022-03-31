@@ -31,7 +31,7 @@ export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
 
   const doNotAllowZero = (num: number) => num === 0 && scale === 'log' ? null : num;
 
-  const results = formatResultsForGroupType<AnalyticsVisitor>(visitors, fallback).map(d => ({
+  const results = formatResultsForGroupType<AnalyticsVisitor>(visitors, period, fallback).map(d => ({
     dateKey: d.dateKey,
     allCount: doNotAllowZero(show.includes('all') ? d.allCount : 0),
     existingCount: doNotAllowZero(show.includes('existing') ? d.existingCount : 0),
@@ -39,7 +39,7 @@ export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
   }));
 
   const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload, label }) => {
-    if (!active || payload?.length < 1) return null;
+    if (!active || !payload[0]) return null;
   
     return (
       <div className='custom-tooltip'>

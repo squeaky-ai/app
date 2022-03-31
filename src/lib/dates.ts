@@ -6,7 +6,8 @@ import {
   startOfToday, 
   startOfYesterday, 
   endOfYesterday, 
-  format 
+  format,
+  parse,
 } from 'date-fns';
 
 import { AbsoluteTime, TimePeriod, TimeRange } from 'types/common';
@@ -33,6 +34,8 @@ export const fromTimeString = (timeString: string) => {
 
   return date.valueOf();
 };
+
+export const fromSlashyDate = (slashyDate: string) => parse(slashyDate, 'dd/MM/yyyy', new Date());
 
 export const toSlashyDate = (s: string) => s ? s.split('/').reverse().join('-') : null;
 

@@ -31,14 +31,14 @@ export const AnalyticsPageViews: FC<Props> = ({ pageViews, period }) => {
 
   const doNotAllowZero = (num: number) => num === 0 && scale === 'log' ? null : num;
 
-  const results = formatResultsForGroupType<AnalyticsPageView>(pageViews, fallback).map(d => ({
+  const results = formatResultsForGroupType<AnalyticsPageView>(pageViews, period, fallback).map(d => ({
     dateKey: d.dateKey,
     totalCount: doNotAllowZero(show.includes('all') ? d.totalCount : 0),
     uniqueCount: doNotAllowZero(show.includes('unique') ? d.uniqueCount : 0),
   }));
 
   const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload, label }) => {
-    if (!active || payload?.length < 1) return null;
+    if (!active || !payload[0]) return null;
   
     return (
       <div className='custom-tooltip'>
