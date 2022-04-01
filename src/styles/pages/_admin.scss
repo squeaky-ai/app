@@ -102,6 +102,24 @@
     }
   }
 
+  .chart-heading {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+
+    .options {
+      display: flex;
+
+      .label {
+        margin: 0 1.5rem 0 0;
+      }
+
+      .checkbox:last-of-type {
+        margin-right: 0;
+      }
+    }
+  }
+
   .custom-tooltip {
     background: var(--gray-blue-800);
     border-radius: var(--border-radius-md);
@@ -115,6 +133,18 @@
 
       &:last-of-type {
         margin-bottom: 0;
+      }
+
+      &.all {
+        color: var(--purple-500);
+      }
+
+      &.verified {
+        color: var(--blue-500);
+      }
+
+      &.unverified {
+        color: var(--rose-500);
       }
     }
   }

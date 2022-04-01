@@ -3,6 +3,8 @@ import type { FC } from 'react';
 import { range } from 'lodash';
 import { format, subMonths } from 'date-fns';
 import { Card } from 'components/card';
+import { Label } from 'components/label';
+import { Checkbox } from 'components/checkbox';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, TooltipProps } from 'recharts';
 import type { Site } from 'types/graphql';
 
@@ -11,45 +13,65 @@ interface Props {
 }
 
 interface Total {
-  count: number;
+  allCount: number;
+  verifiedCount: number;
+  unverifiedCount: number;
   date: string;
 }
 
-const getAccumulatingTotal = (sites: Site[]): Total[] => {
-  const now = new Date();
-
-  const results = range(0, 11).map(month => {
-    const thisMonth = subMonths(now, month);
-    const values = sites.filter(site => new Date(site.createdAt) <= thisMonth);
-    
-    return {
-      date: format(thisMonth, 'MMM yy'),
-      count: values.length,
-    }
-  });
-
-  return results.reverse();
-};
-
 export const SitesGrowth: FC<Props> = ({ sites }) => {
-  const data = getAccumulatingTotal(sites);
+  const [show, setShow] = React.useState<string[]>(['all', 'verified', 'unverified']);
+
+  const handleClick = (value: string) => {
+    show.includes(value)
+      ? setShow(show.filter(s => s !== value))
+      : setShow([...show, value]);
+  };
+
+  const data = ((): Total[] => {
+    const now = new Date();
+  
+    const results = range(0, 11).map(month => {
+      const thisMonth = subMonths(now, month);
+      const values = sites.filter(site => new Date(site.createdAt) <= thisMonth);
+      
+      return {
+        date: format(thisMonth, 'MMM yy'),
+        allCount: show.includes('all') ? values.length : 0,
+        verifiedCount: show.includes('verified') ? values.filter(v => !!v.verifiedAt).length : 0,
+        unverifiedCount: show.includes('unverified') ? values.filter(v => !v.verifiedAt).length : 0,
+      };
+    });
+  
+    return results.reverse();
+  })();
 
   const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload, label }) => {
     if (!active || !payload[0]) return null;
 
-    const sitesCount = payload[0].payload.count;
+    const { allCount, verifiedCount, unverifiedCount } = payload[0].payload;
   
     return (
       <div className='custom-tooltip'>
         <p className='date'>{label}</p>
-        <p className='count'>{sitesCount} sites</p>
+        {show.includes('all') && <p className='count all'>{allCount} All sites</p>}
+        {show.includes('verified') && <p className='count verified'>{verifiedCount} Verified sites</p>}
+        {show.includes('unverified') && <p className='count unverified'>{unverifiedCount} Unverified sites</p>}
       </div>
     );
   };
 
   return (
     <Card>
-      <h5>Site Growth</h5>
+      <div className='chart-heading'>
+        <h5>Site Growth</h5>
+        <div className='options'>
+          <Label>Show:</Label>
+          <Checkbox checked={show.includes('all')} onChange={() => handleClick('all')} className='purple'>All</Checkbox>
+          <Checkbox checked={show.includes('verified')} onChange={() => handleClick('verified')}>Verified</Checkbox>
+          <Checkbox checked={show.includes('unverified')} onChange={() => handleClick('unverified')} className='rose'>Unverified</Checkbox>
+        </div>
+      </div>
       <div className='chart-wrapper'>
       <ResponsiveContainer>
           <LineChart data={data} margin={{ top: 15, left: -15, right: 15, bottom: 0 }}>
@@ -73,7 +95,9 @@ export const SitesGrowth: FC<Props> = ({ sites }) => {
 
             <Tooltip content={<CustomTooltip />} />
   
-            <Line dataKey='count' fillOpacity={1} stroke='#0768C1' strokeWidth={2} />
+            <Line dataKey='allCount' fillOpacity={1} stroke='#8249FB' strokeWidth={2} />
+            <Line dataKey='verifiedCount' fillOpacity={1} stroke='#0768C1' strokeWidth={2} />
+            <Line dataKey='unverifiedCount' fillOpacity={1} stroke='#F96155' strokeWidth={2} />
           </LineChart>
         </ResponsiveContainer>
       </div>
