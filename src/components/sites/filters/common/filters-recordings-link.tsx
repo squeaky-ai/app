@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { Tooltip } from 'components/tooltip';
 import { Icon } from 'components/icon'
 import { useFilters } from 'hooks/use-filters';
+import { FILTERS } from 'data/recordings/constants';
 import type { RecordingsFilters } from 'types/graphql';
 
 interface Props {
@@ -14,10 +15,10 @@ interface Props {
 export const FiltersRecordingsLink: FC<Props> = ({ hint, action }) => {
   const router = useRouter();
 
-  const { filters, setFilters } = useFilters<RecordingsFilters>('recordings');
+  const { setFilters } = useFilters<RecordingsFilters>('recordings');
 
   const handleClick = async () => {
-    setFilters({ ...filters, ...action });
+    setFilters({ ...FILTERS, ...action });
     await router.push(`/sites/${router.query.site_id}/recordings`);
   };
 
