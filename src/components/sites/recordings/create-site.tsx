@@ -54,11 +54,17 @@ export const CreateSite: FC<Props> = ({ children, className }) => {
           <Formik
             initialValues={{ name: '', protocol: 'https://', hostname: '' }}
             validationSchema={CreateSchema}
-            onSubmit={(values, { setSubmitting, setErrors }) => {
+            onSubmit={(values, { setSubmitting, setErrors, setFieldValue }) => {
               (async () => {
                 try {
                   const { name, protocol, hostname } = values;
-                  const url = `${protocol}${hostname}`;
+
+                  // Some people paste the whole url in with the protocol
+                  // so we strip it and update the field
+                  const host = hostname.replace(/^https?:\/\//, '');
+                  setFieldValue('hostname', host);
+
+                  const url = `${protocol}${host}`;
 
                   if (!validateUrl(url)) {
                     return setErrors({ 'hostname': 'URL must be a valid hostname' });

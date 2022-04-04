@@ -60,11 +60,17 @@ const SitesSettingsDetails: NextPage<ServerSideProps> = ({ user }) => {
             <Formik
               initialValues={{ name: site.name, protocol: `${site.url.split('://')[0]}://`, hostname: site.url.split('://')[1] }}
               validationSchema={DetailsSchema}
-              onSubmit={(values, { setSubmitting, setErrors }) => {
+              onSubmit={(values, { setSubmitting, setErrors, setFieldValue }) => {
                 (async () => {
                   try {
                     const { name, protocol, hostname } = values;
-                    const url = `${protocol}${hostname}`;
+
+                    // Some people paste the whole url in with the protocol
+                    // so we strip it and update the field
+                    const host = hostname.replace(/^https?:\/\//, '');
+                    setFieldValue('hostname', host);
+
+                    const url = `${protocol}${host}`;
 
                     if (!validateUrl(url)) {
                       return setErrors({ 'hostname': 'URL must be a valid hostname' });
@@ -73,7 +79,7 @@ const SitesSettingsDetails: NextPage<ServerSideProps> = ({ user }) => {
                     await updateSite({ siteId: site.id, name, url });
 
                     if (url !== site.url) {
-                      toast.add({ type: 'error', body: 'Please note, your tracking code will need to be updated as you’ve changed your URL.' });
+                      toast.add({ type: 'error', body: 'Please note, your tracking code will need to be updated as you\'ve changed your URL.' });
                     }
 
                     toast.add({ type: 'success', body: 'Your site changes have been successfully saved.' });
