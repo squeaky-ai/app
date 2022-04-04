@@ -82,7 +82,7 @@ export const GET_ANALYTICS_AUDIENCE_QUERY = gql`
           deviceX
           count
         }
-        browsers(size: 10, page: $browsersPage) {
+        browsers(size: 5, page: $browsersPage) {
           items {
             browser
             count
