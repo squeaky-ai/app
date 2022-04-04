@@ -36,22 +36,22 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
   const { filters, setFilters } = useFilters<RecordingsFilters>('recordings');
 
   const updateFilters = (key: keyof RecordingsFilters, value: ValueOf<RecordingsFilters>) => {
-    setPage(0);
+    setPage(1);
     setFilters({ ...filters, [key]: value });
   };
 
   const clearFilters = () => {
-    setPage(0);
+    setPage(1);
     setFilters(FILTERS);
   };
 
   const handlePageSize = (size: number) => {
-    setPage(0);
+    setPage(1);
     setSize(size);
   };
 
   const handleSort = (sort: RecordingsSort) => {
-    setPage(0);
+    setPage(1);
     setSort(sort);
   };
 

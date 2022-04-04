@@ -30,22 +30,22 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
   const { filters, setFilters } = useFilters<VisitorsFilters>('visitors');
 
   const updateFilters = (key: keyof VisitorsFilters, value: ValueOf<VisitorsFilters>) => {
-    setPage(0);
+    setPage(1);
     setFilters({ ...filters, [key]: value });
   };
 
   const clearFilters = () => {
-    setPage(0);
+    setPage(1);
     setFilters(FILTERS);
   };
 
   const handlePageSize = (size: number) => {
-    setPage(0);
+    setPage(1);
     setSize(size);
   };
 
   const handleSort = (sort: VisitorsSort) => {
-    setPage(0);
+    setPage(1);
     setSort(sort);
   };
 
