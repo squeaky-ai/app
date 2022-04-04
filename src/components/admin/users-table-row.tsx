@@ -32,6 +32,7 @@ export const UsersTableRow: FC<Props> = ({ user, sites, style }) => (
           {index === sites.length -1 ? '' : ', '}
         </React.Fragment>
       ))}
+      {sites.length === 0 && '-'}
     </Cell>
     <Cell>{toNiceDate(user.createdAt)}</Cell>
     <Cell>{user.lastActivityAt ? toNiceDate(user.lastActivityAt) : '-'}</Cell>

@@ -9,10 +9,11 @@ import type { Site } from 'types/graphql';
 interface Props {
   site: Site;
   activeVisitors: number;
+  style?: React.CSSProperties;
 }
 
-export const SitesTableRow: FC<Props> = ({ site, activeVisitors }) => (
-  <Row>
+export const SitesTableRow: FC<Props> = ({ site, activeVisitors, style }) => (
+  <Row style={style}>
     <Cell>
       <Link href={`/sites/${site.id}/dashboard`}>
         <a target='_blank'>{site.id}</a>

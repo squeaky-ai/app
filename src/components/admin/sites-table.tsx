@@ -1,8 +1,16 @@
 import React from 'react';
 import type { FC } from 'react';
+import classnames from 'classnames';
 import { TableWrapper, Table, Cell, Row } from 'components/table';
 import { Sort } from 'components/sort';
+import { Input } from 'components/input';
 import { SitesTableRow } from 'components/admin/sites-table-row';
+import { NoResults } from 'components/sites/no-results';
+import { SitesColumns } from 'components/admin/sites-columns';
+import { SITE_COLUMNS, DEFAULT_SITE_COLUMNS } from 'data/admin/constants';
+import { getColumnPreferences, getColumnStyles } from 'lib/tables';
+import { Preference } from 'lib/preferences';
+import type { Column } from 'types/common';
 import type { SitesSort } from 'types/admin';
 import type { ActiveVisitorCount, Site } from 'types/graphql';
 
@@ -12,7 +20,12 @@ interface Props {
 }
 
 export const SitesTable: FC<Props> = ({ sites, activeVisitors }) => {
+  const [columns, setColumns] = React.useState<Column[]>(DEFAULT_SITE_COLUMNS);
+
   const [sort, setSort] = React.useState<SitesSort>('created_at__desc');
+  const [search, setSearch] = React.useState<string>('');
+
+  const { rowStyle, tableClassNames } = getColumnStyles(DEFAULT_SITE_COLUMNS, columns);
 
   const getSiteActiveVisitorsCount = (uuid: string) => {
     return activeVisitors.find(a => a.siteId === uuid)?.count || 0;
@@ -43,71 +56,110 @@ export const SitesTable: FC<Props> = ({ sites, activeVisitors }) => {
     }
   };
 
-  const results = [...sites].sort(sortSites(sort));
+  const results = [...sites]
+    .sort(sortSites(sort))
+    .filter(result => {
+      if (!search) return true;
+
+      const keys: Array<keyof Site> = ['name', 'url', 'ownerName'];
+      
+      return keys.some(key => (result[key] || '').toLowerCase().includes(search.toLowerCase()));
+    });
+
+  React.useEffect(() => {
+    getColumnPreferences(Preference.ADMIN_SITES_COLUMNS, SITE_COLUMNS, setColumns);
+  }, []);
 
   return (
-    <TableWrapper>
-      <Table className='sites-table'>
-        <Row className='head'>
-          <Cell>ID</Cell>
-          <Cell>
-            Name
-            <Sort 
-              name='name' 
-              order={sort} 
-              onAsc={() => setSort('name__asc')} 
-              onDesc={() => setSort('name__desc')} 
-            />
-          </Cell>
-          <Cell>Url</Cell>
-          <Cell>Owner Name</Cell>
-          <Cell>
-            Plan Name
-            <Sort 
-              name='plan_name' 
-              order={sort} 
-              onAsc={() => setSort('plan_name__asc')} 
-              onDesc={() => setSort('plan_name__desc')} 
-            />
-          </Cell>
-          <Cell>Plan Exceeded</Cell>
-          <Cell>Tracking Code Status</Cell>
-          <Cell>
-            Team Count
-            <Sort 
-              name='team_count' 
-              order={sort} 
-              onAsc={() => setSort('team_count__asc')} 
-              onDesc={() => setSort('team_count__desc')} 
-            />
-          </Cell>
-          <Cell>
-            Created At
-            <Sort 
-              name='created_at' 
-              order={sort} 
-              onAsc={() => setSort('created_at__asc')} 
-              onDesc={() => setSort('created_at__desc')} 
-            />
-          </Cell>
-          <Cell>
-            Active Visitors
-            <Sort 
-              name='active_visitors' 
-              order={sort} 
-              onAsc={() => setSort('active_visitors__asc')} 
-              onDesc={() => setSort('active_visitors__desc')} 
-            />
-          </Cell>
-        </Row>
-        {results.map(site => (
-          <SitesTableRow 
-            key={site.id} 
-            site={site}
-            activeVisitors={getSiteActiveVisitorsCount(site.uuid)}
+    <>
+      <div className='filters-header'>
+        <Input 
+          type='text' 
+          placeholder='Search...'
+          value={search}
+          onChange={event => setSearch(event.target.value)}
+        />
+        <SitesColumns 
+          columns={columns}
+          setColumns={setColumns}
+        />
+      </div>
+
+      {results.length === 0 && (
+        <div className='no-search-results'>
+          <NoResults 
+            illustration='illustration-2'
+            title='There are no sites that match your search'
           />
-        ))}
-      </Table>
-    </TableWrapper>
+        </div>
+      )}
+
+      {results.length > 0 && (
+        <TableWrapper>
+          <Table className={classnames('sites-table', tableClassNames)}>
+            <Row className='head' style={rowStyle}>
+              <Cell>ID</Cell>
+              <Cell>
+                Name
+                <Sort 
+                  name='name' 
+                  order={sort} 
+                  onAsc={() => setSort('name__asc')} 
+                  onDesc={() => setSort('name__desc')} 
+                />
+              </Cell>
+              <Cell>Url</Cell>
+              <Cell>Owner Name</Cell>
+              <Cell>
+                Plan Name
+                <Sort 
+                  name='plan_name' 
+                  order={sort} 
+                  onAsc={() => setSort('plan_name__asc')} 
+                  onDesc={() => setSort('plan_name__desc')} 
+                />
+              </Cell>
+              <Cell>Plan Exceeded</Cell>
+              <Cell>Tracking Code Status</Cell>
+              <Cell>
+                Team Count
+                <Sort 
+                  name='team_count' 
+                  order={sort} 
+                  onAsc={() => setSort('team_count__asc')} 
+                  onDesc={() => setSort('team_count__desc')} 
+                />
+              </Cell>
+              <Cell>
+                Created At
+                <Sort 
+                  name='created_at' 
+                  order={sort} 
+                  onAsc={() => setSort('created_at__asc')} 
+                  onDesc={() => setSort('created_at__desc')} 
+                />
+              </Cell>
+              <Cell>
+                Active Visitors
+                <Sort 
+                  name='active_visitors' 
+                  order={sort} 
+                  onAsc={() => setSort('active_visitors__asc')} 
+                  onDesc={() => setSort('active_visitors__desc')} 
+                />
+              </Cell>
+            </Row>
+            {results.map(site => (
+              <SitesTableRow 
+                key={site.id} 
+                site={site}
+                activeVisitors={getSiteActiveVisitorsCount(site.uuid)}
+                style={rowStyle}
+              />
+            ))}
+          </Table>
+        </TableWrapper>
+      )}
+    </>
   );
 };

@@ -7,8 +7,9 @@ import { UsersTableRow } from 'components/admin/users-table-row';
 import { Input } from 'components/input';
 import { NoResults } from 'components/sites/no-results';
 import { UsersColumns } from 'components/admin/users-columns';
-import { DEFAULT_USER_COLUMNS } from 'data/admin/constants';
-import { getColumnStyles } from 'lib/tables';
+import { USER_COLUMNS, DEFAULT_USER_COLUMNS } from 'data/admin/constants';
+import { getColumnPreferences, getColumnStyles } from 'lib/tables';
+import { Preference } from 'lib/preferences';
 import type { Column } from 'types/common';
 import type { User, Site } from 'types/graphql';
 import type { UserSort } from 'types/admin';
@@ -56,6 +57,10 @@ export const UsersTable: FC<Props> = ({ users, sites }) => {
       
       return keys.some(key => (result[key] || '').toLowerCase().includes(search.toLowerCase()));
     });
+
+  React.useEffect(() => {
+    getColumnPreferences(Preference.ADMIN_USERS_COLUMNS, USER_COLUMNS, setColumns);
+  }, []);
 
   return (
     <>
