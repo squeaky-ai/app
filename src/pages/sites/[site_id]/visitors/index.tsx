@@ -16,20 +16,37 @@ import { FILTERS, COLUMNS, DEFAULT_COLUMNS } from 'data/visitors/constants';
 import { getColumnPreferences } from 'lib/tables';
 import { useFilters } from 'hooks/use-filters';
 import { Preference } from 'lib/preferences';
+import { VisitorsSort } from 'types/graphql';
 import type { VisitorsFilters } from 'types/graphql';
 import type { Column, ValueOf } from 'types/common';
 
 const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
   const [columns, setColumns] = React.useState<Column[]>(DEFAULT_COLUMNS);
 
+  const [page, setPage] = React.useState<number>(1);
+  const [size, setSize] = React.useState<number>(25);
+  const [sort, setSort] = React.useState<VisitorsSort>(VisitorsSort.LastActivityAtDesc);
+
   const { filters, setFilters } = useFilters<VisitorsFilters>('visitors');
 
   const updateFilters = (key: keyof VisitorsFilters, value: ValueOf<VisitorsFilters>) => {
+    setPage(0);
     setFilters({ ...filters, [key]: value });
   };
 
   const clearFilters = () => {
+    setPage(0);
     setFilters(FILTERS);
+  };
+
+  const handlePageSize = (size: number) => {
+    setPage(0);
+    setSize(size);
+  };
+
+  const handleSort = (sort: VisitorsSort) => {
+    setPage(0);
+    setSort(sort);
   };
 
   React.useEffect(() => {
@@ -84,7 +101,17 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
                   clearFilters={clearFilters} 
                 />
 
-                <Visitors site={site} filters={filters} columns={columns} />
+                <Visitors 
+                  site={site} 
+                  filters={filters} 
+                  columns={columns}
+                  size={size}
+                  sort={sort}
+                  page={page}
+                  setSize={handlePageSize}
+                  setSort={handleSort}
+                  setPage={setPage}
+                />
               </>
             )}
           </Main>

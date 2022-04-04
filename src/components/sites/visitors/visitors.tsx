@@ -26,14 +26,26 @@ import type { VisitorsFilters } from 'types/graphql';
 interface Props {
   site: Site;
   columns: Column[];
+  page: number;
+  size: number;
+  sort: VisitorsSort;
   filters: VisitorsFilters;
+  setPage: (page: number) => void;
+  setSize: (size: number) => void;
+  setSort: (sort: VisitorsSort) => void;
 }
 
-export const Visitors: FC<Props> = ({ site, columns, filters }) => {
-  const [page, setPage] = React.useState<number>(1);
-  const [size, setSize] = React.useState<number>(25);
-  const [sort, setSort] = React.useState<VisitorsSort>(VisitorsSort.LastActivityAtDesc);
-
+export const Visitors: FC<Props> = ({ 
+  site,
+  columns, 
+  filters,
+  page,
+  size,
+  sort,
+  setPage,
+  setSize,
+  setSort,
+}) => {
   const { loading, error, visitors } = useVisitors({ 
     page, 
     sort,
@@ -43,11 +55,6 @@ export const Visitors: FC<Props> = ({ site, columns, filters }) => {
 
   const { items, pagination } = visitors;
   const { rowStyle, tableClassNames } = getColumnStyles(COLUMNS, columns);
-
-  const handlePageSize = (size: number) => {
-    setPage(0);
-    setSize(size);
-  };
 
   if (error) {
     return <Error />;
@@ -161,7 +168,7 @@ export const Visitors: FC<Props> = ({ site, columns, filters }) => {
         />
         <PageSize 
           value={pagination.pageSize} 
-          onChange={handlePageSize}
+          onChange={setSize}
           show={pagination.total > 25}
         />
       </div>

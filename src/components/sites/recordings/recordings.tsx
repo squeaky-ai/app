@@ -24,15 +24,31 @@ interface Props {
   period: TimePeriod;
   columns: Column[];
   member: Team;
+  page: number;
+  size: number;
+  sort: RecordingsSort;
   selected: string[];
+  setSize: (size: number) => void;
+  setPage: (page: number) => void;
+  setSort: (sort: RecordingsSort) => void;
   setSelected: (selected: string[]) => void;
 }
 
-export const Recordings: FC<Props> = ({ site, filters, period, columns, member, selected, setSelected }) => {
-  const [page, setPage] = React.useState<number>(1);
-  const [size, setSize] = React.useState<number>(25);
-  const [sort, setSort] = React.useState<RecordingsSort>(RecordingsSort.ConnectedAtDesc);
-
+export const Recordings: FC<Props> = ({ 
+  site, 
+  filters, 
+  period, 
+  columns, 
+  member,
+  size,
+  page,
+  sort,
+  selected, 
+  setSize,
+  setPage,
+  setSort,
+  setSelected 
+}) => {
   const { loading, error, recordings } = useRecordings({ 
     page, 
     sort,
@@ -48,11 +64,6 @@ export const Recordings: FC<Props> = ({ site, filters, period, columns, member, 
     event.target.checked
       ? setSelected(items.map(t => t.id))
       : setSelected([]);
-  };
-
-  const handlePageSize = (size: number) => {
-    setPage(0);
-    setSize(size);
   };
 
   if (error) {
@@ -121,7 +132,7 @@ export const Recordings: FC<Props> = ({ site, filters, period, columns, member, 
         />
         <PageSize
           value={pagination.pageSize} 
-          onChange={handlePageSize}
+          onChange={setSize}
           show={pagination.total > 25}
         />
       </div>

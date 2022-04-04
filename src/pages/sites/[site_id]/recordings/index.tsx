@@ -19,6 +19,7 @@ import { Preference } from 'lib/preferences';
 import { getColumnPreferences } from 'lib/tables';
 import { useFilters } from 'hooks/use-filters';
 import { usePeriod } from 'hooks/use-period';
+import { RecordingsSort } from 'types/graphql';
 import type { RecordingsFilters } from 'types/graphql';
 import type { Column, ValueOf } from 'types/common';
 
@@ -26,16 +27,32 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
   const [columns, setColumns] = React.useState<Column[]>(DEFAULT_COLUMNS);
   const [selected, setSelected] = React.useState<string[]>([]);
 
+  const [page, setPage] = React.useState<number>(1);
+  const [size, setSize] = React.useState<number>(25);
+  const [sort, setSort] = React.useState<RecordingsSort>(RecordingsSort.ConnectedAtDesc);
+
   const { period, setPeriod } = usePeriod('recordings');
 
   const { filters, setFilters } = useFilters<RecordingsFilters>('recordings');
 
   const updateFilters = (key: keyof RecordingsFilters, value: ValueOf<RecordingsFilters>) => {
+    setPage(0);
     setFilters({ ...filters, [key]: value });
   };
 
   const clearFilters = () => {
+    setPage(0);
     setFilters(FILTERS);
+  };
+
+  const handlePageSize = (size: number) => {
+    setPage(0);
+    setSize(size);
+  };
+
+  const handleSort = (sort: RecordingsSort) => {
+    setPage(0);
+    setSort(sort);
   };
 
   React.useEffect(() => {
@@ -102,7 +119,13 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
                   period={period}
                   columns={columns} 
                   member={member}
+                  page={page}
+                  size={size}
+                  sort={sort}
                   selected={selected}
+                  setPage={setPage}
+                  setSize={handlePageSize}
+                  setSort={handleSort}
                   setSelected={setSelected}
                 />
               </>
