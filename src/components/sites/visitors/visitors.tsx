@@ -44,6 +44,11 @@ export const Visitors: FC<Props> = ({ site, columns, filters }) => {
   const { items, pagination } = visitors;
   const { rowStyle, tableClassNames } = getColumnStyles(COLUMNS, columns);
 
+  const handlePageSize = (size: number) => {
+    setPage(0);
+    setSize(size);
+  };
+
   if (error) {
     return <Error />;
   }
@@ -156,7 +161,7 @@ export const Visitors: FC<Props> = ({ site, columns, filters }) => {
         />
         <PageSize 
           value={pagination.pageSize} 
-          onChange={setSize}
+          onChange={handlePageSize}
           show={pagination.total > 25}
         />
       </div>

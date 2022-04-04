@@ -50,6 +50,11 @@ export const Recordings: FC<Props> = ({ site, filters, period, columns, member, 
       : setSelected([]);
   };
 
+  const handlePageSize = (size: number) => {
+    setPage(0);
+    setSize(size);
+  };
+
   if (error) {
     return <Error />;
   }
@@ -116,7 +121,7 @@ export const Recordings: FC<Props> = ({ site, filters, period, columns, member, 
         />
         <PageSize
           value={pagination.pageSize} 
-          onChange={setSize}
+          onChange={handlePageSize}
           show={pagination.total > 25}
         />
       </div>
