@@ -32,6 +32,7 @@ export const GET_ADMIN_QUERY = gql`
       email
       superuser
       createdAt
+      lastActivityAt
     }
   }
 `;

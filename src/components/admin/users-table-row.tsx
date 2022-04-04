@@ -9,10 +9,11 @@ import type { User, Site } from 'types/graphql';
 interface Props {
   user: User;
   sites: Site[];
+  style?: React.CSSProperties;
 }
 
-export const UsersTableRow: FC<Props> = ({ user, sites }) => (
-  <Row>
+export const UsersTableRow: FC<Props> = ({ user, sites, style }) => (
+  <Row style={style}>
     <Cell>{user.id}</Cell>
     <Cell>{user.fullName || '-'}</Cell>
     <Cell>{user.email}</Cell>
@@ -33,5 +34,6 @@ export const UsersTableRow: FC<Props> = ({ user, sites }) => (
       ))}
     </Cell>
     <Cell>{toNiceDate(user.createdAt)}</Cell>
+    <Cell>{user.lastActivityAt ? toNiceDate(user.lastActivityAt) : '-'}</Cell>
   </Row>
 );

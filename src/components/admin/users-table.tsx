@@ -1,8 +1,15 @@
 import React from 'react';
 import type { FC } from 'react';
+import classnames from 'classnames';
 import { TableWrapper, Table, Cell, Row } from 'components/table';
 import { Sort } from 'components/sort';
 import { UsersTableRow } from 'components/admin/users-table-row';
+import { Input } from 'components/input';
+import { NoResults } from 'components/sites/no-results';
+import { UsersColumns } from 'components/admin/users-columns';
+import { DEFAULT_USER_COLUMNS } from 'data/admin/constants';
+import { getColumnStyles } from 'lib/tables';
+import type { Column } from 'types/common';
 import type { User, Site } from 'types/graphql';
 import type { UserSort } from 'types/admin';
 
@@ -33,49 +40,94 @@ const getUsersSites = (user: User, sites: Site[]) => {
 };
 
 export const UsersTable: FC<Props> = ({ users, sites }) => {
-  const [sort, setSort] = React.useState<UserSort>('created_at__desc');
+  const [columns, setColumns] = React.useState<Column[]>(DEFAULT_USER_COLUMNS);
 
-  const results = [...users].sort(sortUsers(sort));
+  const [sort, setSort] = React.useState<UserSort>('created_at__desc');
+  const [search, setSearch] = React.useState<string>('');
+
+  const { rowStyle, tableClassNames } = getColumnStyles(DEFAULT_USER_COLUMNS, columns);
+
+  const results = [...users]
+    .sort(sortUsers(sort))
+    .filter(result => {
+      if (!search) return true;
+
+      const keys: Array<keyof User> = ['fullName', 'email'];
+      
+      return keys.some(key => (result[key] || '').toLowerCase().includes(search.toLowerCase()));
+    });
 
   return (
-    <TableWrapper>
-      <Table className='users-table'>
-        <Row className='head'>
-          <Cell>ID</Cell>
-          <Cell>
-            Name
-            <Sort 
-              name='name' 
-              order={sort} 
-              onAsc={() => setSort('name__asc')} 
-              onDesc={() => setSort('name__desc')} 
-            />
-          </Cell>
-          <Cell>Email</Cell>
-          <Cell>
-            Superuser
-            <Sort 
-              name='superuser' 
-              order={sort} 
-              onAsc={() => setSort('superuser__asc')} 
-              onDesc={() => setSort('superuser__desc')} 
-            />
-          </Cell>
-          <Cell>Sites</Cell>
-          <Cell>
-            Created At
-            <Sort 
-              name='created_at' 
-              order={sort} 
-              onAsc={() => setSort('created_at__asc')} 
-              onDesc={() => setSort('created_at__desc')} 
-            />
-          </Cell>
-        </Row>
-        {results.map(user => (
-          <UsersTableRow key={user.id} user={user} sites={getUsersSites(user, sites)} />
-        ))}
-      </Table>
-    </TableWrapper>
+    <>
+      <div className='filters-header'>
+        <Input 
+          type='text' 
+          placeholder='Search...'
+          value={search}
+          onChange={event => setSearch(event.target.value)}
+        />
+        <UsersColumns 
+          columns={columns}
+          setColumns={setColumns}
+        />
+      </div>
+
+      {results.length === 0 && (
+        <div className='no-search-results'>
+          <NoResults 
+            illustration='illustration-2'
+            title='There are no users that match your search'
+          />
+        </div>
+      )}
+
+      {results.length > 0 && (
+        <TableWrapper>
+          <Table className={classnames('users-table', tableClassNames)}>
+            <Row className='head' style={rowStyle}>
+              <Cell>ID</Cell>
+              <Cell>
+                Name
+                <Sort 
+                  name='name' 
+                  order={sort} 
+                  onAsc={() => setSort('name__asc')} 
+                  onDesc={() => setSort('name__desc')} 
+                />
+              </Cell>
+              <Cell>Email</Cell>
+              <Cell>
+                Superuser
+                <Sort 
+                  name='superuser' 
+                  order={sort} 
+                  onAsc={() => setSort('superuser__asc')} 
+                  onDesc={() => setSort('superuser__desc')} 
+                />
+              </Cell>
+              <Cell>Sites</Cell>
+              <Cell>
+                Created At
+                <Sort 
+                  name='created_at' 
+                  order={sort} 
+                  onAsc={() => setSort('created_at__asc')} 
+                  onDesc={() => setSort('created_at__desc')} 
+                />
+              </Cell>
+              <Cell>Last Activity At</Cell>
+            </Row>
+            {results.map(user => (
+              <UsersTableRow 
+                key={user.id} 
+                user={user} 
+                sites={getUsersSites(user, sites)}
+                style={rowStyle}
+              />
+            ))}
+          </Table>
+        </TableWrapper>
+      )}
+    </>
   );
 };

@@ -1701,6 +1701,7 @@ export type User = {
   firstName?: Maybe<Scalars['String']>;
   fullName?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
+  lastActivityAt?: Maybe<Scalars['ISO8601DateTime']>;
   lastName?: Maybe<Scalars['String']>;
   superuser: Scalars['Boolean'];
   updatedAt?: Maybe<Scalars['ISO8601DateTime']>;
