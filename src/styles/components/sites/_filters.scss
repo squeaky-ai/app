@@ -80,6 +80,11 @@
       max-height: 300px;
       overflow-y: scroll;
 
+      .label {
+        font-size: 14px;
+        line-height: 20px;
+      }
+
       .checkbox,
       .radio {
         margin-bottom: .5rem;
