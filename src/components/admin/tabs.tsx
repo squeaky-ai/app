@@ -33,6 +33,11 @@ export const Tabs: FC<Props> = ({ tab }) => {
             </a>
           </Link>
         </li>
+        <li className='tab'>
+          <a href='/api/sidekiq' target='_blank' className='button tab-button'>
+            Sidekiq
+          </a>
+        </li>
       </ul>
     </div>
   );
