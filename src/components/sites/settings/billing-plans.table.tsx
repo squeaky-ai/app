@@ -130,7 +130,7 @@ export const BillingPlansTable: FC<Props> = ({ site, billing, hasBilling, showPl
                 Up to <b>{plan.maxMonthlyRecordings.toLocaleString()}</b>
               </div>
               <div className='cell'>
-                <Icon name='check-line' />
+                Unlimited
               </div>
               <div className='cell'>
                 <Icon name='check-line' />
