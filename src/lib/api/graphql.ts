@@ -42,6 +42,7 @@ import {
   SentimentDeleteInput,
   BlogPost,
   AdminBlogPostDeleteInput,
+  AdminUserDeleteInput,
 } from 'types/graphql';
 
 import {
@@ -92,6 +93,7 @@ import {
   USER_DELETE_MUTATION,
   USER_PASSWORD_MUTATION,
   UPDATE_USER_COMMUNICATION,
+  ADMIN_USER_DELETE_MUTATION,
 } from 'data/users/mutations';
 
 import { 
@@ -679,6 +681,18 @@ export const deleteBlogPost = async (input: AdminBlogPostDeleteInput): Promise<v
     variables: { input },
     update(cache) {
       const normalizedId = cache.identify({ id: input.id, __typename: 'BlogPost' });
+      cache.evict({ id: normalizedId });
+      cache.gc();
+    }
+  });
+};
+
+export const adminUserDelete = async (input: AdminUserDeleteInput): Promise<void> => {
+  await client.mutate({
+    mutation: ADMIN_USER_DELETE_MUTATION,
+    variables: { input },
+    update(cache) {
+      const normalizedId = cache.identify({ id: input.id, __typename: 'User' });
       cache.evict({ id: normalizedId });
       cache.gc();
     }

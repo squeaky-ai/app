@@ -61,10 +61,12 @@ export class Dropdown extends React.Component<Props, State> {
     if (!this.ref.current) { 
       return { top: 0, left: 0 };
     }
+
+    const { scrollY } = window;
     const { x, y, height, width } = this.ref.current.getBoundingClientRect();
 
     const left = x + width;
-    const top = y + height + 16;
+    const top = scrollY + y + height + 16;
 
     return { top, left };
   };

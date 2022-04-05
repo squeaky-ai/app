@@ -42,3 +42,11 @@ export const UPDATE_USER_COMMUNICATION = gql`
     }
   }
 `;
+
+export const ADMIN_USER_DELETE_MUTATION = gql`
+  mutation AdminUserDelete($input: AdminUserDeleteInput!) {
+    adminUserDelete(input: $input) {
+      id
+    }
+  }
+`;

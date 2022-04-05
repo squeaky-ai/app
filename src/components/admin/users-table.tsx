@@ -121,6 +121,7 @@ export const UsersTable: FC<Props> = ({ users, sites }) => {
                 />
               </Cell>
               <Cell>Last Activity At</Cell>
+              <Cell />
             </Row>
             {results.map(user => (
               <UsersTableRow 

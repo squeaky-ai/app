@@ -133,25 +133,6 @@
         color: var(--blue-500);
       }
     }
-
-    .dropdown-menu {
-      z-index: 2;
-
-      .button {
-        background: none;
-        border: none;
-
-        i {
-          color: var(--blue-500);
-          font-size: 1.25rem;
-          margin-right: .5rem;
-        }
-
-        &:hover {
-          background: var(--gray-100);
-        }
-      }
-    }
   }
 
   .visitor-starred {

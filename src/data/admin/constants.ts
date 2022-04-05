@@ -43,6 +43,12 @@ export const USER_COLUMNS: Column[] = [
     disabled: false,
     position: 7,
   },
+  {
+    label: 'Options',
+    width: '70px',
+    disabled: false,
+    position: 8,
+  },
 ];
 
 export const SITE_COLUMNS: Column[] = [
@@ -116,6 +122,7 @@ export const DEFAULT_USER_COLUMNS = USER_COLUMNS.filter(c => [
   'Sites',
   'Created At',
   'Last Activity At',
+  'Options',
 ].includes(c.label));
 
 export const DEFAULT_SITE_COLUMNS = SITE_COLUMNS.filter(c => [
