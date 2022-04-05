@@ -33,7 +33,7 @@ export const AnalyticsReferrers: FC<Props> = ({ referrers, page, setPage }) => (
                 {label}
               </Tooltip>
             </Cell>
-            <Cell><b>{referrer.count}</b> <span className='percentage'>({referrer.percentage}%)</span></Cell>
+            <Cell><b>{referrer.count.toLocaleString()}</b> <span className='percentage'>({referrer.percentage.toFixed(2)}%)</span></Cell>
             <Cell className='filters-links'>
               <FiltersRecordingsLink 
                 action={{ referrers: [referrer.referrer === 'Direct' ? 'none' : referrer.referrer] }}

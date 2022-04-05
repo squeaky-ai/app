@@ -30,7 +30,7 @@ export const AnalyticsPages: FC<Props> = ({ pages, page, setPage }) => (
               {page.path}
             </Tooltip>
           </Cell>
-          <Cell><b>{page.count}</b> <span className='percentage'>({page.percentage}%)</span></Cell>
+          <Cell><b>{page.count.toLocaleString()}</b> <span className='percentage'>({page.percentage.toFixed(2)}%)</span></Cell>
           <Cell>{toHoursMinutesAndSeconds(page.avg)}</Cell>
           <Cell className='filters-links'>
             <FiltersRecordingsLink 
