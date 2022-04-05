@@ -73,6 +73,10 @@
   .filters-pages {
     width: 400px;
 
+    .search {
+      width: 100%;
+    }
+
     .pages {
       align-items: flex-start;
       display: flex;
@@ -93,7 +97,7 @@
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
-          width: 240px;
+          width: 340px;
         }
       }
     }
