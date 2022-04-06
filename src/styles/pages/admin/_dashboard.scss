@@ -2,28 +2,93 @@
   .dashboard-grid {
     display: grid;
     grid-gap: 2rem;
-    grid-template-areas: 'total-users total-users total-users monthly-active-users'
-                         'total-users total-users total-users roles'
-                         'total-sites total-sites total-sites sites-verified'
-                         'total-sites total-sites total-sites sites-verified'
-                         'recordings recordings visitors visitors';
-    grid-template-rows: repeat(4, minmax(0, 1fr));
+    grid-template-areas: 'total-users total-users total-users total-users monthly-active-users monthly-active-users'
+                         'total-users total-users total-users total-users roles roles'
+                         'total-sites total-sites total-sites total-sites sites-verified sites-verified'
+                         'total-sites total-sites total-sites total-sites sites-verified sites-verified'
+                         'recordings recordings recordings visitors visitors visitors';
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-rows: auto;
+    margin: 2rem 0 0 0;
 
     .grid-item {
       &.total-users {
         grid-area: total-users;
+
+        h3 {
+          color: var(--rose-500);
+        }
       }
 
       &.monthly-active-users {
         grid-area: monthly-active-users;
+        
+        h5 {
+          align-items: center;
+          display: flex;
+          justify-content: space-between;
+          margin: 0;
+
+          i {
+            color: var(--gray-500);
+            font-size: 16px;
+            font-weight: var(--font-weight-normal);
+          }
+        }
+
+        h3 {
+          color: var(--mauve-500);
+          margin: 2rem 0 0 0;
+        }
       }
 
       &.roles {
         grid-area: roles;
+
+        .role-stats {
+          align-items: center;
+          display: flex;
+          justify-content: space-between;
+          margin: 1.5rem 0 0 0;
+
+          .role {
+            text-align: center;
+
+            h4 {
+              margin: 0 0 .5rem 0;
+            }
+
+            p {
+              margin: 0;
+            }
+
+            &.owners {
+              h4 {
+                color: var(--rose-500);
+              }
+            }
+
+            &.admins {
+              h4 {
+                color: var(--mauve-500);
+              }
+            }
+
+            &.members {
+              h4 {
+                color: var(--peach-500);
+              }
+            }
+          }
+        }
       }
 
       &.total-sites {
         grid-area: total-sites;
+
+        h3 {
+          color: var(--mauve-500);
+        }
       }
 
       &.sites-verified {
@@ -32,17 +97,104 @@
 
       &.recordings {
         grid-area: recordings;
+
+        .recordings-stats {
+          align-items: center;
+          display: flex;
+          margin: 1.5rem 0 0 0;
+
+          .stat {
+            width: 50%;
+
+            h3 {
+              line-height: 2rem;
+              margin: 0 0 .5rem 0;
+            }
+
+            p {
+              font-weight: var(--font-weight-bold);
+              margin: 0;
+            }
+
+            &.processed {
+              h3 {
+                color: var(--rose-500);
+              }
+            }
+
+            &.stored {
+              h3 {
+                color: var(--mauve-500);
+              }
+            }
+          }
+        }
       }
 
       &.visitors {
         grid-area: visitors;
+
+        .visitors-stats {
+          align-items: center;
+          display: flex;
+          margin: 1.5rem 0 0 0;
+
+          .stat {
+            width: 50%;
+
+            h3 {
+              line-height: 2rem;
+              margin: 0 0 .5rem 0;
+            }
+
+            p {
+              align-items: center;
+              display: flex;
+              font-weight: var(--font-weight-bold);
+              margin: 0;
+
+              .icon {
+                color: var(--rose-500);
+                font-size: 1.25rem;
+                margin: 0 .25rem 0 0;
+              }
+            }
+
+            &.live {
+              h3 {
+                color: var(--rose-500);
+              }
+            }
+
+            &.total {
+              h3 {
+                color: var(--mauve-500);
+              }
+            }
+          }
+        }
       }
 
       .card {
         height: 100%;
+        margin: 0;
 
         h5 {
           margin: 0;
+        }
+
+        .numbered-title {
+          align-items: center;
+          display: flex;
+
+          h3 {
+            font-weight: var(--font-weight-normal);
+            margin: 0 0 0 1rem;
+          }
+        }
+
+        .chart-wrapper {
+          margin: 1rem 0 0 0;
         }
       }
     }

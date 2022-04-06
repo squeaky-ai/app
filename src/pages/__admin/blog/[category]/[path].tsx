@@ -2,7 +2,7 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { Spinner } from 'components/spinner';
-import { Page } from 'components/admin/page';
+import { Main } from 'components/main';
 import { useBlogPost } from 'hooks/use-blog-post';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { BlogEdit } from 'components/admin/blog-edit';
@@ -33,36 +33,32 @@ const AdminBlogEdit: NextPage<ServerSideProps> = () => {
         <title>Squeaky | Admin | Edit Blog Post</title>
       </Head>
 
-      <Page>
-        {() => (
+      <Main>
+        <BreadCrumbs items={[{ name: 'Admin', href: '/__admin/dashboard' }, { name: 'Blog', href: '/__admin/blog' }, { name: 'Edit' }]} />
+
+        <h3 className='title'>
+          Edit Post
+        </h3>
+
+        {loading && (
+          <Spinner />
+        )}
+
+        {!loading && !post.blogPost && (
+          <p>Post not found</p>
+        )}
+
+        {!loading && post.blogPost && (
           <>
-            <BreadCrumbs items={[{ name: 'Admin', href: '/__admin/dashboard' }, { name: 'Blog', href: '/__admin/blog' }, { name: 'Edit' }]} />
-
-            <h3 className='title'>
-              Edit Post
-            </h3>
-
-            {loading && (
-              <Spinner />
-            )}
-
-            {!loading && !post.blogPost && (
-              <p>Post not found</p>
-            )}
-
-            {!loading && post.blogPost && (
-              <>
-                <BlogEdit
-                  post={post.blogPost}
-                  images={post.admin.blogImages}
-                  onChange={handleUpdate}
-                  refetchImages={refetch}
-                />
-              </>
-            )}
+            <BlogEdit
+              post={post.blogPost}
+              images={post.admin.blogImages}
+              onChange={handleUpdate}
+              refetchImages={refetch}
+            />
           </>
         )}
-      </Page>
+      </Main>
     </>
   );
 };

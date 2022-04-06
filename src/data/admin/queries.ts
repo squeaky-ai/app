@@ -36,6 +36,9 @@ export const GET_ADMIN_QUERY = gql`
         lastActivityAt
       }
       activeMonthlyUsers
+      recordingsCount
+      recordingsProcessed
+      visitorsCount
       activeVisitors {
         siteId
         count
@@ -57,17 +60,6 @@ export const GET_ADMIN_BLOG_QUERY = gql`
   query GetAdminBlog { 
     admin {
       blogImages
-    }
-  }
-`;
-
-export const GET_ADMIN_ACTIVE_VISITORS_QUERY = gql`
-  query GetActiveVisitorsAdmin { 
-    admin {
-      activeVisitors {
-        siteId
-        count
-      }
     }
   }
 `;

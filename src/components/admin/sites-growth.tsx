@@ -2,7 +2,6 @@ import React from 'react';
 import type { FC } from 'react';
 import { range } from 'lodash';
 import { format, subMonths } from 'date-fns';
-import { Card } from 'components/card';
 import { Label } from 'components/label';
 import { Checkbox } from 'components/checkbox';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, TooltipProps } from 'recharts';
@@ -62,18 +61,21 @@ export const SitesGrowth: FC<Props> = ({ sites }) => {
   };
 
   return (
-    <Card>
+    <>
       <div className='chart-heading'>
-        <h5>Site Growth</h5>
+        <div className='numbered-title'>
+          <h5>Total Sites</h5>
+          <h3>{sites.length}</h3>
+        </div>
         <div className='options'>
           <Label>Show:</Label>
-          <Checkbox checked={show.includes('all')} onChange={() => handleClick('all')} className='purple'>All</Checkbox>
-          <Checkbox checked={show.includes('verified')} onChange={() => handleClick('verified')}>Verified</Checkbox>
-          <Checkbox checked={show.includes('unverified')} onChange={() => handleClick('unverified')} className='rose'>Unverified</Checkbox>
+          <Checkbox checked={show.includes('all')} onChange={() => handleClick('all')} className='rose'>All</Checkbox>
+          <Checkbox checked={show.includes('verified')} onChange={() => handleClick('verified')} className='mauve'>Verified</Checkbox>
+          <Checkbox checked={show.includes('unverified')} onChange={() => handleClick('unverified')} className='peach'>Unverified</Checkbox>
         </div>
       </div>
       <div className='chart-wrapper'>
-      <ResponsiveContainer>
+        <ResponsiveContainer>
           <LineChart data={data} margin={{ top: 15, left: -15, right: 15, bottom: 0 }}>
             <CartesianGrid strokeDasharray='3 3' vertical={false} />
 
@@ -95,12 +97,12 @@ export const SitesGrowth: FC<Props> = ({ sites }) => {
 
             <Tooltip content={<CustomTooltip />} />
   
-            <Line dataKey='allCount' fillOpacity={1} stroke='#8249FB' strokeWidth={2} />
-            <Line dataKey='verifiedCount' fillOpacity={1} stroke='#0768C1' strokeWidth={2} />
-            <Line dataKey='unverifiedCount' fillOpacity={1} stroke='#F96155' strokeWidth={2} />
+            <Line dataKey='allCount' fillOpacity={1} stroke='#F96155' strokeWidth={2} />
+            <Line dataKey='verifiedCount' fillOpacity={1} stroke='#A14259' strokeWidth={2} />
+            <Line dataKey='unverifiedCount' fillOpacity={1} stroke='#FFA574' strokeWidth={2} />
           </LineChart>
         </ResponsiveContainer>
       </div>
-    </Card>
+    </>
   );
 };

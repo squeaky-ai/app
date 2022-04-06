@@ -26,6 +26,9 @@ export const useAdmin = (): UseAdmin => {
       verified: 0,
     },
     blogImages: [],
+    recordingsCount: 0,
+    recordingsProcessed: 0,
+    visitorsCount: 0,
   };
 
   return {

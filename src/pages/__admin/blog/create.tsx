@@ -3,7 +3,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Spinner } from 'components/spinner';
-import { Page } from 'components/admin/page';
+import { Main } from 'components/main';
 import { BlogEdit } from 'components/admin/blog-edit';
 import { BreadCrumbs } from 'components/admin/breadcrumbs';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
@@ -36,29 +36,25 @@ const AdminBlogCreate: NextPage<ServerSideProps> = () => {
         <title>Squeaky | Admin | Create Blog Post</title>
       </Head>
 
-      <Page>
-        {() => (
-          <>
-            <BreadCrumbs items={[{ name: 'Admin', href: '/__admin/dashboard' }, { name: 'Blog', href: '/__admin/blog' }, { name: 'Create' }]} />
+      <Main>
+        <BreadCrumbs items={[{ name: 'Admin', href: '/__admin/dashboard' }, { name: 'Blog', href: '/__admin/blog' }, { name: 'Create' }]} />
 
-            <h3 className='title'>
-              Create Post
-            </h3>
+        <h3 className='title'>
+          Create Post
+        </h3>
 
-            {loading && (
-              <Spinner />
-            )}
-
-            {!loading && (
-              <BlogEdit
-                images={admin.blogImages}
-                refetchImages={refetch}
-                onChange={handleCreate}
-              />
-            )}
-          </>
+        {loading && (
+          <Spinner />
         )}
-      </Page>
+
+        {!loading && (
+          <BlogEdit
+            images={admin.blogImages}
+            refetchImages={refetch}
+            onChange={handleCreate}
+          />
+        )}
+      </Main>
     </>
   );
 };

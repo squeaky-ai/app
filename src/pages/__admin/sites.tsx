@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { Error } from 'components/error';
 import { Spinner } from 'components/spinner';
 import { SitesTable } from 'components/admin/sites-table';
-import { Page } from 'components/admin/page';
+import { Main } from 'components/main';
 import { Input } from 'components/input';
 import { BreadCrumbs } from 'components/admin/breadcrumbs';
 import { SitesColumns } from 'components/admin/sites-columns';
@@ -29,47 +29,43 @@ const AdminSites: NextPage<ServerSideProps> = () => {
         <title>Squeaky | Admin | Sites</title>
       </Head>
 
-      <Page>
-        {({ activeVisitorCount }) => (
-          <>
-            <BreadCrumbs items={[{ name: 'Admin', href: '/__admin/dashboard' }, { name: 'Sites' }]} />
+      <Main>
+        <BreadCrumbs items={[{ name: 'Admin', href: '/__admin/dashboard' }, { name: 'Sites' }]} />
 
-            <div className='admin-header'>
-              <div className='search'>
-                <h3 className='title'>
-                  Sites
-                </h3>
-                <Input 
-                  type='text' 
-                  placeholder='Search...'
-                  value={search}
-                  onChange={event => setSearch(event.target.value)}
-                />
-              </div>
-              <menu>
-                <SitesColumns 
-                  columns={columns}
-                  setColumns={setColumns}
-                />
-              </menu>
-            </div>
+        <div className='admin-header'>
+          <div className='search'>
+            <h3 className='title'>
+              Sites
+            </h3>
+            <Input 
+              type='text' 
+              placeholder='Search...'
+              value={search}
+              onChange={event => setSearch(event.target.value)}
+            />
+          </div>
+          <menu>
+            <SitesColumns 
+              columns={columns}
+              setColumns={setColumns}
+            />
+          </menu>
+        </div>
 
-            {loading && (
-              <Spinner />
-            )}
-
-            {!loading && (
-              <SitesTable 
-                sites={admin.sites} 
-                activeVisitors={activeVisitorCount}
-                search={search}
-                columns={columns}
-                setColumns={setColumns}
-              />
-            )}
-          </>
+        {loading && (
+          <Spinner />
         )}
-      </Page>
+
+        {!loading && (
+          <SitesTable 
+            sites={admin.sites} 
+            activeVisitors={admin.activeVisitors}
+            search={search}
+            columns={columns}
+            setColumns={setColumns}
+          />
+        )}
+      </Main>
     </>
   );
 };

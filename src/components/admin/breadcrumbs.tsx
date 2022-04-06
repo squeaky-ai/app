@@ -13,7 +13,7 @@ interface Props {
 
 export const BreadCrumbs: FC<Props> = ({ items }) => (
   <div className='breadcrumbs'>
-    <Link href='/app/sites'>
+    <Link href='/sites'>
       <a>Squeaky App</a>
     </Link>
     <span>/</span>

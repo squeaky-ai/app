@@ -31,6 +31,24 @@
     }
   }
 
+  &.peach {
+    input {
+      &:checked + .check {
+        background: var(--peach-500);
+        border-color: var(--peach-500);
+      }
+    }
+  }
+
+  &.mauve {
+    input {
+      &:checked + .check {
+        background: var(--mauve-500);
+        border-color: var(--mauve-500);
+      }
+    }
+  }
+
   &.purple {
     input {
       &:checked + .check {
