@@ -1,15 +1,4 @@
-import type { User, Site } from 'types/graphql';
-
 export type AdminTab = 'users' | 'sites' | 'blog';
-
-export type Admin = {
-  usersAdmin: User[];
-  sitesAdmin: Site[];
-}
-
-export type AdminBlog = {
-  blogImagesAdmin: string[];
-}
 
 export type UserSort = 
   'name__asc' |

@@ -31,8 +31,8 @@ const AdminSites: NextPage<ServerSideProps> = () => {
 
               {!loading && (
                 <>
-                  <SitesGrowth sites={admin.sitesAdmin} />
-                  <SitesTable sites={admin.sitesAdmin} activeVisitors={activeVisitorCount} />       
+                  <SitesGrowth sites={admin.sites} />
+                  <SitesTable sites={admin.sites} activeVisitors={activeVisitorCount} />       
                 </>
               )}
             </>

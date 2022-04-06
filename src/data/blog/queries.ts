@@ -28,7 +28,9 @@ export const GET_BLOG_POSTS_QUERY = gql`
 
 export const GET_BLOG_POST_QUERY = gql`
   query GetBlogPost($slug: String!) { 
-    blogImagesAdmin
+    admin {
+      blogImages
+    }
     blogPost(slug: $slug) {      
       id
       title

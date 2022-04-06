@@ -53,7 +53,7 @@ const AdminBlogCreate: NextPage<ServerSideProps> = () => {
 
             {!loading && (
               <BlogEdit
-                images={admin.blogImagesAdmin}
+                images={admin.blogImages}
                 refetchImages={refetch}
                 onChange={handleCreate}
               />

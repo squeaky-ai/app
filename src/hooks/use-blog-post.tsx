@@ -1,11 +1,11 @@
 import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { GET_BLOG_POST_QUERY } from 'data/blog/queries';
-import type { BlogPost } from 'types/graphql';
+import type { Admin, BlogPost } from 'types/graphql';
 
 interface AdminBlogPost {
   blogPost: BlogPost;
-  blogImagesAdmin: string[];
+  admin: Pick<Admin, 'blogImages'>;
 }
 
 interface UseBlogPost {
@@ -26,7 +26,9 @@ export const useBlogPost = (): UseBlogPost => {
 
   const fallback: AdminBlogPost = {
     blogPost: null,
-    blogImagesAdmin: [],
+    admin: {
+      blogImages: []
+    },
   };
 
   return {

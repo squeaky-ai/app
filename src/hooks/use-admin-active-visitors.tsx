@@ -16,6 +16,6 @@ export const useAdminActiveVisitors = (): UseAdminActiveVisitors => {
   return {
     loading, 
     error: !!error,
-    activeVisitorCount: data?.activeVisitorsAdmin || [],
+    activeVisitorCount: data?.admin?.activeVisitors || [],
   };
 };

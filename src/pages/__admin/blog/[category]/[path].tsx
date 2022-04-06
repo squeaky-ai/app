@@ -58,7 +58,7 @@ const AdminBlogEdit: NextPage<ServerSideProps> = () => {
               <>
                 <BlogEdit
                   post={post.blogPost}
-                  images={post.blogImagesAdmin}
+                  images={post.admin.blogImages}
                   onChange={handleUpdate}
                   refetchImages={refetch}
                 />
