@@ -5,7 +5,7 @@ import { useBilling } from 'hooks/use-billing';
 import { Spinner } from 'components/spinner';
 import { Tabs } from 'components/tabs';
 import { BillingTable } from 'components/sites/settings/billing-table';
-import { BillingPlansTable } from 'components/sites/settings/billing-plans.table';
+import { BillingPlansTable } from 'components/sites/settings/billing-plans-table';
 import { PlanChanged } from 'components/sites/settings/plan-changed';
 import { BillingPortalButton } from 'components/sites/settings/billing-portal-button';
 import { Message } from 'components/message';
