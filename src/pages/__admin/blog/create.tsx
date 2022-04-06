@@ -1,12 +1,11 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Spinner } from 'components/spinner';
 import { Page } from 'components/admin/page';
-import { Icon } from 'components/icon';
 import { BlogEdit } from 'components/admin/blog-edit';
+import { BreadCrumbs } from 'components/admin/breadcrumbs';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useAdminBlog } from 'hooks/use-admin-blog';
 import { useToasts } from 'hooks/use-toasts';
@@ -37,15 +36,14 @@ const AdminBlogCreate: NextPage<ServerSideProps> = () => {
         <title>Squeaky | Admin | Create Blog Post</title>
       </Head>
 
-
-      <Page tab='blog'>
+      <Page>
         {() => (
           <>
-            <div className='posts-header'>
-              <Link href='/__admin/blog'>
-                <a className='back'><Icon name='arrow-left-line' /> All Posts</a>
-              </Link>
-            </div>
+            <BreadCrumbs items={[{ name: 'Admin', href: '/__admin/dashboard' }, { name: 'Blog', href: '/__admin/blog' }, { name: 'Create' }]} />
+
+            <h3 className='title'>
+              Create Post
+            </h3>
 
             {loading && (
               <Spinner />

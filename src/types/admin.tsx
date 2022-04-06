@@ -1,5 +1,3 @@
-export type AdminTab = 'users' | 'sites' | 'blog';
-
 export type UserSort = 
   'name__asc' |
   'name__desc' |

@@ -4,13 +4,20 @@ import Head from 'next/head';
 import { Error } from 'components/error';
 import { Spinner } from 'components/spinner';
 import { SitesTable } from 'components/admin/sites-table';
-import { SitesGrowth } from 'components/admin/sites-growth';
 import { Page } from 'components/admin/page';
+import { Input } from 'components/input';
+import { BreadCrumbs } from 'components/admin/breadcrumbs';
+import { SitesColumns } from 'components/admin/sites-columns';
 import { useAdmin } from 'hooks/use-admin';
+import { DEFAULT_SITE_COLUMNS } from 'data/admin/constants';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import type { Column } from 'types/common';
 
 const AdminSites: NextPage<ServerSideProps> = () => {
   const { admin, loading, error } = useAdmin();
+
+  const [search, setSearch] = React.useState<string>('');
+  const [columns, setColumns] = React.useState<Column[]>(DEFAULT_SITE_COLUMNS);
 
   if (error) {
     return <Error />;
@@ -22,18 +29,43 @@ const AdminSites: NextPage<ServerSideProps> = () => {
         <title>Squeaky | Admin | Sites</title>
       </Head>
 
-      <Page tab='sites'>
+      <Page>
         {({ activeVisitorCount }) => (
             <>
+              <BreadCrumbs items={[{ name: 'Admin', href: '/__admin/dashboard' }, { name: 'Sites' }]} />
+
+              <div className='admin-header'>
+                <div className='search'>
+                  <h3 className='title'>
+                    Sites
+                  </h3>
+                  <Input 
+                    type='text' 
+                    placeholder='Search...'
+                    value={search}
+                    onChange={event => setSearch(event.target.value)}
+                  />
+                </div>
+                <menu>
+                  <SitesColumns 
+                    columns={columns}
+                    setColumns={setColumns}
+                  />
+                </menu>
+              </div>
+
               {loading && (
                 <Spinner />
               )}
 
               {!loading && (
-                <>
-                  <SitesGrowth sites={admin.sites} />
-                  <SitesTable sites={admin.sites} activeVisitors={activeVisitorCount} />       
-                </>
+                <SitesTable 
+                  sites={admin.sites} 
+                  activeVisitors={activeVisitorCount}
+                  search={search}
+                  columns={columns}
+                  setColumns={setColumns}
+                />
               )}
             </>
         )}

@@ -2,7 +2,8 @@ import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
 import { useRouter } from 'next/router';
-import { Sidebar } from 'components/app/sidebar';
+import { Sidebar as AppSidebar } from 'components/app/sidebar';
+import { Sidebar as AdminSidebar } from 'components/admin/sidebar';
 
 export const Page: FC = ({ children }) => {
   const router = useRouter();
@@ -22,7 +23,10 @@ export const Page: FC = ({ children }) => {
 
   return (
     <div className={classnames('page app', ...slug)}>
-      <Sidebar />
+      {router.asPath.startsWith('/__admin') 
+        ? <AdminSidebar /> 
+        : <AppSidebar /> 
+      }
       {children}
     </div>
   );

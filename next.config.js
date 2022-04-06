@@ -39,7 +39,7 @@ module.exports = {
     return [
       {
         source: '/__admin',
-        destination: '/__admin/users',
+        destination: '/__admin/dashboard',
         permanent: true,
       },
     ]

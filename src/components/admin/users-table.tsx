@@ -4,9 +4,7 @@ import classnames from 'classnames';
 import { TableWrapper, Table, Cell, Row } from 'components/table';
 import { Sort } from 'components/sort';
 import { UsersTableRow } from 'components/admin/users-table-row';
-import { Input } from 'components/input';
 import { NoResults } from 'components/sites/no-results';
-import { UsersColumns } from 'components/admin/users-columns';
 import { USER_COLUMNS, DEFAULT_USER_COLUMNS } from 'data/admin/constants';
 import { getColumnPreferences, getColumnStyles } from 'lib/tables';
 import { Preference } from 'lib/preferences';
@@ -17,6 +15,9 @@ import type { UserSort } from 'types/admin';
 interface Props {
   users: User[];
   sites: Site[];
+  columns: Column[];
+  search: string;
+  setColumns: (columns: Column[]) => void;
 }
 
 const sortUsers = (sort: UserSort) => (a: User, b: User) => {
@@ -40,11 +41,8 @@ const getUsersSites = (user: User, sites: Site[]) => {
   return sites.filter(site => !!site.team.find(t => t.user.id === user.id));
 };
 
-export const UsersTable: FC<Props> = ({ users, sites }) => {
-  const [columns, setColumns] = React.useState<Column[]>(DEFAULT_USER_COLUMNS);
-
+export const UsersTable: FC<Props> = ({ users, sites, columns, search, setColumns }) => {
   const [sort, setSort] = React.useState<UserSort>('created_at__desc');
-  const [search, setSearch] = React.useState<string>('');
 
   const { rowStyle, tableClassNames } = getColumnStyles(DEFAULT_USER_COLUMNS, columns);
 
@@ -64,19 +62,6 @@ export const UsersTable: FC<Props> = ({ users, sites }) => {
 
   return (
     <>
-      <div className='filters-header'>
-        <Input 
-          type='text' 
-          placeholder='Search...'
-          value={search}
-          onChange={event => setSearch(event.target.value)}
-        />
-        <UsersColumns 
-          columns={columns}
-          setColumns={setColumns}
-        />
-      </div>
-
       {results.length === 0 && (
         <div className='no-search-results'>
           <NoResults 

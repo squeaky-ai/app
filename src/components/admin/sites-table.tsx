@@ -3,10 +3,8 @@ import type { FC } from 'react';
 import classnames from 'classnames';
 import { TableWrapper, Table, Cell, Row } from 'components/table';
 import { Sort } from 'components/sort';
-import { Input } from 'components/input';
 import { SitesTableRow } from 'components/admin/sites-table-row';
 import { NoResults } from 'components/sites/no-results';
-import { SitesColumns } from 'components/admin/sites-columns';
 import { SITE_COLUMNS, DEFAULT_SITE_COLUMNS } from 'data/admin/constants';
 import { getColumnPreferences, getColumnStyles } from 'lib/tables';
 import { Preference } from 'lib/preferences';
@@ -17,14 +15,13 @@ import type { ActiveVisitorCount, Site } from 'types/graphql';
 interface Props {
   sites: Site[];
   activeVisitors: ActiveVisitorCount[];
+  search: string;
+  columns: Column[];
+  setColumns: (columns: Column[]) => void;
 }
 
-export const SitesTable: FC<Props> = ({ sites, activeVisitors }) => {
-  const [columns, setColumns] = React.useState<Column[]>(DEFAULT_SITE_COLUMNS);
-
+export const SitesTable: FC<Props> = ({ sites, activeVisitors, search, columns, setColumns }) => {
   const [sort, setSort] = React.useState<SitesSort>('created_at__desc');
-  const [search, setSearch] = React.useState<string>('');
-
   const { rowStyle, tableClassNames } = getColumnStyles(DEFAULT_SITE_COLUMNS, columns);
 
   const getSiteActiveVisitorsCount = (uuid: string) => {
@@ -72,19 +69,6 @@ export const SitesTable: FC<Props> = ({ sites, activeVisitors }) => {
 
   return (
     <>
-      <div className='filters-header'>
-        <Input 
-          type='text' 
-          placeholder='Search...'
-          value={search}
-          onChange={event => setSearch(event.target.value)}
-        />
-        <SitesColumns 
-          columns={columns}
-          setColumns={setColumns}
-        />
-      </div>
-
       {results.length === 0 && (
         <div className='no-search-results'>
           <NoResults 

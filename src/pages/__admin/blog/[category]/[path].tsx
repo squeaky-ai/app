@@ -1,14 +1,12 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Link from 'next/link';
 import { Spinner } from 'components/spinner';
 import { Page } from 'components/admin/page';
-import { Icon } from 'components/icon';
 import { useBlogPost } from 'hooks/use-blog-post';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { BlogEdit } from 'components/admin/blog-edit';
-import { BlogDelete } from 'components/admin/blog-delete';
+import { BreadCrumbs } from 'components/admin/breadcrumbs';
 import { updateBlogPost } from 'lib/api/graphql';
 import { getAuthorKey } from 'lib/admin/blog';
 import { useToasts } from 'hooks/use-toasts';
@@ -35,16 +33,14 @@ const AdminBlogEdit: NextPage<ServerSideProps> = () => {
         <title>Squeaky | Admin | Edit Blog Post</title>
       </Head>
 
-      <Page tab='blog'>
+      <Page>
         {() => (
           <>
-            <div className='posts-header'>
-              <Link href='/__admin/blog'>
-                <a className='back'><Icon name='arrow-left-line' /> All Posts</a>
-              </Link>
+            <BreadCrumbs items={[{ name: 'Admin', href: '/__admin/dashboard' }, { name: 'Blog', href: '/__admin/blog' }, { name: 'Edit' }]} />
 
-              <BlogDelete id={post.blogPost?.id} />
-            </div>
+            <h3 className='title'>
+              Edit Post
+            </h3>
 
             {loading && (
               <Spinner />

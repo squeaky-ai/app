@@ -8,8 +8,8 @@ import { Pill } from 'components/pill';
 import { TableWrapper, Table, Row, Cell } from 'components/table';
 import { useBlogPosts } from 'hooks/use-blog-posts';
 import { toNiceDate } from 'lib/dates';
+import { BreadCrumbs } from 'components/admin/breadcrumbs';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
-
 
 const AdminBlog: NextPage<ServerSideProps> = () => {
   const { posts, loading } = useBlogPosts();
@@ -20,20 +20,28 @@ const AdminBlog: NextPage<ServerSideProps> = () => {
         <title>Squeaky | Admin | Blog</title>
       </Head>
 
-      <Page tab='blog'>
+      <Page>
         {() => (
           <>
+            <BreadCrumbs items={[{ name: 'Admin', href: '/__admin/dashboard' }, { name: 'Blog' }]} />
+
+            <div className='admin-header'>
+              <div className='search'>
+                <h3 className='title'>
+                  Blog
+                  <Link href='/__admin/blog/create'>
+                    <a className='button link'>+ New Post</a>
+                  </Link>
+                </h3>
+              </div>
+            </div>
+
             {loading && (
               <Spinner />
             )}
 
             {!loading && (
               <>
-                <div className='posts-header'>
-                  <Link href='/__admin/blog/create'>
-                    <a className='button primary'>+ New Post</a>
-                  </Link>
-                </div>
                 <TableWrapper>
                   <Table className='posts-table'>
                     <Row className='head'>
