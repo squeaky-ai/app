@@ -97,6 +97,41 @@
         .pie-wrapper {
           height: 16rem;
           margin: 1.5rem 0 0 0;
+          position: relative;
+
+          .stats {
+            left: 50%;
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+
+            p {
+              margin: 0;
+              text-align: center;
+
+              &:not(.stat) {
+                font-weight: var(--font-weight-bold);
+              }
+            }
+
+            .stat {
+              b {
+                color: var(--peach-500);
+              }
+
+              i {
+                color: var(--gray-500);
+              }
+
+              &:not(:last-of-type) {
+                margin-bottom: 1rem;
+
+                b {
+                  color: var(--mauve-500);
+                }
+              }
+            }
+          }
         }
       }
 
