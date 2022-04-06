@@ -93,6 +93,11 @@
 
       &.sites-verified {
         grid-area: sites-verified;
+
+        .pie-wrapper {
+          height: 16rem;
+          margin: 1.5rem 0 0 0;
+        }
       }
 
       &.recordings {

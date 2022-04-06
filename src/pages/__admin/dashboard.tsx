@@ -7,11 +7,12 @@ import { Spinner } from 'components/spinner';
 import { Main } from 'components/main';
 import { BreadCrumbs } from 'components/admin/breadcrumbs';
 import { Card } from 'components/card';
-import { useAdmin } from 'hooks/use-admin';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { Icon } from 'components/icon';
 import { UsersGrowth } from 'components/admin/users-growth';
 import { SitesGrowth } from 'components/admin/sites-growth';
+import { VerifiedSites } from 'components/admin/verified-sites';
+import { useAdmin } from 'hooks/use-admin';
+import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
 const AdminDashboard: NextPage<ServerSideProps> = () => {
   const { admin, loading, error } = useAdmin();
@@ -88,6 +89,7 @@ const AdminDashboard: NextPage<ServerSideProps> = () => {
             <div className='grid-item sites-verified'>
               <Card>
                 <h5>Verified vs. Unverified</h5>
+                <VerifiedSites verified={admin.verified} />
               </Card>
             </div>
 
