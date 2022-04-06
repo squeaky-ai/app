@@ -60,7 +60,7 @@ export const Sidebar: FC = () => {
               </a>
             </Link>
             <Divider />
-            <a href='/api/sidekiq' className='link' data-label='Sidekiq'>
+            <a target='_blank' href='/api/sidekiq' className='link' data-label='Sidekiq'>
               <Icon name='line-chart-line' />
               <span>Sidekiq</span>
               <Icon name='external-link-line' className='external' />

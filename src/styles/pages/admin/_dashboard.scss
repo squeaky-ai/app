@@ -1,0 +1,50 @@
+.page.__admin.dashboard {
+  .dashboard-grid {
+    display: grid;
+    grid-gap: 2rem;
+    grid-template-areas: 'total-users total-users total-users monthly-active-users'
+                         'total-users total-users total-users roles'
+                         'total-sites total-sites total-sites sites-verified'
+                         'total-sites total-sites total-sites sites-verified'
+                         'recordings recordings visitors visitors';
+    grid-template-rows: repeat(4, minmax(0, 1fr));
+
+    .grid-item {
+      &.total-users {
+        grid-area: total-users;
+      }
+
+      &.monthly-active-users {
+        grid-area: monthly-active-users;
+      }
+
+      &.roles {
+        grid-area: roles;
+      }
+
+      &.total-sites {
+        grid-area: total-sites;
+      }
+
+      &.sites-verified {
+        grid-area: sites-verified;
+      }
+
+      &.recordings {
+        grid-area: recordings;
+      }
+
+      &.visitors {
+        grid-area: visitors;
+      }
+
+      .card {
+        height: 100%;
+
+        h5 {
+          margin: 0;
+        }
+      }
+    }
+  }
+}

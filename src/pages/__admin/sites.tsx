@@ -31,43 +31,43 @@ const AdminSites: NextPage<ServerSideProps> = () => {
 
       <Page>
         {({ activeVisitorCount }) => (
-            <>
-              <BreadCrumbs items={[{ name: 'Admin', href: '/__admin/dashboard' }, { name: 'Sites' }]} />
+          <>
+            <BreadCrumbs items={[{ name: 'Admin', href: '/__admin/dashboard' }, { name: 'Sites' }]} />
 
-              <div className='admin-header'>
-                <div className='search'>
-                  <h3 className='title'>
-                    Sites
-                  </h3>
-                  <Input 
-                    type='text' 
-                    placeholder='Search...'
-                    value={search}
-                    onChange={event => setSearch(event.target.value)}
-                  />
-                </div>
-                <menu>
-                  <SitesColumns 
-                    columns={columns}
-                    setColumns={setColumns}
-                  />
-                </menu>
+            <div className='admin-header'>
+              <div className='search'>
+                <h3 className='title'>
+                  Sites
+                </h3>
+                <Input 
+                  type='text' 
+                  placeholder='Search...'
+                  value={search}
+                  onChange={event => setSearch(event.target.value)}
+                />
               </div>
-
-              {loading && (
-                <Spinner />
-              )}
-
-              {!loading && (
-                <SitesTable 
-                  sites={admin.sites} 
-                  activeVisitors={activeVisitorCount}
-                  search={search}
+              <menu>
+                <SitesColumns 
                   columns={columns}
                   setColumns={setColumns}
                 />
-              )}
-            </>
+              </menu>
+            </div>
+
+            {loading && (
+              <Spinner />
+            )}
+
+            {!loading && (
+              <SitesTable 
+                sites={admin.sites} 
+                activeVisitors={activeVisitorCount}
+                search={search}
+                columns={columns}
+                setColumns={setColumns}
+              />
+            )}
+          </>
         )}
       </Page>
     </>
