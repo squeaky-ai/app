@@ -13,7 +13,6 @@ interface UseAnalytics {
 interface Props {
   site: Site;
   range: TimeRange;
-  browsersPage: number;
   referrersPage: number;
 }
 

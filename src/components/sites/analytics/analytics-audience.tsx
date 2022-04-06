@@ -21,12 +21,10 @@ interface Props {
 }
 
 export const AnalyticsAudience: FC<Props> = ({ site, period }) => {
-  const [browsersPage, setBrowsersPage] = React.useState<number>(1);
   const [referrersPage, setReferrersPage] = React.useState<number>(1);
 
   const { analytics, error, loading } = useAnalyticsAudience({
     site,
-    browsersPage,
     referrersPage,
     range: getDateRange(period),
   });
@@ -60,7 +58,7 @@ export const AnalyticsAudience: FC<Props> = ({ site, period }) => {
       </div>
 
       <div className='grid-item browsers'>
-        <AnalyticsBrowsers browsers={analytics.browsers} page={browsersPage} setPage={setBrowsersPage} />
+        <AnalyticsBrowsers browsers={analytics.browsers} />
       </div>
 
       <div className='grid-item referrers'>

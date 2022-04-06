@@ -1,29 +1,30 @@
 import React from 'react';
 import type { FC } from 'react';
 import { Browser } from 'components/browser';
-import { Pagination } from 'components/pagination';
 import { Card } from 'components/card';
+import { Button } from 'components/button';
 import { AnalyticsBrowsers as AnalyticsBrowsersType } from 'types/graphql';
 
 interface Props {
   browsers: AnalyticsBrowsersType;
-  page: number;
-  setPage: (page: number) => void;
 }
 
-export const AnalyticsBrowsers: FC<Props> = ({ browsers, page, setPage }) => {
-  const { total, pageSize } = browsers.pagination;
+export const AnalyticsBrowsers: FC<Props> = ({ browsers }) => {
+  const [showAll, setShowAll] = React.useState<boolean>(false);
 
+  const limit = 5;
   const offset = 100 - browsers.items[0]?.percentage || 0;
 
   const offsettedPercentage = (percent: number) => offset + percent;
+
+  const results = showAll ? browsers.items : browsers.items.slice(0, limit);
 
   return (
     <>
       <Card>
         <h4>Browser</h4>
         <ul>
-          {browsers.items.map(browser => (
+          {results.map(browser => (
             <li key={browser.browser}>
               <Browser name={browser.browser} height={32} width={32} />
               <div className='contents'>
@@ -33,15 +34,13 @@ export const AnalyticsBrowsers: FC<Props> = ({ browsers, page, setPage }) => {
             </li>
           ))}
         </ul>
+
+        {browsers.items.length > limit && (
+          <Button onClick={() => setShowAll(!showAll)} className='link show-all'>
+            Show {showAll ? 'Less' : 'All'}
+          </Button>
+        )}
       </Card>
-      
-      <Pagination
-        currentPage={page}
-        pageSize={pageSize}
-        total={total}
-        setPage={setPage}
-        scrollToTop={false}
-      />
     </>
   );
 };

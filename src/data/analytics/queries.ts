@@ -64,7 +64,7 @@ export const GET_ANALYTICS_TRAFFIC_QUERY = gql`
 `;
 
 export const GET_ANALYTICS_AUDIENCE_QUERY = gql`
-  query GetAnalytics($siteId: ID!, $fromDate: ISO8601Date!, $toDate: ISO8601Date!, $browsersPage: Int!, $referrersPage: Int!) { 
+  query GetAnalytics($siteId: ID!, $fromDate: ISO8601Date!, $toDate: ISO8601Date!, $referrersPage: Int!) { 
     site(siteId: $siteId) {
       id
       analytics(fromDate: $fromDate, toDate: $toDate) {
@@ -82,7 +82,7 @@ export const GET_ANALYTICS_AUDIENCE_QUERY = gql`
           deviceX
           count
         }
-        browsers(size: 5, page: $browsersPage) {
+        browsers(size: 10) {
           items {
             browser
             count
