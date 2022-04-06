@@ -33,6 +33,7 @@
   .search {
     margin: 0;
     position: relative;
+    width: 100%;
 
     .input {
       margin: 0;
@@ -72,10 +73,6 @@
 
   .filters-pages {
     width: 400px;
-
-    .search {
-      width: 100%;
-    }
 
     .pages {
       align-items: flex-start;
@@ -222,7 +219,7 @@
   }
 
   .filters-referrers {
-    width: 320px;
+    width: 400px;
 
     .referrers {
       align-items: flex-start;
@@ -230,6 +227,11 @@
       max-height: 300px;
       overflow-x: hidden;
       overflow-y: scroll;
+
+      .label {
+        font-size: 14px;
+        line-height: 20px;
+      }
 
       .checkbox {
         margin-bottom: .5rem;
