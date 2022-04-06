@@ -1,11 +1,16 @@
 .page.__admin {
   background: var(--peach-50);
 
+  a {
+    color: var(--mauve-700);
+  }
+
   #app-sidebar {
     background: var(--mauve-900);
 
     .link {
       background: var(--mauve-900);
+      color: var(--peach-100);
 
       &:hover {
         background: var(--mauve-800);
@@ -13,6 +18,7 @@
 
       &.active {
         background: var(--mauve-800);
+        color: var(--white);
 
         .icon {
           color: var(--peach-100);
@@ -124,7 +130,7 @@
             position: static;
   
             &:not(.arrow) {
-              color: var(--blue-500);
+              color: var(--mauve-700);
               font-size: 1.25rem;
               margin-right: .5rem;
             }
