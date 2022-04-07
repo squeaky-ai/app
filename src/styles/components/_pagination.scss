@@ -39,6 +39,7 @@
       &.back {
         border-radius: var(--border-radius-md) 0 0 var(--border-radius-md);
         color: var(--gray-blue-800);
+        padding: 0;
         text-decoration: none;
       }
 
@@ -46,6 +47,7 @@
         border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
         border-right-width: 1px;
         color: var(--gray-blue-800);
+        padding: 0;
         text-decoration: none;
       }
 
