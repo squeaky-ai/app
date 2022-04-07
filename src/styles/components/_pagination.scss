@@ -31,9 +31,10 @@
       font-weight: var(--font-weight-normal);
       height: 2rem;
       justify-content: center;
-      padding: 0;
+      margin: 0;
+      min-width: 2rem;
+      padding: 0 .5rem;
       text-decoration: underline;
-      width: 2rem;
 
       &.back {
         border-radius: var(--border-radius-md) 0 0 var(--border-radius-md);
