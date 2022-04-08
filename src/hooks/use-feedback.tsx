@@ -30,6 +30,7 @@ export const useFeedback = (): UseFeedback => {
     sentimentAccentColor: null,
     sentimentExcludedPages: null,
     sentimentLayout: null,
+    sentimentDevices: ['desktop', 'tablet'],
   };
 
   return {

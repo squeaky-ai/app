@@ -392,6 +392,7 @@ export type Feedback = {
   npsPhrase?: Maybe<Scalars['String']>;
   npsSchedule?: Maybe<Scalars['String']>;
   sentimentAccentColor?: Maybe<Scalars['String']>;
+  sentimentDevices: Array<Maybe<Scalars['String']>>;
   sentimentEnabled?: Maybe<Scalars['Boolean']>;
   sentimentExcludedPages: Array<Maybe<Scalars['String']>>;
   sentimentLayout?: Maybe<Scalars['String']>;
@@ -542,6 +543,7 @@ export type FeedbackUpdateInput = {
   npsPhrase?: InputMaybe<Scalars['String']>;
   npsSchedule?: InputMaybe<Scalars['String']>;
   sentimentAccentColor?: InputMaybe<Scalars['String']>;
+  sentimentDevices?: InputMaybe<Array<Scalars['String']>>;
   sentimentEnabled?: InputMaybe<Scalars['Boolean']>;
   sentimentExcludedPages?: InputMaybe<Array<Scalars['String']>>;
   sentimentLayout?: InputMaybe<Scalars['String']>;

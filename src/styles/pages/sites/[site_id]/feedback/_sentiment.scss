@@ -248,12 +248,6 @@
       }
     }
 
-    .sentiment-settings {
-      h4 { 
-        margin: 2rem 0 1.5rem 0;
-      }
-    }
-
     .color {
       align-items: center;
       border-radius: var(--border-radius-o);
@@ -294,6 +288,16 @@
     .hex {
       margin: 0 0 0 1rem;
       width: 128px;
+    }
+  }
+
+  .sentiment-settings {
+    h4 { 
+      margin: 3rem 0 1rem 0;
+    }
+
+    .checkbox-group {
+      margin: 0 0 1.5rem 0;
     }
   }
 

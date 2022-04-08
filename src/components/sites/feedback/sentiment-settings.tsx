@@ -9,6 +9,7 @@ import { Error } from 'components/error';
 import { useFeedback } from 'hooks/use-feedback';
 import { feedbackUpdate } from 'lib/api/graphql';
 import { Radio } from 'components/radio';
+import { Label } from 'components/label';
 import { Input } from 'components/input';
 import { Button } from 'components/button';
 import { Container } from 'components/container';
@@ -18,6 +19,7 @@ import { useToasts } from 'hooks/use-toasts';
 import type { FeedbackUpdateInput } from 'types/graphql';
 import type { Site } from 'types/graphql';
 import { SentimentPages } from 'components/sites/feedback/sentiment-pages';
+import { Checkbox } from 'components/checkbox';
 
 interface Props {
   site: Site;
@@ -29,6 +31,7 @@ const SentimentSchema = Yup.object().shape({
   sentimentAccentColor: Yup.string().matches(HEX_REGEX, 'Accent color is requied'),
   sentimentExcludedPages: Yup.array(),
   sentimentLayout: Yup.string().oneOf(['right_middle', 'right_bottom', 'left_middle', 'left_bottom'], 'Please select a layout type'),
+  sentimentDevices: Yup.array(),
 });
 
 export const SentimentSettings: FC<Props> = ({ site }) => {
@@ -67,6 +70,7 @@ export const SentimentSettings: FC<Props> = ({ site }) => {
               sentimentAccentColor: feedback.sentimentAccentColor || '#0768C1', 
               sentimentExcludedPages: feedback.sentimentExcludedPages || [],
               sentimentLayout: feedback.sentimentLayout || 'right_middle',
+              sentimentDevices: feedback.sentimentDevices || ['desktop', 'tablet'],
             }}
             validationSchema={SentimentSchema}
             onSubmit={(values, { setSubmitting }) => {
@@ -75,11 +79,13 @@ export const SentimentSettings: FC<Props> = ({ site }) => {
                   FeedbackUpdateInput, 
                   'sentimentAccentColor' | 
                   'sentimentExcludedPages' | 
-                  'sentimentLayout'
+                  'sentimentLayout' |
+                  'sentimentDevices'
                 > = {
                   sentimentAccentColor: values.sentimentAccentColor,
                   sentimentExcludedPages: values.sentimentExcludedPages,
                   sentimentLayout: values.sentimentLayout,
+                  sentimentDevices: values.sentimentDevices,
                 };
                 
                 try {
@@ -171,17 +177,6 @@ export const SentimentSettings: FC<Props> = ({ site }) => {
                   />
                 </div>
 
-                <h4>Visibility</h4>
-
-                <p>By default <b>your feedback widget will display on all pages</b> of your site, if you&apos;d like to hide the widget on any specific pages you can check the boxes for them below.</p>
-
-                <p><b>Hide feedback widget on:</b></p>
-
-                <SentimentPages 
-                  value={values.sentimentExcludedPages}
-                  onChange={handleChange}
-                />
-
                 <h4>Position</h4>
 
                 <p>Use the options below to determine where the feedback widget is positioned on the page.</p>
@@ -220,6 +215,52 @@ export const SentimentSettings: FC<Props> = ({ site }) => {
                     Left bottom
                   </Radio>
                 </div>
+
+                <h4>Pages</h4>
+
+                <p>By default <b>your feedback widget will display on all pages</b> of your site, if you&apos;d like to hide the widget on any specific pages you can check the boxes for them below.</p>
+
+                <p><b>Hide feedback widget on:</b></p>
+
+                <SentimentPages 
+                  value={values.sentimentExcludedPages}
+                  onChange={handleChange}
+                />
+
+                <h4>Devices</h4>
+
+                <p>Use the options below to determine if your feedback widget will appear on all devices.</p>
+
+                <Label>Show feedback widget on:</Label>
+
+                <div className='checkbox-group'>
+                  <Checkbox
+                    name='sentimentDevices'
+                    value='desktop'
+                    onChange={handleChange}
+                    checked={values.sentimentDevices.includes('desktop')}
+                  >
+                    Desktop
+                  </Checkbox>
+                  <Checkbox
+                    name='sentimentDevices'
+                    value='tablet'
+                    onChange={handleChange}
+                    checked={values.sentimentDevices.includes('tablet')}
+                  >
+                    Tablet
+                  </Checkbox>
+                  <Checkbox
+                    name='sentimentDevices'
+                    value='mobile'
+                    onChange={handleChange}
+                    checked={values.sentimentDevices.includes('mobile')}
+                  >
+                    Mobile
+                  </Checkbox>
+                </div>
+
+                <p><b>Please note</b>: If you&apos;re using the left or right positions then your feedback widget may overlap content on your website when used by customers with smaller mobile devices.</p>
 
                 <div className='actions'>
                   <Button disabled={isSubmitting || !isValid} type='submit' className='primary'>
