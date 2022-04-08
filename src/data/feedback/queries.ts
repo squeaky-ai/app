@@ -17,6 +17,7 @@ export const GET_FEEDBACK_QUERY = gql`
         sentimentAccentColor
         sentimentExcludedPages
         sentimentLayout
+        sentimentDevices
       }
     }
   }
