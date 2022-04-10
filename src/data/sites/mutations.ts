@@ -86,3 +86,12 @@ export const DELETE_DOMAIN_BLACKLIST_MUTATION = gql`
     }
   }
 `;
+
+export const MAGIC_ERASURE_ENABLED_MUTATION = gql`
+  mutation MagicErasureUpdate($input: SitesMagicErasureUpdateInput!) {
+    magicErasureUpdate(input: $input) {
+      id
+      magicErasureEnabled
+    }
+  }
+`;

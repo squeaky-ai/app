@@ -1,4 +1,6 @@
-export enum FeatureFlag {}
+export enum FeatureFlag {
+  MAGIC_ERASURE = 'MAGIC_ERASURE',
+}
 
 export class FeatureFlags {
   public static get(key: FeatureFlag): boolean {

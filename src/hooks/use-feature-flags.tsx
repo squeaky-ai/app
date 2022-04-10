@@ -11,12 +11,21 @@ type UseFeatureFlags = {
 
 type Names = Record<FeatureFlag, string>;
 
-export const allFeatureFlags: FeatureFlag[] = [];
+export const allFeatureFlags: FeatureFlag[] = [
+  FeatureFlag.MAGIC_ERASURE,
+];
 
-export const featureFlagNames: Names = {};
+export const featureFlagNames: Names = {
+  MAGIC_ERASURE: 'Magic Erasure'
+};
 
 export const useFeatureFlags = (): UseFeatureFlags => {
-  const [state, setState] = React.useState<State>([]);
+  const [state, setState] = React.useState<State>([
+    {
+      key: FeatureFlag.MAGIC_ERASURE,
+      value: false,
+    }
+  ]);
 
   const handleChange = (key: FeatureFlag, value: boolean) => {
     FeatureFlags.set(key, value);

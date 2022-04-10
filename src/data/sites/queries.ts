@@ -22,6 +22,7 @@ export const GET_SITE_QUERY = gql`
       ownerName
       daysSinceLastRecording
       recordingsCount
+      magicErasureEnabled
       plan {
         type
         name

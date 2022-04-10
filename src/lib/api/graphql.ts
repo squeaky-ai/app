@@ -43,6 +43,7 @@ import {
   BlogPost,
   AdminBlogPostDeleteInput,
   AdminUserDeleteInput,
+  SitesMagicErasureUpdateInput,
 } from 'types/graphql';
 
 import {
@@ -58,6 +59,7 @@ import {
   DELETE_IP_BLACKLIST_MUTATION,
   CREATE_DOMAIN_BLACKLIST_MUTATION,
   DELETE_DOMAIN_BLACKLIST_MUTATION,
+  MAGIC_ERASURE_ENABLED_MUTATION,
 } from 'data/sites/mutations';
 
 import {
@@ -267,6 +269,15 @@ export const domainBlacklistDelete = async (input: SitesDomainBlacklistDeleteInp
   });
 
   return data.domainBlacklist;
+};
+
+export const magicErasureUpdate = async (input: SitesMagicErasureUpdateInput): Promise<Site> => {
+  const { data } = await client.mutate({
+    mutation: MAGIC_ERASURE_ENABLED_MUTATION,
+    variables: { input }
+  });
+
+  return data.magicErasureUpdate;
 };
 
 export const updateUser = async (input: UsersUpdateInput): Promise<User> => {

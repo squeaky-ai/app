@@ -1,0 +1,61 @@
+.page.sites.privacy {
+  .privacy-options {
+    .option-label {
+      align-items: center;
+      display: flex;
+      font-weight: var(--font-weight-bold);
+      margin: 3rem 0 1.5rem 0;
+
+      .icon {
+        color: var(--blue-500);
+        font-size: 18px;
+        font-weight: var(--font-weight-normal);
+        margin: 0 .5rem 0 0;
+      }
+
+      i {
+        color: var(--gray-500);
+        font-weight: var(--font-weight-normal);
+        margin: 0 0 0 .5rem;
+      }
+    }
+
+    ul {
+      margin: 0;
+      padding: 0 0 0 1.5rem;
+
+      li {
+        margin: 0 0 1rem 0;
+      }
+    }
+
+    .magic-erasure-hint {
+      align-items: center;
+      background: var(--white);
+      border: 1px solid var(--blue-500);
+      border-radius: var(--border-radius-md);
+      display: flex;
+      padding: 1.5rem;
+
+      p {
+        margin: 0;
+      }
+
+      .magic-erasure-button {
+        align-items: center;
+        background: var(--blue-500);
+        border-radius: var(--border-radius-o);
+        display: flex;
+        height: 3rem;
+        justify-content: center;
+        margin: 0 1rem 0 0;
+        width: 3rem;
+
+        .icon {
+          color: var(--white);
+          font-size: 1.25rem;
+        }
+      }
+    }
+  }
+}
