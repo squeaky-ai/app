@@ -1,0 +1,38 @@
+.page.widget.magic-erasure {
+  #app-sidebar {
+    display: none;
+  }
+
+  #main {
+    margin: 0;
+    padding: 1rem;
+
+    .label {
+      justify-content: flex-start;
+      margin: 0 0 1rem 0;
+
+      .icon {
+        color: var(--blue-500);
+        font-size: 18px;
+        font-weight: var(--font-weight-normal);
+        margin: 0 0 0 .5rem;
+      }
+    }
+
+    p {
+      margin: 0 0 1rem 0;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0 0 0 1.5rem;
+
+      li {
+        .icon {
+          color: var(--blue-500);
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+}
