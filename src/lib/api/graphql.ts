@@ -44,6 +44,7 @@ import {
   AdminBlogPostDeleteInput,
   AdminUserDeleteInput,
   SitesMagicErasureUpdateInput,
+  SitesCssSelectorBlacklistUpdateInput,
 } from 'types/graphql';
 
 import {
@@ -60,6 +61,7 @@ import {
   CREATE_DOMAIN_BLACKLIST_MUTATION,
   DELETE_DOMAIN_BLACKLIST_MUTATION,
   MAGIC_ERASURE_ENABLED_MUTATION,
+  CSS_SELECTOR_BLACKLIST_UPDATE_MUTATION,
 } from 'data/sites/mutations';
 
 import {
@@ -278,6 +280,15 @@ export const magicErasureUpdate = async (input: SitesMagicErasureUpdateInput): P
   });
 
   return data.magicErasureUpdate;
+};
+
+export const cssSelectorBlacklistUpdate = async (input: SitesCssSelectorBlacklistUpdateInput): Promise<Site> => {
+  const { data } = await client.mutate({
+    mutation: CSS_SELECTOR_BLACKLIST_UPDATE_MUTATION,
+    variables: { input }
+  });
+
+  return data.cssSelectorBlacklist;
 };
 
 export const updateUser = async (input: UsersUpdateInput): Promise<User> => {

@@ -47,6 +47,43 @@ export const GET_SITE_QUERY = gql`
   }
 `;
 
+export const GET_SITE_BY_UUID_QUERY = gql`
+  query GetSite($siteId: ID!) {
+    siteByUuid(siteId: $siteId) {
+      id
+      name
+      url
+      verifiedAt
+      uuid
+      ownerName
+      daysSinceLastRecording
+      recordingsCount
+      magicErasureEnabled
+      cssSelectorBlacklist
+      plan {
+        type
+        name
+        billingValid
+      }
+      team {
+        id
+        role
+        user {
+          id
+        }
+      }
+      ipBlacklist {
+        name
+        value
+      }
+      domainBlacklist {
+        type
+        value
+      }
+    }
+  }
+`;
+
 export const GET_PLAN_QUERY = gql`
   query GetSitePlan($siteId: ID!) {
     site(siteId: $siteId) {

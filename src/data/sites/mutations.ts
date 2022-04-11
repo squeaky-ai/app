@@ -95,3 +95,12 @@ export const MAGIC_ERASURE_ENABLED_MUTATION = gql`
     }
   }
 `;
+
+export const CSS_SELECTOR_BLACKLIST_UPDATE_MUTATION = gql`
+  mutation CssSelectorBlacklistUpdate($input: SitesCssSelectorBlacklistUpdateInput!) {
+    cssSelectorBlacklistUpdate(input: $input) {
+      id
+      cssSelectorBlacklist
+    }
+  }
+`;
