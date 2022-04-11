@@ -8,6 +8,7 @@ import { Container } from 'components/container';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { SettingsTabs } from 'components/sites/settings/settings-tabs';
 import { Icon } from 'components/icon';
+import { Logo } from 'components/logo';
 import { Checkbox } from 'components/checkbox';
 import { OWNER, ADMIN } from 'data/teams/constants';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
@@ -83,7 +84,7 @@ const SitesSettingsPrivacy: NextPage<ServerSideProps> = ({ user }) => {
                 {site.magicErasureEnabled && (
                   <div className='magic-erasure-hint'>
                     <div className='magic-erasure-button'>
-                      <Icon name='eraser-line' />
+                      <Logo logo='small' width={17} height={24} alt='Logo' />
                     </div>
                     <p>Look for the erasure button in the bottom-right of your website</p>
                   </div>

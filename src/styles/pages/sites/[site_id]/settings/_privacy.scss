@@ -43,17 +43,18 @@
 
       .magic-erasure-button {
         align-items: center;
-        background: var(--blue-500);
+        background: var(--peach-50);
         border-radius: var(--border-radius-o);
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
         display: flex;
         height: 3rem;
         justify-content: center;
         margin: 0 1rem 0 0;
         width: 3rem;
 
-        .icon {
-          color: var(--white);
-          font-size: 1.25rem;
+        &:hover {
+          background: var(--peach-100);
+          cursor: pointer;
         }
       }
     }
