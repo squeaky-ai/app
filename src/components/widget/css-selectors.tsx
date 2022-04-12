@@ -1,20 +1,26 @@
 import React from 'react';
 import type { FC } from 'react';
-import { cssSelectorBlacklistUpdate } from 'lib/api/graphql';
+import { cssSelectorBlacklistCreate, cssSelectorBlacklistDelete } from 'lib/api/graphql';
 import type { Site } from 'types/graphql';
 
 interface Props {
   site: Site;
 }
 
-export const CssSelectors: FC<Props> = ({ site }) => {
-  const onWindowMessage = async (message: MessageEvent<string>) => {
-    const selector = message.data;
+type Message = {
+  action: 'create' | 'delete';
+  selector: string;
+}
 
-    await cssSelectorBlacklistUpdate({ 
-      siteId: site.id, 
-      selectors: [selector] 
-    });
+export const CssSelectors: FC<Props> = ({ site }) => {
+  const onWindowMessage = async (message: MessageEvent<Message>) => {
+    const { action, selector } = message.data;
+
+    const func = action === 'create'
+      ? cssSelectorBlacklistCreate
+      : cssSelectorBlacklistDelete;
+
+    await func({ siteId: site.id, selector });
   };
 
   React.useEffect(() => {
