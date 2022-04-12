@@ -8,6 +8,7 @@ import { Container } from 'components/container';
 import { Select, Option } from 'components/select';
 import { BillingPlansTableSmall } from 'components/sites/settings/billing-plans-table-small';
 import { BillingPlansTableLarge } from 'components/sites/settings/billing-plans-table-large';
+import { getUsefulCurrency } from 'lib/currency';
 import { PlansCurrency, Site } from 'types/graphql';
 import type { Billing } from 'types/billing';
 
@@ -20,7 +21,7 @@ interface Props {
 }
 
 export const BillingPlansTable: FC<Props> = ({ site, billing, hasBilling, showPlanChangeMessage }) => {
-  const [currency, setCurrency] = React.useState<PlansCurrency>(PlansCurrency.Eur);
+  const [currency, setCurrency] = React.useState<PlansCurrency>(getUsefulCurrency());
 
   const planIndex = billing.plans.findIndex(plan => Number(plan.id) === site.plan.type);
 
