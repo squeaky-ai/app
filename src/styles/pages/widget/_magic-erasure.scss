@@ -69,9 +69,26 @@
           list-style: none;
           overflow: hidden;
           padding: 1rem;
+          position: relative;
           text-overflow: ellipsis;
           white-space: nowrap;
           width: 100%;
+
+          .delete-selector {
+            background: var(--white);
+            border-radius: var(--border-radius-sm);
+            height: 2rem;
+            display: none;
+            position: absolute;
+            right: .75rem;
+            top: .75rem;
+            width: 2rem;
+
+            .icon {
+              color: var(--rose-500);
+              margin: 0;
+            }
+          }
 
           &:last-of-type {
             border-bottom: 1px solid var(--gray-150);
@@ -88,6 +105,11 @@
 
             + li {
               border-top-color: transparent;
+            }
+
+
+            .delete-selector {
+              display: block;
             }
           }
         }
