@@ -13,14 +13,14 @@ type Message = {
 }
 
 export const CssSelectors: FC<Props> = ({ site }) => {
-  const onWindowMessage = async (message: MessageEvent<Message>) => {
-    const { action, selector } = message.data;
+  const onWindowMessage = async (messageEvent: MessageEvent<string>) => {
+    const message: Message = JSON.parse(messageEvent.data);
 
-    const func = action === 'create'
+    const func = message.action === 'create'
       ? cssSelectorBlacklistCreate
       : cssSelectorBlacklistDelete;
 
-    await func({ siteId: site.id, selector });
+    await func({ siteId: site.id, selector: message.selector });
   };
 
   React.useEffect(() => {
