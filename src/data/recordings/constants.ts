@@ -164,4 +164,9 @@ export const FILTERS: RecordingsFilters = {
     maxWidth: null,
     minWidth: null,
   },
+  utmCampaign: null,
+  utmContent: null,
+  utmMedium: null,
+  utmSource: null,
+  utmTerm: null,
 };

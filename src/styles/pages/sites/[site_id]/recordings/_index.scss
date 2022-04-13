@@ -173,6 +173,10 @@
             display: block;
           }
 
+          &.has-sub-menu {
+            padding: 0;
+          }
+
           .actions {
             display: flex;
 
@@ -180,6 +184,11 @@
               margin-left: 0;
               margin-right: 1rem;
             }
+          }
+
+          .sub-menu {
+            box-shadow: none;
+            position: static;
           }
         }
       }

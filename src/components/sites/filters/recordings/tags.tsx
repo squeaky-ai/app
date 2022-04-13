@@ -16,6 +16,11 @@ import { TagsBookmarked } from 'components/sites/filters/recordings/tags-bookmar
 import { TagsReferrers } from 'components/sites/filters/common/tags-referrers';
 import { TagsStarred } from 'components/sites/filters/recordings/tags-starred';
 import { TagsTags } from 'components/sites/filters/recordings/tags-tags';
+import { TagsUtmCampaign } from 'components/sites/filters/recordings/tags-utm-campaign';
+import { TagsUtmContent } from 'components/sites/filters/recordings/tags-utm-content';
+import { TagsUtmMedium } from 'components/sites/filters/recordings/tags-utm-medium';
+import { TagsUtmSource } from 'components/sites/filters/recordings/tags-utm-source';
+import { TagsUtmTerm } from 'components/sites/filters/recordings/tags-utm-term';
 import type { RecordingsFilters } from 'types/graphql';
 import type { ValueOf } from 'types/common';
 
@@ -41,6 +46,11 @@ export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
   const hasReferrers = filters.referrers.length > 0;
   const hasStarred = filters.starred !== null;
   const hasTags = filters.tags.length > 0;
+  const hasUtmCampaign = filters.utmCampaign !== null;
+  const hasUtmContent = filters.utmContent !== null;
+  const hasUtmMedium = filters.utmMedium !== null;
+  const hasUtmSource = filters.utmSource !== null;
+  const hasUtmTerm = filters.utmTerm !== null;
 
   const hasFilters = (
     hasStatus ||
@@ -57,7 +67,12 @@ export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
     hasBookmarked ||
     hasReferrers ||
     hasStarred ||
-    hasTags
+    hasTags ||
+    hasUtmCampaign ||
+    hasUtmContent ||
+    hasUtmSource ||
+    hasUtmMedium ||
+    hasUtmTerm
   );
 
   if (!hasFilters) return null;
@@ -118,6 +133,26 @@ export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
 
       {hasTags && (
         <TagsTags filters={filters} updateFilters={updateFilters} />
+      )}
+
+      {hasUtmCampaign && (
+        <TagsUtmCampaign filters={filters} updateFilters={updateFilters} />
+      )}
+
+      {hasUtmContent && (
+        <TagsUtmContent filters={filters} updateFilters={updateFilters} />
+      )}
+
+      {hasUtmMedium && (
+        <TagsUtmMedium filters={filters} updateFilters={updateFilters} />
+      )}
+
+      {hasUtmSource && (
+        <TagsUtmSource filters={filters} updateFilters={updateFilters} />
+      )}
+
+      {hasUtmTerm && (
+        <TagsUtmTerm filters={filters} updateFilters={updateFilters} />
       )}
 
       <Button className='link clear-filters' onClick={clearFilters}>

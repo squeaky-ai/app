@@ -1295,6 +1295,11 @@ export type RecordingsFilters = {
   status?: InputMaybe<FiltersStatus>;
   tags: Array<Scalars['Int']>;
   unvisitedPages: Array<Scalars['String']>;
+  utmCampaign?: InputMaybe<Scalars['String']>;
+  utmContent?: InputMaybe<Scalars['String']>;
+  utmMedium?: InputMaybe<Scalars['String']>;
+  utmSource?: InputMaybe<Scalars['String']>;
+  utmTerm?: InputMaybe<Scalars['String']>;
   viewport: FiltersViewport;
   visitedPages: Array<Scalars['String']>;
 };
@@ -1404,6 +1409,11 @@ export type Site = {
   team: Array<Team>;
   updatedAt?: Maybe<Scalars['ISO8601DateTime']>;
   url: Scalars['String'];
+  utmCampaigns: Array<Maybe<Scalars['String']>>;
+  utmContents: Array<Maybe<Scalars['String']>>;
+  utmMediums: Array<Maybe<Scalars['String']>>;
+  utmSources: Array<Maybe<Scalars['String']>>;
+  utmTerms: Array<Maybe<Scalars['String']>>;
   uuid: Scalars['String'];
   verifiedAt?: Maybe<Scalars['ISO8601DateTime']>;
   visitor?: Maybe<Visitor>;
