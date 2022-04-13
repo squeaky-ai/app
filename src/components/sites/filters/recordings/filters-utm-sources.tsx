@@ -60,7 +60,7 @@ export const FiltersUtmSources: FC<Props> = ({ value, onClose, onUpdate }) => {
         values,
       }) => (
         <form className='filters-utm filters-utm-sources' onSubmit={handleSubmit}>
-          <div className='row utm-sources'>
+          <div className='row utm-rows utm-sources'>
             {loading && <Spinner />}
             {results.map(utmSource => (
               <Radio 

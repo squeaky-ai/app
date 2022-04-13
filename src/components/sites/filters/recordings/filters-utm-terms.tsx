@@ -60,7 +60,7 @@ export const FiltersUtmTerms: FC<Props> = ({ value, onClose, onUpdate }) => {
         values,
       }) => (
         <form className='filters-utm filters-utm-terms' onSubmit={handleSubmit}>
-          <div className='row utm-terms'>
+          <div className='row utm-rows utm-terms'>
             {loading && <Spinner />}
             {results.map(utmTerm => (
               <Radio 
