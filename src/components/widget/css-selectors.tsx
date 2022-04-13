@@ -36,7 +36,14 @@ export const CssSelectors: FC<Props> = ({ site }) => {
   };
 
   const handleDeleteSelector = async (selector: string) => {
-    await cssSelectorBlacklistDelete({ siteId: site.id, selector })
+    await cssSelectorBlacklistDelete({ siteId: site.id, selector });
+
+    const message: Message = {
+      action: 'delete',
+      selector,
+    };
+
+    window.parent.postMessage(JSON.stringify(message), '*');
   };
 
   React.useEffect(() => {
