@@ -18,7 +18,7 @@ export const AnalyticsReferrers: FC<Props> = ({ referrers, page, setPage }) => (
     <Table>
       <Row head>
         <Cell>Page</Cell>
-        <Cell>Number of users</Cell>
+        <Cell>Number of visitors</Cell>
         <Cell />
       </Row>
       {referrers.items.map(referrer => {
