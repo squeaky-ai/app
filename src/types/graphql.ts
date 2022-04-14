@@ -1135,6 +1135,7 @@ export type Query = {
   admin: Admin;
   blogPost?: Maybe<BlogPost>;
   blogPosts: BlogPosts;
+  cssSelectorBlacklist: Array<Maybe<Scalars['String']>>;
   feedback?: Maybe<Feedback>;
   plans: Array<Plan>;
   site?: Maybe<Site>;
@@ -1154,6 +1155,11 @@ export type QueryBlogPostArgs = {
 export type QueryBlogPostsArgs = {
   category?: InputMaybe<Scalars['String']>;
   tags?: InputMaybe<Array<Scalars['String']>>;
+};
+
+
+export type QueryCssSelectorBlacklistArgs = {
+  siteId: Scalars['String'];
 };
 
 
@@ -1194,13 +1200,11 @@ export type Recording = {
   exitPage: Scalars['String'];
   id: Scalars['ID'];
   language: Scalars['String'];
-  nextRecording?: Maybe<Recording>;
   notes: Array<Maybe<Note>>;
   nps?: Maybe<FeedbackNpsResponseItem>;
   pageCount: Scalars['Int'];
   pageViews: Array<Maybe<Scalars['String']>>;
   pages: Array<Maybe<Page>>;
-  previousRecording?: Maybe<Recording>;
   referrer?: Maybe<Scalars['String']>;
   sentiment?: Maybe<FeedbackSentimentResponseItem>;
   sessionId: Scalars['String'];

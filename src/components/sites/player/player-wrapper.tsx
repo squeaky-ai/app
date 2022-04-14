@@ -88,7 +88,7 @@ export const PlayerWrapper: FC<Props> = ({ user, state, recording, dispatch, fet
                 items={[{ name: 'Recordings', href: `/sites/${site.id}/recordings` }]} 
               />
 
-              <PlayerDetails site={site} recording={recording} />
+              <PlayerDetails recording={recording} />
               <PlayerActions site={site} member={member} recording={recording} />
             </Header>
 

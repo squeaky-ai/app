@@ -4,33 +4,30 @@ import classnames from 'classnames';
 import { useRouter } from 'next/router';
 import { Icon } from 'components/icon';
 import { Button } from 'components/button';
-import type { Site } from 'types/graphql';
-import type { Recording } from 'types/graphql';
 import { Pill } from 'components/pill';
+import { usePrevAndNextRecording } from 'hooks/use-prev-and-next-recording';
+import type { Recording } from 'types/graphql';
 
 interface Props {
-  site: Site;
   recording: Recording;
 }
 
-export const PlayerDetails: FC<Props> = ({ site, recording }) => {
+export const PlayerDetails: FC<Props> = ({ recording }) => {
   const router = useRouter();
 
+  const { next, prev } = usePrevAndNextRecording({ recording });
+
   const viewPrevious = async () => {
-    if (recording.previousRecording) {
-      await router.push(`/sites/${site.id}/recordings/${recording.previousRecording.id}`);
-    }
+    if (prev) await router.push(prev);
   };
 
   const viewNext = async () => {
-    if (recording.nextRecording) {
-      await router.push(`/sites/${site.id}/recordings/${recording.nextRecording.id}`);
-    }
+    if (next) await router.push(next);
   };
 
   return (
     <div className='recording-details'>
-      <Button onClick={viewPrevious} className={classnames({ disabled: !recording?.previousRecording })}>
+      <Button onClick={viewPrevious} className={classnames({ disabled: true  })}>
         <Icon name='arrow-left-s-line' />
       </Button>
         <span className='session'> #{recording?.sessionId}</span>
@@ -38,7 +35,7 @@ export const PlayerDetails: FC<Props> = ({ site, recording }) => {
           ? <Pill type='secondary'>Viewed</Pill>
           : <Pill type='tertiary'>New</Pill>
         }
-      <Button onClick={viewNext} className={classnames({ disabled: !recording?.nextRecording })}>
+      <Button onClick={viewNext} className={classnames({ disabled: true })}>
         <Icon name='arrow-right-s-line' />
       </Button>
     </div>
