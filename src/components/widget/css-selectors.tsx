@@ -10,7 +10,7 @@ interface Props {
 }
 
 type Message = {
-  action: 'create' | 'delete';
+  action: 'create' | 'delete' | 'load';
   selector: string;
 }
 
@@ -35,6 +35,17 @@ export const CssSelectors: FC<Props> = ({ site }) => {
     await func({ siteId: site.id, selector: message.selector });
   };
 
+  const postSelectorsOnLoad = async (selectors: string[]) => {
+    selectors.forEach(selector => {
+      const message: Message = {
+        action: 'load',
+        selector,
+      };
+
+      window.parent.postMessage(JSON.stringify(message), '*');
+    });
+  };
+
   const handleDeleteSelector = async (selector: string) => {
     await cssSelectorBlacklistDelete({ siteId: site.id, selector });
 
@@ -47,6 +58,8 @@ export const CssSelectors: FC<Props> = ({ site }) => {
   };
 
   React.useEffect(() => {
+    postSelectorsOnLoad(site.cssSelectorBlacklist);
+
     window.addEventListener('message', onWindowMessage);
 
     return () => {
