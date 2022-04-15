@@ -4,17 +4,24 @@ import Link from 'next/link';
 import { Illustration } from 'components/illustration';
 import { Container } from 'components/container';
 
-export const Error: FC = () => (
+interface Props {
+  title?: string;
+  action?: React.ReactNode;
+}
+
+export const Error: FC<Props> = ({ title, action }) => (
   <div className='server-error'>
     <Container className='md'>
       <Illustration illustration='illustration-10' height={256} width={256} alt='Page not found' />
-      <h2>Internal Server Error</h2>
+      <h2>{title || 'Internal Server Error'}</h2>
       <p>Something has gone wrong on our side, sorry!</p>
-      <Link href='/sites'>
-        <a className='button primary'>
-          Back to sites
-        </a>
-      </Link>
+      {action || (
+         <Link href='/sites'>
+          <a className='button primary'>
+            Back to sites
+          </a>
+        </Link>
+      )}
     </Container>
   </div>
 );

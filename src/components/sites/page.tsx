@@ -3,6 +3,7 @@ import type { FC, ReactElement } from 'react';
 import { useSite } from 'hooks/use-site';
 import { NotFound } from 'components/sites/not-found';
 import { Unauthorized } from 'components/sites/unauthorized';
+import { ErrorBoundary } from 'components/sites/error-boundary';
 import { useSidebar } from 'hooks/use-sidebar';
 import type { User, Team } from 'types/graphql';
 import type { Site } from 'types/graphql';
@@ -54,7 +55,9 @@ export const Page: FC<Props> = ({ children, user, scope }) => {
         <Unauthorized />
       )}
 
-      {site && authorized && children({ site, member })}
+      <ErrorBoundary>
+        {site && authorized && children({ site, member })}
+      </ErrorBoundary>
     </>
   )
 };
