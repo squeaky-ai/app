@@ -20,6 +20,7 @@ import { getColumnPreferences } from 'lib/tables';
 import { useFilters } from 'hooks/use-filters';
 import { usePeriod } from 'hooks/use-period';
 import { RecordingsSort } from 'types/graphql';
+import { useSort } from 'hooks/use-sort';
 import type { RecordingsFilters } from 'types/graphql';
 import type { Column, ValueOf } from 'types/common';
 
@@ -29,10 +30,9 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
 
   const [page, setPage] = React.useState<number>(1);
   const [size, setSize] = React.useState<number>(25);
-  const [sort, setSort] = React.useState<RecordingsSort>(RecordingsSort.ConnectedAtDesc);
 
   const { period, setPeriod } = usePeriod('recordings');
-
+  const { sort, setSort } = useSort<RecordingsSort>('recordings');
   const { filters, setFilters } = useFilters<RecordingsFilters>('recordings');
 
   const updateFilters = (key: keyof RecordingsFilters, value: ValueOf<RecordingsFilters>) => {

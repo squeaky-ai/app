@@ -16,6 +16,7 @@ import { FILTERS, COLUMNS, DEFAULT_COLUMNS } from 'data/visitors/constants';
 import { getColumnPreferences } from 'lib/tables';
 import { useFilters } from 'hooks/use-filters';
 import { Preference } from 'lib/preferences';
+import { useSort } from 'hooks/use-sort';
 import { VisitorsSort } from 'types/graphql';
 import type { VisitorsFilters } from 'types/graphql';
 import type { Column, ValueOf } from 'types/common';
@@ -25,8 +26,8 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
 
   const [page, setPage] = React.useState<number>(1);
   const [size, setSize] = React.useState<number>(25);
-  const [sort, setSort] = React.useState<VisitorsSort>(VisitorsSort.LastActivityAtDesc);
 
+  const { sort, setSort } = useSort<VisitorsSort>('visitors');
   const { filters, setFilters } = useFilters<VisitorsFilters>('visitors');
 
   const updateFilters = (key: keyof VisitorsFilters, value: ValueOf<VisitorsFilters>) => {
