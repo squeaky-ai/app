@@ -46,7 +46,7 @@ export const SitesGrowth: FC<Props> = ({ sites }) => {
   })();
 
   const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload, label }) => {
-    if (!active || !payload[0]) return null;
+    if (!active || !payload?.length) return null;
 
     const { allCount, verifiedCount, unverifiedCount } = payload[0].payload;
   

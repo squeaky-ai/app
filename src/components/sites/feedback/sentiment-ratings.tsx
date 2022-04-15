@@ -54,7 +54,7 @@ export const SentimentRatings: FC<Props> = ({ period, ratings }) => {
   }));
 
   const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload }) => {
-    if (!active || !payload[0]) return null;
+    if (!active || !payload?.length) return null;
   
     return (
       <div className='custom-tooltip'>

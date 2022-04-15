@@ -34,7 +34,7 @@ export const UsersGrowth: FC<Props> = ({ users }) => {
   const data = getAccumulatingTotal(users);
 
   const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload, label }) => {
-    if (!active || !payload[0]) return null;
+    if (!active || !payload?.length) return null;
 
     const newUserCount = payload[0].payload.count;
   
