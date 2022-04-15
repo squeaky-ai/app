@@ -19,7 +19,13 @@ export const SitesTableRow: FC<Props> = ({ site, activeVisitors, style }) => (
         <a target='_blank'>{site.id}</a>
       </Link>
     </Cell>
-    <Cell>{site.name}</Cell>
+    <Cell>
+      <Link href={`/__admin/sites/${site.id}`}>
+        <a>
+          {site.name}
+        </a>
+      </Link>
+    </Cell>
     <Cell>
       <a href={site.url} target='_blank' rel='noreferrer'>
         {site.url}
