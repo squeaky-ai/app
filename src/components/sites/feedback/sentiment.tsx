@@ -15,6 +15,7 @@ import { Period } from 'components/sites/period/period';
 import { COLUMNS, DEFAULT_COLUMNS } from 'data/sentiment/constants';
 import { getColumnPreferences } from 'lib/tables';
 import { Preference } from 'lib/preferences';
+import { useSort } from 'hooks/use-sort';
 import { usePeriod } from 'hooks/use-period';
 import { FeedbackSentimentResponseSort } from 'types/graphql';
 import type { Column } from 'types/common';
@@ -22,10 +23,10 @@ import type { Column } from 'types/common';
 export const Sentiment: FC = () => {
   const [page, setPage] = React.useState<number>(1);
   const [size, setSize] = React.useState<number>(10);
-  const [sort, setSort] = React.useState<FeedbackSentimentResponseSort>(FeedbackSentimentResponseSort.TimestampDesc);
   const [columns, setColumns] = React.useState<Column[]>(DEFAULT_COLUMNS);
 
   const { period, setPeriod } = usePeriod('sentiment');
+  const { sort, setSort } = useSort<FeedbackSentimentResponseSort>('sentiment');
 
   const { sentiment, loading, error } = useSentiment({ page, size, sort, range: getDateRange(period) });
   

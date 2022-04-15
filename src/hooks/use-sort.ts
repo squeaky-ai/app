@@ -1,9 +1,17 @@
 import React from 'react';
-import { RecordingsSort, VisitorsSort } from 'types/graphql';
+
+import {
+  RecordingsSort,
+  VisitorsSort,
+  FeedbackNpsResponseSort,
+  FeedbackSentimentResponseSort,
+} from 'types/graphql';
 
 type ComponentType = 
   'recordings' |
-  'visitors';
+  'visitors' |
+  'nps' |
+  'sentiment';
 
 interface UseSort<T> {
   sort: T;
@@ -26,6 +34,10 @@ const getDefaultSort = (type: ComponentType) => {
       return RecordingsSort.ConnectedAtDesc;
     case 'visitors':
       return VisitorsSort.LastActivityAtDesc;
+    case 'nps':
+      return FeedbackNpsResponseSort.TimestampDesc;
+    case 'sentiment':
+      return FeedbackSentimentResponseSort.TimestampDesc;
   }
 };
 

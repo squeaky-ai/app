@@ -18,16 +18,17 @@ import { COLUMNS, DEFAULT_COLUMNS } from 'data/nps/constants';
 import { getColumnPreferences } from 'lib/tables';
 import { Preference } from 'lib/preferences';
 import { usePeriod } from 'hooks/use-period';
+import { useSort } from 'hooks/use-sort';
 import { FeedbackNpsResponseSort } from 'types/graphql';
 import type { Column } from 'types/common';
 
 export const Nps: FC = () => {
   const [page, setPage] = React.useState<number>(1);
   const [size, setSize] = React.useState<number>(10);
-  const [sort, setSort] = React.useState<FeedbackNpsResponseSort>(FeedbackNpsResponseSort.TimestampDesc);
   const [columns, setColumns] = React.useState<Column[]>(DEFAULT_COLUMNS);
 
   const { period, setPeriod } = usePeriod('nps');
+  const { sort, setSort } = useSort<FeedbackNpsResponseSort>('nps');
 
   const { nps, error, loading } = useNps({ page, size, sort, range: getDateRange(period) });
 
