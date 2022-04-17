@@ -1,6 +1,7 @@
 .page.sites.heatmaps {
   #main {
-    padding-bottom: 2rem;
+    height: 100vh;
+    padding-bottom: 0;
   }
 
   .heatmaps-heading {
@@ -27,8 +28,8 @@
     grid-template-areas: 'options options'
                          'content data';
     grid-template-columns: minmax(0, 1fr) 330px;
-    grid-template-rows: 40px minmax(0, 1fr);
-    height: calc(100% - 168px);
+    grid-template-rows: 40px 1fr;
+    height: calc(100% - 12rem);
 
     @include breakpoint-md {
       display: block;
@@ -117,6 +118,7 @@
     .data {
       grid-area: data;
       height: 100%;
+      overflow-y: auto;
       padding: 0;
 
       .head {
