@@ -17,7 +17,7 @@ import { FiltersBookmarked } from 'components/sites/filters/recordings/filters-b
 import { FiltersReferrers } from 'components/sites/filters/recordings/filters-referrers';
 import { FiltersUtm } from  'components/sites/filters/recordings/filters-utm';
 import { FiltersTags } from 'components/sites/filters/recordings/filters-tags';
-import { FiltersStarred } from 'components/sites/filters/recordings/filters-starred';
+import { FiltersStarred } from 'components/sites/filters/common/filters-starred';
 import type { RecordingsFilters } from 'types/graphql';
 import type { ValueOf } from 'types/common';
 

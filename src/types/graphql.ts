@@ -1917,6 +1917,7 @@ export type VisitorsFilters = {
   lastActivity: FiltersDate;
   recordings: FiltersRecordings;
   referrers: Array<Scalars['String']>;
+  starred?: InputMaybe<Scalars['Boolean']>;
   status?: InputMaybe<FiltersStatus>;
   unvisitedPages: Array<Scalars['String']>;
   visitedPages: Array<Scalars['String']>;

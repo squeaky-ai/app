@@ -11,6 +11,7 @@ import { FiltersLanguage } from 'components/sites/filters/common/filters-languag
 import { FiltersRecordings } from 'components/sites/filters/visitors/filters-recordings';
 import { FiltersPages } from 'components/sites/filters/common/filters-pages';
 import { FiltersReferrers } from 'components/sites/filters/recordings/filters-referrers';
+import { FiltersStarred } from 'components/sites/filters/common/filters-starred';
 import type { VisitorsFilters } from 'types/graphql';
 import type { ValueOf } from 'types/common';
 
@@ -30,6 +31,7 @@ enum FilterType {
   UnvisitedPages,
   Language,
   Referrer,
+  Starred,
 }
 
 export const Filters: FC<Props> = ({ filters, updateFilters }) => {
@@ -83,6 +85,10 @@ export const Filters: FC<Props> = ({ filters, updateFilters }) => {
           <Icon name='arrow-drop-left-line' />
           Traffic source
         </Button>
+        <Button onClick={() => handleFilterChange(FilterType.Starred)} className={classnames({ open: openFilter === FilterType.Starred})}>
+          <Icon name='arrow-drop-left-line' />
+          Starred
+        </Button>
 
         <div className={classnames('popout filters', { open: openFilter !== null })}>
           {openFilter === FilterType.Status && (
@@ -131,6 +137,12 @@ export const Filters: FC<Props> = ({ filters, updateFilters }) => {
             <>
               <Label>Traffic Source</Label>
               <FiltersReferrers value={filters.referrers} onUpdate={handleUpdate('referrers')}  onClose={handleFilterClose} />
+            </>
+          )}
+          {openFilter === FilterType.Starred && (
+            <>
+              <Label>Starred</Label>
+              <FiltersStarred value={filters.starred} onUpdate={handleUpdate('starred')}  onClose={handleFilterClose} />
             </>
           )}
         </div>

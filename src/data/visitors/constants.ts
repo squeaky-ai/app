@@ -26,6 +26,7 @@ export const FILTERS: VisitorsFilters = {
     betweenFromDate: null,
     betweenToDate: null,
   },
+  starred: null,
 };
 
 export const COLUMNS: Column[] = [

@@ -4,13 +4,13 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { Checkbox } from 'components/checkbox';
 import { Button } from 'components/button';
-import type { RecordingsFilters } from 'types/graphql';
+import type { RecordingsFilters, VisitorsFilters } from 'types/graphql';
 import type { ValueOf } from 'types/common';
 
 interface Props {
-  value: RecordingsFilters['starred'];
+  value: RecordingsFilters['starred'] | VisitorsFilters['starred'];
   onClose: VoidFunction;
-  onUpdate: (value: ValueOf<RecordingsFilters>) => void;
+  onUpdate: (value: ValueOf<RecordingsFilters | VisitorsFilters>) => void;
 }
 
 const StarredSchema = Yup.object().shape({

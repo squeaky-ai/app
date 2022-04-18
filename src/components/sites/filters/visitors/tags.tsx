@@ -8,6 +8,7 @@ import { TagsLanguages } from 'components/sites/filters/common/tags-languages';
 import { TagsRecordings } from 'components/sites/filters/visitors/tags-recordings';
 import { TagsVisitedPages } from 'components/sites/filters/common/tags-visited-pages';
 import { TagsUnvisitedPages } from 'components/sites/filters/common/tags-unvisited-pages';
+import { TagsStarred } from 'components/sites/filters/common/tags-starred';
 import { TagsReferrers } from 'components/sites/filters/common/tags-referrers';
 import type { VisitorsFilters } from 'types/graphql';
 import type { ValueOf } from 'types/common';
@@ -27,6 +28,7 @@ export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
   const hasVisitedPages = filters.visitedPages.length > 0;
   const hasUnvisitedPages = filters.unvisitedPages.length > 0;
   const hasReferrers = filters.referrers.length > 0;
+  const hasStarred = filters.starred !== null;
 
   const hasFilters = (
     hasStatus ||
@@ -36,7 +38,8 @@ export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
     hasLanguages || 
     hasVisitedPages ||
     hasUnvisitedPages ||
-    hasReferrers
+    hasReferrers ||
+    hasStarred
   );
 
   if (!hasFilters) return null;
@@ -73,6 +76,10 @@ export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
 
       {hasReferrers && (
         <TagsReferrers filters={filters} updateFilters={updateFilters} />
+      )}
+
+      {hasStarred && (
+        <TagsStarred filters={filters} updateFilters={updateFilters} />
       )}
 
       <Button className='link clear-filters' onClick={clearFilters}>

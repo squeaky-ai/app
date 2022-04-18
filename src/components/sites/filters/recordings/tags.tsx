@@ -14,7 +14,7 @@ import { TagsLanguages } from 'components/sites/filters/common/tags-languages';
 import { TagsViewport } from 'components/sites/filters/recordings/tags-viewport';
 import { TagsBookmarked } from 'components/sites/filters/recordings/tags-bookmarked';
 import { TagsReferrers } from 'components/sites/filters/common/tags-referrers';
-import { TagsStarred } from 'components/sites/filters/recordings/tags-starred';
+import { TagsStarred } from 'components/sites/filters/common/tags-starred';
 import { TagsTags } from 'components/sites/filters/recordings/tags-tags';
 import { TagsUtmCampaign } from 'components/sites/filters/recordings/tags-utm-campaign';
 import { TagsUtmContent } from 'components/sites/filters/recordings/tags-utm-content';
