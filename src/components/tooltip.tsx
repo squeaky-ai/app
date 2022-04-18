@@ -23,7 +23,7 @@ export const Tooltip: FC<Props> = ({ button, fluid, delayInMilliseconds, buttonC
     setOpen(true);
   };
 
-  const handleMouseOut = () => {
+  const handleMouseLeave = () => {
     setOpen(false);
   };
 
@@ -39,7 +39,7 @@ export const Tooltip: FC<Props> = ({ button, fluid, delayInMilliseconds, buttonC
 
   return (
     <div ref={ref} className={classnames('tooltip', className)} onClick={onClick}>
-      <Button onMouseEnter={handleMouseIn} onMouseOut={handleMouseOut} className={buttonClassName}>
+      <Button onMouseEnter={handleMouseIn} onMouseLeave={handleMouseLeave} className={buttonClassName}>
         {button}
       </Button>
       <Portal>
