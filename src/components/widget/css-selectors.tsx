@@ -69,7 +69,7 @@ export const CssSelectors: FC<Props> = ({ site }) => {
 
   return (
     <div className='selectors'>
-      <p><b>Hidden on this page</b></p>
+      <p><b>Currently hidden</b></p>
       <ul>
         {site.cssSelectorBlacklist.map(selector => (
           <li key={selector}>
