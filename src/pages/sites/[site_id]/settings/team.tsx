@@ -72,8 +72,8 @@ const SiteSettingsTeam: NextPage<ServerSideProps> = ({ user }) => {
                   <li>Manage site billing</li>
                   <li>Manage team members</li>
                   <li>Manage site settings</li>
-                  <li>View session recordings and analytics</li>
-                  <li>Edit or alter recordings, including deletion</li>
+                  <li>View session recordings, visitors, analytics, feedback and heatmaps</li>
+                  <li>Edit or alter recordings, visitors and feedback, including deletion</li>
                 </ul>
               </div>
               <div className='role'>
@@ -82,16 +82,16 @@ const SiteSettingsTeam: NextPage<ServerSideProps> = ({ user }) => {
                 <ul>
                   <li>Manage team members (excluding owner)</li>
                   <li>Manage site settings</li>
-                  <li>View session recordings and analytics</li>
-                  <li>Edit or alter recordings, including deletion</li>
+                  <li>View session recordings, visitors, analytics, feedback and heatmaps</li>
+                  <li>Edit or alter recordings, visitors and feedback, including deletion</li>
                 </ul>
               </div>
               <div className='role'>
                 <h4>User</h4>
                 <p>Site users can:</p>
                 <ul>
-                  <li>View session recordings and analytics</li>
-                  <li>Edit or alter recordings, including deletion</li>
+                  <li>View session recordings, visitors, analytics, feedback and heatmaps</li>
+                  <li>Edit or alter recordings, visitors and feedback, including deletion</li>
                 </ul>
               </div>
             </div>
