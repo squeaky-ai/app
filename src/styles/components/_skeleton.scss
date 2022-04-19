@@ -3,7 +3,7 @@
   position: relative;
 
   &:before {
-    animation: skeleton 3s infinite;
+    animation: skeleton 2s infinite;
     background: var(--white);
     content: ' ';
     display: block;
@@ -24,13 +24,13 @@
 
 @keyframes skeleton {
   0% {
-    background: var(--gray-50);
+    background: var(--white);
   }
   50% {
     background: var(--gray-100);
   }
   to {
-    background: var(--gray-50);
+    background: var(--white);
   }
 }
 
