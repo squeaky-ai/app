@@ -1,4 +1,8 @@
 .page.sites.visitor {
+  .page-loading {
+    height: calc(100vh - 4rem);
+  }
+
   .visitor-view {
     .title {
       margin-bottom: 2rem;

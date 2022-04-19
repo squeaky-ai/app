@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import { Main } from 'components/main';
 import { Page } from 'components/sites/page';
 import { EmptyState } from 'components/sites/empty-state';
-import { Spinner } from 'components/spinner';
+import { PageLoading } from 'components/sites/page-loading';
 import { Unlock } from 'components/sites/unlock';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { Heatmaps } from 'components/sites/heatmaps/heatmaps';
@@ -47,7 +47,7 @@ const SitesHeatmaps: NextPage<ServerSideProps> = ({ user }) => {
             />
 
             {loading && pages.length === 0 && (
-              <Spinner />
+              <PageLoading />
             )}
 
             <Unlock site={site} page='heatmaps' />

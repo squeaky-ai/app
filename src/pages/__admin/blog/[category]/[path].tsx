@@ -1,7 +1,7 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { Spinner } from 'components/spinner';
+import { PageLoading } from 'components/sites/page-loading';
 import { Main } from 'components/main';
 import { useBlogPost } from 'hooks/use-blog-post';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
@@ -41,7 +41,7 @@ const AdminBlogEdit: NextPage<ServerSideProps> = () => {
         </h3>
 
         {loading && (
-          <Spinner />
+          <PageLoading />
         )}
 
         {!loading && !post.blogPost && (

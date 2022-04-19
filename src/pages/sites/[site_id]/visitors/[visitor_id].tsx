@@ -57,7 +57,7 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
     return <PageLoading />;
   }
 
-  if (!loading && !visitor) {
+  if (!visitor) {
     return <NotFound />;
   }
 
