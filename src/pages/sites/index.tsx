@@ -19,15 +19,15 @@ const Sites: NextPage<ServerSideProps> = () => {
     return <Error />;
   }
 
-  if (loading) {
-    return <Spinner />;
-  }
-
   return (
     <>
       <Head>
         <title>Squeaky | Sites</title>
       </Head>
+
+      {loading && (
+        <Spinner />
+      )}
 
       {!loading && sites.length === 0 && (
         <div className='welcome'>

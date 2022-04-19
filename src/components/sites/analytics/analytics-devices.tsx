@@ -8,16 +8,17 @@ import type { AnalyticsDevice } from 'types/graphql';
 
 interface Props {
   devices: AnalyticsDevice[];
+  loading: boolean;
 }
 
-export const AnalyticsDevices: FC<Props> = ({ devices }) => {
+export const AnalyticsDevices: FC<Props> = ({ devices, loading }) => {
   const total = sum(devices.map(b => b.count));
 
   const [mobile, desktop] = devices;
 
   return (
     <>
-      <Card>
+      <Card loading={loading}>
         <Icon name='computer-line' />
         <div className='stats'>
           <p><b>Desktop / Laptop</b></p>
@@ -25,7 +26,7 @@ export const AnalyticsDevices: FC<Props> = ({ devices }) => {
         </div>
       </Card>
 
-      <Card>
+      <Card loading={loading}>
         <Icon name='tablet-line' />
         <div className='stats'>
           <p><b>Tablet / Mobile</b></p>

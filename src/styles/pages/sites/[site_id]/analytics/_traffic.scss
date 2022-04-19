@@ -44,7 +44,7 @@
                          'page-views page-views page-views'
                          'pages pages pages';
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-template-rows: auto;
+    grid-template-rows: 468px 217px 328px 468px auto;
 
     @include breakpoint-md {
       grid-gap: 1.5rem;

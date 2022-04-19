@@ -1,0 +1,29 @@
+.skeleton {
+  overflow: hidden;
+  position: relative;
+
+  &:before {
+    animation: skeleton 3s infinite;
+    background: var(--gray-100);
+    content: ' ';
+    display: block;
+    height: 100%;
+    left: 0;
+    opacity: 1;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+}
+
+@keyframes skeleton {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -9,7 +9,6 @@ import { Divider } from 'components/divider';
 import { PlayerPreview } from 'components/sites/player/player-preview';
 import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
 import { Pill } from 'components/pill';
-import { Spinner } from 'components/spinner';
 import { Error } from 'components/error';
 import { ActiveVisitors } from './active-visitors';
 import { useDashboard } from 'hooks/use-dashboard';
@@ -36,13 +35,9 @@ export const Dashboard: FC<Props> = ({ site, period }) => {
     return <Error />;
   }
 
-  if (loading) {
-    return <Spinner />;
-  }
-
   return (
     <div className='dashboard-grid'>
-      <Card className='visitors'>
+      <Card loading={loading} className='visitors'>
         <h5>
           <Icon name='group-line' />
           <span>Visitors</span>
@@ -70,7 +65,7 @@ export const Dashboard: FC<Props> = ({ site, period }) => {
         </div>
       </Card>
 
-      <Card className='recordings'>
+      <Card loading={loading} className='recordings'>
         <h5>
           <Icon name='vidicon-line' />
           Recordings
@@ -90,7 +85,7 @@ export const Dashboard: FC<Props> = ({ site, period }) => {
         </div>
       </Card>
 
-      <Card className='pageviews'>
+      <Card loading={loading} className='pageviews'>
         <h5>
           <Icon name='pages-line' />
           Page Views
@@ -104,7 +99,7 @@ export const Dashboard: FC<Props> = ({ site, period }) => {
         </div>
       </Card>
 
-      <Card className='latest-recording'>
+      <Card loading={loading} className='latest-recording'>
         <h5>
           Latest Recording
         </h5>
@@ -173,7 +168,7 @@ export const Dashboard: FC<Props> = ({ site, period }) => {
         )}
       </Card>
 
-      <Card className='latest-notes'>
+      <Card loading={loading} className='latest-notes'>
         <h5>
           <Icon name='sticky-note-line' />
           Latest Notes

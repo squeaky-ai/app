@@ -4,7 +4,6 @@ import { Card } from 'components/card';
 import { NoData } from 'components/sites/feedback/no-data';
 import { useNps } from 'hooks/use-nps';
 import { Error } from 'components/error';
-import { Spinner } from 'components/spinner';
 import { getDateRange } from 'lib/dates';
 import { NpsResponses } from 'components/sites/feedback/nps-responses';
 import { NpsRatings } from 'components/sites/feedback/nps-ratings';
@@ -38,12 +37,6 @@ export const Nps: FC = () => {
     getColumnPreferences(Preference.NPS_COLUMNS, COLUMNS, setColumns);
   }, []);
 
-  // If you just check loading it will flash when changing
-  // sort/pagination
-  if (loading && nps.responses.items.length === 0) {
-    return <Spinner />;
-  }
-
   if (error) {
     return <Error />;
   }
@@ -55,7 +48,7 @@ export const Nps: FC = () => {
         <Period period={period} onChange={setPeriod} />
       </h4>
 
-      <Card className='card-nps'>
+      <Card loading={loading} className='card-nps'>
         <div className='heading'>
           <h5>NPS®</h5>
           <h3>{hasResults ? nps.scores.score : ''}</h3>
@@ -67,7 +60,7 @@ export const Nps: FC = () => {
         }
       </Card>
 
-      <Card className='card-response'>
+      <Card loading={loading} className='card-response'>
         <div className='heading'>
           <h5>Responses</h5>
           {hasResults && <FeedbackTrend value={nps.replies.trend} />}
@@ -78,7 +71,7 @@ export const Nps: FC = () => {
         }
       </Card>
 
-      <Card className='card-ratings'>
+      <Card loading={loading} className='card-ratings'>
         <div className='heading'>
           <h5>Ratings</h5>
         </div>
@@ -88,7 +81,7 @@ export const Nps: FC = () => {
         }
       </Card>
 
-      <Card className='card-displays'>
+      <Card loading={loading} className='card-displays'>
         <div className='items'>
           <div className='item'>
             <p>Displays</p>
@@ -114,7 +107,7 @@ export const Nps: FC = () => {
         </div>
       </Card>
 
-      <Card className='card-results'>
+      <Card loading={loading} className='card-results'>
         <div className='items'>
           <div className='item'>
             <p>Promoters</p>

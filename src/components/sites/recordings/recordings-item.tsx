@@ -8,7 +8,7 @@ import { Tooltip } from 'components/tooltip';
 import { Browser } from 'components/browser';
 import { Dropdown } from 'components/dropdown';
 import { Device } from 'components/device';
-import { Cell } from 'components/table';
+import { Cell, Row } from 'components/table';
 import { Flag } from 'components/flag';
 import { RecordingStarred } from 'components/sites/recordings/recordings-starred';
 import { RecordingsShare } from 'components/sites/recordings/recordings-share';
@@ -42,7 +42,7 @@ export const RecordingsItem: FC<Props> = ({ site, recording, style, member, sele
   };
 
   return (
-    <div className='row recording-row' style={style}>
+    <Row className='recording-row' style={style}>
       <Cell>
         <Checkbox 
           checked={selected.includes(recording.id)}
@@ -154,6 +154,6 @@ export const RecordingsItem: FC<Props> = ({ site, recording, style, member, sele
           />
         </Dropdown>
       </Cell>
-    </div>
+    </Row>
   );
 };

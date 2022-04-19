@@ -1,7 +1,6 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { Spinner } from 'components/spinner';
 import { Container } from 'components/container';
 import { Main } from 'components/main';
 import { Access } from 'components/sites/access';
@@ -9,7 +8,7 @@ import { InviteTeam } from 'components/sites/settings/invite-team';
 import { TeamRow } from 'components/sites/settings/team-row';
 import { Page } from 'components/sites/page';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
-import { Table, Row, Cell } from 'components/table';
+import { Table, Row, Cell, RowSkeleton } from 'components/table';
 import { Error } from 'components/error';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { OWNER, ADMIN } from 'data/teams/constants';
@@ -20,10 +19,6 @@ const SiteSettingsTeam: NextPage<ServerSideProps> = ({ user }) => {
 
   if (error) {
     return <Error />;
-  }
-
-  if (loading) {
-    return <Spinner />;
   }
 
   return (
@@ -53,7 +48,12 @@ const SiteSettingsTeam: NextPage<ServerSideProps> = ({ user }) => {
                 <Cell>Role</Cell>
                 <Cell>Options</Cell>
               </Row>
-              {team.members.map(t => <TeamRow key={t.id} team={t} site={site} user={user} />)}
+              {loading && (
+                <RowSkeleton count={3} />
+              )}
+              {!loading && team.members.map(t => (
+                <TeamRow key={t.id} team={t} site={site} user={user} />
+              ))}
             </Table>
 
             <InviteTeam site={site} />

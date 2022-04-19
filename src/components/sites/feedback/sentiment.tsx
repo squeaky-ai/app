@@ -5,7 +5,6 @@ import { NoData } from 'components/sites/feedback/no-data';
 import { useSentiment } from 'hooks/use-sentiment';
 import { getDateRange } from 'lib/dates';
 import { Error } from 'components/error';
-import { Spinner } from 'components/spinner';
 import { SentimentResponses } from 'components/sites/feedback/sentiment-responses';
 import { SentimentReplies } from 'components/sites/feedback/sentiment-replies';
 import { SentimentRatings } from 'components/sites/feedback/sentiment-ratings';
@@ -36,12 +35,6 @@ export const Sentiment: FC = () => {
     getColumnPreferences(Preference.SENTIMENT_COLUMNS, COLUMNS, setColumns);
   }, []);
 
-  // If you just check loading it will flash when changing
-  // sort/pagination
-  if (loading && sentiment.responses.items.length === 0) {
-    return <Spinner />;
-  }
-
   if (error) {
     return <Error />;
   }
@@ -53,7 +46,7 @@ export const Sentiment: FC = () => {
         <Period period={period} onChange={setPeriod} />
       </h4>
 
-      <Card className='card-rating'>
+      <Card loading={loading} className='card-rating'>
         <div className='heading'>
           <h5>Sentiment Rating</h5>
           <h3>{hasResults ? sentiment.ratings.score.toFixed(2) : ''}</h3>
@@ -65,7 +58,7 @@ export const Sentiment: FC = () => {
         }
       </Card>
 
-      <Card className='card-response'>
+      <Card loading={loading} className='card-response'>
         <div className='heading'>
           <h5>Responses</h5>
           {hasResults && <h3>{sentiment.replies.total}</h3>}

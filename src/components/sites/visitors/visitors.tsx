@@ -7,9 +7,8 @@ import { useVisitors } from 'hooks/use-visitors';
 import { Sort } from 'components/sort';
 import { PageSize } from 'components/sites/page-size';
 import { Tooltip } from 'components/tooltip';
-import { Spinner } from 'components/spinner';
 import { VisitorsItem } from 'components/sites/visitors/visitors-item';
-import { TableWrapper, Table, Row, Cell } from 'components/table';
+import { TableWrapper, Table, Row, Cell, RowSkeleton } from 'components/table';
 import { DismissableMessage } from 'components/message';
 import { Error } from 'components/error';
 import { Preference } from 'lib/preferences';
@@ -141,7 +140,11 @@ export const Visitors: FC<Props> = ({
             </Cell>
             <Cell />
           </Row>
-          {items.map(v => (
+          {loading && (
+            <RowSkeleton count={25} />
+          )}
+
+          {!loading && items.map(v => (
             <VisitorsItem 
               site={site} 
               visitor={v} 
@@ -151,12 +154,6 @@ export const Visitors: FC<Props> = ({
           ))}
         </Table>
       </TableWrapper>
-
-      {loading && !items.length && (
-        <Row className='loading'>
-          <Spinner />
-        </Row>
-      )}
       
       <div className='visitors-footer'>
         <Pagination 

@@ -23,7 +23,7 @@
                          'heading-responses heading-responses heading-responses'
                          'card-responses card-responses card-responses';
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-template-rows: auto;
+    grid-template-rows: 40px 386px 40px auto;
 
     @include breakpoint-md {
       grid-gap: 1.5rem;

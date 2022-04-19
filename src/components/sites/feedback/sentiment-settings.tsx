@@ -4,7 +4,6 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { Icon } from 'components/icon';
 import { Toggle } from 'components/toggle';
-import { Spinner } from 'components/spinner';
 import { Error } from 'components/error';
 import { useFeedback } from 'hooks/use-feedback';
 import { feedbackUpdate } from 'lib/api/graphql';
@@ -49,10 +48,6 @@ export const SentimentSettings: FC<Props> = ({ site }) => {
     await onUpdate({ sentimentEnabled: !feedback.sentimentEnabled });
   };
 
-  if (loading) {
-    return <Spinner />;
-  }
-
   if (error) {
     return <Error />;
   }
@@ -63,7 +58,7 @@ export const SentimentSettings: FC<Props> = ({ site }) => {
         Use Sentiment Survey
       </Toggle>
 
-      {feedback.sentimentEnabled && (
+      {!loading && feedback.sentimentEnabled && (
         <Container className='md'>
           <Formik
             initialValues={{ 

@@ -7,7 +7,7 @@ import { toNiceDate } from 'lib/dates';
 import { Icon } from 'components/icon';
 import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
 import { VisitorsDelete } from 'components/sites/visitors/visitors-delete';
-import { Cell } from 'components/table';
+import { Cell, Row } from 'components/table';
 import { Pill } from 'components/pill';
 import { Dropdown } from 'components/dropdown';
 import { Flag } from 'components/flag';
@@ -37,7 +37,7 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, style }) => {
   };
 
   return (
-    <div className='row' style={style}>
+    <Row style={style}>
       <Cell>
         {visitor.viewed
           ? <Pill type='secondary'>Existing</Pill>
@@ -136,6 +136,6 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, style }) => {
           />
         </Dropdown>
       </Cell>
-    </div>
+    </Row>
   );
 };

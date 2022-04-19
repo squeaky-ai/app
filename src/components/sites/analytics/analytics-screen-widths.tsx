@@ -8,9 +8,10 @@ import type { AnalyticsDimension } from 'types/graphql';
 
 interface Props {
   dimensions: AnalyticsDimension[];
+  loading: boolean;
 }
 
-export const AnalyticsScreenWidths: FC<Props> = ({ dimensions }) => {
+export const AnalyticsScreenWidths: FC<Props> = ({ dimensions, loading }) => {
   const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload, label }) => {
     if (!active || !payload?.length) return null;
   
@@ -26,7 +27,7 @@ export const AnalyticsScreenWidths: FC<Props> = ({ dimensions }) => {
   const mostCommon = orderBy(dimensions, dimensions => dimensions.count, 'desc')[0]?.deviceX || 0;
 
   return (
-    <Card>
+    <Card loading={loading}>
       <h5>
         Screen Width
         <Icon name='arrow-left-line' />

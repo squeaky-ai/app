@@ -3,10 +3,9 @@ import type { FC } from 'react';
 import classnames from 'classnames';
 import { Pagination } from 'components/pagination';
 import { RecordingsItem } from 'components/sites/recordings/recordings-item';
-import { TableWrapper, Table, Row, Cell } from 'components/table';
+import { TableWrapper, Table, Row, Cell, RowSkeleton } from 'components/table';
 import { Sort } from 'components/sort';
 import { PageSize } from 'components/sites/page-size';
-import { Spinner } from 'components/spinner';
 import { Checkbox } from 'components/checkbox';
 import { Error } from 'components/error';
 import { NoResults } from 'components/sites/no-results';
@@ -71,13 +70,7 @@ export const Recordings: FC<Props> = ({
   }
 
   return (
-    <>    
-      {loading && !items.length && (
-        <Row className='loading'>
-          <Spinner />
-        </Row>
-      )}
-
+    <>
       {!loading && !items.length && (
         <NoResults illustration='illustration-13' title='There are no recordings matching your selected filters.' />
       )}
@@ -108,8 +101,12 @@ export const Recordings: FC<Props> = ({
             <Cell>Sentiment</Cell>
             <Cell />
           </Row>
+
+          {loading && (
+            <RowSkeleton className='recording-row' count={25} />
+          )}
           
-          {items.map(recording => (
+          {!loading && items.map(recording => (
             <RecordingsItem 
               site={site}
               recording={recording} 

@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
+import { range } from 'lodash';
 
 export const Table: FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, className, ...rest }) => {
   return (
@@ -33,3 +34,11 @@ export const TableWrapper: FC<React.HTMLAttributes<HTMLDivElement>> = ({ childre
     </div>
   );
 };
+
+export const RowSkeleton: FC<React.HTMLAttributes<HTMLDivElement> & { count: number }> = ({ count, className, ...rest }) => (
+  <>
+    {range(0, count).map(i => (
+      <Row key={i} className={classnames(className, 'skeleton')} {...rest} />
+    ))}
+  </>
+);

@@ -1,6 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
-import { Table, Row, Cell } from 'components/table';
+import { Table, Row, Cell, RowSkeleton } from 'components/table';
 import { toHoursMinutesAndSeconds } from 'lib/dates';
 import { Pagination } from 'components/pagination';
 import { Tooltip } from 'components/tooltip';
@@ -11,10 +11,11 @@ import type { AnalyticsPages as AnalyticsPagesType } from 'types/graphql';
 interface Props {
   pages: AnalyticsPagesType;
   page: number;
+  loading: boolean;
   setPage: (page: number) => void;
 }
 
-export const AnalyticsPages: FC<Props> = ({ pages, page, setPage }) => (
+export const AnalyticsPages: FC<Props> = ({ pages, page, loading, setPage }) => (
   <>
     <Table>
       <Row head>
@@ -23,7 +24,10 @@ export const AnalyticsPages: FC<Props> = ({ pages, page, setPage }) => (
         <Cell>Average time on page</Cell>
         <Cell />
       </Row>
-      {pages.items.map(page => (
+      {loading && (
+        <RowSkeleton count={10} />
+      )}
+      {!loading && pages.items.map(page => (
         <Row key={page.path}>
           <Cell>
             <Tooltip button={page.path} fluid>

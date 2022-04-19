@@ -25,11 +25,37 @@ export const useAnalyticsAudience = (props: Props): UseAnalytics => {
     }
   });
 
+  const fallback: AnalyticsAudience = {
+    browsers: {
+      items: [],
+      pagination: {
+        pageSize: 0,
+        total: 0,
+      },
+    },
+    countries: [],
+    devices: [],
+    dimensions: [],
+    languages: [],
+    referrers: {
+      items: [],
+      pagination: {
+        pageSize: 0,
+        total: 0,
+      }
+    },
+    visitors: {
+      groupRange: 0,
+      groupType: '',
+      items: [],
+    },
+  };
+
   return { 
     loading, 
     error: !!error,
     analytics: data
       ? data.site.analytics
-      : previousData ? previousData.site.analytics : null
+      : previousData ? previousData.site.analytics : fallback
   };
 };
