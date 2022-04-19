@@ -34,7 +34,16 @@ export const useAnalyticsAudience = (props: Props): UseAnalytics => {
       },
     },
     countries: [],
-    devices: [],
+    devices: [
+      {
+        type: 'desktop',
+        count: 0,
+      },
+      {
+        type: 'mobile',
+        count: 0,
+      }
+    ],
     dimensions: [],
     languages: [],
     referrers: {

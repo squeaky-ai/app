@@ -73,7 +73,7 @@ export const Visitors: FC<Props> = ({
       />
 
       <TableWrapper>
-        <Table className={classnames('visitors-list hover', tableClassNames, { hide: items.length === 0 })}>
+        <Table className={classnames('visitors-list hover', tableClassNames, { hide:  !loading && items.length === 0 })}>
           <Row head style={rowStyle}>
             <Cell>
               Status

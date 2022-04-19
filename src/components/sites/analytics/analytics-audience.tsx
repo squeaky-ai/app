@@ -32,7 +32,7 @@ export const AnalyticsAudience: FC<Props> = ({ site, period }) => {
     return <Error />;
   }
 
-  if (!analytics.visitors.items.length) {
+  if (!loading && !analytics.visitors.items.length) {
     return <NoResults title='There is no analytics data available for your chosen period' illustration='illustration-2' />
   }
 

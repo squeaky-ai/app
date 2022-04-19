@@ -76,7 +76,7 @@ export const Recordings: FC<Props> = ({
       )}
 
       <TableWrapper>
-        <Table className={classnames('recordings-list hover', tableClassNames, { hide: items.length === 0 })}>
+        <Table className={classnames('recordings-list hover', tableClassNames, { hide: !loading && items.length === 0 })}>
           <Row head style={rowStyle}>
             <Cell>
               <Checkbox
