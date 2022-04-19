@@ -74,8 +74,14 @@
       grid-template-columns: 1fr !important;
     }
 
+    &.has-skeleton {
+      animation: fade-out-skeleton .1s ease-in forwards;
+      opacity: 0;
+    }
+
     &.skeleton {
       .placeholder {
+        animation: skeleton 2s ease-in-out infinite;
         background: var(--gray-50);
         border-radius: var(--border-radius-md);
         height: 1.5rem;
@@ -105,5 +111,26 @@
 
   @include breakpoint-md {
     overflow-x: auto;
+  }
+}
+
+@keyframes skeleton {
+  0% {
+    background: var(--gray-50);
+  }
+  50% {
+    background: var(--gray-100);
+  }
+  to {
+    background: var(--gray-50);
+  }
+}
+
+@keyframes fade-out-skeleton {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

@@ -7,4 +7,49 @@
   @include breakpoint-md {
     padding: 1.5rem;
   }
+
+  &.skeleton {
+    overflow: hidden;
+    position: relative;
+
+    &:before {
+      animation: skeleton 2s ease-in-out infinite;
+      background: var(--gray-50);
+      content: ' ';
+      display: block;
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+  }
+
+  &.has-skeleton {
+    & > {
+      animation: fade-out-skeleton .1s ease-in forwards;
+      opacity: 0;
+    }
+  }
+}
+
+@keyframes skeleton {
+  0% {
+    background: var(--gray-50);
+  }
+  50% {
+    background: var(--gray-100);
+  }
+  to {
+    background: var(--gray-50);
+  }
+}
+
+@keyframes fade-out-skeleton {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
