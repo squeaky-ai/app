@@ -16,19 +16,21 @@
 }
 
 .has-skeleton {
-  animation: fade-in .1s ease-in forwards;
-  opacity: 0;
+  & > * {
+    animation: fade-in .1s ease-in forwards;
+    opacity: 0;
+  }
 }
 
 @keyframes skeleton {
   0% {
-    background: var(--white);
+    background: var(--gray-50);
   }
   50% {
     background: var(--gray-100);
   }
   to {
-    background: var(--white);
+    background: var(--gray-50);
   }
 }
 

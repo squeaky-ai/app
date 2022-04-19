@@ -12,5 +12,5 @@ export const Card: FC<Props> = ({ children, className, loading, ...rest }) => (
       ? null
       : children
     }
-  </div>
+  </div>  
 );
