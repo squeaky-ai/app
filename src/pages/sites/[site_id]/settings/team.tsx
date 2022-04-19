@@ -49,7 +49,10 @@ const SiteSettingsTeam: NextPage<ServerSideProps> = ({ user }) => {
                 <Cell>Options</Cell>
               </Row>
               {loading && (
-                <RowSkeleton count={3} />
+                <RowSkeleton 
+                  rowCount={3} 
+                  cellCount={4}
+                />
               )}
               {!loading && team.members.map(t => (
                 <TeamRow key={t.id} team={t} site={site} user={user} />

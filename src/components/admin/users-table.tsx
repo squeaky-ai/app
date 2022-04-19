@@ -109,7 +109,11 @@ export const UsersTable: FC<Props> = ({ users, sites, columns, search, loading, 
             <Cell />
           </Row>
           {loading && (
-            <RowSkeleton count={25} />
+            <RowSkeleton 
+              rowCount={25}
+              rowStyle={rowStyle} 
+              cellCount={8}
+            />
           )}
 
           {!loading && results.map(user => (

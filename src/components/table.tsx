@@ -3,42 +3,57 @@ import type { FC } from 'react';
 import classnames from 'classnames';
 import { range } from 'lodash';
 
-export const Table: FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, className, ...rest }) => {
-  return (
-    <div className={classnames('table', className)} {...rest}>
-      {children}
-    </div>
-  );
-};
+interface TableProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-export const Row: FC<React.HTMLAttributes<HTMLDivElement> & { head?: boolean, fluid?: boolean }> = ({ children, className, head, fluid, ...rest }) => {
-  return (
-    <div className={classnames('row', className, { head, fluid })} {...rest}>
-      {children}
-    </div>
-  );
-};
+interface RowProps extends React.HTMLAttributes<HTMLDivElement> {
+  head?: boolean;
+  fluid?: boolean;
+}
 
-export const Cell: FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, className, ...rest }) => {
-  return (
-    <div className={classnames('cell', className)} {...rest}>
-      {children}
-    </div>
-  );
-};
+interface CellProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-export const TableWrapper: FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, className, ...rest }) => {
-  return (
-    <div className={classnames('table-wrapper', className)} {...rest}>
-      {children}
-    </div>
-  );
-};
+interface TableWrapperProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-export const RowSkeleton: FC<React.HTMLAttributes<HTMLDivElement> & { count: number }> = ({ count, className, ...rest }) => (
+interface RowSkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
+  cellCount: number;
+  rowCount: number; 
+  rowStyle?: React.CSSProperties;
+}
+
+export const Table: FC<TableProps> = ({ children, className, ...rest }) => (
+  <div className={classnames('table', className)} {...rest}>
+    {children}
+  </div>
+);
+
+export const Row: FC<RowProps> = ({ children, className, head, fluid, ...rest }) => (
+  <div className={classnames('row', className, { head, fluid })} {...rest}>
+    {children}
+  </div>
+);
+
+export const Cell: FC<CellProps> = ({ children, className, ...rest }) => (
+  <div className={classnames('cell', className)} {...rest}>
+    {children}
+  </div>
+);
+
+export const TableWrapper: FC<TableWrapperProps> = ({ children, className, ...rest }) => (
+  <div className={classnames('table-wrapper', className)} {...rest}>
+    {children}
+  </div>
+);
+
+export const RowSkeleton: FC<RowSkeletonProps> = ({ rowCount, rowStyle, cellCount, className, ...rest }) => (
   <>
-    {range(0, count).map(i => (
-      <Row key={i} className={classnames(className, 'skeleton')} {...rest} />
+    {range(0, rowCount).map(i => (
+      <Row key={i} className={classnames(className, 'skeleton')} style={rowStyle} {...rest}>
+        {range(0, cellCount).map(j => (
+          <Cell key={j}>
+            <div className='placeholder' />
+          </Cell>
+        ))}
+      </Row>
     ))}
   </>
 );

@@ -47,7 +47,10 @@ const AdminBlog: NextPage<ServerSideProps> = () => {
                 <Cell>Updated At</Cell>
               </Row>
               {loading && (
-                <RowSkeleton count={25} />
+                <RowSkeleton 
+                  rowCount={25} 
+                  cellCount={8}
+                />
               )}
 
               {!loading && posts.posts.map(post => (

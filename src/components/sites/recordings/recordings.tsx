@@ -103,7 +103,12 @@ export const Recordings: FC<Props> = ({
           </Row>
 
           {loading && (
-            <RowSkeleton className='recording-row' count={25} />
+            <RowSkeleton 
+              className='recording-row' 
+              rowCount={25} 
+              cellCount={15}
+              rowStyle={rowStyle}
+            />
           )}
           
           {!loading && items.map(recording => (

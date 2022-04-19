@@ -73,6 +73,16 @@
     &.fluid {
       grid-template-columns: 1fr !important;
     }
+
+    &.skeleton {
+      .placeholder {
+        background: var(--gray-50);
+        border-radius: var(--border-radius-md);
+        height: 1.5rem;
+        max-width: 100%;
+        width: 8rem;
+      }
+    }
   }
 
   &.hide {

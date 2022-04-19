@@ -23,7 +23,10 @@ export const AnalyticsReferrers: FC<Props> = ({ referrers, page, loading, setPag
         <Cell />
       </Row>
       {loading && (
-        <RowSkeleton count={10} />
+        <RowSkeleton 
+          rowCount={10} 
+          cellCount={3}
+        />
       )}
       {!loading && referrers.items.map(referrer => {
         const label = referrer.referrer === 'Direct' 

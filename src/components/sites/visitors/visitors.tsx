@@ -141,7 +141,11 @@ export const Visitors: FC<Props> = ({
             <Cell />
           </Row>
           {loading && (
-            <RowSkeleton count={25} />
+            <RowSkeleton 
+              rowCount={25} 
+              rowStyle={rowStyle}
+              cellCount={13}
+            />
           )}
 
           {!loading && items.map(v => (

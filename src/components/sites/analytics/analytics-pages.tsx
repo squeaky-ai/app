@@ -25,7 +25,10 @@ export const AnalyticsPages: FC<Props> = ({ pages, page, loading, setPage }) => 
         <Cell />
       </Row>
       {loading && (
-        <RowSkeleton count={10} />
+        <RowSkeleton 
+          rowCount={10} 
+          cellCount={4}
+        />
       )}
       {!loading && pages.items.map(page => (
         <Row className='has-skeleton' key={page.path}>

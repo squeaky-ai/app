@@ -134,7 +134,11 @@ export const SitesTable: FC<Props> = ({ sites, activeVisitors, search, columns, 
             </Cell>
           </Row>
           {loading && (
-            <RowSkeleton count={25} />
+            <RowSkeleton 
+              rowCount={25} 
+              rowStyle={rowStyle}
+              cellCount={10}
+            />
           )}
 
           {!loading && results.map(site => (
