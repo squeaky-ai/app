@@ -31,7 +31,7 @@ export const AnalyticsReferrers: FC<Props> = ({ referrers, page, loading, setPag
           : referrer.referrer;
 
         return (
-          <Row key={referrer.referrer}>
+          <Row className='has-skeleton' key={referrer.referrer}>
             <Cell>
               <Tooltip button={label} fluid>
                 {label}

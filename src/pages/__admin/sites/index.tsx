@@ -2,7 +2,6 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { Error } from 'components/error';
-import { Spinner } from 'components/spinner';
 import { SitesTable } from 'components/admin/sites-table';
 import { Main } from 'components/main';
 import { Input } from 'components/input';
@@ -52,19 +51,14 @@ const AdminSites: NextPage<ServerSideProps> = () => {
           </menu>
         </div>
 
-        {loading && (
-          <Spinner />
-        )}
-
-        {!loading && (
-          <SitesTable 
-            sites={admin.sites} 
-            activeVisitors={admin.activeVisitors}
-            search={search}
-            columns={columns}
-            setColumns={setColumns}
-          />
-        )}
+        <SitesTable 
+          sites={admin.sites} 
+          activeVisitors={admin.activeVisitors}
+          search={search}
+          columns={columns}
+          loading={loading}
+          setColumns={setColumns}
+        />
       </Main>
     </>
   );

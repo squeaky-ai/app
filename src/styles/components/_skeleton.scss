@@ -4,24 +4,37 @@
 
   &:before {
     animation: skeleton 3s infinite;
-    background: var(--gray-100);
+    background: var(--white);
     content: ' ';
     display: block;
     height: 100%;
     left: 0;
-    opacity: 1;
     position: absolute;
     top: 0;
     width: 100%;
   }
 }
 
+.has-skeleton {
+  animation: fade-in .1s ease-in forwards;
+  opacity: 0;
+}
+
 @keyframes skeleton {
   0% {
-    opacity: 1;
+    background: var(--white);
   }
   50% {
-    opacity: 0
+    background: var(--gray-100);
+  }
+  to {
+    background: var(--white);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
   }
   to {
     opacity: 1;

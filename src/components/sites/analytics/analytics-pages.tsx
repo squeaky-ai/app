@@ -28,7 +28,7 @@ export const AnalyticsPages: FC<Props> = ({ pages, page, loading, setPage }) => 
         <RowSkeleton count={10} />
       )}
       {!loading && pages.items.map(page => (
-        <Row key={page.path}>
+        <Row className='has-skeleton' key={page.path}>
           <Cell>
             <Tooltip button={page.path} fluid>
               {page.path}

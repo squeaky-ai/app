@@ -7,10 +7,10 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const Card: FC<Props> = ({ children, className, loading, ...rest }) => (
-  <div className={classnames('card', { skeleton: loading }, className)} {...rest}>
+  <div className={classnames('card', { skeleton: loading, 'has-skeleton': loading !== null }, className)} {...rest}>
     {loading
       ? null
       : children
     }
-  </div>  
+  </div>
 );

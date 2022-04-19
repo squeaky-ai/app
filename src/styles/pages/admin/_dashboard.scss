@@ -8,7 +8,7 @@
                          'total-sites total-sites total-sites total-sites sites-verified sites-verified'
                          'recordings recordings recordings visitors visitors visitors';
     grid-template-columns: repeat(6, minmax(0, 1fr));
-    grid-template-rows: auto;
+    grid-template-rows: 169px 169px 169px 169px 176px;
     margin: 2rem 0 0 0;
 
     .grid-item {

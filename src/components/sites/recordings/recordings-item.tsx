@@ -42,7 +42,7 @@ export const RecordingsItem: FC<Props> = ({ site, recording, style, member, sele
   };
 
   return (
-    <Row className='recording-row' style={style}>
+    <Row className='recording-row has-skeleton' style={style}>
       <Cell>
         <Checkbox 
           checked={selected.includes(recording.id)}
