@@ -6,7 +6,7 @@ import { Icon } from 'components/icon';
 import { Avatar } from 'components/sites/avatar';
 import { Main } from 'components/main';
 import { Illustration } from 'components/illustration';
-import { Spinner } from 'components/spinner';
+import { PageLoading } from 'components/sites/page-loading';
 import { Error } from 'components/error';
 import { CreateSite } from 'components/sites/recordings/create-site';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
@@ -26,7 +26,7 @@ const Sites: NextPage<ServerSideProps> = () => {
       </Head>
 
       {loading && (
-        <Spinner />
+        <PageLoading />
       )}
 
       {!loading && sites.length === 0 && (

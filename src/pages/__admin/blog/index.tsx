@@ -4,7 +4,8 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { Main } from 'components/main';
 import { Pill } from 'components/pill';
-import { TableWrapper, Table, Row, Cell, RowSkeleton } from 'components/table';
+import { TableWrapper, Table, Row, Cell } from 'components/table';
+import { PageLoading } from 'components/sites/page-loading';
 import { useBlogPosts } from 'hooks/use-blog-posts';
 import { toNiceDate } from 'lib/dates';
 import { BreadCrumbs } from 'components/admin/breadcrumbs';
@@ -33,53 +34,52 @@ const AdminBlog: NextPage<ServerSideProps> = () => {
           </div>
         </div>
 
-        <>
-          <TableWrapper>
-            <Table className='posts-table'>
-              <Row className='head'>
-                <Cell>ID</Cell>
-                <Cell>Title</Cell>
-                <Cell>Category</Cell>
-                <Cell>Tags</Cell>
-                <Cell>Author</Cell>
-                <Cell>Draft</Cell>
-                <Cell>Created At</Cell>
-                <Cell>Updated At</Cell>
-              </Row>
-              {loading && (
-                <RowSkeleton 
-                  rowCount={25} 
-                  cellCount={8}
-                />
-              )}
+        {loading && (
+          <PageLoading />
+        )}
 
-              {!loading && posts.posts.map(post => (
-                <Row key={post.slug}>
-                  <Cell>{post.id}</Cell>
-                  <Cell>
-                    <Link href={`/__admin/blog${post.slug}`}>
-                      <a>{post.title}</a>
-                    </Link>
-                  </Cell>
-                  <Cell>{post.category}</Cell>
-                  <Cell>{post.tags.join(', ')}</Cell>
-                  <Cell className='author'>
-                    <img src={post.author.image} height={24} width={24} />
-                    {post.author.name}
-                  </Cell>
-                  <Cell>
-                    {post.draft 
-                      ? <Pill className='tertiary'>Yes</Pill>
-                      : <Pill className='primary'>No</Pill>
-                    }
-                  </Cell>
-                  <Cell>{toNiceDate(post.createdAt)}</Cell>
-                  <Cell>{toNiceDate(post.updatedAt)}</Cell>
+        {!loading && (
+          <>
+            <TableWrapper>
+              <Table className='posts-table'>
+                <Row className='head'>
+                  <Cell>ID</Cell>
+                  <Cell>Title</Cell>
+                  <Cell>Category</Cell>
+                  <Cell>Tags</Cell>
+                  <Cell>Author</Cell>
+                  <Cell>Draft</Cell>
+                  <Cell>Created At</Cell>
+                  <Cell>Updated At</Cell>
                 </Row>
-              ))}
-            </Table>
-          </TableWrapper>
-        </>
+                {posts.posts.map(post => (
+                  <Row key={post.slug}>
+                    <Cell>{post.id}</Cell>
+                    <Cell>
+                      <Link href={`/__admin/blog${post.slug}`}>
+                        <a>{post.title}</a>
+                      </Link>
+                    </Cell>
+                    <Cell>{post.category}</Cell>
+                    <Cell>{post.tags.join(', ')}</Cell>
+                    <Cell className='author'>
+                      <img src={post.author.image} height={24} width={24} />
+                      {post.author.name}
+                    </Cell>
+                    <Cell>
+                      {post.draft 
+                        ? <Pill className='tertiary'>Yes</Pill>
+                        : <Pill className='primary'>No</Pill>
+                      }
+                    </Cell>
+                    <Cell>{toNiceDate(post.createdAt)}</Cell>
+                    <Cell>{toNiceDate(post.updatedAt)}</Cell>
+                  </Row>
+                ))}
+              </Table>
+            </TableWrapper>
+          </>
+        )}
       </Main>
     </>
   );

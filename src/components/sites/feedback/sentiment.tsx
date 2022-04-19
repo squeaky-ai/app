@@ -11,6 +11,7 @@ import { SentimentRatings } from 'components/sites/feedback/sentiment-ratings';
 import { FeedbackTrend } from 'components/sites/feedback/feedback-trend'
 import { SentimentColumns } from 'components/sites/feedback/sentiment-columns';
 import { Period } from 'components/sites/period/period';
+import { PageLoading } from 'components/sites/page-loading';
 import { COLUMNS, DEFAULT_COLUMNS } from 'data/sentiment/constants';
 import { getColumnPreferences } from 'lib/tables';
 import { Preference } from 'lib/preferences';
@@ -39,6 +40,10 @@ export const Sentiment: FC = () => {
     return <Error />;
   }
 
+  if (loading) {
+    return <PageLoading />;
+  }
+
   return (
     <div className='sentiment-grid'>
        <h4 className='heading-overview'>
@@ -46,7 +51,7 @@ export const Sentiment: FC = () => {
         <Period period={period} onChange={setPeriod} />
       </h4>
 
-      <Card loading={loading} className='card-rating'>
+      <Card className='card-rating'>
         <div className='heading'>
           <h5>Sentiment Rating</h5>
           <h3>{hasResults ? sentiment.ratings.score.toFixed(2) : ''}</h3>
@@ -58,7 +63,7 @@ export const Sentiment: FC = () => {
         }
       </Card>
 
-      <Card loading={loading} className='card-response'>
+      <Card className='card-response'>
         <div className='heading'>
           <h5>Responses</h5>
           {hasResults && <h3>{sentiment.replies.total}</h3>}

@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Main } from 'components/main';
 import { Page } from 'components/sites/page';
-import { Spinner } from 'components/spinner';
+import { PageLoading } from 'components/sites/page-loading';
 import { Card } from 'components/card';
 import { Pill } from 'components/pill';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
@@ -54,7 +54,7 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
   }
 
   if (loading) {
-    return <Spinner />;
+    return <PageLoading />;
   }
 
   if (!loading && !visitor) {

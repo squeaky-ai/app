@@ -7,6 +7,7 @@ import { Main } from 'components/main';
 import { Input } from 'components/input';
 import { BreadCrumbs } from 'components/admin/breadcrumbs';
 import { UsersColumns } from 'components/admin/users-columns';
+import { PageLoading } from 'components/sites/page-loading';
 import { useAdmin } from 'hooks/use-admin';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { DEFAULT_USER_COLUMNS } from 'data/admin/constants';
@@ -51,14 +52,19 @@ const Admin: NextPage<ServerSideProps> = () => {
           </menu>
         </div>
 
-        <UsersTable
-          users={admin.users} 
-          sites={admin.sites} 
-          search={search}
-          columns={columns}
-          loading={loading}
-          setColumns={setColumns}
-        />
+        {loading && (
+          <PageLoading />
+        )}
+
+        {!loading && (
+          <UsersTable
+            users={admin.users} 
+            sites={admin.sites} 
+            search={search}
+            columns={columns}
+            setColumns={setColumns}
+          />
+        )}
       </Main>
     </>
   );

@@ -8,14 +8,14 @@ import { InviteTeam } from 'components/sites/settings/invite-team';
 import { TeamRow } from 'components/sites/settings/team-row';
 import { Page } from 'components/sites/page';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
-import { Table, Row, Cell, RowSkeleton } from 'components/table';
+import { Table, Row, Cell } from 'components/table';
 import { Error } from 'components/error';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { OWNER, ADMIN } from 'data/teams/constants';
 import { useTeam } from 'hooks/use-team';
 
 const SiteSettingsTeam: NextPage<ServerSideProps> = ({ user }) => {
-  const { loading, error, team } = useTeam();
+  const { error, team } = useTeam();
 
   if (error) {
     return <Error />;
@@ -48,13 +48,7 @@ const SiteSettingsTeam: NextPage<ServerSideProps> = ({ user }) => {
                 <Cell>Role</Cell>
                 <Cell>Options</Cell>
               </Row>
-              {loading && (
-                <RowSkeleton 
-                  rowCount={3} 
-                  cellCount={4}
-                />
-              )}
-              {!loading && team.members.map(t => (
+              {team.members.map(t => (
                 <TeamRow key={t.id} team={t} site={site} user={user} />
               ))}
             </Table>

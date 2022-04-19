@@ -7,10 +7,9 @@ import { AnalyticsBrowsers as AnalyticsBrowsersType } from 'types/graphql';
 
 interface Props {
   browsers: AnalyticsBrowsersType;
-  loading: boolean;
 }
 
-export const AnalyticsBrowsers: FC<Props> = ({ browsers, loading }) => {
+export const AnalyticsBrowsers: FC<Props> = ({ browsers }) => {
   const [showAll, setShowAll] = React.useState<boolean>(false);
 
   const limit = 5;
@@ -22,7 +21,7 @@ export const AnalyticsBrowsers: FC<Props> = ({ browsers, loading }) => {
 
   return (
     <>
-      <Card loading={loading}>
+      <Card>
         <h4>Browser</h4>
         <ul>
           {results.map(browser => (

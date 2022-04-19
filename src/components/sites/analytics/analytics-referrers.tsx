@@ -1,6 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
-import { Table, Row, Cell, RowSkeleton } from 'components/table';
+import { Table, Row, Cell } from 'components/table';
 import { Pagination } from 'components/pagination';
 import { Tooltip } from 'components/tooltip';
 import { FiltersVisitorsLink } from 'components/sites/filters/common/filters-visitors-link';
@@ -10,11 +10,10 @@ import type { AnalyticsReferrers as AnalyticsReferrersType } from 'types/graphql
 interface Props {
   referrers: AnalyticsReferrersType;
   page: number;
-  loading: boolean;
   setPage: (page: number) => void;
 }
 
-export const AnalyticsReferrers: FC<Props> = ({ referrers, page, loading, setPage }) => (
+export const AnalyticsReferrers: FC<Props> = ({ referrers, page, setPage }) => (
   <>
     <Table>
       <Row head>
@@ -22,19 +21,13 @@ export const AnalyticsReferrers: FC<Props> = ({ referrers, page, loading, setPag
         <Cell>Number of visitors</Cell>
         <Cell />
       </Row>
-      {loading && (
-        <RowSkeleton 
-          rowCount={10} 
-          cellCount={3}
-        />
-      )}
-      {!loading && referrers.items.map(referrer => {
+      {referrers.items.map(referrer => {
         const label = referrer.referrer === 'Direct' 
           ? <>Direct <i>(none)</i></> 
           : referrer.referrer;
 
         return (
-          <Row className='has-skeleton' key={referrer.referrer}>
+          <Row key={referrer.referrer}>
             <Cell>
               <Tooltip button={label} fluid>
                 {label}

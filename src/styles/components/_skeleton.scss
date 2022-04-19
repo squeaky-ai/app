@@ -1,0 +1,34 @@
+.skeleton {
+  overflow: hidden;
+  position: relative;
+
+  &:before {
+    animation: skeleton 2s infinite;
+    background: var(--white);
+    content: ' ';
+    display: block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+}
+
+.has-skeleton {
+  & > * {
+    animation: fade-in .1s ease-in forwards;
+    opacity: 0;
+  }
+}
+
+
+
+@keyframes fade-out-skeleton {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -37,7 +37,7 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, style }) => {
   };
 
   return (
-    <Row className='has-skeleton' style={style}>
+    <Row style={style}>
       <Cell>
         {visitor.viewed
           ? <Pill type='secondary'>Existing</Pill>

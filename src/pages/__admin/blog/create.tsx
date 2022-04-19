@@ -2,7 +2,7 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { Spinner } from 'components/spinner';
+import { PageLoading } from 'components/sites/page-loading';
 import { Main } from 'components/main';
 import { BlogEdit } from 'components/admin/blog-edit';
 import { BreadCrumbs } from 'components/admin/breadcrumbs';
@@ -44,7 +44,7 @@ const AdminBlogCreate: NextPage<ServerSideProps> = () => {
         </h3>
 
         {loading && (
-          <Spinner />
+          <PageLoading />
         )}
 
         {!loading && (

@@ -1,0 +1,17 @@
+.page-loading {
+  align-items: center;
+  display: flex;
+  height: calc(100% - 17rem);
+  justify-content: center;
+  width: 100%;
+
+  img {
+    animation: rotate 1s linear infinite;
+  }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0) }
+  to { transform: rotate(360deg) }
+}
+

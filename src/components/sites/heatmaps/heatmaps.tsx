@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import classnames from 'classnames';
 import { Icon } from 'components/icon';
 import { Button } from 'components/button';
-import { Spinner } from 'components/spinner';
+import { PageLoading } from 'components/sites/page-loading';
 import { Container } from 'components/container';
 import { Illustration } from 'components/illustration';
 import { Card } from 'components/card';
@@ -35,7 +35,7 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
   const hasData = !!heatmaps.recordingId;
 
   if (loading) {
-    return <Spinner />;
+    return <PageLoading />;
   }
 
   return (

@@ -7,6 +7,7 @@ import { Main } from 'components/main';
 import { Input } from 'components/input';
 import { BreadCrumbs } from 'components/admin/breadcrumbs';
 import { SitesColumns } from 'components/admin/sites-columns';
+import { PageLoading } from 'components/sites/page-loading';
 import { useAdmin } from 'hooks/use-admin';
 import { DEFAULT_SITE_COLUMNS } from 'data/admin/constants';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
@@ -51,14 +52,19 @@ const AdminSites: NextPage<ServerSideProps> = () => {
           </menu>
         </div>
 
-        <SitesTable 
-          sites={admin.sites} 
-          activeVisitors={admin.activeVisitors}
-          search={search}
-          columns={columns}
-          loading={loading}
-          setColumns={setColumns}
-        />
+        {loading && (
+          <PageLoading />
+        )}
+
+        {!loading && (
+          <SitesTable 
+            sites={admin.sites} 
+            activeVisitors={admin.activeVisitors}
+            search={search}
+            columns={columns}
+            setColumns={setColumns}
+          />
+        )}
       </Main>
     </>
   );

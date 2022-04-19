@@ -9,6 +9,7 @@ import { AnalyticsCountries } from 'components/sites/analytics/analytics-countri
 import { AnalyticsReferrers } from 'components/sites/analytics/analytics-referrers';
 import { AnalyticsDevices } from 'components/sites/analytics/analytics-devices';
 import { AnalyticsScreenWidths } from 'components/sites/analytics/analytics-screen-widths';
+import { PageLoading } from 'components/sites/page-loading';
 import { useAnalyticsAudience } from 'hooks/use-analytics-audience';
 import { getDateRange } from 'lib/dates';
 import type { Site } from 'types/graphql';
@@ -32,31 +33,32 @@ export const AnalyticsAudience: FC<Props> = ({ site, period }) => {
     return <Error />;
   }
 
-  if (!loading && !analytics.visitors.items.length) {
+  if (loading) {
+    return <PageLoading />
+  }
+
+  if (!analytics.visitors.items.length) {
     return <NoResults title='There is no analytics data available for your chosen period' illustration='illustration-2' />
   }
 
   return (
     <div className='analytics-audience'>
       <div className='grid-item countries'>
-        <Card loading={loading}>
+        <Card>
           <h4>Countries</h4>
           <AnalyticsCountries countries={analytics.countries} />
         </Card>
       </div>
 
       <div className='grid-item languages'>
-        <Card loading={loading}>
+        <Card>
           <h4>Language</h4>
           <AnalyticsLanguages languages={analytics.languages} />
         </Card>   
       </div>
 
       <div className='grid-item browsers'>
-        <AnalyticsBrowsers 
-          browsers={analytics.browsers}
-          loading={loading}
-        />
+        <AnalyticsBrowsers browsers={analytics.browsers} />
       </div>
 
       <div className='grid-item referrers'>
@@ -65,24 +67,17 @@ export const AnalyticsAudience: FC<Props> = ({ site, period }) => {
           referrers={analytics.referrers} 
           page={referrersPage} 
           setPage={setReferrersPage}
-          loading={loading}
         />
       </div>
 
       <div className='grid-item devices'>
         <h4>Devices</h4>
-        <AnalyticsDevices 
-          devices={analytics.devices}
-          loading={loading}
-        />
+        <AnalyticsDevices devices={analytics.devices} />
       </div>
 
       <div className='grid-item screen-widths'>
         <h4>Screen Widths</h4>
-        <AnalyticsScreenWidths 
-          dimensions={analytics.dimensions}
-          loading={loading}
-        /> 
+        <AnalyticsScreenWidths dimensions={analytics.dimensions} /> 
       </div>
     </div>
   );

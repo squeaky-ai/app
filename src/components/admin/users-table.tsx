@@ -1,7 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
-import { TableWrapper, Table, Cell, Row, RowSkeleton } from 'components/table';
+import { TableWrapper, Table, Cell, Row } from 'components/table';
 import { Sort } from 'components/sort';
 import { UsersTableRow } from 'components/admin/users-table-row';
 import { NoResults } from 'components/sites/no-results';
@@ -17,7 +17,6 @@ interface Props {
   sites: Site[];
   columns: Column[];
   search: string;
-  loading: boolean;
   setColumns: (columns: Column[]) => void;
 }
 
@@ -42,7 +41,7 @@ const getUsersSites = (user: User, sites: Site[]) => {
   return sites.filter(site => !!site.team.find(t => t.user.id === user.id));
 };
 
-export const UsersTable: FC<Props> = ({ users, sites, columns, search, loading, setColumns }) => {
+export const UsersTable: FC<Props> = ({ users, sites, columns, search, setColumns }) => {
   const [sort, setSort] = React.useState<UserSort>('created_at__desc');
 
   const { rowStyle, tableClassNames } = getColumnStyles(DEFAULT_USER_COLUMNS, columns);
@@ -63,7 +62,7 @@ export const UsersTable: FC<Props> = ({ users, sites, columns, search, loading, 
 
   return (
     <>
-      {!loading && results.length === 0 && (
+      {results.length === 0 && (
         <div className='no-search-results'>
           <NoResults 
             illustration='illustration-2'
@@ -108,15 +107,7 @@ export const UsersTable: FC<Props> = ({ users, sites, columns, search, loading, 
             <Cell>Last Activity At</Cell>
             <Cell />
           </Row>
-          {loading && (
-            <RowSkeleton 
-              rowCount={25}
-              rowStyle={rowStyle} 
-              cellCount={8}
-            />
-          )}
-
-          {!loading && results.map(user => (
+          {results.map(user => (
             <UsersTableRow 
               key={user.id} 
               user={user} 

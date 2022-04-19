@@ -1,7 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
-import { TableWrapper, Table, Cell, Row, RowSkeleton } from 'components/table';
+import { TableWrapper, Table, Cell, Row } from 'components/table';
 import { Sort } from 'components/sort';
 import { SitesTableRow } from 'components/admin/sites-table-row';
 import { NoResults } from 'components/sites/no-results';
@@ -17,11 +17,10 @@ interface Props {
   activeVisitors: ActiveVisitorCount[];
   search: string;
   columns: Column[];
-  loading: boolean;
   setColumns: (columns: Column[]) => void;
 }
 
-export const SitesTable: FC<Props> = ({ sites, activeVisitors, search, columns, loading, setColumns }) => {
+export const SitesTable: FC<Props> = ({ sites, activeVisitors, search, columns, setColumns }) => {
   const [sort, setSort] = React.useState<SitesSort>('created_at__desc');
   const { rowStyle, tableClassNames } = getColumnStyles(DEFAULT_SITE_COLUMNS, columns);
 
@@ -70,7 +69,7 @@ export const SitesTable: FC<Props> = ({ sites, activeVisitors, search, columns, 
 
   return (
     <>
-      {!loading && results.length === 0 && (
+      {results.length === 0 && (
         <div className='no-search-results'>
           <NoResults 
             illustration='illustration-2'
@@ -133,15 +132,7 @@ export const SitesTable: FC<Props> = ({ sites, activeVisitors, search, columns, 
               />
             </Cell>
           </Row>
-          {loading && (
-            <RowSkeleton 
-              rowCount={25} 
-              rowStyle={rowStyle}
-              cellCount={10}
-            />
-          )}
-
-          {!loading && results.map(site => (
+          {results.map(site => (
             <SitesTableRow 
               key={site.id} 
               site={site}

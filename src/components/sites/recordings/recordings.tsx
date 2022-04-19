@@ -3,12 +3,13 @@ import type { FC } from 'react';
 import classnames from 'classnames';
 import { Pagination } from 'components/pagination';
 import { RecordingsItem } from 'components/sites/recordings/recordings-item';
-import { TableWrapper, Table, Row, Cell, RowSkeleton } from 'components/table';
+import { TableWrapper, Table, Row, Cell } from 'components/table';
 import { Sort } from 'components/sort';
 import { PageSize } from 'components/sites/page-size';
 import { Checkbox } from 'components/checkbox';
 import { Error } from 'components/error';
 import { NoResults } from 'components/sites/no-results';
+import { PageLoading } from 'components/sites/page-loading';
 import { useRecordings } from 'hooks/use-recordings';
 import { COLUMNS } from 'data/recordings/constants';
 import { getDateRange } from 'lib/dates';
@@ -69,9 +70,13 @@ export const Recordings: FC<Props> = ({
     return <Error />;
   }
 
+  if (loading) {
+    return <PageLoading />;
+  }
+
   return (
     <>
-      {!loading && !items.length && (
+      {!items.length && (
         <NoResults illustration='illustration-13' title='There are no recordings matching your selected filters.' />
       )}
 
@@ -101,17 +106,8 @@ export const Recordings: FC<Props> = ({
             <Cell>Sentiment</Cell>
             <Cell />
           </Row>
-
-          {loading && (
-            <RowSkeleton 
-              className='recording-row' 
-              rowCount={25} 
-              cellCount={15}
-              rowStyle={rowStyle}
-            />
-          )}
           
-          {!loading && items.map(recording => (
+          {items.map(recording => (
             <RecordingsItem 
               site={site}
               recording={recording} 

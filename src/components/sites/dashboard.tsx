@@ -10,7 +10,8 @@ import { PlayerPreview } from 'components/sites/player/player-preview';
 import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
 import { Pill } from 'components/pill';
 import { Error } from 'components/error';
-import { ActiveVisitors } from './active-visitors';
+import { PageLoading } from 'components/sites/page-loading';
+import { ActiveVisitors } from 'components/sites/active-visitors';
 import { useDashboard } from 'hooks/use-dashboard';
 import { toTimeString } from 'lib/dates';
 import { getDateRange } from 'lib/dates';
@@ -35,9 +36,13 @@ export const Dashboard: FC<Props> = ({ site, period }) => {
     return <Error />;
   }
 
+  if (loading) {
+    return <PageLoading />
+  }
+
   return (
     <div className='dashboard-grid'>
-      <Card loading={loading} className='visitors'>
+      <Card className='visitors'>
         <h5>
           <Icon name='group-line' />
           <span>Visitors</span>
@@ -65,7 +70,7 @@ export const Dashboard: FC<Props> = ({ site, period }) => {
         </div>
       </Card>
 
-      <Card loading={loading} className='recordings'>
+      <Card className='recordings'>
         <h5>
           <Icon name='vidicon-line' />
           Recordings
@@ -85,7 +90,7 @@ export const Dashboard: FC<Props> = ({ site, period }) => {
         </div>
       </Card>
 
-      <Card loading={loading} className='pageviews'>
+      <Card className='pageviews'>
         <h5>
           <Icon name='pages-line' />
           Page Views
@@ -99,7 +104,7 @@ export const Dashboard: FC<Props> = ({ site, period }) => {
         </div>
       </Card>
 
-      <Card loading={loading} className='latest-recording'>
+      <Card className='latest-recording'>
         <h5>
           Latest Recording
         </h5>
@@ -168,7 +173,7 @@ export const Dashboard: FC<Props> = ({ site, period }) => {
         )}
       </Card>
 
-      <Card loading={loading} className='latest-notes'>
+      <Card className='latest-notes'>
         <h5>
           <Icon name='sticky-note-line' />
           Latest Notes

@@ -13,7 +13,6 @@ import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { usePages } from 'hooks/use-pages';
 import { usePeriod } from 'hooks/use-period';
 
-
 const SitesHeatmaps: NextPage<ServerSideProps> = ({ user }) => {
   const [page, setPage] = React.useState<string>(null);
 

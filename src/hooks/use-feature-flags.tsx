@@ -13,10 +13,12 @@ type Names = Record<FeatureFlag, string>;
 
 export const allFeatureFlags: FeatureFlag[] = [
   FeatureFlag.MAGIC_ERASURE,
+  FeatureFlag.CHEESE_LOADER,
 ];
 
 export const featureFlagNames: Names = {
-  MAGIC_ERASURE: 'Magic Erasure'
+  MAGIC_ERASURE: 'Magic Erasure',
+  CHEESE_LOADER: 'Cheese Loader',
 };
 
 export const useFeatureFlags = (): UseFeatureFlags => {

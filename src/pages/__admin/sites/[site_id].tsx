@@ -2,7 +2,7 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { Error } from 'components/error';
-import { Spinner } from 'components/spinner';
+import { PageLoading } from 'components/sites/page-loading';
 import { Main } from 'components/main';
 import { NotFound } from 'components/sites/not-found';
 import { BreadCrumbs } from 'components/admin/breadcrumbs';
@@ -34,7 +34,7 @@ const AdminSite: NextPage<ServerSideProps> = () => {
         ]} />
 
         {loading && (
-          <Spinner />
+          <PageLoading />
         )}
         
         {!loading && !site && (

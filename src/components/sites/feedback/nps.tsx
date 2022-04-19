@@ -12,6 +12,7 @@ import { FeedbackTrend } from 'components/sites/feedback/feedback-trend';
 import { NpsScore } from 'components/sites/feedback/nps-score';
 import { NpsColumns } from 'components/sites/feedback/nps-columns';
 import { Period } from 'components/sites/period/period';
+import { PageLoading } from 'components/sites/page-loading';
 import { percentage } from 'lib/maths';
 import { COLUMNS, DEFAULT_COLUMNS } from 'data/nps/constants';
 import { getColumnPreferences } from 'lib/tables';
@@ -41,6 +42,10 @@ export const Nps: FC = () => {
     return <Error />;
   }
 
+  if (loading) {
+    return <PageLoading />;
+  }
+
   return (
     <div className='nps-grid'>
       <h4 className='heading-overview'>
@@ -48,7 +53,7 @@ export const Nps: FC = () => {
         <Period period={period} onChange={setPeriod} />
       </h4>
 
-      <Card loading={loading} className='card-nps'>
+      <Card className='card-nps'>
         <div className='heading'>
           <h5>NPS®</h5>
           <h3>{hasResults ? nps.scores.score : ''}</h3>
@@ -60,7 +65,7 @@ export const Nps: FC = () => {
         }
       </Card>
 
-      <Card loading={loading} className='card-response'>
+      <Card className='card-response'>
         <div className='heading'>
           <h5>Responses</h5>
           {hasResults && <FeedbackTrend value={nps.replies.trend} />}
@@ -71,7 +76,7 @@ export const Nps: FC = () => {
         }
       </Card>
 
-      <Card loading={loading} className='card-ratings'>
+      <Card className='card-ratings'>
         <div className='heading'>
           <h5>Ratings</h5>
         </div>
@@ -81,7 +86,7 @@ export const Nps: FC = () => {
         }
       </Card>
 
-      <Card loading={loading} className='card-displays'>
+      <Card className='card-displays'>
         <div className='items'>
           <div className='item'>
             <p>Displays</p>
@@ -107,7 +112,7 @@ export const Nps: FC = () => {
         </div>
       </Card>
 
-      <Card loading={loading} className='card-results'>
+      <Card className='card-results'>
         <div className='items'>
           <div className='item'>
             <p>Promoters</p>

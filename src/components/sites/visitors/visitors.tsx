@@ -8,7 +8,8 @@ import { Sort } from 'components/sort';
 import { PageSize } from 'components/sites/page-size';
 import { Tooltip } from 'components/tooltip';
 import { VisitorsItem } from 'components/sites/visitors/visitors-item';
-import { TableWrapper, Table, Row, Cell, RowSkeleton } from 'components/table';
+import { TableWrapper, Table, Row, Cell } from 'components/table';
+import { PageLoading } from 'components/sites/page-loading';
 import { DismissableMessage } from 'components/message';
 import { Error } from 'components/error';
 import { Preference } from 'lib/preferences';
@@ -58,9 +59,13 @@ export const Visitors: FC<Props> = ({
     return <Error />;
   }
 
+  if (loading) {
+    return <PageLoading />
+  }
+
   return (
     <>
-      {!loading && !visitors.items.length && (
+      {!visitors.items.length && (
         <NoResults illustration='illustration-13' title='There are no visitors matching your selected filters.' />
       )}
 
@@ -73,7 +78,7 @@ export const Visitors: FC<Props> = ({
       />
 
       <TableWrapper>
-        <Table className={classnames('visitors-list hover', tableClassNames, { hide:  !loading && items.length === 0 })}>
+        <Table className={classnames('visitors-list hover', tableClassNames, { hide: items.length === 0 })}>
           <Row head style={rowStyle}>
             <Cell>
               Status
@@ -140,15 +145,7 @@ export const Visitors: FC<Props> = ({
             </Cell>
             <Cell />
           </Row>
-          {loading && (
-            <RowSkeleton 
-              rowCount={25} 
-              rowStyle={rowStyle}
-              cellCount={13}
-            />
-          )}
-
-          {!loading && items.map(v => (
+          {items.map(v => (
             <VisitorsItem 
               site={site} 
               visitor={v} 
