@@ -91,7 +91,7 @@ export const COLUMNS: Column[] = [
     position: 9,
   },
   {
-    label: 'Device',
+    label: 'Device & Viewport',
     width: '1fr',
     disabled: false,
     position: 10,
