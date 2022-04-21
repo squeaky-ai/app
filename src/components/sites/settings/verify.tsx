@@ -46,10 +46,10 @@ export const Verify: FC<Props> = ({ site }) => {
         </div>  
       )}
 
-      <Button className='primary' onClick={siteVerify}>
+      <Button className='primary' onClick={siteVerify} disabled={site.verifiedAt}>
         {loading 
           ? 'Verifying ...' 
-          : site.verifiedAt ? 'Check Installation' : 'Verify Installation'
+          : 'Verify Installation'
         }
       </Button>
     </>

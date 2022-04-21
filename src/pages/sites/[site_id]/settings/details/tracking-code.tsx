@@ -68,7 +68,7 @@ const SitesSettingsTrackingCode: NextPage<ServerSideProps> = ({ user }) => {
                   <>
                     <Message
                       type='warning'
-                      message={<span><a target='_blank' rel='noreferrer' href={site.url}>{site.url}</a> <b>has not sent any data in the past {site.daysSinceLastRecording} days</b>, there might be an issue with your tracking code. You can check your installation using the button below.</span>}
+                      message={<span><a target='_blank' rel='noreferrer' href={site.url}>{site.url}</a> <b>has not sent any data in the past {site.daysSinceLastRecording} days</b>, there might be an issue with your tracking code.</span>}
                     />
 
                     <p>Please paste the code below into the <code className='code'>&lt;head&gt;</code> section of your HTML on every page you wish to track on your website <a href={site.url} target='_blank' rel='noreferrer'>{site.url}</a>.</p>
