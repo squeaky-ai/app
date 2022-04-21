@@ -1,6 +1,10 @@
 import React from 'react';
 import type { FC } from 'react';
 
+interface Props {
+  children: React.ReactNode;
+}
+
 interface State {
   role: number;
   validBilling: boolean;
@@ -15,7 +19,7 @@ export const SidebarContext = React.createContext<ContextProps>(null);
 
 const { Provider } = SidebarContext;
 
-export const SidebarProvider: FC = ({ children }) => {
+export const SidebarProvider: FC<Props> = ({ children }) => {
   const [sidebar, setSidebar] = React.useState<State>({
     role: -1,
     validBilling: true,

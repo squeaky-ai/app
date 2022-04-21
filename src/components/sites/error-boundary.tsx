@@ -2,11 +2,15 @@ import React from 'react';
 import { Error } from 'components/error';
 import { Button } from 'components/button';
 
+interface Props {
+  children: React.ReactNode;
+}
+
 interface State {
   hasError: boolean;
 }
 
-export class ErrorBoundary<P> extends React.Component<P, State> {
+export class ErrorBoundary<P extends Props> extends React.Component<P, State> {
   public constructor(props: P) {
     super(props);
 

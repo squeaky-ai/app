@@ -14,6 +14,10 @@ const { Provider } = ToastContext;
 
 type Dismiss = { remove: (id: string) => void };
 
+interface Props {
+  children: React.ReactNode;
+}
+
 interface State {
   toasts: ToastItem[];
 }
@@ -24,7 +28,7 @@ export interface ToastItem {
   body: string;
 }
 
-const ToastContainer: FC = ({ children }) => (
+const ToastContainer: FC<{ children: React.ReactNode }> = ({ children }) => (
   <div className='toast-container'>
     {children}
   </div>
@@ -45,8 +49,8 @@ const Toast: FC<ToastItem & Dismiss> = ({ id, type, body, remove }) => {
   );
 };
 
-export class ToastProvider extends React.Component<{}, State> {
-  public constructor(props: {}) {
+export class ToastProvider extends React.Component<Props, State> {
+  public constructor(props: Props) {
     super(props);
 
     this.state = { toasts: [] }; 

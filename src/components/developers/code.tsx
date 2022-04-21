@@ -5,6 +5,7 @@ import { Button } from 'components/button';
 
 interface Props {
   lang: string;
+  children: React.ReactNode;
 }
 
 export const Code: FC<Props> = ({ lang, children }) => {

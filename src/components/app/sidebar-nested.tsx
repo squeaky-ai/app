@@ -9,6 +9,7 @@ interface Props {
   icon: string;
   expanded: boolean;
   warning?: boolean;
+  children: React.ReactNode;
   expand: VoidFunction;
   collapse: VoidFunction;
 }
@@ -20,7 +21,7 @@ export const SidebarNested: FC<Props> = ({
   expand, 
   collapse, 
   warning,
-  children 
+  children,
 }) => {
   const toggleExpanded = () => expanded 
     ? collapse() 

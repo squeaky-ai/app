@@ -4,6 +4,7 @@ import classnames from 'classnames';
 
 type Props = {
   className?: string;
+  children: React.ReactNode;
 }
 
 export const Header: FC<Props> = ({ children, className }) => (

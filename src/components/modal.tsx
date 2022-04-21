@@ -6,6 +6,7 @@ import { Portal } from 'components/portal';
 
 interface Props {
   className?: string;
+  children: React.ReactNode;
   // It may seem weird at first as the component usually closes this
   // via the ref, but the modal can also be closed via the eventListeners
   // so the hook is there to cover all cases
@@ -69,7 +70,7 @@ export class Modal extends React.Component<Props, State> {
   }
 }
 
-export const ModalBody: FC = ({ children, ...rest }) => (
+export const ModalBody: FC<{ children: React.ReactNode }> = ({ children, ...rest }) => (
   <FocusTrap focusTrapOptions={{ clickOutsideDeactivates: true }}>
     <div className='modal-body' role='dialog' {...rest}>
       {children}
@@ -77,7 +78,7 @@ export const ModalBody: FC = ({ children, ...rest }) => (
   </FocusTrap>
 );
 
-export const ModalHeader: FC = ({ children, ...rest }) => (
+export const ModalHeader: FC<{ children: React.ReactNode }> = ({ children, ...rest }) => (
   <div className='modal-header' {...rest}>
     {children}
   </div>

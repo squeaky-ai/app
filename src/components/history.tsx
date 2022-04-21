@@ -15,7 +15,7 @@ export const HistoryContext = React.createContext<ContextProps>({ history: [] })
 
 const { Provider } = HistoryContext;
 
-export const HistoryProvider: FC = ({ children }) => {
+export const HistoryProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
   const router = useRouter();
 
   const [history, setHistory] = React.useState<HistoryItem[]>([]);

@@ -5,7 +5,11 @@ import { useRouter } from 'next/router';
 import { Sidebar as AppSidebar } from 'components/app/sidebar';
 import { Sidebar as AdminSidebar } from 'components/admin/sidebar';
 
-export const Page: FC = ({ children }) => {
+interface Props {
+  children: React.ReactNode;
+}
+
+export const Page: FC<Props> = ({ children }) => {
   const router = useRouter();
 
   const slug = router.route

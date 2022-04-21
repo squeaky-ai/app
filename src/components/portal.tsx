@@ -2,7 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import type { FC } from 'react';
 
-export const Portal: FC = ({ children }) => {
+interface Props {
+  children: React.ReactNode;
+}
+
+export const Portal: FC<Props> = ({ children }) => {
   const selector = '#portal-root';
 
   const ref = React.useRef<HTMLElement>();
