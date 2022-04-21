@@ -17,11 +17,14 @@ import { Platform } from 'components/platform';
 import { SettingsTabs } from 'components/sites/settings/settings-tabs';
 import { MAX_DAYS_BEFORE_POTENTIAL_ISSUE } from 'data/sites/constants';
 import type { Site } from 'types/graphql';
+import { useTrackingCode } from 'hooks/use-tracking-code';
 
 const SitesSettingsTrackingCode: NextPage<ServerSideProps> = ({ user }) => {
-  const hasPotentialIssue = (site: Site) => site.verifiedAt && site.daysSinceLastRecording >= MAX_DAYS_BEFORE_POTENTIAL_ISSUE;
+  const { verifiedAt } = useTrackingCode();
 
-  const isWorkingFine = (site: Site) => site.verifiedAt && site.daysSinceLastRecording < MAX_DAYS_BEFORE_POTENTIAL_ISSUE;
+  const hasPotentialIssue = (site: Site) => verifiedAt && site.daysSinceLastRecording >= MAX_DAYS_BEFORE_POTENTIAL_ISSUE;
+
+  const isWorkingFine = (site: Site) => verifiedAt && site.daysSinceLastRecording < MAX_DAYS_BEFORE_POTENTIAL_ISSUE;
 
   return (
     <>
@@ -43,7 +46,7 @@ const SitesSettingsTrackingCode: NextPage<ServerSideProps> = ({ user }) => {
 
             <h4>
               Tracking code
-              {site.verifiedAt
+              {verifiedAt
                 ? hasPotentialIssue(site)
                   ? <span className='status-heading warning'><Icon name='information-line' /><i>Potential Issue</i></span>
                   : <span className='status-heading verified'><Icon name='information-line' /><i>Verified and active</i></span>
@@ -53,7 +56,7 @@ const SitesSettingsTrackingCode: NextPage<ServerSideProps> = ({ user }) => {
             
             <div className='tracking-code'>
               <Container className='md'>
-                {!site.verifiedAt && (
+                {!verifiedAt && (
                   <>
                     <p><b>Your tracking code is not verified.</b> Please follow the instructions below to use Squeaky on your site.</p>
 
@@ -82,7 +85,7 @@ const SitesSettingsTrackingCode: NextPage<ServerSideProps> = ({ user }) => {
                 <Verify site={site} />
               </Container>
               
-              {!site.verifiedAt && (
+              {!verifiedAt && (
                 <div className='installation-guide'>
                   <h4>
                     <Icon name='book-open-line' />

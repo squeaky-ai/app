@@ -153,3 +153,12 @@ export const GET_BILLING_QUERY = gql`
     }
   }
 `;
+
+export const GET_VERIFIED_AT_QUERY = gql`
+  query GetVerifiedAt($siteId: ID!) {
+    site(siteId: $siteId) {
+      id
+      verifiedAt
+    }
+  }
+`;
