@@ -1,7 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import { useRouter } from 'next/router';
-import { startCase } from 'lodash';
+import { startCase, last } from 'lodash';
 import { Button } from 'components/button';
 import { Container } from 'components/container';
 import { Table, Row, Cell } from 'components/table';
@@ -17,12 +17,26 @@ interface Props {
   hasBilling: boolean;
 }
 
+const getIntervalName = (interval: string) => {
+  switch(interval) {
+    case 'month':
+      return 'Monthly';
+    case 'year':
+      return 'Yearly';
+    default: 
+      return 'Unknown';
+  }
+}
+
 export const BillingTable: FC<Props> = ({ site, billing, hasBilling }) => {
   const router = useRouter();
 
   const plan = billing.plans.find(plan => Number(plan.id) === site.plan.type);
 
-  const currency = billing.billing?.transactions[0]?.currency;
+  const latestTransaction = last(billing.billing?.transactions);
+
+  const currency = latestTransaction?.currency;
+  const interval = latestTransaction?.interval;
 
   const pricing = plan.pricing
     ? plan.pricing.find(p => p.currency === currency)
@@ -55,7 +69,7 @@ export const BillingTable: FC<Props> = ({ site, billing, hasBilling }) => {
             </Row>
             <Row>
               <Cell><b>Billing interval</b></Cell>
-              <Cell>Monthly</Cell>
+              <Cell>{getIntervalName(interval)}</Cell>
               <Cell />
             </Row>
             <Row>
