@@ -199,7 +199,7 @@
                          'heading-responses heading-responses heading-responses heading-responses heading-responses heading-responses'
                          'card-responses card-responses card-responses card-responses card-responses card-responses';
     grid-template-columns: repeat(6, minmax(0, 1fr));
-    grid-template-rows: 40px 258px 242px 40px 1fr;
+    grid-template-rows: auto;
 
     @include breakpoint-md {
       grid-gap: 1.5rem;

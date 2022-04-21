@@ -96,7 +96,7 @@ export const Nps: FC = () => {
             }
           </div>
           <div className='item'>
-            <p>Ratings</p>
+            <p>Responses</p>
             {hasResults
               ? <h3 className='blue'>{nps.stats.ratings.toLocaleString()}</h3>
               : <NoData short />
