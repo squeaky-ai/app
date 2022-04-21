@@ -14,10 +14,10 @@ import { Button } from 'components/button';
 import { Container } from 'components/container';
 import { HEX_REGEX } from 'data/common/constants';
 import { SentimentPreview } from 'components/sites/feedback/sentiment-preview';
+import { SentimentPages } from 'components/sites/feedback/sentiment-pages';
 import { useToasts } from 'hooks/use-toasts';
 import type { FeedbackUpdateInput } from 'types/graphql';
 import type { Site } from 'types/graphql';
-import { SentimentPages } from 'components/sites/feedback/sentiment-pages';
 import { Checkbox } from 'components/checkbox';
 
 interface Props {

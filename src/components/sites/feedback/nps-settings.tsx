@@ -13,6 +13,7 @@ import { Input } from 'components/input';
 import { Checkbox } from 'components/checkbox';
 import { Button } from 'components/button';
 import { NpsPreview } from 'components/sites/feedback/nps-preview';
+import { NpsPages } from 'components/sites/feedback/nps-pages';
 import { HEX_REGEX } from 'data/common/constants';
 import { useToasts } from 'hooks/use-toasts';
 import type { FeedbackUpdateInput } from 'types/graphql';
@@ -31,6 +32,7 @@ const NpsSchema = Yup.object().shape({
   npsFollowUpEnabled: Yup.boolean(),
   npsContactConsentEnabled: Yup.boolean(),
   npsLayout: Yup.string().oneOf(['full_width', 'boxed'], 'Please select a layout type'),
+  npsExcludedPages: Yup.array(),
 });
 
 export const NpsSettings: FC<Props> = ({ site }) => {
@@ -68,6 +70,7 @@ export const NpsSettings: FC<Props> = ({ site }) => {
               npsFollowUpEnabled: feedback.npsFollowUpEnabled ?? true,
               npsContactConsentEnabled: feedback.npsContactConsentEnabled ?? false,
               npsLayout: feedback.npsLayout || 'full_width',
+              npsExcludedPages: feedback.npsExcludedPages || [],
             }}
             validationSchema={NpsSchema}
             onSubmit={(values, { setSubmitting }) => {
@@ -79,7 +82,8 @@ export const NpsSettings: FC<Props> = ({ site }) => {
                   'npsPhrase' | 
                   'npsContactConsentEnabled' | 
                   'npsFollowUpEnabled' | 
-                  'npsLayout'
+                  'npsLayout' |
+                  'npsExcludedPages'
                 > = {
                   npsAccentColor: values.npsAccentColor,
                   npsPhrase: values.npsPhrase,
@@ -87,6 +91,7 @@ export const NpsSettings: FC<Props> = ({ site }) => {
                   npsFollowUpEnabled: values.npsFollowUpEnabled,
                   npsLayout: values.npsLayout,
                   npsSchedule: values.npsSchedule,
+                  npsExcludedPages: values.npsExcludedPages,
                 };
                 
                 try {
@@ -200,6 +205,17 @@ export const NpsSettings: FC<Props> = ({ site }) => {
                     Once a month
                   </Radio>
                 </div>
+
+                <h4>Pages</h4>
+
+                <p>By default <b>your NPS survey banner could be displayed on any page</b> of your site, if you&apos;d like to hide the pop-up on any specific pages you can check the boxes for them below.</p>
+
+                <p><b>Hide feedback widget on:</b></p>
+
+                <NpsPages 
+                  value={values.npsExcludedPages}
+                  onChange={handleChange}
+                />
 
                 <h4>Form options</h4>
 

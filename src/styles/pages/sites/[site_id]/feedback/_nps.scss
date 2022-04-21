@@ -25,6 +25,50 @@
     }
   }
 
+  .nps-pages-wrapper {
+    display: flex;
+
+    @include breakpoint-md {
+      flex-direction: column;
+    }
+  }
+
+  .nps-pages {
+    background: var(--white);
+    border: 1px solid var(--gray-150);
+    border-radius: var(--border-radius-md);
+    flex-shrink: 0;
+    max-height: 22rem;
+    max-width: 22rem;
+    overflow-y: auto;
+    width: 100%;
+
+
+    @include breakpoint-md {
+      max-width: 100%;
+    }
+
+    .checkbox-group {
+      padding: 1rem;
+    }
+
+    .checkbox {
+      span:nth-of-type(2) {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  .nps-hint {
+    margin-left: 2rem;
+
+    @include breakpoint-md {
+      margin: 1.5rem 0 0 0;
+    }
+  }
+
   .recharts-surface {
     overflow: visible;
   }

@@ -10,7 +10,7 @@ import { Label } from 'components/label';
 import type { Feedback } from 'types/graphql';
 
 interface Props {
-  feedback: Omit<Feedback, 'id' | 'npsEnabled' | 'sentimentEnabled' | 'sentimentExcludedPages'>;
+  feedback: Omit<Feedback, 'id' | 'npsEnabled' | 'sentimentEnabled' | 'sentimentExcludedPages' | 'npsExcludedPages'>;
 }
 
 export const SentimentPreview: FC<Props> = ({ feedback }) => {

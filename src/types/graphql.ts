@@ -387,6 +387,7 @@ export type Feedback = {
   npsAccentColor?: Maybe<Scalars['String']>;
   npsContactConsentEnabled?: Maybe<Scalars['Boolean']>;
   npsEnabled: Scalars['Boolean'];
+  npsExcludedPages: Array<Maybe<Scalars['String']>>;
   npsFollowUpEnabled?: Maybe<Scalars['Boolean']>;
   npsLayout?: Maybe<Scalars['String']>;
   npsPhrase?: Maybe<Scalars['String']>;
@@ -538,6 +539,7 @@ export type FeedbackUpdateInput = {
   npsAccentColor?: InputMaybe<Scalars['String']>;
   npsContactConsentEnabled?: InputMaybe<Scalars['Boolean']>;
   npsEnabled?: InputMaybe<Scalars['Boolean']>;
+  npsExcludedPages?: InputMaybe<Array<Scalars['String']>>;
   npsFollowUpEnabled?: InputMaybe<Scalars['Boolean']>;
   npsLayout?: InputMaybe<Scalars['String']>;
   npsPhrase?: InputMaybe<Scalars['String']>;
