@@ -24,9 +24,9 @@ export const GET_SITE_QUERY = gql`
       recordingsCount
       magicErasureEnabled
       plan {
-        type
+        tier
         name
-        billingValid
+        invalid
       }
       team {
         id
@@ -61,9 +61,9 @@ export const GET_SITE_BY_UUID_QUERY = gql`
       magicErasureEnabled
       cssSelectorBlacklist
       plan {
-        type
+        tier
         name
-        billingValid
+        invalid
       }
       team {
         id
@@ -89,13 +89,15 @@ export const GET_PLAN_QUERY = gql`
     site(siteId: $siteId) {
       id
       plan {
-        type
+        tier
         name
         exceeded
-        billingValid
-        recordingsLimit
-        recordingsLocked
-        visitorsLocked
+        valid
+        maxMonthlyRecordings
+        recordingsLockedCount
+        visitorsLockedCount
+        dataStorageMonths
+        responseTimeHours
       }
     }
   }

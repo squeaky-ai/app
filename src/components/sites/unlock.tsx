@@ -17,11 +17,11 @@ export const Unlock: FC<Props> = ({ site, page }) => {
     return null;
   }
 
-  const limit = plan.recordingsLimit.toLocaleString();
+  const limit = plan.maxMonthlyRecordings.toLocaleString();
 
-  const lockedRecordings = plan.recordingsLocked.toLocaleString();
+  const lockedRecordings = plan.recordingsLockedCount.toLocaleString();
 
-  const lockedVisitors = plan.visitorsLocked.toLocaleString();
+  const lockedVisitors = plan.visitorsLockedCount.toLocaleString();
 
   const message: JSX.Element = (() => {
     switch(page) {

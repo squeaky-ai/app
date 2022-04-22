@@ -40,7 +40,7 @@ export const Page: FC<Props> = ({ children, user, scope }) => {
       // the cache and being notified of changes.
       setSidebar({ 
         role: member?.role, 
-        validBilling: site.plan.billingValid 
+        validBilling: !site.plan.invalid 
       });
     }
   }, [site]);

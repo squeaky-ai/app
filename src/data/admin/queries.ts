@@ -11,12 +11,13 @@ export const GET_ADMIN_QUERY = gql`
         ownerName
         verifiedAt
         plan {
-          type
+          tier
           name
           exceeded
-          recordingsLimit
-          recordingsLocked
-          visitorsLocked
+          invalid
+          maxMonthlyRecordings
+          recordingsLockedCount
+          visitorsLockedCount
         }
         team {
           id
