@@ -28,7 +28,7 @@ export const SiteSubscription: FC<Props> = ({ site, isEnterprise, hasBilling }) 
           <span>Plan</span>
           <span>
             {site.plan.name}
-            {isEnterprise && (
+            {isEnterprise && latestTransaction && (
               <>: {CURRENCY_SYMBOLS[latestTransaction.currency]}{toDecimalCurrency(latestTransaction.amount)} per {latestTransaction.interval}</>
             )}
           </span>
@@ -65,7 +65,7 @@ export const SiteSubscription: FC<Props> = ({ site, isEnterprise, hasBilling }) 
         <div className='row'>
           <span>Next Payment</span>
           <span>
-            {hasBilling
+            {hasBilling && latestTransaction
               ? toddMMYYY(new Date(latestTransaction?.periodEndAt))
               : '-'
             }
