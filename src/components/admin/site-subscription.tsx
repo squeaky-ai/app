@@ -1,9 +1,10 @@
 import React from 'react';
 import type { FC } from 'react';
+import { startCase, last } from 'lodash';
 import { Icon } from 'components/icon';
 import { Pill } from 'components/pill';
 import { toddMMYYY } from 'lib/dates';
-import { startCase, last } from 'lodash';
+import { formatCurency } from 'lib/currency';
 import type { Site } from 'types/graphql';
 
 interface Props {
@@ -24,14 +25,19 @@ export const SiteSubscription: FC<Props> = ({ site, isEnterprise, hasBilling }) 
         </h5>
         <div className='row'>
           <span>Plan</span>
-          <span>{site.plan.name}</span>
+          <span>
+            {site.plan.name}
+            {isEnterprise && (
+              <>: {formatCurency(latestTransaction.currency, latestTransaction.amount)} per {latestTransaction.interval}</>
+            )}
+          </span>
         </div>
         {isEnterprise && (
           <div className='row'>
             <span>Coupons</span>
             <span>
               {hasBilling && latestTransaction?.discountName
-                ? `${Number(latestTransaction.discountPercentage)}% ${latestTransaction.discountName}`
+                ? <span className='coupon'>{`${Number(latestTransaction.discountPercentage)}% ${latestTransaction.discountName}`}</span>
                 : '-'
               }
             </span>

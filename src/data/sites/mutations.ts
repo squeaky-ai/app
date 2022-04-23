@@ -113,3 +113,27 @@ export const CSS_SELECTOR_BLACKLIST_DELETE_MUTATION = gql`
     }
   }
 `;
+
+export const ADMIN_SITE_PLAN_UPDATE_MUTATION = gql`
+  mutation($input: AdminSitePlanUpdateInput!) {
+    adminSitePlanUpdate(input: $input) {
+      id
+      plan {
+        tier
+        name
+        exceeded
+        invalid
+        support
+        maxMonthlyRecordings
+        recordingsLockedCount
+        visitorsLockedCount
+        ssoEnabled
+        auditTrailEnabled
+        privateInstanceEnabled
+        responseTimeHours
+        dataStorageMonths
+        notes
+      }
+    }
+  }
+`;

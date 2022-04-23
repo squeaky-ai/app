@@ -10,6 +10,7 @@ import { Radio } from 'components/radio';
 import { TextArea } from 'components/textarea';
 import { Button } from 'components/button';
 import { useToasts } from 'hooks/use-toasts';
+import { adminSitePlanUpdate } from 'lib/api/graphql';
 import type { Site } from 'types/graphql';
 
 interface Props {
@@ -30,7 +31,6 @@ const PlanSchema = Yup.object().shape({
 export const SiteEnterpriseSettings: FC<Props> = ({ site }) => {
   const toasts = useToasts();
 
-  console.log(site.plan);
   return (
     <div className='enterprise-settings'>
       <Formik
@@ -48,7 +48,17 @@ export const SiteEnterpriseSettings: FC<Props> = ({ site }) => {
         onSubmit={(values, { setSubmitting }) => {
           (async () => {
             try {
-              console.log(values);
+              await adminSitePlanUpdate({ 
+                siteId: site.id,
+                maxMonthlyRecordings: Number(values.maxMonthlyRecordings),
+                responseTimeHours: Number(values.responseTimeHours),
+                dataStorageMonths: Number(values.dataStorageMonths),
+                support: values.support,
+                ssoEnabled: values.ssoEnabled,
+                auditTrailEnabled: values.auditTrailEnabled,
+                privateInstanceEnabled: values.privateInstanceEnabled,
+                notes: values.notes,
+              });
               toasts.add({ type: 'success', body: 'Enterprise settings updated' });
             } catch(error) {
               console.error(error);

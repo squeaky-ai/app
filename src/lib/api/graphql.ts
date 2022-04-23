@@ -46,6 +46,7 @@ import {
   SitesMagicErasureUpdateInput,
   SitesCssSelectorBlacklistCreateInput,
   SitesCssSelectorBlacklistDeleteInput,
+  AdminSitePlanUpdateInput,
 } from 'types/graphql';
 
 import {
@@ -64,6 +65,7 @@ import {
   MAGIC_ERASURE_ENABLED_MUTATION,
   CSS_SELECTOR_BLACKLIST_CREATE_MUTATION,
   CSS_SELECTOR_BLACKLIST_DELETE_MUTATION,
+  ADMIN_SITE_PLAN_UPDATE_MUTATION,
 } from 'data/sites/mutations';
 
 import {
@@ -730,4 +732,13 @@ export const adminUserDelete = async (input: AdminUserDeleteInput): Promise<void
       cache.gc();
     }
   });
+};
+
+export const adminSitePlanUpdate = async (input: AdminSitePlanUpdateInput): Promise<Site> => {
+  const { data } = await client.mutate({
+    mutation: ADMIN_SITE_PLAN_UPDATE_MUTATION,
+    variables: { input },
+  });
+
+  return data.adminSitePlanUpdate;
 };
