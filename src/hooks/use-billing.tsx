@@ -21,6 +21,7 @@ export const useBilling = (): UseBilling => {
 
   const fallback: Billing = {
     billing: null,
+    plan: null,
     plans: [],
   };
 
@@ -28,7 +29,7 @@ export const useBilling = (): UseBilling => {
     loading,
     error: !!error,
     billing: data 
-      ? { billing: data.site.billing, plans: data.plans } 
+      ? { billing: data.site.billing, plan: data.site.plan, plans: data.plans } 
       : fallback
   };
 };

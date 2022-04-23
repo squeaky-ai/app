@@ -6,4 +6,171 @@
       color: var(--white);
     }
   }
+
+  .stripe-link {
+    align-items: center;
+    color: var(--gray-blue-800);
+    display: flex;
+    font-weight: var(--font-weight-bold);
+
+    .icon {
+      color: var(--mauve-700);
+      font-size: 1.25rem;
+      margin: 0 .5rem 0 0;
+    }
+  }
+
+  .site-card {
+    display: grid;
+    grid-gap: 3rem;
+    grid-template-columns: 1fr 1fr;
+
+    h5 {
+      align-items: center;
+      display: flex;
+      margin: 0 0 2rem 0;
+
+      .icon {
+        color: var(--mauve-700);
+        font-weight: var(--font-weight-normal);
+        margin: 0 .5rem 0 0;
+      }
+
+      &:nth-of-type(2) {
+        margin: 2rem 0 2rem 0;
+      }
+    }
+
+    .details {
+      padding: 2rem 1rem 1rem 1rem;
+
+      .divider {
+        margin: 3rem 0;
+      }
+    }
+
+    .row {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      margin: 0 0 1rem 0;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+
+      span {
+        width: 50%;
+
+        &:first-of-type {
+          font-weight: var(--font-weight-bold);
+        }
+
+        &:last-of-type {
+          text-align: right;
+        }
+      }
+    }
+
+    .subscription {
+      & > div {
+        background: var(--gray-50);
+        border-radius: var(--border-radius-md);
+        padding: 2rem;
+      }
+
+      .no-invoices {
+        margin: 0;
+      }
+
+      .coupon {
+        color: var(--gray-500);
+        font-size: 13px;
+        line-height: 16px;
+      }
+
+      .enterprise-upgrade {
+        color: var(--mauve-700);
+        margin: 0 0 0 1rem;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .enterprise-settings {
+    .checkbox-group {
+      display: flex;
+      margin: 0 0 1.5rem 0;
+
+      .checkbox {
+        margin: 0 1.5rem 0 0;
+
+        &:hover .check {
+          border-color: var(--mauve-700);
+        }
+
+        input:checked + .check {
+          background: var(--mauve-700);
+          border-color: var(--mauve-700);
+        }
+      }
+    }
+
+    .sublabel {
+      justify-content: flex-start;
+
+      i {
+        color: var(--gray-500);
+        font-weight: var(--font-weight-normal);
+        margin: 0 0 0 .25rem;
+      }
+    }
+
+    .radio-group {
+      display: flex;
+      margin: 0 0 1.5rem 0;
+
+      .radio {
+        margin: 0 1.5rem 0 0;
+
+        &:hover .check {
+          border-color: var(--mauve-700);
+        }
+
+        input:checked + .check {
+          border-color: var(--mauve-700);
+        }
+      }
+    }
+
+    .button.primary {
+      background: var(--mauve-700);
+      border-color: var(--mauve-700);
+    }
+  }
+}
+
+.enterprise-upgrade-modal {
+  .primary {
+    background: var(--mauve-700);
+    border-color: var(--mauve-700);
+  }
+
+  a {
+    color: var(--mauve-700);
+  }
+
+  ol {
+    margin: 0;
+    padding: 0 0 0 1.5rem;
+
+    li {
+      margin: 0 0 1.5rem 0;
+
+      .input {
+        margin: .5rem 0 0 0;
+        max-width: 320px;
+      }
+    }
+  }
 }

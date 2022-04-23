@@ -20,13 +20,20 @@ export const usePlan = (props: Props): UsePlan => {
   });
 
   const fallback: SitesPlan = {
-    name: '',
-    type: 0,
+    name: 'Free',
+    tier: 0,
     exceeded: false,
-    billingValid: true,
-    recordingsLimit: 500,
-    recordingsLocked: 0,
-    visitorsLocked: 0,
+    invalid: false,
+    maxMonthlyRecordings: 500,
+    recordingsLockedCount: 0,
+    visitorsLockedCount: 0,
+    dataStorageMonths: 6,
+    responseTimeHours: 168,
+    auditTrailEnabled: false,
+    privateInstanceEnabled: false,
+    ssoEnabled: false,
+    notes: '',
+    support: [],
   };
 
   return {

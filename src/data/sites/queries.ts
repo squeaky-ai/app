@@ -24,9 +24,9 @@ export const GET_SITE_QUERY = gql`
       recordingsCount
       magicErasureEnabled
       plan {
-        type
+        tier
         name
-        billingValid
+        invalid
       }
       team {
         id
@@ -61,9 +61,9 @@ export const GET_SITE_BY_UUID_QUERY = gql`
       magicErasureEnabled
       cssSelectorBlacklist
       plan {
-        type
+        tier
         name
-        billingValid
+        invalid
       }
       team {
         id
@@ -89,13 +89,15 @@ export const GET_PLAN_QUERY = gql`
     site(siteId: $siteId) {
       id
       plan {
-        type
+        tier
         name
         exceeded
-        billingValid
-        recordingsLimit
-        recordingsLocked
-        visitorsLocked
+        invalid
+        maxMonthlyRecordings
+        recordingsLockedCount
+        visitorsLockedCount
+        dataStorageMonths
+        responseTimeHours
       }
     }
   }
@@ -114,6 +116,22 @@ export const GET_BILLING_QUERY = gql`
   query GetSiteBilling($siteId: ID!) {
     site(siteId: $siteId) {
       id
+      plan {
+        tier
+        name
+        exceeded
+        invalid
+        support
+        maxMonthlyRecordings
+        recordingsLockedCount
+        visitorsLockedCount
+        ssoEnabled
+        auditTrailEnabled
+        privateInstanceEnabled
+        responseTimeHours
+        dataStorageMonths
+        notes
+      }
       billing {
         customerId
         status
@@ -135,6 +153,8 @@ export const GET_BILLING_QUERY = gql`
           }
           periodStartAt
           periodEndAt
+          discountName
+          discountPercentage
         }
       }
     }

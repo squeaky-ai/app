@@ -23,7 +23,7 @@ const MUTATION = gql`
       id
       plan {
         name
-        type
+        tier
       }
     }
   }

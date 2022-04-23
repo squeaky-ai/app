@@ -6,6 +6,7 @@ import { Spinner } from 'components/spinner';
 import { Tabs } from 'components/tabs';
 import { BillingTable } from 'components/sites/settings/billing-table';
 import { BillingPlansTable } from 'components/sites/settings/billing-plans-table';
+import { BillingEnterprise } from 'components/sites/settings/billing-enterprise';
 import { PlanChanged } from 'components/sites/settings/plan-changed';
 import { BillingPortalButton } from 'components/sites/settings/billing-portal-button';
 import { Message } from 'components/message';
@@ -49,13 +50,15 @@ export const Billing: FC<Props> = ({ site }) => {
   // - be new (as they clicked this button before but didn't actually make it through)
   const hasBilling = ![undefined, 'new'].includes(billing.billing?.status);
 
+  const isEnterprise = site.plan?.tier >= 5;
+
   return (
     <>
       {loading && <Spinner />}
 
       {!loading && (
         <div className='billing'>
-          {!site.plan.billingValid && (
+          {site.plan.invalid && (
             <Message
               type='error'
               message={<p><b>Attention</b>: We had trouble processing your subscription using your chosen payment method. You&apos;ve been temporarily placed on the free plan. To restore your subscription and unlock your missing data, please update your payment details.</p>}
@@ -69,12 +72,22 @@ export const Billing: FC<Props> = ({ site }) => {
                 name: 'Plans',
                 page: 'plans',
                 body: (
-                  <BillingPlansTable 
-                    site={site}
-                    billing={billing} 
-                    hasBilling={hasBilling}
-                    showPlanChangeMessage={showPlanChangeMessage}
-                  />
+                  isEnterprise
+                    ? (
+                      <BillingEnterprise 
+                        site={site}
+                        billing={billing} 
+                        hasBilling={hasBilling}
+                      />
+                    )
+                    : (
+                      <BillingPlansTable 
+                        site={site}
+                        billing={billing} 
+                        hasBilling={hasBilling}
+                        showPlanChangeMessage={showPlanChangeMessage}
+                      />
+                    )
                 )
               },
               {
