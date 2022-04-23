@@ -20,7 +20,7 @@ const AdminSite: NextPage<ServerSideProps> = () => {
   }
 
   const hasBilling = !!admin.site?.billing;
-  const isEnterprise = admin.site?.plan?.tier > 5;
+  const isEnterprise = admin.site?.plan?.tier >= 5;
 
   return (
     <>

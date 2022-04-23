@@ -60,7 +60,7 @@ export const BillingPlansTableLarge: FC<Props> = ({
           <b>Response times</b>
         </div>
       </div>
-      {billing.plans.slice(0, billing.plans.length - 1).map((plan, index) => {
+      {billing.plans.slice(0, 5).map((plan, index) => {
         const isCurrent = index === planIndex;
         const isDowngrade = index < planIndex;
 

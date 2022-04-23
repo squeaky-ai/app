@@ -116,6 +116,22 @@ export const GET_BILLING_QUERY = gql`
   query GetSiteBilling($siteId: ID!) {
     site(siteId: $siteId) {
       id
+      plan {
+        tier
+        name
+        exceeded
+        invalid
+        support
+        maxMonthlyRecordings
+        recordingsLockedCount
+        visitorsLockedCount
+        ssoEnabled
+        auditTrailEnabled
+        privateInstanceEnabled
+        responseTimeHours
+        dataStorageMonths
+        notes
+      }
       billing {
         customerId
         status
@@ -137,6 +153,8 @@ export const GET_BILLING_QUERY = gql`
           }
           periodStartAt
           periodEndAt
+          discountName
+          discountPercentage
         }
       }
     }

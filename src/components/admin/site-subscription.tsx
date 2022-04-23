@@ -4,7 +4,8 @@ import { startCase, last } from 'lodash';
 import { Icon } from 'components/icon';
 import { Pill } from 'components/pill';
 import { toddMMYYY } from 'lib/dates';
-import { formatCurency } from 'lib/currency';
+import { CURRENCY_SYMBOLS } from 'data/common/constants';
+import { toDecimalCurrency } from 'lib/currency';
 import type { Site } from 'types/graphql';
 
 interface Props {
@@ -28,7 +29,7 @@ export const SiteSubscription: FC<Props> = ({ site, isEnterprise, hasBilling }) 
           <span>
             {site.plan.name}
             {isEnterprise && (
-              <>: {formatCurency(latestTransaction.currency, latestTransaction.amount)} per {latestTransaction.interval}</>
+              <>: {CURRENCY_SYMBOLS[latestTransaction.currency]}{toDecimalCurrency(latestTransaction.amount)} per {latestTransaction.interval}</>
             )}
           </span>
         </div>

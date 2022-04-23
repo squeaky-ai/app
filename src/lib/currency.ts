@@ -19,11 +19,9 @@ export const getUsefulCurrency = (): PlansCurrency => {
   return PlansCurrency.Usd;
 };
 
-export const formatCurency = (currency: PlansCurrency, amount: number) => {
-  const formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency,
-  });
+export const toDecimalCurrency = (value: number) => {
+  const text = value.toString();
+  const position = text.length - 2;
 
-  return formatter.format(amount);
+  return text.slice(0, position) + '.' + text.slice(position);
 };

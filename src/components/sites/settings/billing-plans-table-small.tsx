@@ -37,7 +37,7 @@ export const BillingPlansTableSmall: FC<Props> = ({
 
   return (
     <div className='plan-table-small'>
-      {billing.plans.slice(0, billing.plans.length - 1).map((plan, index) => {
+      {billing.plans.slice(0, 5).map((plan, index) => {
         const isOpen = open.includes(plan.name);
         const isCurrent = index === planIndex;
         const isDowngrade = index < planIndex;
