@@ -32,7 +32,7 @@ export const Page: FC<Props> = ({ children, user, scope }) => {
 
   const member = getTeamMember(site, user);
   const authorized = user.superuser 
-    ? false 
+    ? true 
     : scope.length ? scope.includes(member?.role) : true;
 
   React.useEffect(() => {
