@@ -7,6 +7,7 @@ import { ErrorBoundary } from 'components/sites/error-boundary';
 import { useSidebar } from 'hooks/use-sidebar';
 import type { User, Team } from 'types/graphql';
 import type { Site } from 'types/graphql';
+import { Error } from 'components/error';
 
 interface Children {
   site: Site;
@@ -26,7 +27,7 @@ export const getTeamMember = (site: Site, user: User): Team | null => {
 };
 
 export const Page: FC<Props> = ({ children, user, scope }) => {
-  const { loading, site } = useSite();
+  const { loading, error, site } = useSite();
   const { setSidebar } = useSidebar();
 
   const member = getTeamMember(site, user);
@@ -47,8 +48,12 @@ export const Page: FC<Props> = ({ children, user, scope }) => {
 
   return (
     <>
-      {!loading && !site && (
-        <NotFound />
+      {error && (
+        <Error className='site-page-error' />
+      )}
+
+      {!loading && !site && !error && (
+        <NotFound className='site-page-error' />
       )}
 
       {site && !authorized && (
@@ -59,5 +64,5 @@ export const Page: FC<Props> = ({ children, user, scope }) => {
         {site && authorized && children({ site, member })}
       </ErrorBoundary>
     </>
-  )
+  );
 };
