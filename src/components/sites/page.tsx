@@ -31,7 +31,9 @@ export const Page: FC<Props> = ({ children, user, scope }) => {
   const { setSidebar } = useSidebar();
 
   const member = getTeamMember(site, user);
-  const authorized = scope.length ? scope.includes(member?.role) : true;
+  const authorized = user.superuser 
+    ? false 
+    : scope.length ? scope.includes(member?.role) : true;
 
   React.useEffect(() => {
     if (site) {
