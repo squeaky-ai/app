@@ -29,6 +29,11 @@ export const usePlan = (props: Props): UsePlan => {
     visitorsLockedCount: 0,
     dataStorageMonths: 6,
     responseTimeHours: 168,
+    auditTrailEnabled: false,
+    privateInstanceEnabled: false,
+    ssoEnabled: false,
+    notes: '',
+    support: [],
   };
 
   return {

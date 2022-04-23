@@ -52,6 +52,10 @@ export const toDayOfMonth = (date: Date) => {
   return format(date, 'do MMMM');
 };
 
+export const toddMMYYY = (date: Date) => {
+  return format(date, 'do LLL yyyy');
+};
+
 export const daysBefore = (count = 7, from?: Date) => {
   from ||= new Date();
 

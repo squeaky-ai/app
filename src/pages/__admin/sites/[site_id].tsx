@@ -6,46 +6,69 @@ import { PageLoading } from 'components/sites/page-loading';
 import { Main } from 'components/main';
 import { NotFound } from 'components/sites/not-found';
 import { BreadCrumbs } from 'components/admin/breadcrumbs';
-import { useAdmin } from 'hooks/use-admin';
+import { useAdminSite } from 'hooks/use-admin-site';
+import { Card } from 'components/card';
+import { Icon } from 'components/icon';
+import { SiteDetails } from 'components/admin/site-details';
+import { SiteSubscription } from 'components/admin/site-subscription';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
-import { useRouter } from 'next/router';
-
 const AdminSite: NextPage<ServerSideProps> = () => {
-  const router = useRouter();
-  const { admin, loading, error } = useAdmin();
+  const { admin, loading, error } = useAdminSite();
 
   if (error) {
     return <Error />;
   }
 
-  const site = admin.sites.find(site => site.id === router.query.site_id);
+  const hasBilling = !!admin.site?.billing;
+  const isEnterprise = admin.site?.plan?.tier > 5;
 
   return (
     <>
       <Head>
-        <title>Squeaky | Admin | Site | {site?.name}</title>
+        <title>Squeaky | Admin | Site | {admin.site?.name}</title>
       </Head>
 
       <Main>
         <BreadCrumbs items={[
           { name: 'Admin', href: '/__admin/dashboard' }, 
           { name: 'Sites', href: '/__admin/sites' },
-          { name: site?.name || 'Unknown' },
+          { name: admin.site?.name || 'Unknown' },
         ]} />
 
         {loading && (
           <PageLoading />
         )}
         
-        {!loading && !site && (
+        {!loading && !admin.site && (
           <NotFound />
         )}
 
-        {site && (
+        {admin.site && (
           <>
             <h3 className='title'>
-              {site.name}
+              {admin.site.name}
+
+              {hasBilling && (
+                <a className='stripe-link' href={`https://dashboard.stripe.com/test/customers/${admin.site.billing.customerId}`} target='_blank' rel='noreferrer'>
+                  <Icon name='external-link-line' />
+                  Stripe
+                </a>
+              )}
             </h3>
+
+            <Card className='site-card'>
+              <SiteDetails 
+                site={admin.site}
+                activeVisitors={admin.activeVisitors}
+                isEnterprise={isEnterprise}
+              />
+
+              <SiteSubscription 
+                site={admin.site}
+                hasBilling={hasBilling}
+                isEnterprise={isEnterprise}
+              />
+            </Card>
           </>
         )}
       </Main>
