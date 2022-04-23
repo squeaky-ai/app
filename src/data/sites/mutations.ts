@@ -137,3 +137,14 @@ export const ADMIN_SITE_PLAN_UPDATE_MUTATION = gql`
     }
   }
 `;
+
+export const ADMIN_SITE_ASSOCIATE_CUSTOMER_MUTATION = gql`
+  mutation($input: AdminSiteAssociateCustomerInput!) {
+    adminSiteAssociateCustomer(input: $input) {
+      id
+      billing {
+        customerId
+      }
+    }
+  }
+`;

@@ -47,6 +47,7 @@ import {
   SitesCssSelectorBlacklistCreateInput,
   SitesCssSelectorBlacklistDeleteInput,
   AdminSitePlanUpdateInput,
+  AdminSiteAssociateCustomerInput,
 } from 'types/graphql';
 
 import {
@@ -66,6 +67,7 @@ import {
   CSS_SELECTOR_BLACKLIST_CREATE_MUTATION,
   CSS_SELECTOR_BLACKLIST_DELETE_MUTATION,
   ADMIN_SITE_PLAN_UPDATE_MUTATION,
+  ADMIN_SITE_ASSOCIATE_CUSTOMER_MUTATION,
 } from 'data/sites/mutations';
 
 import {
@@ -741,4 +743,13 @@ export const adminSitePlanUpdate = async (input: AdminSitePlanUpdateInput): Prom
   });
 
   return data.adminSitePlanUpdate;
+};
+
+export const adminSiteAssociateCustomer = async (input: AdminSiteAssociateCustomerInput): Promise<Site> => {
+  const { data } = await client.mutate({
+    mutation: ADMIN_SITE_ASSOCIATE_CUSTOMER_MUTATION,
+    variables: { input },
+  });
+
+  return data.adminSiteAssociateCustomer;
 };

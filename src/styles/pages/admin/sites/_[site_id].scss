@@ -88,6 +88,12 @@
         font-size: 13px;
         line-height: 16px;
       }
+
+      .enterprise-upgrade {
+        color: var(--mauve-700);
+        margin: 0 0 0 1rem;
+        text-decoration: underline;
+      }
     }
   }
 
@@ -140,6 +146,31 @@
     .button.primary {
       background: var(--mauve-700);
       border-color: var(--mauve-700);
+    }
+  }
+}
+
+.enterprise-upgrade-modal {
+  .primary {
+    background: var(--mauve-700);
+    border-color: var(--mauve-700);
+  }
+
+  a {
+    color: var(--mauve-700);
+  }
+
+  ol {
+    margin: 0;
+    padding: 0 0 0 1.5rem;
+
+    li {
+      margin: 0 0 1.5rem 0;
+
+      .input {
+        margin: .5rem 0 0 0;
+        max-width: 320px;
+      }
     }
   }
 }

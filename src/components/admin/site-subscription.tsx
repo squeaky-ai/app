@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import { startCase, last } from 'lodash';
 import { Icon } from 'components/icon';
 import { Pill } from 'components/pill';
+import { SiteEnterpriseUpgrade } from 'components/admin/site-enterprise-upgrade';
 import { toddMMYYY } from 'lib/dates';
 import { CURRENCY_SYMBOLS } from 'data/common/constants';
 import { toDecimalCurrency } from 'lib/currency';
@@ -28,8 +29,13 @@ export const SiteSubscription: FC<Props> = ({ site, isEnterprise, hasBilling }) 
           <span>Plan</span>
           <span>
             {site.plan.name}
+
             {isEnterprise && latestTransaction && (
               <>: {CURRENCY_SYMBOLS[latestTransaction.currency]}{toDecimalCurrency(latestTransaction.amount)} per {latestTransaction.interval}</>
+            )}
+
+            {!isEnterprise && (
+              <SiteEnterpriseUpgrade site={site} />
             )}
           </span>
         </div>
@@ -44,6 +50,10 @@ export const SiteSubscription: FC<Props> = ({ site, isEnterprise, hasBilling }) 
             </span>
           </div>
         )}
+        <div className='row'>
+          <span>Customer ID</span>
+          <span>{site.billing?.customerId || '-'}</span>
+        </div>
         <div className='row'>
           <span>Plan Exceeded</span>
           <span>
