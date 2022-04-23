@@ -92,7 +92,7 @@ export const GET_PLAN_QUERY = gql`
         tier
         name
         exceeded
-        valid
+        invalid
         maxMonthlyRecordings
         recordingsLockedCount
         visitorsLockedCount
