@@ -11,6 +11,7 @@ import { Cell, Row } from 'components/table';
 import { Pill } from 'components/pill';
 import { Dropdown } from 'components/dropdown';
 import { Flag } from 'components/flag';
+import { Highlighter } from 'components/highlighter';
 import { getLinkedData, groupVisitorBrowsers, groupVisitorDevices, groupVisitorCountries } from 'lib/visitors';
 import type { Site } from 'types/graphql';
 import type { ExternalAttributes } from 'types/visitors';
@@ -19,10 +20,11 @@ import type { Visitor } from 'types/graphql';
 interface Props {
   site: Site;
   visitor: Visitor;
+  search: string;
   style?: React.CSSProperties;
 }
 
-export const VisitorsItem: FC<Props> = ({ site, visitor, style }) => {
+export const VisitorsItem: FC<Props> = ({ site, visitor, search, style }) => {
   const rowActionsRef = React.useRef<Dropdown>();
 
   const linkedData = getLinkedData<ExternalAttributes>(visitor);
@@ -44,16 +46,28 @@ export const VisitorsItem: FC<Props> = ({ site, visitor, style }) => {
           : <Pill type='tertiary'>New</Pill>}
       </Cell>
       <Cell className='primary'>
-        <VisitorsStarred site={site} visitor={visitor} link />
+        <VisitorsStarred 
+          site={site}
+          visitor={visitor} 
+          search={search}
+          link 
+          highlight
+        />
       </Cell>
       <Cell>
-        {linkedData?.id || '-'}
+        <Highlighter value={search}>
+          {linkedData?.id || '-'}
+        </Highlighter>
       </Cell>
       <Cell>
-        {linkedData?.name || '-'}
+        <Highlighter value={search}>
+          {linkedData?.name || '-'}
+        </Highlighter>
       </Cell>
       <Cell>
-        {linkedData?.email || '-'}
+        <Highlighter value={search}>
+          {linkedData?.email || '-'}
+        </Highlighter>
       </Cell>
       <Cell>
         {visitor.recordingCount?.total || 0}

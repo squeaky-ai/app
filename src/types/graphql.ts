@@ -1525,6 +1525,7 @@ export type SiteVisitorArgs = {
 export type SiteVisitorsArgs = {
   filters?: InputMaybe<VisitorsFilters>;
   page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
   size?: InputMaybe<Scalars['Int']>;
   sort?: InputMaybe<VisitorsSort>;
 };

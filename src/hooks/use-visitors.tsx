@@ -8,6 +8,7 @@ interface Props {
   page: number;
   size?: number;
   sort?: VisitorsSort;
+  search?: string;
   filters?: VisitorsFilters;
 }
 
@@ -17,7 +18,7 @@ interface UseVisitors {
   visitors: Visitors;
 }
 
-export const useVisitors = ({ page, size, sort, filters }: Props): UseVisitors => {
+export const useVisitors = ({ page, size, sort, search, filters }: Props): UseVisitors => {
   const router = useRouter();
 
   const { data, loading, error, previousData } = useQuery<{ site: Site }>(GET_VISITORS_QUERY, {
@@ -27,6 +28,7 @@ export const useVisitors = ({ page, size, sort, filters }: Props): UseVisitors =
       size,
       sort,
       filters,
+      search,
     }
   });
 

@@ -6,16 +6,19 @@ import { useRouter } from 'next/router';
 import { Icon } from 'components/icon';
 import { Tooltip } from 'components/tooltip';
 import { visitorStarred } from 'lib/api/graphql';
+import { Highlighter } from 'components/highlighter';
 import type { Visitor } from 'types/graphql';
 import type { Site } from 'types/graphql';
 
 interface Props {
   site: Site;
   link?: boolean;
+  highlight?: boolean;
+  search?: string;
   visitor: Visitor;
 }
 
-export const VisitorsStarred: FC<Props> = ({ site, link, visitor }) => {
+export const VisitorsStarred: FC<Props> = ({ site, search, link, highlight, visitor }) => {
   const router = useRouter();
 
   const starVisitor = async () => {
@@ -25,6 +28,10 @@ export const VisitorsStarred: FC<Props> = ({ site, link, visitor }) => {
       starred: !visitor.starred,
     });
   };
+
+  const visitorId = highlight
+    ? <Highlighter value={search}>{visitor.visitorId}</Highlighter>
+    : visitor.visitorId
 
   return (
     <>
@@ -38,8 +45,8 @@ export const VisitorsStarred: FC<Props> = ({ site, link, visitor }) => {
         {visitor.starred ? 'Starred' : 'Not starred'}
       </Tooltip>
       {link
-        ? <Link href={`/sites/${router.query.site_id}/visitors/${visitor.id}`}><a>{visitor.visitorId}</a></Link>
-        :visitor.visitorId
+        ? <Link href={`/sites/${router.query.site_id}/visitors/${visitor.id}`}><a>{visitorId}</a></Link>
+        : visitorId
       }
     </>
   );

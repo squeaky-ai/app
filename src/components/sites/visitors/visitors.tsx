@@ -24,6 +24,7 @@ import type { VisitorsFilters } from 'types/graphql';
 
 interface Props {
   site: Site;
+  search: string;
   columns: Column[];
   page: number;
   size: number;
@@ -36,6 +37,7 @@ interface Props {
 
 export const Visitors: FC<Props> = ({ 
   site,
+  search,
   columns, 
   filters,
   page,
@@ -49,6 +51,7 @@ export const Visitors: FC<Props> = ({
     page, 
     sort,
     size,
+    search,
     filters: formatFilterDates(filters),
   });
 
@@ -65,10 +68,6 @@ export const Visitors: FC<Props> = ({
 
   return (
     <>
-      {!visitors.items.length && (
-        <NoResults illustration='illustration-13' title='There are no visitors matching your selected filters.' />
-      )}
-
       <DismissableMessage
         preference={Preference.VISITORS_LINKED_DATA_HIDE}
         type='info'
@@ -76,6 +75,10 @@ export const Visitors: FC<Props> = ({
         heading={<p><Icon name='link-m' /> Linked Data</p>}
         message={<p>The columns using the <Icon name='link-m' /> link icon are used to display linked user data from your website or web app. To discover how you can link Squeaky visitor records directly with data of logged in users, <a href='/developers' target='_blank'>click here</a>.</p>}
       />
+
+      {!visitors.items.length && (
+        <NoResults illustration='illustration-13' title='There are no visitors matching your selected filters.' />
+      )}
 
       <TableWrapper>
         <Table className={classnames('visitors-list hover', tableClassNames, { hide: items.length === 0 })}>
@@ -150,6 +153,7 @@ export const Visitors: FC<Props> = ({
               site={site} 
               visitor={v} 
               key={v.visitorId} 
+              search={search}
               style={rowStyle}
             />
           ))}

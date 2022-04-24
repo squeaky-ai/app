@@ -11,6 +11,7 @@ import { VisitorsColumns } from 'components/sites/visitors/visitors-columns';
 import { Filters } from 'components/sites/filters/visitors/filters';
 import { Unlock } from 'components/sites/unlock';
 import { Tags } from 'components/sites/filters/visitors/tags';
+import { Search } from 'components/search';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { FILTERS, COLUMNS, DEFAULT_COLUMNS } from 'data/visitors/constants';
 import { getColumnPreferences } from 'lib/tables';
@@ -26,6 +27,7 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
 
   const [page, setPage] = React.useState<number>(1);
   const [size, setSize] = React.useState<number>(25);
+  const [search, setSearch] = React.useState<string>('');
 
   const { sort, setSort } = useSort<VisitorsSort>('visitors');
   const { filters, setFilters } = useFilters<VisitorsFilters>('visitors');
@@ -70,6 +72,11 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
               <menu>
                 {site.recordingsCount > 0 && (
                   <>
+                    <Search
+                      search={search}
+                      onSearch={setSearch}
+                      placeholder='Search ID&apos;s and linked data...'
+                    />
                     <div className='menu-item columns'>
                       <VisitorsColumns 
                         columns={columns}
@@ -104,7 +111,8 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
 
                 <Visitors 
                   site={site} 
-                  filters={filters} 
+                  filters={filters}
+                  search={search} 
                   columns={columns}
                   size={size}
                   sort={sort}
