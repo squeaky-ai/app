@@ -1,20 +1,18 @@
 .search-input {
   margin: 0 .75rem 0 0;
   position: relative;
-  width: 16rem;
+  width: 20rem;
 
   .input {
-    font-size: 13px;
-    height: 2rem;
-    line-height: 16px;
     margin: 0;
+    padding-right: 2rem;
   }
 
   .icon {
     color: var(--gray-200);
-    font-size: 1rem;
+    font-size: 1.25rem;
     position: absolute;
-    right: .5rem;
-    top: .45rem;
+    right: .55rem;
+    top: .55rem;
   }
 }
