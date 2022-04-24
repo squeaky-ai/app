@@ -44,7 +44,9 @@ export const SiteSubscription: FC<Props> = ({ site, isEnterprise, hasBilling }) 
             <span>Coupons</span>
             <span>
               {hasBilling && latestTransaction?.discountName
-                ? <span className='coupon'>{`${Number(latestTransaction.discountPercentage)}% ${latestTransaction.discountName}`}</span>
+                ? latestTransaction.discountPercentage
+                    ? <span className='coupon'>{`${Number(latestTransaction.discountPercentage)}% ${latestTransaction.discountName}`}</span>
+                    : <span className='coupon'>{CURRENCY_SYMBOLS[latestTransaction.currency]}{toDecimalCurrency(latestTransaction.discountAmount)}</span>
                 : '-'
               }
             </span>

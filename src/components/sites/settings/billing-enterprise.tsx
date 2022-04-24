@@ -6,6 +6,8 @@ import { last } from 'lodash';
 import { Container } from 'components/container';
 import { Icon } from 'components/icon';
 import { Card } from 'components/card';
+import { CURRENCY_SYMBOLS } from 'data/common/constants';
+import { toDecimalCurrency } from 'lib/currency';
 import type { Site } from 'types/graphql';
 import type { Billing } from 'types/billing';
 
@@ -56,7 +58,12 @@ export const BillingEnterprise: FC<Props> = ({ billing }) => {
               {latestTransaction?.discountName && (
                 <>
                   <p>Discounts:</p>
-                  <p>{latestTransaction.discountName} <span>{Number(latestTransaction.discountPercentage)}%</span></p>
+                  {latestTransaction.discountPercentage && (
+                    <p>{latestTransaction.discountName} <span>{Number(latestTransaction.discountPercentage)}%</span></p>
+                  )}
+                  {latestTransaction.discountAmount && (
+                    <p>{latestTransaction.discountName} <span>{CURRENCY_SYMBOLS[latestTransaction.currency]}{toDecimalCurrency(latestTransaction.discountAmount)}</span></p>
+                  )}
                 </>
               )}
             </div>

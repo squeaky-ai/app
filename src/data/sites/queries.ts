@@ -155,6 +155,7 @@ export const GET_BILLING_QUERY = gql`
           periodEndAt
           discountName
           discountPercentage
+          discountAmount
         }
       }
     }

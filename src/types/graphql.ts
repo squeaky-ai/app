@@ -1706,6 +1706,7 @@ export type SubscriptionsTransaction = {
   __typename?: 'SubscriptionsTransaction';
   amount: Scalars['Int'];
   currency: PlansCurrency;
+  discountAmount?: Maybe<Scalars['Int']>;
   discountId?: Maybe<Scalars['String']>;
   discountName?: Maybe<Scalars['String']>;
   discountPercentage?: Maybe<Scalars['Float']>;

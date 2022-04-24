@@ -106,6 +106,7 @@ export const GET_ADMIN_SITE_QUERY = gql`
             periodEndAt
             discountName
             discountPercentage
+            discountAmount
           }
         }
         team {
