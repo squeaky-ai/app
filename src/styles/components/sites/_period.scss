@@ -8,10 +8,12 @@
       border: none;
       border-radius: var(--border-radius-md);
       display: flex;
-      font-weight: var(--font-weight-bold);
-      height: 40px;
+      font-size: 13px;
+      font-weight: var(--font-weight-block);
+      height: 2rem;
+      line-height: 16px;
       margin-left: .5rem;
-      padding: 0 1rem;
+      padding: 0 .75rem;
 
       @include breakpoint-sm {
         margin: 0;
@@ -30,12 +32,12 @@
         }
       }
 
-      i {
+      .icon {
         position: static;
 
         &:not(.arrow) {
           color: var(--blue-500);
-          font-size: 1.25rem;
+          font-size: 1rem;
           margin-right: .5rem;
 
           @include breakpoint-sm {
@@ -48,7 +50,7 @@
         align-items: center;
         display: inline-flex;
         font-weight: var(--font-weight-normal);
-        margin: 0 .5rem;
+        margin: 0 .25rem 0 .5rem;
 
         .icon {
           color: var(--gray-300);

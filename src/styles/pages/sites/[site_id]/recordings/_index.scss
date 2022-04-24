@@ -91,21 +91,23 @@
           border: none;
           border-radius: var(--border-radius-md);
           display: flex;
-          font-weight: var(--font-weight-bold);
-          height: 40px;
-          margin-left: .5rem;
-          padding: 0 1rem;
+          font-size: 13px;
+          font-weight: var(--font-weight-block);
+          height: 2rem;
+          line-height: 16px;
+          margin-left: 0;
+          padding: 0 .75rem;
   
           &:hover {
             background: var(--gray-100);
           }
   
-          i {
+          .icon {
             position: static;
   
             &:not(.arrow) {
               color: var(--blue-500);
-              font-size: 1.25rem;
+              font-size: 1rem;
               margin-right: .5rem;
             }
           }
