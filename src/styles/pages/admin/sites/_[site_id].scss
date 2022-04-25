@@ -60,7 +60,10 @@
       }
 
       span {
+        overflow: hidden;
+        text-overflow: ellipsis;
         width: 50%;
+        white-space: nowrap;
 
         &:first-of-type {
           font-weight: var(--font-weight-bold);
