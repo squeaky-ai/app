@@ -14,7 +14,7 @@ import { useSidebar } from 'hooks/use-sidebar';
 import { Breakpoints } from 'data/common/constants';
 import { Preferences, Preference } from 'lib/preferences';
 import { OWNER, ADMIN } from 'data/teams/constants';
-import { SidebarLogout } from 'components/app/sidebar-logout';
+import { SidebarHelp } from 'components/app/sidebar-help';
 import { SidebarCollapse } from 'components/app/sidebar-collapse';
 
 export const Sidebar: FC = () => {
@@ -140,7 +140,7 @@ export const Sidebar: FC = () => {
                 <span>Analytics</span>
               </a>
             </Link>
-            <SidebarNested 
+            <SidebarNested
               name='Feedback'
               icon='user-voice-line'
               collapse={() => collapse('feedback')}
@@ -205,12 +205,12 @@ export const Sidebar: FC = () => {
         {open ? <Icon name='close-line' /> : <Icon name='menu-line' />}
       </Button>
       <div className='feedback'>
-        <p>Send feedback to:</p>
+        <p>Get in touch:</p>
         <a href='mailto:hello@squeaky.ai'>hello@squeaky.ai</a>
       </div>
       <footer>
         <SidebarAccount path={path} />
-        <SidebarLogout />
+        <SidebarHelp />
         <SidebarCollapse open={open} toggleOpen={toggleOpen} />
       </footer>
     </aside>
