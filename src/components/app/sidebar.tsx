@@ -14,7 +14,7 @@ import { useSidebar } from 'hooks/use-sidebar';
 import { Breakpoints } from 'data/common/constants';
 import { Preferences, Preference } from 'lib/preferences';
 import { OWNER, ADMIN } from 'data/teams/constants';
-import { SidebarHelp } from 'components/app/sidebar-help';
+import { SidebarSupport } from 'components/app/sidebar-support';
 import { SidebarCollapse } from 'components/app/sidebar-collapse';
 
 export const Sidebar: FC = () => {
@@ -58,8 +58,14 @@ export const Sidebar: FC = () => {
     // is not stale. The closure stores the value
     // when it's defined which is going to be wrong
     setOpen(open => {
-      if (!open) setExpanded([]);
+      if (!open) setExpanded([]);      
       return open;
+    });
+
+    setExpanded(expanded => {
+      // This does not behave the others and should
+      // always be closed on body click
+      return expanded.filter(e => e !== 'support');
     });
   };
 
@@ -210,7 +216,11 @@ export const Sidebar: FC = () => {
       </div>
       <footer>
         <SidebarAccount path={path} />
-        <SidebarHelp />
+        <SidebarSupport 
+          collapse={() => collapse('support')}
+          expand={() => expand('support')}
+          expanded={expanded.includes('support')}
+        />
         <SidebarCollapse open={open} toggleOpen={toggleOpen} />
       </footer>
     </aside>
