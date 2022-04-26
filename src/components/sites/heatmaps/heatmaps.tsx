@@ -64,7 +64,7 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
 
           <div className='button-group'>
             <Button className={classnames(type === 'Click' ? 'primary' : 'blank')} onClick={() => setType(HeatmapsType.Click)}>
-              Click
+              {device === HeatmapsDevice.Desktop ? 'Clicks' : 'Taps'}
             </Button>
             <Button className={classnames(type === 'Scroll' ? 'primary' : 'blank')} onClick={() => setType(HeatmapsType.Scroll)}>
               Scroll

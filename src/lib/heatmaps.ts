@@ -143,8 +143,9 @@ export const showClickMaps = (doc: Document, items: HeatmapsItem[]) => {
       right: 0;
       top: 0;
       transform-origin: center center;
-      z-index: 9999999;
     `;
+
+    tag.style.zIndex = `${1000000 + click.count}`;
 
     elem.appendChild(tag);
   });

@@ -13,51 +13,39 @@ export const HEATMAP_COLOURS: HeatmapColor[] = [
     percentage: 0
   },
   {
-    background: '#FFF178',
+    background: '#FFF7D9',
     border: '#BFBFBF',
     foreground: '#000000',
-    percentage: 10
+    percentage: 15
   },
   {
-    background: '#FBC73B',
-    border: '#BFBFBF',
-    foreground: '#000000',
-    percentage: 20
-  },
-  {
-    background: '#FFB506',
+    background: '#FFE99B',
     border: '#BFBFBF',
     foreground: '#000000',
     percentage: 30
   },
   {
+    background: '#FBC73B',
+    border: '#BFBFBF',
+    foreground: '#000000',
+    percentage: 45
+  },
+  {
     background: '#FA9116',
     border: '#BFBFBF',
     foreground: '#000000',
-    percentage: 40
-  },
-  {
-    background: '#F55962',
-    border: '#BFBFBF',
-    foreground: '#FFFFFF',
-    percentage: 50
+    percentage: 60
   },
   {
     background: '#F96155',
     border: '#BFBFBF',
     foreground: '#FFFFFF',
-    percentage: 60
+    percentage: 75
   },
   {
-    background: '#B547C9',
+    background: '#FF2E86',
     border: '#BFBFBF',
     foreground: '#FFFFFF',
-    percentage: 70
-  },
-  {
-    background: '#8249FB',
-    border: '#BFBFBF',
-    foreground: '#FFFFFF',
-    percentage: 80
+    percentage: 90
   },
 ];

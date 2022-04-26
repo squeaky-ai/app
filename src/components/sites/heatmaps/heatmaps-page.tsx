@@ -90,6 +90,7 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items
   const inject = (doc: Document) => setTimeout(() => {
     cleanup(doc);
 
+    doc.documentElement.style.overflowY = 'auto';
     doc.documentElement.scrollTo(0, 0);
     doc.body.style.cssText += 'pointer-events: none; user-select: none;';
     doc.head.innerHTML += iframeStyles;
