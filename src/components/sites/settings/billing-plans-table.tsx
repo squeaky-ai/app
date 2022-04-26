@@ -3,12 +3,11 @@ import type { FC } from 'react';
 import Link from 'next/link';
 import { Button } from 'components/button';
 import { Icon } from 'components/icon';
-import { Label } from 'components/label';
 import { Container } from 'components/container';
 import { Select, Option } from 'components/select';
 import { BillingPlansTableSmall } from 'components/sites/settings/billing-plans-table-small';
 import { BillingPlansTableLarge } from 'components/sites/settings/billing-plans-table-large';
-import { getUsefulCurrency } from 'lib/currency';
+import { Interval, getUsefulCurrency } from 'lib/currency';
 import { PlansCurrency, Site } from 'types/graphql';
 import type { Billing } from 'types/billing';
 
@@ -22,6 +21,7 @@ interface Props {
 
 export const BillingPlansTable: FC<Props> = ({ site, billing, hasBilling, showPlanChangeMessage }) => {
   const [currency, setCurrency] = React.useState<PlansCurrency>(getUsefulCurrency());
+  const [interval, setInterval] = React.useState<Interval>(Interval.MONTHLY);
 
   const planIndex = billing.plans.findIndex(plan => Number(plan.id) === site.plan.tier);
 
@@ -36,6 +36,11 @@ export const BillingPlansTable: FC<Props> = ({ site, billing, hasBilling, showPl
   const onCurrencyChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;
     setCurrency(value as PlansCurrency);
+  };
+
+  const onIntervalChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const { value } = event.target;
+    setInterval(value as Interval);
   };
 
   React.useEffect(() => {
@@ -53,13 +58,20 @@ export const BillingPlansTable: FC<Props> = ({ site, billing, hasBilling, showPl
         </Container>
 
         {!hasTransactions && (
-          <div className='currency-select'>
-            <Label htmlFor='currency'>Currency</Label>
-            <Select name='currency' value={currency} onChange={onCurrencyChange}>
-              <Option value={PlansCurrency.Eur}>Euro (€)</Option>
-              <Option value={PlansCurrency.Gbp}>GBP (£)</Option>
-              <Option value={PlansCurrency.Usd}>USD ($)</Option>
-            </Select>
+          <div className='options'>
+            <div className='currency-select'>
+              <Select name='currency' value={currency} onChange={onCurrencyChange}>
+                <Option value={PlansCurrency.Eur}>Euro (€)</Option>
+                <Option value={PlansCurrency.Gbp}>GBP (£)</Option>
+                <Option value={PlansCurrency.Usd}>USD ($)</Option>
+              </Select>
+            </div>
+            <div className='interval-select'>
+              <Select name='interval' value={interval} onChange={onIntervalChange}>
+                <Option value={Interval.MONTHLY}>Pay monthly</Option>
+                <Option value={Interval.YEARLY}>Pay yearly -20%</Option>
+              </Select>
+            </div>
           </div>
         )}
       </div>
@@ -78,6 +90,7 @@ export const BillingPlansTable: FC<Props> = ({ site, billing, hasBilling, showPl
         billing={billing}
         planIndex={planIndex}
         currency={currency}
+        interval={interval}
         hasBilling={hasBilling}
         showPlanChangeMessage={showPlanChangeMessage}
       />

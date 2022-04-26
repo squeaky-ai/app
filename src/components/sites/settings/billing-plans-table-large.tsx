@@ -2,9 +2,10 @@ import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
 import { Icon } from 'components/icon';
+import { Tag } from 'components/tag';
 import { Checkout } from 'components/sites/settings/checkout';
 import { CURRENCY_SYMBOLS } from 'data/common/constants';
-import { getPricingForCurrency } from 'lib/currency';
+import { Interval, getPricingForCurrency } from 'lib/currency';
 import { PlansCurrency, Site } from 'types/graphql';
 import type { Billing } from 'types/billing';
 
@@ -13,6 +14,7 @@ interface Props {
   billing: Billing;
   planIndex: number;
   currency: PlansCurrency;
+  interval: Interval;
   hasBilling: boolean;
   showPlanChangeMessage: (name: string) => void;
 }
@@ -22,6 +24,7 @@ export const BillingPlansTableLarge: FC<Props> = ({
   billing, 
   planIndex, 
   currency,
+  interval,
   hasBilling,
   showPlanChangeMessage,
 }) => {
@@ -68,10 +71,15 @@ export const BillingPlansTableLarge: FC<Props> = ({
           <div className={classnames('col', { current: isCurrent })} key={plan.name}>
             <div className='cell head'>
               <p>
-                <b>{plan.name}</b>
+                <b>
+                  {plan.name}
+                  {interval === Interval.YEARLY && (
+                   <Tag>20% OFF</Tag>
+                 )}
+                </b>
               </p>
               <p className='pricing'>
-                <b>{CURRENCY_SYMBOLS[currency]}{getPricingForCurrency(plan, currency)}</b> per month
+                <b>{CURRENCY_SYMBOLS[currency]}{getPricingForCurrency(plan, currency)}</b> per {interval}
               </p>
               <Checkout 
                 site={site}

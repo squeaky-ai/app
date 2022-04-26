@@ -18,6 +18,21 @@
       display: none;
     }
 
+    .tag {
+      background: var(--rose-500);
+      border-color: var(--rose-500);
+      border-radius: var(--border-radius-sm);
+      height: 1.25rem;
+      margin: 0 0 0 .5rem;
+      padding: 0;
+
+      span {
+        font-size: 12px;
+        line-height: 16px;
+        padding: 0 .125rem;
+      }
+    }
+
     .col {
       background: var(--white);
       position: relative;
@@ -102,6 +117,13 @@
 
           &:last-of-type {
             border-bottom: none;
+          }
+
+          &.head {
+            p {
+              align-items: center;
+              display: flex;
+            }
           }
         }
       }
@@ -324,6 +346,10 @@
     }
   }
 
+  .options {
+    display: flex;
+  }
+
   .currencies {
     align-items: center;
     display: grid;
@@ -339,10 +365,6 @@
       display: flex;
       margin: 0 0 0 2rem;
       padding: 0 0 0 2rem;
-      
-      .label {
-        margin: 0 1rem 0 0;
-      }
   
       .select {
         margin: 0;
@@ -350,18 +372,53 @@
       }
     }
 
+    .interval-select {
+      align-items: center;
+      display: flex;
+      margin: 0;
+      padding: 0 0 0 1rem;
+
+      .select {
+        margin: 0;
+        width: 190px;
+      }
+    }
+
     @include breakpoint-md {
       grid-template-columns: 1fr;
+
+      .options {
+        margin: 2rem 0 0 0;
+      }
 
       .currency-select {
         border: none;
         display: block;
-        margin: 1.5rem 0 0 0;
+        margin: 0;
         padding: 0;
+      }
+    }
+
+    @include breakpoint-sm {
+      .options {
+        flex-direction: column;
+      }
+
+      .currency-select {
+        width: 100%;
 
         .select {
-          margin: .75rem 0 0 0;
-          width: 16rem;
+          width: 100%;
+        }
+      }
+
+      .interval-select {
+        margin: .75rem 0 0 0;
+        padding: 0;
+        width: 100%;
+
+        .select {
+          width: 100%;
         }
       }
     }

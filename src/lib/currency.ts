@@ -1,6 +1,11 @@
 import { PlansCurrency } from 'types/graphql';
 import type { Plan } from 'types/graphql';
 
+export enum Interval {
+  MONTHLY = 'month',
+  YEARLY = 'year',
+}
+
 export const getPricingForCurrency = (plan: Plan, currency: PlansCurrency) => {
   return (plan.pricing || []).find(p => p.currency === currency)?.amount || 0;
 };
