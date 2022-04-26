@@ -114,6 +114,15 @@ export const CSS_SELECTOR_BLACKLIST_DELETE_MUTATION = gql`
   }
 `;
 
+export const ANONYMISE_FORM_INPUTS_UPDATE_MUTATION = gql`
+  mutation AnonymuseFormInputsUpdate($input: AnonymiseFormInputsUpdateInput!) {
+    anonymiseFormInputsUpdate(input: $input) {
+      id
+      anonymiseFormInputs
+    }
+  }
+`;
+
 export const ADMIN_SITE_PLAN_UPDATE_MUTATION = gql`
   mutation($input: AdminSitePlanUpdateInput!) {
     adminSitePlanUpdate(input: $input) {
