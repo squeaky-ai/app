@@ -7,11 +7,13 @@ import { useRecording } from 'hooks/use-heatmaps';
 import { DeviceWidths, showClickMaps, showScrollMaps, iframeStyles, getElements } from 'lib/heatmaps';
 import { HeatmapsDevice } from 'types/graphql';
 import type { Event } from 'types/event';
+import type { HeatmapsDisplay } from 'types/heatmaps';
 import type { HeatmapsItem, HeatmapsType } from 'types/graphql';
 
 interface Props {
   type: HeatmapsType;
   device: HeatmapsDevice;
+  display: HeatmapsDisplay;
   page: string;
   recordingId: string;
   items: HeatmapsItem[];
@@ -19,7 +21,7 @@ interface Props {
 
 let replayer: Replayer;
 
-export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items }) => {
+export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, display, items }) => {
   const ref = React.useRef<HTMLDivElement>(null);
   const [scale, setScale] = React.useState<number>(1);
   const [loading, setLoading] = React.useState<boolean>(true);
@@ -96,7 +98,7 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items
     doc.head.innerHTML += iframeStyles;
 
     type === 'Click' 
-      ? showClickMaps(doc, items)
+      ? showClickMaps(doc, items, display)
       : showScrollMaps(doc, items, scale);
 
     // Now that stuff isn't going to jump the spinner can be removed
@@ -140,12 +142,12 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, items
     shrink();
   }, [recording?.id, page]);
 
-  // Redraw the tags inside the iframe whenever the type or
-  // items change 
+  // Redraw the tags inside the iframe whenever the type,
+  // display or items change 
   React.useEffect(() => {
     draw();
     shrink();
-  }, [type, items]);
+  }, [type, items, display]);
 
   React.useEffect(() => {
     return () => {

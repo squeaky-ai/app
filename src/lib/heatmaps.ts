@@ -1,6 +1,7 @@
 import { range, orderBy, findLast, sumBy } from 'lodash';
 import { percentage } from 'lib/maths';
 import { HeatmapColor, HEATMAP_COLOURS } from 'data/heatmaps/constants';
+import type { HeatmapsDisplay } from 'types/heatmaps';
 import type { HeatmapsItem } from 'types/graphql';
 
 interface ScrollMapData {
@@ -38,6 +39,10 @@ export const getElements = (doc: Document, selector: string) => {
   } catch {
     return null;
   }
+};
+
+export const selectorIncludesAnchor = (selector: string) => {
+  return !!selector.split(' > ').find(s => /a($|#)/.test(s));
 };
 
 export const getScrollMapData = (items: HeatmapsItem[]): ScrollMapData[] => {
@@ -92,13 +97,14 @@ export const getClickMapData = (items: HeatmapsItem[]): ClickMapData[] => {
   });
 };
 
-export const showClickMaps = (doc: Document, items: HeatmapsItem[]) => {
+export const showClickMaps = (doc: Document, items: HeatmapsItem[], display: HeatmapsDisplay) => {
   const clickMapData = getClickMapData(items);
 
   items.forEach(item => {
     let elem = getElement(doc, item.selector);
 
     if (!elem) return;
+    if (display === 'anchors' && !selectorIncludesAnchor(item.selector)) return;
 
     // These things don't have a innerHTML so the next
     // best thing is to use the parent, even if it's

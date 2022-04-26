@@ -22,6 +22,50 @@
     }
   }
 
+  .heatmaps-display {
+    align-items: center;
+    display: flex;
+
+    .button {
+      background: none;
+      border: none;
+      color: var(--gray-500);
+      font-size: 1.5rem;
+      padding: 0;
+
+      .arrow {
+        display: none;
+      }
+
+      &:hover {
+        color: var(--blue-500);
+      }
+    }
+
+    &.open {
+      .button {
+        color: var(--blue-500);
+      }
+    }
+
+    .dropdown-menu {
+      left: auto;
+      padding: 1.5rem;
+      right: 0;
+      top: 3rem;
+      transform: none;
+      width: 13rem;
+
+      .radio-group {
+        margin: 1rem 0 0 0;
+
+        .radio:last-of-type {
+          margin: 0;
+        }
+      }
+    }
+  }
+
   .heatmaps-grid {
     display: grid;
     grid-gap: 2rem;

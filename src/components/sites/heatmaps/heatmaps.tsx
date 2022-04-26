@@ -12,10 +12,12 @@ import { HeatmapsClicks } from 'components/sites/heatmaps/heatmaps-clicks';
 import { HeatmapsScrolls } from 'components/sites/heatmaps/heatmaps-scrolls';
 import { HeatmapsPages } from 'components/sites/heatmaps/heatmaps-pages';
 import { HeatmapsPage } from 'components/sites/heatmaps/heatmaps-page';
+import { HeatmapsDisplays } from 'components/sites/heatmaps/heatmaps-displays';
 import { useHeatmaps } from 'hooks/use-heatmaps';
 import { getDateRange } from 'lib/dates';
 import { HeatmapsDevice, HeatmapsType } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
+import type { HeatmapsDisplay } from 'types/heatmaps';
 
 interface Props {
   page: string;
@@ -28,6 +30,7 @@ interface Props {
 export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod }) => {
   const [type, setType] = React.useState<HeatmapsType>(HeatmapsType.Click);
   const [device, setDevice] = React.useState<HeatmapsDevice>(HeatmapsDevice.Desktop);
+  const [display, setDisplay] = React.useState<HeatmapsDisplay>('all');
   const [selected, setSelected] = React.useState<string>(null);
 
   const { loading, heatmaps } = useHeatmaps({ page, device, type, range: getDateRange(period) });
@@ -70,6 +73,8 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
               Scroll
             </Button>
           </div>
+
+          <HeatmapsDisplays display={display} setDisplay={setDisplay} />
         </div>
       </div>
       {hasData && (
@@ -78,14 +83,25 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
             <HeatmapsPage 
               type={type}
               device={device}
+              display={display}
               page={page}
               recordingId={heatmaps.recordingId} 
               items={heatmaps.items} 
             />
           </Card>
           <Card className='data'>
-            {type === 'Click' && <HeatmapsClicks items={heatmaps.items} selected={selected} setSelected={setSelected} />}
-            {type === 'Scroll' && <HeatmapsScrolls items={heatmaps.items} />}
+            {type === 'Click' && (
+              <HeatmapsClicks 
+                items={heatmaps.items} 
+                selected={selected} 
+                display={display}
+                setSelected={setSelected} 
+              />
+            )}
+
+            {type === 'Scroll' && (
+              <HeatmapsScrolls items={heatmaps.items} />
+            )}
           </Card>
         </>
       )}

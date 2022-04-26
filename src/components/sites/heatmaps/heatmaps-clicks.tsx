@@ -5,20 +5,28 @@ import { Icon } from 'components/icon';
 import { Tooltip } from 'components/tooltip';
 import { Pill } from 'components/pill';
 import { Sort } from 'components/sort';
-import { ClickMapData, getClickMapData, getElement, getElements } from 'lib/heatmaps';
+import { ClickMapData, getClickMapData, getElement, getElements, selectorIncludesAnchor } from 'lib/heatmaps';
+import type { HeatmapsDisplay } from 'types/heatmaps';
 import type { HeatmapsItem } from 'types/graphql';
 
 interface Props {
   items: HeatmapsItem[];
   selected: string;
+  display: HeatmapsDisplay;
   setSelected: (selected: string) => void;
 }
 
-export const HeatmapsClicks: FC<Props> = ({ items, selected, setSelected }) => {
+export const HeatmapsClicks: FC<Props> = ({ items, selected, display, setSelected }) => {
   const [order, setOrder] = React.useState('clicks__desc');
 
   const clicks = getClickMapData(items)
+    // We need a selector
     .filter(c => c.selector)
+    // If we're only showing anchors then we should try and
+    // find one. You can't just check that the last element
+    // is an anchor as it could include a span or img or
+    // something
+    .filter(c => display === 'all' ? true : selectorIncludesAnchor(c.selector))
     .sort((a, b) => order === 'clicks__asc'
       ? a.count - b.count
       : b.count - a.count
