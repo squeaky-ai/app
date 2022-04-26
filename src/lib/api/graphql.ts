@@ -48,6 +48,7 @@ import {
   SitesCssSelectorBlacklistDeleteInput,
   AdminSitePlanUpdateInput,
   AdminSiteAssociateCustomerInput,
+  AnonymiseFormInputsUpdateInput,
 } from 'types/graphql';
 
 import {
@@ -66,6 +67,7 @@ import {
   MAGIC_ERASURE_ENABLED_MUTATION,
   CSS_SELECTOR_BLACKLIST_CREATE_MUTATION,
   CSS_SELECTOR_BLACKLIST_DELETE_MUTATION,
+  ANONYMISE_FORM_INPUTS_UPDATE_MUTATION,
   ADMIN_SITE_PLAN_UPDATE_MUTATION,
   ADMIN_SITE_ASSOCIATE_CUSTOMER_MUTATION,
 } from 'data/sites/mutations';
@@ -304,6 +306,15 @@ export const cssSelectorBlacklistDelete = async (input: SitesCssSelectorBlacklis
   });
 
   return data.cssSelectorBlacklist;
+};
+
+export const anonymiseFormInputsUpdate = async (input: AnonymiseFormInputsUpdateInput): Promise<Site> => {
+  const { data } = await client.mutate({
+    mutation: ANONYMISE_FORM_INPUTS_UPDATE_MUTATION,
+    variables: { input }
+  });
+
+  return data.anonymiseFormInputs;
 };
 
 export const updateUser = async (input: UsersUpdateInput): Promise<User> => {

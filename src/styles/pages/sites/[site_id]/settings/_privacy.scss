@@ -20,12 +20,28 @@
       }
     }
 
+    h5 {
+      margin: 0 0 1rem 0;
+    }
+
     ul {
       margin: 0;
       padding: 0 0 0 1.5rem;
 
       li {
         margin: 0 0 1rem 0;
+      }
+    }
+
+    .toggle {
+      align-items: center;
+      flex-direction: row-reverse;
+      font-weight: var(--font-weight-normal);
+      justify-content: flex-end;
+      margin: 0 0 2.5rem 0;
+
+      span {
+        margin: 0;
       }
     }
 

@@ -23,6 +23,7 @@ export const GET_SITE_QUERY = gql`
       daysSinceLastRecording
       recordingsCount
       magicErasureEnabled
+      anonymiseFormInputs
       plan {
         tier
         name
