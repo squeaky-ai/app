@@ -5,7 +5,7 @@ import { Icon } from 'components/icon';
 import { Tooltip } from 'components/tooltip';
 import { Pill } from 'components/pill';
 import { Sort } from 'components/sort';
-import { ClickMapData, getClickMapData, getElement, getElements, selectorIncludesAnchor } from 'lib/heatmaps';
+import { ClickMapData, getClickMapData, getElement, getElements, selectorIncludesClickable } from 'lib/heatmaps';
 import type { HeatmapsDisplay } from 'types/heatmaps';
 import type { HeatmapsItem } from 'types/graphql';
 
@@ -26,7 +26,7 @@ export const HeatmapsClicks: FC<Props> = ({ items, selected, display, setSelecte
     // find one. You can't just check that the last element
     // is an anchor as it could include a span or img or
     // something
-    .filter(c => display === 'all' ? true : selectorIncludesAnchor(c.selector))
+    .filter(c => display === 'all' ? true : selectorIncludesClickable(c.selector))
     .sort((a, b) => order === 'clicks__asc'
       ? a.count - b.count
       : b.count - a.count

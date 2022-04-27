@@ -41,8 +41,8 @@ export const getElements = (doc: Document, selector: string) => {
   }
 };
 
-export const selectorIncludesAnchor = (selector: string) => {
-  return !!selector.split(' > ').find(s => /a($|#)/.test(s));
+export const selectorIncludesClickable = (selector: string) => {
+  return !!selector.split(' > ').find(s => /^(a|button)($|#)/.test(s));
 };
 
 export const getScrollMapData = (items: HeatmapsItem[]): ScrollMapData[] => {
@@ -104,7 +104,7 @@ export const showClickMaps = (doc: Document, items: HeatmapsItem[], display: Hea
     let elem = getElement(doc, item.selector);
 
     if (!elem) return;
-    if (display === 'anchors' && !selectorIncludesAnchor(item.selector)) return;
+    if (display === 'anchors' && !selectorIncludesClickable(item.selector)) return;
 
     // These things don't have a innerHTML so the next
     // best thing is to use the parent, even if it's
