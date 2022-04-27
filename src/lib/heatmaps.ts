@@ -42,7 +42,11 @@ export const getElements = (doc: Document, selector: string) => {
 };
 
 export const selectorIncludesClickable = (selector: string) => {
-  return !!selector.split(' > ').find(s => /^(a|button)($|#)/.test(s));
+  // Should match
+  // a              button
+  // a#foo          button#foo
+  // a:nth-of-type  button:nth-of-type
+  return !!selector.split(' > ').find(s => /^(a|button)($|:|#)/.test(s));
 };
 
 export const getScrollMapData = (items: HeatmapsItem[]): ScrollMapData[] => {
