@@ -81,6 +81,7 @@ export const BillingPlansTable: FC<Props> = ({ site, billing, hasBilling, showPl
         billing={billing}
         planIndex={planIndex}
         currency={currency}
+        interval={interval}
         hasBilling={hasBilling}
         showPlanChangeMessage={showPlanChangeMessage}
       />

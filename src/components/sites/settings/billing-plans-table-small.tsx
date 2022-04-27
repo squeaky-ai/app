@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import { Icon } from 'components/icon';
 import { Checkout } from 'components/sites/settings/checkout';
 import { CURRENCY_SYMBOLS } from 'data/common/constants';
-import { getPricingForCurrency } from 'lib/currency';
+import { Interval, getPricingForCurrencyAndInterval } from 'lib/currency';
 import { PlansCurrency, Site } from 'types/graphql';
 import type { Billing } from 'types/billing';
 
@@ -13,6 +13,7 @@ interface Props {
   billing: Billing;
   planIndex: number;
   currency: PlansCurrency;
+  interval: Interval;
   hasBilling: boolean;
   showPlanChangeMessage: (name: string) => void;
 }
@@ -22,6 +23,7 @@ export const BillingPlansTableSmall: FC<Props> = ({
   billing, 
   planIndex, 
   currency,
+  interval,
   hasBilling,
   showPlanChangeMessage,
 }) => {
@@ -48,7 +50,7 @@ export const BillingPlansTableSmall: FC<Props> = ({
               <div className='details'>
                 <b>{plan.name}</b>
                 <p className='pricing'>
-                  <b>{CURRENCY_SYMBOLS[currency]}{getPricingForCurrency(plan, currency)}</b> per month
+                  <b>{CURRENCY_SYMBOLS[currency]}{getPricingForCurrencyAndInterval(plan, currency, interval)}</b> per {interval}
                 </p>
               </div>
               <Checkout 

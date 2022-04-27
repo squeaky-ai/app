@@ -168,6 +168,7 @@ export const GET_BILLING_QUERY = gql`
         id
         currency
         amount
+        interval
       }
       dataStorageMonths
       support

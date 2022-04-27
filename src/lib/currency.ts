@@ -6,8 +6,10 @@ export enum Interval {
   YEARLY = 'year',
 }
 
-export const getPricingForCurrency = (plan: Plan, currency: PlansCurrency) => {
-  return (plan.pricing || []).find(p => p.currency === currency)?.amount || 0;
+export const getPricingForCurrencyAndInterval = (plan: Plan, currency: PlansCurrency, interval: Interval) => {
+  console.log(interval, plan.pricing);
+  return (plan.pricing || [])
+    .find(p => p.currency === currency && p.interval === interval)?.amount || 0;
 };
 
 export const getUsefulCurrency = (): PlansCurrency => {

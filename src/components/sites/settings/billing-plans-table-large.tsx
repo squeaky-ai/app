@@ -5,7 +5,7 @@ import { Icon } from 'components/icon';
 import { Tag } from 'components/tag';
 import { Checkout } from 'components/sites/settings/checkout';
 import { CURRENCY_SYMBOLS } from 'data/common/constants';
-import { Interval, getPricingForCurrency } from 'lib/currency';
+import { Interval, getPricingForCurrencyAndInterval } from 'lib/currency';
 import { PlansCurrency, Site } from 'types/graphql';
 import type { Billing } from 'types/billing';
 
@@ -79,7 +79,7 @@ export const BillingPlansTableLarge: FC<Props> = ({
                 </b>
               </p>
               <p className='pricing'>
-                <b>{CURRENCY_SYMBOLS[currency]}{getPricingForCurrency(plan, currency)}</b> per {interval}
+                <b>{CURRENCY_SYMBOLS[currency]}{getPricingForCurrencyAndInterval(plan, currency, interval)}</b> per {interval}
               </p>
               <Checkout 
                 site={site}
