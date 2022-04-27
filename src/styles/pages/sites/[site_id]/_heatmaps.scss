@@ -141,7 +141,7 @@
       }
   
       .button-group {
-        margin-right: 1.5rem;
+        margin-right: 1rem;
 
         &:last-of-type {
           margin-right: 0;
@@ -357,14 +357,11 @@
 
     .select {
       margin: 0;
+      width: 15rem;
     }
 
     .label {
       margin: 0 .75rem 0 0;
-    }
-
-    .select {
-      width: 320px;
     }
   }
 
@@ -405,7 +402,7 @@
     }
 
     .gradient {
-      background: linear-gradient(180deg, #8249FB 4.17%, #F96155 27.6%, #FA9116 50.52%, #FBC73B 72.4%, #FFFFFF 94.79%);
+      background: linear-gradient(180deg, #FF2E86 4.17%, #F96155 19.79%, #FA9116 33.85%, #FBC73B 49.48%, #FFE99B 63.54%, #FFF7D9 79.17%, #FFFFFF 94.79%);
       border-radius: var(--border-radius-md);
       flex: 1;
       margin: .5rem 0;

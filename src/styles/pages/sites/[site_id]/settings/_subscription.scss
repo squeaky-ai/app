@@ -11,7 +11,7 @@
 
   .plan-table-large {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: 11rem 1fr 1fr 1fr 1fr 1fr;
     margin: 2rem 0;
 
     @include breakpoint-md {
