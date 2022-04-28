@@ -46,11 +46,11 @@
                            'latest-notes';
       grid-template-columns: minmax(0, 1fr);
       grid-template-rows: auto auto 456px auto 456px;
+    }
 
-      @include breakpoint-md {
-        grid-gap: 1.5rem;
-        grid-template-rows: auto auto 600px auto 456px;
-      }
+    @include breakpoint-sm {
+      grid-gap: 1.5rem;
+      grid-template-rows: auto auto 600px auto 300px;
     }
 
     h5 {

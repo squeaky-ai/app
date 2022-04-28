@@ -21,6 +21,15 @@
         width: 100%;
       }
 
+      @include breakpoint-sm {
+        flex-direction: column;
+
+        .search-input {
+          margin: 1rem 0 0 0;
+          width: 100%;
+        }
+      }
+
       .menu-item {
         position: relative;
 
@@ -46,6 +55,10 @@
               margin: 0;
               width: 100%;
             }
+          }
+
+          @include breakpoint-sm {
+            margin-top: 1rem;
           }
         }
       }

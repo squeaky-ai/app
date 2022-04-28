@@ -73,10 +73,10 @@ export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
       </div>
       <div className='graph-wrapper'>
         <ResponsiveContainer>
-          <LineChart data={results} margin={{ top: 0, left: -15, right: 0, bottom: 0 }}>
+          <LineChart data={results} margin={{ top: 0, left: -30, right: 0, bottom: 0 }}>
             <CartesianGrid strokeDasharray='3 3' vertical={false} />
 
-            <XAxis dataKey='dateKey' interval={0} stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} />
+            <XAxis dataKey='dateKey' stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} />
             <YAxis stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} domain={['auto', 'auto']} scale={scale} />
 
             <Tooltip content={<CustomTooltip />} />

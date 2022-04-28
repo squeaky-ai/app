@@ -3,6 +3,10 @@
     align-items: center;
     display: flex;
     margin: 0 0 2rem 0;
+
+    @include breakpoint-md {
+      justify-content: flex-start;
+    }
   }
 
   .site-tabs {

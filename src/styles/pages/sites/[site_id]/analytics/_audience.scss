@@ -17,6 +17,12 @@
     .title {
       margin: 0;
     }
+
+    @include breakpoint-sm {
+      .period {
+        display: none;
+      }
+    }
   }
 
   .analytics-tabs {

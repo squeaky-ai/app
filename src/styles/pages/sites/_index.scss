@@ -102,6 +102,10 @@
         padding-right: 1.5rem;
         text-overflow: ellipsis;
         white-space: nowrap;
+
+        @include breakpoint-sm {
+          padding-right: 0;
+        }
       }
 
       .name {
@@ -120,6 +124,12 @@
 
         @include breakpoint-md {
           margin-bottom: .25rem;
+        }
+
+        @include breakpoint-sm {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
       }
     }
