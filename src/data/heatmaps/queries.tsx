@@ -1,10 +1,10 @@
 import { gql } from '@apollo/client';
 
 export const GET_HEATMAPS_QUERY = gql`
-  query GetHeatmaps($siteId: ID!, $page: String!, $fromDate: ISO8601Date!, $toDate: ISO8601Date!, $device: HeatmapsDevice!, $type: HeatmapsType!) { 
+  query GetHeatmaps($siteId: ID!, $page: String!, $fromDate: ISO8601Date!, $toDate: ISO8601Date!, $device: HeatmapsDevice!, $type: HeatmapsType!, $excludeRecordingIds: [ID!]) { 
     site(siteId: $siteId) {
       id
-      heatmaps(page: $page, device: $device, fromDate: $fromDate, toDate: $toDate, type: $type) {
+      heatmaps(page: $page, device: $device, fromDate: $fromDate, toDate: $toDate, type: $type, excludeRecordingIds: $excludeRecordingIds) {
         desktopCount
         tabletCount
         mobileCount

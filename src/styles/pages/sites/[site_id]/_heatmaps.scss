@@ -156,6 +156,21 @@
             margin-right: .5rem;
           }
         }
+
+        .shuffle-recording {
+          background: var(--white);
+          border: 1px solid var(--gray-200);
+          padding: 0 1rem;
+      
+          .icon {
+            font-size: 1rem;
+            margin-right: 0;
+          }
+
+          &:hover {
+            background-color: var(--gray-100);
+          }
+        }
       }
     }
               

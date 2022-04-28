@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
+import { uniq } from 'lodash';
 import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { PageLoading } from 'components/sites/page-loading';
@@ -8,12 +9,15 @@ import { Container } from 'components/container';
 import { Illustration } from 'components/illustration';
 import { Card } from 'components/card';
 import { Period } from 'components/sites/period/period';
+import { Tooltip } from 'components/tooltip';
 import { HeatmapsClicks } from 'components/sites/heatmaps/heatmaps-clicks';
 import { HeatmapsScrolls } from 'components/sites/heatmaps/heatmaps-scrolls';
 import { HeatmapsPages } from 'components/sites/heatmaps/heatmaps-pages';
 import { HeatmapsPage } from 'components/sites/heatmaps/heatmaps-page';
 import { HeatmapsDisplays } from 'components/sites/heatmaps/heatmaps-displays';
 import { useHeatmaps } from 'hooks/use-heatmaps';
+import { useFeatureFlags } from 'hooks/use-feature-flags';
+import { FeatureFlag } from 'lib/feature-flags';
 import { getDateRange } from 'lib/dates';
 import { HeatmapsDevice, HeatmapsType } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
@@ -28,12 +32,28 @@ interface Props {
 }
 
 export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod }) => {
+  const { featureFlagEnabled } = useFeatureFlags();
+
   const [type, setType] = React.useState<HeatmapsType>(HeatmapsType.Click);
   const [device, setDevice] = React.useState<HeatmapsDevice>(HeatmapsDevice.Desktop);
   const [display, setDisplay] = React.useState<HeatmapsDisplay>('all');
   const [selected, setSelected] = React.useState<string>(null);
+  const [excludeRecordingIds, setExcludeRecordingIds] = React.useState<string[]>([]);
 
-  const { loading, heatmaps } = useHeatmaps({ page, device, type, range: getDateRange(period) });
+  const { loading, heatmaps } = useHeatmaps({ 
+    page, 
+    device, 
+    type,
+    excludeRecordingIds,
+    range: getDateRange(period) 
+  });
+
+  const excludeRecording = () => {
+    if (heatmaps.recordingId) {
+      const excludedIds = uniq([...excludeRecordingIds, heatmaps.recordingId]);
+      setExcludeRecordingIds(excludedIds);
+    }
+  };
 
   const hasData = !!heatmaps.recordingId;
 
@@ -50,6 +70,14 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
         </div>
 
         <div className='right'>
+          {heatmaps.recordingId && featureFlagEnabled(FeatureFlag.SHUFFLE_HEATMAPS) && (
+            <div className='button-group'>
+              <Tooltip fluid button={<Icon name='shuffle-line' />} buttonClassName='quaternary shuffle-recording' buttonOnClick={excludeRecording}>
+                Pick another session to use for the heatmaps page
+              </Tooltip>
+            </div>
+          )}
+
           <div className='button-group'>
             <Button className={classnames(device === HeatmapsDevice.Desktop ? 'primary' : 'blank')} onClick={() => setDevice(HeatmapsDevice.Desktop)}>
               <Icon name='computer-line' />

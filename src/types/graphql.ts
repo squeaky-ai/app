@@ -1492,6 +1492,7 @@ export type SiteAnalyticsArgs = {
 
 export type SiteHeatmapsArgs = {
   device?: HeatmapsDevice;
+  excludeRecordingId?: InputMaybe<Array<Scalars['ID']>>;
   fromDate: Scalars['ISO8601Date'];
   page: Scalars['String'];
   toDate: Scalars['ISO8601Date'];

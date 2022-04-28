@@ -7,13 +7,25 @@ import { Portal } from 'components/portal';
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   button: string | React.ReactNode;
   buttonClassName?: string;
+  buttonOnClick?: (event: React.MouseEvent) => void;
   portalClassName?: string;
   positionX?: 'left' | 'right';
   fluid?: boolean;
   delayInMilliseconds?: number;
 }
 
-export const Tooltip: FC<Props> = ({ button, fluid, delayInMilliseconds, buttonClassName, portalClassName, positionX, className, children, onClick }) => {
+export const Tooltip: FC<Props> = ({ 
+  button, 
+  buttonOnClick,
+  fluid, 
+  delayInMilliseconds, 
+  buttonClassName, 
+  portalClassName, 
+  positionX, 
+  className, 
+  children, 
+  onClick 
+}) => {
   const ref = React.useRef<HTMLDivElement>();
   const [open, setOpen] = React.useState(false);
 
@@ -39,7 +51,7 @@ export const Tooltip: FC<Props> = ({ button, fluid, delayInMilliseconds, buttonC
 
   return (
     <div ref={ref} className={classnames('tooltip', className)} onClick={onClick}>
-      <Button onMouseEnter={handleMouseIn} onMouseLeave={handleMouseLeave} className={buttonClassName}>
+      <Button onClick={buttonOnClick} onMouseEnter={handleMouseIn} onMouseLeave={handleMouseLeave} className={buttonClassName}>
         {button}
       </Button>
       <Portal>

@@ -14,17 +14,27 @@ type Names = Record<FeatureFlag, string>;
 export const allFeatureFlags: FeatureFlag[] = [
   FeatureFlag.MAGIC_ERASURE,
   FeatureFlag.CHEESE_LOADER,
+  FeatureFlag.SHUFFLE_HEATMAPS,
 ];
 
 export const featureFlagNames: Names = {
   MAGIC_ERASURE: 'Magic Erasure',
   CHEESE_LOADER: 'Cheese Loader',
+  SHUFFLE_HEATMAPS: 'Shuffle Heatmaps',
 };
 
 export const useFeatureFlags = (): UseFeatureFlags => {
   const [state, setState] = React.useState<State>([
     {
       key: FeatureFlag.MAGIC_ERASURE,
+      value: false,
+    },
+    {
+      key: FeatureFlag.CHEESE_LOADER,
+      value: false,
+    },
+    {
+      key: FeatureFlag.SHUFFLE_HEATMAPS,
       value: false,
     }
   ]);

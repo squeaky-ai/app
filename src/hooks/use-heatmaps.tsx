@@ -21,6 +21,7 @@ interface Props {
   type: HeatmapsType;
   page: string;
   range: TimeRange;
+  excludeRecordingIds: string[];
 }
 
 export const useHeatmaps = (props: Props): UseHeatmaps => {
@@ -32,6 +33,7 @@ export const useHeatmaps = (props: Props): UseHeatmaps => {
       device: props.device,
       type: props.type,
       page: props.page,
+      excludeRecordingIds: props.excludeRecordingIds,
       ...props.range,
     }
   });
