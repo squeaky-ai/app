@@ -10,15 +10,17 @@ import { Divider } from 'components/divider';
 import { SidebarAccount } from 'components/app/sidebar-account';
 import { SidebarNested } from 'components/app/sidebar-nested';
 import { Logo } from 'components/logo';
+import { SidebarSupport } from 'components/app/sidebar-support';
+import { SidebarCollapse } from 'components/app/sidebar-collapse';
 import { useSidebar } from 'hooks/use-sidebar';
 import { Breakpoints } from 'data/common/constants';
 import { Preferences, Preference } from 'lib/preferences';
 import { OWNER, ADMIN } from 'data/teams/constants';
-import { SidebarSupport } from 'components/app/sidebar-support';
-import { SidebarCollapse } from 'components/app/sidebar-collapse';
+import { useResize } from 'hooks/use-resize';
 
 export const Sidebar: FC = () => {
   const ref = React.useRef<HTMLElement>(null);
+  const resize = useResize();
   const router = useRouter();
 
   const [open, setOpen] = React.useState<boolean>(true);
@@ -96,6 +98,10 @@ export const Sidebar: FC = () => {
 
     return () => document.removeEventListener('click', onBodyClick, true);
   }, []);
+
+  React.useEffect(() => {
+    setOpen(!isMobile());
+  }, [resize.width]);
 
   return (
     <aside ref={ref} id='app-sidebar' className={classnames({ open })}>

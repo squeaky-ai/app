@@ -8,6 +8,12 @@
   #app-sidebar {
     background: var(--mauve-900);
 
+    .menu-toggle {
+      .icon {
+        color: var(--peach-100);
+      }
+    }
+
     .link {
       background: var(--mauve-900);
       color: var(--peach-100);
@@ -57,6 +63,12 @@
       right: 2rem;
       position: absolute;
       top: 2rem;
+
+      @include breakpoint-md {
+        left: 4.5rem;
+        right: auto;
+        top: 1.5rem;
+      }
     }
 
     &.open {
@@ -67,6 +79,12 @@
       .link {
         .external {
           display: block;
+        }
+      }
+
+      menu {
+        @include breakpoint-md {
+          background: var(--mauve-900);
         }
       }
     }
@@ -210,6 +228,18 @@
           }
         }
       }
+
+      @include breakpoint-sm {
+        display: none;
+      }
+    }
+
+    @include breakpoint-md {
+      .search {
+        .input {
+          display: none;
+        }
+      }
     }
   }
 
@@ -217,6 +247,10 @@
     align-items: center;
     display: flex;
     margin: 0;
+
+    @include breakpoint-sm {
+      align-items: flex-start;
+    }
   }
 
   .no-search-results {
@@ -334,6 +368,10 @@
     svg {
       overflow: visible;
     }
+
+    @include breakpoint-md {
+      height: 10rem;
+    }
   }
 
   .users-table {
@@ -366,6 +404,12 @@
 
       .checkbox:last-of-type {
         margin-right: 0;
+      }
+    }
+
+    @include breakpoint-md {
+      .options {
+        display: none;
       }
     }
   }

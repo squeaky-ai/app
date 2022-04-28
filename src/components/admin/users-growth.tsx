@@ -49,12 +49,11 @@ export const UsersGrowth: FC<Props> = ({ users }) => {
   return (
     <div className='chart-wrapper'>
       <ResponsiveContainer>
-        <LineChart data={data} margin={{ top: 15, left: -15, right: 15, bottom: 0 }}>
+        <LineChart data={data} margin={{ top: 15, left: -30, right: 15, bottom: 0 }}>
           <CartesianGrid strokeDasharray='3 3' vertical={false} />
 
           <XAxis 
             dataKey='date' 
-            interval={0} 
             stroke='var(--gray-500)' 
             tickLine={false}
             tickMargin={10} 
@@ -63,8 +62,7 @@ export const UsersGrowth: FC<Props> = ({ users }) => {
           <YAxis 
             stroke='var(--gray-500)' 
             tickLine={false} 
-            tickMargin={10} 
-            interval={0} 
+            tickMargin={10}
             allowDecimals={false} 
           />
 

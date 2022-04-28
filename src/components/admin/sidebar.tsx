@@ -4,16 +4,32 @@ import Link from 'next/link';
 import classnames from 'classnames';
 import { useRouter } from 'next/router';
 import { Icon } from 'components/icon';
+import { Button } from 'components/button';
 import { Logo } from 'components/logo';
 import { Divider } from 'components/divider';
 import { SidebarCollapse } from 'components/app/sidebar-collapse';
+import { Breakpoints } from 'data/common/constants';
+import { useResize } from 'hooks/use-resize';
 
 export const Sidebar: FC = () => {
+  const resize = useResize();
   const router = useRouter();
+
+  const isMobile = () => window.innerWidth < Breakpoints.TABLET;
 
   const [open, setOpen] = React.useState<boolean>(true);
 
   const toggleOpen = () => setOpen(!open);
+
+  React.useEffect(() => {
+    if (isMobile()) {
+      setOpen(false);
+    }
+  }, [router.asPath]);
+
+  React.useEffect(() => {
+    setOpen(!isMobile());
+  }, [resize.width]);
 
   return (
     <aside id='app-sidebar' className={classnames({ open })}>
@@ -68,6 +84,9 @@ export const Sidebar: FC = () => {
           </div>
         </div>
       </menu>
+      <Button className='menu-toggle' onClick={toggleOpen}>
+        {open ? <Icon name='close-line' /> : <Icon name='menu-line' />}
+      </Button>
       <footer>
         <SidebarCollapse open={open} toggleOpen={toggleOpen} />
       </footer>

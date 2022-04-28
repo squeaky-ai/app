@@ -11,6 +11,18 @@
     grid-template-rows: 169px 169px 169px 169px 176px;
     margin: 2rem 0 0 0;
 
+    @include breakpoint-md {
+      grid-template-areas: 'total-users'
+                           'monthly-active-users'
+                           'roles'
+                           'total-sites'
+                           'sites-verified'
+                           'recordings'
+                           'visitors';
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: auto;
+    }
+
     .grid-item {
       &.total-users {
         grid-area: total-users;
