@@ -24,7 +24,7 @@ interface Props {
   style?: React.CSSProperties;
 }
 
-export const VisitorsItem: FC<Props> = ({ site, visitor, search, style }) => {
+export const VisitorsLargeItem: FC<Props> = ({ site, visitor, search, style }) => {
   const rowActionsRef = React.useRef<Dropdown>();
 
   const linkedData = getLinkedData<ExternalAttributes>(visitor);

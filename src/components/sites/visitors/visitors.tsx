@@ -1,22 +1,18 @@
 import React from 'react';
 import type { FC } from 'react';
-import classnames from 'classnames';
 import { Icon } from 'components/icon';
 import { Pagination } from 'components/pagination';
 import { useVisitors } from 'hooks/use-visitors';
-import { Sort } from 'components/sort';
 import { PageSize } from 'components/sites/page-size';
-import { Tooltip } from 'components/tooltip';
-import { VisitorsItem } from 'components/sites/visitors/visitors-item';
-import { TableWrapper, Table, Row, Cell } from 'components/table';
+import { VisitorsSmall } from 'components/sites/visitors/visitors-small';
+import { VisitorsLarge } from 'components/sites/visitors/visitors-large';
 import { PageLoading } from 'components/sites/page-loading';
 import { DismissableMessage } from 'components/message';
 import { Error } from 'components/error';
 import { Preference } from 'lib/preferences';
 import { NoResults } from 'components/sites/no-results';
-import { COLUMNS } from 'data/visitors/constants';
-import { getColumnStyles } from 'lib/tables';
 import { formatFilterDates } from 'lib/visitors';
+import { useResize } from 'hooks/use-resize';
 import { VisitorsSort } from 'types/graphql';
 import type { Site } from 'types/graphql';
 import type { Column } from 'types/common';
@@ -55,8 +51,7 @@ export const Visitors: FC<Props> = ({
     filters: formatFilterDates(filters),
   });
 
-  const { items, pagination } = visitors;
-  const { rowStyle, tableClassNames } = getColumnStyles(COLUMNS, columns);
+  const { mobile } = useResize();
 
   if (error) {
     return <Error />;
@@ -65,6 +60,8 @@ export const Visitors: FC<Props> = ({
   if (loading) {
     return <PageLoading />
   }
+
+  const VisitorsComponent = mobile ? VisitorsSmall : VisitorsLarge;
 
   return (
     <>
@@ -80,97 +77,26 @@ export const Visitors: FC<Props> = ({
         <NoResults illustration='illustration-13' title='There are no visitors matching your selected filters.' />
       )}
 
-      <TableWrapper>
-        <Table className={classnames('visitors-list hover', tableClassNames, { hide: items.length === 0 })}>
-          <Row head style={rowStyle}>
-            <Cell>
-              Status
-            </Cell>
-            <Cell>
-              Visitor ID
-            </Cell>
-            <Cell className='linked'>
-              <Tooltip button={<Icon name='link-m' />}>
-                Linked Data
-              </Tooltip>
-              User ID
-            </Cell>
-            <Cell className='linked'>
-              <Tooltip button={<Icon name='link-m' />}>
-                Linked Data
-              </Tooltip>
-              Name
-            </Cell>
-            <Cell className='linked'>
-              <Tooltip button={<Icon name='link-m' />}>
-                Linked Data
-              </Tooltip>
-              Email
-            </Cell>
-            <Cell>
-              Recordings
-              <Sort 
-                name='recordings' 
-                order={sort} 
-                onAsc={() => setSort(VisitorsSort.RecordingsAsc)} 
-                onDesc={() => setSort(VisitorsSort.RecordingsDesc)} 
-              />
-            </Cell>
-            <Cell>
-              First visited
-              <Sort 
-                name='first_viewed_at' 
-                order={sort} 
-                onAsc={() => setSort(VisitorsSort.FirstViewedAtAsc)} 
-                onDesc={() => setSort(VisitorsSort.FirstViewedAtDesc)} 
-              />
-            </Cell>
-            <Cell>
-              Last activity
-              <Sort 
-                name='last_activity_at' 
-                order={sort} 
-                onAsc={() => setSort(VisitorsSort.LastActivityAtAsc)} 
-                onDesc={() => setSort(VisitorsSort.LastActivityAtDesc)} 
-              />
-            </Cell>
-            <Cell>
-              Language
-            </Cell>
-            <Cell>
-              Device &amp; viewport
-            </Cell>
-            <Cell>
-              Browser
-            </Cell>
-            <Cell>
-              Country
-            </Cell>
-            <Cell />
-          </Row>
-          {items.map(v => (
-            <VisitorsItem 
-              site={site} 
-              visitor={v} 
-              key={v.visitorId} 
-              search={search}
-              style={rowStyle}
-            />
-          ))}
-        </Table>
-      </TableWrapper>
+      <VisitorsComponent
+        site={site}
+        visitors={visitors}
+        sort={sort}
+        columns={columns}
+        search={search}
+        setSort={setSort}
+      />
       
       <div className='visitors-footer'>
         <Pagination 
           currentPage={page} 
-          pageSize={pagination.pageSize}
-          total={pagination.total}
+          pageSize={visitors.pagination.pageSize}
+          total={visitors.pagination.total}
           setPage={setPage}
         />
         <PageSize 
-          value={pagination.pageSize} 
+          value={visitors.pagination.pageSize} 
           onChange={setSize}
-          show={pagination.total > 25}
+          show={visitors.pagination.total > 25}
         />
       </div>
     </>
