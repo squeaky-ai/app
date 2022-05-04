@@ -5,7 +5,7 @@ import { Pagination } from 'components/pagination';
 import { Sort } from 'components/sort';
 import { Checkbox } from 'components/checkbox';
 import { Illustration } from 'components/illustration';
-import { RecordingsItem } from 'components/sites/recordings/recordings-item';
+import { RecordingsLargeItem } from 'components/sites/recordings/recordings-large-item';
 import { Table, Row, Cell } from 'components/table';
 import { getColumnStyles } from 'lib/tables';
 import { RecordingsSort } from 'types/graphql';
@@ -66,7 +66,7 @@ export const VisitorsRecording: FC<Props> = ({ site, visitor, page, sort, column
             <Cell />
           </Row>
           {items.map(recording => (
-            <RecordingsItem 
+            <RecordingsLargeItem 
               site={site}
               recording={recording} 
               key={recording.id} 

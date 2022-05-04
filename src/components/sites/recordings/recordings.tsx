@@ -1,20 +1,16 @@
 import React from 'react';
 import type { FC } from 'react';
-import classnames from 'classnames';
-import { Pagination } from 'components/pagination';
-import { RecordingsItem } from 'components/sites/recordings/recordings-item';
-import { TableWrapper, Table, Row, Cell } from 'components/table';
-import { Sort } from 'components/sort';
-import { PageSize } from 'components/sites/page-size';
-import { Checkbox } from 'components/checkbox';
 import { Error } from 'components/error';
 import { NoResults } from 'components/sites/no-results';
 import { PageLoading } from 'components/sites/page-loading';
+import { Pagination } from 'components/pagination';
+import { PageSize } from 'components/sites/page-size';
 import { useRecordings } from 'hooks/use-recordings';
-import { COLUMNS } from 'data/recordings/constants';
+import { RecordingsSmall } from 'components/sites/recordings/recordings-small';
+import { RecordingsLarge } from 'components/sites/recordings/recordings-large';
 import { getDateRange } from 'lib/dates';
-import { getColumnStyles } from 'lib/tables';
-import { RecordingsSort, } from 'types/graphql';
+import { useResize } from 'hooks/use-resize';
+import { RecordingsSort } from 'types/graphql';
 import type { TimePeriod, Column } from 'types/common';
 import type { Site, Team, RecordingsFilters } from 'types/graphql';
 
@@ -37,7 +33,7 @@ interface Props {
 export const Recordings: FC<Props> = ({ 
   site, 
   filters, 
-  period, 
+  period,
   columns, 
   member,
   size,
@@ -57,14 +53,7 @@ export const Recordings: FC<Props> = ({
     range: getDateRange(period),
   });
 
-  const { items, pagination } = recordings;
-  const { rowStyle, tableClassNames } = getColumnStyles(COLUMNS, columns);
-
-  const onSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.target.checked
-      ? setSelected(items.map(t => t.id))
-      : setSelected([]);
-  };
+  const { mobile } = useResize();
 
   if (error) {
     return <Error />;
@@ -74,64 +63,36 @@ export const Recordings: FC<Props> = ({
     return <PageLoading />;
   }
 
+  if (!recordings.items.length) {
+    return <NoResults illustration='illustration-13' title='There are no recordings matching your selected filters.' />;
+  }
+
+  const RecordingsComponent = mobile ? RecordingsSmall : RecordingsLarge;
+
   return (
     <>
-      {!items.length && (
-        <NoResults illustration='illustration-13' title='There are no recordings matching your selected filters.' />
-      )}
+      <RecordingsComponent
+        site={site}
+        recordings={recordings} 
+        columns={columns}
+        member={member}
+        selected={selected}
+        setSelected={setSelected}
+        setSort={setSort}
+        sort={sort}
+      />
 
-      <TableWrapper>
-        <Table className={classnames('recordings-list hover', tableClassNames, { hide: !loading && items.length === 0 })}>
-          <Row head style={rowStyle}>
-            <Cell>
-              <Checkbox
-                checked={selected.length === items.length && items.length !== 0}
-                partial={selected.length !== 0 && selected.length !== items.length && items.length !== 0}
-                disabled={items.length === 0}
-                onChange={onSelectAll} 
-              />
-            </Cell>
-            <Cell>Status</Cell>
-            <Cell>Recording ID</Cell>
-            <Cell>Visitor ID</Cell>
-            <Cell>Date &amp; Time<Sort name='connected_at' order={sort} onAsc={() => setSort(RecordingsSort.ConnectedAtAsc)} onDesc={() => setSort(RecordingsSort.ConnectedAtDesc)} /></Cell>
-            <Cell>Duration <Sort name='duration' order={sort} onAsc={() => setSort(RecordingsSort.DurationAsc)} onDesc={() => setSort(RecordingsSort.DurationDesc)} /></Cell>
-            <Cell>Pages <Sort name='page_count' order={sort} onAsc={() => setSort(RecordingsSort.PageCountAsc)} onDesc={() => setSort(RecordingsSort.PageCountDesc)} /></Cell>
-            <Cell>Traffic Source</Cell>
-            <Cell>Start &amp; Exit URL</Cell>
-            <Cell>Device &amp; Viewport (px)</Cell>
-            <Cell>Country</Cell>
-            <Cell>Browser</Cell>
-            <Cell>NPS</Cell>
-            <Cell>Sentiment</Cell>
-            <Cell />
-          </Row>
-          
-          {items.map(recording => (
-            <RecordingsItem 
-              site={site}
-              recording={recording} 
-              key={recording.id} 
-              style={rowStyle}
-              selected={selected}
-              member={member}
-              setSelected={setSelected}
-            />
-          ))}
-        </Table>
-      </TableWrapper>
-      
       <div className='recordings-footer'>
         <Pagination 
           currentPage={page}
-          pageSize={pagination.pageSize}
-          total={pagination.total}
+          pageSize={recordings.pagination.pageSize}
+          total={recordings.pagination.total}
           setPage={setPage}
         />
         <PageSize
-          value={pagination.pageSize} 
+          value={recordings.pagination.pageSize} 
           onChange={setSize}
-          show={pagination.total > 25}
+          show={recordings.pagination.total > 25}
         />
       </div>
     </>

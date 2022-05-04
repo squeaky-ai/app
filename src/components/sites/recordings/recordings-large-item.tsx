@@ -28,7 +28,7 @@ interface Props {
   setSelected: (selected: string[]) => void;
 }
 
-export const RecordingsItem: FC<Props> = ({ site, recording, style, member, selected, setSelected }) => {
+export const RecordingsLargeItem: FC<Props> = ({ site, recording, style, member, selected, setSelected }) => {
   const rowActionsRef = React.useRef<Dropdown>();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

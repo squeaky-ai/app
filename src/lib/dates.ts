@@ -39,6 +39,8 @@ export const fromSlashyDate = (slashyDate: string) => parse(slashyDate, 'dd/MM/y
 
 export const toSlashyDate = (s: string) => s ? s.split('/').reverse().join('-') : null;
 
+export const toHyphenedDate = (s: string) => s ? s.split('-').reverse().join('/') : null;
+
 export const toHoursMinutesAndSeconds = (ms?: number) => {
   if (!ms) return '0h 0m 0s';
 

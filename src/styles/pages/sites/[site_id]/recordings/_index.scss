@@ -338,6 +338,50 @@
     display: flex;
     justify-content: space-between;
   }
+
+  .recordings-small {
+    display: flex;
+    flex-direction: column;
+
+    .card {
+      color: var(--gray-blue-800);
+      margin: 0 0 .5rem 0;
+      padding: 1rem;
+      text-decoration: none;
+
+      p {
+        margin: 0;
+      }
+
+      .heading {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        margin: 0 0 1rem 0;
+
+        p {
+          font-weight: var(--font-weight-bold);
+        }
+      }
+
+      .details {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+
+        p {
+          align-items: center;
+          display: flex;
+          white-space: nowrap;
+        }
+
+        .icon {
+          color: var(--gray-blue-200);
+          margin: 0 .25rem 0 0;
+        }
+      }
+    }
+  }
 }
 
 .recording-share-modal {
