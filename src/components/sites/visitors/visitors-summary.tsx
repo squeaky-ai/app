@@ -114,7 +114,7 @@ export const VisitorsSummary: FC<Props> = ({ site, visitor }) => {
             <dd>
               {browsers.length === 1 && (
                 <>
-                  <Browser name={browsers[0].browserName} height={20} width={20} />
+                  <Browser name={browsers[0].browserName} height={16} width={16} />
                   {browsers[0].browserDetails}
                 </>
               )}
@@ -123,7 +123,7 @@ export const VisitorsSummary: FC<Props> = ({ site, visitor }) => {
                   <ul>
                     {browsers.map(device => (
                       <li key={device.browserName}>
-                        <Browser name={device.browserName} height={20} width={20} />
+                        <Browser name={device.browserName} height={16} width={16} />
                         <span>{device.browserName}</span>
                       </li>
                     ))}

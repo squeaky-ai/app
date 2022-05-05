@@ -1,15 +1,11 @@
 import React from 'react';
 import type { FC } from 'react';
-import classnames from 'classnames';
 import { Pagination } from 'components/pagination';
-import { Sort } from 'components/sort';
-import { Checkbox } from 'components/checkbox';
 import { Illustration } from 'components/illustration';
-import { RecordingsLargeItem } from 'components/sites/recordings/recordings-large-item';
-import { Table, Row, Cell } from 'components/table';
-import { getColumnStyles } from 'lib/tables';
+import { VisitorsRecordingsSmall } from 'components/sites/visitors/visitors-recordings-small';
+import { VisitorsRecordingsLarge } from 'components/sites/visitors/visitors-recordings-large';
+import { useResize } from 'hooks/use-resize';
 import { RecordingsSort } from 'types/graphql';
-import { COLUMNS } from 'data/recordings/constants';
 import type { Visitor, Site, Team } from 'types/graphql';
 import type { Column } from 'types/common';
 
@@ -27,56 +23,25 @@ interface Props {
 }
 
 export const VisitorsRecording: FC<Props> = ({ site, visitor, page, sort, columns, selected, member, setSelected, setPage, setSort }) => {
+  const { mobile } = useResize();
+
   const { items, pagination } = visitor.recordings;
 
-  const { rowStyle, tableClassNames } = getColumnStyles(COLUMNS, columns);
-
-  const onSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.target.checked
-      ? setSelected(items.map(t => t.id))
-      : setSelected([]);
-  };
+  const Component = mobile ? VisitorsRecordingsSmall : VisitorsRecordingsLarge;
 
   return (
     <>
       {items.length > 0 && (
-        <Table className={classnames('visitor-recordings-table hover', tableClassNames)}>
-          <Row head style={rowStyle}>
-            <Cell>
-              <Checkbox
-                checked={selected.length === items.length && items.length !== 0}
-                partial={selected.length !== 0 && selected.length !== items.length && items.length !== 0}
-                disabled={items.length === 0}
-                onChange={onSelectAll} 
-              />
-            </Cell>
-            <Cell>Status</Cell>
-            <Cell>Recording ID</Cell>
-            <Cell>Visitor ID</Cell>
-            <Cell>Date &amp; Time<Sort name='connected_at' order={sort} onAsc={() => setSort(RecordingsSort.ConnectedAtAsc)} onDesc={() => setSort(RecordingsSort.ConnectedAtDesc)} /></Cell>
-            <Cell>Duration <Sort name='duration' order={sort} onAsc={() => setSort(RecordingsSort.DurationAsc)} onDesc={() => setSort(RecordingsSort.DurationDesc)} /></Cell>
-            <Cell>Pages <Sort name='page_count' order={sort} onAsc={() => setSort(RecordingsSort.PageCountAsc)} onDesc={() => setSort(RecordingsSort.PageCountDesc)} /></Cell>
-            <Cell>Traffic Source</Cell>
-            <Cell>Start &amp; Exit URL</Cell>
-            <Cell>Device &amp; Viewport (px)</Cell>
-            <Cell>Country</Cell>
-            <Cell>Browser</Cell>
-            <Cell>NPS</Cell>
-            <Cell>Sentiment</Cell>
-            <Cell />
-          </Row>
-          {items.map(recording => (
-            <RecordingsLargeItem 
-              site={site}
-              recording={recording} 
-              key={recording.id} 
-              style={rowStyle}
-              member={member}
-              selected={selected}
-              setSelected={setSelected}
-            />
-          ))}
-        </Table>
+        <Component
+          columns={columns}
+          member={member}
+          selected={selected}
+          setSelected={setSelected}
+          setSort={setSort}
+          site={site}
+          sort={sort}
+          visitor={visitor}
+        />
       )}
 
       {items.length === 0 && (

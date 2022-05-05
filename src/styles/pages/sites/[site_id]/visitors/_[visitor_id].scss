@@ -7,6 +7,13 @@
     .title {
       margin-bottom: 2rem;
 
+      @include breakpoint-sm {
+        align-items: center;
+        flex-direction: row;
+        justify-content: flex-start;
+        margin-bottom: 1rem;
+      }
+
       i {
         color: var(--gray-500);
         margin-right: .5rem;
@@ -216,6 +223,12 @@
       margin: 2rem 0;
       padding: 2rem;
 
+      @include breakpoint-sm {
+        background: none;
+        box-shadow: none;
+        padding: 0;
+      }
+
       .summary-data {
         display: grid;
         grid-gap: 2rem;
@@ -228,11 +241,20 @@
           grid-template-columns: 1fr;
         }
 
+        @include breakpoint-sm {
+          grid-gap: 1rem;
+        }
+
         .linked {
           background: var(--gray-50);
           border-radius: var(--border-radius-md);
           grid-area: linked;
           padding: 2rem;
+
+          @include breakpoint-sm {
+            background: var(--gray-100);
+            padding: 1rem;
+          }
 
           .heading {
             align-items: center;
@@ -261,6 +283,13 @@
         .default {
           grid-area: default;
           margin-top: .5rem;
+
+          @include breakpoint-sm {
+            background: var(--white);
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--box-shadow-md);
+            padding: 1rem;
+          }
         }
 
         .attributes {
@@ -273,6 +302,12 @@
           height: 1rem;
           margin: 0 0 1rem 0;
 
+          @include breakpoint-sm {
+            height: auto;
+            flex-direction: column;
+            justify-content: flex-start;
+          }
+
           &:last-of-type {
             margin-bottom: 0;
           }
@@ -284,6 +319,14 @@
           dd {
             align-items: center;
             display: flex;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+
+
+            @include breakpoint-sm {
+              margin: .25rem 0 0 0;
+            }
           }
 
           .pill {
@@ -298,7 +341,7 @@
 
           .browser {
             display: inline-block;
-            height: 1.25rem;
+            height: 1rem;
             margin-right: .5rem;
           }
         }
@@ -336,6 +379,11 @@
           font-size: 48px;
           line-height: 64px;
           margin: 0;
+
+          @include breakpoint-sm {
+            font-size: 32px;
+            line-height: 48px;
+          }
         }
 
         h5 {
@@ -362,6 +410,50 @@
 
       .row {
         grid-template-columns: 58px 105px 165px 1fr 1fr 1fr 1fr 2fr 1fr 90px 70px;
+      }
+    }
+
+    .visitors-recordings-small {
+      display: flex;
+      flex-direction: column;
+  
+      .card {
+        color: var(--gray-blue-800);
+        margin: 0 0 1rem 0;
+        padding: 1rem;
+        text-decoration: none;
+  
+        p {
+          margin: 0;
+        }
+  
+        .heading {
+          align-items: center;
+          display: flex;
+          justify-content: space-between;
+          margin: 0 0 1rem 0;
+  
+          p {
+            font-weight: var(--font-weight-bold);
+          }
+        }
+  
+        .details {
+          align-items: center;
+          display: flex;
+          justify-content: space-between;
+  
+          p {
+            align-items: center;
+            display: flex;
+            white-space: nowrap;
+          }
+  
+          .icon {
+            color: var(--gray-blue-200);
+            margin: 0 .25rem 0 0;
+          }
+        }
       }
     }
 
@@ -399,6 +491,11 @@
           font-size: 48px;
           line-height: 64px;
           margin: 0;
+
+          @include breakpoint-sm {
+            font-size: 32px;
+            line-height: 48px;
+          }
         }
 
         h5 {
