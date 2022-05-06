@@ -7,7 +7,8 @@ type ComponentType =
   'heatmaps' | 
   'analytics' |
   'nps' |
-  'sentiment';
+  'sentiment' |
+  'journeys';
 
 interface UsePeriod {
   period: TimePeriod;
@@ -28,6 +29,7 @@ const getDefaultFilters = (type: ComponentType) => {
   switch(type) {
     case 'analytics':
     case 'recordings':
+    case 'journeys':
       return 'past_fourteen_days';
     case 'dashboard':
       return 'past_year';

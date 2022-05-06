@@ -167,6 +167,7 @@ export type Analytics = {
   referrers: AnalyticsReferrers;
   sessionDurations: AnalyticsSessionDurations;
   sessionsPerVisitor: AnalyticsSessionsPerVisitor;
+  userPaths: Array<Maybe<AnalyticsUserPath>>;
   visitors: AnalyticsVisitors;
   visitorsCount: AnalyticsVisitorsCount;
   visitsAt: Array<Maybe<AnalyticsVisitAt>>;
@@ -188,6 +189,12 @@ export type AnalyticsPagesArgs = {
 export type AnalyticsReferrersArgs = {
   page?: InputMaybe<Scalars['Int']>;
   size?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type AnalyticsUserPathsArgs = {
+  endPage?: InputMaybe<Scalars['String']>;
+  startPage?: InputMaybe<Scalars['String']>;
 };
 
 export type AnalyticsBrowser = {
@@ -291,6 +298,11 @@ export type AnalyticsSessionsPerVisitor = {
   __typename?: 'AnalyticsSessionsPerVisitor';
   average: Scalars['Float'];
   trend: Scalars['Float'];
+};
+
+export type AnalyticsUserPath = {
+  __typename?: 'AnalyticsUserPath';
+  path: Array<Maybe<Scalars['String']>>;
 };
 
 export type AnalyticsVisitAt = {

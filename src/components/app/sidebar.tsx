@@ -17,6 +17,8 @@ import { Breakpoints } from 'data/common/constants';
 import { Preferences, Preference } from 'lib/preferences';
 import { OWNER, ADMIN } from 'data/teams/constants';
 import { useResize } from 'hooks/use-resize';
+import { useFeatureFlags } from 'hooks/use-feature-flags';
+import { FeatureFlag } from 'lib/feature-flags';
 
 export const Sidebar: FC = () => {
   const ref = React.useRef<HTMLElement>(null);
@@ -28,6 +30,7 @@ export const Sidebar: FC = () => {
   const [position, setPosition] = React.useState<'left' | 'right'>('left');
 
   const { sidebar } = useSidebar();
+  const { featureFlagEnabled } = useFeatureFlags();
 
   const path = router.asPath;
   const pathname = router.pathname;
@@ -152,6 +155,14 @@ export const Sidebar: FC = () => {
                 <span>Analytics</span>
               </a>
             </Link>
+            {featureFlagEnabled(FeatureFlag.JOURNEYS) && (
+              <Link href={`/sites/${siteId}/journeys`}>
+                <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/journeys`) })} data-label='Journeys'>
+                  <Icon name='guide-line' />
+                  <span>Journeys</span>
+                </a>
+              </Link>
+            )}
             <SidebarNested
               name='Feedback'
               icon='user-voice-line'

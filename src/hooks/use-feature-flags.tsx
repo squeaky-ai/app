@@ -15,12 +15,14 @@ export const allFeatureFlags: FeatureFlag[] = [
   FeatureFlag.MAGIC_ERASURE,
   FeatureFlag.CHEESE_LOADER,
   FeatureFlag.SHUFFLE_HEATMAPS,
+  FeatureFlag.JOURNEYS,
 ];
 
 export const featureFlagNames: Names = {
   MAGIC_ERASURE: 'Magic Erasure',
   CHEESE_LOADER: 'Cheese Loader',
   SHUFFLE_HEATMAPS: 'Shuffle Heatmaps',
+  JOURNEYS: 'Journeys',
 };
 
 export const useFeatureFlags = (): UseFeatureFlags => {
@@ -36,7 +38,11 @@ export const useFeatureFlags = (): UseFeatureFlags => {
     {
       key: FeatureFlag.SHUFFLE_HEATMAPS,
       value: false,
-    }
+    },
+    {
+      key: FeatureFlag.JOURNEYS,
+      value: false,
+    },
   ]);
 
   const handleChange = (key: FeatureFlag, value: boolean) => {
