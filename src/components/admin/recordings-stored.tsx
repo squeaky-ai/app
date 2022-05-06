@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import { range } from 'lodash';
 import { format, subMonths } from 'date-fns';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, TooltipProps } from 'recharts';
+import { formatShortNumbers } from 'lib/maths';
 import type { AdminRecordingsStored } from 'types/graphql';
 
 interface Props {
@@ -59,7 +60,8 @@ export const RecordingsStored: FC<Props> = ({ recordingsStored }) => {
             stroke='var(--gray-500)' 
             tickLine={false} 
             tickMargin={10}
-            allowDecimals={false} 
+            allowDecimals={false}
+            tickFormatter={(x) => formatShortNumbers(x) || '0'}
           />
 
           <Tooltip content={<CustomTooltip />} />

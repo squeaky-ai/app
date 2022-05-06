@@ -18,3 +18,11 @@ export const percentage = (total: number, count: number) => total
   : 0;
 
 export const toTwoDecimalPlaces = (value: number) => value ? value.toFixed(2) : '0.00';
+
+export const formatShortNumbers = (count: number) => {
+  if (!count) return null;
+
+  const format = Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 1 })
+  
+  return format.format(count);
+};
