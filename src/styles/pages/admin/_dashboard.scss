@@ -6,7 +6,8 @@
                          'total-users total-users total-users total-users roles roles'
                          'total-sites total-sites total-sites total-sites sites-verified sites-verified'
                          'total-sites total-sites total-sites total-sites sites-verified sites-verified'
-                         'recordings recordings recordings visitors visitors visitors';
+                         'recordings recordings recordings visitors visitors visitors'
+                         'recordings-stored recordings-stored recordings-stored recordings-stored recordings-stored recordings-stored';
     grid-template-columns: repeat(6, minmax(0, 1fr));
     grid-template-rows: 169px 169px 169px 169px 176px;
     margin: 2rem 0 0 0;
@@ -225,6 +226,10 @@
             }
           }
         }
+      }
+
+      &.recordings-stored {
+        grid-area: recordings-stored;
       }
 
       .card {

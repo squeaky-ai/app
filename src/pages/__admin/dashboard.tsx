@@ -9,6 +9,7 @@ import { Card } from 'components/card';
 import { Icon } from 'components/icon';
 import { UsersGrowth } from 'components/admin/users-growth';
 import { SitesGrowth } from 'components/admin/sites-growth';
+import { RecordingsStored } from 'components/admin/recordings-stored';
 import { VerifiedSites } from 'components/admin/verified-sites';
 import { useAdmin } from 'hooks/use-admin';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
@@ -127,7 +128,14 @@ const AdminDashboard: NextPage<ServerSideProps> = () => {
                 </div>
               </Card>
             </div>
-          </div>
+
+            <div className='grid-item recordings-stored'>
+               <Card>
+                 <h5>Recordings Stored</h5>
+                 <RecordingsStored recordingsStored={admin.recordingsStored} />
+               </Card>
+             </div>
+           </div>
         )}
       </Main>
     </>

@@ -31,6 +31,7 @@ export type Admin = {
   blogImages: Array<Maybe<Scalars['String']>>;
   recordingsCount: Scalars['Int'];
   recordingsProcessed: Scalars['Int'];
+  recordingsStored: Array<Maybe<AdminRecordingsStored>>;
   roles: AdminRoles;
   site?: Maybe<Site>;
   sites: Array<Maybe<Site>>;
@@ -100,6 +101,12 @@ export type AdminBlogSignImageInput = {
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: InputMaybe<Scalars['String']>;
   filename: Scalars['String'];
+};
+
+export type AdminRecordingsStored = {
+  __typename?: 'AdminRecordingsStored';
+  count: Scalars['Int'];
+  date: Scalars['ISO8601Date'];
 };
 
 export type AdminRoles = {
@@ -1492,7 +1499,7 @@ export type SiteAnalyticsArgs = {
 
 export type SiteHeatmapsArgs = {
   device?: HeatmapsDevice;
-  excludeRecordingId?: InputMaybe<Array<Scalars['ID']>>;
+  excludeRecordingIds?: InputMaybe<Array<Scalars['ID']>>;
   fromDate: Scalars['ISO8601Date'];
   page: Scalars['String'];
   toDate: Scalars['ISO8601Date'];

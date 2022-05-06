@@ -29,6 +29,7 @@ export const useAdmin = (): UseAdmin => {
     recordingsCount: 0,
     recordingsProcessed: 0,
     visitorsCount: 0,
+    recordingsStored: [],
   };
 
   return {

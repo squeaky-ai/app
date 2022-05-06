@@ -53,6 +53,10 @@ export const GET_ADMIN_QUERY = gql`
         verified
         unverified
       }
+      recordingsStored {
+         count
+         date
+      }
     }
   }
 `;
