@@ -38,12 +38,10 @@ export const JourneysGraph: FC<Props> = ({ journeys }) => {
       {range(0, depth).map(col => {
         const pages = getPagesForCol(col);
 
-        console.log(pages);
-
         return (
           <div className='col' key={col}>
             {pages.map(page => (
-              <div className='page' style={{ height: `${page.percentage}%` }}>
+              <div className='page' key={col + page.path} style={{ height: `${page.percentage}%` }}>
                 <div className='path'>
                   <p>{page.path}</p>
                 </div>
