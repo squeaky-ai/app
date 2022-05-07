@@ -20,13 +20,15 @@ export const Journeys: FC<Props> = ({ period, setPeriod }) => {
   const [startPage, setStartPage] = React.useState<string>(null);
   const [endPage, setEndPage] = React.useState<string>(null);
 
-  const { pages } = usePages();
+  const { pages, loading: pagesLoading } = usePages();
 
-  const { loading, error, journeys } = useJourneys({
+  const { loading: journeysLoading, error, journeys } = useJourneys({
     startPage,
     endPage,
     range: getDateRange(period) 
   });
+
+  const loading = pagesLoading || journeysLoading;
 
   if (error) {
     return <Error />;
