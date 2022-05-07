@@ -5,7 +5,7 @@ import { JourneysPages } from 'components/sites/journeys/journeys-pages';
 import { NoResults } from 'components/sites/no-results';
 import { JourneysGraph } from 'components/sites/journeys/journeys-graph';
 import { Error } from 'components/error';
-import { Spinner } from 'components/spinner';
+import { PageLoading } from 'components/sites/page-loading';
 import { usePages } from 'hooks/use-pages';
 import { useJourneys } from 'hooks/use-journeys';
 import { getDateRange } from 'lib/dates';
@@ -43,7 +43,7 @@ export const Journeys: FC<Props> = ({ period, setPeriod }) => {
       </div>
 
       {loading && (
-        <Spinner />
+        <PageLoading />
       )}
 
       {!loading && (
