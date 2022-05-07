@@ -4,6 +4,7 @@ import { range, countBy, sum } from 'lodash';
 import { Icon } from 'components/icon';
 import { percentage } from 'lib/maths';
 import type { AnalyticsUserPath } from 'types/graphql';
+import { Tooltip } from 'components/tooltip';
 
 interface Props {
   journeys: AnalyticsUserPath[];
@@ -44,13 +45,19 @@ export const JourneysGraph: FC<Props> = ({ journeys }) => {
             <p className='heading'>Page {col + 1}</p>
             {pages.map(page => (
               <div className='page' key={col + page.path} style={{ height: `${page.percentage}%` }}>
-                <p className='path'>
-                  <Icon name='file-line' />
-                  {page.path}
-                </p>
-                <p className='stats'>
-                  {page.percentage}%
-                </p>
+                <div className='row'>
+                  <Tooltip fluid buttonClassName='path' button={
+                    <>
+                      <Icon name='file-line' />
+                      {page.path}
+                    </>
+                  }>
+                    {page.path}
+                  </Tooltip>
+                  <p className='stats'>
+                    {page.percentage}%
+                  </p>
+                </div>
               </div>
             ))}
           </div>

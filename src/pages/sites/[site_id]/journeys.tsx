@@ -8,12 +8,21 @@ import { Page } from 'components/sites/page';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { Unlock } from 'components/sites/unlock';
 import { Journeys } from 'components/sites/journeys/journeys';
+import { PageLoading } from 'components/sites/page-loading';
 import { usePeriod } from 'hooks/use-period';
+import { usePages } from 'hooks/use-pages';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
 const SitesJourneys: NextPage<ServerSideProps> = ({ user }) => {
+  const [page, setPage] = React.useState<string>(null);
   const { period, setPeriod } = usePeriod('journeys');
-  
+
+  const { pages, loading } = usePages();
+
+  React.useEffect(() => {
+    if (!page) setPage(pages[0]);
+  }, [pages]);
+
   return (
     <>
       <Head>
@@ -38,9 +47,16 @@ const SitesJourneys: NextPage<ServerSideProps> = ({ user }) => {
               videoName='Journey Intro'
             />
 
-            {site.recordingsCount > 0 && (
-              <Journeys 
+            {loading && (
+              <PageLoading />
+            )}
+
+            {page && site.recordingsCount > 0 && (
+              <Journeys
+                page={page}
+                pages={pages}
                 period={period}
+                setPage={setPage}
                 setPeriod={setPeriod}
               />
             )}

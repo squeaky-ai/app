@@ -57,7 +57,7 @@
   .journeys-pages {
     align-items: center;
     display: flex;
-    margin: 0 2rem 0 0;
+    margin: 0;
 
     .select {
       margin: 0;
@@ -67,6 +67,10 @@
     .label {
       margin: 0 .75rem 0 0;
     }
+  }
+
+  .position {
+    margin: 0 1rem 0 0;
   }
 
   .journey-wrapper {
@@ -102,22 +106,36 @@
         border: 1px solid var(--blue-500);
         border-radius: var(--border-radius-md);
         box-shadow: var(--box-shadow-md);
-        display: flex;
+        display: block;
         margin: 0 0 .5rem 0;
+        min-height: 3.125rem;
         padding: 1rem;
 
         p {
           margin: 0;
         }
 
-        .path {
+        .row {
+          align-items: center;
+          display: flex;
+        }
+
+        .tooltip {
           flex: 1;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        .path {
           font-size: 13px;
           font-weight: var(--font-weight-bold);
           line-height: 16px;
           overflow: hidden;
+          text-align: left;
           text-overflow: ellipsis;
           white-space: nowrap;
+          width: 100%;
 
           .icon {
             color: var(--blue-500);

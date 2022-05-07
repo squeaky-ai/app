@@ -193,8 +193,8 @@ export type AnalyticsReferrersArgs = {
 
 
 export type AnalyticsUserPathsArgs = {
-  endPage?: InputMaybe<Scalars['String']>;
-  startPage?: InputMaybe<Scalars['String']>;
+  page: Scalars['String'];
+  position: PathPosition;
 };
 
 export type AnalyticsBrowser = {
@@ -1181,6 +1181,11 @@ export type Page = {
   id: Scalars['ID'];
   url: Scalars['String'];
 };
+
+export enum PathPosition {
+  End = 'End',
+  Start = 'Start'
+}
 
 export type Plan = {
   __typename?: 'Plan';
