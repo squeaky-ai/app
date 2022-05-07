@@ -39,12 +39,13 @@ export const JourneysGraph: FC<Props> = ({ journeys }) => {
     <div className='journey-graph'>
       {range(0, depth).map(col => {
         const pages = getPagesForCol(col);
+        const padder = 100 - sum(pages.map(p => p.percentage));
 
         return (
           <div className='col' key={col}>
             <p className='heading'>Page {col + 1}</p>
             {pages.map(page => (
-              <div className='page' key={col + page.path} style={{ flexGrow: `${page.percentage}` }}>
+              <div className='page' key={col + page.path} style={{ flexGrow: page.percentage }}>
                 <div className='row'>
                   <Tooltip fluid buttonClassName='path' button={
                     <>
@@ -60,6 +61,7 @@ export const JourneysGraph: FC<Props> = ({ journeys }) => {
                 </div>
               </div>
             ))}
+            <div className='padder' style={{ flexGrow: padder }} />
           </div>
         );
       })}
