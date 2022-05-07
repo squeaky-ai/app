@@ -49,6 +49,10 @@
     justify-content: flex-start;
   }
 
+  .journeys {
+    height: 100%;
+  }
+
   .journeys-pages {
     align-items: center;
     display: flex;
@@ -80,7 +84,7 @@
       border-right: 1px solid var(--gray-150);
       flex: 1;
       height: 100%;
-      min-width: 20rem;
+      min-width: 18rem;
       padding: 0 1rem;
 
       &:last-of-type {

@@ -36,11 +36,13 @@ export const Journeys: FC<Props> = ({ period, setPeriod }) => {
 
   return (
     <div className='journeys'>
-      <div className='controls'>
-        <JourneysPages label='Start page' page={startPage} pages={pages} setPage={setStartPage} />
-        <JourneysPages label='End page' page={endPage} pages={pages} setPage={setEndPage} />
-        <Period period={period} onChange={setPeriod} />
-      </div>
+      {!pagesLoading && (
+        <div className='controls'>
+          <JourneysPages label='Start page' page={startPage} pages={pages} setPage={setStartPage} />
+          <JourneysPages label='End page' page={endPage} pages={pages} setPage={setEndPage} />
+          <Period period={period} onChange={setPeriod} />
+        </div>
+      )}
 
       {loading && (
         <PageLoading />
