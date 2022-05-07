@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import { range, countBy, sum } from 'lodash';
+import { Icon } from 'components/icon';
 import { percentage } from 'lib/maths';
 import type { AnalyticsUserPath } from 'types/graphql';
 
@@ -40,15 +41,16 @@ export const JourneysGraph: FC<Props> = ({ journeys }) => {
 
         return (
           <div className='col' key={col}>
+            <p className='heading'>Page {col + 1}</p>
             {pages.map(page => (
               <div className='page' key={col + page.path} style={{ height: `${page.percentage}%` }}>
-                <div className='path'>
-                  <p>{page.path}</p>
-                </div>
-                <div className='stats'>
-                  <p>{page.count}</p>
-                  <p>{page.percentage}%</p>
-                </div>
+                <p className='path'>
+                  <Icon name='file-line' />
+                  {page.path}
+                </p>
+                <p className='stats'>
+                  {page.percentage}%
+                </p>
               </div>
             ))}
           </div>
