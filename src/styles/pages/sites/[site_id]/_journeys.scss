@@ -88,7 +88,9 @@
     .col {
       background: var(--gray-100);
       border-radius: var(--border-radius-md);
+      display: flex;
       height: calc(100% - 1.5rem);
+      flex-direction: column;
       margin-right: .5rem;
       padding: .75rem .5rem;
       width: 15rem;
@@ -96,6 +98,7 @@
       .heading {
         color: var(--gray-500);
         font-size: 13px;
+        flex-shrink: 0;
         justify-content: center;
         line-height: 16px;
         margin: 0 0 .75rem 0;
@@ -122,6 +125,7 @@
 
         .tooltip {
           flex: 1;
+          line-height: 1rem;
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
