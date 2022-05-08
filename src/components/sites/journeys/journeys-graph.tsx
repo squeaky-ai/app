@@ -21,14 +21,14 @@ interface PageStats {
 export const JourneysGraph: FC<Props> = ({ journeys }) => {
   const depth = Math.max(...journeys.map(j => j.path.length));
 
-  const getTotalForCol = (col: number) => {
+  const getTotalForCol = (col: number, excludeEmpty: boolean) => {
     const pages = journeys.map(j => j.path[col]);
     const groups = countBy(pages);
 
     return sum(
       Object
         .entries(groups)
-        .filter(([key]) => key !== 'undefined')
+        .filter(([key]) => excludeEmpty ? true : key !== 'undefined')
         .map(([, value]) => value)
     );
   };
@@ -36,7 +36,7 @@ export const JourneysGraph: FC<Props> = ({ journeys }) => {
   const getPagesForCol = (col: number): PageStats[] => {
     const pages = journeys.map(j => j.path[col]);
     const groups = countBy(pages);
-    const total = getTotalForCol(col);
+    const total = getTotalForCol(col, false);
 
     return Object
       .entries(groups)
@@ -50,7 +50,7 @@ export const JourneysGraph: FC<Props> = ({ journeys }) => {
   };
 
   const getExitForColAndPage = (col: number, page: string) => {
-    const total = getTotalForCol(col);
+    const total = getTotalForCol(col, true);
 
     // Take a look at the next position in the depth to see if
     // people did not view anymore pages, as this means that they
