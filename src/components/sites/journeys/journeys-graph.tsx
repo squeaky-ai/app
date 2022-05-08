@@ -24,7 +24,13 @@ export const JourneysGraph: FC<Props> = ({ journeys }) => {
   const getTotalForCol = (col: number) => {
     const pages = journeys.map(j => j.path[col]);
     const groups = countBy(pages);
-    return sum(Object.values(groups));
+
+    return sum(
+      Object
+        .entries(groups)
+        .filter(([key]) => key !== 'undefined')
+        .map(([, value]) => value)
+    );
   };
 
   const getPagesForCol = (col: number): PageStats[] => {
