@@ -16,23 +16,21 @@ interface PageStats {
   path: string;
   count: number;
   percentage: number;
-  exit: number;
 }
 
 export const JourneysGraph: FC<Props> = ({ journeys }) => {
   const depth = Math.max(...journeys.map(j => j.path.length));
 
-  const getPagesForCol = (col: number): PageStats[] => {
-    // Get all the pages for this depth in the journeys arrays
+  const getTotalForCol = (col: number) => {
     const pages = journeys.map(j => j.path[col]);
-
-    // Take a look at the next position in the depth to see if
-    // people did not view anymore pages, as this means that they
-    // dropped off here
-    const exits = journeys.map(j => j.path[col + 1]).filter(j => j === undefined).length;
     const groups = countBy(pages);
+    return sum(Object.values(groups));
+  };
 
-    const total = sum(Object.values(groups));
+  const getPagesForCol = (col: number): PageStats[] => {
+    const pages = journeys.map(j => j.path[col]);
+    const groups = countBy(pages);
+    const total = getTotalForCol(col);
 
     return Object
       .entries(groups)
@@ -41,9 +39,22 @@ export const JourneysGraph: FC<Props> = ({ journeys }) => {
         path: key,
         count: value,
         percentage: percentage(total, value),
-        exit: percentage(total, exits),
       }))
       .sort((a, b) => b.count - a.count);
+  };
+
+  const getExitForColAndPage = (col: number, page: string) => {
+    const total = getTotalForCol(col);
+
+    // Take a look at the next position in the depth to see if
+    // people did not view anymore pages, as this means that they
+    // dropped off here
+    const exits = journeys
+      .filter(j => j.path[col] === page)
+      .map(j => j.path[col + 1])
+      .filter(j => j === undefined).length;
+
+    return percentage(total, exits);
   };
 
   return (
@@ -55,31 +66,35 @@ export const JourneysGraph: FC<Props> = ({ journeys }) => {
         return (
           <div className='col' key={col}>
             <p className='heading'>Page {col + 1}</p>
-            {pages.map(page => (
-              <div className={classnames('page', { 'has-exit': page.exit > 0 })} key={col + page.path} style={{ flexGrow: page.percentage }}>
-                <div className='row'>
-                  <Tooltip fluid buttonClassName='path' button={
-                    <>
-                      <Icon name='file-line' />
-                      {page.path}
-                    </>
-                  }>
-                    {page.path}
-                  </Tooltip>
-                  <p className='stats'>
-                    {page.percentage}%
-                  </p>
-                </div>
-                {page.exit > 0 && (
+            {pages.map(page => {
+              const exits = getExitForColAndPage(col, page.path);
+
+              return (
+                <div className={classnames('page', { 'has-exit': exits > 0 })} key={col + page.path} style={{ flexGrow: page.percentage }}>
                   <div className='row'>
-                    <Pill className='drop-off'>
-                      <Icon name='arrow-right-down-line' />
-                      {page.exit}%
-                    </Pill>
+                    <Tooltip fluid buttonClassName='path' button={
+                      <>
+                        <Icon name='file-line' />
+                        {page.path}
+                      </>
+                    }>
+                      {page.path}
+                    </Tooltip>
+                    <p className='stats'>
+                      {page.percentage}%
+                    </p>
                   </div>
-                )}
-              </div>
-            ))}
+                  {exits > 0 && (
+                    <div className='row'>
+                      <Pill className='drop-off'>
+                        <Icon name='arrow-right-down-line' />
+                        {exits}%
+                      </Pill>
+                    </div>
+                  )}
+                </div>
+              )
+            })}
             <div className='padder' style={{ flexGrow: padder }} />
           </div>
         );
