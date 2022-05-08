@@ -57,6 +57,11 @@
     .results {
       max-height: 20rem;
       overflow-y: auto;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
       
       & > .button {
         align-items: center;
