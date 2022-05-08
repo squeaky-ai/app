@@ -17,8 +17,6 @@ import { HeatmapsPages } from 'components/sites/heatmaps/heatmaps-pages';
 import { HeatmapsPage } from 'components/sites/heatmaps/heatmaps-page';
 import { HeatmapsDisplays } from 'components/sites/heatmaps/heatmaps-displays';
 import { useHeatmaps } from 'hooks/use-heatmaps';
-import { useFeatureFlags } from 'hooks/use-feature-flags';
-import { FeatureFlag } from 'lib/feature-flags';
 import { getDateRange } from 'lib/dates';
 import { HeatmapsDevice, HeatmapsType } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
@@ -33,8 +31,6 @@ interface Props {
 }
 
 export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod }) => {
-  const { featureFlagEnabled } = useFeatureFlags();
-
   const [type, setType] = React.useState<HeatmapsType>(HeatmapsType.Click);
   const [device, setDevice] = React.useState<HeatmapsDevice>(HeatmapsDevice.Desktop);
   const [display, setDisplay] = React.useState<HeatmapsDisplay>('all');
@@ -71,7 +67,7 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
         </div>
 
         <div className='right'>
-          {heatmaps.recordingId && featureFlagEnabled(FeatureFlag.SHUFFLE_HEATMAPS) && (
+          {heatmaps.recordingId && (
             <ButtonGroup>
               <Tooltip portalClassName='suffle-recording-tooltip' button={<Icon name='shuffle-line' />} buttonClassName='quaternary shuffle-recording' buttonOnClick={excludeRecording}>
                 Squeaky shows you a random snapshot of your selected page from within the time period you have defined. If the snapshot is corrupted click the shuffle button and we&apos;ll find an alternative view of your page

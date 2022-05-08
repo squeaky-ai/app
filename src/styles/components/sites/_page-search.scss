@@ -79,12 +79,7 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         width: 100%;
-    
-        i {
-          color: var(--blue-500);
-          margin-right: .75rem;
-        }
-    
+
         &:hover {
           background: var(--gray-100);
           color: var(--gray-blue-900);
