@@ -27,109 +27,107 @@ export const BillingPlansTableLarge: FC<Props> = ({
   interval,
   hasBilling,
   showPlanChangeMessage,
-}) => {
-  return (
-    <div className='plan-table-large'>
-      <div className='col y-labels'>
-        <div className='cell head blank'></div>
-        <div className='cell'>
-          <b>Visits per month</b>
-        </div>
-        <div className='cell'>
-          <b>Team members</b>
-        </div>
-        <div className='cell'>
-          <b>Recordings</b>
-        </div>
-        <div className='cell'>
-          <b>Visitor profiles</b>
-        </div>
-        <div className='cell'>
-          <b>Analytics</b>
-        </div>
-        <div className='cell'>
-          <b>Feedback</b>
-        </div>
-        <div className='cell'>
-          <b>Heatmaps</b>
-        </div>
-        <div className='cell'>
-          <b>Data storage</b>
-        </div>
-        <div className='cell'>
-          <b>Support type</b>
-        </div>
-        <div className='cell'>
-          <b>Response times</b>
-        </div>
+}) => (
+  <div className='plan-table-large'>
+    <div className='col y-labels'>
+      <div className='cell head blank'></div>
+      <div className='cell'>
+        <b>Visits per month</b>
       </div>
-      {billing.plans.slice(0, 5).map((plan, index) => {
-        const isCurrent = index === planIndex;
-        const isDowngrade = index < planIndex;
-
-        return (
-          <div className={classnames('col', { current: isCurrent })} key={plan.name}>
-            <div className='cell head'>
-              <p>
-                <b>
-                  {plan.name}
-                  {interval === Interval.YEARLY && (
-                   <Tag>20% OFF</Tag>
-                 )}
-                </b>
-              </p>
-              <p className='pricing'>
-                <b>{CURRENCY_SYMBOLS[currency]}{getPricingForCurrencyAndInterval(plan, currency, interval)}</b> per {interval}
-              </p>
-              <Checkout 
-                site={site}
-                plan={plan}
-                currency={currency}
-                isCurrent={isCurrent} 
-                isDowngrade={isDowngrade}
-                isFirstTimeCheckout={!hasBilling}
-                showPlanChangeMessage={showPlanChangeMessage}
-              />
-            </div>
-            <div className='cell'>
-              Up to <b>{plan.maxMonthlyRecordings.toLocaleString()}</b>
-            </div>
-            <div className='cell'>
-              Unlimited
-            </div>
-            <div className='cell'>
-              <Icon name='check-line' />
-            </div>
-            <div className='cell'>
-              <Icon name='check-line' />
-            </div>
-            <div className='cell'>
-              <Icon name='check-line' />
-            </div>
-            <div className='cell'>
-              <Icon name='check-line' />
-            </div>
-            <div className='cell'>
-              <Icon name='check-line' />
-            </div>
-            <div className='cell'>
-              {plan.dataStorageMonths >= 12 
-                ? `${plan.dataStorageMonths / 12} year` 
-                : `${plan.dataStorageMonths} months`
-              }
-            </div>
-            <div className='cell'>
-              {plan.support.join(' & ')}
-            </div>
-            <div className='cell'>
-              {plan.responseTimeHours > 24
-                ? <>Max. <b>{plan.responseTimeHours / 24} days</b></>
-                : <>Max. <b>{plan.responseTimeHours} hours</b></>
-              }
-            </div>
-          </div>
-        )
-      })}
+      <div className='cell'>
+        <b>Team members</b>
+      </div>
+      <div className='cell'>
+        <b>Recordings</b>
+      </div>
+      <div className='cell'>
+        <b>Visitor profiles</b>
+      </div>
+      <div className='cell'>
+        <b>Analytics</b>
+      </div>
+      <div className='cell'>
+        <b>Feedback</b>
+      </div>
+      <div className='cell'>
+        <b>Heatmaps</b>
+      </div>
+      <div className='cell'>
+        <b>Data storage</b>
+      </div>
+      <div className='cell'>
+        <b>Support type</b>
+      </div>
+      <div className='cell'>
+        <b>Response times</b>
+      </div>
     </div>
-  );
-};
+    {billing.plans.slice(0, 5).map((plan, index) => {
+      const isCurrent = index === planIndex;
+      const isDowngrade = index < planIndex;
+
+      return (
+        <div className={classnames('col', { current: isCurrent })} key={plan.name}>
+          <div className='cell head'>
+            <p>
+              <b>
+                {plan.name}
+                {interval === Interval.YEARLY && (
+                  <Tag>20% OFF</Tag>
+                )}
+              </b>
+            </p>
+            <p className='pricing'>
+              <b>{CURRENCY_SYMBOLS[currency]}{getPricingForCurrencyAndInterval(plan, currency, interval)}</b> per {interval}
+            </p>
+            <Checkout 
+              site={site}
+              plan={plan}
+              currency={currency}
+              isCurrent={isCurrent} 
+              isDowngrade={isDowngrade}
+              isFirstTimeCheckout={!hasBilling}
+              showPlanChangeMessage={showPlanChangeMessage}
+            />
+          </div>
+          <div className='cell'>
+            Up to <b>{plan.maxMonthlyRecordings.toLocaleString()}</b>
+          </div>
+          <div className='cell'>
+            Unlimited
+          </div>
+          <div className='cell'>
+            <Icon name='check-line' />
+          </div>
+          <div className='cell'>
+            <Icon name='check-line' />
+          </div>
+          <div className='cell'>
+            <Icon name='check-line' />
+          </div>
+          <div className='cell'>
+            <Icon name='check-line' />
+          </div>
+          <div className='cell'>
+            <Icon name='check-line' />
+          </div>
+          <div className='cell'>
+            {plan.dataStorageMonths >= 12 
+              ? `${plan.dataStorageMonths / 12} year` 
+              : `${plan.dataStorageMonths} months`
+            }
+          </div>
+          <div className='cell'>
+            {plan.support.join(' & ')}
+          </div>
+          <div className='cell'>
+            {plan.responseTimeHours > 24
+              ? <>Max. <b>{plan.responseTimeHours / 24} days</b></>
+              : <>Max. <b>{plan.responseTimeHours} hours</b></>
+            }
+          </div>
+        </div>
+      )
+    })}
+  </div>
+);

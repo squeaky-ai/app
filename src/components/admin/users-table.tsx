@@ -37,9 +37,9 @@ const sortUsers = (sort: UserSort) => (a: User, b: User) => {
   }
 };
 
-const getUsersSites = (user: User, sites: Site[]) => {
-  return sites.filter(site => !!site.team.find(t => t.user.id === user.id));
-};
+const getUsersSites = (user: User, sites: Site[]) => (
+  sites.filter(site => !!site.team.find(t => t.user.id === user.id))
+);
 
 export const UsersTable: FC<Props> = ({ users, sites, columns, search, setColumns }) => {
   const [sort, setSort] = React.useState<UserSort>('created_at__desc');

@@ -21,9 +21,9 @@ enum PeriodType {
   Absolute,
 }
 
-const getRelativePeriod = (period: TimePeriod): RelativeTime => {
-  return TIME_PERIODS.find(t => t.key === period)?.key;
-};
+const getRelativePeriod = (period: TimePeriod): RelativeTime => (
+  TIME_PERIODS.find(t => t.key === period)?.key
+);
 
 const getAbsolutePeriod = (period: TimePeriod): AbsoluteTime => {
   const relative = TIME_PERIODS.find(t => t.key === period);

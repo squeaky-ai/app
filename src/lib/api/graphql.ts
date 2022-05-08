@@ -191,9 +191,9 @@ export const client = new ApolloClient({
   ssrMode: typeof window === 'undefined',
 });
 
-export const getGqlString = (document: TypedDocumentNode): string => {
-  return document.loc?.source?.body;
-};
+export const getGqlString = (document: TypedDocumentNode): string => (
+  document.loc?.source?.body
+);
 
 export const createSite = async (name: string, url: string): Promise<Site> => {
   const { data } = await client.mutate({

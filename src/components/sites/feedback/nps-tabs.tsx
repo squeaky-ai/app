@@ -8,32 +8,30 @@ interface Props {
   page: 'feedback' | 'settings' | 'guide';
 }
 
-export const NpsTabs: FC<Props> = ({ siteId, page }) => {
-  return (
-    <div className='nps-tabs'>
-      <ul className='tab-header' role='navigation' aria-label='NPS navigation'>
-        <li className='tab'>
-          <Link href={`/sites/${siteId}/feedback/nps`}>
-            <a className={classnames('button tab-button', { active: page === 'feedback' })}>
-              Feedback
-            </a>
-          </Link>
-        </li>
-        <li className='tab'>
-          <Link href={`/sites/${siteId}/feedback/nps/settings`}>
-            <a className={classnames('button tab-button', { active: page === 'settings' })}>
-              Settings
-            </a>
-          </Link>
-        </li>
-        <li className='tab'>
-          <Link href={`/sites/${siteId}/feedback/nps/guide`}>
-            <a className={classnames('button tab-button', { active: page === 'guide' })}>
-              Guide
-            </a>
-          </Link>
-        </li>
-      </ul>
-    </div>
-  );
-};
+export const NpsTabs: FC<Props> = ({ siteId, page }) => (
+  <div className='nps-tabs'>
+    <ul className='tab-header' role='navigation' aria-label='NPS navigation'>
+      <li className='tab'>
+        <Link href={`/sites/${siteId}/feedback/nps`}>
+          <a className={classnames('button tab-button', { active: page === 'feedback' })}>
+            Feedback
+          </a>
+        </Link>
+      </li>
+      <li className='tab'>
+        <Link href={`/sites/${siteId}/feedback/nps/settings`}>
+          <a className={classnames('button tab-button', { active: page === 'settings' })}>
+            Settings
+          </a>
+        </Link>
+      </li>
+      <li className='tab'>
+        <Link href={`/sites/${siteId}/feedback/nps/guide`}>
+          <a className={classnames('button tab-button', { active: page === 'guide' })}>
+            Guide
+          </a>
+        </Link>
+      </li>
+    </ul>
+  </div>
+);

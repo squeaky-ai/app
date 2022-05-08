@@ -8,9 +8,9 @@ interface Props {
   period: TimePeriod
 }
 
-const isRelativePeriod = (period: TimePeriod): period is RelativeTime => {
-  return !!TIME_PERIODS.find(t => t.key === period);
-};
+const isRelativePeriod = (period: TimePeriod): period is RelativeTime => (
+  !!TIME_PERIODS.find(t => t.key === period)
+);
 
 export const PeriodLabel: FC<Props> = ({ period }) => {
   const isRelative = isRelativePeriod(period);

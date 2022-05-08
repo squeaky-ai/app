@@ -45,134 +45,132 @@ const BlogSchema = Yup.object().shape({
   body: Yup.string().required('Body is required'),
 });
 
-export const BlogEdit: FC<Props> = ({ post, images, onChange, refetchImages }) => {
-  return (
-    <Formik<BlogInput>
-      initialValues={getInitialValues(post)}
-      validationSchema={BlogSchema}
-      onSubmit={(values, { setSubmitting }) => {
-        (async () => {
-          setSubmitting(false);
-          const update = exportBlogPost(values);
-          onChange({ ...update, id: post?.id });
-        })();
-      }}
-    >
-      {({
-        handleBlur,
-        handleSubmit,
-        handleChange,
-        setFieldValue,
-        touched,
-        values,
-        errors,
-      }) => {
-        return (
-          <Card className='create-blog-post'>
-            <h5>Create Blog Post</h5>
+export const BlogEdit: FC<Props> = ({ post, images, onChange, refetchImages }) => (
+  <Formik<BlogInput>
+    initialValues={getInitialValues(post)}
+    validationSchema={BlogSchema}
+    onSubmit={(values, { setSubmitting }) => {
+      (async () => {
+        setSubmitting(false);
+        const update = exportBlogPost(values);
+        onChange({ ...update, id: post?.id });
+      })();
+    }}
+  >
+    {({
+      handleBlur,
+      handleSubmit,
+      handleChange,
+      setFieldValue,
+      touched,
+      values,
+      errors,
+    }) => {
+      return (
+        <Card className='create-blog-post'>
+          <h5>Create Blog Post</h5>
 
-            <div className='grid'>
-              <form onSubmit={handleSubmit}>
-                <div className='input-group'>
-                  <div>
-                    <Label htmlFor='title'>Title</Label>
-                    <Input 
-                      type='text' 
-                      name='title' 
-                      placeholder='e.g. Are cats really lizards?' 
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      value={values.title}
-                      invalid={touched.title && !!errors.title}
-                    />
-                    <span className='validation'>{errors.title}</span>
-                  </div>
-                  <div>
-                    <Label htmlFor='category'>Category</Label>
-                    <Input 
-                      type='text'
-                      name='category'
-                      placeholder='e.g. Development' 
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      value={values.category}
-                      invalid={touched.category && !!errors.category}
-                    />
-                    <span className='validation'>{errors.category}</span>
-                  </div>
+          <div className='grid'>
+            <form onSubmit={handleSubmit}>
+              <div className='input-group'>
+                <div>
+                  <Label htmlFor='title'>Title</Label>
+                  <Input 
+                    type='text' 
+                    name='title' 
+                    placeholder='e.g. Are cats really lizards?' 
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.title}
+                    invalid={touched.title && !!errors.title}
+                  />
+                  <span className='validation'>{errors.title}</span>
                 </div>
-
-                <div className='input-group'>
-                  <div>
-                    <Label className='hint' htmlFor='tags'>Tags <i>(Comma seperated list)</i></Label>
-                    <Input 
-                      type='text' 
-                      name='tags' 
-                      placeholder='e.g. Product, UX, Engineering' 
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      value={values.tags}
-                      invalid={touched.tags && !!errors.tags}
-                    />
-                    <span className='validation'>{errors.tags}</span>
-                  </div>
-                  <div>
-                    <Label htmlFor='author'>Author</Label>
-                    <Select name='author' onChange={handleChange} value={values.author}>
-                      <Option value='chris'>Chris Pattison</Option>
-                      <Option value='lewis'>Lewis Monteith</Option>
-                    </Select>    
-                  </div>
+                <div>
+                  <Label htmlFor='category'>Category</Label>
+                  <Input 
+                    type='text'
+                    name='category'
+                    placeholder='e.g. Development' 
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.category}
+                    invalid={touched.category && !!errors.category}
+                  />
+                  <span className='validation'>{errors.category}</span>
                 </div>
+              </div>
 
-                <Toggle checked={values.draft} name='draft' onChange={(event) => setFieldValue('draft', event.target.checked)}>
-                  Draft
-                </Toggle>
-
-                <Label htmlFor='metaImage'>Meta Image</Label>
-                <div className='images'>
-                  {images.map(image => (
-                    <Radio 
-                      key={image}
-                      name='metaImage'
-                      value={image} 
-                      onChange={handleChange}
-                      className={classnames('image-container', { selected: values.metaImage === image })}
-                    >
-                      <Image path={image} refetchImages={refetchImages} />
-                    </Radio>
-                  ))}
-                  <UploadImage refetchImages={refetchImages} />
+              <div className='input-group'>
+                <div>
+                  <Label className='hint' htmlFor='tags'>Tags <i>(Comma seperated list)</i></Label>
+                  <Input 
+                    type='text' 
+                    name='tags' 
+                    placeholder='e.g. Product, UX, Engineering' 
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.tags}
+                    invalid={touched.tags && !!errors.tags}
+                  />
+                  <span className='validation'>{errors.tags}</span>
                 </div>
+                <div>
+                  <Label htmlFor='author'>Author</Label>
+                  <Select name='author' onChange={handleChange} value={values.author}>
+                    <Option value='chris'>Chris Pattison</Option>
+                    <Option value='lewis'>Lewis Monteith</Option>
+                  </Select>    
+                </div>
+              </div>
+
+              <Toggle checked={values.draft} name='draft' onChange={(event) => setFieldValue('draft', event.target.checked)}>
+                Draft
+              </Toggle>
+
+              <Label htmlFor='metaImage'>Meta Image</Label>
+              <div className='images'>
+                {images.map(image => (
+                  <Radio 
+                    key={image}
+                    name='metaImage'
+                    value={image} 
+                    onChange={handleChange}
+                    className={classnames('image-container', { selected: values.metaImage === image })}
+                  >
+                    <Image path={image} refetchImages={refetchImages} />
+                  </Radio>
+                ))}
+                <UploadImage refetchImages={refetchImages} />
+              </div>
 
 
-                <Label htmlFor='metaDescription'>Meta Description</Label>
-                <TextArea
-                  name='metaDescription' 
-                  placeholder='e.g. Project Managers HATE this man. Find out how he delivers value with this one simple trick.'
-                  rows={3}
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.metaDescription}
-                  invalid={touched.metaDescription && !!errors.metaDescription}
-                />
-                <span className='validation'>{errors.metaDescription}</span>
+              <Label htmlFor='metaDescription'>Meta Description</Label>
+              <TextArea
+                name='metaDescription' 
+                placeholder='e.g. Project Managers HATE this man. Find out how he delivers value with this one simple trick.'
+                rows={3}
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.metaDescription}
+                invalid={touched.metaDescription && !!errors.metaDescription}
+              />
+              <span className='validation'>{errors.metaDescription}</span>
 
-                <Label htmlFor='body'>Body</Label>
-                <Editor 
-                  value={values.body}
-                  onChange={(value) => setFieldValue('body', value)}
-                  refetchImages={refetchImages}
-                />
+              <Label htmlFor='body'>Body</Label>
+              <Editor 
+                value={values.body}
+                onChange={(value) => setFieldValue('body', value)}
+                refetchImages={refetchImages}
+              />
 
-                <Button className='primary submit' type='submit'>
-                  {post ? 'Update Post' : 'Create Post'}
-                </Button>
-              </form>
-            </div>
-          </Card>
-        );
-      }}
-    </Formik>
-  );
-};
+              <Button className='primary submit' type='submit'>
+                {post ? 'Update Post' : 'Create Post'}
+              </Button>
+            </form>
+          </div>
+        </Card>
+      );
+    }}
+  </Formik>
+);

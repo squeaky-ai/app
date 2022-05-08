@@ -11,41 +11,39 @@ import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { Sentiment } from 'components/sites/feedback/sentiment';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 
-const SitesFeedbackSentiment: NextPage<ServerSideProps> = ({ user }) => {
-  return (
-    <>
-      <Head>
-        <title>Squeaky | Feedback | Sentiment</title>
-      </Head>
+const SitesFeedbackSentiment: NextPage<ServerSideProps> = ({ user }) => (
+  <>
+    <Head>
+      <title>Squeaky | Feedback | Sentiment</title>
+    </Head>
 
-      <Page user={user} scope={[]}>
-        {({ site }) => (
-          <Main className={classnames({ empty: !site.verifiedAt })}>
-            <BreadCrumbs site={site} items={[{ name: 'Feedback' }, { name: 'Sentiment' }]} />
+    <Page user={user} scope={[]}>
+      {({ site }) => (
+        <Main className={classnames({ empty: !site.verifiedAt })}>
+          <BreadCrumbs site={site} items={[{ name: 'Feedback' }, { name: 'Sentiment' }]} />
 
-            <h3 className='title'>Sentiment</h3>
+          <h3 className='title'>Sentiment</h3>
 
-            <EmptyState
-              title='Awaiting tracking code installation'
-              subtitle='Collecting Visitor Feedback'
-              illustration='illustration-9'
-              videoName='Feedback Intro'
-            />
+          <EmptyState
+            title='Awaiting tracking code installation'
+            subtitle='Collecting Visitor Feedback'
+            illustration='illustration-9'
+            videoName='Feedback Intro'
+          />
 
-            <Unlock site={site} page='sentiment' />
+          <Unlock site={site} page='sentiment' />
 
-            {!!site.verifiedAt && (
-              <>
-                <SentimentTabs siteId={site.id} page='feedback' />
-                <Sentiment />
-              </>
-            )}
-          </Main>
-        )}
-      </Page>
-    </>
-  );
-};
+          {!!site.verifiedAt && (
+            <>
+              <SentimentTabs siteId={site.id} page='feedback' />
+              <Sentiment />
+            </>
+          )}
+        </Main>
+      )}
+    </Page>
+  </>
+);
 
 export default SitesFeedbackSentiment;
 export { getServerSideProps };

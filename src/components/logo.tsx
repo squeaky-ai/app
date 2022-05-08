@@ -24,6 +24,6 @@ const getLogoSrc = (logo: Logo) => {
   }
 };
 
-export const Logo: FC<Props> = ({ logo, ...props }) => {
-  return <Image src={getLogoSrc(logo)} {...props} alt='Squeaky logo' unoptimized />;
-};
+export const Logo: FC<Props> = ({ logo, ...props }) => (
+  <Image src={getLogoSrc(logo)} {...props} alt='Squeaky logo' unoptimized />
+);

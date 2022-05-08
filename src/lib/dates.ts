@@ -50,13 +50,9 @@ export const toHoursMinutesAndSeconds = (ms?: number) => {
   return `${hours.replace('00', '0')}h ${minutes.replace('00', '0')}m ${seconds.replace('00', '0')}s`;
 };
 
-export const toDayOfMonth = (date: Date) => {
-  return format(date, 'do MMMM');
-};
+export const toDayOfMonth = (date: Date) => format(date, 'do MMMM');
 
-export const toddMMYYY = (date: Date) => {
-  return format(date, 'do LLL yyyy');
-};
+export const toddMMYYY = (date: Date) => format(date, 'do LLL yyyy');
 
 export const daysBefore = (count = 7, from?: Date) => {
   from ||= new Date();
