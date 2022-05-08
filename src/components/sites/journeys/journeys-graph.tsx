@@ -70,7 +70,7 @@ export const JourneysGraph: FC<Props> = ({ journeys }) => {
               const exits = getExitForColAndPage(col, page.path);
 
               return (
-                <div className={classnames('page', { 'has-exit': exits > 0 })} key={col + page.path} style={{ flexGrow: page.percentage }}>
+                <div className={classnames('page', { 'has-exit': exits > 0 })} key={col + page.path} style={{ height: `${page.percentage}%` }}>
                   <div className='row'>
                     <Tooltip fluid buttonClassName='path' button={
                       <>
@@ -95,7 +95,7 @@ export const JourneysGraph: FC<Props> = ({ journeys }) => {
                 </div>
               )
             })}
-            <div className='padder' style={{ flexGrow: padder }} />
+            <div className='padder' style={{ height: `${padder}%` }} />
           </div>
         );
       })}
