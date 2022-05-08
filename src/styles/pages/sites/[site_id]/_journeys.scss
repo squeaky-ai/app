@@ -115,6 +115,10 @@
         min-height: 3.125rem;
         padding: 1rem;
 
+        &.exit {
+          min-height: 6rem;
+        }
+
         p {
           margin: 0;
         }
@@ -157,6 +161,22 @@
           line-height: 16px;
           margin-left: 1rem;
           text-align: right;
+        }
+      }
+
+      .drop-off {
+        align-items: center;
+        background: var(--peach-100);
+        border: 1px solid var(--rose-500);
+        border-radius: var(--border-radius-lg);
+        color: var(--gray-blue-800);
+        display: inline-flex;
+        margin: 1rem 0 0 0;
+
+        .icon {
+          color: var(--rose-500);
+          font-size: 1rem;
+          margin: 0 .125rem 0 0;
         }
       }
 

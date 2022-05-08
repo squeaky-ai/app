@@ -106,6 +106,13 @@
         @include breakpoint-sm {
           padding-right: 0;
         }
+
+        @include breakpoint-sm {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 100%;
+          white-space: nowrap;
+        }
       }
 
       .name {
@@ -124,12 +131,6 @@
 
         @include breakpoint-md {
           margin-bottom: .25rem;
-        }
-
-        @include breakpoint-sm {
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
         }
       }
     }
