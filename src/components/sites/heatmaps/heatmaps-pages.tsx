@@ -1,7 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import { Label } from 'components/label';
-import { Select, Option } from 'components/select';
+import { PageSearch } from 'components/sites/page-search';
 
 interface Props {
   page: string;
@@ -9,22 +9,9 @@ interface Props {
   setPage: (page: string) => void;
 }
 
-
-export const HeatmapsPages: FC<Props> = ({ page, pages, setPage }) => {
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setPage(event.target.value);
-  };
-
-  return (
-    <div className='heatmaps-pages'>
-      <Label htmlFor='page-search'>Page</Label>
-      <Select name='page' onChange={handleChange} value={page}>
-        {pages.map(p => (
-          <Option key={p} value={p}>
-            {p}
-          </Option>
-        ))}
-      </Select>
-    </div>
-  );
-};
+export const HeatmapsPages: FC<Props> = ({ page, pages, setPage }) => (
+  <div className='heatmaps-pages'>
+    <Label htmlFor='page-search'>Page</Label>
+    <PageSearch page={page} pages={pages} setPage={setPage} />
+  </div>
+);
