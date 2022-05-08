@@ -48,7 +48,7 @@ export const BillingEnterprise: FC<Props> = ({ billing }) => {
         <Card className='enterprise-card'>
           <div className='enterprise-heading'>
             <div className='enterprise-logo'>
-              <Image src={enterpriseLogo} height={80} width={80} />
+              <Image src={enterpriseLogo} height={80} width={80} alt='Squeaky enterprise logo' />
             </div>
             <div className='title'>
               <h4>Enterprise</h4>

@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import { uniq } from 'lodash';
 import { Icon } from 'components/icon';
 import { Button } from 'components/button';
+import { ButtonGroup } from 'components/button-group';
 import { PageLoading } from 'components/sites/page-loading';
 import { Container } from 'components/container';
 import { Illustration } from 'components/illustration';
@@ -71,14 +72,14 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
 
         <div className='right'>
           {heatmaps.recordingId && featureFlagEnabled(FeatureFlag.SHUFFLE_HEATMAPS) && (
-            <div className='button-group'>
+            <ButtonGroup>
               <Tooltip portalClassName='suffle-recording-tooltip' button={<Icon name='shuffle-line' />} buttonClassName='quaternary shuffle-recording' buttonOnClick={excludeRecording}>
                 Squeaky shows you a random snapshot of your selected page from within the time period you have defined. If the snapshot is corrupted click the shuffle button and we&apos;ll find an alternative view of your page
               </Tooltip>
-            </div>
+            </ButtonGroup>
           )}
 
-          <div className='button-group'>
+          <ButtonGroup>
             <Button className={classnames(device === HeatmapsDevice.Desktop ? 'primary' : 'blank')} onClick={() => setDevice(HeatmapsDevice.Desktop)}>
               <Icon name='computer-line' />
               {heatmaps.desktopCount}
@@ -91,16 +92,16 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
               <Icon name='smartphone-line' />
               {heatmaps.mobileCount}
             </Button>
-          </div>
+          </ButtonGroup>
 
-          <div className='button-group'>
+          <ButtonGroup>
             <Button className={classnames(type === 'Click' ? 'primary' : 'blank')} onClick={() => setType(HeatmapsType.Click)}>
               {device === HeatmapsDevice.Desktop ? 'Clicks' : 'Taps'}
             </Button>
             <Button className={classnames(type === 'Scroll' ? 'primary' : 'blank')} onClick={() => setType(HeatmapsType.Scroll)}>
               Scroll
             </Button>
-          </div>
+          </ButtonGroup>
 
           <HeatmapsDisplays display={display} setDisplay={setDisplay} />
         </div>
