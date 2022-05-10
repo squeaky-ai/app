@@ -10,7 +10,7 @@ interface Props {
   replayer: Replayer;
 }
 
-export const ActivityTimestamp: FC<Props> = ({ timestamp, offset, replayer }) => {
+export const EventTimestamp: FC<Props> = ({ timestamp, offset, replayer }) => {
   const value = timestamp - offset;
 
   const handleClick = () => {

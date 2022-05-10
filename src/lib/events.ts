@@ -1,7 +1,7 @@
 import type { Event } from 'types/event';
 import { EventType, IncrementalSource, MouseInteractions } from 'rrweb';
 import type { metaEvent } from 'rrweb/typings/types';
-import type { ActivityName } from 'types/event';
+import type { EventName } from 'types/event';
 
 type EventWithTimestamp<T> = T & { id: number; timestamp: number; delay?: number; };
 
@@ -18,7 +18,7 @@ export const isScrollEvent = (
 ) => event.type === EventType.IncrementalSnapshot && event.data.source === IncrementalSource.Scroll;
 
 
-export function getActivityName(event: Event): ActivityName {
+export function getEventName(event: Event): EventName {
   if (event.type === EventType.Meta) {
     return 'page_view';
   }

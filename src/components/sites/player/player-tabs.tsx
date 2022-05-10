@@ -18,9 +18,9 @@ const tabs = [
     name: PlayerTab.INFO
   },
   {
-    key: 'activity',
+    key: 'events',
     icon: 'time-line',
-    name: PlayerTab.ACTIVITY
+    name: PlayerTab.EVENTS
   },
   {
     key: 'pages',

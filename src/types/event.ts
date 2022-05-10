@@ -4,7 +4,7 @@ export type Event = eventWithTime & {
   id: number;
 };
 
-export type ActivityName =
+export type EventName =
   'page_view' |
   'click' |
   'focus' |
@@ -14,7 +14,7 @@ export type ActivityName =
   'scroll' |
   'unknown';
 
-export interface Activity {
+export interface EventItem {
   name: string;
-  value: ActivityName;
+  value: EventName;
 }

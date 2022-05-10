@@ -7,7 +7,7 @@ import { PlayerTab } from 'data/sites/enums';
 import { Label } from 'components/label';
 import { Button } from 'components/button';
 import { SidebarInfo } from 'components/sites/player/sidebar-info';
-import { SidebarActivity } from 'components/sites/player/sidebar-activity';
+import { SidebarEvents } from 'components/sites/player/sidebar-events';
 import { SidebarNotes } from 'components/sites/player/sidebar-notes';
 import { SidebarTags } from 'components/sites/player/sidebar-tags';
 import { SidebarPages } from 'components/sites/player/sidebar-pages';
@@ -46,13 +46,13 @@ export const PlayerSidebar: FC<Props> = ({ state, site, replayer, recording, dis
             <SidebarInfo site={site} recording={recording} setActiveTab={setActiveTab} />
           </div>
         </div>
-        <div className={classnames('sidebar activity', { active: state.activeTab === PlayerTab.ACTIVITY })}>
+        <div className={classnames('sidebar events', { active: state.activeTab === PlayerTab.EVENTS })}>
           <Label className='heading'>
-            Activity 
+            Events 
             <Button onClick={handleClose}><Icon name='close-line' /></Button>
           </Label>
           <div className='contents'>
-            <SidebarActivity recording={recording} replayer={replayer} />
+            <SidebarEvents recording={recording} replayer={replayer} />
           </div>
         </div>
         <div className={classnames('sidebar pages', { active: state.activeTab === PlayerTab.PAGES })}>

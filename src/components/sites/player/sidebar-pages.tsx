@@ -4,7 +4,7 @@ import type { Replayer } from 'rrweb';
 import classnames from 'classnames';
 import { groupBy, sortBy } from 'lodash';
 import { Icon } from 'components/icon';
-import { ActivityTimestamp } from 'components/sites/player/activity-timestamp';
+import { EventTimestamp } from 'components/sites/player/event-timestamp';
 import type { Page, Recording } from 'types/graphql';
 
 interface Props {
@@ -36,9 +36,9 @@ export const SidebarPages: FC<Props> = ({ recording, replayer }) => {
           <div className='timestamps'>
             {pages.map(page => (
               <div key={page.id} className='event'>
-                <ActivityTimestamp offset={offset} timestamp={new Date(page.enteredAt).valueOf()} replayer={replayer} />
+                <EventTimestamp offset={offset} timestamp={new Date(page.enteredAt).valueOf()} replayer={replayer} />
                 <Icon name='arrow-right-line' />
-                <ActivityTimestamp offset={offset} timestamp={new Date(page.exitedAt).valueOf()} replayer={replayer} />
+                <EventTimestamp offset={offset} timestamp={new Date(page.exitedAt).valueOf()} replayer={replayer} />
               </div>
             ))}
           </div>

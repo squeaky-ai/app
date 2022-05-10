@@ -11,7 +11,7 @@ import { Input } from 'components/input';
 import { TextArea } from 'components/textarea';
 import { NoteDelete } from 'components/sites/player/note-delete'
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
-import { ActivityTimestamp } from 'components/sites/player/activity-timestamp';
+import { EventTimestamp } from 'components/sites/player/event-timestamp';
 import { TIMESTAMP_REGEX } from 'data/sites/constants';
 import { toTimeString, fromTimeString } from 'lib/dates';
 import { Note as INote } from 'types/graphql';
@@ -60,7 +60,7 @@ export const Note: FC<Props> = ({ note, handleDelete, handleUpdate, replayer }) 
       <div className='note'>
         <div className='title'>
           {note.timestamp
-            ? <ActivityTimestamp timestamp={note.timestamp} offset={0} replayer={replayer} />
+            ? <EventTimestamp timestamp={note.timestamp} offset={0} replayer={replayer} />
             : <i className='no-timestamp'>No timestamp</i>
           }
           <Dropdown button={<Icon name='more-2-fill' />} buttonClassName='kebab'>

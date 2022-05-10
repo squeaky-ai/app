@@ -1,9 +1,9 @@
 import { FiltersSize } from 'types/graphql';
-import type { Activity } from 'types/event';
+import type { EventItem } from 'types/event';
 import type { Column } from 'types/common';
 import type { RecordingsFilters } from 'types/graphql';
 
-export const ACTIVITIES: Activity[] = [
+export const EVENTS: EventItem[] = [
   {
     name: 'Page views',
     value: 'page_view',

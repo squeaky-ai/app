@@ -6,20 +6,20 @@ import { Icon } from 'components/icon';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { Button } from 'components/button';
 import { Checkbox } from 'components/checkbox';
-import { ACTIVITIES } from 'data/recordings/constants';
+import { EVENTS } from 'data/recordings/constants';
 import { Preference, Preferences } from 'lib/preferences';
-import type { ActivityName } from 'types/event';
+import type { EventName } from 'types/event';
 
 interface Props {
-  active: ActivityName[];
-  setActive: (value: ActivityName[]) => void;
+  active: EventName[];
+  setActive: (value: EventName[]) => void;
 }
 
-const ActivitySchema = Yup.object().shape({
+const EventsSchema = Yup.object().shape({
   checked: Yup.array(),
 });
 
-export const SidebarActivityVisibility: FC<Props> = ({ active, setActive }) => {
+export const SidebarEventsVisibility: FC<Props> = ({ active, setActive }) => {
   const ref = React.useRef<Modal>();
 
   const openModal = () => {
@@ -32,19 +32,19 @@ export const SidebarActivityVisibility: FC<Props> = ({ active, setActive }) => {
 
   return (
     <>
-      <Button className='secondary activity-visibility' onClick={openModal}>
+      <Button className='secondary events-visibility' onClick={openModal}>
         <Icon name='eye-line' />
         Show
-        <span>{active.length}/{ACTIVITIES.length}</span>
+        <span>{active.length}/{EVENTS.length}</span>
       </Button>
 
       <Modal ref={ref}>
-        <ModalBody aria-labelledby='sidebar-activity-visibility-title' aria-describedby='sidebar-activity-visibility-description'>
+        <ModalBody aria-labelledby='sidebar-events-visibility-title' aria-describedby='sidebar-events-visibility-description'>
           <Formik
             initialValues={{ checked: active }}
-            validationSchema={ActivitySchema}
+            validationSchema={EventsSchema}
             onSubmit={(values, { setSubmitting }) => {
-              Preferences.setArray<string>(Preference.ACTIVITY_SHOW_TYPES, values.checked);
+              Preferences.setArray<string>(Preference.EVENTS_SHOW_TYPES, values.checked);
 
               setSubmitting(false);
               setActive(values.checked);
@@ -60,24 +60,24 @@ export const SidebarActivityVisibility: FC<Props> = ({ active, setActive }) => {
             }) => (
               <form onSubmit={handleSubmit}>
                 <ModalHeader>
-                  <p id='sidebar-activity-visibility-title'><b>Activity Visibility</b></p>
+                  <p id='sidebar-events-visibility-title'><b>Events Visibility</b></p>
                   <Button type='button' onClick={closeModal}>
                     <Icon name='close-line' />
                   </Button>
                 </ModalHeader>
                 <ModalContents>
-                  <p id='sidebar-activity-visibility-description'>Please select all activity types you want to see in your activity feed. Your settings are maintained across all recordings.</p>
+                  <p id='sidebar-events-visibility-description'>Please select all events types you want to see in your events feed. Your settings are maintained across all recordings.</p>
                   <div className='checkbox-group'>
-                    {ACTIVITIES.map(activity => (
+                    {EVENTS.map(event => (
                       <Checkbox 
-                        key={activity.value}
+                        key={event.value}
                         name='checked'
                         onBlur={handleBlur}
                         onChange={handleChange}
-                        value={activity.value}
-                        checked={values.checked.includes(activity.value)}
+                        value={event.value}
+                        checked={values.checked.includes(event.value)}
                       >
-                        {activity.name}
+                        {event.name}
                       </Checkbox>
                     ))}
                   </div>
