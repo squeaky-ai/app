@@ -53,7 +53,12 @@ export const FiltersReferrers: FC<Props> = ({ value, onClose, onUpdate }) => {
         <form className='filters-referrers' onSubmit={handleSubmit}>
           <div className='row'>
             <div className='search' role='search' aria-label='Filter recordings'>
-              <Input type='search' placeholder='Search...' onChange={handleSearch} />
+              <Input
+                type='search' 
+                placeholder='Search...' 
+                autoComplete='off'
+                onChange={handleSearch} 
+              />
               <Icon name='search-line' /> 
             </div>
           </div>

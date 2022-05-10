@@ -165,6 +165,7 @@ export const SentimentSettings: FC<Props> = ({ site }) => {
                     name='sentimentAccentColor'
                     className='hex'
                     placeholder='e.g. #32D05F' 
+                    autoComplete='off'
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={DEFAULT_COLORS.includes(values.sentimentAccentColor) ? '' : values.sentimentAccentColor}

@@ -124,6 +124,7 @@ export const Note: FC<Props> = ({ note, handleDelete, handleUpdate, replayer }) 
                   onBlur={handleBlur}
                   onChange={handleChange}
                   placeholder='00:00'
+                  autoComplete='off'
                   value={values.timestamp}
                   invalid={touched.timestamp && !!errors.timestamp}
                 />

@@ -87,6 +87,7 @@ export const InviteTeam: FC<Props> = ({ site }) => {
                     onBlur={handleBlur}
                     onChange={handleChange}
                     placeholder='e.g. jess@email.com'
+                    autoComplete='email'
                     value={values.email}
                     invalid={touched.email && !!errors.email}
                   />

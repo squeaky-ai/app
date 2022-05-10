@@ -83,6 +83,7 @@ export const SettingsTagEdit: FC<Props> = ({ tag, siteId }) => {
                     type='name' 
                     onBlur={handleBlur}
                     onChange={handleChange}
+                    autoComplete='off'
                     value={values.name}
                     invalid={touched.name && !!errors.name}
                   />

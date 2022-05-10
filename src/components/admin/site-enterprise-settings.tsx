@@ -88,6 +88,7 @@ export const SiteEnterpriseSettings: FC<Props> = ({ site }) => {
               <Input 
                 type='text'
                 name='maxMonthlyRecordings'
+                autoComplete='off'
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.maxMonthlyRecordings}

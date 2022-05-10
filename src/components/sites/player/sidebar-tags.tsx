@@ -112,6 +112,7 @@ export const SidebarTags: FC<Props> = ({ recording }) => {
                 <Input
                   name='name' 
                   type='text' 
+                  autoComplete='off'
                   onBlur={onInputBlur}
                   onFocus={onInputFocus}
                   onChange={handleChange}

@@ -83,6 +83,7 @@ export const SettingsScreeningEmailCreate: FC<Props> = ({ siteId }) => {
                     onBlur={handleBlur}
                     onChange={handleChange}
                     placeholder='e.g. jess@squeaky.ai'
+                    autoComplete='email'
                     value={values.value}
                     invalid={touched.value && !!errors.value}
                   />

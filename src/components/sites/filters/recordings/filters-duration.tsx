@@ -86,6 +86,7 @@ export const FiltersDuration: FC<Props> = ({ value, onClose, onUpdate }) => {
               className='time' 
               name='fromDuration' 
               type='text' 
+              autoComplete='off'
               onBlur={handleBlur}
               onChange={handleChange}
               value={values.fromDuration}
@@ -105,6 +106,7 @@ export const FiltersDuration: FC<Props> = ({ value, onClose, onUpdate }) => {
               placeholder='00:00' 
               className='time' 
               name='betweenFromDuration' 
+              autoComplete='off'
               type='text' 
               onBlur={handleBlur}
               onChange={handleChange}
@@ -116,6 +118,7 @@ export const FiltersDuration: FC<Props> = ({ value, onClose, onUpdate }) => {
               placeholder='00:00' 
               className='time' 
               name='betweenToDuration' 
+              autoComplete='off'
               type='text' 
               onBlur={handleBlur}
               onChange={handleChange}

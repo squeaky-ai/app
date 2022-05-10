@@ -87,6 +87,7 @@ export const SettingsScreeningDomainCreate: FC<Props> = ({ siteId }) => {
                       onBlur={handleBlur}
                       onChange={handleChange}
                       placeholder='squeaky.ai'
+                      autoComplete='off'
                       value={values.value}
                       invalid={touched.value && !!errors.value}
                     />

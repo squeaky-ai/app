@@ -79,6 +79,7 @@ export const BlogEdit: FC<Props> = ({ post, images, onChange, refetchImages }) =
                     type='text' 
                     name='title' 
                     placeholder='e.g. Are cats really lizards?' 
+                    autoComplete='off'
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.title}
@@ -92,6 +93,7 @@ export const BlogEdit: FC<Props> = ({ post, images, onChange, refetchImages }) =
                     type='text'
                     name='category'
                     placeholder='e.g. Development' 
+                    autoComplete='off'
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.category}
@@ -108,6 +110,7 @@ export const BlogEdit: FC<Props> = ({ post, images, onChange, refetchImages }) =
                     type='text' 
                     name='tags' 
                     placeholder='e.g. Product, UX, Engineering' 
+                    autoComplete='off'
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.tags}

@@ -29,6 +29,7 @@ export const Search: FC<Props> = ({ search, onSearch, ...rest }) => {
         name='search'
         value={val}
         onChange={handleChange}
+        autoComplete='off'
         {...rest}
       />
       <Icon name='search-line' />

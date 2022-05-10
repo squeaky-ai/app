@@ -114,6 +114,7 @@ export const CreateSite: FC<Props> = ({ children, className }) => {
                     onBlur={handleBlur}
                     onChange={handleChange}
                     placeholder='e.g. My Webite'
+                    autoComplete='off'
                     value={values.name}
                     invalid={touched.name && !!errors.name}
                   />
@@ -131,6 +132,7 @@ export const CreateSite: FC<Props> = ({ children, className }) => {
                       onBlur={handleBlur}
                       onChange={handleChange}
                       placeholder='e.g. www.mywebsite.com'
+                      autoComplete='off'
                       value={values.hostname}
                       invalid={touched.hostname && !!errors.hostname}
                     />

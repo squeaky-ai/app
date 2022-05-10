@@ -44,6 +44,7 @@ export const FiltersViewport: FC<Props> = ({ value, onClose, onUpdate }) => (
             <Label>Min. Width</Label>
             <Input
               name='minWidth'
+              autoComplete='off'
               type='number'
               onBlur={handleBlur}
               onChange={handleChange}
@@ -55,6 +56,7 @@ export const FiltersViewport: FC<Props> = ({ value, onClose, onUpdate }) => (
             <Label>Max. Width</Label>
             <Input
               name='maxWidth'
+              autoComplete='off'
               type='number'
               onBlur={handleBlur}
               onChange={handleChange}
@@ -68,6 +70,7 @@ export const FiltersViewport: FC<Props> = ({ value, onClose, onUpdate }) => (
             <Label>Min. Height</Label>
             <Input
               name='minHeight'
+              autoComplete='off'
               type='number'
               onBlur={handleBlur}
               onChange={handleChange}
@@ -79,6 +82,7 @@ export const FiltersViewport: FC<Props> = ({ value, onClose, onUpdate }) => (
             <Label>Max. Height</Label>
             <Input
               name='maxHeight'
+              autoComplete='off'
               type='number'
               onBlur={handleBlur}
               onChange={handleChange}

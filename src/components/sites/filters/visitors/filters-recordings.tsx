@@ -47,6 +47,7 @@ export const FiltersRecordings: FC<Props> = ({ value, onClose, onUpdate }) => (
             placeholder='e.g. 5'
             name='count' 
             type='number' 
+            autoComplete='off'
             onBlur={handleBlur}
             onChange={handleChange}
             value={values.count || ''}

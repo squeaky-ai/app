@@ -46,7 +46,7 @@
     padding: .5rem;
     position: absolute;
     top: 3rem;
-    width: 100%;
+    width: 20rem;
     z-index: 1;
 
     .search-input {
@@ -72,7 +72,7 @@
         display: block;
         font-weight: var(--font-weight-normal);
         overflow: hidden;
-        padding: .5rem .75rem;
+        padding: .35rem .75rem;
         user-select: none;
         text-align: left;
         text-decoration: none;

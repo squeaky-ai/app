@@ -178,6 +178,7 @@ export const NpsSettings: FC<Props> = ({ site }) => {
                     placeholder='e.g. #32D05F' 
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    autoComplete='off'
                     value={DEFAULT_COLORS.includes(values.npsAccentColor) ? '' : values.npsAccentColor}
                     invalid={touched.npsAccentColor && !!errors.npsAccentColor}
                   />
@@ -231,6 +232,7 @@ export const NpsSettings: FC<Props> = ({ site }) => {
                     onBlur={handleBlur}
                     value={values.npsPhrase}
                     invalid={touched.npsPhrase && !!errors.npsPhrase}
+                    autoComplete='off'
                   />
                   to a friend or colleague?
                 </div>

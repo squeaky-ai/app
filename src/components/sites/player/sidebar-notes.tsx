@@ -133,6 +133,7 @@ export const SidebarNotes: FC<Props> = ({ recording, replayer }) => {
                 <Input 
                   type='text' 
                   name='timestamp' 
+                  autoComplete='off'
                   onBlur={handleBlur}
                   onChange={handleChange}
                   placeholder='00:00'

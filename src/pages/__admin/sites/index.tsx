@@ -40,6 +40,7 @@ const AdminSites: NextPage<ServerSideProps> = () => {
             <Input 
               type='text' 
               placeholder='Search...'
+              autoComplete='off'
               value={search}
               onChange={event => setSearch(event.target.value)}
             />

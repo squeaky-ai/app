@@ -84,6 +84,7 @@ export const SettingsScreeningIpCreate: FC<Props> = ({ siteId }) => {
                     onBlur={handleBlur}
                     onChange={handleChange}
                     placeholder='192.168.0.1'
+                    autoComplete='off'
                     value={values.value}
                     invalid={touched.value && !!errors.value}
                   />
@@ -97,6 +98,7 @@ export const SettingsScreeningIpCreate: FC<Props> = ({ siteId }) => {
                     onBlur={handleBlur}
                     onChange={handleChange}
                     placeholder='Office'
+                    autoComplete='off'
                     value={values.name}
                     invalid={touched.name && !!errors.name}
                   />

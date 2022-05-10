@@ -113,6 +113,7 @@ const SitesSettingsDetails: NextPage<ServerSideProps> = ({ user }) => {
                       onBlur={handleBlur}
                       onChange={handleChange}
                       placeholder='e.g. My Webite'
+                      autoComplete='off'
                       value={values.name}
                       invalid={touched.name && !!errors.name}
                     />
@@ -130,6 +131,7 @@ const SitesSettingsDetails: NextPage<ServerSideProps> = ({ user }) => {
                         onBlur={handleBlur}
                         onChange={handleChange}
                         placeholder='e.g. www.mywebsite.com'
+                        autoComplete='off'
                         value={values.hostname}
                         invalid={touched.hostname && !!errors.hostname}
                       />

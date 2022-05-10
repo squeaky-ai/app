@@ -110,7 +110,10 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
                 {contact && (
                   <div className='email'>
                     <Label>Email address</Label>
-                    <Input placeholder='e.g. jess@squeaky.ai' />
+                    <Input 
+                      placeholder='e.g. jess@squeaky.ai'
+                      autoComplete='email'
+                    />
                   </div>
                 )}
 

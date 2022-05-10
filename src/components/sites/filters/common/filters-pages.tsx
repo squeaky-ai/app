@@ -50,7 +50,12 @@ export const FiltersPages: FC<Props> = ({ value, onClose, onUpdate }) => {
         <form className='filters-pages' onSubmit={handleSubmit}>
           <div className='row'>
             <div className='search' role='search' aria-label='Filter recordings'>
-              <Input type='search' placeholder='Search...' onChange={handleSearch} />
+              <Input 
+                type='search' 
+                placeholder='Search...' 
+                onChange={handleSearch} 
+                autoComplete='off'
+              />
               <Icon name='search-line' /> 
             </div>
           </div>

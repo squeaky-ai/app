@@ -86,6 +86,7 @@ export const SiteEnterpriseUpgrade: FC<Props> = ({ site }) => {
                         type='text'
                         placeholder='e.g. cus_94u549jsf-sdfd'
                         name='customerId'
+                        autoComplete='off'
                         onBlur={handleBlur}
                         onChange={handleChange}
                         value={values.customerId}
