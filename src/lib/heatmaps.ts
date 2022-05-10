@@ -19,12 +19,6 @@ export interface ClickMapData {
   percentage: number;
 }
 
-export enum DeviceWidths {
-  DESKTOP = 1280,
-  TABLET = 800,
-  MOBILE = 380,
-}
-
 export const getElement = (doc: Document, selector: string) => {
   try {
     return doc.querySelector<HTMLElement>(selector);

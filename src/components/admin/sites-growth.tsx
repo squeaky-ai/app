@@ -4,6 +4,8 @@ import { range } from 'lodash';
 import { format, subMonths } from 'date-fns';
 import { Label } from 'components/label';
 import { Checkbox } from 'components/checkbox';
+import { useResize } from 'hooks/use-resize';
+import { DeviceWidths } from 'data/common/constants';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, TooltipProps } from 'recharts';
 import type { Site } from 'types/graphql';
 
@@ -20,6 +22,8 @@ interface Total {
 
 export const SitesGrowth: FC<Props> = ({ sites }) => {
   const [show, setShow] = React.useState<string[]>(['all', 'verified', 'unverified']);
+
+  const { width } = useResize();
 
   const handleClick = (value: string) => {
     show.includes(value)
@@ -84,6 +88,7 @@ export const SitesGrowth: FC<Props> = ({ sites }) => {
               stroke='var(--gray-500)' 
               tickLine={false}
               tickMargin={10} 
+              interval={width > DeviceWidths.DESKTOP ? 0 : 'preserveStartEnd'}
             />
 
             <YAxis 

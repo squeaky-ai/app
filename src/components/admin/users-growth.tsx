@@ -2,6 +2,8 @@ import React from 'react';
 import type { FC } from 'react';
 import { range } from 'lodash';
 import { format, subMonths } from 'date-fns';
+import { useResize } from 'hooks/use-resize';
+import { DeviceWidths } from 'data/common/constants';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, TooltipProps } from 'recharts';
 import type { User } from 'types/graphql';
 
@@ -33,6 +35,8 @@ const getAccumulatingTotal = (users: User[]): Total[] => {
 export const UsersGrowth: FC<Props> = ({ users }) => {
   const data = getAccumulatingTotal(users);
 
+  const { width } = useResize();
+
   const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload, label }) => {
     if (!active || !payload?.length) return null;
 
@@ -57,6 +61,7 @@ export const UsersGrowth: FC<Props> = ({ users }) => {
             stroke='var(--gray-500)' 
             tickLine={false}
             tickMargin={10} 
+            interval={width > DeviceWidths.DESKTOP ? 0 : 'preserveStartEnd'}
           />
 
           <YAxis 

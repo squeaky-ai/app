@@ -58,3 +58,9 @@ export const CURRENCY_SYMBOLS: Record<PlansCurrency, string> = {
   GBP: '£',
   USD: '$'
 };
+
+export enum DeviceWidths {
+  DESKTOP = 1280,
+  TABLET = 800,
+  MOBILE = 380,
+}
