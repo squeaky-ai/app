@@ -1,25 +1,21 @@
 import React from 'react';
 import type { FC } from 'react';
-import classnames from 'classnames';
 import { range, countBy, sum } from 'lodash';
-import { Icon } from 'components/icon';
-import { Tooltip } from 'components/tooltip';
-import { Pill } from 'components/pill';
+import { JourneysPage } from 'components/sites/journeys/journeys-page';
 import { percentage } from 'lib/maths';
+import { PathPosition } from 'types/graphql';
+import type { PageStats } from 'types/journeys';
 import type { AnalyticsUserPath } from 'types/graphql';
 
 interface Props {
+  depth: number;
   journeys: AnalyticsUserPath[];
+  setPage: (page: string) => void;
+  setPosition: (position: PathPosition) => void;
 }
 
-interface PageStats {
-  path: string;
-  count: number;
-  percentage: number;
-}
-
-export const JourneysGraph: FC<Props> = ({ journeys }) => {
-  const depth = Math.max(...journeys.map(j => j.path.length));
+export const JourneysGraph: FC<Props> = ({ depth, journeys, setPage, setPosition }) => {
+  const maxDepth = Math.max(...journeys.map(j => j.path.length));
 
   const getTotalForCol = (col: number, includeEmpty: boolean) => {
     const pages = journeys.map(j => j.path[col]);
@@ -65,42 +61,23 @@ export const JourneysGraph: FC<Props> = ({ journeys }) => {
 
   return (
     <div className='journey-graph'>
-      {range(0, depth).map(col => {
+      {range(0, depth === -1 ? maxDepth : depth).map(col => {
         const pages = getPagesForCol(col);
         const padder = 100 - sum(pages.map(p => p.percentage));
 
         return (
           <div className='col' key={col}>
             <p className='heading'>Page {col + 1}</p>
-            {pages.map(page => {
-              const exits = getExitForColAndPage(col, page.path);
-
-              return (
-                <div className={classnames('page', { 'has-exit': exits > 0 })} key={col + page.path} style={{ height: `${page.percentage}%` }}>
-                  <div className='row'>
-                    <Tooltip fluid buttonClassName='path' button={
-                      <>
-                        <Icon name='file-line' />
-                        {page.path}
-                      </>
-                    }>
-                      {page.path}
-                    </Tooltip>
-                    <p className='stats'>
-                      {page.percentage}%
-                    </p>
-                  </div>
-                  {exits > 0 && (
-                    <div className='row'>
-                      <Pill className='drop-off'>
-                        <Icon name='arrow-right-down-line' />
-                        {exits}%
-                      </Pill>
-                    </div>
-                  )}
-                </div>
-              )
-            })}
+            {pages.map(page => (
+              <JourneysPage
+                key={page.path + col}
+                col={col}
+                page={page}
+                exits={getExitForColAndPage(col, page.path)}
+                setPage={setPage}
+                setPosition={setPosition}
+              />
+            ))}
             <div className='padder' style={{ height: `${padder}%` }} />
           </div>
         );
