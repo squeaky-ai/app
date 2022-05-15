@@ -59,9 +59,11 @@ export const JourneysGraph: FC<Props> = ({ depth, journeys, setPage, setPosition
     return percentage(total, exits);
   };
 
+  const columnCount = depth === -1 ? maxDepth : depth;
+
   return (
-    <div className='journey-graph'>
-      {range(0, depth === -1 ? maxDepth : depth).map(col => {
+    <div className='journey-graph' style={{ gridTemplateColumns: `repeat(${columnCount}, 15rem)` }}>
+      {range(0, columnCount).map(col => {
         const pages = getPagesForCol(col);
         const padder = 100 - sum(pages.map(p => p.percentage));
 

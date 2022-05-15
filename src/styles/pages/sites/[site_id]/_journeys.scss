@@ -105,22 +105,18 @@
   }
 
   .journey-graph {
-    align-items: flex-start;
-    display: flex;
+    display: grid;
     height: 100%;
-    justify-content: flex-start;
+    grid-gap: .5rem;
     overflow: auto;
 
     .col {
       background: var(--gray-100);
       border-radius: var(--border-radius-md);
       display: flex;
-      height: calc(100% - 1.5rem);
       flex-direction: column;
       flex-shrink: 0;
-      margin-right: .5rem;
       padding: .75rem .5rem;
-      width: 15rem;
 
       .heading {
         color: var(--gray-500);
