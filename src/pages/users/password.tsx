@@ -33,7 +33,7 @@ const UsersPassword: NextPage<ServerSideProps> = ({ user }) => {
       <Main>
         <h3 className='title'>Account Settings</h3>
 
-        <Tabs user={user} page='password' />
+        <Tabs page='password' />
 
         <p>To change your password please complete the form below.</p>
 

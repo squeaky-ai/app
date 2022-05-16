@@ -46,7 +46,7 @@ const UsersAccount: NextPage<ServerSideProps> = ({ user }) => {
           </Button>
         </h3>
 
-        <Tabs user={user} page='account' /> 
+        <Tabs page='account' /> 
 
         <Container className='xsm'>
           <Formik

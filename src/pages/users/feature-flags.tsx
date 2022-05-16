@@ -2,7 +2,6 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { Container } from 'components/container';
-import { Unauthorized } from 'components/sites/unauthorized';
 import { Tabs } from 'components/users/tabs';
 import { Main } from 'components/main';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
@@ -19,10 +18,6 @@ const UsersFeatureFlags: NextPage<ServerSideProps> = ({ user }) => {
     updateFeatureFlag(key, checked);
   };
 
-  if (!user.superuser) {
-    return <Unauthorized />;
-  }
-
   return (
     <>
       <Head>
@@ -32,13 +27,24 @@ const UsersFeatureFlags: NextPage<ServerSideProps> = ({ user }) => {
       <Main>
         <h3 className='title'>Account Settings</h3>
 
-        <Tabs user={user} page='feature-flags' />
+        <Tabs page='feature-flags' />
 
-        <Container className='lg options'>
+        <Container className='md options'>
+          <p>Use the feature flags below to toggle early access to beta features we&apos;re currently testing.</p>
+          <p>Beta features are stable and using them will have no impact on the quality of your data capture and storage, but we&apos;d love your feedback, so please send any thoughts to <a href='mailto:hello@squeaky.ai'>hello@squeaky.ai</a>.</p>
           {featureFlags.map(flag => (
-            <Toggle key={flag.key} checked={flag.value} onChange={handleChange(flag.key)}>
-              {featureFlagNames[flag.key]}
-            </Toggle>
+            <React.Fragment key={flag.key}>
+              {(flag.superuser ? user.superuser : true) && (
+                <div className='feature-flag'>
+                  <Toggle checked={flag.value} onChange={handleChange(flag.key)}>
+                    {featureFlagNames[flag.key]}
+                  </Toggle>
+                  {flag.description && (
+                    <p>{flag.description}</p>
+                  )}
+                </div>
+              )}
+            </React.Fragment>
           ))}
         </Container>
       </Main>

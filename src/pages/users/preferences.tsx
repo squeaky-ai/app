@@ -12,7 +12,7 @@ import { useToasts } from 'hooks/use-toasts';
 import { useCommunication } from 'hooks/use-communication';
 import { UsersCommunication } from 'types/graphql';
 
-const UsersPreferences: NextPage<ServerSideProps> = ({ user }) => {
+const UsersPreferences: NextPage<ServerSideProps> = () => {
   const toasts = useToasts();
 
   const { communication, error, loading } = useCommunication();
@@ -44,7 +44,7 @@ const UsersPreferences: NextPage<ServerSideProps> = ({ user }) => {
       <Main>
         <h3 className='title'>Account Settings</h3>
 
-        <Tabs user={user} page='preferences' />
+        <Tabs page='preferences' />
 
         <p>To manage your communication preferences, simple choose from the options below:</p>
 

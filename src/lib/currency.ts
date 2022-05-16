@@ -7,7 +7,6 @@ export enum Interval {
 }
 
 export const getPricingForCurrencyAndInterval = (plan: Plan, currency: PlansCurrency, interval: Interval) => {
-  console.log(interval, plan.pricing);
   return (plan.pricing || [])
     .find(p => p.currency === currency && p.interval === interval)?.amount || 0;
 };
