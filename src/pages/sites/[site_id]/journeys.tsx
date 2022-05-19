@@ -41,9 +41,9 @@ const SitesJourneys: NextPage<ServerSideProps> = ({ user }) => {
             <Unlock site={site} page='analytics' />
 
             <EmptyState
-              title='There are currently no journeys available'
+              title='There are currently no user journeys available.'
               subtitle='Collecting Journey Data'
-              illustration='illustration-3'
+              illustration='illustration-16'
               videoName='Journey Intro'
             />
 
