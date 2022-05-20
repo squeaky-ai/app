@@ -35,6 +35,7 @@ const SitesDashboard: NextPage<ServerSideProps> = ({ user }) => {
               subtitle='Accessing The Dashboard'
               illustration='illustration-5'
               videoName='Dashboard Intro'
+              snippet='If you have only recently installed or updated your tracking code it may take up to an hour before data for your dashboard becomes available.'
             />
 
             {site.recordingsCount > 0 && (

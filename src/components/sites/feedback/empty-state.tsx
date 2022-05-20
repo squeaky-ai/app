@@ -10,11 +10,10 @@ interface Props {
   title: string;
   subtitle: string;
   illustration: IllustrationType;
-  snippet: string;
   videoName?: string;
 }
 
-export const EmptyState: FC<Props> = ({ title, subtitle, videoName, snippet, illustration }) => {
+export const EmptyState: FC<Props> = ({ title, subtitle, videoName, illustration }) => {
   const router = useRouter();
 
   return (
@@ -27,8 +26,7 @@ export const EmptyState: FC<Props> = ({ title, subtitle, videoName, snippet, ill
           videoName={videoName}
           body={
             <>
-              <p>New to Squeaky? Please <Link href={`/sites/${router.query.site_id}/settings/details/tracking-code`}><a>install your tracking code</a></Link> to begin recording user sessions for your website or web app.</p>
-              <p>{snippet}</p>
+              <p>New to Squeaky? Once you have <Link href={`/sites/${router.query.site_id}/settings/details/tracking-code`}><a>installed your tracking code</a></Link> this page will enable you to configure how you wish to collect user feedback, and let you review all incoming feedback in one place.</p>
             </>
           }
         />

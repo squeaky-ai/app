@@ -44,6 +44,7 @@ const SitesHeatmaps: NextPage<ServerSideProps> = ({ user }) => {
               subtitle='Collecting Heatmap Data'
               illustration='illustration-8'
               videoName='Heatmap Intro'
+              snippet='If you have only recently installed or updated your tracking code it may take up to an hour before heatmap data becomes available.'
             />
 
             {loading && pages.length === 0 && (

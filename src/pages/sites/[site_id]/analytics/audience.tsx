@@ -41,6 +41,7 @@ const SitesAnalyticsAudience: NextPage<ServerSideProps> = ({ user }) => {
               subtitle='Collecting Analytics Data'
               illustration='illustration-3'
               videoName='Analytics Intro'
+              snippet='If you have only recently installed or updated your tracking code it may take up to an hour before analytics data becomes available.'
             />
 
             {site.recordingsCount > 0 && (

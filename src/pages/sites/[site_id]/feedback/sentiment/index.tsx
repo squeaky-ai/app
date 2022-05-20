@@ -2,7 +2,7 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import classnames from 'classnames';
-import { EmptyState } from 'components/sites/empty-state';
+import { EmptyState } from 'components/sites/feedback/empty-state';
 import { Main } from 'components/main';
 import { Page } from 'components/sites/page';
 import { Unlock } from 'components/sites/unlock';

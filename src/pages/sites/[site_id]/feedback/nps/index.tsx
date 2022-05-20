@@ -4,7 +4,7 @@ import Head from 'next/head';
 import classnames from 'classnames';
 import { Main } from 'components/main';
 import { Page } from 'components/sites/page';
-import { EmptyState } from 'components/sites/empty-state';
+import { EmptyState } from 'components/sites/feedback/empty-state';
 import { Unlock } from 'components/sites/unlock';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { NpsTabs } from 'components/sites/feedback/nps-tabs';

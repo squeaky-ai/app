@@ -45,6 +45,7 @@ const SitesJourneys: NextPage<ServerSideProps> = ({ user }) => {
               subtitle='Collecting Journey Data'
               illustration='illustration-16'
               videoName='Journey Intro'
+              snippet='If you have only recently installed or updated your tracking code it may take up to an hour before journey data becomes available.'
             />
 
             {loading && (
