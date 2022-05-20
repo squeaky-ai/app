@@ -273,7 +273,7 @@
           font-size: 1.5rem;
           left: 1rem;
           position: absolute;
-          top: 1.3rem;
+          top: 1.2rem;
         }
         
         .title {
@@ -301,6 +301,30 @@
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
+        }
+
+        &.error {
+          background: var(--peach-100);
+          border: 1px solid var(--rose-500);
+          border-radius: var(--border-radius-md);
+
+          .icon {
+            color: var(--rose-500);
+            font-size: 1.25rem;
+          }
+
+          .title {
+            color: var(--rose-500);
+            font-weight: var(--font-weight-bold);
+          }
+
+          .info {
+            color: var(--gray-blue-700);
+          }
+
+          + li {
+            border-top: none;
+          }
         }
       }
     }

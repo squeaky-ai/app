@@ -32,6 +32,10 @@ export const EVENTS: EventItem[] = [
     name: 'Scrolling',
     value: 'scroll',
   },
+  {
+    name: 'Errors',
+    value: 'error',
+  }
 ];
 
 export const COLUMNS: Column[] = [

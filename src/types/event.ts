@@ -12,9 +12,30 @@ export type EventName =
   'touch' |
   'hover' |
   'scroll' |
+  'error' |
   'unknown';
 
 export interface EventItem {
   name: string;
   value: EventName;
 }
+
+export enum CustomEvents {
+  ERROR = 100,
+}
+
+export type ErrorEvent = {
+  id: number;
+  type: CustomEvents.ERROR;
+  timestamp: number;
+  data: {
+    line_number: number;
+    col_number: number;
+    message: string;
+    stack: string;
+    filename: string;
+    href: string;
+  }
+}
+
+export type Events = (Event | ErrorEvent)[];

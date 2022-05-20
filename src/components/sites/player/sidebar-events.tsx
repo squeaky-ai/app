@@ -9,7 +9,7 @@ import { EventTimestamp } from 'components/sites/player/event-timestamp';
 import { SidebarEventsVisibility } from 'components/sites/player/sidebar-events-visibility';
 import { Preference, Preferences } from 'lib/preferences';
 import { EVENTS } from 'data/recordings/constants';
-import type { Event, EventName } from 'types/event';
+import type { Events, EventName } from 'types/event';
 import type { Recording } from 'types/graphql';
 
 import {
@@ -19,6 +19,7 @@ import {
   isMouseEvent,
   isPageViewEvent,
   isScrollEvent,
+  isErrorEvent,
 } from 'lib/events';
 
 interface Props {
@@ -35,7 +36,7 @@ export const SidebarEvents: FC<Props> = ({ recording, replayer }) => {
     savedActive.length === 0 ? EVENTS.map(a => a.value) : savedActive
   );
 
-  const events: Event[] = recording.events.items.map(i => JSON.parse(i));
+  const events: Events = recording.events.items.map(i => JSON.parse(i));
 
   const items = events.reduce((acc, item) => {
     // Add all of the page views
@@ -54,8 +55,12 @@ export const SidebarEvents: FC<Props> = ({ recording, replayer }) => {
       return isScrollEvent(prevEvent) ? [...acc] : [...acc, item];
     }
 
+    if (isErrorEvent(item)) {
+      return [...acc, item];
+    }
+
     return [...acc];
-  }, [] as Event[]);
+  }, [] as Events);
 
   const startedAt = items[0]?.timestamp || 0;
 
@@ -67,7 +72,9 @@ export const SidebarEvents: FC<Props> = ({ recording, replayer }) => {
 
       <ul className='datarow'>
         {items.map((item, index) => (
-          <li className={classnames('icon', { hidden: !active.includes(getEventName(item)) })} key={`${item.timestamp}_${index}`}>
+          <li 
+            className={classnames('icon', { hidden: !active.includes(getEventName(item)), error: isErrorEvent(item) })} 
+            key={`${item.timestamp}_${index}`}>
             {isPageViewEvent(item) && (
               <>
                 <Icon name='compass-discover-line' />
@@ -95,6 +102,16 @@ export const SidebarEvents: FC<Props> = ({ recording, replayer }) => {
                 </p>
                 <p className='info'>{(item.data as any).selector || 'Unknown'}</p>
               </>
+            )}
+
+            {isErrorEvent(item) && (
+              <div className='error'>
+                <Icon name='code-s-slash-line' />
+                <p className='title'>
+                  JavaScript Error <EventTimestamp timestamp={item.timestamp} offset={startedAt} replayer={replayer} />
+                </p>
+                <p className='info'>{item.data.message}</p>
+              </div>
             )}
           </li>
         ))}

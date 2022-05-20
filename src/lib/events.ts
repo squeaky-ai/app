@@ -1,24 +1,27 @@
-import type { Event } from 'types/event';
 import { EventType, IncrementalSource, MouseInteractions } from 'rrweb';
+import { ErrorEvent, CustomEvents } from 'types/event';
 import type { metaEvent } from 'rrweb/typings/types';
-import type { EventName } from 'types/event';
+import type { Event, EventName } from 'types/event';
 
 type EventWithTimestamp<T> = T & { id: number; timestamp: number; delay?: number; };
 
 export const isPageViewEvent = (
-  event: Event
+  event: Event | ErrorEvent
 ): event is EventWithTimestamp<metaEvent> => event.type === EventType.Meta;
 
 export const isMouseEvent = (
-  event: Event
+  event: Event | ErrorEvent
 ) => event.type === EventType.IncrementalSnapshot && event.data.source === IncrementalSource.MouseInteraction;
 
 export const isScrollEvent = (
-  event: Event
+  event: Event | ErrorEvent
 ) => event.type === EventType.IncrementalSnapshot && event.data.source === IncrementalSource.Scroll;
 
+export const isErrorEvent = (
+  event: Event | ErrorEvent
+): event is ErrorEvent => (event.type as any) === CustomEvents.ERROR;
 
-export function getEventName(event: Event): EventName {
+export function getEventName(event: Event | ErrorEvent): EventName {
   if (event.type === EventType.Meta) {
     return 'page_view';
   }
@@ -43,6 +46,10 @@ export function getEventName(event: Event): EventName {
       case MouseInteractions.TouchMove_Departed:
         return 'touch';
     }
+  }
+
+  if ((event.type as EventType | CustomEvents) === CustomEvents.ERROR) {
+    return 'error';
   }
 
   return 'unknown';
