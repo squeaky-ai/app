@@ -34,6 +34,7 @@ export const GET_COMMUNICATION_QUERY = gql`
         productUpdatesEmail
         marketingAndSpecialOffersEmail
         knowledgeSharingEmail
+        feedbackEmail
       }
     }
   }

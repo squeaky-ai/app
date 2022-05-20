@@ -38,6 +38,7 @@ export const UPDATE_USER_COMMUNICATION = gql`
         productUpdatesEmail
         marketingAndSpecialOffersEmail
         knowledgeSharingEmail
+        feedbackEmail
       }
     }
   }

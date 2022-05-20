@@ -81,6 +81,12 @@ const UsersPreferences: NextPage<ServerSideProps> = () => {
                 </Toggle>
                 <p>Receive one email per quarter containing links to the top content that Squeaky has published that quarter. Topics include Product, UX, Marketing, Conversion and Customer Success.</p>
               </li>
+              <li>
+                <Toggle checked={communication.feedbackEmail} onChange={handleToggle('feedbackEmail')}>
+                  Feedback
+                </Toggle>
+                <p>Receive summary email notifications if you have received any NPS® or Sentiment survey feedback during the past hour.</p>
+              </li>
             </ul>
           </Container>
         )}

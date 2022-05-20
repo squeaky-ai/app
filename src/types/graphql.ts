@@ -1914,6 +1914,7 @@ export type User = {
 
 export type UsersCommunication = {
   __typename?: 'UsersCommunication';
+  feedbackEmail: Scalars['Boolean'];
   id: Scalars['ID'];
   knowledgeSharingEmail: Scalars['Boolean'];
   marketingAndSpecialOffersEmail: Scalars['Boolean'];
@@ -1927,6 +1928,7 @@ export type UsersCommunication = {
 export type UsersCommunicationInput = {
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: InputMaybe<Scalars['String']>;
+  feedbackEmail?: InputMaybe<Scalars['Boolean']>;
   knowledgeSharingEmail?: InputMaybe<Scalars['Boolean']>;
   marketingAndSpecialOffersEmail?: InputMaybe<Scalars['Boolean']>;
   monthlyReviewEmail?: InputMaybe<Scalars['Boolean']>;

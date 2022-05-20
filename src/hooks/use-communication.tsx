@@ -19,6 +19,7 @@ export const useCommunication = (): UseCommunication => {
     productUpdatesEmail: true,
     marketingAndSpecialOffersEmail: true,
     knowledgeSharingEmail: true,
+    feedbackEmail: true,
   };
 
   return {
