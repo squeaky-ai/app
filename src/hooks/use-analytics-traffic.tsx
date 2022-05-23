@@ -30,6 +30,8 @@ export const useAnalyticsTraffic = (props: Props): UseAnalytics => {
     pageViews: {
       groupRange: 0,
       groupType: '',
+      total: 0,
+      trend: 0,
       items: [],
     },
     pages: {

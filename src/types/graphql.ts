@@ -245,9 +245,8 @@ export type AnalyticsPage = {
 
 export type AnalyticsPageView = {
   __typename?: 'AnalyticsPageView';
+  count: Scalars['Int'];
   dateKey: Scalars['String'];
-  totalCount: Scalars['Int'];
-  uniqueCount: Scalars['Int'];
 };
 
 export type AnalyticsPageViews = {
@@ -255,6 +254,8 @@ export type AnalyticsPageViews = {
   groupRange: Scalars['Int'];
   groupType: Scalars['String'];
   items: Array<Maybe<AnalyticsPageView>>;
+  total: Scalars['Int'];
+  trend: Scalars['Int'];
 };
 
 export type AnalyticsPages = {

@@ -40,10 +40,11 @@ export const GET_ANALYTICS_TRAFFIC_QUERY = gql`
         pageViews {
           groupType
           groupRange
+          total
+          trend
           items {
             dateKey
-            totalCount
-            uniqueCount
+            count
           }
         }
         pages(size: 10, page: $pagesPage) {
