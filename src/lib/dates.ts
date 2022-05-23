@@ -73,7 +73,7 @@ export const toNiceDate = (timestamp: string) => {
   if (!timestamp) return 'Unknown';
 
   const date = new Date(timestamp);
-  return date.toUTCString().split(':').slice(0, 2).join(':');
+  return format(date, 'E, d LLL yyyy HH:mm');
 };
 
 const formatDateForGraphQL = (date: Date) => format(date, 'yyyy-MM-dd');
