@@ -115,6 +115,7 @@
 
       .input {
         margin: 0;
+        width: 18rem;
       }
     }
 
@@ -254,8 +255,13 @@
   }
 
   .no-search-results {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+
     .empty-state {
-      display: block;
+      display: flex;
     }
   }
 
@@ -430,15 +436,15 @@
       }
 
       &.all {
-        color: var(--purple-500);
+        color: var(--rose-500);
       }
 
       &.verified {
-        color: var(--blue-500);
+        color: var(--mauve-500);
       }
 
       &.unverified {
-        color: var(--rose-500);
+        color: var(--peach-500);
       }
     }
   }

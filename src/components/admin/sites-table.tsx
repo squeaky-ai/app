@@ -79,7 +79,7 @@ export const SitesTable: FC<Props> = ({ sites, activeVisitors, search, columns, 
       )}
 
       <TableWrapper>
-        <Table className={classnames('sites-table', tableClassNames)}>
+        <Table className={classnames('sites-table', tableClassNames, { hide: results.length === 0 })}>
           <Row className='head' style={rowStyle}>
             <Cell>ID</Cell>
             <Cell>

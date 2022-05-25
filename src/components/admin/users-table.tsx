@@ -72,7 +72,7 @@ export const UsersTable: FC<Props> = ({ users, sites, columns, search, setColumn
       )}
 
       <TableWrapper>
-        <Table className={classnames('users-table', tableClassNames)}>
+        <Table className={classnames('users-table', tableClassNames, { hide: results.length === 0 })}>
           <Row className='head' style={rowStyle}>
             <Cell>ID</Cell>
             <Cell>

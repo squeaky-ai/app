@@ -15,7 +15,7 @@
 
   .plan-table-large {
     display: grid;
-    grid-template-columns: 11rem 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 10rem 1fr 1fr 1fr 1fr 1fr;
     margin: 2rem 0;
 
     @include breakpoint-md {
@@ -164,6 +164,7 @@
 
         p {
           margin: 0 0 1rem 0;
+          white-space: nowrap;
 
           &.pricing {
             color: var(--gray-300);
