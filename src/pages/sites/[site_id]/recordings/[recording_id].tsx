@@ -35,6 +35,10 @@ const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
     return <NotFound />;
   }
 
+  if (!loading && !recording.events.items.length) {
+    return <NotFound />;
+  }
+
   return (
     <>
       <Head>
