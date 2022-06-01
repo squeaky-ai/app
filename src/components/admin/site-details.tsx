@@ -14,7 +14,7 @@ interface Props {
 }
 
 export const SiteDetails: FC<Props> = ({ activeVisitors, site, isEnterprise }) => {
-  const activeVisitorsCount = activeVisitors.find(a => a.siteId === site.uuid)?.count || 0
+  const activeVisitorsCount = activeVisitors.find(a => a.siteId === site.uuid)?.count || 0;
 
   return (
     <div className='details'>
@@ -60,6 +60,15 @@ export const SiteDetails: FC<Props> = ({ activeVisitors, site, isEnterprise }) =
       <div className='row'>
         <span>Active Visitors</span>
         <span>{activeVisitorsCount}</span>
+      </div>
+      <div className='row'>
+        <span>Superuser Access</span>
+        <span>
+          {site.superuserAccessEnabled 
+            ? <Pill className='primary'>Yes</Pill> 
+            : <Pill className='tertiary'>No</Pill> 
+          }
+        </span>
       </div>
 
       {isEnterprise && (

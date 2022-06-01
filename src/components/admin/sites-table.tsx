@@ -131,6 +131,9 @@ export const SitesTable: FC<Props> = ({ sites, activeVisitors, search, columns, 
                 onDesc={() => setSort('active_visitors__desc')} 
               />
             </Cell>
+            <Cell>
+              Superuser Access
+            </Cell>
           </Row>
           {results.map(site => (
             <SitesTableRow 

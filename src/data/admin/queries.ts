@@ -10,6 +10,7 @@ export const GET_ADMIN_QUERY = gql`
         url
         ownerName
         verifiedAt
+        superuserAccessEnabled
         plan {
           tier
           name
@@ -71,6 +72,7 @@ export const GET_ADMIN_SITE_QUERY = gql`
         url
         ownerName
         verifiedAt
+        superuserAccessEnabled
         plan {
           tier
           name

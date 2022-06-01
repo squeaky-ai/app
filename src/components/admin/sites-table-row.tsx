@@ -48,5 +48,11 @@ export const SitesTableRow: FC<Props> = ({ site, activeVisitors, style }) => (
     <Cell>{site.team.length}</Cell>
     <Cell>{toNiceDate(site.createdAt)}</Cell>
     <Cell>{activeVisitors}</Cell>
+    <Cell>
+      {site.superuserAccessEnabled 
+        ? <Pill className='primary'>Yes</Pill> 
+        : <Pill className='tertiary'>No</Pill> 
+      }
+    </Cell>
   </Row>
 );
