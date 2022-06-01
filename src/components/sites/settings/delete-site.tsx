@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import classnames from 'classnames';
 import { useRouter } from 'next/router';
 import { Icon } from 'components/icon';
 import { Button } from 'components/button';
@@ -61,7 +62,7 @@ export const DeleteSite: FC<Props> = ({ site }) => {
             <p>If so, all site data will be permanently deleted.</p>
           </ModalContents>
           <ModalFooter>
-            <Button type='button' className='tertiary delete-site-button' onClick={siteDelete} disabled={deleting}>
+            <Button type='button' className={classnames('tertiary delete-site-button', { loading: deleting })} onClick={siteDelete} disabled={deleting}>
               <span>Yes, Delete Site</span>
               {deleting && <Spinner />}
             </Button>

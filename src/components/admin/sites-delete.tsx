@@ -6,15 +6,15 @@ import { Icon } from 'components/icon';
 import { Spinner } from 'components/spinner';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { useToasts } from 'hooks/use-toasts';
-import { adminUserDelete } from 'lib/api/graphql';
-import type { User } from 'types/graphql';
+import { adminSiteDelete } from 'lib/api/graphql';
+import type { Site } from 'types/graphql';
 
 interface Props {
-  user: User;
+  site: Site;
   onClose: VoidFunction;
 }
 
-export const UsersDelete: FC<Props> = ({ user, onClose }) => {
+export const SitesDelete: FC<Props> = ({ site, onClose }) => {
   const ref = React.useRef<Modal>();
   const toasts = useToasts();
 
@@ -29,14 +29,14 @@ export const UsersDelete: FC<Props> = ({ user, onClose }) => {
     if (ref.current) ref.current.hide();
   };
 
-  const deleteUser = async () => {
+  const deleteSite = async () => {
     try {
       setDeleting(true);
-      await adminUserDelete({ id: user.id });
+      await adminSiteDelete({ id: site.id });
       closeModal();
-      toasts.add({ type: 'success', body: 'User deleted successfully' });
+      toasts.add({ type: 'success', body: 'Site deleted successfully' });
     } catch {
-      toasts.add({ type: 'error', body: 'There was an issue deleting the user' });
+      toasts.add({ type: 'error', body: 'There was an issue deleting the site' });
     } finally {
       setDeleting(false);
     }
@@ -44,23 +44,22 @@ export const UsersDelete: FC<Props> = ({ user, onClose }) => {
 
   return (
     <>
-      <Button className='link tertiary' onClick={openModal}>Delete user</Button>
+      <Button className='link tertiary' onClick={openModal}>Delete site</Button>
 
       <Modal ref={ref} onClose={onClose}>
-        <ModalBody aria-labelledby='delete-user-title' aria-describedby='delete-user-description'>
+        <ModalBody aria-labelledby='delete-site-title' aria-describedby='delete-site-description'>
           <ModalHeader>
-            <p id='delete-user-title'><b>Delete User</b></p>
+            <p id='delete-site-title'><b>Delete Site</b></p>
             <Button type='button' onClick={closeModal} disabled={deleting}>
               <Icon name='close-line' />
             </Button>
           </ModalHeader>
           <ModalContents>
-            <p id='delete-user-description'>Are you sure you wish to permanently delete <b>{user.email}</b>?</p>
-            <p>If they are a site owner, this will also be deleted.</p>
+            <p id='delete-site-description'>Are you sure you wish to permanently delete <b>{site.name}</b>?</p>
           </ModalContents>
           <ModalFooter>
-            <Button type='button' className={classnames('tertiary', { loading: deleting })} onClick={deleteUser} disabled={deleting}>
-              <span>Delete User</span>
+            <Button type='button' className={classnames('tertiary', { loading: deleting })} onClick={deleteSite} disabled={deleting}>
+              <span>Delete Site</span>
               {deleting && <Spinner />}
             </Button>
             <Button type='button' className='quaternary' onClick={closeModal} disabled={deleting}>

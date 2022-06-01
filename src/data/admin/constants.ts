@@ -118,6 +118,12 @@ export const SITE_COLUMNS: Column[] = [
     disabled: false,
     position: 11,
   },
+  {
+    label: 'Options',
+    width: '70px',
+    disabled: false,
+    position: 12,
+  },
 ];
 
 export const DEFAULT_USER_COLUMNS = USER_COLUMNS.filter(c => [
@@ -143,4 +149,5 @@ export const DEFAULT_SITE_COLUMNS = SITE_COLUMNS.filter(c => [
   'Created At',
   'Active Visitors',
   'Superuser Access',
+  'Options',
 ].includes(c.label));

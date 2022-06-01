@@ -43,6 +43,7 @@ import {
   BlogPost,
   AdminBlogPostDeleteInput,
   AdminUserDeleteInput,
+  AdminSiteDeleteInput,
   SitesMagicErasureUpdateInput,
   SitesCssSelectorBlacklistCreateInput,
   SitesCssSelectorBlacklistDeleteInput,
@@ -72,6 +73,7 @@ import {
   ADMIN_SITE_PLAN_UPDATE_MUTATION,
   ADMIN_SITE_ASSOCIATE_CUSTOMER_MUTATION,
   SUPERUSER_ACESSS_UPDATE,
+  ADMIN_SITE_DELETE_MUTATION,
 } from 'data/sites/mutations';
 
 import {
@@ -747,6 +749,18 @@ export const adminUserDelete = async (input: AdminUserDeleteInput): Promise<void
       cache.gc();
     }
   });
+};
+
+export const adminSiteDelete = async (input: AdminSiteDeleteInput): Promise<void> => {
+  await client.mutate({
+    mutation: ADMIN_SITE_DELETE_MUTATION,
+    variables: { input },
+    update(cache) {
+      const normalizedId = cache.identify({ id: input.id, __typename: 'Site' });
+      cache.evict({ id: normalizedId });
+      cache.gc();
+    }
+  })
 };
 
 export const adminSitePlanUpdate = async (input: AdminSitePlanUpdateInput): Promise<Site> => {

@@ -166,3 +166,11 @@ export const SUPERUSER_ACESSS_UPDATE = gql`
     }
   }
 `;
+
+export const ADMIN_SITE_DELETE_MUTATION = gql`
+  mutation AdminSiteDelete($input: AdminSiteDeleteInput!) {
+    adminSiteDelete(input: $input) {
+      id
+    }
+  }
+`;
