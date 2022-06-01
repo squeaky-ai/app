@@ -157,3 +157,12 @@ export const ADMIN_SITE_ASSOCIATE_CUSTOMER_MUTATION = gql`
     }
   }
 `;
+
+export const SUPERUSER_ACESSS_UPDATE = gql`
+  mutation($input: SitesSuperuserAccessUpdateInput!) {
+    superuserAccessUpdate(input: $input) {
+      id
+      superuserAccessEnabled
+    }
+  }
+`;

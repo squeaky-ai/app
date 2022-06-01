@@ -49,6 +49,7 @@ import {
   AdminSitePlanUpdateInput,
   AdminSiteAssociateCustomerInput,
   AnonymiseFormInputsUpdateInput,
+  SitesSuperuserAccessUpdateInput,
 } from 'types/graphql';
 
 import {
@@ -70,6 +71,7 @@ import {
   ANONYMISE_FORM_INPUTS_UPDATE_MUTATION,
   ADMIN_SITE_PLAN_UPDATE_MUTATION,
   ADMIN_SITE_ASSOCIATE_CUSTOMER_MUTATION,
+  SUPERUSER_ACESSS_UPDATE,
 } from 'data/sites/mutations';
 
 import {
@@ -763,4 +765,13 @@ export const adminSiteAssociateCustomer = async (input: AdminSiteAssociateCustom
   });
 
   return data.adminSiteAssociateCustomer;
+};
+
+export const superuserAccessUpdate = async (input: SitesSuperuserAccessUpdateInput): Promise<Site> => {
+  const { data } = await client.mutate({
+    mutation: SUPERUSER_ACESSS_UPDATE,
+    variables: { input },
+  });
+
+  return data.superuserAccessUpdate;
 };

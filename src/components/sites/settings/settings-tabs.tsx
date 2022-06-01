@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import Link from 'next/link';
 import classnames from 'classnames';
 import { Icon } from 'components/icon';
-import { OWNER } from 'data/teams/constants';
+import { OWNER, ADMIN } from 'data/teams/constants';
 import { MAX_DAYS_BEFORE_POTENTIAL_ISSUE } from 'data/sites/constants';
 import type { Site } from 'types/graphql';
 import type { Team } from 'types/graphql';
@@ -11,7 +11,7 @@ import type { Team } from 'types/graphql';
 interface Props {
   site: Site;
   member: Team; 
-  page: 'details' | 'tracking-code' | 'privacy' | 'tags' | 'screening' | 'delete';
+  page: 'details' | 'tracking-code' | 'privacy' | 'tags' | 'screening' | 'delete' | 'customer-support';
 }
 
 export const SettingsTabs: FC<Props> = ({ site, page, member }) => (
@@ -62,6 +62,15 @@ export const SettingsTabs: FC<Props> = ({ site, page, member }) => (
           <Link href={`/sites/${site.id}/settings/details/delete`}>
             <a className={classnames('button tab-button', { active: page === 'delete' })}>
               Site deletion
+            </a>
+          </Link>
+        </li>
+      )}
+      {[OWNER, ADMIN].includes(member.role) && (
+        <li className='tab'>
+          <Link href={`/sites/${site.id}/settings/details/customer-support`}>
+            <a className={classnames('button tab-button', { active: page === 'customer-support' })}>
+              Customer Support
             </a>
           </Link>
         </li>
