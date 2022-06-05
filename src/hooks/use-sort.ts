@@ -5,13 +5,15 @@ import {
   VisitorsSort,
   FeedbackNpsResponseSort,
   FeedbackSentimentResponseSort,
+  EventsCaptureSort,
 } from 'types/graphql';
 
 type ComponentType = 
   'recordings' |
   'visitors' |
   'nps' |
-  'sentiment';
+  'sentiment' |
+  'events';
 
 interface UseSort<T> {
   sort: T;
@@ -38,6 +40,8 @@ const getDefaultSort = (type: ComponentType) => {
       return FeedbackNpsResponseSort.TimestampDesc;
     case 'sentiment':
       return FeedbackSentimentResponseSort.TimestampDesc;
+    case 'events':
+      return EventsCaptureSort.CountDesc;
   }
 };
 
