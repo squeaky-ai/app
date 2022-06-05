@@ -145,6 +145,12 @@ export const Sidebar: FC = () => {
                 <span>Recordings</span>
               </a>
             </Link>
+            <Link href={`/sites/${siteId}/events`}>
+              <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/events`) })} data-label='Events'>
+                <Icon name='flashlight-line' />
+                <span>Events</span>
+              </a>
+            </Link>
             <Divider />
             <Link href={`/sites/${siteId}/analytics/traffic`}>
               <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/analytics`) })} data-label='Analytics'>

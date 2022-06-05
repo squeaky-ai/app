@@ -1,0 +1,34 @@
+.page.sites.events {
+  .events-header {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 0 2rem 0;
+    white-space: nowrap;
+
+    @include breakpoint-md {
+      align-items: flex-start;
+      flex-direction: column;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .title {
+    align-items: center;
+    display: flex;
+    margin: 0;
+
+    @include breakpoint-md {
+      align-items: flex-start;
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+
+  .empty {
+    .empty-state {
+      display: flex;
+    }
+  }
+}
