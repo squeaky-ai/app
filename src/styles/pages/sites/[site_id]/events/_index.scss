@@ -14,6 +14,8 @@
     }
 
     menu {
+      align-items: center;
+      display: flex;
       margin: 0;
       padding: 0;
     }
@@ -46,4 +48,132 @@
       grid-template-columns: 1fr;
     }
   }
+
+  .events-table {
+    margin: 0 0 2rem 0;
+
+    .row {
+      grid-template-columns: 58px 1fr 1fr 1fr 1fr 70px;
+
+      .spinner {
+        margin: 0;
+
+        .icon {
+          font-size: 1rem;
+          height: 1rem;
+          line-height: 1rem;
+          margin: 0;
+          width: 1rem;
+        }
+
+        p {
+          display: none;
+        }
+      }
+
+      .event-tag {
+        margin: 0;
+      }
+    }
+
+    .dropdown {
+      .options {
+        align-items: center;
+        background: none;
+        border: none;
+        border-radius: var(--border-radius-o);
+        display: flex;
+        height: 2rem;
+        flex-shrink: 0;
+        font-size: 1.25rem;
+        justify-content: center;
+        padding: 0;
+        width: 2rem;
+  
+        .arrow {
+          display: none;
+        }
+  
+        &:hover {
+          background: var(--gray-100);
+          color: var(--blue-500);
+        }
+      }
+    }
+  }
+
+  .event-captures-footer {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+
+    @include breakpoint-sm {
+      flex-direction: column;
+
+      .rc-pagination {
+        margin: .5rem 0 0 0;
+      }
+
+      .page-size {
+        display: none;
+      }
+    }
+  }
+
+  .bulk-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 .5rem 0 0;
+
+    @include breakpoint-md {
+      display: none;
+    }
+
+    .dropdown {
+      & > .button {
+        background: none;
+        border: none;
+        border-radius: var(--border-radius-md);
+        display: flex;
+        font-weight: var(--font-weight-bold);
+        height: 2.5rem;
+        padding: .5rem 1rem .5rem 1rem;
+
+        i:not(.arrow) {
+          color: var(--blue-500);
+          font-size: 1.25rem;
+          margin-right: .5rem;
+        }
+
+        &:hover {
+          background: var(--gray-100);
+        }
+
+        .arrow {
+          position: static;
+          right: .5rem;
+          top: .5rem;
+        }
+      }
+
+      &.tooltip {
+        cursor: default;
+        opacity: 0.25;
+      }
+
+      &.open {
+        & > .button {
+          background: var(--gray-100);
+        }
+      }
+    }
+
+    .dropdown-menu {
+      transform: translate(0, 3rem); 
+    }
+  }
+}
+
+.bulk-action-hint {
+  white-space: pre-wrap;
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import { Container } from 'components/container';
 import { EventCard } from 'components/sites/events/event-card';
+import { EventsType } from 'types/events';
 
 export const GettingStarted: FC = () => (
   <>
@@ -17,16 +18,16 @@ export const GettingStarted: FC = () => (
         <h5>Autocapture events</h5>
         <p>These are defined using visitor actions that we&apos;re already capturing for you, such as page views, clicks or javascript errors. The nice thing about autocapture events is that you already have all the historical data, you&apos;re just using Event definitions to help surface it.</p>
 
-        <EventCard type='page-view' />
-        <EventCard type='text-click' />
-        <EventCard type='css-selector' />
-        <EventCard type='error' />
+        <EventCard type={EventsType.PageVisit} />
+        <EventCard type={EventsType.TextClick} />
+        <EventCard type={EventsType.SelectorClick} />
+        <EventCard type={EventsType.Error} />
       </div>
       <div className='custom'>
         <h5>Custom events</h5>
         <p>These allow you to add custom tracking for almost any event you could think of e.g. every time a users action updated their shopping cart. Custom events are incredibly powerful, but technical expertise is required.</p>
 
-        <EventCard type='custom' />
+        <EventCard type={EventsType.Custom} />
       </div>
     </div>
   </>

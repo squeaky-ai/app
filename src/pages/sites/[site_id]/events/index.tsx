@@ -11,6 +11,8 @@ import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { Error } from 'components/error';
 import { PageLoading } from 'components/sites/page-loading';
 import { GettingStarted } from 'components/sites/events/getting-started';
+import { EventCapturesBulkActions } from 'components/sites/events/event-captures-bulk-actions';
+import { EventList } from 'components/sites/events/event-list';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useSort } from 'hooks/use-sort';
 import { useEventCaptures } from 'hooks/use-event-captures';
@@ -20,7 +22,8 @@ import { EventsCaptureSort } from 'types/graphql';
 const SitesEvents: NextPage<ServerSideProps> = ({ user }) => {
   const [type, setType] = React.useState<EventsGroupType>(EventsGroupType.All);
   const [page, setPage] = React.useState<number>(1);
-  const [size, setSize] = React.useState<number>(25);
+  const [size, setSize] = React.useState<number>(20);
+  const [selected, setSelected] = React.useState<string[]>([]);
 
   const { sort, setSort } = useSort<EventsCaptureSort>('events');
 
@@ -33,8 +36,6 @@ const SitesEvents: NextPage<ServerSideProps> = ({ user }) => {
   if (loading) {
     return <PageLoading />
   }
-
-  console.log(events);
 
   return (
     <>
@@ -52,6 +53,13 @@ const SitesEvents: NextPage<ServerSideProps> = ({ user }) => {
 
               {events.items.length > 0 && (
                 <menu>
+                  {type === EventsGroupType.All && (
+                    <EventCapturesBulkActions
+                      site={site}
+                      selected={selected}
+                      setSelected={setSelected}
+                    />
+                  )}
                   <ButtonGroup>
                     <Button className={classnames(type === EventsGroupType.All ? 'primary' : 'blank')} onClick={() => setType(EventsGroupType.All)}>
                       All
@@ -74,7 +82,20 @@ const SitesEvents: NextPage<ServerSideProps> = ({ user }) => {
 
             {site.recordingsCount > 0 && (
               events.items.length > 0
-                ? null
+                ? (
+                  <EventList 
+                    type={type}
+                    site={site}
+                    events={events}
+                    page={page}
+                    selected={selected}
+                    sort={sort}
+                    setPage={setPage}
+                    setSelected={setSelected}
+                    setSize={setSize}
+                    setSort={setSort}
+                  />
+                )
                 : <GettingStarted />
             )}
           </Main>

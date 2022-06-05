@@ -51,6 +51,8 @@ import {
   AdminSiteAssociateCustomerInput,
   AnonymiseFormInputsUpdateInput,
   SitesSuperuserAccessUpdateInput,
+  EventCaptureDeleteInput,
+  EventCaptureDeleteBulkInput,
 } from 'types/graphql';
 
 import {
@@ -158,6 +160,11 @@ import {
 import { 
   GET_BLOG_POSTS_QUERY 
 } from 'data/blog/queries';
+
+import {
+  DELETE_EVENT_CAPTURE_MUTATION,
+  BULK_DELETE_EVENT_CAPTURE_MUTATION,
+} from 'data/events/mutations';
 
 export const cache = new InMemoryCache({
   typePolicies: {
@@ -788,4 +795,35 @@ export const superuserAccessUpdate = async (input: SitesSuperuserAccessUpdateInp
   });
 
   return data.superuserAccessUpdate;
+};
+
+export const eventsCaptureDelete = async (input: EventCaptureDeleteInput): Promise<null> => {
+  const { data } = await client.mutate({
+    mutation: DELETE_EVENT_CAPTURE_MUTATION,
+    variables: { input },
+    update(cache) {
+      const normalizedId = cache.identify({ id: input.eventId, __typename: 'EventsCaptureItem' });
+      cache.evict({ id: normalizedId });
+      cache.gc();
+    }
+  });
+
+  return data.eventCapture;
+};
+
+export const eventsCaptureDeleteBulk = async (input: EventCaptureDeleteBulkInput): Promise<null> => {
+  const { data } = await client.mutate({
+    mutation: BULK_DELETE_EVENT_CAPTURE_MUTATION,
+    variables: { input },
+    update(cache) {
+      input.eventIds.forEach(id => {
+        const normalizedId = cache.identify({ id, __typename: 'EventsCaptureItem' });
+        cache.evict({ id: normalizedId });
+      });
+
+      cache.gc();
+    }
+  });
+
+  return data.eventCapture;
 };
