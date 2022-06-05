@@ -139,7 +139,7 @@ export const EventCreate: FC<Props> = ({ site, buttonText, buttonClassName }) =>
                             <Option value={EventsMatch.Equals}>Is</Option>
                             <Option value={EventsMatch.NotEquals}>Is not</Option>
                             <Option value={EventsMatch.Contains}>Contains</Option>
-                            <Option value={EventsMatch.NotContains}>Doesn't contain</Option>
+                            <Option value={EventsMatch.NotContains}>Doesn&apos;t contain</Option>
                             <Option value={EventsMatch.StartsWith}>Starts with</Option>
                           </Select>
                         </div>
