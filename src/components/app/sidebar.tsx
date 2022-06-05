@@ -17,11 +17,15 @@ import { Breakpoints } from 'data/common/constants';
 import { Preferences, Preference } from 'lib/preferences';
 import { OWNER, ADMIN } from 'data/teams/constants';
 import { useResize } from 'hooks/use-resize';
+import { useFeatureFlags } from 'hooks/use-feature-flags';
+import { FeatureFlag } from 'lib/feature-flags';
 
 export const Sidebar: FC = () => {
   const ref = React.useRef<HTMLElement>(null);
   const resize = useResize();
   const router = useRouter();
+
+  const { featureFlagEnabled } = useFeatureFlags();
 
   const [open, setOpen] = React.useState<boolean>(true);
   const [expanded, setExpanded] = React.useState<string[]>([]);
@@ -145,12 +149,14 @@ export const Sidebar: FC = () => {
                 <span>Recordings</span>
               </a>
             </Link>
-            <Link href={`/sites/${siteId}/events`}>
-              <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/events`) })} data-label='Events'>
-                <Icon name='flashlight-line' />
-                <span>Events</span>
-              </a>
-            </Link>
+            {featureFlagEnabled(FeatureFlag.EVENTS_PAGE) && (
+              <Link href={`/sites/${siteId}/events`}>
+                <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/events`) })} data-label='Events'>
+                  <Icon name='flashlight-line' />
+                  <span>Events</span>
+                </a>
+              </Link>
+            )}
             <Divider />
             <Link href={`/sites/${siteId}/analytics/traffic`}>
               <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/analytics`) })} data-label='Analytics'>
