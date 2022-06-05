@@ -47,6 +47,35 @@
     }
   }
 
+  .getting-started {
+    .card {
+      box-shadow: none;
+      margin: 4rem 0 0 0;
+    }
+
+    h4 {
+      align-items: center;
+      display: flex;
+      margin: 0 0 1.5rem 0;
+
+      .icon {
+        color: var(--blue-500);
+        font-size: 1.25rem;
+        margin: 0 .5rem 0 0;
+      }
+    }
+
+    h5 {
+      margin: .5rem 0 1rem 0;
+    }
+
+    .cols {
+      display: grid;
+      grid-gap: 2rem;
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
   .events-table {
     margin: 0 0 2rem 0;
 

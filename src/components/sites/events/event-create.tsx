@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import * as Yup from 'yup';
+import classnames from 'classnames';
 import { Formik } from 'formik';
 import { Icon } from 'components/icon';
 import { Button } from 'components/button';
@@ -19,6 +20,8 @@ import type { Site } from 'types/graphql';
 
 interface Props {
   site: Site;
+  buttonText?: string;
+  buttonClassName?: string;
 }
 
 export enum Steps {
@@ -34,7 +37,7 @@ const EventCreateSchema = Yup.object().shape({
   groupIds: Yup.array(),
 });
 
-export const EventCreate: FC<Props> = ({ site }) => {
+export const EventCreate: FC<Props> = ({ site, buttonText, buttonClassName }) => {
   const ref = React.useRef<Modal>();
 
   const toasts = useToasts();
@@ -51,8 +54,8 @@ export const EventCreate: FC<Props> = ({ site }) => {
 
   return (
     <>
-      <Button className='link event-create' onClick={openModal}>
-        + Add New
+      <Button className={classnames('event-create', buttonClassName)} onClick={openModal}>
+        {buttonText || '+ Add New'}
       </Button>
 
       <Modal ref={ref} className='md event-create-modal'>

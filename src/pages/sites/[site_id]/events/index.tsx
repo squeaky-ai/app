@@ -56,7 +56,7 @@ const SitesEvents: NextPage<ServerSideProps> = ({ user }) => {
                 Events
 
                 {hasEvents && (
-                  <EventCreate site={site} />
+                  <EventCreate site={site} buttonClassName='link' />
                 )}
               </h3>
 
@@ -103,7 +103,7 @@ const SitesEvents: NextPage<ServerSideProps> = ({ user }) => {
                     setSort={setSort}
                   />
                 )
-                : <GettingStarted />
+                : <GettingStarted site={site} />
             )}
           </Main>
         )}
