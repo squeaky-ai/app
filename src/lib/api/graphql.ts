@@ -51,6 +51,13 @@ import {
   AdminSiteAssociateCustomerInput,
   AnonymiseFormInputsUpdateInput,
   SitesSuperuserAccessUpdateInput,
+  EventCaptureDeleteInput,
+  EventCaptureDeleteBulkInput,
+  EventGroupDeleteInput,
+  EventCaptureCreateInput,
+  EventsCaptureItem,
+  EventGroupCreateInput,
+  EventsGroup,
 } from 'types/graphql';
 
 import {
@@ -158,6 +165,14 @@ import {
 import { 
   GET_BLOG_POSTS_QUERY 
 } from 'data/blog/queries';
+
+import {
+  DELETE_EVENT_CAPTURE_MUTATION,
+  BULK_DELETE_EVENT_CAPTURE_MUTATION,
+  DELETE_EVENT_GROUP_MUTATION,
+  CREATE_EVENT_CAPTURE_MUTATION,
+  CREATE_EVENT_GROUP_MUTATION,
+} from 'data/events/mutations';
 
 export const cache = new InMemoryCache({
   typePolicies: {
@@ -788,4 +803,120 @@ export const superuserAccessUpdate = async (input: SitesSuperuserAccessUpdateInp
   });
 
   return data.superuserAccessUpdate;
+};
+
+export const eventsCaptureDelete = async (input: EventCaptureDeleteInput): Promise<null> => {
+  const { data } = await client.mutate({
+    mutation: DELETE_EVENT_CAPTURE_MUTATION,
+    variables: { input },
+    update(cache) {
+      const normalizedId = cache.identify({ id: input.eventId, __typename: 'EventsCaptureItem' });
+      cache.evict({ id: normalizedId });
+      cache.gc();
+    }
+  });
+
+  return data.eventCapture;
+};
+
+export const eventsCaptureDeleteBulk = async (input: EventCaptureDeleteBulkInput): Promise<null> => {
+  const { data } = await client.mutate({
+    mutation: BULK_DELETE_EVENT_CAPTURE_MUTATION,
+    variables: { input },
+    update(cache) {
+      input.eventIds.forEach(id => {
+        const normalizedId = cache.identify({ id, __typename: 'EventsCaptureItem' });
+        cache.evict({ id: normalizedId });
+      });
+
+      cache.gc();
+    }
+  });
+
+  return data.eventCapture;
+};
+
+export const eventsGroupDelete = async (input: EventGroupDeleteInput): Promise<null> => {
+  const { data } = await client.mutate({
+    mutation: DELETE_EVENT_GROUP_MUTATION,
+    variables: { input },
+    update(cache) {
+      const normalizedId = cache.identify({ id: input.groupId, __typename: 'EventsGroup' });
+      cache.evict({ id: normalizedId });
+      cache.gc();
+    }
+  });
+
+  return data.eventGroups;
+};
+
+export const eventsCaptureCreate = async (input: EventCaptureCreateInput): Promise<EventsCaptureItem> => {
+  const { data } = await client.mutate({
+    mutation: CREATE_EVENT_CAPTURE_MUTATION,
+    variables: { input },
+  });
+
+  cache.modify({
+    id: cache.identify({ id: input.siteId, __typename: 'Site' }),
+    fields: {
+      eventCapture(existingRefs = {}) {
+        const newRef = cache.writeFragment({
+          data: data.eventCaptureCreate,
+          fragment: gql`
+            fragment NewEventsCaptureItem on EventsCaptureItem {
+              id
+              name
+              type
+              rules {
+                condition
+                matcher
+                value
+              }
+              groupNames
+              count
+              lastCountedAt
+            }
+          `
+        });
+
+        return {
+          items: [...existingRefs.items, newRef],
+          pagination: {
+            ...existingRefs.pagination,
+            total: existingRefs.pagination.total + 1,
+          }
+        };
+      },
+    },
+  });
+
+  return data.eventCaptureCreate;
+};
+
+export const eventsGroupCreate = async (input: EventGroupCreateInput): Promise<EventsGroup> => {
+  const { data } = await client.mutate({
+    mutation: CREATE_EVENT_GROUP_MUTATION,
+    variables: { input },
+  });
+
+  cache.modify({
+    id: cache.identify({ id: input.siteId, __typename: 'Site' }),
+    fields: {
+      eventGroups(existingRefs = []) {
+        const newRef = cache.writeFragment({
+          data: data.eventGroupCreate,
+          fragment: gql`
+            fragment NewEventsGroup on EventsGroup {
+              id
+              name
+            }
+          `
+        });     
+
+        return [...existingRefs, newRef];
+      },
+    },
+  });
+
+  return data.eventGroupCreate;
 };

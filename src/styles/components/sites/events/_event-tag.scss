@@ -1,0 +1,50 @@
+.tag.event-tag {
+  border: none;
+  border-radius: var(--border-radius-lg);
+  font-weight: var(--font-weight-bold);
+  margin: 0 0 .75rem 0;
+
+  span {
+    align-items: center;
+    display: flex;
+    padding: .25rem .75rem;
+  }
+
+  .icon {
+    font-size: 16px;
+    margin: 0 .25rem 0 0;
+  }
+
+  &.page-view {
+    background: var(--blue-50);
+
+    span, .icon {
+      color: var(--blue-500);
+    }
+  }
+
+  &.text-click,
+  &.css-selector {
+    background: var(--purple-75);
+
+    span, .icon {
+      color: var(--purple-500);
+    }
+  }
+
+  &.error {
+    background: var(--magenta-50);
+
+    span, .icon {
+      color: var(--magenta-700);
+    }
+  }
+
+  &.custom {
+    background: var(--peach-200);
+
+    span, .icon {
+      color: var(--rose-500);
+    }
+  }
+}
