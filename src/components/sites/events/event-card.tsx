@@ -7,6 +7,7 @@ import { EventsType } from 'types/events';
 
 interface Props {
   type: EventsType;
+  onClick?: (type: EventsType) => void;
 }
 
 const getText = (type: EventsType) => {
@@ -24,9 +25,13 @@ const getText = (type: EventsType) => {
   }
 };
 
-export const EventCard: FC<Props> = ({ type }) => {
+export const EventCard: FC<Props> = ({ type, onClick }) => {
+  const handleClick = () => {
+    if (onClick) onClick(type);
+  };
+
   return (
-    <Button className='event-card'>
+    <Button className='event-card' onClick={handleClick}>
       <EventTag type={type} />
       {getText(type)}
       <Icon name='arrow-right-line' className='arrow' />

@@ -3,8 +3,6 @@ export enum EventsGroupType {
   Groups,
 }
 
-// export type EventsType = 'page-view' | 'text-click' | 'css-selector' | 'error' | 'custom';
-
 export enum EventsType {
   PageVisit = 0,
   TextClick = 1,

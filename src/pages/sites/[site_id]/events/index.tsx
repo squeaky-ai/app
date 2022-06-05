@@ -12,6 +12,7 @@ import { Error } from 'components/error';
 import { PageLoading } from 'components/sites/page-loading';
 import { GettingStarted } from 'components/sites/events/getting-started';
 import { EventCapturesBulkActions } from 'components/sites/events/event-captures-bulk-actions';
+import { EventCreate } from 'components/sites/events/event-create';
 import { EventList } from 'components/sites/events/event-list';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useSort } from 'hooks/use-sort';
@@ -37,6 +38,8 @@ const SitesEvents: NextPage<ServerSideProps> = ({ user }) => {
     return <PageLoading />
   }
 
+  const hasEvents = events.items.length > 0;
+
   return (
     <>
       <Head>
@@ -49,9 +52,15 @@ const SitesEvents: NextPage<ServerSideProps> = ({ user }) => {
             <BreadCrumbs site={site} items={[{ name: 'Events' }]} />
 
             <div className='events-header'>
-              <h3 className='title'>Events</h3>
+              <h3 className='title'>
+                Events
 
-              {events.items.length > 0 && (
+                {hasEvents && (
+                  <EventCreate site={site} />
+                )}
+              </h3>
+
+              {hasEvents && (
                 <menu>
                   <EventCapturesBulkActions
                     site={site}

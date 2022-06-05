@@ -23,3 +23,21 @@ export const DELETE_EVENT_GROUP_MUTATION = gql`
     }
   }
 `;
+
+export const CREATE_EVENT_CAPTURE_MUTATION = gql`
+  mutation EventCaptureCreate($input: EventCaptureCreateInput!) {
+    eventCaptureCreate(input: $input) {
+      id
+      name
+      type
+      rules {
+        condition
+        matcher
+        value
+      }
+      count
+      lastCountedAt
+      groupNames
+    }
+  }
+`;

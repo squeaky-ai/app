@@ -31,21 +31,19 @@
       flex-direction: column;
       width: 100%;
     }
+
+    .event-create {
+      margin: 0 0 0 1rem;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 
   .empty {
     .empty-state {
       display: flex;
-    }
-  }
-
-  .getting-started-options {
-    display: grid;
-    grid-gap: 3rem;
-    grid-template-columns: 1fr 1fr;
-
-    @include breakpoint-md { 
-      grid-template-columns: 1fr;
     }
   }
 
@@ -252,6 +250,33 @@
         display: flex;
       }
     }
+  }
+}
+
+.event-create-modal {
+  .input-group {
+    align-items: center;
+    display: flex;
+    margin: 0 0 1.5rem 0;
+    width: 100%;
+
+    .select, .input {
+      margin: 0;
+    }
+
+    div:first-of-type {
+      margin: 0 1rem 0 0;
+      width: 10rem;
+    }
+
+    div:last-of-type {
+      flex: 1;
+    }
+  }
+
+  .label + p {
+    color: var(--gray-500);
+    margin: 0 0 .5rem 0;
   }
 }
 

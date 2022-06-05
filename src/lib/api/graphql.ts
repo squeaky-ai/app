@@ -54,6 +54,9 @@ import {
   EventCaptureDeleteInput,
   EventCaptureDeleteBulkInput,
   EventGroupDeleteInput,
+  EventCaptureCreateInput,
+  EventsCaptureItem,
+  EventsCapture,
 } from 'types/graphql';
 
 import {
@@ -166,6 +169,7 @@ import {
   DELETE_EVENT_CAPTURE_MUTATION,
   BULK_DELETE_EVENT_CAPTURE_MUTATION,
   DELETE_EVENT_GROUP_MUTATION,
+  CREATE_EVENT_CAPTURE_MUTATION,
 } from 'data/events/mutations';
 
 export const cache = new InMemoryCache({
@@ -842,4 +846,47 @@ export const eventsGroupDelete = async (input: EventGroupDeleteInput): Promise<n
   });
 
   return data.eventGroups;
+};
+
+export const eventsCaptureCreate = async (input: EventCaptureCreateInput): Promise<EventsCaptureItem> => {
+  const { data } = await client.mutate({
+    mutation: CREATE_EVENT_CAPTURE_MUTATION,
+    variables: { input },
+  });
+
+  cache.modify({
+    id: cache.identify({ id: input.siteId, __typename: 'Site' }),
+    fields: {
+      eventCapture(existingRefs = {}) {
+        const newRef = cache.writeFragment({
+          data: data.eventCaptureCreate,
+          fragment: gql`
+            fragment NewEventsCaptureItem on EventsCaptureItem {
+              id
+              name
+              type
+              rules {
+                condition
+                matcher
+                value
+              }
+              groupNames
+              count
+              lastCountedAt
+            }
+          `
+        });
+
+        return {
+          items: [...existingRefs.items, newRef],
+          pagination: {
+            ...existingRefs.pagination,
+            total: existingRefs.pagination.total + 1,
+          }
+        };
+      },
+    },
+  });
+
+  return data.eventCaptureCreate;
 };
