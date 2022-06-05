@@ -41,3 +41,12 @@ export const CREATE_EVENT_CAPTURE_MUTATION = gql`
     }
   }
 `;
+
+export const CREATE_EVENT_GROUP_MUTATION = gql`
+  mutation EventGroupCreate($input: EventGroupCreateInput!) {
+    eventGroupCreate(input: $input) {
+      id
+      name
+    }
+  }
+`;

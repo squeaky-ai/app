@@ -6,6 +6,7 @@ import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { EventCreateSelect } from 'components/sites/events/event-create-select';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
+import { EventGroupsSelector } from 'components/sites/events/event-groups-selector';
 import { Label } from 'components/label';
 import { Input } from 'components/input';
 import { Divider } from 'components/divider';
@@ -78,7 +79,7 @@ export const EventCreate: FC<Props> = ({ site }) => {
                   ],
                   siteId: site.id,
                   type: values.eventType,
-                  groupIds: values.groupIds,
+                  groupIds: values.groupIds.map(n => Number(n)),
                 })
                 toasts.add({ type: 'success', body: 'Event create successfully' });
                 closeModal();
@@ -171,7 +172,7 @@ export const EventCreate: FC<Props> = ({ site }) => {
                       <Label htmlFor='name'>Event name</Label>
                       <Input 
                         name='name' 
-                        type='text' 
+                        type='text'
                         onBlur={handleBlur}
                         onChange={handleChange}
                         value={values.name}
@@ -181,13 +182,10 @@ export const EventCreate: FC<Props> = ({ site }) => {
 
                       <Label htmlFor='groupIds'>Group(s)</Label>
                       <p>Create a new group or choose from your existing event groups. Each event can belong to multiple groups.</p>
-                      <Input 
-                        name='groupIds' 
-                        type='text' 
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        value={values.groupIds}
-                        invalid={touched.groupIds && !!errors.groupIds}
+                      <EventGroupsSelector
+                        site={site}
+                        ids={values.groupIds}
+                        onChange={(ids) => setFieldValue('groupIds', ids)} 
                       />
                     </>
                   )}

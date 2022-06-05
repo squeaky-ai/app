@@ -56,7 +56,8 @@ import {
   EventGroupDeleteInput,
   EventCaptureCreateInput,
   EventsCaptureItem,
-  EventsCapture,
+  EventGroupCreateInput,
+  EventsGroup,
 } from 'types/graphql';
 
 import {
@@ -170,6 +171,7 @@ import {
   BULK_DELETE_EVENT_CAPTURE_MUTATION,
   DELETE_EVENT_GROUP_MUTATION,
   CREATE_EVENT_CAPTURE_MUTATION,
+  CREATE_EVENT_GROUP_MUTATION,
 } from 'data/events/mutations';
 
 export const cache = new InMemoryCache({
@@ -889,4 +891,32 @@ export const eventsCaptureCreate = async (input: EventCaptureCreateInput): Promi
   });
 
   return data.eventCaptureCreate;
+};
+
+export const eventsGroupCreate = async (input: EventGroupCreateInput): Promise<EventsGroup> => {
+  const { data } = await client.mutate({
+    mutation: CREATE_EVENT_GROUP_MUTATION,
+    variables: { input },
+  });
+
+  cache.modify({
+    id: cache.identify({ id: input.siteId, __typename: 'Site' }),
+    fields: {
+      eventGroups(existingRefs = []) {
+        const newRef = cache.writeFragment({
+          data: data.eventGroupCreate,
+          fragment: gql`
+            fragment NewEventsGroup on EventsGroup {
+              id
+              name
+            }
+          `
+        });     
+
+        return [...existingRefs, newRef];
+      },
+    },
+  });
+
+  return data.eventGroupCreate;
 };
