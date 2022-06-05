@@ -44,7 +44,7 @@ export const EventCapturesDelete: FC<Props> = ({ eventIds, siteId, onCompleted, 
 
   return (
     <>
-      <Button className='link tertiary' onClick={openModal}>Delete events</Button>
+      <Button className='link' onClick={openModal}>Delete events</Button>
 
       <Modal ref={ref} onClose={onClose}>
         <ModalBody aria-labelledby='delete-event-captures-title' aria-describedby='delete-event-captures-description'>

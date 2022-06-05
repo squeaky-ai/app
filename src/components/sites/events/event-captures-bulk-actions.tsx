@@ -4,6 +4,7 @@ import { Icon } from 'components/icon';
 import { Dropdown } from 'components/dropdown';
 import { Tooltip } from 'components/tooltip';
 import { EventCapturesDelete } from 'components/sites/events/event-captures-delete';
+import { EventAddToGroup } from 'components/sites/events/event-add-to-group';
 import type { Site } from 'types/graphql';
 
 interface Props {
@@ -34,6 +35,7 @@ export const EventCapturesBulkActions: FC<Props> = ({ site, selected, setSelecte
 
       {selected.length > 0 && (
         <Dropdown ref={bulkActionsRef} direction='down' button={<><Icon name='checkbox-multiple-line' /> Bulk Actions</>}>
+          <EventAddToGroup onClose={onBulkActionClose} site={site} eventIds={selected} onCompleted={onCompleted} />
           <EventCapturesDelete onClose={onBulkActionClose} siteId={site.id} eventIds={selected} onCompleted={onCompleted} />
         </Dropdown>
       )}

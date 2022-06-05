@@ -22,16 +22,22 @@ export const EventGroupsSelector: FC<Props> = ({ ids, site, onChange }) => {
     setValue(event.target.value);
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = (event: React.MouseEvent<HTMLButtonElement>, id: string) => {
+    event.stopPropagation();
+
     onChange(ids.filter(i => i !== id));
   };
 
-  const handleSelect = (id: string) => {
+  const handleSelect = (event: React.MouseEvent<HTMLDivElement>, id: string) => {
+    event.stopPropagation();
+
     onChange([...ids, id]);
     setValue('');
   };
 
-  const handleCreate = async () => {
+  const handleCreate = async (event: React.MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+
     const { id } = await eventsGroupCreate({ siteId: site.id, name: value });
     onChange([...ids, id]);
     setValue('');
@@ -62,7 +68,7 @@ export const EventGroupsSelector: FC<Props> = ({ ids, site, onChange }) => {
 
             {results.map(g => (
               <div key={g.id}>
-                <Tag className='primary' onClick={() => handleSelect(g.id)}>
+                <Tag className='primary' onClick={event => handleSelect(event, g.id)}>
                   {g.name}
                 </Tag>
               </div>
@@ -80,7 +86,7 @@ export const EventGroupsSelector: FC<Props> = ({ ids, site, onChange }) => {
 
       <div className='tags'>
         {ids.map(id => (
-          <Tag className='primary' key={id} handleDelete={() => handleDelete(id)}>
+          <Tag className='primary' key={id} handleDelete={event => handleDelete(event, id)}>
             {groups.find(g => g.id === id)?.name}
           </Tag>
         ))}

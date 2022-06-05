@@ -50,3 +50,12 @@ export const CREATE_EVENT_GROUP_MUTATION = gql`
     }
   }
 `;
+
+export const ADD_TO_GROUP_MUTATION = gql`
+  mutation AddToGroup($input: EventAddToGroupInput!) {
+    eventAddToGroup(input: $input) {
+      id
+      groupNames
+    }
+  }
+`;

@@ -58,6 +58,7 @@ import {
   EventsCaptureItem,
   EventGroupCreateInput,
   EventsGroup,
+  EventAddToGroupInput,
 } from 'types/graphql';
 
 import {
@@ -172,6 +173,7 @@ import {
   DELETE_EVENT_GROUP_MUTATION,
   CREATE_EVENT_CAPTURE_MUTATION,
   CREATE_EVENT_GROUP_MUTATION,
+  ADD_TO_GROUP_MUTATION,
 } from 'data/events/mutations';
 
 export const cache = new InMemoryCache({
@@ -919,4 +921,13 @@ export const eventsGroupCreate = async (input: EventGroupCreateInput): Promise<E
   });
 
   return data.eventGroupCreate;
+};
+
+export const eventsAddToGroup = async (input: EventAddToGroupInput): Promise<EventsCaptureItem[]> => {
+  const { data } = await client.mutate({
+    mutation: ADD_TO_GROUP_MUTATION,
+    variables: { input },
+  });
+
+  return data.eventAddToGroup;
 };
