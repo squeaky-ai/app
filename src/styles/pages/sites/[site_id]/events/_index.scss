@@ -172,6 +172,87 @@
       transform: translate(0, 3rem); 
     }
   }
+
+  .event-group {
+    background: var(--gray-100);
+    border-radius: var(--border-radius-md);
+    margin: 0 0 .75rem 0;
+    padding: 1rem;
+    position: relative;
+
+    .heading {
+      align-items: center;
+      background: none;
+      border: none;
+      display: flex;
+      text-align: left;
+      width: 100%;
+
+      .icon {
+        font-size: 1.5rem;
+        margin: 0 .75rem 0 0;
+      }
+
+      span {
+        font-weight: var(--font-weight-normal);
+        margin: 0 0 0 .5rem;
+      }
+    }
+
+    .actions {
+      align-items: center;
+      display: none;
+      position: absolute;
+      top: .75rem;
+      right: 1rem;
+
+      .button {
+        align-items: center;
+        background: var(--gray-50);
+        border: none;
+        border-radius: var(--border-radius-md);
+        display: flex;
+        font-weight: var(--font-weight-bold);
+        height: 2.5rem;
+        margin: 0 0 0 .5rem;
+        padding: 0 1rem;
+
+        &:hover {
+          background: var(--gray-150);
+        }
+
+        .icon {
+          font-size: 1.25rem;
+          font-weight: var(--font-weight-normal);
+          margin: 0 .5rem 0 0;
+        }
+      }
+
+      .group-delete {
+        .icon {
+          color: var(--rose-500);
+        }
+      }
+    }
+
+    .items {
+      display: none;
+      
+      .events-table {
+        margin: 1.5rem 0 0 0;
+      }
+    }
+
+    &.open {
+      .items {
+        display: block;
+      }
+
+      .actions {
+        display: flex;
+      }
+    }
+  }
 }
 
 .bulk-action-hint {

@@ -53,6 +53,7 @@ import {
   SitesSuperuserAccessUpdateInput,
   EventCaptureDeleteInput,
   EventCaptureDeleteBulkInput,
+  EventGroupDeleteInput,
 } from 'types/graphql';
 
 import {
@@ -164,6 +165,7 @@ import {
 import {
   DELETE_EVENT_CAPTURE_MUTATION,
   BULK_DELETE_EVENT_CAPTURE_MUTATION,
+  DELETE_EVENT_GROUP_MUTATION,
 } from 'data/events/mutations';
 
 export const cache = new InMemoryCache({
@@ -826,4 +828,18 @@ export const eventsCaptureDeleteBulk = async (input: EventCaptureDeleteBulkInput
   });
 
   return data.eventCapture;
+};
+
+export const eventsGroupDelete = async (input: EventGroupDeleteInput): Promise<null> => {
+  const { data } = await client.mutate({
+    mutation: DELETE_EVENT_GROUP_MUTATION,
+    variables: { input },
+    update(cache) {
+      const normalizedId = cache.identify({ id: input.groupId, __typename: 'EventsGroup' });
+      cache.evict({ id: normalizedId });
+      cache.gc();
+    }
+  });
+
+  return data.eventGroups;
 };

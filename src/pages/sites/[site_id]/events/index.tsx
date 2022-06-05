@@ -53,13 +53,11 @@ const SitesEvents: NextPage<ServerSideProps> = ({ user }) => {
 
               {events.items.length > 0 && (
                 <menu>
-                  {type === EventsGroupType.All && (
-                    <EventCapturesBulkActions
-                      site={site}
-                      selected={selected}
-                      setSelected={setSelected}
-                    />
-                  )}
+                  <EventCapturesBulkActions
+                    site={site}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
                   <ButtonGroup>
                     <Button className={classnames(type === EventsGroupType.All ? 'primary' : 'blank')} onClick={() => setType(EventsGroupType.All)}>
                       All

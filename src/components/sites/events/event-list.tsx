@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import { EventCaptures } from 'components/sites/events/event-captures';
+import { EventGroups } from 'components/sites/events/event-groups';
 import { EventsGroupType } from 'types/events';
 import { EventsCaptureSort } from 'types/graphql';
 import type { Site, EventsCapture } from 'types/graphql';
@@ -44,5 +45,13 @@ export const EventList: FC<Props> = ({
         setSort={setSort}
       />
     )
-    : null
+    : (
+      <EventGroups
+        site={site}
+        sort={sort}
+        selected={selected}
+        setSelected={setSelected}
+        setSort={setSort}
+      />
+    )
 };

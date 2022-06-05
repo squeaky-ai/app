@@ -28,3 +28,29 @@ export const GET_EVENT_CAPTURES_QUERY = gql`
     }
   }
 `;
+
+export const GET_EVENT_GROUPS_QUERY = gql`
+  query GetEventGroups($siteId: ID!) {
+    site(siteId: $siteId) {
+      id
+      name
+      eventGroups {
+        id
+        name
+        items {
+          id
+          name
+          type
+          rules {
+            matcher
+            condition
+            value
+          }
+          count
+          groupNames
+          lastCountedAt
+        }
+      }
+    }
+  }
+`;

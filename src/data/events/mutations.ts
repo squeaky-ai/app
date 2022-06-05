@@ -15,3 +15,11 @@ export const BULK_DELETE_EVENT_CAPTURE_MUTATION = gql`
     }
   }
 `;
+
+export const DELETE_EVENT_GROUP_MUTATION = gql`
+  mutation EventGroupDelete($input: EventGroupDeleteInput!) {
+    eventGroupDelete(input: $input) {
+      id
+    }
+  }
+`;
