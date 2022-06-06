@@ -58,7 +58,7 @@ export const EventCreate: FC<Props> = ({ site, buttonText, buttonClassName }) =>
         {buttonText || '+ Add New'}
       </Button>
 
-      <Modal ref={ref} className='md event-create-modal'>
+      <Modal ref={ref} className='md event-create-modal' scrollable>
         <Formik
           initialValues={{ 
             eventType: null,

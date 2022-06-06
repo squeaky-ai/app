@@ -282,33 +282,6 @@
   }
 }
 
-.event-create-modal {
-  .input-group {
-    align-items: center;
-    display: flex;
-    margin: 0 0 1.5rem 0;
-    width: 100%;
-
-    .select, .input {
-      margin: 0;
-    }
-
-    div:first-of-type {
-      margin: 0 1rem 0 0;
-      width: 10rem;
-    }
-
-    div:last-of-type {
-      flex: 1;
-    }
-  }
-
-  .label + p {
-    color: var(--gray-500);
-    margin: 0 0 .5rem 0;
-  }
-}
-
 .bulk-action-hint {
   white-space: pre-wrap;
 }

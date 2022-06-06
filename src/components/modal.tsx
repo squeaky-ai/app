@@ -7,6 +7,7 @@ import { Portal } from 'components/portal';
 interface Props {
   className?: string;
   children: React.ReactNode;
+  scrollable?: boolean;
   // It may seem weird at first as the component usually closes this
   // via the ref, but the modal can also be closed via the eventListeners
   // so the hook is there to cover all cases
@@ -61,7 +62,7 @@ export class Modal extends React.Component<Props, State> {
     return (
       <Portal>
         {this.state.show && (
-          <div className={classnames('modal', this.props.className)}>
+          <div className={classnames('modal', { scrollable: this.props.scrollable }, this.props.className)}>
             {this.props.children}
           </div>
         )}

@@ -90,5 +90,21 @@
       width: 560px;
     }
   }
+
+  &.scrollable {
+    .modal-header,
+    .modal-footer {
+      height: 4.5rem;
+    }
+
+    .modal-body {
+      max-height: calc(100vh - 2rem);
+
+      .modal-contents {
+        max-height: calc(100vh - 11rem);
+        overflow: auto;
+      }
+    }
+  }
 }
 

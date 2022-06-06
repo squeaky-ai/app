@@ -67,11 +67,9 @@ export const EventGroupsSelector: FC<Props> = ({ ids, site, onChange }) => {
             )}
 
             {results.map(g => (
-              <div key={g.id}>
-                <Tag className='primary' onClick={event => handleSelect(event, g.id)}>
-                  {g.name}
-                </Tag>
-              </div>
+              <Tag key={g.id} className='primary' onClick={event => handleSelect(event, g.id)}>
+                {g.name}
+              </Tag>
             ))}
           </div>
 
