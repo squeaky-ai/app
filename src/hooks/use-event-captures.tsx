@@ -24,7 +24,8 @@ export const useEventCaptures = ({ page, size, sort }: Props): UseEventCaptures 
       page, 
       size,
       sort,
-    }
+    },
+    pollInterval: 5000,
   });
 
   const fallback: EventsCapture = {
