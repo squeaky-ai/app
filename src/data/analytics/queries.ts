@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const GET_ANALYTICS_TRAFFIC_QUERY = gql`
-  query GetAnalytics($siteId: ID!, $fromDate: ISO8601Date!, $toDate: ISO8601Date!, $pagesPage: Int!) { 
+  query GetAnalytics($siteId: ID!, $fromDate: ISO8601Date!, $toDate: ISO8601Date!, $pagesPage: Int!, $pagesSort: AnalyticsPagesSort) { 
     site(siteId: $siteId) {
       id
       analytics(fromDate: $fromDate, toDate: $toDate) {
@@ -47,7 +47,7 @@ export const GET_ANALYTICS_TRAFFIC_QUERY = gql`
             count
           }
         }
-        pages(size: 10, page: $pagesPage) {
+        pages(size: 10, page: $pagesPage, sort: $pagesSort) {
           items {
             url
             averageDuration

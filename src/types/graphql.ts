@@ -190,6 +190,7 @@ export type AnalyticsBrowsersArgs = {
 export type AnalyticsPagesArgs = {
   page?: InputMaybe<Scalars['Int']>;
   size?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<AnalyticsPagesSort>;
 };
 
 
@@ -280,6 +281,29 @@ export type AnalyticsPagesPerSession = {
   average: Scalars['Float'];
   trend: Scalars['Float'];
 };
+
+export enum AnalyticsPagesSort {
+  /** Lowest bounce rate first */
+  BounceRateAsc = 'bounce_rate__asc',
+  /** Highest bounce rate first */
+  BounceRateDesc = 'bounce_rate__desc',
+  /** Shortest duration first */
+  DurationAsc = 'duration__asc',
+  /** Longest duration first */
+  DurationDesc = 'duration__desc',
+  /** Lowest exit rate first */
+  ExitRateAsc = 'exit_rate__asc',
+  /** Highest exit rate first */
+  ExitRateDesc = 'exit_rate__desc',
+  /** Least amount of unique views first */
+  UniqueViewsAsc = 'unique_views__asc',
+  /** Most amount of unique views first */
+  UniqueViewsDesc = 'unique_views__desc',
+  /** Least amount of views first */
+  ViewsAsc = 'views__asc',
+  /** Most amount of views first */
+  ViewsDesc = 'views__desc'
+}
 
 export type AnalyticsRecordingsCount = {
   __typename?: 'AnalyticsRecordingsCount';

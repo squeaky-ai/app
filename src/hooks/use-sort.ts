@@ -6,6 +6,7 @@ import {
   FeedbackNpsResponseSort,
   FeedbackSentimentResponseSort,
   EventsCaptureSort,
+  AnalyticsPagesSort,
 } from 'types/graphql';
 
 type ComponentType = 
@@ -13,7 +14,8 @@ type ComponentType =
   'visitors' |
   'nps' |
   'sentiment' |
-  'events';
+  'events' |
+  'analytics-pages';
 
 interface UseSort<T> {
   sort: T;
@@ -42,6 +44,8 @@ const getDefaultSort = (type: ComponentType) => {
       return FeedbackSentimentResponseSort.TimestampDesc;
     case 'events':
       return EventsCaptureSort.CountDesc;
+    case 'analytics-pages':
+      return AnalyticsPagesSort.ViewsDesc;
   }
 };
 

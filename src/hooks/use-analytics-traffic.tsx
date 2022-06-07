@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { GET_ANALYTICS_TRAFFIC_QUERY } from 'data/analytics/queries';
-import type { Site } from 'types/graphql';
+import type { AnalyticsPagesSort, Site } from 'types/graphql';
 import type { TimeRange } from 'types/common';
 import type { AnalyticsTraffic } from 'types/analytics';
 
@@ -14,6 +14,7 @@ interface Props {
   site: Site;
   range: TimeRange;
   pagesPage: number;
+  pagesSort: AnalyticsPagesSort;
 }
 
 export const useAnalyticsTraffic = (props: Props): UseAnalytics => {

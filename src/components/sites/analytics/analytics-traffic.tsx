@@ -15,7 +15,8 @@ import { NoResults } from 'components/sites/no-results';
 import { PageLoading } from 'components/sites/page-loading';
 import { useAnalyticsTraffic } from 'hooks/use-analytics-traffic';
 import { getDateRange } from 'lib/dates';
-import type { Site } from 'types/graphql';
+import { useSort } from 'hooks/use-sort';
+import type { AnalyticsPagesSort, Site } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 
 interface Props {
@@ -25,10 +26,13 @@ interface Props {
 
 export const AnalyticsTraffic: FC<Props> = ({ site, period }) => {
   const [pagesPage, setPagesPage] = React.useState<number>(1);
+  
+  const { sort: pagesSort, setSort: setPagesSort } = useSort<AnalyticsPagesSort>('analytics-pages');
 
   const { analytics, error, loading } = useAnalyticsTraffic({
     site,
     pagesPage,
+    pagesSort,
     range: getDateRange(period),
   });
 
@@ -103,7 +107,9 @@ export const AnalyticsTraffic: FC<Props> = ({ site, period }) => {
           <AnalyticsPages 
             pages={analytics.pages}
             page={pagesPage} 
+            sort={pagesSort}
             setPage={setPagesPage}
+            setSort={setPagesSort}
           />
         </div>
     </div>
