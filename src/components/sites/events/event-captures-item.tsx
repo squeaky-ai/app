@@ -44,7 +44,7 @@ export const EventCapturesItem: FC<Props> = ({
         />
       </Cell>
       <Cell>
-        <Link href='#'>
+        <Link href={`/sites/${site.id}/events/history?eventIds=${event.id}`}>
           <a>{event.name}</a>
         </Link>
       </Cell>

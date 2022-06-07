@@ -34,10 +34,6 @@ const SitesEvents: NextPage<ServerSideProps> = ({ user }) => {
     return <Error />;
   }
 
-  if (loading) {
-    return <PageLoading />
-  }
-
   const hasEvents = events.items.length > 0;
 
   return (
@@ -87,7 +83,11 @@ const SitesEvents: NextPage<ServerSideProps> = ({ user }) => {
               snippet='If you have only recently installed or updated your tracking code it may take up to an hour before any event data becomes available for you to manage.'
             />
 
-            {site.recordingsCount > 0 && (
+            {loading && (
+              <PageLoading />
+            )}
+
+            {!loading && site.recordingsCount > 0 && (
               events.items.length > 0
                 ? (
                   <EventList 
