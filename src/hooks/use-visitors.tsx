@@ -42,7 +42,7 @@ export const useVisitors = ({ page, size, sort, search, filters }: Props): UseVi
   };
 
   return {
-    loading,
+    loading: loading && !data && !previousData,
     error: !!error,
     visitors: data
       ? data.site.visitors

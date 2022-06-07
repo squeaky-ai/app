@@ -43,7 +43,7 @@ export const useRecordings = ({ page, size, sort, filters, range }: Props): UseR
   };
 
   return {
-    loading,
+    loading: loading && !data && !previousData,
     error: !!error,
     recordings: data
       ? data.site.recordings

@@ -67,7 +67,7 @@ export const useAnalyticsTraffic = (props: Props): UseAnalytics => {
   };
 
   return { 
-    loading, 
+    loading: loading && !data && !previousData, 
     error: !!error,
     analytics: data
       ? data.site.analytics
