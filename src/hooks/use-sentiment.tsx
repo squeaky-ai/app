@@ -22,7 +22,7 @@ interface UseSentiment {
 export const useSentiment = ({ page, size, sort, range }: Props): UseSentiment => {
   const router = useRouter();
 
-  const { data, loading, error, previousData } = useQuery<{ site: Site }>(GET_SENTIMENT_QUERY, {
+  const { data, loading, error } = useQuery<{ site: Site }>(GET_SENTIMENT_QUERY, {
     variables: { 
       siteId: router.query.site_id as string, 
       page, 
@@ -55,8 +55,6 @@ export const useSentiment = ({ page, size, sort, range }: Props): UseSentiment =
   return {
     loading,
     error: !!error,
-    sentiment: data
-      ? data.site.sentiment
-      : previousData ? previousData.site.sentiment : fallback
+    sentiment: data ? data.site.sentiment : fallback,
   };
 };

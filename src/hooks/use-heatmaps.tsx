@@ -27,7 +27,7 @@ interface Props {
 export const useHeatmaps = (props: Props): UseHeatmaps => {
   const router = useRouter();
 
-  const { data, loading, error, previousData } = useQuery<{ site: Site }>(GET_HEATMAPS_QUERY, {
+  const { data, loading, error } = useQuery<{ site: Site }>(GET_HEATMAPS_QUERY, {
     variables: {
       siteId: router.query.site_id as string,
       device: props.device,
@@ -49,9 +49,7 @@ export const useHeatmaps = (props: Props): UseHeatmaps => {
   return {
     loading,
     error: !!error,
-    heatmaps: (data
-      ? data.site.heatmaps
-      : previousData ? previousData.site.heatmaps : fallback)
+    heatmaps: data ? data.site.heatmaps : fallback,
   };
 };
 

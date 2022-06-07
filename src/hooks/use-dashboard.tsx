@@ -18,7 +18,7 @@ interface UseDashboard {
 export const useDashboard = (props: Props): UseDashboard => {
   const router = useRouter();
 
-  const { data, loading, error, previousData } = useQuery<{ site: Site }>(GET_DASHBOARD_QUERY, {
+  const { data, loading, error } = useQuery<{ site: Site }>(GET_DASHBOARD_QUERY, {
     variables: {
       siteId: router.query.site_id as string,
       ...props.range,
@@ -46,8 +46,6 @@ export const useDashboard = (props: Props): UseDashboard => {
   return {
     loading,
     error: !!error,
-    dashboard: (data
-      ? data.site
-      : previousData ? previousData.site : fallback) as Dashboard
+    dashboard: (data ? data.site : fallback) as Dashboard
   };
 };

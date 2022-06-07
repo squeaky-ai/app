@@ -22,7 +22,7 @@ interface UseRecordings {
 export const useRecordings = ({ page, size, sort, filters, range }: Props): UseRecordings => {
   const router = useRouter();
 
-  const { data, loading, error, previousData } = useQuery<{ site: Site }>(GET_RECORDINGS_QUERY, {
+  const { data, loading, error } = useQuery<{ site: Site }>(GET_RECORDINGS_QUERY, {
     variables: { 
       siteId: router.query.site_id as string, 
       page, 
@@ -43,15 +43,8 @@ export const useRecordings = ({ page, size, sort, filters, range }: Props): UseR
   };
 
   return {
-    loading: loading && !data && !previousData,
+    loading,
     error: !!error,
-    recordings: data
-      ? data.site.recordings
-      // When every keypress is made, the state will turn to loading
-      // which means that we'd default to an empty items list. This
-      // causes the UI to flicker. Instead, we return the last set of
-      // results whenever it's loading and only update when the new
-      // results are in
-      : previousData ? previousData.site.recordings : fallback
+    recordings: data ? data.site.recordings : fallback,
   };
 };
