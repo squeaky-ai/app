@@ -20,26 +20,32 @@ export const AnalyticsPages: FC<Props> = ({ pages, page, setPage }) => (
       <Row head>
         <Cell>Page</Cell>
         <Cell>Views</Cell>
+        <Cell>Unique views</Cell>
         <Cell>Average time on page</Cell>
+        <Cell>Bounce rate</Cell>
+        <Cell>Exit rate</Cell>
         <Cell />
       </Row>
       {pages.items.map(page => (
-        <Row key={page.path}>
+        <Row key={page.url}>
           <Cell>
-            <Tooltip button={page.path} fluid>
-              {page.path}
+            <Tooltip button={page.url} fluid>
+              {page.url}
             </Tooltip>
           </Cell>
-          <Cell><b>{page.count.toLocaleString()}</b> <span className='percentage'>({page.percentage.toFixed(2)}%)</span></Cell>
-          <Cell>{toHoursMinutesAndSeconds(page.avg)}</Cell>
+          <Cell><b>{page.viewCount.toLocaleString()}</b> <span className='percentage'>({page.viewPercentage.toFixed(2)}%)</span></Cell>
+          <Cell><b>{page.uniqueViewCount.toLocaleString()}</b> <span className='percentage'>({page.uniqueViewPercentage.toFixed(2)}%)</span></Cell>
+          <Cell>{toHoursMinutesAndSeconds(page.averageDuration)}</Cell>
+          <Cell>{page.bounceRatePercentage.toFixed(2)}%</Cell>
+          <Cell>{page.exitRatePercentage.toFixed(2)}%</Cell>
           <Cell className='filters-links'>
             <FiltersRecordingsLink 
-              action={{ visitedPages: [page.path] }}
+              action={{ visitedPages: [page.url] }}
               hint='View recordings that visited this page'
             />
 
             <FiltersVisitorsLink 
-              action={{ visitedPages: [page.path] }}
+              action={{ visitedPages: [page.url] }}
               hint='View visitors that visited this page'
             />
           </Cell>

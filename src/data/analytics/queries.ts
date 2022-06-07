@@ -49,10 +49,14 @@ export const GET_ANALYTICS_TRAFFIC_QUERY = gql`
         }
         pages(size: 10, page: $pagesPage) {
           items {
-            path
-            count
-            avg
-            percentage
+            url
+            averageDuration
+            viewCount
+            viewPercentage
+            uniqueViewCount
+            uniqueViewPercentage
+            exitRatePercentage
+            bounceRatePercentage
           }
           pagination {
             total

@@ -244,10 +244,14 @@ export type AnalyticsLanguage = {
 
 export type AnalyticsPage = {
   __typename?: 'AnalyticsPage';
-  avg: Scalars['Int'];
-  count: Scalars['Int'];
-  path: Scalars['String'];
-  percentage: Scalars['Float'];
+  averageDuration: Scalars['Int'];
+  bounceRatePercentage: Scalars['Float'];
+  exitRatePercentage: Scalars['Float'];
+  uniqueViewCount: Scalars['Int'];
+  uniqueViewPercentage: Scalars['Float'];
+  url: Scalars['String'];
+  viewCount: Scalars['Int'];
+  viewPercentage: Scalars['Float'];
 };
 
 export type AnalyticsPageView = {
