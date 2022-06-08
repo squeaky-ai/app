@@ -7,19 +7,30 @@ import { Page } from 'components/sites/page';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { Period } from 'components/sites/period/period';
 import { Error } from 'components/error';
+import { EventHistory } from 'components/sites/events/event-history';
 import { PageLoading } from 'components/sites/page-loading';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { usePeriod } from 'hooks/use-period';
-import { useEventHistory } from 'hooks/use-event-history';
+import { useEventHistoryStats } from 'hooks/use-event-history-stats';
+import { useEventHistoryIds } from 'hooks/use-event-history-ids';
 
 const SitesEventsHistory: NextPage<ServerSideProps> = ({ user }) => {
   const { period, setPeriod } = usePeriod('event-history');
+  
+  const { 
+    groupIds, 
+    captureIds,
+    addEventId,
+    removeEventId,
+  } = useEventHistoryIds();
 
-  const { error, loading } = useEventHistory();
+  const { eventHistoryStats, error, loading } = useEventHistoryStats({ groupIds, captureIds });
 
   if (error) {
     return <Error />;
   }
+
+  const hasIds = [...groupIds, ...captureIds].length > 0;
 
   return (
     <>
@@ -43,6 +54,18 @@ const SitesEventsHistory: NextPage<ServerSideProps> = ({ user }) => {
             </div>
 
             {loading && <PageLoading />}
+            
+            {!loading && hasIds && (
+              <EventHistory 
+                eventHistoryStats={eventHistoryStats} 
+                addEventId={addEventId} 
+                removeEventId={removeEventId} 
+              />
+            )}
+
+            {!loading && !hasIds && (
+              <p>Nothing selected</p>
+            )}
           </Main>
         )}
       </Page>

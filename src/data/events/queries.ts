@@ -54,3 +54,18 @@ export const GET_EVENT_GROUPS_QUERY = gql`
     }
   }
 `;
+
+export const GET_EVENT_HISTORY_STATS_QUERY = gql`
+  query GetEventHistoryStats($siteId: ID!, $captureIds: [ID!]!, $groupIds: [ID!]!) {
+    site(siteId: $siteId) {
+      id      
+      eventHistoryStats(captureIds: $captureIds, groupIds: $groupIds) {
+        id
+        name
+        type
+        count
+        averageEventsPerVisitor
+      }
+    }
+  }
+`;
