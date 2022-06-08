@@ -12,15 +12,25 @@ import { PageLoading } from 'components/sites/page-loading';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { usePeriod } from 'hooks/use-period';
 import { useEventHistoryStats } from 'hooks/use-event-history-stats';
+import { useEventHistoryIds } from 'hooks/use-event-history-ids';
 
 const SitesEventsHistory: NextPage<ServerSideProps> = ({ user }) => {
   const { period, setPeriod } = usePeriod('event-history');
+  
+  const { 
+    groupIds, 
+    captureIds,
+    addEventId,
+    removeEventId,
+  } = useEventHistoryIds();
 
-  const { eventHistoryStats, error, loading } = useEventHistoryStats();
+  const { eventHistoryStats, error, loading } = useEventHistoryStats({ groupIds, captureIds });
 
   if (error) {
     return <Error />;
   }
+
+  const hasIds = [...groupIds, ...captureIds].length > 0;
 
   return (
     <>
@@ -44,7 +54,18 @@ const SitesEventsHistory: NextPage<ServerSideProps> = ({ user }) => {
             </div>
 
             {loading && <PageLoading />}
-            {!loading && <EventHistory eventHistoryStats={eventHistoryStats} />}
+            
+            {!loading && hasIds && (
+              <EventHistory 
+                eventHistoryStats={eventHistoryStats} 
+                addEventId={addEventId} 
+                removeEventId={removeEventId} 
+              />
+            )}
+
+            {!loading && !hasIds && (
+              <p>Nothing selected</p>
+            )}
           </Main>
         )}
       </Page>
