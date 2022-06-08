@@ -1,0 +1,15 @@
+.page.sites.events.history {
+  .event-history-tags {
+    align-items: center;
+    display: flex;
+
+    p {
+      margin: 0 0.5rem 0.5rem 0
+    }
+  }
+
+  .event-counts {
+    height: 30rem;
+    margin: 2rem 0;
+  }
+}

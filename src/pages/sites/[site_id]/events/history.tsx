@@ -7,15 +7,16 @@ import { Page } from 'components/sites/page';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { Period } from 'components/sites/period/period';
 import { Error } from 'components/error';
+import { EventHistory } from 'components/sites/events/event-history';
 import { PageLoading } from 'components/sites/page-loading';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { usePeriod } from 'hooks/use-period';
-import { useEventHistory } from 'hooks/use-event-history';
+import { useEventHistoryStats } from 'hooks/use-event-history-stats';
 
 const SitesEventsHistory: NextPage<ServerSideProps> = ({ user }) => {
   const { period, setPeriod } = usePeriod('event-history');
 
-  const { error, loading } = useEventHistory();
+  const { eventHistoryStats, error, loading } = useEventHistoryStats();
 
   if (error) {
     return <Error />;
@@ -43,6 +44,7 @@ const SitesEventsHistory: NextPage<ServerSideProps> = ({ user }) => {
             </div>
 
             {loading && <PageLoading />}
+            {!loading && <EventHistory eventHistoryStats={eventHistoryStats} />}
           </Main>
         )}
       </Page>

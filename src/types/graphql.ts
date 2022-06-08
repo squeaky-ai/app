@@ -572,6 +572,20 @@ export type EventsGroup = {
   name: Scalars['String'];
 };
 
+export type EventsHistoryStat = {
+  __typename?: 'EventsHistoryStat';
+  averageEventsPerVisitor: Scalars['Int'];
+  count: Scalars['Int'];
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  type: EventsHistoryType;
+};
+
+export enum EventsHistoryType {
+  Capture = 'capture',
+  Group = 'group'
+}
+
 export enum EventsMatch {
   /** Contains */
   Contains = 'contains',
@@ -1685,6 +1699,7 @@ export type Site = {
   domainBlacklist: Array<Maybe<SitesDomainBlacklist>>;
   eventCapture: EventsCapture;
   eventGroups: Array<Maybe<EventsGroup>>;
+  eventHistoryStats: Array<Maybe<EventsHistoryStat>>;
   feedback?: Maybe<Feedback>;
   heatmaps: Heatmaps;
   id: Scalars['ID'];
@@ -1730,6 +1745,12 @@ export type SiteEventCaptureArgs = {
   page?: InputMaybe<Scalars['Int']>;
   size?: InputMaybe<Scalars['Int']>;
   sort?: InputMaybe<EventsCaptureSort>;
+};
+
+
+export type SiteEventHistoryStatsArgs = {
+  captureIds?: Array<Scalars['ID']>;
+  groupIds?: Array<Scalars['ID']>;
 };
 
 
