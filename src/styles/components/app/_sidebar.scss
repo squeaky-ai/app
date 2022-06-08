@@ -325,7 +325,7 @@
     @include breakpoint-md {
       border-bottom-color: var(--gray-blue-600);
       height: 100vh;
-      max-height: 100%;
+      max-height: -webkit-fill-available;
       width: 100%;
     }
 
