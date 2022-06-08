@@ -2,6 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import { EventHistoryTags } from 'components/sites/events/event-history-tags';
 import { EventCounts } from 'components/sites/events/event-counts';
+import { EventHistoryStats } from 'components/sites/events/event-history-stats';
 import { EventTabs, TabsType } from 'components/sites/events/event-tabs';
 import type { EventsHistoryStat } from 'types/graphql';
 
@@ -17,6 +18,11 @@ export const EventHistory: FC<Props> =  ({ eventHistoryStats }) => {
       <EventHistoryTags eventHistoryStats={eventHistoryStats} />
       <EventCounts />
       <EventTabs active={activeTab} onChange={setActiveTab} />
+      
+      {activeTab === 'stats'
+        ? <EventHistoryStats eventHistoryStats={eventHistoryStats} />
+        : null
+      }
     </div>
   );
 };

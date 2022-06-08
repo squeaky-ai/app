@@ -12,4 +12,38 @@
     height: 30rem;
     margin: 2rem 0;
   }
+
+  .event-swatch {
+    background: var(--gray-200);
+    display: inline-block;
+    height: 1rem;
+    margin: 0 .5rem 0 0;
+    width: 1rem;
+    vertical-align: middle;
+  }
+
+  .event-history-tag {
+    align-items: center;
+    background: var(--gray-100);
+    border-radius: 1rem;
+    display: inline-flex;
+    padding: .25rem .75rem;
+
+    .icon {
+      color: var(--gray-300);
+      font-size: 1rem;
+      margin: 0 .25rem 0 0;
+    }
+  }
+
+  .event-history-stats {
+    margin: 2rem 0;
+
+    .table {
+      .row {
+        grid-template-columns: repeat(4, 1fr);
+        height: 3rem;
+      }
+    }
+  }
 }
