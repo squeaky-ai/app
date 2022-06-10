@@ -574,7 +574,7 @@ export type EventsGroup = {
 
 export type EventsHistoryStat = {
   __typename?: 'EventsHistoryStat';
-  averageEventsPerVisitor: Scalars['Int'];
+  averageEventsPerVisitor: Scalars['Float'];
   count: Scalars['Int'];
   id: Scalars['ID'];
   name: Scalars['String'];

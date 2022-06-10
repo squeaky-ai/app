@@ -1,7 +1,9 @@
 import { EventType, IncrementalSource, MouseInteractions } from 'rrweb';
 import { ErrorEvent, CustomEvents } from 'types/event';
+import { EventHistoryStatsSort } from 'types/events';
 import type { metaEvent } from 'rrweb/typings/types';
 import type { Event, EventName } from 'types/event';
+import type { EventsHistoryStat } from 'types/graphql';
 
 type EventWithTimestamp<T> = T & { id: number; timestamp: number; delay?: number; };
 
@@ -97,3 +99,27 @@ export function getMouseInteractionIcon (type: MouseInteractions): string {
       return 'question-line';
   }
 };
+
+export const sortEventsHistory = (
+  eventHistoryStats: EventsHistoryStat[], 
+  sort: EventHistoryStatsSort
+) => [...eventHistoryStats].sort((a, b) => {
+  switch(sort) {
+    case EventHistoryStatsSort.NameAsc:
+      return a.name.localeCompare(b.name);
+    case EventHistoryStatsSort.NameDesc:
+      return b.name.localeCompare(a.name);
+    case EventHistoryStatsSort.CountAsc:
+      return a.count - b.count;
+    case EventHistoryStatsSort.CountDesc:
+      return b.count - a.count;
+    case EventHistoryStatsSort.TypeAsc:
+      return a.type.localeCompare(b.type);
+    case EventHistoryStatsSort.TypeDesc:
+      return b.type.localeCompare(a.type);
+    case EventHistoryStatsSort.AverageEventsPerVisitorAsc:
+      return a.averageEventsPerVisitor - b.averageEventsPerVisitor;
+    case EventHistoryStatsSort.AverageEventsPerVisitorDesc:
+      return b.averageEventsPerVisitor - a.averageEventsPerVisitor;
+  }
+});

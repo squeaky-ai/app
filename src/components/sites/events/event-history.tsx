@@ -4,6 +4,7 @@ import { EventHistoryTags } from 'components/sites/events/event-history-tags';
 import { EventCounts } from 'components/sites/events/event-counts';
 import { EventHistoryStats } from 'components/sites/events/event-history-stats';
 import { EventTabs, TabsType } from 'components/sites/events/event-tabs';
+import { EventHistoryStatsSort } from 'types/events';
 import type { EventsHistoryStat } from 'types/graphql';
 
 interface Props {
@@ -22,6 +23,7 @@ export const EventHistory: FC<Props> =  ({
   setCaptureIds 
 }) => {
   const [activeTab, setActiveTab] = React.useState<TabsType>('stats');
+  const [sort, setSort] = React.useState<EventHistoryStatsSort>(EventHistoryStatsSort.CountDesc);
 
   return (
     <div className='event-history'>
@@ -33,11 +35,14 @@ export const EventHistory: FC<Props> =  ({
         setCaptureIds={setCaptureIds}
       />
 
-      <EventCounts />
+      <EventCounts 
+        sort={sort}
+        eventHistoryStats={eventHistoryStats} 
+      />
       <EventTabs active={activeTab} onChange={setActiveTab} />
       
       {activeTab === 'stats'
-        ? <EventHistoryStats eventHistoryStats={eventHistoryStats} />
+        ? <EventHistoryStats sort={sort} eventHistoryStats={eventHistoryStats} setSort={setSort} />
         : null
       }
     </div>

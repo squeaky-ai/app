@@ -84,6 +84,42 @@
   .event-counts {
     height: 30rem;
     margin: 2rem 0;
+
+    .heading {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 0 1.5rem 0;
+
+      .title {
+        align-items: baseline;
+      }
+
+      h3 {
+        color: var(--purple-500);
+        line-height: 24px;
+        margin: 0;
+      }
+
+      h5 {
+        margin: 0 1rem 0 0;
+      }
+    }
+
+    .key {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+
+      .item {
+        align-items: center;
+        display: flex;
+        margin: 0 1rem 1rem 0;
+
+        p {
+          margin: 0;
+        }
+      }
+    }
   }
 
   .event-swatch {
