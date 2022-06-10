@@ -69,3 +69,33 @@ export const GET_EVENT_HISTORY_STATS_QUERY = gql`
     }
   }
 `;
+
+export const GET_EVENT_FEED_QUERY = gql`
+  query GetEventFeedStats($siteId: ID!, $page: Int, $size: Int, $sort: EventsFeedSort, $captureIds: [ID!]!, $groupIds: [ID!]!) {
+    site(siteId: $siteId) {
+      id      
+      eventFeed(captureIds: $captureIds, groupIds: $groupIds, page: $page, size: $size, sort: $sort) {
+        items {
+          id
+          eventName
+          timestamp
+          visitor {
+            id
+            visitorId
+            starred
+          }
+          recording {
+            id
+            sessionId
+            bookmarked
+          }
+        }
+        pagination {
+          pageSize
+          total
+          sort
+        }
+      }
+    }
+  }
+`;

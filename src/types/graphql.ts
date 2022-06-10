@@ -565,6 +565,26 @@ export enum EventsCondition {
   Or = 'or'
 }
 
+export type EventsFeed = {
+  __typename?: 'EventsFeed';
+  items: Array<Maybe<FeedCaptureItem>>;
+  pagination: EventsFeedPagination;
+};
+
+export type EventsFeedPagination = {
+  __typename?: 'EventsFeedPagination';
+  pageSize: Scalars['Int'];
+  sort: EventsFeedSort;
+  total: Scalars['Int'];
+};
+
+export enum EventsFeedSort {
+  /** Oldest first */
+  TimestampAsc = 'timestamp__asc',
+  /** Newest first */
+  TimestampDesc = 'timestamp__desc'
+}
+
 export type EventsGroup = {
   __typename?: 'EventsGroup';
   id: Scalars['ID'];
@@ -610,6 +630,15 @@ export type EventsRuleInput = {
   condition: EventsCondition;
   matcher: EventsMatch;
   value: Scalars['String'];
+};
+
+export type FeedCaptureItem = {
+  __typename?: 'FeedCaptureItem';
+  eventName: Scalars['String'];
+  id: Scalars['ID'];
+  recording: Recording;
+  timestamp: Scalars['ISO8601DateTime'];
+  visitor: Visitor;
 };
 
 export type Feedback = {
@@ -1698,6 +1727,7 @@ export type Site = {
   daysSinceLastRecording: Scalars['Int'];
   domainBlacklist: Array<Maybe<SitesDomainBlacklist>>;
   eventCapture: EventsCapture;
+  eventFeed: EventsFeed;
   eventGroups: Array<Maybe<EventsGroup>>;
   eventHistoryStats: Array<Maybe<EventsHistoryStat>>;
   feedback?: Maybe<Feedback>;
@@ -1745,6 +1775,15 @@ export type SiteEventCaptureArgs = {
   page?: InputMaybe<Scalars['Int']>;
   size?: InputMaybe<Scalars['Int']>;
   sort?: InputMaybe<EventsCaptureSort>;
+};
+
+
+export type SiteEventFeedArgs = {
+  captureIds: Array<Scalars['ID']>;
+  groupIds: Array<Scalars['ID']>;
+  page?: InputMaybe<Scalars['Int']>;
+  size?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<EventsFeedSort>;
 };
 
 

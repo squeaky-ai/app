@@ -57,6 +57,7 @@ const SitesEventsHistory: NextPage<ServerSideProps> = ({ user }) => {
             
             {!loading && hasIds && (
               <EventHistory 
+                site={site}
                 eventHistoryStats={eventHistoryStats} 
                 groupIds={groupIds}
                 captureIds={captureIds}
@@ -65,6 +66,7 @@ const SitesEventsHistory: NextPage<ServerSideProps> = ({ user }) => {
               />
             )}
 
+            {/** TODO: Add empty state */}
             {!loading && !hasIds && (
               <p>Nothing selected</p>
             )}
