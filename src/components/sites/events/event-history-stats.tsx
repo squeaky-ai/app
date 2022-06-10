@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const EventHistoryStats: FC<Props> = ({ sort, eventHistoryStats, setSort }) => (
-  <div className='event-history-stats'>
+  <div className='event-history-table event-history-stats'>
     <Table>
       <Row head>
         <Cell>

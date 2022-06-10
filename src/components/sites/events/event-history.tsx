@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import { EventHistoryTags } from 'components/sites/events/event-history-tags';
 import { EventCounts } from 'components/sites/events/event-counts';
 import { EventHistoryStats } from 'components/sites/events/event-history-stats';
+import { EventHistoryFeed } from 'components/sites/events/event-history-feed';
 import { EventTabs, TabsType } from 'components/sites/events/event-tabs';
 import { EventHistoryStatsSort } from 'types/events';
 import type { EventsHistoryStat } from 'types/graphql';
@@ -43,7 +44,7 @@ export const EventHistory: FC<Props> =  ({
       
       {activeTab === 'stats'
         ? <EventHistoryStats sort={sort} eventHistoryStats={eventHistoryStats} setSort={setSort} />
-        : null
+        : <EventHistoryFeed eventHistoryStats={eventHistoryStats} />
       }
     </div>
   );
