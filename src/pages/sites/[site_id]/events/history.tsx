@@ -20,8 +20,8 @@ const SitesEventsHistory: NextPage<ServerSideProps> = ({ user }) => {
   const { 
     groupIds, 
     captureIds,
-    addEventId,
-    removeEventId,
+    setGroupIds,
+    setCaptureIds,
   } = useEventHistoryIds();
 
   const { eventHistoryStats, error, loading } = useEventHistoryStats({ groupIds, captureIds });
@@ -58,8 +58,10 @@ const SitesEventsHistory: NextPage<ServerSideProps> = ({ user }) => {
             {!loading && hasIds && (
               <EventHistory 
                 eventHistoryStats={eventHistoryStats} 
-                addEventId={addEventId} 
-                removeEventId={removeEventId} 
+                groupIds={groupIds}
+                captureIds={captureIds}
+                setGroupIds={setGroupIds}
+                setCaptureIds={setCaptureIds} 
               />
             )}
 

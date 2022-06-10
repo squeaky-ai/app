@@ -1,0 +1,86 @@
+import React from 'react';
+import type { FC } from 'react';
+import * as Yup from 'yup';
+import { Formik } from 'formik';
+import { Button } from 'components/button';
+import { Search } from 'components/search';
+import { Checkbox } from 'components/checkbox';
+import { Spinner } from 'components/spinner';
+import { useEventCaptures } from 'hooks/use-event-captures';
+import { EventsCaptureSort, EventsHistoryType } from 'types/graphql';
+import type { EventsHistoryStat } from 'types/graphql';
+
+interface Props {
+  eventHistoryStats: EventsHistoryStat[];
+  onClose: VoidFunction;
+  onUpdate: (value: string[]) => void;
+}
+
+const CapturesSchema = Yup.object().shape({
+  captures: Yup.array(),
+});
+
+export const EventHistoryAddCaptures: FC<Props> = ({ eventHistoryStats, onClose, onUpdate }) => {
+  const [search, setSearch] = React.useState<string>('');
+
+  // TODO: This will be a problem for people 
+  // with many events
+  const { events, loading } = useEventCaptures({ 
+    page: 0, 
+    size: 25, 
+    sort: EventsCaptureSort.NameAsc 
+  });
+
+  const selected = eventHistoryStats.filter(s => s.type === EventsHistoryType.Capture).map(e => e.id);
+
+  const results = events.items
+    .filter(l => l.name.toLowerCase().includes(search.toLowerCase()))
+    .sort((a, b) => a.name.length - b.name.length);
+
+  return (
+    <div className='add-groups'>
+      <Formik
+        initialValues={{ captures: selected }}
+        validationSchema={CapturesSchema}
+        onSubmit={(values, { setSubmitting }) => {
+          setSubmitting(false);
+          onUpdate(values.captures);
+        }}
+      >
+        {({
+          handleBlur,
+          handleChange,
+          handleSubmit,
+          isSubmitting,
+          values,
+        }) => (
+          <form className='filters-pages' onSubmit={handleSubmit}>
+            <div className='row'>
+              <Search search={search} onSearch={setSearch} />
+            </div>
+            <div className='row pages'>
+              {loading && <Spinner />}
+              {results.map(capture => (
+                <Checkbox 
+                  key={capture.id}
+                  name='captures'
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={capture.id}
+                  checked={values.captures.includes(capture.id)}
+                >
+                  {capture.name}
+                </Checkbox>
+              ))}
+            </div>
+
+            <div className='actions'>
+              <Button type='submit' disabled={isSubmitting} className='primary'>Apply</Button>
+              <Button type='button' className='quaternary' onClick={onClose}>Cancel</Button>
+            </div>
+          </form>
+        )}
+      </Formik>
+    </div>
+  )
+};

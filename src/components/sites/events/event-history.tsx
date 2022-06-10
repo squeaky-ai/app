@@ -4,23 +4,33 @@ import { EventHistoryTags } from 'components/sites/events/event-history-tags';
 import { EventCounts } from 'components/sites/events/event-counts';
 import { EventHistoryStats } from 'components/sites/events/event-history-stats';
 import { EventTabs, TabsType } from 'components/sites/events/event-tabs';
-import type { EventsHistoryStat, EventsHistoryType } from 'types/graphql';
+import type { EventsHistoryStat } from 'types/graphql';
 
 interface Props {
+  groupIds: string[];
+  captureIds: string[];
   eventHistoryStats: EventsHistoryStat[];
-  addEventId: (id: string, type: EventsHistoryType) => void;
-  removeEventId: (id: string, type: EventsHistoryType) => void;
+  setGroupIds: (ids: string[]) => void;
+  setCaptureIds: (ids: string[]) => void;
 }
 
-export const EventHistory: FC<Props> =  ({ eventHistoryStats, addEventId, removeEventId }) => {
+export const EventHistory: FC<Props> =  ({ 
+  groupIds, 
+  captureIds, 
+  eventHistoryStats, 
+  setGroupIds, 
+  setCaptureIds 
+}) => {
   const [activeTab, setActiveTab] = React.useState<TabsType>('stats');
 
   return (
     <div className='event-history'>
       <EventHistoryTags 
+        groupIds={groupIds}
+        captureIds={captureIds}
         eventHistoryStats={eventHistoryStats} 
-        addEventId={addEventId}
-        removeEventId={removeEventId}
+        setGroupIds={setGroupIds}
+        setCaptureIds={setCaptureIds}
       />
 
       <EventCounts />
