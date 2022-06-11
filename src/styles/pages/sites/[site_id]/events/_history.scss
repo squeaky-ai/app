@@ -1,4 +1,10 @@
 .page.sites.events.history {
+  .events-header {
+    menu {
+      display: flex;
+    }
+  }
+
   .event-history-tags {
     align-items: center;
     display: flex;

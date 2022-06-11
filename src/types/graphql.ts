@@ -1780,10 +1780,12 @@ export type SiteEventCaptureArgs = {
 
 export type SiteEventFeedArgs = {
   captureIds: Array<Scalars['ID']>;
+  fromDate: Scalars['ISO8601Date'];
   groupIds: Array<Scalars['ID']>;
   page?: InputMaybe<Scalars['Int']>;
   size?: InputMaybe<Scalars['Int']>;
   sort?: InputMaybe<EventsFeedSort>;
+  toDate: Scalars['ISO8601Date'];
 };
 
 

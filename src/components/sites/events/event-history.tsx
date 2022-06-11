@@ -7,11 +7,13 @@ import { EventHistoryFeed } from 'components/sites/events/event-history-feed';
 import { EventTabs, TabsType } from 'components/sites/events/event-tabs';
 import { EventHistoryStatsSort } from 'types/events';
 import type { EventsHistoryStat, Site } from 'types/graphql';
+import type { TimePeriod } from 'types/common';
 
 interface Props {
   site: Site;
   groupIds: string[];
   captureIds: string[];
+  period: TimePeriod;
   eventHistoryStats: EventsHistoryStat[];
   setGroupIds: (ids: string[]) => void;
   setCaptureIds: (ids: string[]) => void;
@@ -21,6 +23,7 @@ export const EventHistory: FC<Props> =  ({
   site,
   groupIds, 
   captureIds, 
+  period,
   eventHistoryStats, 
   setGroupIds, 
   setCaptureIds 
@@ -46,7 +49,7 @@ export const EventHistory: FC<Props> =  ({
       
       {activeTab === 'stats'
         ? <EventHistoryStats sort={sort} eventHistoryStats={eventHistoryStats} setSort={setSort} />
-        : <EventHistoryFeed site={site} groupIds={groupIds} captureIds={captureIds} />
+        : <EventHistoryFeed site={site} groupIds={groupIds} captureIds={captureIds} period={period} />
       }
     </div>
   );

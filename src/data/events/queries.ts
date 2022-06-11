@@ -71,10 +71,10 @@ export const GET_EVENT_HISTORY_STATS_QUERY = gql`
 `;
 
 export const GET_EVENT_FEED_QUERY = gql`
-  query GetEventFeedStats($siteId: ID!, $page: Int, $size: Int, $sort: EventsFeedSort, $captureIds: [ID!]!, $groupIds: [ID!]!) {
+  query GetEventFeedStats($siteId: ID!, $page: Int, $size: Int, $sort: EventsFeedSort, $captureIds: [ID!]!, $groupIds: [ID!]!, $fromDate: ISO8601Date!, $toDate: ISO8601Date!) {
     site(siteId: $siteId) {
       id      
-      eventFeed(captureIds: $captureIds, groupIds: $groupIds, page: $page, size: $size, sort: $sort) {
+      eventFeed(captureIds: $captureIds, groupIds: $groupIds, page: $page, size: $size, sort: $sort, fromDate: $fromDate, toDate: $toDate) {
         items {
           id
           eventName

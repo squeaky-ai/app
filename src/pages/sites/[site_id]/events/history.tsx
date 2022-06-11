@@ -63,6 +63,7 @@ const SitesEventsHistory: NextPage<ServerSideProps> = ({ user }) => {
                 captureIds={captureIds}
                 setGroupIds={setGroupIds}
                 setCaptureIds={setCaptureIds} 
+                period={period}
               />
             )}
 

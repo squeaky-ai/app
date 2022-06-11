@@ -9,17 +9,19 @@ import { PageSize } from 'components/sites/page-size';
 import { Pagination } from 'components/pagination';
 import { useSort } from 'hooks/use-sort';
 import { useEventFeed } from 'hooks/use-event-feed';
-import { toNiceDate } from 'lib/dates';
+import { toNiceDate, getDateRange } from 'lib/dates';
 import { EventsFeedSort } from 'types/graphql';
 import type { Site } from 'types/graphql';
+import type { TimePeriod } from 'types/common';
 
 interface Props {
   site: Site;
   groupIds: string[];
   captureIds: string[];
+  period: TimePeriod;
 }
 
-export const EventHistoryFeed: FC<Props> = ({ site, groupIds, captureIds }) => {
+export const EventHistoryFeed: FC<Props> = ({ site, groupIds, captureIds, period }) => {
   const [page, setPage] = React.useState<number>(1);
   const [size, setSize] = React.useState<number>(10);
 
@@ -30,7 +32,8 @@ export const EventHistoryFeed: FC<Props> = ({ site, groupIds, captureIds }) => {
     captureIds,
     page,
     size,
-    sort
+    sort,
+    range: getDateRange(period),
   });
 
   if (loading) {
