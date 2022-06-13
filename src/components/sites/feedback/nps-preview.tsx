@@ -80,7 +80,7 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
                 </div>
 
                 <div className='options'>
-                  {range(0, 10).map(i => (
+                  {range(0, 11).map(i => (
                     <Label key={i} onClick={handleRatingChange}>
                       <input type='radio' name='rating' value={i} />
                       <span className='rating'>{i}</span>
