@@ -41,7 +41,6 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
     );
   };
   
-
   const results = formatResultsForGroupType<EventsCount>(eventStats.eventCounts, period, { count: 0 }).map(d => ({
     dateKey: d.dateKey,
     count: d.count,
@@ -68,7 +67,7 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
       </div>
       <div className='graph-wrapper'>
         <ResponsiveContainer>
-          <LineChart data={results} margin={{ top: 0, left: -30, right: 0, bottom: 0 }}>
+          <LineChart data={results} margin={{ top: 16, left: -30, right: 0, bottom: 16 }}>
             <CartesianGrid strokeDasharray='3 3' vertical={false} />
 
             <XAxis dataKey='dateKey' stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} />
