@@ -10,7 +10,7 @@ interface Props {
   onClick?: (type: EventsType) => void;
 }
 
-const getText = (type: EventsType) => {
+const getText = (type: EventsType): string | React.ReactNode => {
   switch(type) {
     case EventsType.PageVisit:
       return 'The page view event is triggered each time a visitor loads a particular page within your website or web app.';
@@ -19,9 +19,9 @@ const getText = (type: EventsType) => {
     case EventsType.SelectorClick:
       return 'The CSS selector click event is triggered when a visitors clicks on a specific element on your site via a CSS selector.';
     case EventsType.Error:
-      return '-';
+      return 'Javascript error events help you to track the prevelance of specific Javascript Errors we have recorded on your site.';
     case EventsType.Custom:
-      return '-'
+      return <span>Manually define and track any event <i>(technical expertise required)</i> that takes place on your site.</span>
   }
 };
 

@@ -34,6 +34,25 @@
     margin: 0 0 .5rem 0;
   }
 
+  .event-create-custom {
+    .code-wrapper {
+      .code {
+        background: var(--gray-50);
+        border: 1px solid var(--gray-200);
+        box-shadow: none;
+        padding: .35rem .75rem;
+
+        span {
+          color: var(--rose-500);
+        }
+      }
+
+      .copy {
+        display: none;
+      }
+    }
+  }
+
   &.modal {
     .modal-body {
       .modal-contents {

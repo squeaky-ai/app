@@ -26,6 +26,14 @@
     margin: 0 0 0 1rem;
   }
 
+  .action {
+    margin: 1.5rem 0 0 0;
+    
+    .button {
+      margin: 0;
+    }
+  }
+
   &.error {
     border-color: var(--rose-500);
 
