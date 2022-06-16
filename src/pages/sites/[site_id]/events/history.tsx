@@ -11,6 +11,7 @@ import { EventHistory } from 'components/sites/events/event-history';
 import { PageLoading } from 'components/sites/page-loading';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { usePeriod } from 'hooks/use-period';
+import { getDateRange } from 'lib/dates';
 import { useEventHistoryStats } from 'hooks/use-event-history-stats';
 import { useEventHistoryIds } from 'hooks/use-event-history-ids';
 
@@ -24,7 +25,11 @@ const SitesEventsHistory: NextPage<ServerSideProps> = ({ user }) => {
     setCaptureIds,
   } = useEventHistoryIds();
 
-  const { eventHistoryStats, error, loading } = useEventHistoryStats({ groupIds, captureIds });
+  const { eventHistoryStats, error, loading } = useEventHistoryStats({ 
+    groupIds,
+    captureIds,
+    range: getDateRange(period),
+  });
 
   if (error) {
     return <Error />;
