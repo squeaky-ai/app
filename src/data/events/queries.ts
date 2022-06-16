@@ -55,11 +55,11 @@ export const GET_EVENT_GROUPS_QUERY = gql`
   }
 `;
 
-export const GET_EVENT_HISTORY_STATS_QUERY = gql`
-  query GetEventHistoryStats($siteId: ID!, $captureIds: [ID!]!, $groupIds: [ID!]!, $fromDate: ISO8601Date!, $toDate: ISO8601Date!) {
+export const GET_EVENT_STATS_QUERY = gql`
+  query GetEventStats($siteId: ID!, $captureIds: [ID!]!, $groupIds: [ID!]!, $fromDate: ISO8601Date!, $toDate: ISO8601Date!) {
     site(siteId: $siteId) {
       id      
-      eventHistoryStats(captureIds: $captureIds, groupIds: $groupIds, fromDate: $fromDate, toDate: $toDate) {
+      eventStats(captureIds: $captureIds, groupIds: $groupIds, fromDate: $fromDate, toDate: $toDate) {
         id
         name
         type

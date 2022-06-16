@@ -1,8 +1,8 @@
 import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
-import { GET_EVENT_HISTORY_STATS_QUERY } from 'data/events/queries';
+import { GET_EVENT_STATS_QUERY } from 'data/events/queries';
 import type { TimeRange } from 'types/common';
-import type { Site, EventsHistoryStat } from 'types/graphql';
+import type { Site, EventsStat } from 'types/graphql';
 
 interface Props {
   groupIds: string[];
@@ -10,16 +10,16 @@ interface Props {
   range: TimeRange;
 }
 
-interface UseEventHistoryStats {
+interface UseEventStats {
   loading: boolean;
   error: boolean;
-  eventHistoryStats: EventsHistoryStat[];
+  eventStats: EventsStat[];
 }
 
-export const useEventHistoryStats = (props: Props): UseEventHistoryStats => {
+export const useEventStats = (props: Props): UseEventStats => {
   const router = useRouter();
 
-  const { data, error, loading } = useQuery<{ site: Site }>(GET_EVENT_HISTORY_STATS_QUERY, {
+  const { data, error, loading } = useQuery<{ site: Site }>(GET_EVENT_STATS_QUERY, {
     variables: {
       siteId: router.query.site_id as string,
       ...props,
@@ -30,6 +30,6 @@ export const useEventHistoryStats = (props: Props): UseEventHistoryStats => {
   return {
     loading,
     error: !!error,
-    eventHistoryStats: data ? data.site.eventHistoryStats : [],
+    eventStats: data ? data.site.eventStats : [],
   };
 };

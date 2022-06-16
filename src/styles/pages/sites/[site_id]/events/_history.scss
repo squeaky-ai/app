@@ -5,7 +5,7 @@
     }
   }
 
-  .event-history-tags {
+  .event-tags {
     align-items: center;
     display: flex;
     flex-wrap: wrap;
@@ -137,7 +137,7 @@
     vertical-align: middle;
   }
 
-  .event-history-tag {
+  .event-tag {
     align-items: center;
     background: var(--gray-100);
     border-radius: 1rem;
@@ -152,7 +152,7 @@
     }
   }
 
-  .event-history-table {
+  .event-table {
     margin: 2rem 0;
 
     .table {

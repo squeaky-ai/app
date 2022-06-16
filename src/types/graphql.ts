@@ -616,20 +616,6 @@ export type EventsGroup = {
   name: Scalars['String'];
 };
 
-export type EventsHistoryStat = {
-  __typename?: 'EventsHistoryStat';
-  averageEventsPerVisitor: Scalars['Float'];
-  count: Scalars['Int'];
-  id: Scalars['ID'];
-  name: Scalars['String'];
-  type: EventsHistoryType;
-};
-
-export enum EventsHistoryType {
-  Capture = 'capture',
-  Group = 'group'
-}
-
 export enum EventsMatch {
   /** Contains */
   Contains = 'contains',
@@ -655,6 +641,20 @@ export type EventsRuleInput = {
   matcher: EventsMatch;
   value: Scalars['String'];
 };
+
+export type EventsStat = {
+  __typename?: 'EventsStat';
+  averageEventsPerVisitor: Scalars['Float'];
+  count: Scalars['Int'];
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  type: EventsType;
+};
+
+export enum EventsType {
+  Capture = 'capture',
+  Group = 'group'
+}
 
 export type FeedCaptureItem = {
   __typename?: 'FeedCaptureItem';
@@ -1765,7 +1765,7 @@ export type Site = {
   eventCapture: EventsCapture;
   eventFeed: EventsFeed;
   eventGroups: Array<Maybe<EventsGroup>>;
-  eventHistoryStats: Array<Maybe<EventsHistoryStat>>;
+  eventStats: Array<Maybe<EventsStat>>;
   feedback?: Maybe<Feedback>;
   heatmaps: Heatmaps;
   id: Scalars['ID'];
@@ -1825,7 +1825,7 @@ export type SiteEventFeedArgs = {
 };
 
 
-export type SiteEventHistoryStatsArgs = {
+export type SiteEventStatsArgs = {
   captureIds?: Array<Scalars['ID']>;
   fromDate: Scalars['ISO8601Date'];
   groupIds?: Array<Scalars['ID']>;

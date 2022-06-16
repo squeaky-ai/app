@@ -11,7 +11,7 @@ export enum EventsType {
   Custom = 4,
 }
 
-export enum EventHistoryStatsSort {
+export enum EventStatsSort {
   NameAsc = 'name__asc',
   NameDesc = 'name__desc',
   TypeAsc = 'type__asc',

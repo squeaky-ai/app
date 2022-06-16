@@ -1,13 +1,13 @@
 import React from 'react';
 import type { FC } from 'react';
 import { Tag } from 'components/tag';
-import { EventHistoryAdd } from 'components/sites/events/event-history-add';
-import { EventsHistoryStat, EventsHistoryType } from 'types/graphql';
+import { EventAdd } from 'components/sites/events/event-add';
+import { EventsStat, EventsType } from 'types/graphql';
 
 interface Props {
   groupIds: string[];
   captureIds: string[];
-  eventHistoryStats: EventsHistoryStat[];
+  eventStats: EventsStat[];
   setGroupIds: (ids: string[]) => void;
   setCaptureIds: (ids: string[]) => void;
 }
@@ -15,34 +15,34 @@ interface Props {
 export const EventHistoryTags: FC<Props> = ({ 
   groupIds, 
   captureIds, 
-  eventHistoryStats, 
+  eventStats, 
   setGroupIds, 
   setCaptureIds 
 }) => {
-  const handleRemove = (id: string, type: EventsHistoryType) => {
-    const list = type === EventsHistoryType.Capture
+  const handleRemove = (id: string, type: EventsType) => {
+    const list = type === EventsType.Capture
       ? captureIds
       : groupIds;
 
     const update = list.filter(l => l !== id);
 
-    type === EventsHistoryType.Capture
+    type === EventsType.Capture
       ? setCaptureIds(update)
       : setGroupIds(update);
   };
 
   return (
-    <div className='event-history-tags'>
+    <div className='event-tags'>
       <p><b>Events or Groups:</b></p>
-      {eventHistoryStats.map(stat => (
+      {eventStats.map(stat => (
         <Tag key={stat.id} className='secondary' handleDelete={(() => handleRemove(stat.id, stat.type))}>
           {stat.name}
         </Tag>
       ))}
-      <EventHistoryAdd 
+      <EventAdd 
         setGroupIds={setGroupIds}
         setCaptureIds={setCaptureIds}
-        eventHistoryStats={eventHistoryStats}
+        eventStats={eventStats}
       />
     </div>
   );

@@ -1,9 +1,9 @@
 import { EventType, IncrementalSource, MouseInteractions } from 'rrweb';
 import { ErrorEvent, CustomEvents } from 'types/event';
-import { EventHistoryStatsSort } from 'types/events';
+import { EventStatsSort } from 'types/events';
 import type { metaEvent } from 'rrweb/typings/types';
 import type { Event, EventName } from 'types/event';
-import type { EventsHistoryStat } from 'types/graphql';
+import type { EventsStat } from 'types/graphql';
 
 type EventWithTimestamp<T> = T & { id: number; timestamp: number; delay?: number; };
 
@@ -100,26 +100,26 @@ export function getMouseInteractionIcon (type: MouseInteractions): string {
   }
 };
 
-export const sortEventsHistory = (
-  eventHistoryStats: EventsHistoryStat[], 
-  sort: EventHistoryStatsSort
-) => [...eventHistoryStats].sort((a, b) => {
+export const sortEventsStats = (
+  eventStats: EventsStat[], 
+  sort: EventStatsSort
+) => [...eventStats].sort((a, b) => {
   switch(sort) {
-    case EventHistoryStatsSort.NameAsc:
+    case EventStatsSort.NameAsc:
       return a.name.localeCompare(b.name);
-    case EventHistoryStatsSort.NameDesc:
+    case EventStatsSort.NameDesc:
       return b.name.localeCompare(a.name);
-    case EventHistoryStatsSort.CountAsc:
+    case EventStatsSort.CountAsc:
       return a.count - b.count;
-    case EventHistoryStatsSort.CountDesc:
+    case EventStatsSort.CountDesc:
       return b.count - a.count;
-    case EventHistoryStatsSort.TypeAsc:
+    case EventStatsSort.TypeAsc:
       return a.type.localeCompare(b.type);
-    case EventHistoryStatsSort.TypeDesc:
+    case EventStatsSort.TypeDesc:
       return b.type.localeCompare(a.type);
-    case EventHistoryStatsSort.AverageEventsPerVisitorAsc:
+    case EventStatsSort.AverageEventsPerVisitorAsc:
       return a.averageEventsPerVisitor - b.averageEventsPerVisitor;
-    case EventHistoryStatsSort.AverageEventsPerVisitorDesc:
+    case EventStatsSort.AverageEventsPerVisitorDesc:
       return b.averageEventsPerVisitor - a.averageEventsPerVisitor;
   }
 });

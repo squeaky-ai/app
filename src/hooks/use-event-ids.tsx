@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 
-interface UseEventHistoryIds {
+interface UseEventIds {
   groupIds: string[]
   captureIds: string[];
   setGroupIds: (ids: string[]) => void;
@@ -23,7 +23,7 @@ const updateQueryParams = (groupIds: string[], captureIds: string[]) => {
   history.pushState(null, '', url);
 };
 
-export const useEventHistoryIds = (): UseEventHistoryIds => {
+export const useEventIds = (): UseEventIds => {
   const router = useRouter();
 
   const { captureId = '', groupId = '' } = router.query;

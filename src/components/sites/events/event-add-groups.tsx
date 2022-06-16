@@ -6,45 +6,38 @@ import { Button } from 'components/button';
 import { Search } from 'components/search';
 import { Checkbox } from 'components/checkbox';
 import { Spinner } from 'components/spinner';
-import { useEventCaptures } from 'hooks/use-event-captures';
-import { EventsCaptureSort, EventsHistoryType } from 'types/graphql';
-import type { EventsHistoryStat } from 'types/graphql';
+import { useEventGroups } from 'hooks/use-event-groups-names';
+import { EventsStat, EventsType } from 'types/graphql';
 
 interface Props {
-  eventHistoryStats: EventsHistoryStat[];
+  eventStats: EventsStat[];
   onClose: VoidFunction;
   onUpdate: (value: string[]) => void;
 }
 
-const CapturesSchema = Yup.object().shape({
-  captures: Yup.array(),
+const GroupsSchema = Yup.object().shape({
+  groups: Yup.array(),
 });
 
-export const EventHistoryAddCaptures: FC<Props> = ({ eventHistoryStats, onClose, onUpdate }) => {
+export const EventAddGroups: FC<Props> = ({ eventStats, onClose, onUpdate }) => {
   const [search, setSearch] = React.useState<string>('');
 
-  // TODO: This will be a problem for people 
-  // with many events
-  const { events, loading } = useEventCaptures({ 
-    page: 0, 
-    size: 25, 
-    sort: EventsCaptureSort.NameAsc 
-  });
+  const { groups, loading } = useEventGroups();
 
-  const selected = eventHistoryStats.filter(s => s.type === EventsHistoryType.Capture).map(e => e.id);
+  const selected = eventStats.filter(s => s.type === EventsType.Group).map(e => e.id);
 
-  const results = events.items
+  const results = groups
     .filter(l => l.name.toLowerCase().includes(search.toLowerCase()))
     .sort((a, b) => a.name.length - b.name.length);
 
   return (
     <div className='add-groups'>
       <Formik
-        initialValues={{ captures: selected }}
-        validationSchema={CapturesSchema}
+        initialValues={{ groups: selected }}
+        validationSchema={GroupsSchema}
         onSubmit={(values, { setSubmitting }) => {
           setSubmitting(false);
-          onUpdate(values.captures);
+          onUpdate(values.groups);
         }}
       >
         {({
@@ -60,16 +53,16 @@ export const EventHistoryAddCaptures: FC<Props> = ({ eventHistoryStats, onClose,
             </div>
             <div className='row pages'>
               {loading && <Spinner />}
-              {results.map(capture => (
+              {results.map(group => (
                 <Checkbox 
-                  key={capture.id}
-                  name='captures'
+                  key={group.id}
+                  name='groups'
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={capture.id}
-                  checked={values.captures.includes(capture.id)}
+                  value={group.id}
+                  checked={values.groups.includes(group.id)}
                 >
-                  {capture.name}
+                  {group.name}
                 </Checkbox>
               ))}
             </div>

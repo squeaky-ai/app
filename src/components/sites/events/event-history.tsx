@@ -1,12 +1,12 @@
 import React from 'react';
 import type { FC } from 'react';
-import { EventHistoryTags } from 'components/sites/events/event-history-tags';
+import { EventHistoryTags } from 'components/sites/events/event-tags';
 import { EventCounts } from 'components/sites/events/event-counts';
-import { EventHistoryStats } from 'components/sites/events/event-history-stats';
-import { EventHistoryFeed } from 'components/sites/events/event-history-feed';
+import { EventStatsTable } from 'components/sites/events/event-stats-table';
+import { EventFeedTable } from 'components/sites/events/event-feed-table';
 import { EventTabs, TabsType } from 'components/sites/events/event-tabs';
-import { EventHistoryStatsSort } from 'types/events';
-import type { EventsHistoryStat, Site } from 'types/graphql';
+import { EventStatsSort } from 'types/events';
+import type { EventsStat, Site } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
   groupIds: string[];
   captureIds: string[];
   period: TimePeriod;
-  eventHistoryStats: EventsHistoryStat[];
+  eventStats: EventsStat[];
   setGroupIds: (ids: string[]) => void;
   setCaptureIds: (ids: string[]) => void;
 }
@@ -24,32 +24,32 @@ export const EventHistory: FC<Props> =  ({
   groupIds, 
   captureIds, 
   period,
-  eventHistoryStats, 
+  eventStats, 
   setGroupIds, 
   setCaptureIds 
 }) => {
   const [activeTab, setActiveTab] = React.useState<TabsType>('stats');
-  const [sort, setSort] = React.useState<EventHistoryStatsSort>(EventHistoryStatsSort.CountDesc);
+  const [sort, setSort] = React.useState<EventStatsSort>(EventStatsSort.CountDesc);
 
   return (
     <div className='event-history'>
       <EventHistoryTags 
         groupIds={groupIds}
         captureIds={captureIds}
-        eventHistoryStats={eventHistoryStats} 
+        eventStats={eventStats} 
         setGroupIds={setGroupIds}
         setCaptureIds={setCaptureIds}
       />
 
       <EventCounts 
         sort={sort}
-        eventHistoryStats={eventHistoryStats} 
+        eventStats={eventStats} 
       />
       <EventTabs active={activeTab} onChange={setActiveTab} />
       
       {activeTab === 'stats'
-        ? <EventHistoryStats sort={sort} eventHistoryStats={eventHistoryStats} setSort={setSort} />
-        : <EventHistoryFeed site={site} groupIds={groupIds} captureIds={captureIds} period={period} />
+        ? <EventStatsTable sort={sort} eventStats={eventStats} setSort={setSort} />
+        : <EventFeedTable site={site} groupIds={groupIds} captureIds={captureIds} period={period} />
       }
     </div>
   );

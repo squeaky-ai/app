@@ -5,19 +5,19 @@ import { sum } from 'lodash';
 import { Card } from 'components/card';
 import { EventSwatch } from 'components/sites/events/event-swatch';
 import { ChartScale } from 'components/sites/analytics/chart-scale';
-import { sortEventsHistory } from 'lib/events';
-import type { EventHistoryStatsSort} from 'types/events';
-import type { EventsHistoryStat } from 'types/graphql';
+import { sortEventsStats } from 'lib/events';
+import type { EventStatsSort} from 'types/events';
+import type { EventsStat } from 'types/graphql';
 
 interface Props {
-  sort: EventHistoryStatsSort;
-  eventHistoryStats: EventsHistoryStat[];
+  sort: EventStatsSort;
+  eventStats: EventsStat[];
 }
 
-export const EventCounts: FC<Props> = ({ sort, eventHistoryStats }) => {
+export const EventCounts: FC<Props> = ({ sort, eventStats }) => {
   const [scale, setScale] = React.useState<ScaleType>('auto');
 
-  const totalCount = sum(eventHistoryStats.map(s => s.count));
+  const totalCount = sum(eventStats.map(s => s.count));
 
   return (
     <Card className='event-counts'>
@@ -31,7 +31,7 @@ export const EventCounts: FC<Props> = ({ sort, eventHistoryStats }) => {
         </div>
       </div>
       <div className='key'>
-        {sortEventsHistory(eventHistoryStats, sort).map((stat, index) => (
+        {sortEventsStats(eventStats, sort).map((stat, index) => (
           <div className='item' key={stat.id}>
             <EventSwatch index={index} />
             <p>{stat.name}</p>

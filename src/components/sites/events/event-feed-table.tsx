@@ -21,7 +21,7 @@ interface Props {
   period: TimePeriod;
 }
 
-export const EventHistoryFeed: FC<Props> = ({ site, groupIds, captureIds, period }) => {
+export const EventFeedTable: FC<Props> = ({ site, groupIds, captureIds, period }) => {
   const [page, setPage] = React.useState<number>(1);
   const [size, setSize] = React.useState<number>(10);
 
@@ -47,7 +47,7 @@ export const EventHistoryFeed: FC<Props> = ({ site, groupIds, captureIds, period
 
   return (
     <>
-      <div className='event-history-table event-history-feed'>
+      <div className='event-table event-feed'>
         <Table>
           <Row head>
             <Cell>
