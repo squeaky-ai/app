@@ -19,7 +19,7 @@ export const Message: FC<Props> = ({ children, className, type, message, button,
   </div>  
 );
 
-export const DismissableMessage: FC<Props & { preference: Preference, heading: string | React.ReactNode }> = ({ 
+export const DismissableMessage: FC<Props & { preference?: Preference, heading: string | React.ReactNode }> = ({ 
   preference, 
   children, 
   className, 
@@ -32,11 +32,11 @@ export const DismissableMessage: FC<Props & { preference: Preference, heading: s
 
   const handleDismiss = () => {
     setShow(false);
-    Preferences.setBoolean(preference, true);
+    if (preference) Preferences.setBoolean(preference, true);
   };
 
   React.useEffect(() => {
-    if (!Preferences.getBoolean(preference)) {
+    if (!preference || !Preferences.getBoolean(preference)) {
       setShow(true);
     }
   }, []);

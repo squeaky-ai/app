@@ -23,6 +23,10 @@
     top: 2.75rem;
   }
 
+  i:not(.icon) {
+    color: var(--gray-500);
+  }
+
   &:hover {
     .arrow {
       display: block;

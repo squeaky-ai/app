@@ -8,6 +8,7 @@ import { Button } from 'components/button';
 import { EventCreateSelect } from 'components/sites/events/event-create-select';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { EventGroupsSelector } from 'components/sites/events/event-groups-selector';
+import { EventCreateCustom } from 'components/sites/events/event-create-custom';
 import { Label } from 'components/label';
 import { Input } from 'components/input';
 import { Divider } from 'components/divider';
@@ -118,7 +119,7 @@ export const EventCreate: FC<Props> = ({ site, buttonText, buttonClassName }) =>
                   )}
 
                   {values.eventType === EventsType.Custom && (
-                    <p>Show custom events</p>
+                    <EventCreateCustom />
                   )}
 
                   {values.eventType !== null && values.eventType !== EventsType.Custom && (
@@ -194,14 +195,23 @@ export const EventCreate: FC<Props> = ({ site, buttonText, buttonClassName }) =>
                   )}
                 </ModalContents>
                 <ModalFooter>
-                  {values.eventType !== null && (
-                    <Button type='submit' className='primary'>
-                      Create Event 
+                  {values.eventType !== EventsType.Custom && (
+                    <>
+                      {values.eventType !== null && (
+                        <Button type='submit' className='primary'>
+                          Create Event 
+                        </Button>
+                      )}
+                      <Button type='button' className='quaternary' onClick={closeModal}>
+                        Cancel
+                      </Button>
+                    </>
+                  )}
+                  {values.eventType === EventsType.Custom && (
+                    <Button type='button' className='quaternary' onClick={() => setFieldValue('eventType', null)}>
+                      Back
                     </Button>
                   )}
-                  <Button type='button' className='quaternary' onClick={closeModal}>
-                    Cancel
-                  </Button>
                 </ModalFooter>
               </ModalBody>
             </form>
