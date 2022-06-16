@@ -66,6 +66,14 @@ export const GET_EVENT_STATS_QUERY = gql`
         count
         averageEventsPerVisitor
       }
+      eventCounts(captureIds: $captureIds, groupIds: $groupIds, fromDate: $fromDate, toDate: $toDate) {
+        groupType
+        groupRange
+        items {
+          dateKey
+          count
+        }
+      }
     }
   }
 `;
