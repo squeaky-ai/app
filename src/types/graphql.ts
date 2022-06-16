@@ -589,6 +589,19 @@ export enum EventsCondition {
   Or = 'or'
 }
 
+export type EventsCount = {
+  __typename?: 'EventsCount';
+  count: Scalars['Int'];
+  dateKey: Scalars['String'];
+};
+
+export type EventsCounts = {
+  __typename?: 'EventsCounts';
+  groupRange: Scalars['Int'];
+  groupType: Scalars['String'];
+  items: Array<Maybe<EventsCount>>;
+};
+
 export type EventsFeed = {
   __typename?: 'EventsFeed';
   items: Array<Maybe<FeedCaptureItem>>;
@@ -1763,6 +1776,7 @@ export type Site = {
   daysSinceLastRecording: Scalars['Int'];
   domainBlacklist: Array<Maybe<SitesDomainBlacklist>>;
   eventCapture: EventsCapture;
+  eventCounts: EventsCounts;
   eventFeed: EventsFeed;
   eventGroups: Array<Maybe<EventsGroup>>;
   eventStats: Array<Maybe<EventsStat>>;
@@ -1811,6 +1825,14 @@ export type SiteEventCaptureArgs = {
   page?: InputMaybe<Scalars['Int']>;
   size?: InputMaybe<Scalars['Int']>;
   sort?: InputMaybe<EventsCaptureSort>;
+};
+
+
+export type SiteEventCountsArgs = {
+  captureIds?: Array<Scalars['ID']>;
+  fromDate: Scalars['ISO8601Date'];
+  groupIds?: Array<Scalars['ID']>;
+  toDate: Scalars['ISO8601Date'];
 };
 
 

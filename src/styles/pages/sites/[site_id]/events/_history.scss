@@ -126,6 +126,15 @@
         }
       }
     }
+
+    .graph-wrapper {
+      height: 340px;
+      width: 100%;
+
+      @include breakpoint-md {
+        height: 150px;
+      }
+    }
   }
 
   .event-swatch {

@@ -2,7 +2,9 @@ import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { GET_EVENT_STATS_QUERY } from 'data/events/queries';
 import type { TimeRange } from 'types/common';
-import type { Site, EventsStat } from 'types/graphql';
+import type { Site } from 'types/graphql';
+
+export type EventStats = Pick<Site, 'eventStats' | 'eventCounts'>
 
 interface Props {
   groupIds: string[];
@@ -13,7 +15,7 @@ interface Props {
 interface UseEventStats {
   loading: boolean;
   error: boolean;
-  eventStats: EventsStat[];
+  eventStats: EventStats;
 }
 
 export const useEventStats = (props: Props): UseEventStats => {
@@ -27,9 +29,18 @@ export const useEventStats = (props: Props): UseEventStats => {
     }
   });
 
+  const fallback: EventStats = {
+    eventCounts: {
+      groupRange: 0,
+      groupType: '',
+      items: []
+    },
+    eventStats: []
+  }
+
   return {
     loading,
     error: !!error,
-    eventStats: data ? data.site.eventStats : [],
+    eventStats: data ? data.site : fallback,
   };
 };

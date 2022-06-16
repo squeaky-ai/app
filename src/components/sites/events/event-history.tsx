@@ -6,7 +6,8 @@ import { EventStatsTable } from 'components/sites/events/event-stats-table';
 import { EventFeedTable } from 'components/sites/events/event-feed-table';
 import { EventTabs, TabsType } from 'components/sites/events/event-tabs';
 import { EventStatsSort } from 'types/events';
-import type { EventsStat, Site } from 'types/graphql';
+import type { EventStats } from 'hooks/use-event-stats';
+import type { Site } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 
 interface Props {
@@ -14,7 +15,7 @@ interface Props {
   groupIds: string[];
   captureIds: string[];
   period: TimePeriod;
-  eventStats: EventsStat[];
+  eventStats: EventStats;
   setGroupIds: (ids: string[]) => void;
   setCaptureIds: (ids: string[]) => void;
 }
@@ -36,7 +37,7 @@ export const EventHistory: FC<Props> =  ({
       <EventHistoryTags 
         groupIds={groupIds}
         captureIds={captureIds}
-        eventStats={eventStats} 
+        eventStats={eventStats.eventStats} 
         setGroupIds={setGroupIds}
         setCaptureIds={setCaptureIds}
       />
@@ -44,11 +45,12 @@ export const EventHistory: FC<Props> =  ({
       <EventCounts 
         sort={sort}
         eventStats={eventStats} 
+        period={period}
       />
       <EventTabs active={activeTab} onChange={setActiveTab} />
       
       {activeTab === 'stats'
-        ? <EventStatsTable sort={sort} eventStats={eventStats} setSort={setSort} />
+        ? <EventStatsTable sort={sort} eventStats={eventStats.eventStats} setSort={setSort} />
         : <EventFeedTable site={site} groupIds={groupIds} captureIds={captureIds} period={period} />
       }
     </div>
