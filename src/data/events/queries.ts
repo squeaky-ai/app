@@ -71,7 +71,11 @@ export const GET_EVENT_STATS_QUERY = gql`
         groupRange
         items {
           dateKey
-          count
+          metrics {
+            id
+            count
+            type
+          }
         }
       }
     }

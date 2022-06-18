@@ -591,8 +591,15 @@ export enum EventsCondition {
 
 export type EventsCount = {
   __typename?: 'EventsCount';
-  count: Scalars['Int'];
   dateKey: Scalars['String'];
+  metrics: Array<Maybe<EventsCountMetric>>;
+};
+
+export type EventsCountMetric = {
+  __typename?: 'EventsCountMetric';
+  count: Scalars['Int'];
+  id: Scalars['ID'];
+  type: EventsType;
 };
 
 export type EventsCounts = {

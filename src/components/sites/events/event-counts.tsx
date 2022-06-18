@@ -26,6 +26,8 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
 
   const totalCount = sum(eventStats.eventStats.map(s => s.count));
 
+  const doNotAllowZero = (num: number) => num === 0 && scale === 'log' ? null : num;
+
   const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload, label }) => {
     if (!active || !payload?.length) return null;
   
@@ -34,17 +36,34 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
         <p className='date'>{formatLabel(period, label)}</p>
         {eventStats.eventStats.map((stat, index) => (
           <p key={stat.id} style={{ color: colors[index] }}>
-            {payload[0].payload[stat.id]} {stat.name}
+            {stat.name} TODO
           </p>
         ))}
       </div>
     );
   };
+
+  const metricKeys = eventStats.eventCounts
+    .items
+    .map(item => item.metrics.map(metric => metric.id))
+    .flat();
   
-  const results = formatResultsForGroupType<EventsCount>(eventStats.eventCounts, period, { count: 0 }).map(d => ({
-    dateKey: d.dateKey,
-    count: d.count,
-  }));
+  const results = formatResultsForGroupType<EventsCount>(eventStats.eventCounts, period, { metrics: [] }).map(d => {
+    const result: Record<string, string | number> = { dateKey: d.dateKey };
+
+    // Set the defaults
+    metricKeys.forEach(key => {
+      result[`group::${key}`] = 0;
+      result[`capture::${key}`] = 0;
+    });
+
+    // Override this with metric keys we have values for
+    d.metrics.forEach(metric => {
+      result[`${metric.type}::${metric.id}`] = doNotAllowZero(metric.count);
+    });
+
+    return result;
+  });
 
   return (
     <Card className='event-counts'>
@@ -78,7 +97,7 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
             {eventStats.eventStats.map((stat, index) => (
               <Line 
                 key={stat.id}
-                dataKey={stat.id}
+                dataKey={`${stat.type}::${stat.id}`}
                 fillOpacity={1}
                 stroke={colors[index]}
                 strokeWidth={2}
