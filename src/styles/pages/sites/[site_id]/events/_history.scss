@@ -131,6 +131,10 @@
       height: 340px;
       width: 100%;
 
+      svg {
+        overflow: visible;
+      }
+
       @include breakpoint-md {
         height: 150px;
       }

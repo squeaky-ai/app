@@ -28,21 +28,6 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
 
   const doNotAllowZero = (num: number) => num === 0 && scale === 'log' ? null : num;
 
-  const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload, label }) => {
-    if (!active || !payload?.length) return null;
-  
-    return (
-      <div className='custom-tooltip'>
-        <p className='date'>{formatLabel(period, label)}</p>
-        {eventStats.eventStats.map((stat, index) => (
-          <p key={stat.id} style={{ color: colors[index] }}>
-            {stat.name} TODO
-          </p>
-        ))}
-      </div>
-    );
-  };
-
   const metricKeys = eventStats.eventCounts
     .items
     .map(item => item.metrics.map(metric => metric.id))
@@ -64,6 +49,23 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
 
     return result;
   });
+
+  const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload, label }) => {
+    if (!active || !payload?.length) return null;
+
+    const metrics = results.find(r => r.dateKey === label);
+  
+    return (
+      <div className='custom-tooltip'>
+        <p className='date'>{formatLabel(period, label)}</p>
+        {eventStats.eventStats.map((stat, index) => (
+          <p key={stat.id} style={{ color: colors[index] }}>
+            {stat.name} {metrics[`${stat.type}::${stat.id}`]}
+          </p>
+        ))}
+      </div>
+    );
+  };
 
   return (
     <Card className='event-counts'>
