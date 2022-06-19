@@ -33,7 +33,7 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
     .map(item => item.metrics.map(metric => `${metric.type}::${metric.id}`))
     .flat();
 
-  console.log(formatResultsForGroupType<EventsCount>(eventStats.eventCounts, period, { metrics: [] }));
+  console.log(JSON.stringify(eventStats, null, 4));
   
   const results = formatResultsForGroupType<EventsCount>(eventStats.eventCounts, period, { metrics: [] }).map(d => {
     const result: Record<string, string | number> = { dateKey: d.dateKey };
