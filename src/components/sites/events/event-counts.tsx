@@ -50,6 +50,8 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
     return result;
   });
 
+  console.log(JSON.stringify(results, null, 4));
+
   const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload, label }) => {
     if (!active || !payload?.length) return null;
 
