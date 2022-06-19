@@ -30,17 +30,14 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
 
   const metricKeys = eventStats.eventCounts
     .items
-    .map(item => item.metrics.map(metric => metric.id))
+    .map(item => item.metrics.map(metric => `${metric.type}::${metric.id}`))
     .flat();
   
   const results = formatResultsForGroupType<EventsCount>(eventStats.eventCounts, period, { metrics: [] }).map(d => {
     const result: Record<string, string | number> = { dateKey: d.dateKey };
 
     // Set the defaults
-    metricKeys.forEach(key => {
-      result[`group::${key}`] = 0;
-      result[`capture::${key}`] = 0;
-    });
+    metricKeys.forEach(key => { result[key] = 0 });
 
     // Override this with metric keys we have values for
     d.metrics.forEach(metric => {
@@ -49,8 +46,6 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
 
     return result;
   });
-
-  console.log(JSON.stringify(formatResultsForGroupType<EventsCount>(eventStats.eventCounts, period, { metrics: [] }), null, 4));
 
   const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload, label }) => {
     if (!active || !payload?.length) return null;

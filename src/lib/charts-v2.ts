@@ -36,9 +36,9 @@ const getEndDateForPeriod = (period: TimePeriod): Date => {
   return fromSlashyDate(period.fromDate || period.betweenToDate);
 };
 
-export const formatResultsForGroupType = <T extends Item>(visitors: Result<T>, period: TimePeriod, fallback: Omit<T, 'dateKey'>): T[] => {
+export const formatResultsForGroupType = <T extends Item>(results: Result<T>, period: TimePeriod, fallback: Omit<T, 'dateKey'>): T[] => {
   const endDate = getEndDateForPeriod(period);
-  const { groupRange, groupType, items } = visitors;
+  const { groupRange, groupType, items } = results;
 
   switch(groupType) {
     case 'hourly':
