@@ -13,7 +13,7 @@ import { formatResultsForGroupType } from 'lib/charts-v2';
 import type { EventStats } from 'hooks/use-event-stats';
 import type { EventStatsSort} from 'types/events';
 import type { TimePeriod } from 'types/common';
-import type { EventsCount } from 'types/graphql';
+import type { EventsCount, EventsCountMetric } from 'types/graphql';
 
 interface Props {
   sort: EventStatsSort;
@@ -28,12 +28,15 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
 
   const doNotAllowZero = (num: number) => num === 0 && scale === 'log' ? null : num;
 
+  // To avoid hitting issues with GraphQL caching the datekey
+  // is returned with the id when it is a metric count so it
+  // must be stripped off
+  const buildKeyFromMetric = (metric: EventsCountMetric) => `${metric.type}::${metric.id.split('::')[1]}`;
+
   const metricKeys = eventStats.eventCounts
     .items
-    .map(item => item.metrics.map(metric => `${metric.type}::${metric.id}`))
+    .map(item => item.metrics.map(metric => buildKeyFromMetric(metric)))
     .flat();
-
-  console.log(JSON.stringify(eventStats, null, 4));
   
   const results = formatResultsForGroupType<EventsCount>(eventStats.eventCounts, period, { metrics: [] }).map(d => {
     const result: Record<string, string | number> = { dateKey: d.dateKey };
@@ -43,7 +46,7 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
 
     // Override this with metric keys we have values for
     d.metrics.forEach(metric => {
-      result[`${metric.type}::${metric.id}`] = doNotAllowZero(metric.count);
+      result[buildKeyFromMetric(metric)] = doNotAllowZero(metric.count);
     });
 
     return result;
