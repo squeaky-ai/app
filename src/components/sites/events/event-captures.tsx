@@ -6,7 +6,8 @@ import { Sort } from 'components/sort';
 import { PageSize } from 'components/sites/page-size';
 import { Pagination } from 'components/pagination';
 import { EventCapturesItem } from 'components/sites/events/event-captures-item';
-import { EventsCaptureSort } from 'types/graphql';
+import { EventsCaptureSort, EventsType } from 'types/graphql';
+import type { EventSelected } from 'types/events';
 import type { Site, EventsCapture } from 'types/graphql';
 
 interface Props {
@@ -14,11 +15,11 @@ interface Props {
   events: EventsCapture;
   page: number;
   sort: EventsCaptureSort;
-  selected: string[];
+  selected: EventSelected[];
   setSort: (sort: EventsCaptureSort) => void;
   setPage: (page: number) => void;
   setSize: (page: number) => void;
-  setSelected: (selected: string[]) => void;
+  setSelected: (selected: EventSelected[]) => void;
 }
 
 export const EventCaptures: FC<Props> = ({ 
@@ -36,7 +37,7 @@ export const EventCaptures: FC<Props> = ({
 
   const onSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.target.checked
-      ? setSelected(items.map(t => t.id))
+      ? setSelected(items.map(t => ({ id: t.id, type: EventsType.Capture })))
       : setSelected([]);
   };
 

@@ -59,3 +59,20 @@ export const ADD_TO_GROUP_MUTATION = gql`
     }
   }
 `;
+
+export const UPDATE_EVENT_CAPTURE_MUTATION = gql`
+  mutation EventCaptureUpdate($input: EventCaptureUpdateInput!) {
+    eventCaptureUpdate(input: $input) {
+      id
+      name
+      type
+      rules {
+        condition
+        matcher
+        value
+      }
+      count
+      lastCountedAt
+    }
+  }
+`;

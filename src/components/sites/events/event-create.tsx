@@ -15,7 +15,7 @@ import { Divider } from 'components/divider';
 import { Select, Option } from 'components/select';
 import { useToasts } from 'hooks/use-toasts';
 import { eventsCaptureCreate } from 'lib/api/graphql';
-import { EventsType } from 'types/events';
+import { EventsCaptureType } from 'types/events';
 import { EventsCondition, EventsMatch } from 'types/graphql';
 import type { Site } from 'types/graphql';
 
@@ -118,19 +118,19 @@ export const EventCreate: FC<Props> = ({ site, buttonText, buttonClassName }) =>
                     <EventCreateSelect setType={(value) => setFieldValue('eventType', value)} />
                   )}
 
-                  {values.eventType === EventsType.Custom && (
+                  {values.eventType === EventsCaptureType.Custom && (
                     <EventCreateCustom />
                   )}
 
-                  {values.eventType !== null && values.eventType !== EventsType.Custom && (
+                  {values.eventType !== null && values.eventType !== EventsCaptureType.Custom && (
                     <>
                       <Label htmlFor='eventType'>Event type</Label>
                       <Select name='eventType' onChange={(event) => setFieldValue('eventType', Number(event.target.value))} value={values.eventType}>
-                        <Option value={EventsType.PageVisit}>Page visit</Option>
-                        <Option value={EventsType.TextClick}>Text click</Option>
-                        <Option value={EventsType.SelectorClick}>CSS Selector click</Option>
-                        <Option value={EventsType.Error}>JavaScript error</Option>
-                        <Option value={EventsType.Custom}>Custom event</Option>
+                        <Option value={EventsCaptureType.PageVisit}>Page visit</Option>
+                        <Option value={EventsCaptureType.TextClick}>Text click</Option>
+                        <Option value={EventsCaptureType.SelectorClick}>CSS Selector click</Option>
+                        <Option value={EventsCaptureType.Error}>JavaScript error</Option>
+                        <Option value={EventsCaptureType.Custom}>Custom event</Option>
                       </Select>
 
                       <div className='input-group'>
@@ -146,11 +146,11 @@ export const EventCreate: FC<Props> = ({ site, buttonText, buttonClassName }) =>
                         </div>
                         <div>
                           <Label htmlFor='value'>
-                            {values.eventType === EventsType.PageVisit && 'URL'}
-                            {values.eventType === EventsType.TextClick && 'Text string'}
-                            {values.eventType === EventsType.SelectorClick && 'CSS selector'}
-                            {values.eventType === EventsType.Error && 'Error message'}
-                            {values.eventType === EventsType.Custom && 'TODO'}
+                            {values.eventType === EventsCaptureType.PageVisit && 'URL'}
+                            {values.eventType === EventsCaptureType.TextClick && 'Text string'}
+                            {values.eventType === EventsCaptureType.SelectorClick && 'CSS selector'}
+                            {values.eventType === EventsCaptureType.Error && 'Error message'}
+                            {values.eventType === EventsCaptureType.Custom && 'TODO'}
                           </Label>
                           <Input 
                             name='value' 
@@ -161,8 +161,8 @@ export const EventCreate: FC<Props> = ({ site, buttonText, buttonClassName }) =>
                             invalid={touched.value && !!errors.value}
                             placeholder={
                               (() => {
-                                if (values.eventType === EventsType.PageVisit) return 'e.g. https://example.com';
-                                if (values.eventType === EventsType.SelectorClick) return 'e.g., #elementID > DIV';
+                                if (values.eventType === EventsCaptureType.PageVisit) return 'e.g. https://example.com';
+                                if (values.eventType === EventsCaptureType.SelectorClick) return 'e.g., #elementID > DIV';
                                 return '';
                               })()
                             }
@@ -195,7 +195,7 @@ export const EventCreate: FC<Props> = ({ site, buttonText, buttonClassName }) =>
                   )}
                 </ModalContents>
                 <ModalFooter>
-                  {values.eventType !== EventsType.Custom && (
+                  {values.eventType !== EventsCaptureType.Custom && (
                     <>
                       {values.eventType !== null && (
                         <Button type='submit' className='primary'>
@@ -207,7 +207,7 @@ export const EventCreate: FC<Props> = ({ site, buttonText, buttonClassName }) =>
                       </Button>
                     </>
                   )}
-                  {values.eventType === EventsType.Custom && (
+                  {values.eventType === EventsCaptureType.Custom && (
                     <Button type='button' className='quaternary' onClick={() => setFieldValue('eventType', null)}>
                       Back
                     </Button>

@@ -3,52 +3,52 @@ import type { FC } from 'react';
 import classnames from 'classnames';
 import { Icon } from 'components/icon';
 import { Tag } from 'components/tag'
-import { EventsType } from 'types/events';;
+import { EventsCaptureType } from 'types/events';
 
 interface Props {
-  type: EventsType;
+  type: EventsCaptureType;
 }
 
-const getText = (type: EventsType) => {
+const getText = (type: EventsCaptureType) => {
   switch(type) {
-    case EventsType.PageVisit:
+    case EventsCaptureType.PageVisit:
       return 'Page View';
-    case EventsType.TextClick:
+    case EventsCaptureType.TextClick:
       return 'Text Click';
-    case EventsType.SelectorClick:
+    case EventsCaptureType.SelectorClick:
       return 'CSS Selector Click';
-    case EventsType.Error:
+    case EventsCaptureType.Error:
       return 'JavaScript Error';
-    case EventsType.Custom:
+    case EventsCaptureType.Custom:
       return 'Custom Event';
   }
 };
 
-const getIcon = (type: EventsType) => {
+const getIcon = (type: EventsCaptureType) => {
   switch(type) {
-    case EventsType.PageVisit:
+    case EventsCaptureType.PageVisit:
       return 'file-line';
-    case EventsType.TextClick:
-    case EventsType.SelectorClick:
+    case EventsCaptureType.TextClick:
+    case EventsCaptureType.SelectorClick:
       return 'cursor-line';
-    case EventsType.Error:
+    case EventsCaptureType.Error:
       return 'error-warning-line';
-    case EventsType.Custom:
+    case EventsCaptureType.Custom:
       return 'flashlight-line';
   }
 };
 
-const getClassName = (type: EventsType) => {
+const getClassName = (type: EventsCaptureType) => {
   switch(type) {
-    case EventsType.PageVisit:
+    case EventsCaptureType.PageVisit:
       return 'page-view';
-    case EventsType.TextClick:
+    case EventsCaptureType.TextClick:
       return 'text-click';
-    case EventsType.SelectorClick:
+    case EventsCaptureType.SelectorClick:
       return 'css-selector';
-    case EventsType.Error:
+    case EventsCaptureType.Error:
       return 'error';
-    case EventsType.Custom:
+    case EventsCaptureType.Custom:
       return 'custom';
   }
 };

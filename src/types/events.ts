@@ -1,9 +1,11 @@
+import type { EventsType } from 'types/graphql';
+
 export enum EventsGroupType {
   All,
   Groups,
 }
 
-export enum EventsType {
+export enum EventsCaptureType {
   PageVisit = 0,
   TextClick = 1,
   SelectorClick = 2,
@@ -20,4 +22,9 @@ export enum EventStatsSort {
   CountDesc = 'count__desc',
   AverageEventsPerVisitorAsc = 'average_events_per_visitor__asc',
   AverageEventsPerVisitorDesc = 'average_events_per_visitor__desc',
+}
+
+export type EventSelected = {
+  id: string;
+  type: EventsType;
 }

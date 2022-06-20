@@ -16,6 +16,7 @@ export const GET_EVENT_CAPTURES_QUERY = gql`
             value
           }
           count
+          groupIds
           groupNames
           lastCountedAt
         }
@@ -47,6 +48,7 @@ export const GET_EVENT_GROUPS_QUERY = gql`
             value
           }
           count
+          groupIds
           groupNames
           lastCountedAt
         }

@@ -4,13 +4,14 @@ import { useEventGroups } from 'hooks/use-event-groups';
 import { EventGroup } from 'components/sites/events/event-group';
 import { PageLoading } from 'components/sites/page-loading';
 import { Error } from 'components/error';
+import type { EventSelected } from 'types/events';
 import type { Site, EventsCaptureSort } from 'types/graphql';
 
 interface Props {
   site: Site;
-  selected: string[];
+  selected: EventSelected[];
   sort: EventsCaptureSort;
-  setSelected: (selected: string[]) => void;
+  setSelected: (selected: EventSelected[]) => void;
   setSort: (sort: EventsCaptureSort) => void;
 }
 

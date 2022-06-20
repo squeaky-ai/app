@@ -227,6 +227,28 @@
       }
     }
 
+    .no-items {
+      align-items: center;
+      background: var(--white);
+      box-shadow: var(--box-shadow-md);
+      border-radius: var(--border-radius-md);
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      margin: 1rem 0 0 0;
+      padding: 2rem;
+
+      .icon {
+        color: var(--gray-300);
+        font-size: 2rem;
+        margin: 0 0 .5rem 0;
+      }
+
+      p {
+        margin: 0;
+      }
+    }
+
     .actions {
       align-items: center;
       display: none;
@@ -239,6 +261,7 @@
         background: var(--gray-50);
         border: none;
         border-radius: var(--border-radius-md);
+        color: var(--gray-blue-800);
         display: flex;
         font-weight: var(--font-weight-bold);
         height: 2.5rem;
@@ -259,6 +282,12 @@
       .group-delete {
         .icon {
           color: var(--rose-500);
+        }
+      }
+
+      .event-compare {
+        .icon {
+          color: var(--blue-500);
         }
       }
     }

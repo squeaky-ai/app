@@ -3,17 +3,19 @@ import type { FC } from 'react';
 import classnames from 'classnames';
 import { Button } from 'components/button';
 import { Icon } from 'components/icon';
+import { EventCompare } from 'components/sites/events/event-compare';
 import { EventGroupDelete } from 'components/sites/events/event-group-delete';
 import { EventCaptures } from 'components/sites/events/event-captures';
-import { EventsCaptureSort, EventsGroup, Site } from 'types/graphql';
+import type { EventSelected } from 'types/events';
+import { EventsCaptureSort, EventsGroup, EventsType, Site } from 'types/graphql';
 
 interface Props {
   site: Site;
   group: EventsGroup;
   sort: EventsCaptureSort;
-  selected: string[];
+  selected: EventSelected[];
   setSort: (sort: EventsCaptureSort) => void;
-  setSelected: (selected: string[]) => void;
+  setSelected: (selected: EventSelected[]) => void;
 }
 
 export const EventGroup: FC<Props> = ({
@@ -28,6 +30,8 @@ export const EventGroup: FC<Props> = ({
 
   const handleToggle = () => setOpen(!open);
 
+  const hasItems = group.items.length > 0;
+
   return (
     <div className={classnames('event-group', { open })}>
       <Button className='heading' onClick={handleToggle}>
@@ -41,31 +45,47 @@ export const EventGroup: FC<Props> = ({
           site={site}
           group={group}
         />
+        <EventCompare
+          site={site}
+          selected={group.items.map(i => ({ id: i.id, type: EventsType.Capture }))}
+          buttonText={
+            <>
+              <Icon name='pie-chart-line' />
+              Compare all
+            </>
+          }
+          buttonDisabled={!hasItems}
+        />
       </div>
 
       <div className='items'>
-        {group.items.length === 0 && (
-          <p>No items</p>
+        {!hasItems && (
+          <div className='no-items'>
+            <Icon name='plant-line' />
+            <p>No events in group</p>
+          </div>
         )}
 
-        <EventCaptures
-          site={site}
-          events={{
-            items: group.items,
-            pagination: {
-              sort,
-              total: group.items.length,
-              pageSize: group.items.length,
-            }
-          }}
-          page={1}
-          sort={sort}
-          selected={selected}
-          setPage={() => ''}
-          setSize={() => ''}
-          setSort={setSort}
-          setSelected={setSelected}
-        />
+        {hasItems && (
+          <EventCaptures
+            site={site}
+            events={{
+              items: group.items,
+              pagination: {
+                sort,
+                total: group.items.length,
+                pageSize: group.items.length,
+              }
+            }}
+            page={1}
+            sort={sort}
+            selected={selected}
+            setPage={() => ''}
+            setSize={() => ''}
+            setSort={setSort}
+            setSelected={setSelected}
+          />
+          )}
       </div>
     </div>
   );

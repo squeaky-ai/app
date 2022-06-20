@@ -1,10 +1,10 @@
 import React from 'react';
 import type { FC } from 'react';
 import { EventCard } from 'components/sites/events/event-card';
-import { EventsType } from 'types/events';
+import { EventsCaptureType } from 'types/events';
 
 interface Props {
-  setType: (type: EventsType) => void;
+  setType: (type: EventsCaptureType) => void;
 }
 
 export const EventCreateSelect: FC<Props> = ({ setType }) => {
@@ -12,13 +12,13 @@ export const EventCreateSelect: FC<Props> = ({ setType }) => {
     <div className='events-create-select'>
       <p>To proceed, please select the type of event you&apos;d like to track.</p>
       <p className='heading'><b>Autocapture</b></p>
-      <EventCard type={EventsType.PageVisit} onClick={() => setType(EventsType.PageVisit)} />
-      <EventCard type={EventsType.TextClick} onClick={() => setType(EventsType.TextClick)} />
-      <EventCard type={EventsType.SelectorClick} onClick={() => setType(EventsType.SelectorClick)} />
-      <EventCard type={EventsType.Error} onClick={() => setType(EventsType.Error)} />
+      <EventCard type={EventsCaptureType.PageVisit} onClick={() => setType(EventsCaptureType.PageVisit)} />
+      <EventCard type={EventsCaptureType.TextClick} onClick={() => setType(EventsCaptureType.TextClick)} />
+      <EventCard type={EventsCaptureType.SelectorClick} onClick={() => setType(EventsCaptureType.SelectorClick)} />
+      <EventCard type={EventsCaptureType.Error} onClick={() => setType(EventsCaptureType.Error)} />
 
       <p className='heading'><b>Custom</b></p>
-      <EventCard type={EventsType.Custom} onClick={() => setType(EventsType.Custom)} />
+      <EventCard type={EventsCaptureType.Custom} onClick={() => setType(EventsCaptureType.Custom)} />
     </div>
   );
 };

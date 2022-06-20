@@ -17,14 +17,14 @@ import { EventList } from 'components/sites/events/event-list';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useSort } from 'hooks/use-sort';
 import { useEventCaptures } from 'hooks/use-event-captures';
-import { EventsGroupType } from 'types/events';
+import { EventsGroupType, EventSelected } from 'types/events';
 import { EventsCaptureSort } from 'types/graphql';
 
 const SitesEvents: NextPage<ServerSideProps> = ({ user }) => {
   const [type, setType] = React.useState<EventsGroupType>(EventsGroupType.All);
   const [page, setPage] = React.useState<number>(1);
   const [size, setSize] = React.useState<number>(20);
-  const [selected, setSelected] = React.useState<string[]>([]);
+  const [selected, setSelected] = React.useState<EventSelected[]>([]);
 
   const { sort, setSort } = useSort<EventsCaptureSort>('events');
 

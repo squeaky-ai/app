@@ -5,15 +5,17 @@ import { Icon } from 'components/icon';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { useToasts } from 'hooks/use-toasts';
 import { eventsCaptureDeleteBulk } from 'lib/api/graphql';
+import { EventsType } from 'types/graphql';
+import type { EventSelected } from 'types/events';
 
 interface Props {
   siteId: string;
-  eventIds: string[];
+  selected: EventSelected[];
   onCompleted: VoidFunction;
   onClose: VoidFunction;
 }
 
-export const EventCapturesDelete: FC<Props> = ({ eventIds, siteId, onCompleted, onClose }) => {
+export const EventCapturesDelete: FC<Props> = ({ selected, siteId, onCompleted, onClose }) => {
   const ref = React.useRef<Modal>();
   const toasts = useToasts();
 
@@ -31,7 +33,7 @@ export const EventCapturesDelete: FC<Props> = ({ eventIds, siteId, onCompleted, 
 
       await eventsCaptureDeleteBulk({
         siteId,
-        eventIds,
+        eventIds: selected.filter(s => s.type === EventsType.Capture).map(s => s.id),
       });
 
       closeModal();
@@ -55,7 +57,7 @@ export const EventCapturesDelete: FC<Props> = ({ eventIds, siteId, onCompleted, 
             </Button>
           </ModalHeader>
           <ModalContents>
-            <p id='delete-event-captures-description'>Are you sure you wish to permanently delete all {eventIds.length} events?</p>
+            <p id='delete-event-captures-description'>Are you sure you wish to permanently delete all {selected.length} events?</p>
           </ModalContents>
           <ModalFooter>
             <Button type='button' className='tertiary' onClick={deleteEvents}>

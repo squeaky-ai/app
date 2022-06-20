@@ -3,24 +3,24 @@ import type { FC } from 'react';
 import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { EventTag } from 'components/sites/events/event-tag';
-import { EventsType } from 'types/events';
+import { EventsCaptureType } from 'types/events';
 
 interface Props {
-  type: EventsType;
-  onClick?: (type: EventsType) => void;
+  type: EventsCaptureType;
+  onClick?: (type: EventsCaptureType) => void;
 }
 
-const getText = (type: EventsType): string | React.ReactNode => {
+const getText = (type: EventsCaptureType): string | React.ReactNode => {
   switch(type) {
-    case EventsType.PageVisit:
+    case EventsCaptureType.PageVisit:
       return 'The page view event is triggered each time a visitor loads a particular page within your website or web app.';
-    case EventsType.TextClick:
+    case EventsCaptureType.TextClick:
       return 'The text click event is triggered when a visitors clicks on a button or link with a specific text string on your site.';
-    case EventsType.SelectorClick:
+    case EventsCaptureType.SelectorClick:
       return 'The CSS selector click event is triggered when a visitors clicks on a specific element on your site via a CSS selector.';
-    case EventsType.Error:
+    case EventsCaptureType.Error:
       return 'Javascript error events help you to track the prevelance of specific Javascript Errors we have recorded on your site.';
-    case EventsType.Custom:
+    case EventsCaptureType.Custom:
       return <span>Manually define and track any event <i>(technical expertise required)</i> that takes place on your site.</span>
   }
 };

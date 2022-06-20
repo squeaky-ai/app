@@ -7,16 +7,18 @@ import { Label } from 'components/label';
 import { EventGroupsSelector } from 'components/sites/events/event-groups-selector';
 import { useToasts } from 'hooks/use-toasts';
 import { eventsAddToGroup } from 'lib/api/graphql';
+import { EventsType } from 'types/graphql';
+import type { EventSelected } from 'types/events';
 import type { Site } from 'types/graphql';
 
 interface Props {
   site: Site;
-  eventIds: string[];
+  selected: EventSelected[];
   onCompleted: VoidFunction;
   onClose: VoidFunction;
 }
 
-export const EventAddToGroup: FC<Props> = ({ site, eventIds, onClose, onCompleted }) => {
+export const EventAddToGroup: FC<Props> = ({ site, selected, onClose, onCompleted }) => {
   const ref = React.useRef<Modal>();
   const toasts = useToasts();
 
@@ -36,7 +38,7 @@ export const EventAddToGroup: FC<Props> = ({ site, eventIds, onClose, onComplete
 
       await eventsAddToGroup({
         siteId: site.id,
-        eventIds,
+        eventIds: selected.filter(s => s.type === EventsType.Capture).map(s => s.id),
         groupIds,
       });
 
