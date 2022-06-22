@@ -1,9 +1,11 @@
 import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
+import { Icon } from 'components/icon';
 import { RecordingsLargeItem } from 'components/sites/recordings/recordings-large-item';
 import { TableWrapper, Table, Row, Cell } from 'components/table';
 import { Sort } from 'components/sort';
+import { Tooltip } from 'components/tooltip';
 import { Checkbox } from 'components/checkbox';
 import { COLUMNS } from 'data/recordings/constants';
 import { getColumnStyles } from 'lib/tables';
@@ -56,6 +58,24 @@ export const RecordingsLarge: FC<Props> = ({
           <Cell>Status</Cell>
           <Cell>Recording ID</Cell>
           <Cell>Visitor ID</Cell>
+          <Cell className='linked'>
+            <Tooltip button={<Icon name='link-m' />}>
+              Linked Data
+            </Tooltip>
+            User ID
+          </Cell>
+          <Cell className='linked'>
+            <Tooltip button={<Icon name='link-m' />}>
+              Linked Data
+            </Tooltip>
+            Name
+          </Cell>
+          <Cell className='linked'>
+            <Tooltip button={<Icon name='link-m' />}>
+              Linked Data
+            </Tooltip>
+            Email
+          </Cell>
           <Cell>Date &amp; Time<Sort name='connected_at' order={sort} onAsc={() => setSort(RecordingsSort.ConnectedAtAsc)} onDesc={() => setSort(RecordingsSort.ConnectedAtDesc)} /></Cell>
           <Cell>Duration <Sort name='duration' order={sort} onAsc={() => setSort(RecordingsSort.DurationAsc)} onDesc={() => setSort(RecordingsSort.DurationDesc)} /></Cell>
           <Cell>Pages <Sort name='page_count' order={sort} onAsc={() => setSort(RecordingsSort.PageCountAsc)} onDesc={() => setSort(RecordingsSort.PageCountDesc)} /></Cell>

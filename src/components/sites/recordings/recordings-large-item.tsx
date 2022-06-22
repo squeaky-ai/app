@@ -16,7 +16,9 @@ import { RecordingDelete } from 'components/sites/recordings/recording-delete';
 import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
 import { Emoji, EmojiType } from 'components/emoji';
 import { toNiceDate, toTimeString } from 'lib/dates';
+import { getLinkedData } from 'lib/visitors';
 import { npsColor } from 'lib/feedback';
+import type { ExternalAttributes } from 'types/visitors';
 import type { Site, Recording, Team } from 'types/graphql';
 
 interface Props {
@@ -30,6 +32,8 @@ interface Props {
 
 export const RecordingsLargeItem: FC<Props> = ({ site, recording, style, member, selected, setSelected }) => {
   const rowActionsRef = React.useRef<Dropdown>();
+
+  const linkedData = getLinkedData<ExternalAttributes>(recording.visitor);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.target.checked
@@ -60,6 +64,15 @@ export const RecordingsLargeItem: FC<Props> = ({ site, recording, style, member,
       </Cell>
       <Cell>
         <VisitorsStarred site={site} visitor={recording.visitor} link />
+      </Cell>
+      <Cell>
+        {linkedData?.id || '-'}
+      </Cell>
+      <Cell>
+        {linkedData?.name || '-'}
+      </Cell>
+      <Cell>
+        {linkedData?.email || '-'}
       </Cell>
       <Cell>
         {toNiceDate(recording.connectedAt)}

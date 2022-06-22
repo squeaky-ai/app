@@ -36,6 +36,7 @@ export const GET_RECORDINGS_QUERY = gql`
             id
             visitorId
             starred
+            linkedData
           }
           nps {
             score
