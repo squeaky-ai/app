@@ -13,6 +13,10 @@ export class ImageBlot extends BlockEmbed {
   static tagName = 'figure';
   
   static create(value: CreateInput) {
+    if (value instanceof HTMLElement) {
+      return value;
+    }
+
     let node: HTMLElement = super.create();
 
     const img = document.createElement('img');

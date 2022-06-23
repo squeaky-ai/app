@@ -12,10 +12,12 @@ export class EmbedBlot extends BlockEmbed {
   static className = 'embed'
   
   static create(value: CreateInput) {
+    if (value instanceof HTMLElement) {
+      return value;
+    }
+
     let node: HTMLElement = super.create();
-
     node.innerHTML = value.html || '';
-
     return node;
   }
 
