@@ -9,6 +9,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   button: string | React.ReactNode;
   buttonClassName?: string;
   buttonDisabled?: boolean;
+  menuId?: string;
   menuClassName?: string;
   direction?: 'up' | 'down';
   portal?: boolean;
@@ -74,7 +75,7 @@ export class Dropdown extends React.Component<Props, State> {
   public render(): JSX.Element {
     return (
       <div ref={this.ref} className={classnames('dropdown', this.props.className, { open: this.state.open })}>
-        <Button onClick={() => this.setState({ open: !this.state.open })} className={this.props.buttonClassName} disabled={this.props.buttonDisabled}>
+        <Button type='button' onClick={() => this.setState({ open: !this.state.open })} className={this.props.buttonClassName} disabled={this.props.buttonDisabled}>
           {this.props.button}
           <Icon name='arrow-drop-down-line' className='arrow' />
         </Button>
@@ -95,7 +96,7 @@ export class Dropdown extends React.Component<Props, State> {
             <>
               {this.state.open && (
                 <FocusTrap focusTrapOptions={{ clickOutsideDeactivates: true }}>
-                  <div className={classnames('dropdown-menu', this.props.direction, this.props.menuClassName)}>
+                  <div id={this.props.menuId} className={classnames('dropdown-menu', this.props.direction, this.props.menuClassName)}>
                     {this.props.children}
                   </div>
                 </FocusTrap>

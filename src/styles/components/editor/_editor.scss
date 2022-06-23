@@ -1,0 +1,44 @@
+#editor {
+  margin: 0 0 1.5rem 0;
+
+  .ql-editor {
+    border: 1px solid var(--gray-200);
+    border-radius: var(--border-radius-md);
+    min-height: 20rem;
+    outline: none;
+    padding: .35rem .75rem;
+
+    &:hover,
+    &:focus {
+      border-color: var(--blue-500);
+    }
+
+    &.ql-blank:before {
+      color: var(--gray-500);
+      content: 'Write some crap...';
+      font-style: italic;
+      position: absolute;
+    }
+
+    & > *:first-child {
+      margin-top: 0;
+    }
+  }
+
+  .ql-clipboard {
+    display: none;
+  }
+
+  figure {
+    margin: 0 0 1.5rem 0;
+    width: 100%;
+
+    img {
+      width: 100%;
+    }
+
+    figcaption {
+      text-align: center;
+    }
+  }
+}

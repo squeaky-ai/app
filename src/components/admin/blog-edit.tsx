@@ -14,16 +14,17 @@ import { Image } from 'components/admin/image';
 import { TextArea } from 'components/textarea';
 import { Button } from 'components/button';
 import { Select, Option } from 'components/select';
+import { Spinner } from 'components/spinner';
 import { exportBlogPost, getInitialValues } from 'lib/admin/blog';
+import type { Props as EditorProps } from 'components/editor/editor';
 import type { BlogPost } from 'types/graphql';
 import type { BlogInput } from 'types/admin';
-import type { Props as EditorProps } from 'components/admin/rich-text';
 
 const Editor = dynamic<EditorProps>(
-  () => import('./rich-text').then(mod => mod.RichText),
+  () => import('../editor/editor').then(mod => mod.Editor),
   { 
     ssr: false,
-    loading: () => <p>Loading...</p>
+    loading: () => <Spinner />
   },
 );
 
@@ -35,10 +36,10 @@ interface Props {
 }
 
 const BlogSchema = Yup.object().shape({
-  title: Yup.string().required('Title is requied'),
-  tags: Yup.string().required('Tags are requied'),
+  title: Yup.string().required('Title is required'),
+  tags: Yup.string().required('Tags are required'),
   author: Yup.string().oneOf(['chris', 'lewis']),
-  category: Yup.string().required('Category is requied'),
+  category: Yup.string().required('Category is required'),
   draft: Yup.boolean(),
   metaImage: Yup.string().required('Meta image is required'),
   metaDescription: Yup.string().required('Meta description is required'),
@@ -163,6 +164,7 @@ export const BlogEdit: FC<Props> = ({ post, images, onChange, refetchImages }) =
               <Label htmlFor='body'>Body</Label>
               <Editor 
                 value={values.body}
+                images={images}
                 onChange={(value) => setFieldValue('body', value)}
                 refetchImages={refetchImages}
               />

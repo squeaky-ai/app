@@ -27,7 +27,7 @@ interface Props {
 const DEFAULT_COLORS = ['#0768C1', '#F96155', '#8249FB', '#001A39'];
 
 const SentimentSchema = Yup.object().shape({
-  sentimentAccentColor: Yup.string().matches(HEX_REGEX, 'Accent color is requied'),
+  sentimentAccentColor: Yup.string().matches(HEX_REGEX, 'Accent color is required'),
   sentimentExcludedPages: Yup.array(),
   sentimentLayout: Yup.string().oneOf(['right_middle', 'right_bottom', 'left_middle', 'left_bottom'], 'Please select a layout type'),
   sentimentDevices: Yup.array(),

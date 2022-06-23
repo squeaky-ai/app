@@ -26,9 +26,9 @@ interface Props {
 const DEFAULT_COLORS = ['#0768C1', '#F96155', '#8249FB', '#001A39'];
 
 const NpsSchema = Yup.object().shape({
-  npsAccentColor: Yup.string().matches(HEX_REGEX, 'Accent color is requied'),
+  npsAccentColor: Yup.string().matches(HEX_REGEX, 'Accent color is required'),
   npsSchedule: Yup.string().oneOf(['once', 'monthly'], 'Please select frequency'),
-  npsPhrase: Yup.string().required('Accent color is requied'),
+  npsPhrase: Yup.string().required('Accent color is required'),
   npsFollowUpEnabled: Yup.boolean(),
   npsContactConsentEnabled: Yup.boolean(),
   npsLayout: Yup.string().oneOf(['full_width', 'boxed'], 'Please select a layout type'),

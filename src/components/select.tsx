@@ -5,11 +5,12 @@ import { Icon } from 'components/icon';
 
 interface Props extends React.SelectHTMLAttributes<HTMLSelectElement> {
   invalid?: boolean;
+  selectClassName?: string;
 }
 
-export const Select: FC<Props> = ({ children, className, invalid, ...rest }) => (
-  <div className={classnames('select', className, { invalid })}>
-    <select {...rest}>
+export const Select: FC<Props> = ({ children, className, selectClassName, invalid, style, ...rest }) => (
+  <div className={classnames('select', className, { invalid })} style={style}>
+    <select className={classnames(selectClassName)} {...rest}>
       {children}
     </select>
     <Icon name='arrow-drop-down-line' />
