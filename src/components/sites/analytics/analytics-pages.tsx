@@ -33,15 +33,6 @@ export const AnalyticsPages: FC<Props> = ({ pages, page, sort, setPage, setSort 
           />
         </Cell>
         <Cell>
-          Unique views
-          <Sort 
-            name='unique_views' 
-            order={sort} 
-            onAsc={() => setSort(AnalyticsPagesSort.UniqueViewsAsc)} 
-            onDesc={() => setSort(AnalyticsPagesSort.UniqueViewsDesc)} 
-          />
-        </Cell>
-        <Cell>
           Average time on page
           <Sort 
             name='duration' 
@@ -78,7 +69,6 @@ export const AnalyticsPages: FC<Props> = ({ pages, page, sort, setPage, setSort 
             </Tooltip>
           </Cell>
           <Cell><b>{page.viewCount.toLocaleString()}</b> <span className='percentage'>({page.viewPercentage.toFixed(2)}%)</span></Cell>
-          <Cell><b>{page.uniqueViewCount.toLocaleString()}</b> <span className='percentage'>({page.uniqueViewPercentage.toFixed(2)}%)</span></Cell>
           <Cell>{toHoursMinutesAndSeconds(page.averageDuration)}</Cell>
           <Cell>{page.bounceRatePercentage.toFixed(2)}%</Cell>
           <Cell>{page.exitRatePercentage.toFixed(2)}%</Cell>

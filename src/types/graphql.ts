@@ -248,8 +248,6 @@ export type AnalyticsPage = {
   averageDuration: Scalars['Int'];
   bounceRatePercentage: Scalars['Float'];
   exitRatePercentage: Scalars['Float'];
-  uniqueViewCount: Scalars['Int'];
-  uniqueViewPercentage: Scalars['Float'];
   url: Scalars['String'];
   viewCount: Scalars['Int'];
   viewPercentage: Scalars['Float'];
