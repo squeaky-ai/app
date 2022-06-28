@@ -53,8 +53,6 @@ export const GET_ANALYTICS_TRAFFIC_QUERY = gql`
             averageDuration
             viewCount
             viewPercentage
-            uniqueViewCount
-            uniqueViewPercentage
             exitRatePercentage
             bounceRatePercentage
           }

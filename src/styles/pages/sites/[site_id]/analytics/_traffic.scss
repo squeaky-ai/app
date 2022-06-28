@@ -212,7 +212,7 @@
           }
 
           .row {
-            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 100px;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 100px;
   
             @include breakpoint-md {
               align-items: flex-start;
