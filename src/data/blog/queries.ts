@@ -19,6 +19,7 @@ export const GET_BLOG_POSTS_QUERY = gql`
         metaDescription
         slug
         body
+        scripts
         createdAt
         updatedAt
       }
@@ -45,6 +46,7 @@ export const GET_BLOG_POST_QUERY = gql`
       metaDescription
       slug
       body
+      scripts
       createdAt
       updatedAt
     }

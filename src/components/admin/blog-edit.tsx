@@ -2,7 +2,6 @@ import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
 import * as Yup from 'yup';
-import dynamic from 'next/dynamic';
 import { Formik } from 'formik';
 import { Label } from 'components/label';
 import { Card } from 'components/card';
@@ -14,19 +13,9 @@ import { Image } from 'components/admin/image';
 import { TextArea } from 'components/textarea';
 import { Button } from 'components/button';
 import { Select, Option } from 'components/select';
-import { Spinner } from 'components/spinner';
 import { exportBlogPost, getInitialValues } from 'lib/admin/blog';
-import type { Props as EditorProps } from 'components/editor/editor';
 import type { BlogPost } from 'types/graphql';
 import type { BlogInput } from 'types/admin';
-
-const Editor = dynamic<EditorProps>(
-  () => import('../editor/editor').then(mod => mod.Editor),
-  { 
-    ssr: false,
-    loading: () => <Spinner />
-  },
-);
 
 interface Props {
   post?: BlogPost;
@@ -44,6 +33,7 @@ const BlogSchema = Yup.object().shape({
   metaImage: Yup.string().required('Meta image is required'),
   metaDescription: Yup.string().required('Meta description is required'),
   body: Yup.string().required('Body is required'),
+  script: Yup.string(),
 });
 
 export const BlogEdit: FC<Props> = ({ post, images, onChange, refetchImages }) => (
@@ -162,11 +152,23 @@ export const BlogEdit: FC<Props> = ({ post, images, onChange, refetchImages }) =
               <span className='validation'>{errors.metaDescription}</span>
 
               <Label htmlFor='body'>Body</Label>
-              <Editor 
+              <TextArea 
+                className='edit-body'
+                name='body'
+                rows={20}
+                onChange={handleChange}
+                onBlur={handleBlur}
                 value={values.body}
-                images={images}
-                onChange={(value) => setFieldValue('body', value)}
-                refetchImages={refetchImages}
+              />
+
+              <Label htmlFor='script'>Script</Label>
+              <TextArea
+                className='edit-body'
+                name='script'
+                rows={3}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.script}
               />
 
               <Button className='primary submit' type='submit'>
