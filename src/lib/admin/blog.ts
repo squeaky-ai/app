@@ -36,7 +36,7 @@ const getSlug = (args: Pick<BlogInput, 'title' | 'category'>) => {
     .trim()
     .toLowerCase()
     .replace(/ /g, '-')
-    .replace(/[^a-z-]/g, '')
+    .replace(/[^a-z0-9-]/g, '')
 
   return `/${category}/${title}`;
 };
