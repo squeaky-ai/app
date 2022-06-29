@@ -9,12 +9,13 @@ import type { AnalyticsUserPath } from 'types/graphql';
 
 interface Props {
   depth: number;
+  position: PathPosition;
   journeys: AnalyticsUserPath[];
   setPage: (page: string) => void;
   setPosition: (position: PathPosition) => void;
 }
 
-export const JourneysGraph: FC<Props> = ({ depth, journeys, setPage, setPosition }) => {
+export const JourneysGraph: FC<Props> = ({ depth, position, journeys, setPage, setPosition }) => {
   const maxDepth = Math.max(...journeys.map(j => j.path.length));
 
   const getTotalForCol = (col: number, includeEmpty: boolean) => {
@@ -76,6 +77,7 @@ export const JourneysGraph: FC<Props> = ({ depth, journeys, setPage, setPosition
                 col={col}
                 page={page}
                 exits={getExitForColAndPage(col, page.path)}
+                position={position}
                 setPage={setPage}
                 setPosition={setPosition}
               />

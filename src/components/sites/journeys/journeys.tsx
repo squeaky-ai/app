@@ -60,6 +60,7 @@ export const Journeys: FC<Props> = ({ page, pages, period, setPage, setPeriod })
 
           {journeys.length > 0 &&  (
             <JourneysGraph 
+              position={position}
               journeys={journeys} 
               depth={depth}
               setPage={setPage}

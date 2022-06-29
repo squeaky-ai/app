@@ -16,13 +16,14 @@ interface Props {
   col: number;
   page: PageStats;
   exits: number;
+  position: PathPosition;
   setPage: (page: string) => void;
   setPosition: (position: PathPosition) => void;
 }
 
 type Coords = [number, number];
 
-export const JourneysPage: FC<Props> = ({ col, page, exits, setPage, setPosition }) => {
+export const JourneysPage: FC<Props> = ({ col, page, position, exits, setPage, setPosition }) => {
   const ref = React.useRef<HTMLDivElement>(null);
   
   const router = useRouter();
@@ -94,7 +95,7 @@ export const JourneysPage: FC<Props> = ({ col, page, exits, setPage, setPosition
           {page.percentage}%
         </p>
       </div>
-      {exits > 0 && (
+      {exits > 0 && position !== PathPosition.End && (
         <div className='row'>
           <Pill className='drop-off'>
             <Icon name='arrow-right-down-line' />
