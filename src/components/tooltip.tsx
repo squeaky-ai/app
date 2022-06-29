@@ -7,6 +7,7 @@ import { Portal } from 'components/portal';
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   button: string | React.ReactNode;
   buttonClassName?: string;
+  buttonProps?: React.ButtonHTMLAttributes<HTMLButtonElement>;
   buttonOnClick?: (event: React.MouseEvent) => void;
   portalClassName?: string;
   positionX?: 'left' | 'right';
@@ -20,6 +21,7 @@ export const Tooltip: FC<Props> = ({
   fluid, 
   delayInMilliseconds, 
   buttonClassName, 
+  buttonProps,
   portalClassName, 
   positionX, 
   className, 
@@ -51,7 +53,7 @@ export const Tooltip: FC<Props> = ({
 
   return (
     <div ref={ref} className={classnames('tooltip', className)} onClick={onClick}>
-      <Button onClick={buttonOnClick} onMouseEnter={handleMouseIn} onMouseLeave={handleMouseLeave} className={buttonClassName}>
+      <Button onClick={buttonOnClick} onMouseEnter={handleMouseIn} onMouseLeave={handleMouseLeave} className={buttonClassName} {...buttonProps}>
         {button}
       </Button>
       <Portal>

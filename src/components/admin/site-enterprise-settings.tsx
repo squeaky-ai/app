@@ -18,7 +18,7 @@ interface Props {
 }
 
 const PlanSchema = Yup.object().shape({
-  maxMonthlyRecordings: Yup.number().required('Maximum visits per month is requied'),
+  maxMonthlyRecordings: Yup.number().required('Maximum visits per month is required'),
   responseTimeHours: Yup.number().required('SLA response time is required'),
   dataStorageMonths: Yup.number().required('Data retention is required'),
   support: Yup.array(),

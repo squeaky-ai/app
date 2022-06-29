@@ -62,6 +62,7 @@ export type AdminBlogPostCreateInput = {
   draft: Scalars['Boolean'];
   metaDescription: Scalars['String'];
   metaImage: Scalars['String'];
+  scripts: Array<InputMaybe<Scalars['String']>>;
   slug: Scalars['String'];
   tags: Array<Scalars['String']>;
   title: Scalars['String'];
@@ -85,6 +86,7 @@ export type AdminBlogPostUpdateInput = {
   id: Scalars['ID'];
   metaDescription?: InputMaybe<Scalars['String']>;
   metaImage?: InputMaybe<Scalars['String']>;
+  scripts: Array<InputMaybe<Scalars['String']>>;
   slug?: InputMaybe<Scalars['String']>;
   tags?: InputMaybe<Array<Scalars['String']>>;
   title?: InputMaybe<Scalars['String']>;
@@ -246,7 +248,9 @@ export type AnalyticsLanguage = {
 export type AnalyticsPage = {
   __typename?: 'AnalyticsPage';
   averageDuration: Scalars['Int'];
+  bounceRateCount: Scalars['Int'];
   bounceRatePercentage: Scalars['Float'];
+  exitRateCount: Scalars['Int'];
   exitRatePercentage: Scalars['Float'];
   url: Scalars['String'];
   viewCount: Scalars['Int'];
@@ -293,10 +297,6 @@ export enum AnalyticsPagesSort {
   ExitRateAsc = 'exit_rate__asc',
   /** Highest exit rate first */
   ExitRateDesc = 'exit_rate__desc',
-  /** Least amount of unique views first */
-  UniqueViewsAsc = 'unique_views__asc',
-  /** Most amount of unique views first */
-  UniqueViewsDesc = 'unique_views__desc',
   /** Least amount of views first */
   ViewsAsc = 'views__asc',
   /** Most amount of views first */
@@ -428,6 +428,7 @@ export type BlogPost = {
   id: Scalars['ID'];
   metaDescription: Scalars['String'];
   metaImage: Scalars['String'];
+  scripts: Array<Maybe<Scalars['String']>>;
   slug: Scalars['String'];
   tags: Array<Scalars['String']>;
   title: Scalars['String'];

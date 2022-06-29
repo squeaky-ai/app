@@ -193,12 +193,6 @@
       }
     }
 
-    .rich-text-editor {
-      figure {
-        margin: 0 0 1rem 0;
-      }
-    }
-
     .upload {
       align-items: center;
       background: none;
@@ -218,16 +212,6 @@
       .icon {
         font-size: 1rem;
         font-weight: var(--font-weight-normal);
-      }
-    }
-
-    .DraftEditor-editorContainer {
-      border: 1px solid var(--gray-200);
-      border-radius: var(--border-radius-md);
-
-      .public-DraftEditor-content {
-        min-height: 40rem;
-        padding: .75rem;
       }
     }
   }

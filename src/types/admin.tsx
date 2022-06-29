@@ -32,4 +32,5 @@ export type BlogInput = {
   metaImage: string;
   metaDescription: string;
   body: string;
+  script: string;
 }

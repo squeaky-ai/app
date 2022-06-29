@@ -2,7 +2,6 @@ import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
 import * as Yup from 'yup';
-import dynamic from 'next/dynamic';
 import { Formik } from 'formik';
 import { Label } from 'components/label';
 import { Card } from 'components/card';
@@ -17,15 +16,6 @@ import { Select, Option } from 'components/select';
 import { exportBlogPost, getInitialValues } from 'lib/admin/blog';
 import type { BlogPost } from 'types/graphql';
 import type { BlogInput } from 'types/admin';
-import type { Props as EditorProps } from 'components/admin/rich-text';
-
-const Editor = dynamic<EditorProps>(
-  () => import('./rich-text').then(mod => mod.RichText),
-  { 
-    ssr: false,
-    loading: () => <p>Loading...</p>
-  },
-);
 
 interface Props {
   post?: BlogPost;
@@ -35,14 +25,15 @@ interface Props {
 }
 
 const BlogSchema = Yup.object().shape({
-  title: Yup.string().required('Title is requied'),
-  tags: Yup.string().required('Tags are requied'),
+  title: Yup.string().required('Title is required'),
+  tags: Yup.string().required('Tags are required'),
   author: Yup.string().oneOf(['chris', 'lewis']),
-  category: Yup.string().required('Category is requied'),
+  category: Yup.string().required('Category is required'),
   draft: Yup.boolean(),
   metaImage: Yup.string().required('Meta image is required'),
   metaDescription: Yup.string().required('Meta description is required'),
   body: Yup.string().required('Body is required'),
+  script: Yup.string(),
 });
 
 export const BlogEdit: FC<Props> = ({ post, images, onChange, refetchImages }) => (
@@ -161,10 +152,23 @@ export const BlogEdit: FC<Props> = ({ post, images, onChange, refetchImages }) =
               <span className='validation'>{errors.metaDescription}</span>
 
               <Label htmlFor='body'>Body</Label>
-              <Editor 
+              <TextArea 
+                className='edit-body'
+                name='body'
+                rows={20}
+                onChange={handleChange}
+                onBlur={handleBlur}
                 value={values.body}
-                onChange={(value) => setFieldValue('body', value)}
-                refetchImages={refetchImages}
+              />
+
+              <Label htmlFor='script'>Script</Label>
+              <TextArea
+                className='edit-body'
+                name='script'
+                rows={3}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.script}
               />
 
               <Button className='primary submit' type='submit'>

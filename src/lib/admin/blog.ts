@@ -51,6 +51,7 @@ export const exportBlogPost = (input: BlogInput): Omit<BlogPost, 'id' | 'created
   metaImage: `https://cdn.squeaky.ai/${input.metaImage}`,
   body: input.body,
   slug: getSlug(input),
+  scripts: input.script.split(',').map(s => s.trim()).filter(s => !!s),
 });
 
 export const uploadFile = async (
@@ -90,6 +91,7 @@ export const getInitialValues = (post: BlogPost): BlogInput => {
       metaImage: '',
       metaDescription: '',
       body: '<p>Hello world</p>',
+      script: '',
     };
   };
 
@@ -102,5 +104,6 @@ export const getInitialValues = (post: BlogPost): BlogInput => {
     metaImage: post.metaImage.replace('https://cdn.squeaky.ai/', ''),
     metaDescription: post.metaDescription,
     body: post.body,
+    script: post.scripts.join(','),
   }
 };
