@@ -8,13 +8,23 @@ import { Page } from 'components/sites/page';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { Unlock } from 'components/sites/unlock';
 import { Period } from 'components/sites/period/period';
-import { usePeriod } from 'hooks/use-period';
+import { PageSearch } from 'components/sites/page-search';
+import { Label } from 'components/label';
 import { Tabs } from 'components/sites/analytics/tabs';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { usePeriod } from 'hooks/use-period';
+import { usePages } from 'hooks/use-pages';
 
 const SitesAnalyticsPageAudience: NextPage<ServerSideProps> = ({ user }) => {
+  const { pages } = usePages();
   const { period, setPeriod } = usePeriod('analytics');
-  
+
+  const [page, setPage] = React.useState<string>('');
+
+  React.useEffect(() => {
+    if (!page) setPage(pages[0]);
+  }, [pages]);
+
   return (
     <>
       <Head>
@@ -28,7 +38,11 @@ const SitesAnalyticsPageAudience: NextPage<ServerSideProps> = ({ user }) => {
 
             <div className='heading'>
               <h3 className='title'>Page Analytics</h3>
-              <Period period={period} onChange={setPeriod} />
+              <menu>
+                <Label>Page</Label>
+                <PageSearch page={page} setPage={setPage} pages={pages} />
+                <Period period={period} onChange={setPeriod} />
+              </menu>
             </div>
 
             <Unlock site={site} page='analytics' />
