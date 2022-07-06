@@ -11,6 +11,7 @@ import { Period } from 'components/sites/period/period';
 import { PageSearch } from 'components/sites/page-search';
 import { Label } from 'components/label';
 import { Tabs } from 'components/sites/analytics/tabs';
+import { AnalyticsPagesAudience } from 'components/sites/analytics/analytics-pages-audience';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { usePeriod } from 'hooks/use-period';
 import { usePages } from 'hooks/use-pages';
@@ -56,6 +57,10 @@ const SitesAnalyticsPageAudience: NextPage<ServerSideProps> = ({ user }) => {
               videoName='Analytics Intro'
               snippet='If you have only recently installed or updated your tracking code it may take up to an hour before analytics data becomes available.'
             />
+
+            {site.recordingsCount > 0 && page && (
+              <AnalyticsPagesAudience period={period} page={page} site={site} />
+            )}
           </Main>
         )}
       </Page>

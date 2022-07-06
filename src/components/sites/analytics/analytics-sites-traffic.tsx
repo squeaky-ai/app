@@ -24,7 +24,7 @@ interface Props {
   period: TimePeriod;
 }
 
-export const AnalyticsTraffic: FC<Props> = ({ site, period }) => {
+export const AnalyticsSitesTraffic: FC<Props> = ({ site, period }) => {
   const [pagesPage, setPagesPage] = React.useState<number>(1);
   
   const { sort: pagesSort, setSort: setPagesSort } = useSort<AnalyticsPagesSort>('analytics-pages');
@@ -49,7 +49,7 @@ export const AnalyticsTraffic: FC<Props> = ({ site, period }) => {
   }
 
   return (
-    <div className='analytics-traffic'>
+    <div className='analytics-traffic sites'>
        <div className='grid-item visitors-graph'>
           <Card>
             <AnalyticsVisitors visitors={analytics.visitors} period={period} />

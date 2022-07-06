@@ -10,7 +10,7 @@ import { Unlock } from 'components/sites/unlock';
 import { Period } from 'components/sites/period/period';
 import { usePeriod } from 'hooks/use-period';
 import { Tabs } from 'components/sites/analytics/tabs';
-import { AnalyticsTraffic } from 'components/sites/analytics/analytics-traffic';
+import { AnalyticsSitesTraffic } from 'components/sites/analytics/analytics-sites-traffic';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
 const SitesAnalyticsSiteTraffic: NextPage<ServerSideProps> = ({ user }) => {
@@ -45,7 +45,7 @@ const SitesAnalyticsSiteTraffic: NextPage<ServerSideProps> = ({ user }) => {
             />
 
             {site.recordingsCount > 0 && (
-              <AnalyticsTraffic period={period} site={site} />
+              <AnalyticsSitesTraffic period={period} site={site} />
             )}
           </Main>
         )}

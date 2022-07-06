@@ -20,7 +20,7 @@ interface Props {
   period: TimePeriod;
 }
 
-export const AnalyticsAudience: FC<Props> = ({ site, period }) => {
+export const AnalyticsSitesAudience: FC<Props> = ({ site, period }) => {
   const [referrersPage, setReferrersPage] = React.useState<number>(1);
 
   const { analytics, error, loading } = useAnalyticsAudience({
@@ -42,7 +42,7 @@ export const AnalyticsAudience: FC<Props> = ({ site, period }) => {
   }
 
   return (
-    <div className='analytics-audience'>
+    <div className='analytics-audience sites'>
       <div className='grid-item countries'>
         <Card>
           <h4>Countries</h4>
