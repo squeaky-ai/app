@@ -73,7 +73,7 @@ export const PageRoutes: FC<Props> = ({ button, buttonClassName, routes, setRout
                   </Button>
                 </ModalHeader>
                 <ModalContents>    
-                  <p>Replace whatever you want to replace with ":parameter", this text can be anything you want, just make sure it starts with a colon.</p>
+                  <p>Replace whatever you want to replace with &quot;:parameter&quot;, this text can be anything you want, just make sure it starts with a colon.</p>
                   <div className='add-route'>
                     <Input
                       type='text'
