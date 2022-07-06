@@ -20,12 +20,14 @@ export const allFeatureFlags: FeatureFlag[] = [
   FeatureFlag.MAGIC_ERASURE,
   FeatureFlag.CHEESE_LOADER,
   FeatureFlag.EVENTS_PAGE,
+  FeatureFlag.PATH_PARAMS,
 ];
 
 export const featureFlagNames: Names = {
   MAGIC_ERASURE: 'Magic Erasure',
   CHEESE_LOADER: 'Cheese Loader',
-  EVENTS_PAGE: 'Events Page'
+  EVENTS_PAGE: 'Events Page',
+  PATH_PARAMS: 'Path Params',
 };
 
 const options: State = [
@@ -45,6 +47,12 @@ const options: State = [
     key: FeatureFlag.EVENTS_PAGE,
     value: false,
     superuser: true,
+    description: '',
+  },
+  {
+    key: FeatureFlag.PATH_PARAMS,
+    value: false,
+    superuser: false,
     description: '',
   },
 ];

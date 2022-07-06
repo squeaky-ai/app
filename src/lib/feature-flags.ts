@@ -2,6 +2,7 @@ export enum FeatureFlag {
   MAGIC_ERASURE = 'MAGIC_ERASURE',
   CHEESE_LOADER = 'CHEESE_LOADER',
   EVENTS_PAGE = 'EVENTS_PAGE',
+  PATH_PARAMS = 'PATH_PARAMS',
 }
 
 export class FeatureFlags {

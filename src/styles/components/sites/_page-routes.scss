@@ -1,0 +1,71 @@
+.page-routes {
+  align-items: center;
+  background: none;
+  border: none;
+  border-radius: var(--border-radius-md);
+  display: flex;
+  font-weight: var(--font-weight-bold);
+  height: 40px;
+  margin-left: 0.5rem;
+  padding: 0 1rem;
+
+  .icon {
+    color: var(--blue-500);
+    font-size: 1.25rem;
+    margin-right: 0.5rem;
+  }
+
+  span {
+    font-weight: var(--font-weight-normal);
+    margin: 0 0 0 .5rem;
+  }
+
+  &:hover {
+    background: var(--gray-100);
+  }
+}
+
+.page-routes-modal {
+  .add-route {
+    display: flex;
+
+    .input {
+      border-right: 0;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .button {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+
+  .routes {
+    display: flex;
+    flex-direction: column;
+
+    .route {
+      align-items: center;
+      border-bottom: 1px solid var(--gray-150);
+      display: flex;
+      padding: .5rem 0;
+
+      span {
+        flex: 1;
+      }
+
+      .button {
+        align-items: center;
+        color: var(--gray-blue-800);
+        display: flex;
+        font-size: 1.25rem;
+        margin: 0;
+
+        .icon {
+          margin: 0;
+        }
+      }
+    }
+  }
+}
