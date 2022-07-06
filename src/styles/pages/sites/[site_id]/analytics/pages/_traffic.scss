@@ -1,0 +1,54 @@
+.page.sites.analytics.traffic.page {
+  .analytics-traffic {
+    display: grid;
+    grid-gap: 2rem;
+    grid-template-areas: 'average-time-on-page average-time-on-page average-visits-per-session average-visits-per-session bounce-rate bounce-rate exit-rate exit-rate'
+                          'visitors-graph visitors-graph visitors-graph visitors-graph visitors-graph visitors-graph visitors-graph visitors-graph'
+                          'time-of-day time-of-day time-of-day time-of-day time-of-day time-averages time-averages time-averages';
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    grid-template-rows: auto;
+    
+    @include breakpoint-md {
+      grid-gap: 1.5rem;
+      grid-template-areas: 'average-time-on-page'
+                           'average-visits-per-session'
+                           'average-session-per-visitors'
+                           'bounce-rate'
+                           'exit-rate'
+                           'visitors-graph'
+                           'time-of-day'
+                           'time-averages';
+      grid-template-columns: 100%;
+    }
+
+    .grid-item {
+      &.average-time-on-page {
+        grid-area: average-time-on-page;
+      }
+
+      &.average-visits-per-session {
+        grid-area: average-visits-per-session;
+      }
+
+      &.bounce-rate {
+        grid-area: bounce-rate;
+      }
+
+      &.exit-rate {
+        grid-area: exit-rate;
+      }
+
+      &.visitors-graph {
+        grid-area: visitors-graph;
+      }
+
+      &.time-of-day {
+        grid-area: time-of-day;
+      }
+
+      &.time-averages {
+        grid-area: time-averages;
+      }
+    }
+  }
+}
