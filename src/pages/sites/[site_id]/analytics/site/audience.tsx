@@ -13,7 +13,7 @@ import { Tabs } from 'components/sites/analytics/tabs';
 import { AnalyticsAudience } from 'components/sites/analytics/analytics-audience';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
-const SitesAnalyticsAudience: NextPage<ServerSideProps> = ({ user }) => {
+const SitesAnalyticsSiteAudience: NextPage<ServerSideProps> = ({ user }) => {
   const { period, setPeriod } = usePeriod('analytics');
   
   return (
@@ -28,13 +28,13 @@ const SitesAnalyticsAudience: NextPage<ServerSideProps> = ({ user }) => {
             <BreadCrumbs site={site} items={[{ name: 'Analytics' }]} />
 
             <div className='heading'>
-              <h3 className='title'>Analytics</h3>
+              <h3 className='title'>Site Analytics</h3>
               <Period period={period} onChange={setPeriod} />
             </div>
 
             <Unlock site={site} page='analytics' />
 
-            <Tabs site={site} tab='audience' />
+            <Tabs site={site} tab='audience' type='site' />
 
             <EmptyState
               title='There are currently no analytics available'
@@ -54,5 +54,5 @@ const SitesAnalyticsAudience: NextPage<ServerSideProps> = ({ user }) => {
   );
 };
 
-export default SitesAnalyticsAudience;
+export default SitesAnalyticsSiteAudience;
 export { getServerSideProps };

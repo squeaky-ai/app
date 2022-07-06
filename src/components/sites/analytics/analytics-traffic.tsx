@@ -105,6 +105,7 @@ export const AnalyticsTraffic: FC<Props> = ({ site, period }) => {
         <div className='grid-item pages'>
           <h4>Pages</h4>
           <AnalyticsPages 
+            site={site}
             pages={analytics.pages}
             page={pagesPage} 
             sort={pagesSort}

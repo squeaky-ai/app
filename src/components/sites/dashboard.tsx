@@ -97,7 +97,7 @@ export const Dashboard: FC<Props> = ({ site, period }) => {
         </h5>
         <h2>{dashboard.analytics.pageViewCount.toLocaleString()}</h2>
         <div className='link'>
-          <Link href={`/sites/${site_id}/analytics/traffic`}>
+          <Link href={`/sites/${site_id}/analytics/site/traffic`}>
             <a>Analytics</a>
           </Link>
           <Icon name='arrow-right-line' />

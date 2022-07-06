@@ -10,16 +10,15 @@ import { Unlock } from 'components/sites/unlock';
 import { Period } from 'components/sites/period/period';
 import { usePeriod } from 'hooks/use-period';
 import { Tabs } from 'components/sites/analytics/tabs';
-import { AnalyticsTraffic } from 'components/sites/analytics/analytics-traffic';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
-const SitesAnalyticsTraffic: NextPage<ServerSideProps> = ({ user }) => {
+const SitesAnalyticsPageAudience: NextPage<ServerSideProps> = ({ user }) => {
   const { period, setPeriod } = usePeriod('analytics');
   
   return (
     <>
       <Head>
-        <title>Squeaky | Site Analytics | Traffic</title> 
+        <title>Squeaky | Page Analytics | Audience</title> 
       </Head>
 
       <Page user={user} scope={[]}>
@@ -28,13 +27,13 @@ const SitesAnalyticsTraffic: NextPage<ServerSideProps> = ({ user }) => {
             <BreadCrumbs site={site} items={[{ name: 'Analytics' }]} />
 
             <div className='heading'>
-              <h3 className='title'>Analytics</h3>
+              <h3 className='title'>Page Analytics</h3>
               <Period period={period} onChange={setPeriod} />
             </div>
 
             <Unlock site={site} page='analytics' />
 
-            <Tabs site={site} tab='traffic' />
+            <Tabs site={site} tab='audience' type='page' />
 
             <EmptyState
               title='There are currently no analytics available'
@@ -43,10 +42,6 @@ const SitesAnalyticsTraffic: NextPage<ServerSideProps> = ({ user }) => {
               videoName='Analytics Intro'
               snippet='If you have only recently installed or updated your tracking code it may take up to an hour before analytics data becomes available.'
             />
-
-            {site.recordingsCount > 0 && (
-              <AnalyticsTraffic period={period} site={site} />
-            )}
           </Main>
         )}
       </Page>
@@ -54,5 +49,5 @@ const SitesAnalyticsTraffic: NextPage<ServerSideProps> = ({ user }) => {
   );
 };
 
-export default SitesAnalyticsTraffic;
+export default SitesAnalyticsPageAudience;
 export { getServerSideProps };

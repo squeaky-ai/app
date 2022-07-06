@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import Link from 'next/link';
 import { Table, Row, Cell } from 'components/table';
 import { toHoursMinutesAndSeconds } from 'lib/dates';
 import { Sort } from 'components/sort';
@@ -8,9 +9,10 @@ import { Tooltip } from 'components/tooltip';
 import { FiltersVisitorsLink } from 'components/sites/filters/common/filters-visitors-link';
 import { FiltersRecordingsLink } from 'components/sites/filters/common/filters-recordings-link';
 import { AnalyticsPagesSort } from 'types/graphql';
-import type { AnalyticsPages as AnalyticsPagesType } from 'types/graphql';
+import type { Site, AnalyticsPages as AnalyticsPagesType } from 'types/graphql';
 
 interface Props {
+  site: Site;
   pages: AnalyticsPagesType;
   page: number;
   sort: AnalyticsPagesSort;
@@ -18,7 +20,7 @@ interface Props {
   setSort: (sort: AnalyticsPagesSort) => void;
 }
 
-export const AnalyticsPages: FC<Props> = ({ pages, page, sort, setPage, setSort }) => (
+export const AnalyticsPages: FC<Props> = ({ site, pages, page, sort, setPage, setSort }) => (
   <>
     <Table>
       <Row head>
@@ -64,7 +66,14 @@ export const AnalyticsPages: FC<Props> = ({ pages, page, sort, setPage, setSort 
       {pages.items.map(page => (
         <Row key={page.url}>
           <Cell>
-            <Tooltip button={page.url} fluid>
+            <Tooltip
+              button={
+                <Link href={`/sites/${site.id}/analytics/page/traffic?url=${encodeURIComponent(page.url)}`}>
+                  <a>{page.url}</a>
+                </Link>
+              }
+              fluid
+            >
               {page.url}
             </Tooltip>
           </Cell>
