@@ -73,7 +73,11 @@ export const PageRoutes: FC<Props> = ({ button, buttonClassName, routes, setRout
                   </Button>
                 </ModalHeader>
                 <ModalContents>    
-                  <p>Replace whatever you want to replace with &quot;:parameter&quot;, this text can be anything you want, just make sure it starts with a colon.</p>
+                  <p>Replace whatever you want to replace with &quot;:parameter&quot;, this text can be anything you want, just make sure it starts with a colon. For example:</p>
+                  <ul>
+                    <li><code className='code'>/products/:product/features</code></li>
+                    <li><code className='code'>/blog/:category/:post</code></li>
+                  </ul>
                   <div className='add-route'>
                     <Input
                       type='text'
@@ -94,7 +98,7 @@ export const PageRoutes: FC<Props> = ({ button, buttonClassName, routes, setRout
                   <div className='routes'>
                     {values.routes.map(route => (
                       <div className='route' key={route}>
-                        <span>{route}</span>
+                        <code className='code'>{route}</code>
                         <Button type='button' className='link' onClick={() => setFieldValue('routes', values.routes.filter(r => r !== route))}>
                           <Icon name='close-line' />
                         </Button>

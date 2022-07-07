@@ -52,8 +52,8 @@ const options: State = [
   {
     key: FeatureFlag.PATH_PARAMS,
     value: false,
-    superuser: false,
-    description: '',
+    superuser: true,
+    description: 'Add the ability to enter custom routes on the journeys page to group urls that contain path parameters.',
   },
 ];
 

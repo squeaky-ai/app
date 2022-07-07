@@ -41,18 +41,33 @@
     }
   }
 
+  p {
+    margin: 0 0 1rem 0;
+  }
+
+  ul {
+    margin: 0 0 1.5rem 0;
+    padding: 0;
+
+    li {
+      margin: 0 0 .5rem 1.5rem;
+    }
+  }
+
   .routes {
     display: flex;
     flex-direction: column;
 
     .route {
       align-items: center;
-      border-bottom: 1px solid var(--gray-150);
+      background: var(--gray-100);
       display: flex;
-      padding: .5rem 0;
+      margin: 0 0 .5rem 0;
+      padding: .25rem;
 
-      span {
+      code {
         flex: 1;
+        margin-right: .5rem;
       }
 
       .button {
@@ -60,7 +75,7 @@
         color: var(--gray-blue-800);
         display: flex;
         font-size: 1.25rem;
-        margin: 0;
+        margin: 0 .25rem 0 0;
 
         .icon {
           margin: 0;
