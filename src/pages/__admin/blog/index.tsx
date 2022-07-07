@@ -63,7 +63,7 @@ const AdminBlog: NextPage<ServerSideProps> = () => {
                     <Cell>{post.category}</Cell>
                     <Cell>{post.tags.join(', ')}</Cell>
                     <Cell className='author'>
-                      <img src={post.author.image} height={24} width={24} />
+                      <img src={post.author.image} height={24} width={24} alt={`Image of the author ${post.author.name}`} />
                       {post.author.name}
                     </Cell>
                     <Cell>

@@ -19,17 +19,17 @@ export const JourneysDepth: FC<Props> = ({ depth, setDepth }) => {
         Journey length:
       </Label>
       <Select name='depth' value={depth} onChange={handleChange}>
-        <Option value='1'>1 page</Option>
-        <Option value='2'>2 pages</Option>
-        <Option value='3'>3 pages</Option>
-        <Option value='4'>4 pages</Option>
-        <Option value='5'>5 pages</Option>
-        <Option value='6'>6 pages</Option>
-        <Option value='7'>7 pages</Option>
-        <Option value='8'>8 pages</Option>
-        <Option value='9'>9 pages</Option>
-        <Option value='10'>10 pages</Option>
-        <Option value='-1'>All pages</Option>
+        <Option value='1'></Option>
+        <Option value='2'>2</Option>
+        <Option value='3'>3</Option>
+        <Option value='4'>4</Option>
+        <Option value='5'>5</Option>
+        <Option value='6'>6</Option>
+        <Option value='7'>7</Option>
+        <Option value='8'>8</Option>
+        <Option value='9'>9</Option>
+        <Option value='10'>10</Option>
+        <Option value='-1'>All</Option>
       </Select>
     </div>
   );
