@@ -11,7 +11,10 @@ export const PlayerSliderLoading: FC = () => (
       step={1} 
       value={0}
       recording={null}
+      pressed={false}
       onChange={() => ''}
+      onMouseDown={() => ''}
+      onMouseUp={() => ''}
     />
 
     <span className='timestamps'>

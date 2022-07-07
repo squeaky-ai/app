@@ -2,7 +2,7 @@ import React from 'react';
 import { Replayer } from 'rrweb';
 import { Slider } from 'components/sites/player/slider';
 import { toTimeString } from 'lib/dates';
-import { PlayerStatus } from 'types/player';
+import { Action, PlayerStatus } from 'types/player';
 import type { Recording } from 'types/graphql';
 
 interface Props {
@@ -11,10 +11,12 @@ interface Props {
   playbackSpeed: number;
   recording: Recording;
   handleSlide: (seconds: number) => void;
+  dispatch: React.Dispatch<Action>;
 }
 
 interface State {
   value: number;
+  pressed: boolean;
 }
 
 export class PlayerSlider extends React.Component<Props, State> {
@@ -23,7 +25,10 @@ export class PlayerSlider extends React.Component<Props, State> {
   public constructor(props: Props) {
     super(props);
 
-    this.state = { value: 0 };
+    this.state = {
+      value: 0,
+      pressed: false,
+    };
   }
 
   public componentWillUnmount(): void {
@@ -78,7 +83,20 @@ export class PlayerSlider extends React.Component<Props, State> {
 
   private onSlide = (value: number): void => {
     this.setState({ value });
-    this.props.handleSlide(value * 1000);
+
+    if (!this.state.pressed) {
+      this.props.handleSlide(value * 1000);
+    }
+  };
+
+  private onMouseDown = (): void => {
+    this.setState({ pressed: true });
+    this.props.replayer.pause();
+  };
+
+  private onMouseUp = (): void => {
+    this.setState({ pressed: false });
+    this.props.replayer.play(this.state.value * 1000);
   };
 
   private getSeconds = (ms: number): number => {
@@ -106,7 +124,10 @@ export class PlayerSlider extends React.Component<Props, State> {
           step={1} 
           value={this.state.value}
           recording={this.props.recording}
+          pressed={this.state.pressed}
           onChange={this.onSlide}
+          onMouseDown={this.onMouseDown}
+          onMouseUp={this.onMouseUp}
         />
 
         <span className='timestamps'>

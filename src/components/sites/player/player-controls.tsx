@@ -81,6 +81,7 @@ export const PlayerControls: FC<Props> = ({ state, replayer, recording, dispatch
           playbackSpeed={state.playbackSpeed}
           recording={recording} 
           handleSlide={handleSetProgress} 
+          dispatch={dispatch}
         />
       )}
 

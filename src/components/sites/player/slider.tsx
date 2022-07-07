@@ -11,12 +11,24 @@ interface Props {
   value: number;
   className?: string;
   recording: Recording;
+  pressed: boolean;
+  onMouseUp: VoidFunction;
+  onMouseDown: VoidFunction;
   onChange: (value: number) => void;
 }
 
-export const Slider: FC<Props> = ({ max, min, step, value, recording, onChange }) => {
+export const Slider: FC<Props> = ({
+  max,
+  min,
+  step,
+  value,
+  recording,
+  pressed,
+  onChange,
+  onMouseUp,
+  onMouseDown, 
+}) => {
   const [val, setVal] = React.useState<number>(0);
-  const [clicked, setClicked] = React.useState<boolean>(false);
 
   const { totalPages, currentPage } = recording?.events?.pagination || { 
     totalPages: 0, 
@@ -42,7 +54,7 @@ export const Slider: FC<Props> = ({ max, min, step, value, recording, onChange }
   // only if the user is currently clicking on the slider,
   // otherwise it will fight with it
   React.useEffect(() => {
-    if (!clicked) {
+    if (!pressed) {
       setVal(value);
     }
   }, [value]);
@@ -59,8 +71,8 @@ export const Slider: FC<Props> = ({ max, min, step, value, recording, onChange }
         step={step} 
         value={val}
         onChange={handleChange}
-        onMouseDown={() => setClicked(true)}
-        onMouseUp={() => setClicked(false)}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
       />
     </div>
   );
