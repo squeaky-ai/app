@@ -186,3 +186,12 @@ export const GET_VERIFIED_AT_QUERY = gql`
     }
   }
 `;
+
+export const GET_ROUTES_QUERY = gql`
+  query GetSiteRoutes($siteId: ID!) {
+    site(siteId: $siteId) {
+      id
+      routes
+    }
+  }
+`;

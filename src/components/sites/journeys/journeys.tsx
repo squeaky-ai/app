@@ -12,12 +12,11 @@ import { JourneysDepth } from 'components/sites/journeys/journeys-depth';
 import { PageRoutes } from 'components/sites/page-routes';
 import { useJourneys } from 'hooks/use-journeys';
 import { getDateRange } from 'lib/dates';
-import { PathPosition } from 'types/graphql';
-import { useFeatureFlags } from 'hooks/use-feature-flags';
-import { FeatureFlag } from 'lib/feature-flags';
+import { PathPosition, Site } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 
 interface Props {
+  site: Site;
   page: string;
   pages: string[];
   period: TimePeriod;
@@ -25,14 +24,11 @@ interface Props {
   setPeriod: (page: TimePeriod) => void;
 }
 
-export const Journeys: FC<Props> = ({ page, pages, period, setPage, setPeriod }) => {
+export const Journeys: FC<Props> = ({ site, page, pages, period, setPage, setPeriod }) => {
   const [depth, setDepth] = React.useState<number>(5);
-  const [routes, setRoutes] = React.useState<string[]>([]);
   const [position, setPosition] = React.useState<PathPosition>(PathPosition.Start);
 
-  const { featureFlagEnabled } = useFeatureFlags();
-
-  const { loading, error, journeys } = useJourneys({
+  const { loading, error, journeys, routes } = useJourneys({
     page,
     position,
     range: getDateRange(period) 
@@ -84,9 +80,7 @@ export const Journeys: FC<Props> = ({ page, pages, period, setPage, setPeriod })
           <JourneysDepth depth={depth} setDepth={setDepth} />
         </menu>
         <menu className='right'>
-          {featureFlagEnabled(FeatureFlag.PATH_PARAMS) && (
-            <PageRoutes routes={routes} setRoutes={setRoutes} />
-          )}
+          <PageRoutes site={site} routes={routes} />
           <Period period={period} onChange={setPeriod} />
         </menu>
       </div>

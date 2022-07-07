@@ -54,6 +54,7 @@ const SitesJourneys: NextPage<ServerSideProps> = ({ user }) => {
 
             {page && site.recordingsCount > 0 && (
               <Journeys
+                site={site}
                 page={page}
                 pages={pages}
                 period={period}

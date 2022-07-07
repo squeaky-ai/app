@@ -60,6 +60,7 @@ import {
   EventsGroup,
   EventAddToGroupInput,
   EventCaptureUpdateInput,
+  SitesRoutesUpdateInput,
 } from 'types/graphql';
 
 import {
@@ -83,6 +84,7 @@ import {
   ADMIN_SITE_ASSOCIATE_CUSTOMER_MUTATION,
   SUPERUSER_ACESSS_UPDATE,
   ADMIN_SITE_DELETE_MUTATION,
+  ROUTES_UPDATE_MUTATION,
 } from 'data/sites/mutations';
 
 import {
@@ -941,4 +943,13 @@ export const eventsCaptureUpdate = async (input: EventCaptureUpdateInput): Promi
   });
 
   return data.eventCaptureUpdate;
+};
+
+export const routesUpdate = async (input: SitesRoutesUpdateInput): Promise<Site> => {
+  const { data } = await client.mutate({
+    mutation: ROUTES_UPDATE_MUTATION,
+    variables: { input },
+  });
+
+  return data.routesUpdate;
 };

@@ -8,6 +8,7 @@ import type { Site, AnalyticsUserPath } from 'types/graphql';
 interface UseJourneys {
   loading: boolean;
   error: boolean;
+  routes: string[];
   journeys: AnalyticsUserPath[];
 }
 
@@ -32,6 +33,7 @@ export const useJourneys = (props: Props): UseJourneys => {
   return {
     loading,
     error: !!error,
+    routes: data ? data.site.routes : [],
     journeys: data ? data.site.analytics.userPaths : [],
   };
 };

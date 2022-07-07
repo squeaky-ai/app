@@ -174,3 +174,12 @@ export const ADMIN_SITE_DELETE_MUTATION = gql`
     }
   }
 `;
+
+export const ROUTES_UPDATE_MUTATION = gql`
+  mutation($input: SitesRoutesUpdateInput!) {
+    routesUpdate(input: $input) {
+      id
+      routes
+    }
+  }
+`;
