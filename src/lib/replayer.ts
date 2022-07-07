@@ -1,15 +1,16 @@
 import React from 'react';
 import { Replayer } from 'rrweb';
-import type { Event } from 'types/event';
 import { Action, PlayerStatus } from 'types/player';
+import type { Event } from 'types/event';
 import type { Recording } from 'types/graphql';
 
 interface InitArgs {
+  events: Event[];
   recording: Recording;
   dispatch: React.Dispatch<Action>;
 }
 
-export const initReplayer = ({ recording, dispatch }: InitArgs): Replayer => {
+export const initReplayer = ({ events, recording, dispatch }: InitArgs): Replayer => {
   const element = document.querySelector('.player-container');
 
   if (!element) {
@@ -18,8 +19,6 @@ export const initReplayer = ({ recording, dispatch }: InitArgs): Replayer => {
     // or it will cry
     return null;
   }
-
-  const events: Event[] = recording.events.items.map(i => JSON.parse(i));
 
   if (events.length === 0) {
     // Shouldn't be possible to create a recording without events

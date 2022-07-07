@@ -3,7 +3,7 @@ import { ErrorEvent, CustomEvents } from 'types/event';
 import { EventStatsSort } from 'types/events';
 import type { metaEvent } from 'rrweb/typings/types';
 import type { Event, EventName } from 'types/event';
-import type { EventsStat } from 'types/graphql';
+import type { EventsStat, RecordingsEvent } from 'types/graphql';
 
 type EventWithTimestamp<T> = T & { id: number; timestamp: number; delay?: number; };
 
@@ -22,6 +22,13 @@ export const isScrollEvent = (
 export const isErrorEvent = (
   event: Event | ErrorEvent
 ): event is ErrorEvent => (event.type as any) === CustomEvents.ERROR;
+
+export const parseRecordingEvents = (event: RecordingsEvent[]): Event[] => event.map(i => ({
+  id: Number(i.id),
+  type: i.type, 
+  data: JSON.parse(i.data),
+  timestamp: Number(i.timestamp),
+}));
 
 export function getEventName(event: Event | ErrorEvent): EventName {
   if (event.type === EventType.Meta) {

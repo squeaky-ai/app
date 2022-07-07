@@ -9,8 +9,7 @@ import { EventTimestamp } from 'components/sites/player/event-timestamp';
 import { SidebarEventsVisibility } from 'components/sites/player/sidebar-events-visibility';
 import { Preference, Preferences } from 'lib/preferences';
 import { EVENTS } from 'data/recordings/constants';
-import type { Events, EventName } from 'types/event';
-import type { Recording } from 'types/graphql';
+import type { Event, Events, EventName } from 'types/event';
 
 import {
   getEventName, 
@@ -23,11 +22,11 @@ import {
 } from 'lib/events';
 
 interface Props {
+  events: Event[];
   replayer: Replayer;
-  recording: Recording;
 }
 
-export const SidebarEvents: FC<Props> = ({ recording, replayer }) => {
+export const SidebarEvents: FC<Props> = ({ events, replayer }) => {
   const savedActive = Preferences.getArray<EventName>(Preference.EVENTS_SHOW_TYPES);
 
   const [active, setActive] = React.useState<EventName[]>(
@@ -35,8 +34,6 @@ export const SidebarEvents: FC<Props> = ({ recording, replayer }) => {
     // show that, otherwise default to showing all of the types
     savedActive.length === 0 ? EVENTS.map(a => a.value) : savedActive
   );
-
-  const events: Events = recording.events.items.map(i => JSON.parse(i));
 
   const items = events.reduce((acc, item) => {
     // Add all of the page views

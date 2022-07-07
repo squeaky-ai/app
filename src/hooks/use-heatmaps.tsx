@@ -1,7 +1,9 @@
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
+import { parseRecordingEvents } from 'lib/events';
 import { GET_HEATMAPS_QUERY, GET_RECORDING_QUERY } from 'data/heatmaps/queries';
 import type { TimeRange } from 'types/common';
+import type { Event } from 'types/event';
 import type { Site, Recording, Heatmaps, HeatmapsDevice, HeatmapsType } from 'types/graphql';
 
 interface UseHeatmaps {
@@ -13,6 +15,7 @@ interface UseHeatmaps {
 interface UseRecording {
   loading: boolean;
   error: boolean;
+  events: Event[];
   recording: Recording | null;
 }
 
@@ -70,6 +73,7 @@ export const useRecording = (id: string): UseRecording => {
     error: !!error,
     recording: data 
       ? data.site.recording 
-      : null
+      : null,
+    events: data ? parseRecordingEvents(data.site.recording.events.items) : [],
   };
 };

@@ -12,20 +12,22 @@ import { PlayerDetails } from 'components/sites/player/player-details';
 import { PlayerFooter } from 'components/sites/player/player-footer';
 import { Error } from 'components/error';
 import { PlayerState, PlayerStatus } from 'types/player';
-import type { User, Recording, RecordingsEvents } from 'types/graphql';
+import type { User, Recording } from 'types/graphql';
 import type { Action } from 'types/player';
+import type { Event } from 'types/event';
 
 interface Props {
   user: User;
   state: PlayerState;
+  events: Event[];
   recording: Recording;
   dispatch: React.Dispatch<Action>;
-  fetchMoreEvents: (eventPage: number) => Promise<RecordingsEvents>;
+  fetchMoreEvents: (eventPage: number) => Promise<Event[]>;
 }
 
 let nextPageTimer: NodeJS.Timer;
 
-export const PlayerWrapper: FC<Props> = ({ user, state, recording, dispatch, fetchMoreEvents }) => {
+export const PlayerWrapper: FC<Props> = ({ user, state, recording, events, dispatch, fetchMoreEvents }) => {
   const router = useRouter();
   const ref = React.useRef<Player>(null);
 
@@ -39,8 +41,8 @@ export const PlayerWrapper: FC<Props> = ({ user, state, recording, dispatch, fet
       // replayer. There's no need to manage the events as 
       // part of the recording as the InMemoryCache will take
       // care of it
-      const { items } = await fetchMoreEvents(page);
-      items.forEach((e) => ref.current.replayer.addEvent(JSON.parse(e)));
+      const items = await fetchMoreEvents(page);
+      items.forEach((e) => ref.current.replayer.addEvent(e));
 
       // // Start replaying now that there is more stuff to show
       ref.current.replayer.play(ref.current.replayer.getCurrentTime());
@@ -104,6 +106,7 @@ export const PlayerWrapper: FC<Props> = ({ user, state, recording, dispatch, fet
                 ref={ref}
                 site={site}
                 state={state}
+                events={events}
                 recording={recording}
                 dispatch={dispatch}
               />
@@ -113,6 +116,7 @@ export const PlayerWrapper: FC<Props> = ({ user, state, recording, dispatch, fet
               state={state}
               site={site}
               replayer={ref.current?.replayer}
+              events={events}
               recording={recording}
               dispatch={dispatch}
             />

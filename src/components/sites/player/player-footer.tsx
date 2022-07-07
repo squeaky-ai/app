@@ -9,16 +9,18 @@ import { PlayerControls } from 'components/sites/player/player-controls';
 import type { Recording } from 'types/graphql';
 import type { PlayerState, Action } from 'types/player';
 import type { Site } from 'types/graphql';
+import { Event } from 'types/event';
 
 interface Props {
   state: PlayerState;
   site: Site;
   replayer: Replayer;
+  events: Event[];
   recording: Recording;
   dispatch: React.Dispatch<Action>;
 }
 
-export const PlayerFooter: FC<Props> = ({ state, site, replayer, recording, dispatch }) => (
+export const PlayerFooter: FC<Props> = ({ state, site, replayer, events, recording, dispatch }) => (
   <>
     <footer className={classnames('controls', { active: state.activeTab !== null })}>
       <div className='control-group'>
@@ -45,6 +47,7 @@ export const PlayerFooter: FC<Props> = ({ state, site, replayer, recording, disp
       state={state}
       site={site}
       replayer={replayer} 
+      events={events}
       recording={recording}
       dispatch={dispatch}
     />

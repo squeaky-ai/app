@@ -7,10 +7,12 @@ import { initReplayer } from 'lib/replayer';
 import { PlayerState, Action, PlayerStatus } from 'types/player';
 import type { Recording } from 'types/graphql';
 import type { Site } from 'types/graphql';
+import type { Event } from 'types/event';
 
 interface Props {
   site: Site;
   state: PlayerState;
+  events: Event[];
   recording: Recording;
   dispatch: React.Dispatch<Action>;
 }
@@ -32,6 +34,7 @@ export class Player extends React.Component<Props> {
   public componentDidMount() {
     this.replayer = initReplayer({
       dispatch: this.props.dispatch,
+      events: this.props.events,
       recording: this.props.recording,
     });
 

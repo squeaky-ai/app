@@ -2,17 +2,14 @@ import React from 'react';
 import type { FC } from 'react';
 import { Replayer } from 'rrweb';
 import type { Event } from 'types/event';
-import type { Recording } from 'types/graphql';
 
 interface Props {
-  recording: Recording;
+  events: Event[];
 }
 
-export const PlayerPreview: FC<Props> = ({ recording }) => {
+export const PlayerPreview: FC<Props> = ({ events }) => {
   const ref = React.useRef<HTMLDivElement>(null);
   const [zoom, setZoom] = React.useState<number>(1);
-
-  const { events } = recording;
 
   const squidgeToFit = (replayer: Replayer) => setTimeout(() => {
     const { height, width } = ref.current.getBoundingClientRect();
@@ -29,11 +26,9 @@ export const PlayerPreview: FC<Props> = ({ recording }) => {
   }, 0);
 
   React.useEffect(() => {
-    const items: Event[] = events.items.map(e => JSON.parse(e));
+    if (events.length === 0) return undefined;
 
-    if (items.length === 0) return undefined;
-
-    const replayer = new Replayer(items, {
+    const replayer = new Replayer(events, {
       root: document.getElementById('preview-wrapper'),
       skipInactive: true,
       mouseTail: false,

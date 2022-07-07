@@ -47,7 +47,12 @@ export const GET_DASHBOARD_QUERY = gql`
           starred
         }
         events(page: 1, size: 10) {
-          items
+          items {
+            id
+            type
+            data
+            timestamp
+          }
         }
       }
     }

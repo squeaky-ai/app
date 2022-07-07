@@ -25,7 +25,7 @@ const initialState: PlayerState = {
 const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
   const [state, dispatch] = React.useReducer(reducer, initialState);
 
-  const { recording, error, loading, fetchMoreEvents } = useRecording();
+  const { recording, events, error, loading, fetchMoreEvents } = useRecording();
 
   if (error) {
     return <Error />;
@@ -35,7 +35,7 @@ const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
     return <NotFound />;
   }
 
-  if (!loading && !recording.events.items.length) {
+  if (!loading && !events.length) {
     return <NotFound />;
   }
 
@@ -48,6 +48,7 @@ const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
       <PlayerWrapper 
         user={user} 
         state={state}
+        events={events}
         recording={recording}
         dispatch={dispatch}
         fetchMoreEvents={fetchMoreEvents}

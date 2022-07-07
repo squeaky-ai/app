@@ -1691,6 +1691,14 @@ export type RecordingsDevice = {
   viewportY: Scalars['Int'];
 };
 
+export type RecordingsEvent = {
+  __typename?: 'RecordingsEvent';
+  data: Scalars['String'];
+  id: Scalars['ID'];
+  timestamp: Scalars['BigInt'];
+  type: Scalars['Int'];
+};
+
 export type RecordingsEventPagination = {
   __typename?: 'RecordingsEventPagination';
   currentPage: Scalars['Int'];
@@ -1701,7 +1709,7 @@ export type RecordingsEventPagination = {
 
 export type RecordingsEvents = {
   __typename?: 'RecordingsEvents';
-  items: Array<Maybe<Scalars['String']>>;
+  items: Array<Maybe<RecordingsEvent>>;
   pagination: RecordingsEventPagination;
 };
 
