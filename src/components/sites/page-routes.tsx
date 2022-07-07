@@ -46,6 +46,7 @@ export const PageRoutes: FC<Props> = ({ site, button, buttonClassName, routes })
         <Formik
           initialValues={{ routes }}
           validationSchema={PageRoutesSchema}
+          enableReinitialize
           onSubmit={(values, { setSubmitting }) => {
             (async () => {
               try {
