@@ -146,7 +146,12 @@ export const GET_RECORDING_EVENTS_QUERY = gql`
       recording(recordingId: $recordingId) {
         id
         events(page: $eventPage) {
-          items
+          items {
+            id
+            data
+            type
+            timestamp
+          }
           pagination {
             perPage
             itemCount
