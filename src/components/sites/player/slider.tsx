@@ -1,8 +1,10 @@
 import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
+import { Replayer } from 'rrweb';
 import { clamp, debounce } from 'lodash';
 import { Input } from 'components/input';
+import { Inactivity } from 'components/sites/player/inactivity';
 import { Icon } from 'components/icon';
 import { getInteractionEvents, getMouseInteractionIcon, isPageViewEvent, isScrollEvent, isErrorEvent } from 'lib/events';
 import { EventType, IncrementalSource } from 'rrweb';
@@ -18,6 +20,7 @@ interface Props {
   events: Event[];
   recording: Recording;
   pressed: boolean;
+  replayer: Replayer;
   duration: number;
   onMouseUp: VoidFunction;
   onMouseDown: VoidFunction;
@@ -30,6 +33,7 @@ export const Slider: FC<Props> = ({
   step,
   value,
   events,
+  replayer,
   recording,
   pressed,
   duration,
@@ -84,11 +88,15 @@ export const Slider: FC<Props> = ({
     <div className='slider'>
       <div className='bar buffered' style={{ width: `${clamp(buffered * 100, 0, 100)}%` }} />
       <div className='bar progress' style={{ width: `${clamp(progress * 100, 0, 100)}%` }} />
+
+      {interactions.length && (
+        <Inactivity replayer={replayer} duration={duration} />
+      )}
       
       <div className='events'>
-        {interactions.map(e => (
+        {interactions.map((e, index) => (
           <div 
-            key={e.id}
+            key={e.id + index}
             className={classnames('event', { error: isErrorEvent(e) })}
             style={{ left: `${Math.round(((e.timestamp - offset) / duration) * 100)}%` }}
           >
