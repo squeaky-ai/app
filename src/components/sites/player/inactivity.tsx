@@ -89,10 +89,14 @@ export class Inactivity extends React.Component<Props> {
   };
 
   public render(): JSX.Element {
+    console.log('Inactivity', this.inactivity);
     return (
       <div className='inactivity'>
         {this.inactivity.map((inactivity, index) => {
           const [left, right] = this.leftPositionFromDuration(inactivity);
+
+
+          console.log('Left and right', [left, right]);
 
           return (
             <div
