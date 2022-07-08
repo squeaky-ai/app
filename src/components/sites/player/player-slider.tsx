@@ -4,11 +4,13 @@ import { Slider } from 'components/sites/player/slider';
 import { toTimeString } from 'lib/dates';
 import { Action, PlayerStatus } from 'types/player';
 import type { Recording } from 'types/graphql';
+import type { Event } from 'types/event';
 
 interface Props {
   replayer: Replayer;
   status: PlayerStatus;
   playbackSpeed: number;
+  events: Event[];
   recording: Recording;
   handleSlide: (seconds: number) => void;
   dispatch: React.Dispatch<Action>;
@@ -123,7 +125,9 @@ export class PlayerSlider extends React.Component<Props, State> {
           max={this.durationInSeconds} 
           step={1} 
           value={this.state.value}
+          events={this.props.events}
           recording={this.props.recording}
+          duration={this.duration}
           pressed={this.state.pressed}
           onChange={this.onSlide}
           onMouseDown={this.onMouseDown}

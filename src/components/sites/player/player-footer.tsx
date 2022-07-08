@@ -34,6 +34,7 @@ export const PlayerFooter: FC<Props> = ({ state, site, replayer, events, recordi
         <PlayerControls 
           state={state} 
           replayer={replayer} 
+          events={events}
           recording={recording}
           dispatch={dispatch}
         />

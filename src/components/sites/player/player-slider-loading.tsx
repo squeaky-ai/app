@@ -12,6 +12,8 @@ export const PlayerSliderLoading: FC = () => (
       value={0}
       recording={null}
       pressed={false}
+      events={[]}
+      duration={0}
       onChange={() => ''}
       onMouseDown={() => ''}
       onMouseUp={() => ''}

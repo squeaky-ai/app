@@ -2,20 +2,19 @@ import React from 'react';
 import type { FC } from 'react';
 import type { Replayer } from 'rrweb';
 import classnames from 'classnames';
-import { last } from 'lodash';
 import { Icon } from 'components/icon';
 import { EventType, IncrementalSource } from 'rrweb';
 import { EventTimestamp } from 'components/sites/player/event-timestamp';
 import { SidebarEventsVisibility } from 'components/sites/player/sidebar-events-visibility';
+import { getInteractionEvents } from 'lib/events';
 import { Preference, Preferences } from 'lib/preferences';
 import { EVENTS } from 'data/recordings/constants';
-import type { Event, Events, EventName } from 'types/event';
+import type { Event, EventName } from 'types/event';
 
 import {
   getEventName, 
   getMouseInteractionLabel, 
   getMouseInteractionIcon, 
-  isMouseEvent,
   isPageViewEvent,
   isScrollEvent,
   isErrorEvent,
@@ -35,29 +34,7 @@ export const SidebarEvents: FC<Props> = ({ events, replayer }) => {
     savedActive.length === 0 ? EVENTS.map(a => a.value) : savedActive
   );
 
-  const items = events.reduce((acc, item) => {
-    // Add all of the page views
-    if (isPageViewEvent(item)) {
-      return [...acc, item];
-    }
-
-    // Add all of the mouse events
-    if (isMouseEvent(item)) {
-      return [...acc, item];
-    }
-
-    // Only add scroll events if the previous event was not a scroll event
-    if (isScrollEvent(item)) {
-      const prevEvent = last(acc);
-      return isScrollEvent(prevEvent) ? [...acc] : [...acc, item];
-    }
-
-    if (isErrorEvent(item)) {
-      return [...acc, item];
-    }
-
-    return [...acc];
-  }, [] as Events);
+  const items = getInteractionEvents(events);
 
   const startedAt = items[0]?.timestamp || 0;
 
