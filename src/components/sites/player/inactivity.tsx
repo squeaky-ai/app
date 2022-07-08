@@ -37,9 +37,11 @@ export class Inactivity extends React.Component<Props> {
   };
 
   private leftPositionFromDuration(inactivity: number[]) {
+    const [left, right] = inactivity;
+
     return [
-      Math.round(((inactivity[0]) / this.props.duration) * 100),
-      Math.round(((inactivity[1]) / this.props.duration) * 100),
+      Math.round(((left) / this.props.duration) * 100),
+      right ? Math.round(((right) / this.props.duration) * 100) : 100,
     ];
   }
 
@@ -89,14 +91,10 @@ export class Inactivity extends React.Component<Props> {
   };
 
   public render(): JSX.Element {
-    console.log('Inactivity', this.inactivity);
     return (
       <div className='inactivity'>
         {this.inactivity.map((inactivity, index) => {
           const [left, right] = this.leftPositionFromDuration(inactivity);
-
-
-          console.log('Left and right', [left, right]);
 
           return (
             <div
