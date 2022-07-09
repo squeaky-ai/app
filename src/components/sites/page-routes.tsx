@@ -76,7 +76,7 @@ export const PageRoutes: FC<Props> = ({ site, button, buttonClassName, routes })
                   </Button>
                 </ModalHeader>
                 <ModalContents>    
-                  <p>If your app generates a URL structure that contains unique parameters e.g. User ID&apos;s, then use the tool below to swap these parameters with a common phrase. This will generate a cleaner and more readable map of your visitor journey.</p>
+                  <p>If your site generates a URL structure that contains unique parameters e.g. User ID&apos;s, then use the tool below to swap these parameters with a common phrase. This will generate a cleaner and more readable map of your visitor journey.</p>
                   <p><b>For example:</b></p>
                   <ul>
                     <li><code className='code'>/products/:product/features</code></li>
