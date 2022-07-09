@@ -6,15 +6,14 @@ import { Icon } from 'components/icon';
 import { EventType, IncrementalSource } from 'rrweb';
 import { EventTimestamp } from 'components/sites/player/event-timestamp';
 import { SidebarEventsVisibility } from 'components/sites/player/sidebar-events-visibility';
-import { getInteractionEvents } from 'lib/events';
+import { getInteractionEvents, isCustomEvent, getIconForEventType } from 'lib/events';
 import { Preference, Preferences } from 'lib/preferences';
 import { EVENTS } from 'data/recordings/constants';
 import type { Event, EventName } from 'types/event';
 
 import {
   getEventName, 
-  getMouseInteractionLabel, 
-  getMouseInteractionIcon, 
+  getMouseInteractionLabel,
   isPageViewEvent,
   isScrollEvent,
   isErrorEvent,
@@ -51,7 +50,7 @@ export const SidebarEvents: FC<Props> = ({ events, replayer }) => {
             key={`${item.timestamp}_${index}`}>
             {isPageViewEvent(item) && (
               <>
-                <Icon name='compass-discover-line' />
+                <Icon name={getIconForEventType(item)} />
                 <p className='title'>
                   Page view <EventTimestamp timestamp={item.timestamp} offset={startedAt} replayer={replayer} />
                 </p>
@@ -61,7 +60,7 @@ export const SidebarEvents: FC<Props> = ({ events, replayer }) => {
 
             {isScrollEvent(item) && (
               <>
-                <Icon name='mouse-line' />
+                <Icon name={getIconForEventType(item)} />
                 <p className='title'>
                   Scrolled <EventTimestamp timestamp={item.timestamp} offset={startedAt} replayer={replayer} />
                 </p>
@@ -70,7 +69,7 @@ export const SidebarEvents: FC<Props> = ({ events, replayer }) => {
 
             {item.type === EventType.IncrementalSnapshot && item.data.source === IncrementalSource.MouseInteraction && (
               <>
-                <Icon name={getMouseInteractionIcon(item.data.type)} />
+                <Icon name={getIconForEventType(item)} />
                 <p className='title'>
                   {getMouseInteractionLabel(item.data.type)} <EventTimestamp timestamp={item.timestamp} offset={startedAt} replayer={replayer} />
                 </p>
@@ -80,12 +79,21 @@ export const SidebarEvents: FC<Props> = ({ events, replayer }) => {
 
             {isErrorEvent(item) && (
               <div className='error'>
-                <Icon name='code-s-slash-line' />
+                <Icon name={getIconForEventType(item)} />
                 <p className='title'>
                   JavaScript Error <EventTimestamp timestamp={item.timestamp} offset={startedAt} replayer={replayer} />
                 </p>
                 <p className='info'>{item.data.message}</p>
               </div>
+            )}
+
+            {isCustomEvent(item) && (
+              <>
+                <Icon name={getIconForEventType(item)} />
+                <p className='title'>
+                  Custom Event <EventTimestamp timestamp={item.timestamp} offset={startedAt} replayer={replayer} />
+                </p>
+              </>
             )}
           </li>
         ))}

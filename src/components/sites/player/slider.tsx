@@ -6,10 +6,9 @@ import { clamp, debounce } from 'lodash';
 import { Input } from 'components/input';
 import { Inactivity } from 'components/sites/player/inactivity';
 import { Icon } from 'components/icon';
-import { getInteractionEvents, getMouseInteractionIcon, isPageViewEvent, isScrollEvent, isErrorEvent } from 'lib/events';
-import { EventType, IncrementalSource } from 'rrweb';
+import { getInteractionEvents, getIconForEventType, isErrorEvent } from 'lib/events';
 import type { Recording } from 'types/graphql';
-import type { Event, ErrorEvent } from 'types/event';
+import type { Event } from 'types/event';
 
 interface Props {
   min: number;
@@ -64,15 +63,6 @@ export const Slider: FC<Props> = ({
     setVal(number);
     // Fire the debounced callback so the replayer can update
     setValue(number);
-  };
-
-  const getIconForEventType = (event: Event | ErrorEvent) => {
-    if (isPageViewEvent(event)) return 'compass-discover-line';
-    if (isScrollEvent(event)) return 'mouse-line';
-    if (event.type === EventType.IncrementalSnapshot && event.data.source === IncrementalSource.MouseInteraction) return getMouseInteractionIcon(event.data.type);
-    if (isErrorEvent(event)) return 'code-s-slash-line';
-
-    return 'question-mark';
   };
 
   // Update the value when it changes in the parent but

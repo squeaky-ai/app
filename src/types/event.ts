@@ -22,6 +22,7 @@ export interface EventItem {
 
 export enum CustomEvents {
   ERROR = 100,
+  CUSTOM_TRACK = 101,
 }
 
 export type ErrorEvent = {

@@ -24,6 +24,10 @@ export const isErrorEvent = (
   event: Event | ErrorEvent
 ): event is ErrorEvent => (event.type as any) === CustomEvents.ERROR;
 
+export const isCustomEvent = (
+  event: Event | ErrorEvent
+): event is ErrorEvent => (event.type as any) === CustomEvents.CUSTOM_TRACK;
+
 export const parseRecordingEvents = (event: RecordingsEvent[]): Event[] => event.map(i => ({
   id: Number(i.id),
   type: i.type, 
@@ -153,5 +157,33 @@ export const getInteractionEvents = (events: Event[]) => events.reduce((acc, ite
     return [...acc, item];
   }
 
+  if (isCustomEvent(item)) {
+    return [...acc, item];
+  }
+
   return [...acc];
 }, [] as Events);
+
+export const getIconForEventType = (event: Event | ErrorEvent) => {
+  if (isPageViewEvent(event)) {
+    return 'compass-discover-line';
+  }
+
+  if (isScrollEvent(event)) {
+    return 'mouse-line';
+  }
+
+  if (event.type === EventType.IncrementalSnapshot && event.data.source === IncrementalSource.MouseInteraction) {
+    return getMouseInteractionIcon(event.data.type);
+  }
+
+  if (isErrorEvent(event)) {
+    return 'code-s-slash-line';
+  }
+
+  if (isCustomEvent(event)) {
+    return 'loader-line';
+  }
+
+  return 'question-mark';
+};
