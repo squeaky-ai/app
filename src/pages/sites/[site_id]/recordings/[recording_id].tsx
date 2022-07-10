@@ -31,6 +31,16 @@ const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
 
   const { recording, events, error, loading, fetchMoreEvents } = useRecording();
 
+  React.useEffect(() => {
+    const savedActive = Preferences.getArray<EventName>(Preference.EVENTS_SHOW_TYPES);
+    // If they have anything stored in the preferences then
+    // show that, otherwise default to showing all of the types
+    dispatch({
+      type: 'eventVisibility',
+      value: savedActive.length === 0 ? EVENTS.map(a => a.value) : savedActive,
+    });
+  }, []);
+
   if (error) {
     return <Error />;
   }
@@ -42,16 +52,6 @@ const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
   if (!loading && !events.length) {
     return <NotFound />;
   }
-
-  React.useEffect(() => {
-    const savedActive = Preferences.getArray<EventName>(Preference.EVENTS_SHOW_TYPES);
-    // If they have anything stored in the preferences then
-    // show that, otherwise default to showing all of the types
-    dispatch({
-      type: 'eventVisibility',
-      value: savedActive.length === 0 ? EVENTS.map(a => a.value) : savedActive,
-    });
-  }, []);
 
   return (
     <>
