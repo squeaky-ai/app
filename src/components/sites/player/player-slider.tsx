@@ -60,10 +60,10 @@ export class PlayerSlider extends React.Component<Props, State> {
 
     const update = () => {
       const currentTime = this.props.replayer.getCurrentTime();
-      const seconds = this.getSeconds(currentTime);
+      const value = this.getSliderPosition(currentTime);
 
-      if (seconds !== this.state.value) {
-        this.setState({ value: seconds });
+      if (value !== this.state.value) {
+        this.setState({ value });
       }
 
       if (currentTime < this.duration) {
@@ -107,6 +107,10 @@ export class PlayerSlider extends React.Component<Props, State> {
     return Math.floor(ms / 1000);
   };
 
+  private getSliderPosition = (ms: number): number => {
+    return Number((ms / 1000).toFixed(2));
+  };
+
   private get durationInSeconds(): number {
     return this.getSeconds(this.duration);
   }
@@ -125,7 +129,6 @@ export class PlayerSlider extends React.Component<Props, State> {
         <Slider 
           min={0} 
           max={this.durationInSeconds} 
-          step={1} 
           value={this.state.value}
           events={this.props.events}
           recording={this.props.recording}

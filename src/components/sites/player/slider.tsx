@@ -12,7 +12,6 @@ import type { PlayerState } from 'types/player';
 interface Props {
   min: number;
   max: number;
-  step: number;
   value: number;
   className?: string;
   events: Event[];
@@ -28,7 +27,6 @@ interface Props {
 export const Slider: FC<Props> = ({
   max,
   min,
-  step,
   value,
   events,
   recording,
@@ -98,7 +96,7 @@ export const Slider: FC<Props> = ({
         type='range' 
         min={min} 
         max={max} 
-        step={step} 
+        step={.01} 
         value={val}
         onChange={handleChange}
         onMouseDown={onMouseDown}
