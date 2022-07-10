@@ -1,6 +1,5 @@
 import React from 'react';
 import type { FC } from 'react';
-import { Replayer } from 'rrweb';
 import { clamp, debounce } from 'lodash';
 import { Input } from 'components/input';
 import { Inactivity } from 'components/sites/player/inactivity';
@@ -19,7 +18,6 @@ interface Props {
   events: Event[];
   recording: Recording;
   pressed: boolean;
-  replayer: Replayer;
   duration: number;
   state: PlayerState;
   onMouseUp: VoidFunction;
@@ -33,7 +31,6 @@ export const Slider: FC<Props> = ({
   step,
   value,
   events,
-  replayer,
   recording,
   pressed,
   duration,
@@ -82,13 +79,13 @@ export const Slider: FC<Props> = ({
       <div className='bar progress' style={{ width: `${clamp(progress * 100, 0, 100)}%` }} />
 
       {interactions.length && (
-        <Inactivity replayer={replayer} duration={duration} />
+        <Inactivity inactivity={recording.inactivity} duration={duration} />
       )}
       
       <div className='events'>
         {interactions.map((e, index) => (
           <Interaction 
-            key={e.id + index}
+            key={`${e.id}_${index}`}
             duration={duration}
             event={e}
             offset={offset}

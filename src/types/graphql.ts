@@ -1608,6 +1608,7 @@ export type QueryUserInvitationArgs = {
 
 export type Recording = {
   __typename?: 'Recording';
+  activityDuration?: Maybe<Scalars['BigInt']>;
   bookmarked: Scalars['Boolean'];
   connectedAt?: Maybe<Scalars['ISO8601DateTime']>;
   countryCode?: Maybe<Scalars['String']>;
@@ -1618,6 +1619,7 @@ export type Recording = {
   events: RecordingsEvents;
   exitPage: Scalars['String'];
   id: Scalars['ID'];
+  inactivity: Array<Maybe<Array<Scalars['BigInt']>>>;
   language: Scalars['String'];
   notes: Array<Maybe<Note>>;
   nps?: Maybe<FeedbackNpsResponseItem>;

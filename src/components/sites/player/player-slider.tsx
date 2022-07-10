@@ -128,7 +128,6 @@ export class PlayerSlider extends React.Component<Props, State> {
           step={1} 
           value={this.state.value}
           events={this.props.events}
-          replayer={this.props.replayer}
           recording={this.props.recording}
           duration={this.duration}
           pressed={this.state.pressed}
