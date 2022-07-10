@@ -8,18 +8,18 @@ import { Button } from 'components/button';
 import { Checkbox } from 'components/checkbox';
 import { EVENTS } from 'data/recordings/constants';
 import { Preference, Preferences } from 'lib/preferences';
-import type { EventName } from 'types/event';
+import type { PlayerState, Action } from 'types/player';
 
 interface Props {
-  active: EventName[];
-  setActive: (value: EventName[]) => void;
+  state: PlayerState;
+  dispatch: React.Dispatch<Action>;
 }
 
 const EventsSchema = Yup.object().shape({
   checked: Yup.array(),
 });
 
-export const SidebarEventsVisibility: FC<Props> = ({ active, setActive }) => {
+export const SidebarEventsVisibility: FC<Props> = ({ state, dispatch }) => {
   const ref = React.useRef<Modal>();
 
   const openModal = () => {
@@ -35,19 +35,19 @@ export const SidebarEventsVisibility: FC<Props> = ({ active, setActive }) => {
       <Button className='secondary events-visibility' onClick={openModal}>
         <Icon name='eye-line' />
         Show
-        <span>{active.length}/{EVENTS.length}</span>
+        <span>{state.eventVisibility.length}/{EVENTS.length}</span>
       </Button>
 
       <Modal ref={ref}>
         <ModalBody aria-labelledby='sidebar-events-visibility-title' aria-describedby='sidebar-events-visibility-description'>
           <Formik
-            initialValues={{ checked: active }}
+            initialValues={{ checked: state.eventVisibility }}
             validationSchema={EventsSchema}
             onSubmit={(values, { setSubmitting }) => {
               Preferences.setArray<string>(Preference.EVENTS_SHOW_TYPES, values.checked);
 
               setSubmitting(false);
-              setActive(values.checked);
+              dispatch({ type: 'eventVisibility', value: values.checked });
               closeModal();
             }}
           >

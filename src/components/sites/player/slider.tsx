@@ -1,14 +1,14 @@
 import React from 'react';
 import type { FC } from 'react';
-import classnames from 'classnames';
 import { Replayer } from 'rrweb';
 import { clamp, debounce } from 'lodash';
 import { Input } from 'components/input';
 import { Inactivity } from 'components/sites/player/inactivity';
-import { Icon } from 'components/icon';
-import { getInteractionEvents, getIconForEventType, isErrorEvent } from 'lib/events';
+import { Interaction } from 'components/sites/player/interaction';
+import { getInteractionEvents, getEventName } from 'lib/events';
 import type { Recording } from 'types/graphql';
 import type { Event } from 'types/event';
+import type { PlayerState } from 'types/player';
 
 interface Props {
   min: number;
@@ -21,6 +21,7 @@ interface Props {
   pressed: boolean;
   replayer: Replayer;
   duration: number;
+  state: PlayerState;
   onMouseUp: VoidFunction;
   onMouseDown: VoidFunction;
   onChange: (value: number) => void;
@@ -36,6 +37,7 @@ export const Slider: FC<Props> = ({
   recording,
   pressed,
   duration,
+  state,
   onChange,
   onMouseUp,
   onMouseDown, 
@@ -85,13 +87,13 @@ export const Slider: FC<Props> = ({
       
       <div className='events'>
         {interactions.map((e, index) => (
-          <div 
+          <Interaction 
             key={e.id + index}
-            className={classnames('event', { error: isErrorEvent(e) })}
-            style={{ left: `${Math.round(((e.timestamp - offset) / duration) * 100)}%` }}
-          >
-            <Icon name={getIconForEventType(e)} />
-          </div>
+            duration={duration}
+            event={e}
+            offset={offset}
+            hidden={!state.eventVisibility.includes(getEventName(e))}
+          />
         ))}
       </div>
 

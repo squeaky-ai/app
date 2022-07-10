@@ -53,7 +53,7 @@ export const PlayerSidebar: FC<Props> = ({ state, site, replayer, events, record
             <Button onClick={handleClose}><Icon name='close-line' /></Button>
           </Label>
           <div className='contents'>
-            <SidebarEvents events={events} replayer={replayer} />
+            <SidebarEvents events={events} replayer={replayer} state={state} dispatch={dispatch} />
           </div>
         </div>
         <div className={classnames('sidebar pages', { active: state.activeTab === PlayerTab.PAGES })}>

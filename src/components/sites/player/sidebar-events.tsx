@@ -7,9 +7,8 @@ import { EventType, IncrementalSource } from 'rrweb';
 import { EventTimestamp } from 'components/sites/player/event-timestamp';
 import { SidebarEventsVisibility } from 'components/sites/player/sidebar-events-visibility';
 import { getInteractionEvents, isCustomEvent, getIconForEventType } from 'lib/events';
-import { Preference, Preferences } from 'lib/preferences';
-import { EVENTS } from 'data/recordings/constants';
-import type { Event, EventName } from 'types/event';
+import type { Event } from 'types/event';
+import type { PlayerState, Action } from 'types/player';
 
 import {
   getEventName, 
@@ -21,18 +20,12 @@ import {
 
 interface Props {
   events: Event[];
+  state: PlayerState;
   replayer: Replayer;
+  dispatch: React.Dispatch<Action>;
 }
 
-export const SidebarEvents: FC<Props> = ({ events, replayer }) => {
-  const savedActive = Preferences.getArray<EventName>(Preference.EVENTS_SHOW_TYPES);
-
-  const [active, setActive] = React.useState<EventName[]>(
-    // If they have anything stored in the preferences then
-    // show that, otherwise default to showing all of the types
-    savedActive.length === 0 ? EVENTS.map(a => a.value) : savedActive
-  );
-
+export const SidebarEvents: FC<Props> = ({ events, state, replayer, dispatch }) => {
   const items = getInteractionEvents(events);
 
   const startedAt = items[0]?.timestamp || 0;
@@ -41,12 +34,12 @@ export const SidebarEvents: FC<Props> = ({ events, replayer }) => {
 
   return (
     <>
-      <SidebarEventsVisibility active={active} setActive={setActive} />
+      <SidebarEventsVisibility state={state} dispatch={dispatch} />
 
       <ul className='datarow'>
         {items.map((item, index) => (
           <li 
-            className={classnames('icon', { hidden: !active.includes(getEventName(item)), error: isErrorEvent(item) })} 
+            className={classnames('icon', { hidden: !state.eventVisibility.includes(getEventName(item)), error: isErrorEvent(item) })} 
             key={`${item.timestamp}_${index}`}>
             {isPageViewEvent(item) && (
               <>

@@ -5,6 +5,7 @@ import { toTimeString } from 'lib/dates';
 import { Action, PlayerStatus } from 'types/player';
 import type { Recording } from 'types/graphql';
 import type { Event } from 'types/event';
+import type { PlayerState } from 'types/player';
 
 interface Props {
   replayer: Replayer;
@@ -12,6 +13,7 @@ interface Props {
   playbackSpeed: number;
   events: Event[];
   recording: Recording;
+  state: PlayerState;
   handleSlide: (seconds: number) => void;
   dispatch: React.Dispatch<Action>;
 }
@@ -130,6 +132,7 @@ export class PlayerSlider extends React.Component<Props, State> {
           recording={this.props.recording}
           duration={this.duration}
           pressed={this.state.pressed}
+          state={this.props.state}
           onChange={this.onSlide}
           onMouseDown={this.onMouseDown}
           onMouseUp={this.onMouseUp}

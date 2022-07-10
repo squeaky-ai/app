@@ -1,5 +1,6 @@
 import type { PlayerTab } from 'data/sites/enums';
 import type { ValueOf } from 'types/common';
+import type { EventName } from 'types/event';
 
 export enum PlayerStatus {
   PLAYING,
@@ -16,6 +17,7 @@ export interface PlayerState {
   skipInactivity: boolean;
   incomplete: boolean;
   zoom: number;
+  eventVisibility: EventName[];
 }
 
 export type Action = {

@@ -7,6 +7,9 @@ import { Error } from 'components/error';
 import { PlayerWrapper } from 'components/sites/player/player-wrapper';
 import { useRecording } from 'hooks/use-recording';
 import { PlayerState, Action, PlayerStatus } from 'types/player';
+import { Preference, Preferences } from 'lib/preferences';
+import { EVENTS } from 'data/recordings/constants';
+import type { EventName } from 'types/event';
 
 const reducer = (state: PlayerState, action: Action) => ({ 
   ...state,
@@ -20,6 +23,7 @@ const initialState: PlayerState = {
   skipInactivity: true,
   incomplete: false,
   zoom: 1,
+  eventVisibility: [],
 };
 
 const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
@@ -38,6 +42,16 @@ const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
   if (!loading && !events.length) {
     return <NotFound />;
   }
+
+  React.useEffect(() => {
+    const savedActive = Preferences.getArray<EventName>(Preference.EVENTS_SHOW_TYPES);
+    // If they have anything stored in the preferences then
+    // show that, otherwise default to showing all of the types
+    dispatch({
+      type: 'eventVisibility',
+      value: savedActive.length === 0 ? EVENTS.map(a => a.value) : savedActive,
+    });
+  }, []);
 
   return (
     <>
