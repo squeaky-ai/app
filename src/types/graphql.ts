@@ -1745,6 +1745,10 @@ export type RecordingsPagination = {
 };
 
 export enum RecordingsSort {
+  /** Least active recordings first */
+  ActivityAsc = 'activity__asc',
+  /** Most active recordings first */
+  ActivityDesc = 'activity__desc',
   /** Oldest recordings first */
   ConnectedAtAsc = 'connected_at__asc',
   /** Most recent recordings first */
