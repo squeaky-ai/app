@@ -2,11 +2,12 @@ import React from 'react';
 import type { FC } from 'react';
 
 interface Props {
+  max: number;
   duration: number;
   inactivity: number[][];
 }
 
-export const Inactivity: FC<Props> = ({ duration, inactivity }) => {
+export const Activity: FC<Props> = ({ max, duration, inactivity }) => {
   const leftPositionFromDuration = (inactivityItem: number[]) => {
     const [left, right] = inactivityItem;
 
@@ -17,14 +18,14 @@ export const Inactivity: FC<Props> = ({ duration, inactivity }) => {
   };
 
   return (
-    <div className='inactivity'>
+    <div className='activity' style={{ width: `${max}%` }}>
       {inactivity.map((inactivity, index) => {
         const [left, right] = leftPositionFromDuration(inactivity);
 
         return (
           <div
             key={index}
-            className='block' 
+            className='block'
             style={{ left: `${left}%`, width: `${right - left}%` }}
           />
         );

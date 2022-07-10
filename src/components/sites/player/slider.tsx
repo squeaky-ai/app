@@ -2,7 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import { clamp, debounce } from 'lodash';
 import { Input } from 'components/input';
-import { Inactivity } from 'components/sites/player/inactivity';
+import { Activity } from 'components/sites/player/activity';
 import { Interaction } from 'components/sites/player/interaction';
 import { getInteractionEvents, getEventName } from 'lib/events';
 import type { Recording } from 'types/graphql';
@@ -50,6 +50,9 @@ export const Slider: FC<Props> = ({
   const progress = clamp(value / (max - min), min, max);
   const buffered = currentPage / totalPages;
 
+  const bufferedWidth = clamp(buffered * 100, 0, 100);
+  const progressedWith = clamp(progress * 100, 0, 100);
+
   const setValue = React.useCallback(debounce((number: number) => {
     onChange(number);
   }, 500), []);
@@ -73,11 +76,15 @@ export const Slider: FC<Props> = ({
 
   return (
     <div className='slider'>
-      <div className='bar buffered' style={{ width: `${clamp(buffered * 100, 0, 100)}%` }} />
-      <div className='bar progress' style={{ width: `${clamp(progress * 100, 0, 100)}%` }} />
+      <div className='bar buffered' style={{ width: `${bufferedWidth}%` }} />
+      <div className='bar progress' style={{ width: `${progressedWith}%` }} />
 
       {interactions.length && (
-        <Inactivity inactivity={recording.inactivity} duration={duration} />
+        <Activity
+          max={bufferedWidth}
+          duration={duration}
+          inactivity={recording.inactivity}
+        />
       )}
       
       <div className='events'>
