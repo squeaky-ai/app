@@ -71,6 +71,10 @@ export const SidebarInfo: FC<Props> = ({ site, recording, setActiveTab }) => {
           <dd>{toTimeString(recording.duration)}</dd>
         </div>
         <div className='row'>
+          <dt>Activity</dt>
+          <dd>{recording.activityDuration ? toTimeString(recording.activityDuration || 0) : '-'}</dd>
+        </div>
+        <div className='row'>
           <dt>Pages</dt>
           <dd><Button onClick={() => setActiveTab(PlayerTab.PAGES)} className='pages'>{recording.pageCount}</Button></dd>
         </div>

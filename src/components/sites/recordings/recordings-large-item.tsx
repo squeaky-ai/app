@@ -18,6 +18,7 @@ import { Emoji, EmojiType } from 'components/emoji';
 import { toNiceDate, toTimeString } from 'lib/dates';
 import { getLinkedData } from 'lib/visitors';
 import { npsColor } from 'lib/feedback';
+import { percentage } from 'lib/maths';
 import type { ExternalAttributes } from 'types/visitors';
 import type { Site, Recording, Team } from 'types/graphql';
 
@@ -79,6 +80,12 @@ export const RecordingsLargeItem: FC<Props> = ({ site, recording, style, member,
       </Cell>
       <Cell>
         {toTimeString(recording.duration)}
+      </Cell>
+      <Cell>
+        {recording.activityDuration && (
+          <>{toTimeString(recording.activityDuration || 0)} <i className='percent'>({percentage(recording.duration, recording.activityDuration)}%)</i></>
+        )}
+        {!recording.activityDuration && '-'}
       </Cell>
       <Cell>
         <Tooltip button={recording.pageCount} buttonClassName='link'>

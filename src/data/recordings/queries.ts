@@ -32,6 +32,8 @@ export const GET_RECORDINGS_QUERY = gql`
           sessionId
           connectedAt
           disconnectedAt
+          inactivity
+          activityDuration
           visitor {
             id
             visitorId
@@ -86,6 +88,8 @@ export const GET_RECORDING_QUERY = gql`
         countryName
         connectedAt
         disconnectedAt
+        inactivity
+        activityDuration
         visitor {
           id
           visitorId
