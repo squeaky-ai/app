@@ -15,7 +15,7 @@
 
     .icon {
       color: var(--mauve-700);
-      font-size: 1.25rem;
+      font-size: var(--font-size-body-lg);
       margin: 0 .5rem 0 0;
     }
   }
@@ -88,8 +88,8 @@
 
       .coupon {
         color: var(--gray-500);
-        font-size: 13px;
-        line-height: 16px;
+        font-size: var(--font-size-body-sm);
+        line-height: var(--line-height-body-sm);
       }
 
       .enterprise-upgrade {

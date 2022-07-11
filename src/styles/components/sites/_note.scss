@@ -14,8 +14,8 @@
 
     .no-timestamp {
       color: var(--gray-200);
-      font-size: 13px;
-      line-height: 20px;
+      font-size: var(--font-size-body-sm);
+      line-height: var(--line-height-body-sm);
     }
 
     .dropdown {
@@ -41,14 +41,14 @@
 
       &.timestamp {
         color: var(--blue-500);
-        font-size: 13px;
+        font-size: var(--font-size-body-sm);
         font-weight: var(--font-weight-normal);
-        line-height: 20px;
+        line-height: var(--line-height-body-sm);
         text-decoration: underline;
       }
 
       &.kebab {
-        font-size: 1.25rem;
+        font-size: var(--font-size-body-lg);
       }
     }
   }
@@ -64,8 +64,8 @@
 
     span {
       color: var(--gray-500);
-      font-size: 13px;
-      line-height: 20px;
+      font-size: var(--font-size-body-sm);
+      line-height: var(--line-height-body-sm);
     }
   }
 }

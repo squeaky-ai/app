@@ -52,7 +52,7 @@
       background: none;
       border: none;
       display: flex;
-      font-size: 1.5rem;
+      font-size: var(--font-size-body-xl);
     }
   }
 
@@ -68,9 +68,9 @@
     color: var(--gray-blue-200);
     display: flex;
     height: 2.5rem;
-    font-size: 13px;
+    font-size: var(--font-size-body-sm);
     justify-content: center;
-    line-height: 24px;
+    line-height: var(--line-height-body-sm);
     margin-bottom: .5rem;
     padding: 0;
     position: relative;
@@ -81,7 +81,7 @@
     i {
       color: var(--blue-300);
       display: block;
-      font-size: 1rem;
+      font-size: var(--font-size-body);
       margin: 0;
     }
 
@@ -104,8 +104,8 @@
       color: var(--white);
       content: attr(data-label);
       display: none;
-      font-size: 13px;
-      line-height: 20px;
+      font-size: var(--font-size-body-sm);
+      line-height: var(--line-height-body-sm);
       left: calc(100% + 2rem);
       padding: .25rem .5rem;
       position: absolute;
@@ -138,10 +138,10 @@
         border: none;
         color: var(--gray-blue-200);
         display: flex;
-        font-size: 13px;
+        font-size: var(--font-size-body-sm);
         font-weight: var(--font-weight-normal);
         justify-content: center;
-        line-height: 24px;
+        line-height: var(--line-height-body-sm);
         margin: 0;
         text-align: center;
         padding: 0;
@@ -153,8 +153,8 @@
         border-radius: var(--border-radius-md);
         box-shadow: var(--box-shadow-sm);
         display: none;
-        font-size: 13px;
-        line-height: 24px;
+        font-size: var(--font-size-body-sm);
+        line-height: var(--line-height-body-sm);
         left: calc(100% + 2rem);
         top: 0;
         padding: .5rem;
@@ -451,10 +451,10 @@
 
             .button {
               color: var(--gray-blue-200);
-              font-size: 13px;
+              font-size: var(--font-size-body-sm);
               font-weight: var(--font-weight-normal);
               height: auto;
-              line-height: 20px;
+              line-height: var(--line-height-body-sm);
               margin-bottom: .5rem;
               padding: 0;
 
@@ -482,8 +482,8 @@
       white-space: nowrap;
 
       p, a {
-        font-size: 13px;
-        line-height: 16px;
+        font-size: var(--font-size-body-sm);
+        line-height: var(--line-height-body-sm);
         margin: 0;
       }
 

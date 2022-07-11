@@ -72,7 +72,7 @@
 
         .icon {
           color: var(--blue-500);
-          font-size: 1.25rem;
+          font-size: var(--font-size-body-lg);
           margin-right: .75rem;
         }
       }
@@ -109,7 +109,7 @@
     .verified {
       align-items: center;
       display: flex;
-      font-size: 16px;
+      font-size: var(--line-height-body);
       font-weight: var(--font-weight-normal);
 
       .icon {
@@ -127,7 +127,7 @@
 
     i {
       color: var(--green-500);
-      font-size: 1.5rem;
+      font-size: var(--font-size-body-xl);
       margin-right: .5rem;
     }
   }
@@ -162,12 +162,12 @@
   .status-heading {
     align-items: center;
     display: flex;
-    font-size: 16px;
+    font-size: var(--font-size-body);
     font-weight: var(--font-weight-normal);
-    line-height: 24px;
+    line-height: var(--line-height-body);
 
     .icon {
-      font-size: 1.25rem;
+      font-size: var(--font-size-body-lg);
       margin: 0 .25rem 0 1.5rem;
     }
 
@@ -198,7 +198,7 @@
 
     i {
       color: var(--rose-500);
-      font-size: 1.5rem;
+      font-size: var(--font-size-body-xl);
       margin-right: .5rem;
     }
   }
@@ -211,7 +211,7 @@
 
     i {
       color: var(--orange-500);
-      font-size: 1.5rem;
+      font-size: var(--font-size-body-xl);
       margin-right: .5rem;
     }
   }
@@ -249,7 +249,7 @@
 
         i:not(.arrow) {
           color: var(--blue-500);
-          font-size: 1.25rem;
+          font-size: var(--font-size-body-lg);
           margin-right: .5rem;
         }
 
@@ -324,8 +324,8 @@
     margin-bottom: 1.5rem;
 
     .button {
-      font-size: 13px;
-      line-height: 16px;
+      font-size: var(--font-size-body-sm);
+      line-height: var(--line-height-body-sm);
     }
 
     .row {

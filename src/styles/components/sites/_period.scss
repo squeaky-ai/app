@@ -35,7 +35,7 @@
 
         &:not(.arrow) {
           color: var(--blue-500);
-          font-size: 1.25rem;
+          font-size: var(--font-size-body-lg);
           margin-right: .5rem;
 
           @include breakpoint-sm {
@@ -87,7 +87,7 @@
 
         i {
           color: var(--gray-blue-800);
-          font-size: 1.5rem;
+          font-size: var(--font-size-body-xl);
         }
       }
 

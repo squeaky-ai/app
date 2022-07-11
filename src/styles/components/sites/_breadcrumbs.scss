@@ -1,8 +1,8 @@
 .breadcrumbs {
   align-items: center;
   display: flex;
-  font-size: 13px;
-  line-height: 20px;
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body-sm);
   margin: 2rem 0 1.5rem 0;
 
   span {
@@ -13,8 +13,8 @@
 
   p {
     color: var(--gray-500);
-    font-size: 13px;
-    line-height: 20px;
+    font-size: var(--font-size-body-sm);
+    line-height: var(--line-height-body-sm);
     margin: 0;
   }
 

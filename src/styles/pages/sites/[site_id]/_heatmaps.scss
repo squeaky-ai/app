@@ -30,7 +30,7 @@
       background: none;
       border: none;
       color: var(--gray-500);
-      font-size: 1.5rem;
+      font-size: var(--font-size-body-xl);
       padding: 0;
 
       .arrow {
@@ -152,7 +152,7 @@
           display: flex;
   
           i {
-            font-size: 1.25rem;
+            font-size: var(--font-size-body-lg);
             margin-right: .5rem;
           }
         }
@@ -163,7 +163,7 @@
           padding: 0 1rem;
       
           .icon {
-            font-size: 1rem;
+            font-size: var(--font-size-body);
             margin-right: 0;
           }
 
@@ -187,8 +187,8 @@
 
       p,
       .tooltip {
-        font-size: 13px;
-        line-height: 20px;
+        font-size: var(--font-size-body-sm);
+        line-height: var(--line-height-body-sm);
         margin: 0;
         padding: 1.5rem 0 1.5rem 1.5rem;
       }
@@ -197,8 +197,8 @@
         width: 100%;
 
         .button {
-          font-size: 13px;
-          line-height: 20px;
+          font-size: var(--font-size-body-sm);
+          line-height: var(--line-height-body-sm);
           overflow: hidden;
           text-align: left;
           text-overflow: ellipsis;
@@ -253,7 +253,7 @@
           }
 
           p {
-            font-size: 16px;
+            font-size: var(--font-size-body);
             margin: 0;
             padding: 1rem 0 0 0;
           }
@@ -307,7 +307,7 @@
           }
 
           p {
-            font-size: 16px;
+            font-size: var(--font-size-body);
             margin: 0;
             padding: 1rem 0 0 0;
           }
@@ -411,8 +411,8 @@
 
     p {
       color: var(--white);
-      font-size: 13px;
-      line-height: 20px;
+      font-size: var(--font-size-body-sm);
+      line-height: var(--line-height-body-sm);
       margin: 0;
     }
 

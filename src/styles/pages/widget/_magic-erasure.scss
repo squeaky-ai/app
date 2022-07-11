@@ -20,7 +20,7 @@
 
       .icon {
         color: var(--gray-700);
-        font-size: 18px;
+        font-size: var(--font-size-body);
         font-weight: var(--font-weight-normal);
         margin: 0;
 
@@ -58,8 +58,8 @@
     }
 
     .selectors {
-      font-size: 13px;
-      line-height: 16px;
+      font-size: var(--font-size-body-sm);
+      line-height: var(--line-height-body-sm);
       margin: 1rem 0 0 0;
 
       ul {

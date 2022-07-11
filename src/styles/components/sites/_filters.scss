@@ -42,7 +42,7 @@
 
     i {
       color: var(--gray-200);
-      font-size: 1.25rem;
+      font-size: var(--font-size-body-lg);
       position: absolute;
       right: .75rem;
       top: .5rem;
@@ -82,8 +82,8 @@
       overflow-y: auto;
 
       .label {
-        font-size: 13px;
-        line-height: 16px;
+        font-size: var(--font-size-body-sm);
+        line-height: var(--line-height-body-sm);
       }
 
       .checkbox,
@@ -229,8 +229,8 @@
       overflow-y: auto;
 
       .label {
-        font-size: 13px;
-        line-height: 16px;
+        font-size: var(--font-size-body-sm);
+        line-height: var(--line-height-body-sm);
       }
 
       .checkbox {

@@ -6,11 +6,6 @@
   padding: .25rem .75rem;
   pointer-events: none;
 
-  @include breakpoint-md {
-    font-size: 13px;
-    line-height: 20px;
-  }
-
   &.up {
     i {
       color: var(--green-500);
@@ -24,7 +19,7 @@
   }
 
   i {
-    font-size: 1.25rem;
+    font-size: var(--font-size-body-lg);
     margin-right: .25rem;
   }
 

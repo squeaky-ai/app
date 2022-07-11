@@ -7,10 +7,10 @@
     border: 1px solid var(--gray-200);
     border-radius: var(--border-radius-md);
     color: var(--body-color);
-    font-size: 16px;
+    font-size: var(--font-size-body);
     font-weight: var(--font-weight-normal);
     height: 40px;
-    line-height: 24px;
+    line-height: var(--line-height-body);
     margin: 0;
     overflow: hidden;
     padding: .35rem 2rem .35rem .75rem;
@@ -70,9 +70,9 @@
         border-radius: var(--border-radius-md);
         color: var(--gray-blue-700);
         display: block;
-        font-size: 13px;
+        font-size: var(--font-size-body);
         font-weight: var(--font-weight-normal);
-        line-height: 16px;
+        line-height: var(--line-height-body);
         overflow: hidden;
         padding: .35rem .75rem;
         user-select: none;

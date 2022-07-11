@@ -4,9 +4,9 @@
   border-radius: var(--border-radius-md);
   display: flex;
   flex-direction: column;
-  font-size: 13px;
+  font-size: var(--font-size-body-sm);
   font-weight: var(--font-weight-normal);
-  line-height: 18px;
+  line-height: var(--line-height-body-sm);
   margin: 0 0 .5rem 0;
   min-height: 6.25rem;
   padding: 1rem 4.5rem 1rem 1rem;
@@ -17,7 +17,7 @@
   .arrow {
     color: var(--gray-300);
     display: none;
-    font-size: 1.5rem;
+    font-size: var(--font-size-body-xl);
     position: absolute;
     right: 2rem;
     top: 2.75rem;

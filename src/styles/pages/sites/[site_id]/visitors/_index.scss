@@ -76,7 +76,7 @@
   
             &:not(.arrow) {
               color: var(--blue-500);
-              font-size: 1.25rem;
+              font-size: var(--font-size-body-lg);
               margin-right: .5rem;
             }
           }
@@ -129,7 +129,7 @@
 
           i {
             color: var(--body-color);
-            font-size: 1.5rem;
+            font-size: var(--font-size-body-xl);
           }
         }
 
@@ -168,8 +168,8 @@
     }
 
     p:last-of-type {
-      font-size: 13px;
-      line-height: 20px;
+      font-size: var(--font-size-body-sm);
+      line-height: var(--line-height-body-sm);
     }
   }
 
@@ -204,7 +204,7 @@
       margin: 0 0 .75rem .5rem;
 
       i {
-        font-size: 1.25rem;
+        font-size: var(--font-size-body-lg);
       }
     }
   }
@@ -237,7 +237,7 @@
       .linked i {
         color: var(--blue-500);
         display: inline-block;
-        font-size: 1rem;
+        font-size: var(--font-size-body);
         margin-right: .25rem;
         vertical-align: middle;
       }
@@ -251,7 +251,7 @@
           display: flex;
           height: 2rem;
           flex-shrink: 0;
-          font-size: 1.25rem;
+          font-size: var(--font-size-body-lg);
           justify-content: center;
           padding: 0;
           width: 2rem;
@@ -279,7 +279,7 @@
     
             i {
               color: var(--blue-500);
-              font-size: 1.25rem;
+              font-size: var(--font-size-body-lg);
               margin-right: .5rem;
             }
     
@@ -297,7 +297,7 @@
     }
 
     .visitor-starred {
-      font-size: 1.25rem;
+      font-size: var(--font-size-body-lg);
     }
 
     .browser {

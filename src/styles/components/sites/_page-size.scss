@@ -15,7 +15,7 @@
 
     select {
       height: 30px;
-      line-height: 20px;
+      line-height: var(--line-height-body);
     }
 
     i {

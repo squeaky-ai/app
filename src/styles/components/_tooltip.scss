@@ -22,8 +22,8 @@
   border: 2px solid var(--gray-blue-700);
   border-radius: var(--border-radius-md);
   color: var(--gray-100);
-  font-size: 13px;
-  line-height: 1rem;
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body-sm);
   left: 0;
   max-width: 256px;
   padding: 1rem;

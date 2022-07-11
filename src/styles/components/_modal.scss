@@ -36,7 +36,7 @@
 
         i {
           display: block;
-          font-size: 1.5rem;
+          font-size: var(--font-size-body-xl);
         }
       }
 
@@ -48,7 +48,7 @@
           display: flex;
 
           .icon {
-            font-size: 1.25rem;
+            font-size: var(--font-size-body-lg);
             margin: 0 .5rem 0 0;
           }
 

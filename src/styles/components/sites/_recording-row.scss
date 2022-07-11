@@ -4,7 +4,7 @@
     border: none;
     color: var(--gray-150);
     display: inline-block;
-    font-size: 1.25rem;
+    font-size: var(--font-size-body-lg);
     margin-right: .5rem;
     padding: 0;
     vertical-align: middle;
@@ -43,9 +43,9 @@
   }
 
   .nps-score {
-    font-size: 16px;
+    font-size: var(--font-size-body);
     font-weight: var(--font-weight-bold);
-    line-height: 20px;
+    line-height: var(--line-height-body);
     margin: 0;
 
     &.blue {
@@ -101,7 +101,7 @@
             width: 100%;
 
             .button {
-              line-height: 20px;
+              line-height: var(--line-height-body);
               overflow: hidden;
               text-align: left;
               text-overflow: ellipsis;
@@ -123,7 +123,7 @@
       display: flex;
       height: 2rem;
       flex-shrink: 0;
-      font-size: 1.25rem;
+      font-size: var(--font-size-body-lg);
       justify-content: center;
       padding: 0;
       width: 2rem;
@@ -140,6 +140,6 @@
   }
 
   .visitor-starred {
-    font-size: 1.25rem;
+    font-size: var(--font-size-body-lg);
   }
 }

@@ -49,7 +49,7 @@
     padding: .3rem .75rem;
 
     span {
-      line-height: 18px;
+      line-height: var(--line-height-body);
       padding: 0;
       pointer-events: none;
     }

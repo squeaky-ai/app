@@ -2,13 +2,13 @@
   background: var(--white);
   border-radius: var(--border-radius-md);
   box-shadow: var(--box-shadow-md);
-  font-size: 13px;
-  line-height: 20px;
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body-sm);
   width: 100%;
 
   p {
-    font-size: 13px;
-    line-height: 20px;
+    font-size: var(--font-size-body-sm);
+    line-height: var(--line-height-body-sm);
   }
 
   .row {
@@ -32,7 +32,8 @@
     }
 
     .tooltip > .button {
-      font-size: 13px;
+      font-size: var(--font-size-body-sm);
+      line-height: var(--line-height-body-sm);
 
       &:not(.link) {
         color: var(--gray-blue-700);

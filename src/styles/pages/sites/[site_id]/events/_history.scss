@@ -45,7 +45,7 @@
 
         i {
           color: var(--gray-blue-800);
-          font-size: 1.5rem;
+          font-size: var(--font-size-body-xl);
           margin-right: .5rem;
           position: static;
         }
@@ -160,7 +160,7 @@
 
     .icon {
       color: var(--gray-300);
-      font-size: 1rem;
+      font-size: var(--font-size-body);
       margin: 0 .25rem 0 0;
     }
   }
