@@ -3,7 +3,7 @@
   border: 1px solid var(--gray-200);
   border-radius: var(--border-radius-md);
   color: var(--gray-blue-800);
-  height: 40px;
+  height: 2rem;
   margin: 0 0 1.5rem 0; 
   outline: none;
   padding: .35rem .75rem;
@@ -56,7 +56,7 @@
   grid-template-areas: 'select input input'
                        'validation validation validation';
   grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-  grid-template-rows: 40px;
+  grid-template-rows: 2rem;
   margin-bottom: 2rem;
 
   .select {

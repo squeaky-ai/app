@@ -38,8 +38,8 @@
   }
 
   &.secondary {
-    background: var(--white);
-    border: 1px solid var(--blue-500);
+    background: var(--gray-blue-50);
+    border: 1px solid var(--gray-blue-50);
     border-radius: var(--border-radius-md);
     color: var(--gray-blue-800);
     height: 2rem;
@@ -48,8 +48,8 @@
 
     &:hover,
     &:active {
-      background: var(--blue-500);
-      color: var(--white);
+      background: var(--gray-blue-100);
+      color: var(--gray-blue-800);
     }
   }
 
