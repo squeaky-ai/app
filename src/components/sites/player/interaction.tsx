@@ -13,7 +13,7 @@ interface Props {
 }
 
 export const Interaction: FC<Props> = ({ event, hidden, offset, duration }) => {
-  const left = Math.round(((event.timestamp - offset) / duration) * 100);
+  const left = `${Math.round(((event.timestamp - offset) / duration) * 100)}%`;
 
   return (
     <div className={classnames('event', { hidden, error: isErrorEvent(event) })} style={{ left }}>
