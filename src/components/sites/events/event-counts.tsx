@@ -44,7 +44,7 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
     const result: Record<string, string | number> = { dateKey: d.dateKey };
 
     // Set the defaults
-    metricKeys.forEach(key => { result[key] = 0 });
+    metricKeys.forEach(key => { result[key] = doNotAllowZero(0) });
 
     // Override this with metric keys we have values for
     d.metrics.forEach(metric => {
