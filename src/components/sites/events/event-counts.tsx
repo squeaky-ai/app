@@ -33,6 +33,8 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
   // must be stripped off
   const buildKeyFromMetric = (metric: EventsCountMetric) => `${metric.type}::${metric.id.split('::')[1]}`;
 
+  const sortedEventsStats = sortEventsStats(eventStats.eventStats, sort);
+
   const metricKeys = eventStats.eventCounts
     .items
     .map(item => item.metrics.map(metric => buildKeyFromMetric(metric)))
@@ -60,7 +62,7 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
     return (
       <div className='custom-tooltip'>
         <p className='date'>{formatLabel(period, label)}</p>
-        {eventStats.eventStats.map((stat, index) => (
+        {sortedEventsStats.map((stat, index) => (
           <p key={stat.id} style={{ color: colors[index] }}>
             {stat.name} {metrics[`${stat.type}::${stat.id}`]}
           </p>
@@ -81,7 +83,7 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
         </div>
       </div>
       <div className='key'>
-        {sortEventsStats(eventStats.eventStats, sort).map((stat, index) => (
+        {sortedEventsStats.map((stat, index) => (
           <div className='item' key={stat.id}>
             <EventSwatch index={index} />
             <p>{stat.name}</p>
