@@ -63,7 +63,7 @@ export const EventCapturesItem: FC<Props> = ({
       <Cell>
         {event.lastCountedAt
           ? event.count
-          : <Spinner />
+          : <span className='scanning'><Spinner /> Scanning historical data...</span>
         }
       </Cell>
       <Cell>

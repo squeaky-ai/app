@@ -82,8 +82,14 @@
     .row {
       grid-template-columns: 58px 1fr 1fr 1fr 1fr 70px;
 
+      .scanning {
+        align-items: center;
+        display: inline-flex;
+        vertical-align: middle;
+      }
+
       .spinner {
-        margin: 0;
+        margin: 0 .25rem 0 0;
 
         .icon {
           font-size: 1rem;
