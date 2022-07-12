@@ -1,7 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
 import { Tag } from 'components/tag';
-import { EventAdd } from 'components/sites/events/event-add';
 import { EventsStat, EventsType } from 'types/graphql';
 
 interface Props {
@@ -39,11 +38,6 @@ export const EventHistoryTags: FC<Props> = ({
           {stat.name}
         </Tag>
       ))}
-      <EventAdd 
-        setGroupIds={setGroupIds}
-        setCaptureIds={setCaptureIds}
-        eventStats={eventStats}
-      />
     </div>
   );
 };
