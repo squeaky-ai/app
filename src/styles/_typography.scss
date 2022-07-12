@@ -76,6 +76,11 @@ b {
   font-weight: var(--font-weight-bold);
 }
 
+li {
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+}
+
 code, pre {
   color: var(--gray-blue-800);
   font-family: 'Monaco', 'Consolas' 'Courier New', monospace;
@@ -101,7 +106,7 @@ code, pre {
   font: inherit;
   font-size: var(--font-size-body);
   font-weight: var(--font-weight-normal);
-  line-height: var(--line-height-body);
+  line-height: var(--line-height-controls);
 
   &::placeholder {
     color: var(--gray-500);
@@ -112,5 +117,5 @@ code, pre {
 .select select {
   font: inherit;
   font-size: var(--font-size-body);
-  line-height: 24px;
+  line-height: var(--line-height-controls);
 }

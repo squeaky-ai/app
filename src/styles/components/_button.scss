@@ -21,7 +21,7 @@
   &.primary {
     background: var(--blue-500);
     border: 1px solid var(--blue-500);
-    border-radius: var(--border-radius-md);
+    border-radius: var(--border-radius-controls);
     color: var(--white);
     height: 2rem;
     margin: 0;
@@ -40,7 +40,7 @@
   &.secondary {
     background: var(--gray-blue-50);
     border: 1px solid var(--gray-blue-50);
-    border-radius: var(--border-radius-md);
+    border-radius: var(---border-radius-controls);
     color: var(--gray-blue-800);
     height: 2rem;
     margin: 0;
@@ -56,7 +56,7 @@
   &.tertiary {
     background: var(--white);
     border: 1px solid var(--rose-500);
-    border-radius: var(--border-radius-md);
+    border-radius: var(--border-radius-controls);
     color: var(--gray-blue-800);
     height: 2rem;
     margin: 0;
@@ -72,7 +72,7 @@
   &.quaternary {
     background: var(--gray-100);
     border: 1px solid var(--gray-100);
-    border-radius: var(--border-radius-md);
+    border-radius: var(--border-radius-controls);
     color: var(--gray-blue-800);
     height: 2rem;
     margin: 0;
@@ -87,7 +87,7 @@
   &.blank {
     background: var(--white);
     border: 1px solid var(--gray-200);
-    border-radius: var(--border-radius-md);
+    border-radius: var(--border-radius-controls);
     color: var(--body-color);
     height: 2rem;
     margin: 0;
