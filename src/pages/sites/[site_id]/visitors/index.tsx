@@ -68,7 +68,7 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
             <BreadCrumbs site={site} items={[{ name: 'Visitors' }]} />
 
             <div className='visitors-header'>
-              <h3 className='title'>Visitors</h3>
+              <h4 className='title'>Visitors</h4>
               <menu>
                 {site.recordingsCount > 0 && (
                   <>

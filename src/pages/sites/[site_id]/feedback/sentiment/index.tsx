@@ -22,7 +22,7 @@ const SitesFeedbackSentiment: NextPage<ServerSideProps> = ({ user }) => (
         <Main className={classnames({ empty: !site.verifiedAt })}>
           <BreadCrumbs site={site} items={[{ name: 'Feedback' }, { name: 'Sentiment' }]} />
 
-          <h3 className='title'>Sentiment</h3>
+          <h4 className='title'>Sentiment</h4>
 
           <EmptyState
             title='Awaiting tracking code installation'

@@ -25,7 +25,7 @@ const UsersFeatureFlags: NextPage<ServerSideProps> = ({ user }) => {
       </Head>
 
       <Main>
-        <h3 className='title'>Account Settings</h3>
+        <h4 className='title'>Account Settings</h4>
 
         <Tabs page='feature-flags' />
 

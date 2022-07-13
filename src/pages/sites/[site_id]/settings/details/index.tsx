@@ -48,10 +48,10 @@ const SitesSettingsDetails: NextPage<ServerSideProps> = ({ user }) => {
           <Main>
             <BreadCrumbs site={site} items={[{ name: 'Settings' }, { name: 'Details' }]} />
 
-            <h3 className='title'>
+            <h4 className='title'>
               Site Settings
               <Access roles={[OWNER, ADMIN]} />
-            </h3>
+            </h4>
 
             <SettingsTabs site={site} page='details' member={member} />
 

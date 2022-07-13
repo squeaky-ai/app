@@ -38,13 +38,13 @@ const UsersAccount: NextPage<ServerSideProps> = ({ user }) => {
       </Head>
 
       <Main>
-        <h3 className='title'>
+        <h4 className='title'>
           Account Settings
           <Button className='button signout link' onClick={handleSignOut}>
             <Icon name='logout-box-line' />
             Log out
           </Button>
-        </h3>
+        </h4>
 
         <Tabs page='account' /> 
 

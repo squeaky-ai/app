@@ -34,9 +34,9 @@ const AdminSites: NextPage<ServerSideProps> = () => {
 
         <div className='admin-header'>
           <div className='search'>
-            <h3 className='title'>
+            <h4 className='title'>
               Sites
-            </h3>
+            </h4>
             <Input 
               type='text' 
               placeholder='Search...'
