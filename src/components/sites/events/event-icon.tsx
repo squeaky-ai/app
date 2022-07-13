@@ -9,7 +9,6 @@ import blurIcon from '../../../../public/icons/blur.svg';
 import clickIcon from '../../../../public/icons/click.svg';
 import focusIcon from '../../../../public/icons/focus.svg';
 import hoverIcon from '../../../../public/icons/hover.svg';
-import scrollIcon from '../../../../public/icons/scroll.svg';
 import touchIcon from '../../../../public/icons/touch.svg';
 
 interface Props {
@@ -27,6 +26,8 @@ const getRemixIcon = (type: EventName): string => {
       return 'error-warning-line';
     case 'custom':
       return 'flashlight-line';
+    case 'scroll':
+      return 'mouse-line';
     default:
       return '';
   }
@@ -42,8 +43,6 @@ const getCustomSvg = (type: EventName) => {
       return focusIcon;
     case 'hover':
       return hoverIcon;
-    case 'scroll':
-      return scrollIcon;
     case 'touch':
       return touchIcon;
     default:
@@ -52,7 +51,7 @@ const getCustomSvg = (type: EventName) => {
 };
 
 export const EventIcon: FC<Props> = ({ type, className, height, width }) => {
-  const usesRemixIcon = ['page_view', 'error', 'custom'].includes(type);
+  const usesRemixIcon = ['page_view', 'error', 'custom', 'scroll'].includes(type);
 
   return (
     <span className={classnames('event-icon', className, { 'uses-icon': usesRemixIcon })}>
