@@ -1,8 +1,8 @@
 import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
-import { Icon } from 'components/icon';
-import { getIconForEventType, isErrorEvent } from 'lib/events';
+import { EventIcon } from 'components/sites/events/event-icon';
+import { isErrorEvent, getEventName } from 'lib/events';
 import type { SessionEvent } from 'types/event';
 
 interface Props {
@@ -17,7 +17,7 @@ export const Interaction: FC<Props> = ({ event, hidden, offset, duration }) => {
 
   return (
     <div className={classnames('event', { hidden, error: isErrorEvent(event) })} style={{ left }}>
-      <Icon name={getIconForEventType(event)} />
+      <EventIcon type={getEventName(event)} />
     </div>
   );
 };
