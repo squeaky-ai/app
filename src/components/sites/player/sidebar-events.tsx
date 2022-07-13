@@ -30,8 +30,6 @@ export const SidebarEvents: FC<Props> = ({ events, state, replayer, dispatch }) 
 
   const startedAt = items[0]?.timestamp || 0;
 
-  const getPathName = (url: string) => new URL(url).pathname;
-
   return (
     <>
       <SidebarEventsVisibility state={state} dispatch={dispatch} />
@@ -47,7 +45,7 @@ export const SidebarEvents: FC<Props> = ({ events, state, replayer, dispatch }) 
                 <p className='title'>
                   Page view <EventTimestamp timestamp={item.timestamp} offset={startedAt} replayer={replayer} />
                 </p>
-                <p className='info'>{getPathName(item.data.href)}</p>
+                <p className='info'>{item.data.href}</p>
               </>
             )}
 
