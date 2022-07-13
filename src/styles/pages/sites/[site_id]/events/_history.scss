@@ -3,19 +3,9 @@
     menu {
       display: flex;
     }
-  }
-
-  .event-tags {
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-
-    p {
-      margin: 0 0.5rem 0.5rem 0;
-    }
 
     .add-event {
-      margin: 0 0.5rem 0.5rem .5rem;
+      margin: 0 0 0 1rem;
 
       .arrow {
         display: none;
@@ -84,6 +74,16 @@
         box-shadow: none;
         position: static;
       }
+    }
+  }
+
+  .event-tags {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+
+    p {
+      margin: 0 0.5rem 0.5rem 0;
     }
   }
 
@@ -185,6 +185,14 @@
 
     .active .icon {
       color: var(--purple-500);
+    }
+  }
+
+  .empty-state {
+    display: flex;
+
+    .empty-state-hint {
+      display: none;
     }
   }
 }

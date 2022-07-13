@@ -2,30 +2,27 @@ import { last } from 'lodash';
 import { EventType, IncrementalSource, MouseInteractions } from 'rrweb';
 import { ErrorEvent, CustomEvents } from 'types/event';
 import { EventStatsSort } from 'types/events';
-import type { metaEvent } from 'rrweb/typings/types';
-import type { Event, Events, EventName } from 'types/event';
+import type { Event, Events, EventName, SessionEvent } from 'types/event';
 import type { EventsStat, RecordingsEvent } from 'types/graphql';
 
-type EventWithTimestamp<T> = T & { id: number; timestamp: number; delay?: number; };
-
 export const isPageViewEvent = (
-  event: Event | ErrorEvent
-): event is EventWithTimestamp<metaEvent> => event.type === EventType.Meta;
+  event: SessionEvent
+): event is ErrorEvent => (event.type as any) === CustomEvents.PAGE_VIEW;
 
 export const isMouseEvent = (
-  event: Event | ErrorEvent
+  event: SessionEvent
 ) => event.type === EventType.IncrementalSnapshot && event.data.source === IncrementalSource.MouseInteraction;
 
 export const isScrollEvent = (
-  event: Event | ErrorEvent
+  event: SessionEvent
 ) => event.type === EventType.IncrementalSnapshot && event.data.source === IncrementalSource.Scroll;
 
 export const isErrorEvent = (
-  event: Event | ErrorEvent
+  event: SessionEvent
 ): event is ErrorEvent => (event.type as any) === CustomEvents.ERROR;
 
 export const isCustomEvent = (
-  event: Event | ErrorEvent
+  event: SessionEvent
 ): event is ErrorEvent => (event.type as any) === CustomEvents.CUSTOM_TRACK;
 
 export const parseRecordingEvents = (event: RecordingsEvent[]): Event[] => event.map(i => ({
@@ -35,12 +32,12 @@ export const parseRecordingEvents = (event: RecordingsEvent[]): Event[] => event
   timestamp: Number(i.timestamp),
 }));
 
-export function getEventName(event: Event | ErrorEvent): EventName {
-  if (event.type === EventType.Meta) {
+export function getEventName(event: SessionEvent): EventName {
+  if (isPageViewEvent(event)) {
     return 'page_view';
   }
 
-  if (event.type === EventType.IncrementalSnapshot && event.data.source === IncrementalSource.Scroll) {
+  if (isScrollEvent(event)) {
     return 'scroll';
   }
 
@@ -62,8 +59,12 @@ export function getEventName(event: Event | ErrorEvent): EventName {
     }
   }
 
-  if ((event.type as EventType | CustomEvents) === CustomEvents.ERROR) {
+  if (isErrorEvent(event)) {
     return 'error';
+  }
+
+  if (isCustomEvent(event)) {
+    return 'custom'
   }
 
   return 'unknown';
@@ -164,7 +165,7 @@ export const getInteractionEvents = (events: Event[]) => events.reduce((acc, ite
   return [...acc];
 }, [] as Events);
 
-export const getIconForEventType = (event: Event | ErrorEvent) => {
+export const getIconForEventType = (event: SessionEvent) => {
   if (isPageViewEvent(event)) {
     return 'compass-discover-line';
   }

@@ -3,10 +3,10 @@ import type { FC } from 'react';
 import classnames from 'classnames';
 import { Icon } from 'components/icon';
 import { getIconForEventType, isErrorEvent } from 'lib/events';
-import type { Event, ErrorEvent } from 'types/event';
+import type { SessionEvent } from 'types/event';
 
 interface Props {
-  event: Event | ErrorEvent;
+  event: SessionEvent;
   offset: number;
   duration: number;
   hidden: boolean;

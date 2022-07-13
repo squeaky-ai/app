@@ -13,6 +13,7 @@ export type EventName =
   'hover' |
   'scroll' |
   'error' |
+  'custom' |
   'unknown';
 
 export interface EventItem {
@@ -23,6 +24,7 @@ export interface EventItem {
 export enum CustomEvents {
   ERROR = 100,
   CUSTOM_TRACK = 101,
+  PAGE_VIEW = 102,
 }
 
 export type ErrorEvent = {
@@ -36,7 +38,18 @@ export type ErrorEvent = {
     stack: string;
     filename: string;
     href: string;
-  }
+  };
 }
 
-export type Events = (Event | ErrorEvent)[];
+export type PageViewEvent = {
+  id: number;
+  type: CustomEvents.PAGE_VIEW;
+  timestamp: number;
+  data: {
+    href: string;
+  };
+}
+
+export type SessionEvent = Event | ErrorEvent | PageViewEvent;
+
+export type Events = SessionEvent[];
