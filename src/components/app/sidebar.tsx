@@ -132,7 +132,9 @@ export const Sidebar: FC = () => {
                 <span>Dashboard</span>
               </a>
             </Link>
-            <Divider />
+            <Divider>
+              <span>Data Capture</span>
+            </Divider>
             <Link href={`/sites/${siteId}/visitors`}>
               <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/visitors`) })} data-label='Visitors'>
                 <Icon name='group-line' />
@@ -151,7 +153,9 @@ export const Sidebar: FC = () => {
                 <span>Events</span>
               </a>
             </Link>
-            <Divider />
+            <Divider>
+              <span>Analysis</span>
+            </Divider>
             <Link href={`/sites/${siteId}/analytics/traffic`}>
               <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/analytics`) })} data-label='Analytics'>
                 <Icon name='line-chart-line' />
@@ -170,6 +174,9 @@ export const Sidebar: FC = () => {
                 <span>Heatmaps</span>
               </a>
             </Link>
+            <Divider>
+              <span>Engagement</span>
+            </Divider>
             <SidebarNested
               name='Feedback'
               icon='user-voice-line'
@@ -190,36 +197,32 @@ export const Sidebar: FC = () => {
             </SidebarNested>
             {[OWNER, ADMIN].includes(sidebar.role) && (
               <>
-              <Divider />
-                <SidebarNested 
-                  name='Settings'
-                  icon='settings-3-line'
-                  collapse={() => collapse('settings')}
-                  expand={() => expand('settings')}
-                  expanded={expanded.includes('settings')}
-                  warning={!sidebar.validBilling}
-                >
-                  <Link href={`/sites/${siteId}/settings/details`}>
-                    <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/settings/details`) })}>
-                      Site
+                <Divider>
+                  <span>Settings</span>
+                </Divider>
+                <Link href={`/sites/${siteId}/settings/details`}>
+                  <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/settings/details`) })} data-label='Site'>
+                    <Icon name='window-line' />
+                    <span>Site</span>
+                  </a>
+                </Link>
+                <Link href={`/sites/${siteId}/settings/team`}>
+                  <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/settings/team`) })} data-label='Team'>
+                    <Icon name='group-line' />
+                    <span>Team</span>
+                  </a>
+                </Link>
+                {sidebar.role === OWNER && (
+                  <Link href={`/sites/${siteId}/settings/subscription`}>
+                    <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/settings/subscription`) })} data-label='Subscription'>
+                      <Icon name='bank-card-2-line' />
+                      <span>Subscription</span>
+                      {!sidebar.validBilling && (
+                        <Icon name='error-warning-fill' className='warning' />
+                      )}
                     </a>
                   </Link>
-                  <Link href={`/sites/${siteId}/settings/team`}>
-                    <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/settings/team`) })}>
-                      Team
-                    </a>
-                  </Link>
-                  {sidebar.role === OWNER && (
-                    <Link href={`/sites/${siteId}/settings/subscription`}>
-                      <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/settings/subscription`) })} data-label='Subscription'>
-                        Subscription
-                        {!sidebar.validBilling && (
-                          <Icon name='error-warning-fill' className='warning' />
-                        )}
-                      </a>
-                    </Link>
-                  )}
-                </SidebarNested>
+                )}
               </>
             )}
           </div>

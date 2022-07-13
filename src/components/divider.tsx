@@ -4,6 +4,8 @@ import classnames from 'classnames';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {}
 
-export const Divider: FC<Props> = ({ className, ...rest }) => (
-  <div className={classnames('divider', className)} {...rest} />
+export const Divider: FC<Props> = ({ className, children, ...rest }) => (
+  <div className={classnames('divider', className)} {...rest}>
+    {children}
+  </div>
 );
