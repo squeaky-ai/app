@@ -74,7 +74,7 @@
         & > .button {
           background: none;
           border: none;
-          border-radius: var(--border-radius-md);
+          border-radius: var(--border-radius-controls);
           font-weight: var(--font-weight-bold);
           height: 2rem;
           margin-left: .5rem;
@@ -111,7 +111,7 @@
         }
 
         .filters-columns {
-          padding: 1rem;
+          padding: .5rem;
 
           .checkbox {
             margin-bottom: .5rem;
@@ -156,7 +156,7 @@
           border-radius: var(--border-radius-md);
           box-shadow: var(--box-shadow-sm);
           display: none;
-          padding: 1.5rem;
+          padding: 1rem;
           position: absolute;
           right: 220px;
           top: 0;
