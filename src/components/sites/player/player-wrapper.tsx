@@ -44,8 +44,11 @@ export const PlayerWrapper: FC<Props> = ({ user, state, recording, events, dispa
       const items = await fetchMoreEvents(page);
       items.forEach((e) => ref.current.replayer.addEvent(e));
 
-      // // Start replaying now that there is more stuff to show
-      ref.current.replayer.play(ref.current.replayer.getCurrentTime());
+      // Start replaying now that there is more stuff to show
+      const position = ref.current.replayer.getCurrentTime();
+      const shouldResume = ref.current.replayer.service.state.value === 'playing' || state.status === PlayerStatus.LOADING;
+      ref.current.replayer.pause(position)
+      if (shouldResume) ref.current.replayer.play(position);
 
       // Recursively call it again, if it's been exceeded then
       // it will return early
