@@ -35,7 +35,9 @@ export const PlayerControls: FC<Props> = ({ state, replayer, events, recording, 
   };
 
   const handlePlaybackSpeed = (speed: number) => {
+    replayer.pause();
     replayer.setConfig({ speed });
+    replayer.play(replayer.getCurrentTime());
   };
 
   const handleSkipInactivity = (skip: boolean) => {
@@ -45,8 +47,10 @@ export const PlayerControls: FC<Props> = ({ state, replayer, events, recording, 
     dispatch({ type: 'skipInactivity', value: skip });
   };
 
-  const handleSetProgress = (ms: number) => {
-    replayer.play(ms);
+  const handleSetProgress = (ms: number, resume: boolean) => {
+    replayer.pause(ms);
+    replayer.setConfig({ speed: 1 });
+    if (resume) replayer.play(ms);
   };
 
   const PlayPauseIcon = () => {

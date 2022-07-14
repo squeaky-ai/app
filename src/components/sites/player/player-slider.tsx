@@ -14,7 +14,7 @@ interface Props {
   events: Event[];
   recording: Recording;
   state: PlayerState;
-  handleSlide: (seconds: number) => void;
+  handleSlide: (milliseconds: number, resume: boolean) => void;
   dispatch: React.Dispatch<Action>;
 }
 
@@ -25,6 +25,7 @@ interface State {
 
 export class PlayerSlider extends React.Component<Props, State> {
   private timer: number;
+  private shouldResumeAfterSlide: boolean = true;
 
   public constructor(props: Props) {
     super(props);
@@ -88,19 +89,17 @@ export class PlayerSlider extends React.Component<Props, State> {
   private onSlide = (value: number): void => {
     this.setState({ value });
 
-    if (!this.state.pressed) {
-      this.props.handleSlide(value * 1000);
-    }
+    this.props.handleSlide(value * 1000, this.shouldResumeAfterSlide);
   };
 
   private onMouseDown = (): void => {
     this.setState({ pressed: true });
+    this.shouldResumeAfterSlide = this.props.replayer.service.state.value === 'playing';
     this.props.replayer.pause();
   };
 
   private onMouseUp = (): void => {
     this.setState({ pressed: false });
-    this.props.replayer.play(this.state.value * 1000);
   };
 
   private getSeconds = (ms: number): number => {
