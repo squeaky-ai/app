@@ -50,6 +50,12 @@ export const PlayerControls: FC<Props> = ({ state, replayer, events, recording, 
   const handleSetProgress = (ms: number, resume: boolean) => {
     replayer.pause(ms);
     replayer.setConfig({ speed: 1 });
+    if (state.skipInactivity) {
+      // Without this it seems like the inactivity will never
+      // be skipped after you scrub
+      replayer.setConfig({ skipInactive: false });
+      replayer.setConfig({ skipInactive: true });
+    }
     if (resume) replayer.play(ms);
   };
 
