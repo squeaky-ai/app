@@ -35,7 +35,9 @@ export const PlayerControls: FC<Props> = ({ state, replayer, events, recording, 
   };
 
   const handlePlaybackSpeed = (speed: number) => {
+    replayer.pause();
     replayer.setConfig({ speed });
+    replayer.play(replayer.getCurrentTime());
   };
 
   const handleSkipInactivity = (skip: boolean) => {
@@ -45,8 +47,16 @@ export const PlayerControls: FC<Props> = ({ state, replayer, events, recording, 
     dispatch({ type: 'skipInactivity', value: skip });
   };
 
-  const handleSetProgress = (ms: number) => {
-    replayer.play(ms);
+  const handleSetProgress = (ms: number, resume: boolean) => {
+    replayer.pause(ms);
+    replayer.setConfig({ speed: 1 });
+    if (state.skipInactivity) {
+      // Without this it seems like the inactivity will never
+      // be skipped after you scrub
+      replayer.setConfig({ skipInactive: false });
+      replayer.setConfig({ skipInactive: true });
+    }
+    if (resume) replayer.play(ms);
   };
 
   const PlayPauseIcon = () => {

@@ -164,27 +164,3 @@ export const getInteractionEvents = (events: Event[]) => events.reduce((acc, ite
 
   return [...acc];
 }, [] as Events);
-
-export const getIconForEventType = (event: SessionEvent) => {
-  if (isPageViewEvent(event)) {
-    return 'compass-discover-line';
-  }
-
-  if (isScrollEvent(event)) {
-    return 'mouse-line';
-  }
-
-  if (event.type === EventType.IncrementalSnapshot && event.data.source === IncrementalSource.MouseInteraction) {
-    return getMouseInteractionIcon(event.data.type);
-  }
-
-  if (isErrorEvent(event)) {
-    return 'code-s-slash-line';
-  }
-
-  if (isCustomEvent(event)) {
-    return 'loader-line';
-  }
-
-  return 'question-mark';
-};

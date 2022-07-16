@@ -33,9 +33,13 @@ export const EVENTS: EventItem[] = [
     value: 'scroll',
   },
   {
-    name: 'Errors',
+    name: 'Javascript Error',
     value: 'error',
-  }
+  },
+  {
+    name: 'Other tracked events',
+    value: 'custom',
+  },
 ];
 
 export const COLUMNS: Column[] = [
