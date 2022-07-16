@@ -120,7 +120,7 @@ export const Sidebar: FC = () => {
           <div className='nav left'>
             <Link href='/sites'>
               <a className={classnames('link', { active: path.startsWith('/sites') })} data-label='All Sites'>
-                <Icon name='window-line' />
+                <Icon className='sidebar-icon' name='window-line' />
                 <span>All Sites</span>
               </a>
             </Link>
@@ -128,7 +128,7 @@ export const Sidebar: FC = () => {
           <div className='nav right'>
             <Link href={`/sites/${siteId}/dashboard`}>
               <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/dashboard`) })} data-label='Dashboard'>
-                <Icon name='dashboard-3-line' />
+                <Icon className='sidebar-icon' name='dashboard-3-line' />
                 <span>Dashboard</span>
               </a>
             </Link>
@@ -137,19 +137,19 @@ export const Sidebar: FC = () => {
             </Divider>
             <Link href={`/sites/${siteId}/visitors`}>
               <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/visitors`) })} data-label='Visitors'>
-                <Icon name='group-line' />
+                <Icon className='sidebar-icon' name='group-line' />
                 <span>Visitors</span>
               </a>
             </Link>
             <Link href={`/sites/${siteId}/recordings`}>
               <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/recordings`) })} data-label='Recordings'>
-                <Icon name='vidicon-line' />
+                <Icon className='sidebar-icon' name='vidicon-line' />
                 <span>Recordings</span>
               </a>
             </Link>
             <Link href={`/sites/${siteId}/events`}>
               <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/events`) })} data-label='Events'>
-                <Icon name='flashlight-line' />
+                <Icon className='sidebar-icon' name='flashlight-line' />
                 <span>Events</span>
               </a>
             </Link>
@@ -158,19 +158,19 @@ export const Sidebar: FC = () => {
             </Divider>
             <Link href={`/sites/${siteId}/analytics/traffic`}>
               <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/analytics`) })} data-label='Analytics'>
-                <Icon name='line-chart-line' />
+                <Icon className='sidebar-icon' name='line-chart-line' />
                 <span>Analytics</span>
               </a>
             </Link>
             <Link href={`/sites/${siteId}/journeys`}>
               <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/journeys`) })} data-label='Journeys'>
-                <Icon name='guide-line' />
+                <Icon className='sidebar-icon' name='guide-line' />
                 <span>Journeys</span>
               </a>
             </Link>
             <Link href={`/sites/${siteId}/heatmaps`}>
               <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/heatmaps`) })} data-label='Heatmaps'>
-                <Icon name='fire-line' />
+                <Icon className='sidebar-icon' name='fire-line' />
                 <span>Heatmaps</span>
               </a>
             </Link>
@@ -202,20 +202,20 @@ export const Sidebar: FC = () => {
                 </Divider>
                 <Link href={`/sites/${siteId}/settings/details`}>
                   <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/settings/details`) })} data-label='Site'>
-                    <Icon name='window-line' />
+                    <Icon className='sidebar-icon' name='window-line' />
                     <span>Site</span>
                   </a>
                 </Link>
                 <Link href={`/sites/${siteId}/settings/team`}>
                   <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/settings/team`) })} data-label='Team'>
-                    <Icon name='group-line' />
+                    <Icon className='sidebar-icon' name='group-line' />
                     <span>Team</span>
                   </a>
                 </Link>
                 {sidebar.role === OWNER && (
                   <Link href={`/sites/${siteId}/settings/subscription`}>
                     <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/settings/subscription`) })} data-label='Subscription'>
-                      <Icon name='bank-card-2-line' />
+                      <Icon className='sidebar-icon' name='bank-card-2-line' />
                       <span>Subscription</span>
                       {!sidebar.validBilling && (
                         <Icon name='error-warning-fill' className='warning' />

@@ -1,6 +1,5 @@
 import React from 'react';
 import type { FC } from 'react';
-import { useRouter } from 'next/router';
 import { Icon } from 'components/icon';
 import { Card } from 'components/card';
 import { toNiceDate } from 'lib/dates';
@@ -8,7 +7,6 @@ import { Device } from 'components/device';
 import { Tooltip } from 'components/tooltip';
 import { Browser } from 'components/browser';
 import { Flag } from 'components/flag';
-import { VisitorsDelete } from 'components/sites/visitors/visitors-delete';
 import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
 import { Pill } from 'components/pill';
 import { getLinkedData, normalizeKey, groupVisitorBrowsers, groupVisitorDevices, groupVisitorCountries } from 'lib/visitors';
@@ -21,25 +19,13 @@ interface Props {
 }
 
 export const VisitorsSummary: FC<Props> = ({ site, visitor }) => {
-  const router = useRouter();
-
   const linkedData = getLinkedData(visitor);
   const devices = groupVisitorDevices(visitor.devices);
   const browsers = groupVisitorBrowsers(visitor.devices);
   const countries = groupVisitorCountries(visitor.countries);
 
-  const onVisitorDelete = async () => {
-    await router.push(`/sites/${site.id}/visitors`);
-  };
-
   return (
     <Card className='summary'>
-      <h4 className='title'>
-        <Icon name='user-line' />
-        {visitor.visitorId}
-        <VisitorsDelete site={site} visitorId={visitor.id} onDelete={onVisitorDelete} />
-      </h4>
-
       <div className='summary-data'>
         <div className='linked'>
           <p className='heading'>

@@ -404,9 +404,9 @@
         outline: 2px dashed var(--white);
       }
 
-      i:not(.arrow) {
+      .sidebar-icon {
         color: var(--gray-blue-300);
-        margin-right: .25rem;
+        margin: 0 .25rem 0 0;
         width: 1rem;
       }
 

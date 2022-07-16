@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import classnames from 'classnames';
 import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
@@ -11,11 +12,13 @@ import { Message } from 'components/message';
 interface Props {
   site: Site;
   visitorId: string;
+  button?: string | React.ReactNode;
+  buttonClassName?: string;
   onClose?: VoidFunction;
   onDelete?: VoidFunction;
 }
 
-export const VisitorsDelete: FC<Props> = ({ site, visitorId, onClose, onDelete }) => {
+export const VisitorsDelete: FC<Props> = ({ site, visitorId, button, buttonClassName, onClose, onDelete }) => {
   const toasts = useToasts();
   const ref = React.useRef<Modal>();
 
@@ -46,8 +49,8 @@ export const VisitorsDelete: FC<Props> = ({ site, visitorId, onClose, onDelete }
 
   return (
     <>
-      <Button onClick={openModal} className='delete-visitor'>
-        <Icon name='delete-bin-line' /> <span>Delete</span>
+      <Button onClick={openModal} className={classnames('delete-visitor', buttonClassName)}>
+        {button || <><Icon name='delete-bin-line' /> <span>Delete</span></>}
       </Button>
             
       <Modal ref={ref} onClose={onClose}>
