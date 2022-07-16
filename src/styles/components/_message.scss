@@ -4,20 +4,17 @@
   border-left-width: 6px;
   border-radius: var(--border-radius-md);
   display: flex;
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
   margin-bottom: 1.5rem;
   padding: .75rem 1rem;
   text-align: left;
-
-  @include breakpoint-md {
-    font-size: 13px;
-    line-height: 20px;
-  }
 
   i {
     color: var(--blue-500);
     display: block;
     flex-shrink: 0;
-    font-size: 1.5rem;
+    font-size: var(--font-size-body-xl);
     margin-right: .5rem;
   }
 
@@ -78,7 +75,7 @@
 
     p {
       i {
-        font-size: 1.25rem;
+        font-size: var(--font-size-body-lg);
         vertical-align: middle;
       }
 

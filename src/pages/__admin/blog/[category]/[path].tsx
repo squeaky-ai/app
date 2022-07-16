@@ -36,9 +36,9 @@ const AdminBlogEdit: NextPage<ServerSideProps> = () => {
       <Main>
         <BreadCrumbs items={[{ name: 'Admin', href: '/__admin/dashboard' }, { name: 'Blog', href: '/__admin/blog' }, { name: 'Edit' }]} />
 
-        <h3 className='title'>
+        <h4 className='title'>
           Edit Post
-        </h3>
+        </h4>
 
         {loading && (
           <PageLoading />

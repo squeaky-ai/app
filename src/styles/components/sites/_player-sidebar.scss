@@ -36,7 +36,7 @@
         background: none;
         border: none;
         color: var(--gray-blue-700);
-        font-size: 1.5rem;
+        font-size: var(--font-size-body-xl);
         margin: 0;
         padding: 0;
 
@@ -68,13 +68,13 @@
     .no-attributes {
       align-items: center;
       display: flex;
-      font-size: 13px;
-      line-height: 20px;
+      font-size: var(--font-size-body-sm);
+      line-height: var(--line-height-body-sm);
       margin-bottom: 0;
 
       i {
         color: var(--blue-500);
-        font-size: 1rem;
+        font-size: var(--font-size-body);
         margin-right: .5rem;
       }
 
@@ -85,16 +85,16 @@
     }
 
     .heading {
-      font-size: 13px;
+      font-size: var(--font-size-body-sm);
       font-weight: var(--font-weight-bold);
+      line-height: var(--line-height-body-sm);
       justify-content: flex-start;
-      line-height: 20px;
       margin-bottom: 1rem;
       padding: 0;
 
       i {
         color: var(--blue-500);
-        font-size: 1rem;
+        font-size: var(--font-size-body);
         margin-right: .5rem;
       }
     }
@@ -127,8 +127,8 @@
   }
 
   .datalist {
-    font-size: 13px;
-    line-height: 20px;
+    font-size: var(--font-size-body-sm);
+    line-height: var(--line-height-body-sm);
     margin: 1rem 0;
 
     .row {
@@ -159,8 +159,8 @@
 
         .button {
           color: var(--gray-500);
-          font-size: 13px;
-          line-height: 20px;
+          font-size: var(--font-size-body-sm);
+          line-height: var(--line-height-body-sm);
           overflow: hidden;
           text-align: right;
           text-overflow: ellipsis;
@@ -176,7 +176,7 @@
           width: 1.25rem;
 
           i {
-            font-size: 16px;
+            font-size: var(--font-size-body);
           }
         }
 
@@ -186,20 +186,20 @@
       }
 
       .device {
-        font-size: 1rem;
+        font-size: var(--font-size-body);
         margin-right: .25rem;
       }
 
       .browser {
         display: inline-block;
         height: 1rem;
-        line-height: 1rem;
+        line-height: var(--line-height-body-sm);
         margin-right: .25rem;
         vertical-align: middle;
       }
 
       .bookmark {
-        line-height: 1rem;
+        line-height: var(--line-height-body-sm);
 
         i {
           color: var(--gray-150);
@@ -217,7 +217,7 @@
 
         & > .button {
           height: 1rem;
-          line-height: .75rem;
+          line-height: var(--line-height-body-sm);
         }
       }
     }
@@ -226,17 +226,17 @@
       background: none;
       border: none;
       color: var(--blue-500);
-      font-size: 13px;
+      font-size: var(--font-size-body-sm);
       font-weight: var(--font-weight-normal);
-      line-height: 20px;
+      line-height: var(--line-height-body-sm);
       padding: 0;
       text-decoration: underline;
     }
   }
 
   .datarow {
-    font-size: 13px;
-    line-height: 20px;
+    font-size: var(--font-size-body-sm);
+    line-height: var(--line-height-body-sm);
     margin: 0;
     padding: 0;
 
@@ -266,8 +266,8 @@
         position: relative;
 
         p {
-          font-size: 13px;
-          line-height: 20px;
+          font-size: var(--font-size-body-sm);
+          line-height: var(--line-height-body-sm);
           margin: 0;
         }
 
@@ -288,8 +288,9 @@
             border: none;
             color: var(--blue-500);
             cursor: pointer;
-            font-size: 13px;
+            font-size: var(--font-size-body-sm);
             font-weight: var(--font-weight-normal);
+            line-height: var(--line-height-body-sm);
             margin: 0;
             padding: 0;
             text-decoration: underline;
@@ -311,7 +312,7 @@
 
           .icon {
             color: var(--rose-500);
-            font-size: 1.25rem;
+            font-size: var(--font-size-body-lg);
           }
 
           .title {
@@ -398,8 +399,8 @@
         margin-bottom: .5rem;
 
         + p {
-          font-size: 13px;
-          line-height: 20px;
+          font-size: var(--font-size-body-sm);
+          line-height: var(--line-height-body-sm);
           margin: 0 0 1.5rem 0;
         }
       }
@@ -509,9 +510,9 @@
           background: none;
           border: none;
           color: var(--blue-500);
-          font-size: 13px;
+          font-size: var(--font-size-body-sm);
           font-weight: var(--font-weight-normal);
-          line-height: 20px;
+          line-height: var(--line-height-body-sm);
           padding: 0;
           text-align: left;
           text-decoration: underline;
@@ -520,7 +521,7 @@
 
         i {
           color: var(--gray-500);
-          font-size: 1rem;
+          font-size: var(--font-size-body);
           margin: 0 .5rem;
         }
       }
@@ -549,7 +550,7 @@
 
     i {
       color: var(--blue-500);
-      font-size: 1.5rem;
+      font-size: var(--font-size-body-xl);
       text-align: left;
     }
 
@@ -568,8 +569,8 @@
 
     p {
       color: var(--gray-500);
-      font-size: 13px;
-      line-height: 20px;
+      font-size: var(--font-size-body-sm);
+      line-height: var(--line-height-body-sm);
       margin: 0 0 .75rem 0;
 
       &.heading {

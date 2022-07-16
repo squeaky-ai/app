@@ -31,8 +31,8 @@
       padding: 0;
 
       span {
-        font-size: 12px;
-        line-height: 16px;
+        font-size: var(--font-size-body-sm);
+        line-height: var(--line-height-body-sm);
         padding: 0 .125rem;
       }
     }
@@ -143,9 +143,9 @@
       border-color: var(--gray-100);
       border-style: solid;
       border-width: 1px 1px 0 0;
-      font-size: 13px;
+      font-size: var(--font-size-body-sm);
       height: 3rem;
-      line-height: 16px;
+      line-height: var(--line-height-body-sm);
       padding: 1rem;
 
       &:last-of-type {
@@ -168,14 +168,14 @@
 
           &.pricing {
             color: var(--gray-300);
-            font-size: 13px;
-            line-height: 16px;
+            font-size: var(--font-size-body-sm);
+            line-height: var(--line-height-body-sm);
             margin: 0 0 1.5rem 0;
 
             b {
               color: var(--gray-500);
-              font-size: 18px;
-              line-height: 24px;
+              font-size: var(--font-size-body-xl);
+              line-height: var(--line-height-body);
             }
           }
         }
@@ -234,7 +234,7 @@
       }
 
       .arrow {
-        font-size: 1.5rem;
+        font-size: var(--font-size-body-xl);
         margin: 0 0 0 1rem;
 
         @include breakpoint-sm {
@@ -255,7 +255,7 @@
 
           b {
             color: var(--gray-500);
-            font-size: 16px;
+            font-size: var(--font-size-body);
             vertical-align: middle;
           }
         }
@@ -302,13 +302,13 @@
     background: var(--gray-blue-700);
     border-radius: var(--border-radius-md);
     display: flex;
-    padding: 2rem;
+    padding: 1.5rem;
 
     .icon {
       align-self: flex-start;
       color: var(--blue-300);
       flex-shrink: 0;
-      font-size: 1.5rem;
+      font-size: var(--font-size-body-xl);
       margin: 0 1rem 0 0;
     }
 
@@ -345,8 +345,8 @@
   .message {
     &.error {
       p {
-        font-size: 13px;
-        line-height: 20px;
+        font-size: var(--font-size-body-sm);
+        line-height: var(--line-height-body-sm);
       }
     }
   }
@@ -441,8 +441,8 @@
     }
 
     .link {
-      font-size: 13px;
-      line-height: 16px;
+      font-size: var(--font-size-body-sm);
+      line-height: var(--line-height-body-sm);
       text-decoration: underline;
     }
   }
@@ -470,13 +470,13 @@
 
       .icon {
         color: var(--blue-500);
-        font-size: 1.5rem;
+        font-size: var(--font-size-body-xl);
         margin: 0 .5rem 0 0;
       }
 
       p {
-        font-size: 13px;
-        line-height: 16px;
+        font-size: var(--font-size-body-sm);
+        line-height: var(--line-height-body-sm);
         margin: 0;
       }
     }
@@ -514,8 +514,8 @@
           flex: 1;
           
           p {
-            font-size: 13px;
-            line-height: 16px;
+            font-size: var(--font-size-body-sm);
+            line-height: var(--line-height-body-sm);
             margin: 0;
             text-align: right;
 
@@ -556,13 +556,13 @@
           li {
             align-items: center;
             display: flex;
-            font-size: 13px;
-            line-height: 16px;
+            font-size: var(--font-size-body-sm);
+            line-height: var(--line-height-body-sm);
             list-style: none;
 
             .icon {
               color: var(--mauve-700);
-              font-size: 1rem;
+              font-size: var(--font-size-body);
               margin: 0 .25rem 0 0;
             }
           }
@@ -590,8 +590,8 @@
 
           .details {
             p {
-              font-size: 13px;
-              line-height: 16px;
+              font-size: var(--font-size-body-sm);
+              line-height: var(--line-height-body-sm);
               margin: 0 0 .5rem 0;
 
               &.heading {
@@ -609,8 +609,8 @@
               padding: 1.5rem;
 
               p {
-                font-size: 13px;
-                line-height: 16px;
+                font-size: var(--font-size-body-sm);
+                line-height: var(--line-height-body-sm);
 
                 &.heading {
                   font-weight: var(--font-weight-bold);
@@ -655,7 +655,7 @@
 
     .star {
       color: var(--blue-300);
-      font-size: 1.25rem;
+      font-size: var(--font-size-body-lg);
     }
 
     .content {
@@ -682,7 +682,7 @@
 
       .icon {
         color: var(--white);
-        font-size: 1.5rem;
+        font-size: var(--font-size-body-xl);
       }
     }
   }

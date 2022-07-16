@@ -51,14 +51,14 @@ const SitesEventsHistory: NextPage<ServerSideProps> = ({ user }) => {
             <BreadCrumbs site={site} items={[{ name: 'Events', href: `/sites/${site.id}/events` }, { name: 'Event History' }]} />
 
             <div className='events-header'>
-              <h3 className='title'>
+              <h4 className='title'>
                 Events History
                 <EventAdd 
                   setGroupIds={setGroupIds}
                   setCaptureIds={setCaptureIds}
                   eventStats={eventStats.eventStats}
                 />
-              </h3>
+              </h4>
 
               <menu>
                 <Period period={period} onChange={setPeriod} />

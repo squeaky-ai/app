@@ -25,10 +25,10 @@ const SitesDashboard: NextPage<ServerSideProps> = ({ user }) => {
           <Main className={classnames({ empty: site.recordingsCount === 0 })}>
             <BreadCrumbs site={site} items={[{ name: 'Dashboard' }]} />
 
-            <h3 className='title'>
+            <h4 className='title'>
               Dashboard
               <Period period={period} onChange={setPeriod} />
-            </h3>
+            </h4>
 
             <EmptyState
               title='There is currently no dashboard data'

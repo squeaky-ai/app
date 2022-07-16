@@ -56,10 +56,10 @@ const SitesSettingsPrivacy: NextPage<ServerSideProps> = ({ user }) => {
           <Main>
             <BreadCrumbs site={site} items={[{ name: 'Settings', href: `/sites/${site.id}/settings/details` }, { name: 'Privacy' }]} />
 
-            <h3 className='title'>
+            <h4 className='title'>
               Site Settings
               <Access roles={[OWNER, ADMIN]} />
-            </h3>
+            </h4>
 
             <SettingsTabs site={site} member={member} page='privacy' />
 

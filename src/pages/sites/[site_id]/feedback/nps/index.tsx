@@ -22,7 +22,7 @@ const SitesFeedbackNps: NextPage<ServerSideProps> = ({ user }) => (
         <Main className={classnames({ empty: !site.verifiedAt })}>
           <BreadCrumbs site={site} items={[{ name: 'Feedback' }, { name: 'NPS Score®' }]} />
 
-          <h3 className='title'>Net Promoter Score®</h3>
+          <h4 className='title'>Net Promoter Score®</h4>
 
           <EmptyState
             title='Awaiting tracking code installation'

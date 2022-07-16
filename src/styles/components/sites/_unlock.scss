@@ -9,14 +9,14 @@
 
   i {
     color: var(--purple-500);
-    font-size: 1.25rem;
+    font-size: var(--font-size-body-lg);
     margin: 0 .75rem 0 .5rem;
   }
 
   p {
-    font-size: 13px;
+    font-size: var(--font-size-body-sm);
     flex: 1;
-    line-height: 20px;
+    line-height: var(--line-height-body-sm);
     margin: 0;
 
     a {
@@ -30,9 +30,9 @@
     border-radius: var(--border-radius-md);
     color: var(--black);
     display: flex;
-    font-size: 13px;
+    font-size: var(--font-size-body-sm);
     height: 32px;
-    line-height: 20px;
+    line-height: var(--line-height-body-sm);
     margin: 0;
     padding: .34rem .75rem;
 

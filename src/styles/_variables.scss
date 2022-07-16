@@ -26,6 +26,7 @@
   --gray-blue-900: #001125;
   --gray-blue-800: #001A39;
   --gray-blue-700: #032349;
+  --gray-blue-650: #0C2F58;
   --gray-blue-600: #153B67;
   --gray-blue-500: #234977;
   --gray-blue-300: #617FA8;
@@ -63,6 +64,19 @@
   --font-weight-bold: 500;
   --font-weight-normal: 400;
 
+  // Font sizes
+  --font-size-body: 14px;
+  --font-size-body-x-sm: 10px;
+  --font-size-body-sm: 12px;
+  --font-size-body-lg: 16px;
+  --font-size-body-xl: 18px;
+
+  // Line heights
+  --line-height-body: 20px;
+  --line-height-body-x-sm: 12px;
+  --line-height-body-sm: 16px;
+  --line-height-controls: 24px;
+
   // Borders
   --border-radius-x-sm: .125rem;
   --border-radius-sm: .25rem;
@@ -71,4 +85,5 @@
   --border-radius-xl: 2rem;
   --border-radius-c: 50%;
   --border-radius-o: 100%;
+  --border-radius-controls: .375rem;
 }

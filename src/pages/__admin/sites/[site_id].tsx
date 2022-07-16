@@ -45,7 +45,7 @@ const AdminSite: NextPage<ServerSideProps> = () => {
 
         {admin.site && (
           <>
-            <h3 className='title'>
+            <h4 className='title'>
               {admin.site.name}
 
               {hasBilling && (
@@ -54,7 +54,7 @@ const AdminSite: NextPage<ServerSideProps> = () => {
                   Stripe
                 </a>
               )}
-            </h3>
+            </h4>
 
             <Card className='site-card'>
               <SiteDetails 

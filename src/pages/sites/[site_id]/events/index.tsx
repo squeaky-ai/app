@@ -48,13 +48,13 @@ const SitesEvents: NextPage<ServerSideProps> = ({ user }) => {
             <BreadCrumbs site={site} items={[{ name: 'Events' }]} />
 
             <div className='events-header'>
-              <h3 className='title'>
+              <h4 className='title'>
                 Events
 
                 {hasEvents && (
                   <EventCreate site={site} buttonClassName='link' />
                 )}
-              </h3>
+              </h4>
 
               {hasEvents && (
                 <menu>

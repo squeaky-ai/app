@@ -2,9 +2,9 @@
   border: 1px solid var(--gray-150);
   border-radius: var(--border-radius-lg);
   color: var(--gray-500);
-  font-size: 13px;
+  font-size: var(--font-size-body-sm);
   font-weight: var(--font-weight-bold);
-  line-height: 20px;
+  line-height: var(--line-height-body-sm);
   padding: .2rem .5rem;
   text-align: center;
 
@@ -30,20 +30,15 @@
   }
 
   &.small {
-    font-size: 10px;
-    line-height: 13px;
+    font-size: var(--font-size-body-x-sm);
+    line-height: var(--font-size-body-x-sm);
     padding: .1rem .5rem;
   }
 
   &.large {
-    font-size: 16px;
-    line-height: 20px;
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-body);
     padding: .3rem 1rem;
-
-    @include breakpoint-md {
-      font-size: 13px;
-      line-height: 20px;
-    }
   }
 
   &.squared {

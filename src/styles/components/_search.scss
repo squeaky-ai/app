@@ -10,9 +10,9 @@
 
   .icon {
     color: var(--gray-200);
-    font-size: 1.25rem;
+    font-size: var(--font-size-body-lg);
     position: absolute;
     right: .55rem;
-    top: .55rem;
+    top: .5rem;
   }
 }

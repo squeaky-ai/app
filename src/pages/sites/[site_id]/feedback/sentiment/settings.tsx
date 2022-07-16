@@ -24,7 +24,7 @@ const SitesFeedbackSentimentSettings: NextPage<ServerSideProps> = ({ user }) => 
         <Main className={classnames({ empty: !site.verifiedAt })}>
           <BreadCrumbs site={site} items={[{ name: 'Feedback' }, { name: 'Sentiment' }]} />
 
-          <h3 className='title'>Sentiment</h3>
+          <h4 className='title'>Sentiment</h4>
         
           <Container className='xl centered empty-state'>
             <div className='empty-state-contents'>
