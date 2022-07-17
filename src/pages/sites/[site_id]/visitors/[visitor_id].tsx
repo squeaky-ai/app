@@ -108,7 +108,7 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
                 </h2>
               </Card>
               <Card className='page-views'>
-                <h5>Average Session Duration</h5>
+                <h5>Avg. Session Duration</h5>
                 <h2>{toHoursMinutesAndSeconds(visitor.averageSessionDuration || 0)}</h2>
               </Card>
               <Card className='session-duration'>
