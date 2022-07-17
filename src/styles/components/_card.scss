@@ -2,9 +2,9 @@
   background: var(--white);
   border-radius: var(--border-radius-md);
   box-shadow: var(--box-shadow-md);
-  padding: 2rem;
+  padding: 1.5rem;
 
   @include breakpoint-md {
-    padding: 1.5rem;
+    padding: 1rem;
   }
 }

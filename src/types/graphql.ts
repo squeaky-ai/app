@@ -2470,6 +2470,10 @@ export type VisitorsPagesCount = {
 };
 
 export enum VisitorsPagesSort {
+  /** Least amount of time on page */
+  AverageTimeOnPageAsc = 'average_time_on_page__asc',
+  /** Longest average duration */
+  AverageTimeOnPageDesc = 'average_time_on_page__desc',
   /** Least amount of views first */
   ViewsCountAsc = 'views_count__asc',
   /** Most amount of views first */

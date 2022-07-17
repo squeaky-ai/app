@@ -99,6 +99,31 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
 
             <VisitorsSummary site={site} visitor={visitor} />
 
+            <div className='stats'>
+              <Card className='recordings'>
+                <h5>Recordings</h5>
+                <h2>
+                  {visitor.recordingCount?.total || 0}
+                  <Pill type='tertiary'>{visitor.recordingCount.new} New</Pill>
+                </h2>
+              </Card>
+              <Card className='page-views'>
+                <h5>Average Session Duration</h5>
+                <h2>{toHoursMinutesAndSeconds(visitor.averageSessionDuration || 0)}</h2>
+              </Card>
+              <Card className='session-duration'>
+                <h5>Page Views</h5>
+                <h2>
+                  {visitor.pageViewsCount.total}
+                  <Pill type='secondary'>{visitor.pageViewsCount.unique} Unique</Pill>
+                </h2>
+              </Card>
+              <Card className='per-session'>
+                <h5>Pages Per Session</h5>
+                <h2>{toTwoDecimalPlaces(visitor.pagesPerSession || 0)}</h2>
+              </Card>
+            </div>
+
             <div className='recordings-header'>
               <h5>Recordings</h5>
               {visitor.recordings.items.length > 0 && (
@@ -116,20 +141,6 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
               )}
             </div>
 
-            <div className='visitor-highlights'>
-              <Card className='recordings'>
-                <h5>Recordings</h5>
-                <h2>
-                  {visitor.recordingCount?.total || 0}
-                  <Pill type='tertiary'>{visitor.recordingCount.new} New</Pill>
-                </h2>
-              </Card>
-              <Card className='page-views'>
-                <h5>Average Session Duration</h5>
-                <h2>{toHoursMinutesAndSeconds(visitor.averageSessionDuration || 0)}</h2>
-              </Card>
-            </div>
-
             <VisitorsRecording 
               visitor={visitor} 
               site={site}
@@ -144,20 +155,6 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
             />
 
             <h5>Pages</h5>
-
-            <div className='stats'>
-              <Card className='session-duration'>
-                <h5>Page Views</h5>
-                <h2>
-                  {visitor.pageViewsCount.total}
-                  <Pill type='secondary'>{visitor.pageViewsCount.unique} Unique</Pill>
-                </h2>
-              </Card>
-              <Card className='per-session'>
-                <h5>Pages Per Session</h5>
-                <h2>{toTwoDecimalPlaces(visitor.pagesPerSession || 0)}</h2>
-              </Card>
-            </div>
   
             <VisitorPages 
               visitor={visitor} 

@@ -219,7 +219,7 @@
       font-size: var(--font-size-body-sm);
       line-height: var(--line-height-body-sm);
       margin: 0 0 2rem 0;
-      padding: 2rem;
+      padding: 1.5rem;
 
       @include breakpoint-sm {
         background: none;
@@ -247,7 +247,7 @@
           background: var(--gray-50);
           border-radius: var(--border-radius-md);
           grid-area: linked;
-          padding: 2rem;
+          padding: 1.5rem;
 
           @include breakpoint-sm {
             background: var(--gray-100);
@@ -355,54 +355,6 @@
       }
     }
 
-    .visitor-highlights {
-      display: grid;
-      grid-gap: 2rem;
-      grid-template-areas: 'recordings pageviews';
-      grid-template-columns: repeat(2, 1fr);
-      margin-bottom: 2rem;
-
-      @include breakpoint-md {
-        grid-gap: 1.5rem;
-        grid-template-areas: 'recordings'
-                             'pageviews';
-        grid-template-columns: repeat(1, 1fr);
-      }
-
-      .card {
-        h2 {
-          align-items: center;
-          color: var(--blue-500);
-          display: flex;
-          font-size: 48px;
-          line-height: 64px;
-          margin: 0;
-
-          @include breakpoint-sm {
-            font-size: 32px;
-            line-height: 48px;
-          }
-        }
-
-        h5 {
-          margin: 0 0 1.5rem 0;
-        }
-
-        .pill {
-          margin-left: 1rem;
-          padding: .25rem .75rem;
-        }
-
-        &.recordings {
-          grid-area: recordings;
-        }
-
-        &.page-views {
-          grid-area: pageviews;
-        }
-      }
-    }
-
     .visitor-recordings-table {
       margin-bottom: 2rem;
 
@@ -470,13 +422,15 @@
     .stats {
       display: grid;
       grid-gap: 2rem;
-      grid-template-areas: 'session-duration per-session';
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-areas: 'recordings page-views session-duration per-session';
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       margin-bottom: 2rem;
 
       @include breakpoint-lg {
         grid-gap: 2rem;
-        grid-template-areas: 'session-duration'
+        grid-template-areas: 'recordings'
+                             'page-views'
+                             'session-duration'
                              'per-session';
         grid-template-columns: minmax(0, 1fr);
       }
@@ -505,6 +459,14 @@
           padding: .25rem .75rem;
         }
 
+        &.recordings {
+          grid-area: recordings;
+        }
+
+        &.page-views {
+          grid-area: page-views;
+        }
+
         &.session-duration {
           grid-area: session-duration;
         }
@@ -519,7 +481,7 @@
       margin-bottom: 2rem;
       
       .row {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
       }
     }
   }
