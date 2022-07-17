@@ -154,7 +154,7 @@ export const COLUMNS: Column[] = [
   },
   {
     label: 'Options',
-    width: '70px',
+    width: '64px',
     disabled: false,
     position: 19,
   },

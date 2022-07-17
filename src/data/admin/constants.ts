@@ -45,7 +45,7 @@ export const USER_COLUMNS: Column[] = [
   },
   {
     label: 'Options',
-    width: '70px',
+    width: '64px',
     disabled: false,
     position: 8,
   },
@@ -120,7 +120,7 @@ export const SITE_COLUMNS: Column[] = [
   },
   {
     label: 'Options',
-    width: '70px',
+    width: '64px',
     disabled: false,
     position: 12,
   },
