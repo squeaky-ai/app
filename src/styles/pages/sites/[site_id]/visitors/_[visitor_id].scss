@@ -360,6 +360,14 @@
 
       .row {
         grid-template-columns: 58px 105px 165px 1fr 1fr 1fr 1fr 2fr 1fr 90px 70px;
+
+        .linked i {
+          color: var(--blue-500);
+          display: inline-block;
+          font-size: var(--font-size-body);
+          margin-right: .25rem;
+          vertical-align: middle;
+        }
       }
     }
 
