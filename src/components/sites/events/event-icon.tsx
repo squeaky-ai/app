@@ -28,12 +28,14 @@ const getRemixIcon = (type: EventName): string => {
       return 'flashlight-line';
     case 'scroll':
       return 'mouse-line';
+    case 'unknown':
+      return 'question-mark';
     default:
       return '';
   }
 };
 
-const getCustomSvg = (type: EventName) => {
+const getCustomSvg = (type: Omit<EventName, 'page_view' | 'error' | 'custom' | 'scroll'>) => {
   switch(type) {
     case 'click':
       return clickIcon;
@@ -51,7 +53,7 @@ const getCustomSvg = (type: EventName) => {
 };
 
 export const EventIcon: FC<Props> = ({ type, className, height, width }) => {
-  const usesRemixIcon = ['page_view', 'error', 'custom', 'scroll'].includes(type);
+  const usesRemixIcon = ['page_view', 'error', 'custom', 'scroll', 'unknown'].includes(type);
 
   return (
     <span className={classnames('event-icon', className, { 'uses-icon': usesRemixIcon })}>
