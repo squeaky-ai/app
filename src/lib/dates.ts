@@ -12,17 +12,12 @@ import {
 
 import { AbsoluteTime, TimePeriod, TimeRange } from 'types/common';
 
-export const toTimeString = (ms?: number | string, forceHours = false) => {
-  if (!ms) return '00:00';
+export const toTimeString = (ms?: number | string) => {
+  if (!ms) return '00:00:00';
 
   const date = new Date(0);
   date.setMilliseconds(Number(ms));
-
-  const longerThanAnHour = date.getUTCHours() !== 0;
-  
-  return longerThanAnHour || forceHours
-    ? date.toISOString().substr(11, 8)
-    : date.toISOString().substr(14, 5);
+  return date.toISOString().substr(11, 8);
 };
 
 export const fromTimeString = (timeString: string) => {
@@ -49,15 +44,12 @@ export const toSlashyDate = (s: string) => s ? s.split('/').reverse().join('-') 
 export const toHyphenedDate = (s: string) => s ? s.split('-').reverse().join('/') : null;
 
 export const toHoursMinutesAndSeconds = (ms?: number) => {
-  if (!ms) return '0m 0s';
+  if (!ms) return '0h 0m 0s';
 
-  const timeString = toTimeString(ms, true);
+  const timeString = toTimeString(ms);
 
   const [hours, minutes, seconds] = timeString.split(':');
-  const string = `${hours.replace('00', '0')}h ${minutes.replace('00', '0')}m ${seconds.replace('00', '0')}s`;
-
-  // If there's no hours then remove them to save space
-  return string?.replace('0h ', '');
+  return `${hours.replace('00', '0')}h ${minutes.replace('00', '0')}m ${seconds.replace('00', '0')}s`;
 };
 
 export const toDayOfMonth = (date: Date) => format(date, 'do MMMM');
