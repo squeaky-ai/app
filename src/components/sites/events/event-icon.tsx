@@ -46,7 +46,7 @@ const getCustomSvg = (type: EventName) => {
     case 'touch':
       return touchIcon;
     default:
-      return null;
+      throw new Error(`No image for event type ${type}`);
   }
 };
 
