@@ -123,10 +123,12 @@ export const GET_ADMIN_SITE_QUERY = gql`
           }
         }
         recordingCounts {
-          total
-          locked
-          deleted
-          currentMonth
+          totalAll
+          lockedAll
+          deletedAll
+          totalCurrentMonth
+          lockedCurrentMonth
+          deletedCurrentMonth
         }
         createdAt
       }

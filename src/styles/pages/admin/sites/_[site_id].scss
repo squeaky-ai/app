@@ -72,6 +72,10 @@
         
         &:first-of-type {
           font-weight: var(--font-weight-bold);
+
+          i {
+            color: var(--gray-500);
+          }
         }
 
         &:last-of-type {

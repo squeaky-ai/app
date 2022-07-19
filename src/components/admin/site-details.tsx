@@ -79,20 +79,28 @@ export const SiteDetails: FC<Props> = ({ activeVisitors, site, isEnterprise }) =
       </h5>
 
       <div className='row'>
-        <span>Total</span>
-        <span>{site.recordingCounts.total}</span>
+        <span>Total <i>(all time)</i></span>
+        <span>{site.recordingCounts.totalAll}</span>
       </div>
       <div className='row'>
-        <span>Locked</span>
-        <span>{site.recordingCounts.locked}</span>
+        <span>Locked <i>(all time)</i></span>
+        <span>{site.recordingCounts.lockedAll}</span>
       </div>
       <div className='row'>
-        <span>Deleted</span>
-        <span>{site.recordingCounts.deleted}</span>
+        <span>Deleted <i>(all time)</i></span>
+        <span>{site.recordingCounts.deletedAll}</span>
       </div>
       <div className='row'>
-        <span>Current Month</span>
-        <span>{site.recordingCounts.currentMonth}</span>
+        <span>Total <i>(current month)</i></span>
+        <span>{site.recordingCounts.totalCurrentMonth}</span>
+      </div>
+      <div className='row'>
+        <span>Locked <i>(current month)</i></span>
+        <span>{site.recordingCounts.lockedCurrentMonth}</span>
+      </div>
+      <div className='row'>
+        <span>Deleted <i>(current month)</i></span>
+        <span>{site.recordingCounts.deletedCurrentMonth}</span>
       </div>
 
       {isEnterprise && (
