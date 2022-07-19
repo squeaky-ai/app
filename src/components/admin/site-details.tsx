@@ -5,10 +5,10 @@ import { Pill } from 'components/pill';
 import { Divider } from 'components/divider';
 import { SiteEnterpriseSettings } from 'components/admin/site-enterprise-settings';
 import { toNiceDate } from 'lib/dates';
-import type { ActiveVisitorCount, Site } from 'types/graphql';
+import type { ActiveVisitorCount, AdminSite } from 'types/graphql';
 
 interface Props {
-  site: Site;
+  site: AdminSite;
   activeVisitors: ActiveVisitorCount[];
   isEnterprise: boolean;
 }
@@ -69,6 +69,30 @@ export const SiteDetails: FC<Props> = ({ activeVisitors, site, isEnterprise }) =
             : <Pill className='tertiary'>No</Pill> 
           }
         </span>
+      </div>
+
+      <Divider />
+
+      <h5>
+        <Icon name='vidicon-line' />
+        Recordings
+      </h5>
+
+      <div className='row'>
+        <span>Total</span>
+        <span>{site.recordingCounts.total}</span>
+      </div>
+      <div className='row'>
+        <span>Locked</span>
+        <span>{site.recordingCounts.locked}</span>
+      </div>
+      <div className='row'>
+        <span>Deleted</span>
+        <span>{site.recordingCounts.deleted}</span>
+      </div>
+      <div className='row'>
+        <span>Current Month</span>
+        <span>{site.recordingCounts.currentMonth}</span>
       </div>
 
       {isEnterprise && (

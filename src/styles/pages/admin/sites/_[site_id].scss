@@ -1,4 +1,8 @@
 .page.__admin.site {
+  .title {
+    justify-content: space-between;
+  }
+
   .not-found {
     background: var(--peach-50);
 
@@ -11,7 +15,6 @@
     align-items: center;
     color: var(--gray-blue-800);
     display: flex;
-    font-weight: var(--font-weight-bold);
 
     .icon {
       color: var(--mauve-700);
@@ -42,7 +45,7 @@
     }
 
     .details {
-      padding: 2rem 1rem 1rem 1rem;
+      padding: 1.5rem 1rem 1rem 1rem;
 
       .divider {
         margin: 3rem 0;
@@ -52,8 +55,10 @@
     .row {
       align-items: center;
       display: flex;
+      font-size: var(--font-size-body);
       justify-content: space-between;
-      margin: 0 0 1rem 0;
+      line-height: var(--line-height-body);
+      margin: 0 0 .75rem 0;
 
       &:last-of-type {
         margin-bottom: 0;
@@ -64,7 +69,7 @@
         text-overflow: ellipsis;
         width: 50%;
         white-space: nowrap;
-
+        
         &:first-of-type {
           font-weight: var(--font-weight-bold);
         }
@@ -79,7 +84,7 @@
       & > div {
         background: var(--gray-50);
         border-radius: var(--border-radius-md);
-        padding: 2rem;
+        padding: 1.5rem;
       }
 
       .no-invoices {

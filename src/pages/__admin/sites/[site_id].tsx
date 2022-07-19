@@ -25,7 +25,7 @@ const AdminSite: NextPage<ServerSideProps> = () => {
   return (
     <>
       <Head>
-        <title>Squeaky | Admin | Site | {admin.site?.name}</title>
+        <title>Squeaky | Admin | Site</title>
       </Head>
 
       <Main>
@@ -49,7 +49,7 @@ const AdminSite: NextPage<ServerSideProps> = () => {
               {admin.site.name}
 
               {hasBilling && (
-                <a className='stripe-link' href={`https://dashboard.stripe.com/test/customers/${admin.site.billing.customerId}`} target='_blank' rel='noreferrer'>
+                <a className='button stripe-link' href={`https://dashboard.stripe.com/test/customers/${admin.site.billing.customerId}`} target='_blank' rel='noreferrer'>
                   <Icon name='external-link-line' />
                   Stripe
                 </a>

@@ -8,10 +8,10 @@ import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'compo
 import { Input } from 'components/input';
 import { useToasts } from 'hooks/use-toasts';
 import { adminSiteAssociateCustomer } from 'lib/api/graphql';
-import type { Site } from 'types/graphql';
+import type { AdminSite } from 'types/graphql';
 
 interface Props {
-  site: Site;
+  site: AdminSite;
 }
 
 const UpgradeSchema = Yup.object().shape({

@@ -43,9 +43,6 @@ export const Sidebar: FC = () => {
           <Logo logo='small' alt='Logo' height={32} width={24} />
         </a>
       </Link>
-      <div className='admin-tag'>
-        ADMIN
-      </div>
       <menu className='left'>
         <div className='slider'>
           <div className='nav left'>

@@ -7,10 +7,10 @@ import { SiteEnterpriseUpgrade } from 'components/admin/site-enterprise-upgrade'
 import { toddMMYYY } from 'lib/dates';
 import { CURRENCY_SYMBOLS } from 'data/common/constants';
 import { toDecimalCurrency } from 'lib/currency';
-import type { Site } from 'types/graphql';
+import type { AdminSite } from 'types/graphql';
 
 interface Props {
-  site: Site;
+  site: AdminSite;
   isEnterprise: boolean;
   hasBilling: boolean;
 }
