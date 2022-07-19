@@ -4,6 +4,7 @@ import { Icon } from 'components/icon';
 import { Pill } from 'components/pill';
 import { Divider } from 'components/divider';
 import { SiteEnterpriseSettings } from 'components/admin/site-enterprise-settings';
+import { Row, Table, Cell } from 'components/table';
 import { toNiceDate } from 'lib/dates';
 import type { ActiveVisitorCount, AdminSite } from 'types/graphql';
 
@@ -73,34 +74,34 @@ export const SiteDetails: FC<Props> = ({ activeVisitors, site, isEnterprise }) =
 
       <Divider />
 
-      <h5>
-        <Icon name='vidicon-line' />
-        Recordings
-      </h5>
+      <div className='recordings-counts'>
+        <h5>
+          <Icon name='vidicon-line' />
+          Recordings
+        </h5>
 
-      <div className='row'>
-        <span>Total <i>(all time)</i></span>
-        <span>{site.recordingCounts.totalAll}</span>
-      </div>
-      <div className='row'>
-        <span>Locked <i>(all time)</i></span>
-        <span>{site.recordingCounts.lockedAll}</span>
-      </div>
-      <div className='row'>
-        <span>Deleted <i>(all time)</i></span>
-        <span>{site.recordingCounts.deletedAll}</span>
-      </div>
-      <div className='row'>
-        <span>Total <i>(current month)</i></span>
-        <span>{site.recordingCounts.totalCurrentMonth}</span>
-      </div>
-      <div className='row'>
-        <span>Locked <i>(current month)</i></span>
-        <span>{site.recordingCounts.lockedCurrentMonth}</span>
-      </div>
-      <div className='row'>
-        <span>Deleted <i>(current month)</i></span>
-        <span>{site.recordingCounts.deletedCurrentMonth}</span>
+        <Table>
+          <Row className='head'>
+            <Cell />
+            <Cell>All Time</Cell>
+            <Cell>Current Month</Cell>
+          </Row>
+          <Row>
+            <Cell>Total</Cell>
+            <Cell>{site.recordingCounts.totalAll}</Cell>
+            <Cell>{site.recordingCounts.totalCurrentMonth}</Cell>
+          </Row>
+          <Row>
+            <Cell>Locked</Cell>
+            <Cell>{site.recordingCounts.lockedAll}</Cell>
+            <Cell>{site.recordingCounts.lockedCurrentMonth}</Cell>
+          </Row>
+          <Row>
+            <Cell>Deleted</Cell>
+            <Cell>{site.recordingCounts.deletedAll}</Cell>
+            <Cell>{site.recordingCounts.deletedCurrentMonth}</Cell>
+          </Row>
+        </Table>
       </div>
 
       {isEnterprise && (
