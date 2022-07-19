@@ -88,18 +88,18 @@ export const SiteDetails: FC<Props> = ({ activeVisitors, site, isEnterprise }) =
           </Row>
           <Row>
             <Cell>Total</Cell>
-            <Cell>{site.recordingCounts.totalAll}</Cell>
-            <Cell>{site.recordingCounts.totalCurrentMonth}</Cell>
+            <Cell>{site.recordingCounts.totalAll.toLocaleString()}</Cell>
+            <Cell>{site.recordingCounts.totalCurrentMonth.toLocaleString()}</Cell>
           </Row>
           <Row>
             <Cell>Locked</Cell>
-            <Cell>{site.recordingCounts.lockedAll}</Cell>
-            <Cell>{site.recordingCounts.lockedCurrentMonth}</Cell>
+            <Cell>{site.recordingCounts.lockedAll.toLocaleString()}</Cell>
+            <Cell>{site.recordingCounts.lockedCurrentMonth.toLocaleString()}</Cell>
           </Row>
           <Row>
             <Cell>Deleted</Cell>
-            <Cell>{site.recordingCounts.deletedAll}</Cell>
-            <Cell>{site.recordingCounts.deletedCurrentMonth}</Cell>
+            <Cell>{site.recordingCounts.deletedAll.toLocaleString()}</Cell>
+            <Cell>{site.recordingCounts.deletedCurrentMonth.toLocaleString()}</Cell>
           </Row>
         </Table>
       </div>
