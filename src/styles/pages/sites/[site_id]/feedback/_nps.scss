@@ -2,7 +2,44 @@
   .title {
     align-items: center;
     display: flex;
+    justify-content: space-between;
     margin: 0 0 2rem 0;
+
+    menu {
+      align-items: center;
+      display: flex;
+      margin: 0;
+      padding: 0;
+
+      .button {
+        align-items: center;
+        background: none;
+        border: none;
+        border-radius: var(--border-radius-md);
+        display: flex;
+        font-weight: var(--font-weight-bold);
+        height: 2rem;
+        margin-left: 0.5rem;
+        padding: 0 1rem;
+
+        &:hover {
+          background: var(--gray-100);
+        }
+
+        .icon {
+          color: var(--blue-500);
+          font-size: var(--font-size-body-lg);
+          margin: 0 0.5rem 0 0;
+        }
+      }
+
+      .nps-status {
+        span {
+          font-weight: var(--font-weight-normal);
+          margin: 0 0 0 .25rem;
+        }
+      }
+    }
   }
 
   .empty {
@@ -613,6 +650,8 @@
     background: var(--white);
     border-radius: var(--border-radius-md);
     display: flex;
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-body);
     margin: 0 0 1.5rem 0;
     padding: .75rem 1rem;
     white-space: nowrap;
@@ -625,8 +664,11 @@
 
   .actions {
     display: flex;
-    justify-content: space-between;
     margin-top: 4.5rem;
+
+    .button {
+      margin: 0 1rem 0 0;
+    }
 
     .icon {
       i {
@@ -815,6 +857,7 @@
         i {
           color: var(--white);
           font-size: var(--font-size-body-lg);
+          margin: 0;
         }
         
         &:hover {

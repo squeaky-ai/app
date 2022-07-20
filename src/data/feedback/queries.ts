@@ -13,6 +13,7 @@ export const GET_FEEDBACK_QUERY = gql`
         npsFollowUpEnabled
         npsContactConsentEnabled
         npsLayout
+        npsExcludedPages
         sentimentEnabled
         sentimentAccentColor
         sentimentExcludedPages
