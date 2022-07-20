@@ -58,8 +58,8 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
 
   return (
     <>
-      <Button type='button' className='icon secondary' onClick={toggleShow}>
-        <Icon name='eye-line' />
+      <Button type='button' className='icon' onClick={toggleShow}>
+        <Icon name='search-line' />
         {show ? 'Hide' : 'Preview'}
       </Button>
 

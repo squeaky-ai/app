@@ -7,15 +7,16 @@ import { Page } from 'components/sites/page';
 import { EmptyState } from 'components/sites/feedback/empty-state';
 import { Unlock } from 'components/sites/unlock';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
-import { NpsTabs } from 'components/sites/feedback/nps-tabs';
+import { PageLoading } from 'components/sites/page-loading';
 import { Error } from 'components/error';
-import { Nps } from 'components/sites/feedback/nps';
+import { NpsTabs } from 'components/sites/feedback/nps-tabs';
 import { NpsPreview } from 'components/sites/feedback/nps-preview';
-import { NpsStatus } from 'components/sites/feedback/nps-status';
+import { NpsScheduling } from 'components/sites/feedback/nps-scheduling';
 import { useFeedback } from 'hooks/use-feedback';
+import { NpsStatus } from 'components/sites/feedback/nps-status';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
-const SitesFeedbackNps: NextPage<ServerSideProps> = ({ user }) => {
+const SitesFeedbackNpsScheduling: NextPage<ServerSideProps> = ({ user }) => {
   const { loading, error, feedback } = useFeedback();
 
   if (error) {
@@ -25,7 +26,7 @@ const SitesFeedbackNps: NextPage<ServerSideProps> = ({ user }) => {
   return (
     <>
       <Head>
-        <title>Squeaky | Feedback | NPS</title> 
+        <title>Squeaky | Feedback | NPS | Schedule &amp; Visibility</title>
       </Head>
 
       <Page user={user} scope={[]}>
@@ -52,10 +53,14 @@ const SitesFeedbackNps: NextPage<ServerSideProps> = ({ user }) => {
 
             <Unlock site={site} page='nps' />
 
-            {!!site.verifiedAt && (
+            {loading && (
+              <PageLoading />
+            )}
+
+            {!!site.verifiedAt && !loading && (
               <>
-                <NpsTabs siteId={site.id} page='feedback' />
-                <Nps />
+                <NpsTabs siteId={site.id} page='scheduling' />
+                <NpsScheduling site={site} feedback={feedback} />
               </>
             )}
           </Main>
@@ -65,5 +70,5 @@ const SitesFeedbackNps: NextPage<ServerSideProps> = ({ user }) => {
   );
 };
 
-export default SitesFeedbackNps;
+export default SitesFeedbackNpsScheduling;
 export { getServerSideProps };
