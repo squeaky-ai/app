@@ -8,6 +8,7 @@ import { toddMMYYY } from 'lib/dates';
 import { CURRENCY_SYMBOLS } from 'data/common/constants';
 import { toDecimalCurrency } from 'lib/currency';
 import type { AdminSite } from 'types/graphql';
+import { Message } from 'components/message';
 
 interface Props {
   site: AdminSite;
@@ -25,6 +26,14 @@ export const SiteSubscription: FC<Props> = ({ site, isEnterprise, hasBilling }) 
           <Icon name='price-tag-3-line' />
           Subscription
         </h5>
+
+        {site.plan?.tier > 0 && !hasBilling && (
+          <Message
+            type='warning'
+            message='This site has been manually placed on a paid tier'
+          />
+        )}
+
         <div className='row'>
           <span>Plan</span>
           <span>

@@ -28,6 +28,10 @@
     grid-gap: 3rem;
     grid-template-columns: 1fr 1fr;
 
+    @include breakpoint-md {
+      grid-template-columns: 1fr;
+    }
+
     h5 {
       align-items: center;
       display: flex;
@@ -80,6 +84,20 @@
 
         &:last-of-type {
           text-align: right;
+        }
+      }
+
+      @include breakpoint-md {
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: center;
+
+        span {
+          width: 100%;
+
+          &:last-of-type {
+            text-align: left;
+          }
         }
       }
     }
