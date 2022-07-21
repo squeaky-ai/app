@@ -96,6 +96,18 @@
       transition: transform .3s ease-in-out;
     }
 
+    .tag {
+      background: var(--yellow-500);
+      border: none;
+      border-radius: var(--border-radius-sm);
+      margin: 0 0 0 .5rem;
+
+      span {
+        color: var(--gray-blue-800);
+        padding: 0 .25rem;
+      }
+    }
+
     &:after {
       background: var(--gray-blue-800);
       border-radius: var(--border-radius-controls);
