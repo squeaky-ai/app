@@ -9,10 +9,10 @@ import { Page } from 'components/sites/page';
 import { Illustration } from 'components/illustration';
 import { Container } from 'components/container';
 import { EmptyStateHint } from 'components/sites/empty-state-hint';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { NpsTabs } from 'components/sites/feedback/nps-tabs';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { Card } from 'components/card';
+import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
 const SitesFeedbackNpsGuide: NextPage<ServerSideProps> = ({ user }) => (
   <>
@@ -50,6 +50,8 @@ const SitesFeedbackNpsGuide: NextPage<ServerSideProps> = ({ user }) => (
                 <p>NPS® is a micro customer survey that combines a rating scale from 0 to 10 with a free text field that asks a visitor why they gave the rating they selected. Each time, the same question is always asked: &quot;How likely are you to recommend X to a friend or colleague&quot;, where the name of the company, product or service is used to take the place of &quot;X&quot;.</p>
                 
                 <h4>Outcomes</h4>
+          
+                <p>After collecting data, the Net Promoter Score® is determined based on the <b>three possible groups</b> that the vistors fall into: <b>Promoters</b>, <b>Passives</b> or <b>Detractors</b>.</p>
 
                 <div className='outcomes'>
                   <div className='items'>
@@ -71,8 +73,6 @@ const SitesFeedbackNpsGuide: NextPage<ServerSideProps> = ({ user }) => (
                     <p className='promoter'><span>Promoters</span></p>
                   </div>
                 </div>
-
-                <p>After collecting data, the Net Promoter Score® is determined based on the <b>three possible groups</b> that the vistors fall into: <b>Promoters</b>, <b>Passives</b> or <b>Detractors</b>.</p>
 
                 <p>The total score for your company is based on the percentage of promoters minus the percentage of detractors. You will end up with a value is between -100 and +100. The lower the value, the less satisfied your visitors are and the less likely they would be to recommend your company.</p>
 

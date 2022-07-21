@@ -1,15 +1,18 @@
 import React from 'react';
 import type { FC } from 'react';
 import * as Yup from 'yup';
+import classnames from 'classnames';
 import { Formik } from 'formik';
 import { feedbackUpdate } from 'lib/api/graphql';
 import { Container } from 'components/container';
 import { Radio } from 'components/radio';
 import { Button } from 'components/button';
+import { Card } from 'components/card';
 import { NpsPages } from 'components/sites/feedback/nps-pages';
 import { useToasts } from 'hooks/use-toasts';
 import type { Feedback, FeedbackUpdateInput } from 'types/graphql';
 import type { Site } from 'types/graphql';
+import Link from 'next/link';
 
 interface Props {
   site: Site;
@@ -17,7 +20,7 @@ interface Props {
 }
 
 const NpsSchema = Yup.object().shape({
-  npsSchedule: Yup.string().oneOf(['once', 'monthly'], 'Please select frequency'),
+  npsSchedule: Yup.string().oneOf(['once', 'monthly', 'custom'], 'Please select frequency'),
   npsExcludedPages: Yup.array(),
 });
 
@@ -88,18 +91,32 @@ export const NpsScheduling: FC<Props> = ({ site, feedback }) => {
                 >
                   Once a month
                 </Radio>
+                <Radio
+                  name='npsSchedule'
+                  value='custom'
+                  onChange={handleChange}
+                  checked={values.npsSchedule === 'custom'}
+                >
+                  Custom trigger <i>(technical expertise required)</i>
+                </Radio>
               </div>
 
-              <h4>Pages</h4>
+              <Card className={classnames('custom-hint', { disabled: values.npsSchedule !== 'custom' })}>
+                <p>If you require the NPS survey to trigger only at very specific moments you can define custom triggers. This is achieved by using the <code className='code'>squeaky.showNpsSurvey()</code> method in your code that will be detected by our tracking script. For more information and examples, please visit the <Link href='/developers'><a>Squeaky Developer Documentation</a></Link>.</p>
+              </Card>
 
-              <p>By default <b>your NPS survey banner could be displayed on any page</b> of your site, if you&apos;d like to hide the pop-up on any specific pages you can check the boxes for them below.</p>
+              <div className={classnames('pages', { disabled: values.npsSchedule === 'custom' })}>
+                <h4>Pages</h4>
 
-              <p><b>Hide feedback widget on:</b></p>
+                <p>If you are using the &quot;One-time&quot; or &quot;Once per month&quot; schedules then <b>your NPS survey banner could be displayed on any page</b> of your site, if you&quot;d like to prevent the survey from appearing on specific pages then you can check the boxes.</p>
 
-              <NpsPages 
-                value={values.npsExcludedPages}
-                onChange={handleChange}
-              />
+                <p><b>Hide feedback widget on:</b></p>
+
+                <NpsPages 
+                  value={values.npsExcludedPages}
+                  onChange={handleChange}
+                />
+              </div>
 
               <div className='actions'>
                 <Button disabled={isSubmitting || !isValid} type='submit' className='primary'>

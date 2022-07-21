@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import * as Yup from 'yup';
+import { uniq } from 'lodash';
 import { Formik } from 'formik';
 import { feedbackUpdate } from 'lib/api/graphql';
 import { Container } from 'components/container';
@@ -8,6 +9,7 @@ import { Input } from 'components/input';
 import { Checkbox } from 'components/checkbox';
 import { Button } from 'components/button';
 import { useToasts } from 'hooks/use-toasts';
+import { countryNames } from 'data/feedback/constants';
 import type { Feedback, FeedbackUpdateInput } from 'types/graphql';
 import type { Site } from 'types/graphql';
 
@@ -20,6 +22,8 @@ const NpsSchema = Yup.object().shape({
   npsPhrase: Yup.string().required('Accent color is required'),
   npsFollowUpEnabled: Yup.boolean(),
   npsContactConsentEnabled: Yup.boolean(),
+  npsLanguages: Yup.array(),
+  npsLanguagesDefault: Yup.string().required('A default language is required'),
 });
 
 export const NpsForm: FC<Props> = ({ site, feedback }) => {
@@ -40,6 +44,8 @@ export const NpsForm: FC<Props> = ({ site, feedback }) => {
             npsPhrase: feedback.npsPhrase || site.name,
             npsFollowUpEnabled: feedback.npsFollowUpEnabled ?? true,
             npsContactConsentEnabled: feedback.npsContactConsentEnabled ?? false,
+            npsLanguages: feedback.npsLanguages || ['en'],
+            npsLanguagesDefault: feedback.npsLanguagesDefault || 'en',
           }}
           validationSchema={NpsSchema}
           onSubmit={(values, { setSubmitting }) => {
@@ -71,6 +77,7 @@ export const NpsForm: FC<Props> = ({ site, feedback }) => {
             handleChange,
             handleSubmit,
             handleReset,
+            setFieldValue,
             isSubmitting,
             touched,
             values,
@@ -115,6 +122,52 @@ export const NpsForm: FC<Props> = ({ site, feedback }) => {
                   Allow visitors to consent to being contact by email
                 </Checkbox>
               </div>
+
+              <h4>Languages</h4>
+
+              <p>If you have visitors that are using a different primary language then you may wish to adjust the NPS banner accordingly. Please check the boxes before for any languages you&apos;d like to include and we will show the NPS® questions and follow-up questions in these languages if they match the visitors browser or device settings.</p>
+
+              <div className='languages'>
+                {Object.entries(countryNames).map(([locale, name]) => (
+                  <div className='row' key={locale}>
+                    <span className='name'>
+                      <Checkbox
+                        name='npsLanguages'
+                        onChange={(event) => {
+                          if (!event.target.checked && locale === values.npsLanguagesDefault) {
+                            setFieldValue('npsLanguagesDefault', 'en');
+                          }
+
+                          handleChange(event);
+                        }}
+                        disabled={locale === 'en'}
+                        value={locale}
+                        checked={values.npsLanguages.includes(locale)}
+                      >
+                        {name}
+                      </Checkbox>
+                    </span>
+                    <span>
+                      {values.npsLanguagesDefault === locale
+                        ? <i>Default</i>
+                        : (
+                            <Button 
+                              className='link' 
+                              onClick={() => {
+                                setFieldValue('npsLanguages', uniq([...values.npsLanguages, locale]));
+                                setFieldValue('npsLanguagesDefault', locale);
+                              }}
+                            >
+                              Make default
+                            </Button>
+                          )
+                      }
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              <p>If you&apos;d like to request an additional langauge be added to our NPS® surveys then please contact us via email using <a href='mailto:hello@squeaky.ai'>hello@squeaky.ai</a>.</p>
 
               <div className='actions'>
                 <Button disabled={isSubmitting || !isValid} type='submit' className='primary'>
