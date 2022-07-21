@@ -9,7 +9,7 @@ import { TextArea } from 'components/textarea';
 import { Logo } from 'components/logo';
 import { Radio } from 'components/radio';
 import { Input } from 'components/input';
-import { t } from 'lib/t';
+import { Replacements, t as translation } from 'lib/t';
 import type { Feedback } from 'types/graphql';
 
 interface Props {
@@ -21,6 +21,14 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
   const [page, setPage] = React.useState<number>(1);
   const [show, setShow] = React.useState<boolean>(false);
   const [contact, setContact] = React.useState<boolean>(false);
+
+  const t = (key: string, replacements?: Replacements) => translation(
+    'feedback',
+    key,
+    replacements,
+    feedback.npsLanguages,
+    feedback.npsLanguagesDefault,
+  );
 
   const toggleShow = () => {
     setPage(0);
@@ -73,11 +81,11 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
 
             {page < 2 && (
               <div className={`page-${page}`}>
-                <p className='heading'>{t('feedback', 'how_likely_to_recommend', { name: feedback.npsPhrase })}</p>
+                <p className='heading'>{t('how_likely_to_recommend', { name: feedback.npsPhrase })}</p>
 
                 <div className='labels'>
-                  <span>{t('feedback', 'not_likely')}</span>
-                  <span>{t('feedback', 'extremely_likely')}</span>
+                  <span>{t('not_likely')}</span>
+                  <span>{t('extremely_likely')}</span>
                 </div>
 
                 <div className='options'>
@@ -90,19 +98,19 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
                 </div>
 
                 <div className='reason'>
-                  <Label>{t('feedback', 'what_is_the_main_reason')}</Label>
+                  <Label>{t('what_is_the_main_reason')}</Label>
                   <TextArea placeholder='Please type here ...' />
                 </div>
                 
                 {feedback.npsContactConsentEnabled && (
                   <div className='respond'>
-                    <Label>{t('feedback', 'would_you_like_to_hear')}</Label>
+                    <Label>{t('would_you_like_to_hear')}</Label>
                     <div className='radio-group'>
                       <Radio name='contact' checked={contact} onChange={() => setContact(true)}>
-                      {t('feedback', 'yes')}
+                      {t('yes')}
                       </Radio>
                       <Radio name='contact' checked={!contact} onChange={() => setContact(false)}>
-                        {t('feedback', 'no')}
+                        {t('no')}
                       </Radio>
                     </div>
                   </div>
@@ -110,7 +118,7 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
 
                 {contact && (
                   <div className='email'>
-                    <Label>{t('feedback', 'email_address')}</Label>
+                    <Label>{t('email_address')}</Label>
                     <Input 
                       placeholder='e.g. jess@squeaky.ai'
                       autoComplete='email'
@@ -126,7 +134,7 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
                     </span>
                   </p>
                   <Button type='button' className='primary' onClick={handleNextPage}>
-                    Submit
+                    {t('submit')}
                   </Button>
                 </div>
               </div>
@@ -135,10 +143,10 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
             {page === 2 && (
               <div className='page-2'>
                 <Icon name='checkbox-circle-line' />
-                <h4>Feedback sent</h4>
-                <p>Thank you for sharing your feedback and helping to make our service better.</p>
+                <h4>{t('feedback_sent')}</h4>
+                <p>{t('thanks_for_sharing')}</p>
                 <Button type='button' className='secondary' onClick={handleClose}>
-                  Close
+                  {t('close')}
                 </Button>
               </div>
             )}

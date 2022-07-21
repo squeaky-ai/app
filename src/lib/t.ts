@@ -9,14 +9,16 @@ const allTranslations: Record<Namesapce, Translations> = {
   feedback,
 };
 
-const getLocale = (): SupportedLanguages => {
-  const locale = (navigator.language || '').split('_')[0];
-  const supportedLocales = Object.values(SupportedLanguages) as string[];
+const getLocale = (
+  locales: string[],
+  defaultLocale?: string
+): SupportedLanguages => {
+  const locale = (navigator.language || '').split('-')[0];
 
   return (
-    supportedLocales.includes(locale)
+    locales.includes(locale)
       ? locale
-      : SupportedLanguages.English
+      : defaultLocale
   ) as SupportedLanguages;
 };
 
@@ -24,10 +26,11 @@ export const t = (
   namespace: Namesapce,
   key: string,
   replacements: Replacements = {},
-  locale?: SupportedLanguages,
+  locales: string[] = Object.values(SupportedLanguages),
+  defaultLocale?: string,
 ): string => {
   const i18n = allTranslations[namespace];
-  let string = i18n[locale || getLocale()][key] || '### Missing translation ###';
+  let string = i18n?.[getLocale(locales, defaultLocale)]?.[key] || '### Missing translation ###';
 
   Object.entries(replacements).forEach(([key, value]) => {
     string = string.replaceAll(`:${key}`, value)
