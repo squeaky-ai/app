@@ -9,7 +9,7 @@ import { Input } from 'components/input';
 import { Checkbox } from 'components/checkbox';
 import { Button } from 'components/button';
 import { useToasts } from 'hooks/use-toasts';
-import { countryNames } from 'data/feedback/constants';
+import { countryNames } from 'types/translations';
 import type { Feedback, FeedbackUpdateInput } from 'types/graphql';
 import type { Site } from 'types/graphql';
 
@@ -54,11 +54,15 @@ export const NpsForm: FC<Props> = ({ site, feedback }) => {
                 FeedbackUpdateInput, 
                 'npsPhrase' | 
                 'npsContactConsentEnabled' | 
-                'npsFollowUpEnabled'
+                'npsFollowUpEnabled' |
+                'npsLanguages' |
+                'npsLanguagesDefault'
               > = {
                 npsPhrase: values.npsPhrase,
                 npsContactConsentEnabled: values.npsContactConsentEnabled,
                 npsFollowUpEnabled: values.npsFollowUpEnabled,
+                npsLanguages: values.npsLanguages,
+                npsLanguagesDefault: values.npsLanguagesDefault,
               };
               
               try {

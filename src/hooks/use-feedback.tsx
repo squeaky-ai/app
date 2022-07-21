@@ -26,6 +26,8 @@ export const useFeedback = (): UseFeedback => {
     npsFollowUpEnabled: null,
     npsContactConsentEnabled: null,
     npsLayout: null,
+    npsLanguages: ['en'],
+    npsLanguagesDefault: 'en',
     npsExcludedPages: [],
     sentimentEnabled: false,
     sentimentAccentColor: null,

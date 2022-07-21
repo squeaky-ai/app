@@ -9,6 +9,7 @@ import { TextArea } from 'components/textarea';
 import { Logo } from 'components/logo';
 import { Radio } from 'components/radio';
 import { Input } from 'components/input';
+import { t } from 'lib/t';
 import type { Feedback } from 'types/graphql';
 
 interface Props {
@@ -72,11 +73,11 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
 
             {page < 2 && (
               <div className={`page-${page}`}>
-                <p className='heading'>How likely is it that you would recommend {feedback.npsPhrase} to a friend or colleague?</p>
+                <p className='heading'>{t('feedback', 'how_likely_to_recommend', { name: feedback.npsPhrase })}</p>
 
                 <div className='labels'>
-                  <span>Not likely</span>
-                  <span>Extremely likely</span>
+                  <span>{t('feedback', 'not_likely')}</span>
+                  <span>{t('feedback', 'extremely_likely')}</span>
                 </div>
 
                 <div className='options'>
@@ -89,19 +90,19 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
                 </div>
 
                 <div className='reason'>
-                  <Label>What&apos;s the main reason for your score?</Label>
+                  <Label>{t('feedback', 'what_is_the_main_reason')}</Label>
                   <TextArea placeholder='Please type here ...' />
                 </div>
                 
                 {feedback.npsContactConsentEnabled && (
                   <div className='respond'>
-                    <Label>Would you like to hear back from us regarding your feedback?</Label>
+                    <Label>{t('feedback', 'would_you_like_to_hear')}</Label>
                     <div className='radio-group'>
                       <Radio name='contact' checked={contact} onChange={() => setContact(true)}>
-                        Yes
+                      {t('feedback', 'yes')}
                       </Radio>
                       <Radio name='contact' checked={!contact} onChange={() => setContact(false)}>
-                        No
+                        {t('feedback', 'no')}
                       </Radio>
                     </div>
                   </div>
@@ -109,7 +110,7 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
 
                 {contact && (
                   <div className='email'>
-                    <Label>Email address</Label>
+                    <Label>{t('feedback', 'email_address')}</Label>
                     <Input 
                       placeholder='e.g. jess@squeaky.ai'
                       autoComplete='email'

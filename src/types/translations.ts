@@ -2,16 +2,18 @@ export enum SupportedLanguages {
   English = 'en',
   Czech = 'cs',
   Dutch = 'nl',
-  French = 'fr_fr',
+  French = 'fr',
   Swedish = 'se',
-  Spanish = 'es_es',
+  Spanish = 'es',
 }
 
 export const countryNames: Record<SupportedLanguages, string> = {
   en: 'English',
   cs: 'Czech',
   nl: 'Dutch',
-  fr_fr: 'French (France)',
+  fr: 'French (France)',
   se: 'Swedish',
-  es_es: 'Spanish (Spain)',
+  es: 'Spanish (Spain)',
 };
+
+export type Translations = Record<SupportedLanguages, Record<string, string>>;
