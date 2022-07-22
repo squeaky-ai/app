@@ -128,7 +128,7 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
 
                 <div className='footer'>
                   <p>
-                    Powered by
+                    {t('powered_by')}
                     <span className='logo'>
                       <Logo logo='dark' height={20} width={64} />
                     </span>
