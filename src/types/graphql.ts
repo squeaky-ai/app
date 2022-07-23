@@ -864,14 +864,22 @@ export type Feedback = {
   npsEnabled: Scalars['Boolean'];
   npsExcludedPages: Array<Maybe<Scalars['String']>>;
   npsFollowUpEnabled?: Maybe<Scalars['Boolean']>;
+  npsLanguages: Array<Maybe<Scalars['String']>>;
+  npsLanguagesDefault?: Maybe<Scalars['String']>;
   npsLayout?: Maybe<Scalars['String']>;
   npsPhrase?: Maybe<Scalars['String']>;
   npsSchedule?: Maybe<Scalars['String']>;
+  npsTranslations: Scalars['String'];
   sentimentAccentColor?: Maybe<Scalars['String']>;
   sentimentDevices: Array<Maybe<Scalars['String']>>;
   sentimentEnabled?: Maybe<Scalars['Boolean']>;
   sentimentExcludedPages: Array<Maybe<Scalars['String']>>;
   sentimentLayout?: Maybe<Scalars['String']>;
+};
+
+
+export type FeedbackNpsTranslationsArgs = {
+  userLocale: Scalars['String'];
 };
 
 export type FeedbackNpsGroups = {
@@ -1016,6 +1024,8 @@ export type FeedbackUpdateInput = {
   npsEnabled?: InputMaybe<Scalars['Boolean']>;
   npsExcludedPages?: InputMaybe<Array<Scalars['String']>>;
   npsFollowUpEnabled?: InputMaybe<Scalars['Boolean']>;
+  npsLanguages?: InputMaybe<Array<Scalars['String']>>;
+  npsLanguagesDefault?: InputMaybe<Scalars['String']>;
   npsLayout?: InputMaybe<Scalars['String']>;
   npsPhrase?: InputMaybe<Scalars['String']>;
   npsSchedule?: InputMaybe<Scalars['String']>;

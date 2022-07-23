@@ -14,7 +14,7 @@ import { NpsTabs } from 'components/sites/feedback/nps-tabs';
 import { useFeedback } from 'hooks/use-feedback';
 import { NpsStatus } from 'components/sites/feedback/nps-status';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
-import { NpsForm } from 'components/sites/feedback/nps_form';
+import { NpsForm } from 'components/sites/feedback/nps-form';
 
 const SitesFeedbackNpsForm: NextPage<ServerSideProps> = ({ user }) => {
   const { loading, error, feedback } = useFeedback();

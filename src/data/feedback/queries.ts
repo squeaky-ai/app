@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const GET_FEEDBACK_QUERY = gql`
-  query GetFeedback($siteId: ID!) { 
+  query GetFeedback($siteId: ID!, $locale: String!) { 
     site(siteId: $siteId) {
       id
       feedback {
@@ -14,6 +14,9 @@ export const GET_FEEDBACK_QUERY = gql`
         npsContactConsentEnabled
         npsLayout
         npsExcludedPages
+        npsLanguages
+        npsLanguagesDefault
+        npsTranslations(userLocale: $locale)
         sentimentEnabled
         sentimentAccentColor
         sentimentExcludedPages

@@ -530,11 +530,34 @@
     }
   }
 
-  .schedule {
-    display: flex;
-
+  .schedule {   
     .label {
       margin-right: 1.5rem;
+
+      i {
+        color: var(--gray-300);
+      }
+    }
+  }
+
+  .custom-hint {
+    box-shadow: none;
+    margin: 1rem 0 0 1.5rem;
+    padding: 1rem;
+
+    p {
+      margin: 0;
+    }
+
+    &.disabled {
+      opacity: .5;
+    }
+  }
+
+  .pages {
+    &.disabled {
+      opacity: .5;
+      pointer-events: none;
     }
   }
 
@@ -659,6 +682,27 @@
     .input {
       margin: 0 .5rem;
       width: 136px;
+    }
+  }
+
+  .languages {
+    margin: 0 0 1.5rem 0;
+
+    .row {
+      display: grid;
+      font-size: var(--font-size-body);
+      line-height: var(--line-height-body);
+      grid-template-columns: 14rem 1fr;
+      margin: 0 0 .5rem 0;
+
+      span {
+        align-items: center;
+        display: flex;
+
+        .checkbox {
+          margin: 0 .25rem 0 0;
+        }
+      }
     }
   }
 
@@ -1032,6 +1076,7 @@
 
         .button {
           border: 2px solid var(--nps-accent-color);
+          margin: 0 auto;
 
           &:hover {
             background-color: var(--nps-accent-color);
