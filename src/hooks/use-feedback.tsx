@@ -12,9 +12,18 @@ interface UseFeedback {
 export const useFeedback = (): UseFeedback => {
   const router = useRouter();
 
+  const locale = (() => {
+    try {
+      return navigator.language.split('-')[0];
+    } catch {
+      return 'en';
+    }
+  })();
+
   const { loading, error, data } = useQuery(GET_FEEDBACK_QUERY, {
     variables: {
-      siteId: router.query.site_id as string
+      siteId: router.query.site_id as string,
+      locale,
     }
   });
 
@@ -29,6 +38,7 @@ export const useFeedback = (): UseFeedback => {
     npsLanguages: ['en'],
     npsLanguagesDefault: 'en',
     npsExcludedPages: [],
+    npsTranslations: '{}',
     sentimentEnabled: false,
     sentimentAccentColor: null,
     sentimentExcludedPages: null,

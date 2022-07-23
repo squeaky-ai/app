@@ -15,5 +15,3 @@ export const countryNames: Record<SupportedLanguages, string> = {
   se: 'Swedish',
   es: 'Spanish (Spain)',
 };
-
-export type Translations = Record<SupportedLanguages, Record<string, string>>;

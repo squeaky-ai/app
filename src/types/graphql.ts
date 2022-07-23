@@ -869,11 +869,17 @@ export type Feedback = {
   npsLayout?: Maybe<Scalars['String']>;
   npsPhrase?: Maybe<Scalars['String']>;
   npsSchedule?: Maybe<Scalars['String']>;
+  npsTranslations: Scalars['String'];
   sentimentAccentColor?: Maybe<Scalars['String']>;
   sentimentDevices: Array<Maybe<Scalars['String']>>;
   sentimentEnabled?: Maybe<Scalars['Boolean']>;
   sentimentExcludedPages: Array<Maybe<Scalars['String']>>;
   sentimentLayout?: Maybe<Scalars['String']>;
+};
+
+
+export type FeedbackNpsTranslationsArgs = {
+  userLocale: Scalars['String'];
 };
 
 export type FeedbackNpsGroups = {

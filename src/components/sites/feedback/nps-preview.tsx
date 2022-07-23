@@ -9,7 +9,6 @@ import { TextArea } from 'components/textarea';
 import { Logo } from 'components/logo';
 import { Radio } from 'components/radio';
 import { Input } from 'components/input';
-import { Replacements, t as translation } from 'lib/t';
 import type { Feedback } from 'types/graphql';
 
 interface Props {
@@ -22,13 +21,7 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
   const [show, setShow] = React.useState<boolean>(false);
   const [contact, setContact] = React.useState<boolean>(false);
 
-  const t = (key: string, replacements?: Replacements) => translation(
-    'feedback',
-    key,
-    replacements,
-    feedback.npsLanguages,
-    feedback.npsLanguagesDefault,
-  );
+  const translations = JSON.parse(feedback.npsTranslations);
 
   const toggleShow = () => {
     setPage(0);
@@ -81,11 +74,11 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
 
             {page < 2 && (
               <div className={`page-${page}`}>
-                <p className='heading'>{t('how_likely_to_recommend', { name: feedback.npsPhrase })}</p>
+                <p className='heading'>{translations.how_likely_to_recommend}</p>
 
                 <div className='labels'>
-                  <span>{t('not_likely')}</span>
-                  <span>{t('extremely_likely')}</span>
+                  <span>{translations.not_likely}</span>
+                  <span>{translations.extremely_likely}</span>
                 </div>
 
                 <div className='options'>
@@ -98,19 +91,19 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
                 </div>
 
                 <div className='reason'>
-                  <Label>{t('what_is_the_main_reason')}</Label>
+                  <Label>{translations.what_is_the_main_reason}</Label>
                   <TextArea placeholder='Please type here ...' />
                 </div>
                 
                 {feedback.npsContactConsentEnabled && (
                   <div className='respond'>
-                    <Label>{t('would_you_like_to_hear')}</Label>
+                    <Label>{translations.would_you_like_to_hear}</Label>
                     <div className='radio-group'>
                       <Radio name='contact' checked={contact} onChange={() => setContact(true)}>
-                      {t('yes')}
+                      {translations.yes}
                       </Radio>
                       <Radio name='contact' checked={!contact} onChange={() => setContact(false)}>
-                        {t('no')}
+                        {translations.no}
                       </Radio>
                     </div>
                   </div>
@@ -118,7 +111,7 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
 
                 {contact && (
                   <div className='email'>
-                    <Label>{t('email_address')}</Label>
+                    <Label>{translations.email_address}</Label>
                     <Input 
                       placeholder='e.g. jess@squeaky.ai'
                       autoComplete='email'
@@ -128,13 +121,13 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
 
                 <div className='footer'>
                   <p>
-                    {t('powered_by')}
+                    {translations.powered_by}
                     <span className='logo'>
                       <Logo logo='dark' height={20} width={64} />
                     </span>
                   </p>
                   <Button type='button' className='primary' onClick={handleNextPage}>
-                    {t('submit')}
+                    {translations.submit}
                   </Button>
                 </div>
               </div>
@@ -143,10 +136,10 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
             {page === 2 && (
               <div className='page-2'>
                 <Icon name='checkbox-circle-line' />
-                <h4>{t('feedback_sent')}</h4>
-                <p>{t('thanks_for_sharing')}</p>
+                <h4>{translations.feedback_sent}</h4>
+                <p>{translations.thanks_for_sharing}</p>
                 <Button type='button' className='secondary' onClick={handleClose}>
-                  {t('close')}
+                  {translations.close}
                 </Button>
               </div>
             )}
