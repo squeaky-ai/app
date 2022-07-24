@@ -1,11 +1,19 @@
 import { gql } from '@apollo/client';
 
 export const GET_NPS_QUERY = gql`
-  query GetNPS($siteId: ID!, $page: Int!, $size: Int!, $sort: FeedbackNpsResponseSort!, $fromDate: ISO8601Date!, $toDate: ISO8601Date!) {
+  query GetNPS(
+    $siteId: ID!,
+    $page: Int!,
+    $size: Int!,
+    $filters: FeedbackNpsResponseFilters,
+    $sort: FeedbackNpsResponseSort!,
+    $fromDate: ISO8601Date!,
+    $toDate: ISO8601Date!
+  ) {
     site(siteId: $siteId) {
       id
       nps(fromDate: $fromDate, toDate: $toDate) {
-        responses(page: $page, size: $size, sort: $sort) {
+        responses(page: $page, size: $size, sort: $sort, filters: $filters) {
           items {
             id
             score

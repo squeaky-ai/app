@@ -30,7 +30,7 @@ export const NpsColumns: FC<Props> = ({ columns, setColumns }) => {
   };
 
   return (
-    <Dropdown className='columns' button={<><Icon name='layout-column-line' /> Columns</>}>
+    <Dropdown className='menu-item columns' button={<><Icon name='layout-column-line' /> Columns</>}>
       <form className='filters-columns'>
         {COLUMNS.map(column => 
           <Checkbox 

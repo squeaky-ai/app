@@ -32,7 +32,10 @@ const getDefaultFilters = (type: ComponentType) => {
     case 'recordings':
     case 'journeys':
     case 'event-history':
-      return 'past_fourteen_days';
+      return 'past_fourteen_days'; 
+    case 'nps':
+    case 'sentiment':
+      return 'past_thirty_days';
     case 'dashboard':
       return 'past_year';
     default:

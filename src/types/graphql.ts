@@ -882,6 +882,12 @@ export type FeedbackNpsTranslationsArgs = {
   userLocale: Scalars['String'];
 };
 
+export enum FeedbackNpsGroup {
+  Detractor = 'Detractor',
+  Passive = 'Passive',
+  Promoter = 'Promoter'
+}
+
 export type FeedbackNpsGroups = {
   __typename?: 'FeedbackNpsGroups';
   detractors: Scalars['Int'];
@@ -910,6 +916,11 @@ export type FeedbackNpsResponse = {
   __typename?: 'FeedbackNpsResponse';
   items: Array<Maybe<FeedbackNpsResponseItem>>;
   pagination: FeedbackNpsResponsePagination;
+};
+
+export type FeedbackNpsResponseFilters = {
+  followUpComment?: InputMaybe<Scalars['Boolean']>;
+  outcomeType?: InputMaybe<FeedbackNpsGroup>;
 };
 
 export type FeedbackNpsResponseItem = {
@@ -1655,6 +1666,7 @@ export type Nps = {
 
 
 export type NpsResponsesArgs = {
+  filters?: InputMaybe<FeedbackNpsResponseFilters>;
   page?: InputMaybe<Scalars['Int']>;
   size?: InputMaybe<Scalars['Int']>;
   sort?: InputMaybe<FeedbackNpsResponseSort>;

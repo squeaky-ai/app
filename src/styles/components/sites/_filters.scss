@@ -290,4 +290,24 @@
       }
     }
   }
+
+  .filters-outcome-type {
+    .radio {
+      margin-bottom: .5rem;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .filters-follow-up-comment {
+    .radio {
+      margin-bottom: .5rem;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
 }
