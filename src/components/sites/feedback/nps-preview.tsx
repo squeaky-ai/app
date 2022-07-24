@@ -9,7 +9,9 @@ import { TextArea } from 'components/textarea';
 import { Logo } from 'components/logo';
 import { Radio } from 'components/radio';
 import { Input } from 'components/input';
+import { Select, Option } from 'components/select';
 import type { Feedback } from 'types/graphql';
+import type { SupportedLanguages } from 'types/translations';
 
 interface Props {
   feedback: Omit<Feedback, 'id' | 'npsEnabled' | 'sentimentEnabled' | 'sentimentExcludedPages' | 'sentimentDevices'>;
@@ -20,6 +22,7 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
   const [page, setPage] = React.useState<number>(1);
   const [show, setShow] = React.useState<boolean>(false);
   const [contact, setContact] = React.useState<boolean>(false);
+  const [locale, setLocale] = React.useState<SupportedLanguages>(null);
 
   const translations = JSON.parse(feedback.npsTranslations);
 
@@ -52,6 +55,10 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
     setContact(false);
   };
 
+  const onLocaleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setLocale(event.target.value as SupportedLanguages);
+  };
+
   React.useEffect(() => {
     if (ref.current) {
       ref.current.setAttribute('style', `--nps-accent-color:${feedback.npsAccentColor};`);
@@ -68,6 +75,19 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
       {show && (
         <div ref={ref} className={classnames('nps-preview', { boxed: feedback.npsLayout === 'boxed' })}>
           <div className='nps-wrapper'>
+            {feedback.npsLanguages.length > 1 && (
+              <div className='locale'>
+                <Icon name='translate' className='translation-icon' />
+                <Select value={locale || feedback.npsLanguagesDefault} onChange={onLocaleChange}>
+                  {feedback.npsLanguages.map(npsLanguage => (
+                    <Option key={npsLanguage} value={npsLanguage}>
+                      {npsLanguage}
+                    </Option>
+                  ))}
+                </Select>
+              </div>
+            )}
+
             <Button type='button' className='close' onClick={toggleShow}>
               <Icon name='close-line' />
             </Button>

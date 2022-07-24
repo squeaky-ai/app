@@ -910,6 +910,48 @@
       width: 33rem;
     }
 
+    .locale {
+      align-items: center;
+      display: flex;
+      height: 1rem;
+      left: 1rem;
+      margin: 0;
+      position: absolute;
+      top: 1rem;
+  
+      .translation-icon {
+        color: var(--gray-300);
+        font-size: 12px;
+        margin: 0 .125rem 0 0;
+      }
+  
+      .select {
+        align-self: center;
+        border: none;
+        display: flex;
+        height: auto;
+        margin: 0;
+  
+        select {
+          font-size: 12px;
+          font-weight: var(--font-weight-bold);
+          height: auto;
+          line-height: 16px;
+          margin: 0;
+          padding: 0;        
+          text-transform: uppercase;
+        }
+  
+        i {
+          font-size: 1rem;
+          height: 1rem;
+          line-height: 1rem;
+          position: static;
+          width: 1rem;
+        }
+      }
+    }
+
     .nps-wrapper {
       margin: 0 auto;
       max-width: 33rem;
@@ -945,7 +987,7 @@
         color: var(--gray-800);
         font-weight: var(--font-weight-block);
         margin: 0;
-        padding: 3rem;
+        padding: 3rem 3rem 2rem 3rem;
         text-align: center;
       }
 
@@ -964,7 +1006,7 @@
         align-items: center;
         display: flex;
         justify-content: space-between;
-        padding: .75rem 3rem 3rem;
+        padding: .75rem 3rem 2rem;
 
         .rating {
           align-items: center;
@@ -974,12 +1016,13 @@
           color: var(--gray-800);
           cursor: pointer;
           display: flex;
+          font-size: var(--font-size-body-sm);
           flex-shrink: 0;
-          height: 2rem;
+          height: 1.5rem;
           justify-content: center;
           margin: 0;
           padding: 0;
-          width: 2rem;
+          width: 1.5rem;
 
           &:hover {
             background: var(--nps-accent-color);
