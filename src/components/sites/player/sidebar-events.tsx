@@ -33,7 +33,10 @@ export const SidebarEvents: FC<Props> = ({ events, state, replayer, dispatch }) 
 
   return (
     <>
-      <SidebarEventsVisibility state={state} dispatch={dispatch} />
+      <h5 className='events-header'>
+        Events
+        <SidebarEventsVisibility state={state} dispatch={dispatch} />
+      </h5>
 
       <ul className='datarow'>
         {items.map((item, index) => (

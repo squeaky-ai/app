@@ -35,7 +35,6 @@ export const SidebarEventsVisibility: FC<Props> = ({ state, dispatch }) => {
       <Button className='secondary events-visibility' onClick={openModal}>
         <Icon name='eye-line' />
         Show
-        <span>{state.eventVisibility.length}/{EVENTS.length}</span>
       </Button>
 
       <Modal ref={ref}>

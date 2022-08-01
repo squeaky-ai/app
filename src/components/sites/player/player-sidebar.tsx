@@ -39,17 +39,11 @@ export const PlayerSidebar: FC<Props> = ({ state, site, replayer, events, record
             </div>
           </div>
           <div className={classnames('sidebar events', { active: state.activeTab === PlayerTab.EVENTS })}>
-            <Label className='heading'>
-              Events 
-            </Label>
             <div className='contents'>
               <SidebarEvents events={events} replayer={replayer} state={state} dispatch={dispatch} />
             </div>
           </div>
           <div className={classnames('sidebar pages', { active: state.activeTab === PlayerTab.PAGES })}>
-            <Label className='heading'>
-              Pages 
-            </Label>
             <div className='contents'>
               <SidebarPages recording={recording} replayer={replayer} />
             </div>
