@@ -3,7 +3,6 @@ import type { FC } from 'react';
 import type { Replayer } from 'rrweb';
 import classnames from 'classnames';
 import { PlayerTab } from 'data/sites/enums';
-import { Label } from 'components/label';
 import { SidebarInfo } from 'components/sites/player/sidebar-info';
 import { SidebarEvents } from 'components/sites/player/sidebar-events';
 import { SidebarNotes } from 'components/sites/player/sidebar-notes';
@@ -54,9 +53,6 @@ export const PlayerSidebar: FC<Props> = ({ state, site, replayer, events, record
             </div>
           </div>
           <div className={classnames('sidebar tags', { active: state.activeTab === PlayerTab.TAGS })}>
-            <Label className='heading'>
-              Tags
-            </Label>
             <div className='contents'>
               <SidebarTags recording={recording} />
             </div>
