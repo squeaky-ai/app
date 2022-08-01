@@ -102,7 +102,7 @@ export const NpsScheduling: FC<Props> = ({ site, feedback }) => {
               </div>
 
               <Card className={classnames('custom-hint', { disabled: values.npsSchedule !== 'custom' })}>
-                <p>If you require the NPS survey to trigger only at very specific moments you can define custom triggers. This is achieved by using the <code className='code'>squeaky.showNpsSurvey()</code> method in your code that will be detected by our tracking script. For more information and examples, please visit the <Link href='/developers'><a>Squeaky Developer Documentation</a></Link>.</p>
+                <p>If you require the NPS survey to trigger only at very specific moments you can define custom triggers. This is achieved by using the <code className='code'>squeaky.showNpsSurvey()</code> method in your code that will be detected by our tracking script. For more information and examples, please visit the <Link target='_blank' href='/developers'><a>Squeaky Developer Documentation</a></Link>.</p>
               </Card>
 
               <div className={classnames('pages', { disabled: values.npsSchedule === 'custom' })}>

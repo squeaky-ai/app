@@ -6,7 +6,6 @@ import { PlayerTab } from 'data/sites/enums';
 import { toNiceDate, toTimeString } from 'lib/dates';
 import { Tooltip } from 'components/tooltip';
 import { Browser } from 'components/browser';
-import { Flag } from 'components/flag';
 import { Device } from 'components/device';
 import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
 import { RecordingStarred } from 'components/sites/recordings/recordings-starred';
@@ -25,12 +24,30 @@ export const SidebarInfo: FC<Props> = ({ site, recording, setActiveTab }) => {
 
   return (
     <>
+      <h5>Visitor</h5>
+      <dl className='datalist'>
+        <div className='row'>
+          <dt>Visitor ID</dt>
+          <dd className='visitor-id'><VisitorsStarred site={site} visitor={recording.visitor} link /></dd>
+        </div>
+        <div className='row'>
+          <dt>First visited</dt>
+          <dd>{toNiceDate(recording.visitor.firstViewedAt)}</dd>
+        </div>
+        <div className='row'>
+          <dt>Last activity</dt>
+          <dd>{toNiceDate(recording.visitor.lastActivityAt)}</dd>
+        </div>
+        <div className='row'>
+          <dt>Recordings</dt>
+          <dd>{recording.visitor.recordingCount.total}</dd>
+        </div>
+      </dl>
       <div className='attributes'>
         {!linkedData && (
           <p className='no-attributes'>
             <Icon name='link-m' />
             <span>No Linked Data</span>
-            <a href='/developers' target='_blank'>Settings</a>
           </p>
         )}
 
@@ -51,14 +68,11 @@ export const SidebarInfo: FC<Props> = ({ site, recording, setActiveTab }) => {
           </>
         )}
       </div>
+      <h5>Recording</h5>
       <dl className='datalist'>
         <div className='row'>
-          <dt>Recording #</dt>
+          <dt>Recording ID</dt>
           <dd className='recording-id'><RecordingStarred site={site} recording={recording} /></dd>
-        </div>
-        <div className='row'>
-          <dt>Visitor</dt>
-          <dd className='visitor-id'><VisitorsStarred site={site} visitor={recording.visitor} link /></dd>
         </div>
         <div className='row'>
           <dt>Date</dt>
@@ -126,17 +140,6 @@ export const SidebarInfo: FC<Props> = ({ site, recording, setActiveTab }) => {
         <div className='row'>
           <dt>Language</dt>
           <dd>{recording.language}</dd>
-        </div>
-        <div className='row'>
-          <dt>Country</dt>
-          <dd>
-            {!!recording.countryCode && (
-              <Tooltip button={<Flag code={recording.countryCode} />}>
-                {recording.countryName}
-              </Tooltip>
-            )}
-            {!recording.countryCode && '-'}
-          </dd>
         </div>
       </dl>
     </>

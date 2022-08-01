@@ -95,6 +95,11 @@ export const GET_RECORDING_QUERY = gql`
           visitorId
           starred
           linkedData
+          firstViewedAt
+          lastActivityAt
+          recordingCount {
+            total
+          }
         }
         pages {
           id
