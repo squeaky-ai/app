@@ -49,9 +49,6 @@ export const PlayerSidebar: FC<Props> = ({ state, site, replayer, events, record
             </div>
           </div>
           <div className={classnames('sidebar notes', { active: state.activeTab === PlayerTab.NOTES })}>
-            <Label className='heading'>
-              Notes 
-            </Label>
             <div className='contents'>
               <SidebarNotes recording={recording} replayer={replayer} />
             </div>
@@ -65,9 +62,6 @@ export const PlayerSidebar: FC<Props> = ({ state, site, replayer, events, record
             </div>
           </div>
           <div className={classnames('sidebar feedback', { active: state.activeTab === PlayerTab.FEEDBACK })}>
-            <Label className='heading'>
-              Feedback
-            </Label>
             <div className='contents'>
               <SidebarFeedback recording={recording} />
             </div>

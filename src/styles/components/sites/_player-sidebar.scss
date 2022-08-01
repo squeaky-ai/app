@@ -338,14 +338,6 @@
 
   .notes {
     &.empty {
-      align-items: center;
-      background: var(--gray-50);
-      border-radius: var(--border-radius-md);
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      justify-content: center;
-
       .create-state {
         display: block;
       }
@@ -357,13 +349,6 @@
 
     .create-state {
       display: none;
-      padding: 1.5rem;
-      text-align: center;
-    }
-
-    .create-note {
-      margin-bottom: 1.5rem;
-      width: 100%;
     }
     
     .note {

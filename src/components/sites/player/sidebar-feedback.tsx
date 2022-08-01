@@ -9,11 +9,14 @@ interface Props {
 }
 
 export const SidebarFeedback: FC<Props> = ({ recording }) => (
-  <div className='recordings'>
-    {!recording.nps && !recording.sentiment && (
-      <p>There was no feedback left during this session recording</p>
-    )}
-    {!!recording.nps && <SidebarNps nps={recording.nps} />}
-    {!!recording.sentiment && <SidebarSentiment sentiment={recording.sentiment} />}
-  </div>
+  <>
+    <h5>Feedback</h5>
+    <div className='recordings'>
+      {!recording.nps && !recording.sentiment && (
+        <p>There was no feedback left during this session recording</p>
+      )}
+      {!!recording.nps && <SidebarNps nps={recording.nps} />}
+      {!!recording.sentiment && <SidebarSentiment sentiment={recording.sentiment} />}
+    </div>
+  </>
 );

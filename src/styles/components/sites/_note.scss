@@ -1,6 +1,6 @@
 .note {
   border-top: 2px solid var(--gray-100);
-  padding: 1.5rem 0;
+  padding: 1rem 0;
 
   &:last-of-type {
     border-bottom: 2px solid var(--gray-100);
@@ -51,6 +51,10 @@
         font-size: var(--font-size-body-lg);
       }
     }
+  }
+
+  .body {
+    margin: 0 0 1rem 0;
   }
 
   .user {
