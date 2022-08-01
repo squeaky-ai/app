@@ -15,6 +15,7 @@
   }
 
   .site-header {
+    grid-area: header;
     width: 100%;
   
     .recording-details {
@@ -22,28 +23,36 @@
       display: flex;
   
       .button {
-        background: var(--white);
+        align-items: center;
+        background: none;
         border: none;
-        border-radius: var(--border-radius-o);
-        height: 1.5rem;
+        border-radius: var(--border-radius-controls);
+        display: flex;
+        font-size: var(--font-size-body-xxl);
+        height: 2rem;
+        justify-content: center;
         padding: 0;
-        width: 1.5rem;
+        width: 2rem;
+
+        .icon {
+          color: var(--gray-500);
+        }
   
         &:first-of-type {
-          margin-right: 2rem;
+          margin-right: .75rem;
         }
   
         &:last-of-type {
-          margin-left: 2rem;
+          margin-left: .75rem;
         }
-  
+
         &:hover {
-          color: var(--blue-500);
+          background: var(--white);
+
+          .icon {
+            color: var(--gray-blue-800);
+          }
         }
-      }
-  
-      .pill {
-        margin-left: .5rem;
       }
     }
   
@@ -55,19 +64,17 @@
         align-items: center;
         background: none;
         border: none;
-        border-radius: 50%;
+        border-radius: var(--border-radius-controls);
         color: var(--gray-500);
         display: flex;
         justify-content: center;
-        font-size: var(--font-size-body-xl);
-        height: 2.5rem;
+        font-size: var(--font-size-body-xxl);
+        height: 2rem;
         margin-right: .5rem;
         padding: 0;
-        width: 2.5rem;
+        width: 2rem;
   
         &.close {
-          background: var(--white);
-          color: var(--gray-blue-800);
           margin-right: 0;
         }
   
@@ -91,20 +98,17 @@
   }
 
   .player-page {
-    align-items: center;
-    display: flex;
-    flex: 1;
-    flex-direction: column;
+    display: grid;
+    grid-template-areas: 'sidebar header'
+                         'sidebar player'
+                         'sidebar footer';
+    grid-template-columns: 19.5rem minmax(0, 1fr);
+    grid-template-rows: 5.5rem minmax(0, 1fr) 5.5rem;
     height: 100%;
-    transition: padding .3s ease-in-out;
     width: 100%;
 
     .header {
       display: flex;
-    }
-
-    &.open {
-      padding-right: 18.5rem;
     }
   }
 

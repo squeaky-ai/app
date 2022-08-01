@@ -6,10 +6,11 @@ import { Page } from 'components/sites/page';
 import { Player } from 'components/sites/player/player';
 import { Header } from 'components/header';
 import { Spinner } from 'components/spinner';
-import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { PlayerActions } from 'components/sites/player/player-actions';
+import { PlayerClose } from 'components/sites/player/player-close';
 import { PlayerDetails } from 'components/sites/player/player-details';
 import { PlayerFooter } from 'components/sites/player/player-footer';
+import { PlayerSidebar } from 'components/sites/player/player-sidebar';
 import { Error } from 'components/error';
 import { PlayerState, PlayerStatus } from 'types/player';
 import type { User, Recording } from 'types/graphql';
@@ -88,13 +89,9 @@ export const PlayerWrapper: FC<Props> = ({ user, state, recording, events, dispa
         {({ site, member }) => (
           <>
             <Header className='site-header'>
-              <BreadCrumbs 
-                site={site} 
-                items={[{ name: 'Recordings', href: `/sites/${site.id}/recordings` }]} 
-              />
-
-              <PlayerDetails recording={recording} />
               <PlayerActions site={site} member={member} recording={recording} />
+              <PlayerDetails recording={recording} />
+              <PlayerClose site={site} />
             </Header>
 
             {!recording && (
@@ -104,25 +101,33 @@ export const PlayerWrapper: FC<Props> = ({ user, state, recording, events, dispa
             )}
             
             {!!recording && (
-              <Player
-                key={`player-${recording.id}`} 
-                ref={ref}
-                site={site}
-                state={state}
-                events={events}
-                recording={recording}
-                dispatch={dispatch}
-              />
+              <>
+                <PlayerSidebar 
+                  state={state}
+                  site={site}
+                  replayer={ref.current?.replayer} 
+                  events={events}
+                  recording={recording}
+                  dispatch={dispatch}
+                />
+                <Player
+                  key={`player-${recording.id}`} 
+                  ref={ref}
+                  site={site}
+                  state={state}
+                  events={events}
+                  recording={recording}
+                  dispatch={dispatch}
+                />
+                <PlayerFooter
+                  state={state}
+                  replayer={ref.current?.replayer}
+                  events={events}
+                  recording={recording}
+                  dispatch={dispatch}
+                />
+              </>
             )}
-
-            <PlayerFooter
-              state={state}
-              site={site}
-              replayer={ref.current?.replayer}
-              events={events}
-              recording={recording}
-              dispatch={dispatch}
-            />
           </>
         )}
       </Page>

@@ -4,7 +4,6 @@ import classnames from 'classnames';
 import { useRouter } from 'next/router';
 import { Icon } from 'components/icon';
 import { Button } from 'components/button';
-import { Pill } from 'components/pill';
 import { usePrevAndNextRecording } from 'hooks/use-prev-and-next-recording';
 import type { Recording } from 'types/graphql';
 
@@ -28,15 +27,11 @@ export const PlayerDetails: FC<Props> = ({ recording }) => {
   return (
     <div className='recording-details'>
       <Button onClick={viewPrevious} className={classnames({ disabled: !prev })}>
-        <Icon name='arrow-left-s-line' />
+        <Icon name='arrow-left-line' />
       </Button>
         <span className='session'> #{recording?.sessionId}</span>
-        {recording?.viewed
-          ? <Pill type='secondary'>Viewed</Pill>
-          : <Pill type='tertiary'>New</Pill>
-        }
       <Button onClick={viewNext} className={classnames({ disabled: !next })}>
-        <Icon name='arrow-right-s-line' />
+        <Icon name='arrow-right-line' />
       </Button>
     </div>
   );

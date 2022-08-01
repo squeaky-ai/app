@@ -15,43 +15,47 @@ const tabs = [
   {
     key: 'info',
     icon: 'information-line',
-    name: PlayerTab.INFO
+    name: PlayerTab.INFO,
   },
   {
     key: 'events',
-    icon: 'time-line',
-    name: PlayerTab.EVENTS
+    icon: 'flashlight-line',
+    name: PlayerTab.EVENTS,
   },
   {
     key: 'pages',
     icon: 'pages-line',
-    name: PlayerTab.PAGES
+    name: PlayerTab.PAGES,
   },
   {
     key: 'notes',
     icon: 'sticky-note-line',
-    name: PlayerTab.NOTES
+    name: PlayerTab.NOTES,
   },
   {
     key: 'tags',
     icon: 'price-tag-3-line',
-    name: PlayerTab.TAGS
+    name: PlayerTab.TAGS,
+  },
+  {
+    key: 'feedback',
+    icon: 'user-voice-line',
+    name: PlayerTab.FEEDBACK,
   },
 ];
 
 export const PlayerTabs: FC<Props> = ({ state, dispatch }) => {
   const handleSetActive = (value: PlayerTab) => {
-    const activeTab = value === state.activeTab ? null : value;
-    dispatch({ type: 'activeTab', value: activeTab });
+    dispatch({ type: 'activeTab', value });
   };
 
   return (
-    <>
+    <div className='player-tabs'>
       {tabs.map(tab => (
         <Button key={tab.key} className={classnames('control', { active: state.activeTab === tab.name })} onClick={() => handleSetActive(tab.name)}>
           <Icon name={tab.icon} />
         </Button>
       ))}
-    </>
+    </div>
   );
 };

@@ -3,5 +3,6 @@ export enum PlayerTab {
   NOTES,
   TAGS,
   EVENTS,
-  PAGES
+  PAGES,
+  FEEDBACK,
 }
