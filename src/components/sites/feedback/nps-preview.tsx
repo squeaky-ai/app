@@ -14,15 +14,16 @@ import type { Feedback } from 'types/graphql';
 import type { SupportedLanguages } from 'types/translations';
 
 interface Props {
+  locale: SupportedLanguages;
   feedback: Omit<Feedback, 'id' | 'npsEnabled' | 'sentimentEnabled' | 'sentimentExcludedPages' | 'sentimentDevices'>;
+  setLocale: (locale: SupportedLanguages) => void;
 }
 
-export const NpsPreview: FC<Props> = ({ feedback }) => {
+export const NpsPreview: FC<Props> = ({ locale, feedback, setLocale }) => {
   const ref = React.useRef<HTMLDivElement>(null);
   const [page, setPage] = React.useState<number>(1);
   const [show, setShow] = React.useState<boolean>(false);
   const [contact, setContact] = React.useState<boolean>(false);
-  const [locale, setLocale] = React.useState<SupportedLanguages>(null);
 
   const translations = JSON.parse(feedback.npsTranslations);
 

@@ -17,7 +17,7 @@ import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { NpsForm } from 'components/sites/feedback/nps-form';
 
 const SitesFeedbackNpsForm: NextPage<ServerSideProps> = ({ user }) => {
-  const { loading, error, feedback } = useFeedback();
+  const { loading, error, feedback, locale, setLocale } = useFeedback();
 
   if (error) {
     return <Error />;
@@ -38,7 +38,7 @@ const SitesFeedbackNpsForm: NextPage<ServerSideProps> = ({ user }) => {
               Net Promoter Score®
               {!loading && feedback && (
                 <menu>
-                  <NpsPreview feedback={feedback} />
+                  <NpsPreview feedback={feedback} locale={locale} setLocale={setLocale} />
                   <NpsStatus feedback={feedback} site={site} />
                 </menu>
               )}
