@@ -12,7 +12,6 @@ import { NpsPages } from 'components/sites/feedback/nps-pages';
 import { useToasts } from 'hooks/use-toasts';
 import type { Feedback, FeedbackUpdateInput } from 'types/graphql';
 import type { Site } from 'types/graphql';
-import Link from 'next/link';
 
 interface Props {
   site: Site;
@@ -102,7 +101,7 @@ export const NpsScheduling: FC<Props> = ({ site, feedback }) => {
               </div>
 
               <Card className={classnames('custom-hint', { disabled: values.npsSchedule !== 'custom' })}>
-                <p>If you require the NPS survey to trigger only at very specific moments you can define custom triggers. This is achieved by using the <code className='code'>squeaky.showNpsSurvey()</code> method in your code that will be detected by our tracking script. For more information and examples, please visit the <Link target='_blank' href='/developers'><a>Squeaky Developer Documentation</a></Link>.</p>
+                <p>If you require the NPS survey to trigger only at very specific moments you can define custom triggers. This is achieved by using the <code className='code'>squeaky.showNpsSurvey()</code> method in your code that will be detected by our tracking script. For more information and examples, please visit the <a target='_blank' href='/developers'>Squeaky Developer Documentation</a>.</p>
               </Card>
 
               <div className={classnames('pages', { disabled: values.npsSchedule === 'custom' })}>
