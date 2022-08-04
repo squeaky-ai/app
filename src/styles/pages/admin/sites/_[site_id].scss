@@ -160,6 +160,16 @@
         margin: 0 0 0 1rem;
         text-decoration: underline;
       }
+
+      .row {
+        &.has-address {
+          align-items: flex-start;
+
+          span span:first-of-type {
+            font-weight: var(--font-weight-normal);
+          }
+        }
+      }
     }
   }
 

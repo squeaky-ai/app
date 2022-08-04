@@ -438,6 +438,16 @@
 
     .row {
       grid-template-columns: 1fr 1fr 128px;
+
+      &.has-address {
+        align-items: flex-start;
+        height: auto;
+        padding: 1rem .5rem;
+
+        p {
+          margin: 0;
+        }
+      }
     }
 
     .link {

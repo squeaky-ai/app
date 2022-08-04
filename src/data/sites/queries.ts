@@ -143,6 +143,18 @@ export const GET_BILLING_QUERY = gql`
         cardNumber
         billingName
         billingEmail
+        billingAddress {
+          city
+          country
+          line1
+          line2
+          postalCode
+          state
+        }
+        taxIds {
+          type
+          value
+        }
         transactions {
           id
           amount
