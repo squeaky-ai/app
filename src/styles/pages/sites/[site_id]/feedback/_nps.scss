@@ -902,6 +902,12 @@
 
     .checkbox {
       margin: 0;
+
+      &.disabled {
+        span {
+          color: var(--gray-500);
+        }
+      }
     }
 
     a {
