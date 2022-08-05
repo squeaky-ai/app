@@ -13,7 +13,7 @@ interface Props {
 export const GettingStarted: FC<Props> = ({ site }) => (
   <>
     <Container className='md getting-started'>
-      <p>To help you make the most out of the data you&apos;re capturing with Squeaky, we allow you to create definitions for any action that visitors are taking on your site e.g. tracking each time a visitor clicks the Login button. You can then comapre the actions you have defined in the events interface, to see how often they&apos;re taking place</p>
+      <p>To help you make the most out of the data you&apos;re capturing with Squeaky, we allow you to create definitions for any action that visitors are taking on your site e.g. tracking each time a visitor clicks the Login button. You can then compare the actions you have defined in the events interface, to see how often they&apos;re taking place</p>
 
       <EventCreate 
         site={site} 
