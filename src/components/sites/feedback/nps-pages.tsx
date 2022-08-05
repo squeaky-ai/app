@@ -7,16 +7,31 @@ import { Checkbox } from 'components/checkbox';
 interface Props {
   value: string[];
   onChange: (event: React.ChangeEvent) => void;
+  setSelected: (pages: string[]) => void;
 }
 
-export const NpsPages: FC<Props> = ({ value, onChange }) => {
+export const NpsPages: FC<Props> = ({ value, onChange, setSelected }) => {
   const { loading, pages } = usePages();
+
+  const onSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.target.checked
+      ? setSelected(pages)
+      : setSelected([]);
+  };
 
   return (
     <div className='nps-pages-wrapper'>
       <div className='nps-pages'>
         {loading && <Spinner />}
         <div className='checkbox-group'>
+          <Checkbox
+            checked={value.length === pages.length && pages.length !== 0}
+            partial={value.length !== 0 && value.length !== pages.length && pages.length !== 0}
+            disabled={pages.length === 0}
+            onChange={onSelectAll} 
+          >
+            <b>Select All</b>
+          </Checkbox>
           {pages.map(page => (
             <Checkbox 
               name='npsExcludedPages' 

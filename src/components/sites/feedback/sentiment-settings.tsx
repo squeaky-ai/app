@@ -103,6 +103,7 @@ export const SentimentSettings: FC<Props> = ({ site }) => {
               values,
               errors,
               isValid,
+              setFieldValue,
             }) => (
               <form onSubmit={handleSubmit}>
                 <h4>Accent colour</h4>
@@ -221,6 +222,9 @@ export const SentimentSettings: FC<Props> = ({ site }) => {
                 <SentimentPages 
                   value={values.sentimentExcludedPages}
                   onChange={handleChange}
+                  setSelected={(pages: string[]) => {
+                    setFieldValue('sentimentExcludedPages', pages);
+                  }}
                 />
 
                 <h4>Devices</h4>

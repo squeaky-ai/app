@@ -67,6 +67,7 @@ export const NpsScheduling: FC<Props> = ({ site, feedback }) => {
             isSubmitting,
             values,
             isValid,
+            setFieldValue,
           }) => (
             <form onSubmit={handleSubmit}>
               <h4>Scheduling</h4>
@@ -114,6 +115,9 @@ export const NpsScheduling: FC<Props> = ({ site, feedback }) => {
                 <NpsPages 
                   value={values.npsExcludedPages}
                   onChange={handleChange}
+                  setSelected={(pages: string[]) => {
+                    setFieldValue('npsExcludedPages', pages);
+                  }}
                 />
               </div>
 
