@@ -270,7 +270,9 @@ export const SentimentSettings: FC<Props> = ({ site }) => {
                 <p><b>Please note</b>: If you&apos;re using the left or right positions then your feedback widget may overlap content on your website when used by customers with smaller mobile devices.</p>
 
                 <div className='hide-logo'>
-                  <p>In the bottom-left corner of your feedback widget there is the text &apos;Powered by Squeaky&apos; (or similar, depending on your language settings). Paying subscribers can remove this use the option below.</p>
+                  {!isPaying && (
+                    <p>In the bottom-left corner of your feedback widget there is the text &apos;Powered by Squeaky&apos; (or similar, depending on your language settings). Paying subscribers can remove this use the option below.</p>
+                  )}
 
                   <div className='hide-logo-check'>
                     <Checkbox
