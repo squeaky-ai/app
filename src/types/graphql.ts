@@ -877,6 +877,7 @@ export type Feedback = {
   sentimentExcludedPages: Array<Maybe<Scalars['String']>>;
   sentimentHideLogo: Scalars['Boolean'];
   sentimentLayout?: Maybe<Scalars['String']>;
+  sentimentSchedule?: Maybe<Scalars['String']>;
 };
 
 
@@ -1049,6 +1050,7 @@ export type FeedbackUpdateInput = {
   sentimentExcludedPages?: InputMaybe<Array<Scalars['String']>>;
   sentimentHideLogo?: InputMaybe<Scalars['Boolean']>;
   sentimentLayout?: InputMaybe<Scalars['String']>;
+  sentimentSchedule?: InputMaybe<Scalars['String']>;
   siteId: Scalars['ID'];
 };
 

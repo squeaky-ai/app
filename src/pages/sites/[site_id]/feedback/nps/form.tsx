@@ -11,10 +11,10 @@ import { Error } from 'components/error';
 import { NpsPreview } from 'components/sites/feedback/nps-preview';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { NpsTabs } from 'components/sites/feedback/nps-tabs';
-import { useFeedback } from 'hooks/use-feedback';
-import { NpsStatus } from 'components/sites/feedback/nps-status';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { NpsForm } from 'components/sites/feedback/nps-form';
+import { NpsStatus } from 'components/sites/feedback/nps-status';
+import { useFeedback } from 'hooks/use-feedback';
+import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
 const SitesFeedbackNpsForm: NextPage<ServerSideProps> = ({ user }) => {
   const { loading, error, feedback, locale, setLocale } = useFeedback();
