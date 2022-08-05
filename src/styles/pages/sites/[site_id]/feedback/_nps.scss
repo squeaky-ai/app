@@ -892,6 +892,24 @@
     }
   }
 
+  .hide-logo {
+    margin: 2rem 0 0 0;
+
+    .hide-logo-check {
+      align-items: center;
+      display: flex;
+    }
+
+    .checkbox {
+      margin: 0;
+    }
+
+    a {
+      font-size: var(--font-size-body);
+      margin: 0 0 0 1rem;
+    }
+  }
+
   .nps-preview {
     background: var(--white);
     bottom: 0;
@@ -1091,6 +1109,10 @@
 
           .logo {
             margin: .85rem 0 0 .25rem;
+          }
+
+          &.hide {
+            visibility: hidden;
           }
         }
 

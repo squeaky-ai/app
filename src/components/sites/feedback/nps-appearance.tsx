@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import * as Yup from 'yup';
+import Link from 'next/link';
 import { Formik } from 'formik';
 import { Icon } from 'components/icon';
 import { feedbackUpdate } from 'lib/api/graphql';
@@ -12,6 +13,7 @@ import { HEX_REGEX } from 'data/common/constants';
 import { useToasts } from 'hooks/use-toasts';
 import type { Feedback, FeedbackUpdateInput } from 'types/graphql';
 import type { Site } from 'types/graphql';
+import { Checkbox } from 'components/checkbox';
 
 interface Props {
   site: Site;
@@ -23,10 +25,13 @@ const DEFAULT_COLORS = ['#0768C1', '#F96155', '#8249FB', '#001A39'];
 const NpsSchema = Yup.object().shape({
   npsAccentColor: Yup.string().matches(HEX_REGEX, 'Accent color is required'),
   npsLayout: Yup.string().oneOf(['full_width', 'boxed'], 'Please select a layout type'),
+  npsHideLogo: Yup.boolean(),
 });
 
 export const NpsAppearance: FC<Props> = ({ site, feedback }) => {
   const toasts = useToasts();
+
+  const isPaying = (site.plan?.tier || 0) > 0;
 
   const onUpdate = async (input: Partial<FeedbackUpdateInput>): Promise<void> => {
     await feedbackUpdate({
@@ -42,13 +47,15 @@ export const NpsAppearance: FC<Props> = ({ site, feedback }) => {
           initialValues={{ 
             npsAccentColor: feedback.npsAccentColor || '#0768C1', 
             npsLayout: feedback.npsLayout || 'full_width',
+            npsHideLogo: feedback.npsHideLogo || false,
           }}
           validationSchema={NpsSchema}
           onSubmit={(values, { setSubmitting }) => {
             (async () => {
-              const params: Pick<FeedbackUpdateInput, 'npsAccentColor' | 'npsLayout'> = {
+              const params: Pick<FeedbackUpdateInput, 'npsAccentColor' | 'npsLayout' | 'npsHideLogo'> = {
                 npsAccentColor: values.npsAccentColor,
                 npsLayout: values.npsLayout,
+                npsHideLogo: values.npsHideLogo,
               };
               
               try {
@@ -163,6 +170,22 @@ export const NpsAppearance: FC<Props> = ({ site, feedback }) => {
                 >
                   Boxed
                 </Radio>
+              </div>
+
+              <div className='hide-logo'>
+                <p>In the bottom-left corner of your feedback widget there is the text &apos;Powered by Squeaky&apos; (or similar, depending on your language settings). Paying subscribers can remove this use the option below.</p>
+
+                <div className='hide-logo-check'>
+                  <Checkbox
+                    name='npsHideLogo'
+                    onChange={handleChange}
+                    checked={values.npsHideLogo}
+                    disabled={!isPaying}
+                  >
+                    Hide &apos;Powered by Squeaky&apos; badge
+                  </Checkbox>
+                  {!isPaying && (<Link href={`/sites/${site.id}/settings/subscription`}><a>Upgrade to enable</a></Link>)}
+                </div>
               </div>
 
               <div className='actions'>

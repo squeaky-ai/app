@@ -17,11 +17,13 @@ export const GET_FEEDBACK_QUERY = gql`
         npsLanguages
         npsLanguagesDefault
         npsTranslations(userLocale: $locale)
+        npsHideLogo
         sentimentEnabled
         sentimentAccentColor
         sentimentExcludedPages
         sentimentLayout
         sentimentDevices
+        sentimentHideLogo
       }
     }
   }

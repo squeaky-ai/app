@@ -864,6 +864,7 @@ export type Feedback = {
   npsEnabled: Scalars['Boolean'];
   npsExcludedPages: Array<Maybe<Scalars['String']>>;
   npsFollowUpEnabled?: Maybe<Scalars['Boolean']>;
+  npsHideLogo: Scalars['Boolean'];
   npsLanguages: Array<Maybe<Scalars['String']>>;
   npsLanguagesDefault?: Maybe<Scalars['String']>;
   npsLayout?: Maybe<Scalars['String']>;
@@ -874,6 +875,7 @@ export type Feedback = {
   sentimentDevices: Array<Maybe<Scalars['String']>>;
   sentimentEnabled?: Maybe<Scalars['Boolean']>;
   sentimentExcludedPages: Array<Maybe<Scalars['String']>>;
+  sentimentHideLogo: Scalars['Boolean'];
   sentimentLayout?: Maybe<Scalars['String']>;
 };
 
@@ -1035,6 +1037,7 @@ export type FeedbackUpdateInput = {
   npsEnabled?: InputMaybe<Scalars['Boolean']>;
   npsExcludedPages?: InputMaybe<Array<Scalars['String']>>;
   npsFollowUpEnabled?: InputMaybe<Scalars['Boolean']>;
+  npsHideLogo?: InputMaybe<Scalars['Boolean']>;
   npsLanguages?: InputMaybe<Array<Scalars['String']>>;
   npsLanguagesDefault?: InputMaybe<Scalars['String']>;
   npsLayout?: InputMaybe<Scalars['String']>;
@@ -1044,6 +1047,7 @@ export type FeedbackUpdateInput = {
   sentimentDevices?: InputMaybe<Array<Scalars['String']>>;
   sentimentEnabled?: InputMaybe<Scalars['Boolean']>;
   sentimentExcludedPages?: InputMaybe<Array<Scalars['String']>>;
+  sentimentHideLogo?: InputMaybe<Scalars['Boolean']>;
   sentimentLayout?: InputMaybe<Scalars['String']>;
   siteId: Scalars['ID'];
 };

@@ -10,10 +10,12 @@ export const FEEDBACK_UPDATE_MUTATION = gql`
       npsFollowUpEnabled
       npsContactConsentEnabled
       npsLayout
+      npsHideLogo
       sentimentEnabled
       sentimentAccentColor
       sentimentExcludedPages
       sentimentLayout
+      sentimentHideLogo
     }
   }
 `;

@@ -490,6 +490,24 @@
     }
   }
 
+  .hide-logo {
+    margin: 2rem 0 0 0;
+
+    .hide-logo-check {
+      align-items: center;
+      display: flex;
+    }
+
+    .checkbox {
+      margin: 0;
+    }
+
+    a {
+      font-size: var(--font-size-body);
+      margin: 0 0 0 1rem;
+    }
+  }
+
   .sentiment-preview {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     position: absolute;
@@ -610,6 +628,10 @@
 
           .logo {
             margin: .85rem 0 0 .25rem;
+          }
+
+          &.hide {
+            visibility: hidden;
           }
         }
 

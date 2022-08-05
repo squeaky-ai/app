@@ -141,7 +141,7 @@ export const NpsPreview: FC<Props> = ({ locale, feedback, setLocale }) => {
                 )}
 
                 <div className='footer'>
-                  <p>
+                  <p className={classnames({ hide: feedback.npsHideLogo })}>
                     {translations.powered_by}
                     <span className='logo'>
                       <Logo logo='dark' height={20} width={64} />

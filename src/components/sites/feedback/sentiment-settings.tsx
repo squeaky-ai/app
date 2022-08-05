@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import * as Yup from 'yup';
+import Link from 'next/link';
 import { Formik } from 'formik';
 import { Icon } from 'components/icon';
 import { Toggle } from 'components/toggle';
@@ -31,11 +32,14 @@ const SentimentSchema = Yup.object().shape({
   sentimentExcludedPages: Yup.array(),
   sentimentLayout: Yup.string().oneOf(['right_middle', 'right_bottom', 'left_middle', 'left_bottom'], 'Please select a layout type'),
   sentimentDevices: Yup.array(),
+  sentimentHideLogo: Yup.boolean(),
 });
 
 export const SentimentSettings: FC<Props> = ({ site }) => {
   const toasts = useToasts();
   const { loading, error, feedback } = useFeedback();
+
+  const isPaying = (site.plan?.tier || 0) > 0;
 
   const onUpdate = async (input: Partial<FeedbackUpdateInput>): Promise<void> => {
     await feedbackUpdate({
@@ -66,6 +70,7 @@ export const SentimentSettings: FC<Props> = ({ site }) => {
               sentimentExcludedPages: feedback.sentimentExcludedPages || [],
               sentimentLayout: feedback.sentimentLayout || 'right_middle',
               sentimentDevices: feedback.sentimentDevices || ['desktop', 'tablet'],
+              sentimentHideLogo: feedback.sentimentHideLogo || false,
             }}
             validationSchema={SentimentSchema}
             onSubmit={(values, { setSubmitting }) => {
@@ -75,12 +80,14 @@ export const SentimentSettings: FC<Props> = ({ site }) => {
                   'sentimentAccentColor' | 
                   'sentimentExcludedPages' | 
                   'sentimentLayout' |
-                  'sentimentDevices'
+                  'sentimentDevices' |
+                  'sentimentHideLogo'
                 > = {
                   sentimentAccentColor: values.sentimentAccentColor,
                   sentimentExcludedPages: values.sentimentExcludedPages,
                   sentimentLayout: values.sentimentLayout,
                   sentimentDevices: values.sentimentDevices,
+                  sentimentHideLogo: values.sentimentHideLogo,
                 };
                 
                 try {
@@ -261,6 +268,22 @@ export const SentimentSettings: FC<Props> = ({ site }) => {
                 </div>
 
                 <p><b>Please note</b>: If you&apos;re using the left or right positions then your feedback widget may overlap content on your website when used by customers with smaller mobile devices.</p>
+
+                <div className='hide-logo'>
+                  <p>In the bottom-left corner of your feedback widget there is the text &apos;Powered by Squeaky&apos; (or similar, depending on your language settings). Paying subscribers can remove this use the option below.</p>
+
+                  <div className='hide-logo-check'>
+                    <Checkbox
+                      name='sentimentHideLogo'
+                      onChange={handleChange}
+                      checked={values.sentimentHideLogo}
+                      disabled={!isPaying}
+                    >
+                      Hide &apos;Powered by Squeaky&apos; badge
+                    </Checkbox>
+                    {!isPaying && (<Link href={`/sites/${site.id}/settings/subscription`}><a>Upgrade to enable</a></Link>)}
+                  </div>
+                </div>
 
                 <div className='actions'>
                   <Button disabled={isSubmitting || !isValid} type='submit' className='primary'>

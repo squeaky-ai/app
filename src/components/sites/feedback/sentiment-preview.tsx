@@ -17,7 +17,8 @@ interface Props {
                            'npsExcludedPages' | 
                            'npsLanguages' |
                            'npsLanguagesDefault' |
-                           'npsTranslations'>;
+                           'npsTranslations' |
+                           'npsHideLogo'>;
 }
 
 export const SentimentPreview: FC<Props> = ({ feedback }) => {
@@ -101,7 +102,7 @@ export const SentimentPreview: FC<Props> = ({ feedback }) => {
                   <TextArea placeholder='Tell us about your experience...' />
 
                   <div className='footer'>
-                    <p>
+                    <p className={classnames({ hide: feedback.sentimentHideLogo })}>
                       Powered by
                       <span className='logo'>
                         <Logo logo='dark' height={20} width={64} />

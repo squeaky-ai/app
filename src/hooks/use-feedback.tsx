@@ -37,11 +37,13 @@ export const useFeedback = (): UseFeedback => {
     npsLanguagesDefault: 'en',
     npsExcludedPages: [],
     npsTranslations: '{}',
+    npsHideLogo: false,
     sentimentEnabled: false,
     sentimentAccentColor: null,
     sentimentExcludedPages: null,
     sentimentLayout: null,
     sentimentDevices: ['desktop', 'tablet'],
+    sentimentHideLogo: false,
   };
 
   React.useEffect(() => {
