@@ -173,9 +173,10 @@ export const NpsAppearance: FC<Props> = ({ site, feedback }) => {
               </div>
 
               <div className='hide-logo'>
-                {!isPaying && (
-                  <p>In the bottom-left corner of your feedback widget there is the text &apos;Powered by Squeaky&apos; (or similar, depending on your language settings). Paying subscribers can remove this use the option below.</p>
-                )}
+                {isPaying
+                  ? <p>In the bottom-left corner of your feedback widget there is the text &apos;Powered by Squeaky&apos; (or similar, depending on your language settings). You can remove this badge using the option below.</p>
+                  : <p>In the bottom-left corner of your feedback widget there is the text &apos;Powered by Squeaky&apos; (or similar, depending on your language settings). Paying subscribers can remove this use the option below.</p>
+                }
 
                 <div className='hide-logo-check'>
                   <Checkbox
