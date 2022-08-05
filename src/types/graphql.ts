@@ -1003,6 +1003,11 @@ export type FeedbackSentimentResponse = {
   pagination: FeedbackSentimentResponsePagination;
 };
 
+export type FeedbackSentimentResponseFilters = {
+  followUpComment?: InputMaybe<Scalars['Boolean']>;
+  rating?: InputMaybe<Scalars['Int']>;
+};
+
 export type FeedbackSentimentResponseItem = {
   __typename?: 'FeedbackSentimentResponseItem';
   comment?: Maybe<Scalars['String']>;
@@ -1977,6 +1982,7 @@ export type Sentiment = {
 
 
 export type SentimentResponsesArgs = {
+  filters?: InputMaybe<FeedbackSentimentResponseFilters>;
   page?: InputMaybe<Scalars['Int']>;
   size?: InputMaybe<Scalars['Int']>;
   sort?: InputMaybe<FeedbackSentimentResponseSort>;

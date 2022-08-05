@@ -1,14 +1,10 @@
 import React from 'react';
 import type { FC } from 'react';
 import * as Yup from 'yup';
-import Link from 'next/link';
 import { Formik } from 'formik';
-import { Icon } from 'components/icon';
 import { feedbackUpdate } from 'lib/api/graphql';
-import { Radio } from 'components/radio';
 import { Label } from 'components/label';
 import { Checkbox } from 'components/checkbox';
-import { Input } from 'components/input';
 import { Button } from 'components/button';
 import { Container } from 'components/container';
 import { SentimentPages } from 'components/sites/feedback/sentiment-pages';
@@ -28,8 +24,6 @@ const SentimentSchema = Yup.object().shape({
 
 export const SentimentVisibility: FC<Props> = ({ site, feedback }) => {
   const toasts = useToasts();
-
-  const isPaying = (site.plan?.tier || 0) > 0;
 
   const onUpdate = async (input: Partial<FeedbackUpdateInput>): Promise<void> => {
     await feedbackUpdate({
