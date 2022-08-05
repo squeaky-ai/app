@@ -16,6 +16,7 @@ export const FEEDBACK_UPDATE_MUTATION = gql`
       sentimentExcludedPages
       sentimentLayout
       sentimentHideLogo
+      sentimentSchedule
     }
   }
 `;

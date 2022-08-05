@@ -44,6 +44,7 @@ export const useFeedback = (): UseFeedback => {
     sentimentLayout: null,
     sentimentDevices: ['desktop', 'tablet'],
     sentimentHideLogo: false,
+    sentimentSchedule: 'always',
   };
 
   React.useEffect(() => {

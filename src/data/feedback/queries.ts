@@ -24,6 +24,7 @@ export const GET_FEEDBACK_QUERY = gql`
         sentimentLayout
         sentimentDevices
         sentimentHideLogo
+        sentimentSchedule
       }
     }
   }

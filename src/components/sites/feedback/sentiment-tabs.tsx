@@ -5,7 +5,7 @@ import classnames from 'classnames';
 
 interface Props {
   siteId: string;
-  page: 'feedback' | 'settings' | 'guide';
+  page: 'feedback' | 'appearance' | 'visibility';
 }
 
 export const SentimentTabs: FC<Props> = ({ siteId, page }) => (
@@ -19,9 +19,16 @@ export const SentimentTabs: FC<Props> = ({ siteId, page }) => (
         </Link>
       </li>
       <li className='tab'>
-        <Link href={`/sites/${siteId}/feedback/sentiment/settings`}>
-          <a className={classnames('button tab-button', { active: page === 'settings' })}>
-            Settings
+        <Link href={`/sites/${siteId}/feedback/sentiment/appearance`}>
+          <a className={classnames('button tab-button', { active: page === 'appearance' })}>
+            Appearance
+          </a>
+        </Link>
+      </li>
+      <li className='tab'>
+        <Link href={`/sites/${siteId}/feedback/sentiment/visibility`}>
+          <a className={classnames('button tab-button', { active: page === 'visibility' })}>
+            Visibility
           </a>
         </Link>
       </li>

@@ -877,6 +877,7 @@ export type Feedback = {
   sentimentExcludedPages: Array<Maybe<Scalars['String']>>;
   sentimentHideLogo: Scalars['Boolean'];
   sentimentLayout?: Maybe<Scalars['String']>;
+  sentimentSchedule?: Maybe<Scalars['String']>;
 };
 
 
@@ -1002,6 +1003,11 @@ export type FeedbackSentimentResponse = {
   pagination: FeedbackSentimentResponsePagination;
 };
 
+export type FeedbackSentimentResponseFilters = {
+  followUpComment?: InputMaybe<Scalars['Boolean']>;
+  rating?: InputMaybe<Scalars['Int']>;
+};
+
 export type FeedbackSentimentResponseItem = {
   __typename?: 'FeedbackSentimentResponseItem';
   comment?: Maybe<Scalars['String']>;
@@ -1049,6 +1055,7 @@ export type FeedbackUpdateInput = {
   sentimentExcludedPages?: InputMaybe<Array<Scalars['String']>>;
   sentimentHideLogo?: InputMaybe<Scalars['Boolean']>;
   sentimentLayout?: InputMaybe<Scalars['String']>;
+  sentimentSchedule?: InputMaybe<Scalars['String']>;
   siteId: Scalars['ID'];
 };
 
@@ -1975,6 +1982,7 @@ export type Sentiment = {
 
 
 export type SentimentResponsesArgs = {
+  filters?: InputMaybe<FeedbackSentimentResponseFilters>;
   page?: InputMaybe<Scalars['Int']>;
   size?: InputMaybe<Scalars['Int']>;
   sort?: InputMaybe<FeedbackSentimentResponseSort>;

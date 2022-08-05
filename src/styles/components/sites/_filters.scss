@@ -310,4 +310,18 @@
       }
     }
   }
+
+  .filters-rating {
+    .radio {
+      margin-bottom: .5rem;
+
+      span:not(.check) {
+        height: 1.25rem;
+      }
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
 }
