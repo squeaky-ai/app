@@ -113,7 +113,7 @@ export const NpsPreview: FC<Props> = ({ locale, feedback, setLocale }) => {
 
                 <div className='reason'>
                   <Label>{translations.what_is_the_main_reason}</Label>
-                  <TextArea placeholder='Please type here ...' />
+                  <TextArea placeholder={translations.please_type} />
                 </div>
                 
                 {feedback.npsContactConsentEnabled && (
