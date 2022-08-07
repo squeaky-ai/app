@@ -45,7 +45,7 @@ export const EVENTS: EventItem[] = [
 export const COLUMNS: Column[] = [
   {
     label: 'Select',
-    width: '58px',
+    width: '48px',
     disabled: false,
     position: 1,
   },

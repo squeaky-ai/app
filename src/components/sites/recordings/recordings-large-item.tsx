@@ -139,7 +139,7 @@ export const RecordingsLargeItem: FC<Props> = ({ site, recording, style, member,
         {!recording.countryCode && '-'}
       </Cell>
       <Cell>
-        <Tooltip positionX='right' className='browser-tooltip' button={<Browser name={recording.device.browserName} height={24} width={24} />}>
+        <Tooltip positionX='right' className='browser-tooltip' button={<Browser name={recording.device.browserName} height={16} width={16} />}>
           {recording.device.browserDetails}
         </Tooltip>
       </Cell>
@@ -152,7 +152,7 @@ export const RecordingsLargeItem: FC<Props> = ({ site, recording, style, member,
       <Cell>
         {!!recording.sentiment && (
           <div className='emoji'>
-            <Emoji height={24} width={24} emoji={`emoji-${recording.sentiment.score + 1}` as EmojiType} />
+            <Emoji height={16} width={16} emoji={`emoji-${recording.sentiment.score + 1}` as EmojiType} />
           </div>
         )}
 
