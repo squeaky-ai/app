@@ -36,6 +36,10 @@ export const GET_ADMIN_QUERY = gql`
         superuser
         createdAt
         lastActivityAt
+        visitor {
+          id
+          visitorId
+        }
       }
       activeMonthlyUsers
       recordingsCount

@@ -9,18 +9,18 @@ import { USER_COLUMNS, DEFAULT_USER_COLUMNS } from 'data/admin/constants';
 import { getColumnPreferences, getColumnStyles } from 'lib/tables';
 import { Preference } from 'lib/preferences';
 import type { Column } from 'types/common';
-import type { User, Site } from 'types/graphql';
+import type { AdminUser, Site } from 'types/graphql';
 import type { UserSort } from 'types/admin';
 
 interface Props {
-  users: User[];
+  users: AdminUser[];
   sites: Site[];
   columns: Column[];
   search: string;
   setColumns: (columns: Column[]) => void;
 }
 
-const sortUsers = (sort: UserSort) => (a: User, b: User) => {
+const sortUsers = (sort: UserSort) => (a: AdminUser, b: AdminUser) => {
   switch(sort) {
     case 'name__asc':
       return (a.fullName || '').localeCompare(b.fullName || '');
@@ -37,7 +37,7 @@ const sortUsers = (sort: UserSort) => (a: User, b: User) => {
   }
 };
 
-const getUsersSites = (user: User, sites: Site[]) => (
+const getUsersSites = (user: AdminUser, sites: Site[]) => (
   sites.filter(site => !!site.team.find(t => t.user.id === user.id))
 );
 
@@ -51,7 +51,7 @@ export const UsersTable: FC<Props> = ({ users, sites, columns, search, setColumn
     .filter(result => {
       if (!search) return true;
 
-      const keys: Array<keyof User> = ['fullName', 'email'];
+      const keys: Array<keyof AdminUser> = ['fullName', 'email'];
       
       return keys.some(key => (result[key] || '').toLowerCase().includes(search.toLowerCase()));
     });
@@ -85,6 +85,7 @@ export const UsersTable: FC<Props> = ({ users, sites, columns, search, setColumn
               />
             </Cell>
             <Cell>Email</Cell>
+            <Cell>Visitor</Cell>
             <Cell>
               Superuser
               <Sort 

@@ -26,6 +26,7 @@ module.exports = {
     apiHost: API_HOST_NAME,
     webHost: WEB_HOST_NAME,
     basePath: BASE_PATH,
+    squeakySiteId: 82,
   },
   async rewrites() {
     return IS_DEV ? [

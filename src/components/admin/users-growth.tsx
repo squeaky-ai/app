@@ -5,10 +5,10 @@ import { format, subMonths } from 'date-fns';
 import { useResize } from 'hooks/use-resize';
 import { DeviceWidths } from 'data/common/constants';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, TooltipProps } from 'recharts';
-import type { User } from 'types/graphql';
+import type { AdminUser } from 'types/graphql';
 
 interface Props {
-  users: User[];
+  users: AdminUser[];
 }
 
 interface Total {
@@ -16,7 +16,7 @@ interface Total {
   date: string;
 }
 
-const getAccumulatingTotal = (users: User[]): Total[] => {
+const getAccumulatingTotal = (users: AdminUser[]): Total[] => {
   const now = new Date();
 
   const results = range(0, 11).map(month => {
