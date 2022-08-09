@@ -156,20 +156,21 @@
             margin-right: .5rem;
           }
         }
+      }
 
-        .shuffle-recording {
-          background: var(--white);
-          border: 1px solid var(--gray-200);
-          padding: 0 1rem;
-      
-          .icon {
-            font-size: var(--font-size-body);
-            margin-right: 0;
-          }
+      .shuffle-recording {
+        background: var(--white);
+        border: 1px solid var(--gray-200);
+        margin: 0 1rem 0 0;
+        padding: 0 1rem;
+    
+        .icon {
+          font-size: var(--font-size-body);
+          margin-right: 0;
+        }
 
-          &:hover {
-            background-color: var(--gray-100);
-          }
+        &:hover {
+          background-color: var(--gray-100);
         }
       }
     }
