@@ -11,12 +11,12 @@ const ASSET_PREFIX = IS_DEV ? '' : 'https://cdn.squeaky.ai/app';
 
 // In production we point to the squeaky.ai/api but in
 // development we use a local running instance
-const API_HOST_NAME = API_HOST || 'http://localhost:4000';
+const API_HOST_NAME = API_HOST || 'http://localhost:3333';
 
 // All of the meta tags in _document.tsx need to point to the
 // correct host as it will be no good having localhost in
 // production!
-const WEB_HOST_NAME = IS_DEV ? 'http://localhost:3000' : 'https://squeaky.ai';
+const WEB_HOST_NAME = IS_DEV ? 'http://localhost:3333' : 'https://squeaky.ai';
 
 module.exports = {
   basePath: BASE_PATH,
@@ -32,7 +32,7 @@ module.exports = {
     return IS_DEV ? [
       {
         source: '/api/:slug*',
-        destination: 'http://localhost:4000/api/:slug*',
+        destination: 'http://localhost:3333/api/:slug*',
         basePath: false,
       }
     ] : [];
