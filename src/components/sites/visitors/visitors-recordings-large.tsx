@@ -69,6 +69,7 @@ export const VisitorsRecordingsLarge: FC<Props> = ({ site, visitor, sort, column
         </Cell>
         <Cell>Date &amp; Time<Sort name='connected_at' order={sort} onAsc={() => setSort(RecordingsSort.ConnectedAtAsc)} onDesc={() => setSort(RecordingsSort.ConnectedAtDesc)} /></Cell>
         <Cell>Duration <Sort name='duration' order={sort} onAsc={() => setSort(RecordingsSort.DurationAsc)} onDesc={() => setSort(RecordingsSort.DurationDesc)} /></Cell>
+        <Cell>Activity <Sort name='activity' order={sort} onAsc={() => setSort(RecordingsSort.ActivityAsc)} onDesc={() => setSort(RecordingsSort.ActivityDesc)} /></Cell>
         <Cell>Pages <Sort name='page_count' order={sort} onAsc={() => setSort(RecordingsSort.PageCountAsc)} onDesc={() => setSort(RecordingsSort.PageCountDesc)} /></Cell>
         <Cell>Traffic Source</Cell>
         <Cell>Start &amp; Exit URL</Cell>
