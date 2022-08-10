@@ -45,7 +45,7 @@
 
           i {
             color: var(--gray-500);
-            font-size: 16px;
+            font-size: var(--font-size-body);
             font-weight: var(--font-weight-normal);
           }
         }
@@ -209,7 +209,7 @@
 
               .icon {
                 color: var(--rose-500);
-                font-size: 1.25rem;
+                font-size: var(--font-size-body-lg);
                 margin: 0 .25rem 0 0;
               }
             }

@@ -86,7 +86,7 @@
 
     .select {
       margin: 0;
-      width: 8rem;
+      width: 5rem;
     }
 
     .label {
@@ -101,7 +101,7 @@
 
   .journey-wrapper {
     height: calc(100vh - 18rem);
-    margin: 3rem 0 0 0;
+    margin: 2rem 0 0 0;
   }
 
   .journey-graph {
@@ -120,10 +120,10 @@
 
       .heading {
         color: var(--gray-500);
-        font-size: 13px;
+        font-size: var(--font-size-body-sm);
         flex-shrink: 0;
         justify-content: center;
-        line-height: 16px;
+        line-height: var(--line-height-body-sm);
         margin: 0 0 .75rem 0;
       }
 
@@ -163,9 +163,9 @@
         }
 
         .path {
-          font-size: 13px;
+          font-size: var(--font-size-body-sm);
           font-weight: var(--font-weight-bold);
-          line-height: 16px;
+          line-height: var(--line-height-body-sm);
           overflow: hidden;
           text-align: left;
           text-overflow: ellipsis;
@@ -174,7 +174,7 @@
 
           .icon {
             color: var(--blue-500);
-            font-size: 1rem;
+            font-size: var(--font-size-body);
             font-weight: var(--font-weight-normal);
             margin: 0 .25rem 0 0;
             vertical-align: middle;
@@ -183,8 +183,8 @@
 
         .stats {
           color: var(--gray-blue-800);
-          font-size: 13px;
-          line-height: 16px;
+          font-size: var(--font-size-body-sm);
+          line-height: var(--line-height-body-sm);
           margin-left: 1rem;
           text-align: right;
         }
@@ -206,7 +206,7 @@
 
         .icon {
           color: var(--rose-500);
-          font-size: 1rem;
+          font-size: var(--font-size-body);
           margin: 0 .125rem 0 0;
         }
       }

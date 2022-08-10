@@ -32,6 +32,8 @@ export const GET_RECORDINGS_QUERY = gql`
           sessionId
           connectedAt
           disconnectedAt
+          inactivity
+          activityDuration
           visitor {
             id
             visitorId
@@ -86,11 +88,18 @@ export const GET_RECORDING_QUERY = gql`
         countryName
         connectedAt
         disconnectedAt
+        inactivity
+        activityDuration
         visitor {
           id
           visitorId
           starred
           linkedData
+          firstViewedAt
+          lastActivityAt
+          recordingCount {
+            total
+          }
         }
         pages {
           id
@@ -121,7 +130,12 @@ export const GET_RECORDING_QUERY = gql`
           comment
         }
         events(page: $eventPage) {
-          items
+          items {
+            id
+            data
+            type
+            timestamp
+          }
           pagination {
             perPage
             itemCount
@@ -141,7 +155,12 @@ export const GET_RECORDING_EVENTS_QUERY = gql`
       recording(recordingId: $recordingId) {
         id
         events(page: $eventPage) {
-          items
+          items {
+            id
+            data
+            type
+            timestamp
+          }
           pagination {
             perPage
             itemCount

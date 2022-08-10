@@ -32,10 +32,10 @@ const SiteSettingsTeam: NextPage<ServerSideProps> = ({ user }) => {
           <Main>
             <BreadCrumbs site={site} items={[{ name: 'Team' }]} />
 
-            <h3 className='title'>
+            <h4 className='title'>
               Team
               <Access roles={[OWNER, ADMIN]} />
-            </h3>
+            </h4>
 
             <Container className='md'>
               <p>This page allows you to view, invite and manage the roles of any team members associated with this site. Adding members is always free of charge, regardless of their role.</p>

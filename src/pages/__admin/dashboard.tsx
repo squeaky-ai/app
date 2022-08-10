@@ -31,9 +31,9 @@ const AdminDashboard: NextPage<ServerSideProps> = () => {
       <Main>
         <BreadCrumbs items={[{ name: 'Admin' }, { name: 'Dashboard' }]} />
 
-        <h3 className='title'>
+        <h4 className='title'>
           Dashboard
-        </h3>
+        </h4>
 
         {loading && (
           <PageLoading />

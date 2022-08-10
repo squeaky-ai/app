@@ -5,6 +5,7 @@
 
   .visitor-view {
     .title {
+      justify-content: space-between;
       margin-bottom: 2rem;
 
       @include breakpoint-sm {
@@ -14,34 +15,31 @@
         margin-bottom: 1rem;
       }
 
-      i {
-        color: var(--gray-500);
-        margin-right: .5rem;
-      }
-
       .delete-visitor {
-        align-items: center;
-        background: none;
-        border: none;
-        border-radius: var(--border-radius-o);
-        display: flex;
-        justify-content: center;
-        height: 2rem;
-        margin-left: .75rem;
-        width: 2rem;
+        &:not(.tertiary) {
+          align-items: center;
+          background: none;
+          border: none;
+          border-radius: var(--border-radius-o);
+          display: flex;
+          justify-content: center;
+          height: 2rem;
+          margin-left: .75rem;
+          width: 2rem;
 
-        i {
-          color: var(--rose-500);
-          font-size: 1.25rem;
-          margin: 0;
-        }
+          i {
+            color: var(--rose-500);
+            font-size: var(--font-size-body-lg);
+            margin: 0;
+          }
 
-        span {
-          display: none;
-        }
+          span {
+            display: none;
+          }
 
-        &:hover {
-          background: var(--gray-100);
+          &:hover {
+            background: var(--gray-100);
+          }
         }
       }
     }
@@ -74,9 +72,9 @@
         & > .button {
           background: none;
           border: none;
-          border-radius: var(--border-radius-md);
+          border-radius: var(--border-radius-controls);
           font-weight: var(--font-weight-bold);
-          height: 40px;
+          height: 2rem;
           margin-left: .5rem;
           padding: 0 1rem;
   
@@ -89,7 +87,7 @@
   
             &:not(.arrow) {
               color: var(--blue-500);
-              font-size: 1.25rem;
+              font-size: var(--font-size-body-lg);
               margin-right: .5rem;
             }
           }
@@ -111,7 +109,7 @@
         }
 
         .filters-columns {
-          padding: 1rem;
+          padding: .5rem;
 
           .checkbox {
             margin-bottom: .5rem;
@@ -136,7 +134,7 @@
 
         & > .button {
           color: var(--body-color);
-          height: 40px;
+          height: 2rem;
           margin-left: 0;
           padding: 0 .5rem;
           text-align: left;
@@ -147,7 +145,7 @@
 
           i {
             color: var(--body-color);
-            font-size: 1.5rem;
+            font-size: var(--font-size-body-xl);
           }
         }
 
@@ -156,7 +154,7 @@
           border-radius: var(--border-radius-md);
           box-shadow: var(--box-shadow-sm);
           display: none;
-          padding: 1.5rem;
+          padding: 1rem;
           position: absolute;
           right: 220px;
           top: 0;
@@ -194,7 +192,7 @@
     
             i:not(.arrow) {
               color: var(--blue-500);
-              font-size: 1.25rem;
+              font-size: var(--font-size-body-lg);
               margin-right: .5rem;
             }
 
@@ -218,10 +216,10 @@
     }
 
     .summary {
-      font-size: 13px;
-      line-height: 20px;
-      margin: 2rem 0;
-      padding: 2rem;
+      font-size: var(--font-size-body-sm);
+      line-height: var(--line-height-body-sm);
+      margin: 0 0 2rem 0;
+      padding: 1.5rem;
 
       @include breakpoint-sm {
         background: none;
@@ -249,7 +247,7 @@
           background: var(--gray-50);
           border-radius: var(--border-radius-md);
           grid-area: linked;
-          padding: 2rem;
+          padding: 1.5rem;
 
           @include breakpoint-sm {
             background: var(--gray-100);
@@ -263,7 +261,7 @@
 
             i {
               color: var(--blue-500);
-              font-size: 18px;
+              font-size: var(--font-size-body-lg);
               font-weight: var(--font-weight-normal);
               margin-right: .5rem;
             }
@@ -336,7 +334,7 @@
           }
 
           .device {
-            font-size: 20px;
+            font-size: var(--font-size-body-lg);
           }
 
           .browser {
@@ -349,58 +347,10 @@
         .tooltip {
           .button {
             color: var(--blue-500);
-            font-size: 13px;
-            line-height: 20px;
+            font-size: var(--font-size-body-sm);
+            line-height: var(--line-height-body-sm);
             text-decoration: underline;
           }
-        }
-      }
-    }
-
-    .visitor-highlights {
-      display: grid;
-      grid-gap: 2rem;
-      grid-template-areas: 'recordings pageviews';
-      grid-template-columns: repeat(2, 1fr);
-      margin-bottom: 2rem;
-
-      @include breakpoint-md {
-        grid-gap: 1.5rem;
-        grid-template-areas: 'recordings'
-                             'pageviews';
-        grid-template-columns: repeat(1, 1fr);
-      }
-
-      .card {
-        h2 {
-          align-items: center;
-          color: var(--blue-500);
-          display: flex;
-          font-size: 48px;
-          line-height: 64px;
-          margin: 0;
-
-          @include breakpoint-sm {
-            font-size: 32px;
-            line-height: 48px;
-          }
-        }
-
-        h5 {
-          margin: 0 0 1.5rem 0;
-        }
-
-        .pill {
-          margin-left: 1rem;
-          padding: .25rem .75rem;
-        }
-
-        &.recordings {
-          grid-area: recordings;
-        }
-
-        &.page-views {
-          grid-area: pageviews;
         }
       }
     }
@@ -409,7 +359,15 @@
       margin-bottom: 2rem;
 
       .row {
-        grid-template-columns: 58px 105px 165px 1fr 1fr 1fr 1fr 2fr 1fr 90px 70px;
+        grid-template-columns: 58px 105px 165px 1fr 1fr 1fr 1fr 2fr 1fr 90px 4rem;
+
+        .linked i {
+          color: var(--blue-500);
+          display: inline-block;
+          font-size: var(--font-size-body);
+          margin-right: .25rem;
+          vertical-align: middle;
+        }
       }
     }
 
@@ -472,13 +430,15 @@
     .stats {
       display: grid;
       grid-gap: 2rem;
-      grid-template-areas: 'session-duration per-session';
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-areas: 'recordings page-views session-duration per-session';
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       margin-bottom: 2rem;
 
       @include breakpoint-lg {
         grid-gap: 2rem;
-        grid-template-areas: 'session-duration'
+        grid-template-areas: 'recordings'
+                             'page-views'
+                             'session-duration'
                              'per-session';
         grid-template-columns: minmax(0, 1fr);
       }
@@ -507,6 +467,14 @@
           padding: .25rem .75rem;
         }
 
+        &.recordings {
+          grid-area: recordings;
+        }
+
+        &.page-views {
+          grid-area: page-views;
+        }
+
         &.session-duration {
           grid-area: session-duration;
         }
@@ -521,7 +489,7 @@
       margin-bottom: 2rem;
       
       .row {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
       }
     }
   }

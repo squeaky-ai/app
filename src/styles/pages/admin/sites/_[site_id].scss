@@ -1,4 +1,8 @@
 .page.__admin.site {
+  .title {
+    justify-content: space-between;
+  }
+
   .not-found {
     background: var(--peach-50);
 
@@ -11,11 +15,10 @@
     align-items: center;
     color: var(--gray-blue-800);
     display: flex;
-    font-weight: var(--font-weight-bold);
 
     .icon {
       color: var(--mauve-700);
-      font-size: 1.25rem;
+      font-size: var(--font-size-body-lg);
       margin: 0 .5rem 0 0;
     }
   }
@@ -24,6 +27,10 @@
     display: grid;
     grid-gap: 3rem;
     grid-template-columns: 1fr 1fr;
+
+    @include breakpoint-md {
+      grid-template-columns: 1fr;
+    }
 
     h5 {
       align-items: center;
@@ -42,7 +49,7 @@
     }
 
     .details {
-      padding: 2rem 1rem 1rem 1rem;
+      padding: .5rem 0 0 0;
 
       .divider {
         margin: 3rem 0;
@@ -52,8 +59,10 @@
     .row {
       align-items: center;
       display: flex;
+      font-size: var(--font-size-body);
       justify-content: space-between;
-      margin: 0 0 1rem 0;
+      line-height: var(--line-height-body);
+      margin: 0 0 .75rem 0;
 
       &:last-of-type {
         margin-bottom: 0;
@@ -64,13 +73,67 @@
         text-overflow: ellipsis;
         width: 50%;
         white-space: nowrap;
-
+        
         &:first-of-type {
           font-weight: var(--font-weight-bold);
+
+          i {
+            color: var(--gray-500);
+          }
         }
 
         &:last-of-type {
           text-align: right;
+        }
+      }
+
+      @include breakpoint-md {
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: center;
+
+        span {
+          width: 100%;
+
+          &:last-of-type {
+            text-align: left;
+          }
+        }
+      }
+    }
+
+    .recordings-counts {
+      .table {
+        .row {
+          display: grid;
+          grid-template-columns: 6rem 1fr 1fr;
+          margin: 0;
+
+          .cell {
+            &:first-of-type {
+              font-weight: var(--font-weight-bold);
+              overflow: visible;
+              position: relative;
+              text-align: right;
+
+              &:after {
+                background: var(--gray-100);
+                content: ' ';
+                display: block;
+                height: 3rem;
+                position: absolute;
+                right: 0;
+                top: -1.5rem;
+                width: 1px;
+              }
+            }
+          }
+
+          &:last-of-type {
+            .cell:first-of-type::after {
+              height: 3.5rem;
+            }
+          }
         }
       }
     }
@@ -79,7 +142,7 @@
       & > div {
         background: var(--gray-50);
         border-radius: var(--border-radius-md);
-        padding: 2rem;
+        padding: 1.5rem;
       }
 
       .no-invoices {
@@ -88,14 +151,24 @@
 
       .coupon {
         color: var(--gray-500);
-        font-size: 13px;
-        line-height: 16px;
+        font-size: var(--font-size-body-sm);
+        line-height: var(--line-height-body-sm);
       }
 
       .enterprise-upgrade {
         color: var(--mauve-700);
         margin: 0 0 0 1rem;
         text-decoration: underline;
+      }
+
+      .row {
+        &.has-address {
+          align-items: flex-start;
+
+          span span:first-of-type {
+            font-weight: var(--font-weight-normal);
+          }
+        }
       }
     }
   }

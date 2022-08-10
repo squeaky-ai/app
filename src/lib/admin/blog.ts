@@ -27,16 +27,15 @@ export const getAuthorKey = (author: BlogPost['author']): BlogInput['author'] =>
   }
 };
 
-const getSlug = (args: Pick<BlogInput, 'title' | 'category'>) => {
-  const category = args.category
-    .trim()
-    .toLowerCase();
+const formatStringForUrlSlug = (string: string) => string
+  .trim()
+  .toLowerCase()
+  .replace(/ /g, '-')
+  .replace(/[^a-z0-9-]/g, '');
 
-  const title = args.title
-    .trim()
-    .toLowerCase()
-    .replace(/ /g, '-')
-    .replace(/[^a-z0-9-]/g, '')
+const getSlug = (args: Pick<BlogInput, 'title' | 'category'>) => {
+  const title = formatStringForUrlSlug(args.title);
+  const category = formatStringForUrlSlug(args.category);
 
   return `/${category}/${title}`;
 };

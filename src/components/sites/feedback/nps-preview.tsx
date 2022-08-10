@@ -9,17 +9,23 @@ import { TextArea } from 'components/textarea';
 import { Logo } from 'components/logo';
 import { Radio } from 'components/radio';
 import { Input } from 'components/input';
+import { Select, Option } from 'components/select';
 import type { Feedback } from 'types/graphql';
+import type { SupportedLanguages } from 'types/translations';
 
 interface Props {
+  locale: SupportedLanguages;
   feedback: Omit<Feedback, 'id' | 'npsEnabled' | 'sentimentEnabled' | 'sentimentExcludedPages' | 'sentimentDevices'>;
+  setLocale: (locale: SupportedLanguages) => void;
 }
 
-export const NpsPreview: FC<Props> = ({ feedback }) => {
+export const NpsPreview: FC<Props> = ({ locale, feedback, setLocale }) => {
   const ref = React.useRef<HTMLDivElement>(null);
   const [page, setPage] = React.useState<number>(1);
   const [show, setShow] = React.useState<boolean>(false);
   const [contact, setContact] = React.useState<boolean>(false);
+
+  const translations = JSON.parse(feedback.npsTranslations);
 
   const toggleShow = () => {
     setPage(0);
@@ -50,6 +56,10 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
     setContact(false);
   };
 
+  const onLocaleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setLocale(event.target.value as SupportedLanguages);
+  };
+
   React.useEffect(() => {
     if (ref.current) {
       ref.current.setAttribute('style', `--nps-accent-color:${feedback.npsAccentColor};`);
@@ -58,25 +68,38 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
 
   return (
     <>
-      <Button type='button' className='icon secondary' onClick={toggleShow}>
-        <Icon name='eye-line' />
+      <Button type='button' className='icon' onClick={toggleShow}>
+        <Icon name='search-line' />
         {show ? 'Hide' : 'Preview'}
       </Button>
 
       {show && (
         <div ref={ref} className={classnames('nps-preview', { boxed: feedback.npsLayout === 'boxed' })}>
           <div className='nps-wrapper'>
+            {feedback.npsLanguages.length > 1 && (
+              <div className='locale'>
+                <Icon name='translate' className='translation-icon' />
+                <Select value={locale || feedback.npsLanguagesDefault} onChange={onLocaleChange}>
+                  {feedback.npsLanguages.map(npsLanguage => (
+                    <Option key={npsLanguage} value={npsLanguage}>
+                      {npsLanguage}
+                    </Option>
+                  ))}
+                </Select>
+              </div>
+            )}
+
             <Button type='button' className='close' onClick={toggleShow}>
               <Icon name='close-line' />
             </Button>
 
             {page < 2 && (
               <div className={`page-${page}`}>
-                <p className='heading'>How likely is it that you would recommend {feedback.npsPhrase} to a friend or colleague?</p>
+                <p className='heading'>{translations.how_likely_to_recommend}</p>
 
                 <div className='labels'>
-                  <span>Not likely</span>
-                  <span>Extremely likely</span>
+                  <span>{translations.not_likely}</span>
+                  <span>{translations.extremely_likely}</span>
                 </div>
 
                 <div className='options'>
@@ -89,19 +112,19 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
                 </div>
 
                 <div className='reason'>
-                  <Label>What&apos;s the main reason for your score?</Label>
-                  <TextArea placeholder='Please type here ...' />
+                  <Label>{translations.what_is_the_main_reason}</Label>
+                  <TextArea placeholder={translations.please_type} />
                 </div>
                 
                 {feedback.npsContactConsentEnabled && (
                   <div className='respond'>
-                    <Label>Would you like to hear back from us regarding your feedback?</Label>
+                    <Label>{translations.would_you_like_to_hear}</Label>
                     <div className='radio-group'>
                       <Radio name='contact' checked={contact} onChange={() => setContact(true)}>
-                        Yes
+                      {translations.yes}
                       </Radio>
                       <Radio name='contact' checked={!contact} onChange={() => setContact(false)}>
-                        No
+                        {translations.no}
                       </Radio>
                     </div>
                   </div>
@@ -109,7 +132,7 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
 
                 {contact && (
                   <div className='email'>
-                    <Label>Email address</Label>
+                    <Label>{translations.email_address}</Label>
                     <Input 
                       placeholder='e.g. jess@squeaky.ai'
                       autoComplete='email'
@@ -118,14 +141,14 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
                 )}
 
                 <div className='footer'>
-                  <p>
-                    Powered by
+                  <p className={classnames({ hide: feedback.npsHideLogo })}>
+                    {translations.powered_by}
                     <span className='logo'>
                       <Logo logo='dark' height={20} width={64} />
                     </span>
                   </p>
                   <Button type='button' className='primary' onClick={handleNextPage}>
-                    Submit
+                    {translations.submit}
                   </Button>
                 </div>
               </div>
@@ -134,10 +157,10 @@ export const NpsPreview: FC<Props> = ({ feedback }) => {
             {page === 2 && (
               <div className='page-2'>
                 <Icon name='checkbox-circle-line' />
-                <h4>Feedback sent</h4>
-                <p>Thank you for sharing your feedback and helping to make our service better.</p>
+                <h4>{translations.feedback_sent}</h4>
+                <p>{translations.thanks_for_sharing}</p>
                 <Button type='button' className='secondary' onClick={handleClose}>
-                  Close
+                  {translations.close}
                 </Button>
               </div>
             )}

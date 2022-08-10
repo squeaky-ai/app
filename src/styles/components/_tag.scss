@@ -10,8 +10,8 @@
     color: var(--white);
     cursor: default;
     display: inline-block;
-    font-size: 13px;
-    line-height: 20px;
+    font-size: var(--font-size-body-sm);
+    line-height: var(--line-height-body-sm);
     padding: 0 .75rem;
   }
 

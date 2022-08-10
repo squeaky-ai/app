@@ -33,9 +33,9 @@ export type Admin = {
   recordingsProcessed: Scalars['Int'];
   recordingsStored: Array<Maybe<AdminRecordingsStored>>;
   roles: AdminRoles;
-  site?: Maybe<Site>;
+  site?: Maybe<AdminSite>;
   sites: Array<Maybe<Site>>;
-  users: Array<Maybe<User>>;
+  users: Array<Maybe<AdminUser>>;
   verified: AdminVerified;
   visitorsCount: Scalars['Int'];
 };
@@ -86,7 +86,7 @@ export type AdminBlogPostUpdateInput = {
   id: Scalars['ID'];
   metaDescription?: InputMaybe<Scalars['String']>;
   metaImage?: InputMaybe<Scalars['String']>;
-  scripts: Array<InputMaybe<Scalars['String']>>;
+  scripts?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   slug?: InputMaybe<Scalars['String']>;
   tags?: InputMaybe<Array<Scalars['String']>>;
   title?: InputMaybe<Scalars['String']>;
@@ -118,6 +118,156 @@ export type AdminRoles = {
   owners: Scalars['Int'];
 };
 
+export type AdminSite = {
+  __typename?: 'AdminSite';
+  activeUserCount: Scalars['Int'];
+  analytics: Analytics;
+  anonymiseFormInputs: Scalars['Boolean'];
+  billing?: Maybe<SiteBilling>;
+  browsers: Array<Maybe<Scalars['String']>>;
+  countries: Array<Maybe<RecordingsCountry>>;
+  createdAt: Scalars['ISO8601DateTime'];
+  cssSelectorBlacklist: Array<Maybe<Scalars['String']>>;
+  daysSinceLastRecording: Scalars['Int'];
+  domainBlacklist: Array<Maybe<SitesDomainBlacklist>>;
+  eventCapture: EventsCapture;
+  eventCounts: EventsCounts;
+  eventFeed: EventsFeed;
+  eventGroups: Array<Maybe<EventsGroup>>;
+  eventStats: Array<Maybe<EventsStat>>;
+  feedback?: Maybe<Feedback>;
+  heatmaps: Heatmaps;
+  id: Scalars['ID'];
+  ipBlacklist: Array<Maybe<SitesIpBlacklist>>;
+  languages: Array<Maybe<Scalars['String']>>;
+  magicErasureEnabled: Scalars['Boolean'];
+  name: Scalars['String'];
+  notes: Notes;
+  nps: Nps;
+  ownerName: Scalars['String'];
+  pageUrls: Array<Maybe<Scalars['String']>>;
+  plan?: Maybe<SitesPlan>;
+  recording?: Maybe<Recording>;
+  recordingCounts: AdminSiteRecordingsCounts;
+  recordingLatest?: Maybe<Recording>;
+  recordings: Recordings;
+  recordingsCount: Scalars['Int'];
+  referrers: Array<Maybe<Scalars['String']>>;
+  routes: Array<Maybe<Scalars['String']>>;
+  sentiment: Sentiment;
+  superuserAccessEnabled: Scalars['Boolean'];
+  tags: Array<Maybe<Tag>>;
+  team: Array<Team>;
+  updatedAt?: Maybe<Scalars['ISO8601DateTime']>;
+  url: Scalars['String'];
+  utmCampaigns: Array<Maybe<Scalars['String']>>;
+  utmContents: Array<Maybe<Scalars['String']>>;
+  utmMediums: Array<Maybe<Scalars['String']>>;
+  utmSources: Array<Maybe<Scalars['String']>>;
+  utmTerms: Array<Maybe<Scalars['String']>>;
+  uuid: Scalars['String'];
+  verifiedAt?: Maybe<Scalars['ISO8601DateTime']>;
+  visitor?: Maybe<Visitor>;
+  visitors: Visitors;
+};
+
+
+export type AdminSiteAnalyticsArgs = {
+  fromDate: Scalars['ISO8601Date'];
+  toDate: Scalars['ISO8601Date'];
+};
+
+
+export type AdminSiteEventCaptureArgs = {
+  page?: InputMaybe<Scalars['Int']>;
+  size?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<EventsCaptureSort>;
+};
+
+
+export type AdminSiteEventCountsArgs = {
+  captureIds?: Array<Scalars['ID']>;
+  fromDate: Scalars['ISO8601Date'];
+  groupIds?: Array<Scalars['ID']>;
+  toDate: Scalars['ISO8601Date'];
+};
+
+
+export type AdminSiteEventFeedArgs = {
+  captureIds: Array<Scalars['ID']>;
+  fromDate: Scalars['ISO8601Date'];
+  groupIds: Array<Scalars['ID']>;
+  page?: InputMaybe<Scalars['Int']>;
+  size?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<EventsFeedSort>;
+  toDate: Scalars['ISO8601Date'];
+};
+
+
+export type AdminSiteEventStatsArgs = {
+  captureIds?: Array<Scalars['ID']>;
+  fromDate: Scalars['ISO8601Date'];
+  groupIds?: Array<Scalars['ID']>;
+  toDate: Scalars['ISO8601Date'];
+};
+
+
+export type AdminSiteHeatmapsArgs = {
+  device?: HeatmapsDevice;
+  excludeRecordingIds?: InputMaybe<Array<Scalars['ID']>>;
+  fromDate: Scalars['ISO8601Date'];
+  page: Scalars['String'];
+  toDate: Scalars['ISO8601Date'];
+  type?: HeatmapsType;
+};
+
+
+export type AdminSiteNotesArgs = {
+  page?: InputMaybe<Scalars['Int']>;
+  size?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type AdminSiteNpsArgs = {
+  fromDate: Scalars['ISO8601Date'];
+  toDate: Scalars['ISO8601Date'];
+};
+
+
+export type AdminSiteRecordingArgs = {
+  recordingId: Scalars['ID'];
+};
+
+
+export type AdminSiteRecordingsArgs = {
+  filters?: InputMaybe<RecordingsFilters>;
+  fromDate: Scalars['ISO8601Date'];
+  page?: InputMaybe<Scalars['Int']>;
+  size?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<RecordingsSort>;
+  toDate: Scalars['ISO8601Date'];
+};
+
+
+export type AdminSiteSentimentArgs = {
+  fromDate: Scalars['ISO8601Date'];
+  toDate: Scalars['ISO8601Date'];
+};
+
+
+export type AdminSiteVisitorArgs = {
+  visitorId: Scalars['ID'];
+};
+
+
+export type AdminSiteVisitorsArgs = {
+  filters?: InputMaybe<VisitorsFilters>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  size?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<VisitorsSort>;
+};
+
 /** Autogenerated input type of AdminSiteAssociateCustomer */
 export type AdminSiteAssociateCustomerInput = {
   /** A unique identifier for the client performing the mutation. */
@@ -146,6 +296,31 @@ export type AdminSitePlanUpdateInput = {
   siteId: Scalars['ID'];
   ssoEnabled?: InputMaybe<Scalars['Boolean']>;
   support?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type AdminSiteRecordingsCounts = {
+  __typename?: 'AdminSiteRecordingsCounts';
+  deletedAll: Scalars['Int'];
+  deletedCurrentMonth: Scalars['Int'];
+  lockedAll: Scalars['Int'];
+  lockedCurrentMonth: Scalars['Int'];
+  totalAll: Scalars['Int'];
+  totalCurrentMonth: Scalars['Int'];
+};
+
+export type AdminUser = {
+  __typename?: 'AdminUser';
+  communication?: Maybe<UsersCommunication>;
+  createdAt: Scalars['ISO8601DateTime'];
+  email: Scalars['String'];
+  firstName?: Maybe<Scalars['String']>;
+  fullName?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  lastActivityAt?: Maybe<Scalars['ISO8601DateTime']>;
+  lastName?: Maybe<Scalars['String']>;
+  superuser: Scalars['Boolean'];
+  updatedAt?: Maybe<Scalars['ISO8601DateTime']>;
+  visitor?: Maybe<Visitor>;
 };
 
 /** Autogenerated input type of AdminUserDelete */
@@ -704,15 +879,32 @@ export type Feedback = {
   npsEnabled: Scalars['Boolean'];
   npsExcludedPages: Array<Maybe<Scalars['String']>>;
   npsFollowUpEnabled?: Maybe<Scalars['Boolean']>;
+  npsHideLogo: Scalars['Boolean'];
+  npsLanguages: Array<Maybe<Scalars['String']>>;
+  npsLanguagesDefault?: Maybe<Scalars['String']>;
   npsLayout?: Maybe<Scalars['String']>;
   npsPhrase?: Maybe<Scalars['String']>;
   npsSchedule?: Maybe<Scalars['String']>;
+  npsTranslations: Scalars['String'];
   sentimentAccentColor?: Maybe<Scalars['String']>;
   sentimentDevices: Array<Maybe<Scalars['String']>>;
   sentimentEnabled?: Maybe<Scalars['Boolean']>;
   sentimentExcludedPages: Array<Maybe<Scalars['String']>>;
+  sentimentHideLogo: Scalars['Boolean'];
   sentimentLayout?: Maybe<Scalars['String']>;
+  sentimentSchedule?: Maybe<Scalars['String']>;
 };
+
+
+export type FeedbackNpsTranslationsArgs = {
+  userLocale: Scalars['String'];
+};
+
+export enum FeedbackNpsGroup {
+  Detractor = 'Detractor',
+  Passive = 'Passive',
+  Promoter = 'Promoter'
+}
 
 export type FeedbackNpsGroups = {
   __typename?: 'FeedbackNpsGroups';
@@ -742,6 +934,11 @@ export type FeedbackNpsResponse = {
   __typename?: 'FeedbackNpsResponse';
   items: Array<Maybe<FeedbackNpsResponseItem>>;
   pagination: FeedbackNpsResponsePagination;
+};
+
+export type FeedbackNpsResponseFilters = {
+  followUpComment?: InputMaybe<Scalars['Boolean']>;
+  outcomeType?: InputMaybe<FeedbackNpsGroup>;
 };
 
 export type FeedbackNpsResponseItem = {
@@ -821,6 +1018,11 @@ export type FeedbackSentimentResponse = {
   pagination: FeedbackSentimentResponsePagination;
 };
 
+export type FeedbackSentimentResponseFilters = {
+  followUpComment?: InputMaybe<Scalars['Boolean']>;
+  rating?: InputMaybe<Scalars['Int']>;
+};
+
 export type FeedbackSentimentResponseItem = {
   __typename?: 'FeedbackSentimentResponseItem';
   comment?: Maybe<Scalars['String']>;
@@ -856,6 +1058,9 @@ export type FeedbackUpdateInput = {
   npsEnabled?: InputMaybe<Scalars['Boolean']>;
   npsExcludedPages?: InputMaybe<Array<Scalars['String']>>;
   npsFollowUpEnabled?: InputMaybe<Scalars['Boolean']>;
+  npsHideLogo?: InputMaybe<Scalars['Boolean']>;
+  npsLanguages?: InputMaybe<Array<Scalars['String']>>;
+  npsLanguagesDefault?: InputMaybe<Scalars['String']>;
   npsLayout?: InputMaybe<Scalars['String']>;
   npsPhrase?: InputMaybe<Scalars['String']>;
   npsSchedule?: InputMaybe<Scalars['String']>;
@@ -863,7 +1068,9 @@ export type FeedbackUpdateInput = {
   sentimentDevices?: InputMaybe<Array<Scalars['String']>>;
   sentimentEnabled?: InputMaybe<Scalars['Boolean']>;
   sentimentExcludedPages?: InputMaybe<Array<Scalars['String']>>;
+  sentimentHideLogo?: InputMaybe<Scalars['Boolean']>;
   sentimentLayout?: InputMaybe<Scalars['String']>;
+  sentimentSchedule?: InputMaybe<Scalars['String']>;
   siteId: Scalars['ID'];
 };
 
@@ -1011,6 +1218,8 @@ export type Mutation = {
   recordingViewed: Recording;
   recordingsDelete: Array<Recording>;
   recordingsViewed: Array<Recording>;
+  routesDelete: Site;
+  routesUpdate: Site;
   sentimentCreate: FiltersSuccess;
   sentimentDelete?: Maybe<FeedbackSentimentResponseItem>;
   siteCreate: Site;
@@ -1263,6 +1472,16 @@ export type MutationRecordingsViewedArgs = {
 };
 
 
+export type MutationRoutesDeleteArgs = {
+  input: SitesRoutesDeleteInput;
+};
+
+
+export type MutationRoutesUpdateArgs = {
+  input: SitesRoutesUpdateInput;
+};
+
+
 export type MutationSentimentCreateArgs = {
   input: SentimentCreateInput;
 };
@@ -1473,6 +1692,7 @@ export type Nps = {
 
 
 export type NpsResponsesArgs = {
+  filters?: InputMaybe<FeedbackNpsResponseFilters>;
   page?: InputMaybe<Scalars['Int']>;
   size?: InputMaybe<Scalars['Int']>;
   sort?: InputMaybe<FeedbackNpsResponseSort>;
@@ -1596,6 +1816,7 @@ export type QueryUserInvitationArgs = {
 
 export type Recording = {
   __typename?: 'Recording';
+  activityDuration?: Maybe<Scalars['BigInt']>;
   bookmarked: Scalars['Boolean'];
   connectedAt?: Maybe<Scalars['ISO8601DateTime']>;
   countryCode?: Maybe<Scalars['String']>;
@@ -1606,6 +1827,7 @@ export type Recording = {
   events: RecordingsEvents;
   exitPage: Scalars['String'];
   id: Scalars['ID'];
+  inactivity: Array<Maybe<Array<Scalars['BigInt']>>>;
   language: Scalars['String'];
   notes: Array<Maybe<Note>>;
   nps?: Maybe<FeedbackNpsResponseItem>;
@@ -1679,6 +1901,14 @@ export type RecordingsDevice = {
   viewportY: Scalars['Int'];
 };
 
+export type RecordingsEvent = {
+  __typename?: 'RecordingsEvent';
+  data: Scalars['String'];
+  id: Scalars['ID'];
+  timestamp: Scalars['BigInt'];
+  type: Scalars['Int'];
+};
+
 export type RecordingsEventPagination = {
   __typename?: 'RecordingsEventPagination';
   currentPage: Scalars['Int'];
@@ -1689,7 +1919,7 @@ export type RecordingsEventPagination = {
 
 export type RecordingsEvents = {
   __typename?: 'RecordingsEvents';
-  items: Array<Maybe<Scalars['String']>>;
+  items: Array<Maybe<RecordingsEvent>>;
   pagination: RecordingsEventPagination;
 };
 
@@ -1723,6 +1953,10 @@ export type RecordingsPagination = {
 };
 
 export enum RecordingsSort {
+  /** Least active recordings first */
+  ActivityAsc = 'activity__asc',
+  /** Most active recordings first */
+  ActivityDesc = 'activity__desc',
   /** Oldest recordings first */
   ConnectedAtAsc = 'connected_at__asc',
   /** Most recent recordings first */
@@ -1763,6 +1997,7 @@ export type Sentiment = {
 
 
 export type SentimentResponsesArgs = {
+  filters?: InputMaybe<FeedbackSentimentResponseFilters>;
   page?: InputMaybe<Scalars['Int']>;
   size?: InputMaybe<Scalars['Int']>;
   sort?: InputMaybe<FeedbackSentimentResponseSort>;
@@ -1821,6 +2056,7 @@ export type Site = {
   recordings: Recordings;
   recordingsCount: Scalars['Int'];
   referrers: Array<Maybe<Scalars['String']>>;
+  routes: Array<Maybe<Scalars['String']>>;
   sentiment: Sentiment;
   superuserAccessEnabled: Scalars['Boolean'];
   tags: Array<Maybe<Tag>>;
@@ -1937,6 +2173,7 @@ export type SiteVisitorsArgs = {
 
 export type SiteBilling = {
   __typename?: 'SiteBilling';
+  billingAddress?: Maybe<SitesBillingAddress>;
   billingEmail?: Maybe<Scalars['String']>;
   billingName?: Maybe<Scalars['String']>;
   cardNumber?: Maybe<Scalars['String']>;
@@ -1946,6 +2183,7 @@ export type SiteBilling = {
   expiry?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   status: SubscriptionsStatus;
+  taxIds: Array<Maybe<SitesTaxId>>;
   transactions: Array<Maybe<SubscriptionsTransaction>>;
 };
 
@@ -1953,6 +2191,16 @@ export type SiteSessionSettings = {
   __typename?: 'SiteSessionSettings';
   anonymiseFormInputs: Scalars['Boolean'];
   cssSelectorBlacklist: Array<Maybe<Scalars['String']>>;
+};
+
+export type SitesBillingAddress = {
+  __typename?: 'SitesBillingAddress';
+  city?: Maybe<Scalars['String']>;
+  country?: Maybe<Scalars['String']>;
+  line1?: Maybe<Scalars['String']>;
+  line2?: Maybe<Scalars['String']>;
+  postalCode?: Maybe<Scalars['String']>;
+  state?: Maybe<Scalars['String']>;
 };
 
 /** Autogenerated input type of SitesCreate */
@@ -2065,12 +2313,34 @@ export type SitesPlan = {
   visitorsLockedCount: Scalars['Int'];
 };
 
+/** Autogenerated input type of SitesRoutesDelete */
+export type SitesRoutesDeleteInput = {
+  /** A unique identifier for the client performing the mutation. */
+  clientMutationId?: InputMaybe<Scalars['String']>;
+  route: Scalars['String'];
+  siteId: Scalars['ID'];
+};
+
+/** Autogenerated input type of SitesRoutesUpdate */
+export type SitesRoutesUpdateInput = {
+  /** A unique identifier for the client performing the mutation. */
+  clientMutationId?: InputMaybe<Scalars['String']>;
+  routes: Array<InputMaybe<Scalars['String']>>;
+  siteId: Scalars['ID'];
+};
+
 /** Autogenerated input type of SitesSuperuserAccessUpdate */
 export type SitesSuperuserAccessUpdateInput = {
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: InputMaybe<Scalars['String']>;
   enabled: Scalars['Boolean'];
   siteId: Scalars['ID'];
+};
+
+export type SitesTaxId = {
+  __typename?: 'SitesTaxId';
+  type?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
 };
 
 /** Autogenerated input type of SitesUpdate */
@@ -2427,6 +2697,10 @@ export type VisitorsPagesCount = {
 };
 
 export enum VisitorsPagesSort {
+  /** Least amount of time on page */
+  AverageTimeOnPageAsc = 'average_time_on_page__asc',
+  /** Longest average duration */
+  AverageTimeOnPageDesc = 'average_time_on_page__desc',
   /** Least amount of views first */
   ViewsCountAsc = 'views_count__asc',
   /** Most amount of views first */

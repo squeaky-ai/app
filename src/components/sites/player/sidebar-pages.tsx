@@ -26,24 +26,28 @@ export const SidebarPages: FC<Props> = ({ recording, replayer }) => {
   };
 
   return (
-    <ul className='datarow pages'>
-      {Object.entries(groups).map(([path, pages]) => (
-        <li key={path} className={classnames({ open: open.includes(path) })}>
-          <div className='title' onClick={() => handleOpen(path)}>
-            <span className='path'>{path}</span>
-            <span className='count'>{pages.length}</span>
-          </div>
-          <div className='timestamps'>
-            {pages.map(page => (
-              <div key={page.id} className='event'>
-                <EventTimestamp offset={offset} timestamp={new Date(page.enteredAt).valueOf()} replayer={replayer} />
-                <Icon name='arrow-right-line' />
-                <EventTimestamp offset={offset} timestamp={new Date(page.exitedAt).valueOf()} replayer={replayer} />
-              </div>
-            ))}
-          </div>
-        </li>
-      ))}
-    </ul>
+    <>
+      <h5>Pages</h5>
+      <ul className='datarow pages'>
+        {Object.entries(groups).map(([path, pages]) => (
+          <li key={path} className={classnames({ open: open.includes(path) })}>
+            <div className='title' onClick={() => handleOpen(path)}>
+              <span className='path'>{path}</span>
+              <span className='count'>{pages.length}</span>
+              <Icon name='arrow-drop-down-line' />
+            </div>
+            <div className='timestamps'>
+              {pages.map(page => (
+                <div key={page.id} className='event'>
+                  <EventTimestamp offset={offset} timestamp={new Date(page.enteredAt).valueOf()} replayer={replayer} />
+                  <Icon name='arrow-right-line' />
+                  <EventTimestamp offset={offset} timestamp={new Date(page.exitedAt).valueOf()} replayer={replayer} />
+                </div>
+              ))}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 };

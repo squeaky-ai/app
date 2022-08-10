@@ -43,8 +43,13 @@ export const GET_RECORDING_QUERY = gql`
           enteredAt
           exitedAt
         }
-        events(size: 500) {
-          items
+        events(page: 1, size: 10) {
+          items {
+            id
+            type
+            data
+            timestamp
+          }
           pagination {
             perPage
             itemCount

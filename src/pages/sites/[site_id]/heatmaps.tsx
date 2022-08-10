@@ -36,7 +36,7 @@ const SitesHeatmaps: NextPage<ServerSideProps> = ({ user }) => {
             <BreadCrumbs site={site} items={[{ name: 'Heatmaps' }]} />
 
             <div className='heatmaps-heading'>
-              <h3 className='title'>Heatmaps</h3>
+              <h4 className='title'>Heatmaps</h4>
             </div>
 
             <EmptyState 

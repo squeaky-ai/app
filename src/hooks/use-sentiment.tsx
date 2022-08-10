@@ -3,13 +3,14 @@ import { useQuery } from '@apollo/client';
 import { GET_SENTIMENT_QUERY } from 'data/sentiment/queries';
 import { FeedbackSentimentResponseSort } from 'types/graphql';
 import type { TimeRange } from 'types/common';
-import type { Site, Sentiment } from 'types/graphql';
+import type { Site, Sentiment, FeedbackSentimentResponseFilters } from 'types/graphql';
 
 interface Props {
   page: number;
   size?: number;
   query?: string;
   sort?: FeedbackSentimentResponseSort;
+  filters: FeedbackSentimentResponseFilters;
   range: TimeRange;
 }
 
@@ -19,7 +20,7 @@ interface UseSentiment {
   sentiment: Sentiment;
 }
 
-export const useSentiment = ({ page, size, sort, range }: Props): UseSentiment => {
+export const useSentiment = ({ page, size, sort, filters, range }: Props): UseSentiment => {
   const router = useRouter();
 
   const { data, loading, error } = useQuery<{ site: Site }>(GET_SENTIMENT_QUERY, {
@@ -28,6 +29,7 @@ export const useSentiment = ({ page, size, sort, range }: Props): UseSentiment =
       page, 
       size,
       sort,
+      filters,
       ...range,
     }
   });

@@ -7,7 +7,6 @@ import { useRecording } from 'hooks/use-heatmaps';
 import { DeviceWidths } from 'data/common/constants';
 import { showClickMaps, showScrollMaps, iframeStyles, getElements } from 'lib/heatmaps';
 import { HeatmapsDevice } from 'types/graphql';
-import type { Event } from 'types/event';
 import type { HeatmapsDisplay } from 'types/heatmaps';
 import type { HeatmapsItem, HeatmapsType } from 'types/graphql';
 
@@ -27,7 +26,7 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, displ
   const [scale, setScale] = React.useState<number>(1);
   const [loading, setLoading] = React.useState<boolean>(true);
 
-  const { error, recording } = useRecording(recordingId);
+  const { error, recording, events } = useRecording(recordingId);
 
   const init = () => {
     if (!recording) return;
@@ -36,23 +35,21 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, displ
       destroy();
     }
 
-    const items: Event[] = recording.events.items.map(e => JSON.parse(e));
     const root = document.getElementById('heatmaps-page-wrapper');
 
-    if (items.length === 0) return;
+    if (events.length === 0) return;
 
     // Find where exactly this page is in the list, and try and find
     // a timestamp that is just before the user navigates away. This
     // should ensure that we have the complete page
-    const offset = new Date(items[0].timestamp).valueOf();
     const timestamp = recording.pages.find(p => p.url === page)?.exitedAt;
-    const location = new Date(timestamp).valueOf() - offset - 50;
+    const location = new Date(timestamp).valueOf() - events[0].timestamp - 50;
 
     if (!timestamp) {
       return destroy();
     }
 
-    replayer = new Replayer(items, {
+    replayer = new Replayer(events, {
       root,
       skipInactive: true,
       mouseTail: false,

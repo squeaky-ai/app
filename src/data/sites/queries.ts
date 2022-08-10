@@ -143,6 +143,18 @@ export const GET_BILLING_QUERY = gql`
         cardNumber
         billingName
         billingEmail
+        billingAddress {
+          city
+          country
+          line1
+          line2
+          postalCode
+          state
+        }
+        taxIds {
+          type
+          value
+        }
         transactions {
           id
           amount
@@ -183,6 +195,15 @@ export const GET_VERIFIED_AT_QUERY = gql`
     site(siteId: $siteId) {
       id
       verifiedAt
+    }
+  }
+`;
+
+export const GET_ROUTES_QUERY = gql`
+  query GetSiteRoutes($siteId: ID!) {
+    site(siteId: $siteId) {
+      id
+      routes
     }
   }
 `;

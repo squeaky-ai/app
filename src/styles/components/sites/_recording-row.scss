@@ -4,7 +4,7 @@
     border: none;
     color: var(--gray-150);
     display: inline-block;
-    font-size: 1.25rem;
+    font-size: var(--font-size-body-lg);
     margin-right: .5rem;
     padding: 0;
     vertical-align: middle;
@@ -20,13 +20,13 @@
 
   .pill {
     display: inline-block;
-    width: 70px;
+    width: 4.25rem;
   }
 
   .browser, 
   .browser-tooltip {
     display: block;
-    height: 1.5rem;
+    height: 1rem;
   }
 
   .direct {
@@ -43,9 +43,9 @@
   }
 
   .nps-score {
-    font-size: 16px;
+    font-size: var(--font-size-body);
     font-weight: var(--font-weight-bold);
-    line-height: 20px;
+    line-height: var(--line-height-body);
     margin: 0;
 
     &.blue {
@@ -59,6 +59,10 @@
     &.purple {
       color: var(--purple-500);
     }
+  }
+
+  .percent {
+    color: var(--gray-500);
   }
 
   .referrer {
@@ -76,28 +80,25 @@
   .start-exit-page {
     .item {
       display: flex;
-      margin-bottom: .25rem;
+      height: 1rem;
+      margin: 0;
       width: 100%;
-
-      &:last-of-type {
-        margin-bottom: 0;
-      }
 
       div {
         &:first-of-type {
           color: var(--gray-200);
           margin-right: .5rem;
-          width: 70px;
+          width: 58px;
         }
 
         &:last-of-type {
-          width: calc(100% - 78px);
+          width: calc(100% - 66px);
           
           .tooltip {
             width: 100%;
 
             .button {
-              line-height: 20px;
+              line-height: var(--line-height-body);
               overflow: hidden;
               text-align: left;
               text-overflow: ellipsis;
@@ -119,7 +120,7 @@
       display: flex;
       height: 2rem;
       flex-shrink: 0;
-      font-size: 1.25rem;
+      font-size: var(--font-size-body-lg);
       justify-content: center;
       padding: 0;
       width: 2rem;
@@ -136,6 +137,6 @@
   }
 
   .visitor-starred {
-    font-size: 1.25rem;
+    font-size: var(--font-size-body-lg);
   }
 }

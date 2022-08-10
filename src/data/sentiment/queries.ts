@@ -1,11 +1,19 @@
 import { gql } from '@apollo/client';
 
 export const GET_SENTIMENT_QUERY = gql`
-  query GetSentiment($siteId: ID!, $page: Int!, $size: Int!, $sort: FeedbackSentimentResponseSort!, $fromDate: ISO8601Date!, $toDate: ISO8601Date!) {
+  query GetSentiment(
+    $siteId: ID!,
+    $page: Int!,
+    $size: Int!,
+    $filters: FeedbackSentimentResponseFilters,
+    $sort: FeedbackSentimentResponseSort!,
+    $fromDate: ISO8601Date!,
+    $toDate: ISO8601Date!
+  ) {
     site(siteId: $siteId) {
       id
       sentiment(fromDate: $fromDate, toDate: $toDate) {
-        responses(page: $page, size: $size, sort: $sort) {
+        responses(page: $page, size: $size, sort: $sort, filters: $filters) {
           items {
             id
             score

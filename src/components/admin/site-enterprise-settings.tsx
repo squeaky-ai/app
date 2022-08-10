@@ -11,10 +11,10 @@ import { TextArea } from 'components/textarea';
 import { Button } from 'components/button';
 import { useToasts } from 'hooks/use-toasts';
 import { adminSitePlanUpdate } from 'lib/api/graphql';
-import type { Site } from 'types/graphql';
+import type { AdminSite } from 'types/graphql';
 
 interface Props {
-  site: Site;
+  site: AdminSite;
 }
 
 const PlanSchema = Yup.object().shape({

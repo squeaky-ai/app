@@ -14,7 +14,7 @@
 
       i {
         color: var(--blue-500);
-        font-size: 1.25rem;
+        font-size: var(--font-size-body-lg);
         margin-right: .75rem;
       }
     }
@@ -40,13 +40,13 @@
       border-radius: var(--border-radius-md);
       color: var(--blue-500);
       display: none;
-      font-size: 13px;
+      font-size: var(--font-size-body-sm);
       height: 2.5rem;
-      line-height: 20px;
+      line-height: var(--line-height-body-sm);
       padding: 0 1rem;
 
       i {
-        font-size: 16px;
+        font-size: var(--font-size-body);
       }
 
       @include breakpoint-md {

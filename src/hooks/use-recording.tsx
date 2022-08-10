@@ -1,14 +1,16 @@
 import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { GET_RECORDING_QUERY, GET_RECORDING_EVENTS_QUERY } from 'data/recordings/queries';
-import type { Site } from 'types/graphql';
-import type { Recording, RecordingsEvents } from 'types/graphql';
+import { parseRecordingEvents } from 'lib/events';
+import type { Event } from 'types/event';
+import type { Site, Recording } from 'types/graphql';
 
 interface UseRecording {
   loading: boolean;
   error: boolean;
   recording: Recording | null;
-  fetchMoreEvents: (eventPage: number) => Promise<RecordingsEvents>;
+  events: Event[];
+  fetchMoreEvents: (eventPage: number) => Promise<Event[]>;
 }
 
 export const useRecording = (id?: string): UseRecording => {
@@ -34,15 +36,16 @@ export const useRecording = (id?: string): UseRecording => {
       }
     });
 
-    return data.site.recording.events;
+    return parseRecordingEvents(data.site.recording.events.items);
   };
 
   return {
     loading, 
     error: !!error,
     recording: data 
-      ? data.site.recording 
+      ? data.site.recording
       : null,
-      fetchMoreEvents
+    events: data ? parseRecordingEvents(data.site.recording.events.items) : [],
+    fetchMoreEvents
   };
 };

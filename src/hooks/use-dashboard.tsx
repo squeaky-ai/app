@@ -1,9 +1,10 @@
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_DASHBOARD_QUERY } from 'data/dashboard/queries';
-import type { Site } from 'types/graphql';
-import type { Dashboard } from 'types/dashboard';
+import { parseRecordingEvents } from 'lib/events';
 import type { TimeRange } from 'types/common';
+import type { Event } from 'types/event';
+import type { Site, Analytics, Recording, Notes } from 'types/graphql';
 
 interface Props {
   range: TimeRange;
@@ -12,7 +13,10 @@ interface Props {
 interface UseDashboard {
   loading: boolean;
   error: boolean;
-  dashboard: Dashboard;
+  notes: Pick<Notes, 'items'>;
+  analytics: Pick<Analytics, 'visitorsCount' | 'pageViewCount' | 'recordingsCount'>;
+  recordingLatest: Recording | null;
+  recordingLatestEvents: Event[];
 }
 
 export const useDashboard = (props: Props): UseDashboard => {
@@ -25,27 +29,12 @@ export const useDashboard = (props: Props): UseDashboard => {
     }
   });
 
-  const fallback: Dashboard = {
-    notes: {
-      items: []
-    },
-    analytics: {
-      visitorsCount: {
-        total: 0,
-        new: 0,
-      },
-      pageViewCount: 0,
-      recordingsCount: {
-        total: 0,
-        new: 0,
-      },
-    },
-    recordingLatest: null,
-  };
-
   return {
     loading,
     error: !!error,
-    dashboard: (data ? data.site : fallback) as Dashboard
+    notes: data ? data.site.notes : null,
+    analytics: data ? data.site.analytics : null,
+    recordingLatest: data ? data.site.recordingLatest : null,
+    recordingLatestEvents: data ? parseRecordingEvents(data.site.recordingLatest.events.items) : [],
   };
 };

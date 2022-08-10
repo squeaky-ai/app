@@ -1,4 +1,5 @@
 import type { Column } from 'types/common';
+import type { FeedbackSentimentResponseFilters } from 'types/graphql';
 
 export const COLUMNS: Column[] = [
   {
@@ -45,7 +46,7 @@ export const COLUMNS: Column[] = [
   },
   {
     label: 'Options',
-    width: '70px',
+    width: '64px',
     disabled: false,
     position: 8,
   },
@@ -59,3 +60,8 @@ export const DEFAULT_COLUMNS = COLUMNS.filter(c => [
   'Follow-up response', 
   'Options',
 ].includes(c.label));
+
+export const FILTERS: FeedbackSentimentResponseFilters = {
+  followUpComment: null,
+  rating: null,
+};

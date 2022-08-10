@@ -3,13 +3,14 @@ import { useQuery } from '@apollo/client';
 import { GET_NPS_QUERY } from 'data/nps/queries';
 import { FeedbackNpsResponseSort } from 'types/graphql';
 import type { TimeRange } from 'types/common';
-import type { Site, Nps } from 'types/graphql';
+import type { FeedbackNpsResponseFilters, Site, Nps } from 'types/graphql';
 
 interface Props {
   page: number;
   size?: number;
   query?: string;
   sort?: FeedbackNpsResponseSort;
+  filters: FeedbackNpsResponseFilters;
   range: TimeRange;
 }
 
@@ -19,7 +20,7 @@ interface UseNps {
   nps: Nps;
 }
 
-export const useNps = ({ page, size, sort, range }: Props): UseNps => {
+export const useNps = ({ page, size, sort, filters, range }: Props): UseNps => {
   const router = useRouter();
 
   const { data, loading, error } = useQuery<{ site: Site }>(GET_NPS_QUERY, {
@@ -28,6 +29,7 @@ export const useNps = ({ page, size, sort, range }: Props): UseNps => {
       page, 
       size,
       sort,
+      filters,
       ...range,
     }
   });

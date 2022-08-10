@@ -7,10 +7,10 @@
     border: 1px solid var(--gray-200);
     border-radius: var(--border-radius-md);
     color: var(--body-color);
-    font-size: 16px;
+    font-size: var(--font-size-body);
     font-weight: var(--font-weight-normal);
-    height: 40px;
-    line-height: 24px;
+    height: 2rem;
+    line-height: var(--line-height-body);
     margin: 0;
     overflow: hidden;
     padding: .35rem 2rem .35rem .75rem;
@@ -26,14 +26,13 @@
 
     .icon {
       display: flex;
-      height: 2rem;
-      font-size: 2rem;
-      line-height: 2.2rem;
+      height: 30px;
+      font-size: 1.5rem;
       pointer-events: none;
       position: absolute;
-      right: .25rem;
-      top: .15rem;
-      width: 2rem;
+      right: 0;
+      top: 0.3rem;
+      width: 30px;
     }
   }
 
@@ -70,9 +69,9 @@
         border-radius: var(--border-radius-md);
         color: var(--gray-blue-700);
         display: block;
-        font-size: 13px;
+        font-size: var(--font-size-body);
         font-weight: var(--font-weight-normal);
-        line-height: 16px;
+        line-height: var(--line-height-body);
         overflow: hidden;
         padding: .35rem .75rem;
         user-select: none;

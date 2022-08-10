@@ -39,9 +39,9 @@ const AdminBlogCreate: NextPage<ServerSideProps> = () => {
       <Main>
         <BreadCrumbs items={[{ name: 'Admin', href: '/__admin/dashboard' }, { name: 'Blog', href: '/__admin/blog' }, { name: 'Create' }]} />
 
-        <h3 className='title'>
+        <h4 className='title'>
           Create Post
-        </h3>
+        </h4>
 
         {loading && (
           <PageLoading />

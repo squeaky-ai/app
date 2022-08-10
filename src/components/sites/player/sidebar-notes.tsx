@@ -70,14 +70,18 @@ export const SidebarNotes: FC<Props> = ({ recording, replayer }) => {
 
   return (
     <>
+      <h5>
+        Notes
+        {notes.length > 0 && (
+          <Button className='secondary create-note' onClick={openModal}>+ Add Note</Button>
+        )}
+      </h5>
       <div className={classnames('notes', { empty: notes.length === 0 })}>
         <div className='create-state'>
           <p>There are no notes for this recording</p>
           <Button className='secondary' onClick={openModal}>+ Add Note</Button>
         </div>
         <div className='note-state'>
-          <Button className='secondary create-note' onClick={openModal}>+ Add Note</Button>
-
           {notes.map(note => (
             <Note 
               key={note.id} 

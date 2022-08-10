@@ -1,152 +1,88 @@
 .controls {
   align-items: center;
   display: flex;
-  height: 80px;
+  grid-area: footer;
   justify-content: space-between;
   position: relative;
-  width: 100%;
 
-  .control-group {
+  .slider {
+    width: 100%;
+  }
+
+  .timestamps {
+    color: var(--gray-500);
+    flex-shrink: 0;
+    font-size: var(--font-size-body-sm);
+    line-height: var(--line-height-body-sm);
+    margin: 0 0 0 2rem;
+    white-space: nowrap;
+    width: 128px;
+  }
+
+  .speed {
     align-items: center;
-    background: var(--gray-100);
+    background: none;
+    border: none;
+    border-radius: var(--border-radius-o);
     display: flex;
-    padding: 1.25rem 2rem;
-    position: relative;
-    z-index: 3;
+    height: 2.5rem;
+    justify-content: center;
+    margin-left: .5rem;
+    padding: 0;
+    width: 2.5rem;
 
-    &:first-of-type,
-    &:last-of-type {
-      width: 18.5rem;
+    &:hover {
+      background: var(--white);
     }
 
-    &:nth-of-type(2) {
-      flex: 1;
-      justify-content: center;
-    }
-
-    &:last-of-type {
-      transition: transform .3s ease-in-out;
-    }
-
-    .control {
-      align-items: center;
-      background: none;
-      border: none;
-      border-radius: var(--border-radius-o);
-      display: flex;
-      height: 2.5rem;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-right: .55rem;
-      padding: 0;
-      position: relative;
-      width: 2.5rem;
-
-      i {
-        color: var(--gray-500);
-        font-size: 1.5rem;
-      }
-
-      &:hover {
-        background: var(--white);
-
-        i {
-          color: var(--gray-blue-800);
-        }
-      }
-
-      &:last-of-type {
-        margin-right: 0;
-      }
-
-      &::before {
-        background: var(--blue-500);
-        content: ' ';
+    .icon {
+      font-size: var(--font-size-body-xxl);
+      
+      &:not(.skip) {
         display: none;
-        height: 3px;
-        left: 0;
-        position: absolute;
-        top: -22px;
-        width: 100%;
-      }
-
-      &.incomplete {
-        .icon {
-          color: var(--rose-500);
-        }
-      }
-
-      &.active {
-        i {
-          color: var(--blue-500);
-        }
-
-        &::before {
-          display: block;
-        }
-      }
-    }
-
-    .zoom-level {
-      margin: 0 .25rem 0 0;
-    }
-
-    .slider {
-      width: 400px;
-    }
-
-    .timestamps {
-      color: var(--gray-500);
-      font-size: 13px;
-      line-height: 20px;
-      margin-left: 1rem;
-      white-space: nowrap;
-      width: 128px;
-    }
-
-    .speed {
-      align-items: center;
-      background: none;
-      border: none;
-      border-radius: var(--border-radius-o);
-      display: flex;
-      height: 2.5rem;
-      justify-content: center;
-      margin-left: .5rem;
-      padding: 0;
-      width: 2.5rem;
-
-      &:hover {
-        background: var(--white);
-      }
-
-      i {
-        font-size: 1.25rem;
-        
-        &:not(.skip) {
-          display: none;
-        }
       }
     }
   }
 
-  &.active {
-    .control-group:first-of-type {
-      width: auto;
+  .play-pause {
+    align-items: center;
+    background: none;
+    border: none;
+    border-radius: var(--border-radius-controls);
+    display: flex;
+    flex-shrink: 0;
+    height: 2rem;
+    margin: 0 1rem;
+    width: 2rem;
+
+    .icon {
+      font-size: var(--font-size-body-xxl);
     }
 
-    .control-group:last-of-type {
+    &:hover {
       background: var(--white);
-      border-left: 1px solid var(--gray-150);
-      position: absolute;
-      right: -18.5rem;
+    }
+  }
+  
+  .speed-wrapper {
+    flex-shrink: 0;
+    height: 2rem;
+    margin: 0 1rem;
+    width: 2rem;
+
+    & > .button {
+      border-radius: var(--border-radius-controls);
+      height: 2rem;
+      margin: 0;
+      padding: 0;
+      width: 2rem;
     }
   }
 }
 
-.dropdown-menu.playback-speed-menu {
-  margin: -1rem 0 0 -4.5rem;
+.dropdown-menu.playback-speed-menu.up {
   padding: 1.5rem;
+  transform: translate(-168px, calc(-100% - 1rem));
   width: 200px;
 
   .label:last-of-type {

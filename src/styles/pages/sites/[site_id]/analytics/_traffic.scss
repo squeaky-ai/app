@@ -93,10 +93,6 @@
         width: 100%;
         white-space: nowrap;
       }
-
-      .row {
-        height: 3rem;
-      }
     }
 
     .grid-item {
@@ -140,8 +136,8 @@
               color: var(--white);
               content: attr(data-label);
               display: none;
-              font-size: 13px;
-              line-height: 20px;
+              font-size: var(--font-size-body-sm);
+              line-height: var(--line-height-body-sm);
               left: 2rem;
               padding: .25rem .5rem;
               position: absolute;
@@ -163,8 +159,9 @@
             align-items: center;
             background: none;
             display: inline-flex;
-            font-size: 12px;
+            font-size: var(--font-size-body-sm);
             font-weight: var(--font-weight-normal);
+            line-height: var(--line-height-body-sm);
             margin: 0;
             padding: 0;
   
@@ -180,9 +177,9 @@
 
         .time-averages {
           p {
-            font-size: 13px;
+            font-size: var(--font-size-body-sm);
             font-weight: var(--font-weight-bold);
-            line-height: 16px;
+            line-height: var(--line-height-body-sm);
             margin: 0 0 .75rem 0;
           }
 
@@ -193,7 +190,7 @@
             margin: 0 0 2.5rem 0;
 
             .icon {
-              font-size: 1.25rem;
+              font-size: var(--font-size-body-lg);
               margin: 0 .5rem 0 0;
             }
 

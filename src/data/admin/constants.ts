@@ -20,34 +20,40 @@ export const USER_COLUMNS: Column[] = [
     position: 3,
   },
   {
+    label: 'Visitor',
+    width: '1fr',
+    disabled: false,
+    position: 4,
+  },
+  {
     label: 'Superuser',
     width: '140px',
     disabled: false,
-    position: 4,
+    position: 5,
   },
   {
     label: 'Sites',
     width: '1fr',
     disabled: false,
-    position: 5,
+    position: 6,
   },
   {
     label: 'Created At',
     width: '1fr',
     disabled: false,
-    position: 6,
+    position: 7,
   },
   {
     label: 'Last Activity At',
     width: '1fr',
     disabled: false,
-    position: 7,
+    position: 8,
   },
   {
     label: 'Options',
-    width: '70px',
+    width: '64px',
     disabled: false,
-    position: 8,
+    position: 9,
   },
 ];
 
@@ -120,7 +126,7 @@ export const SITE_COLUMNS: Column[] = [
   },
   {
     label: 'Options',
-    width: '70px',
+    width: '64px',
     disabled: false,
     position: 12,
   },
@@ -130,6 +136,7 @@ export const DEFAULT_USER_COLUMNS = USER_COLUMNS.filter(c => [
   'ID', 
   'Name',
   'Email',
+  'Visitor',
   'Superuser',
   'Sites',
   'Created At',

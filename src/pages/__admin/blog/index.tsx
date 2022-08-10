@@ -25,12 +25,12 @@ const AdminBlog: NextPage<ServerSideProps> = () => {
 
         <div className='admin-header'>
           <div className='search'>
-            <h3 className='title'>
+            <h4 className='title'>
               Blog
               <Link href='/__admin/blog/create'>
                 <a className='button link'>+ New Post</a>
               </Link>
-            </h3>
+            </h4>
           </div>
         </div>
 
@@ -63,7 +63,7 @@ const AdminBlog: NextPage<ServerSideProps> = () => {
                     <Cell>{post.category}</Cell>
                     <Cell>{post.tags.join(', ')}</Cell>
                     <Cell className='author'>
-                      <img src={post.author.image} height={24} width={24} />
+                      <img src={post.author.image} height={24} width={24} alt={`Image of the author ${post.author.name}`} />
                       {post.author.name}
                     </Cell>
                     <Cell>

@@ -1,19 +1,23 @@
 import React from 'react';
 import type { FC } from 'react';
+import classnames from 'classnames';
 import { startCase, last } from 'lodash';
 import { Icon } from 'components/icon';
 import { Pill } from 'components/pill';
 import { SiteEnterpriseUpgrade } from 'components/admin/site-enterprise-upgrade';
 import { toddMMYYY } from 'lib/dates';
 import { CURRENCY_SYMBOLS } from 'data/common/constants';
+import { Message } from 'components/message';
 import { toDecimalCurrency } from 'lib/currency';
-import type { Site } from 'types/graphql';
+import type { AdminSite, SitesBillingAddress } from 'types/graphql';
 
 interface Props {
-  site: Site;
+  site: AdminSite;
   isEnterprise: boolean;
   hasBilling: boolean;
 }
+
+const addressFields: Array<keyof SitesBillingAddress> = ['line1', 'line2', 'city', 'state', 'postalCode', 'country'];
 
 export const SiteSubscription: FC<Props> = ({ site, isEnterprise, hasBilling }) => {
   const latestTransaction = last(site?.billing?.transactions);
@@ -25,6 +29,14 @@ export const SiteSubscription: FC<Props> = ({ site, isEnterprise, hasBilling }) 
           <Icon name='price-tag-3-line' />
           Subscription
         </h5>
+
+        {site.plan?.tier > 0 && !hasBilling && (
+          <Message
+            type='warning'
+            message='This site has been manually placed on a paid tier'
+          />
+        )}
+
         <div className='row'>
           <span>Plan</span>
           <span>
@@ -100,9 +112,26 @@ export const SiteSubscription: FC<Props> = ({ site, isEnterprise, hasBilling }) 
             }
           </span>
         </div>
+        <div className={classnames('row address', { 'has-address': hasBilling && site.billing?.billingAddress })}>
+          <span>Address</span>
+          <span>
+            {hasBilling && site.billing?.billingAddress
+              ? addressFields.map((x, i) => {
+                  const value = site.billing.billingAddress[x];
+                  return <span key={i}>{value ? <>{value}<br /></> : null}</span>
+                })
+              : '-'
+            }
+          </span>
+        </div>
         <div className='row'>
           <span>VAT/GST Number</span>
-          <span>-</span>
+          <span>
+            {hasBilling
+              ? site.billing.taxIds.map(t => t.value).join(', ')
+              : '-'
+            }
+          </span>
         </div>
         <h5>
           <Icon name='bank-card-2-line' />

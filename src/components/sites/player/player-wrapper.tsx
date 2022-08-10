@@ -6,26 +6,29 @@ import { Page } from 'components/sites/page';
 import { Player } from 'components/sites/player/player';
 import { Header } from 'components/header';
 import { Spinner } from 'components/spinner';
-import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { PlayerActions } from 'components/sites/player/player-actions';
+import { PlayerClose } from 'components/sites/player/player-close';
 import { PlayerDetails } from 'components/sites/player/player-details';
 import { PlayerFooter } from 'components/sites/player/player-footer';
+import { PlayerSidebar } from 'components/sites/player/player-sidebar';
 import { Error } from 'components/error';
 import { PlayerState, PlayerStatus } from 'types/player';
-import type { User, Recording, RecordingsEvents } from 'types/graphql';
+import type { User, Recording } from 'types/graphql';
 import type { Action } from 'types/player';
+import type { Event } from 'types/event';
 
 interface Props {
   user: User;
   state: PlayerState;
+  events: Event[];
   recording: Recording;
   dispatch: React.Dispatch<Action>;
-  fetchMoreEvents: (eventPage: number) => Promise<RecordingsEvents>;
+  fetchMoreEvents: (eventPage: number) => Promise<Event[]>;
 }
 
 let nextPageTimer: NodeJS.Timer;
 
-export const PlayerWrapper: FC<Props> = ({ user, state, recording, dispatch, fetchMoreEvents }) => {
+export const PlayerWrapper: FC<Props> = ({ user, state, recording, events, dispatch, fetchMoreEvents }) => {
   const router = useRouter();
   const ref = React.useRef<Player>(null);
 
@@ -39,11 +42,14 @@ export const PlayerWrapper: FC<Props> = ({ user, state, recording, dispatch, fet
       // replayer. There's no need to manage the events as 
       // part of the recording as the InMemoryCache will take
       // care of it
-      const { items } = await fetchMoreEvents(page);
-      items.forEach((e) => ref.current.replayer.addEvent(JSON.parse(e)));
+      const items = await fetchMoreEvents(page);
+      items.forEach((e) => ref.current.replayer.addEvent(e));
 
-      // // Start replaying now that there is more stuff to show
-      ref.current.replayer.play(ref.current.replayer.getCurrentTime());
+      // Start replaying now that there is more stuff to show
+      const position = ref.current.replayer.getCurrentTime();
+      const shouldResume = ref.current.replayer.service.state.value === 'playing' || state.status === PlayerStatus.LOADING;
+      ref.current.replayer.pause(position)
+      if (shouldResume) ref.current.replayer.play(position);
 
       // Recursively call it again, if it's been exceeded then
       // it will return early
@@ -83,13 +89,9 @@ export const PlayerWrapper: FC<Props> = ({ user, state, recording, dispatch, fet
         {({ site, member }) => (
           <>
             <Header className='site-header'>
-              <BreadCrumbs 
-                site={site} 
-                items={[{ name: 'Recordings', href: `/sites/${site.id}/recordings` }]} 
-              />
-
-              <PlayerDetails recording={recording} />
               <PlayerActions site={site} member={member} recording={recording} />
+              <PlayerDetails recording={recording} />
+              <PlayerClose site={site} />
             </Header>
 
             {!recording && (
@@ -99,23 +101,33 @@ export const PlayerWrapper: FC<Props> = ({ user, state, recording, dispatch, fet
             )}
             
             {!!recording && (
-              <Player
-                key={`player-${recording.id}`} 
-                ref={ref}
-                site={site}
-                state={state}
-                recording={recording}
-                dispatch={dispatch}
-              />
+              <>
+                <PlayerSidebar 
+                  state={state}
+                  site={site}
+                  replayer={ref.current?.replayer} 
+                  events={events}
+                  recording={recording}
+                  dispatch={dispatch}
+                />
+                <Player
+                  key={`player-${recording.id}`} 
+                  ref={ref}
+                  site={site}
+                  state={state}
+                  events={events}
+                  recording={recording}
+                  dispatch={dispatch}
+                />
+                <PlayerFooter
+                  state={state}
+                  replayer={ref.current?.replayer}
+                  events={events}
+                  recording={recording}
+                  dispatch={dispatch}
+                />
+              </>
             )}
-
-            <PlayerFooter
-              state={state}
-              site={site}
-              replayer={ref.current?.replayer}
-              recording={recording}
-              dispatch={dispatch}
-            />
           </>
         )}
       </Page>

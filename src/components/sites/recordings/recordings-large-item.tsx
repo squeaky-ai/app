@@ -18,6 +18,7 @@ import { Emoji, EmojiType } from 'components/emoji';
 import { toNiceDate, toTimeString } from 'lib/dates';
 import { getLinkedData } from 'lib/visitors';
 import { npsColor } from 'lib/feedback';
+import { percentage } from 'lib/maths';
 import type { ExternalAttributes } from 'types/visitors';
 import type { Site, Recording, Team } from 'types/graphql';
 
@@ -81,6 +82,12 @@ export const RecordingsLargeItem: FC<Props> = ({ site, recording, style, member,
         {toTimeString(recording.duration)}
       </Cell>
       <Cell>
+        {recording.activityDuration && (
+          <>{toTimeString(recording.activityDuration || 0)} <i className='percent'>({percentage(recording.duration, recording.activityDuration)}%)</i></>
+        )}
+        {!recording.activityDuration && '-'}
+      </Cell>
+      <Cell>
         <Tooltip button={recording.pageCount} buttonClassName='link'>
           <ul className='tooltip-list'>
             {recording.pageViews.map((page, i) => (
@@ -132,7 +139,7 @@ export const RecordingsLargeItem: FC<Props> = ({ site, recording, style, member,
         {!recording.countryCode && '-'}
       </Cell>
       <Cell>
-        <Tooltip positionX='right' className='browser-tooltip' button={<Browser name={recording.device.browserName} height={24} width={24} />}>
+        <Tooltip positionX='right' className='browser-tooltip' button={<Browser name={recording.device.browserName} height={16} width={16} />}>
           {recording.device.browserDetails}
         </Tooltip>
       </Cell>
@@ -145,7 +152,7 @@ export const RecordingsLargeItem: FC<Props> = ({ site, recording, style, member,
       <Cell>
         {!!recording.sentiment && (
           <div className='emoji'>
-            <Emoji height={24} width={24} emoji={`emoji-${recording.sentiment.score + 1}` as EmojiType} />
+            <Emoji height={16} width={16} emoji={`emoji-${recording.sentiment.score + 1}` as EmojiType} />
           </div>
         )}
 

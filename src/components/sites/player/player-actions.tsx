@@ -9,7 +9,6 @@ import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'compo
 import { RecordingsShare } from 'components/sites/recordings/recordings-share';
 import { recordingDelete, recordingBookmarked } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
-import { useHistory } from 'hooks/use-history';
 import { Preferences, Preference } from 'lib/preferences';
 import type { Recording, Site, Team } from 'types/graphql';
 
@@ -22,7 +21,6 @@ interface Props {
 export const PlayerActions: FC<Props> = ({ site, recording, member }) => {
   const toast = useToasts();
   const router = useRouter();
-  const { history } = useHistory();
   const ref = React.useRef<Modal>();
   const [skipDeleteModal, setSkipDeleteModal] = React.useState<boolean>(false);
 
@@ -32,14 +30,6 @@ export const PlayerActions: FC<Props> = ({ site, recording, member }) => {
 
   const closeModal = () => {
     if (ref.current) ref.current.hide();
-  };
-
-  const onBackButton = () => {
-    // The last url will be the current one,
-    // so go back one further
-    const prevRoute = history[history.length - 2];
-
-    router.push(prevRoute?.path || `/sites/${site.id}/recordings`);
   };
 
   const deleteRecording = async () => {
@@ -99,9 +89,6 @@ export const PlayerActions: FC<Props> = ({ site, recording, member }) => {
         />
         <Button onClick={handleDeleteClick} disabled={!recording}>
           <Icon name='delete-bin-line' />
-        </Button>
-        <Button className='close' onClick={onBackButton}>
-          <Icon name='close-line' />
         </Button>
       </div>
 

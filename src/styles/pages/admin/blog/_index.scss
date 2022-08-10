@@ -24,7 +24,7 @@
     min-width: 1024px;
 
     .row {
-      grid-template-columns: 60px 1fr 1fr 1fr 1fr 100px  1fr 1fr;
+      grid-template-columns: 60px 1fr 1fr 1fr 1fr 100px 1fr 1fr;
     }
 
     .author {
@@ -42,7 +42,7 @@
     background: var(--gray-blue-800);
     color: var(--white);
     font-family: 'Monaco', 'Consolas' 'Courier New', monospace;
-    font-size: 16px;
-    line-height: 24px;
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-body);
   }
 }

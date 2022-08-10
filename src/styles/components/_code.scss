@@ -4,11 +4,6 @@
   display: inline-block;
   padding: .05rem .25rem;
 
-  @include breakpoint-md {
-    font-size: 13px;
-    line-height: 20px;
-  }
-
   &.block {
     background: var(--white);
     border-radius: var(--border-radius-md);
@@ -17,13 +12,6 @@
     overflow: hidden;
     padding: 0;
     width: 100%;
-
-    @include breakpoint-md {
-      code {
-        font-size: 13px;
-        line-height: 20px;
-      }
-    }
 
     &.simple {
       padding: 1rem;

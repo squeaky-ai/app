@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import classnames from 'classnames';
 import { useRouter } from 'next/router';
 import { startCase, last } from 'lodash';
 import { Button } from 'components/button';
@@ -9,13 +10,15 @@ import { CURRENCY_SYMBOLS } from 'data/common/constants';
 import { Transactions } from 'components/sites/settings/transactions';
 import { BillingPortalButton } from 'components/sites/settings/billing-portal-button';
 import type { Billing } from 'types/billing';
-import type { Site } from 'types/graphql';
+import type { Site, SitesBillingAddress } from 'types/graphql';
 
 interface Props {
   site: Site;
   billing: Billing;
   hasBilling: boolean;
 }
+
+const addressFields: Array<keyof SitesBillingAddress> = ['line1', 'line2', 'city', 'state', 'postalCode', 'country'];
 
 const getIntervalName = (interval: string) => {
   switch(interval) {
@@ -79,6 +82,37 @@ export const BillingTable: FC<Props> = ({ site, billing, hasBilling }) => {
                   ? `${startCase(billing.billing.cardType)} ending in ${billing.billing.cardNumber}`
                   : '-'
                 } 
+              </Cell>
+              <Cell>
+                <BillingPortalButton site={site} buttonClassName='link' />
+              </Cell>
+            </Row>
+            <Row className={classnames('address', { 'has-address': !!billing.billing.billingAddress })}>
+              <Cell><b>Address</b></Cell>
+              <Cell>
+                {billing.billing.billingAddress
+                  ? (
+                    <p>
+                      {addressFields.map((x, i) => {
+                        const value = billing.billing.billingAddress[x];
+                        return <span key={i}>{value ? <>{value}<br /></> : null}</span>
+                      })}
+                    </p>
+                  )
+                  : '-'
+                }
+              </Cell>
+              <Cell>
+                <BillingPortalButton site={site} buttonClassName='link' />
+              </Cell>
+            </Row>
+            <Row>
+              <Cell><b>VAT/GST number</b></Cell>
+              <Cell>
+                {billing.billing.taxIds?.length
+                  ? billing.billing.taxIds.map(t => t.value).join(', ')
+                  : '-'
+                }
               </Cell>
               <Cell>
                 <BillingPortalButton site={site} buttonClassName='link' />

@@ -8,9 +8,20 @@ import { TextArea } from 'components/textarea';
 import { Logo } from 'components/logo';
 import { Label } from 'components/label';
 import type { Feedback } from 'types/graphql';
+import type { SupportedLanguages } from 'types/translations';
 
 interface Props {
-  feedback: Omit<Feedback, 'id' | 'npsEnabled' | 'sentimentEnabled' | 'sentimentExcludedPages' | 'npsExcludedPages'>;
+  locale: SupportedLanguages;
+  feedback: Omit<Feedback, 'id' | 
+                           'npsEnabled' | 
+                           'sentimentEnabled' | 
+                           'sentimentExcludedPages' | 
+                           'npsExcludedPages' | 
+                           'npsLanguages' |
+                           'npsLanguagesDefault' |
+                           'npsTranslations' |
+                           'npsHideLogo'>;
+  setLocale: (locale: SupportedLanguages) => void;
 }
 
 export const SentimentPreview: FC<Props> = ({ feedback }) => {
@@ -32,15 +43,17 @@ export const SentimentPreview: FC<Props> = ({ feedback }) => {
     }
   });
 
+  console.log(show);
+
   return (
     <>
       <Button type='button' className='icon secondary' onClick={toggleShow}>
-        <Icon name='eye-line' />
+        <Icon name='search-line' />
         {show ? 'Hide' : 'Preview'}
       </Button>
 
       {show && (
-        <div className={classnames('sentiment-preview', feedback.sentimentLayout)} ref={ref}>
+        <div className={classnames('sentiment-preview', feedback.sentimentLayout, { 'hidden-logo': feedback.sentimentHideLogo })} ref={ref}>
           <Button type='button' className={classnames('open', { show: open })} onClick={toggleOpen}>
             <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='20' height='20'>
               <path d='M12 22a10 10 0 1 1 0-20 10 10 0 1 1 0 20zm-5-9a5 5 0 0 0 5 5 5 5 0 0 0 5-5h-2a3 3 0 0 1-3 3 3 3 0 0 1-3-3H7zm1-2a1.5 1.5 0 0 0 1.5-1.5A1.5 1.5 0 0 0 8 8a1.5 1.5 0 0 0-1.5 1.5A1.5 1.5 0 0 0 8 11zm8 0a1.5 1.5 0 0 0 1.5-1.5A1.5 1.5 0 0 0 16 8a1.5 1.5 0 0 0-1.5 1.5A1.5 1.5 0 0 0 16 11z' fill='#fff' opacity='.65' />
@@ -94,7 +107,7 @@ export const SentimentPreview: FC<Props> = ({ feedback }) => {
                   <TextArea placeholder='Tell us about your experience...' />
 
                   <div className='footer'>
-                    <p>
+                    <p className={classnames({ hide: feedback.sentimentHideLogo })}>
                       Powered by
                       <span className='logo'>
                         <Logo logo='dark' height={20} width={64} />

@@ -14,6 +14,8 @@ import { usePeriod } from 'hooks/use-period';
 import { getDateRange } from 'lib/dates';
 import { useEventStats } from 'hooks/use-event-stats';
 import { useEventIds } from 'hooks/use-event-ids';
+import { EmptyState } from 'components/sites/empty-state';
+import { EventAdd } from 'components/sites/events/event-add';
 
 const SitesEventsHistory: NextPage<ServerSideProps> = ({ user }) => {
   const { period, setPeriod } = usePeriod('event-history');
@@ -49,9 +51,14 @@ const SitesEventsHistory: NextPage<ServerSideProps> = ({ user }) => {
             <BreadCrumbs site={site} items={[{ name: 'Events', href: `/sites/${site.id}/events` }, { name: 'Event History' }]} />
 
             <div className='events-header'>
-              <h3 className='title'>
+              <h4 className='title'>
                 Events History
-              </h3>
+                <EventAdd 
+                  setGroupIds={setGroupIds}
+                  setCaptureIds={setCaptureIds}
+                  eventStats={eventStats.eventStats}
+                />
+              </h4>
 
               <menu>
                 <Period period={period} onChange={setPeriod} />
@@ -72,9 +79,13 @@ const SitesEventsHistory: NextPage<ServerSideProps> = ({ user }) => {
               />
             )}
 
-            {/** TODO: Add empty state */}
             {!loading && !hasIds && (
-              <p>Nothing selected</p>
+              <EmptyState
+                title='There are currently no events configured.'
+                subtitle=''
+                snippet=''
+                illustration='illustration-2'
+              />
             )}
           </Main>
         )}

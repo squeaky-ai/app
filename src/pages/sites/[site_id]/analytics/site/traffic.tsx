@@ -28,7 +28,7 @@ const SitesAnalyticsSiteTraffic: NextPage<ServerSideProps> = ({ user }) => {
             <BreadCrumbs site={site} items={[{ name: 'Analytics' }]} />
 
             <div className='heading'>
-              <h3 className='title'>Site Analytics</h3>
+              <h4 className='title'>Analytics</h4>
               <Period period={period} onChange={setPeriod} />
             </div>
 

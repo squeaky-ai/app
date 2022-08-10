@@ -1,0 +1,79 @@
+.page-routes {
+  align-items: center;
+  background: none;
+  border: none;
+  border-radius: var(--border-radius-md);
+  display: flex;
+  font-weight: var(--font-weight-bold);
+  height: 2rem;
+  margin-left: 0.5rem;
+  padding: 0 1rem;
+
+  .icon {
+    color: var(--blue-500);
+    font-size: var(--font-size-body-lg);
+    margin-right: 0.5rem;
+  }
+
+  span {
+    font-weight: var(--font-weight-normal);
+    margin: 0 0 0 .5rem;
+  }
+
+  &:hover {
+    background: var(--gray-100);
+  }
+}
+
+.page-routes-modal {
+  .add-route {
+    display: flex;
+
+    .button {
+      margin: 0 0 0 1rem;
+    }
+  }
+
+  p {
+    margin: 0 0 1rem 0;
+  }
+
+  ul {
+    margin: 0 0 1.5rem 0;
+    padding: 0;
+
+    li {
+      margin: 0 0 .5rem 1.5rem;
+    }
+  }
+
+  .routes {
+    display: flex;
+    flex-direction: column;
+
+    .route {
+      align-items: center;
+      background: var(--gray-100);
+      display: flex;
+      margin: 0 0 .5rem 0;
+      padding: .25rem;
+
+      code {
+        flex: 1;
+        margin-right: .5rem;
+      }
+
+      .button {
+        align-items: center;
+        color: var(--gray-blue-800);
+        display: flex;
+        font-size: var(--font-size-body-lg);
+        margin: 0 .25rem 0 0;
+
+        .icon {
+          margin: 0;
+        }
+      }
+    }
+  }
+}

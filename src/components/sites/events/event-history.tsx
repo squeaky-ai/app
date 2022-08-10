@@ -47,6 +47,7 @@ export const EventHistory: FC<Props> =  ({
         eventStats={eventStats} 
         period={period}
       />
+
       <EventTabs active={activeTab} onChange={setActiveTab} />
       
       {activeTab === 'stats'

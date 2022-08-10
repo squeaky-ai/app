@@ -20,10 +20,10 @@ const SiteSettingsSubscription: NextPage<ServerSideProps> = ({ user }) => (
         <Main>
           <BreadCrumbs site={site} items={[{ name: 'Subscription' }]} />
 
-          <h3 className='title'>
+          <h4 className='title'>
             Subscription
             <Access roles={[OWNER]} />
-          </h3>
+          </h4>
 
           <Billing site={site} />
         </Main>

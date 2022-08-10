@@ -17,8 +17,8 @@
     color: var(--gray-blue-700);
     display: none;
     font-weight: var(--font-weight-normal);
-    font-size: 13px;
-    line-height: 1rem;
+    font-size: var(--font-size-body-sm);
+    line-height: var(--line-height-body-sm);
     margin-left: .25rem;
   }
 

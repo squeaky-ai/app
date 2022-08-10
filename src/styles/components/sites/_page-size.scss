@@ -15,11 +15,11 @@
 
     select {
       height: 30px;
-      line-height: 20px;
+      line-height: var(--line-height-body);
     }
 
     i {
-      top: -.25rem;
+      top: .2rem;
     }
   }
 }

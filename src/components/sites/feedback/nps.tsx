@@ -13,14 +13,16 @@ import { NpsScore } from 'components/sites/feedback/nps-score';
 import { NpsColumns } from 'components/sites/feedback/nps-columns';
 import { Period } from 'components/sites/period/period';
 import { PageLoading } from 'components/sites/page-loading';
+import { NpsFilters } from 'components/sites/filters/nps/filters';
 import { percentage } from 'lib/maths';
 import { COLUMNS, DEFAULT_COLUMNS } from 'data/nps/constants';
 import { getColumnPreferences } from 'lib/tables';
 import { Preference } from 'lib/preferences';
 import { usePeriod } from 'hooks/use-period';
 import { useSort } from 'hooks/use-sort';
-import { FeedbackNpsResponseSort } from 'types/graphql';
-import type { Column } from 'types/common';
+import { useFilters } from 'hooks/use-filters';
+import { FeedbackNpsResponseFilters, FeedbackNpsResponseSort } from 'types/graphql';
+import type { ValueOf, Column } from 'types/common';
 
 export const Nps: FC = () => {
   const [page, setPage] = React.useState<number>(1);
@@ -28,11 +30,23 @@ export const Nps: FC = () => {
   const [columns, setColumns] = React.useState<Column[]>(DEFAULT_COLUMNS);
 
   const { period, setPeriod } = usePeriod('nps');
+  const { filters, setFilters } = useFilters<FeedbackNpsResponseFilters>('nps');
   const { sort, setSort } = useSort<FeedbackNpsResponseSort>('nps');
 
-  const { nps, error, loading } = useNps({ page, size, sort, range: getDateRange(period) });
+  const updateFilters = (key: keyof FeedbackNpsResponseFilters, value: ValueOf<FeedbackNpsResponseFilters>) => {
+    setPage(1);
+    setFilters({ ...filters, [key]: value });
+  };
 
-  const hasResults = nps.responses.pagination.total > 0;
+  const { nps, error, loading } = useNps({ 
+    page,
+    size,
+    sort,
+    filters,
+    range: getDateRange(period) 
+  });
+
+  const hasResults = nps.replies.responses.length > 0;
 
   React.useEffect(() => {
     getColumnPreferences(Preference.NPS_COLUMNS, COLUMNS, setColumns);
@@ -141,10 +155,16 @@ export const Nps: FC = () => {
       <h4 className='heading-responses'>
         Responses
         {hasResults && (
-          <NpsColumns 
-            columns={columns}
-            setColumns={setColumns}
-          />
+          <menu>
+            <NpsColumns 
+              columns={columns}
+              setColumns={setColumns}
+            />
+            <NpsFilters 
+              filters={filters}
+              updateFilters={updateFilters}
+            />
+          </menu>
         )}
       </h4>
 

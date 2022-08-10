@@ -33,15 +33,19 @@ export const EVENTS: EventItem[] = [
     value: 'scroll',
   },
   {
-    name: 'Errors',
+    name: 'Javascript Error',
     value: 'error',
-  }
+  },
+  {
+    name: 'Other tracked events',
+    value: 'custom',
+  },
 ];
 
 export const COLUMNS: Column[] = [
   {
     label: 'Select',
-    width: '58px',
+    width: '48px',
     disabled: false,
     position: 1,
   },
@@ -95,58 +99,64 @@ export const COLUMNS: Column[] = [
     position: 9,
   },
   {
-    label: 'Pages',
+    label: 'Activity',
     width: '1fr',
     disabled: false,
     position: 10,
   },
   {
-    label: 'Traffic Source',
-    width: '2fr',
+    label: 'Pages',
+    width: '1fr',
     disabled: false,
     position: 11,
   },
   {
-    label: 'Start & Exit URL',
+    label: 'Traffic Source',
     width: '2fr',
     disabled: false,
     position: 12,
   },
   {
+    label: 'Start & Exit URL',
+    width: '2fr',
+    disabled: false,
+    position: 13,
+  },
+  {
     label: 'Device & Viewport',
     width: '1fr',
     disabled: false,
-    position: 13,
+    position: 14,
   },
   {
     label: 'Country',
     width: '100px',
     disabled: false,
-    position: 14,
+    position: 15,
   },
   {
     label: 'Browser',
     width: '90px',
     disabled: false,
-    position: 15,
+    position: 16,
   },
   {
     label: 'NPS Rating',
     width: '90px',
     disabled: false,
-    position: 16,
+    position: 17,
   },
   {
     label: 'Sentiment Rating',
     width: '90px',
     disabled: false,
-    position: 17,
+    position: 18,
   },
   {
     label: 'Options',
-    width: '70px',
+    width: '64px',
     disabled: false,
-    position: 18,
+    position: 19,
   },
 ];
 
@@ -155,6 +165,7 @@ export const DEFAULT_COLUMNS = COLUMNS.filter(c => [
   'Status', 
   'Recording ID',
   'Duration', 
+  'Activity', 
   'Pages', 
   'Start & Exit URL',
   'Options',

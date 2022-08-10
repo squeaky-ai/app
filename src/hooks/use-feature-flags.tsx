@@ -19,13 +19,11 @@ type Names = Record<FeatureFlag, string>;
 export const allFeatureFlags: FeatureFlag[] = [
   FeatureFlag.MAGIC_ERASURE,
   FeatureFlag.CHEESE_LOADER,
-  FeatureFlag.EVENTS_PAGE,
 ];
 
 export const featureFlagNames: Names = {
   MAGIC_ERASURE: 'Magic Erasure',
   CHEESE_LOADER: 'Cheese Loader',
-  EVENTS_PAGE: 'Events Page'
 };
 
 const options: State = [
@@ -37,12 +35,6 @@ const options: State = [
   },
   {
     key: FeatureFlag.CHEESE_LOADER,
-    value: false,
-    superuser: true,
-    description: '',
-  },
-  {
-    key: FeatureFlag.EVENTS_PAGE,
     value: false,
     superuser: true,
     description: '',

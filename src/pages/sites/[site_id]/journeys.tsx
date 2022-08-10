@@ -35,7 +35,7 @@ const SitesJourneys: NextPage<ServerSideProps> = ({ user }) => {
             <BreadCrumbs site={site} items={[{ name: 'Journeys' }]} />
 
             <div className='heading'>
-              <h3 className='title'>Journeys</h3>
+              <h4 className='title'>Journeys</h4>
             </div>
 
             <Unlock site={site} page='analytics' />
@@ -54,6 +54,7 @@ const SitesJourneys: NextPage<ServerSideProps> = ({ user }) => {
 
             {page && site.recordingsCount > 0 && (
               <Journeys
+                site={site}
                 page={page}
                 pages={pages}
                 period={period}

@@ -54,7 +54,7 @@
 
         .icon {
           color: var(--blue-500);
-          font-size: 1.5rem;
+          font-size: var(--font-size-body-xl);
           margin: 0;
         }
       }
@@ -123,7 +123,7 @@
       z-index: 1;
 
       .icon {
-        font-size: 1.5rem;
+        font-size: var(--font-size-body-xl);
         margin: 0 0 1rem 0;
       }
     }
@@ -134,8 +134,9 @@
 
     i {
       color: var(--gray-500);
-      font-size: 13px;
+      font-size: var(--font-size-body-sm);
       font-weight: var(--font-weight-normal);
+      line-height: var(--line-height-body-sm);
       margin: 0 0 0 .5rem;
     }
   }
@@ -210,7 +211,7 @@
       }
 
       .icon {
-        font-size: 1rem;
+        font-size: var(--font-size-body);
         font-weight: var(--font-weight-normal);
       }
     }

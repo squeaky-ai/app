@@ -8,42 +8,62 @@ import { EmptyState } from 'components/sites/feedback/empty-state';
 import { Unlock } from 'components/sites/unlock';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { NpsTabs } from 'components/sites/feedback/nps-tabs';
+import { Error } from 'components/error';
 import { Nps } from 'components/sites/feedback/nps';
+import { NpsPreview } from 'components/sites/feedback/nps-preview';
+import { NpsStatus } from 'components/sites/feedback/nps-status';
+import { useFeedback } from 'hooks/use-feedback';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
-const SitesFeedbackNps: NextPage<ServerSideProps> = ({ user }) => (
-  <>
-    <Head>
-      <title>Squeaky | Feedback | NPS</title>
-    </Head>
+const SitesFeedbackNps: NextPage<ServerSideProps> = ({ user }) => {
+  const { loading, error, feedback, locale, setLocale } = useFeedback();
 
-    <Page user={user} scope={[]}>
-      {({ site }) => (
-        <Main className={classnames({ empty: !site.verifiedAt })}>
-          <BreadCrumbs site={site} items={[{ name: 'Feedback' }, { name: 'NPS Score®' }]} />
+  if (error) {
+    return <Error />;
+  }
 
-          <h3 className='title'>Net Promoter Score®</h3>
+  return (
+    <>
+      <Head>
+        <title>Squeaky | Feedback | NPS</title> 
+      </Head>
 
-          <EmptyState
-            title='Awaiting tracking code installation'
-            subtitle='Collecting Session Recordings'
-            illustration='illustration-9'
-            videoName='Feedback Intro'
-          />
+      <Page user={user} scope={[]}>
+        {({ site }) => (
+          <Main className={classnames({ empty: !site.verifiedAt })}>
+            <BreadCrumbs site={site} items={[{ name: 'Feedback' }, { name: 'NPS Score®' }]} />
 
-          <Unlock site={site} page='nps' />
+            <h4 className='title'>
+              Net Promoter Score®
+              {!loading && feedback && (
+                <menu>
+                  <NpsPreview feedback={feedback} locale={locale} setLocale={setLocale} />
+                  <NpsStatus feedback={feedback} site={site} />
+                </menu>
+              )}
+            </h4>
 
-          {!!site.verifiedAt && (
-            <>
-              <NpsTabs siteId={site.id} page='feedback' />
-              <Nps />
-            </>
-          )}
-        </Main>
-      )}
-    </Page>
-  </>
-);
+            <EmptyState
+              title='Awaiting tracking code installation'
+              subtitle='Collecting Session Recordings'
+              illustration='illustration-9'
+              videoName='Feedback Intro'
+            />
+
+            <Unlock site={site} page='nps' />
+
+            {!!site.verifiedAt && (
+              <>
+                <NpsTabs siteId={site.id} page='feedback' />
+                <Nps />
+              </>
+            )}
+          </Main>
+        )}
+      </Page>
+    </>
+  );
+};
 
 export default SitesFeedbackNps;
 export { getServerSideProps };

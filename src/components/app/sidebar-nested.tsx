@@ -34,7 +34,7 @@ export const SidebarNested: FC<Props> = ({
   return (
     <div className={classnames('link nested', className, { open: expanded })} data-label={name}>
       <Button onClick={toggleExpanded}>
-        <Icon name={icon} />
+        <Icon className='sidebar-icon' name={icon} />
         {showWarning && (
           <span className='warning closed' /> 
         )}

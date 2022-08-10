@@ -1,6 +1,5 @@
 import React from 'react';
 import type { FC } from 'react';
-import Link from 'next/link';
 import { Spinner } from 'components/spinner';
 import { usePages } from 'hooks/use-pages';
 import { Checkbox } from 'components/checkbox';
@@ -8,16 +7,31 @@ import { Checkbox } from 'components/checkbox';
 interface Props {
   value: string[];
   onChange: (event: React.ChangeEvent) => void;
+  setSelected: (pages: string[]) => void;
 }
 
-export const NpsPages: FC<Props> = ({ value, onChange }) => {
+export const NpsPages: FC<Props> = ({ value, onChange, setSelected }) => {
   const { loading, pages } = usePages();
+
+  const onSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.target.checked
+      ? setSelected(pages)
+      : setSelected([]);
+  };
 
   return (
     <div className='nps-pages-wrapper'>
       <div className='nps-pages'>
         {loading && <Spinner />}
         <div className='checkbox-group'>
+          <Checkbox
+            checked={value.length === pages.length && pages.length !== 0}
+            partial={value.length !== 0 && value.length !== pages.length && pages.length !== 0}
+            disabled={pages.length === 0}
+            onChange={onSelectAll} 
+          >
+            <b>Select All</b>
+          </Checkbox>
           {pages.map(page => (
             <Checkbox 
               name='npsExcludedPages' 
@@ -32,10 +46,8 @@ export const NpsPages: FC<Props> = ({ value, onChange }) => {
         </div>
       </div>
       <div className='nps-hint'>
-      <p>To ensure all pages on your site or web app are listed, please make sure you have generated a recording that visits every page of your site.</p>
-      <Link href='#'>
-        <a>Learn more</a>
-      </Link>
+        <p>The pages list only shows pages that have appeared in a session recording captured by Squeaky.</p>
+        <p>To ensure all pages on your site are listed, please make sure you have generated a recording that visits every page of your site.</p>
       </div>
     </div>
   );

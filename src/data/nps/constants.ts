@@ -1,5 +1,5 @@
-
 import type { Column } from 'types/common';
+import type { FeedbackNpsResponseFilters } from 'types/graphql';
 
 export const COLUMNS: Column[] = [
   {
@@ -52,7 +52,7 @@ export const COLUMNS: Column[] = [
   },
   {
     label: 'Options',
-    width: '70px',
+    width: '64px',
     disabled: false,
     position: 9,
   },
@@ -67,3 +67,9 @@ export const DEFAULT_COLUMNS = COLUMNS.filter(c => [
   'Email',
   'Options',
 ].includes(c.label));
+
+
+export const FILTERS: FeedbackNpsResponseFilters = {
+  followUpComment: null,
+  outcomeType: null,
+};

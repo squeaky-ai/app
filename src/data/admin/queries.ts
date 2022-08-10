@@ -36,6 +36,10 @@ export const GET_ADMIN_QUERY = gql`
         superuser
         createdAt
         lastActivityAt
+        visitor {
+          id
+          visitorId
+        }
       }
       activeMonthlyUsers
       recordingsCount
@@ -98,6 +102,18 @@ export const GET_ADMIN_SITE_QUERY = gql`
           cardNumber
           billingName
           billingEmail
+          billingAddress {
+            city
+            country
+            line1
+            line2
+            postalCode
+            state
+          }
+          taxIds {
+            type
+            value
+          }
           transactions {
             id
             amount
@@ -121,6 +137,14 @@ export const GET_ADMIN_SITE_QUERY = gql`
           user {
             id
           }
+        }
+        recordingCounts {
+          totalAll
+          lockedAll
+          deletedAll
+          totalCurrentMonth
+          lockedCurrentMonth
+          deletedCurrentMonth
         }
         createdAt
       }

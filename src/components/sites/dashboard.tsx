@@ -25,12 +25,16 @@ interface Props {
 
 export const Dashboard: FC<Props> = ({ site, period }) => {
   const router = useRouter();
-  const { dashboard, error, loading } = useDashboard({ range: getDateRange(period) });
+  const { 
+    notes,
+    analytics,
+    recordingLatest,
+    recordingLatestEvents,
+    error,
+    loading 
+  } = useDashboard({ range: getDateRange(period) });
 
   const { site_id } = router.query;
-
-  const notes = dashboard.notes?.items;
-  const recording = dashboard.recordingLatest;
 
   if (error) {
     return <Error />;
@@ -56,10 +60,10 @@ export const Dashboard: FC<Props> = ({ site, period }) => {
           </Tooltip>
         </h5>
         <h2>
-          {dashboard.analytics.visitorsCount.total.toLocaleString()}
+          {analytics.visitorsCount.total.toLocaleString()}
         </h2>
         <div className='bottom'>
-          <Pill type='tertiary'>{dashboard.analytics.visitorsCount.new.toLocaleString()} New</Pill>
+          <Pill type='tertiary'>{analytics.visitorsCount.new.toLocaleString()} New</Pill>
 
           <div className='link'>
             <Link href={`/sites/${site_id}/visitors`}>
@@ -76,10 +80,10 @@ export const Dashboard: FC<Props> = ({ site, period }) => {
           Recordings
         </h5>
         <h2>
-          {dashboard.analytics.recordingsCount.total.toLocaleString()}
+          {analytics.recordingsCount.total.toLocaleString()}
         </h2>
         <div className='bottom'>
-          <Pill type='tertiary'>{dashboard.analytics.recordingsCount.new.toLocaleString()} New</Pill>
+          <Pill type='tertiary'>{analytics.recordingsCount.new.toLocaleString()} New</Pill>
 
           <div className='link'>
             <Link href={`/sites/${site_id}/recordings`}>
@@ -95,7 +99,7 @@ export const Dashboard: FC<Props> = ({ site, period }) => {
           <Icon name='pages-line' />
           Page Views
         </h5>
-        <h2>{dashboard.analytics.pageViewCount.toLocaleString()}</h2>
+        <h2>{analytics.pageViewCount.toLocaleString()}</h2>
         <div className='link'>
           <Link href={`/sites/${site_id}/analytics/site/traffic`}>
             <a>Analytics</a>
@@ -109,11 +113,11 @@ export const Dashboard: FC<Props> = ({ site, period }) => {
           Latest Recording
         </h5>
 
-        {recording && (
+        {recordingLatest && (
           <div className='preview'>
-            <Link href={`/sites/${site_id}/recordings/${recording.id}`}>
+            <Link href={`/sites/${site_id}/recordings/${recordingLatest.id}`}>
               <a className='recording-preview'>
-                <PlayerPreview recording={recording} />
+                <PlayerPreview events={recordingLatestEvents} />
                 <div className='play-button-wrapper'>
                   <div className='play-button'>
                     <Icon name='play-fill' />
@@ -126,19 +130,19 @@ export const Dashboard: FC<Props> = ({ site, period }) => {
               <li>
                 <span className='name'>Visitor ID</span>
                 <span className='value'>
-                  <VisitorsStarred site={site} visitor={recording.visitor} />
+                  <VisitorsStarred site={site} visitor={recordingLatest.visitor} />
                 </span>
               </li>
               <li>
                 <span className='name'>Duration</span>
-                <span className='value'>{toTimeString(recording.duration)}</span>
+                <span className='value'>{toTimeString(recordingLatest.duration)}</span>
               </li>
               <li>
                 <span className='name'>Pages</span>
                 <span className='value no-overflow'>
-                  <Tooltip positionX='right' button={recording.pageCount} buttonClassName='link'>
+                  <Tooltip positionX='right' button={recordingLatest.pageCount} buttonClassName='link'>
                     <ul className='tooltip-list'>
-                      {recording.pageViews.map((page, i) => (
+                      {recordingLatest.pageViews.map((page, i) => (
                         <li key={page + i}>{page}</li>
                       ))}
                     </ul>
@@ -148,16 +152,16 @@ export const Dashboard: FC<Props> = ({ site, period }) => {
               <li>
                 <span className='name'>Start URL</span>
                 <span className='value'>
-                  <Tooltip fluid positionX='right' className='pages' button={recording.startPage}>
-                    {recording.startPage}
+                  <Tooltip fluid positionX='right' className='pages' button={recordingLatest.startPage}>
+                    {recordingLatest.startPage}
                   </Tooltip>
                 </span>
               </li>
               <li>
                 <span className='name'>Exit URL</span>
                 <span className='value'>
-                  <Tooltip fluid positionX='right' className='pages' button={recording.exitPage}>
-                    {recording.exitPage}
+                  <Tooltip fluid positionX='right' className='pages' button={recordingLatest.exitPage}>
+                    {recordingLatest.exitPage}
                   </Tooltip>
                 </span>
               </li>
@@ -165,7 +169,7 @@ export const Dashboard: FC<Props> = ({ site, period }) => {
           </div>
         )}
 
-        {!recording && !loading && (
+        {!recordingLatest && !loading && (
           <div className='preview-empty-state'>
             <Icon name='time-line' />
             <p>No data available</p>
@@ -179,20 +183,20 @@ export const Dashboard: FC<Props> = ({ site, period }) => {
           Latest Notes
         </h5>
 
-        {notes.length === 0 && (
+        {notes.items.length === 0 && (
           <div className='notes-empty-state'>
             <Icon name='time-line' />
             <p>No data available</p>
           </div>
         )}
 
-        {notes.length > 0 && (
+        {notes.items.length > 0 && (
           <>
             <Divider />
 
             <div className='notes-list'>
               <ul>
-                {notes.map(note => (
+                {notes.items.map(note => (
                   <li key={note.id}>
                     <p className='title'>
                       Recording ID: <Link href={`/sites/${site_id}/recordings/${note.recordingId}`}><a>{note.sessionId}</a></Link>

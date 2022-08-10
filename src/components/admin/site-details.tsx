@@ -4,11 +4,12 @@ import { Icon } from 'components/icon';
 import { Pill } from 'components/pill';
 import { Divider } from 'components/divider';
 import { SiteEnterpriseSettings } from 'components/admin/site-enterprise-settings';
+import { Row, Table, Cell } from 'components/table';
 import { toNiceDate } from 'lib/dates';
-import type { ActiveVisitorCount, Site } from 'types/graphql';
+import type { ActiveVisitorCount, AdminSite } from 'types/graphql';
 
 interface Props {
-  site: Site;
+  site: AdminSite;
   activeVisitors: ActiveVisitorCount[];
   isEnterprise: boolean;
 }
@@ -69,6 +70,38 @@ export const SiteDetails: FC<Props> = ({ activeVisitors, site, isEnterprise }) =
             : <Pill className='tertiary'>No</Pill> 
           }
         </span>
+      </div>
+
+      <Divider />
+
+      <div className='recordings-counts'>
+        <h5>
+          <Icon name='vidicon-line' />
+          Recordings
+        </h5>
+
+        <Table>
+          <Row className='head'>
+            <Cell />
+            <Cell>All Time</Cell>
+            <Cell>Current Month</Cell>
+          </Row>
+          <Row>
+            <Cell>Total</Cell>
+            <Cell>{site.recordingCounts.totalAll.toLocaleString()}</Cell>
+            <Cell>{site.recordingCounts.totalCurrentMonth.toLocaleString()}</Cell>
+          </Row>
+          <Row>
+            <Cell>Locked</Cell>
+            <Cell>{site.recordingCounts.lockedAll.toLocaleString()}</Cell>
+            <Cell>{site.recordingCounts.lockedCurrentMonth.toLocaleString()}</Cell>
+          </Row>
+          <Row>
+            <Cell>Deleted</Cell>
+            <Cell>{site.recordingCounts.deletedAll.toLocaleString()}</Cell>
+            <Cell>{site.recordingCounts.deletedCurrentMonth.toLocaleString()}</Cell>
+          </Row>
+        </Table>
       </div>
 
       {isEnterprise && (

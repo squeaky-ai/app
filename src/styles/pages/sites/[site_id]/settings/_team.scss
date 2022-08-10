@@ -27,9 +27,9 @@
       .button {
         background: none;
         border: none;
-        font-size: 13px;
+        font-size: var(--font-size-body-sm);
         font-weight: var(--font-weight-normal);
-        line-height: 20px;
+        line-height: var(--line-height-body-sm);
         padding: 0;
         text-decoration: underline;
   

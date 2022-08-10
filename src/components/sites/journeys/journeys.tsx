@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import { pullAt } from 'lodash';
 import { Period } from 'components/sites/period/period';
 import { JourneysPages } from 'components/sites/journeys/journeys-pages';
 import { JourneysPosition } from 'components/sites/journeys/journeys-position';
@@ -8,12 +9,14 @@ import { JourneysGraph } from 'components/sites/journeys/journeys-graph';
 import { Error } from 'components/error';
 import { PageLoading } from 'components/sites/page-loading';
 import { JourneysDepth } from 'components/sites/journeys/journeys-depth';
+import { PageRoutes } from 'components/sites/page-routes';
 import { useJourneys } from 'hooks/use-journeys';
 import { getDateRange } from 'lib/dates';
-import { PathPosition } from 'types/graphql';
+import { PathPosition, Site } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 
 interface Props {
+  site: Site;
   page: string;
   pages: string[];
   period: TimePeriod;
@@ -21,11 +24,11 @@ interface Props {
   setPeriod: (page: TimePeriod) => void;
 }
 
-export const Journeys: FC<Props> = ({ page, pages, period, setPage, setPeriod }) => {
+export const Journeys: FC<Props> = ({ site, page, pages, period, setPage, setPeriod }) => {
   const [depth, setDepth] = React.useState<number>(5);
   const [position, setPosition] = React.useState<PathPosition>(PathPosition.Start);
 
-  const { loading, error, journeys } = useJourneys({
+  const { loading, error, journeys, routes } = useJourneys({
     page,
     position,
     range: getDateRange(period) 
@@ -34,6 +37,39 @@ export const Journeys: FC<Props> = ({ page, pages, period, setPage, setPeriod })
   if (error) {
     return <Error />;
   }
+
+  const journeysWithRoutes = journeys.map(journey => {
+    const path = journey.path.map(path => {
+      const match = routes.find(r => {
+        const routeChunks = r.split('/');
+        // Trailing slashes are going to cause problems
+        const pathChunks = path.replace(/\/$/, '').split('/');
+
+        // They can't match if they're not the same length
+        if (routeChunks.length !== pathChunks.length) {
+          return false;
+        }
+
+        // Get the index at which the user has entered params
+        const parameterIndexes = routeChunks.reduce((acc, chunk, index) => {
+          if (chunk.startsWith(':')) acc.push(index);
+          return acc;
+        }, []);
+
+        // Remove all the values at these index so that we can
+        // compare what is left
+        pullAt(routeChunks, parameterIndexes);
+        pullAt(pathChunks, parameterIndexes)
+
+        return routeChunks.join('/') === pathChunks.join('/');
+      });
+
+      // If nothing is found then return the original path
+      return match || path;
+    });
+
+    return { path };
+  });
 
   return (
     <div className='journeys'>
@@ -44,6 +80,7 @@ export const Journeys: FC<Props> = ({ page, pages, period, setPage, setPeriod })
           <JourneysDepth depth={depth} setDepth={setDepth} />
         </menu>
         <menu className='right'>
+          <PageRoutes site={site} routes={routes} />
           <Period period={period} onChange={setPeriod} />
         </menu>
       </div>
@@ -61,7 +98,7 @@ export const Journeys: FC<Props> = ({ page, pages, period, setPage, setPeriod })
           {journeys.length > 0 &&  (
             <JourneysGraph 
               position={position}
-              journeys={journeys} 
+              journeys={journeysWithRoutes} 
               depth={depth}
               setPage={setPage}
               setPosition={setPosition}

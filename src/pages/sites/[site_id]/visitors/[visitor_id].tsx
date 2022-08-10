@@ -13,6 +13,7 @@ import { VisitorsRecording } from 'components/sites/visitors/visitors-recordings
 import { VisitorPages } from 'components/sites/visitors/visitors-pages';
 import { RecordingsColumns } from 'components/sites/recordings/recordings-columns';
 import { RecordingsBulkActions } from 'components/sites/recordings/recordings-bulk-actions';
+import { VisitorsDelete } from 'components/sites/visitors/visitors-delete';
 import { Error } from 'components/error';
 import { NotFound } from 'components/sites/not-found';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
@@ -23,6 +24,7 @@ import { Preference } from 'lib/preferences';
 import { COLUMNS, DEFAULT_COLUMNS } from 'data/recordings/constants';
 import { VisitorsPagesSort, RecordingsSort } from 'types/graphql';
 import type { Column } from 'types/common';
+import type { Site } from 'types/graphql';
 
 const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
   const router = useRouter();
@@ -40,6 +42,10 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
     pagesPage: pageviewPage,
     pagesSort: pageviewSort
   });
+
+  const onVisitorDelete = async (site: Site) => {
+    await router.push(`/sites/${site.id}/visitors`);
+  };
 
   const { site_id } = router.query;
 
@@ -80,7 +86,43 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
               } 
             />
 
+            <h4 className='title'>
+              Visitor: {visitor.visitorId}
+              <VisitorsDelete 
+                site={site}
+                visitorId={visitor.id}
+                onDelete={() => onVisitorDelete(site)} 
+                button='Delete Visitor'
+                buttonClassName='tertiary'
+              />
+            </h4>
+
             <VisitorsSummary site={site} visitor={visitor} />
+
+            <div className='stats'>
+              <Card className='recordings'>
+                <h5>Recordings</h5>
+                <h2>
+                  {visitor.recordingCount?.total || 0}
+                  <Pill type='tertiary'>{visitor.recordingCount.new} New</Pill>
+                </h2>
+              </Card>
+              <Card className='page-views'>
+                <h5>Avg. Session Duration</h5>
+                <h2>{toHoursMinutesAndSeconds(visitor.averageSessionDuration || 0)}</h2>
+              </Card>
+              <Card className='session-duration'>
+                <h5>Page Views</h5>
+                <h2>
+                  {visitor.pageViewsCount.total}
+                  <Pill type='secondary'>{visitor.pageViewsCount.unique} Unique</Pill>
+                </h2>
+              </Card>
+              <Card className='per-session'>
+                <h5>Pages Per Session</h5>
+                <h2>{toTwoDecimalPlaces(visitor.pagesPerSession || 0)}</h2>
+              </Card>
+            </div>
 
             <div className='recordings-header'>
               <h5>Recordings</h5>
@@ -99,20 +141,6 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
               )}
             </div>
 
-            <div className='visitor-highlights'>
-              <Card className='recordings'>
-                <h5>Recordings</h5>
-                <h2>
-                  {visitor.recordingCount?.total || 0}
-                  <Pill type='tertiary'>{visitor.recordingCount.new} New</Pill>
-                </h2>
-              </Card>
-              <Card className='page-views'>
-                <h5>Average Session Duration</h5>
-                <h2>{toHoursMinutesAndSeconds(visitor.averageSessionDuration || 0)}</h2>
-              </Card>
-            </div>
-
             <VisitorsRecording 
               visitor={visitor} 
               site={site}
@@ -127,20 +155,6 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
             />
 
             <h5>Pages</h5>
-
-            <div className='stats'>
-              <Card className='session-duration'>
-                <h5>Page Views</h5>
-                <h2>
-                  {visitor.pageViewsCount.total}
-                  <Pill type='secondary'>{visitor.pageViewsCount.unique} Unique</Pill>
-                </h2>
-              </Card>
-              <Card className='per-session'>
-                <h5>Pages Per Session</h5>
-                <h2>{toTwoDecimalPlaces(visitor.pagesPerSession || 0)}</h2>
-              </Card>
-            </div>
   
             <VisitorPages 
               visitor={visitor} 

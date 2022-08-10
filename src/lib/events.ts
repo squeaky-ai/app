@@ -1,34 +1,43 @@
+import { last } from 'lodash';
 import { EventType, IncrementalSource, MouseInteractions } from 'rrweb';
 import { ErrorEvent, CustomEvents } from 'types/event';
 import { EventStatsSort } from 'types/events';
-import type { metaEvent } from 'rrweb/typings/types';
-import type { Event, EventName } from 'types/event';
-import type { EventsStat } from 'types/graphql';
-
-type EventWithTimestamp<T> = T & { id: number; timestamp: number; delay?: number; };
+import type { Event, Events, EventName, SessionEvent } from 'types/event';
+import type { EventsStat, RecordingsEvent } from 'types/graphql';
 
 export const isPageViewEvent = (
-  event: Event | ErrorEvent
-): event is EventWithTimestamp<metaEvent> => event.type === EventType.Meta;
+  event: SessionEvent
+): event is ErrorEvent => (event.type as any) === CustomEvents.PAGE_VIEW;
 
 export const isMouseEvent = (
-  event: Event | ErrorEvent
+  event: SessionEvent
 ) => event.type === EventType.IncrementalSnapshot && event.data.source === IncrementalSource.MouseInteraction;
 
 export const isScrollEvent = (
-  event: Event | ErrorEvent
+  event: SessionEvent
 ) => event.type === EventType.IncrementalSnapshot && event.data.source === IncrementalSource.Scroll;
 
 export const isErrorEvent = (
-  event: Event | ErrorEvent
+  event: SessionEvent
 ): event is ErrorEvent => (event.type as any) === CustomEvents.ERROR;
 
-export function getEventName(event: Event | ErrorEvent): EventName {
-  if (event.type === EventType.Meta) {
+export const isCustomEvent = (
+  event: SessionEvent
+): event is ErrorEvent => (event.type as any) === CustomEvents.CUSTOM_TRACK;
+
+export const parseRecordingEvents = (event: RecordingsEvent[]): Event[] => event.map(i => ({
+  id: Number(i.id),
+  type: i.type, 
+  data: JSON.parse(i.data),
+  timestamp: Number(i.timestamp),
+}));
+
+export function getEventName(event: SessionEvent): EventName {
+  if (isPageViewEvent(event)) {
     return 'page_view';
   }
 
-  if (event.type === EventType.IncrementalSnapshot && event.data.source === IncrementalSource.Scroll) {
+  if (isScrollEvent(event)) {
     return 'scroll';
   }
 
@@ -50,8 +59,12 @@ export function getEventName(event: Event | ErrorEvent): EventName {
     }
   }
 
-  if ((event.type as EventType | CustomEvents) === CustomEvents.ERROR) {
+  if (isErrorEvent(event)) {
     return 'error';
+  }
+
+  if (isCustomEvent(event)) {
+    return 'custom'
   }
 
   return 'unknown';
@@ -123,3 +136,31 @@ export const sortEventsStats = (
       return b.averageEventsPerVisitor - a.averageEventsPerVisitor;
   }
 });
+
+export const getInteractionEvents = (events: Event[]) => events.reduce((acc, item) => {
+  // Add all of the page views
+  if (isPageViewEvent(item)) {
+    return [...acc, item];
+  }
+
+  // Add all of the mouse events
+  if (isMouseEvent(item)) {
+    return [...acc, item];
+  }
+
+  // Only add scroll events if the previous event was not a scroll event
+  if (isScrollEvent(item)) {
+    const prevEvent = last(acc);
+    return isScrollEvent(prevEvent) ? [...acc] : [...acc, item];
+  }
+
+  if (isErrorEvent(item)) {
+    return [...acc, item];
+  }
+
+  if (isCustomEvent(item)) {
+    return [...acc, item];
+  }
+
+  return [...acc];
+}, [] as Events);

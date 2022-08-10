@@ -10,15 +10,17 @@ import { PlayerIncomplete } from 'components/sites/player/player-incomplete';
 import { Spinner } from 'components/spinner';
 import { PlayerState, Action, PlayerStatus } from 'types/player';
 import type { Recording } from 'types/graphql';
+import type { Event } from 'types/event';
 
 interface Props {
   state: PlayerState;
   replayer: Replayer;
+  events: Event[];
   recording: Recording;
   dispatch: React.Dispatch<Action>;
 }
 
-export const PlayerControls: FC<Props> = ({ state, replayer, recording, dispatch }) => {
+export const PlayerControls: FC<Props> = ({ state, replayer, events, recording, dispatch }) => {
   const handlePlayPause = () => {
     switch(state.status) {
       case PlayerStatus.FINISHED:
@@ -33,7 +35,9 @@ export const PlayerControls: FC<Props> = ({ state, replayer, recording, dispatch
   };
 
   const handlePlaybackSpeed = (speed: number) => {
+    replayer.pause();
     replayer.setConfig({ speed });
+    replayer.play(replayer.getCurrentTime());
   };
 
   const handleSkipInactivity = (skip: boolean) => {
@@ -43,8 +47,16 @@ export const PlayerControls: FC<Props> = ({ state, replayer, recording, dispatch
     dispatch({ type: 'skipInactivity', value: skip });
   };
 
-  const handleSetProgress = (ms: number) => {
-    replayer.play(ms);
+  const handleSetProgress = (ms: number, resume: boolean) => {
+    replayer.pause(ms);
+    replayer.setConfig({ speed: 1 });
+    if (state.skipInactivity) {
+      // Without this it seems like the inactivity will never
+      // be skipped after you scrub
+      replayer.setConfig({ skipInactive: false });
+      replayer.setConfig({ skipInactive: true });
+    }
+    if (resume) replayer.play(ms);
   };
 
   const PlayPauseIcon = () => {
@@ -79,8 +91,11 @@ export const PlayerControls: FC<Props> = ({ state, replayer, recording, dispatch
           replayer={replayer}
           status={state.status}
           playbackSpeed={state.playbackSpeed}
+          events={events}
           recording={recording} 
+          state={state}
           handleSlide={handleSetProgress} 
+          dispatch={dispatch}
         />
       )}
 

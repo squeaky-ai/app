@@ -7,10 +7,10 @@ import { Spinner } from 'components/spinner';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { useToasts } from 'hooks/use-toasts';
 import { adminUserDelete } from 'lib/api/graphql';
-import type { User } from 'types/graphql';
+import type { AdminUser } from 'types/graphql';
 
 interface Props {
-  user: User;
+  user: AdminUser;
   onClose: VoidFunction;
 }
 

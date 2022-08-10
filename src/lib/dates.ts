@@ -35,6 +35,8 @@ export const fromTimeString = (timeString: string) => {
   return date.valueOf();
 };
 
+export const getDateFromTimestamp = (date: string) => new Date(Number(date));
+
 export const fromSlashyDate = (slashyDate: string) => parse(slashyDate, 'dd/MM/yyyy', new Date());
 
 export const toSlashyDate = (s: string) => s ? s.split('/').reverse().join('-') : null;

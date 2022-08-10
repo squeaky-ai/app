@@ -1,19 +1,22 @@
 import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
+import getConfig from 'next/config';
 import { Icon } from 'components/icon';
 import { Cell, Row } from 'components/table';
 import { Pill } from 'components/pill';
 import { toNiceDate } from 'lib/dates';
 import { Dropdown } from 'components/dropdown';
 import { UsersDelete } from 'components/admin/users-delete';
-import type { User, Site } from 'types/graphql';
+import type { AdminUser, Site } from 'types/graphql';
 
 interface Props {
-  user: User;
+  user: AdminUser;
   sites: Site[];
   style?: React.CSSProperties;
 }
+
+const { publicRuntimeConfig } = getConfig();
 
 export const UsersTableRow: FC<Props> = ({ user, sites, style }) => {
   const rowActionsRef = React.useRef<Dropdown>();
@@ -27,6 +30,12 @@ export const UsersTableRow: FC<Props> = ({ user, sites, style }) => {
       <Cell>{user.id}</Cell>
       <Cell>{user.fullName || '-'}</Cell>
       <Cell>{user.email}</Cell>
+      <Cell>
+        {user.visitor 
+          ? <Link href={`/sites/${publicRuntimeConfig.squeakySiteId}/visitors/${user.visitor.id}`}><a>{user.visitor.visitorId}</a></Link>
+          : '-'
+        }
+      </Cell>
       <Cell>
         {user.superuser 
           ? <Pill className='tertiary'>Yes</Pill>
