@@ -1,4 +1,4 @@
-import type { Analytics } from 'types/graphql';
+import type { Analytics, AnalyticsPerPage } from 'types/graphql';
 
 export type AnalyticsTraffic = Pick<Analytics,
   'pageViewCount' |
@@ -20,4 +20,11 @@ export type AnalyticsAudience = Pick<Analytics,
   'devices' |
   'referrers' |
   'visitors'
+>
+
+export type AnalyticsPageTraffic = Pick<AnalyticsPerPage,
+  'averageTimeOnPage' |
+  'averageVisitsPerSession' |
+  'bounceRate' |
+  'exitRate'
 >

@@ -1,5 +1,5 @@
-.page.sites.analytics.traffic.page {
-  .analytics-traffic {
+.page.sites.analytics.traffic {
+  .analytics-page-traffic {
     display: grid;
     grid-gap: 2rem;
     grid-template-areas: 'average-time-on-page average-time-on-page average-visits-per-session average-visits-per-session bounce-rate bounce-rate exit-rate exit-rate'
@@ -22,6 +22,74 @@
     }
 
     .grid-item {
+      h4 {
+        margin: 2rem 0 1.5rem 0;
+      }
+
+      .rc-pagination {
+        margin-top: 1.5rem;
+      }
+
+      .card {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+
+        h3 {
+          align-items: flex-end;
+          color: var(--blue-500);
+          display: flex;
+          font-weight: var(--font-weight-bold);
+          flex: 1 1;
+          margin: 0;
+        }
+  
+        h5 {
+          align-items: center;
+          display: flex;
+          margin: 0 0 1.5rem 0;
+
+          .icon {
+            color: var(--blue-500);
+            font-weight: var(--font-weight-normal);
+            margin: 0 .5rem 0 0;
+          }
+        }
+
+        .trend {
+          margin: 1.5rem 0 0 0;
+        }
+      }
+  
+      .heading {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+  
+        .title {
+          h3 {
+            color: var(--purple-500);
+            margin: 0 1rem;
+          }
+  
+          h5 {
+            margin: 0;
+          }
+        }
+  
+        .actions {
+          display: flex;
+  
+          .label {
+            margin: 0 1.5rem 0 0;
+          }
+  
+          .checkbox:last-of-type {
+            margin-right: 0;
+          }
+        }
+      }
+
       &.average-time-on-page {
         grid-area: average-time-on-page;
       }

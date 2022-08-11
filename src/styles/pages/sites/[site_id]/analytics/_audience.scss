@@ -1,4 +1,4 @@
-.page.sites.analytics.audience.site {
+.page.sites.analytics.audience {
   .title {
     margin: 0 0 2rem 0;
 
@@ -55,7 +55,7 @@
     }
   }
 
-  .analytics-audience {
+  .analytics-site-audience {
     display: grid;
     grid-gap: 2rem;
     grid-template-areas: 'countries languages browsers'

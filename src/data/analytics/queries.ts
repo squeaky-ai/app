@@ -124,3 +124,31 @@ export const GET_ANALYTICS_AUDIENCE_QUERY = gql`
     }
   }
 `;
+
+export const GET_ANALYTICS_PAGE_TRAFFIC_QUERY = gql`
+  query GetAnalytics($siteId: ID!, $fromDate: ISO8601Date!, $toDate: ISO8601Date!, $page: String!) { 
+    site(siteId: $siteId) {
+      id
+      analytics(fromDate: $fromDate, toDate: $toDate) {
+        perPage(page: $page) {
+          averageTimeOnPage {
+            average
+            trend
+          }
+          averageVisitsPerSession {
+            average
+            trend
+          }
+          bounceRate {
+            average
+            trend
+          }
+          exitRate {
+            average
+            trend
+          }
+        }
+      }
+    }
+  }
+`;

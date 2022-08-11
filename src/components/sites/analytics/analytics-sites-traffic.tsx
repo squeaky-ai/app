@@ -49,7 +49,7 @@ export const AnalyticsSitesTraffic: FC<Props> = ({ site, period }) => {
   }
 
   return (
-    <div className='analytics-traffic sites'>
+    <div className='analytics-site-traffic'>
        <div className='grid-item visitors-graph'>
           <Card>
             <AnalyticsVisitors visitors={analytics.visitors} period={period} />

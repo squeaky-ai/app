@@ -11,7 +11,7 @@ interface Props {
 
 export const AnalyticsPagesAudience: FC<Props> = () => {
   return (
-    <div className='analytics-audience pages'>
+    <div className='analytics-page-audience pages'>
 
     </div>
   );

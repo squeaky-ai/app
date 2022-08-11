@@ -1,4 +1,4 @@
-.page.sites.analytics.traffic.site {
+.page.sites.analytics.traffic {
   .title {
     margin: 0 0 2rem 0;
 
@@ -27,7 +27,7 @@
         margin: 0 .5rem 0 0;
       }
 
-      .label {
+      & > .label {
         margin: 0 1rem 0 0;
       }
     }
@@ -59,7 +59,7 @@
     }
   }
 
-  .analytics-traffic {
+  .analytics-site-traffic {
     display: grid;
     grid-gap: 2rem;
     grid-template-areas: 'visitors-graph visitors-graph visitors-graph'
