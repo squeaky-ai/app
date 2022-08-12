@@ -8,8 +8,8 @@ import { Page } from 'components/sites/page';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { Unlock } from 'components/sites/unlock';
 import { Period } from 'components/sites/period/period';
-import { PageLoading } from 'components/sites/page-loading';
 import { PageSearch } from 'components/sites/page-search';
+import { PageLoading } from 'components/sites/page-loading';
 import { Label } from 'components/label';
 import { usePeriod } from 'hooks/use-period';
 import { Tabs } from 'components/sites/analytics/tabs';
@@ -38,37 +38,35 @@ const SitesAnalyticsPageTraffic: NextPage<ServerSideProps> = ({ user }) => {
           <Main className={classnames({ empty: site.recordingsCount === 0 })}>
             <BreadCrumbs site={site} items={[{ name: 'Analytics' }]} />
 
+            <div className='heading'>
+              <h3 className='title'>Page Analytics</h3>
+              {!loading && (
+                <menu>
+                  <Label>Page</Label>
+                  <PageSearch page={page} setPage={setPage} pages={pages} />
+                  <Period period={period} onChange={setPeriod} />
+                </menu>
+              )}
+            </div>
+
+            <Unlock site={site} page='analytics' />
+
+            <Tabs site={site} tab='traffic' type='page' />
+
+            <EmptyState
+              title='There are currently no analytics available'
+              subtitle='Collecting Analytics Data'
+              illustration='illustration-3'
+              videoName='Analytics Intro'
+              snippet='If you have only recently installed or updated your tracking code it may take up to an hour before analytics data becomes available.'
+            />
+
             {loading && (
               <PageLoading />
             )}
 
-            {!loading && (
-              <>
-                <div className='heading'>
-                  <h3 className='title'>Page Analytics</h3>
-                  <menu>
-                    <Label>Page</Label>
-                    <PageSearch page={page} setPage={setPage} pages={pages} />
-                    <Period period={period} onChange={setPeriod} />
-                  </menu>
-                </div>
-
-                <Unlock site={site} page='analytics' />
-
-                <Tabs site={site} tab='traffic' type='page' />
-
-                <EmptyState
-                  title='There are currently no analytics available'
-                  subtitle='Collecting Analytics Data'
-                  illustration='illustration-3'
-                  videoName='Analytics Intro'
-                  snippet='If you have only recently installed or updated your tracking code it may take up to an hour before analytics data becomes available.'
-                />
-
-                {site.recordingsCount > 0 && page && (
-                  <AnalyticsPagesTraffic period={period} page={page} site={site} />
-                )}
-              </>
+            {site.recordingsCount > 0 && page && (
+              <AnalyticsPagesTraffic period={period} page={page} site={site} />
             )}
           </Main>
         )}
