@@ -347,6 +347,7 @@ export type Analytics = {
   pageViews: AnalyticsPageViews;
   pages: AnalyticsPages;
   pagesPerSession: AnalyticsPagesPerSession;
+  perPage: AnalyticsPerPage;
   recordingsCount: AnalyticsRecordingsCount;
   referrers: AnalyticsReferrers;
   sessionDurations: AnalyticsSessionDurations;
@@ -368,6 +369,11 @@ export type AnalyticsPagesArgs = {
   page?: InputMaybe<Scalars['Int']>;
   size?: InputMaybe<Scalars['Int']>;
   sort?: InputMaybe<AnalyticsPagesSort>;
+};
+
+
+export type AnalyticsPerPageArgs = {
+  page: Scalars['String'];
 };
 
 
@@ -477,6 +483,38 @@ export enum AnalyticsPagesSort {
   /** Most amount of views first */
   ViewsDesc = 'views__desc'
 }
+
+export type AnalyticsPerPage = {
+  __typename?: 'AnalyticsPerPage';
+  averageTimeOnPage: AnalyticsPerPageDuration;
+  averageVisitsPerSession: AnalyticsPerPageVisitsPerSession;
+  bounceRate: AnalyticsPerPageBounceRate;
+  exitRate: AnalyticsPerPageExitRate;
+};
+
+export type AnalyticsPerPageBounceRate = {
+  __typename?: 'AnalyticsPerPageBounceRate';
+  average: Scalars['Float'];
+  trend: Scalars['Float'];
+};
+
+export type AnalyticsPerPageDuration = {
+  __typename?: 'AnalyticsPerPageDuration';
+  average: Scalars['BigInt'];
+  trend: Scalars['BigInt'];
+};
+
+export type AnalyticsPerPageExitRate = {
+  __typename?: 'AnalyticsPerPageExitRate';
+  average: Scalars['Float'];
+  trend: Scalars['Float'];
+};
+
+export type AnalyticsPerPageVisitsPerSession = {
+  __typename?: 'AnalyticsPerPageVisitsPerSession';
+  average: Scalars['Float'];
+  trend: Scalars['Float'];
+};
 
 export type AnalyticsRecordingsCount = {
   __typename?: 'AnalyticsRecordingsCount';

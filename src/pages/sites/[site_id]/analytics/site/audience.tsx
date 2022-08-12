@@ -10,16 +10,16 @@ import { Unlock } from 'components/sites/unlock';
 import { Period } from 'components/sites/period/period';
 import { usePeriod } from 'hooks/use-period';
 import { Tabs } from 'components/sites/analytics/tabs';
-import { AnalyticsTraffic } from 'components/sites/analytics/analytics-traffic';
+import { AnalyticsSitesAudience } from 'components/sites/analytics/analytics-sites-audience';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
-const SitesAnalyticsTraffic: NextPage<ServerSideProps> = ({ user }) => {
+const SitesAnalyticsSiteAudience: NextPage<ServerSideProps> = ({ user }) => {
   const { period, setPeriod } = usePeriod('analytics');
   
   return (
     <>
       <Head>
-        <title>Squeaky | Site Analytics | Traffic</title> 
+        <title>Squeaky | Site Analytics | Audience</title> 
       </Head>
 
       <Page user={user} scope={[]}>
@@ -34,7 +34,7 @@ const SitesAnalyticsTraffic: NextPage<ServerSideProps> = ({ user }) => {
 
             <Unlock site={site} page='analytics' />
 
-            <Tabs site={site} tab='traffic' />
+            <Tabs site={site} tab='audience' type='site' />
 
             <EmptyState
               title='There are currently no analytics available'
@@ -45,7 +45,7 @@ const SitesAnalyticsTraffic: NextPage<ServerSideProps> = ({ user }) => {
             />
 
             {site.recordingsCount > 0 && (
-              <AnalyticsTraffic period={period} site={site} />
+              <AnalyticsSitesAudience period={period} site={site} />
             )}
           </Main>
         )}
@@ -54,5 +54,5 @@ const SitesAnalyticsTraffic: NextPage<ServerSideProps> = ({ user }) => {
   );
 };
 
-export default SitesAnalyticsTraffic;
+export default SitesAnalyticsSiteAudience;
 export { getServerSideProps };

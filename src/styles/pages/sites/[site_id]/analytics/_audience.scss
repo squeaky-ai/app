@@ -18,6 +18,20 @@
       margin: 0;
     }
 
+    menu {
+      display: flex;
+      margin: 0;
+      padding: 0;
+
+      .page-search {
+        margin: 0 .5rem 0 0;
+      }
+
+      .label {
+        margin: 0 1rem 0 0;
+      }
+    }
+
     @include breakpoint-sm {
       .period {
         display: none;
@@ -41,7 +55,7 @@
     }
   }
 
-  .analytics-audience {
+  .analytics-site-audience {
     display: grid;
     grid-gap: 2rem;
     grid-template-areas: 'countries languages browsers'

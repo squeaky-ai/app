@@ -8,18 +8,28 @@ import { Page } from 'components/sites/page';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { Unlock } from 'components/sites/unlock';
 import { Period } from 'components/sites/period/period';
+import { PageSearch } from 'components/sites/page-search';
+import { Label } from 'components/label';
 import { usePeriod } from 'hooks/use-period';
 import { Tabs } from 'components/sites/analytics/tabs';
-import { AnalyticsAudience } from 'components/sites/analytics/analytics-audience';
+import { AnalyticsPagesTraffic } from 'components/sites/analytics/analytics-pages-traffic';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { usePages } from 'hooks/use-pages';
 
-const SitesAnalyticsAudience: NextPage<ServerSideProps> = ({ user }) => {
+const SitesAnalyticsPageTraffic: NextPage<ServerSideProps> = ({ user }) => {
+  const { pages } = usePages();
   const { period, setPeriod } = usePeriod('analytics');
+
+  const [page, setPage] = React.useState<string>('');
+
+  React.useEffect(() => {
+    if (!page) setPage(pages[0]);
+  }, [pages]);
   
   return (
     <>
       <Head>
-        <title>Squeaky | Site Analytics | Audience</title> 
+        <title>Squeaky | Page Analytics | Traffic</title> 
       </Head>
 
       <Page user={user} scope={[]}>
@@ -28,13 +38,17 @@ const SitesAnalyticsAudience: NextPage<ServerSideProps> = ({ user }) => {
             <BreadCrumbs site={site} items={[{ name: 'Analytics' }]} />
 
             <div className='heading'>
-              <h4 className='title'>Analytics</h4>
-              <Period period={period} onChange={setPeriod} />
+              <h3 className='title'>Page Analytics</h3>
+              <menu>
+                <Label>Page</Label>
+                <PageSearch page={page} setPage={setPage} pages={pages} />
+                <Period period={period} onChange={setPeriod} />
+              </menu>
             </div>
 
             <Unlock site={site} page='analytics' />
 
-            <Tabs site={site} tab='audience' />
+            <Tabs site={site} tab='traffic' type='page' />
 
             <EmptyState
               title='There are currently no analytics available'
@@ -44,8 +58,8 @@ const SitesAnalyticsAudience: NextPage<ServerSideProps> = ({ user }) => {
               snippet='If you have only recently installed or updated your tracking code it may take up to an hour before analytics data becomes available.'
             />
 
-            {site.recordingsCount > 0 && (
-              <AnalyticsAudience period={period} site={site} />
+            {site.recordingsCount > 0 && page && (
+              <AnalyticsPagesTraffic period={period} page={page} site={site} />
             )}
           </Main>
         )}
@@ -54,5 +68,5 @@ const SitesAnalyticsAudience: NextPage<ServerSideProps> = ({ user }) => {
   );
 };
 
-export default SitesAnalyticsAudience;
+export default SitesAnalyticsPageTraffic;
 export { getServerSideProps };
