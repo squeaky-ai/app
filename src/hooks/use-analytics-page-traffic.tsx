@@ -49,6 +49,7 @@ export const useAnalyticsPageTraffic = (props: Props): UseAnalyticsPageTraffic =
       trend: 0,
       items: [],
     },
+    visitsAt: [],
   };
 
   return { 

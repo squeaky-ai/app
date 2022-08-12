@@ -157,6 +157,11 @@ export const GET_ANALYTICS_PAGE_TRAFFIC_QUERY = gql`
               count
             }
           }
+          visitsAt {
+            day
+            hour
+            count
+          }
         }
       }
     }

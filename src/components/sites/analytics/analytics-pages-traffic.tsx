@@ -8,9 +8,11 @@ import { AnalyticsPagesAverageDuration } from 'components/sites/analytics/analyt
 import { AnalyticsPagesAverageVisitsPerSession } from 'components/sites/analytics/analytics-pages-average-visits-per-session';
 import { AnalyticsPagesBounceRate } from 'components/sites/analytics/analytics-pages-bounce-rate';
 import { AnalyticsPagesExitRate } from 'components/sites/analytics/analytics-pages-exit-rate';
-import { getDateRange } from 'lib/dates';
+import { AnalyticsVisitsAt } from 'components/sites/analytics/analytics-visits-at';
 import { AnalyticsPageViews } from 'components/sites/analytics/analytics-page-views';
+import { AnalyticsTimeAverages } from 'components/sites/analytics/analytics-time-averages';
 import { useAnalyticsPageTraffic } from 'hooks/use-analytics-page-traffic';
+import { getDateRange } from 'lib/dates';
 import type { Site } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 
@@ -70,12 +72,13 @@ export const AnalyticsPagesTraffic: FC<Props> = ({ site, page, period }) => {
       <div className='grid-item time-of-day'>
         <Card>
           <h5><Icon name='group-line' /> Visitors by time of day</h5>
+          <AnalyticsVisitsAt visitsAt={analytics.visitsAt} />
         </Card>
       </div>
 
       <div className='grid-item time-averages'>
         <Card>
-
+          <AnalyticsTimeAverages visitsAt={analytics.visitsAt} />
         </Card>
       </div>
     </div>

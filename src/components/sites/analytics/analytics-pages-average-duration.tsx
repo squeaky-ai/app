@@ -16,7 +16,7 @@ export const AnalyticsPagesAverageDuration: FC<Props> = ({ averageTimeOnPage }) 
     <>
       <h5>Average Time On Page</h5>
       <h3>{toHoursMinutesAndSeconds(average)}</h3>
-      <Trend direction={trend >= 0 ? 'up' : 'down'} value={toHoursMinutesAndSeconds(trend)} />
+      <Trend direction={trend >= 0 ? 'up' : 'down'} value={toHoursMinutesAndSeconds(Math.abs(trend))} />
     </>
   );
 };

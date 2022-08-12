@@ -491,6 +491,7 @@ export type AnalyticsPerPage = {
   bounceRate: AnalyticsPerPageBounceRate;
   exitRate: AnalyticsPerPageExitRate;
   pageViews: AnalyticsPageViews;
+  visitsAt: Array<Maybe<AnalyticsVisitAt>>;
 };
 
 export type AnalyticsPerPageBounceRate = {

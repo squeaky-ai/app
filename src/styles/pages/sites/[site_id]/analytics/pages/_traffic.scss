@@ -153,10 +153,89 @@
 
       &.time-of-day {
         grid-area: time-of-day;
+
+        .visits-at {
+          display: grid;
+          flex: 0;
+          grid-gap: .5rem;
+          grid-template-columns: repeat(25, minmax(0, 1fr));
+          grid-template-rows: repeat(8, 1.25rem);
+  
+          .visit {
+            background: var(--gray-100);
+            flex-shrink: 0;
+            position: relative;
+  
+            &::after {
+              background: var(--gray-blue-800);
+              border-radius: var(--border-radius-md);
+              color: var(--white);
+              content: attr(data-label);
+              display: none;
+              font-size: var(--font-size-body-sm);
+              line-height: var(--line-height-body-sm);
+              left: 2rem;
+              padding: .25rem .5rem;
+              position: absolute;
+              pointer-events: none;
+              white-space: nowrap;
+              z-index: 1;
+            }
+  
+            &:not(.label):hover {
+              background: var(--gray-blue-600);
+        
+              &:after {
+                display: block;
+              }
+            }
+          }
+  
+          .label {
+            align-items: center;
+            background: none;
+            display: inline-flex;
+            font-size: var(--font-size-body-sm);
+            font-weight: var(--font-weight-normal);
+            line-height: var(--line-height-body-sm);
+            margin: 0;
+            padding: 0;
+  
+            &.hidden {
+              visibility: hidden;
+            }
+          }
+        }
       }
 
       &.time-averages {
         grid-area: time-averages;
+
+        .time-averages {
+          p {
+            font-size: var(--font-size-body-sm);
+            font-weight: var(--font-weight-bold);
+            line-height: var(--line-height-body-sm);
+            margin: 0 0 .75rem 0;
+          }
+
+          h4 {
+            align-items: center;
+            color: var(--blue-500);
+            display: flex;
+            margin: 0 0 2.5rem 0;
+
+            .icon {
+              font-size: var(--font-size-body-lg);
+              margin: 0 .5rem 0 0;
+            }
+
+            &:last-of-type {
+              color: var(--rose-500);
+              margin: 0;
+            }
+          }
+        }
       }
     }
   }
