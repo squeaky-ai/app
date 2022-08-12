@@ -42,7 +42,7 @@ export const AnalyticsSitesAudience: FC<Props> = ({ site, period }) => {
   }
 
   return (
-    <div className='analytics-site-audience sites'>
+    <div className='analytics-audience sites'>
       <div className='grid-item countries'>
         <Card>
           <h4>Countries</h4>

@@ -30,3 +30,12 @@ export type AnalyticsPageTraffic = Pick<AnalyticsPerPage,
   'pageViews' |
   'visitsAt'
 >
+
+export type AnalyticsPageAudience = Pick<AnalyticsPerPage,
+  'languages' | 
+  'countries' |
+  'browsers' |
+  'dimensions' |
+  'devices' |
+  'referrers'
+>

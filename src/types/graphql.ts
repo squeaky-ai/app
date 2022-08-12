@@ -489,9 +489,27 @@ export type AnalyticsPerPage = {
   averageTimeOnPage: AnalyticsPerPageDuration;
   averageVisitsPerSession: AnalyticsPerPageVisitsPerSession;
   bounceRate: AnalyticsPerPageBounceRate;
+  browsers: AnalyticsBrowsers;
+  countries: Array<Maybe<AnalyticsCountry>>;
+  devices: Array<AnalyticsDevice>;
+  dimensions: Array<Maybe<AnalyticsDimension>>;
   exitRate: AnalyticsPerPageExitRate;
+  languages: Array<Maybe<AnalyticsLanguage>>;
   pageViews: AnalyticsPageViews;
+  referrers: AnalyticsReferrers;
   visitsAt: Array<Maybe<AnalyticsVisitAt>>;
+};
+
+
+export type AnalyticsPerPageBrowsersArgs = {
+  page?: InputMaybe<Scalars['Int']>;
+  size?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type AnalyticsPerPageReferrersArgs = {
+  page?: InputMaybe<Scalars['Int']>;
+  size?: InputMaybe<Scalars['Int']>;
 };
 
 export type AnalyticsPerPageBounceRate = {

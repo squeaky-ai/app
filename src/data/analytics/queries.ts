@@ -167,3 +167,54 @@ export const GET_ANALYTICS_PAGE_TRAFFIC_QUERY = gql`
     }
   }
 `;
+
+export const GET_ANALYTICS_PAGE_AUDIENCE_QUERY = gql`
+  query GetAnalytics($siteId: ID!, $fromDate: ISO8601Date!, $toDate: ISO8601Date!, $referrersPage: Int!, $page: String!) { 
+    site(siteId: $siteId) {
+      id
+      analytics(fromDate: $fromDate, toDate: $toDate) {
+        perPage(page: $page) {
+          languages {
+            name
+            count
+          }
+          countries {
+            name
+            code
+            count
+          }
+          browsers(size: 10) {
+            items {
+              browser
+              count
+              percentage
+            }
+            pagination {
+              total
+              pageSize
+            }
+          }
+          dimensions {
+            deviceX
+            count
+          }
+          devices {
+            type
+            count
+          }
+          referrers(size: 10, page: $referrersPage) {
+            items {
+              referrer
+              count
+              percentage
+            }
+            pagination {
+              total
+              pageSize
+            }
+          }
+        }
+      }
+    }
+  }
+`;
