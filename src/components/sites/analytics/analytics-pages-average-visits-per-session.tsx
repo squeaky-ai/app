@@ -14,7 +14,7 @@ export const AnalyticsPagesAverageVisitsPerSession: FC<Props> = ({ averageVisits
     <>
       <h5>Average Visits Per Session</h5>
       <h3>{average.toFixed(2)}</h3>
-      <Trend direction={trend >= 0 ? 'up' : 'down'} value={trend.toFixed(2)} />
+      <Trend direction={trend >= 0 ? 'up' : 'down'} value={Math.abs(trend).toFixed(2)} />
     </>
   );
 };
