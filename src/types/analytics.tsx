@@ -26,5 +26,6 @@ export type AnalyticsPageTraffic = Pick<AnalyticsPerPage,
   'averageTimeOnPage' |
   'averageVisitsPerSession' |
   'bounceRate' |
-  'exitRate'
+  'exitRate' |
+  'pageViews'
 >

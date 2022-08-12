@@ -490,6 +490,7 @@ export type AnalyticsPerPage = {
   averageVisitsPerSession: AnalyticsPerPageVisitsPerSession;
   bounceRate: AnalyticsPerPageBounceRate;
   exitRate: AnalyticsPerPageExitRate;
+  pageViews: AnalyticsPageViews;
 };
 
 export type AnalyticsPerPageBounceRate = {

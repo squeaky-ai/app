@@ -42,6 +42,13 @@ export const useAnalyticsPageTraffic = (props: Props): UseAnalyticsPageTraffic =
       average: 0,
       trend: 0,
     },
+    pageViews: {
+      groupRange: 0,
+      groupType: '',
+      total: 0,
+      trend: 0,
+      items: [],
+    },
   };
 
   return { 

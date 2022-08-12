@@ -9,6 +9,7 @@ import { AnalyticsPagesAverageVisitsPerSession } from 'components/sites/analytic
 import { AnalyticsPagesBounceRate } from 'components/sites/analytics/analytics-pages-bounce-rate';
 import { AnalyticsPagesExitRate } from 'components/sites/analytics/analytics-pages-exit-rate';
 import { getDateRange } from 'lib/dates';
+import { AnalyticsPageViews } from 'components/sites/analytics/analytics-page-views';
 import { useAnalyticsPageTraffic } from 'hooks/use-analytics-page-traffic';
 import type { Site } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
@@ -62,7 +63,7 @@ export const AnalyticsPagesTraffic: FC<Props> = ({ site, page, period }) => {
 
       <div className='grid-item visitors-graph'>
         <Card>
-          <h5>Visitors</h5>
+          <AnalyticsPageViews pageViews={analytics.pageViews} period={period} />
         </Card>
       </div>
 

@@ -108,6 +108,47 @@
 
       &.visitors-graph {
         grid-area: visitors-graph;
+
+        .analytics-graph {
+          .title {
+            align-items: flex-end;
+    
+            h3 {
+              line-height: 2rem;
+            }
+
+            .trend {
+              margin: 0;
+            }
+          }
+    
+          @include breakpoint-md {
+            .heading {
+              margin-bottom: 2rem;
+    
+              .actions {
+                display: none;
+              }
+            }
+    
+            .title {
+              width: 100%;
+    
+              h3 {
+                flex: 1;
+              }
+            }
+          }
+        }
+    
+        .graph-wrapper {
+          height: 340px;
+          width: 100%;
+    
+          @include breakpoint-md {
+            height: 150px;
+          }
+        }
       }
 
       &.time-of-day {

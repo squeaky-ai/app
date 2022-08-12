@@ -147,6 +147,16 @@ export const GET_ANALYTICS_PAGE_TRAFFIC_QUERY = gql`
             average
             trend
           }
+          pageViews {
+            groupType
+            groupRange
+            total
+            trend
+            items {
+              dateKey
+              count
+            }
+          }
         }
       }
     }
