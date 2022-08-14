@@ -92,18 +92,34 @@
 
       &.average-time-on-page {
         grid-area: average-time-on-page;
+
+        .card {
+          height: 100%;
+        }
       }
 
       &.average-visits-per-session {
         grid-area: average-visits-per-session;
+
+        .card {
+          height: 100%;
+        }
       }
 
       &.bounce-rate {
         grid-area: bounce-rate;
+
+        .card {
+          height: 100%;
+        }
       }
 
       &.exit-rate {
         grid-area: exit-rate;
+
+        .card {
+          height: 100%;
+        }
       }
 
       &.visitors-graph {
