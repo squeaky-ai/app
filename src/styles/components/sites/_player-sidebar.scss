@@ -371,25 +371,6 @@
       }
     }
 
-    .tag {
-      background: var(--gray-blue-50);
-      border-color: var(--gray-blue-200);
-      border-radius: var(--border-radius-controls);
-      height: 2rem;
-
-      span {
-        color: var(--gray-blue-700);
-      }
-
-      .button {
-        border-color: var(--gray-blue-200);
-
-        .icon {
-          color: var(--gray-blue-300);
-        }
-      }
-    }
-
     form {
       position: relative;
     }

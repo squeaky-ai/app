@@ -30,7 +30,7 @@ export const SettingsTag: FC<Props> = ({ tag, siteId, selected, setSelected }) =
         />
       </Cell>
       <Cell>
-        <Tag>{tag.name}</Tag>
+        <Tag className='primary'>{tag.name}</Tag>
       </Cell>
       <Cell className='options'>
         <SettingsTagEdit tag={tag} siteId={siteId} />

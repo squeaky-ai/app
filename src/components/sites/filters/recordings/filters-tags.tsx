@@ -75,7 +75,7 @@ export const FiltersTags: FC<Props> = ({ value, onClose, onUpdate }) => {
                 value={tag.id}
                 checked={values.tags.includes(tag.id)}
               >
-                <Tag>{tag.name}</Tag>
+                <Tag className='primary'>{tag.name}</Tag>
               </Checkbox>
             ))}
           </div>

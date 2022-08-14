@@ -109,7 +109,7 @@ export const SidebarTags: FC<Props> = ({ recording }) => {
                     <ul>
                       {results.map(tag => (
                         <li key={tag.id}>
-                          <Tag onClick={handleTagClick}>
+                          <Tag className='secondary' onClick={handleTagClick}>
                             {tag.name}
                           </Tag>
                         </li>
@@ -122,7 +122,7 @@ export const SidebarTags: FC<Props> = ({ recording }) => {
           </Formik>
           <div className='tag-list'>
             {recording.tags.map(tag => (
-              <Tag handleDelete={() => handleTagRemove(tag)} key={tag.id}>
+              <Tag className='primary' handleDelete={() => handleTagRemove(tag)} key={tag.id}>
                 {tag.name}
               </Tag>
             ))}
