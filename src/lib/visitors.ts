@@ -2,7 +2,7 @@ import { capitalize } from 'lodash';
 import { toSlashyDate } from 'lib/dates';
 import type { Visitor, RecordingsDevice, RecordingsCountry, VisitorsFilters, FiltersDate } from 'types/graphql';
 
-export function getLinkedData<T>(visitor: Visitor): T {
+export function getLinkedData<T>(visitor: Pick<Visitor, 'linkedData'>): T {
   try {
     return JSON.parse(visitor.linkedData);
   } catch {

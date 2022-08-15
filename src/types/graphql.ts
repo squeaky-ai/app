@@ -2673,6 +2673,7 @@ export type Visitor = {
   averageSessionDuration: Scalars['Int'];
   countries: Array<RecordingsCountry>;
   devices: Array<RecordingsDevice>;
+  export: VisitorsExport;
   firstViewedAt?: Maybe<Scalars['ISO8601DateTime']>;
   id: Scalars['ID'];
   language?: Maybe<Scalars['String']>;
@@ -2714,6 +2715,14 @@ export type VisitorsDeleteInput = {
   clientMutationId?: InputMaybe<Scalars['String']>;
   siteId: Scalars['ID'];
   visitorId: Scalars['ID'];
+};
+
+export type VisitorsExport = {
+  __typename?: 'VisitorsExport';
+  linkedData?: Maybe<Scalars['String']>;
+  npsFeedback: Array<Maybe<FeedbackNpsResponseItem>>;
+  recordingsCount: Scalars['Int'];
+  sentimentFeedback: Array<Maybe<FeedbackSentimentResponseItem>>;
 };
 
 export type VisitorsFilters = {

@@ -13,6 +13,7 @@ import { VisitorsRecording } from 'components/sites/visitors/visitors-recordings
 import { VisitorPages } from 'components/sites/visitors/visitors-pages';
 import { RecordingsColumns } from 'components/sites/recordings/recordings-columns';
 import { RecordingsBulkActions } from 'components/sites/recordings/recordings-bulk-actions';
+import { VisitorsExport } from 'components/sites/visitors/visitors-export';
 import { VisitorsDelete } from 'components/sites/visitors/visitors-delete';
 import { Error } from 'components/error';
 import { NotFound } from 'components/sites/not-found';
@@ -88,13 +89,19 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
 
             <h4 className='title'>
               Visitor: {visitor.visitorId}
-              <VisitorsDelete 
-                site={site}
-                visitorId={visitor.id}
-                onDelete={() => onVisitorDelete(site)} 
-                button='Delete Visitor'
-                buttonClassName='tertiary'
-              />
+              <menu>
+                <VisitorsExport
+                  site={site}
+                  visitor={visitor}
+                />
+                <VisitorsDelete 
+                  site={site}
+                  visitorId={visitor.id}
+                  onDelete={() => onVisitorDelete(site)} 
+                  button='Delete Visitor'
+                  buttonClassName='tertiary'
+                />
+              </menu>
             </h4>
 
             <VisitorsSummary site={site} visitor={visitor} />

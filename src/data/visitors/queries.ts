@@ -142,3 +142,27 @@ export const GET_VISITOR_QUERY = gql`
     }
   }
 `;
+
+export const GET_VISITOR_EXPORT_QUERY = gql`
+  query GetVisitorExport($siteId: ID!, $visitorId: ID!) {
+    site(siteId: $siteId) {
+      id
+      visitor(visitorId: $visitorId) {
+        export {
+          recordingsCount
+          npsFeedback {
+            score
+            comment
+            contact
+            email
+          }
+          sentimentFeedback {
+            score
+            comment
+          }
+          linkedData
+        }
+      }
+    }
+  }
+`;
