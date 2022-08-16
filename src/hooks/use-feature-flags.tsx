@@ -17,32 +17,16 @@ type UseFeatureFlags = {
 type Names = Record<FeatureFlag, string>;
 
 export const allFeatureFlags: FeatureFlag[] = [
-  FeatureFlag.MAGIC_ERASURE,
   FeatureFlag.CHEESE_LOADER,
-  FeatureFlag.PER_PAGE_ANALYTICS,
 ];
 
 export const featureFlagNames: Names = {
-  MAGIC_ERASURE: 'Magic Erasure',
   CHEESE_LOADER: 'Cheese Loader',
-  PER_PAGE_ANALYTICS: 'Per Page Analytics',
 };
 
 const options: State = [
   {
-    key: FeatureFlag.MAGIC_ERASURE,
-    value: false,
-    superuser: true,
-    description: '',
-  },
-  {
     key: FeatureFlag.CHEESE_LOADER,
-    value: false,
-    superuser: true,
-    description: '',
-  },
-  {
-    key: FeatureFlag.PER_PAGE_ANALYTICS,
     value: false,
     superuser: true,
     description: '',

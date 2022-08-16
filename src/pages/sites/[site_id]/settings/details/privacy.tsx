@@ -12,8 +12,6 @@ import { Logo } from 'components/logo';
 import { Checkbox } from 'components/checkbox';
 import { OWNER, ADMIN } from 'data/teams/constants';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
-import { useFeatureFlags } from 'hooks/use-feature-flags';
-import { FeatureFlag } from 'lib/feature-flags';
 import { magicErasureUpdate, anonymiseFormInputsUpdate } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
 import { Toggle } from 'components/toggle';
@@ -21,9 +19,6 @@ import type { Site } from 'types/graphql';
 
 const SitesSettingsPrivacy: NextPage<ServerSideProps> = ({ user }) => {
   const toasts = useToasts();
-  const { featureFlagEnabled } = useFeatureFlags();
-
-  const magicErasureEnabled = featureFlagEnabled(FeatureFlag.MAGIC_ERASURE);
 
   const toggleMagicErasureEnabled = (site: Site) => async () => {
     try {
@@ -75,58 +70,44 @@ const SitesSettingsPrivacy: NextPage<ServerSideProps> = ({ user }) => {
 
               <h5>Other content</h5>
 
-              {!magicErasureEnabled && (
-                <>
-                  <p>If there are other types of content you don&apos;t want to record with the Squeaky tracking code then you can <b>manually apply the following class names</b> to the relevant elements in your codebase:</p>
-                  <ul>
-                    <li>An element with the class name <code className='code'>.squeaky-hide</code> will not be recorded. Instead, it will replay as a placeholder with the same dimension.</li>
-                    <li>All text of elements with the class name <code className='code'>.squeaky-mask</code> and their children will be masked.</li>
-                  </ul>
-                </>
+              <p>If there are other types of content you don&apos;t want to record with the Squeaky tracking code then you can choose from the following two options:</p>
+
+              <p className='option-label'>
+                <Icon name='eraser-line' />
+                Squeaky Magic Eraser
+                <i>No technical expertise required</i>
+              </p>
+
+              <p>The magic eraser is a simple tool <b>that only you can see</b> when you visit your website. It allows you to simple click on any element you wish to hide from your recordings e.g. your visitors address. You click the element, and then it will never be capture by the Squeaky tracking code.</p>
+              <p>To see the Magic Erasure tool on your site or web app, all you have to do is turn on the visibility use the checkbox below, and visit your site whilst you&apos;re logged in to the Squeaky.</p>
+
+              <Checkbox checked={site.magicErasureEnabled} onChange={toggleMagicErasureEnabled(site)}>
+                Show Magic Erasure
+              </Checkbox> 
+
+              {site.magicErasureEnabled && (
+                <div className='magic-erasure-hint'>
+                  <div className='magic-erasure-button'>
+                    <Logo logo='small' width={17} height={24} alt='Logo' />
+                  </div>
+                  <p>Look for the erasure button in the bottom-right of your website</p>
+                </div>
               )}
 
-              {magicErasureEnabled && (
-                <>
-                  <p>If there are other types of content you don&apos;t want to record with the Squeaky tracking code then you can choose from the following two options:</p>
+              <p className='option-label'>
+                <Icon name='code-s-slash-line' />
+                Manually Add Class Names
+                <i>Developer help needed</i>
+              </p>
 
-                  <p className='option-label'>
-                    <Icon name='eraser-line' />
-                    Squeaky Magic Eraser
-                    <i>No technical expertise required</i>
-                  </p>
+              <p>If you have developers that can help you, they can apply the following class names to the relevant elements in your codebase:</p>
 
-                  <p>The magic eraser is a simple tool <b>that only you can see</b> when you visit your website. It allows you to simple click on any element you wish to hide from your recordings e.g. your visitors address. You click the element, and then it will never be capture by the Squeaky tracking code.</p>
-                  <p>To see the Magic Erasure tool on your site or web app, all you have to do is turn on the visibility use the checkbox below, and visit your site whilst you&apos;re logged in to the Squeaky.</p>
+              <ul>
+                <li>An element with the class name <code className='code'>.squeaky-hide</code> will not be recorded. Instead, it will replay as a placeholder with the same dimension.</li>
+                <li>All text of elements with the class name <code className='code'>.squeaky-mask</code> and their children will be masked.</li>
+              </ul>
 
-                  <Checkbox checked={site.magicErasureEnabled} onChange={toggleMagicErasureEnabled(site)}>
-                    Show Magic Erasure
-                  </Checkbox> 
-
-                  {site.magicErasureEnabled && (
-                    <div className='magic-erasure-hint'>
-                      <div className='magic-erasure-button'>
-                        <Logo logo='small' width={17} height={24} alt='Logo' />
-                      </div>
-                      <p>Look for the erasure button in the bottom-right of your website</p>
-                    </div>
-                  )}
-
-                  <p className='option-label'>
-                    <Icon name='code-s-slash-line' />
-                    Manually Add Class Names
-                    <i>Developer help needed</i>
-                  </p>
-
-                  <p>If you have developers that can help you, they can apply the following class names to the relevant elements in your codebase:</p>
-
-                  <ul>
-                    <li>An element with the class name <code className='code'>.squeaky-hide</code> will not be recorded. Instead, it will replay as a placeholder with the same dimension.</li>
-                    <li>All text of elements with the class name <code className='code'>.squeaky-mask</code> and their children will be masked.</li>
-                  </ul>
-
-                  <p>The class names approach is especially well suited to elements that repeat e.g. cells in a table.</p>
-                </>
-              )}
+              <p>The class names approach is especially well suited to elements that repeat e.g. cells in a table.</p>
             </Container>
           </Main>
         )}

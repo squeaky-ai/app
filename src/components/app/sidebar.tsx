@@ -18,8 +18,6 @@ import { Breakpoints } from 'data/common/constants';
 import { Preferences, Preference } from 'lib/preferences';
 import { OWNER, ADMIN } from 'data/teams/constants';
 import { useResize } from 'hooks/use-resize';
-import { useFeatureFlags } from 'hooks/use-feature-flags';
-import { FeatureFlag } from 'lib/feature-flags';
 
 export const Sidebar: FC = () => {
   const ref = React.useRef<HTMLElement>(null);
@@ -31,7 +29,6 @@ export const Sidebar: FC = () => {
   const [position, setPosition] = React.useState<'left' | 'right'>('left');
 
   const { sidebar } = useSidebar();
-  const { featureFlagEnabled } = useFeatureFlags();
 
   const path = router.asPath;
   const pathname = router.pathname;
@@ -161,36 +158,24 @@ export const Sidebar: FC = () => {
             <Divider>
               <span>Analysis</span>
             </Divider>
-            {featureFlagEnabled(FeatureFlag.PER_PAGE_ANALYTICS)
-              ? (
-                  <SidebarNested
-                    name='Analytics'
-                    icon='line-chart-line'
-                    collapse={() => collapse('analytics')}
-                    expand={() => expand('analytics')}
-                    expanded={expanded.includes('analytics')}
-                  >
-                    <Link href={`/sites/${siteId}/analytics/site/traffic`}>
-                      <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/analytics/site`) })} data-label='Analytics'>
-                        Site
-                      </a>
-                    </Link>
-                    <Link href={`/sites/${siteId}/analytics/page/traffic`}>
-                      <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/analytics/page`) })} data-label='Analytics'>
-                        Page
-                      </a>
-                    </Link>
-                  </SidebarNested>
-                )
-              : (
-                  <Link href={`/sites/${siteId}/analytics/site/traffic`}>
-                    <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/analytics/site`) })} data-label='Analytics'>
-                      <Icon className='sidebar-icon' name='line-chart-line' />
-                      <span>Analytics</span>
-                    </a>
-                  </Link>
-                )
-            }
+            <SidebarNested
+              name='Analytics'
+              icon='line-chart-line'
+              collapse={() => collapse('analytics')}
+              expand={() => expand('analytics')}
+              expanded={expanded.includes('analytics')}
+            >
+              <Link href={`/sites/${siteId}/analytics/site/traffic`}>
+                <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/analytics/site`) })} data-label='Analytics'>
+                  Site
+                </a>
+              </Link>
+              <Link href={`/sites/${siteId}/analytics/page/traffic`}>
+                <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/analytics/page`) })} data-label='Analytics'>
+                  Page
+                </a>
+              </Link>
+            </SidebarNested>
             <Link href={`/sites/${siteId}/journeys`}>
               <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/journeys`) })} data-label='Journeys'>
                 <Icon className='sidebar-icon' name='guide-line' />
