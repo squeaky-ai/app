@@ -56,4 +56,8 @@
       display: block;
     }
   }
+
+  &.disabled {
+    background: var(--gray-50);
+  }
 }

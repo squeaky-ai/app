@@ -1,16 +1,24 @@
 .date-picker {
+  display: flex;
+  height: 2rem;
   position: relative;
   width: 170px;
 
-  i {
-    left: .75rem;
+  .icon {
+    align-items: center;
+    color: var(--gray-200);
+    display: flex;
     font-size: var(--font-size-body-lg);
+    height: 30px;
+    justify-content: center;
     position: absolute;
-    top: .5rem;
+    right: .75rem;
+    top: 0;
   }
 
   .input {
+    height: 30px;
     margin: 0;
-    padding-left: 2.5rem;
+    padding-right: 2.5rem;
   }
 }

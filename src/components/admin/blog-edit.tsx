@@ -132,7 +132,7 @@ export const BlogEdit: FC<Props> = ({ post, images, onChange, refetchImages }) =
                     onChange={handleChange}
                     className={classnames('image-container', { selected: values.metaImage === image })}
                   >
-                    <Image path={image} refetchImages={refetchImages} />
+                    <Image path={image} refetchImages={refetchImages} alt='Meta image' />
                   </Radio>
                 ))}
                 <UploadImage refetchImages={refetchImages} />

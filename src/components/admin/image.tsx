@@ -15,10 +15,11 @@ const MUTATION = gql`
 
 interface Props {
   path: string;
+  alt: string;
   refetchImages: VoidFunction;
 }
 
-export const Image: FC<Props> = ({ path, refetchImages }) => {
+export const Image: FC<Props> = ({ path, alt, refetchImages }) => {
   const ref = React.useRef<Modal>();
   const [deleteImage] = useMutation(MUTATION);
 
@@ -46,7 +47,8 @@ export const Image: FC<Props> = ({ path, refetchImages }) => {
     <>
       <div className='image'>
         <div className='clip'>
-          <img src={`https://cdn.squeaky.ai/${path}`} />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img alt={alt} src={`https://cdn.squeaky.ai/${path}`} />
         </div>
         <Button className='delete-image' onClick={openModal}>
           <Icon name='close-line' />

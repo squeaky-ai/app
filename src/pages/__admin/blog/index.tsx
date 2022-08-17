@@ -63,6 +63,7 @@ const AdminBlog: NextPage<ServerSideProps> = () => {
                     <Cell>{post.category}</Cell>
                     <Cell>{post.tags.join(', ')}</Cell>
                     <Cell className='author'>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={post.author.image} height={24} width={24} alt={`Image of the author ${post.author.name}`} />
                       {post.author.name}
                     </Cell>

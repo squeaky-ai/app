@@ -26,6 +26,10 @@
     }
   }
 
+  &:disabled {
+    background: var(--gray-50);
+  }
+
   &:focus {
     border-color: var(--blue-500);
   }

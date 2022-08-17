@@ -450,16 +450,6 @@
     }
   }
 
-  .actions {
-    display: flex;
-    margin-top: 4.5rem;
-
-    .button {
-      margin-left: 0;
-      margin-right: 1rem;
-    }
-  }
-
   .sentiment-table {
     margin-bottom: 2rem;
 
@@ -583,6 +573,16 @@
   .sentiment-settings {
     .toggle {
       display: inline-flex;
+    }
+
+    .actions {
+      display: flex;
+      margin-top: 4.5rem;
+  
+      .button {
+        margin-left: 0;
+        margin-right: 1rem;
+      }
     }
   }
 

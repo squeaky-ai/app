@@ -43,8 +43,6 @@ export const SentimentPreview: FC<Props> = ({ feedback }) => {
     }
   });
 
-  console.log(show);
-
   return (
     <>
       <Button type='button' className='icon secondary' onClick={toggleShow}>

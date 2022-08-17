@@ -8,9 +8,9 @@ interface Props extends React.SelectHTMLAttributes<HTMLSelectElement> {
   selectClassName?: string;
 }
 
-export const Select: FC<Props> = ({ children, className, selectClassName, invalid, style, ...rest }) => (
-  <div className={classnames('select', className, { invalid })} style={style}>
-    <select className={classnames(selectClassName)} {...rest}>
+export const Select: FC<Props> = ({ children, disabled, className, selectClassName, invalid, style, ...rest }) => (
+  <div className={classnames('select', className, { invalid, disabled })} style={style}>
+    <select disabled={disabled} className={classnames(selectClassName)} {...rest}>
       {children}
     </select>
     <Icon name='arrow-drop-down-line' />

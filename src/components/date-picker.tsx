@@ -9,11 +9,11 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 
 export const DatePicker: FC<Props> = (props) => (
   <div className='date-picker'>
-    <Icon name='calendar-line' />
     <Input 
       placeholder='DD/MM/YYYY' 
       autoComplete='off'
       {...props} 
     />
+    <Icon name='calendar-line' />
   </div>
 );

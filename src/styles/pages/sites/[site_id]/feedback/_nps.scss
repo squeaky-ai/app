@@ -60,6 +60,28 @@
     .toggle {
       display: inline-flex;
     }
+
+    .actions {
+      display: flex;
+      margin-top: 4.5rem;
+  
+      .button {
+        margin: 0 1rem 0 0;
+      }
+  
+      .icon {
+        i {
+          color: var(--blue-500);
+          margin: 0 .5rem 0 0;
+        }
+  
+        &:hover {
+          i {
+            color: var(--white);
+          }
+        }
+      }
+    }
   }
 
   .nps-pages-wrapper {
@@ -733,28 +755,6 @@
 
         .checkbox {
           margin: 0 .25rem 0 0;
-        }
-      }
-    }
-  }
-
-  .actions {
-    display: flex;
-    margin-top: 4.5rem;
-
-    .button {
-      margin: 0 1rem 0 0;
-    }
-
-    .icon {
-      i {
-        color: var(--blue-500);
-        margin: 0 .5rem 0 0;
-      }
-
-      &:hover {
-        i {
-          color: var(--white);
         }
       }
     }
