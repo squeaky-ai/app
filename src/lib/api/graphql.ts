@@ -49,6 +49,7 @@ import {
   SitesCssSelectorBlacklistDeleteInput,
   AdminSitePlanUpdateInput,
   AdminSiteAssociateCustomerInput,
+  AdminSiteIngestUpdateInput,
   AnonymiseFormInputsUpdateInput,
   SitesSuperuserAccessUpdateInput,
   EventCaptureDeleteInput,
@@ -82,6 +83,7 @@ import {
   ANONYMISE_FORM_INPUTS_UPDATE_MUTATION,
   ADMIN_SITE_PLAN_UPDATE_MUTATION,
   ADMIN_SITE_ASSOCIATE_CUSTOMER_MUTATION,
+  ADMIN_SITE_INGEST_UPDATE,
   SUPERUSER_ACESSS_UPDATE,
   ADMIN_SITE_DELETE_MUTATION,
   ROUTES_UPDATE_MUTATION,
@@ -800,6 +802,15 @@ export const adminSiteAssociateCustomer = async (input: AdminSiteAssociateCustom
   });
 
   return data.adminSiteAssociateCustomer;
+};
+
+export const adminSiteIngestUpdate = async (input: AdminSiteIngestUpdateInput): Promise<Site> => {
+  const { data } = await client.mutate({
+    mutation: ADMIN_SITE_INGEST_UPDATE,
+    variables: { input },
+  });
+
+  return data.adminSiteIngestUpdate;
 };
 
 export const superuserAccessUpdate = async (input: SitesSuperuserAccessUpdateInput): Promise<Site> => {

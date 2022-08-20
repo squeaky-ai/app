@@ -77,6 +77,7 @@ export const GET_ADMIN_SITE_QUERY = gql`
         ownerName
         verifiedAt
         superuserAccessEnabled
+        ingestEnabled
         plan {
           tier
           name

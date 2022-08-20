@@ -11,7 +11,9 @@ import { Card } from 'components/card';
 import { Icon } from 'components/icon';
 import { SiteDetails } from 'components/admin/site-details';
 import { SiteSubscription } from 'components/admin/site-subscription';
+import { SiteIngestEnabled } from 'components/admin/site-ingest-enabled';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
+
 const AdminSite: NextPage<ServerSideProps> = () => {
   const { admin, loading, error } = useAdminSite();
 
@@ -48,12 +50,16 @@ const AdminSite: NextPage<ServerSideProps> = () => {
             <h4 className='title'>
               {admin.site.name}
 
-              {hasBilling && (
-                <a className='button stripe-link' href={`https://dashboard.stripe.com/test/customers/${admin.site.billing.customerId}`} target='_blank' rel='noreferrer'>
-                  <Icon name='external-link-line' />
-                  Stripe
-                </a>
-              )}
+              <menu>
+                <SiteIngestEnabled site={admin.site} />
+    
+                {hasBilling && (
+                  <a className='button stripe-link' href={`https://dashboard.stripe.com/test/customers/${admin.site.billing.customerId}`} target='_blank' rel='noreferrer'>
+                    <Icon name='external-link-line' />
+                    Stripe
+                  </a>
+                )}
+              </menu>
             </h4>
 
             <Card className='site-card'>
