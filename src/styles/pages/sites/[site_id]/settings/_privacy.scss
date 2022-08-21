@@ -4,7 +4,7 @@
       align-items: center;
       display: flex;
       font-weight: var(--font-weight-bold);
-      margin: 3rem 0 1.5rem 0;
+      margin: 0 0 1.5rem 0;
 
       .icon {
         color: var(--blue-500);
@@ -33,6 +33,18 @@
       }
     }
 
+    .card {
+      margin: 0 0 1rem 0;
+
+      p:last-of-type {
+        margin: 0;
+      }
+
+      .checkbox.label {
+        margin: 1.5rem 0 0 0;
+      }
+    }
+
     .toggle {
       align-items: center;
       flex-direction: row-reverse;
@@ -47,10 +59,10 @@
 
     .magic-erasure-hint {
       align-items: center;
-      background: var(--white);
-      border: 1px solid var(--blue-500);
+      background: var(--gray-50);
       border-radius: var(--border-radius-md);
       display: flex;
+      margin: 1.5rem 0 0 0;
       padding: 1.5rem;
 
       p {
@@ -72,6 +84,56 @@
           background: var(--peach-100);
           cursor: pointer;
         }
+      }
+    }
+  }
+
+  .consent {
+    form {
+      margin: 2rem 0 0 0;
+    }
+
+    .radio-group {
+      margin-top: .75rem;
+    }
+
+    .actions {
+      margin: 3rem 0 0 0;
+    }
+
+    .card {
+      margin: 1rem 0 0 1.5rem;
+    }
+
+    .languages {
+      margin: 0 0 1.5rem 0;
+  
+      .row {
+        display: grid;
+        font-size: var(--font-size-body);
+        line-height: var(--line-height-body);
+        grid-template-columns: 14rem 1fr;
+        margin: 0 0 .5rem 0;
+  
+        span {
+          align-items: center;
+          display: flex;
+  
+          .checkbox {
+            margin: 0 .25rem 0 0;
+          }
+        }
+      }
+    }
+
+    .preview {
+      align-items: center;
+      display: inline-flex;
+      margin: 2rem 0 0 0;
+
+      .icon {
+        color: var(--blue-500);
+        margin: 0 .5rem 0 0;
       }
     }
   }

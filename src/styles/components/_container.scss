@@ -1,6 +1,10 @@
 .container {
   width: 100%;
 
+  &.xxsm {
+    max-width: 320px;
+  }
+
   &.xsm {
     max-width: 400px;
   }

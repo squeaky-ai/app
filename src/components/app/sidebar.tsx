@@ -226,6 +226,12 @@ export const Sidebar: FC = () => {
                     <span>Team</span>
                   </a>
                 </Link>
+                <Link href={`/sites/${siteId}/settings/privacy/data`}>
+                  <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/settings/privacy`) })} data-label='Privacy'>
+                    <Icon className='sidebar-icon' name='ghost-line' />
+                    <span>Privacy</span>
+                  </a>
+                </Link>
                 {sidebar.role === OWNER && (
                   <Link href={`/sites/${siteId}/settings/subscription`}>
                     <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/settings/subscription`) })} data-label='Subscription'>

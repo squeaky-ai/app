@@ -5,15 +5,15 @@ import { Main } from 'components/main';
 import { Access } from 'components/sites/access';
 import { Page } from 'components/sites/page';
 import { Container } from 'components/container';
-import { Toggle } from 'components/toggle';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
-import { SettingsTabs } from 'components/sites/settings/settings-tabs';
+import { Toggle } from 'components/toggle';
+import { PrivacyTabs } from 'components/sites/settings/privacy-tabs';
 import { OWNER, ADMIN } from 'data/teams/constants';
 import { useToasts } from 'hooks/use-toasts';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { superuserAccessUpdate } from 'lib/api/graphql';
+import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
-const SitesSettingsCustomerSupport: NextPage<ServerSideProps> = ({ user }) => {
+const SitesSettingsPrivacyCustomerSupport: NextPage<ServerSideProps> = ({ user }) => {
   const toasts = useToasts();
 
   const handleToggle = async (id: string, event: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,29 +30,25 @@ const SitesSettingsCustomerSupport: NextPage<ServerSideProps> = ({ user }) => {
   return (
     <>
       <Head>
-        <title>Squeaky | Site Settings | Customer Support</title>
+        <title>Squeaky | Site Settings | Privacy</title>
       </Head>
 
       <Page user={user} scope={[OWNER, ADMIN]}>
-        {({ site, member }) => (
+        {({ site }) => (
           <Main>
-            <BreadCrumbs site={site} items={[{ name: 'Settings', href: `/sites/${site.id}/settings/details` }, { name: 'Customer support' }]} />
+            <BreadCrumbs site={site} items={[{ name: 'Settings', href: `/sites/${site.id}/settings/details` }, { name: 'Privacy' }]} />
 
             <h4 className='title'>
-              Site Settings
+              Privacy
               <Access roles={[OWNER, ADMIN]} />
             </h4>
 
-            <SettingsTabs site={site} member={member} page='customer-support' />
+            <PrivacyTabs site={site} page='customer-support' />
 
-            <h4>
-              Customer support
-              <Access roles={[OWNER, ADMIN]} />
-            </h4>
-
-            <Container className='md'>
+            <Container className='md customer-support'>
+              <h4>Customer Support Access</h4>
               <p>By default our customer support team have no access to your site. If you wish to provide access for troubleshooting purposes than you can toggle the switch below.</p>
-              <p className='small'>Please note: It is your responsibility to ensure that any access you provide to our customer support team adheres with the privacy policy and terms of service or your business.</p>
+              <p className='small'><b>Please note</b>: It is your responsibility to ensure that any access you provide to our customer support team adheres with the privacy policy and terms of service or your business.</p>
               <Toggle checked={site.superuserAccessEnabled} name='draft' onChange={event => handleToggle(site.id, event)}>
                 Customer Support Access
               </Toggle>
@@ -64,5 +60,5 @@ const SitesSettingsCustomerSupport: NextPage<ServerSideProps> = ({ user }) => {
   );
 };
 
-export default SitesSettingsCustomerSupport;
+export default SitesSettingsPrivacyCustomerSupport;
 export { getServerSideProps };
