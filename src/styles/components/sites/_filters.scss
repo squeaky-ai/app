@@ -187,6 +187,10 @@
       .tag {
         height: 2rem;
         margin: 0;
+
+        &.secondary {
+          background: var(--white);
+        }
       }
     }
   }

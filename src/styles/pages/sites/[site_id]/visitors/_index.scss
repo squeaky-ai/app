@@ -187,6 +187,10 @@
     }
 
     .tag {
+      &.secondary {
+        background: var(--white);
+      }
+
       span span {
         padding: 0;
       }

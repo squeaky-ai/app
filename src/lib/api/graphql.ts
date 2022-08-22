@@ -4,6 +4,7 @@ import { ApolloClient, InMemoryCache, TypedDocumentNode, gql } from '@apollo/cli
 import {
   Query,
   FeedbackUpdateInput,
+  ConsentUpdateInput,
   NotesCreateInput,
   NotesDeleteInput,
   NotesUpdateInput,
@@ -36,6 +37,7 @@ import {
   Recording,
   Visitor,
   Feedback,
+  Consent,
   UsersCommunication,
   UsersCommunicationInput,
   NpsDeleteInput,
@@ -148,6 +150,10 @@ import {
 import {
   FEEDBACK_UPDATE_MUTATION,
 } from 'data/feedback/mutations';
+
+import {
+  CONSENT_UPDATE_MUTATION,
+} from 'data/consent/mutations';
 
 import { 
   VISITOR_STARRED_MUTATION,
@@ -676,6 +682,15 @@ export const feedbackUpdate = async (input: FeedbackUpdateInput): Promise<Feedba
   });
 
   return data.feedback;
+};
+
+export const consentUpdate = async (input: ConsentUpdateInput): Promise<Consent> => {
+  const { data } = await client.mutate({
+    mutation: CONSENT_UPDATE_MUTATION,
+    variables: { input },
+  });
+
+  return data.consent;
 };
 
 export const visitorDelete = async (input: VisitorsDeleteInput): Promise<null> => {
