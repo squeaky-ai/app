@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import Link from 'next/link';
 import { Table, Row, Cell } from 'components/table';
 import { Spinner } from 'components/spinner';
 import { Sort } from 'components/sort';
@@ -72,10 +73,18 @@ export const EventFeedTable: FC<Props> = ({ site, groupIds, captureIds, period }
                 {feed.eventName}
               </Cell>
               <Cell>
-                <VisitorsStarred site={site} visitor={feed.visitor} />
+                <Link href={`/sites/${site.id}/visitors/${feed.visitor.id}`}>
+                  <a>
+                    <VisitorsStarred site={site} visitor={feed.visitor} />
+                  </a>
+                </Link>
               </Cell>
               <Cell>
-                <RecordingStarred site={site} recording={feed.recording} />
+                <Link href={`/sites/${site.id}/recordings/${feed.recording.id}`}>
+                  <a>
+                    <RecordingStarred site={site} recording={feed.recording} />
+                  </a>
+                </Link>
               </Cell>
             </Row>
           ))}
