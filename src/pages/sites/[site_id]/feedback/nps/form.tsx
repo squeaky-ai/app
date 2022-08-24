@@ -8,7 +8,6 @@ import { EmptyState } from 'components/sites/feedback/empty-state';
 import { Unlock } from 'components/sites/unlock';
 import { PageLoading } from 'components/sites/page-loading';
 import { Error } from 'components/error';
-import { NpsPreview } from 'components/sites/feedback/nps-preview';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { NpsTabs } from 'components/sites/feedback/nps-tabs';
 import { NpsForm } from 'components/sites/feedback/nps-form';
@@ -38,7 +37,6 @@ const SitesFeedbackNpsForm: NextPage<ServerSideProps> = ({ user }) => {
               Net Promoter Score®
               {!loading && feedback && (
                 <menu>
-                  <NpsPreview feedback={feedback} locale={locale} setLocale={setLocale} />
                   <NpsStatus feedback={feedback} site={site} />
                 </menu>
               )}
@@ -60,7 +58,7 @@ const SitesFeedbackNpsForm: NextPage<ServerSideProps> = ({ user }) => {
             {!!site.verifiedAt && !loading && (
               <>
                 <NpsTabs siteId={site.id} page='form' />
-                <NpsForm site={site} feedback={feedback} />
+                <NpsForm site={site} feedback={feedback} locale={locale} setLocale={setLocale} />
               </>
             )}
           </Main>

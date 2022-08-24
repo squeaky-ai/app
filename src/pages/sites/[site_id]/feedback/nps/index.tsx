@@ -10,13 +10,12 @@ import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { NpsTabs } from 'components/sites/feedback/nps-tabs';
 import { Error } from 'components/error';
 import { Nps } from 'components/sites/feedback/nps';
-import { NpsPreview } from 'components/sites/feedback/nps-preview';
 import { NpsStatus } from 'components/sites/feedback/nps-status';
 import { useFeedback } from 'hooks/use-feedback';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
 const SitesFeedbackNps: NextPage<ServerSideProps> = ({ user }) => {
-  const { loading, error, feedback, locale, setLocale } = useFeedback();
+  const { loading, error, feedback } = useFeedback();
 
   if (error) {
     return <Error />;
@@ -37,7 +36,6 @@ const SitesFeedbackNps: NextPage<ServerSideProps> = ({ user }) => {
               Net Promoter Score®
               {!loading && feedback && (
                 <menu>
-                  <NpsPreview feedback={feedback} locale={locale} setLocale={setLocale} />
                   <NpsStatus feedback={feedback} site={site} />
                 </menu>
               )}

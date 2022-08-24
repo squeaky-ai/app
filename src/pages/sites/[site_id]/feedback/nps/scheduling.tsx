@@ -10,7 +10,6 @@ import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { PageLoading } from 'components/sites/page-loading';
 import { Error } from 'components/error';
 import { NpsTabs } from 'components/sites/feedback/nps-tabs';
-import { NpsPreview } from 'components/sites/feedback/nps-preview';
 import { NpsScheduling } from 'components/sites/feedback/nps-scheduling';
 import { useFeedback } from 'hooks/use-feedback';
 import { NpsStatus } from 'components/sites/feedback/nps-status';
@@ -38,7 +37,6 @@ const SitesFeedbackNpsScheduling: NextPage<ServerSideProps> = ({ user }) => {
               Net Promoter Score®
               {!loading && feedback && (
                 <menu>
-                  <NpsPreview feedback={feedback} locale={locale} setLocale={setLocale} />
                   <NpsStatus feedback={feedback} site={site} />
                 </menu>
               )}
@@ -60,7 +58,7 @@ const SitesFeedbackNpsScheduling: NextPage<ServerSideProps> = ({ user }) => {
             {!!site.verifiedAt && !loading && (
               <>
                 <NpsTabs siteId={site.id} page='scheduling' />
-                <NpsScheduling site={site} feedback={feedback} />
+                <NpsScheduling site={site} feedback={feedback} locale={locale} setLocale={setLocale} />
               </>
             )}
           </Main>

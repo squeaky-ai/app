@@ -15,7 +15,7 @@ import type { SupportedLanguages } from 'types/translations';
 
 interface Props {
   locale: SupportedLanguages;
-  feedback: Omit<Feedback, 'id' | 'npsEnabled' | 'sentimentEnabled' | 'sentimentExcludedPages' | 'sentimentDevices'>;
+  feedback: Feedback;
   setLocale: (locale: SupportedLanguages) => void;
 }
 
@@ -68,7 +68,7 @@ export const NpsPreview: FC<Props> = ({ locale, feedback, setLocale }) => {
 
   return (
     <>
-      <Button type='button' className='icon' onClick={toggleShow}>
+      <Button type='button' className='icon secondary' onClick={toggleShow}>
         <Icon name='search-line' />
         {show ? 'Hide' : 'Preview'}
       </Button>

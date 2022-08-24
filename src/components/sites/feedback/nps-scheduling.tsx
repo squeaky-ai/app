@@ -10,12 +10,16 @@ import { Button } from 'components/button';
 import { Card } from 'components/card';
 import { NpsPages } from 'components/sites/feedback/nps-pages';
 import { useToasts } from 'hooks/use-toasts';
+import { NpsPreview } from 'components/sites/feedback/nps-preview';
 import type { Feedback, FeedbackUpdateInput } from 'types/graphql';
 import type { Site } from 'types/graphql';
+import type { SupportedLanguages } from 'types/translations';
 
 interface Props {
   site: Site;
+  locale: SupportedLanguages;
   feedback: Feedback;
+  setLocale: (locale: SupportedLanguages) => void;
 }
 
 const NpsSchema = Yup.object().shape({
@@ -23,7 +27,7 @@ const NpsSchema = Yup.object().shape({
   npsExcludedPages: Yup.array(),
 });
 
-export const NpsScheduling: FC<Props> = ({ site, feedback }) => {
+export const NpsScheduling: FC<Props> = ({ site, locale, feedback, setLocale }) => {
   const toasts = useToasts();
 
   const onUpdate = async (input: Partial<FeedbackUpdateInput>): Promise<void> => {
@@ -122,13 +126,22 @@ export const NpsScheduling: FC<Props> = ({ site, feedback }) => {
               </div>
 
               <div className='actions'>
-                <Button disabled={isSubmitting || !isValid} type='submit' className='primary'>
-                  Save Changes
-                </Button>
+                <div className='left'>
+                  <Button disabled={isSubmitting || !isValid} type='submit' className='primary'>
+                    Save Changes
+                  </Button>
 
-                <Button className='quaternary' type='button' onClick={handleReset}>
-                  Discard Changes
-                </Button>
+                  <Button className='quaternary' type='button' onClick={handleReset}>
+                    Discard Changes
+                  </Button>
+                </div>
+                <div className='right'>
+                  <NpsPreview 
+                    feedback={{ ...feedback, ...values }}
+                    locale={locale}
+                    setLocale={setLocale}
+                  />
+                </div>
               </div>
             </form>
           )}

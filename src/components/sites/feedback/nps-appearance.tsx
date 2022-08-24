@@ -9,15 +9,19 @@ import { Container } from 'components/container';
 import { Radio } from 'components/radio';
 import { Input } from 'components/input';
 import { Button } from 'components/button';
+import { Checkbox } from 'components/checkbox';
+import { NpsPreview } from 'components/sites/feedback/nps-preview';
 import { HEX_REGEX } from 'data/common/constants';
 import { useToasts } from 'hooks/use-toasts';
 import type { Feedback, FeedbackUpdateInput } from 'types/graphql';
 import type { Site } from 'types/graphql';
-import { Checkbox } from 'components/checkbox';
+import type { SupportedLanguages } from 'types/translations';
 
 interface Props {
   site: Site;
+  locale: SupportedLanguages;
   feedback: Feedback;
+  setLocale: (locale: SupportedLanguages) => void;
 }
 
 const DEFAULT_COLORS = ['#0768C1', '#F96155', '#8249FB', '#001A39'];
@@ -28,7 +32,7 @@ const NpsSchema = Yup.object().shape({
   npsHideLogo: Yup.boolean(),
 });
 
-export const NpsAppearance: FC<Props> = ({ site, feedback }) => {
+export const NpsAppearance: FC<Props> = ({ site, locale, feedback, setLocale }) => {
   const toasts = useToasts();
 
   const isPaying = (site.plan?.tier || 0) > 0;
@@ -192,13 +196,22 @@ export const NpsAppearance: FC<Props> = ({ site, feedback }) => {
               </div>
 
               <div className='actions'>
-                <Button disabled={isSubmitting || !isValid} type='submit' className='primary'>
-                  Save Changes
-                </Button>
+                <div className='left'>
+                  <Button disabled={isSubmitting || !isValid} type='submit' className='primary'>
+                    Save Changes
+                  </Button>
 
-                <Button className='quaternary' type='button' onClick={handleReset}>
-                  Discard Changes
-                </Button>
+                  <Button className='quaternary' type='button' onClick={handleReset}>
+                    Discard Changes
+                  </Button>
+                </div>
+                <div className='right'>
+                  <NpsPreview 
+                    feedback={{ ...feedback, ...values }}
+                    locale={locale}
+                    setLocale={setLocale}
+                  />
+                </div>
               </div>
             </form>
           )}
