@@ -19,7 +19,7 @@ export const PrivacyTabs: FC<Props> = ({ site, page }) => (
           </a>
         </Link>
       </li>
-      <li className='tab' style={{ display: 'none' }}>
+      <li className='tab'>
         <Link href={`/sites/${site.id}/settings/privacy/consent`}>
           <a className={classnames('button tab-button', { active: page === 'consent' })}>
             Consent
