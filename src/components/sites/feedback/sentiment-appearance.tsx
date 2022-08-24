@@ -9,15 +9,19 @@ import { Input } from 'components/input';
 import { Button } from 'components/button';
 import { Checkbox } from 'components/checkbox';
 import { Container } from 'components/container';
+import { SentimentPreview } from 'components/sites/feedback/sentiment-preview';
 import { HEX_REGEX } from 'data/common/constants';
 import { useToasts } from 'hooks/use-toasts';
 import { feedbackUpdate } from 'lib/api/graphql';
 import type { Feedback, FeedbackUpdateInput } from 'types/graphql';
 import type { Site } from 'types/graphql';
+import type { SupportedLanguages } from 'types/translations';
 
 interface Props {
   site: Site;
+  locale: SupportedLanguages;
   feedback: Feedback;
+  setLocale: (locale: SupportedLanguages) => void;
 }
 
 const DEFAULT_COLORS = ['#0768C1', '#F96155', '#8249FB', '#001A39'];
@@ -29,7 +33,7 @@ const SentimentSchema = Yup.object().shape({
   sentimentSchedule: Yup.string().oneOf(['always', 'custom'], 'Please select frequency'),
 });
 
-export const SentimentAppearance: FC<Props> = ({ site, feedback }) => {
+export const SentimentAppearance: FC<Props> = ({ site, locale, feedback, setLocale }) => {
   const toasts = useToasts();
 
   const isPaying = (site.plan?.tier || 0) > 0;
@@ -233,13 +237,22 @@ export const SentimentAppearance: FC<Props> = ({ site, feedback }) => {
               </Checkbox>
 
               <div className='actions'>
-                <Button disabled={isSubmitting || !isValid} type='submit' className='primary'>
-                  Save Changes
-                </Button>
+                <div className='left'>
+                  <Button disabled={isSubmitting || !isValid} type='submit' className='primary'>
+                    Save Changes
+                  </Button>
 
-                <Button className='quaternary' type='button' onClick={handleReset}>
-                  Discard Changes
-                </Button>
+                  <Button className='quaternary' type='button' onClick={handleReset}>
+                    Discard Changes
+                  </Button>
+                </div>
+                <div className='right'>
+                  <SentimentPreview
+                    feedback={{ ...feedback, ...values }}
+                    locale={locale}
+                    setLocale={setLocale}
+                  />
+                </div>
               </div>
             </form>
           )}

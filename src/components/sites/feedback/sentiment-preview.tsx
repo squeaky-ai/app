@@ -12,15 +12,7 @@ import type { SupportedLanguages } from 'types/translations';
 
 interface Props {
   locale: SupportedLanguages;
-  feedback: Omit<Feedback, 'id' | 
-                           'npsEnabled' | 
-                           'sentimentEnabled' | 
-                           'sentimentExcludedPages' | 
-                           'npsExcludedPages' | 
-                           'npsLanguages' |
-                           'npsLanguagesDefault' |
-                           'npsTranslations' |
-                           'npsHideLogo'>;
+  feedback: Feedback;
   setLocale: (locale: SupportedLanguages) => void;
 }
 

@@ -12,7 +12,6 @@ import { EmptyStateHint } from 'components/sites/empty-state-hint';
 import { SentimentTabs } from 'components/sites/feedback/sentiment-tabs';
 import { SentimentStatus } from 'components/sites/feedback/sentiment-status';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
-import { SentimentPreview } from 'components/sites/feedback/sentiment-preview';
 import { SentimentVisibility } from 'components/sites/feedback/sentiment-visibility';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useFeedback } from 'hooks/use-feedback';
@@ -39,7 +38,6 @@ const SitesFeedbackSentimentVisibility: NextPage<ServerSideProps> = ({ user }) =
               Sentiment
               {!loading && feedback && (
                 <menu>
-                  <SentimentPreview feedback={feedback} locale={locale} setLocale={setLocale} />
                   <SentimentStatus feedback={feedback} site={site} />
                 </menu>
               )}
@@ -63,7 +61,7 @@ const SitesFeedbackSentimentVisibility: NextPage<ServerSideProps> = ({ user }) =
             {!!site.verifiedAt && !loading && (
               <>
                 <SentimentTabs siteId={site.id} page='visibility' />
-                <SentimentVisibility site={site} feedback={feedback} />
+                <SentimentVisibility site={site} feedback={feedback} locale={locale} setLocale={setLocale} />
               </>
             )}
           </Main>

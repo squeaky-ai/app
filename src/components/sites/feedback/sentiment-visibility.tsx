@@ -8,13 +8,17 @@ import { Checkbox } from 'components/checkbox';
 import { Button } from 'components/button';
 import { Container } from 'components/container';
 import { SentimentPages } from 'components/sites/feedback/sentiment-pages';
+import { SentimentPreview } from 'components/sites/feedback/sentiment-preview';
 import { useToasts } from 'hooks/use-toasts';
 import type { Feedback, FeedbackUpdateInput } from 'types/graphql';
 import type { Site } from 'types/graphql';
+import type { SupportedLanguages } from 'types/translations';
 
 interface Props {
   site: Site;
+  locale: SupportedLanguages;
   feedback: Feedback;
+  setLocale: (locale: SupportedLanguages) => void;
 }
 
 const SentimentSchema = Yup.object().shape({
@@ -22,7 +26,7 @@ const SentimentSchema = Yup.object().shape({
   sentimentDevices: Yup.array(),
 });
 
-export const SentimentVisibility: FC<Props> = ({ site, feedback }) => {
+export const SentimentVisibility: FC<Props> = ({ site, locale, feedback, setLocale }) => {
   const toasts = useToasts();
 
   const onUpdate = async (input: Partial<FeedbackUpdateInput>): Promise<void> => {
@@ -119,13 +123,22 @@ export const SentimentVisibility: FC<Props> = ({ site, feedback }) => {
               <p><b>Please note</b>: If you&apos;re using the left or right positions then your feedback widget may overlap content on your website when used by customers with smaller mobile devices.</p>
 
               <div className='actions'>
-                <Button disabled={isSubmitting || !isValid} type='submit' className='primary'>
-                  Save Changes
-                </Button>
+                <div className='left'>
+                  <Button disabled={isSubmitting || !isValid} type='submit' className='primary'>
+                    Save Changes
+                  </Button>
 
-                <Button className='quaternary' type='button' onClick={handleReset}>
-                  Discard Changes
-                </Button>
+                  <Button className='quaternary' type='button' onClick={handleReset}>
+                    Discard Changes
+                  </Button>
+                </div>
+                <div className='right'>
+                  <SentimentPreview
+                    feedback={{ ...feedback, ...values }}
+                    locale={locale}
+                    setLocale={setLocale}
+                  />
+                </div>
               </div>
             </form>
           )}

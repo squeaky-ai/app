@@ -9,14 +9,13 @@ import { Page } from 'components/sites/page';
 import { Unlock } from 'components/sites/unlock';
 import { SentimentTabs } from 'components/sites/feedback/sentiment-tabs';
 import { SentimentStatus } from 'components/sites/feedback/sentiment-status';
-import { SentimentPreview } from 'components/sites/feedback/sentiment-preview';
 import { Sentiment } from 'components/sites/feedback/sentiment';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useFeedback } from 'hooks/use-feedback';
 
 const SitesFeedbackSentiment: NextPage<ServerSideProps> = ({ user }) => {
-  const { loading, error, feedback, locale, setLocale } = useFeedback();
+  const { loading, error, feedback } = useFeedback();
 
   if (error) {
     return <Error />;
@@ -37,7 +36,6 @@ const SitesFeedbackSentiment: NextPage<ServerSideProps> = ({ user }) => {
               Sentiment
               {!loading && feedback && (
                 <menu>
-                  <SentimentPreview feedback={feedback} locale={locale} setLocale={setLocale} />
                   <SentimentStatus feedback={feedback} site={site} />
                 </menu>
               )}
