@@ -50,7 +50,7 @@ export const useFeedback = (): UseFeedback => {
   React.useEffect(() => {
     const userLocale = navigator.language.split('-')[0];
 
-    if (!locale && data?.site && data.site.feedback.npsLanguages.includes(userLocale)) {
+    if (!locale && data?.site?.feedback && data.site.feedback.npsLanguages.includes(userLocale)) {
       setLocale(userLocale as SupportedLanguages);
     }
   }, [data?.site?.feedback?.npsLanguages]);

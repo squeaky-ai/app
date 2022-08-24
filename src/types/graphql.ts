@@ -125,7 +125,7 @@ export type AdminSite = {
   anonymiseFormInputs: Scalars['Boolean'];
   billing?: Maybe<SiteBilling>;
   browsers: Array<Maybe<Scalars['String']>>;
-  consent?: Maybe<Consent>;
+  consent: Consent;
   countries: Array<Maybe<RecordingsCountry>>;
   createdAt: Scalars['ISO8601DateTime'];
   cssSelectorBlacklist: Array<Maybe<Scalars['String']>>;
@@ -136,7 +136,7 @@ export type AdminSite = {
   eventFeed: EventsFeed;
   eventGroups: Array<Maybe<EventsGroup>>;
   eventStats: Array<Maybe<EventsStat>>;
-  feedback?: Maybe<Feedback>;
+  feedback: Feedback;
   heatmaps: Heatmaps;
   id: Scalars['ID'];
   ingestEnabled: Scalars['Boolean'];
@@ -1871,7 +1871,8 @@ export type Query = {
   __typename?: 'Query';
   admin: Admin;
   blogPost?: Maybe<BlogPost>;
-  blogPosts: BlogPosts;
+  blogPosts?: Maybe<BlogPosts>;
+  consent?: Maybe<Consent>;
   feedback?: Maybe<Feedback>;
   plans: Array<Plan>;
   site?: Maybe<Site>;
@@ -1892,6 +1893,11 @@ export type QueryBlogPostArgs = {
 export type QueryBlogPostsArgs = {
   category?: InputMaybe<Scalars['String']>;
   tags?: InputMaybe<Array<Scalars['String']>>;
+};
+
+
+export type QueryConsentArgs = {
+  siteId: Scalars['String'];
 };
 
 
@@ -2139,7 +2145,7 @@ export type Site = {
   anonymiseFormInputs: Scalars['Boolean'];
   billing?: Maybe<SiteBilling>;
   browsers: Array<Maybe<Scalars['String']>>;
-  consent?: Maybe<Consent>;
+  consent: Consent;
   countries: Array<Maybe<RecordingsCountry>>;
   createdAt: Scalars['ISO8601DateTime'];
   cssSelectorBlacklist: Array<Maybe<Scalars['String']>>;
@@ -2150,7 +2156,7 @@ export type Site = {
   eventFeed: EventsFeed;
   eventGroups: Array<Maybe<EventsGroup>>;
   eventStats: Array<Maybe<EventsStat>>;
-  feedback?: Maybe<Feedback>;
+  feedback: Feedback;
   heatmaps: Heatmaps;
   id: Scalars['ID'];
   ipBlacklist: Array<Maybe<SitesIpBlacklist>>;
