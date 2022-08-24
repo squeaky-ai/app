@@ -32,6 +32,7 @@ export const PlayerPreview: FC<Props> = ({ events }) => {
       root: document.getElementById('preview-wrapper'),
       skipInactive: true,
       mouseTail: false,
+      pauseAnimation: false,
     });
 
     squidgeToFit(replayer);

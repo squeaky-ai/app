@@ -53,6 +53,7 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, recordingId, displ
       root,
       skipInactive: true,
       mouseTail: false,
+      pauseAnimation: false,
     });
 
     // They need to be able to scroll
