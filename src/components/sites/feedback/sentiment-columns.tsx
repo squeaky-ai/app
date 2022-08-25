@@ -4,7 +4,6 @@ import { Icon } from 'components/icon';
 import { Checkbox } from 'components/checkbox';
 import { Dropdown } from 'components/dropdown';
 import { COLUMNS } from 'data/sentiment/constants';
-import { Preferences, Preference } from 'lib/preferences';
 import type { Column } from 'types/common';
 
 interface Props {
@@ -23,8 +22,6 @@ export const SentimentColumns: FC<Props> = ({ columns, setColumns }) => {
     const result = event.target.checked
       ? [...columns, value]
       : columns.filter(c => c.position !== value.position);
-
-    Preferences.setArray(Preference.SENTIMENT_COLUMNS, result.map(r => r.position));
 
     setColumns(result);
   };

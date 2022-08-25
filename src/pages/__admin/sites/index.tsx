@@ -9,15 +9,15 @@ import { BreadCrumbs } from 'components/admin/breadcrumbs';
 import { SitesColumns } from 'components/admin/sites-columns';
 import { PageLoading } from 'components/sites/page-loading';
 import { useAdmin } from 'hooks/use-admin';
-import { DEFAULT_SITE_COLUMNS } from 'data/admin/constants';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
-import type { Column } from 'types/common';
+import { useColumns } from 'hooks/use-columns';
 
 const AdminSites: NextPage<ServerSideProps> = () => {
   const { admin, loading, error } = useAdmin();
 
   const [search, setSearch] = React.useState<string>('');
-  const [columns, setColumns] = React.useState<Column[]>(DEFAULT_SITE_COLUMNS);
+
+  const { columns, columnsReady, setColumns } = useColumns('admin-sites');
 
   if (error) {
     return <Error />;
@@ -57,13 +57,12 @@ const AdminSites: NextPage<ServerSideProps> = () => {
           <PageLoading />
         )}
 
-        {!loading && (
+        {!loading && columnsReady && (
           <SitesTable 
             sites={admin.sites} 
             activeVisitors={admin.activeVisitors}
             search={search}
             columns={columns}
-            setColumns={setColumns}
           />
         )}
       </Main>

@@ -10,14 +10,13 @@ import { UsersColumns } from 'components/admin/users-columns';
 import { PageLoading } from 'components/sites/page-loading';
 import { useAdmin } from 'hooks/use-admin';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
-import { DEFAULT_USER_COLUMNS } from 'data/admin/constants';
-import type { Column } from 'types/common';
+import { useColumns } from 'hooks/use-columns';
 
 const Admin: NextPage<ServerSideProps> = () => {
   const { admin, loading, error } = useAdmin();
 
   const [search, setSearch] = React.useState<string>('');
-  const [columns, setColumns] = React.useState<Column[]>(DEFAULT_USER_COLUMNS);
+  const { columns, columnsReady, setColumns } = useColumns('admin-users');
 
   if (error) {
     return <Error />;
@@ -57,13 +56,12 @@ const Admin: NextPage<ServerSideProps> = () => {
           <PageLoading />
         )}
 
-        {!loading && (
+        {!loading && columnsReady && (
           <UsersTable
             users={admin.users} 
             sites={admin.sites} 
             search={search}
             columns={columns}
-            setColumns={setColumns}
           />
         )}
       </Main>

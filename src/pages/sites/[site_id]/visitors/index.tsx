@@ -13,24 +13,22 @@ import { Unlock } from 'components/sites/unlock';
 import { Tags } from 'components/sites/filters/visitors/tags';
 import { Search } from 'components/search';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
-import { FILTERS, COLUMNS, DEFAULT_COLUMNS } from 'data/visitors/constants';
-import { getColumnPreferences } from 'lib/tables';
+import { FILTERS } from 'data/visitors/constants';
 import { useFilters } from 'hooks/use-filters';
-import { Preference } from 'lib/preferences';
 import { useSort } from 'hooks/use-sort';
 import { VisitorsSort } from 'types/graphql';
+import { useColumns } from 'hooks/use-columns';
 import type { VisitorsFilters } from 'types/graphql';
-import type { Column, ValueOf } from 'types/common';
+import type { ValueOf } from 'types/common';
 
 const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
-  const [columns, setColumns] = React.useState<Column[]>(DEFAULT_COLUMNS);
-
   const [page, setPage] = React.useState<number>(1);
   const [size, setSize] = React.useState<number>(25);
   const [search, setSearch] = React.useState<string>('');
 
   const { sort, setSort } = useSort<VisitorsSort>('visitors');
   const { filters, setFilters } = useFilters<VisitorsFilters>('visitors');
+  const { columns, columnsReady, setColumns } = useColumns('visitors');
 
   const updateFilters = (key: keyof VisitorsFilters, value: ValueOf<VisitorsFilters>) => {
     setPage(1);
@@ -51,10 +49,6 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
     setPage(1);
     setSort(sort);
   };
-
-  React.useEffect(() => {
-    getColumnPreferences(Preference.VISITORS_COLUMNS, COLUMNS, setColumns)
-  }, []);
 
   return (
     <>
@@ -102,7 +96,7 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
 
             <Unlock site={site} page='visitors' />
 
-            {site.recordingsCount > 0 && (
+            {site.recordingsCount > 0 && columnsReady && (
               <>
                 <Tags 
                   filters={filters} 

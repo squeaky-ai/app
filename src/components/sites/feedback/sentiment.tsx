@@ -13,23 +13,21 @@ import { SentimentColumns } from 'components/sites/feedback/sentiment-columns';
 import { Period } from 'components/sites/period/period';
 import { SentimentFilters } from 'components/sites/filters/sentiment/filters';
 import { PageLoading } from 'components/sites/page-loading';
-import { COLUMNS, DEFAULT_COLUMNS } from 'data/sentiment/constants';
-import { getColumnPreferences } from 'lib/tables';
-import { Preference } from 'lib/preferences';
 import { useSort } from 'hooks/use-sort';
 import { useFilters } from 'hooks/use-filters';
 import { usePeriod } from 'hooks/use-period';
+import { useColumns } from 'hooks/use-columns';
 import { FeedbackSentimentResponseSort, FeedbackSentimentResponseFilters } from 'types/graphql';
-import type { Column, ValueOf } from 'types/common';
+import type { ValueOf } from 'types/common';
 
 export const Sentiment: FC = () => {
   const [page, setPage] = React.useState<number>(1);
   const [size, setSize] = React.useState<number>(10);
-  const [columns, setColumns] = React.useState<Column[]>(DEFAULT_COLUMNS);
 
   const { period, setPeriod } = usePeriod('sentiment');
   const { filters, setFilters } = useFilters<FeedbackSentimentResponseFilters>('sentiment');
   const { sort, setSort } = useSort<FeedbackSentimentResponseSort>('sentiment');
+  const { columns, columnsReady, setColumns } = useColumns('sentiment');
 
   const updateFilters = (key: keyof FeedbackSentimentResponseFilters, value: ValueOf<FeedbackSentimentResponseFilters>) => {
     setPage(1);
@@ -45,10 +43,6 @@ export const Sentiment: FC = () => {
   });
   
   const hasResults = sentiment.replies.responses.length > 0;
-
-  React.useEffect(() => {
-    getColumnPreferences(Preference.SENTIMENT_COLUMNS, COLUMNS, setColumns);
-  }, []);
 
   if (error) {
     return <Error />;
@@ -104,16 +98,18 @@ export const Sentiment: FC = () => {
         )}
       </h4>
 
-      <SentimentResponses
-        page={page}
-        sort={sort}
-        size={size}
-        setPage={setPage}
-        setSort={setSort}
-        setSize={setSize}
-        responses={sentiment.responses}
-        columns={columns}
-      />
+      {columnsReady && (
+        <SentimentResponses
+          page={page}
+          sort={sort}
+          size={size}
+          setPage={setPage}
+          setSort={setSort}
+          setSize={setSize}
+          responses={sentiment.responses}
+          columns={columns}
+        />
+      )}
     </div>
   );
 };

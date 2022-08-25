@@ -14,18 +14,16 @@ import { RecordingsBulkActions } from 'components/sites/recordings/recordings-bu
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { Period } from 'components/sites/period/period';
 import { Unlock } from 'components/sites/unlock';
-import { FILTERS, COLUMNS, DEFAULT_COLUMNS } from 'data/recordings/constants';
-import { Preference } from 'lib/preferences';
-import { getColumnPreferences } from 'lib/tables';
+import { FILTERS } from 'data/recordings/constants';
 import { useFilters } from 'hooks/use-filters';
 import { usePeriod } from 'hooks/use-period';
 import { RecordingsSort } from 'types/graphql';
 import { useSort } from 'hooks/use-sort';
+import { useColumns } from 'hooks/use-columns';
 import type { RecordingsFilters } from 'types/graphql';
-import type { Column, ValueOf } from 'types/common';
+import type { ValueOf } from 'types/common';
 
 const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
-  const [columns, setColumns] = React.useState<Column[]>(DEFAULT_COLUMNS);
   const [selected, setSelected] = React.useState<string[]>([]);
 
   const [page, setPage] = React.useState<number>(1);
@@ -34,6 +32,7 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
   const { period, setPeriod } = usePeriod('recordings');
   const { sort, setSort } = useSort<RecordingsSort>('recordings');
   const { filters, setFilters } = useFilters<RecordingsFilters>('recordings');
+  const { columns, columnsReady, setColumns } = useColumns('recordings');
 
   const updateFilters = (key: keyof RecordingsFilters, value: ValueOf<RecordingsFilters>) => {
     setPage(1);
@@ -54,10 +53,6 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
     setPage(1);
     setSort(sort);
   };
-
-  React.useEffect(() => {
-    getColumnPreferences(Preference.RECORDINGS_COLUMNS, COLUMNS, setColumns);
-  }, []);
 
   return (
     <>
@@ -106,7 +101,7 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
 
             <Unlock site={site} page='recordings' />
 
-            {site.recordingsCount > 0 && (
+            {site.recordingsCount > 0 && columnsReady && (
               <>
                 <Tags 
                   filters={filters} 

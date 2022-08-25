@@ -5,9 +5,8 @@ import { TableWrapper, Table, Cell, Row } from 'components/table';
 import { Sort } from 'components/sort';
 import { UsersTableRow } from 'components/admin/users-table-row';
 import { NoResults } from 'components/sites/no-results';
-import { USER_COLUMNS, DEFAULT_USER_COLUMNS } from 'data/admin/constants';
-import { getColumnPreferences, getColumnStyles } from 'lib/tables';
-import { Preference } from 'lib/preferences';
+import { DEFAULT_USER_COLUMNS } from 'data/admin/constants';
+import { getColumnStyles } from 'lib/tables';
 import type { Column } from 'types/common';
 import type { AdminUser, Site } from 'types/graphql';
 import type { UserSort } from 'types/admin';
@@ -17,7 +16,6 @@ interface Props {
   sites: Site[];
   columns: Column[];
   search: string;
-  setColumns: (columns: Column[]) => void;
 }
 
 const sortUsers = (sort: UserSort) => (a: AdminUser, b: AdminUser) => {
@@ -41,7 +39,7 @@ const getUsersSites = (user: AdminUser, sites: Site[]) => (
   sites.filter(site => !!site.team.find(t => t.user.id === user.id))
 );
 
-export const UsersTable: FC<Props> = ({ users, sites, columns, search, setColumns }) => {
+export const UsersTable: FC<Props> = ({ users, sites, columns, search }) => {
   const [sort, setSort] = React.useState<UserSort>('created_at__desc');
 
   const { rowStyle, tableClassNames } = getColumnStyles(DEFAULT_USER_COLUMNS, columns);
@@ -55,10 +53,6 @@ export const UsersTable: FC<Props> = ({ users, sites, columns, search, setColumn
       
       return keys.some(key => (result[key] || '').toLowerCase().includes(search.toLowerCase()));
     });
-
-  React.useEffect(() => {
-    getColumnPreferences(Preference.ADMIN_USERS_COLUMNS, USER_COLUMNS, setColumns);
-  }, []);
 
   return (
     <>

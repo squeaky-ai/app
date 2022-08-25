@@ -19,12 +19,9 @@ import { Error } from 'components/error';
 import { NotFound } from 'components/sites/not-found';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useVisitor } from 'hooks/use-visitor';
-import { getColumnPreferences } from 'lib/tables';
+import { useColumns } from 'hooks/use-columns';
 import { toHoursMinutesAndSeconds } from 'lib/dates';
-import { Preference } from 'lib/preferences';
-import { COLUMNS, DEFAULT_COLUMNS } from 'data/recordings/constants';
 import { VisitorsPagesSort, RecordingsSort } from 'types/graphql';
-import type { Column } from 'types/common';
 import type { Site } from 'types/graphql';
 
 const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
@@ -33,9 +30,11 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
   const [selected, setSelected] = React.useState<string[]>([]);
   const [pageviewPage, setPageviewPage] = React.useState<number>(1);
   const [recordingPage, setRecordingPage] = React.useState<number>(0);
-  const [columns, setColumns] = React.useState<Column[]>(DEFAULT_COLUMNS);
   const [pageviewSort, setPageviewSort] = React.useState<VisitorsPagesSort>(VisitorsPagesSort.ViewsCountDesc);
   const [recordingSort, setRecordingSort] = React.useState<RecordingsSort>(RecordingsSort.ConnectedAtDesc);
+
+
+  const { columns, columnsReady, setColumns } = useColumns('recordings');
 
   const { visitor, error, loading } = useVisitor({ 
     recordingPage,
@@ -51,10 +50,6 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
   const { site_id } = router.query;
 
   const toTwoDecimalPlaces = (value: number) => Number(value.toFixed(2));
-
-  React.useEffect(() => {
-    getColumnPreferences(Preference.RECORDINGS_COLUMNS, COLUMNS, setColumns);
-  }, []);
 
   if (error) {
     return <Error />;
@@ -133,7 +128,7 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
 
             <div className='recordings-header'>
               <h5>Recordings</h5>
-              {visitor.recordings.items.length > 0 && (
+              {visitor.recordings.items.length > 0 && columnsReady && (
                 <menu>
                   <RecordingsBulkActions
                     site={site}

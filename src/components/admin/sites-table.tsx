@@ -5,9 +5,8 @@ import { TableWrapper, Table, Cell, Row } from 'components/table';
 import { Sort } from 'components/sort';
 import { SitesTableRow } from 'components/admin/sites-table-row';
 import { NoResults } from 'components/sites/no-results';
-import { SITE_COLUMNS, DEFAULT_SITE_COLUMNS } from 'data/admin/constants';
-import { getColumnPreferences, getColumnStyles } from 'lib/tables';
-import { Preference } from 'lib/preferences';
+import { DEFAULT_SITE_COLUMNS } from 'data/admin/constants';
+import { getColumnStyles } from 'lib/tables';
 import type { Column } from 'types/common';
 import type { SitesSort } from 'types/admin';
 import type { ActiveVisitorCount, Site } from 'types/graphql';
@@ -17,10 +16,9 @@ interface Props {
   activeVisitors: ActiveVisitorCount[];
   search: string;
   columns: Column[];
-  setColumns: (columns: Column[]) => void;
 }
 
-export const SitesTable: FC<Props> = ({ sites, activeVisitors, search, columns, setColumns }) => {
+export const SitesTable: FC<Props> = ({ sites, activeVisitors, search, columns }) => {
   const [sort, setSort] = React.useState<SitesSort>('created_at__desc');
   const { rowStyle, tableClassNames } = getColumnStyles(DEFAULT_SITE_COLUMNS, columns);
 
@@ -62,10 +60,6 @@ export const SitesTable: FC<Props> = ({ sites, activeVisitors, search, columns, 
       
       return keys.some(key => (result[key] || '').toLowerCase().includes(search.toLowerCase()));
     });
-
-  React.useEffect(() => {
-    getColumnPreferences(Preference.ADMIN_SITES_COLUMNS, SITE_COLUMNS, setColumns);
-  }, []);
 
   return (
     <>
