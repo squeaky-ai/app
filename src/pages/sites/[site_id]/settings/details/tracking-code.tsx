@@ -16,8 +16,8 @@ import { Icon } from 'components/icon';
 import { Platform } from 'components/platform';
 import { SettingsTabs } from 'components/sites/settings/settings-tabs';
 import { MAX_DAYS_BEFORE_POTENTIAL_ISSUE } from 'data/sites/constants';
-import type { Site } from 'types/graphql';
 import { useTrackingCode } from 'hooks/use-tracking-code';
+import type { Site } from 'types/graphql';
 
 const SitesSettingsTrackingCode: NextPage<ServerSideProps> = ({ user }) => {
   const { verifiedAt } = useTrackingCode();
@@ -60,7 +60,7 @@ const SitesSettingsTrackingCode: NextPage<ServerSideProps> = ({ user }) => {
                   <>
                     <p><b>Your tracking code is not verified.</b> Please follow the instructions below to use Squeaky on your site.</p>
 
-                    <p>Please paste the code below into the <code className='code'>&lt;head&gt;</code> section of your HTML on every page you wish to track on your website <a href={site.url} rel='noreferrer' target='_blank'>{site.url}</a>. This is the code that enables Squeaky to anonymously capture user behaviour, giving you valuable insights into their experience on your site.</p>
+                    <p>Please paste the code below into the <code className='code'>&lt;head&gt;</code> section of your HTML on every page you wish to track on your website <a href={site.url} rel='noreferrer' target='_blank' className='external-link'><span>{site.url}</span> <Icon name='external-link-line' /></a>. This is the code that enables Squeaky to anonymously capture user behaviour, giving you valuable insights into their experience on your site.</p>
                   </>
                 )}
 
@@ -71,13 +71,13 @@ const SitesSettingsTrackingCode: NextPage<ServerSideProps> = ({ user }) => {
                       message={<span><a target='_blank' rel='noreferrer' href={site.url}>{site.url}</a> <b>has not sent any data in the past {site.daysSinceLastRecording} days</b>, there might be an issue with your tracking code.</span>}
                     />
 
-                    <p>Please paste the code below into the <code className='code'>&lt;head&gt;</code> section of your HTML on every page you wish to track on your website <a href={site.url} target='_blank' rel='noreferrer'>{site.url}</a>.</p>
+                    <p>Please paste the code below into the <code className='code'>&lt;head&gt;</code> section of your HTML on every page you wish to track on your website <a href={site.url} target='_blank' rel='noreferrer' className='external-link'><span>{site.url}</span> <Icon name='external-link-line' /></a>.</p>
                   </>
                 )}
 
 
                 {isWorkingFine(site) && (
-                  <p>You can paste the code below into the <code className='code'>&lt;head&gt;</code> section of your HTML on any page that you wish to track on <a href={site.url} target='_blank' rel='noreferrer'>{site.url}</a>.</p>
+                  <p>You can paste the code below into the <code className='code'>&lt;head&gt;</code> section of your HTML on any page that you wish to track on <a href={site.url} target='_blank' rel='noreferrer' className='external-link'><span>{site.url}</span> <Icon name='external-link-line' /></a>.</p>
                 )}
 
                 <TrackingCode site={site} />
@@ -91,7 +91,7 @@ const SitesSettingsTrackingCode: NextPage<ServerSideProps> = ({ user }) => {
                     <Icon name='book-open-line' />
                     Installation Guides
                   </h4>
-                  <p>Need help getting set up? Visit our <Link href='https://squeaky.notion.site/Install-your-tracking-code-6ab27212bb5c434196f494ac43349b72#582b9522ff9a4f268dab90b0be05fbb5'><a target='_blank' rel='noreferrer'>Manual Installation Guide</a></Link>, or try one of the step-by-step platform guides in our help center:</p>
+                  <p>Need help getting set up? Visit our <Link href='https://squeaky.notion.site/Install-your-tracking-code-6ab27212bb5c434196f494ac43349b72#582b9522ff9a4f268dab90b0be05fbb5'><a target='_blank' rel='noreferrer' className='external-link'><span>Manual Installation Guide</span> <Icon name='external-link-line' /></a></Link>, or try one of the step-by-step platform guides in our help center:</p>
 
                   <div className='platforms'>
                     <Link href='https://squeaky.notion.site/Wordpress-571e94c409f94748a6c40f67b5d79543'>

@@ -54,9 +54,8 @@ const AdminSite: NextPage<ServerSideProps> = () => {
                 <SiteIngestEnabled site={admin.site} />
     
                 {hasBilling && (
-                  <a className='button stripe-link' href={`https://dashboard.stripe.com/test/customers/${admin.site.billing.customerId}`} target='_blank' rel='noreferrer'>
-                    <Icon name='external-link-line' />
-                    Stripe
+                  <a className='button stripe-link external-link' href={`https://dashboard.stripe.com/test/customers/${admin.site.billing.customerId}`} target='_blank' rel='noreferrer'>
+                    <span>Stripe</span> <Icon name='external-link-line' />
                   </a>
                 )}
               </menu>

@@ -12,6 +12,7 @@ import { SettingsTabs } from 'components/sites/settings/settings-tabs';
 import { Table, Row, Cell } from 'components/table';
 import { Message } from 'components/message';
 import { Button } from 'components/button';
+import { Icon } from 'components/icon';
 import { SettingsScreeningIpCreate } from 'components/sites/settings/settings-screening-ip-create';
 import { SettingsScreeningDomainCreate } from 'components/sites/settings/settings-screening-domain-create';
 import { SettingsScreeningEmailCreate } from 'components/sites/settings/settings-screening-email-create';
@@ -69,7 +70,7 @@ const SitesSettingsIp: NextPage<ServerSideProps> = ({ user }) => {
               <Label className='section'>
                 <span>IP Address</span>
                 <Link href='https://www.iplocation.net/find-ip-address'>
-                  <a target='_blank' rel='noreferrer'>Find Your IP Address</a>
+                  <a target='_blank' rel='noreferrer' className='external-link'><span>Find Your IP Address</span> <Icon name='external-link-line' /></a>
                 </Link>
               </Label>
 

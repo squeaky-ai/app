@@ -453,7 +453,12 @@
     .link {
       font-size: var(--font-size-body-sm);
       line-height: var(--line-height-body-sm);
-      text-decoration: underline;
+    }
+    
+    .external-link {
+      .icon {
+        font-size: var(--font-size-body-sm);
+      }
     }
   }
 

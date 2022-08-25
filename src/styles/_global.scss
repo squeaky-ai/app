@@ -11,3 +11,19 @@ html, body {
 *:focus-visible {
   outline: 2px dashed var(--body-color);
 }
+
+.external-link {
+  text-decoration: none;
+
+  span {
+    text-decoration: underline;
+  }
+
+  .icon {
+    color: var(--blue-700);
+    display: inline;
+    font-size: var(--font-size-body);
+    margin: 0;
+    vertical-align: middle;
+  }
+}

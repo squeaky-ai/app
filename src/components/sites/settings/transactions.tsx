@@ -2,6 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
 import { orderBy } from 'lodash';
+import { Icon } from 'components/icon';
 import { Table, Row, Cell } from 'components/table';
 import { CURRENCY_SYMBOLS } from 'data/common/constants';
 import { toDecimalCurrency } from 'lib/currency';
@@ -30,8 +31,8 @@ export const Transactions: FC<Props> = ({ billing }) => {
             <Cell>{CURRENCY_SYMBOLS[transaction.currency]}{toDecimalCurrency(transaction.amount)}</Cell>
             <Cell>
               <Link href={transaction.invoiceWebUrl}>
-                <a target='_blank' rel='noreferrer'>
-                  View invoice
+                <a target='_blank' rel='noreferrer' className='external-link'>
+                  <span>View invoice</span> <Icon name='external-link-line' />
                 </a>
               </Link>
             </Cell>

@@ -1,7 +1,9 @@
 import React from 'react';
 import type { FC } from 'react';
+import classnames from 'classnames';
 import { gql, useMutation } from '@apollo/client';
 import { Button } from 'components/button';
+import { Icon } from 'components/icon';
 import { useToasts } from 'hooks/use-toasts';
 import type { Site, SubscriptionsCheckout } from 'types/graphql';
 
@@ -46,8 +48,13 @@ export const BillingPortalButton: FC<Props> = ({ site, message, buttonClassName 
   };
 
   return (
-    <Button type='button' className={buttonClassName} onClick={handlePortalRedirect} disabled={loading}>
-      {loading ? 'Loading...' : message || 'Update'}
+    <Button type='button' className={classnames(buttonClassName, 'external-link')} onClick={handlePortalRedirect} disabled={loading}>
+      {loading && 'Loading...'}
+      {!loading && (
+        <>
+          <span>{message || 'Update'}</span> <Icon name='external-link-line' />
+        </>
+      )}
     </Button>
   )
 };

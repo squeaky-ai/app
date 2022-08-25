@@ -67,7 +67,7 @@ export const BillingTable: FC<Props> = ({ site, billing, hasBilling }) => {
                 {pricing?.amount ? `, ${CURRENCY_SYMBOLS[currency]}${(pricing.amount)}` : ''}
                 </Cell>
               <Cell>
-                <Button onClick={onBackToPlansTab} className='link'>Change plan</Button>
+                <Button onClick={onBackToPlansTab} className='link'><span>Change plan</span></Button>
               </Cell>
             </Row>
             <Row>
