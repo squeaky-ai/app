@@ -78,8 +78,8 @@ const SitesSettingsPrivacyData: NextPage<ServerSideProps> = ({ user }) => {
                   <i>No technical expertise required</i>
                 </p>
 
-                <p>The magic eraser is a simple tool <b>that only you can see</b> when you visit your website. It allows you to simple click on any element you wish to hide from your recordings e.g. your visitors address. You click the element, and then it will never be capture by the Squeaky tracking code.</p>
-                <p>To see the Magic Erasure tool on your site or web app, all you have to do is turn on the visibility use the checkbox below, and visit your site whilst you&apos;re logged in to the Squeaky.</p>
+                <p>The magic eraser is a simple tool <b>that only you can see</b> when you visit your website. It allows you to simply click on any element you wish to hide from your recordings e.g. your visitors address. You click the element, and then it will never be capture by the Squeaky tracking code.</p>
+                <p>To see the Magic Erasure tool on your site or web app, all you have to do is turn on the visibility using the checkbox below, and visit your site whilst you&apos;re logged in to the Squeaky.</p>
 
                 <Checkbox checked={site.magicErasureEnabled} onChange={toggleMagicErasureEnabled(site)}>
                   Show Magic Erasure
