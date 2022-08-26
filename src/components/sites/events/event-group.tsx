@@ -6,11 +6,12 @@ import { Icon } from 'components/icon';
 import { EventCompare } from 'components/sites/events/event-compare';
 import { EventGroupDelete } from 'components/sites/events/event-group-delete';
 import { EventCaptures } from 'components/sites/events/event-captures';
+import { EventsCaptureSort, EventsGroup, EventsType, Site, Team } from 'types/graphql'
 import type { EventSelected } from 'types/events';
-import { EventsCaptureSort, EventsGroup, EventsType, Site } from 'types/graphql';
 
 interface Props {
   site: Site;
+  member: Team;
   group: EventsGroup;
   sort: EventsCaptureSort;
   selected: EventSelected[];
@@ -20,6 +21,7 @@ interface Props {
 
 export const EventGroup: FC<Props> = ({
   site,
+  member,
   group,
   sort,
   selected,
@@ -43,6 +45,7 @@ export const EventGroup: FC<Props> = ({
       <div className='actions'>
         <EventGroupDelete
           site={site}
+          member={member}
           group={group}
         />
         <EventCompare
@@ -69,6 +72,7 @@ export const EventGroup: FC<Props> = ({
         {hasItems && (
           <EventCaptures
             site={site}
+            member={member}
             events={{
               items: group.items,
               pagination: {

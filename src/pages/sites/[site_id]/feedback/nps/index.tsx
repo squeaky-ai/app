@@ -28,7 +28,7 @@ const SitesFeedbackNps: NextPage<ServerSideProps> = ({ user }) => {
       </Head>
 
       <Page user={user} scope={[]}>
-        {({ site }) => (
+        {({ site, member }) => (
           <Main className={classnames({ empty: !site.verifiedAt })}>
             <BreadCrumbs site={site} items={[{ name: 'Feedback' }, { name: 'NPS Score®' }]} />
 
@@ -36,7 +36,7 @@ const SitesFeedbackNps: NextPage<ServerSideProps> = ({ user }) => {
               Net Promoter Score®
               {!loading && feedback && (
                 <menu>
-                  <NpsStatus feedback={feedback} site={site} />
+                  <NpsStatus feedback={feedback} site={site} member={member} />
                 </menu>
               )}
             </h4>
@@ -52,8 +52,8 @@ const SitesFeedbackNps: NextPage<ServerSideProps> = ({ user }) => {
 
             {!!site.verifiedAt && (
               <>
-                <NpsTabs siteId={site.id} page='feedback' />
-                <Nps />
+                <NpsTabs siteId={site.id} member={member} page='feedback' />
+                <Nps member={member} />
               </>
             )}
           </Main>

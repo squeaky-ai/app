@@ -46,7 +46,7 @@ const SitesEventsHistory: NextPage<ServerSideProps> = ({ user }) => {
       </Head>
 
       <Page user={user} scope={[]}>
-        {({ site }) => (
+        {({ site, member }) => (
           <Main className={classnames({ empty: site.recordingsCount === 0 })}>
             <BreadCrumbs site={site} items={[{ name: 'Events', href: `/sites/${site.id}/events` }, { name: 'Event History' }]} />
 
@@ -70,6 +70,7 @@ const SitesEventsHistory: NextPage<ServerSideProps> = ({ user }) => {
             {!loading && hasIds && (
               <EventHistory 
                 site={site}
+                member={member}
                 eventStats={eventStats} 
                 groupIds={groupIds}
                 captureIds={captureIds}

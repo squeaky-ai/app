@@ -6,12 +6,13 @@ import { Sort } from 'components/sort';
 import { PageSize } from 'components/sites/page-size';
 import { Pagination } from 'components/pagination';
 import { EventCapturesItem } from 'components/sites/events/event-captures-item';
-import { EventsCaptureSort, EventsType } from 'types/graphql';
+import { EventsCaptureSort, EventsType, Team } from 'types/graphql';
 import type { EventSelected } from 'types/events';
 import type { Site, EventsCapture } from 'types/graphql';
 
 interface Props {
   site: Site;
+  member: Team;
   events: EventsCapture;
   page: number;
   sort: EventsCaptureSort;
@@ -24,6 +25,7 @@ interface Props {
 
 export const EventCaptures: FC<Props> = ({ 
   site,
+  member,
   events,
   sort, 
   page,
@@ -71,6 +73,7 @@ export const EventCaptures: FC<Props> = ({
               key={event.id}
               site={site}
               event={event}
+              member={member}
               selected={selected}
               setSelected={setSelected}
             />

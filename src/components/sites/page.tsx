@@ -5,9 +5,9 @@ import { NotFound } from 'components/sites/not-found';
 import { Unauthorized } from 'components/sites/unauthorized';
 import { ErrorBoundary } from 'components/sites/error-boundary';
 import { useSidebar } from 'hooks/use-sidebar';
+import { Error } from 'components/error';
 import type { User, Team } from 'types/graphql';
 import type { Site } from 'types/graphql';
-import { Error } from 'components/error';
 
 interface Children {
   site: Site;

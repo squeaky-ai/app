@@ -11,19 +11,20 @@ import { SidebarFeedback } from 'components/sites/player/sidebar-feedback';
 import { PlayerTabs } from 'components/sites/player/player-tabs';
 import { SidebarPages } from 'components/sites/player/sidebar-pages';
 import type { PlayerState, Action } from 'types/player';
-import type { Recording, Site } from 'types/graphql';
+import type { Recording, Site, Team } from 'types/graphql';
 import type { Event } from 'types/event';
 
 interface Props {
   state: PlayerState;
   site: Site;
+  member: Team;
   replayer: Replayer;
   events: Event[];
   recording: Recording;
   dispatch: React.Dispatch<Action>;
 }
 
-export const PlayerSidebar: FC<Props> = ({ state, site, replayer, events, recording, dispatch }) => {
+export const PlayerSidebar: FC<Props> = ({ state, site, member, replayer, events, recording, dispatch }) => {
   const setActiveTab = (value: PlayerTab) => {
     dispatch({ type: 'activeTab', value });
   };
@@ -34,7 +35,7 @@ export const PlayerSidebar: FC<Props> = ({ state, site, replayer, events, record
         <>
           <div className={classnames('sidebar info', { active: state.activeTab === PlayerTab.INFO })}>
             <div className='contents'>
-              <SidebarInfo site={site} recording={recording} setActiveTab={setActiveTab} />
+              <SidebarInfo site={site} member={member} recording={recording} setActiveTab={setActiveTab} />
             </div>
           </div>
           <div className={classnames('sidebar events', { active: state.activeTab === PlayerTab.EVENTS })}>
@@ -49,12 +50,12 @@ export const PlayerSidebar: FC<Props> = ({ state, site, replayer, events, record
           </div>
           <div className={classnames('sidebar notes', { active: state.activeTab === PlayerTab.NOTES })}>
             <div className='contents'>
-              <SidebarNotes recording={recording} replayer={replayer} />
+              <SidebarNotes member={member} recording={recording} replayer={replayer} />
             </div>
           </div>
           <div className={classnames('sidebar tags', { active: state.activeTab === PlayerTab.TAGS })}>
             <div className='contents'>
-              <SidebarTags recording={recording} />
+              <SidebarTags member={member} recording={recording} />
             </div>
           </div>
           <div className={classnames('sidebar feedback', { active: state.activeTab === PlayerTab.FEEDBACK })}>

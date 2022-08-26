@@ -10,11 +10,12 @@ import { NoResponses } from 'components/sites/feedback/no-responses';
 import { NpsResponsesItem } from 'components/sites/feedback/nps-responses-item';
 import { COLUMNS } from 'data/nps/constants';
 import { getColumnStyles } from 'lib/tables';
-import { FeedbackNpsResponseSort } from 'types/graphql';
+import { FeedbackNpsResponseSort, Team } from 'types/graphql';
 import type { FeedbackNpsResponse } from 'types/graphql';
 import type { Column } from 'types/common';
 
 interface Props {
+  member: Team;
   page: number;
   sort: FeedbackNpsResponseSort;
   size: number;
@@ -25,7 +26,17 @@ interface Props {
   columns: Column[];
 }
 
-export const NpsResponses: FC<Props> = ({ page, sort, size, setPage, setSort, setSize, responses, columns }) => {
+export const NpsResponses: FC<Props> = ({ 
+  member,
+  page, 
+  sort, 
+  size, 
+  setPage, 
+  setSort, 
+  setSize, 
+  responses, 
+  columns 
+}) => {
   const { items, pagination } = responses;
 
   const hasResults = pagination.total > 0;
@@ -74,7 +85,7 @@ export const NpsResponses: FC<Props> = ({ page, sort, size, setPage, setSort, se
               <Cell />
             </Row>
             {items.map(i => (
-              <NpsResponsesItem key={i.id} response={i} style={rowStyle} />
+              <NpsResponsesItem key={i.id} response={i} style={rowStyle} member={member} />
             ))}
           </Table>
           <div className='nps-responses-footer'>

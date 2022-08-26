@@ -31,7 +31,7 @@ const SitesFeedbackSentimentAppearance: NextPage<ServerSideProps> = ({ user }) =
       </Head>
 
       <Page user={user} scope={[]}>
-        {({ site }) => (
+        {({ site, member }) => (
           <Main className={classnames({ empty: !site.verifiedAt })}>
             <BreadCrumbs site={site} items={[{ name: 'Feedback' }, { name: 'Sentiment' }]} />
 
@@ -39,7 +39,7 @@ const SitesFeedbackSentimentAppearance: NextPage<ServerSideProps> = ({ user }) =
               Sentiment
               {!loading && feedback && (
                 <menu>
-                  <SentimentStatus feedback={feedback} site={site} />
+                  <SentimentStatus feedback={feedback} site={site} member={member} />
                 </menu>
               )}
             </h4>
@@ -65,7 +65,7 @@ const SitesFeedbackSentimentAppearance: NextPage<ServerSideProps> = ({ user }) =
 
             {!!site.verifiedAt && !loading && (
               <>
-                <SentimentTabs siteId={site.id} page='appearance' />
+                <SentimentTabs siteId={site.id} member={member} page='appearance' />
                 <SentimentAppearance site={site} feedback={feedback} locale={locale} setLocale={setLocale} />
               </>
             )}

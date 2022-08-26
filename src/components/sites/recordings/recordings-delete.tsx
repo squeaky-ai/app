@@ -5,15 +5,18 @@ import { Icon } from 'components/icon';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { recordingsDelete } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
+import { MEMBER, READ_ONLY } from 'data/teams/constants';
+import type { Team } from 'types/graphql';
 
 interface Props {
   siteId: string;
+  member: Team;
   recordingIds: string[];
   onCompleted: VoidFunction;
   onClose: VoidFunction;
 }
 
-export const RecordingsDelete: FC<Props> = ({ recordingIds, siteId, onCompleted, onClose }) => {
+export const RecordingsDelete: FC<Props> = ({ recordingIds, member, siteId, onCompleted, onClose }) => {
   const ref = React.useRef<Modal>();
   const toasts = useToasts();
 
@@ -44,7 +47,9 @@ export const RecordingsDelete: FC<Props> = ({ recordingIds, siteId, onCompleted,
 
   return (
     <>
-      <Button className='link tertiary' onClick={openModal}>Delete recordings</Button>
+      <Button className='link tertiary' onClick={openModal} unauthorized={[MEMBER, READ_ONLY].includes(member.role)}>
+        Delete recordings
+      </Button>
 
       <Modal ref={ref} onClose={onClose}>
         <ModalBody aria-labelledby='delete-recordings-title' aria-describedby='delete-recordings-description'>

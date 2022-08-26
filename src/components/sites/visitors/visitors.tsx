@@ -13,13 +13,14 @@ import { Preference } from 'lib/preferences';
 import { NoResults } from 'components/sites/no-results';
 import { formatFilterDates } from 'lib/visitors';
 import { useResize } from 'hooks/use-resize';
-import { VisitorsSort } from 'types/graphql';
+import { Team, VisitorsSort } from 'types/graphql';
 import type { Site } from 'types/graphql';
 import type { Column } from 'types/common';
 import type { VisitorsFilters } from 'types/graphql';
 
 interface Props {
   site: Site;
+  member: Team;
   search: string;
   columns: Column[];
   page: number;
@@ -34,6 +35,7 @@ interface Props {
 export const Visitors: FC<Props> = ({ 
   site,
   search,
+  member,
   columns, 
   filters,
   page,
@@ -79,6 +81,7 @@ export const Visitors: FC<Props> = ({
 
       <VisitorsComponent
         site={site}
+        member={member}
         visitors={visitors}
         sort={sort}
         columns={columns}

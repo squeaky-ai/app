@@ -11,14 +11,15 @@ import { Dropdown } from 'components/dropdown';
 import { Emoji, EmojiType } from 'components/emoji';
 import { SentimentResponsesDelete } from 'components/sites/feedback/sentiment-responses-delete';
 import { toNiceDate } from 'lib/dates';
-import type { FeedbackSentimentResponseItem } from 'types/graphql';
+import type { FeedbackSentimentResponseItem, Team } from 'types/graphql';
 
 interface Props {
+  member: Team;
   response: FeedbackSentimentResponseItem;
   style?: React.CSSProperties;
 }
 
-export const SentimentResponsesItem: FC<Props> = ({ response, style }) => {
+export const SentimentResponsesItem: FC<Props> = ({ member, response, style }) => {
   const router = useRouter();
   const rowActionsRef = React.useRef<Dropdown>();
 
@@ -76,6 +77,7 @@ export const SentimentResponsesItem: FC<Props> = ({ response, style }) => {
       <Cell>
         <Dropdown portal button={<Icon name='more-2-fill' />} buttonClassName='options' ref={rowActionsRef}>
           <SentimentResponsesDelete 
+            member={member}
             response={response}
             onClose={onRowActionClose}
           />

@@ -1,13 +1,13 @@
 import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
-import { Button } from 'components/button';
+import { Button, Props as ButtonProps } from 'components/button';
 import { Portal } from 'components/portal';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   button: string | React.ReactNode;
   buttonClassName?: string;
-  buttonProps?: React.ButtonHTMLAttributes<HTMLButtonElement>;
+  buttonProps?: ButtonProps;
   buttonOnClick?: (event: React.MouseEvent) => void;
   portalClassName?: string;
   positionX?: 'left' | 'right';

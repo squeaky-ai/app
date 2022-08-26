@@ -2,21 +2,23 @@ import React from 'react';
 import type { FC } from 'react';
 import { Container } from 'components/container';
 import { Card } from 'components/card';
-import { EventCreate } from 'components/sites/events/event-create';
-import type { Site } from 'types/graphql';
 import { Icon } from 'components/icon';
+import { EventCreate } from 'components/sites/events/event-create';
+import type { Site, Team } from 'types/graphql';
 
 interface Props {
   site: Site;
+  member: Team;
 }
 
-export const GettingStarted: FC<Props> = ({ site }) => (
+export const GettingStarted: FC<Props> = ({ site, member }) => (
   <>
     <Container className='md getting-started'>
       <p>To help you make the most out of the data you&apos;re capturing with Squeaky, we allow you to create definitions for any action that visitors are taking on your site e.g. tracking each time a visitor clicks the Login button. You can then compare the actions you have defined in the events interface, to see how often they&apos;re taking place</p>
 
       <EventCreate 
         site={site} 
+        member={member}
         buttonText='Define Your First Event'
         buttonClassName='primary'
       />

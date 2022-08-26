@@ -5,10 +5,11 @@ import { EventGroup } from 'components/sites/events/event-group';
 import { PageLoading } from 'components/sites/page-loading';
 import { Error } from 'components/error';
 import type { EventSelected } from 'types/events';
-import type { Site, EventsCaptureSort } from 'types/graphql';
+import type { Site, EventsCaptureSort, Team } from 'types/graphql';
 
 interface Props {
   site: Site;
+  member: Team;
   selected: EventSelected[];
   sort: EventsCaptureSort;
   setSelected: (selected: EventSelected[]) => void;
@@ -17,6 +18,7 @@ interface Props {
 
 export const EventGroups: FC<Props> = ({ 
   site,
+  member,
   sort,
   selected,
   setSort,
@@ -43,6 +45,7 @@ export const EventGroups: FC<Props> = ({
           key={group.id}
           site={site}
           group={group}
+          member={member}
           sort={sort}
           selected={selected}
           setSort={setSort}

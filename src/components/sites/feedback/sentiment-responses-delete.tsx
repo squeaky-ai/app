@@ -6,14 +6,16 @@ import { Button } from 'components/button';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { useToasts } from 'hooks/use-toasts';
 import { sentimentDelete } from 'lib/api/graphql';
-import type { FeedbackSentimentResponseItem } from 'types/graphql';
+import type { FeedbackSentimentResponseItem, Team } from 'types/graphql';
+import { MEMBER, READ_ONLY } from 'data/teams/constants';
 
 interface Props {
+  member: Team;
   response: FeedbackSentimentResponseItem;
   onClose: VoidFunction;
 }
 
-export const SentimentResponsesDelete: FC<Props> = ({ response, onClose }) => {
+export const SentimentResponsesDelete: FC<Props> = ({ member, response, onClose }) => {
   const toasts = useToasts();
   const router = useRouter();
 
@@ -41,7 +43,7 @@ export const SentimentResponsesDelete: FC<Props> = ({ response, onClose }) => {
 
   return (
     <>
-      <Button onClick={openModal}>
+      <Button onClick={openModal} unauthorized={[MEMBER, READ_ONLY].includes(member.role)}>
         <Icon name='delete-bin-line' /> Delete
       </Button>
             

@@ -87,10 +87,12 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
               <menu>
                 <VisitorsExport
                   site={site}
+                  member={member}
                   visitor={visitor}
                 />
                 <VisitorsDelete 
                   site={site}
+                  member={member}
                   visitorId={visitor.id}
                   onDelete={() => onVisitorDelete(site)} 
                   button='Delete Visitor'
@@ -99,7 +101,7 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
               </menu>
             </h4>
 
-            <VisitorsSummary site={site} visitor={visitor} />
+            <VisitorsSummary site={site} member={member} visitor={visitor} />
 
             <div className='stats'>
               <Card className='recordings'>
@@ -132,6 +134,7 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
                 <menu>
                   <RecordingsBulkActions
                     site={site}
+                    member={member}
                     selected={selected}
                     setSelected={setSelected}
                   />

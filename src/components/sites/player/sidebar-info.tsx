@@ -10,16 +10,17 @@ import { Device } from 'components/device';
 import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
 import { RecordingStarred } from 'components/sites/recordings/recordings-starred';
 import { getLinkedData, normalizeKey } from 'lib/visitors';
-import type { Recording } from 'types/graphql';
+import type { Recording, Team } from 'types/graphql';
 import type { Site } from 'types/graphql';
 
 interface Props {
   site: Site;
+  member: Team;
   recording: Recording;
   setActiveTab: (value: PlayerTab) => void;
 }
 
-export const SidebarInfo: FC<Props> = ({ site, recording, setActiveTab }) => {
+export const SidebarInfo: FC<Props> = ({ site, member, recording, setActiveTab }) => {
   const linkedData = getLinkedData(recording.visitor);
 
   return (
@@ -28,7 +29,9 @@ export const SidebarInfo: FC<Props> = ({ site, recording, setActiveTab }) => {
       <dl className='datalist'>
         <div className='row'>
           <dt>Visitor ID</dt>
-          <dd className='visitor-id'><VisitorsStarred site={site} visitor={recording.visitor} link /></dd>
+          <dd className='visitor-id'>
+            <VisitorsStarred site={site} member={member} visitor={recording.visitor} link />
+          </dd>
         </div>
         <div className='row'>
           <dt>First visited</dt>
@@ -72,7 +75,7 @@ export const SidebarInfo: FC<Props> = ({ site, recording, setActiveTab }) => {
       <dl className='datalist'>
         <div className='row'>
           <dt>Recording ID</dt>
-          <dd className='recording-id'><RecordingStarred site={site} recording={recording} /></dd>
+          <dd className='recording-id'><RecordingStarred site={site} member={member} recording={recording} /></dd>
         </div>
         <div className='row'>
           <dt>Date</dt>

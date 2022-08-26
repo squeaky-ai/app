@@ -73,6 +73,7 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
                     <Period period={period} onChange={setPeriod} />
                     <RecordingsBulkActions
                       site={site}
+                      member={member}
                       selected={selected}
                       setSelected={setSelected}
                     />

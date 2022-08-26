@@ -8,11 +8,13 @@ import { Button } from 'components/button';
 import { Input } from 'components/input';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { routesUpdate } from 'lib/api/graphql';
+import { MEMBER, READ_ONLY } from 'data/teams/constants';
 import { useToasts } from 'hooks/use-toasts';
-import type { Site } from 'types/graphql';
+import type { Site, Team } from 'types/graphql';
 
 interface Props {
   site: Site;
+  member: Team;
   button?: string;
   buttonClassName?: string;
   routes: string[];
@@ -22,7 +24,7 @@ const PageRoutesSchema = Yup.object().shape({
   routes: Yup.array(),
 });
 
-export const PageRoutes: FC<Props> = ({ site, button, buttonClassName, routes }) => {
+export const PageRoutes: FC<Props> = ({ site, member, button, buttonClassName, routes }) => {
   const ref = React.useRef<Modal>();
   const [route, setRoute] = React.useState<string>('');
 
@@ -38,7 +40,7 @@ export const PageRoutes: FC<Props> = ({ site, button, buttonClassName, routes })
 
   return (
     <>
-      <Button className={classnames('page-routes', buttonClassName)} onClick={openModal}>
+      <Button className={classnames('page-routes', buttonClassName)} onClick={openModal} unauthorized={[MEMBER, READ_ONLY].includes(member.role)}>
         {button || <><Icon name='guide-line' />URL structure <span>({ routes.length })</span></>}
       </Button>
 

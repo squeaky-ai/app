@@ -45,13 +45,19 @@
   &.time {
     width: 70px;
   }
+
+  &.is-unauthorized {
+    opacity: .25;
+    pointer-events: none;
+    position: relative;
+  }
 }
 
 .input:-webkit-autofill,
 .input:-webkit-autofill:hover,
 .input:-webkit-autofill:focus,
 .input:-webkit-autofill:active {
-    transition: background 5000s ease-in-out 0s;
+  transition: background 5000s ease-in-out 0s;
 }
 
 .select-input-group {

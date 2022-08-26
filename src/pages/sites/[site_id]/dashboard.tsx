@@ -21,7 +21,7 @@ const SitesDashboard: NextPage<ServerSideProps> = ({ user }) => {
       </Head>
 
       <Page user={user} scope={[]}>
-        {({ site }) => (
+        {({ site, member }) => (
           <Main className={classnames({ empty: site.recordingsCount === 0 })}>
             <BreadCrumbs site={site} items={[{ name: 'Dashboard' }]} />
 
@@ -39,7 +39,7 @@ const SitesDashboard: NextPage<ServerSideProps> = ({ user }) => {
             />
 
             {site.recordingsCount > 0 && (
-              <Dashboard site={site} period={period} />
+              <Dashboard site={site} member={member} period={period} />
             )}
           </Main>
         )}
