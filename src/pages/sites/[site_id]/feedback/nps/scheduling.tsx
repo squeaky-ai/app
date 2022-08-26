@@ -57,7 +57,7 @@ const SitesFeedbackNpsScheduling: NextPage<ServerSideProps> = ({ user }) => {
 
             {!!site.verifiedAt && !loading && (
               <>
-                <NpsTabs siteId={site.id} page='scheduling' />
+                <NpsTabs siteId={site.id} member={member} page='scheduling' />
                 <NpsScheduling site={site} feedback={feedback} locale={locale} setLocale={setLocale} />
               </>
             )}

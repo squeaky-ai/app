@@ -57,7 +57,7 @@ const SitesFeedbackNpsAppearance: NextPage<ServerSideProps> = ({ user }) => {
 
             {!!site.verifiedAt && !loading && (
               <>
-                <NpsTabs siteId={site.id} page='appearance' />
+                <NpsTabs siteId={site.id} member={member} page='appearance' />
                 <NpsAppearance site={site} feedback={feedback} locale={locale} setLocale={setLocale} />
               </>
             )}

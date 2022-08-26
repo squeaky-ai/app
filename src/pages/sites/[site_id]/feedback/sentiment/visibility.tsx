@@ -60,7 +60,7 @@ const SitesFeedbackSentimentVisibility: NextPage<ServerSideProps> = ({ user }) =
 
             {!!site.verifiedAt && !loading && (
               <>
-                <SentimentTabs siteId={site.id} page='visibility' />
+                <SentimentTabs siteId={site.id} member={member} page='visibility' />
                 <SentimentVisibility site={site} feedback={feedback} locale={locale} setLocale={setLocale} />
               </>
             )}

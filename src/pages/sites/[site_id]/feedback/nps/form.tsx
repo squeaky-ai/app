@@ -57,7 +57,7 @@ const SitesFeedbackNpsForm: NextPage<ServerSideProps> = ({ user }) => {
 
             {!!site.verifiedAt && !loading && (
               <>
-                <NpsTabs siteId={site.id} page='form' />
+                <NpsTabs siteId={site.id} member={member} page='form' />
                 <NpsForm site={site} feedback={feedback} locale={locale} setLocale={setLocale} />
               </>
             )}
