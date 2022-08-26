@@ -7,7 +7,7 @@ import { EventCompare } from 'components/sites/events/event-compare';
 import { EventGroupDelete } from 'components/sites/events/event-group-delete';
 import { EventCaptures } from 'components/sites/events/event-captures';
 import { EventsCaptureSort, EventsGroup, EventsType, Site, Team } from 'types/graphql'
-import type { EventSelected } from 'types/events';;
+import type { EventSelected } from 'types/events';
 
 interface Props {
   site: Site;
