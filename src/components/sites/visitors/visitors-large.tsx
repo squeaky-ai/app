@@ -8,12 +8,13 @@ import { VisitorsLargeItem } from 'components/sites/visitors/visitors-large-item
 import { TableWrapper, Table, Row, Cell } from 'components/table';
 import { COLUMNS } from 'data/visitors/constants';
 import { getColumnStyles } from 'lib/tables';
-import { Visitors, VisitorsSort } from 'types/graphql';
+import { Team, Visitors, VisitorsSort } from 'types/graphql';
 import type { Site } from 'types/graphql';
 import type { Column } from 'types/common';
 
 interface Props {
   site: Site,
+  member: Team;
   visitors: Visitors;
   search: string;
   columns: Column[];
@@ -23,6 +24,7 @@ interface Props {
 
 export const VisitorsLarge: FC<Props> = ({ 
   site,
+  member,
   visitors,
   search,
   columns,
@@ -104,6 +106,7 @@ export const VisitorsLarge: FC<Props> = ({
         {items.map(v => (
           <VisitorsLargeItem 
             site={site} 
+            member={member}
             visitor={v} 
             key={v.visitorId} 
             search={search}

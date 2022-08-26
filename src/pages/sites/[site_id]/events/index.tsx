@@ -43,7 +43,7 @@ const SitesEvents: NextPage<ServerSideProps> = ({ user }) => {
       </Head>
 
       <Page user={user} scope={[]}>
-        {({ site }) => (
+        {({ site, member }) => (
           <Main className={classnames({ empty: site.recordingsCount === 0 })}>
             <BreadCrumbs site={site} items={[{ name: 'Events' }]} />
 
@@ -52,7 +52,7 @@ const SitesEvents: NextPage<ServerSideProps> = ({ user }) => {
                 Events
 
                 {hasEvents && (
-                  <EventCreate site={site} buttonClassName='link' />
+                  <EventCreate site={site} member={member} buttonClassName='link' />
                 )}
               </h4>
 
@@ -60,6 +60,7 @@ const SitesEvents: NextPage<ServerSideProps> = ({ user }) => {
                 <menu>
                   <EventCapturesBulkActions
                     site={site}
+                    member={member}
                     selected={selected}
                     setSelected={setSelected}
                   />
@@ -94,6 +95,7 @@ const SitesEvents: NextPage<ServerSideProps> = ({ user }) => {
                     type={type}
                     site={site}
                     events={events}
+                    member={member}
                     page={page}
                     selected={selected}
                     sort={sort}
@@ -103,7 +105,7 @@ const SitesEvents: NextPage<ServerSideProps> = ({ user }) => {
                     setSort={setSort}
                   />
                 )
-                : <GettingStarted site={site} />
+                : <GettingStarted site={site} member={member} />
             )}
           </Main>
         )}

@@ -13,18 +13,19 @@ import { Dropdown } from 'components/dropdown';
 import { Flag } from 'components/flag';
 import { Highlighter } from 'components/highlighter';
 import { getLinkedData, groupVisitorBrowsers, groupVisitorDevices, groupVisitorCountries } from 'lib/visitors';
-import type { Site } from 'types/graphql';
+import type { Site, Team } from 'types/graphql';
 import type { ExternalAttributes } from 'types/visitors';
 import type { Visitor } from 'types/graphql';
 
 interface Props {
   site: Site;
+  member: Team;
   visitor: Visitor;
   search: string;
   style?: React.CSSProperties;
 }
 
-export const VisitorsLargeItem: FC<Props> = ({ site, visitor, search, style }) => {
+export const VisitorsLargeItem: FC<Props> = ({ site, member, visitor, search, style }) => {
   const rowActionsRef = React.useRef<Dropdown>();
 
   const linkedData = getLinkedData<ExternalAttributes>(visitor);
@@ -48,6 +49,7 @@ export const VisitorsLargeItem: FC<Props> = ({ site, visitor, search, style }) =
       <Cell className='primary'>
         <VisitorsStarred 
           site={site}
+          member={member}
           visitor={visitor} 
           search={search}
           link 
@@ -145,6 +147,7 @@ export const VisitorsLargeItem: FC<Props> = ({ site, visitor, search, style }) =
         <Dropdown portal button={<Icon name='more-2-fill' />} buttonClassName='options' ref={rowActionsRef}>
           <VisitorsDelete 
             site={site} 
+            member={member}
             visitorId={visitor.id}
             onClose={onRowActionClose}
           />

@@ -29,7 +29,7 @@ const SitesFeedbackNpsForm: NextPage<ServerSideProps> = ({ user }) => {
       </Head>
 
       <Page user={user} scope={[]}>
-        {({ site }) => (
+        {({ site, member }) => (
           <Main className={classnames({ empty: !site.verifiedAt })}>
             <BreadCrumbs site={site} items={[{ name: 'Feedback' }, { name: 'NPS Score®' }]} />
 
@@ -37,7 +37,7 @@ const SitesFeedbackNpsForm: NextPage<ServerSideProps> = ({ user }) => {
               Net Promoter Score®
               {!loading && feedback && (
                 <menu>
-                  <NpsStatus feedback={feedback} site={site} />
+                  <NpsStatus feedback={feedback} site={site} member={member} />
                 </menu>
               )}
             </h4>

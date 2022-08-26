@@ -6,11 +6,13 @@ import { Button } from 'components/button';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { visitorDelete } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
-import type { Site } from 'types/graphql';
 import { Message } from 'components/message';
+import { MEMBER, READ_ONLY } from 'data/teams/constants';
+import type { Site, Team } from 'types/graphql';
 
 interface Props {
   site: Site;
+  member: Team;
   visitorId: string;
   button?: string | React.ReactNode;
   buttonClassName?: string;
@@ -18,7 +20,7 @@ interface Props {
   onDelete?: VoidFunction;
 }
 
-export const VisitorsDelete: FC<Props> = ({ site, visitorId, button, buttonClassName, onClose, onDelete }) => {
+export const VisitorsDelete: FC<Props> = ({ site, member, visitorId, button, buttonClassName, onClose, onDelete }) => {
   const toasts = useToasts();
   const ref = React.useRef<Modal>();
 
@@ -49,7 +51,7 @@ export const VisitorsDelete: FC<Props> = ({ site, visitorId, button, buttonClass
 
   return (
     <>
-      <Button onClick={openModal} className={classnames('delete-visitor', buttonClassName)}>
+      <Button onClick={openModal} className={classnames('delete-visitor', buttonClassName)} unauthorized={[MEMBER, READ_ONLY].includes(member.role)}>
         {button || <><Icon name='delete-bin-line' /> <span>Delete</span></>}
       </Button>
             

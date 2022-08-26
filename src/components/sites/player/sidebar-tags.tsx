@@ -6,11 +6,13 @@ import { useRouter } from 'next/router';
 import { Formik } from 'formik';
 import { Input } from 'components/input';
 import { Tag } from 'components/tag';
-import { tagCreate, tagRemove } from 'lib/api/graphql';
-import type { Recording, Tag as ITag } from 'types/graphql';
 import { useTags } from 'hooks/use-tags';
+import { READ_ONLY } from 'data/teams/constants';
+import { tagCreate, tagRemove } from 'lib/api/graphql';
+import type { Recording, Tag as ITag, Team } from 'types/graphql';
 
 interface Props {
+  member: Team;
   recording: Recording;
 }
 
@@ -18,7 +20,7 @@ const TagSchema = Yup.object().shape({
   name: Yup.string().required('Name is required')
 });
 
-export const SidebarTags: FC<Props> = ({ recording }) => {
+export const SidebarTags: FC<Props> = ({ member, recording }) => {
   const ref = React.useRef<HTMLFormElement>(null);
 
   const router = useRouter();
@@ -102,6 +104,7 @@ export const SidebarTags: FC<Props> = ({ recording }) => {
                     onChange={handleChange}
                     placeholder='Add tag ...'
                     value={values.name}
+                    unauthorized={[READ_ONLY].includes(member.role)}
                   />
 
                   <div className={classnames('tag-results', { show: focus })}>
@@ -122,7 +125,11 @@ export const SidebarTags: FC<Props> = ({ recording }) => {
           </Formik>
           <div className='tag-list'>
             {recording.tags.map(tag => (
-              <Tag className='primary' handleDelete={() => handleTagRemove(tag)} key={tag.id}>
+              <Tag 
+                className='primary' 
+                buttonProps={{ unauthorized: [READ_ONLY].includes(member.role) }} 
+                handleDelete={() => handleTagRemove(tag)} key={tag.id}
+              >
                 {tag.name}
               </Tag>
             ))}

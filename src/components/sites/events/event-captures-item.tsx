@@ -9,12 +9,13 @@ import { Spinner } from 'components/spinner';
 import { EventTag } from 'components/sites/events/event-tag';
 import { EventCapturesEdit } from 'components/sites/events/event-captures-edit';
 import { EventCaptureDelete } from 'components/sites/events/event-capture-delete';
-import { EventsType } from 'types/graphql';
+import { EventsType, Team } from 'types/graphql';
 import type { EventSelected } from 'types/events';
 import type { Site, EventsCaptureItem } from 'types/graphql';
 
 interface Props {
   site: Site;
+  member: Team;
   event: EventsCaptureItem;
   selected: EventSelected[];
   setSelected: (selected: EventSelected[]) => void;
@@ -22,6 +23,7 @@ interface Props {
 
 export const EventCapturesItem: FC<Props> = ({ 
   site,
+  member,
   event, 
   selected,
   setSelected,
@@ -70,11 +72,13 @@ export const EventCapturesItem: FC<Props> = ({
         <Dropdown portal button={<Icon name='more-2-fill' />} buttonClassName='options' ref={rowActionsRef}>
           <EventCapturesEdit
             site={site} 
+            member={member}
             event={event}
             onClose={onRowActionClose}
           />
           <EventCaptureDelete 
             site={site} 
+            member={member}
             eventId={event.id}
             onClose={onRowActionClose}
           />

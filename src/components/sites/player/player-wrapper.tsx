@@ -105,6 +105,7 @@ export const PlayerWrapper: FC<Props> = ({ user, state, recording, events, dispa
                 <PlayerSidebar 
                   state={state}
                   site={site}
+                  member={member}
                   replayer={ref.current?.replayer} 
                   events={events}
                   recording={recording}

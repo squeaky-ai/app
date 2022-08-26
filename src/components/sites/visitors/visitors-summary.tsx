@@ -10,15 +10,16 @@ import { Flag } from 'components/flag';
 import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
 import { Pill } from 'components/pill';
 import { getLinkedData, normalizeKey, groupVisitorBrowsers, groupVisitorDevices, groupVisitorCountries } from 'lib/visitors';
-import type { Site } from 'types/graphql';
+import type { Site, Team } from 'types/graphql';
 import type { Visitor } from 'types/graphql';
 
 interface Props {
   site: Site;
+  member: Team;
   visitor: Visitor;
 }
 
-export const VisitorsSummary: FC<Props> = ({ site, visitor }) => {
+export const VisitorsSummary: FC<Props> = ({ site, member, visitor }) => {
   const linkedData = getLinkedData(visitor);
   const devices = groupVisitorDevices(visitor.devices);
   const browsers = groupVisitorBrowsers(visitor.devices);
@@ -54,7 +55,7 @@ export const VisitorsSummary: FC<Props> = ({ site, visitor }) => {
           <div className='row'>
             <dt>Visitor ID</dt>
             <dd>
-              <VisitorsStarred site={site} visitor={visitor} />
+              <VisitorsStarred site={site} member={member} visitor={visitor} />
               {!visitor.viewed && (
                 <Pill type='tertiary'>New</Pill>
               )}

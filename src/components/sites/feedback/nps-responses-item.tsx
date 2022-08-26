@@ -11,14 +11,15 @@ import { Tooltip } from 'components/tooltip';
 import { Dropdown } from 'components/dropdown';
 import { NpsResponsesDelete } from 'components/sites/feedback/nps-responses-delete';
 import { toNiceDate } from 'lib/dates';
-import type { FeedbackNpsResponseItem } from 'types/graphql';
+import type { FeedbackNpsResponseItem, Team } from 'types/graphql';
 
 interface Props {
+  member: Team;
   response: FeedbackNpsResponseItem;
   style?: React.CSSProperties;
 }
 
-export const NpsResponsesItem: FC<Props> = ({ response, style }) => {
+export const NpsResponsesItem: FC<Props> = ({ member, response, style }) => {
   const router = useRouter();
   const rowActionsRef = React.useRef<Dropdown>();
 
@@ -82,6 +83,7 @@ export const NpsResponsesItem: FC<Props> = ({ response, style }) => {
       <Cell>
         <Dropdown portal button={<Icon name='more-2-fill' />} buttonClassName='options' ref={rowActionsRef}>
           <NpsResponsesDelete 
+            member={member}
             response={response}
             onClose={onRowActionClose}
           />

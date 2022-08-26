@@ -15,15 +15,16 @@ import { ActiveVisitors } from 'components/sites/active-visitors';
 import { useDashboard } from 'hooks/use-dashboard';
 import { toTimeString } from 'lib/dates';
 import { getDateRange } from 'lib/dates';
-import type { Site } from 'types/graphql';
+import type { Site, Team } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 
 interface Props {
   site: Site;
+  member: Team;
   period: TimePeriod;
 }
 
-export const Dashboard: FC<Props> = ({ site, period }) => {
+export const Dashboard: FC<Props> = ({ site, member, period }) => {
   const router = useRouter();
   const { 
     notes,
@@ -130,7 +131,7 @@ export const Dashboard: FC<Props> = ({ site, period }) => {
               <li>
                 <span className='name'>Visitor ID</span>
                 <span className='value'>
-                  <VisitorsStarred site={site} visitor={recordingLatest.visitor} />
+                  <VisitorsStarred site={site} member={member} visitor={recordingLatest.visitor} />
                 </span>
               </li>
               <li>

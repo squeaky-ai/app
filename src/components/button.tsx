@@ -2,15 +2,17 @@ import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
 
-interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
+export interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  unauthorized?: boolean;
+}
 
 interface DelayedProps {
   delay: number;
   initialDelayed?: boolean;
 }
 
-export const Button: FC<Props> = ({ children, className, ...rest }) => (
-  <button className={classnames('button', className)} {...rest}>
+export const Button: FC<Props> = ({ children, className, unauthorized, ...rest }) => (
+  <button className={classnames('button', className, { 'is-unauthorized': unauthorized })} {...rest}>
     {children}
   </button>
 );

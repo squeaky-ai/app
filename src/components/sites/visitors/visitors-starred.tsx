@@ -7,18 +7,20 @@ import { Icon } from 'components/icon';
 import { Tooltip } from 'components/tooltip';
 import { visitorStarred } from 'lib/api/graphql';
 import { Highlighter } from 'components/highlighter';
-import type { Visitor } from 'types/graphql';
+import { READ_ONLY } from 'data/teams/constants';
+import type { Team, Visitor } from 'types/graphql';
 import type { Site } from 'types/graphql';
 
 interface Props {
   site: Site;
+  member: Team;
   link?: boolean;
   highlight?: boolean;
   search?: string;
   visitor: Visitor;
 }
 
-export const VisitorsStarred: FC<Props> = ({ site, search, link, highlight, visitor }) => {
+export const VisitorsStarred: FC<Props> = ({ site, member, search, link, highlight, visitor }) => {
   const router = useRouter();
 
   const starVisitor = async () => {
@@ -41,6 +43,7 @@ export const VisitorsStarred: FC<Props> = ({ site, search, link, highlight, visi
             {visitor.starred ? <Icon className='star' name='star-fill' /> : <Icon className='star' name='star-line' />}
           </span>
         }
+        buttonProps={{ unauthorized: [READ_ONLY].includes(member.role) }}
       >
         {visitor.starred ? 'Starred' : 'Not starred'}
       </Tooltip>

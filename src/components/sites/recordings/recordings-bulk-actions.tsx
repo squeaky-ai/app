@@ -5,15 +5,16 @@ import { Dropdown } from 'components/dropdown';
 import { Tooltip } from 'components/tooltip';
 import { RecordingsDelete } from 'components/sites/recordings/recordings-delete';
 import { RecordingsStatus } from 'components/sites/recordings/recordings-status';
-import type { Site } from 'types/graphql';
+import type { Site, Team } from 'types/graphql';
 
 interface Props {
   site: Site;
+  member: Team;
   selected: string[];
   setSelected: (selected: string[]) => void;
 }
 
-export const RecordingsBulkActions: FC<Props> = ({ site, selected, setSelected }) => {
+export const RecordingsBulkActions: FC<Props> = ({ site, member, selected, setSelected }) => {
   const bulkActionsRef = React.useRef<Dropdown>();
 
   const onCompleted = () => {
@@ -35,8 +36,19 @@ export const RecordingsBulkActions: FC<Props> = ({ site, selected, setSelected }
 
       {selected.length > 0 && (
         <Dropdown ref={bulkActionsRef} direction='down' button={<><Icon name='checkbox-multiple-line' /> Bulk Actions</>}>
-          <RecordingsStatus onClose={onBulkActionClose} siteId={site.id} recordingIds={selected} onCompleted={onCompleted} />
-          <RecordingsDelete onClose={onBulkActionClose} siteId={site.id} recordingIds={selected} onCompleted={onCompleted} />
+          <RecordingsStatus 
+            onClose={onBulkActionClose} 
+            siteId={site.id} 
+            recordingIds={selected} 
+            onCompleted={onCompleted} 
+          />
+          <RecordingsDelete 
+            onClose={onBulkActionClose} 
+            member={member}
+            siteId={site.id} 
+            recordingIds={selected} 
+            onCompleted={onCompleted} 
+          />
         </Dropdown>
       )}
     </div>

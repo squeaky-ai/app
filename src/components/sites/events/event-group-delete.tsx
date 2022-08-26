@@ -7,14 +7,16 @@ import { Checkbox } from 'components/checkbox';
 import { Preferences, Preference } from 'lib/preferences';
 import { useToasts } from 'hooks/use-toasts';
 import { eventsGroupDelete } from 'lib/api/graphql';
-import type { EventsGroup, Site } from 'types/graphql';
+import type { EventsGroup, Site, Team } from 'types/graphql';
+import { MEMBER, READ_ONLY } from 'data/teams/constants';
 
 interface Props {
   site: Site;
+  member: Team;
   group: EventsGroup;
 }
 
-export const EventGroupDelete: FC<Props> = ({ site, group }) => {
+export const EventGroupDelete: FC<Props> = ({ site, member, group }) => {
   const toasts = useToasts();
   const ref = React.useRef<Modal>();
   const [skipDeleteModal, setSkipDeleteModal] = React.useState<boolean>(false);
@@ -59,7 +61,7 @@ export const EventGroupDelete: FC<Props> = ({ site, group }) => {
 
   return (
     <>
-      <Button className='group-delete' onClick={handleDeleteClick}>
+      <Button className='group-delete' onClick={handleDeleteClick} unauthorized={[MEMBER, READ_ONLY].includes(member.role)}>
         <Icon name='delete-bin-line' />
         Delete group
       </Button>

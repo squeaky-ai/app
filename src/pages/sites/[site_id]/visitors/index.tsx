@@ -57,7 +57,7 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
       </Head>
 
       <Page user={user} scope={[]}>
-        {({ site }) => (
+        {({ site, member }) => (
           <Main className={classnames({ empty: site.recordingsCount === 0 })}>
             <BreadCrumbs site={site} items={[{ name: 'Visitors' }]} />
 
@@ -106,6 +106,7 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
 
                 <Visitors 
                   site={site} 
+                  member={member}
                   filters={filters}
                   search={search} 
                   columns={columns}

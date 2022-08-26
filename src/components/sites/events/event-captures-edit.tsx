@@ -13,11 +13,13 @@ import { useToasts } from 'hooks/use-toasts';
 import { EventGroupsSelector } from 'components/sites/events/event-groups-selector';
 import { eventsCaptureUpdate } from 'lib/api/graphql';
 import { EventsCaptureType } from 'types/events';
-import { EventsCondition, EventsMatch } from 'types/graphql';
+import { MEMBER, READ_ONLY } from 'data/teams/constants';
+import { EventsCondition, EventsMatch, Team } from 'types/graphql';
 import type { Site, EventsCaptureItem } from 'types/graphql';
 
 interface Props {
   site: Site;
+  member: Team;
   event: EventsCaptureItem;
   onClose?: VoidFunction;
 }
@@ -30,7 +32,7 @@ const EventCreateSchema = Yup.object().shape({
   groupIds: Yup.array(),
 });
 
-export const EventCapturesEdit: FC<Props> = ({ site, event, onClose }) => {
+export const EventCapturesEdit: FC<Props> = ({ site, member, event, onClose }) => {
   const toasts = useToasts();
   const ref = React.useRef<Modal>();
 
@@ -46,7 +48,7 @@ export const EventCapturesEdit: FC<Props> = ({ site, event, onClose }) => {
 
   return (
     <>
-      <Button onClick={openModal}>
+      <Button onClick={openModal} unauthorized={[MEMBER, READ_ONLY].includes(member.role)}>
         <Icon name='edit-line' /> Edit
       </Button>
             

@@ -5,17 +5,19 @@ import { Icon } from 'components/icon';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { useToasts } from 'hooks/use-toasts';
 import { eventsCaptureDeleteBulk } from 'lib/api/graphql';
-import { EventsType } from 'types/graphql';
+import { EventsType, Team } from 'types/graphql';
 import type { EventSelected } from 'types/events';
+import { MEMBER, READ_ONLY } from 'data/teams/constants';
 
 interface Props {
   siteId: string;
+  member: Team;
   selected: EventSelected[];
   onCompleted: VoidFunction;
   onClose: VoidFunction;
 }
 
-export const EventCapturesDelete: FC<Props> = ({ selected, siteId, onCompleted, onClose }) => {
+export const EventCapturesDelete: FC<Props> = ({ selected, siteId, member, onCompleted, onClose }) => {
   const ref = React.useRef<Modal>();
   const toasts = useToasts();
 
@@ -46,7 +48,9 @@ export const EventCapturesDelete: FC<Props> = ({ selected, siteId, onCompleted, 
 
   return (
     <>
-      <Button className='link' onClick={openModal}>Delete events</Button>
+      <Button className='link' onClick={openModal} unauthorized={[MEMBER, READ_ONLY].includes(member.role)}>
+        Delete events
+      </Button>
 
       <Modal ref={ref} onClose={onClose}>
         <ModalBody aria-labelledby='delete-event-captures-title' aria-describedby='delete-event-captures-description'>

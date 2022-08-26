@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import { EventCaptures } from 'components/sites/events/event-captures';
 import { EventGroups } from 'components/sites/events/event-groups';
 import { EventsGroupType } from 'types/events';
-import { EventsCaptureSort } from 'types/graphql';
+import { EventsCaptureSort, Team } from 'types/graphql';
 import type { EventSelected } from 'types/events';
 import type { Site, EventsCapture } from 'types/graphql';
 
@@ -11,6 +11,7 @@ interface Props {
   type: EventsGroupType;
   site: Site;
   events: EventsCapture;
+  member: Team;
   page: number;
   sort: EventsCaptureSort;
   selected: EventSelected[];
@@ -24,6 +25,7 @@ export const EventList: FC<Props> = ({
   type,
   site,
   events,
+  member,
   page,
   sort,
   selected,
@@ -38,6 +40,7 @@ export const EventList: FC<Props> = ({
         site={site}
         events={events}
         page={page}
+        member={member}
         sort={sort}
         selected={selected}
         setPage={setPage}
@@ -50,6 +53,7 @@ export const EventList: FC<Props> = ({
       <EventGroups
         site={site}
         sort={sort}
+        member={member}
         selected={selected}
         setSelected={setSelected}
         setSort={setSort}

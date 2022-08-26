@@ -7,15 +7,16 @@ import { EventCompare } from 'components/sites/events/event-compare';
 import { EventCapturesDelete } from 'components/sites/events/event-captures-delete';
 import { EventAddToGroup } from 'components/sites/events/event-add-to-group';
 import type { EventSelected } from 'types/events';
-import type { Site } from 'types/graphql';
+import type { Site, Team } from 'types/graphql';
 
 interface Props {
   site: Site;
+  member: Team;
   selected: EventSelected[];
   setSelected: (selected: EventSelected[]) => void;
 }
 
-export const EventCapturesBulkActions: FC<Props> = ({ site, selected, setSelected }) => {
+export const EventCapturesBulkActions: FC<Props> = ({ site, member, selected, setSelected }) => {
   const bulkActionsRef = React.useRef<Dropdown>();
 
   const onCompleted = () => {
@@ -37,9 +38,25 @@ export const EventCapturesBulkActions: FC<Props> = ({ site, selected, setSelecte
 
       {selected.length > 0 && (
         <Dropdown ref={bulkActionsRef} direction='down' button={<><Icon name='checkbox-multiple-line' /> Bulk Actions</>}>
-          <EventCompare site={site} selected={selected} onCompleted={onCompleted} />
-          <EventAddToGroup onClose={onBulkActionClose} site={site} selected={selected} onCompleted={onCompleted} />
-          <EventCapturesDelete onClose={onBulkActionClose} siteId={site.id} selected={selected} onCompleted={onCompleted} />
+          <EventCompare
+            site={site}
+            selected={selected}
+            onCompleted={onCompleted} 
+          />
+          <EventAddToGroup 
+            onClose={onBulkActionClose} 
+            site={site}
+            member={member}
+            selected={selected} 
+            onCompleted={onCompleted}
+          />
+          <EventCapturesDelete 
+            onClose={onBulkActionClose} 
+            siteId={site.id} 
+            member={member}
+            selected={selected} 
+            onCompleted={onCompleted} 
+          />
         </Dropdown>
       )}
     </div>

@@ -169,4 +169,10 @@
       }
     }
   }
+
+  &.is-unauthorized {
+    opacity: .25;
+    pointer-events: none;
+    position: relative;
+  }
 }

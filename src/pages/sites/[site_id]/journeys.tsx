@@ -30,7 +30,7 @@ const SitesJourneys: NextPage<ServerSideProps> = ({ user }) => {
       </Head>
 
       <Page user={user} scope={[]}>
-        {({ site }) => (
+        {({ site, member }) => (
           <Main className={classnames({ empty: site.recordingsCount === 0 })}>
             <BreadCrumbs site={site} items={[{ name: 'Journeys' }]} />
 
@@ -55,6 +55,7 @@ const SitesJourneys: NextPage<ServerSideProps> = ({ user }) => {
             {page && site.recordingsCount > 0 && (
               <Journeys
                 site={site}
+                member={member}
                 page={page}
                 pages={pages}
                 period={period}

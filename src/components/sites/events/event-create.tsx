@@ -16,11 +16,13 @@ import { Select, Option } from 'components/select';
 import { useToasts } from 'hooks/use-toasts';
 import { eventsCaptureCreate } from 'lib/api/graphql';
 import { EventsCaptureType } from 'types/events';
-import { EventsCondition, EventsMatch } from 'types/graphql';
+import { EventsCondition, EventsMatch, Team } from 'types/graphql';
+import { MEMBER, READ_ONLY } from 'data/teams/constants';
 import type { Site } from 'types/graphql';
 
 interface Props {
   site: Site;
+  member: Team;
   buttonText?: string;
   buttonClassName?: string;
 }
@@ -38,7 +40,7 @@ const EventCreateSchema = Yup.object().shape({
   groupIds: Yup.array(),
 });
 
-export const EventCreate: FC<Props> = ({ site, buttonText, buttonClassName }) => {
+export const EventCreate: FC<Props> = ({ site, member, buttonText, buttonClassName }) => {
   const ref = React.useRef<Modal>();
 
   const toasts = useToasts();
@@ -55,7 +57,7 @@ export const EventCreate: FC<Props> = ({ site, buttonText, buttonClassName }) =>
 
   return (
     <>
-      <Button className={classnames('event-create', buttonClassName)} onClick={openModal}>
+      <Button className={classnames('event-create', buttonClassName)} onClick={openModal} unauthorized={[MEMBER, READ_ONLY].includes(member.role)}>
         {buttonText || '+ Add New'}
       </Button>
 

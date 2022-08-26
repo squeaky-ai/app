@@ -7,15 +7,17 @@ import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'compo
 import { recordingDelete } from 'lib/api/graphql';
 import { Preferences, Preference } from 'lib/preferences';
 import { useToasts } from 'hooks/use-toasts';
-import type { Site } from 'types/graphql';
+import { MEMBER, READ_ONLY } from 'data/teams/constants';
+import type { Site, Team } from 'types/graphql';
 
 interface Props {
   site: Site;
+  member: Team;
   recordingId: string;
   onClose?: VoidFunction;
 }
 
-export const RecordingDelete: FC<Props> = ({ site, recordingId, onClose }) => {
+export const RecordingDelete: FC<Props> = ({ site, member, recordingId, onClose }) => {
   const toasts = useToasts();
   const ref = React.useRef<Modal>();
   const [skipDeleteModal, setSkipDeleteModal] = React.useState<boolean>(false);
@@ -60,7 +62,7 @@ export const RecordingDelete: FC<Props> = ({ site, recordingId, onClose }) => {
 
   return (
     <>
-      <Button onClick={handleDeleteClick}>
+      <Button onClick={handleDeleteClick} unauthorized={[MEMBER, READ_ONLY].includes(member.role)}>
         <Icon name='delete-bin-line' /> Delete
       </Button>
             

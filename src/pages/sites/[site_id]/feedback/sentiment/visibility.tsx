@@ -30,7 +30,7 @@ const SitesFeedbackSentimentVisibility: NextPage<ServerSideProps> = ({ user }) =
       </Head>
 
       <Page user={user} scope={[]}>
-        {({ site }) => (
+        {({ site, member }) => (
           <Main className={classnames({ empty: !site.verifiedAt })}>
             <BreadCrumbs site={site} items={[{ name: 'Feedback' }, { name: 'Sentiment' }]} />
 
@@ -38,7 +38,7 @@ const SitesFeedbackSentimentVisibility: NextPage<ServerSideProps> = ({ user }) =
               Sentiment
               {!loading && feedback && (
                 <menu>
-                  <SentimentStatus feedback={feedback} site={site} />
+                  <SentimentStatus feedback={feedback} site={site} member={member} />
                 </menu>
               )}
             </h4>

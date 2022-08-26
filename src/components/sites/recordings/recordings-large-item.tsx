@@ -61,10 +61,10 @@ export const RecordingsLargeItem: FC<Props> = ({ site, recording, style, member,
         }
       </Cell>
       <Cell className='primary'>
-        <RecordingStarred site={site} recording={recording} link />
+        <RecordingStarred site={site} member={member} recording={recording} link />
       </Cell>
       <Cell>
-        <VisitorsStarred site={site} visitor={recording.visitor} link />
+        <VisitorsStarred site={site} member={member} visitor={recording.visitor} link />
       </Cell>
       <Cell>
         {linkedData?.id || '-'}
@@ -162,6 +162,7 @@ export const RecordingsLargeItem: FC<Props> = ({ site, recording, style, member,
         <Dropdown portal button={<Icon name='more-2-fill' />} buttonClassName='options' ref={rowActionsRef}>
           <RecordingDelete 
             site={site} 
+            member={member}
             recordingId={recording.id}
             onClose={onRowActionClose}
           />

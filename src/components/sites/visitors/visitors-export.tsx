@@ -6,14 +6,16 @@ import { Button } from 'components/button';
 import { getLinkedData } from 'lib/visitors';
 import { useToasts } from 'hooks/use-toasts';
 import { GET_VISITOR_EXPORT_QUERY } from 'data/visitors/queries';
-import type { FeedbackNpsResponseItem, FeedbackSentimentResponseItem, Site, Visitor } from 'types/graphql';
+import { MEMBER, READ_ONLY } from 'data/teams/constants';
+import type { FeedbackNpsResponseItem, FeedbackSentimentResponseItem, Site, Team, Visitor } from 'types/graphql';
 
 interface Props {
   site: Site;
+  member: Team;
   visitor: Visitor;
 }
 
-export const VisitorsExport: FC<Props> = ({ site, visitor }) => {
+export const VisitorsExport: FC<Props> = ({ site, member, visitor }) => {
   const toasts = useToasts();
 
   const [getExport, { loading }] = useLazyQuery<{ site: Site }>(GET_VISITOR_EXPORT_QUERY, {
@@ -57,7 +59,7 @@ export const VisitorsExport: FC<Props> = ({ site, visitor }) => {
   };
 
   return (
-    <Button className='secondary' disabled={loading} onClick={handleClick}>
+    <Button className='secondary' disabled={loading} onClick={handleClick} unauthorized={[MEMBER, READ_ONLY].includes(member.role)}>
       Export .json
     </Button>
   )

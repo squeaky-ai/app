@@ -11,18 +11,19 @@ import { Pagination } from 'components/pagination';
 import { useSort } from 'hooks/use-sort';
 import { useEventFeed } from 'hooks/use-event-feed';
 import { toNiceDate, getDateRange } from 'lib/dates';
-import { EventsFeedSort } from 'types/graphql';
+import { EventsFeedSort, Team } from 'types/graphql';
 import type { Site } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 
 interface Props {
   site: Site;
+  member: Team;
   groupIds: string[];
   captureIds: string[];
   period: TimePeriod;
 }
 
-export const EventFeedTable: FC<Props> = ({ site, groupIds, captureIds, period }) => {
+export const EventFeedTable: FC<Props> = ({ site, member, groupIds, captureIds, period }) => {
   const [page, setPage] = React.useState<number>(1);
   const [size, setSize] = React.useState<number>(10);
 
@@ -75,14 +76,18 @@ export const EventFeedTable: FC<Props> = ({ site, groupIds, captureIds, period }
               <Cell>
                 <Link href={`/sites/${site.id}/visitors/${feed.visitor.id}`}>
                   <a>
-                    <VisitorsStarred site={site} visitor={feed.visitor} />
+                    <VisitorsStarred site={site} member={member} visitor={feed.visitor} />
                   </a>
                 </Link>
               </Cell>
               <Cell>
                 <Link href={`/sites/${site.id}/recordings/${feed.recording.id}`}>
                   <a>
-                    <RecordingStarred site={site} recording={feed.recording} />
+                    <RecordingStarred 
+                      site={site}
+                      member={member}
+                      recording={feed.recording} 
+                    />
                   </a>
                 </Link>
               </Cell>
