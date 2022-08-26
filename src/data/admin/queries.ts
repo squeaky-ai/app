@@ -53,6 +53,7 @@ export const GET_ADMIN_QUERY = gql`
         owners
         admins
         members
+        readonly
       }
       verified {
         verified

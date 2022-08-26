@@ -116,6 +116,7 @@ export type AdminRoles = {
   admins: Scalars['Int'];
   members: Scalars['Int'];
   owners: Scalars['Int'];
+  readonly: Scalars['Int'];
 };
 
 export type AdminSite = {
@@ -148,6 +149,7 @@ export type AdminSite = {
   nps: Nps;
   ownerName: Scalars['String'];
   pageUrls: Array<Maybe<Scalars['String']>>;
+  pages: Array<Maybe<SitesPage>>;
   plan?: Maybe<SitesPlan>;
   recording?: Maybe<Recording>;
   recordingCounts: AdminSiteRecordingsCounts;
@@ -231,6 +233,12 @@ export type AdminSiteNotesArgs = {
 
 
 export type AdminSiteNpsArgs = {
+  fromDate: Scalars['ISO8601Date'];
+  toDate: Scalars['ISO8601Date'];
+};
+
+
+export type AdminSitePagesArgs = {
   fromDate: Scalars['ISO8601Date'];
   toDate: Scalars['ISO8601Date'];
 };
@@ -2167,6 +2175,7 @@ export type Site = {
   nps: Nps;
   ownerName: Scalars['String'];
   pageUrls: Array<Maybe<Scalars['String']>>;
+  pages: Array<Maybe<SitesPage>>;
   plan?: Maybe<SitesPlan>;
   recording?: Maybe<Recording>;
   recordingLatest?: Maybe<Recording>;
@@ -2249,6 +2258,12 @@ export type SiteNotesArgs = {
 
 
 export type SiteNpsArgs = {
+  fromDate: Scalars['ISO8601Date'];
+  toDate: Scalars['ISO8601Date'];
+};
+
+
+export type SitePagesArgs = {
   fromDate: Scalars['ISO8601Date'];
   toDate: Scalars['ISO8601Date'];
 };
@@ -2415,6 +2430,12 @@ export type SitesMagicErasureUpdateInput = {
   clientMutationId?: InputMaybe<Scalars['String']>;
   enabled: Scalars['Boolean'];
   siteId: Scalars['ID'];
+};
+
+export type SitesPage = {
+  __typename?: 'SitesPage';
+  count: Scalars['Int'];
+  url: Scalars['String'];
 };
 
 export type SitesPlan = {

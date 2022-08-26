@@ -10,6 +10,7 @@ import { Select, Option } from 'components/select';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { teamInvite } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
+import { ADMIN, MEMBER, READ_ONLY } from 'data/teams/constants';
 import type { Site } from 'types/graphql';
 
 interface Props {
@@ -18,7 +19,7 @@ interface Props {
 
 const InviteSchema = Yup.object().shape({ 
   email: Yup.string().email('Please enter a valid email address').required('Email is required'),
-  role: Yup.string().oneOf(['0', '1'], 'Please select a role')
+  role: Yup.string().oneOf([READ_ONLY.toString(), MEMBER.toString(), ADMIN.toString()], 'Please select a role')
 });
 
 export const InviteTeam: FC<Props> = ({ site }) => {
@@ -42,7 +43,7 @@ export const InviteTeam: FC<Props> = ({ site }) => {
       <Modal ref={ref}>
         <ModalBody aria-labelledby='invite-team-title'>
           <Formik
-            initialValues={{ email: '', role: '0' }}
+            initialValues={{ email: '', role: MEMBER.toString() }}
             validationSchema={InviteSchema}
             onSubmit={(values, { setSubmitting }) => {
               (async () => {
@@ -95,8 +96,9 @@ export const InviteTeam: FC<Props> = ({ site }) => {
 
                   <Label htmlFor='role'>Role</Label>
                   <Select name='role' onChange={handleChange} value={values.role} invalid={touched.role && !!errors.role}>
-                    <Option value='0'>User</Option>
-                    <Option value='1'>Admin</Option>
+                    <Option value={READ_ONLY}>Read-only</Option>
+                    <Option value={MEMBER}>User</Option>
+                    <Option value={ADMIN}>Admin</Option>
                   </Select>
                   <span className='validation'>{errors.role}</span>
                 </ModalContents>

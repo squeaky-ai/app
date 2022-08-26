@@ -77,6 +77,10 @@ const AdminDashboard: NextPage<ServerSideProps> = () => {
                     <h4>{admin.roles.members}</h4>
                     <p>Users</p>
                   </div>
+                  <div className='role readonly'>
+                    <h4>{admin.roles.readonly}</h4>
+                    <p>Read-only</p>
+                  </div>
                 </div>
               </Card>
             </div>

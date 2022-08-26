@@ -7,12 +7,12 @@ import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'compo
 import { Label } from 'components/label';
 import { Tooltip } from 'components/tooltip';
 import { useToasts } from 'hooks/use-toasts';
-import { MEMBER } from 'data/teams/constants';
+import { ADMIN, OWNER } from 'data/teams/constants';
 import { pluralise } from 'lib/text';
 import type { Site, Team } from 'types/graphql';
 
 interface Props {
-  button: React.ReactChild;
+  button: React.ReactNode;
   site: Site;
   recordingId: string;
   member?: Team;
@@ -52,9 +52,9 @@ export const RecordingsShare: FC<Props> = ({ button, site, member, recordingId, 
 
   const memberShareText = `${site.team.length} ${pluralise('member', site.team)}`;
 
-  const isMember = member
-    ? member.role === MEMBER
-    : true;
+  const canShare = member
+    ? [OWNER, ADMIN].includes(member.role)
+    : false;
 
   return (
     <>
@@ -75,11 +75,11 @@ export const RecordingsShare: FC<Props> = ({ button, site, member, recordingId, 
             <Tooltip 
               button={
                 <>
-                  {isMember && (
+                  {!canShare && (
                     <p className='team-members'>{memberShareText}</p>
                   )}
 
-                  {!isMember && (
+                  {canShare && (
                     <Link href={`/sites/${site.id}/settings/team`}>
                       <a className='team-members'>{memberShareText}</a>
                     </Link>

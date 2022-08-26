@@ -20,6 +20,7 @@ export const useAdmin = (): UseAdmin => {
       owners: 0,
       admins: 0,
       members: 0,
+      readonly: 0,
     },
     verified: {
       unverified: 0,

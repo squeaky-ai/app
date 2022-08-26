@@ -93,6 +93,12 @@
                 color: var(--peach-500);
               }
             }
+
+            &.readonly {
+              h4 {
+                color: var(--gray-500);
+              }
+            }
           }
         }
       }

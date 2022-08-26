@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import { useRouter } from 'next/router';
 import { Icon } from 'components/icon';
 import { Select, Option } from 'components/select';
-import { OWNER, INVITED, MEMBER } from 'data/teams/constants';
+import { OWNER, ADMIN, INVITED, MEMBER, READ_ONLY } from 'data/teams/constants';
 import { CancelInvitation } from 'components/sites/settings/cancel-invitation';
 import { ResendInvitation } from 'components/sites/settings/resend-invitation';
 import { DeleteTeam } from 'components/sites/settings/delete-team';
@@ -34,8 +34,9 @@ export const TeamRow: FC<Props> = ({ user, site, team }) => {
   const userRole = site.team.find(t => t.user.id.toString() === user.id.toString());
 
   const roleNames: { [key: number]: string } = {
-    0: 'a User',
-    1: 'an Admin'
+    [READ_ONLY]: 'a Read-only user',
+    [MEMBER]: 'a User',
+    [ADMIN]: 'an Admin'
   };
 
   const openModal = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -58,7 +59,7 @@ export const TeamRow: FC<Props> = ({ user, site, team }) => {
       toast.add({ type: 'success', body: 'Role change complete' });
 
       // They can no longer view this page as they won't be authenticated
-      if (self && role === MEMBER) {
+      if (self && [MEMBER, READ_ONLY].includes(role)) {
         await router.push(`/sites/${site.id}/dashboard`);
         return;
       }
@@ -89,8 +90,9 @@ export const TeamRow: FC<Props> = ({ user, site, team }) => {
             ? team.roleName
             : (
                 <Select name='role' onChange={openModal} value={role}>
-                  <Option value='0'>User</Option>
-                  <Option value='1'>Admin</Option>
+                  <Option value={READ_ONLY}>Read-only</Option>
+                  <Option value={MEMBER}>User</Option>
+                  <Option value={ADMIN}>Admin</Option>
                 </Select>
               )
           }
