@@ -2,6 +2,7 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import classnames from 'classnames';
+import { useRouter } from 'next/router';
 import { Main } from 'components/main';
 import { EmptyState } from 'components/sites/empty-state';
 import { Page } from 'components/sites/page';
@@ -18,6 +19,8 @@ import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { usePages } from 'hooks/use-pages';
 
 const SitesAnalyticsPageTraffic: NextPage<ServerSideProps> = ({ user }) => {
+  const { query } = useRouter();
+
   const { pages, loading } = usePages();
   const { period, setPeriod } = usePeriod('analytics');
 
@@ -26,6 +29,10 @@ const SitesAnalyticsPageTraffic: NextPage<ServerSideProps> = ({ user }) => {
   React.useEffect(() => {
     if (!page) setPage(pages[0]);
   }, [pages]);
+
+  React.useEffect(() => {
+    if (query.url) setPage(`${query.url}`);
+  }, []);
   
   return (
     <>
@@ -51,7 +58,7 @@ const SitesAnalyticsPageTraffic: NextPage<ServerSideProps> = ({ user }) => {
 
             <Unlock site={site} page='analytics' />
 
-            <Tabs site={site} tab='traffic' type='page' />
+            <Tabs site={site} tab='traffic' type='page' page={page} />
 
             <EmptyState
               title='There are currently no analytics available'

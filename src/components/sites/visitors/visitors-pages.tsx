@@ -1,13 +1,15 @@
 import React from 'react';
 import type { FC } from 'react';
+import Link from 'next/link';
 import { Sort } from 'components/sort';
 import { Pagination } from 'components/pagination';
 import { Table, Row, Cell } from 'components/table';
 import { toTimeString } from 'lib/dates';
-import { VisitorsPagesSort } from 'types/graphql';
+import { Site, VisitorsPagesSort } from 'types/graphql';
 import type { Visitor } from 'types/graphql';
 
 interface Props {
+  site: Site;
   visitor: Visitor;
   sort: VisitorsPagesSort;
   page: number;
@@ -15,7 +17,7 @@ interface Props {
   setSort: (sort: VisitorsPagesSort) => void;
 }
 
-export const VisitorPages: FC<Props> = ({ visitor, page, sort, setPage, setSort }) => {
+export const VisitorPages: FC<Props> = ({ site, visitor, page, sort, setPage, setSort }) => {
   const { items, pagination } = visitor.pages;
 
   return (
@@ -46,7 +48,13 @@ export const VisitorPages: FC<Props> = ({ visitor, page, sort, setPage, setSort 
         </Row>
         {items.map(item => (
           <Row key={item.pageView}>
-            <Cell>{item.pageView}</Cell>
+            <Cell>
+              <Link href={`/sites/${site.id}/analytics/page/traffic?url=${encodeURIComponent(item.pageView)}`}>
+                <a>
+                  {item.pageView}
+                </a>
+              </Link>
+            </Cell>
             <Cell><b>{item.pageViewCount}</b></Cell>
             <Cell>{toTimeString(item.averageTimeOnPage)}</Cell>
           </Row>

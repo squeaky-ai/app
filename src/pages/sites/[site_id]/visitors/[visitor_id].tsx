@@ -159,6 +159,7 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
             <h5>Pages</h5>
   
             <VisitorPages 
+              site={site}
               visitor={visitor} 
               page={pageviewPage} 
               setPage={setPageviewPage}
