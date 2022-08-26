@@ -53,7 +53,7 @@ const WidgetMagicErasure: NextPage<ServerSideProps> = () => {
             <ul>
               <li>Hover a row to see a hidden item</li>
               <li>Click to navigate to an element</li>
-              <li>Click the <Icon name='eye-line' /> icon to unhide the element</li>
+              <li>Click the <Icon name='close-line' /> icon to unhide the element</li>
             </ul>
           </div>
         )}
