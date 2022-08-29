@@ -2,7 +2,8 @@ import { last } from 'lodash';
 import { EventType, IncrementalSource, MouseInteractions } from 'rrweb';
 import { ErrorEvent, CustomEvents } from 'types/event';
 import { EventStatsSort } from 'types/events';
-import type { Event, Events, EventName, SessionEvent } from 'types/event';
+import type { PlayerState } from 'types/player';
+import type { Event, Events, EventName, SessionEvent, InteractionEventItem } from 'types/event';
 import type { EventsStat, RecordingsEvent } from 'types/graphql';
 
 export const isPageViewEvent = (
@@ -26,7 +27,7 @@ export const isCustomEvent = (
 ): event is ErrorEvent => (event.type as any) === CustomEvents.CUSTOM_TRACK;
 
 export const parseRecordingEvents = (event: RecordingsEvent[]): Event[] => event.map(i => ({
-  id: Number(i.id),
+  id: i.id,
   type: i.type, 
   data: JSON.parse(i.data),
   timestamp: Number(i.timestamp),
@@ -56,6 +57,8 @@ export function getEventName(event: SessionEvent): EventName {
       case MouseInteractions.TouchStart:
       case MouseInteractions.TouchMove_Departed:
         return 'touch';
+      case MouseInteractions.ContextMenu:
+        return 'context';
     }
   }
 
@@ -70,46 +73,33 @@ export function getEventName(event: SessionEvent): EventName {
   return 'unknown';
 }
 
-export function getMouseInteractionLabel(type: MouseInteractions): string {
-  switch(type) {
-    case MouseInteractions.MouseUp:
-    case MouseInteractions.MouseDown:
-    case MouseInteractions.DblClick:
-    case MouseInteractions.Click:
-      return 'Clicked';
-    case MouseInteractions.Focus:
-      return 'Focus';
-    case MouseInteractions.Blur:
+export function getEventLabel(name: EventName): string {
+  switch(name) {
+    case 'blur':
       return 'Blur';
-    case MouseInteractions.TouchEnd:
-    case MouseInteractions.TouchStart:
-    case MouseInteractions.TouchMove_Departed:
+    case 'click':
+      return 'Click';
+    case 'context':
+      return 'Right Click';
+    case 'custom':
+      return 'Custom Event';
+    case 'error':
+      return 'JavaScript Error';
+    case 'focus':
+      return 'Focus';
+    case 'hover':
+      return 'Hover';
+    case 'inactivity':
+      return 'Inactivity';
+    case 'page_view':
+      return 'Page View';
+    case 'scroll':
+      return 'Scroll';
+    case 'touch':
       return 'Touch';
-    case MouseInteractions.ContextMenu:
-      return 'Context';
+    case 'unknown':
     default:
-      return 'Unknown';
-  }
-};
-
-export function getMouseInteractionIcon (type: MouseInteractions): string {
-  switch(type) {
-    case MouseInteractions.MouseUp:
-    case MouseInteractions.MouseDown:
-    case MouseInteractions.DblClick:
-    case MouseInteractions.Click:
-      return 'cursor-line';
-    case MouseInteractions.Focus:
-    case MouseInteractions.Blur:
-      return 'input-method-line';
-    case MouseInteractions.TouchEnd:
-    case MouseInteractions.TouchStart:
-    case MouseInteractions.TouchMove_Departed:
-      return 'drag-drop-line';
-    case MouseInteractions.ContextMenu:
-      return 'menu-line';
-    default:
-      return 'question-line';
+      return 'Uknown';
   }
 };
 
@@ -137,30 +127,65 @@ export const sortEventsStats = (
   }
 });
 
-export const getInteractionEvents = (events: Event[]) => events.reduce((acc, item) => {
-  // Add all of the page views
-  if (isPageViewEvent(item)) {
-    return [...acc, item];
-  }
+export const getInteractionEvents = (
+  events: Events,
+  state: PlayerState,
+  inactivity?: number[][],
+): { interactionEvents: InteractionEventItem[], startedAt: number } => {
+  const startedAt = events[0]?.timestamp || 0;
 
-  // Add all of the mouse events
-  if (isMouseEvent(item)) {
-    return [...acc, item];
-  }
+  const results = events.reduce((acc, item) => {
+    const eventName = getEventName(item);
 
-  // Only add scroll events if the previous event was not a scroll event
-  if (isScrollEvent(item)) {
-    const prevEvent = last(acc);
-    return isScrollEvent(prevEvent) ? [...acc] : [...acc, item];
-  }
+    if (eventName === 'unknown') return acc;
 
-  if (isErrorEvent(item)) {
-    return [...acc, item];
-  }
+    const event: InteractionEventItem = {
+      eventName,
+      show: state.eventVisibility.includes(eventName),
+      timestampStart: item.timestamp,
+      timestampEnd: null,
+      label: getEventLabel(eventName),
+      info: null,
+    };
 
-  if (isCustomEvent(item)) {
-    return [...acc, item];
-  }
+    const data = item.data as any; // TODO
 
-  return [...acc];
-}, [] as Events);
+    if (eventName === 'page_view') {
+      event.info = data.href;
+    }
+
+    if (['click', 'blur', 'focus', 'touch', 'context'].includes(eventName)) {
+      event.info = data.selector || 'Unknown';
+    }
+
+    if (eventName === 'error') {
+      event.info = data.message;
+    }
+
+    if (eventName === 'scroll') {
+      const prevEvent = last(acc);
+      if (prevEvent?.eventName === 'scroll') {
+        prevEvent.timestampEnd = item.timestamp;
+        return acc;
+      }
+    }
+
+    return [...acc, event]
+  }, [] as InteractionEventItem[]);
+
+  inactivity?.forEach(inactivity => {
+    results.push({
+      eventName: 'inactivity',
+      label: 'Inactivity',
+      show: state.eventVisibility.includes('inactivity'),
+      timestampStart: startedAt + Number(inactivity[0]),
+      timestampEnd: startedAt + Number(inactivity[1]),
+      info: null,
+    });
+  });
+
+  return {
+    interactionEvents: results.sort((a, b) => a.timestampStart - b.timestampStart),
+    startedAt,
+  };
+};

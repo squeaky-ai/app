@@ -4,7 +4,7 @@ import { clamp, debounce } from 'lodash';
 import { Input } from 'components/input';
 import { Activity } from 'components/sites/player/activity';
 import { Interaction } from 'components/sites/player/interaction';
-import { getInteractionEvents, getEventName } from 'lib/events';
+import { getInteractionEvents } from 'lib/events';
 import type { Recording } from 'types/graphql';
 import type { Event } from 'types/event';
 import type { PlayerState } from 'types/player';
@@ -44,7 +44,7 @@ export const Slider: FC<Props> = ({
     currentPage: 0 
   };
 
-  const interactions = getInteractionEvents(events);
+  const { interactionEvents } = getInteractionEvents(events, state);
   
   const offset = events[0]?.timestamp || 0;
   const progress = clamp(value / (max - min), min, max);
@@ -79,22 +79,22 @@ export const Slider: FC<Props> = ({
       <div className='bar buffered' style={{ width: `${bufferedWidth}%` }} />
       <div className='bar progress' style={{ width: `${progressedWith}%` }} />
 
-      {interactions.length && (
+      {interactionEvents.length && (
         <Activity
           max={bufferedWidth}
           duration={duration}
           inactivity={recording.inactivity}
+          enabled={state.eventVisibility.includes('inactivity')}
         />
       )}
       
       <div className='events'>
-        {interactions.map((e, index) => (
+        {interactionEvents.map((e, index) => (
           <Interaction 
-            key={`${e.id}_${index}`}
+            key={`${e.timestampStart}_${index}`}
             duration={duration}
-            event={e}
+            interactionEvent={e}
             offset={offset}
-            hidden={!state.eventVisibility.includes(getEventName(e))}
           />
         ))}
       </div>

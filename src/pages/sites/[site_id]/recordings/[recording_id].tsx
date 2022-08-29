@@ -10,6 +10,7 @@ import { PlayerState, Action, PlayerStatus } from 'types/player';
 import { Preference, Preferences } from 'lib/preferences';
 import { EVENTS } from 'data/recordings/constants';
 import type { EventName } from 'types/event';
+import { ValueOf } from 'types/common';
 
 const reducer = (state: PlayerState, action: Action) => ({ 
   ...state,
@@ -24,6 +25,7 @@ const initialState: PlayerState = {
   incomplete: false,
   zoom: 1,
   eventVisibility: [],
+  eventOptions: [],
 };
 
 const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
@@ -31,14 +33,22 @@ const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
 
   const { recording, events, error, loading, fetchMoreEvents } = useRecording();
 
-  React.useEffect(() => {
-    const savedActive = Preferences.getArray<EventName>(Preference.EVENTS_SHOW_TYPES);
-    // If they have anything stored in the preferences then
-    // show that, otherwise default to showing all of the types
+  const fetchAndDispatchValues = (
+    preference: Preference,
+    type: keyof PlayerState,
+    fallback: ValueOf<PlayerState>
+  ) => {
+    const savedActive = Preferences.getArray<EventName>(preference);
+
     dispatch({
-      type: 'eventVisibility',
-      value: savedActive.length === 0 ? EVENTS.map(a => a.value) : savedActive,
+      type,
+      value: savedActive.length === 0 ? fallback : savedActive,
     });
+  };
+
+  React.useEffect(() => {
+    fetchAndDispatchValues(Preference.EVENTS_SHOW_TYPES, 'eventVisibility', EVENTS.map(a => a.value));
+    fetchAndDispatchValues(Preference.EVENTS_OPTIONS_TYPES, 'eventOptions', ['inactivity']);
   }, []);
 
   if (error) {

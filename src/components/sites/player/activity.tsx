@@ -1,13 +1,15 @@
 import React from 'react';
 import type { FC } from 'react';
+import classnames from 'classnames';
 
 interface Props {
   max: number;
   duration: number;
   inactivity: number[][];
+  enabled: boolean;
 }
 
-export const Activity: FC<Props> = ({ max, duration, inactivity }) => {
+export const Activity: FC<Props> = ({ max, duration, inactivity, enabled }) => {
   const leftPositionFromDuration = (inactivityItem: number[]) => {
     const [left, right] = inactivityItem;
 
@@ -18,7 +20,7 @@ export const Activity: FC<Props> = ({ max, duration, inactivity }) => {
   };
 
   return (
-    <div className='activity' style={{ width: `${max}%` }}>
+    <div className={classnames('activity', { hidden: !enabled})} style={{ width: `${max}%` }}>
       {inactivity.map((inactivity, index) => {
         const [left, right] = leftPositionFromDuration(inactivity);
 

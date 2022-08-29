@@ -1,7 +1,7 @@
 import type { eventWithTime } from 'rrweb/typings/types';
 
 export type Event = eventWithTime & {
-  id: number;
+  id: number | string;
 };
 
 export type EventName =
@@ -14,7 +14,11 @@ export type EventName =
   'scroll' |
   'error' |
   'custom' |
-  'unknown';
+  'context' |
+  'unknown' |
+  'inactivity';
+
+export type EventOptions = 'compact';
 
 export interface EventItem {
   name: string;
@@ -53,3 +57,12 @@ export type PageViewEvent = {
 export type SessionEvent = Event | ErrorEvent | PageViewEvent;
 
 export type Events = SessionEvent[];
+
+export interface InteractionEventItem {
+  show: boolean;
+  eventName: EventName;
+  timestampStart: number;
+  timestampEnd: number;
+  label: string;
+  info?: string;
+}
