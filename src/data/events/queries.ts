@@ -62,7 +62,7 @@ export const GET_EVENT_STATS_QUERY = gql`
     site(siteId: $siteId) {
       id      
       eventStats(captureIds: $captureIds, groupIds: $groupIds, fromDate: $fromDate, toDate: $toDate) {
-        id
+        eventOrGroupId
         name
         type
         count

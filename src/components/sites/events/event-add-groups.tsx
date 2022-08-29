@@ -24,7 +24,7 @@ export const EventAddGroups: FC<Props> = ({ eventStats, onClose, onUpdate }) => 
 
   const { groups, loading } = useEventGroups();
 
-  const selected = eventStats.filter(s => s.type === EventsType.Group).map(e => e.id);
+  const selected = eventStats.filter(s => s.type === EventsType.Group).map(e => e.eventOrGroupId);
 
   const results = groups
     .filter(l => l.name.toLowerCase().includes(search.toLowerCase()))

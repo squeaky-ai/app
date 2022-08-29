@@ -34,7 +34,7 @@ export const EventHistoryTags: FC<Props> = ({
     <div className='event-tags'>
       <p><b>Events or Groups:</b></p>
       {eventStats.map(stat => (
-        <Tag key={stat.id} className='secondary' handleDelete={(() => handleRemove(stat.id, stat.type))}>
+        <Tag key={stat.eventOrGroupId} className='secondary' handleDelete={(() => handleRemove(stat.eventOrGroupId, stat.type))}>
           {stat.name}
         </Tag>
       ))}

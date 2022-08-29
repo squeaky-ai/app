@@ -63,8 +63,8 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
       <div className='custom-tooltip'>
         <p className='date'>{formatLabel(period, label)}</p>
         {sortedEventsStats.map((stat, index) => (
-          <p key={stat.id} style={{ color: colors[index] }}>
-            {stat.name} {metrics[`${stat.type}::${stat.id}`]}
+          <p key={stat.eventOrGroupId} style={{ color: colors[index] }}>
+            {stat.name} {metrics[`${stat.type}::${stat.eventOrGroupId}`]}
           </p>
         ))}
       </div>
@@ -84,7 +84,7 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
       </div>
       <div className='key'>
         {eventStats.eventStats.map((stat, index) => (
-          <div className='item' key={stat.id}>
+          <div className='item' key={stat.eventOrGroupId}>
             <EventSwatch index={index} />
             <p>{stat.name}</p>
           </div>
@@ -102,8 +102,8 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
 
             {eventStats.eventStats.map((stat, index) => (
               <Line 
-                key={stat.id}
-                dataKey={`${stat.type}::${stat.id}`}
+                key={stat.eventOrGroupId}
+                dataKey={`${stat.type}::${stat.eventOrGroupId}`}
                 fillOpacity={1}
                 stroke={colors[index]}
                 strokeWidth={2}

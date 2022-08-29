@@ -56,7 +56,7 @@ export const EventStatsTable: FC<Props> = ({ sort, eventStats, setSort }) => (
         </Cell>
       </Row>
       {sortEventsStats(eventStats, sort).map((stat, index) => (
-        <Row key={stat.id}>
+        <Row key={stat.eventOrGroupId}>
           <Cell>
             <EventSwatch index={index} />
             {stat.name}

@@ -31,7 +31,7 @@ export const EventAddCaptures: FC<Props> = ({ eventStats, onClose, onUpdate }) =
     sort: EventsCaptureSort.NameAsc 
   });
 
-  const selected = eventStats.filter(s => s.type === EventsType.Capture).map(e => e.id);
+  const selected = eventStats.filter(s => s.type === EventsType.Capture).map(e => e.eventOrGroupId);
 
   const results = events.items
     .filter(l => l.name.toLowerCase().includes(search.toLowerCase()))

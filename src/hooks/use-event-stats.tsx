@@ -35,7 +35,7 @@ export const useEventStats = (props: Props): UseEventStats => {
       groupType: '',
       items: []
     },
-    eventStats: []
+    eventStats: [],
   }
 
   return {
