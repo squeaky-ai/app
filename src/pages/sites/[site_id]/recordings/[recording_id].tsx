@@ -47,8 +47,8 @@ const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
   };
 
   React.useEffect(() => {
-    fetchAndDispatchValues(Preference.EVENTS_SHOW_TYPES, 'eventVisibility', EVENTS.map(a => a.value));
     fetchAndDispatchValues(Preference.EVENTS_OPTIONS_TYPES, 'eventOptions', ['inactivity']);
+    fetchAndDispatchValues(Preference.EVENTS_VISIBILITY_TYPES, 'eventVisibility', [...EVENTS.map(a => a.value), 'inactivity']);
   }, []);
 
   if (error) {

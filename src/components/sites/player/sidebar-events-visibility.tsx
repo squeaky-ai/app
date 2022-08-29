@@ -49,8 +49,8 @@ export const SidebarEventsVisibility: FC<Props> = ({ state, dispatch }) => {
             }}
             validationSchema={EventsSchema}
             onSubmit={(values, { setSubmitting }) => {
-              Preferences.setArray<string>(Preference.EVENTS_SHOW_TYPES, values.eventVisibility);
               Preferences.setArray<string>(Preference.EVENTS_OPTIONS_TYPES, values.eventOptions);
+              Preferences.setArray<string>(Preference.EVENTS_VISIBILITY_TYPES, values.eventVisibility);
 
               setSubmitting(false);
               dispatch({ type: 'eventOptions', value: values.eventOptions });
