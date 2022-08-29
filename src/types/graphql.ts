@@ -958,7 +958,7 @@ export type EventsStat = {
   __typename?: 'EventsStat';
   averageEventsPerVisitor: Scalars['Float'];
   count: Scalars['Int'];
-  id: Scalars['ID'];
+  id: Scalars['String'];
   name: Scalars['String'];
   type: EventsType;
 };

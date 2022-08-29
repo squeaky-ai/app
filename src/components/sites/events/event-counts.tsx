@@ -83,7 +83,7 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
         </div>
       </div>
       <div className='key'>
-        {sortedEventsStats.map((stat, index) => (
+        {eventStats.eventStats.map((stat, index) => (
           <div className='item' key={stat.id}>
             <EventSwatch index={index} />
             <p>{stat.name}</p>
