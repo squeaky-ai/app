@@ -120,10 +120,6 @@ export const sortEventsStats = (
       return a.type.localeCompare(b.type);
     case EventStatsSort.TypeDesc:
       return b.type.localeCompare(a.type);
-    case EventStatsSort.AverageEventsPerVisitorAsc:
-      return a.averageEventsPerVisitor - b.averageEventsPerVisitor;
-    case EventStatsSort.AverageEventsPerVisitorDesc:
-      return b.averageEventsPerVisitor - a.averageEventsPerVisitor;
   }
 });
 

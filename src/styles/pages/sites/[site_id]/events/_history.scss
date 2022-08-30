@@ -170,6 +170,15 @@
 
     .table {
       .row {
+        grid-template-columns: repeat(3, 1fr);
+        height: 3rem;
+      }
+    }
+  }
+
+  .event-feed {
+    .table {
+      .row {
         grid-template-columns: repeat(4, 1fr);
         height: 3rem;
       }

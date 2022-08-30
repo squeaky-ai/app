@@ -66,7 +66,6 @@ export const GET_EVENT_STATS_QUERY = gql`
         name
         type
         count
-        averageEventsPerVisitor
       }
       eventCounts(captureIds: $captureIds, groupIds: $groupIds, fromDate: $fromDate, toDate: $toDate) {
         groupType

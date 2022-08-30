@@ -45,15 +45,6 @@ export const EventStatsTable: FC<Props> = ({ sort, eventStats, setSort }) => (
             onDesc={() => setSort(EventStatsSort.CountDesc)} 
           />
         </Cell>
-        <Cell>
-          Avg. events per visitor 
-          <Sort 
-            name='average_events_per_visitor' 
-            order={sort} 
-            onAsc={() => setSort(EventStatsSort.AverageEventsPerVisitorAsc)} 
-            onDesc={() => setSort(EventStatsSort.AverageEventsPerVisitorDesc)} 
-          />
-        </Cell>
       </Row>
       {sortEventsStats(eventStats, sort).map((stat, index) => (
         <Row key={stat.eventOrGroupId}>
@@ -66,9 +57,6 @@ export const EventStatsTable: FC<Props> = ({ sort, eventStats, setSort }) => (
           </Cell>
           <Cell>
             {stat.count}
-          </Cell>
-          <Cell>
-            {stat.averageEventsPerVisitor}
           </Cell>
         </Row>
       ))}
