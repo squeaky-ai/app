@@ -18,10 +18,12 @@ type Names = Record<FeatureFlag, string>;
 
 export const allFeatureFlags: FeatureFlag[] = [
   FeatureFlag.CHEESE_LOADER,
+  FeatureFlag.SLIDER_V2,
 ];
 
 export const featureFlagNames: Names = {
   CHEESE_LOADER: 'Cheese Loader',
+  SLIDER_V2: 'V2 Slider',
 };
 
 const options: State = [
@@ -31,6 +33,12 @@ const options: State = [
     superuser: true,
     description: '',
   },
+  {
+    key: FeatureFlag.SLIDER_V2,
+    value: false,
+    superuser: false,
+    description: 'Updated slider that should be more accurate',
+  }
 ];
 
 export const useFeatureFlags = (): UseFeatureFlags => {

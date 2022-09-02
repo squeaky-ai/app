@@ -35,6 +35,7 @@ export const initReplayer = ({ events, recording, dispatch }: InitArgs): Replaye
       lineWidth: 3,
       strokeStyle: '#F96155'
     },
+    triggerFocus: false,
   });
 
   // TODO: The typing for this is a mess! Listen for some of

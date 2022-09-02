@@ -5,12 +5,15 @@ import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { PlayerSpeed } from 'components/sites/player/player-speed';
 import { PlayerSlider } from 'components/sites/player/player-slider';
+import { PlayerSliderV2 } from 'components/sites/player/player-slider-v2';
 import { PlayerSliderLoading } from 'components/sites/player/player-slider-loading';
 import { PlayerIncomplete } from 'components/sites/player/player-incomplete';
 import { Spinner } from 'components/spinner';
 import { PlayerState, Action, PlayerStatus } from 'types/player';
 import type { Recording } from 'types/graphql';
 import type { Event } from 'types/event';
+import { useFeatureFlags } from 'hooks/use-feature-flags';
+import { FeatureFlag } from 'lib/feature-flags';
 
 interface Props {
   state: PlayerState;
@@ -21,6 +24,8 @@ interface Props {
 }
 
 export const PlayerControls: FC<Props> = ({ state, replayer, events, recording, dispatch }) => {
+  const { featureFlagEnabled } = useFeatureFlags();
+
   const handlePlayPause = () => {
     switch(state.status) {
       case PlayerStatus.FINISHED:
@@ -86,17 +91,33 @@ export const PlayerControls: FC<Props> = ({ state, replayer, events, recording, 
       </Button>
 
       {replayer && recording && (
-        <PlayerSlider 
-          key={recording.id}
-          replayer={replayer}
-          status={state.status}
-          playbackSpeed={state.playbackSpeed}
-          events={events}
-          recording={recording} 
-          state={state}
-          handleSlide={handleSetProgress} 
-          dispatch={dispatch}
-        />
+        featureFlagEnabled(FeatureFlag.SLIDER_V2)
+          ? (
+            <PlayerSliderV2
+              key={recording.id}
+              replayer={replayer}
+              status={state.status}
+              playbackSpeed={state.playbackSpeed}
+              events={events}
+              recording={recording} 
+              state={state}
+              handleSlide={handleSetProgress} 
+              dispatch={dispatch}
+            />
+          )
+          : (
+            <PlayerSlider 
+              key={recording.id}
+              replayer={replayer}
+              status={state.status}
+              playbackSpeed={state.playbackSpeed}
+              events={events}
+              recording={recording} 
+              state={state}
+              handleSlide={handleSetProgress} 
+              dispatch={dispatch}
+            />
+          )
       )}
 
       {(!replayer || !recording) && (

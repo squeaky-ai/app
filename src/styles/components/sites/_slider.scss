@@ -95,6 +95,29 @@
     }
   }
 
+  .track {
+    cursor: pointer;
+    height: .25rem;
+    width: 100%;
+
+    .button {
+      background: var(--blue-500);
+      border: 2px solid var(--gray-100);
+      border-radius: var(--border-radius-o);
+      cursor: pointer;
+      height: 2rem;
+      margin: .2rem 0 0 0;
+      position: relative;
+      transform: translate(-50%, -50%);
+      width: 2rem;
+      z-index: 2;
+
+      &.clicked {
+        background: var(--blue-300);
+      }
+    }
+  }
+
   .input[type=range] {
     appearance: none;
     border: none;
