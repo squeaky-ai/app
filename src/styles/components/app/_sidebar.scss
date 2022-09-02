@@ -302,6 +302,21 @@
       i {
         color: var(--gray-blue-200);
       }
+
+      &.nested-support {
+        .items {
+          .button {
+            span {
+              display: block;
+              text-decoration: none;
+            }
+
+            .icon {
+              color: var(--gray-500);
+            }
+          }
+        }
+      }
     }
 
     @include breakpoint-md {
