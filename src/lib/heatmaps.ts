@@ -1,8 +1,9 @@
+import heatmap from 'vendor/heatmap';
 import { range, orderBy, findLast, sumBy } from 'lodash';
 import { percentage } from 'lib/maths';
 import { HeatmapColor, HEATMAP_COLOURS } from 'data/heatmaps/constants';
 import type { HeatmapsDisplay } from 'types/heatmaps';
-import type { HeatmapsItem } from 'types/graphql';
+import type { HeatmapsScroll, HeatmapsClick, HeatmapsCursor } from 'types/graphql';
 
 interface ScrollMapData {
   increment: number;
@@ -43,7 +44,7 @@ export const selectorIncludesClickable = (selector: string) => {
   return !!selector.split(' > ').find(s => /^(a|button)($|:|#)/.test(s));
 };
 
-export const getScrollMapData = (items: HeatmapsItem[]): ScrollMapData[] => {
+export const getScrollMapData = (items: HeatmapsScroll[]): ScrollMapData[] => {
   const total = items.length;
 
   const max = Math.max(...items.map(i => i.y));
@@ -71,7 +72,7 @@ export const getScrollMapData = (items: HeatmapsItem[]): ScrollMapData[] => {
   });
 };
 
-export const getClickMapData = (items: HeatmapsItem[]): ClickMapData[] => {
+export const getClickMapData = (items: HeatmapsClick[]): ClickMapData[] => {
   const total = sumBy(items, 'count');
 
   const max = Math.max(...items.map(i => i.count));
@@ -95,7 +96,7 @@ export const getClickMapData = (items: HeatmapsItem[]): ClickMapData[] => {
   });
 };
 
-export const showClickMaps = (doc: Document, items: HeatmapsItem[], display: HeatmapsDisplay) => {
+export const showClickMaps = (doc: Document, items: HeatmapsClick[], display: HeatmapsDisplay) => {
   const clickMapData = getClickMapData(items);
 
   items.forEach(item => {
@@ -155,7 +156,7 @@ export const showClickMaps = (doc: Document, items: HeatmapsItem[], display: Hea
   });
 };
 
-export const showScrollMaps = (doc: Document, items: HeatmapsItem[], scale: number) => {
+export const showScrollMaps = (doc: Document, items: HeatmapsScroll[], scale: number) => {
   const scrollMapData = getScrollMapData(items);
   const unscale = 1 / scale;
 
@@ -178,6 +179,37 @@ export const showScrollMaps = (doc: Document, items: HeatmapsItem[], scale: numb
   createFixedScrollMarker(doc, scrollMapData, 25, unscale);
   createFixedScrollMarker(doc, scrollMapData, 50, unscale);
   createFixedScrollMarker(doc, scrollMapData, 75, unscale);
+};
+
+export const showCursorMaps = (doc: Document, items: HeatmapsCursor[]) => {
+  const overlay = document.createElement('div');
+  overlay.classList.add('__squeaky_cursor_overlay');
+  overlay.style.cssText = `
+    background: rgba(0, 0, 0, .25);
+    height: ${doc.body.scrollHeight}px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 99999999;
+  `;
+
+  const heatmapContainer = document.createElement('div');
+  heatmapContainer.style.cssText = `
+    height: 100%;
+    width: 100%;
+  `;
+
+  overlay.appendChild(heatmapContainer);
+  doc.body.appendChild(overlay);
+
+  const map = heatmap.create({ container: heatmapContainer });
+
+  map.setData({
+    min: 0,
+    max: 100,
+    data: items.map(item => ({ x: item.x, y: item.y, value: 1 })),
+  });
 };
 
 const createFixedScrollMarker = (doc: Document, scrollMapData: ScrollMapData[], percentage: number, scale: number) => {

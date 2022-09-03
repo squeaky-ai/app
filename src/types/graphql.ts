@@ -1247,11 +1247,30 @@ export type FiltersViewport = {
 
 export type Heatmaps = {
   __typename?: 'Heatmaps';
-  desktopCount: Scalars['Int'];
-  items: Array<Maybe<HeatmapsItem>>;
-  mobileCount: Scalars['Int'];
-  recordingId?: Maybe<Scalars['String']>;
-  tabletCount: Scalars['Int'];
+  counts: HeatmapsCounts;
+  items: Array<Maybe<Item>>;
+  recording?: Maybe<Recording>;
+};
+
+export type HeatmapsClick = {
+  __typename?: 'HeatmapsClick';
+  count: Scalars['Int'];
+  id: Scalars['ID'];
+  selector: Scalars['String'];
+};
+
+export type HeatmapsCounts = {
+  __typename?: 'HeatmapsCounts';
+  desktop: Scalars['Int'];
+  mobile: Scalars['Int'];
+  tablet: Scalars['Int'];
+};
+
+export type HeatmapsCursor = {
+  __typename?: 'HeatmapsCursor';
+  id: Scalars['ID'];
+  x: Scalars['Int'];
+  y: Scalars['Int'];
 };
 
 export enum HeatmapsDevice {
@@ -1263,20 +1282,23 @@ export enum HeatmapsDevice {
   Tablet = 'Tablet'
 }
 
-export type HeatmapsItem = {
-  __typename?: 'HeatmapsItem';
-  count?: Maybe<Scalars['Int']>;
-  selector?: Maybe<Scalars['String']>;
+export type HeatmapsScroll = {
+  __typename?: 'HeatmapsScroll';
+  id: Scalars['ID'];
   x?: Maybe<Scalars['Int']>;
-  y?: Maybe<Scalars['Int']>;
+  y: Scalars['Int'];
 };
 
 export enum HeatmapsType {
   /** Show clicks */
   Click = 'Click',
+  /** Show mouse positions */
+  Cursor = 'Cursor',
   /** Show scrolls */
   Scroll = 'Scroll'
 }
+
+export type Item = HeatmapsClick | HeatmapsCursor | HeatmapsScroll;
 
 export type Mutation = {
   __typename?: 'Mutation';

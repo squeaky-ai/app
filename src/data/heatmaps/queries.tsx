@@ -1,60 +1,61 @@
 import { gql } from '@apollo/client';
 
 export const GET_HEATMAPS_QUERY = gql`
-  query GetHeatmaps($siteId: ID!, $page: String!, $fromDate: ISO8601Date!, $toDate: ISO8601Date!, $device: HeatmapsDevice!, $type: HeatmapsType!, $excludeRecordingIds: [ID!]) { 
+  query GetHeatmaps($siteId: ID!, $page: String!, $type: HeatmapsType!, $fromDate: ISO8601Date!, $toDate: ISO8601Date!, $device: HeatmapsDevice!, $excludeRecordingIds: [ID!]) {
     site(siteId: $siteId) {
       id
-      heatmaps(page: $page, device: $device, fromDate: $fromDate, toDate: $toDate, type: $type, excludeRecordingIds: $excludeRecordingIds) {
-        desktopCount
-        tabletCount
-        mobileCount
-        recordingId
-        items {
-          x
-          y
-          selector
-          count
+      heatmaps(page: $page, type: $type, device: $device, fromDate: $fromDate, toDate: $toDate, excludeRecordingIds: $excludeRecordingIds) {
+        counts {
+          desktop
+          tablet
+          mobile
         }
-      }
-    }
-  }
-`;
-
-export const GET_RECORDING_QUERY = gql`
-  query GetHeatmapsRecording($siteId: ID!, $recordingId: ID!) { 
-    site(siteId: $siteId) {
-      id
-      recording(recordingId: $recordingId) {
-        id
-        device {
-          viewportX
-          viewportY
-        }
-        connectedAt
-        disconnectedAt
-        visitor {
+        recording {
           id
-          visitorId
-          starred
-          linkedData
-        }
-        pages {
-          url
-          enteredAt
-          exitedAt
-        }
-        events(page: 1, size: 10) {
-          items {
-            id
-            type
-            data
-            timestamp
+          device {
+            viewportX
+            viewportY
           }
-          pagination {
-            perPage
-            itemCount
-            currentPage
-            totalPages
+          connectedAt
+          disconnectedAt
+          visitor {
+            id
+            visitorId
+            starred
+            linkedData
+          }
+          pages {
+            url
+            enteredAt
+            exitedAt
+          }
+          events(page: 1, size: 10) {
+            items {
+              id
+              type
+              data
+              timestamp
+            }
+            pagination {
+              perPage
+              itemCount
+              currentPage
+              totalPages
+            }
+          }
+        }
+        items {
+          ... on HeatmapsClick {
+            selector
+            count
+          }
+          ... on HeatmapsScroll {
+            x
+            y
+          }
+          ... on HeatmapsCursor {
+            x
+            y
           }
         }
       }
