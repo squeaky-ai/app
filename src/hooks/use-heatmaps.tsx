@@ -1,22 +1,13 @@
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
-import { parseRecordingEvents } from 'lib/events';
-import { GET_HEATMAPS_QUERY, GET_RECORDING_QUERY } from 'data/heatmaps/queries';
+import { GET_HEATMAPS_QUERY } from 'data/heatmaps/queries';
 import type { TimeRange } from 'types/common';
-import type { Event } from 'types/event';
-import type { Site, Recording, Heatmaps, HeatmapsDevice, HeatmapsType } from 'types/graphql';
+import type { Site, Heatmaps, HeatmapsDevice, HeatmapsType } from 'types/graphql';
 
 interface UseHeatmaps {
   loading: boolean;
   error: boolean;
   heatmaps: Heatmaps;
-}
-
-interface UseRecording {
-  loading: boolean;
-  error: boolean;
-  events: Event[];
-  recording: Recording | null;
 }
 
 interface Props {
@@ -27,53 +18,37 @@ interface Props {
   excludeRecordingIds: string[];
 }
 
+function getVariablesForProps(siteId: string, props: Props) {
+  return {
+    siteId,
+    device: props.device,
+    type: props.type,
+    page: props.page,
+    excludeRecordingIds: props.excludeRecordingIds,
+    ...props.range,
+  }
+}
+
 export const useHeatmaps = (props: Props): UseHeatmaps => {
   const router = useRouter();
 
   const { data, loading, error } = useQuery<{ site: Site }>(GET_HEATMAPS_QUERY, {
-    variables: {
-      siteId: router.query.site_id as string,
-      device: props.device,
-      type: props.type,
-      page: props.page,
-      excludeRecordingIds: props.excludeRecordingIds,
-      ...props.range,
-    }
+    variables: getVariablesForProps(router.query.site_id as string, props),
   });
 
-  const fallback: Heatmaps = {
-    desktopCount: 0,
-    tabletCount: 0,
-    mobileCount: 0,
-    recordingId: null,
+  const defaults: Heatmaps = {
+    counts: {
+      desktop: 0,
+      tablet: 0,
+      mobile: 0,
+    },
+    recording: null,
     items: [],
   };
 
   return {
     loading,
     error: !!error,
-    heatmaps: data ? data.site.heatmaps : fallback,
-  };
-};
-
-
-export const useRecording = (id: string): UseRecording => {
-  const router = useRouter();
-
-  const { data, loading, error } = useQuery<{ site: Site }>(GET_RECORDING_QUERY, {
-    variables: {
-      siteId: router.query.site_id as string,
-      recordingId: id || router.query.recording_id as string,
-      eventPage: 1,
-    }
-  });
-
-  return {
-    loading, 
-    error: !!error,
-    recording: data 
-      ? data.site.recording 
-      : null,
-    events: data ? parseRecordingEvents(data.site.recording.events.items) : [],
+    heatmaps: { ...defaults, ...data?.site?.heatmaps },
   };
 };

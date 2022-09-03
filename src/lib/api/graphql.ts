@@ -214,7 +214,10 @@ export const cache = new InMemoryCache({
           }
         }
       }
-    }
+    },
+    Heatmaps: {
+      merge: true,
+    },
   }
 });
 

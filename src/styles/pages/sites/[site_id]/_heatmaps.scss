@@ -84,6 +84,12 @@
                            'empty-state empty-state';
     }
 
+    &.hide-sidebar {
+      grid-template-areas: 'options'
+                           'content';
+      grid-template-columns: 100%;
+    }
+
     .empty-state {
       grid-area: empty-state;
       height: 100%;

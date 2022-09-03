@@ -46,24 +46,24 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
   });
 
   const excludeRecording = () => {
-    if (heatmaps.recordingId) {
-      const excludedIds = uniq([...excludeRecordingIds, heatmaps.recordingId]);
+    if (heatmaps.recording) {
+      const excludedIds = uniq([...excludeRecordingIds, heatmaps.recording.id]);
       setExcludeRecordingIds(excludedIds);
     }
   };
 
-  const hasData = !!heatmaps.recordingId;
+  const hasData = !!heatmaps.recording;
 
   if (loading) {
     return <PageLoading />;
   }
 
   return (
-    <div className={classnames('heatmaps-grid', { empty: !hasData })}>
+    <div className={classnames('heatmaps-grid', { empty: !hasData, 'hide-sidebar': type === 'Cursor' })}>
       <div className='options'>
         <div className='left'>
           <HeatmapsPages page={page} pages={pages} setPage={setPage} />
-          {heatmaps.recordingId && (
+          {heatmaps.recording && (
             <Tooltip portalClassName='suffle-recording-tooltip' button={<Icon name='shuffle-line' />} buttonClassName='quaternary shuffle-recording' buttonOnClick={excludeRecording}>
               Squeaky shows you a random snapshot of your selected page from within the time period you have defined. If the snapshot is corrupted click the shuffle button and we&apos;ll find an alternative view of your page
             </Tooltip>
@@ -76,21 +76,24 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
           <ButtonGroup>
             <Button className={classnames(device === HeatmapsDevice.Desktop ? 'primary' : 'blank')} onClick={() => setDevice(HeatmapsDevice.Desktop)}>
               <Icon name='computer-line' />
-              {heatmaps.desktopCount}
+              {heatmaps.counts.desktop}
             </Button>
             <Button className={classnames(device === HeatmapsDevice.Tablet ? 'primary' : 'blank')} onClick={() => setDevice(HeatmapsDevice.Tablet)}>
               <Icon name='tablet-line' />
-              {heatmaps.tabletCount}
+              {heatmaps.counts.tablet}
             </Button>
             <Button className={classnames(device === HeatmapsDevice.Mobile ? 'primary' : 'blank')} onClick={() => setDevice(HeatmapsDevice.Mobile)}>
               <Icon name='smartphone-line' />
-              {heatmaps.mobileCount}
+              {heatmaps.counts.mobile}
             </Button>
           </ButtonGroup>
 
           <ButtonGroup>
             <Button className={classnames(type === 'Click' ? 'primary' : 'blank')} onClick={() => setType(HeatmapsType.Click)}>
               {device === HeatmapsDevice.Desktop ? 'Clicks' : 'Taps'}
+            </Button>
+            <Button className={classnames(type === 'Cursor' ? 'primary' : 'blank')} onClick={() => setType(HeatmapsType.Cursor)}>
+              Cursors
             </Button>
             <Button className={classnames(type === 'Scroll' ? 'primary' : 'blank')} onClick={() => setType(HeatmapsType.Scroll)}>
               Scroll
@@ -108,14 +111,13 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
               device={device}
               display={display}
               page={page}
-              recordingId={heatmaps.recordingId} 
-              items={heatmaps.items} 
+              heatmaps={heatmaps}
             />
           </Card>
           <Card className='data'>
             {type === 'Click' && (
               <HeatmapsClicks 
-                items={heatmaps.items} 
+                heatmaps={heatmaps} 
                 selected={selected} 
                 display={display}
                 setSelected={setSelected} 
@@ -123,7 +125,7 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
             )}
 
             {type === 'Scroll' && (
-              <HeatmapsScrolls items={heatmaps.items} />
+              <HeatmapsScrolls heatmaps={heatmaps} />
             )}
           </Card>
         </>

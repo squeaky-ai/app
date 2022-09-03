@@ -2,18 +2,18 @@ import React from 'react';
 import type { FC } from 'react';
 import { Icon } from 'components/icon';
 import { getScrollMapData } from 'lib/heatmaps';
-import type { HeatmapsItem } from 'types/graphql';
+import type { Heatmaps, HeatmapsScroll } from 'types/graphql';
 
 interface Props {
-  items: HeatmapsItem[];
+  heatmaps: Heatmaps;
 }
 
-export const HeatmapsScrolls: FC<Props> = ({ items }) => {
-  const scrollMap = getScrollMapData(items).slice(1);
+export const HeatmapsScrolls: FC<Props> = ({ heatmaps }) => {
+  const scrollMap = getScrollMapData(heatmaps.items as HeatmapsScroll[]).slice(1);
 
   return (
     <div className='scrolls-table'>
-      {items.length === 0 && (
+      {heatmaps.items.length === 0 && (
         <div className='empty'>
           <Icon name='time-line' />
           <p>No data available</p>
@@ -21,7 +21,7 @@ export const HeatmapsScrolls: FC<Props> = ({ items }) => {
       )}
 
       
-      {items.length > 0 && (
+      {heatmaps.items.length > 0 && (
         <>
           <div className='head row'>
             <p>% scrolled</p>
