@@ -1,5 +1,6 @@
 export enum FeatureFlag {
   CHEESE_LOADER = 'CHEESE_LOADER',
+  HEATMAPS_CURSORS = 'HEATMAPS_CURSORS',
   SLIDER_V2 = 'SLIDER_V2',
 }
 

@@ -17,7 +17,9 @@ import { HeatmapsPages } from 'components/sites/heatmaps/heatmaps-pages';
 import { HeatmapsPage } from 'components/sites/heatmaps/heatmaps-page';
 import { HeatmapsDisplays } from 'components/sites/heatmaps/heatmaps-displays';
 import { useHeatmaps } from 'hooks/use-heatmaps';
+import { useFeatureFlags } from 'hooks/use-feature-flags';
 import { getDateRange } from 'lib/dates';
+import { FeatureFlag } from 'lib/feature-flags';
 import { HeatmapsDevice, HeatmapsType } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 import type { HeatmapsDisplay } from 'types/heatmaps';
@@ -31,6 +33,8 @@ interface Props {
 }
 
 export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod }) => {
+  const { featureFlagEnabled } = useFeatureFlags();
+
   const [type, setType] = React.useState<HeatmapsType>(HeatmapsType.Click);
   const [device, setDevice] = React.useState<HeatmapsDevice>(HeatmapsDevice.Desktop);
   const [display, setDisplay] = React.useState<HeatmapsDisplay>('all');
@@ -92,9 +96,11 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
             <Button className={classnames(type === 'Click' ? 'primary' : 'blank')} onClick={() => setType(HeatmapsType.Click)}>
               {device === HeatmapsDevice.Desktop ? 'Clicks' : 'Taps'}
             </Button>
-            <Button className={classnames(type === 'Cursor' ? 'primary' : 'blank')} onClick={() => setType(HeatmapsType.Cursor)}>
-              Cursors
-            </Button>
+            {featureFlagEnabled(FeatureFlag.HEATMAPS_CURSORS) && (
+              <Button className={classnames(type === 'Cursor' ? 'primary' : 'blank')} onClick={() => setType(HeatmapsType.Cursor)}>
+                Cursors
+              </Button>
+            )}
             <Button className={classnames(type === 'Scroll' ? 'primary' : 'blank')} onClick={() => setType(HeatmapsType.Scroll)}>
               Scroll
             </Button>
