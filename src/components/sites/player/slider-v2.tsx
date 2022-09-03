@@ -99,9 +99,11 @@ export const SliderV2: FC<Props> = ({
 
   React.useEffect(() => {
     window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove, true);
+      window.removeEventListener('mouseup', handleMouseUp, true);
     };
   }, []);
 
@@ -133,7 +135,6 @@ export const SliderV2: FC<Props> = ({
       <div className='track' onMouseDown={handleClick}>
         <Button
           onMouseDown={handleMouseDown}
-          onMouseUp={handleMouseUp}
           className={classnames({ clicked: clicked.current })}
           style={{ left: `${val}%` }}
         />

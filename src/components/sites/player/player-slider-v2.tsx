@@ -98,7 +98,6 @@ export class PlayerSliderV2 extends React.Component<Props, State> {
   };
 
   private onMouseDown = (): void => {
-    console.log('!!');
     this.setState({ pressed: true });
     this.shouldResumeAfterSlide = this.props.replayer.service.state.value === 'playing';
     this.props.replayer.pause();
