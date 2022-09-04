@@ -4,23 +4,31 @@ import { Replayer } from 'rrweb';
 import { Spinner } from 'components/spinner';
 import { ScrollIndicator } from 'components/sites/scroll-indicator';
 import { DeviceWidths } from 'data/common/constants';
-import { showClickMaps, showScrollMaps, showCursorMaps, iframeStyles, getElements } from 'lib/heatmaps';
+import { showClickCountsMaps, showClickGradientMaps, showScrollMaps, iframeStyles, getElements } from 'lib/heatmaps';
 import { parseRecordingEvents } from 'lib/events';
-import { Heatmaps, HeatmapsClick, HeatmapsCursor, HeatmapsDevice, HeatmapsScroll } from 'types/graphql';
-import type { HeatmapsDisplay } from 'types/heatmaps';
+import { Heatmaps, HeatmapsClick, HeatmapsDevice, HeatmapsScroll } from 'types/graphql';
+import type { HeatmapClickDisplay, HeatmapClickTarget } from 'types/heatmaps';
 import type { HeatmapsType } from 'types/graphql';
 
 interface Props {
   type: HeatmapsType;
   device: HeatmapsDevice;
-  display: HeatmapsDisplay;
+  clickTarget: HeatmapClickTarget;
+  clickDisplay: HeatmapClickDisplay;
   page: string;
   heatmaps: Heatmaps;
 }
 
 let replayer: Replayer;
 
-export const HeatmapsPage: FC<Props> = ({ type, device, page, display, heatmaps }) => {
+export const HeatmapsPage: FC<Props> = ({
+  type,
+  device,
+  page,
+  clickTarget,
+  clickDisplay,
+  heatmaps,
+}) => {
   const ref = React.useRef<HTMLDivElement>(null);
   const [scale, setScale] = React.useState<number>(1);
   const [loading, setLoading] = React.useState<boolean>(true);
@@ -70,7 +78,7 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, display, heatmaps 
   const cleanup = (doc: Document) => {
     getElements(doc, '.__squeaky_click_tag').forEach(d => d.remove());
     getElements(doc, '.__squeaky_scroll_overlay').forEach(d => d.remove());
-    getElements(doc, '.__squeaky_cursor_overlay').forEach(d => d.remove());
+    getElements(doc, '.__squeaky_click_overlay').forEach(d => d.remove());
     getElements(doc, '.__squeaky_outline').forEach(elem => elem.classList.remove('__squeaky_outline'));
     getElements(doc, '#__squeaky_scrolling_percentage_marker').forEach(d => d.remove());
     getElements(doc, '.__squeaky_fixed_percentage_marker').forEach(d => d.remove());
@@ -97,9 +105,9 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, display, heatmaps 
     doc.body.style.cssText += 'pointer-events: none; user-select: none;';
     doc.head.innerHTML += iframeStyles;
 
-    if (type === 'Click') showClickMaps(doc, heatmaps.items as HeatmapsClick[], display);
+    if (type === 'Click' && clickDisplay === 'counts') showClickCountsMaps(doc, heatmaps.items as HeatmapsClick[], clickTarget);
+    if (type === 'Click' && clickDisplay === 'gradient') showClickGradientMaps(doc, heatmaps.items as HeatmapsClick[]);
     if (type === 'Scroll') showScrollMaps(doc, heatmaps.items as HeatmapsScroll[], scale);
-    if (type === 'Cursor') showCursorMaps(doc, heatmaps.items as HeatmapsCursor[]);
 
     // Now that stuff isn't going to jump the spinner can be removed
     setLoading(false);
@@ -147,7 +155,7 @@ export const HeatmapsPage: FC<Props> = ({ type, device, page, display, heatmaps 
   React.useEffect(() => {
     draw();
     shrink();
-  }, [type, heatmaps.counts, heatmaps.items, display]);
+  }, [type, heatmaps.counts, heatmaps.items, clickTarget, clickDisplay]);
 
   React.useEffect(() => {
     return () => {

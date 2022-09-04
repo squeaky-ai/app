@@ -19,13 +19,11 @@ type Names = Record<FeatureFlag, string>;
 export const allFeatureFlags: FeatureFlag[] = [
   FeatureFlag.CHEESE_LOADER,
   FeatureFlag.SLIDER_V2,
-  FeatureFlag.HEATMAPS_CURSORS,
 ];
 
 export const featureFlagNames: Names = {
   CHEESE_LOADER: 'Cheese Loader',
   SLIDER_V2: 'V2 Slider',
-  HEATMAPS_CURSORS: 'Heatmaps Cursors',
 };
 
 const options: State = [
@@ -40,12 +38,6 @@ const options: State = [
     value: false,
     superuser: false,
     description: 'Updated slider that should be more accurate',
-  },
-  {
-    key: FeatureFlag.HEATMAPS_CURSORS,
-    value: false,
-    superuser: true,
-    description: 'Experminatal cursor position heatmaps',
   },
 ];
 

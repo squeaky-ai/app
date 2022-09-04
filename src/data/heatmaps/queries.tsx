@@ -53,10 +53,6 @@ export const GET_HEATMAPS_QUERY = gql`
             x
             y
           }
-          ... on HeatmapsCursor {
-            x
-            y
-          }
         }
       }
     }

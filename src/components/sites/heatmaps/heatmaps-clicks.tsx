@@ -6,17 +6,17 @@ import { Tooltip } from 'components/tooltip';
 import { Pill } from 'components/pill';
 import { Sort } from 'components/sort';
 import { ClickMapData, getClickMapData, getElement, getElements, selectorIncludesClickable } from 'lib/heatmaps';
-import type { HeatmapsDisplay } from 'types/heatmaps';
+import type { HeatmapClickTarget } from 'types/heatmaps';
 import type { Heatmaps, HeatmapsClick } from 'types/graphql';
 
 interface Props {
   heatmaps: Heatmaps;
   selected: string;
-  display: HeatmapsDisplay;
+  clickTarget: HeatmapClickTarget;
   setSelected: (selected: string) => void;
 }
 
-export const HeatmapsClicks: FC<Props> = ({ heatmaps, selected, display, setSelected }) => {
+export const HeatmapsClicks: FC<Props> = ({ heatmaps, selected, clickTarget, setSelected }) => {
   const [order, setOrder] = React.useState('clicks__desc');
 
   const clicks = getClickMapData(heatmaps.items as HeatmapsClick[])
@@ -26,7 +26,7 @@ export const HeatmapsClicks: FC<Props> = ({ heatmaps, selected, display, setSele
     // find one. You can't just check that the last element
     // is an anchor as it could include a span or img or
     // something
-    .filter(c => display === 'all' ? true : selectorIncludesClickable(c.selector))
+    .filter(c => clickTarget === 'all' ? true : selectorIncludesClickable(c.selector))
     .sort((a, b) => order === 'clicks__asc'
       ? a.count - b.count
       : b.count - a.count

@@ -1,1 +1,2 @@
-export type HeatmapsDisplay = 'all' | 'anchors';
+export type HeatmapClickTarget = 'all' | 'anchors';
+export type HeatmapClickDisplay = 'counts' | 'gradient';

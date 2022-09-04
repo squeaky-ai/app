@@ -2,8 +2,8 @@ import heatmap from 'vendor/heatmap';
 import { range, orderBy, findLast, sumBy } from 'lodash';
 import { percentage } from 'lib/maths';
 import { HeatmapColor, HEATMAP_COLOURS } from 'data/heatmaps/constants';
-import type { HeatmapsDisplay } from 'types/heatmaps';
-import type { HeatmapsScroll, HeatmapsClick, HeatmapsCursor } from 'types/graphql';
+import type { HeatmapClickTarget } from 'types/heatmaps';
+import type { HeatmapsScroll, HeatmapsClick } from 'types/graphql';
 
 interface ScrollMapData {
   increment: number;
@@ -96,14 +96,14 @@ export const getClickMapData = (items: HeatmapsClick[]): ClickMapData[] => {
   });
 };
 
-export const showClickMaps = (doc: Document, items: HeatmapsClick[], display: HeatmapsDisplay) => {
+export const showClickCountsMaps = (doc: Document, items: HeatmapsClick[], clickTarget: HeatmapClickTarget) => {
   const clickMapData = getClickMapData(items);
 
   items.forEach(item => {
     let elem = getElement(doc, item.selector);
 
     if (!elem) return;
-    if (display === 'anchors' && !selectorIncludesClickable(item.selector)) return;
+    if (clickTarget === 'anchors' && !selectorIncludesClickable(item.selector)) return;
 
     // These things don't have a innerHTML so the next
     // best thing is to use the parent, even if it's
@@ -181,9 +181,30 @@ export const showScrollMaps = (doc: Document, items: HeatmapsScroll[], scale: nu
   createFixedScrollMarker(doc, scrollMapData, 75, unscale);
 };
 
-export const showCursorMaps = (doc: Document, items: HeatmapsCursor[]) => {
+export const showClickGradientMaps = (doc: Document, items: HeatmapsClick[]) => {
+  const clickMapData = getClickMapData(items);
+  
+  const data = items
+    .map(item => {
+      let elem = getElement(doc, item.selector);
+
+      if (!elem) return null;
+
+      const click = clickMapData.find(c => c.selector === item.selector);
+      const { left, top, width, height } = elem.getBoundingClientRect();
+
+      const x = left + (width / 2);
+      const y = top + (height / 2);
+
+      return { x, y, value: click.count };
+    })
+    .filter(d => !!d)
+    .filter(d => !(d.x === 0 && d.y === 0));
+
+  if (data.length === 0) return;
+
   const overlay = document.createElement('div');
-  overlay.classList.add('__squeaky_cursor_overlay');
+  overlay.classList.add('__squeaky_click_overlay');
   overlay.style.cssText = `
     background: rgba(0, 0, 0, .25);
     height: ${doc.body.scrollHeight}px;
@@ -203,13 +224,10 @@ export const showCursorMaps = (doc: Document, items: HeatmapsCursor[]) => {
   overlay.appendChild(heatmapContainer);
   doc.body.appendChild(overlay);
 
+  const max = Math.max(...data.map(d => d.value));
   const map = heatmap.create({ container: heatmapContainer });
 
-  map.setData({
-    min: 0,
-    max: 100,
-    data: items.map(item => ({ x: item.x, y: item.y, value: 1 })),
-  });
+  map.setData({ min: 0, max, data });
 };
 
 const createFixedScrollMarker = (doc: Document, scrollMapData: ScrollMapData[], percentage: number, scale: number) => {
