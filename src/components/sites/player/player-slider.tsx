@@ -14,8 +14,8 @@ interface Props {
   events: Event[];
   recording: Recording;
   state: PlayerState;
-  handleSlide: (milliseconds: number, resume: boolean) => void;
   dispatch: React.Dispatch<Action>;
+  handleSlide: (milliseconds: number, resume: boolean) => void;
 }
 
 interface State {
@@ -38,10 +38,14 @@ export class PlayerSlider extends React.Component<Props, State> {
 
   public componentWillUnmount(): void {
     this.stop();
+
+    window.removeEventListener('keydown', this.onKeyPress, true);
   }
 
   public componentDidMount(): void {
     this.restart();
+
+    window.addEventListener('keydown', this.onKeyPress);
   }
 
   public componentDidUpdate(prevProps: Props): void {
@@ -86,7 +90,8 @@ export class PlayerSlider extends React.Component<Props, State> {
     }
   };
 
-  private onSlide = (value: number): void => {
+  private onSlide = (percentage: number): void => {
+    const value = percentage * this.durationInSeconds / 100;
     this.setState({ value });
 
     this.props.handleSlide(value * 1000, this.shouldResumeAfterSlide);
@@ -102,12 +107,29 @@ export class PlayerSlider extends React.Component<Props, State> {
     this.setState({ pressed: false });
   };
 
+  private onKeyPress = (event: KeyboardEvent) => {
+    const tagName = (event.target as HTMLElement).tagName;
+
+    if (tagName !== 'BODY') return;
+
+    switch(event.code) {
+      case 'Space':
+        this.togglePlayPause();
+    }
+  };
+
   private getSeconds = (ms: number): number => {
     return Math.floor(ms / 1000);
   };
 
   private getSliderPosition = (ms: number): number => {
     return Number((ms / 1000).toFixed(2));
+  };
+
+  private togglePlayPause = () => {
+    this.props.replayer.service.state.value === 'playing'
+      ? this.props.replayer.pause()
+      : this.props.replayer.play(this.props.replayer.getCurrentTime());
   };
 
   private get durationInSeconds(): number {
@@ -125,10 +147,8 @@ export class PlayerSlider extends React.Component<Props, State> {
   public render(): JSX.Element {
     return (
       <>
-        <Slider 
-          min={0} 
-          max={this.durationInSeconds} 
-          value={this.state.value}
+        <Slider
+          value={this.state.value / this.durationInSeconds * 100}
           events={this.props.events}
           recording={this.props.recording}
           duration={this.duration}

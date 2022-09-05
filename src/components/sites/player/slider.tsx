@@ -1,17 +1,16 @@
 import React from 'react';
 import type { FC } from 'react';
+import classnames from 'classnames';
 import { clamp, debounce } from 'lodash';
-import { Input } from 'components/input';
 import { Activity } from 'components/sites/player/activity';
 import { Interaction } from 'components/sites/player/interaction';
 import { getInteractionEvents } from 'lib/events';
 import type { Recording } from 'types/graphql';
 import type { Event } from 'types/event';
 import type { PlayerState } from 'types/player';
+import { Button } from 'components/button';
 
 interface Props {
-  min: number;
-  max: number;
   value: number;
   className?: string;
   events: Event[];
@@ -21,12 +20,10 @@ interface Props {
   state: PlayerState;
   onMouseUp: VoidFunction;
   onMouseDown: VoidFunction;
-  onChange: (value: number) => void;
+  onChange: (percentage: number) => void;
 }
 
 export const Slider: FC<Props> = ({
-  max,
-  min,
   value,
   events,
   recording,
@@ -37,6 +34,9 @@ export const Slider: FC<Props> = ({
   onMouseUp,
   onMouseDown, 
 }) => {
+  const ref = React.useRef<HTMLDivElement>(null);
+  const clicked = React.useRef<boolean>(false);
+
   const [val, setVal] = React.useState<number>(0);
 
   const { totalPages, currentPage } = recording?.events?.pagination || { 
@@ -47,22 +47,45 @@ export const Slider: FC<Props> = ({
   const { interactionEvents } = getInteractionEvents(events, state);
   
   const offset = events[0]?.timestamp || 0;
-  const progress = clamp(value / (max - min), min, max);
+  const progress = value;
   const buffered = currentPage / totalPages;
 
   const bufferedWidth = clamp(buffered * 100, 0, 100);
   const progressedWith = clamp(progress * 100, 0, 100);
 
-  const setValue = React.useCallback(debounce((number: number) => {
-    onChange(number);
+  const setValue = React.useCallback(debounce((percentage: number) => {
+    onChange(percentage);
   }, 500), []);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const number = Number(event.target.value);
-    // Update the state here so the UI is responsive
-    setVal(number);
-    // Fire the debounced callback so the replayer can update
-    setValue(number);
+  const handleMouseDown = (event: React.MouseEvent) => {
+    event.stopPropagation();
+
+    clicked.current = true;
+    onMouseDown();
+  };
+
+  const handleMouseUp = () => {
+    clicked.current = false;
+    onMouseUp();
+  };
+
+  const handleMouseMove = (event: MouseEvent) => {
+    if (clicked.current) {
+      setValueFromEvent(event);
+    }
+  };
+
+  const handleClick = (event: React.MouseEvent) => {
+    onMouseDown();
+    setValueFromEvent(event);
+  };
+
+  const setValueFromEvent = (event: MouseEvent | React.MouseEvent) => {
+    const { left, width } = ref.current.getBoundingClientRect();
+    const position = event.clientX - left;
+    const percentage = clamp((position / width) * 100, 0, 100);
+    setVal(percentage);
+    setValue(percentage);
   };
 
   // Update the value when it changes in the parent but
@@ -70,12 +93,22 @@ export const Slider: FC<Props> = ({
   // otherwise it will fight with it
   React.useEffect(() => {
     if (!pressed) {
-      setVal(value);
+      setVal(clamp(value, 0, 100));
     }
   }, [value]);
 
+  React.useEffect(() => {
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove, true);
+      window.removeEventListener('mouseup', handleMouseUp, true);
+    };
+  }, []);
+
   return (
-    <div className='slider'>
+    <div className='slider' ref={ref}>
       <div className='bar buffered' style={{ width: `${bufferedWidth}%` }} />
       <div className='bar progress' style={{ width: `${progressedWith}%` }} />
 
@@ -99,16 +132,13 @@ export const Slider: FC<Props> = ({
         ))}
       </div>
 
-      <Input 
-        type='range' 
-        min={min} 
-        max={max} 
-        step={.01} 
-        value={val}
-        onChange={handleChange}
-        onMouseDown={onMouseDown}
-        onMouseUp={onMouseUp}
-      />
+      <div className='track' onMouseDown={handleClick}>
+        <Button
+          onMouseDown={handleMouseDown}
+          className={classnames({ clicked: clicked.current })}
+          style={{ left: `${val}%` }}
+        />
+      </div>
     </div>
   );
 };
