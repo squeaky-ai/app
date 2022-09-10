@@ -38,7 +38,7 @@ const SitesJourneys: NextPage<ServerSideProps> = ({ user }) => {
               <h4 className='title'>Journeys</h4>
             </div>
 
-            <Unlock site={site} page='analytics' />
+            <Unlock site={site} />
 
             <EmptyState
               title='There are currently no user journeys available.'

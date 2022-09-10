@@ -48,7 +48,7 @@ const SitesFeedbackNps: NextPage<ServerSideProps> = ({ user }) => {
               videoName='Feedback Intro'
             />
 
-            <Unlock site={site} page='nps' />
+            <Unlock site={site} />
 
             {!!site.verifiedAt && (
               <>

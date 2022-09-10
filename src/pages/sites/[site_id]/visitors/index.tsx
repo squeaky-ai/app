@@ -94,7 +94,7 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
               snippet='If you have only recently installed or updated your tracking code it may take up to an hour before user records become available.'
             />
 
-            <Unlock site={site} page='visitors' />
+            <Unlock site={site} />
 
             {site.recordingsCount > 0 && columnsReady && (
               <>

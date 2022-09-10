@@ -134,8 +134,6 @@ export const ADMIN_SITE_PLAN_UPDATE_MUTATION = gql`
         invalid
         support
         maxMonthlyRecordings
-        recordingsLockedCount
-        visitorsLockedCount
         ssoEnabled
         auditTrailEnabled
         privateInstanceEnabled

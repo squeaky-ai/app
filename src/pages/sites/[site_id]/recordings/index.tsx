@@ -100,7 +100,7 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
               snippet='If you have only recently installed or updated your tracking code it may take up to an hour before new session recordings are available in the recordings page.'
             />
 
-            <Unlock site={site} page='recordings' />
+            <Unlock site={site} />
 
             {site.recordingsCount > 0 && columnsReady && (
               <>

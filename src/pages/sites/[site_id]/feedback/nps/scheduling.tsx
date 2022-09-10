@@ -49,7 +49,7 @@ const SitesFeedbackNpsScheduling: NextPage<ServerSideProps> = ({ user }) => {
               videoName='Feedback Intro'
             />
 
-            <Unlock site={site} page='nps' />
+            <Unlock site={site} />
 
             {loading && (
               <PageLoading />

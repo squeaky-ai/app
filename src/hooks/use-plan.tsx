@@ -25,8 +25,6 @@ export const usePlan = (props: Props): UsePlan => {
     exceeded: false,
     invalid: false,
     maxMonthlyRecordings: 500,
-    recordingsLockedCount: 0,
-    visitorsLockedCount: 0,
     dataStorageMonths: 6,
     responseTimeHours: 168,
     auditTrailEnabled: false,
