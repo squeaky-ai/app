@@ -56,7 +56,7 @@ const SitesAnalyticsPageTraffic: NextPage<ServerSideProps> = ({ user }) => {
               )}
             </div>
 
-            <Unlock site={site} page='analytics' />
+            <Unlock site={site} />
 
             <Tabs site={site} tab='traffic' type='page' page={page} />
 

@@ -32,7 +32,7 @@ const SitesAnalyticsSiteAudience: NextPage<ServerSideProps> = ({ user }) => {
               <Period period={period} onChange={setPeriod} />
             </div>
 
-            <Unlock site={site} page='analytics' />
+            <Unlock site={site} />
 
             <Tabs site={site} tab='audience' type='site' />
 

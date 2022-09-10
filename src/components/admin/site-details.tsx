@@ -92,11 +92,6 @@ export const SiteDetails: FC<Props> = ({ activeVisitors, site, isEnterprise }) =
             <Cell>{site.recordingCounts.totalCurrentMonth.toLocaleString()}</Cell>
           </Row>
           <Row>
-            <Cell>Locked</Cell>
-            <Cell>{site.recordingCounts.lockedAll.toLocaleString()}</Cell>
-            <Cell>{site.recordingCounts.lockedCurrentMonth.toLocaleString()}</Cell>
-          </Row>
-          <Row>
             <Cell>Deleted</Cell>
             <Cell>{site.recordingCounts.deletedAll.toLocaleString()}</Cell>
             <Cell>{site.recordingCounts.deletedCurrentMonth.toLocaleString()}</Cell>

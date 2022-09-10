@@ -96,8 +96,6 @@ export const GET_PLAN_QUERY = gql`
         exceeded
         invalid
         maxMonthlyRecordings
-        recordingsLockedCount
-        visitorsLockedCount
         dataStorageMonths
         responseTimeHours
       }
@@ -125,8 +123,6 @@ export const GET_BILLING_QUERY = gql`
         invalid
         support
         maxMonthlyRecordings
-        recordingsLockedCount
-        visitorsLockedCount
         ssoEnabled
         auditTrailEnabled
         privateInstanceEnabled

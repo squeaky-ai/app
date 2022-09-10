@@ -48,7 +48,7 @@ const SitesFeedbackSentiment: NextPage<ServerSideProps> = ({ user }) => {
               videoName='Feedback Intro'
             />
 
-            <Unlock site={site} page='sentiment' />
+            <Unlock site={site} />
 
             {!!site.verifiedAt && (
               <>

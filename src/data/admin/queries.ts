@@ -17,8 +17,6 @@ export const GET_ADMIN_QUERY = gql`
           exceeded
           invalid
           maxMonthlyRecordings
-          recordingsLockedCount
-          visitorsLockedCount
         }
         team {
           id
@@ -86,8 +84,6 @@ export const GET_ADMIN_SITE_QUERY = gql`
           invalid
           support
           maxMonthlyRecordings
-          recordingsLockedCount
-          visitorsLockedCount
           ssoEnabled
           auditTrailEnabled
           privateInstanceEnabled
@@ -142,10 +138,8 @@ export const GET_ADMIN_SITE_QUERY = gql`
         }
         recordingCounts {
           totalAll
-          lockedAll
           deletedAll
           totalCurrentMonth
-          lockedCurrentMonth
           deletedCurrentMonth
         }
         createdAt
