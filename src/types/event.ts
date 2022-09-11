@@ -1,7 +1,7 @@
 import type { eventWithTime } from 'rrweb/typings/types';
 
 export type Event = eventWithTime & {
-  id: number | string;
+  id: string;
 };
 
 export type EventName =
@@ -32,7 +32,7 @@ export enum CustomEvents {
 }
 
 export type ErrorEvent = {
-  id: number;
+  id: string;
   type: CustomEvents.ERROR;
   timestamp: number;
   data: {
@@ -46,7 +46,7 @@ export type ErrorEvent = {
 }
 
 export type PageViewEvent = {
-  id: number;
+  id: string;
   type: CustomEvents.PAGE_VIEW;
   timestamp: number;
   data: {

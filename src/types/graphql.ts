@@ -12,6 +12,7 @@ export type Scalars = {
   Float: number;
   /** Represents non-fractional signed whole numeric values. Since the value may exceed the size of a 32-bit integer, it's encoded as a string. */
   BigInt: any;
+  Event: any;
   /** An ISO 8601-encoded date */
   ISO8601Date: any;
   /** An ISO 8601-encoded datetime */
@@ -2038,7 +2039,7 @@ export type RecordingsDevice = {
 
 export type RecordingsEvent = {
   __typename?: 'RecordingsEvent';
-  data: Scalars['String'];
+  data: Scalars['Event'];
   id: Scalars['ID'];
   timestamp: Scalars['BigInt'];
   type: Scalars['Int'];
@@ -2335,6 +2336,7 @@ export type SiteSessionSettings = {
   anonymiseFormInputs: Scalars['Boolean'];
   cssSelectorBlacklist: Array<Maybe<Scalars['String']>>;
   ingestEnabled: Scalars['Boolean'];
+  invalidOrExceededPlan: Scalars['Boolean'];
   ipBlacklist: Array<Maybe<SitesIpBlacklist>>;
   name: Scalars['String'];
   url: Scalars['String'];
