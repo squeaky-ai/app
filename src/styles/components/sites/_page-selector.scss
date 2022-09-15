@@ -93,6 +93,7 @@
     .checkbox .check + span {
       display: flex;
       justify-content: space-between;
+      overflow: hidden;
       width: 100%;
     }
 

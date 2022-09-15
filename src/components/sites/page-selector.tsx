@@ -128,7 +128,7 @@ const ClickItem: FC<{
 }> = ({ page, handleClick }) => (
   <Button className='item' onClick={() => handleClick(page)}>
     <span className='url'>{page.url}</span>
-    <span className='count'>{page.count}</span>
+    <span className='count'>{page.count.toLocaleString()}</span>
   </Button>
 );
 
@@ -140,7 +140,7 @@ const SingleItem: FC<{
 }> = ({ name, page, selected, handleChange }) => (
   <Radio className='item' checked={selected} name={name} value={page.url} onChange={handleChange}>
     <span className='url'>{page.url}</span>
-    <span className='count'>{page.count}</span>
+    <span className='count'>{page.count.toLocaleString()}</span>
   </Radio>
 );
 
@@ -152,6 +152,6 @@ const MultiItem: FC<{
 }> = ({ name, page, selected, handleChange }) => (
   <Checkbox className='item' checked={selected} name={name} value={page.url} onChange={handleChange}>
     <span className='url'>{page.url}</span>
-    <span className='count'>{page.count}</span>
+    <span className='count'>{page.count.toLocaleString()}</span>
   </Checkbox>
 );
