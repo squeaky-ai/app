@@ -19,9 +19,10 @@ import { FiltersUtm } from  'components/sites/filters/recordings/filters-utm';
 import { FiltersTags } from 'components/sites/filters/recordings/filters-tags';
 import { FiltersStarred } from 'components/sites/filters/common/filters-starred';
 import type { RecordingsFilters } from 'types/graphql';
-import type { ValueOf } from 'types/common';
+import type { TimePeriod, ValueOf } from 'types/common';
 
 interface Props {
+  period: TimePeriod;
   filters: RecordingsFilters;
   updateFilters: (key: keyof RecordingsFilters, value: ValueOf<RecordingsFilters>) => void;
 }
@@ -44,7 +45,7 @@ enum FilterType {
   Utm
 }
 
-export const Filters: FC<Props> = ({ filters, updateFilters }) => {
+export const Filters: FC<Props> = ({ period, filters, updateFilters }) => {
   const [openFilter, setOpenFilter] = React.useState<FilterType | null>(null);
 
   const handleFilterChange = (filter: FilterType): void => {
@@ -145,26 +146,22 @@ export const Filters: FC<Props> = ({ filters, updateFilters }) => {
           )}
           {openFilter === FilterType.StartUrl && (
             <>
-              <Label>Start URL</Label>
-              <FiltersPage value={filters.startUrl} onUpdate={handleUpdate('startUrl')} onClose={handleFilterClose} />
+              <FiltersPage label='Start URL' value={filters.startUrl} period={period} onUpdate={handleUpdate('startUrl')} onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.ExitUrl && (
             <>
-              <Label>Exit URL</Label>
-              <FiltersPage value={filters.exitUrl} onUpdate={handleUpdate('exitUrl')} onClose={handleFilterClose} />
+              <FiltersPage label='Exit URL' value={filters.exitUrl} period={period} onUpdate={handleUpdate('exitUrl')} onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.VisitedPages && (
             <>
-              <Label>Visited pages</Label>
-              <FiltersPages value={filters.visitedPages} onUpdate={handleUpdate('visitedPages')} onClose={handleFilterClose} />
+              <FiltersPages label='Visited pages' value={filters.visitedPages} period={period} onUpdate={handleUpdate('visitedPages')} onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.UnvisitedPages && (
             <>
-              <Label>Unvisited pages</Label>
-              <FiltersPages value={filters.unvisitedPages} onUpdate={handleUpdate('unvisitedPages')} onClose={handleFilterClose} />
+              <FiltersPages label='Unvisited pages' value={filters.unvisitedPages} period={period} onUpdate={handleUpdate('unvisitedPages')} onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.Device && (

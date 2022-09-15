@@ -1,36 +1,45 @@
 import { gql, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
-import type { Site } from 'types/graphql';
+import type { TimeRange } from 'types/common';
+import type { Site, SitesPage } from 'types/graphql';
 
 interface UsePages {
   loading: boolean;
   error: boolean;
-  pages: string[];
+  pages: SitesPage[];
+}
+
+interface Props {
+  range: TimeRange
 }
 
 const QUERY = gql`
-  query GetSitePages($siteId: ID!) {
+  query GetSitePages($siteId: ID!, $fromDate: ISO8601Date!, $toDate: ISO8601Date!) {
     site(siteId: $siteId) {
       id
-      pageUrls
+      pages(fromDate: $fromDate, toDate: $toDate) {
+        url
+        count
+      }
     }
   }
 `;
 
-export const usePages = (): UsePages => {
+export const usePages = ({ range }: Props): UsePages => {
   const router = useRouter();
 
   const { data, error, loading } = useQuery<{ site: Site }>(QUERY, {
     variables: {
-      siteId: router.query.site_id as string
-    }
+      siteId: router.query.site_id as string,
+      ...range,
+    },
   });
 
-  const pages = data ? data.site.pageUrls : [];
+  const pages = data ? data.site.pages : [];
 
   return {
     loading,
     error: !!error,
-    pages: [...pages].sort((a, b) => a.localeCompare(b)),
+    pages,
   };
 };

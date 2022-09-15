@@ -72,31 +72,12 @@
   }
 
   .filters-pages {
+    margin: 0;
     width: 400px;
 
-    .pages {
-      align-items: flex-start;
-      display: flex;
-      flex-direction: column;
-      max-height: 300px;
-      overflow-y: auto;
-
-      .label {
-        font-size: var(--font-size-body-sm);
-        line-height: var(--line-height-body-sm);
-      }
-
-      .checkbox,
-      .radio {
-        margin-bottom: .5rem;
-
-        span:not(.check) {
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-          width: 340px;
-        }
-      }
+    .page-selector {
+      margin: 0 0 1.5rem 0;
+      padding: 0;
     }
   }
 

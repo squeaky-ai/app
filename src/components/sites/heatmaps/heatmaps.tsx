@@ -18,13 +18,13 @@ import { HeatmapsPage } from 'components/sites/heatmaps/heatmaps-page';
 import { HeatmapsDisplays } from 'components/sites/heatmaps/heatmaps-displays';
 import { useHeatmaps } from 'hooks/use-heatmaps';
 import { getDateRange } from 'lib/dates';
-import { HeatmapsDevice, HeatmapsType } from 'types/graphql';
+import { HeatmapsDevice, HeatmapsType, SitesPage } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 import type { HeatmapClickTarget, HeatmapClickDisplay } from 'types/heatmaps';
 
 interface Props {
   page: string;
-  pages: string[];
+  pages: SitesPage[];
   period: TimePeriod;
   setPage: (page: string) => void;
   setPeriod: (page: TimePeriod) => void;

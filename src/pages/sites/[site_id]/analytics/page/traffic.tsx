@@ -9,25 +9,30 @@ import { Page } from 'components/sites/page';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { Unlock } from 'components/sites/unlock';
 import { Period } from 'components/sites/period/period';
-import { PageSearch } from 'components/sites/page-search';
 import { PageLoading } from 'components/sites/page-loading';
 import { Label } from 'components/label';
 import { usePeriod } from 'hooks/use-period';
 import { Tabs } from 'components/sites/analytics/tabs';
+import { PageSelector } from 'components/sites/page-selector';
 import { AnalyticsPagesTraffic } from 'components/sites/analytics/analytics-pages-traffic';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { usePages } from 'hooks/use-pages';
+import { getDateRange } from 'lib/dates';
 
 const SitesAnalyticsPageTraffic: NextPage<ServerSideProps> = ({ user }) => {
   const { query } = useRouter();
 
-  const { pages, loading } = usePages();
   const { period, setPeriod } = usePeriod('analytics');
+  const { pages, loading } = usePages({ range: getDateRange(period) });
 
   const [page, setPage] = React.useState<string>('');
 
   React.useEffect(() => {
-    if (!page) setPage(pages[0]);
+    if (!page) {
+      // Default to the most popular page
+      const page = [...pages].sort((a, b) => b.count - a.count)[0];
+      setPage(page?.url);
+    }
   }, [pages]);
 
   React.useEffect(() => {
@@ -50,7 +55,12 @@ const SitesAnalyticsPageTraffic: NextPage<ServerSideProps> = ({ user }) => {
               {!loading && (
                 <menu>
                   <Label>Page</Label>
-                  <PageSearch page={page} setPage={setPage} pages={pages} />
+                  <PageSelector
+                    type='single'
+                    selected={page}
+                    pages={pages}
+                    handleChange={(event => setPage(event.target.value))}
+                  />
                   <Period period={period} onChange={setPeriod} />
                 </menu>
               )}

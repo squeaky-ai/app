@@ -29,7 +29,7 @@ export const SitesTable: FC<Props> = ({ sites, activeVisitors, search, columns }
   const sortSites = (sort: SitesSort) => (a: Site, b: Site) => {
     switch(sort) {
       case 'name__asc':
-        return a.name.localeCompare(b.name );
+        return a.name.localeCompare(b.name);
       case 'name__desc':
         return b.name.localeCompare(a.name);
       case 'plan_name__asc':
