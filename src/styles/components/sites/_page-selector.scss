@@ -4,6 +4,7 @@
   &:not(.no-results) {
     &:after {
       background: linear-gradient(360deg, rgba(0, 0, 0, .07) 0%, rgba(255, 255, 255, 0) 78.13%);
+      border-radius: 0 0 var(--border-radius-md) var(--border-radius-md);
       bottom: 0;
       content: ' ';
       display: block;
@@ -95,7 +96,7 @@
         justify-content: space-between;
         padding: 0;
         text-align: left;
-        width: 100%;
+        width: calc(100% - 2rem);
 
         &:hover {
           background: var(--gray-50);
@@ -140,7 +141,11 @@
 
     .results {
       .item {
-        margin: 0 0 0.5rem 0
+        margin: 0 0 0.5rem 0;
+
+        &.button {
+          width: 100%;
+        }
       }
 
       li:last-of-type .item {
