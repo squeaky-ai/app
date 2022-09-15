@@ -45,6 +45,7 @@ export const FiltersPages: FC<Props> = ({ label, value, period, onClose, onUpdat
         <form className='filters-pages' onSubmit={handleSubmit}>
           {loading && <Spinner />}
           <PageSelector
+            compact
             type='multi'
             label={label}
             pages={pages}

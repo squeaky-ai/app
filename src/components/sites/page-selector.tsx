@@ -16,6 +16,7 @@ interface Props {
   label?: string;
   type: PageSelectorType;
   pages: SitesPage[];
+  compact?: boolean;
   selected: string | string[] | null;
   setSelected?: (pages: SitesPage[]) => void;
   handleClick?: (page: SitesPage) => void;
@@ -34,6 +35,7 @@ export const PageSelector: FC<Props> = ({
   label,
   type,
   pages,
+  compact,
   selected,
   handleClick,
   handleChange,
@@ -45,12 +47,6 @@ export const PageSelector: FC<Props> = ({
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value as Sort;
     setSort(value);
-  };
-
-  const onSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.target.checked
-      ? setSelected(pages)
-      : setSelected([]);
   };
 
   const isSelected = (page: SitesPage): boolean => {
@@ -74,8 +70,14 @@ export const PageSelector: FC<Props> = ({
     })
     .filter(page => page.url.toLowerCase().includes(search.toLowerCase()));
 
+  const onSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.target.checked
+      ? setSelected(results)
+      : setSelected([]);
+  };
+
   return (
-    <div className={classnames('page-selector', type)}>
+    <div className={classnames('page-selector', type, { compact, 'no-results': results.length === 0 })}>
       <div className='selector-label'>
         <Label>
           {label || <>Select Page{type === 'multi' ? 's' : ''}</>}
