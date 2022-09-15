@@ -23,6 +23,7 @@ export const SentimentPages: FC<Props> = ({ value, onChange, setSelected }) => {
         {loading && <Spinner />}
         <PageSelector
           type='multi'
+          name='sentimentExcludedPages'
           pages={pages}
           selected={value}
           handleChange={onChange}
