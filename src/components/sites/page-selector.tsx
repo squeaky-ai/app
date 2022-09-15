@@ -104,6 +104,12 @@ export const PageSelector: FC<Props> = ({
           </Checkbox>
         )}
 
+        {results.length === 0 && (
+          <li className='item empty'>
+            No results
+          </li>
+        )}
+
         {results.map(result => (
           <li key={result.url}>
             {type === 'click' && <ClickItem page={result} handleClick={handleClick} />}

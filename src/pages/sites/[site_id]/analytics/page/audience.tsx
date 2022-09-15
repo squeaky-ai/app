@@ -12,8 +12,8 @@ import { Period } from 'components/sites/period/period';
 import { PageLoading } from 'components/sites/page-loading';
 import { Label } from 'components/label';
 import { Tabs } from 'components/sites/analytics/tabs';
+import { Pages } from 'components/sites/analytics/pages';
 import { AnalyticsPagesAudience } from 'components/sites/analytics/analytics-pages-audience';
-import { PageSelector } from 'components/sites/page-selector';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { usePeriod } from 'hooks/use-period';
 import { usePages } from 'hooks/use-pages';
@@ -55,11 +55,10 @@ const SitesAnalyticsPageAudience: NextPage<ServerSideProps> = ({ user }) => {
               {!loading && (
                 <menu>
                   <Label>Page</Label>
-                  <PageSelector
-                    type='click'
-                    selected={page}
+                  <Pages
+                    page={page}
                     pages={pages}
-                    handleChange={(event => setPage(event.target.value))}
+                    setPage={setPage}
                   />
                   <Period period={period} onChange={setPeriod} />
                 </menu>

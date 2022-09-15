@@ -400,13 +400,13 @@
     align-items: center;
     display: flex;
 
-    .select {
-      margin: 0;
-      width: 15rem;
-    }
+    .page-dropdown {
+      align-items: center;
+      display: flex;
 
-    .label {
-      margin: 0 .75rem 0 0;
+      & > .label {
+        margin: 0 .5rem 0 0;
+      }
     }
   }
 
