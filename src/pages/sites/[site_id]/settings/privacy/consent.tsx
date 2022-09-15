@@ -220,7 +220,7 @@ const SitesSettingsPrivacyConsent: NextPage<ServerSideProps> = ({ user }) => {
                             ))}
                           </div>
 
-                          <p>If you&apos;d like to request an additional langauge be added to our consent surveys then please contact us via email using <a href='mailto:hello@squeaky.ai'>hello@squeaky.ai</a>.</p>
+                          <p>If you&apos;d like to request an additional language be added to our consent surveys then please contact us via email using <a href='mailto:hello@squeaky.ai'>hello@squeaky.ai</a>.</p>
 
                           <Label htmlFor='layout'>Layout</Label>
                           <p>Where would you like your consent widget to appear?</p>
