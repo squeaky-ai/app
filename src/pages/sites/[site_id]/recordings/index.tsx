@@ -84,6 +84,7 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
                       />
                     </div>
                     <Filters 
+                      period={period}
                       filters={filters}
                       updateFilters={updateFilters}
                     />

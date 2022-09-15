@@ -77,7 +77,8 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
                         setColumns={setColumns}
                       />
                     </div>
-                    <Filters 
+                    <Filters
+                      period='past_year' // Visitors have no concept of time periods, so the last year should be fine
                       filters={filters}
                       updateFilters={updateFilters}
                     />

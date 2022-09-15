@@ -13,9 +13,10 @@ import { FiltersPages } from 'components/sites/filters/common/filters-pages';
 import { FiltersReferrers } from 'components/sites/filters/recordings/filters-referrers';
 import { FiltersStarred } from 'components/sites/filters/common/filters-starred';
 import type { VisitorsFilters } from 'types/graphql';
-import type { ValueOf } from 'types/common';
+import type { TimePeriod, ValueOf } from 'types/common';
 
 interface Props {
+  period: TimePeriod;
   filters: VisitorsFilters;
   updateFilters: (key: keyof VisitorsFilters, value: ValueOf<VisitorsFilters>) => void;
 }
@@ -34,7 +35,7 @@ enum FilterType {
   Starred,
 }
 
-export const Filters: FC<Props> = ({ filters, updateFilters }) => {
+export const Filters: FC<Props> = ({ period, filters, updateFilters }) => {
   const [openFilter, setOpenFilter] = React.useState<FilterType | null>(null);
 
   const handleFilterChange = (filter: FilterType): void => {
@@ -123,14 +124,12 @@ export const Filters: FC<Props> = ({ filters, updateFilters }) => {
           )}
           {openFilter === FilterType.VisitedPages && (
             <>
-              <Label>Visited pages</Label>
-              <FiltersPages value={filters.visitedPages} onUpdate={handleUpdate('visitedPages')}  onClose={handleFilterClose} />
+              <FiltersPages label='Visited pages' value={filters.visitedPages} period={period} onUpdate={handleUpdate('visitedPages')}  onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.UnvisitedPages && (
             <>
-              <Label>Unvisited pages</Label>
-              <FiltersPages value={filters.unvisitedPages} onUpdate={handleUpdate('unvisitedPages')}  onClose={handleFilterClose} />
+              <FiltersPages label='Unvisited pages' value={filters.unvisitedPages} period={period} onUpdate={handleUpdate('unvisitedPages')}  onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.Referrer && (

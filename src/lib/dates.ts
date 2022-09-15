@@ -78,7 +78,7 @@ export const toNiceDate = (timestamp: string) => {
   return format(date, 'E, d LLL yyyy HH:mm');
 };
 
-const formatDateForGraphQL = (date: Date) => format(date, 'yyyy-MM-dd');
+export const formatDateForGraphQL = (date: Date) => format(date, 'yyyy-MM-dd');
 
 const expandAbsoluteDateToRange = (date: AbsoluteTime): TimeRange => {
   const now = new Date();

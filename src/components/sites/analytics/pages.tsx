@@ -12,7 +12,7 @@ interface Props {
   setPage: (page: string) => void;
 }
 
-export const JourneysPages: FC<Props> = ({ page, pages, setPage }) => {
+export const Pages: FC<Props> = ({ page, pages, setPage }) => {
   const ref = React.useRef<HTMLDivElement>(null);
 
   const [open, setOpen] = React.useState<boolean>(false);
@@ -39,7 +39,7 @@ export const JourneysPages: FC<Props> = ({ page, pages, setPage }) => {
   }, []);
 
   return (
-    <div className='journeys-pages'>
+    <div className='analytics-pages'>
       <div ref={ref} className={classnames('page-dropdown', { open })}>
         <Button className='search-open' onClick={() => setOpen(!open)}>
           {page}
@@ -54,7 +54,7 @@ export const JourneysPages: FC<Props> = ({ page, pages, setPage }) => {
             handleClick={handleSelect}
           />
         </div>
-      </div>
+      </div>      
     </div>
   );
 };

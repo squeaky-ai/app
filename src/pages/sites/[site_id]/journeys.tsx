@@ -12,15 +12,20 @@ import { PageLoading } from 'components/sites/page-loading';
 import { usePeriod } from 'hooks/use-period';
 import { usePages } from 'hooks/use-pages';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { getDateRange } from 'lib/dates';
 
 const SitesJourneys: NextPage<ServerSideProps> = ({ user }) => {
   const [page, setPage] = React.useState<string>(null);
   const { period, setPeriod } = usePeriod('journeys');
 
-  const { pages, loading } = usePages();
+  const { pages, loading } = usePages({ range: getDateRange(period) });
 
   React.useEffect(() => {
-    if (!page) setPage(pages[0]);
+    if (!page) {
+      // Default to the most popular page
+      const page = [...pages].sort((a, b) => b.count - a.count)[0];
+      setPage(page?.url);
+    }
   }, [pages]);
 
   return (

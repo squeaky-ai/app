@@ -12,14 +12,14 @@ import { JourneysDepth } from 'components/sites/journeys/journeys-depth';
 import { PageRoutes } from 'components/sites/page-routes';
 import { useJourneys } from 'hooks/use-journeys';
 import { getDateRange } from 'lib/dates';
-import { PathPosition, Site, Team } from 'types/graphql';
+import { PathPosition, Site, SitesPage, Team } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 
 interface Props {
   site: Site;
   member: Team;
   page: string;
-  pages: string[];
+  pages: SitesPage[];
   period: TimePeriod;
   setPage: (page: string) => void;
   setPeriod: (page: TimePeriod) => void;
