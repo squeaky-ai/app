@@ -11,12 +11,11 @@ import { DismissableMessage } from 'components/message';
 import { Error } from 'components/error';
 import { Preference } from 'lib/preferences';
 import { NoResults } from 'components/sites/no-results';
-import { formatFilterDates } from 'lib/visitors';
 import { useResize } from 'hooks/use-resize';
 import { Team, VisitorsSort } from 'types/graphql';
 import type { Site } from 'types/graphql';
 import type { Column } from 'types/common';
-import type { VisitorsFilters } from 'types/graphql';
+import type { VisitorsFilters } from 'types/visitors';
 
 interface Props {
   site: Site;
@@ -50,7 +49,7 @@ export const Visitors: FC<Props> = ({
     sort,
     size,
     search,
-    filters: formatFilterDates(filters),
+    filters,
   });
 
   const { mobile } = useResize();

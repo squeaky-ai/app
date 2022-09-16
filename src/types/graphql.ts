@@ -1180,11 +1180,8 @@ export type FeedbackUpdateInput = {
 };
 
 export type FiltersDate = {
-  betweenFromDate?: InputMaybe<Scalars['ISO8601Date']>;
-  betweenToDate?: InputMaybe<Scalars['ISO8601Date']>;
   fromDate?: InputMaybe<Scalars['ISO8601Date']>;
-  fromType?: InputMaybe<FiltersStart>;
-  rangeType?: InputMaybe<FiltersRange>;
+  toDate?: InputMaybe<Scalars['ISO8601Date']>;
 };
 
 export type FiltersDuration = {
@@ -1216,13 +1213,6 @@ export enum FiltersSize {
   GreaterThan = 'GreaterThan',
   /** Show recordings that have a duration shorter than */
   LessThan = 'LessThan'
-}
-
-export enum FiltersStart {
-  /** Show recordings that start after this time */
-  After = 'After',
-  /** Show recordings that start before this time */
-  Before = 'Before'
 }
 
 export enum FiltersStatus {
@@ -2822,9 +2812,9 @@ export type VisitorsExport = {
 };
 
 export type VisitorsFilters = {
-  firstVisited: FiltersDate;
+  firstVisited?: InputMaybe<FiltersDate>;
   languages: Array<Scalars['String']>;
-  lastActivity: FiltersDate;
+  lastActivity?: InputMaybe<FiltersDate>;
   recordings: FiltersRecordings;
   referrers: Array<Scalars['String']>;
   starred?: InputMaybe<Scalars['Boolean']>;

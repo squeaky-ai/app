@@ -8,7 +8,8 @@ import { Spinner } from 'components/spinner';
 import { Button } from 'components/button';
 import { Input } from 'components/input';
 import { useReferrers } from 'hooks/use-referrers';
-import type { RecordingsFilters, VisitorsFilters } from 'types/graphql';
+import type { RecordingsFilters } from 'types/graphql';
+import type { VisitorsFilters } from 'types/visitors';
 import type { ValueOf } from 'types/common';
 
 interface Props {

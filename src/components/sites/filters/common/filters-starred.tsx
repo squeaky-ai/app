@@ -4,7 +4,8 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { Checkbox } from 'components/checkbox';
 import { Button } from 'components/button';
-import type { RecordingsFilters, VisitorsFilters } from 'types/graphql';
+import type { RecordingsFilters } from 'types/graphql';
+import type { VisitorsFilters } from 'types/visitors';
 import type { ValueOf } from 'types/common';
 
 interface Props {

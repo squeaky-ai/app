@@ -68,65 +68,68 @@
       top: 2.5rem;
       transform: none;
       width: 12.375rem;
+    }
+  }
 
-      .divider {
-        margin: 1rem 0;
+  .period-form {
+    .divider {
+      margin: 1rem 0;
+    }
+
+    .actions {
+      border-top: 1px solid var(--gray-150);
+      display: grid;
+      grid-gap: .75rem;
+      grid-template-columns: repeat(2, 1fr);
+      margin: 1rem 0 0 -1rem;
+      padding: 1rem 1rem 0 1rem;
+      width: calc(100% + 2rem);
+
+      .button {
+        margin: 0;
       }
+    }
 
-      .actions {
-        border-top: 1px solid var(--gray-150);
-        display: grid;
-        grid-gap: .75rem;
-        grid-template-columns: repeat(2, 1fr);
-        margin: 1rem 0 0 -1rem;
-        padding: 1rem 1rem 0 1rem;
-        width: calc(100% + 2rem);
+    .row {
+      align-items: center;
+      display: flex;
+      margin: 0 0 .5rem 0;
+      padding: 0 0 0 1.5rem;
 
-        .button {
-          margin: 0;
-        }
-      }
-
-      .row {
-        align-items: center;
+      .select {
         display: flex;
-        margin: 0 0 .5rem 0;
-        padding: 0 0 0 1.5rem;
 
-        .select {
-          display: flex;
-
-          .icon {
-            align-items: center;
-            justify-content: center;
-            top: 0;
-          }
-
-          select {
-            font-weight: var(--font-weight-normal);
-          }
+        .icon {
+          align-items: center;
+          justify-content: center;
+          top: 0;
         }
 
-        .label, .select {
-          margin: 0;
+        select {
+          font-weight: var(--font-weight-normal);
+        }
+      }
+
+      .label, .select {
+        margin: 0;
+      }
+
+      &.from-type {
+        display: flex;
+        padding: 0;
+      }
+
+      &.multi-date {
+        align-items: flex-start;
+        flex-direction: column;
+
+        .date-picker {
+          flex: 1;
+          width: 100%;
         }
 
-        &.from-type {
-          display: flex;
-          padding: 0;
-        }
-
-        &.multi-date {
-          align-items: flex-start;
-          flex-direction: column;
-
-          .date-picker {
-            width: 100%;
-          }
-
-          p {
-            margin: .25rem 0;
-          }
+        p {
+          margin: .25rem 0;
         }
       }
     }

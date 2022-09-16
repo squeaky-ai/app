@@ -3,7 +3,8 @@ import type { FC } from 'react';
 import { Label } from 'components/label';
 import { Tag } from 'components/tag';
 import type { ValueOf } from 'types/common';
-import type { RecordingsFilters, VisitorsFilters } from 'types/graphql';
+import type { RecordingsFilters } from 'types/graphql';
+import type { VisitorsFilters } from 'types/visitors';
 
 type Filters = RecordingsFilters | VisitorsFilters;
 

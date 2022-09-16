@@ -3,8 +3,9 @@ import type { FC } from 'react';
 import { Label } from 'components/label';
 import { Tag } from 'components/tag';
 import { FILTERS } from 'data/visitors/constants';
+import { TIME_PERIODS } from 'data/common/constants';
 import type { ValueOf } from 'types/common';
-import type { VisitorsFilters } from 'types/graphql';
+import type { VisitorsFilters } from 'types/visitors';
 
 interface Props {
   name: 'firstVisited' | 'lastActivity';
@@ -17,19 +18,39 @@ export const TagsDate: FC<Props> = ({ name, filters, updateFilters }) => {
     updateFilters(name, FILTERS[name]);
   };
 
+  const value = filters[name];
+  const label = name === 'firstVisited' ? 'First Visited' : 'Last Activity';
+
+  if (value === null) return null;
+
+  const isRealtivePeriod = typeof value === 'string';
+  const relativePeriod = TIME_PERIODS.find(p => p.key === value);
+
   return (
     <>
-      <Label>Date</Label>
+      <Label>{label}</Label>
 
-      {filters[name].rangeType === 'Between' && (
+      {relativePeriod && (
         <Tag className='secondary' handleDelete={onDeleteTag}>
-          <span>Between</span> {filters[name].betweenFromDate} <span>and</span> {filters[name].betweenToDate}
+          {relativePeriod.name}
         </Tag>
       )}
 
-      {filters[name].rangeType === 'From' && (
+      {!isRealtivePeriod && value.fromType === 'Before' && (
         <Tag className='secondary' handleDelete={onDeleteTag}>
-          <span>From</span> {filters[name].fromDate}
+          <span>Before</span> {value.fromDate}
+        </Tag>
+      )}
+
+      {!isRealtivePeriod && value.fromType === 'After' && (
+        <Tag className='secondary' handleDelete={onDeleteTag}>
+          <span>After</span> {value.fromDate}
+        </Tag>
+      )}
+
+      {!isRealtivePeriod && value.fromType === 'Between' && (
+        <Tag className='secondary' handleDelete={onDeleteTag}>
+          <span>Between</span> {value.betweenFromDate} and {value.betweenToDate}
         </Tag>
       )}
     </>

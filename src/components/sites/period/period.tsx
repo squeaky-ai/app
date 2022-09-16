@@ -25,7 +25,7 @@ const AbsoluteSchema = Yup.object().shape({
   betweenToDate: DateStringSchema,
 });
 
-const RelativeSchema = Yup.object().shape({
+const DateSchema = Yup.object().shape({
   period: Yup.lazy((value: TimePeriod) => {
     return !!TIME_PERIODS.find(t => t.key === value)
       ? Yup.string()
@@ -49,7 +49,7 @@ export const Period: FC<Props> = ({ period, onChange }) => {
     <div className='period'>
       <Formik
         initialValues={{ period }}
-        validationSchema={RelativeSchema}
+        validationSchema={DateSchema}
         onSubmit={(values, { setSubmitting }) => {
           (async () => {
             setSubmitting(false);
@@ -63,7 +63,7 @@ export const Period: FC<Props> = ({ period, onChange }) => {
           values,
           errors,
         }) => (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className='period-form'>
             <Dropdown ref={ref} button={<><Icon name='calendar-line' /> <b>Period:</b> <PeriodLabel period={period} /></>} dropdown-menu='down'>
               <Relative period={values.period} onChange={setFieldValue} />
               <Absolute period={values.period} errors={errors} onChange={setFieldValue} />

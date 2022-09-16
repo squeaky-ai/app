@@ -5,7 +5,7 @@ import { Tooltip } from 'components/tooltip';
 import { Icon } from 'components/icon'
 import { useFilters } from 'hooks/use-filters';
 import { FILTERS } from 'data/visitors/constants';
-import type { VisitorsFilters } from 'types/graphql';
+import type { VisitorsFilters } from 'types/visitors';
 
 interface Props {
   hint: string;

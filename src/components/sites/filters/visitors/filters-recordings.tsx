@@ -5,7 +5,7 @@ import { Formik } from 'formik';
 import { Button } from 'components/button';
 import { Option, Select } from 'components/select';
 import { Input } from 'components/input';
-import type { VisitorsFilters } from 'types/graphql';
+import type { VisitorsFilters } from 'types/visitors';
 import type { ValueOf } from 'types/common';
 
 interface Props {

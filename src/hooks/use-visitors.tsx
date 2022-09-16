@@ -2,7 +2,9 @@ import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_VISITORS_QUERY } from 'data/visitors/queries';
 import { VisitorsSort } from 'types/graphql';
-import type { Site, VisitorsFilters, Visitors } from 'types/graphql';
+import { getDateRange } from 'lib/dates';
+import type { Site, Visitors, VisitorsFilters as Filters } from 'types/graphql';
+import type { VisitorsFilters } from 'types/visitors';
 
 interface Props {
   page: number;
@@ -18,6 +20,12 @@ interface UseVisitors {
   visitors: Visitors;
 }
 
+const formatVisitorsFilters = (filters: VisitorsFilters): Filters => ({
+  ...filters,
+  firstVisited: filters.firstVisited ? getDateRange(filters.firstVisited) : null,
+  lastActivity: filters.lastActivity ? getDateRange(filters.lastActivity) : null,
+});
+
 export const useVisitors = ({ page, size, sort, search, filters }: Props): UseVisitors => {
   const router = useRouter();
 
@@ -27,8 +35,8 @@ export const useVisitors = ({ page, size, sort, search, filters }: Props): UseVi
       page, 
       size,
       sort,
-      filters,
       search,
+      filters: formatVisitorsFilters(filters),
     }
   });
 

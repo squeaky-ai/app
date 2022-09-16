@@ -10,7 +10,7 @@ import { TagsVisitedPages } from 'components/sites/filters/common/tags-visited-p
 import { TagsUnvisitedPages } from 'components/sites/filters/common/tags-unvisited-pages';
 import { TagsStarred } from 'components/sites/filters/common/tags-starred';
 import { TagsReferrers } from 'components/sites/filters/common/tags-referrers';
-import type { VisitorsFilters } from 'types/graphql';
+import type { VisitorsFilters } from 'types/visitors';
 import type { ValueOf } from 'types/common';
 
 interface Props {
@@ -22,8 +22,8 @@ interface Props {
 export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
   const hasStatus = filters.status !== null;
   const hasRecordings = filters.recordings.count !== null;
-  const hasFirstVisited = filters.firstVisited.rangeType !== null;
-  const hasLastActivity = filters.lastActivity.rangeType !== null;
+  const hasFirstVisited = filters.firstVisited !== null;
+  const hasLastActivity = filters.lastActivity !== null;
   const hasLanguages = filters.languages.length > 0;
   const hasVisitedPages = filters.visitedPages.length > 0;
   const hasUnvisitedPages = filters.unvisitedPages.length > 0;

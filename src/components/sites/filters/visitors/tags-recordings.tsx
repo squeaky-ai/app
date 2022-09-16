@@ -4,7 +4,7 @@ import { Label } from 'components/label';
 import { Tag } from 'components/tag';
 import { FILTERS } from 'data/visitors/constants';
 import type { ValueOf } from 'types/common';
-import type { VisitorsFilters } from 'types/graphql';
+import type { VisitorsFilters } from 'types/visitors';
 
 interface Props {
   filters: VisitorsFilters;

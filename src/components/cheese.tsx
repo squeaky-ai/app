@@ -6,6 +6,6 @@ import cheese from '../../public/cheese.svg';
 
 export const Cheese: FC = () => (
   <div className='cheese'>
-    <Image src={cheese} height={80} width={80} alt='Loading icon' />
+    <Image src={cheese} height={80} width={80} alt='Loading icon' priority />
   </div>
 );

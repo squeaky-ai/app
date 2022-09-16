@@ -18,7 +18,7 @@ import { useFilters } from 'hooks/use-filters';
 import { useSort } from 'hooks/use-sort';
 import { VisitorsSort } from 'types/graphql';
 import { useColumns } from 'hooks/use-columns';
-import type { VisitorsFilters } from 'types/graphql';
+import type { VisitorsFilters } from 'types/visitors';
 import type { ValueOf } from 'types/common';
 
 const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {

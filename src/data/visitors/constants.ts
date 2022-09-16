@@ -1,6 +1,6 @@
-import { FiltersStart, FiltersRange } from 'types/graphql';
+import { FiltersRange } from 'types/graphql';
 import type { Column } from 'types/common';
-import type { VisitorsFilters } from 'types/graphql';
+import type { VisitorsFilters } from 'types/visitors';
 
 export const FILTERS: VisitorsFilters = {
   status: null,
@@ -12,20 +12,8 @@ export const FILTERS: VisitorsFilters = {
   visitedPages: [],
   unvisitedPages: [],
   referrers: [],
-  firstVisited: {
-    rangeType: null,
-    fromType: FiltersStart.Before,
-    fromDate: null,
-    betweenFromDate: null,
-    betweenToDate: null,
-  },
-  lastActivity: {
-    rangeType: null,
-    fromType: FiltersStart.Before,
-    fromDate: null,
-    betweenFromDate: null,
-    betweenToDate: null,
-  },
+  firstVisited: null,
+  lastActivity: null,
   starred: null,
 };
 

@@ -12,7 +12,7 @@ import { FiltersRecordings } from 'components/sites/filters/visitors/filters-rec
 import { FiltersPages } from 'components/sites/filters/common/filters-pages';
 import { FiltersReferrers } from 'components/sites/filters/recordings/filters-referrers';
 import { FiltersStarred } from 'components/sites/filters/common/filters-starred';
-import type { VisitorsFilters } from 'types/graphql';
+import type { VisitorsFilters } from 'types/visitors';
 import type { TimePeriod, ValueOf } from 'types/common';
 
 interface Props {
