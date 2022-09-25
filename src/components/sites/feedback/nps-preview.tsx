@@ -16,10 +16,11 @@ import type { SupportedLanguages } from 'types/translations';
 interface Props {
   locale: SupportedLanguages;
   feedback: Feedback;
+  storedFeedback: Feedback;
   setLocale: (locale: SupportedLanguages) => void;
 }
 
-export const NpsPreview: FC<Props> = ({ locale, feedback, setLocale }) => {
+export const NpsPreview: FC<Props> = ({ locale, feedback, storedFeedback, setLocale }) => {
   const ref = React.useRef<HTMLDivElement>(null);
   const [page, setPage] = React.useState<number>(1);
   const [show, setShow] = React.useState<boolean>(false);
@@ -95,7 +96,13 @@ export const NpsPreview: FC<Props> = ({ locale, feedback, setLocale }) => {
 
             {page < 2 && (
               <div className={`page-${page}`}>
-                <p className='heading'>{translations.how_likely_to_recommend}</p>
+                <p className='heading'>
+                  {/** A hack so we don't need to refetch translations */}
+                  {storedFeedback.npsPhrase === feedback.npsPhrase
+                    ? translations.how_likely_to_recommend
+                    : translations.how_likely_to_recommend.replace(storedFeedback.npsPhrase, feedback.npsPhrase) 
+                  }
+                </p>
 
                 <div className='labels'>
                   <span>{translations.not_likely}</span>

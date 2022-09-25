@@ -9,11 +9,12 @@ import type { SupportedLanguages } from 'types/translations';
 
 interface Props {
   consent: Consent;
+  storedConsent: Consent;
   locale: SupportedLanguages;
   setLocale: (locale: SupportedLanguages) => void;
 }
 
-export const ConsentPreview: FC<Props> = ({ locale, consent, setLocale }) => {
+export const ConsentPreview: FC<Props> = ({ locale, storedConsent, consent, setLocale }) => {
   const [show, setShow] = React.useState<boolean>(false);
   const [expand, setExpand] = React.useState<boolean>(false);
 
@@ -36,7 +37,14 @@ export const ConsentPreview: FC<Props> = ({ locale, consent, setLocale }) => {
       {show && (
         <div className={classnames('consent-preview', consent.layout)}>
           <h5>{translations.privacy_friendly_analytics}</h5>
-          <p>{translations.we_use_squeaky}</p>
+
+          <p>
+            {/** A hack so we don't need to refetch translations */}
+            {storedConsent.name === consent.name
+              ? translations.we_use_squeaky
+              : translations.we_use_squeaky.replace(storedConsent.name, consent.name) 
+            }
+          </p>
           <p dangerouslySetInnerHTML={{ __html: translations.set_consent_preferemces }}></p>
 
           {consent.languages.length > 1 && (
@@ -78,5 +86,5 @@ export const ConsentPreview: FC<Props> = ({ locale, consent, setLocale }) => {
         </div>
       )}
     </>
-  )
+  );
 };

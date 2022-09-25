@@ -253,6 +253,7 @@ const SitesSettingsPrivacyConsent: NextPage<ServerSideProps> = ({ user }) => {
 
                           <ConsentPreview 
                             consent={{ ...consent, ...values }}
+                            storedConsent={consent}
                             locale={locale}
                             setLocale={setLocale}
                           />

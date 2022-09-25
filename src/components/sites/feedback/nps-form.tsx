@@ -189,6 +189,7 @@ export const NpsForm: FC<Props> = ({ site, locale, feedback, setLocale }) => {
                 <div className='right'>
                   <NpsPreview 
                     feedback={{ ...feedback, ...values }}
+                    storedFeedback={feedback}
                     locale={locale}
                     setLocale={setLocale}
                   />
