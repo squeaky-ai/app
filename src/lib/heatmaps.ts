@@ -3,7 +3,7 @@ import { range, orderBy, findLast, sumBy } from 'lodash';
 import { percentage } from 'lib/maths';
 import { HeatmapColor, HEATMAP_COLOURS } from 'data/heatmaps/constants';
 import type { HeatmapClickTarget } from 'types/heatmaps';
-import type { HeatmapsScroll, HeatmapsClick } from 'types/graphql';
+import type { HeatmapsScroll, HeatmapsClick, HeatmapsCursor } from 'types/graphql';
 
 interface ScrollMapData {
   increment: number;
@@ -179,6 +179,41 @@ export const showScrollMaps = (doc: Document, items: HeatmapsScroll[], scale: nu
   createFixedScrollMarker(doc, scrollMapData, 25, unscale);
   createFixedScrollMarker(doc, scrollMapData, 50, unscale);
   createFixedScrollMarker(doc, scrollMapData, 75, unscale);
+};
+
+export const showCursorMaps = (doc: Document, items: HeatmapsCursor[]) => {
+  const data = items.map(item => ({ 
+    x: item.x,
+    y: item.y, 
+    value: 1 
+  }));
+
+  if (data.length === 0) return;
+
+  const overlay = document.createElement('div');
+  overlay.classList.add('__squeaky_cursor_overlay');
+  overlay.style.cssText = `
+     background: rgba(0, 0, 0, .25);
+     height: ${doc.body.scrollHeight}px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 99999999;
+  `;
+
+  const heatmapContainer = document.createElement('div');
+  heatmapContainer.style.cssText = `
+    height: 100%;
+    width: 100%;
+  `;
+  overlay.appendChild(heatmapContainer);
+  doc.body.appendChild(overlay);
+
+  const max = Math.max(...items.map(d => d.x), ...items.map(d => d.y));
+  const map = heatmap.create({ container: heatmapContainer });
+
+  map.setData({ min: 0, max, data });
 };
 
 export const showClickGradientMaps = (doc: Document, items: HeatmapsClick[]) => {

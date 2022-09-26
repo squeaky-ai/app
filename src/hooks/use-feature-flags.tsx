@@ -18,10 +18,14 @@ type Names = Record<FeatureFlag, string>;
 
 export const allFeatureFlags: FeatureFlag[] = [
   FeatureFlag.CHEESE_LOADER,
+  FeatureFlag.HEATMAP_FLAMEGRAPH,
+  FeatureFlag.HEATMAP_CURSORS,
 ];
 
 export const featureFlagNames: Names = {
   CHEESE_LOADER: 'Cheese Loader',
+  HEATMAP_FLAMEGRAPH: 'Heatmap Flamegraph',
+  HEATMAP_CURSORS: 'Heatmap Mouse Positions',
 };
 
 const options: State = [
@@ -31,6 +35,18 @@ const options: State = [
     superuser: false,
     description: 'Replace the standard spinner with a cheesy Squeaky one',
   },
+  {
+    key: FeatureFlag.HEATMAP_FLAMEGRAPH,
+    value: false,
+    superuser: false,
+    description: 'Experimental flamegraphs for click positions',
+  },
+  {
+    key: FeatureFlag.HEATMAP_CURSORS,
+    value: false,
+    superuser: false,
+    description: 'Experimental flamegraphs for mouse positions',
+  }
 ];
 
 export const useFeatureFlags = (): UseFeatureFlags => {

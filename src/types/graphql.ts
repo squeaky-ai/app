@@ -1255,6 +1255,13 @@ export type HeatmapsCounts = {
   tablet: Scalars['Int'];
 };
 
+export type HeatmapsCursor = {
+  __typename?: 'HeatmapsCursor';
+  id: Scalars['ID'];
+  x: Scalars['Int'];
+  y: Scalars['Int'];
+};
+
 export enum HeatmapsDevice {
   /** Show desktop */
   Desktop = 'Desktop',
@@ -1274,11 +1281,13 @@ export type HeatmapsScroll = {
 export enum HeatmapsType {
   /** Show clicks */
   Click = 'Click',
+  /** Show mouse positions */
+  Cursor = 'Cursor',
   /** Show scrolls */
   Scroll = 'Scroll'
 }
 
-export type Item = HeatmapsClick | HeatmapsScroll;
+export type Item = HeatmapsClick | HeatmapsCursor | HeatmapsScroll;
 
 export type Mutation = {
   __typename?: 'Mutation';

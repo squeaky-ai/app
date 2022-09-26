@@ -4,9 +4,9 @@ import { Replayer } from 'rrweb';
 import { Spinner } from 'components/spinner';
 import { ScrollIndicator } from 'components/sites/scroll-indicator';
 import { DeviceWidths } from 'data/common/constants';
-import { showClickCountsMaps, showClickGradientMaps, showScrollMaps, iframeStyles, getElements } from 'lib/heatmaps';
+import { showClickCountsMaps, showClickGradientMaps, showScrollMaps, showCursorMaps, iframeStyles, getElements } from 'lib/heatmaps';
 import { parseRecordingEvents } from 'lib/events';
-import { Heatmaps, HeatmapsClick, HeatmapsDevice, HeatmapsScroll } from 'types/graphql';
+import { Heatmaps, HeatmapsClick, HeatmapsDevice, HeatmapsScroll, HeatmapsCursor } from 'types/graphql';
 import type { HeatmapClickDisplay, HeatmapClickTarget } from 'types/heatmaps';
 import type { HeatmapsType } from 'types/graphql';
 
@@ -79,6 +79,7 @@ export const HeatmapsPage: FC<Props> = ({
     getElements(doc, '.__squeaky_click_tag').forEach(d => d.remove());
     getElements(doc, '.__squeaky_scroll_overlay').forEach(d => d.remove());
     getElements(doc, '.__squeaky_click_overlay').forEach(d => d.remove());
+    getElements(doc, '.__squeaky_cursor_overlay').forEach(d => d.remove());
     getElements(doc, '.__squeaky_outline').forEach(elem => elem.classList.remove('__squeaky_outline'));
     getElements(doc, '#__squeaky_scrolling_percentage_marker').forEach(d => d.remove());
     getElements(doc, '.__squeaky_fixed_percentage_marker').forEach(d => d.remove());
@@ -108,6 +109,7 @@ export const HeatmapsPage: FC<Props> = ({
     if (type === 'Click' && clickDisplay === 'counts') showClickCountsMaps(doc, heatmaps.items as HeatmapsClick[], clickTarget);
     if (type === 'Click' && clickDisplay === 'gradient') showClickGradientMaps(doc, heatmaps.items as HeatmapsClick[]);
     if (type === 'Scroll') showScrollMaps(doc, heatmaps.items as HeatmapsScroll[], scale);
+    if (type === 'Cursor') showCursorMaps(doc, heatmaps.items as HeatmapsCursor[]);
 
     // Now that stuff isn't going to jump the spinner can be removed
     setLoading(false);

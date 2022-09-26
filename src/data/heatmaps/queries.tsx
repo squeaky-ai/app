@@ -49,6 +49,10 @@ export const GET_HEATMAPS_QUERY = gql`
             selector
             count
           }
+          ... on HeatmapsCursor {
+            x
+            y
+          }
           ... on HeatmapsScroll {
             x
             y

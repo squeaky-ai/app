@@ -58,7 +58,7 @@ const SitesHeatmaps: NextPage<ServerSideProps> = ({ user }) => {
 
             <Unlock site={site} />
 
-            {site.recordingsCount > 0 && page && (
+            {site.recordingsCount > 0 && !loading && (
               <Heatmaps 
                 page={page} 
                 pages={pages}
