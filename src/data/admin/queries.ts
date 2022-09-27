@@ -159,3 +159,29 @@ export const GET_ADMIN_BLOG_QUERY = gql`
     }
   }
 `;
+
+export const GET_ADMIN_USERS_QUERY = gql`
+  query GetAdminUsers($page: Int, $size: Int, $search: String, $sort: AdminUserSort) {
+    admin {
+      users(page: $page, size: $size, search: $search, sort: $sort) {
+        items {
+          id
+          fullName
+          email
+          superuser
+          createdAt
+          lastActivityAt
+          visitor {
+            id
+            visitorId
+          }
+        }
+        pagination {
+          pageSize
+          total
+          sort
+        }
+      }
+    }
+  }
+`;

@@ -7,56 +7,28 @@ import { UsersTableRow } from 'components/admin/users-table-row';
 import { NoResults } from 'components/sites/no-results';
 import { DEFAULT_USER_COLUMNS } from 'data/admin/constants';
 import { getColumnStyles } from 'lib/tables';
+import { AdminUserSort } from 'types/graphql';
 import type { Column } from 'types/common';
 import type { AdminUser, Site } from 'types/graphql';
-import type { UserSort } from 'types/admin';
 
 interface Props {
   users: AdminUser[];
   sites: Site[];
   columns: Column[];
-  search: string;
+  sort: AdminUserSort;
+  setSort: (sort: AdminUserSort) => void;
 }
-
-const sortUsers = (sort: UserSort) => (a: AdminUser, b: AdminUser) => {
-  switch(sort) {
-    case 'name__asc':
-      return (a.fullName || '').localeCompare(b.fullName || '');
-    case 'name__desc':
-      return (b.fullName || '').localeCompare(a.fullName || '');
-    case 'superuser__asc':
-      return a.superuser ? 1 : 0;
-    case 'superuser__desc':
-      return a.superuser ? 0 : 1;
-    case 'created_at__asc':
-      return new Date(a.createdAt).valueOf() - new Date(b.createdAt).valueOf();
-    case 'created_at__desc':
-      return new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf();
-  }
-};
 
 const getUsersSites = (user: AdminUser, sites: Site[]) => (
   sites.filter(site => !!site.team.find(t => t.user.id === user.id))
 );
 
-export const UsersTable: FC<Props> = ({ users, sites, columns, search }) => {
-  const [sort, setSort] = React.useState<UserSort>('created_at__desc');
-
+export const UsersTable: FC<Props> = ({ users, sites, columns, sort, setSort }) => {
   const { rowStyle, tableClassNames } = getColumnStyles(DEFAULT_USER_COLUMNS, columns);
-
-  const results = [...users]
-    .sort(sortUsers(sort))
-    .filter(result => {
-      if (!search) return true;
-
-      const keys: Array<keyof AdminUser> = ['fullName', 'email'];
-      
-      return keys.some(key => (result[key] || '').toLowerCase().includes(search.toLowerCase()));
-    });
 
   return (
     <>
-      {results.length === 0 && (
+      {users.length === 0 && (
         <div className='no-search-results'>
           <NoResults 
             illustration='illustration-2'
@@ -66,7 +38,7 @@ export const UsersTable: FC<Props> = ({ users, sites, columns, search }) => {
       )}
 
       <TableWrapper>
-        <Table className={classnames('users-table', tableClassNames, { hide: results.length === 0 })}>
+        <Table className={classnames('users-table', tableClassNames, { hide: users.length === 0 })}>
           <Row className='head' style={rowStyle}>
             <Cell>ID</Cell>
             <Cell>
@@ -74,35 +46,35 @@ export const UsersTable: FC<Props> = ({ users, sites, columns, search }) => {
               <Sort 
                 name='name' 
                 order={sort} 
-                onAsc={() => setSort('name__asc')} 
-                onDesc={() => setSort('name__desc')} 
+                onAsc={() => setSort(AdminUserSort.NameAsc)} 
+                onDesc={() => setSort(AdminUserSort.NameDesc)} 
               />
             </Cell>
             <Cell>Email</Cell>
             <Cell>Visitor</Cell>
-            <Cell>
-              Superuser
-              <Sort 
-                name='superuser' 
-                order={sort} 
-                onAsc={() => setSort('superuser__asc')} 
-                onDesc={() => setSort('superuser__desc')} 
-              />
-            </Cell>
+            <Cell>Superuser</Cell>
             <Cell>Sites</Cell>
             <Cell>
               Created At
               <Sort 
                 name='created_at' 
                 order={sort} 
-                onAsc={() => setSort('created_at__asc')} 
-                onDesc={() => setSort('created_at__desc')} 
+                onAsc={() => setSort(AdminUserSort.CreatedAtAsc)} 
+                onDesc={() => setSort(AdminUserSort.CreatedAtDesc)} 
               />
             </Cell>
-            <Cell>Last Activity At</Cell>
+            <Cell>
+              Last Activity At
+              <Sort 
+                name='last_activity_at' 
+                order={sort} 
+                onAsc={() => setSort(AdminUserSort.LastActivityAtAsc)} 
+                onDesc={() => setSort(AdminUserSort.LastActivityAtDesc)} 
+              />
+            </Cell>
             <Cell />
           </Row>
-          {results.map(user => (
+          {users.map(user => (
             <UsersTableRow 
               key={user.id} 
               user={user} 
