@@ -35,14 +35,17 @@ export const Sidebar: FC = () => {
     <aside id='app-sidebar' className={classnames({ open })}>
       <Link href='/sites'>
         <a className='logo large'>
-          <Logo logo='main' alt='Logo' height={32} width={103} />
+          <Logo logo='main' alt='Logo' height={24} width={78} />
         </a>
       </Link>
       <Link href='/sites'>
         <a className='logo small'>
-          <Logo logo='small' alt='Logo' height={32} width={24} />
+          <Logo logo='small' alt='Logo' height={24} width={18} />
         </a>
       </Link>
+      <span className='admin-indicator'>
+        ADMIN
+      </span>
       <menu className='left'>
         <div className='slider'>
           <div className='nav left'>

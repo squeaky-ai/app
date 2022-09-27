@@ -1,8 +1,20 @@
 .page.__admin {
-  background: var(--peach-50);
+  background: var(--gray-50);
 
   a {
     color: var(--mauve-700);
+  }
+  
+  .admin-indicator {
+    color: var(--peach-200);
+    font-size: var(--font-size-body-x-sm);
+    position: absolute;
+    right: 1.5rem;
+    top: 1.65rem;
+
+    @include breakpoint-md {
+      display: none;
+    }
   }
 
   #app-sidebar {
