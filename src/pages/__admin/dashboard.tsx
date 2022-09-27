@@ -11,12 +11,12 @@ import { UsersGrowth } from 'components/admin/users-growth';
 import { SitesGrowth } from 'components/admin/sites-growth';
 import { RecordingsStored } from 'components/admin/recordings-stored';
 import { VerifiedSites } from 'components/admin/verified-sites';
-import { useAdmin } from 'hooks/use-admin';
+import { useAdminDashboard } from 'hooks/use-admin-dashboard';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { PageLoading } from 'components/sites/page-loading';
 
 const AdminDashboard: NextPage<ServerSideProps> = () => {
-  const { admin, loading, error } = useAdmin();
+  const { admin, loading, error } = useAdminDashboard();
 
   if (error) {
     return <Error />;
@@ -45,9 +45,9 @@ const AdminDashboard: NextPage<ServerSideProps> = () => {
               <Card>
                 <div className='numbered-title'>
                   <h5>Total Users</h5>
-                  <h3>{admin.users.length}</h3>
+                  <h3>{admin.usersCount}</h3>
                 </div>
-                <UsersGrowth users={admin.users} />
+                <UsersGrowth users={admin.usersStored} />
               </Card>
             </div>
 
@@ -87,7 +87,7 @@ const AdminDashboard: NextPage<ServerSideProps> = () => {
 
             <div className='grid-item total-sites'>
               <Card>
-                <SitesGrowth sites={admin.sites} />
+                <SitesGrowth count={admin.sitesCount} sites={admin.sitesStored} />
               </Card>
             </div>
 

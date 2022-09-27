@@ -7,10 +7,10 @@ import { Pill } from 'components/pill';
 import { toNiceDate } from 'lib/dates';
 import { Dropdown } from 'components/dropdown';
 import { SitesDelete } from 'components/admin/sites-delete';
-import type { Site } from 'types/graphql';
+import type { AdminSite } from 'types/graphql';
 
 interface Props {
-  site: Site;
+  site: AdminSite;
   activeVisitors: number;
   style?: React.CSSProperties;
 }

@@ -1,14 +1,14 @@
 import React from 'react';
 import type { FC } from 'react';
-import { range } from 'lodash';
+import { range, sum } from 'lodash';
 import { format, subMonths } from 'date-fns';
 import { useResize } from 'hooks/use-resize';
 import { DeviceWidths } from 'data/common/constants';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, TooltipProps } from 'recharts';
-import type { AdminUser } from 'types/graphql';
+import type { AdminUsersStored } from 'types/graphql';
 
 interface Props {
-  users: AdminUser[];
+  users: AdminUsersStored[];
 }
 
 interface Total {
@@ -16,16 +16,16 @@ interface Total {
   date: string;
 }
 
-const getAccumulatingTotal = (users: AdminUser[]): Total[] => {
+const getAccumulatingTotal = (users: AdminUsersStored[]): Total[] => {
   const now = new Date();
 
   const results = range(0, 11).map(month => {
     const thisMonth = subMonths(now, month);
-    const values = users.filter(user => new Date(user.createdAt) <= thisMonth);
+    const values = users.filter(user => new Date(user.date) <= thisMonth);
     
     return {
       date: format(thisMonth, 'MMM yy'),
-      count: values.length,
+      count: sum(values.map(v => v.count)),
     }
   });
 

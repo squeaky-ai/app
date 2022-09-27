@@ -4,19 +4,41 @@ import Head from 'next/head';
 import { Error } from 'components/error';
 import { UsersTable } from 'components/admin/users-table';
 import { Main } from 'components/main';
-import { Input } from 'components/input';
+import { PageSize } from 'components/sites/page-size';
 import { BreadCrumbs } from 'components/admin/breadcrumbs';
 import { UsersColumns } from 'components/admin/users-columns';
 import { PageLoading } from 'components/sites/page-loading';
-import { useAdmin } from 'hooks/use-admin';
+import { Pagination } from 'components/pagination';
+import { Search } from 'components/search';
+import { useAdminUsers } from 'hooks/use-admin-users';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useColumns } from 'hooks/use-columns';
+import { AdminUserSort } from 'types/graphql';
 
 const Admin: NextPage<ServerSideProps> = () => {
-  const { admin, loading, error } = useAdmin();
-
   const [search, setSearch] = React.useState<string>('');
+  const [page, setPage] = React.useState<number>(1);
+  const [size, setSize] = React.useState<number>(25);
+  const [sort, setSort] = React.useState<AdminUserSort>(AdminUserSort.CreatedAtDesc);
+
+  const { users, loading, error } = useAdminUsers({
+    size,
+    sort,
+    page,
+    search,
+  });
+
   const { columns, columnsReady, setColumns } = useColumns('admin-users');
+
+  const handlePageSize = (size: number) => {
+    setPage(1);
+    setSize(size);
+  };
+
+  const handleSort = (sort: AdminUserSort) => {
+    setPage(1);
+    setSort(sort);
+  };
 
   if (error) {
     return <Error />;
@@ -36,12 +58,10 @@ const Admin: NextPage<ServerSideProps> = () => {
             <h4 className='title'>
               Users
             </h4>
-            <Input 
-              type='text' 
-              placeholder='Search...'
-              autoComplete='off'
-              value={search}
-              onChange={event => setSearch(event.target.value)}
+            <Search
+              search={search}
+              onSearch={setSearch}
+              placeholder='Search names and emails...'
             />
           </div>
           <menu>
@@ -57,12 +77,28 @@ const Admin: NextPage<ServerSideProps> = () => {
         )}
 
         {!loading && columnsReady && (
-          <UsersTable
-            users={admin.users} 
-            sites={admin.sites} 
-            search={search}
-            columns={columns}
-          />
+          <>
+            <UsersTable
+              users={users.items} 
+              columns={columns}
+              sort={sort}
+              setSort={handleSort}
+            />
+
+            <div className='users-footer'>
+              <Pagination 
+                currentPage={page} 
+                pageSize={users.pagination.pageSize}
+                total={users.pagination.total}
+                setPage={setPage}
+              />
+              <PageSize 
+                value={users.pagination.pageSize} 
+                onChange={handlePageSize}
+                show={users.pagination.total > 25}
+              />
+            </div>
+          </>
         )}
       </Main>
     </>

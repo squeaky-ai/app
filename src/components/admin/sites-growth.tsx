@@ -1,16 +1,17 @@
 import React from 'react';
 import type { FC } from 'react';
-import { range } from 'lodash';
+import { range, sum } from 'lodash';
 import { format, subMonths } from 'date-fns';
 import { Label } from 'components/label';
 import { Checkbox } from 'components/checkbox';
 import { useResize } from 'hooks/use-resize';
 import { DeviceWidths } from 'data/common/constants';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, TooltipProps } from 'recharts';
-import type { Site } from 'types/graphql';
+import type { AdminSitesStored } from 'types/graphql';
 
 interface Props {
-  sites: Site[];
+  count: number;
+  sites: AdminSitesStored[];
 }
 
 interface Total {
@@ -20,7 +21,7 @@ interface Total {
   date: string;
 }
 
-export const SitesGrowth: FC<Props> = ({ sites }) => {
+export const SitesGrowth: FC<Props> = ({ count, sites }) => {
   const [show, setShow] = React.useState<string[]>(['all', 'verified', 'unverified']);
 
   const { width } = useResize();
@@ -36,13 +37,13 @@ export const SitesGrowth: FC<Props> = ({ sites }) => {
   
     const results = range(0, 11).map(month => {
       const thisMonth = subMonths(now, month);
-      const values = sites.filter(site => new Date(site.createdAt) <= thisMonth);
+      const values = sites.filter(site => new Date(site.date) <= thisMonth);
       
       return {
         date: format(thisMonth, 'MMM yy'),
-        allCount: show.includes('all') ? values.length : 0,
-        verifiedCount: show.includes('verified') ? values.filter(v => !!v.verifiedAt).length : 0,
-        unverifiedCount: show.includes('unverified') ? values.filter(v => !v.verifiedAt).length : 0,
+        allCount: show.includes('all') ? sum(values.map(v => v.allCount)) : 0,
+        verifiedCount: show.includes('verified') ? sum(values.map(v => v.verifiedCount)) : 0,
+        unverifiedCount: show.includes('unverified') ? sum(values.map(v => v.unverifiedCount)) : 0,
       };
     });
   
@@ -69,7 +70,7 @@ export const SitesGrowth: FC<Props> = ({ sites }) => {
       <div className='chart-heading'>
         <div className='numbered-title'>
           <h5>Total Sites</h5>
-          <h3>{sites.length}</h3>
+          <h3>{count}</h3>
         </div>
         <div className='options'>
           <Label>Show:</Label>

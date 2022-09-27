@@ -3,42 +3,6 @@ import { gql } from '@apollo/client';
 export const GET_ADMIN_QUERY = gql`
   query GetAdmin { 
     admin {
-      sites {
-        id
-        name
-        uuid
-        url
-        ownerName
-        verifiedAt
-        superuserAccessEnabled
-        plan {
-          tier
-          name
-          exceeded
-          invalid
-          maxMonthlyRecordings
-        }
-        team {
-          id
-          role
-          user {
-            id
-          }
-        }
-        createdAt
-      }
-      users {
-        id
-        fullName
-        email
-        superuser
-        createdAt
-        lastActivityAt
-        visitor {
-          id
-          visitorId
-        }
-      }
       activeMonthlyUsers
       recordingsCount
       recordingsProcessed
@@ -58,9 +22,21 @@ export const GET_ADMIN_QUERY = gql`
         unverified
       }
       recordingsStored {
-         count
-         date
+        count
+        date
       }
+      sitesStored {
+        allCount
+        verifiedCount
+        unverifiedCount
+        date
+      }
+      usersStored {
+        count
+        date
+      }
+      usersCount
+      sitesCount
     }
   }
 `;
@@ -156,6 +132,78 @@ export const GET_ADMIN_BLOG_QUERY = gql`
   query GetAdminBlog { 
     admin {
       blogImages
+    }
+  }
+`;
+
+export const GET_ADMIN_USERS_QUERY = gql`
+  query GetAdminUsers($page: Int, $size: Int, $search: String, $sort: AdminUserSort) {
+    admin {
+      users(page: $page, size: $size, search: $search, sort: $sort) {
+        items {
+          id
+          fullName
+          email
+          superuser
+          createdAt
+          lastActivityAt
+          visitor {
+            id
+            visitorId
+          }
+          sites {
+            id
+            name
+          }
+        }
+        pagination {
+          pageSize
+          total
+          sort
+        }
+      }
+    }
+  }
+`;
+
+export const GET_ADMIN_SITES_QUERY = gql`
+  query GetAdminSites($page: Int, $size: Int, $search: String, $sort: AdminSiteSort) {
+    admin {
+      sites(page: $page, size: $size, search: $search, sort: $sort) {
+        items {
+          id
+          name
+          uuid
+          url
+          ownerName
+          verifiedAt
+          superuserAccessEnabled
+          plan {
+            tier
+            name
+            exceeded
+            invalid
+            maxMonthlyRecordings
+          }
+          team {
+            id
+            role
+            user {
+              id
+            }
+          }
+          createdAt
+        }
+        pagination {
+          pageSize
+          total
+          sort
+        }
+      }
+      activeVisitors {
+        siteId
+        count
+      }
     }
   }
 `;

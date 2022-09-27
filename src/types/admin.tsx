@@ -1,22 +1,4 @@
-export type UserSort = 
-  'name__asc' |
-  'name__desc' |
-  'superuser__asc' |
-  'superuser__desc' |
-  'created_at__asc' |
-  'created_at__desc';
-
-export type SitesSort = 
-  'name__asc' |
-  'name__desc' |
-  'plan_name__asc' |
-  'plan_name__desc' |
-  'team_count__asc' |
-  'team_count__desc' |
-  'created_at__asc' |
-  'created_at__desc' | 
-  'active_visitors__asc' |
-  'active_visitors__desc';
+import type { Admin } from 'types/graphql';
 
 export type BlogAuthor = {
   name: string;
@@ -34,3 +16,11 @@ export type BlogInput = {
   body: string;
   script: string;
 }
+
+
+export type AdminDashboard = Omit<
+  Admin,
+  'sites' |
+  'users' | 
+  'blogImages'
+>;
