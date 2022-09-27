@@ -151,6 +151,10 @@ export const GET_ADMIN_USERS_QUERY = gql`
             id
             visitorId
           }
+          sites {
+            id
+            name
+          }
         }
         pagination {
           pageSize

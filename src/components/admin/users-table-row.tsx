@@ -8,17 +8,16 @@ import { Pill } from 'components/pill';
 import { toNiceDate } from 'lib/dates';
 import { Dropdown } from 'components/dropdown';
 import { UsersDelete } from 'components/admin/users-delete';
-import type { AdminUser, Site } from 'types/graphql';
+import type { AdminUser } from 'types/graphql';
 
 interface Props {
   user: AdminUser;
-  sites: Site[];
   style?: React.CSSProperties;
 }
 
 const { publicRuntimeConfig } = getConfig();
 
-export const UsersTableRow: FC<Props> = ({ user, sites, style }) => {
+export const UsersTableRow: FC<Props> = ({ user, style }) => {
   const rowActionsRef = React.useRef<Dropdown>();
 
   const onRowActionClose = () => {
@@ -43,15 +42,15 @@ export const UsersTableRow: FC<Props> = ({ user, sites, style }) => {
         }
       </Cell>
       <Cell>
-        {sites.map((site, index) => (
+        {user.sites.map((site, index) => (
           <React.Fragment key={site.id}>
             <Link href={`/sites/${site.id}/dashboard`}>
               <a target='_blank'>{site.name}</a>
             </Link>
-            {index === sites.length -1 ? '' : ', '}
+            {index === user.sites.length -1 ? '' : ', '}
           </React.Fragment>
         ))}
-        {sites.length === 0 && '-'}
+        {user.sites.length === 0 && '-'}
       </Cell>
       <Cell>{toNiceDate(user.createdAt)}</Cell>
       <Cell>{user.lastActivityAt ? toNiceDate(user.lastActivityAt) : '-'}</Cell>

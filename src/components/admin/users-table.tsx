@@ -9,21 +9,16 @@ import { DEFAULT_USER_COLUMNS } from 'data/admin/constants';
 import { getColumnStyles } from 'lib/tables';
 import { AdminUserSort } from 'types/graphql';
 import type { Column } from 'types/common';
-import type { AdminUser, Site } from 'types/graphql';
+import type { AdminUser } from 'types/graphql';
 
 interface Props {
   users: AdminUser[];
-  sites: Site[];
   columns: Column[];
   sort: AdminUserSort;
   setSort: (sort: AdminUserSort) => void;
 }
 
-const getUsersSites = (user: AdminUser, sites: Site[]) => (
-  sites.filter(site => !!site.team.find(t => t.user.id === user.id))
-);
-
-export const UsersTable: FC<Props> = ({ users, sites, columns, sort, setSort }) => {
+export const UsersTable: FC<Props> = ({ users, columns, sort, setSort }) => {
   const { rowStyle, tableClassNames } = getColumnStyles(DEFAULT_USER_COLUMNS, columns);
 
   return (
@@ -77,8 +72,7 @@ export const UsersTable: FC<Props> = ({ users, sites, columns, sort, setSort }) 
           {users.map(user => (
             <UsersTableRow 
               key={user.id} 
-              user={user} 
-              sites={getUsersSites(user, sites)}
+              user={user}
               style={rowStyle}
             />
           ))}

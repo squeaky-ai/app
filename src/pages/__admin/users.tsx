@@ -80,7 +80,6 @@ const Admin: NextPage<ServerSideProps> = () => {
           <>
             <UsersTable
               users={users.items} 
-              sites={[]} // TODO 
               columns={columns}
               sort={sort}
               setSort={handleSort}

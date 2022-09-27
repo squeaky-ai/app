@@ -381,6 +381,7 @@ export type AdminUser = {
   id: Scalars['ID'];
   lastActivityAt?: Maybe<Scalars['ISO8601DateTime']>;
   lastName?: Maybe<Scalars['String']>;
+  sites: Array<Maybe<Site>>;
   superuser: Scalars['Boolean'];
   updatedAt?: Maybe<Scalars['ISO8601DateTime']>;
   visitor?: Maybe<Visitor>;
