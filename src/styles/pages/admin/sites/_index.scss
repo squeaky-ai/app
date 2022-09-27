@@ -1,0 +1,23 @@
+.page.__admin.sites {
+  .table-wrapper {
+    margin-bottom: 2rem;
+  }
+
+  .sites-footer {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+
+    @include breakpoint-sm {
+      flex-direction: column;
+
+      .rc-pagination {
+        margin: .5rem 0 0 0;
+      }
+
+      .page-size {
+        display: none;
+      }
+    }
+  }
+}

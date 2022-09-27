@@ -1,19 +1,17 @@
 import { useQuery } from '@apollo/client';
 import { GET_ADMIN_QUERY } from 'data/admin/queries';
-import type { Admin } from 'types/graphql';
+import type { AdminDashboard } from 'types/admin';
 
-interface UseAdmin {
+interface UseAdminDashboard {
   loading: boolean;
   error: boolean;
-  admin: Admin;
+  admin: AdminDashboard; 
 }
 
-export const useAdmin = (): UseAdmin => {
+export const useAdminDashboard = (): UseAdminDashboard => {
   const { loading, error, data } = useQuery(GET_ADMIN_QUERY);
 
-  const fallback: Admin = {
-    sites: [],
-    users: [],
+  const fallback: AdminDashboard = {
     activeMonthlyUsers: 0,
     activeVisitors: [],
     roles: {
@@ -26,11 +24,14 @@ export const useAdmin = (): UseAdmin => {
       unverified: 0,
       verified: 0,
     },
-    blogImages: [],
+    sitesCount: 0,
+    usersCount: 0,
     recordingsCount: 0,
     recordingsProcessed: 0,
     visitorsCount: 0,
     recordingsStored: [],
+    sitesStored: [],
+    usersStored: [],
   };
 
   return {

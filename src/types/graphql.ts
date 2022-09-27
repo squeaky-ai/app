@@ -36,7 +36,11 @@ export type Admin = {
   roles: AdminRoles;
   site?: Maybe<AdminSite>;
   sites: AdminSites;
+  sitesCount: Scalars['Int'];
+  sitesStored: Array<Maybe<AdminSitesStored>>;
   users: AdminUsers;
+  usersCount: Scalars['Int'];
+  usersStored: Array<Maybe<AdminUsersStored>>;
   verified: AdminVerified;
   visitorsCount: Scalars['Int'];
 };
@@ -359,6 +363,14 @@ export type AdminSites = {
   pagination: AdminSitePagination;
 };
 
+export type AdminSitesStored = {
+  __typename?: 'AdminSitesStored';
+  allCount: Scalars['Int'];
+  date: Scalars['ISO8601Date'];
+  unverifiedCount: Scalars['Int'];
+  verifiedCount: Scalars['Int'];
+};
+
 export type AdminUser = {
   __typename?: 'AdminUser';
   communication?: Maybe<UsersCommunication>;
@@ -401,6 +413,12 @@ export type AdminUsers = {
   __typename?: 'AdminUsers';
   items: Array<Maybe<AdminUser>>;
   pagination: AdminUserPagination;
+};
+
+export type AdminUsersStored = {
+  __typename?: 'AdminUsersStored';
+  count: Scalars['Int'];
+  date: Scalars['ISO8601Date'];
 };
 
 export type AdminVerified = {

@@ -10,13 +10,13 @@ interface Props {
   search?: string;
 }
 
-interface UseAdmin {
+interface UseAdminUsers {
   loading: boolean;
   error: boolean;
   users: AdminUsers;
 }
 
-export const useAdminUsers = (props: Props): UseAdmin => {
+export const useAdminUsers = (props: Props): UseAdminUsers => {
   const { loading, error, data } = useQuery(GET_ADMIN_USERS_QUERY, {
     variables: props,
   });

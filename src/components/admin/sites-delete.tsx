@@ -7,10 +7,10 @@ import { Spinner } from 'components/spinner';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { useToasts } from 'hooks/use-toasts';
 import { adminSiteDelete } from 'lib/api/graphql';
-import type { Site } from 'types/graphql';
+import type { AdminSite } from 'types/graphql';
 
 interface Props {
-  site: Site;
+  site: AdminSite;
   onClose: VoidFunction;
 }
 
