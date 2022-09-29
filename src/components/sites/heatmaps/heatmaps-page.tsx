@@ -6,15 +6,14 @@ import { ScrollIndicator } from 'components/sites/scroll-indicator';
 import { DeviceWidths } from 'data/common/constants';
 import { showClickCountsMaps, showClickGradientMaps, showScrollMaps, showCursorMaps, iframeStyles, getElements } from 'lib/heatmaps';
 import { parseRecordingEvents } from 'lib/events';
-import { Heatmaps, HeatmapsClick, HeatmapsDevice, HeatmapsScroll, HeatmapsCursor } from 'types/graphql';
-import type { HeatmapClickDisplay, HeatmapClickTarget } from 'types/heatmaps';
+import { Heatmaps, HeatmapsClickPosition, HeatmapsDevice, HeatmapsScroll, HeatmapsCursor, HeatmapsClickCount } from 'types/graphql';
+import type { HeatmapClickTarget } from 'types/heatmaps';
 import type { HeatmapsType } from 'types/graphql';
 
 interface Props {
   type: HeatmapsType;
   device: HeatmapsDevice;
   clickTarget: HeatmapClickTarget;
-  clickDisplay: HeatmapClickDisplay;
   page: string;
   heatmaps: Heatmaps;
 }
@@ -26,7 +25,6 @@ export const HeatmapsPage: FC<Props> = ({
   device,
   page,
   clickTarget,
-  clickDisplay,
   heatmaps,
 }) => {
   const ref = React.useRef<HTMLDivElement>(null);
@@ -106,8 +104,8 @@ export const HeatmapsPage: FC<Props> = ({
     doc.body.style.cssText += 'pointer-events: none; user-select: none;';
     doc.head.innerHTML += iframeStyles;
 
-    if (type === 'Click' && clickDisplay === 'counts') showClickCountsMaps(doc, heatmaps.items as HeatmapsClick[], clickTarget);
-    if (type === 'Click' && clickDisplay === 'gradient') showClickGradientMaps(doc, heatmaps.items as HeatmapsClick[]);
+    if (type === 'ClickCount') showClickCountsMaps(doc, heatmaps.items as HeatmapsClickCount[], clickTarget);
+    if (type === 'ClickPosition') showClickGradientMaps(doc, heatmaps.items as HeatmapsClickPosition[]);
     if (type === 'Scroll') showScrollMaps(doc, heatmaps.items as HeatmapsScroll[], scale);
     if (type === 'Cursor') showCursorMaps(doc, heatmaps.items as HeatmapsCursor[]);
 
@@ -157,7 +155,7 @@ export const HeatmapsPage: FC<Props> = ({
   React.useEffect(() => {
     draw();
     shrink();
-  }, [type, heatmaps.counts, heatmaps.items, clickTarget, clickDisplay]);
+  }, [type, heatmaps.counts, heatmaps.items, clickTarget]);
 
   React.useEffect(() => {
     return () => {

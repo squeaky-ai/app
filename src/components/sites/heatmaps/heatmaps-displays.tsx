@@ -7,27 +7,25 @@ import { Radio } from 'components/radio';
 import { HeatmapsType } from 'types/graphql';
 import { FeatureFlag } from 'lib/feature-flags';
 import { useFeatureFlags } from 'hooks/use-feature-flags';
-import type { HeatmapClickDisplay, HeatmapClickTarget } from 'types/heatmaps';
+import type { HeatmapClickTarget } from 'types/heatmaps';
 
 interface Props {
   type: HeatmapsType;
   clickTarget: HeatmapClickTarget;
-  clickDisplay: HeatmapClickDisplay;
+  setType: (type: HeatmapsType) => void;
   setClickTarget: (clickTarget: HeatmapClickTarget) => void;
-  setClickDisplay: (clickDisplay: HeatmapClickDisplay) => void;
 }
 
 export const HeatmapsDisplays: FC<Props> = ({
   type,
   clickTarget,
-  clickDisplay,
+  setType,
   setClickTarget,
-  setClickDisplay,
 }) => {
   const { featureFlagEnabled } = useFeatureFlags();
 
   return (
-    <Dropdown className='heatmaps-display' button={<Icon name='settings-3-line' />} buttonDisabled={type === HeatmapsType.Scroll}>
+    <Dropdown className='heatmaps-display' button={<Icon name='settings-3-line' />} buttonDisabled={![HeatmapsType.ClickCount, HeatmapsType.ClickPosition].includes(type)}>
       <Label>Click targets</Label>
       <form className='radio-group'>
         <Radio name='clickTarget' checked={clickTarget === 'all'} onChange={() => setClickTarget('all')}>
@@ -41,10 +39,10 @@ export const HeatmapsDisplays: FC<Props> = ({
         <>
           <Label>Click display</Label>
           <form className='radio-group'>
-            <Radio name='clickDisplay' checked={clickDisplay === 'gradient'} onChange={() => setClickDisplay('gradient')}>
+            <Radio name='clickDisplay' checked={type === HeatmapsType.ClickPosition} onChange={() => setType(HeatmapsType.ClickPosition)}>
               Gradients
             </Radio>
-            <Radio name='clickDisplay' checked={clickDisplay === 'counts'} onChange={() => setClickDisplay('counts')}>
+            <Radio name='clickDisplay' checked={type === HeatmapsType.ClickCount} onChange={() => setType(HeatmapsType.ClickCount)}>
               Click counts
             </Radio>
           </form>

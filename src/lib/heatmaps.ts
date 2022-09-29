@@ -3,7 +3,7 @@ import { range, orderBy, findLast, sumBy } from 'lodash';
 import { percentage } from 'lib/maths';
 import { HeatmapColor, HEATMAP_COLOURS } from 'data/heatmaps/constants';
 import type { HeatmapClickTarget } from 'types/heatmaps';
-import type { HeatmapsScroll, HeatmapsClick, HeatmapsCursor } from 'types/graphql';
+import type { HeatmapsScroll, HeatmapsClickCount, HeatmapsClickPosition, HeatmapsCursor } from 'types/graphql';
 
 interface ScrollMapData {
   increment: number;
@@ -72,7 +72,7 @@ export const getScrollMapData = (items: HeatmapsScroll[]): ScrollMapData[] => {
   });
 };
 
-export const getClickMapData = (items: HeatmapsClick[]): ClickMapData[] => {
+export const getClickMapData = (items: HeatmapsClickCount[]): ClickMapData[] => {
   const total = sumBy(items, 'count');
 
   const max = Math.max(...items.map(i => i.count));
@@ -96,7 +96,7 @@ export const getClickMapData = (items: HeatmapsClick[]): ClickMapData[] => {
   });
 };
 
-export const showClickCountsMaps = (doc: Document, items: HeatmapsClick[], clickTarget: HeatmapClickTarget) => {
+export const showClickCountsMaps = (doc: Document, items: HeatmapsClickCount[], clickTarget: HeatmapClickTarget) => {
   const clickMapData = getClickMapData(items);
 
   items.forEach(item => {
@@ -193,8 +193,8 @@ export const showCursorMaps = (doc: Document, items: HeatmapsCursor[]) => {
   const overlay = document.createElement('div');
   overlay.classList.add('__squeaky_cursor_overlay');
   overlay.style.cssText = `
-     background: rgba(0, 0, 0, .25);
-     height: ${doc.body.scrollHeight}px;
+    background: rgba(0, 0, 0, .25);
+    height: ${doc.body.scrollHeight}px;
     left: 0;
     position: absolute;
     top: 0;
@@ -216,25 +216,22 @@ export const showCursorMaps = (doc: Document, items: HeatmapsCursor[]) => {
   map.setData({ min: 0, max, data });
 };
 
-export const showClickGradientMaps = (doc: Document, items: HeatmapsClick[]) => {
-  const clickMapData = getClickMapData(items);
-  
+export const showClickGradientMaps = (doc: Document, items: HeatmapsClickPosition[]) => {  
   const data = items
     .map(item => {
-      let elem = getElement(doc, item.selector);
+      const elem = getElement(doc, item.selector);
 
       if (!elem) return null;
 
-      const click = clickMapData.find(c => c.selector === item.selector);
-      const { left, top, width, height } = elem.getBoundingClientRect();
+      const { left, top } = elem.getBoundingClientRect();
 
-      const x = left + (width / 2);
-      const y = top + (height / 2);
-
-      return { x, y, value: click.count };
+      return {
+        x: left + item.relativeToElementX,
+        y: top + item.relativeToElementY,
+        value: 1,
+      };
     })
-    .filter(d => !!d)
-    .filter(d => !(d.x === 0 && d.y === 0));
+    .filter(d => !!d);
 
   if (data.length === 0) return;
 
@@ -259,7 +256,7 @@ export const showClickGradientMaps = (doc: Document, items: HeatmapsClick[]) => 
   overlay.appendChild(heatmapContainer);
   doc.body.appendChild(overlay);
 
-  const max = Math.max(...data.map(d => d.value));
+  const max = data.length;
   const map = heatmap.create({ container: heatmapContainer });
 
   map.setData({ min: 0, max, data });

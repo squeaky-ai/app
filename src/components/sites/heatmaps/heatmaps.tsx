@@ -22,7 +22,7 @@ import { FeatureFlag } from 'lib/feature-flags';
 import { useFeatureFlags } from 'hooks/use-feature-flags';
 import { HeatmapsDevice, HeatmapsType, SitesPage } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
-import type { HeatmapClickTarget, HeatmapClickDisplay } from 'types/heatmaps';
+import type { HeatmapClickTarget } from 'types/heatmaps';
 
 interface Props {
   page: string;
@@ -33,10 +33,9 @@ interface Props {
 }
 
 export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod }) => {
-  const [type, setType] = React.useState<HeatmapsType>(HeatmapsType.Click);
+  const [type, setType] = React.useState<HeatmapsType>(HeatmapsType.ClickCount);
   const [device, setDevice] = React.useState<HeatmapsDevice>(HeatmapsDevice.Desktop);
   const [clickTarget, setClickTarget] = React.useState<HeatmapClickTarget>('all');
-  const [clickDisplay, setClickDisplay] = React.useState<HeatmapClickDisplay>('counts');
   const [selected, setSelected] = React.useState<string>(null);
   const [excludeRecordingIds, setExcludeRecordingIds] = React.useState<string[]>([]);
 
@@ -58,7 +57,7 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
   };
 
   const hasData = !!heatmaps.recording;
-  const hasHiddenSidebar = (type === HeatmapsType.Click && clickDisplay === 'gradient') || type === HeatmapsType.Cursor;
+  const hasHiddenSidebar = [HeatmapsType.Cursor, HeatmapsType.ClickPosition].includes(type);
 
   if (loading) {
     return <PageLoading />;
@@ -95,15 +94,15 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
           </ButtonGroup>
 
           <ButtonGroup>
-            <Button className={classnames(type === 'Click' ? 'primary' : 'blank')} onClick={() => setType(HeatmapsType.Click)}>
+            <Button className={classnames([HeatmapsType.ClickCount, HeatmapsType.ClickPosition].includes(type) ? 'primary' : 'blank')} onClick={() => setType(HeatmapsType.ClickCount)}>
               {device === HeatmapsDevice.Desktop ? 'Clicks' : 'Taps'}
             </Button>
             {featureFlagEnabled(FeatureFlag.HEATMAP_CURSORS) && (
-              <Button className={classnames(type === 'Cursor' ? 'primary' : 'blank')} onClick={() => setType(HeatmapsType.Cursor)}>
+              <Button className={classnames(type === HeatmapsType.Cursor ? 'primary' : 'blank')} onClick={() => setType(HeatmapsType.Cursor)}>
                 Mouse
               </Button>
             )}
-            <Button className={classnames(type === 'Scroll' ? 'primary' : 'blank')} onClick={() => setType(HeatmapsType.Scroll)}>
+            <Button className={classnames(type === HeatmapsType.Scroll ? 'primary' : 'blank')} onClick={() => setType(HeatmapsType.Scroll)}>
               Scroll
             </Button>
           </ButtonGroup>
@@ -111,9 +110,8 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
           <HeatmapsDisplays
             type={type}
             clickTarget={clickTarget}
-            clickDisplay={clickDisplay}
+            setType={setType}
             setClickTarget={setClickTarget} 
-            setClickDisplay={setClickDisplay}
           />
         </div>
       </div>
@@ -124,13 +122,12 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
               type={type}
               device={device}
               clickTarget={clickTarget}
-              clickDisplay={clickDisplay}
               page={page}
               heatmaps={heatmaps}
             />
           </Card>
           <Card className='data'>
-            {type === 'Click' && (
+            {type === 'ClickCount' && (
               <HeatmapsClicks 
                 heatmaps={heatmaps} 
                 selected={selected} 

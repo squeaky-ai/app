@@ -1318,10 +1318,18 @@ export type Heatmaps = {
   recording?: Maybe<Recording>;
 };
 
-export type HeatmapsClick = {
-  __typename?: 'HeatmapsClick';
+export type HeatmapsClickCount = {
+  __typename?: 'HeatmapsClickCount';
   count: Scalars['Int'];
   id: Scalars['ID'];
+  selector: Scalars['String'];
+};
+
+export type HeatmapsClickPosition = {
+  __typename?: 'HeatmapsClickPosition';
+  id: Scalars['ID'];
+  relativeToElementX: Scalars['Int'];
+  relativeToElementY: Scalars['Int'];
   selector: Scalars['String'];
 };
 
@@ -1356,15 +1364,17 @@ export type HeatmapsScroll = {
 };
 
 export enum HeatmapsType {
-  /** Show clicks */
-  Click = 'Click',
+  /** Show click counts */
+  ClickCount = 'ClickCount',
+  /** Show click positions */
+  ClickPosition = 'ClickPosition',
   /** Show mouse positions */
   Cursor = 'Cursor',
   /** Show scrolls */
   Scroll = 'Scroll'
 }
 
-export type Item = HeatmapsClick | HeatmapsCursor | HeatmapsScroll;
+export type Item = HeatmapsClickCount | HeatmapsClickPosition | HeatmapsCursor | HeatmapsScroll;
 
 export type Mutation = {
   __typename?: 'Mutation';

@@ -45,9 +45,14 @@ export const GET_HEATMAPS_QUERY = gql`
           }
         }
         items {
-          ... on HeatmapsClick {
+          ... on HeatmapsClickCount {
             selector
             count
+          }
+          ... on HeatmapsClickPosition {
+            selector
+            relativeToElementX
+            relativeToElementY
           }
           ... on HeatmapsCursor {
             x
