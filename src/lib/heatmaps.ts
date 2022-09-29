@@ -256,10 +256,9 @@ export const showClickGradientMaps = (doc: Document, items: HeatmapsClickPositio
   overlay.appendChild(heatmapContainer);
   doc.body.appendChild(overlay);
 
-  const max = data.length;
   const map = heatmap.create({ container: heatmapContainer });
 
-  map.setData({ min: 0, max, data });
+  map.setData({ min: 0, max: 1, data });
 };
 
 const createFixedScrollMarker = (doc: Document, scrollMapData: ScrollMapData[], percentage: number, scale: number) => {
