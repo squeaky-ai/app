@@ -354,7 +354,9 @@ export type AdminSiteRecordingsCounts = {
 
 export enum AdminSiteSort {
   CreatedAtAsc = 'created_at__asc',
-  CreatedAtDesc = 'created_at__desc'
+  CreatedAtDesc = 'created_at__desc',
+  NameAsc = 'name__asc',
+  NameDesc = 'name__desc'
 }
 
 export type AdminSites = {

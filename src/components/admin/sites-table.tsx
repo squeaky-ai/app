@@ -41,7 +41,15 @@ export const SitesTable: FC<Props> = ({ sites, activeVisitors, columns, sort, se
         <Table className={classnames('sites-table', tableClassNames, { hide: sites.length === 0 })}>
           <Row className='head' style={rowStyle}>
             <Cell>ID</Cell>
-            <Cell>Name</Cell>
+            <Cell>
+              Name
+              <Sort 
+                name='name' 
+                order={sort} 
+                onAsc={() => setSort(AdminSiteSort.NameAsc)} 
+                onDesc={() => setSort(AdminSiteSort.NameDesc)} 
+              />
+            </Cell>
             <Cell>Url</Cell>
             <Cell>Owner Name</Cell>
             <Cell>Plan Name</Cell>
@@ -58,7 +66,7 @@ export const SitesTable: FC<Props> = ({ sites, activeVisitors, columns, sort, se
               />
             </Cell>
             <Cell>Active Visitors</Cell>
-            <Cell>Superuser Access</Cell>
+            <Cell>CS Access</Cell>
           </Row>
           {sites.map(site => (
             <SitesTableRow 
