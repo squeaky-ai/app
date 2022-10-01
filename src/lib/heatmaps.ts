@@ -1,5 +1,5 @@
 import heatmap from 'vendor/heatmap';
-import { range, orderBy, findLast, sumBy } from 'lodash';
+import { range, orderBy, findLast, sumBy, countBy } from 'lodash';
 import { percentage } from 'lib/maths';
 import { HeatmapColor, HEATMAP_COLOURS } from 'data/heatmaps/constants';
 import type { HeatmapClickTarget } from 'types/heatmaps';
@@ -256,9 +256,12 @@ export const showClickGradientMaps = (doc: Document, items: HeatmapsClickPositio
   overlay.appendChild(heatmapContainer);
   doc.body.appendChild(overlay);
 
+  // Group by the selector, as that should allow us to have
+  // some idea of a local area of clicks
+  const max = Math.max(...Object.values(countBy(items, item => item.selector))) || 1;
   const map = heatmap.create({ container: heatmapContainer });
 
-  map.setData({ min: 0, max: 1, data });
+  map.setData({ min: 0, max, data });
 };
 
 const createFixedScrollMarker = (doc: Document, scrollMapData: ScrollMapData[], percentage: number, scale: number) => {
