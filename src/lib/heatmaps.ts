@@ -1,6 +1,6 @@
 import heatmap from 'vendor/heatmap';
 import { range, orderBy, findLast, sumBy, countBy } from 'lodash';
-import { percentage } from 'lib/maths';
+import { percentage, roundTo } from 'lib/maths';
 import { HeatmapColor, HEATMAP_COLOURS } from 'data/heatmaps/constants';
 import type { HeatmapClickTarget } from 'types/heatmaps';
 import type { HeatmapsScroll, HeatmapsClickCount, HeatmapsClickPosition, HeatmapsCursor } from 'types/graphql';
@@ -210,7 +210,7 @@ export const showCursorMaps = (doc: Document, items: HeatmapsCursor[]) => {
   overlay.appendChild(heatmapContainer);
   doc.body.appendChild(overlay);
 
-  const max = Math.max(...items.map(d => d.x), ...items.map(d => d.y));
+  const max = getMaxRoundedCoordsByRoughArea(items);
   const map = heatmap.create({ container: heatmapContainer });
 
   map.setData({ min: 0, max, data });
@@ -397,3 +397,16 @@ export const iframeStyles = `
     }
   </style>
 `;
+
+const getMaxRoundedCoordsByRoughArea = (items: HeatmapsCursor[]): number => {
+  const getMaxRoundedValue = (values: number[]): number => {
+    const rounded = values.map(v => roundTo(v, 100));
+    const grouped = countBy(rounded);
+    return Math.max(...Object.values(grouped));
+  };
+
+  const xCoords = items.map(i => i.x);
+  const yCoords = items.map(i => i.y);
+
+  return Math.max(getMaxRoundedValue(xCoords), getMaxRoundedValue(yCoords));
+};

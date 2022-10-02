@@ -26,3 +26,7 @@ export const formatShortNumbers = (count: number) => {
   
   return format.format(count);
 };
+
+export const roundTo = (value: number, to: number) => {
+  return Math.ceil(value / to) * to;
+};
