@@ -211,10 +211,9 @@ export const showCursorMaps = (doc: Document, items: HeatmapsCursor[]) => {
   doc.body.appendChild(overlay);
 
   const max = getMaxRoundedCoordsByRoughArea(items);
-  console.log(max);
   const map = heatmap.create({ container: heatmapContainer });
 
-  map.setData({ min: 0, max: 1, data });
+  map.setData({ min: 0, max, data });
 };
 
 export const showClickGradientMaps = (doc: Document, items: HeatmapsClickPosition[]) => {  
@@ -401,7 +400,7 @@ export const iframeStyles = `
 
 const getMaxRoundedCoordsByRoughArea = (items: HeatmapsCursor[]): number => {
   const getMaxRoundedValue = (values: number[]): number => {
-    const rounded = values.map(v => roundTo(v, 50));
+    const rounded = values.map(v => roundTo(v, 25));
     const grouped = countBy(rounded);
     return Math.max(...Object.values(grouped));
   };
