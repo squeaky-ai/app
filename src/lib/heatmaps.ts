@@ -400,7 +400,7 @@ export const iframeStyles = `
 
 const getMaxRoundedCoordsByRoughArea = (items: HeatmapsCursor[]): number => {
   const getMaxRoundedValue = (values: number[]): number => {
-    const rounded = values.map(v => roundTo(v, 100));
+    const rounded = values.map(v => roundTo(v, 50));
     const grouped = countBy(rounded);
     return Math.max(...Object.values(grouped));
   };
