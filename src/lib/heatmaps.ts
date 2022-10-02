@@ -211,9 +211,10 @@ export const showCursorMaps = (doc: Document, items: HeatmapsCursor[]) => {
   doc.body.appendChild(overlay);
 
   const max = getMaxRoundedCoordsByRoughArea(items);
+  console.log(max);
   const map = heatmap.create({ container: heatmapContainer });
 
-  map.setData({ min: 0, max, data });
+  map.setData({ min: 0, max: 1, data });
 };
 
 export const showClickGradientMaps = (doc: Document, items: HeatmapsClickPosition[]) => {  
