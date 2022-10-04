@@ -211,6 +211,9 @@ export const showCursorMaps = (doc: Document, items: HeatmapsCursor[]) => {
     y: item.y, 
     value: 1 
   }));
+
+  // TODO: Remove debug
+  (window as any).heatmaps = map;
 };
 
 export const showClickGradientMaps = (doc: Document, items: HeatmapsClickPosition[]) => {  
