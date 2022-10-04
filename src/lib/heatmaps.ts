@@ -1,6 +1,6 @@
 import heatmap from 'vendor/heatmap';
-import { range, orderBy, findLast, sumBy, countBy } from 'lodash';
-import { percentage, roundTo } from 'lib/maths';
+import { range, orderBy, findLast, sumBy } from 'lodash';
+import { percentage } from 'lib/maths';
 import { HeatmapColor, HEATMAP_COLOURS } from 'data/heatmaps/constants';
 import type { HeatmapClickTarget } from 'types/heatmaps';
 import type { HeatmapsScroll, HeatmapsClickCount, HeatmapsClickPosition, HeatmapsCursor } from 'types/graphql';
@@ -182,13 +182,7 @@ export const showScrollMaps = (doc: Document, items: HeatmapsScroll[], scale: nu
 };
 
 export const showCursorMaps = (doc: Document, items: HeatmapsCursor[]) => {
-  const data = items.map(item => ({ 
-    x: item.x,
-    y: item.y, 
-    value: 1 
-  }));
-
-  if (data.length === 0) return;
+  if (items.length === 0) return;
 
   const overlay = document.createElement('div');
   overlay.classList.add('__squeaky_cursor_overlay');
@@ -210,13 +204,16 @@ export const showCursorMaps = (doc: Document, items: HeatmapsCursor[]) => {
   overlay.appendChild(heatmapContainer);
   doc.body.appendChild(overlay);
 
-  const max = getMaxRoundedCoordsByRoughArea(items);
   const map = heatmap.create({ container: heatmapContainer });
 
-  map.setData({ min: 0, max, data });
+  items.forEach(item => map.addData({ 
+    x: item.x,
+    y: item.y, 
+    value: 1 
+  }));
 };
 
-export const showClickGradientMaps = (doc: Document, items: HeatmapsClickPosition[]) => {  
+export const showClickGradientMaps = (doc: Document, items: HeatmapsClickPosition[]) => {
   const data = items
     .map(item => {
       const elem = getElement(doc, item.selector);
@@ -256,12 +253,9 @@ export const showClickGradientMaps = (doc: Document, items: HeatmapsClickPositio
   overlay.appendChild(heatmapContainer);
   doc.body.appendChild(overlay);
 
-  // Group by the selector, as that should allow us to have
-  // some idea of a local area of clicks
-  const max = Math.max(...Object.values(countBy(items, item => item.selector))) || 1;
   const map = heatmap.create({ container: heatmapContainer });
 
-  map.setData({ min: 0, max, data });
+  data.forEach(d => map.addData(d));
 };
 
 const createFixedScrollMarker = (doc: Document, scrollMapData: ScrollMapData[], percentage: number, scale: number) => {
@@ -397,16 +391,3 @@ export const iframeStyles = `
     }
   </style>
 `;
-
-const getMaxRoundedCoordsByRoughArea = (items: HeatmapsCursor[]): number => {
-  const getMaxRoundedValue = (values: number[]): number => {
-    const rounded = values.map(v => roundTo(v, 25));
-    const grouped = countBy(rounded);
-    return Math.max(...Object.values(grouped));
-  };
-
-  const xCoords = items.map(i => i.x);
-  const yCoords = items.map(i => i.y);
-
-  return Math.max(getMaxRoundedValue(xCoords), getMaxRoundedValue(yCoords));
-};
