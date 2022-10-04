@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import { useRouter } from 'next/router';
 import { useBilling } from 'hooks/use-billing';
 import { Spinner } from 'components/spinner';
+import { Container } from 'components/container';
 import { Tabs } from 'components/tabs';
 import { BillingTable } from 'components/sites/settings/billing-table';
 import { BillingPlansTable } from 'components/sites/settings/billing-plans-table';
@@ -50,13 +51,26 @@ export const Billing: FC<Props> = ({ site }) => {
   // - be new (as they clicked this button before but didn't actually make it through)
   const hasBilling = ![undefined, 'new'].includes(billing.billing?.status);
 
+  // This is for people who we've hacked onto multi 
+  // account billing by changing the tier manually
+  const hasPlanOverride = billing.plan?.tier > 0 && !billing.billing;
+
   const isEnterprise = site.plan?.tier >= 5;
 
   return (
     <>
       {loading && <Spinner />}
 
-      {!loading && (
+      {!loading && hasPlanOverride && (
+        <Container className='md'>
+          <Message
+            type='info'
+            message={<p>This site is currently part of a subscription bundle with other sites. If you&apos;d like to make changes to your plan please visit the parent site or get in touch via <a href='mailto:hello@squeaky.ai'>hello@squeaky.ai</a>.</p>}
+          />
+        </Container>
+      )}
+
+      {!loading && !hasPlanOverride && (
         <div className='billing'>
           {site.plan.invalid && (
             <Message
