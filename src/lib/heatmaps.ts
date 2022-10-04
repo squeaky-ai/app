@@ -206,14 +206,11 @@ export const showCursorMaps = (doc: Document, items: HeatmapsCursor[]) => {
 
   const map = heatmap.create({ container: heatmapContainer });
 
-  items.forEach(item => map.addData({ 
-    x: item.x,
-    y: item.y, 
-    value: 1 
-  }));
-
-  // TODO: Remove debug
-  (window as any).heatmaps = map;
+  map.setData({
+    min: 0,
+    max: 5, // TODO: What should this really be?
+    data: items.map(i => ({ x: i.x, y: i.y, value: 1 })),
+  });
 };
 
 export const showClickGradientMaps = (doc: Document, items: HeatmapsClickPosition[]) => {  
@@ -262,6 +259,7 @@ export const showClickGradientMaps = (doc: Document, items: HeatmapsClickPositio
   const map = heatmap.create({ container: heatmapContainer });
 
   map.setData({ min: 0, max, data });
+  (window as any).heatmap = map;
 };
 
 const createFixedScrollMarker = (doc: Document, scrollMapData: ScrollMapData[], percentage: number, scale: number) => {
