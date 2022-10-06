@@ -59,6 +59,7 @@ export type SessionEvent = Event | ErrorEvent | PageViewEvent;
 export type Events = SessionEvent[];
 
 export interface InteractionEventItem {
+  id: string;
   show: boolean;
   eventName: EventName;
   timestampStart: number;

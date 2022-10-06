@@ -309,6 +309,14 @@
           white-space: nowrap;
         }
 
+        .view-more {
+          color: var(--gray-700);
+          font-size: var(--font-size-body-sm);
+          margin: .25rem 0 0 0;
+          padding: 0;
+          text-decoration: underline;
+        }
+
         &.error {
           background: var(--peach-100);
           border: 1px solid var(--rose-500);
@@ -673,5 +681,21 @@
 .events-visibility-modal { 
   .label i {
     color: var(--gray-500);
+  }
+}
+
+.sidebar-errors-modal {
+  .key {
+    font-weight: var(--font-weight-bold);
+    margin: 0 0 .25rem 0;
+  }
+
+  .code.block {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    box-shadow: none;
+    margin: .25rem 0 0 0;
+    overflow: auto;
+    padding: .35rem .75rem;
   }
 }

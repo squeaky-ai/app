@@ -4,15 +4,17 @@ import type { Replayer } from 'rrweb';
 import classnames from 'classnames';
 import { EventIcon } from 'components/sites/events/event-icon';
 import { EventTimestamp } from 'components/sites/player/event-timestamp';
+import { SidebarErrorModal } from 'components/sites/player/sidebar-error-modal';
 import { SidebarEventsVisibility } from 'components/sites/player/sidebar-events-visibility';
 import { getInteractionEvents } from 'lib/events';
-import type { Event } from 'types/event';
+import { CustomEvents } from 'types/event';
+import type { Events, InteractionEventItem, ErrorEvent } from 'types/event';
 import type { PlayerState, Action } from 'types/player';
 import type { Recording } from 'types/graphql';
 
 
 interface Props {
-  events: Event[];
+  events: Events;
   state: PlayerState;
   replayer: Replayer;
   recording: Recording;
@@ -25,6 +27,13 @@ export const SidebarEvents: FC<Props> = ({ events, recording, state, replayer, d
     state, 
     recording.inactivity
   );
+
+  const getEventFromInteractionEvent = (item: InteractionEventItem): ErrorEvent | null => {
+    const event = events.find(e => e.id === item.id);
+    if (event?.type === CustomEvents.ERROR) return event;
+
+    return null;
+  };
 
   return (
     <>
@@ -50,6 +59,7 @@ export const SidebarEvents: FC<Props> = ({ events, recording, state, replayer, d
                   </span>
                 </p>
                 {item.info && <p className='info'>{item.info}</p>}
+                {item.eventName === 'error' && <SidebarErrorModal event={getEventFromInteractionEvent(item)} />}
               </div>
           </li>
         ))}

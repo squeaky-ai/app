@@ -137,6 +137,7 @@ export const getInteractionEvents = (
 
     const event: InteractionEventItem = {
       eventName,
+      id: item.id,
       show: state.eventVisibility.includes(eventName),
       timestampStart: item.timestamp,
       timestampEnd: null,
@@ -169,8 +170,9 @@ export const getInteractionEvents = (
     return [...acc, event]
   }, [] as InteractionEventItem[]);
 
-  inactivity?.forEach(inactivity => {
+  inactivity?.forEach((inactivity, index) => {
     results.push({
+      id: `inactivity-${index}`,
       eventName: 'inactivity',
       label: 'Inactivity',
       show: state.eventVisibility.includes('inactivity'),
