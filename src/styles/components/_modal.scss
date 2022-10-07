@@ -93,6 +93,12 @@
     }
   }
 
+  &.md-lg {
+    .modal-body {
+      width: 640px;
+    }
+  }
+
   &.scrollable {
     .modal-header,
     .modal-footer {
