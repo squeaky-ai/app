@@ -30,7 +30,7 @@ export const SidebarErrorModal: FC<Props> = ({ event }) => {
         View details
       </Button>
 
-      <Modal ref={ref} className='md sidebar-errors-modal'>
+      <Modal ref={ref} className='md sidebar-errors-modal' scrollable>
         <ModalBody aria-labelledby='sidebar-error-title'>
           <ModalHeader>
             <p id='sidebar-errort-title'><b>JavaScript Error Details</b></p>
