@@ -197,7 +197,7 @@
         }
 
         .button {
-          font-weight: var(--font-weight-bold);
+          font-weight: var(--font-weight-medium);
         }
   
         .items {
@@ -365,7 +365,7 @@
         color: var(--gray-blue-300);
         display: block;
         font-size: var(--font-size-body-x-sm);
-        font-weight: var(--font-weight-block);
+        font-weight: var(--font-weight-medium);
         text-transform: uppercase;
       }
     }
@@ -443,7 +443,7 @@
 
       span {
         display: inline-flex;
-        font-weight: var(--font-weight-bold);
+        font-weight: var(--font-weight-medium);
       }
 
       .arrow {
@@ -506,7 +506,7 @@
             .button {
               color: var(--gray-blue-200);
               font-size: var(--font-size-body-sm);
-              font-weight: var(--font-weight-bold);
+              font-weight: var(--font-weight-medium);
               height: auto;
               line-height: var(--line-height-body-sm);
               margin-bottom: .5rem;

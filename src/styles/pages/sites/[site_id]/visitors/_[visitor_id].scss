@@ -84,7 +84,7 @@
           background: none;
           border: none;
           border-radius: var(--border-radius-controls);
-          font-weight: var(--font-weight-bold);
+          font-weight: var(--font-weight-semibold);
           height: 2rem;
           margin-left: .5rem;
           padding: 0 1rem;
@@ -268,7 +268,7 @@
           .heading {
             align-items: center;
             display: flex;
-            font-weight: var(--font-weight-bold);
+            font-weight: var(--font-weight-medium);
 
             i {
               color: var(--blue-500);
@@ -322,7 +322,7 @@
           }
 
           dt {
-            font-weight: var(--font-weight-bold);
+            font-weight: var(--font-weight-medium);
           }
 
           dd {
@@ -403,7 +403,7 @@
           margin: 0 0 1rem 0;
   
           p {
-            font-weight: var(--font-weight-bold);
+            font-weight: var(--font-weight-medium);
           }
         }
   

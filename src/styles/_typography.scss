@@ -8,7 +8,7 @@ html, body {
 
 h1 {
   font-size: 64px;
-  font-weight: var(--font-weight-block);
+  font-weight: var(--font-weight-bold);
   line-height: 72px;
 
   @include breakpoint-md {
@@ -19,7 +19,7 @@ h1 {
 
 h2 {
   font-size: 48px;
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-medium);
   line-height: 64px;
 
   @include breakpoint-md {
@@ -30,7 +30,7 @@ h2 {
 
 h3 {
   font-size: 32px;
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-medium);
   line-height: 48px;
 
   @include breakpoint-md {
@@ -41,7 +41,7 @@ h3 {
 
 h4 {
   font-size: 24px;
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-medium);
   line-height: 32px;
 
   @include breakpoint-md {
@@ -52,7 +52,7 @@ h4 {
 
 h5 {
   font-size: 18px;
-  font-weight: var(--font-weight-block);
+  font-weight: var(--font-weight-semibold);
   line-height: 24px;
 }
 
@@ -73,7 +73,7 @@ a {
 }
 
 b {
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-semibold);
 }
 
 li {
@@ -91,13 +91,13 @@ code, pre {
 .button {
   font: inherit;
   font-size: var(--font-size-body);
-  font-weight: var(--font-weight-block);
+  font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-body);
 }
 
 .label {
   font-size: var(--font-size-body);
-  font-weight: var(--font-weight-block);
+  font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-body);
 }
 

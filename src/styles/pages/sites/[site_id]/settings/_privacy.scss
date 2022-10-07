@@ -3,7 +3,7 @@
     .option-label {
       align-items: center;
       display: flex;
-      font-weight: var(--font-weight-bold);
+      font-weight: var(--font-weight-medium);
       margin: 0 0 1.5rem 0;
 
       .icon {
@@ -157,7 +157,7 @@
       align-items: center;
       color: var(--gray-blue-800);
       display: flex;
-      font-weight: var(--font-weight-bold);
+      font-weight: var(--font-weight-medium);
       
       .icon {
         color: var(--gray-500);
@@ -202,7 +202,7 @@
   
         select {
           font-size: 12px;
-          font-weight: var(--font-weight-bold);
+          font-weight: var(--font-weight-medium);
           height: auto;
           line-height: 16px;
           margin: 0;

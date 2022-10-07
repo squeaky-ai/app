@@ -75,7 +75,7 @@
         white-space: nowrap;
         
         &:first-of-type {
-          font-weight: var(--font-weight-bold);
+          font-weight: var(--font-weight-medium);
 
           i {
             color: var(--gray-500);
@@ -111,7 +111,7 @@
 
           .cell {
             &:first-of-type {
-              font-weight: var(--font-weight-bold);
+              font-weight: var(--font-weight-medium);
               overflow: visible;
               position: relative;
               text-align: right;

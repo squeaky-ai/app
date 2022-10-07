@@ -17,7 +17,7 @@
         border: none;
         border-radius: var(--border-radius-md);
         display: flex;
-        font-weight: var(--font-weight-bold);
+        font-weight: var(--font-weight-medium);
         height: 2rem;
         margin-left: 0.5rem;
         padding: 0 1rem;
@@ -621,7 +621,7 @@
       border: none;
       color: var(--white);
       display: flex;
-      font-weight: var(--font-weight-block);
+      font-weight: var(--font-weight-medium);
       height: 2.5rem;
       left: 0;
       padding: 0 .75rem;
@@ -678,7 +678,7 @@
       }
 
       .heading {
-        font-weight: var(--font-weight-block);
+        font-weight: var(--font-weight-medium);
         text-align: center;
         margin: 0 0 2rem 0;
         padding: 3rem 3rem 0 3rem;

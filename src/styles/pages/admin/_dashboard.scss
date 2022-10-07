@@ -130,7 +130,7 @@
               text-align: center;
 
               &:not(.stat) {
-                font-weight: var(--font-weight-bold);
+                font-weight: var(--font-weight-medium);
               }
             }
 
@@ -172,7 +172,7 @@
             }
 
             p {
-              font-weight: var(--font-weight-bold);
+              font-weight: var(--font-weight-medium);
               margin: 0;
             }
 
@@ -210,7 +210,7 @@
             p {
               align-items: center;
               display: flex;
-              font-weight: var(--font-weight-bold);
+              font-weight: var(--font-weight-medium);
               margin: 0;
 
               .icon {

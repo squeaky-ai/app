@@ -164,7 +164,7 @@
               padding: 0;
 
               &:first-of-type {
-                font-weight: var(--font-weight-bold);
+                font-weight: var(--font-weight-medium);
                 margin-bottom: .5rem;
               }
             }
@@ -217,7 +217,7 @@
             }
 
             p {
-              font-weight: var(--font-weight-bold);
+              font-weight: var(--font-weight-medium);
               margin: 0;
 
               &.count {
@@ -310,7 +310,7 @@
             }
 
             p {
-              font-weight: var(--font-weight-bold);
+              font-weight: var(--font-weight-medium);
               margin: 0;
 
               &.count {
@@ -392,7 +392,7 @@
             }
 
             p {
-              font-weight: var(--font-weight-bold);
+              font-weight: var(--font-weight-medium);
               margin: 0 0 1rem 0;
               text-align: center;
             }
@@ -458,7 +458,7 @@
         h3 {
           align-items: flex-end;
           display: flex;
-          font-weight: var(--font-weight-bold);
+          font-weight: var(--font-weight-medium);
           flex: 1;
           margin: 0;
         }

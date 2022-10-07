@@ -8,7 +8,7 @@
       border: none;
       border-radius: var(--border-radius-md);
       display: flex;
-      font-weight: var(--font-weight-bold);
+      font-weight: var(--font-weight-semibold);
       height: 2rem;
       margin-left: .5rem;
       padding: 0 1rem;
@@ -23,7 +23,7 @@
       }
 
       b {
-        font-weight: var(--font-weight-bold);
+        font-weight: var(--font-weight-semibold);
 
         @include breakpoint-sm {
           display: none;

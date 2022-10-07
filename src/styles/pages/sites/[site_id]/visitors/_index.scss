@@ -64,6 +64,7 @@
           border: none;
           border-radius: var(--border-radius-md);
           height: 2rem;
+          font-weight: var(--font-weight-semibold);
           margin-left: .5rem;
           padding: 0 1rem;
   
@@ -327,7 +328,7 @@
         margin: 0 0 1rem 0;
 
         p {
-          font-weight: var(--font-weight-bold);
+          font-weight: var(--font-weight-medium);
         }
       }
 

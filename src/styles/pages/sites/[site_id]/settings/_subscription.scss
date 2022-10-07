@@ -536,7 +536,7 @@
 
             &:first-of-type {
               color: var(--mauve-700);
-              font-weight: var(--font-weight-bold);
+              font-weight: var(--font-weight-medium);
               margin: 0 0 .5rem 0;
             }
 
@@ -610,7 +610,7 @@
               margin: 0 0 .5rem 0;
 
               &.heading {
-                font-weight: var(--font-weight-bold);
+                font-weight: var(--font-weight-medium);
                 margin: 1rem 0 .5rem 0;
               }
             }
@@ -628,7 +628,7 @@
                 line-height: var(--line-height-body-sm);
 
                 &.heading {
-                  font-weight: var(--font-weight-bold);
+                  font-weight: var(--font-weight-medium);
                   margin: 0 0 1rem 0;
                 }
 

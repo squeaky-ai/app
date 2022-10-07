@@ -17,7 +17,7 @@
         border: none;
         border-radius: var(--border-radius-md);
         display: flex;
-        font-weight: var(--font-weight-bold);
+        font-weight: var(--font-weight-medium);
         height: 2rem;
         margin-left: 0.5rem;
         padding: 0 1rem;
@@ -137,7 +137,7 @@
 
       p {
         font-size: var(--font-size-body-sm);
-        font-weight: var(--font-weight-bold);
+        font-weight: var(--font-weight-medium);
         line-height: var(--line-height-body-sm);
         margin: 0;
         text-align: center;
@@ -220,7 +220,7 @@
     .heading {
       align-items: center;
       display: flex;
-      font-weight: var(--font-weight-bold);
+      font-weight: var(--font-weight-medium);
       margin: 0 0 1.5rem 0;
 
       i {
@@ -275,7 +275,7 @@
       }
 
       & > p {
-        font-weight: var(--font-weight-bold);
+        font-weight: var(--font-weight-medium);
       }
     }
   }
@@ -946,7 +946,7 @@
   
         select {
           font-size: 12px;
-          font-weight: var(--font-weight-bold);
+          font-weight: var(--font-weight-medium);
           height: auto;
           line-height: 16px;
           margin: 0;
@@ -997,7 +997,7 @@
 
       .heading {
         color: var(--gray-800);
-        font-weight: var(--font-weight-block);
+        font-weight: var(--font-weight-medium);
         margin: 0;
         padding: 3rem 3rem 2rem 3rem;
         text-align: center;
@@ -1008,7 +1008,7 @@
         color: var(--gray-500);
         display: flex;
         font-size: var(--font-size-body-sm);
-        font-weight: var(--font-weight-bold);
+        font-weight: var(--font-weight-medium);
         justify-content: space-between;
         line-height: var(--line-height-body-sm);
         padding: 0 3rem;
