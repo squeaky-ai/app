@@ -17,7 +17,7 @@ import type { TimePeriod } from 'types/common';
 
 interface Props {
   site: Site;
-  member: Team;
+  member?: Team;
   groupIds: string[];
   captureIds: string[];
   period: TimePeriod;

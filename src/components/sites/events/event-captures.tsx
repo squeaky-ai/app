@@ -12,7 +12,7 @@ import type { Site, EventsCapture } from 'types/graphql';
 
 interface Props {
   site: Site;
-  member: Team;
+  member?: Team;
   events: EventsCapture;
   page: number;
   sort: EventsCaptureSort;

@@ -6,11 +6,11 @@ import { Button } from 'components/button';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { useToasts } from 'hooks/use-toasts';
 import { npsDelete } from 'lib/api/graphql';
-import { MEMBER, READ_ONLY } from 'data/teams/constants';
+import { MEMBER, READ_ONLY, SUPER_USER } from 'data/teams/constants';
 import type { FeedbackNpsResponseItem, Team } from 'types/graphql';
 
 interface Props {
-  member: Team;
+  member?: Team;
   response: FeedbackNpsResponseItem;
   onClose: VoidFunction;
 }
@@ -43,7 +43,7 @@ export const NpsResponsesDelete: FC<Props> = ({ member, response, onClose }) => 
 
   return (
     <>
-      <Button onClick={openModal} unauthorized={[MEMBER, READ_ONLY].includes(member.role)}>
+      <Button onClick={openModal} unauthorized={[MEMBER, READ_ONLY, SUPER_USER].includes(member?.role)}>
         <Icon name='delete-bin-line' /> Delete
       </Button>
             

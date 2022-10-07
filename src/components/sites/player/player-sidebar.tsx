@@ -17,7 +17,7 @@ import type { Event } from 'types/event';
 interface Props {
   state: PlayerState;
   site: Site;
-  member: Team;
+  member?: Team;
   replayer: Replayer;
   events: Event[];
   recording: Recording;

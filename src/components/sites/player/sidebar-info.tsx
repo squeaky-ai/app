@@ -15,7 +15,7 @@ import type { Site } from 'types/graphql';
 
 interface Props {
   site: Site;
-  member: Team;
+  member?: Team;
   recording: Recording;
   setActiveTab: (value: PlayerTab) => void;
 }

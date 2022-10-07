@@ -15,7 +15,7 @@ import type { FeedbackSentimentResponse } from 'types/graphql';
 import type { Column } from 'types/common';
 
 interface Props {
-  member: Team;
+  member?: Team;
   page: number;
   sort: FeedbackSentimentResponseSort;
   size: number;

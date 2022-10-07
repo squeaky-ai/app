@@ -23,7 +23,7 @@ import { FeedbackNpsResponseFilters, FeedbackNpsResponseSort, Team } from 'types
 import type { ValueOf } from 'types/common';
 
 interface Props {
-  member: Team;
+  member?: Team;
 }
 
 export const Nps: FC<Props> = ({ member }) => {

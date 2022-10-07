@@ -11,7 +11,7 @@ import type { Site, Team } from 'types/graphql';
 
 interface Props {
   site: Site;
-  member: Team;
+  member?: Team;
   selected: EventSelected[];
   setSelected: (selected: EventSelected[]) => void;
 }

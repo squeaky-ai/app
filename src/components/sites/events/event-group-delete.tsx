@@ -7,12 +7,12 @@ import { Checkbox } from 'components/checkbox';
 import { Preferences, Preference } from 'lib/preferences';
 import { useToasts } from 'hooks/use-toasts';
 import { eventsGroupDelete } from 'lib/api/graphql';
+import { MEMBER, READ_ONLY, SUPER_USER } from 'data/teams/constants';
 import type { EventsGroup, Site, Team } from 'types/graphql';
-import { MEMBER, READ_ONLY } from 'data/teams/constants';
 
 interface Props {
   site: Site;
-  member: Team;
+  member?: Team;
   group: EventsGroup;
 }
 
@@ -61,7 +61,7 @@ export const EventGroupDelete: FC<Props> = ({ site, member, group }) => {
 
   return (
     <>
-      <Button className='group-delete' onClick={handleDeleteClick} unauthorized={[MEMBER, READ_ONLY].includes(member.role)}>
+      <Button className='group-delete' onClick={handleDeleteClick} unauthorized={[MEMBER, READ_ONLY, SUPER_USER].includes(member?.role)}>
         <Icon name='delete-bin-line' />
         Delete group
       </Button>

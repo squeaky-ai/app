@@ -14,7 +14,7 @@ import { toNiceDate } from 'lib/dates';
 import type { FeedbackNpsResponseItem, Team } from 'types/graphql';
 
 interface Props {
-  member: Team;
+  member?: Team;
   response: FeedbackNpsResponseItem;
   style?: React.CSSProperties;
 }

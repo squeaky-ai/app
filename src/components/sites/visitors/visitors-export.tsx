@@ -6,12 +6,12 @@ import { Button } from 'components/button';
 import { getLinkedData } from 'lib/visitors';
 import { useToasts } from 'hooks/use-toasts';
 import { GET_VISITOR_EXPORT_QUERY } from 'data/visitors/queries';
-import { MEMBER, READ_ONLY } from 'data/teams/constants';
+import { MEMBER, READ_ONLY, SUPER_USER } from 'data/teams/constants';
 import type { FeedbackNpsResponseItem, FeedbackSentimentResponseItem, Site, Team, Visitor } from 'types/graphql';
 
 interface Props {
   site: Site;
-  member: Team;
+  member?: Team;
   visitor: Visitor;
 }
 
@@ -59,7 +59,7 @@ export const VisitorsExport: FC<Props> = ({ site, member, visitor }) => {
   };
 
   return (
-    <Button className='secondary' disabled={loading} onClick={handleClick} unauthorized={[MEMBER, READ_ONLY].includes(member.role)}>
+    <Button className='secondary' disabled={loading} onClick={handleClick} unauthorized={[MEMBER, READ_ONLY, SUPER_USER].includes(member?.role)}>
       Export .json
     </Button>
   )

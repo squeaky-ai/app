@@ -16,7 +16,7 @@ interface Props {
   site: Site;
   columns: Column[];
   selected: string[];
-  member: Team;
+  member?: Team;
   setPage: (value: number) => void;
   setSort: (value: RecordingsSort) => void;
   setSelected: (selected: string[]) => void;

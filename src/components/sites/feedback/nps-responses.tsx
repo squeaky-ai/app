@@ -15,7 +15,7 @@ import type { FeedbackNpsResponse } from 'types/graphql';
 import type { Column } from 'types/common';
 
 interface Props {
-  member: Team;
+  member?: Team;
   page: number;
   sort: FeedbackNpsResponseSort;
   size: number;

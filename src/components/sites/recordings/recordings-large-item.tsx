@@ -27,7 +27,7 @@ interface Props {
   recording: Recording;
   style?: React.CSSProperties;
   selected: string[];
-  member: Team;
+  member?: Team;
   setSelected: (selected: string[]) => void;
 }
 

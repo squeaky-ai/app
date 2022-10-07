@@ -7,12 +7,12 @@ import { Formik } from 'formik';
 import { Input } from 'components/input';
 import { Tag } from 'components/tag';
 import { useTags } from 'hooks/use-tags';
-import { READ_ONLY } from 'data/teams/constants';
+import { READ_ONLY, SUPER_USER } from 'data/teams/constants';
 import { tagCreate, tagRemove } from 'lib/api/graphql';
 import type { Recording, Tag as ITag, Team } from 'types/graphql';
 
 interface Props {
-  member: Team;
+  member?: Team;
   recording: Recording;
 }
 
@@ -104,7 +104,7 @@ export const SidebarTags: FC<Props> = ({ member, recording }) => {
                     onChange={handleChange}
                     placeholder='Add tag ...'
                     value={values.name}
-                    unauthorized={[READ_ONLY].includes(member.role)}
+                    unauthorized={[READ_ONLY, SUPER_USER].includes(member?.role)}
                   />
 
                   <div className={classnames('tag-results', { show: focus })}>
@@ -127,7 +127,7 @@ export const SidebarTags: FC<Props> = ({ member, recording }) => {
             {recording.tags.map(tag => (
               <Tag 
                 className='primary' 
-                buttonProps={{ unauthorized: [READ_ONLY].includes(member.role) }} 
+                buttonProps={{ unauthorized: [READ_ONLY, SUPER_USER].includes(member?.role) }} 
                 handleDelete={() => handleTagRemove(tag)} key={tag.id}
               >
                 {tag.name}

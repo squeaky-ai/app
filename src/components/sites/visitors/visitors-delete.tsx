@@ -7,12 +7,12 @@ import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'compo
 import { visitorDelete } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
 import { Message } from 'components/message';
-import { MEMBER, READ_ONLY } from 'data/teams/constants';
+import { MEMBER, READ_ONLY, SUPER_USER } from 'data/teams/constants';
 import type { Site, Team } from 'types/graphql';
 
 interface Props {
   site: Site;
-  member: Team;
+  member?: Team;
   visitorId: string;
   button?: string | React.ReactNode;
   buttonClassName?: string;
@@ -51,7 +51,7 @@ export const VisitorsDelete: FC<Props> = ({ site, member, visitorId, button, but
 
   return (
     <>
-      <Button onClick={openModal} className={classnames('delete-visitor', buttonClassName)} unauthorized={[MEMBER, READ_ONLY].includes(member.role)}>
+      <Button onClick={openModal} className={classnames('delete-visitor', buttonClassName)} unauthorized={[MEMBER, READ_ONLY, SUPER_USER].includes(member?.role)}>
         {button || <><Icon name='delete-bin-line' /> <span>Delete</span></>}
       </Button>
             

@@ -10,7 +10,7 @@ import type { Team } from 'types/graphql';
 
 interface Props {
   site: Site;
-  member: Team; 
+  member?: Team; 
   page: 'details' | 'tracking-code' | 'tags' | 'screening' | 'delete';
 }
 
@@ -50,7 +50,7 @@ export const SettingsTabs: FC<Props> = ({ site, page, member }) => (
           </a>
         </Link>
       </li>
-      {member.role === OWNER && (
+      {member?.role === OWNER && (
         <li className='tab'>
           <Link href={`/sites/${site.id}/settings/details/delete`}>
             <a className={classnames('button tab-button', { active: page === 'delete' })}>

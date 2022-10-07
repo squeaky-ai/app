@@ -6,13 +6,13 @@ import { Icon } from 'components/icon';
 import { Tooltip } from 'components/tooltip';
 import { useToasts } from 'hooks/use-toasts';
 import { recordingBookmarked } from 'lib/api/graphql';
-import { READ_ONLY } from 'data/teams/constants';
+import { READ_ONLY, SUPER_USER } from 'data/teams/constants';
 import type { Recording, Site, Team } from 'types/graphql';
 
 interface Props {
   link?: boolean;
   site: Site;
-  member: Team;
+  member?: Team;
   recording: Recording;
 }
 
@@ -40,7 +40,7 @@ export const RecordingStarred: FC<Props> = ({ link, site, member, recording }) =
           </span>
         }
         buttonClassName='recording-starred'
-        buttonProps={{ unauthorized: [READ_ONLY].includes(member.role) }}
+        buttonProps={{ unauthorized: [READ_ONLY, SUPER_USER].includes(member?.role) }}
       >
         {recording.bookmarked ? 'Bookmarked' : 'Not bookmarked'}
       </Tooltip>

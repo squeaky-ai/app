@@ -14,7 +14,7 @@ import type { Column } from 'types/common';
 
 interface Props {
   site: Site,
-  member: Team;
+  member?: Team;
   visitors: Visitors;
   search: string;
   columns: Column[];

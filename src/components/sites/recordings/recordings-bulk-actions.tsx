@@ -9,7 +9,7 @@ import type { Site, Team } from 'types/graphql';
 
 interface Props {
   site: Site;
-  member: Team;
+  member?: Team;
   selected: string[];
   setSelected: (selected: string[]) => void;
 }

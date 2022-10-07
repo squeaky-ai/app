@@ -17,12 +17,12 @@ import { useToasts } from 'hooks/use-toasts';
 import { eventsCaptureCreate } from 'lib/api/graphql';
 import { EventsCaptureType } from 'types/events';
 import { EventsCondition, EventsMatch, Team } from 'types/graphql';
-import { MEMBER, READ_ONLY } from 'data/teams/constants';
+import { MEMBER, READ_ONLY, SUPER_USER } from 'data/teams/constants';
 import type { Site } from 'types/graphql';
 
 interface Props {
   site: Site;
-  member: Team;
+  member?: Team;
   buttonText?: string;
   buttonClassName?: string;
 }
@@ -57,7 +57,7 @@ export const EventCreate: FC<Props> = ({ site, member, buttonText, buttonClassNa
 
   return (
     <>
-      <Button className={classnames('event-create', buttonClassName)} onClick={openModal} unauthorized={[MEMBER, READ_ONLY].includes(member.role)}>
+      <Button className={classnames('event-create', buttonClassName)} onClick={openModal} unauthorized={[MEMBER, READ_ONLY, SUPER_USER].includes(member?.role)}>
         {buttonText || '+ Add New'}
       </Button>
 

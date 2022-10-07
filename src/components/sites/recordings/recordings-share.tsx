@@ -53,7 +53,7 @@ export const RecordingsShare: FC<Props> = ({ button, site, member, recordingId, 
   const memberShareText = `${site.team.length} ${pluralise('member', site.team)}`;
 
   const canShare = member
-    ? [OWNER, ADMIN].includes(member.role)
+    ? [OWNER, ADMIN].includes(member?.role)
     : false;
 
   return (

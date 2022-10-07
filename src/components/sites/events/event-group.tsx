@@ -11,7 +11,7 @@ import type { EventSelected } from 'types/events';
 
 interface Props {
   site: Site;
-  member: Team;
+  member?: Team;
   group: EventsGroup;
   sort: EventsCaptureSort;
   selected: EventSelected[];

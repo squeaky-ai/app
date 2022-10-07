@@ -7,14 +7,14 @@ import { Label } from 'components/label';
 import { EventGroupsSelector } from 'components/sites/events/event-groups-selector';
 import { useToasts } from 'hooks/use-toasts';
 import { eventsAddToGroup } from 'lib/api/graphql';
-import { MEMBER, READ_ONLY } from 'data/teams/constants';
+import { MEMBER, READ_ONLY, SUPER_USER } from 'data/teams/constants';
 import { EventsType, Team } from 'types/graphql';
 import type { EventSelected } from 'types/events';
 import type { Site } from 'types/graphql';
 
 interface Props {
   site: Site;
-  member: Team;
+  member?: Team;
   selected: EventSelected[];
   onCompleted: VoidFunction;
   onClose: VoidFunction;
@@ -54,7 +54,7 @@ export const EventAddToGroup: FC<Props> = ({ site, member, selected, onClose, on
 
   return (
     <>
-      <Button className='link' onClick={openModal} unauthorized={[MEMBER, READ_ONLY].includes(member.role)}>
+      <Button className='link' onClick={openModal} unauthorized={[MEMBER, READ_ONLY, SUPER_USER].includes(member?.role)}>
         Add to group
       </Button>
 

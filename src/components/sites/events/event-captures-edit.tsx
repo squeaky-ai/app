@@ -13,13 +13,13 @@ import { useToasts } from 'hooks/use-toasts';
 import { EventGroupsSelector } from 'components/sites/events/event-groups-selector';
 import { eventsCaptureUpdate } from 'lib/api/graphql';
 import { EventsCaptureType } from 'types/events';
-import { MEMBER, READ_ONLY } from 'data/teams/constants';
+import { MEMBER, READ_ONLY, SUPER_USER } from 'data/teams/constants';
 import { EventsCondition, EventsMatch, Team } from 'types/graphql';
 import type { Site, EventsCaptureItem } from 'types/graphql';
 
 interface Props {
   site: Site;
-  member: Team;
+  member?: Team;
   event: EventsCaptureItem;
   onClose?: VoidFunction;
 }
@@ -48,7 +48,7 @@ export const EventCapturesEdit: FC<Props> = ({ site, member, event, onClose }) =
 
   return (
     <>
-      <Button onClick={openModal} unauthorized={[MEMBER, READ_ONLY].includes(member.role)}>
+      <Button onClick={openModal} unauthorized={[MEMBER, READ_ONLY, SUPER_USER].includes(member?.role)}>
         <Icon name='edit-line' /> Edit
       </Button>
             

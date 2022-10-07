@@ -19,7 +19,7 @@ interface Props {
   filters: RecordingsFilters;
   period: TimePeriod;
   columns: Column[];
-  member: Team;
+  member?: Team;
   page: number;
   size: number;
   sort: RecordingsSort;

@@ -9,7 +9,7 @@ import type { Site, EventsCaptureSort, Team } from 'types/graphql';
 
 interface Props {
   site: Site;
-  member: Team;
+  member?: Team;
   selected: EventSelected[];
   sort: EventsCaptureSort;
   setSelected: (selected: EventSelected[]) => void;

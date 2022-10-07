@@ -17,7 +17,7 @@ interface Props {
   recordings: Recordings;
   site: Site;
   columns: Column[];
-  member: Team;
+  member?: Team;
   sort: RecordingsSort;
   selected: string[];
   setSort: (sort: RecordingsSort) => void;

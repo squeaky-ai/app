@@ -7,13 +7,13 @@ import { Icon } from 'components/icon';
 import { Tooltip } from 'components/tooltip';
 import { visitorStarred } from 'lib/api/graphql';
 import { Highlighter } from 'components/highlighter';
-import { READ_ONLY } from 'data/teams/constants';
+import { READ_ONLY, SUPER_USER } from 'data/teams/constants';
 import type { Team, Visitor } from 'types/graphql';
 import type { Site } from 'types/graphql';
 
 interface Props {
   site: Site;
-  member: Team;
+  member?: Team;
   link?: boolean;
   highlight?: boolean;
   search?: string;
@@ -43,7 +43,7 @@ export const VisitorsStarred: FC<Props> = ({ site, member, search, link, highlig
             {visitor.starred ? <Icon className='star' name='star-fill' /> : <Icon className='star' name='star-line' />}
           </span>
         }
-        buttonProps={{ unauthorized: [READ_ONLY].includes(member.role) }}
+        buttonProps={{ unauthorized: [READ_ONLY, SUPER_USER].includes(member?.role) }}
       >
         {visitor.starred ? 'Starred' : 'Not starred'}
       </Tooltip>

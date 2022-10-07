@@ -4,12 +4,12 @@ import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { feedbackUpdate } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
-import { MEMBER, READ_ONLY } from 'data/teams/constants';
+import { MEMBER, READ_ONLY, SUPER_USER } from 'data/teams/constants';
 import type { Feedback, Site, Team } from 'types/graphql';
 
 interface Props {
   site: Site;
-  member: Team;
+  member?: Team;
   feedback: Feedback;
 }
 
@@ -30,7 +30,7 @@ export const SentimentStatus: FC<Props> = ({ site, member, feedback }) => {
   };
 
   return (
-    <Button type='button' className='icon sentiment-status' onClick={toggleStatus} unauthorized={[MEMBER, READ_ONLY].includes(member.role)}>
+    <Button type='button' className='icon sentiment-status' onClick={toggleStatus} unauthorized={[MEMBER, READ_ONLY, SUPER_USER].includes(member?.role)}>
       <Icon name='eye-line' />
       Status: <span>{feedback.sentimentEnabled ? 'Live' : 'Disabled'}</span>
     </Button>

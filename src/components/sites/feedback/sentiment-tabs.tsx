@@ -2,12 +2,12 @@ import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
 import classnames from 'classnames';
+import { ADMIN, OWNER, SUPER_USER } from 'data/teams/constants';
 import type { Team } from 'types/graphql';
-import { ADMIN, OWNER } from 'data/teams/constants';
 
 interface Props {
   siteId: string;
-  member: Team;
+  member?: Team;
   page: 'feedback' | 'appearance' | 'visibility';
 }
 
@@ -21,7 +21,7 @@ export const SentimentTabs: FC<Props> = ({ siteId, member, page }) => (
           </a>
         </Link>
       </li>
-      {[OWNER, ADMIN].includes(member.role) && (
+      {[OWNER, ADMIN, SUPER_USER].includes(member?.role) && (
         <>
           <li className='tab'>
             <Link href={`/sites/${siteId}/feedback/sentiment/appearance`}>

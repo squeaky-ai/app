@@ -8,7 +8,7 @@ import type { Site, Team } from 'types/graphql';
 
 interface Props {
   site: Site;
-  member: Team;
+  member?: Team;
 }
 
 export const GettingStarted: FC<Props> = ({ site, member }) => (

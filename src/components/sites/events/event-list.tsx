@@ -11,7 +11,7 @@ interface Props {
   type: EventsGroupType;
   site: Site;
   events: EventsCapture;
-  member: Team;
+  member?: Team;
   page: number;
   sort: EventsCaptureSort;
   selected: EventSelected[];

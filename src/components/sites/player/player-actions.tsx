@@ -9,14 +9,14 @@ import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'compo
 import { RecordingsShare } from 'components/sites/recordings/recordings-share';
 import { recordingDelete, recordingBookmarked } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
-import { ADMIN, READ_ONLY } from 'data/teams/constants';
+import { ADMIN, READ_ONLY, SUPER_USER } from 'data/teams/constants';
 import { Preferences, Preference } from 'lib/preferences';
 import type { Recording, Site, Team } from 'types/graphql';
 
 interface Props {
   site: Site;
   recording: Recording;
-  member: Team;
+  member?: Team;
 }
 
 export const PlayerActions: FC<Props> = ({ site, recording, member }) => {
@@ -79,7 +79,7 @@ export const PlayerActions: FC<Props> = ({ site, recording, member }) => {
   return (
     <>
       <div className='recording-actions'>
-        <Button onClick={handleBookmark} className={classnames('boookmark', { active: recording?.bookmarked })} disabled={!recording} unauthorized={[READ_ONLY].includes(member.role)}>
+        <Button onClick={handleBookmark} className={classnames('boookmark', { active: recording?.bookmarked })} disabled={!recording} unauthorized={[READ_ONLY, SUPER_USER].includes(member?.role)}>
           <Icon name='bookmark-3-line' />
         </Button>
         <RecordingsShare
@@ -88,7 +88,7 @@ export const PlayerActions: FC<Props> = ({ site, recording, member }) => {
           recordingId={recording?.id}
           member={member}
         />
-        <Button onClick={handleDeleteClick} disabled={!recording} unauthorized={[ADMIN, READ_ONLY].includes(member.role)}>
+        <Button onClick={handleDeleteClick} disabled={!recording} unauthorized={[ADMIN, READ_ONLY, SUPER_USER].includes(member?.role)}>
           <Icon name='delete-bin-line' />
         </Button>
       </div>

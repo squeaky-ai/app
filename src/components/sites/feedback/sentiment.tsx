@@ -21,7 +21,7 @@ import { FeedbackSentimentResponseSort, FeedbackSentimentResponseFilters, Team }
 import type { ValueOf } from 'types/common';
 
 interface Props {
-  member: Team;
+  member?: Team;
 }
 
 export const Sentiment: FC<Props> = ({ member }) => {

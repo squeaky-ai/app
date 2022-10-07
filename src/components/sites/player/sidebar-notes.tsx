@@ -15,12 +15,12 @@ import { Note } from 'components/sites/player/note';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { TIMESTAMP_REGEX } from 'data/sites/constants';
 import { toTimeString, fromTimeString } from 'lib/dates';
-import { READ_ONLY } from 'data/teams/constants';
+import { READ_ONLY, SUPER_USER } from 'data/teams/constants';
 import { noteDelete, noteCreate, noteUpdate } from 'lib/api/graphql';
 import type { Recording, Note as INote, Team } from 'types/graphql';
 
 interface Props {
-  member: Team;
+  member?: Team;
   replayer: Replayer;
   recording: Recording;
 }
@@ -75,7 +75,7 @@ export const SidebarNotes: FC<Props> = ({ member, recording, replayer }) => {
       <h5>
         Notes
         {notes.length > 0 && (
-          <Button className='secondary create-note' onClick={openModal} unauthorized={[READ_ONLY].includes(member.role)}>
+          <Button className='secondary create-note' onClick={openModal} unauthorized={[READ_ONLY, SUPER_USER].includes(member?.role)}>
             + Add Note
           </Button>
         )}
@@ -83,7 +83,7 @@ export const SidebarNotes: FC<Props> = ({ member, recording, replayer }) => {
       <div className={classnames('notes', { empty: notes.length === 0 })}>
         <div className='create-state'>
           <p>There are no notes for this recording</p>
-          <Button className='secondary' onClick={openModal} unauthorized={[READ_ONLY].includes(member.role)}>
+          <Button className='secondary' onClick={openModal} unauthorized={[READ_ONLY, SUPER_USER].includes(member?.role)}>
             + Add Note
           </Button>
         </div>

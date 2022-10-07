@@ -19,7 +19,7 @@ import type { VisitorsFilters } from 'types/visitors';
 
 interface Props {
   site: Site;
-  member: Team;
+  member?: Team;
   search: string;
   columns: Column[];
   page: number;

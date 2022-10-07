@@ -11,7 +11,7 @@ import type { Site } from 'types/graphql';
 
 interface Children {
   site: Site;
-  member: Team;
+  member?: Team;
 }
 
 interface Props {

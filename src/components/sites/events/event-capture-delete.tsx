@@ -7,12 +7,12 @@ import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'compo
 import { Preferences, Preference } from 'lib/preferences';
 import { useToasts } from 'hooks/use-toasts';
 import { eventsCaptureDelete } from 'lib/api/graphql';
-import { MEMBER, READ_ONLY } from 'data/teams/constants';
+import { MEMBER, READ_ONLY, SUPER_USER } from 'data/teams/constants';
 import type { Site, Team } from 'types/graphql';
 
 interface Props {
   site: Site;
-  member: Team;
+  member?: Team;
   eventId: string;
   onClose?: VoidFunction;
 }
@@ -62,7 +62,7 @@ export const EventCaptureDelete: FC<Props> = ({ site, member, eventId, onClose }
 
   return (
     <>
-      <Button onClick={handleDeleteClick} unauthorized={[MEMBER, READ_ONLY].includes(member.role)}>
+      <Button onClick={handleDeleteClick} unauthorized={[MEMBER, READ_ONLY, SUPER_USER].includes(member?.role)}>
         <Icon name='delete-bin-line' /> Delete
       </Button>
             

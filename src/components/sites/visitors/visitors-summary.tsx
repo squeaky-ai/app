@@ -15,7 +15,7 @@ import type { Visitor } from 'types/graphql';
 
 interface Props {
   site: Site;
-  member: Team;
+  member?: Team;
   visitor: Visitor;
 }
 
