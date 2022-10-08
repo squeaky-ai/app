@@ -47,6 +47,13 @@
       grid-template-columns: 2fr 1fr 1fr 1fr;
     }
   }
+
+  .errors-table-footer {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 1.5rem 0 0 0;
+  }
 }
 
 .custom-tooltip {
