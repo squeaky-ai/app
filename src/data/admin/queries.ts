@@ -207,3 +207,41 @@ export const GET_ADMIN_SITES_QUERY = gql`
     }
   }
 `;
+
+export const GET_ADMIN_SITES_BUNDLES_QUERY = gql`
+  query GetAdminSitesQueries {
+    admin {
+      sitesBundles {
+        id
+        name
+        plan {
+          name
+        }
+        sites {
+          id
+          name
+          uuid
+          url
+          ownerName
+          verifiedAt
+          superuserAccessEnabled
+          plan {
+            tier
+            name
+            exceeded
+            invalid
+            maxMonthlyRecordings
+          }
+          team {
+            id
+            role
+            user {
+              id
+            }
+          }
+          createdAt
+        }
+      }
+    }
+  }
+`;

@@ -4,6 +4,16 @@
   a {
     color: var(--mauve-700);
   }
+
+  .button {
+    &.primary {
+      background: var(--mauve-700);
+    }
+  }
+
+  .button-group {
+    border-color: var(--mauve-700);
+  }
   
   .admin-indicator {
     color: var(--peach-200);

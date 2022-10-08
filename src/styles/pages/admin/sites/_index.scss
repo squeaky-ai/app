@@ -20,4 +20,53 @@
       }
     }
   }
+
+  .site-bundles {
+    margin: 2rem 0 0 0;
+
+    .site-bundle {
+      background: var(--gray-100);
+      border-radius: var(--border-radius-md);
+      margin: 0 0 .75rem 0;
+      padding: 1rem;
+      position: relative;
+  
+      .heading {
+        align-items: center;
+        background: none;
+        border: none;
+        display: flex;
+        text-align: left;
+        width: 100%;
+  
+        .icon {
+          font-size: var(--font-size-body-xl);
+          margin: 0 .75rem 0 0;
+        }
+  
+        span {
+          font-weight: var(--font-weight-normal);
+          margin: 0 0 0 .5rem;
+        }
+      }
+
+      .items {
+        display: none;
+        
+        .sites-table {
+          margin: 1.5rem 0 0 0;
+        }
+
+        .table-wrapper {
+          margin: 0;
+        }
+      }
+  
+      &.open {
+        .items {
+          display: block;
+        }
+      }
+    }
+  }
 }

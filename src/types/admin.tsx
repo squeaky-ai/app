@@ -24,3 +24,8 @@ export type AdminDashboard = Omit<
   'users' | 
   'blogImages'
 >;
+
+export enum AdminSiteType {
+  All,
+  Bundled,
+}
