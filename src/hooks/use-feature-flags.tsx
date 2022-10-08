@@ -20,12 +20,14 @@ export const allFeatureFlags: FeatureFlag[] = [
   FeatureFlag.CHEESE_LOADER,
   FeatureFlag.HEATMAP_FLAMEGRAPH,
   FeatureFlag.HEATMAP_CURSORS,
+  FeatureFlag.ERRORS_PAGE,
 ];
 
 export const featureFlagNames: Names = {
   CHEESE_LOADER: 'Cheese Loader',
   HEATMAP_FLAMEGRAPH: 'Heatmap Flamegraph',
   HEATMAP_CURSORS: 'Heatmap Mouse Positions',
+  ERRORS_PAGE: 'Errors Page',
 };
 
 const options: State = [
@@ -46,6 +48,12 @@ const options: State = [
     value: false,
     superuser: false,
     description: 'Experimental flamegraphs for mouse positions',
+  },
+  {
+    key: FeatureFlag.ERRORS_PAGE,
+    value: false,
+    superuser: false,
+    description: 'View errors that happen on your site',
   }
 ];
 
