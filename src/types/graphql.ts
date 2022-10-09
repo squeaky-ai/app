@@ -154,6 +154,7 @@ export type AdminSite = {
   cssSelectorBlacklist: Array<Maybe<Scalars['String']>>;
   daysSinceLastRecording: Scalars['Int'];
   domainBlacklist: Array<Maybe<SitesDomainBlacklist>>;
+  errorDetails?: Maybe<ErrorsDetails>;
   errors: Errors;
   errorsCounts: ErrorsCounts;
   eventCapture: EventsCapture;
@@ -203,6 +204,11 @@ export type AdminSite = {
 export type AdminSiteAnalyticsArgs = {
   fromDate: Scalars['ISO8601Date'];
   toDate: Scalars['ISO8601Date'];
+};
+
+
+export type AdminSiteErrorDetailsArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -888,6 +894,17 @@ export type ErrorsCounts = {
   groupRange: Scalars['Int'];
   groupType: Scalars['String'];
   items: Array<Maybe<ErrorsCount>>;
+};
+
+export type ErrorsDetails = {
+  __typename?: 'ErrorsDetails';
+  colNumber: Scalars['Int'];
+  filename: Scalars['String'];
+  id: Scalars['ID'];
+  lineNumber: Scalars['Int'];
+  message: Scalars['String'];
+  pages: Array<Scalars['String']>;
+  stack: Scalars['String'];
 };
 
 export type ErrorsItem = {
@@ -2325,6 +2342,7 @@ export type Site = {
   cssSelectorBlacklist: Array<Maybe<Scalars['String']>>;
   daysSinceLastRecording: Scalars['Int'];
   domainBlacklist: Array<Maybe<SitesDomainBlacklist>>;
+  errorDetails?: Maybe<ErrorsDetails>;
   errors: Errors;
   errorsCounts: ErrorsCounts;
   eventCapture: EventsCapture;
@@ -2372,6 +2390,11 @@ export type Site = {
 export type SiteAnalyticsArgs = {
   fromDate: Scalars['ISO8601Date'];
   toDate: Scalars['ISO8601Date'];
+};
+
+
+export type SiteErrorDetailsArgs = {
+  id: Scalars['ID'];
 };
 
 

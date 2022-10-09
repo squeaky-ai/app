@@ -42,7 +42,7 @@ const SitesErrors: NextPage<ServerSideProps> = ({ user }) => {
   return (
     <>
       <Head>
-        <title>Squeaky | Site Events</title>
+        <title>Squeaky | Site Errors</title>
       </Head>
 
       <Page user={user} scope={[]}>
@@ -78,6 +78,7 @@ const SitesErrors: NextPage<ServerSideProps> = ({ user }) => {
                 />
 
                 <ErrorsTable 
+                  site={site}
                   errors={errors.items}
                   sort={sort}
                   setSort={setSort}

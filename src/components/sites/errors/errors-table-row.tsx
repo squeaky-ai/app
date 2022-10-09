@@ -1,19 +1,25 @@
 import React from 'react';
 import type { FC } from 'react';
+import Link from 'next/link';
 import { Row, Cell } from 'components/table';
 import { toNiceDate } from 'lib/dates';
-import type { ErrorsItem } from 'types/graphql';
+import type { ErrorsItem, Site } from 'types/graphql';
 
 interface Props {
+  site: Site;
   error: ErrorsItem;
 }
 
 const fromTimestampToIsoString = (timestamp: string) => new Date(Number(timestamp)).toISOString();
 
-export const ErrorsTableRow: FC<Props> = ({ error }) => (
+export const ErrorsTableRow: FC<Props> = ({ site, error }) => (
   <Row>
     <Cell>{error.message}</Cell>
-    <Cell>{error.errorCount}</Cell>
+    <Cell>
+      <Link href={`/sites/${site.id}/errors/${error.id}`}>
+        <a>{error.errorCount}</a>
+      </Link>
+    </Cell>
     <Cell>{error.recordingCount}</Cell>
     <Cell>{toNiceDate(fromTimestampToIsoString(error.lastOccurance))}</Cell>
   </Row>

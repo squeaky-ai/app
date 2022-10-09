@@ -3,16 +3,17 @@ import type { FC } from 'react';
 import { Sort } from 'components/sort';
 import { TableWrapper, Table, Cell, Row } from 'components/table';
 import { ErrorsTableRow } from 'components/sites/errors/errors-table-row';
-import { ErrorsSort } from 'types/graphql';
+import { ErrorsSort, Site } from 'types/graphql';
 import type { ErrorsItem } from 'types/graphql';
 
 interface Props {
+  site: Site;
   errors: ErrorsItem[];
   sort: ErrorsSort;
   setSort: (sort: ErrorsSort) => void;
 }
 
-export const ErrorsTable: FC<Props> = ({ errors, sort, setSort }) => (
+export const ErrorsTable: FC<Props> = ({ site, errors, sort, setSort }) => (
   <TableWrapper>
     <Table className='errors-table'>
       <Row className='head'>
@@ -46,7 +47,11 @@ export const ErrorsTable: FC<Props> = ({ errors, sort, setSort }) => (
         </Cell>
       </Row>
       {errors.map(error => (
-        <ErrorsTableRow key={error.id} error={error} />
+        <ErrorsTableRow 
+          key={error.id} 
+          site={site}
+          error={error} 
+        />
       ))}
     </Table>
   </TableWrapper>

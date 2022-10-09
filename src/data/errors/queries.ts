@@ -29,3 +29,28 @@ export const GET_ERRORS_QUERY = gql`
     }
   }
 `;
+
+export const GET_ERRORS_DETAILS_QUERY = gql`
+  query GetErrorsDetails($siteId: ID!, $errorId: ID!) {
+    site(siteId: $siteId) {
+      id
+      errorDetails(errorId: $errorId) {
+        id
+        message
+        stack
+        pages
+        filename
+        lineNumber
+        colNumber
+      }
+      errorsCounts(errorId: $errorId, fromDate: $fromDate, toDate: $toDate) {
+        groupType
+        groupRange
+        items {
+          dateKey
+          count
+        }
+      }
+    }
+  }
+`;
