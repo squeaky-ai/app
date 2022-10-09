@@ -31,7 +31,7 @@ export const GET_ERRORS_QUERY = gql`
 `;
 
 export const GET_ERRORS_DETAILS_QUERY = gql`
-  query GetErrorsDetails($siteId: ID!, $errorId: ID!) {
+  query GetErrorsDetails($siteId: ID!, $errorId: ID!, $fromDate: ISO8601Date!, $toDate: ISO8601Date!) {
     site(siteId: $siteId) {
       id
       errorDetails(errorId: $errorId) {
