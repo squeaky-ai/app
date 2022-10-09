@@ -208,7 +208,7 @@ export type AdminSiteAnalyticsArgs = {
 
 
 export type AdminSiteErrorDetailsArgs = {
-  id: Scalars['ID'];
+  errorId: Scalars['ID'];
 };
 
 
@@ -222,6 +222,7 @@ export type AdminSiteErrorsArgs = {
 
 
 export type AdminSiteErrorsCountsArgs = {
+  errorId?: InputMaybe<Scalars['ID']>;
   fromDate: Scalars['ISO8601Date'];
   toDate: Scalars['ISO8601Date'];
 };
@@ -904,7 +905,15 @@ export type ErrorsDetails = {
   lineNumber: Scalars['Int'];
   message: Scalars['String'];
   pages: Array<Scalars['String']>;
+  recordings: Recordings;
   stack: Scalars['String'];
+};
+
+
+export type ErrorsDetailsRecordingsArgs = {
+  page?: InputMaybe<Scalars['Int']>;
+  size?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<RecordingsSort>;
 };
 
 export type ErrorsItem = {
@@ -2394,7 +2403,7 @@ export type SiteAnalyticsArgs = {
 
 
 export type SiteErrorDetailsArgs = {
-  id: Scalars['ID'];
+  errorId: Scalars['ID'];
 };
 
 
@@ -2408,6 +2417,7 @@ export type SiteErrorsArgs = {
 
 
 export type SiteErrorsCountsArgs = {
+  errorId?: InputMaybe<Scalars['ID']>;
   fromDate: Scalars['ISO8601Date'];
   toDate: Scalars['ISO8601Date'];
 };

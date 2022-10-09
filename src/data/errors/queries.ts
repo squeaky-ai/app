@@ -54,3 +54,59 @@ export const GET_ERRORS_DETAILS_QUERY = gql`
     }
   }
 `;
+
+export const GET_ERRORS_DETAILS_RECORDINGS_QUERY = gql`
+  query GetErrorsDetailsRecordings($siteId: ID!, $errorId: ID!, $page: Int, $size: Int, $sort: RecordingsSort, $fromDate: ISO8601Date!, $toDate: ISO8601Date!) {
+    site(siteId: $siteId) {
+      id
+      errorDetails(errorId: $errorId) {
+        id
+        recordings(page: $page, size: $size, sort: $sort, fromDate: $fromDate, toDate: $toDate) {
+          items {
+            id
+            language
+            duration
+            viewed
+            bookmarked
+            startPage
+            exitPage
+            pageViews
+            pageCount
+            referrer
+            device {
+              deviceType
+              viewportX
+              viewportY
+              deviceX
+              deviceY
+              browserName
+              browserDetails
+              useragent
+            }
+            countryCode
+            countryName
+            sessionId
+            connectedAt
+            disconnectedAt
+            visitor {
+              id
+              visitorId
+              starred
+            }
+            nps {
+              score
+            }
+            sentiment {
+              score
+            }
+          }
+          pagination {
+            pageSize
+            total
+            sort
+          }
+        }
+      }
+    }
+  }
+`;

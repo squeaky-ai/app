@@ -1,23 +1,39 @@
 import React from 'react';
 import type { FC } from 'react';
 import { ErrorTabs } from 'components/sites/errors/error-tabs';
-import { ErrorTab } from 'types/errors';
 import { Card } from 'components/card';
 import { ErrorRecordings } from 'components/sites/errors/error-recordings';
 import { ErrorVisitors } from 'components/sites/errors/error-visitors';
 import { ErrorCounts } from 'components/sites/errors/counts';
-import type { TimePeriod } from 'types/common';
-import type { ErrorsDetails, ErrorsCounts } from 'types/graphql';
+import { ErrorTab } from 'types/errors';
+import type { Column, TimePeriod } from 'types/common';
+import type { ErrorsDetails, ErrorsCounts, Site, Team } from 'types/graphql';
 
 interface Props {
+  tab: ErrorTab;
+  site: Site;
+  member: Team;
   details: ErrorsDetails;
   counts: ErrorsCounts;
   period: TimePeriod;
+  recordingsColumns: Column[];
+  recordingsSelected: string[];
+  setTab: (tab: ErrorTab) => void;
+  setRecordingsSelected: (selected: string[]) => void;
 }
 
-export const ErrorDetails: FC<Props> = ({ counts, period, details }) => {
-  const [tab, setTab] = React.useState<ErrorTab>(ErrorTab.DETAILS);
-
+export const ErrorDetails: FC<Props> = ({ 
+  tab,
+  site,
+  member, 
+  counts, 
+  period, 
+  details, 
+  recordingsColumns, 
+  recordingsSelected,
+  setTab,
+  setRecordingsSelected,
+}) => {
   return (
     <div className='error-details'>
       <ErrorCounts
@@ -51,7 +67,17 @@ export const ErrorDetails: FC<Props> = ({ counts, period, details }) => {
             <p className='key'>Stacktrace</p>
             <pre className='code block'>
               <code>
-                {details.stack}
+                {details.stack || `To see stacktraces you must throw a JavaScript error and not a string.
+
+// Good
+throw new Error('My Error');
+
+// Bad
+throw 'My Error';
+
+You can read more here:
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/throw
+`}
               </code>
             </pre>
           </div>
@@ -59,7 +85,15 @@ export const ErrorDetails: FC<Props> = ({ counts, period, details }) => {
       )}
 
       {tab === ErrorTab.RECORDINGS && (
-        <ErrorRecordings id={details.id} />
+        <ErrorRecordings 
+          id={details.id}
+          site={site}
+          member={member}
+          period={period}
+          columns={recordingsColumns}
+          selected={recordingsSelected}
+          setSelected={setRecordingsSelected}
+        />
       )}
 
       {tab === ErrorTab.VISITORS && (
