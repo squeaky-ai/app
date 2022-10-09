@@ -905,15 +905,28 @@ export type ErrorsDetails = {
   lineNumber: Scalars['Int'];
   message: Scalars['String'];
   pages: Array<Scalars['String']>;
+  recordingIds: Array<Scalars['Int']>;
   recordings: Recordings;
   stack: Scalars['String'];
+  visitors: Visitors;
 };
 
 
 export type ErrorsDetailsRecordingsArgs = {
+  fromDate: Scalars['ISO8601Date'];
   page?: InputMaybe<Scalars['Int']>;
   size?: InputMaybe<Scalars['Int']>;
   sort?: InputMaybe<RecordingsSort>;
+  toDate: Scalars['ISO8601Date'];
+};
+
+
+export type ErrorsDetailsVisitorsArgs = {
+  fromDate: Scalars['ISO8601Date'];
+  page?: InputMaybe<Scalars['Int']>;
+  size?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<VisitorsSort>;
+  toDate: Scalars['ISO8601Date'];
 };
 
 export type ErrorsItem = {

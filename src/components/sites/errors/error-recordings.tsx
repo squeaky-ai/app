@@ -34,7 +34,7 @@ export const ErrorRecordings: FC<Props> = ({
   setSelected
 }) => {
   const [page, setPage] = React.useState<number>(1);
-  const [size, setSize] = React.useState<number>(10);
+  const [size, setSize] = React.useState<number>(25);
 
   const { mobile } = useResize();
   const { sort, setSort } = useSort<RecordingsSort>('recordings');

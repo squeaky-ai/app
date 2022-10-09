@@ -110,3 +110,48 @@ export const GET_ERRORS_DETAILS_RECORDINGS_QUERY = gql`
     }
   }
 `;
+
+export const GET_ERRORS_DETAILS_VISITORS_QUERY = gql`
+  query GetErrorsDetailsVisitors($siteId: ID!, $errorId: ID!, $page: Int, $size: Int, $sort: VisitorsSort, $fromDate: ISO8601Date!, $toDate: ISO8601Date!) {
+    site(siteId: $siteId) {
+      id
+      errorDetails(errorId: $errorId) {
+        id
+        visitors(page: $page, size: $size, sort: $sort, fromDate: $fromDate, toDate: $toDate) {
+          items {
+            id
+            visitorId
+            viewed
+            recordingCount {
+              total
+            }
+            firstViewedAt
+            lastActivityAt
+            language
+            devices {
+              deviceType
+              viewportX
+              viewportY
+              deviceX
+              deviceY
+              browserName
+              browserDetails
+              useragent
+            }
+            countries {
+              code
+              name
+            }
+            starred
+            linkedData
+          }
+          pagination {
+            pageSize
+            total
+            sort
+          }
+        }
+      }
+    }
+  }
+`;

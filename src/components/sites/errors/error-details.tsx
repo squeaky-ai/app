@@ -16,6 +16,7 @@ interface Props {
   details: ErrorsDetails;
   counts: ErrorsCounts;
   period: TimePeriod;
+  visitorsColumns: Column[];
   recordingsColumns: Column[];
   recordingsSelected: string[];
   setTab: (tab: ErrorTab) => void;
@@ -29,6 +30,7 @@ export const ErrorDetails: FC<Props> = ({
   counts, 
   period, 
   details, 
+  visitorsColumns,
   recordingsColumns, 
   recordingsSelected,
   setTab,
@@ -97,7 +99,13 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/thr
       )}
 
       {tab === ErrorTab.VISITORS && (
-        <ErrorVisitors id={details.id} />
+        <ErrorVisitors 
+          id={details.id}
+          site={site}
+          member={member}
+          period={period}
+          columns={visitorsColumns}
+        />
       )}
     </div>
   );

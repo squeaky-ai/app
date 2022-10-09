@@ -92,6 +92,7 @@ const SitesErrorsError: NextPage<ServerSideProps> = ({ user }) => {
                   period={period}
                   details={details}
                   setTab={setTab}
+                  visitorsColumns={visitorsColumns}
                   recordingsColumns={recordingsColumns}
                   recordingsSelected={recordingsSelected}
                   setRecordingsSelected={setRecordingsSelected}
