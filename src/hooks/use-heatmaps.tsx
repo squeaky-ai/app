@@ -15,6 +15,7 @@ interface Props {
   type: HeatmapsType;
   page: string;
   range: TimeRange;
+  cluster: number;
   excludeRecordingIds: string[];
 }
 
@@ -24,6 +25,7 @@ function getVariablesForProps(siteId: string, props: Props) {
     device: props.device,
     type: props.type,
     page: props.page,
+    cluster: props.cluster,
     excludeRecordingIds: props.excludeRecordingIds,
     ...props.range,
   }

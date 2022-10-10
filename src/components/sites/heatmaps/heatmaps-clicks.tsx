@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import { Icon } from 'components/icon';
 import { Tooltip } from 'components/tooltip';
 import { Pill } from 'components/pill';
+import { Card } from 'components/card';
 import { Sort } from 'components/sort';
 import { ClickMapData, getClickMapData, getElement, getElements, selectorIncludesClickable } from 'lib/heatmaps';
 import type { HeatmapClickTarget } from 'types/heatmaps';
@@ -64,45 +65,47 @@ export const HeatmapsClicks: FC<Props> = ({ heatmaps, selected, clickTarget, set
   };
 
   return (
-    <div className='clicks-table'>
-      {clicks.length === 0 && (
-        <div className='empty'>
-          <Icon name='time-line' />
-          <p>No data available</p>
-        </div>
-      )}
-
-      {clicks.length > 0 && (
-        <>
-          <div className='head row'>
-            <p>Element</p>
-            <p>
-              Clicks
-              <Sort
-                name='clicks'
-                order={order}
-                onAsc={() => setOrder('clicks__asc')}
-                onDesc={() => setOrder('clicks__desc')}
-              />
-            </p>
+    <Card className='data'>
+      <div className='clicks-table'>
+        {clicks.length === 0 && (
+          <div className='empty'>
+            <Icon name='time-line' />
+            <p>No data available</p>
           </div>
-            <ul>
-              {clicks.map(click => (
-                <li key={click.selector} className={classnames('row', { selected: click.selector === selected })} onClick={() => scrollToView(click)}>
-                  <Tooltip button={click.selector} portalClassName='element-tooltip'>
-                    {click.selector}
-                  </Tooltip>
-                  <p>
-                    <Pill small style={{ backgroundColor: click.color.background, color: click.color.foreground, borderColor: click.color.border }} squared>
-                      {click.count}
-                    </Pill>
-                    {click.percentage}%
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </>
         )}
-    </div>
+
+        {clicks.length > 0 && (
+          <>
+            <div className='head row'>
+              <p>Element</p>
+              <p>
+                Clicks
+                <Sort
+                  name='clicks'
+                  order={order}
+                  onAsc={() => setOrder('clicks__asc')}
+                  onDesc={() => setOrder('clicks__desc')}
+                />
+              </p>
+            </div>
+              <ul>
+                {clicks.map(click => (
+                  <li key={click.selector} className={classnames('row', { selected: click.selector === selected })} onClick={() => scrollToView(click)}>
+                    <Tooltip button={click.selector} portalClassName='element-tooltip'>
+                      {click.selector}
+                    </Tooltip>
+                    <p>
+                      <Pill small style={{ backgroundColor: click.color.background, color: click.color.foreground, borderColor: click.color.border }} squared>
+                        {click.count}
+                      </Pill>
+                      {click.percentage}%
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+      </div>
+    </Card>
   );
 };

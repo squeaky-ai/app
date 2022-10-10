@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const GET_HEATMAPS_QUERY = gql`
-  query GetHeatmaps($siteId: ID!, $page: String!, $type: HeatmapsType!, $fromDate: ISO8601Date!, $toDate: ISO8601Date!, $device: HeatmapsDevice!, $excludeRecordingIds: [ID!]) {
+  query GetHeatmaps($siteId: ID!, $page: String!, $type: HeatmapsType!, $fromDate: ISO8601Date!, $toDate: ISO8601Date!, $device: HeatmapsDevice!, $excludeRecordingIds: [ID!], $cluster: Int) {
     site(siteId: $siteId) {
       id
       heatmaps(page: $page, type: $type, device: $device, fromDate: $fromDate, toDate: $toDate, excludeRecordingIds: $excludeRecordingIds) {
@@ -44,7 +44,7 @@ export const GET_HEATMAPS_QUERY = gql`
             }
           }
         }
-        items {
+        items(cluster: $cluster) {
           ... on HeatmapsClickCount {
             selector
             count

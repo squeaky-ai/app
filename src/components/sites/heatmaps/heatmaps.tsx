@@ -23,6 +23,7 @@ import { useFeatureFlags } from 'hooks/use-feature-flags';
 import { HeatmapsDevice, HeatmapsType, SitesPage } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 import type { HeatmapClickTarget } from 'types/heatmaps';
+import { HeatmapsGradients } from './heatmaps-gradients';
 
 interface Props {
   page: string;
@@ -33,6 +34,7 @@ interface Props {
 }
 
 export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod }) => {
+  const [cluster, setCluster] = React.useState<number>(16);
   const [type, setType] = React.useState<HeatmapsType>(HeatmapsType.ClickCount);
   const [device, setDevice] = React.useState<HeatmapsDevice>(HeatmapsDevice.Desktop);
   const [clickTarget, setClickTarget] = React.useState<HeatmapClickTarget>('all');
@@ -45,6 +47,7 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
     page, 
     device, 
     type,
+    cluster,
     excludeRecordingIds,
     range: getDateRange(period) 
   });
@@ -57,14 +60,13 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
   };
 
   const hasData = !!heatmaps.recording;
-  const hasHiddenSidebar = [HeatmapsType.Cursor, HeatmapsType.ClickPosition].includes(type);
 
   if (loading) {
     return <PageLoading />;
   }
 
   return (
-    <div className={classnames('heatmaps-grid', { empty: !hasData, 'hide-sidebar': hasHiddenSidebar })}>
+    <div className={classnames('heatmaps-grid', { empty: !hasData })}>
       <div className='options'>
         <div className='left'>
           <HeatmapsPages page={page} pages={pages} setPage={setPage} />
@@ -126,20 +128,22 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
               heatmaps={heatmaps}
             />
           </Card>
-          <Card className='data'>
-            {type === 'ClickCount' && (
-              <HeatmapsClicks 
-                heatmaps={heatmaps} 
-                selected={selected} 
-                clickTarget={clickTarget}
-                setSelected={setSelected} 
-              />
-            )}
+          {type === HeatmapsType.ClickCount && (
+            <HeatmapsClicks 
+              heatmaps={heatmaps} 
+              selected={selected} 
+              clickTarget={clickTarget}
+              setSelected={setSelected} 
+            />
+          )}
 
-            {type === 'Scroll' && (
-              <HeatmapsScrolls heatmaps={heatmaps} />
-            )}
-          </Card>
+          {type === HeatmapsType.Scroll && (
+            <HeatmapsScrolls heatmaps={heatmaps} />
+          )}
+
+          {type === HeatmapsType.Cursor && (
+            <HeatmapsGradients cluster={cluster} setCluster={setCluster} />
+          )}
         </>
       )}
       {!hasData && (

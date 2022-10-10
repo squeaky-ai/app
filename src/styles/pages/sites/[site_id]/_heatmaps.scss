@@ -88,18 +88,6 @@
                            'empty-state empty-state';
     }
 
-    &.hide-sidebar {
-      grid-template-areas: 'options'
-                           'content';
-      grid-template-columns: 100%;
-
-      .card {
-        &.data {
-          display: none;
-        }
-      }
-    }
-
     .empty-state {
       grid-area: empty-state;
       height: 100%;
@@ -422,6 +410,16 @@
 
     .label {
       margin: 0 .75rem 0 0;
+    }
+  }
+
+  .gradient-settings {
+    h5 {
+      margin: 0 0 1.5rem 0;
+    }
+
+    p {
+      margin: 0 0 .5rem 0;
     }
   }
 
