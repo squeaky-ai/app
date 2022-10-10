@@ -154,7 +154,7 @@ export type AdminSite = {
   cssSelectorBlacklist: Array<Maybe<Scalars['String']>>;
   daysSinceLastRecording: Scalars['Int'];
   domainBlacklist: Array<Maybe<SitesDomainBlacklist>>;
-  errorDetails?: Maybe<ErrorsDetails>;
+  error: ErrorsError;
   errors: Errors;
   errorsCounts: ErrorsCounts;
   eventCapture: EventsCapture;
@@ -207,8 +207,10 @@ export type AdminSiteAnalyticsArgs = {
 };
 
 
-export type AdminSiteErrorDetailsArgs = {
+export type AdminSiteErrorArgs = {
   errorId: Scalars['ID'];
+  fromDate: Scalars['ISO8601Date'];
+  toDate: Scalars['ISO8601Date'];
 };
 
 
@@ -905,28 +907,28 @@ export type ErrorsDetails = {
   lineNumber: Scalars['Int'];
   message: Scalars['String'];
   pages: Array<Scalars['String']>;
-  recordingIds: Array<Scalars['Int']>;
-  recordings: Recordings;
   stack: Scalars['String'];
+};
+
+export type ErrorsError = {
+  __typename?: 'ErrorsError';
+  details?: Maybe<ErrorsDetails>;
+  recordings: Recordings;
   visitors: Visitors;
 };
 
 
-export type ErrorsDetailsRecordingsArgs = {
-  fromDate: Scalars['ISO8601Date'];
+export type ErrorsErrorRecordingsArgs = {
   page?: InputMaybe<Scalars['Int']>;
   size?: InputMaybe<Scalars['Int']>;
   sort?: InputMaybe<RecordingsSort>;
-  toDate: Scalars['ISO8601Date'];
 };
 
 
-export type ErrorsDetailsVisitorsArgs = {
-  fromDate: Scalars['ISO8601Date'];
+export type ErrorsErrorVisitorsArgs = {
   page?: InputMaybe<Scalars['Int']>;
   size?: InputMaybe<Scalars['Int']>;
   sort?: InputMaybe<VisitorsSort>;
-  toDate: Scalars['ISO8601Date'];
 };
 
 export type ErrorsItem = {
@@ -2364,7 +2366,7 @@ export type Site = {
   cssSelectorBlacklist: Array<Maybe<Scalars['String']>>;
   daysSinceLastRecording: Scalars['Int'];
   domainBlacklist: Array<Maybe<SitesDomainBlacklist>>;
-  errorDetails?: Maybe<ErrorsDetails>;
+  error: ErrorsError;
   errors: Errors;
   errorsCounts: ErrorsCounts;
   eventCapture: EventsCapture;
@@ -2415,8 +2417,10 @@ export type SiteAnalyticsArgs = {
 };
 
 
-export type SiteErrorDetailsArgs = {
+export type SiteErrorArgs = {
   errorId: Scalars['ID'];
+  fromDate: Scalars['ISO8601Date'];
+  toDate: Scalars['ISO8601Date'];
 };
 
 

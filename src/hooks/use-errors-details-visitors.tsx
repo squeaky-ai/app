@@ -50,6 +50,6 @@ export const useErrorsDetailsVisitors = ({
   return {
     loading,
     error: !!error,
-    visitors: data ? data.site.errorDetails.visitors : fallback,
+    visitors: data ? data.site.error.visitors : fallback,
   };
 };

@@ -37,7 +37,7 @@ export const useErrorsDetails = ({ id, range }: Props): UseErrorsDetails => {
   return {
     loading,
     error: !!error,
-    details: data ? data.site.errorDetails : null,
+    details: data ? data.site.error.details : null,
     counts: data ? data.site.errorsCounts : countsFallack,
   };
 };

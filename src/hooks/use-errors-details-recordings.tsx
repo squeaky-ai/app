@@ -50,6 +50,6 @@ export const useErrorsDetailsRecordings = ({
   return {
     loading,
     error: !!error,
-    recordings: data ? data.site.errorDetails.recordings : fallback,
+    recordings: data ? data.site.error.recordings : fallback,
   };
 };
