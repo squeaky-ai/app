@@ -3,7 +3,6 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { Error } from 'components/error';
 import { SitesTable } from 'components/admin/sites-table';
-import { SiteBundles } from 'components/admin/site-bundles';
 import { Main } from 'components/main';
 import { Search } from 'components/search';
 import { BreadCrumbs } from 'components/admin/breadcrumbs';
@@ -16,14 +15,12 @@ import { useAdminSites } from 'hooks/use-admin-sites';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useColumns } from 'hooks/use-columns';
 import { AdminSiteSort } from 'types/graphql';
-import { AdminSiteType } from 'types/admin';
 
 const AdminSites: NextPage<ServerSideProps> = () => {
   const [search, setSearch] = React.useState<string>('');
   const [page, setPage] = React.useState<number>(1);
   const [size, setSize] = React.useState<number>(25);
   const [sort, setSort] = React.useState<AdminSiteSort>(AdminSiteSort.CreatedAtDesc);
-  const [type, setType] = React.useState<AdminSiteType>(AdminSiteType.All);
 
   const { sites, activeVisitors, loading, error } = useAdminSites({
     size,
@@ -62,23 +59,18 @@ const AdminSites: NextPage<ServerSideProps> = () => {
             <h4 className='title'>
               Sites
             </h4>
-            {type === AdminSiteType.All && (
-              <Search
-                search={search}
-                onSearch={setSearch}
-                placeholder='Search names...'
-              />
-            )}
+            <Search
+              search={search}
+              onSearch={setSearch}
+              placeholder='Search names...'
+            />
           </div>
           <menu>
             <SitesColumns 
               columns={columns}
               setColumns={setColumns}
             />
-            <SitesType
-              type={type}
-              setType={setType}
-            />
+            <SitesType />
           </menu>
         </div>
 
@@ -86,7 +78,7 @@ const AdminSites: NextPage<ServerSideProps> = () => {
           <PageLoading />
         )}
 
-        {!loading && columnsReady && type === AdminSiteType.All && (
+        {!loading && columnsReady && (
           <>
             <SitesTable 
               sites={sites.items} 
@@ -109,15 +101,6 @@ const AdminSites: NextPage<ServerSideProps> = () => {
               />
             </div>
           </>
-        )}
-
-        {!loading && columnsReady && type === AdminSiteType.Bundled && (
-          <SiteBundles 
-            activeVisitors={activeVisitors}
-            columns={columns}
-            sort={sort}
-            setSort={handleSort}
-          />
         )}
       </Main>
     </>

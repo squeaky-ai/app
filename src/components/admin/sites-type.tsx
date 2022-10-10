@@ -1,24 +1,28 @@
 import React from 'react';
 import type { FC } from 'react';
+import Link from 'next/link';
 import classnames from 'classnames';
-import { Button } from 'components/button';
+import { useRouter } from 'next/router';
 import { ButtonGroup } from 'components/button-group';
-import { AdminSiteType } from 'types/admin';
 
-interface Props {
-  type: AdminSiteType;
-  setType: (type: AdminSiteType) => void;
-}
+export const SitesType: FC = () => {
+  const router = useRouter();
 
-export const SitesType: FC<Props> = ({ type, setType }) => {
+  const bundled = router.pathname.endsWith('bundles');
+
   return (
-    <ButtonGroup>
-      <Button className={classnames(type === AdminSiteType.All ? 'primary' : 'blank')} onClick={() => setType(AdminSiteType.All)}>
-        All
-      </Button>
-      <Button className={classnames(type === AdminSiteType.Bundled ? 'primary' : 'blank')} onClick={() => setType(AdminSiteType.Bundled)}>
-        Bundled
-      </Button>
+    <ButtonGroup className='site-types'>
+      <Link href='/__admin/sites'>
+        <a className={classnames('button', !bundled ? 'primary' : 'blank')}>
+          All
+        </a>
+      </Link>
+
+      <Link href='/__admin/sites/bundles'>
+        <a className={classnames('button', bundled ? 'primary' : 'blank')}>
+          Bundled
+        </a>
+      </Link>
     </ButtonGroup>
   );
 };
