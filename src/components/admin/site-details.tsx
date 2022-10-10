@@ -2,7 +2,6 @@ import React from 'react';
 import type { FC } from 'react';
 import { Icon } from 'components/icon';
 import { Pill } from 'components/pill';
-import { Divider } from 'components/divider';
 import { SiteIngestEnabled } from 'components/admin/site-ingest-enabled';
 import { SiteEnterpriseSettings } from 'components/admin/site-enterprise-settings';
 import { Row, Table, Cell } from 'components/table';
@@ -107,7 +106,6 @@ export const SiteDetails: FC<Props> = ({ activeVisitors, site, isEnterprise }) =
 
       {isEnterprise && (
         <Card>
-          <Divider />
           <h5>
             <Icon name='building-line' />
             Enterprise Settings

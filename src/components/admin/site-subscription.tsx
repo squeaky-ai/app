@@ -23,6 +23,7 @@ const addressFields: Array<keyof SitesBillingAddress> = ['line1', 'line2', 'city
 
 export const SiteSubscription: FC<Props> = ({ site, isEnterprise, hasBilling }) => {
   const latestTransaction = last(site?.billing?.transactions);
+  const bundledSites = site.bundledWith.filter(s => s.id !== site.id);
 
   return (
     <div className='subscription'>
@@ -176,10 +177,13 @@ export const SiteSubscription: FC<Props> = ({ site, isEnterprise, hasBilling }) 
         <div className='row'>
           <span>Sites</span>
           <span>
-            {site.bundledWith.filter(s => s.id !== site.id).map(site => (
-              <Link key={site.id} href={`/__admin/sites/${site.id}`}>
-                <a>{site.name}</a>
-              </Link>
+            {bundledSites.map((site, index) => (
+              <span key={site.id}>
+                <Link href={`/__admin/sites/${site.id}`}>
+                  <a>{site.name}</a>
+                </Link>
+                {index === (bundledSites.length - 1) ? '' : ','}
+              </span>
             ))}
           </span>
         </div>
