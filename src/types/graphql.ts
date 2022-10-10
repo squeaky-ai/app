@@ -1429,6 +1429,11 @@ export type Heatmaps = {
   recording?: Maybe<Recording>;
 };
 
+
+export type HeatmapsItemsArgs = {
+  cluster?: InputMaybe<Scalars['Int']>;
+};
+
 export type HeatmapsClickCount = {
   __typename?: 'HeatmapsClickCount';
   count: Scalars['Int'];
@@ -1453,6 +1458,7 @@ export type HeatmapsCounts = {
 
 export type HeatmapsCursor = {
   __typename?: 'HeatmapsCursor';
+  count: Scalars['Int'];
   id: Scalars['ID'];
   x: Scalars['Int'];
   y: Scalars['Int'];

@@ -205,11 +205,12 @@ export const showCursorMaps = (doc: Document, items: HeatmapsCursor[]) => {
   doc.body.appendChild(overlay);
 
   const map = heatmap.create({ container: heatmapContainer });
+  const max = Math.max(...items.map(i => i.count));
 
   map.setData({
     min: 0,
-    max: 5, // TODO: What should this really be?
-    data: items.map(i => ({ x: i.x, y: i.y, value: 1 })),
+    max,
+    data: items.map(i => ({ x: i.x, y: i.y, value: i.count })),
   });
 };
 
