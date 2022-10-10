@@ -1,11 +1,13 @@
 import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
+import Link from 'next/link';
 import { startCase, last } from 'lodash';
 import { Icon } from 'components/icon';
 import { Pill } from 'components/pill';
 import { SiteEnterpriseUpgrade } from 'components/admin/site-enterprise-upgrade';
 import { toddMMYYY } from 'lib/dates';
+import { Card } from 'components/card';
 import { CURRENCY_SYMBOLS } from 'data/common/constants';
 import { Message } from 'components/message';
 import { toDecimalCurrency } from 'lib/currency';
@@ -24,11 +26,18 @@ export const SiteSubscription: FC<Props> = ({ site, isEnterprise, hasBilling }) 
 
   return (
     <div className='subscription'>
-      <div>
-        <h5>
-          <Icon name='price-tag-3-line' />
-          Subscription
-        </h5>
+      <Card>
+        <div className='title'>
+          <h5>
+            <Icon name='price-tag-3-line' />
+            Subscription
+          </h5>
+          {hasBilling && (
+            <a className='button stripe-link external-link' href={`https://dashboard.stripe.com/test/customers/${site.billing.customerId}`} target='_blank' rel='noreferrer'>
+              <Icon name='external-link-line' /> <span>Stripe</span>
+            </a>
+          )}
+        </div>
 
         {site.plan?.tier > 0 && !hasBilling && (
           <Message
@@ -133,6 +142,9 @@ export const SiteSubscription: FC<Props> = ({ site, isEnterprise, hasBilling }) 
             }
           </span>
         </div>
+      </Card>
+
+      <Card>
         <h5>
           <Icon name='bank-card-2-line' />
           Invoices
@@ -154,7 +166,24 @@ export const SiteSubscription: FC<Props> = ({ site, isEnterprise, hasBilling }) 
             </span>
           </div>
         ))}
-      </div>
+      </Card>
+
+      <Card>
+        <h5>
+          <Icon name='bubble-chart-line' />
+          Bundled with
+        </h5>
+        <div className='row'>
+          <span>Sites</span>
+          <span>
+            {site.bundledWith.filter(s => s.id !== site.id).map(site => (
+              <Link key={site.id} href={`/__admin/sites/${site.id}`}>
+                <a>{site.name}</a>
+              </Link>
+            ))}
+          </span>
+        </div>
+      </Card>
     </div>
   );
 };

@@ -21,6 +21,16 @@
     }
   }
 
+  .bundled {
+    color: var(--rose-500);
+    font-size: var(--font-size-body);
+
+    .icon {
+      margin: 0 0 0 .25rem;
+      vertical-align: middle;
+    }
+  }
+
   .site-bundles {
     margin: 2rem 0 0 0;
 

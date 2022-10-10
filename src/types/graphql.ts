@@ -148,6 +148,8 @@ export type AdminSite = {
   anonymiseFormInputs: Scalars['Boolean'];
   billing?: Maybe<SiteBilling>;
   browsers: Array<Maybe<Scalars['String']>>;
+  bundled: Scalars['Boolean'];
+  bundledWith: Array<Maybe<AdminSite>>;
   consent: Consent;
   countries: Array<Maybe<RecordingsCountry>>;
   createdAt: Scalars['ISO8601DateTime'];

@@ -7,11 +7,8 @@ import { Main } from 'components/main';
 import { NotFound } from 'components/sites/not-found';
 import { BreadCrumbs } from 'components/admin/breadcrumbs';
 import { useAdminSite } from 'hooks/use-admin-site';
-import { Card } from 'components/card';
-import { Icon } from 'components/icon';
 import { SiteDetails } from 'components/admin/site-details';
 import { SiteSubscription } from 'components/admin/site-subscription';
-import { SiteIngestEnabled } from 'components/admin/site-ingest-enabled';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
 const AdminSite: NextPage<ServerSideProps> = () => {
@@ -49,19 +46,9 @@ const AdminSite: NextPage<ServerSideProps> = () => {
           <>
             <h4 className='title'>
               {admin.site.name}
-
-              <menu>
-                <SiteIngestEnabled site={admin.site} />
-    
-                {hasBilling && (
-                  <a className='button stripe-link external-link' href={`https://dashboard.stripe.com/test/customers/${admin.site.billing.customerId}`} target='_blank' rel='noreferrer'>
-                    <span>Stripe</span> <Icon name='external-link-line' />
-                  </a>
-                )}
-              </menu>
             </h4>
 
-            <Card className='site-card'>
+            <div className='site-card'>
               <SiteDetails 
                 site={admin.site}
                 activeVisitors={admin.activeVisitors}
@@ -73,7 +60,7 @@ const AdminSite: NextPage<ServerSideProps> = () => {
                 hasBilling={hasBilling}
                 isEnterprise={isEnterprise}
               />
-            </Card>
+            </div>
           </>
         )}
       </Main>

@@ -118,6 +118,11 @@ export const GET_ADMIN_SITE_QUERY = gql`
           totalCurrentMonth
           deletedCurrentMonth
         }
+        bundled
+        bundledWith {
+          id
+          name
+        }
         createdAt
       }
       activeVisitors {
@@ -192,6 +197,7 @@ export const GET_ADMIN_SITES_QUERY = gql`
               id
             }
           }
+          bundled
           createdAt
         }
         pagination {
@@ -239,6 +245,7 @@ export const GET_ADMIN_SITES_BUNDLES_QUERY = gql`
               id
             }
           }
+          bundled
           createdAt
         }
       }

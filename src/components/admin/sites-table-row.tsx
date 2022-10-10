@@ -31,10 +31,13 @@ export const SitesTableRow: FC<Props> = ({ site, activeVisitors, style }) => {
       </Cell>
       <Cell>
         <Link href={`/__admin/sites/${site.id}`}>
-          <a>
-            {site.name}
-          </a>
+          <a>{site.name}</a>
         </Link>
+        {site.bundled && (
+          <span className='bundled'>
+            <Icon name='bubble-chart-line' />
+          </span>
+        )}
       </Cell>
       <Cell>
         <a href={site.url} target='_blank' rel='noreferrer'>
