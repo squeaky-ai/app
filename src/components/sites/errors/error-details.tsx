@@ -47,9 +47,9 @@ export const ErrorDetails: FC<Props> = ({
 
       {tab === ErrorTab.DETAILS && (
         <Card className='details'>
-          <div className='left'>
+          <div>
             <p className='key'>Pages</p>
-            <p className='value'>
+            <p className='value pages'>
               {details.pages.map(p => <span key={p}>{p}</span>)}
             </p>
 
@@ -65,7 +65,7 @@ export const ErrorDetails: FC<Props> = ({
             <p className='key'>Message</p>
             <p className='value'>{details.message}</p>
           </div>
-          <div className='right'>
+          <div>
             <p className='key'>Stacktrace</p>
             <pre className='code block'>
               <code>

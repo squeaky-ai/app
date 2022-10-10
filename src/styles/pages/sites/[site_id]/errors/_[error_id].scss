@@ -106,16 +106,9 @@
 
   .error-details {
     .details {
-      display: flex;
-
-      .left {
-        flex: 1;
-      }
-      
-      .right {
-        flex: 1;
-        margin: 0 0 0 1.5rem;
-      }
+      display: grid;
+      grid-gap: 2rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
 
       .key {
         font-weight: var(--font-weight-medium);
@@ -127,7 +120,17 @@
 
         span {
           display: block;
+          margin: 0 0 .5rem 0;
         }
+      }
+
+      .pages {
+        border: 1px solid var(--gray-150);
+        border-radius: var(--border-radius-md);
+        margin: .5rem 0 1rem 0;
+        max-height: 200px;
+        overflow: hidden auto;
+        padding: 1rem;
       }
     
       .code.block {
