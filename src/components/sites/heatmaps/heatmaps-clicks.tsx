@@ -7,20 +7,19 @@ import { Pill } from 'components/pill';
 import { Card } from 'components/card';
 import { Sort } from 'components/sort';
 import { ClickMapData, getClickMapData, getElement, getElements, selectorIncludesClickable } from 'lib/heatmaps';
-import type { HeatmapClickTarget } from 'types/heatmaps';
-import type { Heatmaps, HeatmapsClickCount } from 'types/graphql';
+import type { HeatmapClickTarget, HeatmapsClickCount } from 'types/heatmaps';
 
 interface Props {
-  heatmaps: Heatmaps;
+  items: HeatmapsClickCount[];
   selected: string;
   clickTarget: HeatmapClickTarget;
   setSelected: (selected: string) => void;
 }
 
-export const HeatmapsClicks: FC<Props> = ({ heatmaps, selected, clickTarget, setSelected }) => {
+export const HeatmapsClicks: FC<Props> = ({ items, selected, clickTarget, setSelected }) => {
   const [order, setOrder] = React.useState('clicks__desc');
 
-  const clicks = getClickMapData(heatmaps.items as HeatmapsClickCount[])
+  const clicks = getClickMapData(items as HeatmapsClickCount[])
     // We need a selector
     .filter(c => c.selector)
     // If we're only showing anchors then we should try and

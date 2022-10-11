@@ -16,14 +16,16 @@ import { HeatmapsScrolls } from 'components/sites/heatmaps/heatmaps-scrolls';
 import { HeatmapsPages } from 'components/sites/heatmaps/heatmaps-pages';
 import { HeatmapsPage } from 'components/sites/heatmaps/heatmaps-page';
 import { HeatmapsDisplays } from 'components/sites/heatmaps/heatmaps-displays';
+import { HeatmapsGradients } from 'components/sites/heatmaps/heatmaps-gradients';
 import { useHeatmaps } from 'hooks/use-heatmaps';
+import { useHeatmapsItems } from 'hooks/use-heatmaps-items';
 import { getDateRange } from 'lib/dates';
 import { FeatureFlag } from 'lib/feature-flags';
 import { useFeatureFlags } from 'hooks/use-feature-flags';
-import { HeatmapsDevice, HeatmapsType, SitesPage } from 'types/graphql';
+import { HeatmapsType } from 'types/heatmaps';
+import { HeatmapsDevice, SitesPage } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 import type { HeatmapClickTarget } from 'types/heatmaps';
-import { HeatmapsGradients } from './heatmaps-gradients';
 
 interface Props {
   page: string;
@@ -46,10 +48,16 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
   const { loading, heatmaps } = useHeatmaps({ 
     page, 
     device, 
-    type,
     cluster,
     excludeRecordingIds,
-    range: getDateRange(period) 
+    range: getDateRange(period),
+  });
+
+  const { clickCounts, clickPositions, cursors, scrolls } = useHeatmapsItems({
+    type,
+    page,
+    device,
+    range: getDateRange(period),
   });
 
   const excludeRecording = () => {
@@ -126,11 +134,15 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
               clickTarget={clickTarget}
               page={page}
               heatmaps={heatmaps}
+              clicksCounts={clickCounts}
+              clickPositions={clickPositions}
+              cursors={cursors}
+              scrolls={scrolls}
             />
           </Card>
           {type === HeatmapsType.ClickCount && (
             <HeatmapsClicks 
-              heatmaps={heatmaps} 
+              items={clickCounts}
               selected={selected} 
               clickTarget={clickTarget}
               setSelected={setSelected} 
@@ -138,7 +150,7 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
           )}
 
           {type === HeatmapsType.Scroll && (
-            <HeatmapsScrolls heatmaps={heatmaps} />
+            <HeatmapsScrolls items={scrolls} />
           )}
 
           {type === HeatmapsType.Cursor && (

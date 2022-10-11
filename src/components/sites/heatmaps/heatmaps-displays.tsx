@@ -4,9 +4,9 @@ import { Dropdown } from 'components/dropdown';
 import { Label } from 'components/label';
 import { Icon } from 'components/icon';
 import { Radio } from 'components/radio';
-import { HeatmapsType } from 'types/graphql';
 import { FeatureFlag } from 'lib/feature-flags';
 import { useFeatureFlags } from 'hooks/use-feature-flags';
+import { HeatmapsType } from 'types/heatmaps';
 import type { HeatmapClickTarget } from 'types/heatmaps';
 
 interface Props {

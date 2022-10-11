@@ -272,7 +272,6 @@ export type AdminSiteHeatmapsArgs = {
   fromDate: Scalars['ISO8601Date'];
   page: Scalars['String'];
   toDate: Scalars['ISO8601Date'];
-  type?: HeatmapsType;
 };
 
 
@@ -1425,28 +1424,7 @@ export type FiltersViewport = {
 export type Heatmaps = {
   __typename?: 'Heatmaps';
   counts: HeatmapsCounts;
-  items: Array<Maybe<Item>>;
   recording?: Maybe<Recording>;
-};
-
-
-export type HeatmapsItemsArgs = {
-  cluster?: InputMaybe<Scalars['Int']>;
-};
-
-export type HeatmapsClickCount = {
-  __typename?: 'HeatmapsClickCount';
-  count: Scalars['Int'];
-  id: Scalars['ID'];
-  selector: Scalars['String'];
-};
-
-export type HeatmapsClickPosition = {
-  __typename?: 'HeatmapsClickPosition';
-  id: Scalars['ID'];
-  relativeToElementX: Scalars['Int'];
-  relativeToElementY: Scalars['Int'];
-  selector: Scalars['String'];
 };
 
 export type HeatmapsCounts = {
@@ -1454,14 +1432,6 @@ export type HeatmapsCounts = {
   desktop: Scalars['Int'];
   mobile: Scalars['Int'];
   tablet: Scalars['Int'];
-};
-
-export type HeatmapsCursor = {
-  __typename?: 'HeatmapsCursor';
-  count: Scalars['Int'];
-  id: Scalars['ID'];
-  x: Scalars['Int'];
-  y: Scalars['Int'];
 };
 
 export enum HeatmapsDevice {
@@ -1472,26 +1442,6 @@ export enum HeatmapsDevice {
   /** Show tablet */
   Tablet = 'Tablet'
 }
-
-export type HeatmapsScroll = {
-  __typename?: 'HeatmapsScroll';
-  id: Scalars['ID'];
-  x?: Maybe<Scalars['Int']>;
-  y: Scalars['Int'];
-};
-
-export enum HeatmapsType {
-  /** Show click counts */
-  ClickCount = 'ClickCount',
-  /** Show click positions */
-  ClickPosition = 'ClickPosition',
-  /** Show mouse positions */
-  Cursor = 'Cursor',
-  /** Show scrolls */
-  Scroll = 'Scroll'
-}
-
-export type Item = HeatmapsClickCount | HeatmapsClickPosition | HeatmapsCursor | HeatmapsScroll;
 
 export type Mutation = {
   __typename?: 'Mutation';
@@ -2488,7 +2438,6 @@ export type SiteHeatmapsArgs = {
   fromDate: Scalars['ISO8601Date'];
   page: Scalars['String'];
   toDate: Scalars['ISO8601Date'];
-  type?: HeatmapsType;
 };
 
 

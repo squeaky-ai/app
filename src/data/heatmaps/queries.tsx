@@ -1,10 +1,10 @@
 import { gql } from '@apollo/client';
 
 export const GET_HEATMAPS_QUERY = gql`
-  query GetHeatmaps($siteId: ID!, $page: String!, $type: HeatmapsType!, $fromDate: ISO8601Date!, $toDate: ISO8601Date!, $device: HeatmapsDevice!, $excludeRecordingIds: [ID!], $cluster: Int) {
+  query GetHeatmaps($siteId: ID!, $page: String!, $fromDate: ISO8601Date!, $toDate: ISO8601Date!, $device: HeatmapsDevice!, $excludeRecordingIds: [ID!]) {
     site(siteId: $siteId) {
       id
-      heatmaps(page: $page, type: $type, device: $device, fromDate: $fromDate, toDate: $toDate, excludeRecordingIds: $excludeRecordingIds) {
+      heatmaps(page: $page, device: $device, fromDate: $fromDate, toDate: $toDate, excludeRecordingIds: $excludeRecordingIds) {
         counts {
           desktop
           tablet
@@ -42,26 +42,6 @@ export const GET_HEATMAPS_QUERY = gql`
               currentPage
               totalPages
             }
-          }
-        }
-        items(cluster: $cluster) {
-          ... on HeatmapsClickCount {
-            selector
-            count
-          }
-          ... on HeatmapsClickPosition {
-            selector
-            relativeToElementX
-            relativeToElementY
-          }
-          ... on HeatmapsCursor {
-            x
-            y
-            count
-          }
-          ... on HeatmapsScroll {
-            x
-            y
           }
         }
       }

@@ -3,7 +3,7 @@ import { range, orderBy, findLast, sumBy, countBy } from 'lodash';
 import { percentage } from 'lib/maths';
 import { HeatmapColor, HEATMAP_COLOURS } from 'data/heatmaps/constants';
 import type { HeatmapClickTarget } from 'types/heatmaps';
-import type { HeatmapsScroll, HeatmapsClickCount, HeatmapsClickPosition, HeatmapsCursor } from 'types/graphql';
+import type { HeatmapsScroll, HeatmapsClickCount, HeatmapsClickPosition, HeatmapsCursor } from 'types/heatmaps';
 
 interface ScrollMapData {
   increment: number;
@@ -224,8 +224,8 @@ export const showClickGradientMaps = (doc: Document, items: HeatmapsClickPositio
       const { left, top } = elem.getBoundingClientRect();
 
       return {
-        x: left + item.relativeToElementX,
-        y: top + item.relativeToElementY,
+        x: left + item.relative_to_element_x,
+        y: top + item.relative_to_element_y,
         value: 1,
       };
     })
