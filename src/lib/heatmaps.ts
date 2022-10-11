@@ -2,6 +2,7 @@ import heatmap from 'vendor/heatmap';
 import { range, orderBy, findLast, sumBy, countBy } from 'lodash';
 import { percentage } from 'lib/maths';
 import { HeatmapColor, HEATMAP_COLOURS } from 'data/heatmaps/constants';
+import type { Heatmap } from 'vendor/heatmap';
 import type { HeatmapClickTarget } from 'types/heatmaps';
 import type { HeatmapsScroll, HeatmapsClickCount, HeatmapsClickPosition, HeatmapsCursor } from 'types/heatmaps';
 
@@ -19,6 +20,16 @@ export interface ClickMapData {
   count: number;
   percentage: number;
 }
+
+const createHeatmapsInstance = (container: HTMLElement): Heatmap<string, 'x', 'y'> => heatmap.create({
+  container,
+  gradient: {
+    0.25: '#FFE99B', 
+    0.55: '#FBC73B', 
+    0.85: '#F96155', 
+    1.0: '#FF2E86'
+  },
+});
 
 export const getElement = (doc: Document, selector: string) => {
   try {
@@ -204,7 +215,7 @@ export const showCursorMaps = (doc: Document, items: HeatmapsCursor[]) => {
   overlay.appendChild(heatmapContainer);
   doc.body.appendChild(overlay);
 
-  const map = heatmap.create({ container: heatmapContainer });
+  const map = createHeatmapsInstance(heatmapContainer);
   const max = Math.max(...items.map(i => i.count));
 
   map.setData({
@@ -256,7 +267,7 @@ export const showClickGradientMaps = (doc: Document, items: HeatmapsClickPositio
 
   // Group by the selector, as that should allow us to have
   // some idea of a local area of clicks
-  const map = heatmap.create({ container: heatmapContainer });
+  const map = createHeatmapsInstance(heatmapContainer);
   const max = Math.max(...Object.values((countBy(data, data => `${data.x}-${data.y}`))));
 
   map.setData({ min: 0, max, data });

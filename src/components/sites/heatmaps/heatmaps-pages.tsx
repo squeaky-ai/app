@@ -44,7 +44,7 @@ export const HeatmapsPages: FC<Props> = ({ page, pages, setPage }) => {
       <div ref={ref} className={classnames('page-dropdown', { open })}>
         <Label>Page</Label>
         <Button className='search-open' onClick={() => setOpen(!open)}>
-          {page}
+          {page || '/'}
           <Icon name='arrow-drop-down-line' />
         </Button>
 

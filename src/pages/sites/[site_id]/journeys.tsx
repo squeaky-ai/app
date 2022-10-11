@@ -57,7 +57,7 @@ const SitesJourneys: NextPage<ServerSideProps> = ({ user }) => {
               <PageLoading />
             )}
 
-            {page && site.recordingsCount > 0 && (
+            {site.recordingsCount > 0 && !loading && (
               <Journeys
                 site={site}
                 member={member}

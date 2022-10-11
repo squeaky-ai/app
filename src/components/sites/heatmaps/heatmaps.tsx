@@ -16,7 +16,6 @@ import { HeatmapsScrolls } from 'components/sites/heatmaps/heatmaps-scrolls';
 import { HeatmapsPages } from 'components/sites/heatmaps/heatmaps-pages';
 import { HeatmapsPage } from 'components/sites/heatmaps/heatmaps-page';
 import { HeatmapsDisplays } from 'components/sites/heatmaps/heatmaps-displays';
-import { HeatmapsGradients } from 'components/sites/heatmaps/heatmaps-gradients';
 import { useHeatmaps } from 'hooks/use-heatmaps';
 import { useHeatmapsItems } from 'hooks/use-heatmaps-items';
 import { getDateRange } from 'lib/dates';
@@ -36,7 +35,6 @@ interface Props {
 }
 
 export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod }) => {
-  const [cluster, setCluster] = React.useState<number>(16);
   const [type, setType] = React.useState<HeatmapsType>(HeatmapsType.ClickCount);
   const [device, setDevice] = React.useState<HeatmapsDevice>(HeatmapsDevice.Desktop);
   const [clickTarget, setClickTarget] = React.useState<HeatmapClickTarget>('all');
@@ -48,7 +46,6 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
   const { loading, heatmaps } = useHeatmaps({ 
     page, 
     device, 
-    cluster,
     excludeRecordingIds,
     range: getDateRange(period),
   });
@@ -68,13 +65,14 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
   };
 
   const hasData = !!heatmaps.recording;
+  const hasHiddenSidebar = [HeatmapsType.ClickPosition, HeatmapsType.Cursor].includes(type);
 
   if (loading) {
     return <PageLoading />;
   }
 
   return (
-    <div className={classnames('heatmaps-grid', { empty: !hasData })}>
+    <div className={classnames('heatmaps-grid', { empty: !hasData, 'hide-sidebar': hasHiddenSidebar })}>
       <div className='options'>
         <div className='left'>
           <HeatmapsPages page={page} pages={pages} setPage={setPage} />
@@ -151,10 +149,6 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
 
           {type === HeatmapsType.Scroll && (
             <HeatmapsScrolls items={scrolls} />
-          )}
-
-          {type === HeatmapsType.Cursor && (
-            <HeatmapsGradients cluster={cluster} setCluster={setCluster} />
           )}
         </>
       )}

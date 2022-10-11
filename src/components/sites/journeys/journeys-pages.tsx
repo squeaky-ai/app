@@ -42,7 +42,7 @@ export const JourneysPages: FC<Props> = ({ page, pages, setPage }) => {
     <div className='journeys-pages'>
       <div ref={ref} className={classnames('page-dropdown', { open })}>
         <Button className='search-open' onClick={() => setOpen(!open)}>
-          {page}
+          {page || '/'}
           <Icon name='arrow-drop-down-line' />
         </Button>
 

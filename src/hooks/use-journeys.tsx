@@ -27,7 +27,8 @@ export const useJourneys = (props: Props): UseJourneys => {
       page: props.page,
       position: props.position,
       ...props.range,
-    }
+    },
+    skip: !props.page,
   });
 
   return {

@@ -14,7 +14,6 @@ interface Props {
   device: HeatmapsDevice;
   page: string;
   range: TimeRange;
-  cluster: number;
   excludeRecordingIds: string[];
 }
 
@@ -23,7 +22,6 @@ function getVariablesForProps(siteId: string, props: Props) {
     siteId,
     device: props.device,
     page: props.page,
-    cluster: props.cluster,
     excludeRecordingIds: props.excludeRecordingIds,
     ...props.range,
   }
@@ -34,6 +32,7 @@ export const useHeatmaps = (props: Props): UseHeatmaps => {
 
   const { data, loading, error } = useQuery<{ site: Site }>(GET_HEATMAPS_QUERY, {
     variables: getVariablesForProps(router.query.site_id as string, props),
+    skip: !props.page,
   });
 
   const defaults: Heatmaps = {

@@ -88,6 +88,18 @@
                            'empty-state empty-state';
     }
 
+    &.hide-sidebar {
+      grid-template-areas: 'options'
+                           'content';
+      grid-template-columns: 100%;
+
+      .card {
+        &.data {
+          display: none;
+        }
+      }
+    }
+
     .empty-state {
       grid-area: empty-state;
       height: 100%;
