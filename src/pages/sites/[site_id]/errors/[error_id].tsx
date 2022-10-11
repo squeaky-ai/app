@@ -11,6 +11,8 @@ import { Period } from 'components/sites/period/period';
 import { ErrorDetails } from 'components/sites/errors/error-details';
 import { RecordingsColumns } from 'components/sites/recordings/recordings-columns';
 import { VisitorsColumns } from 'components/sites/visitors/visitors-columns';
+import { Container } from 'components/container';
+import { Illustration } from 'components/illustration';
 import { RecordingsBulkActions } from 'components/sites/recordings/recordings-bulk-actions';
 import { usePeriod } from 'hooks/use-period';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
@@ -79,7 +81,12 @@ const SitesErrorsError: NextPage<ServerSideProps> = ({ user }) => {
             )}
 
             {!loading && !details && (
-              <p>Not found</p>
+              <Container className='sm centered empty-state show'>
+                <div className='empty-state-contents'>
+                  <Illustration illustration='illustration-18' height={240} width={320} alt='Illustration to represent the empty errors page' />
+                  <h4>Your site has no errors for the time period you&apos;ve selected</h4>
+                </div>
+              </Container>
             )}
 
             {!loading && details && (

@@ -7,6 +7,8 @@ import { Page } from 'components/sites/page';
 import { EmptyState } from 'components/sites/empty-state';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { Error } from 'components/error';
+import { Container } from 'components/container';
+import { Illustration } from 'components/illustration';
 import { PageLoading } from 'components/sites/page-loading';
 import { ErrorsTable } from 'components/sites/errors/errors-table';
 import { ErrorCounts } from 'components/sites/errors/counts';
@@ -68,6 +70,15 @@ const SitesErrors: NextPage<ServerSideProps> = ({ user }) => {
 
             {loading && (
               <PageLoading />
+            )}
+
+            {!loading && !hasErrors && (
+              <Container className='sm centered empty-state show'>
+                <div className='empty-state-contents'>
+                  <Illustration illustration='illustration-18' height={240} width={320} alt='Illustration to represent the empty errors page' />
+                  <h4>Your site has no errors for the time period you&apos;ve selected</h4>
+                </div>
+              </Container>
             )}
 
             {!loading && hasErrors && (
