@@ -26,11 +26,11 @@ const AdminSitesBundles: NextPage<ServerSideProps> = () => {
   return (
     <>
       <Head>
-        <title>Squeaky | Admin | Sites</title>
+        <title>Squeaky | Admin | Sites | Bundles</title>
       </Head>
 
       <Main>
-        <BreadCrumbs items={[{ name: 'Admin', href: '/__admin/dashboard' }, { name: 'Sites' }]} />
+        <BreadCrumbs items={[{ name: 'Admin', href: '/__admin/dashboard' }, { name: 'Sites' }, { name: 'Bundles' }]} />
 
         <div className='admin-header'>
           <div className='search'>

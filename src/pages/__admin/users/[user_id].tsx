@@ -10,7 +10,7 @@ import { useAdminUser } from 'hooks/use-admin-user';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { User } from 'components/admin/user';
 
-const Admin: NextPage<ServerSideProps> = () => {
+const AdminUser: NextPage<ServerSideProps> = () => {
   const { user, loading, error } = useAdminUser();
 
   const fullName = user?.fullName || 'No one';
@@ -52,5 +52,5 @@ const Admin: NextPage<ServerSideProps> = () => {
   );
 };
 
-export default Admin;
+export default AdminUser;
 export { getServerSideProps };

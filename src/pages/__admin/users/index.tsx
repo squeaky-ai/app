@@ -10,12 +10,13 @@ import { UsersColumns } from 'components/admin/users-columns';
 import { PageLoading } from 'components/sites/page-loading';
 import { Pagination } from 'components/pagination';
 import { Search } from 'components/search';
+import { UsersType } from 'components/admin/users-type';
 import { useAdminUsers } from 'hooks/use-admin-users';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useColumns } from 'hooks/use-columns';
 import { AdminUserSort } from 'types/graphql';
 
-const Admin: NextPage<ServerSideProps> = () => {
+const AdminUsers: NextPage<ServerSideProps> = () => {
   const [search, setSearch] = React.useState<string>('');
   const [page, setPage] = React.useState<number>(1);
   const [size, setSize] = React.useState<number>(25);
@@ -47,11 +48,11 @@ const Admin: NextPage<ServerSideProps> = () => {
   return (
     <>
       <Head>
-        <title>Squeaky | Admin | Users</title>
+        <title>Squeaky | Admin | Users | All</title>
       </Head>
 
       <Main>
-        <BreadCrumbs items={[{ name: 'Admin', href: '/__admin/dashboard' }, { name: 'Users' }]} />
+        <BreadCrumbs items={[{ name: 'Admin', href: '/__admin/dashboard' }, { name: 'Users' }, { name: 'All' }]} />
 
         <div className='admin-header'>
           <div className='search'>
@@ -69,6 +70,7 @@ const Admin: NextPage<ServerSideProps> = () => {
               columns={columns}
               setColumns={setColumns}
             />
+            <UsersType />
           </menu>
         </div>
 
@@ -105,5 +107,5 @@ const Admin: NextPage<ServerSideProps> = () => {
   );
 };
 
-export default Admin;
+export default AdminUsers;
 export { getServerSideProps };

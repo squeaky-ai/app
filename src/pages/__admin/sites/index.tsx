@@ -48,11 +48,11 @@ const AdminSites: NextPage<ServerSideProps> = () => {
   return (
     <>
       <Head>
-        <title>Squeaky | Admin | Sites</title>
+        <title>Squeaky | Admin | Sites | All</title>
       </Head>
 
       <Main>
-        <BreadCrumbs items={[{ name: 'Admin', href: '/__admin/dashboard' }, { name: 'Sites' }]} />
+        <BreadCrumbs items={[{ name: 'Admin', href: '/__admin/dashboard' }, { name: 'Sites' }, { name: 'All' }]} />
 
         <div className='admin-header'>
           <div className='search'>

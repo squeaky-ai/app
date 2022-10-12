@@ -103,7 +103,7 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
 
           <ButtonGroup>
             <Button className={classnames([HeatmapsType.ClickCount, HeatmapsType.ClickPosition].includes(type) ? 'primary' : 'blank')} onClick={() => setType(HeatmapsType.ClickCount)}>
-              {device === HeatmapsDevice.Desktop ? 'Clicks' : 'Taps'}
+              {device === HeatmapsDevice.Desktop ? 'Click' : 'Tap'}
             </Button>
             {featureFlagEnabled(FeatureFlag.HEATMAP_CURSORS) && (
               <Button className={classnames(type === HeatmapsType.Cursor ? 'primary' : 'blank')} onClick={() => setType(HeatmapsType.Cursor)}>
