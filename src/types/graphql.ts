@@ -39,6 +39,7 @@ export type Admin = {
   sitesBundles: Array<Maybe<SitesBundle>>;
   sitesCount: Scalars['Int'];
   sitesStored: Array<Maybe<AdminSitesStored>>;
+  user?: Maybe<AdminUser>;
   users: AdminUsers;
   usersCount: Scalars['Int'];
   usersStored: Array<Maybe<AdminUsersStored>>;
@@ -57,6 +58,11 @@ export type AdminSitesArgs = {
   search?: InputMaybe<Scalars['String']>;
   size?: InputMaybe<Scalars['Int']>;
   sort?: InputMaybe<AdminSiteSort>;
+};
+
+
+export type AdminUserArgs = {
+  userId: Scalars['ID'];
 };
 
 

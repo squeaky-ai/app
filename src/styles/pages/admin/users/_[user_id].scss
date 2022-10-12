@@ -1,0 +1,14 @@
+.page.__admin.user {
+  .user-details {
+    p {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      margin: 0 0 1rem 0;
+
+      &:last-of-type {
+        margin: 0;
+      }
+    }
+  }
+}

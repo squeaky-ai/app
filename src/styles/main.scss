@@ -80,7 +80,8 @@
 @import './pages/admin/sites/[site_id]';
 @import './pages/admin/sites/index';
 @import './pages/admin/dashboard';
-@import './pages/admin/users';
+@import './pages/admin/users/[user_id]';
+@import './pages/admin/users/index';
 @import './pages/sites/[site_id]/analytics/pages/traffic';
 @import './pages/sites/[site_id]/analytics/audience';
 @import './pages/sites/[site_id]/analytics/traffic';

@@ -42,7 +42,7 @@ export const GET_ADMIN_QUERY = gql`
 `;
 
 export const GET_ADMIN_SITE_QUERY = gql`
-  query GetAdmin($siteId: ID!) { 
+  query GetAdminSite($siteId: ID!) { 
     admin {
       site(siteId: $siteId) {
         id
@@ -247,6 +247,29 @@ export const GET_ADMIN_SITES_BUNDLES_QUERY = gql`
           }
           bundled
           createdAt
+        }
+      }
+    }
+  }
+`;
+
+export const GET_ADMIN_USER_QUERY = gql`
+  query GetAdminUser($userId: ID!) {
+    admin {
+      user(userId: $userId) {
+        id
+        fullName
+        email
+        superuser
+        createdAt
+        lastActivityAt
+        visitor {
+          id
+          visitorId
+        }
+        sites {
+          id
+          name
         }
       }
     }

@@ -42,7 +42,7 @@ const Admin: NextPage<ServerSideProps> = () => {
 
   if (error) {
     return <Error />;
-  }
+  } 
 
   return (
     <>
