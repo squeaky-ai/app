@@ -9,6 +9,7 @@ import { Period } from 'components/sites/period/period';
 import { Error } from 'components/error';
 import { EventHistory } from 'components/sites/events/event-history';
 import { PageLoading } from 'components/sites/page-loading';
+import { Unlock } from 'components/sites/unlock';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { usePeriod } from 'hooks/use-period';
 import { getDateRange } from 'lib/dates';
@@ -64,6 +65,8 @@ const SitesEventsHistory: NextPage<ServerSideProps> = ({ user }) => {
                 <Period period={period} onChange={setPeriod} />
               </menu>
             </div>
+
+            <Unlock site={site} />
 
             {loading && <PageLoading />}
             

@@ -14,6 +14,7 @@ import { GettingStarted } from 'components/sites/events/getting-started';
 import { EventCapturesBulkActions } from 'components/sites/events/event-captures-bulk-actions';
 import { EventCreate } from 'components/sites/events/event-create';
 import { EventList } from 'components/sites/events/event-list';
+import { Unlock } from 'components/sites/unlock';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useSort } from 'hooks/use-sort';
 import { useEventCaptures } from 'hooks/use-event-captures';
@@ -75,6 +76,8 @@ const SitesEvents: NextPage<ServerSideProps> = ({ user }) => {
                 </menu>
               )}
             </div>
+
+            <Unlock site={site} />
 
             <EmptyState
               title='There is currently no events data'

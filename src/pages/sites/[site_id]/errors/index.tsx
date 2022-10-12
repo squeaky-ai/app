@@ -10,6 +10,7 @@ import { Error } from 'components/error';
 import { Container } from 'components/container';
 import { Illustration } from 'components/illustration';
 import { PageLoading } from 'components/sites/page-loading';
+import { Unlock } from 'components/sites/unlock';
 import { ErrorsTable } from 'components/sites/errors/errors-table';
 import { ErrorCounts } from 'components/sites/errors/counts';
 import { Period } from 'components/sites/period/period';
@@ -67,6 +68,8 @@ const SitesErrors: NextPage<ServerSideProps> = ({ user }) => {
               videoName='Errors Intro'
               snippet='If you have only recently installed or updated your tracking code it may take up to an hour before any event data becomes available for you to manage.'
             />
+
+            <Unlock site={site} />
 
             {loading && (
               <PageLoading />

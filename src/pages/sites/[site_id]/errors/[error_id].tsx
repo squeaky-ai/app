@@ -15,6 +15,7 @@ import { Container } from 'components/container';
 import { Illustration } from 'components/illustration';
 import { RecordingsBulkActions } from 'components/sites/recordings/recordings-bulk-actions';
 import { usePeriod } from 'hooks/use-period';
+import { Unlock } from 'components/sites/unlock';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useRouter } from 'next/router';
 import { useErrorsDetails } from 'hooks/use-errors-details';
@@ -75,6 +76,8 @@ const SitesErrorsError: NextPage<ServerSideProps> = ({ user }) => {
                 </menu>
               )}
             </div>
+
+            <Unlock site={site} />
 
             {loading && (
               <PageLoading />

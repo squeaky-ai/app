@@ -8,6 +8,7 @@ import { PageLoading } from 'components/sites/page-loading';
 import { Card } from 'components/card';
 import { Pill } from 'components/pill';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
+import { Unlock } from 'components/sites/unlock';
 import { VisitorsSummary } from 'components/sites/visitors/visitors-summary';
 import { VisitorsRecording } from 'components/sites/visitors/visitors-recordings';
 import { VisitorPages } from 'components/sites/visitors/visitors-pages';
@@ -100,6 +101,8 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
                 />
               </menu>
             </h4>
+
+            <Unlock site={site} />
 
             <VisitorsSummary site={site} member={member} visitor={visitor} />
 
