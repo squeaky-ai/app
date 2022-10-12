@@ -181,7 +181,7 @@ const SitesSettingsPrivacyConsent: NextPage<ServerSideProps> = ({ user }) => {
                           <p>If you have visitors that are using a different primary language then you may wish to adjust the consent widget accordingly. Please check the boxes before for any languages you&apos;d like to include and we will show them these languages if they match the visitor&apos;s browser or device settings.</p>
                         
                           <div className='languages'>
-                            {Object.entries(countryNames).filter(c => !['fr', 'es'].includes(c[0])).map(([locale, name]) => (
+                            {Object.entries(countryNames).map(([locale, name]) => (
                               <div className='row' key={locale}>
                                 <span className='name'>
                                   <Checkbox
