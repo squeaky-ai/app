@@ -160,6 +160,10 @@ export const GET_ADMIN_USERS_QUERY = gql`
             id
             name
           }
+          partner {
+            name
+            slug
+          }
         }
         pagination {
           pageSize
@@ -270,6 +274,37 @@ export const GET_ADMIN_USER_QUERY = gql`
         sites {
           id
           name
+        }
+        partner {
+          name
+          slug
+        }
+      }
+    }
+  }
+`;
+
+export const GET_ADMIN_USERS_PARTNERS_QUERY = gql`
+  query GetAdminUsersPartners {
+    admin {
+      usersPartners {
+        id
+        fullName
+        email
+        superuser
+        createdAt
+        lastActivityAt
+        visitor {
+          id
+          visitorId
+        }
+        sites {
+          id
+          name
+        }
+        partner {
+          name
+          slug
         }
       }
     }

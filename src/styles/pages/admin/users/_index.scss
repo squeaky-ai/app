@@ -3,6 +3,16 @@
     margin-bottom: 2rem;
   }
 
+  .partnered {
+    color: var(--rose-500);
+    font-size: var(--font-size-body);
+
+    .icon {
+      margin: 0 0 0 .25rem;
+      vertical-align: middle;
+    }
+  }
+
   .users-footer {
     align-items: center;
     display: flex;
@@ -16,6 +26,14 @@
       }
 
       .page-size {
+        display: none;
+      }
+    }
+  }
+
+  &.partners {
+    .table {
+      .sort {
         display: none;
       }
     }

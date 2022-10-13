@@ -31,6 +31,11 @@ export const UsersTableRow: FC<Props> = ({ user, style }) => {
         <Link href={`/__admin/users/${user.id}`}>
           <a>{user.fullName || '-'}</a>
         </Link>
+        {!!user.partner && (
+          <span className='partnered'>
+            <Icon name='user-star-line' />
+          </span>
+        )}
       </Cell>
       <Cell>{user.email}</Cell>
       <Cell>

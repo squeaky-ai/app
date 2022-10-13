@@ -24,3 +24,9 @@ export type AdminDashboard = Omit<
   'users' | 
   'blogImages'
 >;
+
+export enum AdminUserPartnerTabs {
+  REFERRERD_SITES,
+  REVENUE_COMMISSION,
+  INVOICES,
+}

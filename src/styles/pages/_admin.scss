@@ -15,6 +15,15 @@
   .button-group {
     border-color: var(--mauve-700);
   }
+
+  .tab-header {
+    .button {
+      &.active::after,
+      &:hover:after {
+        background: var(--mauve-700);
+      }
+    }
+  }
   
   .admin-indicator {
     color: var(--peach-200);

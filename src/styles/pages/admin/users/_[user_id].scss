@@ -1,4 +1,10 @@
 .page.__admin.user {
+  .admin-header {
+    .pill {
+      margin: 0 0 0 1rem;
+    }
+  }
+
   .user-details {
     p {
       align-items: center;
@@ -10,5 +16,9 @@
         margin: 0;
       }
     }
+  }
+
+  .user-partner {
+    margin: 2rem 0 0 0;
   }
 }

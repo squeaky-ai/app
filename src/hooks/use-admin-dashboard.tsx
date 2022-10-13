@@ -33,6 +33,7 @@ export const useAdminDashboard = (): UseAdminDashboard => {
     sitesStored: [],
     usersStored: [],
     sitesBundles: [],
+    usersPartners: [],
   };
 
   return {

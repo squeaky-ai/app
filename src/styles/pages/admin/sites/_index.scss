@@ -79,4 +79,12 @@
       }
     }
   }
+
+  &.bundles {
+    .table {
+      .sort {
+        display: none;
+      }
+    }
+  }
 }

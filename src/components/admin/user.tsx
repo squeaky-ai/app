@@ -63,5 +63,17 @@ export const User: FC<Props> = ({ user }) => (
         }
       </span>
     </p>
+    {user.partner && (
+      <>
+        <p>
+          <b>Partner Company Name</b>
+          <span>{user.partner.name}</span>
+        </p>
+        <p>
+          <b>Partner Company Slug</b>
+          <span>{user.partner.slug}</span>
+        </p>
+      </>
+    )}
   </Card>
 );
