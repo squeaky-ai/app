@@ -24,10 +24,11 @@ export interface ClickMapData {
 const createHeatmapsInstance = (container: HTMLElement): Heatmap<string, 'x', 'y'> => heatmap.create({
   container,
   gradient: {
-    0.25: '#FFE99B', 
-    0.55: '#FBC73B', 
-    0.85: '#F96155', 
-    1.0: '#FF2E86'
+    0.25: '#B1E4FD', 
+    0.35: '#D5E2F3',
+    0.55: '#FFFFFF', 
+    0.85: '#FBC73B', 
+    1.0:  '#FA4638',
   },
 });
 
