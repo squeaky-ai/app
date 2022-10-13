@@ -219,6 +219,9 @@ export const showCursorMaps = (doc: Document, items: HeatmapsCursor[]) => {
   const map = createHeatmapsInstance(heatmapContainer);
   const max = Math.max(...items.map(i => i.count));
 
+  // TODO: Remove!
+  (window as any).heatmap = map;
+
   map.setData({
     min: 0,
     max,
