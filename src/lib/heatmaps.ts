@@ -24,11 +24,10 @@ export interface ClickMapData {
 const createHeatmapsInstance = (container: HTMLElement): Heatmap<string, 'x', 'y'> => heatmap.create({
   container,
   gradient: {
-    0.25: '#B1E4FD', 
-    0.35: '#D5E2F3',
-    0.55: '#FFFFFF', 
-    0.85: '#FBC73B', 
-    1.0:  '#FA4638',
+    0.25: '#0046DC',
+    0.55: "yellow",
+    0.85: '#FFA800',
+    1.00: "red",
   },
 });
 
@@ -199,7 +198,7 @@ export const showCursorMaps = (doc: Document, items: HeatmapsCursor[]) => {
   const overlay = document.createElement('div');
   overlay.classList.add('__squeaky_cursor_overlay');
   overlay.style.cssText = `
-    background: rgba(0, 0, 0, .25);
+    background: rgba(0, 70, 220, .15);
     height: ${doc.body.scrollHeight}px;
     left: 0;
     position: absolute;
@@ -218,9 +217,6 @@ export const showCursorMaps = (doc: Document, items: HeatmapsCursor[]) => {
 
   const map = createHeatmapsInstance(heatmapContainer);
   const max = Math.max(...items.map(i => i.count));
-
-  // TODO: Remove!
-  (window as any).heatmap = map;
 
   map.setData({
     min: 0,
@@ -251,7 +247,7 @@ export const showClickGradientMaps = (doc: Document, items: HeatmapsClickPositio
   const overlay = document.createElement('div');
   overlay.classList.add('__squeaky_click_overlay');
   overlay.style.cssText = `
-    background: rgba(0, 0, 0, .25);
+    background: rgba(0, 70, 220, .15);
     height: ${doc.body.scrollHeight}px;
     left: 0;
     position: absolute;
