@@ -9,6 +9,10 @@ export const USER_QUERY = gql`
       fullName
       email
       superuser
+      partner {
+        name
+        slug
+      }
     }
   }
 `;

@@ -15,7 +15,7 @@ const App: FC<AppProps> = ({ Component, pageProps }) => (
     <ToastProvider>
       <HistoryProvider>
         <SidebarProvider>
-          <Page>
+          <Page user={pageProps.user}>
             <Component {...pageProps} />
           </Page>
         </SidebarProvider>

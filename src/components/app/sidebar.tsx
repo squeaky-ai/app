@@ -20,8 +20,13 @@ import { OWNER, ADMIN } from 'data/teams/constants';
 import { useResize } from 'hooks/use-resize';
 import { useFeatureFlags } from 'hooks/use-feature-flags';
 import { FeatureFlag } from 'lib/feature-flags';
+import type { User } from 'types/graphql';
 
-export const Sidebar: FC = () => {
+interface Props {
+  user: User;
+}
+
+export const Sidebar: FC<Props> = ({ user }) => {
   const ref = React.useRef<HTMLElement>(null);
   const resize = useResize();
   const router = useRouter();
@@ -129,6 +134,14 @@ export const Sidebar: FC = () => {
                 <span>All Sites</span>
               </a>
             </Link>
+            {!!user.partner && (
+              <Link href='/partners'>
+                <a className={classnames('link', { active: path.startsWith('/partners') })} data-label='Partner Program'>
+                  <Icon className='sidebar-icon' name='user-star-line' />
+                  <span>Partner Program</span>
+                </a>
+              </Link>
+            )}
           </div>
           <div className='nav right'>
             <Link href={`/sites/${siteId}/dashboard`}>
