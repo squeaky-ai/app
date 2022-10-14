@@ -6,7 +6,7 @@ import { Unauthorized } from 'components/sites/unauthorized';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
 const Partners: NextPage<ServerSideProps> = ({ user }) => {
-  const isPartner = !!user.partner;
+  const isPartner = !!user?.partner;
 
   return (
     <>

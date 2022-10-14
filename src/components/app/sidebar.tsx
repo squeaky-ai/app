@@ -134,7 +134,7 @@ export const Sidebar: FC<Props> = ({ user }) => {
                 <span>All Sites</span>
               </a>
             </Link>
-            {!!user.partner && (
+            {!!user?.partner && (
               <Link href='/partners'>
                 <a className={classnames('link', { active: path.startsWith('/partners') })} data-label='Partner Program'>
                   <Icon className='sidebar-icon' name='user-star-line' />
