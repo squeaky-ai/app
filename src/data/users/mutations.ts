@@ -26,6 +26,15 @@ export const USER_PASSWORD_MUTATION = gql`
   }
 `;
 
+export const USER_CREATE_REFERRAL_MUTATION = gql`
+  mutation UserCreateReferral($input: UsersReferralCreateInput!) {
+    userReferralCreate(input: $input) {
+      id
+      url
+    }
+  }
+`;
+
 export const UPDATE_USER_COMMUNICATION = gql`
   mutation UserCommunication($input: UsersCommunicationInput!) {
     userCommunication(input: $input) {
@@ -47,6 +56,14 @@ export const UPDATE_USER_COMMUNICATION = gql`
 export const ADMIN_USER_DELETE_MUTATION = gql`
   mutation AdminUserDelete($input: AdminUserDeleteInput!) {
     adminUserDelete(input: $input) {
+      id
+    }
+  }
+`;
+
+export const ADMIN_REFERRAL_DELETE_MUTATION = gql`
+  mutation AdminReferralDelete($input: AdminReferralDeleteInput!) {
+    adminReferralDelete(input: $input) {
       id
     }
   }

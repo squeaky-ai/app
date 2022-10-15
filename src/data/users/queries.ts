@@ -10,6 +10,7 @@ export const USER_QUERY = gql`
       email
       superuser
       partner {
+        id
         name
         slug
       }
@@ -39,6 +40,32 @@ export const GET_COMMUNICATION_QUERY = gql`
         marketingAndSpecialOffersEmail
         knowledgeSharingEmail
         feedbackEmail
+      }
+    }
+  }
+`;
+
+
+export const GET_PARTNER_QUERY = gql`
+  query UserParnter {
+    user {
+      id
+      partner {
+        id
+        referrals {
+          id
+          url
+          site {
+            id
+            url
+            name
+            verifiedAt
+            plan {
+              tier
+              name
+            }
+          }
+        }
       }
     }
   }

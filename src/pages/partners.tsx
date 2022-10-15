@@ -1,9 +1,9 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { Main } from 'components/main';
 import { Unauthorized } from 'components/sites/unauthorized';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { Partner } from 'components/partners/partner';
 
 const Partners: NextPage<ServerSideProps> = ({ user }) => {
   const isPartner = !!user?.partner;
@@ -19,9 +19,7 @@ const Partners: NextPage<ServerSideProps> = ({ user }) => {
       )}
 
       {isPartner && (
-        <Main>
-          <h4 className='title'>Partner Program</h4>
-        </Main>
+        <Partner />
       )}
     </>
   );

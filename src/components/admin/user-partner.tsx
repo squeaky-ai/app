@@ -1,7 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import { UserPartnerTabs } from 'components/admin/user-partner-tabs';
-import { UserPartnerReferreredSite } from 'components/admin/user-partner-referrered-sites';
+import { UserPartnerReferreredSites } from 'components/admin/user-partner-referrered-sites';
 import { UserPartnerRevenue } from 'components/admin/user-partner-revenue';
 import { UserPartnerInvoices } from 'components/admin/user-partner-invoices';
 import { AdminUserPartnerTabs } from 'types/admin';
@@ -18,7 +18,7 @@ export const UserPartner: FC<Props> = ({ user }) => {
     <div className='user-partner'>
       <UserPartnerTabs tab={tab} onChange={setTab} />
       {tab === AdminUserPartnerTabs.REFERRERD_SITES && (
-        <UserPartnerReferreredSite user={user} />
+        <UserPartnerReferreredSites user={user} />
       )}
       {tab === AdminUserPartnerTabs.REVENUE_COMMISSION && (
         <UserPartnerRevenue user={user} setTab={setTab} />

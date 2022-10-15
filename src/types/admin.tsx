@@ -30,3 +30,5 @@ export enum AdminUserPartnerTabs {
   REVENUE_COMMISSION,
   INVOICES,
 }
+
+export type ReferreredSiteColumns = 'lead' | 'inactive' | 'free' | 'paid';

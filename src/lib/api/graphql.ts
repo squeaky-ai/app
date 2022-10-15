@@ -64,6 +64,9 @@ import {
   EventAddToGroupInput,
   EventCaptureUpdateInput,
   SitesRoutesUpdateInput,
+  AdminReferralDeleteInput,
+  UsersReferralCreateInput,
+  UsersReferral,
 } from 'types/graphql';
 
 import {
@@ -124,7 +127,9 @@ import {
   USER_DELETE_MUTATION,
   USER_PASSWORD_MUTATION,
   UPDATE_USER_COMMUNICATION,
+  USER_CREATE_REFERRAL_MUTATION,
   ADMIN_USER_DELETE_MUTATION,
+  ADMIN_REFERRAL_DELETE_MUTATION,
 } from 'data/users/mutations';
 
 import { 
@@ -981,4 +986,47 @@ export const routesUpdate = async (input: SitesRoutesUpdateInput): Promise<Site>
   });
 
   return data.routesUpdate;
+};
+
+export const adminReferralDelete = async (input: AdminReferralDeleteInput): Promise<void> => {
+  await client.mutate({
+    mutation: ADMIN_REFERRAL_DELETE_MUTATION,
+    variables: { input },
+    update(cache) {
+      const normalizedId = cache.identify({ id: input.id, __typename: 'UsersReferral' });
+      console.log(normalizedId);
+      cache.evict({ id: normalizedId });
+      cache.gc();
+    }
+  });
+
+  return null;
+};
+
+export const referralCreate = async (partnerId: string, input: UsersReferralCreateInput): Promise<UsersReferral> => {
+  const { data } = await client.mutate({
+    mutation: USER_CREATE_REFERRAL_MUTATION,
+    variables: { input },
+  });
+
+  cache.modify({
+    id: cache.identify({ id: partnerId, __typename: 'UsersPartner' }),
+    fields: {
+      referrals(existingRefs = []) {
+        const newRef = cache.writeFragment({
+          data: data.userReferralCreate,
+          fragment: gql`
+            fragment NewUserReferral on UserReferral {
+              id
+              url
+            }
+          `
+        });     
+
+        return [...existingRefs, newRef];
+      },
+    },
+  });
+
+  return data.userReferralCreate;
 };

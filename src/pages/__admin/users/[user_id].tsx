@@ -46,7 +46,7 @@ const AdminUser: NextPage<ServerSideProps> = () => {
           <NotFound />
         )}
 
-        {user && (
+        {!loading && user && (
           <>
             <User user={user} />
             {user?.partner && <UserPartner user={user} />}
