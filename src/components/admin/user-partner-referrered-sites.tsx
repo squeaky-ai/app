@@ -9,7 +9,6 @@ import type { AdminUser, UsersReferral } from 'types/graphql';
 
 type Referrals = Record<ReferreredSiteColumns, UsersReferral[]>;
 
-const defaultValues: Referrals = { lead: [], inactive: [], free: [], paid: [] };
 
 interface Props {
   user: AdminUser;
@@ -25,6 +24,8 @@ export const UserPartnerReferreredSites: FC<Props> = () => {
   if (loading) {
     return <PageLoading />;
   }
+
+  const defaultValues: Referrals = { lead: [], inactive: [], free: [], paid: [] };
 
   const columns = referrals.reduce((acc, referral: UsersReferral) => {
     if (!referral.site) {
