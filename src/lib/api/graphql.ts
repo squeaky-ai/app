@@ -67,6 +67,7 @@ import {
   AdminReferralDeleteInput,
   UsersReferralCreateInput,
   UsersReferral,
+  UsersReferralDeleteInput,
 } from 'types/graphql';
 
 import {
@@ -130,6 +131,7 @@ import {
   USER_CREATE_REFERRAL_MUTATION,
   ADMIN_USER_DELETE_MUTATION,
   ADMIN_REFERRAL_DELETE_MUTATION,
+  USER_REFERRAL_DELETE_MUTATION,
 } from 'data/users/mutations';
 
 import { 
@@ -986,6 +988,21 @@ export const routesUpdate = async (input: SitesRoutesUpdateInput): Promise<Site>
   });
 
   return data.routesUpdate;
+};
+
+export const referralDelete = async (input: UsersReferralDeleteInput): Promise<void> => {
+  await client.mutate({
+    mutation: USER_REFERRAL_DELETE_MUTATION,
+    variables: { input },
+    update(cache) {
+      const normalizedId = cache.identify({ id: input.id, __typename: 'UsersReferral' });
+      console.log(normalizedId);
+      cache.evict({ id: normalizedId });
+      cache.gc();
+    }
+  });
+
+  return null;
 };
 
 export const adminReferralDelete = async (input: AdminReferralDeleteInput): Promise<void> => {

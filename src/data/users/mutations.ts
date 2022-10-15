@@ -68,3 +68,11 @@ export const ADMIN_REFERRAL_DELETE_MUTATION = gql`
     }
   }
 `;
+
+export const USER_REFERRAL_DELETE_MUTATION = gql`
+  mutation UserReferralDelete($input: UsersReferralDeleteInput!) {
+    userReferralDelete(input: $input) {
+      id
+    }
+  }
+`;

@@ -1,70 +1,33 @@
 import React from 'react';
 import type { FC } from 'react';
-import { Error } from 'components/error';
-import { PageLoading } from 'components/sites/page-loading';
-import { UserPartnerReferreredSite } from 'components/admin/user-partner-referrered-site';
-import { useAdminUserReferrals } from 'hooks/use-admin-user-referrals';
-import type { ReferreredSiteColumns } from 'types/admin';
-import type { AdminUser, UsersReferral } from 'types/graphql';
-
-type Referrals = Record<ReferreredSiteColumns, UsersReferral[]>;
-
+import { PartnerReferreredSite } from 'components/partners/partner-referrered-site';
+import { buildReferrersColumns } from 'lib/users';
+import type { AdminUser } from 'types/graphql';
 
 interface Props {
   user: AdminUser;
 }
 
-export const UserPartnerReferreredSites: FC<Props> = () => {
-  const { referrals, loading, error } = useAdminUserReferrals();
-
-  if (error) {
-    return <Error />;
-  }
-
-  if (loading) {
-    return <PageLoading />;
-  }
-
-  const defaultValues: Referrals = { lead: [], inactive: [], free: [], paid: [] };
-
-  const columns = referrals.reduce((acc, referral: UsersReferral) => {
-    if (!referral.site) {
-      acc.lead.push(referral);
-      return acc;
-    }
-    if (!referral.site.verifiedAt) {
-      acc.inactive.push(referral);
-      return acc;
-    }
-    if (referral.site.plan.tier === 0) {
-      acc.free.push(referral);
-      return acc;
-    }
-    if (referral.site.plan.tier > 0) {
-      acc.paid.push(referral);
-      return acc;
-    }
-
-    return acc;
-  }, defaultValues);
+export const UserPartnerReferreredSites: FC<Props> = ({ user }) => {
+  const columns = buildReferrersColumns(user.partner.referrals);
 
   return (
     <div className='referrered-sites'>
       <div className='col'>
         <p className='heading'>Lead</p>
-        {columns.lead.map(col => <UserPartnerReferreredSite key={col.id} type='lead' referral={col} />)}
+        {columns.lead.map(col => <PartnerReferreredSite key={col.id} type='lead' admin referral={col} />)}
       </div>
       <div className='col'>
         <p className='heading'>Site Created: Inactive</p>
-        {columns.inactive.map(col => <UserPartnerReferreredSite key={col.id} type='inactive' referral={col} />)}
+        {columns.inactive.map(col => <PartnerReferreredSite key={col.id} type='inactive' admin referral={col} />)}
       </div>
       <div className='col'>
         <p className='heading'>Site Active: Free Plan</p>
-        {columns.free.map(col => <UserPartnerReferreredSite key={col.id} type='free' referral={col} />)}
+        {columns.free.map(col => <PartnerReferreredSite key={col.id} type='free' admin referral={col} />)}
       </div>
       <div className='col'>
         <p className='heading'>Site Active: Paid Plan</p>
-        {columns.paid.map(col => <UserPartnerReferreredSite key={col.id} type='paid' referral={col} />)}
+        {columns.paid.map(col => <PartnerReferreredSite key={col.id} type='paid' admin referral={col} />)}
       </div>
     </div>
   );

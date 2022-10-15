@@ -280,6 +280,20 @@ export const GET_ADMIN_USER_QUERY = gql`
           id
           name
           slug
+          referrals {
+            id
+            url
+            site {
+              id
+              url
+              name
+              verifiedAt
+              plan {
+                tier
+                name
+              }
+            }
+          }
         }
       }
     }
@@ -308,33 +322,6 @@ export const GET_ADMIN_USERS_PARTNERS_QUERY = gql`
           id
           name
           slug
-        }
-      }
-    }
-  }
-`;
-
-export const GET_ADMIN_USER_REFERRALS_QUERY = gql`
-  query GetAdminUser($userId: ID!) {
-    admin {
-      user(userId: $userId) {
-        id
-        partner {
-          id
-          referrals {
-            id
-            url
-            site {
-              id
-              url
-              name
-              verifiedAt
-              plan {
-                tier
-                name
-              }
-            }
-          }
         }
       }
     }

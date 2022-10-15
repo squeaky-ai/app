@@ -3,16 +3,17 @@ import type { FC } from 'react';
 import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
-import { adminReferralDelete } from 'lib/api/graphql';
+import { adminReferralDelete, referralDelete } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
 import type { UsersReferral } from 'types/graphql';
 
 interface Props {
+  admin: boolean;
   referral: UsersReferral;
   onClose?: VoidFunction;
 }
 
-export const UserPartnerReferredSiteDelete: FC<Props> = ({ referral, onClose }) => {
+export const PartnerReferredSiteDelete: FC<Props> = ({ admin, referral, onClose }) => {
   const ref = React.useRef<Modal>();
   const toasts = useToasts();
 
@@ -28,7 +29,11 @@ export const UserPartnerReferredSiteDelete: FC<Props> = ({ referral, onClose }) 
 
   const deleteReferral = async () => {
     try {
-      await adminReferralDelete({ id: referral.id });
+      if (admin) {
+        await adminReferralDelete({ id: referral.id });
+      } else {
+        await referralDelete({ id: referral.id });
+      }
       toasts.add({ type: 'success', body: 'Referral deleted successfully' });
     } catch(error) {
       console.error(error);

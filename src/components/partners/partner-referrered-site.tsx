@@ -4,16 +4,17 @@ import classnames from 'classnames';
 import { Icon } from 'components/icon';
 import { Tag } from 'components/tag';
 import { Dropdown } from 'components/dropdown';
-import { UserPartnerReferredSiteDelete } from 'components/admin/user-partner-referrered-site-delete'
+import { PartnerReferredSiteDelete } from 'components/partners/partner-referrered-site-delete';
 import type { UsersReferral } from 'types/graphql';
 import type { ReferreredSiteColumns } from 'types/admin';
 
 interface Props {
+  admin: boolean;
   referral: UsersReferral;
   type: ReferreredSiteColumns;
 }
 
-export const UserPartnerReferreredSite: FC<Props> = ({ referral, type }) => {
+export const PartnerReferreredSite: FC<Props> = ({ admin, referral, type }) => {
   const rowActionsRef = React.useRef<Dropdown>();
 
   const onRowActionClose = () => {
@@ -44,7 +45,8 @@ export const UserPartnerReferreredSite: FC<Props> = ({ referral, type }) => {
       {type === 'lead' && (
         <div className='action'>
           <Dropdown portal button={<Icon name='more-2-fill' />} buttonClassName='options' ref={rowActionsRef}>
-            <UserPartnerReferredSiteDelete 
+            <PartnerReferredSiteDelete
+              admin={admin}
               referral={referral}
               onClose={onRowActionClose}
             />
