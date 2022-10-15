@@ -1,4 +1,10 @@
 .page.__admin.user {
+  #main {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 2rem;
+  }
+
   .admin-header {
     .pill {
       margin: 0 0 0 1rem;
@@ -19,6 +25,67 @@
   }
 
   .user-partner {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
     margin: 2rem 0 0 0;
+  }
+
+  .referrered-sites {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: .5rem;
+    flex: 1;
+    margin: 1.5rem 0 0 0;
+    overflow: auto;
+
+    .col {
+      background: var(--gray-100);
+      border-radius: var(--border-radius-md);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      padding: .75rem .5rem;
+
+      .heading {
+        color: var(--gray-500);
+        font-size: var(--font-size-body-sm);
+        flex-shrink: 0;
+        justify-content: center;
+        line-height: var(--line-height-body-sm);
+        margin: 0 0 .75rem 0;
+        text-align: center;
+      }
+    }
+  }
+
+  .revenue {
+    display: grid;
+    grid-gap: 2rem;
+    grid-template-columns: 1fr 1fr;
+
+    .stats {
+      display: flex;
+
+      h3 {
+        color: var(--gray-500);
+        display: block;
+        flex: 1;
+        margin: 0;
+
+        i {
+          display: block;
+          font-size: var(--font-size-body);
+          font-weight: var(--font-weight-normal);
+          line-height: var(--line-height-body);
+        }
+      }
+
+      &.mauve {
+        h3 {
+          color: var(--mauve-500);
+        }
+      }
+    }
   }
 }
