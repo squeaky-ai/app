@@ -9,7 +9,9 @@ interface UsePartner {
 }
 
 export const usePartner = (): UsePartner => {
-  const { loading, error, data } = useQuery(GET_PARTNER_QUERY);
+  const { loading, error, data } = useQuery(GET_PARTNER_QUERY, {
+    pollInterval: 5000,
+  });
 
   return {
     loading,
