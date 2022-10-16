@@ -49,7 +49,7 @@ export const CreateLead: FC<Props> = ({ partner, onClose }) => {
   return (
     <>
       <Button className='primary' onClick={openModal}>
-        Create Lead
+        + Add Lead
       </Button>
             
       <Modal ref={ref} onClose={onClose}>
@@ -78,7 +78,11 @@ export const CreateLead: FC<Props> = ({ partner, onClose }) => {
                   closeModal();
                   toasts.add({ type: 'success', body: 'Lead created successfully' });
                 } catch(error: any) {
-                  toasts.add({ type: 'error', body: 'Failed to create lead' });
+                  if (/already registered/.test(error)) {
+                    setErrors({ hostname: 'This url is already registered' });
+                  } else {
+                    toasts.add({ type: 'error', body: 'There was an error creating your lead' });
+                  }
                 }
 
                 setSubmitting(false);
