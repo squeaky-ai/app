@@ -19,14 +19,13 @@ import { HeatmapsDisplays } from 'components/sites/heatmaps/heatmaps-displays';
 import { useHeatmaps } from 'hooks/use-heatmaps';
 import { useHeatmapsItems } from 'hooks/use-heatmaps-items';
 import { getDateRange } from 'lib/dates';
-import { FeatureFlag } from 'lib/feature-flags';
-import { useFeatureFlags } from 'hooks/use-feature-flags';
 import { HeatmapsType } from 'types/heatmaps';
 import { HeatmapsDevice, SitesPage } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 import type { HeatmapClickTarget } from 'types/heatmaps';
 
 interface Props {
+  type: HeatmapsType;
   page: string;
   pages: SitesPage[];
   period: TimePeriod;
@@ -34,14 +33,11 @@ interface Props {
   setPeriod: (page: TimePeriod) => void;
 }
 
-export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod }) => {
-  const [type, setType] = React.useState<HeatmapsType>(HeatmapsType.ClickCount);
+export const Heatmaps: FC<Props> = ({ type, page, pages, period, setPage, setPeriod }) => {
   const [device, setDevice] = React.useState<HeatmapsDevice>(HeatmapsDevice.Desktop);
   const [clickTarget, setClickTarget] = React.useState<HeatmapClickTarget>('all');
   const [selected, setSelected] = React.useState<string>(null);
   const [excludeRecordingIds, setExcludeRecordingIds] = React.useState<string[]>([]);
-
-  const { featureFlagEnabled } = useFeatureFlags();
 
   const { loading, heatmaps } = useHeatmaps({ 
     page, 
@@ -101,26 +97,12 @@ export const Heatmaps: FC<Props> = ({ page, pages, period, setPage, setPeriod })
             </Button>
           </ButtonGroup>
 
-          <ButtonGroup>
-            <Button className={classnames([HeatmapsType.ClickCount, HeatmapsType.ClickPosition].includes(type) ? 'primary' : 'blank')} onClick={() => setType(HeatmapsType.ClickCount)}>
-              {device === HeatmapsDevice.Desktop ? 'Click' : 'Tap'}
-            </Button>
-            {featureFlagEnabled(FeatureFlag.HEATMAP_CURSORS) && (
-              <Button className={classnames(type === HeatmapsType.Cursor ? 'primary' : 'blank')} onClick={() => setType(HeatmapsType.Cursor)}>
-                Mouse
-              </Button>
-            )}
-            <Button className={classnames(type === HeatmapsType.Scroll ? 'primary' : 'blank')} onClick={() => setType(HeatmapsType.Scroll)}>
-              Scroll
-            </Button>
-          </ButtonGroup>
-
-          <HeatmapsDisplays
-            type={type}
-            clickTarget={clickTarget}
-            setType={setType}
-            setClickTarget={setClickTarget} 
-          />
+          {type === HeatmapsType.ClickCount && (
+            <HeatmapsDisplays
+              clickTarget={clickTarget}
+              setClickTarget={setClickTarget} 
+            />
+          )}
         </div>
       </div>
       {hasData && (

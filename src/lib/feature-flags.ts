@@ -1,8 +1,5 @@
 export enum FeatureFlag {
   CHEESE_LOADER = 'CHEESE_LOADER',
-  HEATMAP_FLAMEGRAPH = 'HEATMAP_FLAMEGRAPH',
-  HEATMAP_CURSORS = 'HEATMAP_CURSORS',
-  ERRORS_PAGE = 'ERRORS_PAGE',
 }
 
 export class FeatureFlags {

@@ -13,8 +13,9 @@ import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { usePages } from 'hooks/use-pages';
 import { usePeriod } from 'hooks/use-period';
 import { getDateRange } from 'lib/dates';
+import { HeatmapsType } from 'types/heatmaps';
 
-const SitesHeatmaps: NextPage<ServerSideProps> = ({ user }) => {
+const SitesHeatmapsMouse: NextPage<ServerSideProps> = ({ user }) => {
   const [page, setPage] = React.useState<string>(null);
 
   const { period, setPeriod } = usePeriod('heatmaps');
@@ -38,10 +39,10 @@ const SitesHeatmaps: NextPage<ServerSideProps> = ({ user }) => {
       <Page user={user} scope={[]}>
         {({ site }) => (
           <Main className={classnames({ empty: site.recordingsCount === 0 })}>
-            <BreadCrumbs site={site} items={[{ name: 'Heatmaps' }]} />
+            <BreadCrumbs site={site} items={[{ name: 'Heatmaps' }, { name: 'Mouse' }]} />
 
             <div className='heatmaps-heading'>
-              <h4 className='title'>Heatmaps</h4>
+              <h4 className='title'>Mouse</h4>
             </div>
 
             <EmptyState 
@@ -60,6 +61,7 @@ const SitesHeatmaps: NextPage<ServerSideProps> = ({ user }) => {
 
             {site.recordingsCount > 0 && !loading && (
               <Heatmaps 
+                type={HeatmapsType.Cursor}
                 page={page} 
                 pages={pages}
                 setPage={setPage} 
@@ -74,5 +76,5 @@ const SitesHeatmaps: NextPage<ServerSideProps> = ({ user }) => {
   );
 };
 
-export default SitesHeatmaps;
+export default SitesHeatmapsMouse;
 export { getServerSideProps };

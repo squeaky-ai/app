@@ -18,8 +18,6 @@ import { Breakpoints } from 'data/common/constants';
 import { Preferences, Preference } from 'lib/preferences';
 import { OWNER, ADMIN } from 'data/teams/constants';
 import { useResize } from 'hooks/use-resize';
-import { useFeatureFlags } from 'hooks/use-feature-flags';
-import { FeatureFlag } from 'lib/feature-flags';
 import type { User } from 'types/graphql';
 
 interface Props {
@@ -36,7 +34,6 @@ export const Sidebar: FC<Props> = ({ user }) => {
   const [position, setPosition] = React.useState<'left' | 'right'>('left');
 
   const { sidebar } = useSidebar();
-  const { featureFlagEnabled } = useFeatureFlags();
 
   const path = router.asPath;
   const pathname = router.pathname;
@@ -98,6 +95,7 @@ export const Sidebar: FC<Props> = ({ user }) => {
     setDefaultActive('feedback', '/sites/[site_id]/feedback');
     setDefaultActive('settings', '/sites/[site_id]/settings');
     setDefaultActive('analytics', '/sites/[site_id]/analytics');
+    setDefaultActive('heatmaps', '/sites/[site_id]/heatmaps');
   }, [path]);
 
   React.useEffect(() => {
@@ -169,14 +167,12 @@ export const Sidebar: FC<Props> = ({ user }) => {
                   <span>Events <Tag>BETA</Tag></span>
                 </a>
               </Link>
-              {featureFlagEnabled(FeatureFlag.ERRORS_PAGE) && (
-                <Link href={`/sites/${siteId}/errors`}>
-                  <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/errors`) })} data-label='Errors'>
-                    <Icon className='sidebar-icon' name='code-s-slash-line' />
-                    <span>Errors</span>
-                  </a>
-                </Link>
-              )}
+              <Link href={`/sites/${siteId}/errors`}>
+                <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/errors`) })} data-label='Errors'>
+                  <Icon className='sidebar-icon' name='code-s-slash-line' />
+                  <span>Errors</span>
+                </a>
+              </Link>
             </SidebarGroup>
             <SidebarGroup name='Analysis'>
               <SidebarNested
@@ -187,12 +183,12 @@ export const Sidebar: FC<Props> = ({ user }) => {
                 expanded={expanded.includes('analytics')}
               >
                 <Link href={`/sites/${siteId}/analytics/site/traffic`}>
-                  <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/analytics/site`) })} data-label='Analytics'>
+                  <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/analytics/site`) })} data-label='Site'>
                     Site
                   </a>
                 </Link>
                 <Link href={`/sites/${siteId}/analytics/page/traffic`}>
-                  <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/analytics/page`) })} data-label='Analytics'>
+                  <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/analytics/page`) })} data-label='Page'>
                     Page
                   </a>
                 </Link>
@@ -203,12 +199,34 @@ export const Sidebar: FC<Props> = ({ user }) => {
                   <span>Journeys</span>
                 </a>
               </Link>
-              <Link href={`/sites/${siteId}/heatmaps`}>
-                <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/heatmaps`) })} data-label='Heatmaps'>
-                  <Icon className='sidebar-icon' name='fire-line' />
-                  <span>Heatmaps</span>
-                </a>
-              </Link>
+              <SidebarNested
+                name='Heatmaps'
+                icon='fire-line'
+                collapse={() => collapse('heatmaps')}
+                expand={() => expand('heatmaps')}
+                expanded={expanded.includes('heatmaps')}
+              >
+                <Link href={`/sites/${siteId}/heatmaps/click-positions`}>
+                  <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/heatmaps/click-positions`) })} data-label='Clicks'>
+                    Clicks
+                  </a>
+                </Link>
+                <Link href={`/sites/${siteId}/heatmaps/click-counts`}>
+                  <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/heatmaps/click-counts`) })} data-label='Clicks counts'>
+                    Click counts
+                  </a>
+                </Link>
+                <Link href={`/sites/${siteId}/heatmaps/mouse`}>
+                  <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/heatmaps/mouse`) })} data-label='Mouse'>
+                    Mouse
+                  </a>
+                </Link>
+                <Link href={`/sites/${siteId}/heatmaps/scroll`}>
+                  <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/heatmaps/scroll`) })} data-label='Scroll'>
+                    Scroll
+                  </a>
+                </Link>
+              </SidebarNested>
             </SidebarGroup>
             <SidebarGroup name='Engagement'>
               <SidebarNested
