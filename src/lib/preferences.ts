@@ -9,6 +9,7 @@ export enum Preference {
   NPS_COLUMNS = 'NPS_COLUMNS',
   SENTIMENT_COLUMNS = 'SENTIMENT_COLUMNS',
   SIDEBAR_CLOSED = 'SIDEBAR_CLOSED',
+  SIDEBAR_COLLAPSED = 'SIDEBAR_COLLAPSED',
   ADMIN_USERS_COLUMNS = 'ADMIN_USERS_COLUMNS',
   ADMIN_SITES_COLUMNS = 'ADMIN_SITES_COLUMNS',
   EVENTS_CAPTURE_DELETED_SKIP_PROMPT = 'EVENTS_CAPTURE_DELETED_SKIP_PROMPT',
@@ -52,5 +53,9 @@ export class Preferences {
 
   public static delete(key: Preference): void {
     localStorage.removeItem(`preferences::${key}`);
+  }
+
+  public static exists(key: Preference): boolean {
+    return localStorage.getItem(`preferences::${key}`) === undefined;
   }
 }

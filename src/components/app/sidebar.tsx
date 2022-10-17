@@ -6,11 +6,11 @@ import { uniq, without } from 'lodash';
 import { useRouter } from 'next/router';
 import { Icon } from 'components/icon';
 import { Button } from 'components/button';
-import { Divider } from 'components/divider';
 import { SidebarAccount } from 'components/app/sidebar-account';
 import { SidebarNested } from 'components/app/sidebar-nested';
 import { Logo } from 'components/logo';
 import { SidebarSupport } from 'components/app/sidebar-support';
+import { SidebarGroup } from 'components/app/sidebar-group';
 import { SidebarCollapse } from 'components/app/sidebar-collapse';
 import { useSidebar } from 'hooks/use-sidebar';
 import { Tag } from 'components/tag';
@@ -150,94 +150,88 @@ export const Sidebar: FC<Props> = ({ user }) => {
                 <span>Dashboard</span>
               </a>
             </Link>
-            <Divider>
-              <span>Data Capture</span>
-            </Divider>
-            <Link href={`/sites/${siteId}/visitors`}>
-              <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/visitors`) })} data-label='Visitors'>
-                <Icon className='sidebar-icon' name='group-line' />
-                <span>Visitors</span>
-              </a>
-            </Link>
-            <Link href={`/sites/${siteId}/recordings`}>
-              <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/recordings`) })} data-label='Recordings'>
-                <Icon className='sidebar-icon' name='vidicon-line' />
-                <span>Recordings</span>
-              </a>
-            </Link>
-            <Link href={`/sites/${siteId}/events`}>
-              <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/events`) })} data-label='Events'>
-                <Icon className='sidebar-icon' name='flashlight-line' />
-                <span>Events <Tag>BETA</Tag></span>
-              </a>
-            </Link>
-            {featureFlagEnabled(FeatureFlag.ERRORS_PAGE) && (
-              <Link href={`/sites/${siteId}/errors`}>
-                <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/errors`) })} data-label='Errors'>
-                  <Icon className='sidebar-icon' name='code-s-slash-line' />
-                  <span>Errors</span>
+            <SidebarGroup name='Data Capture'>
+              <Link href={`/sites/${siteId}/visitors`}>
+                <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/visitors`) })} data-label='Visitors'>
+                  <Icon className='sidebar-icon' name='group-line' />
+                  <span>Visitors</span>
                 </a>
               </Link>
-            )}
-            <Divider>
-              <span>Analysis</span>
-            </Divider>
-            <SidebarNested
-              name='Analytics'
-              icon='line-chart-line'
-              collapse={() => collapse('analytics')}
-              expand={() => expand('analytics')}
-              expanded={expanded.includes('analytics')}
-            >
-              <Link href={`/sites/${siteId}/analytics/site/traffic`}>
-                <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/analytics/site`) })} data-label='Analytics'>
-                  Site
+              <Link href={`/sites/${siteId}/recordings`}>
+                <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/recordings`) })} data-label='Recordings'>
+                  <Icon className='sidebar-icon' name='vidicon-line' />
+                  <span>Recordings</span>
                 </a>
               </Link>
-              <Link href={`/sites/${siteId}/analytics/page/traffic`}>
-                <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/analytics/page`) })} data-label='Analytics'>
-                  Page
+              <Link href={`/sites/${siteId}/events`}>
+                <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/events`) })} data-label='Events'>
+                  <Icon className='sidebar-icon' name='flashlight-line' />
+                  <span>Events <Tag>BETA</Tag></span>
                 </a>
               </Link>
-            </SidebarNested>
-            <Link href={`/sites/${siteId}/journeys`}>
-              <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/journeys`) })} data-label='Journeys'>
-                <Icon className='sidebar-icon' name='guide-line' />
-                <span>Journeys</span>
-              </a>
-            </Link>
-            <Link href={`/sites/${siteId}/heatmaps`}>
-              <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/heatmaps`) })} data-label='Heatmaps'>
-                <Icon className='sidebar-icon' name='fire-line' />
-                <span>Heatmaps</span>
-              </a>
-            </Link>
-            <Divider>
-              <span>Engagement</span>
-            </Divider>
-            <SidebarNested
-              name='Feedback'
-              icon='user-voice-line'
-              collapse={() => collapse('feedback')}
-              expand={() => expand('feedback')}
-              expanded={expanded.includes('feedback')}
-            >
-              <Link href={`/sites/${siteId}/feedback/nps`}>
-                <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/feedback/nps`) })}>
-                  NPS®
+              {featureFlagEnabled(FeatureFlag.ERRORS_PAGE) && (
+                <Link href={`/sites/${siteId}/errors`}>
+                  <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/errors`) })} data-label='Errors'>
+                    <Icon className='sidebar-icon' name='code-s-slash-line' />
+                    <span>Errors</span>
+                  </a>
+                </Link>
+              )}
+            </SidebarGroup>
+            <SidebarGroup name='Analysis'>
+              <SidebarNested
+                name='Analytics'
+                icon='line-chart-line'
+                collapse={() => collapse('analytics')}
+                expand={() => expand('analytics')}
+                expanded={expanded.includes('analytics')}
+              >
+                <Link href={`/sites/${siteId}/analytics/site/traffic`}>
+                  <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/analytics/site`) })} data-label='Analytics'>
+                    Site
+                  </a>
+                </Link>
+                <Link href={`/sites/${siteId}/analytics/page/traffic`}>
+                  <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/analytics/page`) })} data-label='Analytics'>
+                    Page
+                  </a>
+                </Link>
+              </SidebarNested>
+              <Link href={`/sites/${siteId}/journeys`}>
+                <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/journeys`) })} data-label='Journeys'>
+                  <Icon className='sidebar-icon' name='guide-line' />
+                  <span>Journeys</span>
                 </a>
               </Link>
-              <Link href={`/sites/${siteId}/feedback/sentiment`}>
-                <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/feedback/sentiment`) })}>
-                  Sentiment
+              <Link href={`/sites/${siteId}/heatmaps`}>
+                <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/heatmaps`) })} data-label='Heatmaps'>
+                  <Icon className='sidebar-icon' name='fire-line' />
+                  <span>Heatmaps</span>
                 </a>
               </Link>
-            </SidebarNested>
+            </SidebarGroup>
+            <SidebarGroup name='Engagement'>
+              <SidebarNested
+                name='Feedback'
+                icon='user-voice-line'
+                collapse={() => collapse('feedback')}
+                expand={() => expand('feedback')}
+                expanded={expanded.includes('feedback')}
+              >
+                <Link href={`/sites/${siteId}/feedback/nps`}>
+                  <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/feedback/nps`) })}>
+                    NPS®
+                  </a>
+                </Link>
+                <Link href={`/sites/${siteId}/feedback/sentiment`}>
+                  <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/feedback/sentiment`) })}>
+                    Sentiment
+                  </a>
+                </Link>
+              </SidebarNested>
+            </SidebarGroup>
             {[OWNER, ADMIN].includes(sidebar.role) && (
-              <>
-                <Divider>
-                  <span>Settings</span>
-                </Divider>
+              <SidebarGroup name='Settings'>
                 <Link href={`/sites/${siteId}/settings/details`}>
                   <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/settings/details`) })} data-label='Site'>
                     <Icon className='sidebar-icon' name='window-line' />
@@ -267,7 +261,7 @@ export const Sidebar: FC<Props> = ({ user }) => {
                     </a>
                   </Link>
                 )}
-              </>
+              </SidebarGroup>
             )}
           </div>
         </div>
