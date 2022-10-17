@@ -676,6 +676,37 @@
       }
     }
   }
+
+  .sidebar-copy {
+    position: relative;
+
+    .copy {
+      align-items: center;
+      background: var(--white);
+      border-color: var(--gray-150);
+      border-style: solid;
+      border-width: 0 0 0 1px;
+      display: none;
+      height: 100%;
+      margin: 0;
+      padding: 0 .5rem;
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: 1;
+
+      .icon {
+        color: var(--blue-500);
+        vertical-align: top;
+      }
+    }
+
+    &:hover {
+      .copy {
+        display: flex;
+      }
+    }
+  }
 }
 
 .events-visibility-modal { 

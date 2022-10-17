@@ -9,6 +9,7 @@ import { Browser } from 'components/browser';
 import { Device } from 'components/device';
 import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
 import { RecordingStarred } from 'components/sites/recordings/recordings-starred';
+import { SidebarInfoCopy } from 'components/sites/player/sidebar-info-copy';
 import { getLinkedData, normalizeKey } from 'lib/visitors';
 import type { Recording, Team } from 'types/graphql';
 import type { Site } from 'types/graphql';
@@ -98,26 +99,32 @@ export const SidebarInfo: FC<Props> = ({ site, member, recording, setActiveTab }
           <dd>
             {!recording.referrer && '-'}
             {!!recording.referrer && (
-              <Tooltip button={recording.referrer} positionX='right' fluid>
-                {recording.referrer}
-              </Tooltip>
+              <SidebarInfoCopy text={recording.referrer}>
+                <Tooltip button={recording.referrer} positionX='left' fluid>
+                  {recording.referrer}
+                </Tooltip>
+              </SidebarInfoCopy>
             )}
           </dd>
         </div>
         <div className='row'>
           <dt>Start URL</dt>
           <dd>
-            <Tooltip button={recording.startPage} positionX='right' fluid>
-              {recording.startPage}
-            </Tooltip>
+            <SidebarInfoCopy text={recording.startPage}>
+              <Tooltip button={recording.startPage} positionX='left' fluid>
+                {recording.startPage}
+              </Tooltip>
+            </SidebarInfoCopy>
           </dd>
         </div>
         <div className='row'>
           <dt>Exit URL</dt>
           <dd>
-            <Tooltip button={recording.exitPage} positionX='right' fluid>
-              {recording.exitPage}
-            </Tooltip>
+            <SidebarInfoCopy text={recording.exitPage}>
+              <Tooltip button={recording.exitPage} positionX='left' fluid>
+                {recording.exitPage}
+              </Tooltip>
+            </SidebarInfoCopy>
           </dd>
         </div>
         <div className='row'>
