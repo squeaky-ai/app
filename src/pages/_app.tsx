@@ -7,10 +7,11 @@ import { ToastProvider } from 'components/toast';
 import { HistoryProvider } from 'components/history';
 import { SidebarProvider } from 'components/sidebar';
 import { Page } from 'components/page';
+import type { User } from 'types/graphql';
 
 import '../styles/main.scss';
 
-const App: FC<AppProps> = ({ Component, pageProps }) => (
+const App: FC<AppProps<{ user: User }>> = ({ Component, pageProps }) => (
   <ApolloProvider client={client}>
     <ToastProvider>
       <HistoryProvider>

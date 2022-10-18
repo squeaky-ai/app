@@ -7,7 +7,7 @@ const BASE_PATH = '/app'
 // In production all the assets are served from S3/
 // Cloudfront, but in development they are loaded from
 // disk
-const ASSET_PREFIX = IS_DEV ? '' : 'https://cdn.squeaky.ai/app';
+const ASSET_PREFIX = IS_DEV ? undefined : 'https://cdn.squeaky.ai/app';
 
 // In production we point to the squeaky.ai/api but in
 // development we use a local running instance
@@ -21,7 +21,6 @@ const WEB_HOST_NAME = IS_DEV ? 'http://localhost:3333' : 'https://squeaky.ai';
 module.exports = {
   basePath: BASE_PATH,
   assetPrefix: ASSET_PREFIX,
-  strictMode: true,
   publicRuntimeConfig: {
     apiHost: API_HOST_NAME,
     webHost: WEB_HOST_NAME,
