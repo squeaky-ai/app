@@ -69,6 +69,19 @@ export const ADMIN_REFERRAL_DELETE_MUTATION = gql`
   }
 `;
 
+export const ADMIN_USER_PARTNER_CREATE_MUTATION = gql`
+  mutation AdminUserPartnerCreate($input: AdminUserPartnerCreateInput!) {
+    adminUserPartnerCreate(input: $input) {
+      id
+      partner {
+        id
+        name
+        slug
+      }
+    }
+  }
+`;
+
 export const USER_REFERRAL_DELETE_MUTATION = gql`
   mutation UserReferralDelete($input: UsersReferralDeleteInput!) {
     userReferralDelete(input: $input) {

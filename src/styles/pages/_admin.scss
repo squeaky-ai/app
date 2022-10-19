@@ -8,6 +8,7 @@
   .button {
     &.primary {
       background: var(--mauve-700);
+      border-color: var(--mauve-700);
       color: var(--white);
     }
   }

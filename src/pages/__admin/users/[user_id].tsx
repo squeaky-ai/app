@@ -1,6 +1,7 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import classnames from 'classnames';
 import { Icon } from 'components/icon';
 import { Error } from 'components/error';
 import { Main } from 'components/main';
@@ -9,6 +10,7 @@ import { User } from 'components/admin/user';
 import { Pill } from 'components/pill';
 import { PageLoading } from 'components/sites/page-loading';
 import { UserPartner } from 'components/admin/user-partner';
+import { UserPartnerCreate } from 'components/admin/user-partner-create';
 import { NotFound } from 'components/sites/not-found';
 import { useAdminUser } from 'hooks/use-admin-user';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
@@ -17,6 +19,7 @@ const AdminUser: NextPage<ServerSideProps> = () => {
   const { user, loading, error } = useAdminUser();
 
   const fullName = user?.fullName || 'No one';
+  const isPartner = !!user?.partner;
 
   if (error) {
     return <Error />;
@@ -25,17 +28,16 @@ const AdminUser: NextPage<ServerSideProps> = () => {
   return (
     <>
       <Head>
-        <title>Squeaky | Admin | Users | {fullName}</title>
+        <title>Squeaky | Admin | Users | User</title>
       </Head>
 
       <Main>
         <BreadCrumbs items={[{ name: 'Admin', href: '/__admin/dashboard' }, { name: 'Users', href: '/__admin/users' }, { name: fullName }]} />
 
-        <div className='admin-header'>
-          <h4 className='title'>
-            {fullName}
-            {user?.partner && <Pill className='tertiary'><Icon name='user-star-line' /> Partner</Pill>}
-          </h4>
+        <div className={classnames('admin-header', { partner: isPartner })}>
+          <h4 className='title'>{fullName}</h4>
+          {isPartner && <Pill className='tertiary'><Icon name='user-star-line' /> Partner</Pill>}
+          {!isPartner && <UserPartnerCreate user={user} />}
         </div>
 
         {loading && (
@@ -49,7 +51,7 @@ const AdminUser: NextPage<ServerSideProps> = () => {
         {!loading && user && (
           <>
             <User user={user} />
-            {user?.partner && <UserPartner user={user} />}
+            {isPartner && <UserPartner user={user} />}
           </>
         )}
       </Main>

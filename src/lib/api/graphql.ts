@@ -68,6 +68,7 @@ import {
   UsersReferralCreateInput,
   UsersReferral,
   UsersReferralDeleteInput,
+  AdminUserPartnerCreateInput,
 } from 'types/graphql';
 
 import {
@@ -131,6 +132,7 @@ import {
   USER_CREATE_REFERRAL_MUTATION,
   ADMIN_USER_DELETE_MUTATION,
   ADMIN_REFERRAL_DELETE_MUTATION,
+  ADMIN_USER_PARTNER_CREATE_MUTATION,
   USER_REFERRAL_DELETE_MUTATION,
 } from 'data/users/mutations';
 
@@ -1015,6 +1017,15 @@ export const adminReferralDelete = async (input: AdminReferralDeleteInput): Prom
       cache.evict({ id: normalizedId });
       cache.gc();
     }
+  });
+
+  return null;
+};
+
+export const adminPartnerCreate = async (input: AdminUserPartnerCreateInput): Promise<void> => {
+  await client.mutate({
+    mutation: ADMIN_USER_PARTNER_CREATE_MUTATION,
+    variables: { input },
   });
 
   return null;

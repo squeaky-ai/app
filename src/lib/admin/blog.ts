@@ -1,3 +1,4 @@
+import { formatStringForUrlSlug } from 'lib/text';
 import { BlogInput } from 'types/admin';
 import { BlogPost } from 'types/graphql';
 
@@ -26,12 +27,6 @@ export const getAuthorKey = (author: BlogPost['author']): BlogInput['author'] =>
       return null;
   }
 };
-
-const formatStringForUrlSlug = (string: string) => string
-  .trim()
-  .toLowerCase()
-  .replace(/ /g, '-')
-  .replace(/[^a-z0-9-]/g, '');
 
 const getSlug = (args: Pick<BlogInput, 'title' | 'category'>) => {
   const title = formatStringForUrlSlug(args.title);
