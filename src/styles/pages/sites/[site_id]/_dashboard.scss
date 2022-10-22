@@ -1,4 +1,8 @@
 .page.sites.dashboard {
+  #main {
+    padding: 0 2rem 2rem 2rem;
+  }
+
   .title {
     align-items: center;
     display: flex;
@@ -473,6 +477,100 @@
               background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 1));
               z-index: 1;
             }
+          }
+        }
+      }
+    }
+  }
+
+  .dashboard-v2 {
+    display: flex;
+    height: calc(100% - 8rem);
+
+    .dashboard-empty-state {
+      align-items: center;
+      background: var(--gray-50);
+      border: 1px solid var(--gray-100);
+      border-radius: var(--border-radius-md);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: calc(100% - 4rem);
+
+      i {
+        color: var(--gray-300);
+        font-size: 2rem;
+        margin: 0 0 .5rem 0;
+      }
+
+      p {
+        margin: 0;
+      }
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-gap: 2rem;
+      grid-template-areas: 'visitors recordings bounce-rate'
+                           'visitors recordings exit-rate'
+                           'page-views page-views errors';
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      flex: 1;
+
+      .visitors {
+        grid-area: visitors;
+      }
+
+      .recordings {
+        grid-area: recordings;
+      }
+
+      .bounce-rate {
+        grid-area: bounce-rate;
+        
+        h5 {
+          .icon {
+            color: var(--rose-500);
+          }
+        }
+      }
+
+      .exit-rate {
+        grid-area: exit-rate;
+        
+        h5 {
+          .icon {
+            color: var(--rose-500);
+          }
+        }
+      }
+
+      .page-views {
+        grid-area: page-views;
+      }
+
+      .errors {
+        grid-area: errors;
+        
+        h5 {
+          .icon {
+            color: var(--rose-500);
+          }
+        }
+      }
+
+      .card {
+        h5 {
+          align-items: center;
+          display: flex;
+
+          a {
+            color: var(--gray-blue-800);
+          }
+
+          .icon {
+            font-size: var(--font-size-body-xxl);
           }
         }
       }

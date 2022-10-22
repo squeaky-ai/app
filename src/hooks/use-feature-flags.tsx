@@ -18,10 +18,12 @@ type Names = Record<FeatureFlag, string>;
 
 export const allFeatureFlags: FeatureFlag[] = [
   FeatureFlag.CHEESE_LOADER,
+  FeatureFlag.DASHBOARD_V2,
 ];
 
 export const featureFlagNames: Names = {
   CHEESE_LOADER: 'Cheese Loader',
+  DASHBOARD_V2: 'Dashboard v2',
 };
 
 const options: State = [
@@ -30,6 +32,12 @@ const options: State = [
     value: false,
     superuser: false,
     description: 'Replace the standard spinner with a cheesy Squeaky one',
+  },
+  {
+    key: FeatureFlag.DASHBOARD_V2,
+    value: false,
+    superuser: true,
+    description: 'Interim dashboard unil we do the custom ones',
   },
 ];
 

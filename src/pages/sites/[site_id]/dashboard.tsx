@@ -7,12 +7,17 @@ import { EmptyState } from 'components/sites/empty-state';
 import { Page } from 'components/sites/page';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { Dashboard } from 'components/sites/dashboard';
+import { Dashboard as DashboardV2 } from 'components/sites/dashboard-v2';
 import { Period } from 'components/sites/period/period';
 import { usePeriod } from 'hooks/use-period';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { useFeatureFlags } from 'hooks/use-feature-flags';
+import { FeatureFlag } from 'lib/feature-flags';
 
 const SitesDashboard: NextPage<ServerSideProps> = ({ user }) => {
   const { period, setPeriod } = usePeriod('dashboard');
+
+  const { featureFlagEnabled } = useFeatureFlags();
 
   return (
     <>
@@ -39,7 +44,9 @@ const SitesDashboard: NextPage<ServerSideProps> = ({ user }) => {
             />
 
             {site.recordingsCount > 0 && (
-              <Dashboard site={site} member={member} period={period} />
+              featureFlagEnabled(FeatureFlag.DASHBOARD_V2)
+                ? <DashboardV2 site={site} member={member} period={period} />
+                : <Dashboard site={site} member={member} period={period} />
             )}
           </Main>
         )}

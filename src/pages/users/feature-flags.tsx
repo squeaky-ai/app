@@ -37,6 +37,7 @@ const UsersFeatureFlags: NextPage<ServerSideProps> = ({ user }) => {
               {(flag.superuser ? user.superuser : true) && (
                 <div className='feature-flag'>
                   <Toggle checked={flag.value} onChange={handleChange(flag.key)}>
+                    {flag.superuser && '[superuser] '}
                     {featureFlagNames[flag.key]}
                   </Toggle>
                   {flag.description && (
