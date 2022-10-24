@@ -45,6 +45,14 @@
       }
     }
 
+    .radio-group {
+      margin: 0 0 1.5rem 0;
+
+      i {
+        color: var(--gray-500);
+      }
+    }
+
     .toggle {
       align-items: center;
       flex-direction: row-reverse;

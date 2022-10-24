@@ -114,11 +114,12 @@ export const CSS_SELECTOR_BLACKLIST_DELETE_MUTATION = gql`
   }
 `;
 
-export const ANONYMISE_FORM_INPUTS_UPDATE_MUTATION = gql`
-  mutation AnonymuseFormInputsUpdate($input: AnonymiseFormInputsUpdateInput!) {
-    anonymiseFormInputsUpdate(input: $input) {
+export const ANONYMISE_PREFERENCES_UPDATE_MUTATION = gql`
+  mutation AnonymisePreferencesUpdate($input: AnonymisePreferencesUpdateInput!) {
+    anonymisePreferencesUpdate(input: $input) {
       id
       anonymiseFormInputs
+      anonymiseText
     }
   }
 `;

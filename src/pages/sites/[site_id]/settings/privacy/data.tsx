@@ -12,10 +12,10 @@ import { Icon } from 'components/icon';
 import { Logo } from 'components/logo';
 import { Checkbox } from 'components/checkbox';
 import { OWNER, ADMIN } from 'data/teams/constants';
+import { PrivacyAnonymising } from 'components/sites/settings/privacy-anonymising';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
-import { magicErasureUpdate, anonymiseFormInputsUpdate } from 'lib/api/graphql';
+import { magicErasureUpdate } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
-import { Toggle } from 'components/toggle';
 import type { Site } from 'types/graphql';
 
 const SitesSettingsPrivacyData: NextPage<ServerSideProps> = ({ user }) => {
@@ -24,16 +24,6 @@ const SitesSettingsPrivacyData: NextPage<ServerSideProps> = ({ user }) => {
   const toggleMagicErasureEnabled = (site: Site) => async () => {
     try {
       await magicErasureUpdate({ siteId: site.id, enabled: !site.magicErasureEnabled });
-      toasts.add({ type: 'success', body: 'Your preferences have been updated' });
-    } catch(error) {
-      console.error(error);
-      toasts.add({ type: 'error', body: 'There was an issue updating your preferences' });
-    }
-  };
-
-  const toggleAnonymiseFormInputsEnabled = (site: Site) => async() => {
-    try {
-      await anonymiseFormInputsUpdate({ siteId: site.id, enabled: !site.anonymiseFormInputs });
       toasts.add({ type: 'success', body: 'Your preferences have been updated' });
     } catch(error) {
       console.error(error);
@@ -60,14 +50,14 @@ const SitesSettingsPrivacyData: NextPage<ServerSideProps> = ({ user }) => {
             <PrivacyTabs site={site} page='data' />
 
             <Container className='md privacy-options'>
-              <h4>Form fields</h4>
-              <p>At Squeaky we <b>anonymise all data that your site visitors input into forms by default</b>. If you have the consent of your visitors, and wish to capture form data, you can choose to turn off anonymisation using the toggle below.</p>
+              <h4>Text &amp; Forms</h4>
+              <p>To help you provide privacy-friendly analytics we <b>anonymise all data that your site visitors input into forms by default</b>. you can optionally turn this off, or additionally choose to <b>anonymise all text captured across your site</b>.</p>
 
-              <Toggle checked={site.anonymiseFormInputs} onChange={toggleAnonymiseFormInputsEnabled(site)}>
-                Anonymise form inputs
-              </Toggle>
+              <PrivacyAnonymising site={site} />
 
-              <h4>Other content</h4>
+              <p><b>Please note</b>: You can still use the Squeaky Magic Erasure below, regardless of your text and forms configuration.</p>
+    
+              <h4>All content</h4>
 
               <p>If there are other types of content you don&apos;t want to record with the Squeaky tracking code then you can choose from the following two options:</p>
 
