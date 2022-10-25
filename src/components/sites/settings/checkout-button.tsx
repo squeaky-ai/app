@@ -4,14 +4,14 @@ import { gql, useMutation } from '@apollo/client';
 import { Button } from 'components/button';
 import { Icon } from 'components/icon';
 import { useToasts } from 'hooks/use-toasts';
-import { PlansCurrency } from 'types/graphql';
+import { Currency } from 'types/graphql';
 import type { Plan, Site, SubscriptionsCheckout } from 'types/graphql';
 
 interface Props {
   site: Site;
   plan: Plan;
   loading: boolean;
-  currency: PlansCurrency;
+  currency: Currency;
   setLoading: (loading: boolean) => void;
 }
 

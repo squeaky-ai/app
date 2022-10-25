@@ -8,7 +8,7 @@ import { Select, Option } from 'components/select';
 import { BillingPlansTableSmall } from 'components/sites/settings/billing-plans-table-small';
 import { BillingPlansTableLarge } from 'components/sites/settings/billing-plans-table-large';
 import { Interval, getUsefulCurrency } from 'lib/currency';
-import { PlansCurrency, Site } from 'types/graphql';
+import { Currency, Site } from 'types/graphql';
 import type { Billing } from 'types/billing';
 
 
@@ -20,7 +20,7 @@ interface Props {
 }
 
 export const BillingPlansTable: FC<Props> = ({ site, billing, hasBilling, showPlanChangeMessage }) => {
-  const [currency, setCurrency] = React.useState<PlansCurrency>(getUsefulCurrency());
+  const [currency, setCurrency] = React.useState<Currency>(getUsefulCurrency());
   const [interval, setInterval] = React.useState<Interval>(Interval.MONTHLY);
 
   const planIndex = billing.plans.findIndex(plan => Number(plan.id) === site.plan.tier);
@@ -35,7 +35,7 @@ export const BillingPlansTable: FC<Props> = ({ site, billing, hasBilling, showPl
 
   const onCurrencyChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;
-    setCurrency(value as PlansCurrency);
+    setCurrency(value as Currency);
   };
 
   const onIntervalChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -61,9 +61,9 @@ export const BillingPlansTable: FC<Props> = ({ site, billing, hasBilling, showPl
           <div className='options'>
             <div className='currency-select'>
               <Select name='currency' value={currency} onChange={onCurrencyChange}>
-                <Option value={PlansCurrency.Eur}>Euro (€)</Option>
-                <Option value={PlansCurrency.Gbp}>GBP (£)</Option>
-                <Option value={PlansCurrency.Usd}>USD ($)</Option>
+                <Option value={Currency.Eur}>Euro (€)</Option>
+                <Option value={Currency.Gbp}>GBP (£)</Option>
+                <Option value={Currency.Usd}>USD ($)</Option>
               </Select>
             </div>
             <div className='interval-select'>

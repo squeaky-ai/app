@@ -294,6 +294,17 @@ export const GET_ADMIN_USER_QUERY = gql`
               }
             }
           }
+          invoices {
+            id
+            invoiceNumber
+            invoiceUrl
+            status
+            amount
+            currency
+            issuedAt
+            dueAt
+            paidAt
+          }
         }
       }
     }

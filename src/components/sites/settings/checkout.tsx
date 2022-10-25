@@ -3,14 +3,14 @@ import type { FC } from 'react';
 import { Button } from 'components/button';
 import { Icon } from 'components/icon';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
-import { Plan, PlansCurrency, Site } from 'types/graphql';
+import { Plan, Currency, Site } from 'types/graphql';
 import { CheckoutButton } from 'components/sites/settings/checkout-button';
 import { ChangePlanButton } from 'components/sites/settings/change-plan-button';
 
 interface Props {
   site: Site;
   plan: Plan;
-  currency: PlansCurrency;
+  currency: Currency;
   isCurrent: boolean;
   isDowngrade: boolean;
   isFirstTimeCheckout: boolean;

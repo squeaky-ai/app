@@ -69,6 +69,7 @@ import {
   UsersReferral,
   UsersReferralDeleteInput,
   AdminUserPartnerCreateInput,
+  AdminPartnerInvoiceUpdateInput,
 } from 'types/graphql';
 
 import {
@@ -133,6 +134,7 @@ import {
   ADMIN_USER_DELETE_MUTATION,
   ADMIN_REFERRAL_DELETE_MUTATION,
   ADMIN_USER_PARTNER_CREATE_MUTATION,
+  ADMIN_PARTNER_INVOICE_UPDATE,
   USER_REFERRAL_DELETE_MUTATION,
 } from 'data/users/mutations';
 
@@ -1025,6 +1027,15 @@ export const adminReferralDelete = async (input: AdminReferralDeleteInput): Prom
 export const adminPartnerCreate = async (input: AdminUserPartnerCreateInput): Promise<void> => {
   await client.mutate({
     mutation: ADMIN_USER_PARTNER_CREATE_MUTATION,
+    variables: { input },
+  });
+
+  return null;
+};
+
+export const adminPartnerInvoiceUpdate = async (input: AdminPartnerInvoiceUpdateInput): Promise<void> => {
+  await client.mutate({
+    mutation: ADMIN_PARTNER_INVOICE_UPDATE,
     variables: { input },
   });
 

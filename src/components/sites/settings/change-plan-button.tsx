@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import { Button } from 'components/button';
 import { useToasts } from 'hooks/use-toasts';
-import { PlansCurrency } from 'types/graphql';
+import { Currency } from 'types/graphql';
 import type { Plan, Site, SiteBilling } from 'types/graphql';
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
   plan: Plan;
   label: string;
   loading: boolean;
-  currency: PlansCurrency;
+  currency: Currency;
   buttonClassName: string;
   setLoading: (loading: boolean) => void;
   onChange: (name: string) => void;

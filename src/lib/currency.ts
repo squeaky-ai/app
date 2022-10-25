@@ -1,4 +1,4 @@
-import { PlansCurrency } from 'types/graphql';
+import { Currency } from 'types/graphql';
 import type { Plan } from 'types/graphql';
 
 export enum Interval {
@@ -6,23 +6,23 @@ export enum Interval {
   YEARLY = 'year',
 }
 
-export const getPricingForCurrencyAndInterval = (plan: Plan, currency: PlansCurrency, interval: Interval) => {
+export const getPricingForCurrencyAndInterval = (plan: Plan, currency: Currency, interval: Interval) => {
   return (plan.pricing || [])
     .find(p => p.currency === currency && p.interval === interval)?.amount || 0;
 };
 
-export const getUsefulCurrency = (): PlansCurrency => {
+export const getUsefulCurrency = (): Currency => {
   const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
   if (['Europe/London', 'Europe/Belfast'].includes(tz)) {
-    return PlansCurrency.Gbp;
+    return Currency.Gbp;
   }
 
   if (tz.startsWith('Europe')) {
-    return PlansCurrency.Eur;
+    return Currency.Eur;
   }
 
-  return PlansCurrency.Usd;
+  return Currency.Usd;
 };
 
 export const toDecimalCurrency = (value: number) => {

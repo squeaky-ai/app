@@ -5,14 +5,14 @@ import { Icon } from 'components/icon';
 import { Checkout } from 'components/sites/settings/checkout';
 import { CURRENCY_SYMBOLS } from 'data/common/constants';
 import { Interval, getPricingForCurrencyAndInterval } from 'lib/currency';
-import { PlansCurrency, Site } from 'types/graphql';
+import { Currency, Site } from 'types/graphql';
 import type { Billing } from 'types/billing';
 
 interface Props {
   site: Site;
   billing: Billing;
   planIndex: number;
-  currency: PlansCurrency;
+  currency: Currency;
   interval: Interval;
   hasBilling: boolean;
   showPlanChangeMessage: (name: string) => void;

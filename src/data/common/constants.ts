@@ -1,5 +1,5 @@
 import getConfig from 'next/config';
-import { PlansCurrency } from 'types/graphql';
+import { Currency } from 'types/graphql';
 import type { RelativeTime } from 'types/common';
 
 const { publicRuntimeConfig } = getConfig();
@@ -53,7 +53,7 @@ export const TIME_PERIODS: { name: string, key: RelativeTime }[] = [
   },
 ];
 
-export const CURRENCY_SYMBOLS: Record<PlansCurrency, string> = {
+export const CURRENCY_SYMBOLS: Record<Currency, string> = {
   EUR: '€',
   GBP: '£',
   USD: '$'

@@ -82,6 +82,15 @@ export const ADMIN_USER_PARTNER_CREATE_MUTATION = gql`
   }
 `;
 
+export const ADMIN_PARTNER_INVOICE_UPDATE = gql`
+  mutation AdminPartnerInvoiceUpdate($input: AdminPartnerInvoiceUpdateInput!) {
+    adminPartnerInvoiceUpdate(input: $input) {
+      id
+      status
+    }
+  }
+`;
+
 export const USER_REFERRAL_DELETE_MUTATION = gql`
   mutation UserReferralDelete($input: UsersReferralDeleteInput!) {
     userReferralDelete(input: $input) {

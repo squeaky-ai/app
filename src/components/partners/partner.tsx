@@ -8,6 +8,7 @@ import { PageLoading } from 'components/sites/page-loading';
 import { Card } from 'components/card';
 import { usePartner } from 'hooks/use-partner';
 import { buildReferrersColumns } from 'lib/users';
+import { PartnerInvoices } from './partner-invoices';
 
 export const Partner: FC = () => {
   const { partner, loading, error } = usePartner();
@@ -85,6 +86,12 @@ export const Partner: FC = () => {
             <h3>£0.00</h3>
           </div>
         </Card>
+      </div>
+
+      <div className='invoices'>
+        <h5>Invoices</h5>
+
+        <PartnerInvoices partner={partner} />
       </div>
     </Main>
   );

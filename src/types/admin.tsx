@@ -32,3 +32,12 @@ export enum AdminUserPartnerTabs {
 }
 
 export type ReferreredSiteColumns = 'lead' | 'inactive' | 'free' | 'paid';
+
+export enum InvoicesSort {
+  IssuedAtAsc = 'issued_at__asc',
+  IssuedAtDesc = 'issued_at__desc',
+  DueAtAsc = 'due_at__asc',
+  DueAtDesc = 'due_at__desc',
+  PaidAtAsc = 'paid_at__asc',
+  PaidAtDesc = 'paid_at__desc',
+}

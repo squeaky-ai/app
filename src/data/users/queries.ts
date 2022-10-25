@@ -66,6 +66,17 @@ export const GET_PARTNER_QUERY = gql`
             }
           }
         }
+        invoices {
+          id
+          invoiceNumber
+          invoiceUrl
+          status
+          amount
+          currency
+          issuedAt
+          dueAt
+          paidAt
+        }
       }
     }
   }
