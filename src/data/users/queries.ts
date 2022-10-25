@@ -77,6 +77,16 @@ export const GET_PARTNER_QUERY = gql`
           dueAt
           paidAt
         }
+        allTimeCommission {
+          id
+          amount
+          currency
+        }
+        payOuts {
+          id
+          amount
+          currency
+        }
       }
     }
   }

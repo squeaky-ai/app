@@ -26,6 +26,8 @@ export const getUsefulCurrency = (): Currency => {
 };
 
 export const toDecimalCurrency = (value: number) => {
+  if (!value) return '0.00';
+
   const text = value.toString();
   const position = text.length - 2;
 

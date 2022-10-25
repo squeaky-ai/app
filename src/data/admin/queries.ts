@@ -305,6 +305,16 @@ export const GET_ADMIN_USER_QUERY = gql`
             dueAt
             paidAt
           }
+          allTimeCommission {
+            id
+            amount
+            currency
+          }
+          payOuts {
+            id
+            amount
+            currency
+          }
         }
       }
     }

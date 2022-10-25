@@ -25,22 +25,22 @@ export type ActiveVisitorCount = {
 export type Admin = {
   __typename?: 'Admin';
   activeMonthlyUsers: Scalars['Int'];
-  activeVisitors: Array<Maybe<ActiveVisitorCount>>;
-  blogImages: Array<Maybe<Scalars['String']>>;
+  activeVisitors: Array<ActiveVisitorCount>;
+  blogImages: Array<Scalars['String']>;
   recordingsCount: Scalars['Int'];
   recordingsProcessed: Scalars['Int'];
-  recordingsStored: Array<Maybe<AdminRecordingsStored>>;
+  recordingsStored: Array<AdminRecordingsStored>;
   roles: AdminRoles;
   site?: Maybe<AdminSite>;
   sites: AdminSites;
-  sitesBundles: Array<Maybe<SitesBundle>>;
+  sitesBundles: Array<SitesBundle>;
   sitesCount: Scalars['Int'];
-  sitesStored: Array<Maybe<AdminSitesStored>>;
+  sitesStored: Array<AdminSitesStored>;
   user?: Maybe<AdminUser>;
   users: AdminUsers;
   usersCount: Scalars['Int'];
-  usersPartners: Array<Maybe<AdminUser>>;
-  usersStored: Array<Maybe<AdminUsersStored>>;
+  usersPartners: Array<AdminUser>;
+  usersStored: Array<AdminUsersStored>;
   verified: AdminVerified;
   visitorsCount: Scalars['Int'];
 };
@@ -88,7 +88,7 @@ export type AdminBlogPostCreateInput = {
   draft: Scalars['Boolean'];
   metaDescription: Scalars['String'];
   metaImage: Scalars['String'];
-  scripts: Array<InputMaybe<Scalars['String']>>;
+  scripts: Array<Scalars['String']>;
   slug: Scalars['String'];
   tags: Array<Scalars['String']>;
   title: Scalars['String'];
@@ -112,7 +112,7 @@ export type AdminBlogPostUpdateInput = {
   id: Scalars['ID'];
   metaDescription?: InputMaybe<Scalars['String']>;
   metaImage?: InputMaybe<Scalars['String']>;
-  scripts?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  scripts?: InputMaybe<Array<Scalars['String']>>;
   slug?: InputMaybe<Scalars['String']>;
   tags?: InputMaybe<Array<Scalars['String']>>;
   title?: InputMaybe<Scalars['String']>;
@@ -167,55 +167,55 @@ export type AdminSite = {
   anonymiseFormInputs: Scalars['Boolean'];
   anonymiseText: Scalars['Boolean'];
   billing?: Maybe<SiteBilling>;
-  browsers: Array<Maybe<Scalars['String']>>;
+  browsers: Array<Scalars['String']>;
   bundled: Scalars['Boolean'];
-  bundledWith: Array<Maybe<AdminSite>>;
+  bundledWith: Array<AdminSite>;
   consent: Consent;
-  countries: Array<Maybe<RecordingsCountry>>;
+  countries: Array<RecordingsCountry>;
   createdAt: Scalars['ISO8601DateTime'];
-  cssSelectorBlacklist: Array<Maybe<Scalars['String']>>;
+  cssSelectorBlacklist: Array<Scalars['String']>;
   daysSinceLastRecording: Scalars['Int'];
-  domainBlacklist: Array<Maybe<SitesDomainBlacklist>>;
+  domainBlacklist: Array<SitesDomainBlacklist>;
   error: ErrorsError;
   errors: Errors;
   errorsCounts: ErrorsCounts;
   eventCapture: EventsCapture;
   eventCounts: EventsCounts;
   eventFeed: EventsFeed;
-  eventGroups: Array<Maybe<EventsGroup>>;
-  eventStats: Array<Maybe<EventsStat>>;
+  eventGroups: Array<EventsGroup>;
+  eventStats: Array<EventsStat>;
   feedback: Feedback;
   heatmaps: Heatmaps;
   id: Scalars['ID'];
   ingestEnabled: Scalars['Boolean'];
-  ipBlacklist: Array<Maybe<SitesIpBlacklist>>;
-  languages: Array<Maybe<Scalars['String']>>;
+  ipBlacklist: Array<SitesIpBlacklist>;
+  languages: Array<Scalars['String']>;
   magicErasureEnabled: Scalars['Boolean'];
   name: Scalars['String'];
   notes: Notes;
   nps: Nps;
   ownerName: Scalars['String'];
-  pageUrls: Array<Maybe<Scalars['String']>>;
-  pages: Array<Maybe<SitesPage>>;
+  pageUrls: Array<Scalars['String']>;
+  pages: Array<SitesPage>;
   plan?: Maybe<SitesPlan>;
   recording?: Maybe<Recording>;
   recordingCounts: AdminSiteRecordingsCounts;
   recordingLatest?: Maybe<Recording>;
   recordings: Recordings;
   recordingsCount: Scalars['Int'];
-  referrers: Array<Maybe<Scalars['String']>>;
-  routes: Array<Maybe<Scalars['String']>>;
+  referrers: Array<Scalars['String']>;
+  routes: Array<Scalars['String']>;
   sentiment: Sentiment;
   superuserAccessEnabled: Scalars['Boolean'];
-  tags: Array<Maybe<Tag>>;
+  tags: Array<Tag>;
   team: Array<Team>;
   updatedAt?: Maybe<Scalars['ISO8601DateTime']>;
   url: Scalars['String'];
-  utmCampaigns: Array<Maybe<Scalars['String']>>;
-  utmContents: Array<Maybe<Scalars['String']>>;
-  utmMediums: Array<Maybe<Scalars['String']>>;
-  utmSources: Array<Maybe<Scalars['String']>>;
-  utmTerms: Array<Maybe<Scalars['String']>>;
+  utmCampaigns: Array<Scalars['String']>;
+  utmContents: Array<Scalars['String']>;
+  utmMediums: Array<Scalars['String']>;
+  utmSources: Array<Scalars['String']>;
+  utmTerms: Array<Scalars['String']>;
   uuid: Scalars['String'];
   verifiedAt?: Maybe<Scalars['ISO8601DateTime']>;
   visitor?: Maybe<Visitor>;
@@ -389,7 +389,7 @@ export type AdminSitePlanUpdateInput = {
   responseTimeHours?: InputMaybe<Scalars['Int']>;
   siteId: Scalars['ID'];
   ssoEnabled?: InputMaybe<Scalars['Boolean']>;
-  support?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  support?: InputMaybe<Array<Scalars['String']>>;
 };
 
 export type AdminSiteRecordingsCounts = {
@@ -409,7 +409,7 @@ export enum AdminSiteSort {
 
 export type AdminSites = {
   __typename?: 'AdminSites';
-  items: Array<Maybe<AdminSite>>;
+  items: Array<AdminSite>;
   pagination: AdminSitePagination;
 };
 
@@ -432,7 +432,7 @@ export type AdminUser = {
   lastActivityAt?: Maybe<Scalars['ISO8601DateTime']>;
   lastName?: Maybe<Scalars['String']>;
   partner?: Maybe<UsersPartner>;
-  sites: Array<Maybe<Site>>;
+  sites: Array<Site>;
   superuser: Scalars['Boolean'];
   updatedAt?: Maybe<Scalars['ISO8601DateTime']>;
   visitor?: Maybe<Visitor>;
@@ -472,7 +472,7 @@ export enum AdminUserSort {
 
 export type AdminUsers = {
   __typename?: 'AdminUsers';
-  items: Array<Maybe<AdminUser>>;
+  items: Array<AdminUser>;
   pagination: AdminUserPagination;
 };
 
@@ -491,10 +491,10 @@ export type AdminVerified = {
 export type Analytics = {
   __typename?: 'Analytics';
   browsers: AnalyticsBrowsers;
-  countries: Array<Maybe<AnalyticsCountry>>;
+  countries: Array<AnalyticsCountry>;
   devices: Array<AnalyticsDevice>;
-  dimensions: Array<Maybe<AnalyticsDimension>>;
-  languages: Array<Maybe<AnalyticsLanguage>>;
+  dimensions: Array<AnalyticsDimension>;
+  languages: Array<AnalyticsLanguage>;
   pageViewCount: Scalars['Int'];
   pageViews: AnalyticsPageViews;
   pages: AnalyticsPages;
@@ -504,10 +504,10 @@ export type Analytics = {
   referrers: AnalyticsReferrers;
   sessionDurations: AnalyticsSessionDurations;
   sessionsPerVisitor: AnalyticsSessionsPerVisitor;
-  userPaths: Array<Maybe<AnalyticsUserPath>>;
+  userPaths: Array<AnalyticsUserPath>;
   visitors: AnalyticsVisitors;
   visitorsCount: AnalyticsVisitorsCount;
-  visitsAt: Array<Maybe<AnalyticsVisitAt>>;
+  visitsAt: Array<AnalyticsVisitAt>;
 };
 
 
@@ -549,7 +549,7 @@ export type AnalyticsBrowser = {
 
 export type AnalyticsBrowsers = {
   __typename?: 'AnalyticsBrowsers';
-  items: Array<Maybe<AnalyticsBrowser>>;
+  items: Array<AnalyticsBrowser>;
   pagination: CommonPagination;
 };
 
@@ -600,14 +600,14 @@ export type AnalyticsPageViews = {
   __typename?: 'AnalyticsPageViews';
   groupRange: Scalars['Int'];
   groupType: Scalars['String'];
-  items: Array<Maybe<AnalyticsPageView>>;
+  items: Array<AnalyticsPageView>;
   total: Scalars['Int'];
   trend: Scalars['Int'];
 };
 
 export type AnalyticsPages = {
   __typename?: 'AnalyticsPages';
-  items: Array<Maybe<AnalyticsPage>>;
+  items: Array<AnalyticsPage>;
   pagination: CommonPagination;
 };
 
@@ -642,14 +642,14 @@ export type AnalyticsPerPage = {
   averageVisitsPerSession: AnalyticsPerPageVisitsPerSession;
   bounceRate: AnalyticsPerPageBounceRate;
   browsers: AnalyticsBrowsers;
-  countries: Array<Maybe<AnalyticsCountry>>;
+  countries: Array<AnalyticsCountry>;
   devices: Array<AnalyticsDevice>;
-  dimensions: Array<Maybe<AnalyticsDimension>>;
+  dimensions: Array<AnalyticsDimension>;
   exitRate: AnalyticsPerPageExitRate;
-  languages: Array<Maybe<AnalyticsLanguage>>;
+  languages: Array<AnalyticsLanguage>;
   pageViews: AnalyticsPageViews;
   referrers: AnalyticsReferrers;
-  visitsAt: Array<Maybe<AnalyticsVisitAt>>;
+  visitsAt: Array<AnalyticsVisitAt>;
 };
 
 
@@ -703,7 +703,7 @@ export type AnalyticsReferrer = {
 
 export type AnalyticsReferrers = {
   __typename?: 'AnalyticsReferrers';
-  items: Array<Maybe<AnalyticsReferrer>>;
+  items: Array<AnalyticsReferrer>;
   pagination: CommonPagination;
 };
 
@@ -721,7 +721,7 @@ export type AnalyticsSessionsPerVisitor = {
 
 export type AnalyticsUserPath = {
   __typename?: 'AnalyticsUserPath';
-  path: Array<Maybe<Scalars['String']>>;
+  path: Array<Scalars['String']>;
 };
 
 export type AnalyticsVisitAt = {
@@ -743,7 +743,7 @@ export type AnalyticsVisitors = {
   __typename?: 'AnalyticsVisitors';
   groupRange: Scalars['Int'];
   groupType: Scalars['String'];
-  items: Array<Maybe<AnalyticsVisitor>>;
+  items: Array<AnalyticsVisitor>;
 };
 
 export type AnalyticsVisitorsCount = {
@@ -814,7 +814,7 @@ export type BlogPost = {
   id: Scalars['ID'];
   metaDescription: Scalars['String'];
   metaImage: Scalars['String'];
-  scripts: Array<Maybe<Scalars['String']>>;
+  scripts: Array<Scalars['String']>;
   slug: Scalars['String'];
   tags: Array<Scalars['String']>;
   title: Scalars['String'];
@@ -838,7 +838,7 @@ export type Consent = {
   __typename?: 'Consent';
   consentMethod: Scalars['String'];
   id: Scalars['ID'];
-  languages: Array<Maybe<Scalars['String']>>;
+  languages: Array<Scalars['String']>;
   languagesDefault?: Maybe<Scalars['String']>;
   layout: Scalars['String'];
   name: Scalars['String'];
@@ -920,7 +920,7 @@ export enum Currency {
 
 export type Errors = {
   __typename?: 'Errors';
-  items: Array<Maybe<ErrorsItem>>;
+  items: Array<ErrorsItem>;
   pagination: ErrorsPagination;
 };
 
@@ -934,7 +934,7 @@ export type ErrorsCounts = {
   __typename?: 'ErrorsCounts';
   groupRange: Scalars['Int'];
   groupType: Scalars['String'];
-  items: Array<Maybe<ErrorsCount>>;
+  items: Array<ErrorsCount>;
 };
 
 export type ErrorsDetails = {
@@ -1065,19 +1065,19 @@ export type EventGroupDeleteInput = {
 
 export type EventsCapture = {
   __typename?: 'EventsCapture';
-  items: Array<Maybe<EventsCaptureItem>>;
+  items: Array<EventsCaptureItem>;
   pagination: EventsCapturePagination;
 };
 
 export type EventsCaptureItem = {
   __typename?: 'EventsCaptureItem';
   count: Scalars['Int'];
-  groupIds: Array<Maybe<Scalars['String']>>;
-  groupNames: Array<Maybe<Scalars['String']>>;
+  groupIds: Array<Scalars['String']>;
+  groupNames: Array<Scalars['String']>;
   id: Scalars['ID'];
   lastCountedAt?: Maybe<Scalars['ISO8601DateTime']>;
   name: Scalars['String'];
-  rules: Array<Maybe<EventsRule>>;
+  rules: Array<EventsRule>;
   type: Scalars['Int'];
 };
 
@@ -1107,7 +1107,7 @@ export enum EventsCondition {
 export type EventsCount = {
   __typename?: 'EventsCount';
   dateKey: Scalars['String'];
-  metrics: Array<Maybe<EventsCountMetric>>;
+  metrics: Array<EventsCountMetric>;
 };
 
 export type EventsCountMetric = {
@@ -1121,12 +1121,12 @@ export type EventsCounts = {
   __typename?: 'EventsCounts';
   groupRange: Scalars['Int'];
   groupType: Scalars['String'];
-  items: Array<Maybe<EventsCount>>;
+  items: Array<EventsCount>;
 };
 
 export type EventsFeed = {
   __typename?: 'EventsFeed';
-  items: Array<Maybe<FeedCaptureItem>>;
+  items: Array<FeedCaptureItem>;
   pagination: EventsFeedPagination;
 };
 
@@ -1147,7 +1147,7 @@ export enum EventsFeedSort {
 export type EventsGroup = {
   __typename?: 'EventsGroup';
   id: Scalars['ID'];
-  items: Array<Maybe<EventsCaptureItem>>;
+  items: Array<EventsCaptureItem>;
   name: Scalars['String'];
 };
 
@@ -1206,19 +1206,19 @@ export type Feedback = {
   npsAccentColor?: Maybe<Scalars['String']>;
   npsContactConsentEnabled?: Maybe<Scalars['Boolean']>;
   npsEnabled: Scalars['Boolean'];
-  npsExcludedPages: Array<Maybe<Scalars['String']>>;
+  npsExcludedPages: Array<Scalars['String']>;
   npsFollowUpEnabled?: Maybe<Scalars['Boolean']>;
   npsHideLogo: Scalars['Boolean'];
-  npsLanguages: Array<Maybe<Scalars['String']>>;
+  npsLanguages: Array<Scalars['String']>;
   npsLanguagesDefault?: Maybe<Scalars['String']>;
   npsLayout?: Maybe<Scalars['String']>;
   npsPhrase?: Maybe<Scalars['String']>;
   npsSchedule?: Maybe<Scalars['String']>;
   npsTranslations: Scalars['String'];
   sentimentAccentColor?: Maybe<Scalars['String']>;
-  sentimentDevices: Array<Maybe<Scalars['String']>>;
+  sentimentDevices: Array<Scalars['String']>;
   sentimentEnabled?: Maybe<Scalars['Boolean']>;
-  sentimentExcludedPages: Array<Maybe<Scalars['String']>>;
+  sentimentExcludedPages: Array<Scalars['String']>;
   sentimentHideLogo: Scalars['Boolean'];
   sentimentLayout?: Maybe<Scalars['String']>;
   sentimentSchedule?: Maybe<Scalars['String']>;
@@ -1249,7 +1249,7 @@ export type FeedbackNpsRatings = {
 
 export type FeedbackNpsReplies = {
   __typename?: 'FeedbackNpsReplies';
-  responses: Array<Maybe<FeedbackNpsReply>>;
+  responses: Array<FeedbackNpsReply>;
   trend: Scalars['Int'];
 };
 
@@ -1261,7 +1261,7 @@ export type FeedbackNpsReply = {
 
 export type FeedbackNpsResponse = {
   __typename?: 'FeedbackNpsResponse';
-  items: Array<Maybe<FeedbackNpsResponseItem>>;
+  items: Array<FeedbackNpsResponseItem>;
   pagination: FeedbackNpsResponsePagination;
 };
 
@@ -1306,7 +1306,7 @@ export type FeedbackNpsScore = {
 
 export type FeedbackNpsScores = {
   __typename?: 'FeedbackNpsScores';
-  responses: Array<Maybe<FeedbackNpsScore>>;
+  responses: Array<FeedbackNpsScore>;
   score: Scalars['Int'];
   trend: Scalars['Int'];
 };
@@ -1325,14 +1325,14 @@ export type FeedbackSentimentRating = {
 
 export type FeedbackSentimentRatings = {
   __typename?: 'FeedbackSentimentRatings';
-  responses: Array<Maybe<FeedbackSentimentRating>>;
+  responses: Array<FeedbackSentimentRating>;
   score: Scalars['Float'];
   trend: Scalars['Float'];
 };
 
 export type FeedbackSentimentReplies = {
   __typename?: 'FeedbackSentimentReplies';
-  responses: Array<Maybe<FeedbackSentimentReply>>;
+  responses: Array<FeedbackSentimentReply>;
   total: Scalars['Int'];
 };
 
@@ -1343,7 +1343,7 @@ export type FeedbackSentimentReply = {
 
 export type FeedbackSentimentResponse = {
   __typename?: 'FeedbackSentimentResponse';
-  items: Array<Maybe<FeedbackSentimentResponseItem>>;
+  items: Array<FeedbackSentimentResponseItem>;
   pagination: FeedbackSentimentResponsePagination;
 };
 
@@ -1990,7 +1990,7 @@ export type Note = {
 
 export type Notes = {
   __typename?: 'Notes';
-  items: Array<Maybe<Note>>;
+  items: Array<Note>;
   pagination: NotesPagination;
 };
 
@@ -2033,7 +2033,7 @@ export type NotesUpdateInput = {
 export type Nps = {
   __typename?: 'Nps';
   groups: FeedbackNpsGroups;
-  ratings: Array<Maybe<FeedbackNpsRatings>>;
+  ratings: Array<FeedbackNpsRatings>;
   replies: FeedbackNpsReplies;
   responses: FeedbackNpsResponse;
   scores: FeedbackNpsScores;
@@ -2113,7 +2113,7 @@ export type Query = {
   site?: Maybe<Site>;
   siteByUuid?: Maybe<Site>;
   siteSessionSettings?: Maybe<SiteSessionSettings>;
-  sites: Array<Maybe<Site>>;
+  sites: Array<Site>;
   user?: Maybe<User>;
   userExists: Scalars['Boolean'];
   userInvitation?: Maybe<UsersInvitation>;
@@ -2183,19 +2183,19 @@ export type Recording = {
   events: RecordingsEvents;
   exitPage: Scalars['String'];
   id: Scalars['ID'];
-  inactivity: Array<Maybe<Array<Scalars['BigInt']>>>;
+  inactivity: Array<Array<Scalars['BigInt']>>;
   language: Scalars['String'];
-  notes: Array<Maybe<Note>>;
+  notes: Array<Note>;
   nps?: Maybe<FeedbackNpsResponseItem>;
   pageCount: Scalars['Int'];
-  pageViews: Array<Maybe<Scalars['String']>>;
-  pages: Array<Maybe<Page>>;
+  pageViews: Array<Scalars['String']>;
+  pages: Array<Page>;
   referrer?: Maybe<Scalars['String']>;
   sentiment?: Maybe<FeedbackSentimentResponseItem>;
   sessionId: Scalars['String'];
   siteId: Scalars['ID'];
   startPage: Scalars['String'];
-  tags: Array<Maybe<Tag>>;
+  tags: Array<Tag>;
   timezone?: Maybe<Scalars['String']>;
   viewed: Scalars['Boolean'];
   visitor: Visitor;
@@ -2209,7 +2209,7 @@ export type RecordingEventsArgs = {
 
 export type Recordings = {
   __typename?: 'Recordings';
-  items: Array<Maybe<Recording>>;
+  items: Array<Recording>;
   pagination: RecordingsPagination;
 };
 
@@ -2275,7 +2275,7 @@ export type RecordingsEventPagination = {
 
 export type RecordingsEvents = {
   __typename?: 'RecordingsEvents';
-  items: Array<Maybe<RecordingsEvent>>;
+  items: Array<RecordingsEvent>;
   pagination: RecordingsEventPagination;
 };
 
@@ -2385,51 +2385,51 @@ export type Site = {
   anonymiseFormInputs: Scalars['Boolean'];
   anonymiseText: Scalars['Boolean'];
   billing?: Maybe<SiteBilling>;
-  browsers: Array<Maybe<Scalars['String']>>;
+  browsers: Array<Scalars['String']>;
   consent: Consent;
-  countries: Array<Maybe<RecordingsCountry>>;
+  countries: Array<RecordingsCountry>;
   createdAt: Scalars['ISO8601DateTime'];
-  cssSelectorBlacklist: Array<Maybe<Scalars['String']>>;
+  cssSelectorBlacklist: Array<Scalars['String']>;
   daysSinceLastRecording: Scalars['Int'];
-  domainBlacklist: Array<Maybe<SitesDomainBlacklist>>;
+  domainBlacklist: Array<SitesDomainBlacklist>;
   error: ErrorsError;
   errors: Errors;
   errorsCounts: ErrorsCounts;
   eventCapture: EventsCapture;
   eventCounts: EventsCounts;
   eventFeed: EventsFeed;
-  eventGroups: Array<Maybe<EventsGroup>>;
-  eventStats: Array<Maybe<EventsStat>>;
+  eventGroups: Array<EventsGroup>;
+  eventStats: Array<EventsStat>;
   feedback: Feedback;
   heatmaps: Heatmaps;
   id: Scalars['ID'];
-  ipBlacklist: Array<Maybe<SitesIpBlacklist>>;
-  languages: Array<Maybe<Scalars['String']>>;
+  ipBlacklist: Array<SitesIpBlacklist>;
+  languages: Array<Scalars['String']>;
   magicErasureEnabled: Scalars['Boolean'];
   name: Scalars['String'];
   notes: Notes;
   nps: Nps;
   ownerName: Scalars['String'];
-  pageUrls: Array<Maybe<Scalars['String']>>;
-  pages: Array<Maybe<SitesPage>>;
+  pageUrls: Array<Scalars['String']>;
+  pages: Array<SitesPage>;
   plan?: Maybe<SitesPlan>;
   recording?: Maybe<Recording>;
   recordingLatest?: Maybe<Recording>;
   recordings: Recordings;
   recordingsCount: Scalars['Int'];
-  referrers: Array<Maybe<Scalars['String']>>;
-  routes: Array<Maybe<Scalars['String']>>;
+  referrers: Array<Scalars['String']>;
+  routes: Array<Scalars['String']>;
   sentiment: Sentiment;
   superuserAccessEnabled: Scalars['Boolean'];
-  tags: Array<Maybe<Tag>>;
+  tags: Array<Tag>;
   team: Array<Team>;
   updatedAt?: Maybe<Scalars['ISO8601DateTime']>;
   url: Scalars['String'];
-  utmCampaigns: Array<Maybe<Scalars['String']>>;
-  utmContents: Array<Maybe<Scalars['String']>>;
-  utmMediums: Array<Maybe<Scalars['String']>>;
-  utmSources: Array<Maybe<Scalars['String']>>;
-  utmTerms: Array<Maybe<Scalars['String']>>;
+  utmCampaigns: Array<Scalars['String']>;
+  utmContents: Array<Scalars['String']>;
+  utmMediums: Array<Scalars['String']>;
+  utmSources: Array<Scalars['String']>;
+  utmTerms: Array<Scalars['String']>;
   uuid: Scalars['String'];
   verifiedAt?: Maybe<Scalars['ISO8601DateTime']>;
   visitor?: Maybe<Visitor>;
@@ -2573,18 +2573,18 @@ export type SiteBilling = {
   expiry?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   status: SubscriptionsStatus;
-  taxIds: Array<Maybe<SitesTaxId>>;
-  transactions: Array<Maybe<SubscriptionsTransaction>>;
+  taxIds: Array<SitesTaxId>;
+  transactions: Array<SubscriptionsTransaction>;
 };
 
 export type SiteSessionSettings = {
   __typename?: 'SiteSessionSettings';
   anonymiseFormInputs: Scalars['Boolean'];
   anonymiseText: Scalars['Boolean'];
-  cssSelectorBlacklist: Array<Maybe<Scalars['String']>>;
+  cssSelectorBlacklist: Array<Scalars['String']>;
   ingestEnabled: Scalars['Boolean'];
   invalidOrExceededPlan: Scalars['Boolean'];
-  ipBlacklist: Array<Maybe<SitesIpBlacklist>>;
+  ipBlacklist: Array<SitesIpBlacklist>;
   name: Scalars['String'];
   url: Scalars['String'];
   uuid: Scalars['String'];
@@ -2605,7 +2605,7 @@ export type SitesBundle = {
   id: Scalars['ID'];
   name: Scalars['String'];
   plan: SitesPlan;
-  sites: Array<Maybe<AdminSite>>;
+  sites: Array<AdminSite>;
 };
 
 /** Autogenerated input type of SitesCreate */
@@ -2734,7 +2734,7 @@ export type SitesRoutesDeleteInput = {
 export type SitesRoutesUpdateInput = {
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: InputMaybe<Scalars['String']>;
-  routes: Array<InputMaybe<Scalars['String']>>;
+  routes: Array<Scalars['String']>;
   siteId: Scalars['ID'];
 };
 
@@ -3017,10 +3017,12 @@ export type UsersInvoice = {
 
 export type UsersPartner = {
   __typename?: 'UsersPartner';
+  allTimeCommission: Array<UsersPayment>;
   id: Scalars['ID'];
   invoices: Array<UsersInvoice>;
   name: Scalars['String'];
-  referrals: Array<Maybe<UsersReferral>>;
+  payOuts: Array<UsersPayment>;
+  referrals: Array<UsersReferral>;
   slug: Scalars['String'];
 };
 
@@ -3031,6 +3033,13 @@ export type UsersPasswordInput = {
   currentPassword: Scalars['String'];
   password: Scalars['String'];
   passwordConfirmation: Scalars['String'];
+};
+
+export type UsersPayment = {
+  __typename?: 'UsersPayment';
+  amount: Scalars['Int'];
+  currency: Currency;
+  id: Scalars['ID'];
 };
 
 export type UsersReferral = {
@@ -3100,7 +3109,7 @@ export type VisitorRecordingsArgs = {
 
 export type Visitors = {
   __typename?: 'Visitors';
-  items: Array<Maybe<Visitor>>;
+  items: Array<Visitor>;
   pagination: VisitorsPagination;
 };
 
@@ -3115,9 +3124,9 @@ export type VisitorsDeleteInput = {
 export type VisitorsExport = {
   __typename?: 'VisitorsExport';
   linkedData?: Maybe<Scalars['String']>;
-  npsFeedback: Array<Maybe<FeedbackNpsResponseItem>>;
+  npsFeedback: Array<FeedbackNpsResponseItem>;
   recordingsCount: Scalars['Int'];
-  sentimentFeedback: Array<Maybe<FeedbackSentimentResponseItem>>;
+  sentimentFeedback: Array<FeedbackSentimentResponseItem>;
 };
 
 export type VisitorsFilters = {
@@ -3148,7 +3157,7 @@ export type VisitorsPagePagination = {
 
 export type VisitorsPages = {
   __typename?: 'VisitorsPages';
-  items: Array<Maybe<VisitorsPage>>;
+  items: Array<VisitorsPage>;
   pagination: VisitorsPagePagination;
 };
 
