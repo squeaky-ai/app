@@ -25,15 +25,6 @@ export const UserPartnerRevenue: FC<Props> = ({ user, setTab }) => (
       </div>
     </Card>
     <Card>
-      <h5>Monthly partner commission</h5>
-      <p>Shows current monthly commission earned through all plans.</p>
-      <div className='stats'>
-        <h3>€0.00 <i>(0 plans)</i></h3>
-        <h3>$0.00 <i>(0 plans)</i></h3>
-        <h3>£0.00 <i>(0 plans)</i></h3>
-      </div>
-    </Card>
-    <Card>
       <h5>Historical pay outs</h5>
       <p>Funds that have been paid out following a received <Button className='link' onClick={() => setTab(AdminUserPartnerTabs.INVOICES)}>invoices</Button>.</p>
       <div className='stats'>
