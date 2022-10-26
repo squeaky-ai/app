@@ -1,15 +1,9 @@
 import React from 'react';
 import type { FC } from 'react';
-import Link from 'next/link';
 import { TableWrapper, Table, Cell, Row } from 'components/table';
 import { Sort } from 'components/sort';
 import { InvoicesSort } from 'types/admin';
-import { Icon } from 'components/icon';
-import { Pill } from 'components/pill';
-import { toDecimalCurrency } from 'lib/currency';
-import { toddMMYYY } from 'lib/dates';
-import { CURRENCY_SYMBOLS } from 'data/common/constants';
-import { INVOICE_PENDING } from 'data/users/constants';
+import { PartnerInvoicesRow } from 'components/partners/partner-invoices-row';
 import type { UsersPartner } from 'types/graphql';
 
 interface Props {
@@ -61,26 +55,10 @@ export const PartnerInvoices: FC<Props> = ({ partner }) => {
                   onDesc={() => setSort(InvoicesSort.PaidAtDesc)} 
                 />
               </Cell>
+              <Cell />
             </Row>
             {partner.invoices.map(invoice => (
-              <Row key={invoice.id}>
-                <Cell>
-                  <Icon name='file-line' className='file' />
-                  <Link href={invoice.invoiceUrl}>
-                    <a>{invoice.invoiceNumber}</a>
-                  </Link>
-                </Cell>
-                <Cell>
-                  {invoice.status === INVOICE_PENDING
-                    ? <Pill className='tertiary'>Pending</Pill>
-                    : <Pill className='primary'>Paid</Pill>
-                  }
-                </Cell>
-                <Cell>{CURRENCY_SYMBOLS[invoice.currency]}{toDecimalCurrency(invoice.amount)}</Cell>
-                <Cell>{invoice.issuedAt ? (toddMMYYY(new Date(invoice.issuedAt))) : '-'}</Cell>
-                <Cell>{invoice.dueAt ? (toddMMYYY(new Date(invoice.dueAt))) : '-'}</Cell>
-                <Cell>{invoice.paidAt ? (toddMMYYY(new Date(invoice.paidAt))) : '-'}</Cell>
-              </Row>
+              <PartnerInvoicesRow key={invoice.id} invoice={invoice} />
             ))}
           </Table>
         </TableWrapper>

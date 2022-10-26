@@ -68,7 +68,7 @@ export const GET_PARTNER_QUERY = gql`
         }
         invoices {
           id
-          invoiceNumber
+          filename
           invoiceUrl
           status
           amount

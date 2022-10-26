@@ -296,7 +296,7 @@ export const GET_ADMIN_USER_QUERY = gql`
           }
           invoices {
             id
-            invoiceNumber
+            filename
             invoiceUrl
             status
             amount

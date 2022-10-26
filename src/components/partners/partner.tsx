@@ -10,6 +10,7 @@ import { PartnerInvoices } from 'components/partners/partner-invoices';
 import { usePartner } from 'hooks/use-partner';
 import { buildReferrersColumns } from 'lib/users';
 import { toDecimalCurrency } from 'lib/currency';
+import { CreateInvoice } from 'components/partners/create-invoice';
 import { getAllTimeCommission, getAvailablePayout, getHistoricalPayouts } from 'lib/comisssion';
 import { Currency } from 'types/graphql';
 
@@ -92,7 +93,10 @@ export const Partner: FC = () => {
       </div>
 
       <div className='invoices'>
-        <h5>Invoices</h5>
+        <h5>
+          Invoices
+          <CreateInvoice partner={partner} />
+        </h5>
 
         <PartnerInvoices partner={partner} />
       </div>

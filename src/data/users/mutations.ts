@@ -35,6 +35,29 @@ export const USER_CREATE_REFERRAL_MUTATION = gql`
   }
 `;
 
+export const USER_CREATE_INVOICE_MUTATION = gql`
+  mutation UserCreateInvoice($input: UsersInvoiceCreateInput!) {
+    userInvoiceCreate(input: $input) {
+      id
+      currency
+      dueAt
+      filename
+      invoiceUrl
+      issuedAt
+      paidAt
+      status
+    }
+  }
+`;
+
+export const USER_DELETE_INVOICE_MUTATION = gql`
+  mutation UserDeleteInvoice($input: UsersInvoiceDeleteInput!) {
+    userInvoiceDelete(input: $input) {
+      id
+    }
+  }
+`;
+
 export const UPDATE_USER_COMMUNICATION = gql`
   mutation UserCommunication($input: UsersCommunicationInput!) {
     userCommunication(input: $input) {
