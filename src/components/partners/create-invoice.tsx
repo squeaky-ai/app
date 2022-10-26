@@ -60,7 +60,7 @@ export const CreateInvoice: FC<Props> = ({ partner, onClose }) => {
               (async () => {         
                 try { 
                   await invoiceCreate(partner.id, {
-                    amount: Number(values.amount),
+                    amount: Number(values.amount) * 100,
                     currency: values.currency as Currency,
                     filename: values.invoice.name,
                   });
