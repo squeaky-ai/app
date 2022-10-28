@@ -26,14 +26,20 @@ export const useDashboard = (props: Props): UseDashboard => {
   });
 
   const dashboard: Dashboard = data ? {
-    pageViewCount: data.site.analytics.pageViewCount,
+    pageViews: data.site.analytics.pageViews,
     pages: data.site.analytics.pages,
     bounceRate: data.site.analytics.bounceRate,
+    bounceCounts: data.site.analytics.bounceCounts,
     bounces: data.site.analytics.bounces,
     exits: data.site.analytics.exits,
     visitorsCount: data.site.analytics.visitorsCount,
+    visitors: data.site.analytics.visitors,
+    recordings: data.site.analytics.recordings,
     recordingsCount: data.site.analytics.recordingsCount,
     errors: data.site.errors.items,
+    errorsCounts: data.site.errorsCounts,
+    recordingsHighlights: data.site.recordingsHighlights,
+    visitorsHighlights: data.site.visitorsHighlights,
   } : null;
 
   return {

@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
+import { AreaChart, Area, ResponsiveContainer } from 'recharts';
 import { Icon } from 'components/icon';
 import { Label } from 'components/label';
 import { Trend } from 'components/trend';
@@ -10,16 +11,24 @@ import { toHoursMinutesAndSeconds } from 'lib/dates';
 import { FiltersRecordingsLink } from 'components/sites/filters/common/filters-recordings-link';
 import { FiltersVisitorsLink } from 'components/sites/filters/common/filters-visitors-link';
 import { DashboardChart } from 'components/sites/dashboard/dashboard-chart';
-import type { Site } from 'types/graphql';
+import { formatResultsForGroupType } from 'lib/charts-v2';
+import type { Site, AnalyticsPageView } from 'types/graphql';
 import type { Dashboard } from 'types/dashboard';
+import type { TimePeriod } from 'types/common';
 
 interface Props {
   site: Site;
   dashboard: Dashboard;
+  period: TimePeriod;
 }
 
-export const DashboardPageViews: FC<Props> = ({ site, dashboard }) => {
-  const hasPageViews = dashboard.pageViewCount.total > 0;
+export const DashboardPageViews: FC<Props> = ({ site, dashboard, period }) => {
+  const hasPageViews = dashboard.pageViews.total > 0;
+
+  const results = formatResultsForGroupType<AnalyticsPageView>(dashboard.pageViews, period, { count: 0 }).map(d => ({
+    dateKey: d.dateKey,
+    count: d.count,
+  }));
 
   return (
     <>
@@ -32,8 +41,8 @@ export const DashboardPageViews: FC<Props> = ({ site, dashboard }) => {
         </h5>
         {hasPageViews && (
           <div className='counts'>
-            <h3>{dashboard.pageViewCount.total}</h3>
-            <Trend direction={dashboard.pageViewCount.trend >= 0 ? 'up' : 'down'} value={dashboard.pageViewCount.trend.toString()} />            
+            <h3>{dashboard.pageViews.total}</h3>
+            <Trend direction={dashboard.pageViews.trend >= 0 ? 'up' : 'down'} value={dashboard.pageViews.trend.toString()} />            
           </div>
         )}
       </div>
@@ -42,7 +51,22 @@ export const DashboardPageViews: FC<Props> = ({ site, dashboard }) => {
       )}
       {hasPageViews && (
         <>
-          <DashboardChart />
+          <DashboardChart>
+            <ResponsiveContainer>
+              <AreaChart data={results} margin={{ top: 0, left: 0, right: 0, bottom: 0 }}>
+                {dashboard.errorsCounts.items.map(count => (
+                  <Area 
+                    key={count.dateKey}
+                    dataKey='count'
+                    fillOpacity={1}
+                    stroke='var(--blue-500)'
+                    strokeWidth={2}
+                    fill='var(--blue-50)'
+                  />
+                ))}
+              </AreaChart>
+            </ResponsiveContainer>
+          </DashboardChart>
           <Label>Most viewed</Label>
           <TableWrapper>
             <Table>

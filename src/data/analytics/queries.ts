@@ -5,10 +5,6 @@ export const GET_ANALYTICS_TRAFFIC_QUERY = gql`
     site(siteId: $siteId) {
       id
       analytics(fromDate: $fromDate, toDate: $toDate) {
-        pageViewCount {
-          total
-          trend
-        }
         visitsAt {
           day
           hour

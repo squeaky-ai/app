@@ -1,8 +1,12 @@
 import React from 'react';
 import type { FC } from 'react';
 
-export const DashboardChart: FC = () => (
+interface Props {
+  children: React.ReactNode;
+}
+
+export const DashboardChart: FC<Props> = ({ children }) => (
   <div className='dashboard-chart'>
-    Imagine there's a chart
+    {children}
   </div>
 );

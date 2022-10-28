@@ -27,10 +27,6 @@ export const useAnalyticsTraffic = (props: Props): UseAnalytics => {
   });
 
   const fallback: AnalyticsTraffic = {
-    pageViewCount: {
-      total: 0,
-      trend: 0,
-    },
     pageViews: {
       groupRange: 0,
       groupType: '',

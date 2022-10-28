@@ -34,22 +34,22 @@ export const Dashboard: FC<Props> = ({ site, period }) => {
   return (
     <div className='dashboard-grid'>
       <Card className='visitors'>
-        <DashboardVisitors site={site} dashboard={dashboard} />
+        <DashboardVisitors site={site} dashboard={dashboard} period={period} />
       </Card>
       <Card className='recordings'>
-        <DashboardRecordings site={site} dashboard={dashboard} />
+        <DashboardRecordings site={site} dashboard={dashboard} period={period} />
       </Card>
       <Card className='bounce-rate'>
-        <DashboardBounceRate site={site} dashboard={dashboard} />
+        <DashboardBounceRate site={site} dashboard={dashboard} period={period} />
       </Card>
       <Card className='exit-rate'>
         <DashboardExitRate site={site} dashboard={dashboard} />
       </Card>
       <Card className='page-views'>
-        <DashboardPageViews site={site} dashboard={dashboard} />
+        <DashboardPageViews site={site} dashboard={dashboard} period={period} />
       </Card>
       <Card className='errors'>
-        <DashboardErrors site={site} dashboard={dashboard} />
+        <DashboardErrors site={site} dashboard={dashboard} period={period} />
       </Card>
     </div>
   );
