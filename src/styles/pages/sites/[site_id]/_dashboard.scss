@@ -34,7 +34,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: calc(100% - 4rem);
+    height: calc(100% - 3rem);
 
     i {
       color: var(--gray-300);
@@ -59,15 +59,12 @@
 
   .dashboard-grid {
     display: grid;
+    flex: 1;
     grid-gap: 2rem;
     grid-template-areas: 'visitors recordings bounce-rate'
-                         'visitors recordings bounce-rate'
                          'visitors recordings exit-rate'
-                         'page-views page-views errors'
                          'page-views page-views errors';
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    flex: 1;
     height: calc(100% - 8rem);
 
     h5 {
@@ -91,13 +88,13 @@
 
         h3 {
           color: var(--blue-500);
+          line-height: var(--line-height-controls);
           margin: 0;
         }
 
         h5 {
           align-items: center;
           display: flex;
-          line-height: var(--line-height-controls);
           margin: 0;
   
           a {
@@ -109,8 +106,13 @@
           }
         }
 
-        .trend {
+        .trend,
+        .pill {
           margin: 0 0 0 1rem;
+        }
+
+        .pill + .pill {
+          margin: 0 0 0 .5rem;
         }
       }
 
@@ -119,7 +121,7 @@
 
         .row {
           border: none;
-          height: 2rem;
+          height: 1.75rem;
           
           .cell {
             &:first-of-type {
@@ -147,6 +149,12 @@
       
       h5 {
         .icon {
+          color: var(--rose-500);
+        }
+      }
+
+      .heading {
+        h3 {
           color: var(--rose-500);
         }
       }
@@ -189,6 +197,10 @@
         margin: 0 0 1.5rem 0;
       }
 
+      .counts {
+        display: flex;
+      }
+
       .heading {
         justify-content: space-between;
 
@@ -210,6 +222,24 @@
       h5 {
         .icon {
           color: var(--rose-500);
+        }
+      }
+
+      .heading {
+        justify-content: space-between;
+
+        h3 {
+          color: var(--rose-500);
+        }
+      }
+
+      .table {
+        .row {
+          grid-template-columns: 1fr auto;
+
+          .cell:last-of-type {
+            text-align: right;
+          }
         }
       }
     }

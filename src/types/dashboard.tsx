@@ -1,4 +1,4 @@
-import { Analytics } from 'types/graphql';
+import { Analytics, Errors } from 'types/graphql';
 
 
 export interface Dashboard {
@@ -7,4 +7,7 @@ export interface Dashboard {
   bounces: Analytics['bounces'];
   bounceRate: Analytics['bounceRate'];
   exits: Analytics['exits'];
+  visitorsCount: Analytics['visitorsCount'];
+  recordingsCount: Analytics['recordingsCount'];
+  errors: Errors['items'];
 }

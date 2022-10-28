@@ -18,7 +18,7 @@ export const DashboardExitRate: FC<Props> = ({ dashboard }) => {
     <>
       <div className='heading'>
         <h5>
-          <Icon name='arrow-left-right-line' />
+          <Icon name='logout-box-line' />
           Exit Rate
         </h5>
       </div>

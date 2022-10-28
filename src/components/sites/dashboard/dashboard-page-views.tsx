@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import Link from 'next/link';
 import { Icon } from 'components/icon';
 import { Label } from 'components/label';
+import { Trend } from 'components/trend';
 import { TableWrapper, Table, Row, Cell } from 'components/table';
 import { DashboardNoData } from 'components/sites/dashboard/dashboard-no-data';
 import { toHoursMinutesAndSeconds } from 'lib/dates';
@@ -18,7 +19,7 @@ interface Props {
 }
 
 export const DashboardPageViews: FC<Props> = ({ site, dashboard }) => {
-  const hasPageViews = dashboard.pageViewCount > 0;
+  const hasPageViews = dashboard.pageViewCount.total > 0;
 
   return (
     <>
@@ -31,7 +32,8 @@ export const DashboardPageViews: FC<Props> = ({ site, dashboard }) => {
         </h5>
         {hasPageViews && (
           <div className='counts'>
-            <h3>{dashboard.pageViewCount}</h3>
+            <h3>{dashboard.pageViewCount.total}</h3>
+            <Trend direction={dashboard.pageViewCount.trend >= 0 ? 'up' : 'down'} value={dashboard.pageViewCount.trend.toString()} />            
           </div>
         )}
       </div>

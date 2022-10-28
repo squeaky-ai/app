@@ -498,7 +498,7 @@ export type Analytics = {
   dimensions: Array<AnalyticsDimension>;
   exits: Array<AnalyticsExit>;
   languages: Array<AnalyticsLanguage>;
-  pageViewCount: Scalars['Int'];
+  pageViewCount: AnalyticsPageViewCount;
   pageViews: AnalyticsPageViews;
   pages: AnalyticsPages;
   pagesPerSession: AnalyticsPagesPerSession;
@@ -625,6 +625,12 @@ export type AnalyticsPageView = {
   __typename?: 'AnalyticsPageView';
   count: Scalars['Int'];
   dateKey: Scalars['String'];
+};
+
+export type AnalyticsPageViewCount = {
+  __typename?: 'AnalyticsPageViewCount';
+  total: Scalars['Int'];
+  trend: Scalars['Int'];
 };
 
 export type AnalyticsPageViews = {

@@ -31,6 +31,9 @@ export const useDashboard = (props: Props): UseDashboard => {
     bounceRate: data.site.analytics.bounceRate,
     bounces: data.site.analytics.bounces,
     exits: data.site.analytics.exits,
+    visitorsCount: data.site.analytics.visitorsCount,
+    recordingsCount: data.site.analytics.recordingsCount,
+    errors: data.site.errors.items,
   } : null;
 
   return {
