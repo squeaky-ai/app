@@ -67,6 +67,23 @@
                          'page-views page-views errors';
     grid-template-columns: repeat(3, minmax(0, 1fr));
 
+    @include breakpoint-md {
+      grid-template-areas: 'visitors recordings'
+                           'bounce-rate exit-rate'
+                           'page-views errors';
+     grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include breakpoint-sm {
+      grid-template-areas: 'visitors'
+                           'recordings'
+                           'bounce-rate'
+                           'exit-rate'
+                           'page-views'
+                           'errors';
+     grid-template-columns: minmax(0, 1fr);
+    }
+
     h5 {
       align-items: center;
       display: flex;
