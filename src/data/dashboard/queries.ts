@@ -6,52 +6,26 @@ export const GET_DASHBOARD_QUERY = gql`
       id
       analytics(fromDate: $fromDate, toDate: $toDate) {
         pageViewCount
-        visitorsCount {
-          total
-          new
+        bounceRate {
+          average
+          trend
         }
-        recordingsCount {
-          total
-          new
+        bounces(size: 5) {
+          url
+          percentage
         }
-      }
-      notes(page: 1, size: 5) {
-        items {
-          id
-          timestamp
-          body
-          recordingId
-          sessionId
-          user {
-            fullName
-          }
+        exits(size: 5) {
+          url
+          percentage
         }
-      }
-      recordingLatest {
-        id
-        duration
-        startPage
-        exitPage
-        pageCount
-        pageViews
-        connectedAt
-        device {
-          viewportX
-          viewportY
-          deviceX
-          deviceY
-        }
-        visitor {
-          id
-          visitorId
-          starred
-        }
-        events(page: 1, size: 10) {
+        pages(size: 5, page: 1, sort: views__desc) {
           items {
-            id
-            type
-            data
-            timestamp
+            url
+            averageDuration
+            viewCount
+            viewPercentage
+            exitRatePercentage
+            bounceRatePercentage
           }
         }
       }

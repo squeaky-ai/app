@@ -38,8 +38,6 @@ const getDefaultFilters = (type: ComponentType) => {
     case 'nps':
     case 'sentiment':
       return 'past_thirty_days';
-    case 'dashboard':
-      return 'past_year';
     default:
       return 'past_seven_days';
   }

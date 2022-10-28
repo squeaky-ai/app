@@ -490,10 +490,13 @@ export type AdminVerified = {
 
 export type Analytics = {
   __typename?: 'Analytics';
+  bounceRate: AnalyticsBounceRate;
+  bounces: Array<AnalyticsBounce>;
   browsers: AnalyticsBrowsers;
   countries: Array<AnalyticsCountry>;
   devices: Array<AnalyticsDevice>;
   dimensions: Array<AnalyticsDimension>;
+  exits: Array<AnalyticsExit>;
   languages: Array<AnalyticsLanguage>;
   pageViewCount: Scalars['Int'];
   pageViews: AnalyticsPageViews;
@@ -511,8 +514,18 @@ export type Analytics = {
 };
 
 
+export type AnalyticsBouncesArgs = {
+  size?: InputMaybe<Scalars['Int']>;
+};
+
+
 export type AnalyticsBrowsersArgs = {
   page?: InputMaybe<Scalars['Int']>;
+  size?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type AnalyticsExitsArgs = {
   size?: InputMaybe<Scalars['Int']>;
 };
 
@@ -538,6 +551,18 @@ export type AnalyticsReferrersArgs = {
 export type AnalyticsUserPathsArgs = {
   page: Scalars['String'];
   position: PathPosition;
+};
+
+export type AnalyticsBounce = {
+  __typename?: 'AnalyticsBounce';
+  percentage: Scalars['Float'];
+  url: Scalars['String'];
+};
+
+export type AnalyticsBounceRate = {
+  __typename?: 'AnalyticsBounceRate';
+  average: Scalars['Float'];
+  trend: Scalars['Float'];
 };
 
 export type AnalyticsBrowser = {
@@ -570,6 +595,12 @@ export type AnalyticsDimension = {
   __typename?: 'AnalyticsDimension';
   count: Scalars['Int'];
   deviceX: Scalars['Int'];
+};
+
+export type AnalyticsExit = {
+  __typename?: 'AnalyticsExit';
+  percentage: Scalars['Float'];
+  url: Scalars['String'];
 };
 
 export type AnalyticsLanguage = {
