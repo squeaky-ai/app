@@ -29,7 +29,7 @@ export const DashboardBounceRate: FC<Props> = ({ dashboard, period }) => {
     return (
       <div className='custom-tooltip'>
         <p className='date'>Bounce Rate</p>
-        <p className='count blue'>{count}</p>
+        <p className='count blue'>{count}%</p>
       </div>
     );
   };
