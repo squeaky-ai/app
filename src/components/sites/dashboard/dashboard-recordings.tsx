@@ -62,9 +62,9 @@ export const DashboardRecordings: FC<Props> = ({ site, dashboard, period }) => {
             </ResponsiveContainer>
           </DashboardChart>
           <div className='heading'>
-            <h3>{dashboard.recordingsCount.total}</h3>
-            <Pill className='medium tertiary'>{dashboard.recordingsCount.new} New</Pill>
-            <Pill className='medium secondary'>{dashboard.recordingsCount.total - dashboard.recordingsCount.new} Viewed</Pill>
+            <h3>{dashboard.recordingsCount.total.toLocaleString()}</h3>
+            <Pill className='medium tertiary'>{(dashboard.recordingsCount.new).toLocaleString()} New</Pill>
+            <Pill className='medium secondary'>{(dashboard.recordingsCount.total - dashboard.recordingsCount.new).toLocaleString()} Viewed</Pill>
           </div>
           <Label>Most eventful</Label>
           <TableWrapper>

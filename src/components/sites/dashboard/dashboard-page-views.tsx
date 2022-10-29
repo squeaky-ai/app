@@ -30,8 +30,6 @@ export const DashboardPageViews: FC<Props> = ({ site, dashboard, period }) => {
     count: d.count,
   }));
 
-  console.log({ message: 'pageViews', pageViews: dashboard.pageViews, results } );
-
   return (
     <>
       <div className='heading'>
@@ -43,8 +41,8 @@ export const DashboardPageViews: FC<Props> = ({ site, dashboard, period }) => {
         </h5>
         {hasPageViews && (
           <div className='counts'>
-            <h3>{dashboard.pageViews.total}</h3>
-            <Trend direction={dashboard.pageViews.trend >= 0 ? 'up' : 'down'} value={dashboard.pageViews.trend.toString()} />            
+            <h3>{dashboard.pageViews.total.toLocaleString()}</h3>
+            <Trend direction={dashboard.pageViews.trend >= 0 ? 'up' : 'down'} value={dashboard.pageViews.trend.toLocaleString()} />            
           </div>
         )}
       </div>
@@ -56,7 +54,7 @@ export const DashboardPageViews: FC<Props> = ({ site, dashboard, period }) => {
           <DashboardChart>
             <ResponsiveContainer>
               <AreaChart data={results} margin={{ top: 0, left: 0, right: 0, bottom: 0 }}>
-                {dashboard.errorsCounts.items.map(count => (
+                {dashboard.pageViews.items.map(count => (
                   <Area 
                     key={count.dateKey}
                     dataKey='count'

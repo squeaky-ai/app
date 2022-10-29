@@ -27,8 +27,6 @@ export const DashboardVisitors: FC<Props> = ({ site, dashboard, period }) => {
     count: d.allCount,
   }));
 
-  console.log({ message: 'visitors', visitors: dashboard.visitors, results } );
-
   return (
     <>
       <div className='heading'>
@@ -50,7 +48,7 @@ export const DashboardVisitors: FC<Props> = ({ site, dashboard, period }) => {
           <DashboardChart>
             <ResponsiveContainer>
               <AreaChart data={results} margin={{ top: 0, left: 0, right: 0, bottom: 0 }}>
-                {dashboard.errorsCounts.items.map(count => (
+                {dashboard.visitors.items.map(count => (
                   <Area 
                     key={count.dateKey}
                     dataKey='count'
@@ -64,9 +62,9 @@ export const DashboardVisitors: FC<Props> = ({ site, dashboard, period }) => {
             </ResponsiveContainer>
           </DashboardChart>
           <div className='heading'>
-            <h3>{dashboard.visitorsCount.total}</h3>
-            <Pill className='medium tertiary'>{dashboard.visitorsCount.new} New</Pill>
-            <Pill className='medium secondary'>{dashboard.visitorsCount.total - dashboard.visitorsCount.new} Existing</Pill>
+            <h3>{dashboard.visitorsCount.total.toLocaleString()}</h3>
+            <Pill className='medium tertiary'>{(dashboard.visitorsCount.new).toLocaleString()} New</Pill>
+            <Pill className='medium secondary'>{(dashboard.visitorsCount.total - dashboard.visitorsCount.new).toLocaleString()} Existing</Pill>
           </div>
           <Label>Most active</Label>
           <TableWrapper>

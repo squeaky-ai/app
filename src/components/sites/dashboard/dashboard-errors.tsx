@@ -44,7 +44,7 @@ export const DashboardErrors: FC<Props> = ({ site, dashboard, period }) => {
       {!hasErrors && (
         <div className='dashboard-empty-state'>
           <Illustration illustration='illustration-18' height={180} width={162} alt='Illustration to represent the empty errors page' />
-          <p>You&apos;re site has no errors for the time period you&apos;ve selected</p>
+          <p>Your site has no errors for the time period you&apos;ve selected</p>
         </div>
       )}
       {hasErrors && (
