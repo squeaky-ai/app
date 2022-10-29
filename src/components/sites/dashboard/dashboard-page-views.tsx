@@ -30,6 +30,8 @@ export const DashboardPageViews: FC<Props> = ({ site, dashboard, period }) => {
     count: d.count,
   }));
 
+  console.log({ message: 'pageViews', pageViews: dashboard.pageViews, results } );
+
   return (
     <>
       <div className='heading'>

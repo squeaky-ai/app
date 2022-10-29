@@ -27,6 +27,8 @@ export const DashboardVisitors: FC<Props> = ({ site, dashboard, period }) => {
     count: d.allCount,
   }));
 
+  console.log({ message: 'visitors', visitors: dashboard.visitors, results } );
+
   return (
     <>
       <div className='heading'>

@@ -68,7 +68,7 @@ export const DashboardBounceRate: FC<Props> = ({ dashboard, period }) => {
               {dashboard.bounces.map(bounce => (
                 <Row key={bounce.url}>
                   <Cell>{bounce.url}</Cell>
-                  <Cell>{bounce.percentage}%</Cell>
+                  <Cell>{bounce.percentage.toFixed(2)}%</Cell>
                 </Row>
               ))}
             </Table>

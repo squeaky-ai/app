@@ -36,7 +36,7 @@ export const DashboardExitRate: FC<Props> = ({ dashboard }) => {
               {dashboard.exits.map(bounce => (
                 <Row key={bounce.url}>
                   <Cell>{bounce.url}</Cell>
-                  <Cell>{bounce.percentage}%</Cell>
+                  <Cell>{bounce.percentage.toFixed(2)}%</Cell>
                 </Row>
               ))}
             </Table>
