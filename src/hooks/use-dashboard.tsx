@@ -1,10 +1,9 @@
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_DASHBOARD_QUERY } from 'data/dashboard/queries';
-import { parseRecordingEvents } from 'lib/events';
 import type { TimeRange } from 'types/common';
-import type { Event } from 'types/event';
-import type { Site, Analytics, Recording, Notes } from 'types/graphql';
+import type { Site } from 'types/graphql';
+import type { Dashboard } from 'types/dashboard';
 
 interface Props {
   range: TimeRange;
@@ -13,10 +12,7 @@ interface Props {
 interface UseDashboard {
   loading: boolean;
   error: boolean;
-  notes: Pick<Notes, 'items'>;
-  analytics: Pick<Analytics, 'visitorsCount' | 'pageViewCount' | 'recordingsCount'>;
-  recordingLatest: Recording | null;
-  recordingLatestEvents: Event[];
+  dashboard: Dashboard;
 }
 
 export const useDashboard = (props: Props): UseDashboard => {
@@ -29,12 +25,26 @@ export const useDashboard = (props: Props): UseDashboard => {
     }
   });
 
+  const dashboard: Dashboard = data ? {
+    pageViews: data.site.analytics.pageViews,
+    pages: data.site.analytics.pages,
+    bounceRate: data.site.analytics.bounceRate,
+    bounceCounts: data.site.analytics.bounceCounts,
+    bounces: data.site.analytics.bounces,
+    exits: data.site.analytics.exits,
+    visitorsCount: data.site.analytics.visitorsCount,
+    visitors: data.site.analytics.visitors,
+    recordings: data.site.analytics.recordings,
+    recordingsCount: data.site.analytics.recordingsCount,
+    errors: data.site.errors.items,
+    errorsCounts: data.site.errorsCounts,
+    recordingsHighlights: data.site.recordingsHighlights,
+    visitorsHighlights: data.site.visitorsHighlights,
+  } : null;
+
   return {
     loading,
     error: !!error,
-    notes: data ? data.site.notes : null,
-    analytics: data ? data.site.analytics : null,
-    recordingLatest: data ? data.site.recordingLatest : null,
-    recordingLatestEvents: data ? parseRecordingEvents(data.site.recordingLatest.events.items) : [],
+    dashboard,
   };
 };

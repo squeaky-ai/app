@@ -1,7 +1,6 @@
 import type { Analytics, AnalyticsPerPage } from 'types/graphql';
 
 export type AnalyticsTraffic = Pick<Analytics,
-  'pageViewCount' |
   'visitsAt' |
   'sessionDurations' |
   'pagesPerSession' |

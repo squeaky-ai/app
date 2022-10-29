@@ -35,6 +35,12 @@
     padding: .1rem .5rem;
   }
 
+  &.medium {
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-body);
+    padding: .25rem .75rem;
+  }
+
   &.large {
     font-size: var(--font-size-body);
     line-height: var(--line-height-body);

@@ -1,58 +1,116 @@
 import { gql } from '@apollo/client';
 
+// Oh lordy it's thicc
 export const GET_DASHBOARD_QUERY = gql`
   query GetDashboard($siteId: ID!, $fromDate: ISO8601Date!, $toDate: ISO8601Date!) { 
     site(siteId: $siteId) {
       id
       analytics(fromDate: $fromDate, toDate: $toDate) {
-        pageViewCount
+        bounceRate {
+          average
+          trend
+        }
+        bounces(size: 5) {
+          url
+          percentage
+        }
+        exits(size: 5) {
+          url
+          percentage
+        }
         visitorsCount {
           total
           new
+        }
+        visitors {
+          groupType
+          groupRange
+          items {
+            dateKey
+            allCount
+          }
+        }
+        recordings {
+          groupType
+          groupRange
+          items {
+            dateKey
+            count
+          }
+        }
+        bounceCounts {
+          groupType
+          groupRange
+          items {
+            dateKey
+            viewCount
+            bounceRateCount
+          }
         }
         recordingsCount {
           total
           new
         }
+        pages(size: 5, page: 1, sort: views__desc) {
+          items {
+            url
+            averageDuration
+            viewCount
+            viewPercentage
+            exitRatePercentage
+            bounceRatePercentage
+          }
+        }
+        pageViews {
+          groupType
+          groupRange
+          total
+          trend
+          items {
+            dateKey
+            count
+          }
+        }
       }
-      notes(page: 1, size: 5) {
+      errors(size: 5, sort: error_count__desc, fromDate: $fromDate, toDate: $toDate) {
         items {
           id
-          timestamp
-          body
-          recordingId
-          sessionId
-          user {
-            fullName
-          }
+          message
+          errorCount
         }
       }
-      recordingLatest {
-        id
-        duration
-        startPage
-        exitPage
-        pageCount
-        pageViews
-        connectedAt
-        device {
-          viewportX
-          viewportY
-          deviceX
-          deviceY
+      errorsCounts(fromDate: $fromDate, toDate: $toDate) {
+        groupType
+        groupRange
+        items {
+          dateKey
+          count
         }
-        visitor {
+      }
+      recordingsHighlights(fromDate: $fromDate, toDate: $toDate) {
+        eventful {
+          id
+          sessionId
+          disconnectedAt
+        }
+        longest {
+          id
+          sessionId
+          duration
+        }
+      }
+      visitorsHighlights(fromDate: $fromDate, toDate: $toDate) {
+        active {
           id
           visitorId
-          starred
-        }
-        events(page: 1, size: 10) {
-          items {
-            id
-            type
-            data
-            timestamp
+          recordingCount {
+            total
           }
+        }
+        newest {
+          id
+          visitorId
+          createdAt
         }
       }
     }
