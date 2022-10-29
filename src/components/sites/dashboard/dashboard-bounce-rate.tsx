@@ -1,6 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
-import { AreaChart, Area, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, ResponsiveContainer, Tooltip, TooltipProps } from 'recharts';
 import { Icon } from 'components/icon';
 import { Trend } from 'components/trend';
 import { Label } from 'components/label';
@@ -20,6 +20,19 @@ interface Props {
 
 export const DashboardBounceRate: FC<Props> = ({ dashboard, period }) => {
   const hasBounceRate = dashboard.bounces.length > 0;
+
+  const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload }) => {
+    if (!active || !payload?.length) return null;
+
+    const { count } = payload[0].payload;
+  
+    return (
+      <div className='custom-tooltip'>
+        <p className='date'>Bounce Rate</p>
+        <p className='count blue'>{count}</p>
+      </div>
+    );
+  };
 
   const results = formatResultsForGroupType<AnalyticsBounceCount>(dashboard.bounceCounts, period, { bounceRateCount: 0, viewCount: 0 }).map(d => ({
     dateKey: d.dateKey,
@@ -53,8 +66,11 @@ export const DashboardBounceRate: FC<Props> = ({ dashboard, period }) => {
                     stroke='var(--blue-500)'
                     strokeWidth={2}
                     fill='var(--blue-50)'
+                    type='monotone'
                   />
                 ))}
+
+                <Tooltip content={<CustomTooltip />} />
               </AreaChart>
             </ResponsiveContainer>
           </DashboardChart>

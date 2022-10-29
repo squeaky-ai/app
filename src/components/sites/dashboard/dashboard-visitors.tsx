@@ -1,7 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
-import { AreaChart, Area, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, ResponsiveContainer, Tooltip, TooltipProps } from 'recharts';
 import { Icon } from 'components/icon';
 import { Pill } from 'components/pill';
 import { Label } from 'components/label';
@@ -21,6 +21,19 @@ interface Props {
 
 export const DashboardVisitors: FC<Props> = ({ site, dashboard, period }) => {
   const hasVisitors = dashboard.visitorsCount.total > 0;
+
+  const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload }) => {
+    if (!active || !payload?.length) return null;
+
+    const { count } = payload[0].payload;
+  
+    return (
+      <div className='custom-tooltip'>
+        <p className='date'>New Visitors</p>
+        <p className='count blue'>{count}</p>
+      </div>
+    );
+  };
 
   const results = formatResultsForGroupType<Pick<AnalyticsVisitor, 'allCount' | 'dateKey'>>(dashboard.visitors, period, { allCount: 0 }).map(d => ({
     dateKey: d.dateKey,
@@ -56,8 +69,11 @@ export const DashboardVisitors: FC<Props> = ({ site, dashboard, period }) => {
                     stroke='var(--blue-500)'
                     strokeWidth={2}
                     fill='var(--blue-50)'
+                    type='monotone'
                   />
                 ))}
+
+                <Tooltip content={<CustomTooltip />} />
               </AreaChart>
             </ResponsiveContainer>
           </DashboardChart>

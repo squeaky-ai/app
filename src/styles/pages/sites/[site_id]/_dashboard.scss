@@ -316,3 +316,15 @@
 .active-users-portal {
   padding: .5rem;
 }
+
+.custom-tooltip {
+  p {
+    &.blue {
+      color: var(--blue-500);
+    }
+
+    &.rose {
+      color: var(--rose-500);
+    }
+  }
+}
