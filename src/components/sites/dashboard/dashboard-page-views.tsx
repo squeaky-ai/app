@@ -66,7 +66,7 @@ export const DashboardPageViews: FC<Props> = ({ site, dashboard, period }) => {
         <>
           <DashboardChart>
             <ResponsiveContainer>
-              <AreaChart data={results} margin={{ top: 0, left: 0, right: 0, bottom: 0 }}>
+              <AreaChart data={results} margin={{ top: 1, left: 1, right: 1, bottom: 1 }}>
                 {dashboard.pageViews.items.map(count => (
                   <Area 
                     key={count.dateKey}

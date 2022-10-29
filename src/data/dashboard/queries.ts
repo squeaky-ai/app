@@ -10,11 +10,11 @@ export const GET_DASHBOARD_QUERY = gql`
           average
           trend
         }
-        bounces(size: 5) {
+        bounces(size: 3) {
           url
           percentage
         }
-        exits(size: 5) {
+        exits(size: 3) {
           url
           percentage
         }
