@@ -11,6 +11,7 @@ import { formatResultsForGroupType } from 'lib/charts-v2';
 import type { Site, ErrorsCount } from 'types/graphql';
 import type { Dashboard } from 'types/dashboard';
 import type { TimePeriod } from 'types/common';
+import { Illustration } from 'components/illustration';
 
 interface Props {
   site: Site;
@@ -42,8 +43,8 @@ export const DashboardErrors: FC<Props> = ({ site, dashboard, period }) => {
       </div>
       {!hasErrors && (
         <div className='dashboard-empty-state'>
-          <Icon name='time-line' />
-          <p>No data available</p>
+          <Illustration illustration='illustration-18' height={180} width={162} alt='Illustration to represent the empty errors page' />
+          <p>You&apos;re site has no errors for the time period you&apos;ve selected</p>
         </div>
       )}
       {hasErrors && (

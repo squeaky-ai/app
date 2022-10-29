@@ -280,6 +280,18 @@
         }
       }
 
+      .dashboard-empty-state {
+        background: none;
+        border: none;
+        padding: 2rem;
+
+        p {
+          font-weight: var(--font-weight-semibold);
+          margin: 2rem 0 0 0;
+          text-align: center;
+        }
+      }
+
       .heading {
         justify-content: space-between;
 
