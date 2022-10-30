@@ -53,18 +53,20 @@ export const EventAddGroups: FC<Props> = ({ eventStats, onClose, onUpdate }) => 
             </div>
             <div className='row pages'>
               {loading && <Spinner />}
-              {results.map(group => (
-                <Checkbox 
-                  key={group.id}
-                  name='groups'
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={group.id}
-                  checked={values.groups.includes(group.id)}
-                >
-                  {group.name}
-                </Checkbox>
-              ))}
+              <div className='checkbox-group'>
+                {results.map(group => (
+                  <Checkbox 
+                    key={group.id}
+                    name='groups'
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={group.id}
+                    checked={values.groups.includes(group.id)}
+                  >
+                    {group.name}
+                  </Checkbox>
+                ))}
+              </div>
             </div>
 
             <div className='actions'>

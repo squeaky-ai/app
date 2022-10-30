@@ -60,18 +60,20 @@ export const EventAddCaptures: FC<Props> = ({ eventStats, onClose, onUpdate }) =
             </div>
             <div className='row pages'>
               {loading && <Spinner />}
-              {results.map(capture => (
-                <Checkbox 
-                  key={capture.id}
-                  name='captures'
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={capture.id}
-                  checked={values.captures.includes(capture.id)}
-                >
-                  {capture.name}
-                </Checkbox>
-              ))}
+              <div className='checkbox-group'>
+                {results.map(capture => (
+                  <Checkbox 
+                    key={capture.id}
+                    name='captures'
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={capture.id}
+                    checked={values.captures.includes(capture.id)}
+                  >
+                    {capture.name}
+                  </Checkbox>
+                ))}                
+              </div>
             </div>
 
             <div className='actions'>

@@ -83,7 +83,7 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
         </div>
       </div>
       <div className='key'>
-        {eventStats.eventStats.map((stat, index) => (
+        {sortedEventsStats.map((stat, index) => (
           <div className='item' key={stat.eventOrGroupId}>
             <EventSwatch index={index} />
             <p>{stat.name}</p>
@@ -100,7 +100,7 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
 
             <Tooltip content={<CustomTooltip />} />
 
-            {eventStats.eventStats.map((stat, index) => (
+            {sortedEventsStats.map((stat, index) => (
               <Line 
                 key={stat.eventOrGroupId}
                 dataKey={`${stat.type}::${stat.eventOrGroupId}`}

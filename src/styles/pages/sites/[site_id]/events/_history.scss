@@ -12,8 +12,13 @@
       }
     }
 
+    .add-groups,
     .add-events {
       position: relative;
+
+      .filters-pages {
+        width: 100%;
+      }
     }
 
     .dropdown-menu {
