@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
+import { orderBy } from 'lodash';
 import { AreaChart, Area, ResponsiveContainer, Tooltip, TooltipProps } from 'recharts';
 import { Icon } from 'components/icon';
 import { Pill } from 'components/pill';
@@ -85,7 +86,7 @@ export const DashboardVisitors: FC<Props> = ({ site, dashboard, period }) => {
           <Label>Most active</Label>
           <TableWrapper>
             <Table>
-              {dashboard.visitorsHighlights.active.map(visitor => (
+              {orderBy(dashboard.visitorsHighlights.active, v => v.recordingCount.total, 'desc').map(visitor => (
                 <Row key={visitor.id}>
                   <Cell>
                     <Icon name='user-line' />
