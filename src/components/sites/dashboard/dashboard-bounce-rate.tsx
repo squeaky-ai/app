@@ -76,7 +76,7 @@ export const DashboardBounceRate: FC<Props> = ({ dashboard, period }) => {
           </DashboardChart>
           <div className='heading'>
             <h3>{dashboard.bounceRate.average}%</h3>
-            <Trend direction={dashboard.bounceRate.trend >= 0 ? 'up' : 'down'} value={`${dashboard.bounceRate.trend}%`} />
+            <Trend direction={dashboard.bounceRate.trend >= 0 ? 'up' : 'down'} value={`${dashboard.bounceRate.trend.toFixed(2)}%`} />
           </div>
           <Label>Highest bounce rates</Label>
           <TableWrapper>
