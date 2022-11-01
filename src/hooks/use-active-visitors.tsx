@@ -6,8 +6,6 @@ interface UseActiveVisitors {
   loading: boolean;
   error: boolean;
   activeVisitors: number;
-  startPolling: (interval: number) => void;
-  stopPolling: VoidFunction;
 }
 
 export const useActiveVisitors = (): UseActiveVisitors => {
@@ -17,15 +15,14 @@ export const useActiveVisitors = (): UseActiveVisitors => {
     siteId: router.query.site_id as string
   };
 
-  const { loading, error, data, startPolling, stopPolling } = useQuery(GET_ACTIVE_USERS_QUERY, {
-    variables
+  const { loading, error, data } = useQuery(GET_ACTIVE_USERS_QUERY, {
+    variables,
+    pollInterval: 5000,
   });
 
   return {
     loading,
     error: !!error,
     activeVisitors: data ? data.site.activeUserCount : 0,
-    startPolling,
-    stopPolling,
   };
 };
