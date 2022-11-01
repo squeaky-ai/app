@@ -45,7 +45,7 @@ export const DashboardVisitors: FC<Props> = ({ site, dashboard, period }) => {
 
   return (
     <>
-      <div className='heading'>
+      <div className='heading active-users-heading'>
         <h5>
           <Icon name='group-line' />
           <Link href={`/sites/${site.id}/visitors`}>
@@ -53,7 +53,7 @@ export const DashboardVisitors: FC<Props> = ({ site, dashboard, period }) => {
           </Link>
         </h5>
         <Tooltip portalClassName='active-users-portal' button={
-          <Pill className='small'>
+          <Pill className='small active-users'>
             <Icon name='flashlight-line' />
             <ActiveVisitors />
           </Pill>

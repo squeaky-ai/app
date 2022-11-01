@@ -156,39 +156,39 @@
     .visitors {
       grid-area: visitors;
 
-      .heading {
+      .active-users-heading {
         justify-content: space-between;
+
+        .pill.active-users {
+          align-items: center;
+          background: var(--gray-50);
+          border: none;
+          color: var(--purple-500);
+          cursor: pointer;
+          display: inline-flex;
+          font-size: var(--font-size-body);
+          line-height: var(--line-height-body);
+          padding: .2rem .75rem .15rem .5rem;
+          pointer-events: none;
+  
+          .icon {
+            color: var(--purple-500);
+            margin-right: .25rem;
+          }
+  
+          &:hover {
+            background: var(--purple-500);
+            color: var(--white);
+  
+            .icon {
+              color: var(--white);
+            }
+          }
+        }
       }
 
       .label:nth-of-type(2) {
         margin: 1.5rem 0 .5rem 0;
-      }
-
-      .pill {
-        align-items: center;
-        background: var(--gray-50);
-        border: none;
-        color: var(--purple-500);
-        cursor: pointer;
-        display: inline-flex;
-        font-size: var(--font-size-body);
-        line-height: var(--line-height-body);
-        padding: .2rem .75rem .15rem .5rem;
-        pointer-events: none;
-
-        .icon {
-          color: var(--purple-500);
-          margin-right: .25rem;
-        }
-
-        &:hover {
-          background: var(--purple-500);
-          color: var(--white);
-
-          .icon {
-            color: var(--white);
-          }
-        }
       }
 
       .table {
