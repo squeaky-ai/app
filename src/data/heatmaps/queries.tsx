@@ -29,7 +29,7 @@ export const GET_HEATMAPS_QUERY = gql`
             enteredAt
             exitedAt
           }
-          events(page: 1, size: 10) {
+          events(page: 1) {
             items {
               id
               type
@@ -37,8 +37,6 @@ export const GET_HEATMAPS_QUERY = gql`
               timestamp
             }
             pagination {
-              perPage
-              itemCount
               currentPage
               totalPages
             }

@@ -36,7 +36,7 @@ export const useRecording = (id?: string): UseRecording => {
       }
     });
 
-    return parseRecordingEvents(data.site.recording.events.items);
+    return parseRecordingEvents(data?.site?.recording?.events?.items || []);
   };
 
   return {
@@ -45,7 +45,7 @@ export const useRecording = (id?: string): UseRecording => {
     recording: data 
       ? data.site.recording
       : null,
-    events: data ? parseRecordingEvents(data.site.recording.events.items) : [],
+    events: parseRecordingEvents(data?.site?.recording?.events?.items || []),
     fetchMoreEvents
   };
 };

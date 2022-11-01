@@ -2278,7 +2278,7 @@ export type Recording = {
   device: RecordingsDevice;
   disconnectedAt?: Maybe<Scalars['ISO8601DateTime']>;
   duration: Scalars['BigInt'];
-  events: RecordingsEvents;
+  events?: Maybe<RecordingsEvents>;
   exitPage: Scalars['String'];
   id: Scalars['ID'];
   inactivity: Array<Array<Scalars['BigInt']>>;
@@ -2302,7 +2302,6 @@ export type Recording = {
 
 export type RecordingEventsArgs = {
   page?: InputMaybe<Scalars['Int']>;
-  size?: InputMaybe<Scalars['Int']>;
 };
 
 export type Recordings = {
@@ -2366,8 +2365,6 @@ export type RecordingsEvent = {
 export type RecordingsEventPagination = {
   __typename?: 'RecordingsEventPagination';
   currentPage: Scalars['Int'];
-  itemCount: Scalars['Int'];
-  perPage: Scalars['Int'];
   totalPages: Scalars['Int'];
 };
 

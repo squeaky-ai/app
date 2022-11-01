@@ -137,8 +137,6 @@ export const GET_RECORDING_QUERY = gql`
             timestamp
           }
           pagination {
-            perPage
-            itemCount
             currentPage
             totalPages
           }
@@ -162,8 +160,6 @@ export const GET_RECORDING_EVENTS_QUERY = gql`
             timestamp
           }
           pagination {
-            perPage
-            itemCount
             currentPage
             totalPages
           }
