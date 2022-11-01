@@ -15,6 +15,12 @@
 
   .button-group {
     border-color: var(--mauve-700);
+
+    .button {
+      &.primary {
+        border-color: var(--white);
+      }
+    }
   }
 
   .tab-header {
