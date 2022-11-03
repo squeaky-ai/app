@@ -125,6 +125,10 @@
           min-height: 6rem;
         }
 
+        &.dim {
+          opacity: .35;
+        }
+
         &:hover {
           border-color: var(--blue-500);
           cursor: pointer;

@@ -4,7 +4,7 @@ import { range, countBy, sum } from 'lodash';
 import { JourneysPage } from 'components/sites/journeys/journeys-page';
 import { percentage } from 'lib/maths';
 import { PathPosition } from 'types/graphql';
-import type { PageStats } from 'types/journeys';
+import type { PageStats, HoveredPage } from 'types/journeys';
 import type { AnalyticsUserPath } from 'types/graphql';
 
 interface Props {
@@ -16,6 +16,8 @@ interface Props {
 }
 
 export const JourneysGraph: FC<Props> = ({ depth, position, journeys, setPage, setPosition }) => {
+  const [hoveredPage, setHoveredPage] = React.useState<HoveredPage>(null);
+
   const maxDepth = Math.max(...journeys.map(j => j.path.length));
 
   const getTotalForCol = (col: number, includeEmpty: boolean) => {
@@ -60,6 +62,30 @@ export const JourneysGraph: FC<Props> = ({ depth, position, journeys, setPage, s
     return percentage(total, exits);
   };
 
+  const dimPage = (col: number, page: string) => {
+    // Nothing is selected
+    if (!hoveredPage) return false;
+    // Everything before has to be dimmed
+    if (hoveredPage.col > col) return true;
+    // Everything else on this column has to be dimmed
+    if (hoveredPage.col === col && hoveredPage.page !== page) return true;
+    // This is the current column so it can't be dimmed
+    if (hoveredPage.col === col && hoveredPage.page === page) return false;
+
+    const routes = journeys
+      .filter(j => j.path[hoveredPage.col] === hoveredPage.page)
+
+    return !routes.some(r => r.path[col] === page);
+  };
+
+  const handleMouseEnter = (col: number, page: string) => {
+    setHoveredPage({ col, page });
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredPage(null);
+  };
+
   const columnCount = depth === -1 ? maxDepth : depth;
 
   return (
@@ -80,6 +106,9 @@ export const JourneysGraph: FC<Props> = ({ depth, position, journeys, setPage, s
                 position={position}
                 setPage={setPage}
                 setPosition={setPosition}
+                dim={dimPage(col, page.path)}
+                handleMouseEnter={() => handleMouseEnter(col, page.path)}
+                handleMouseLeave={handleMouseLeave}
               />
             ))}
             <div className='padder' style={{ height: `${padder}%` }} />

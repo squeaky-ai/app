@@ -14,16 +14,29 @@ import type { RecordingsFilters } from 'types/graphql';
 
 interface Props {
   col: number;
+  dim: boolean;
   page: PageStats;
   exits: number;
   position: PathPosition;
   setPage: (page: string) => void;
   setPosition: (position: PathPosition) => void;
+  handleMouseEnter: VoidFunction;
+  handleMouseLeave: VoidFunction;
 }
 
 type Coords = [number, number];
 
-export const JourneysPage: FC<Props> = ({ col, page, position, exits, setPage, setPosition }) => {
+export const JourneysPage: FC<Props> = ({
+  col, 
+  dim,
+  page, 
+  position,
+  exits, 
+  setPage, 
+  setPosition,
+  handleMouseEnter,
+  handleMouseLeave,
+}) => {
   const ref = React.useRef<HTMLDivElement>(null);
   
   const router = useRouter();
@@ -81,7 +94,15 @@ export const JourneysPage: FC<Props> = ({ col, page, position, exits, setPage, s
   }, []);
 
   return (
-    <div ref={ref} onClick={handleClick} className={classnames('page', { 'has-exit': exits > 0 })} key={col + page.path} style={{ height: `${page.percentage}%` }}>
+    <div 
+      ref={ref} 
+      onClick={handleClick} 
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className={classnames('page', { 'has-exit': exits > 0, dim })} 
+      key={col + page.path} 
+      style={{ height: `${page.percentage}%` }}
+    >
       <div className='row'>
         <Tooltip fluid buttonClassName='path' button={
           <>

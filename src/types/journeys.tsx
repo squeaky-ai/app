@@ -3,3 +3,8 @@ export interface PageStats {
   count: number;
   percentage: number;
 }
+
+export interface HoveredPage {
+  col: number;
+  page: string;
+}
