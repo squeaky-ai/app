@@ -7,9 +7,10 @@ import type { Site } from 'types/graphql';
 
 interface Props {
   site: Site;
+  quiet?: boolean;
 }
 
-export const PrivacyAnonymising: FC<Props> = ({ site }) => {
+export const PrivacyAnonymising: FC<Props> = ({ site, quiet = false }) => {
   const toasts = useToasts();
 
   const toggleAnonymiseFormInputsEnabled = async (text: boolean, forms: boolean) => {
@@ -19,7 +20,10 @@ export const PrivacyAnonymising: FC<Props> = ({ site }) => {
         formsEnabled: forms,
         textEnabled: text,
       });
-      toasts.add({ type: 'success', body: 'Your preferences have been updated' });
+
+      if (!quiet) { 
+        toasts.add({ type: 'success', body: 'Your preferences have been updated' });
+      }
     } catch(error) {
       console.error(error);
       toasts.add({ type: 'error', body: 'There was an issue updating your preferences' });

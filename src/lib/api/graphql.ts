@@ -253,12 +253,14 @@ export const createSite = async (name: string, url: string): Promise<Site> => {
     variables: { input: { name, url } },
   });
 
-  const { sites } = cache.readQuery<Query>({ query: GET_SITES_QUERY });
+  const query = cache.readQuery<Query>({ query: GET_SITES_QUERY });
 
-  cache.writeQuery({
-    query: GET_SITES_QUERY,
-    data: { sites: [...sites, data.siteCreate] }
-  });
+  if (query?.sites) {
+    cache.writeQuery({
+      query: GET_SITES_QUERY,
+      data: { sites: [...query.sites, data.siteCreate] }
+    });
+  }
 
   return data.siteCreate;
 };

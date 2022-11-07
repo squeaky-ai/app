@@ -20,6 +20,7 @@
 @import './components/sites/access';
 @import './components/sites/avatar';
 @import './components/sites/breadcrumbs';
+@import './components/sites/create';
 @import './components/sites/empty-state-hint';
 @import './components/sites/empty-state';
 @import './components/sites/filters';
@@ -103,7 +104,6 @@
 @import './pages/sites/[site_id]/dashboard';
 @import './pages/sites/[site_id]/heatmaps';
 @import './pages/sites/[site_id]/journeys';
-@import './pages/sites/create';
 @import './pages/sites/index';
 @import './pages/users/account';
 @import './pages/users/delete';

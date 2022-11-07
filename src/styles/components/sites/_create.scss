@@ -1,20 +1,24 @@
-.page.sites.create {
+.site-create-modal {
   background: var(--white);
 
-  #main {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    padding: 4rem 2rem 5.5rem 2rem;
-  }
+  &.modal {
+    .modal-body {
+      background: var(--white);
+      border: none;
+      border-radius: var(--border-radius-lg);
+      box-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.1);
+      padding: 3rem;
 
-  #app-sidebar {
-    display: none;
-  }
+      .modal-header {
+        border-bottom: none;
+        height: auto;
+        padding: 0;
+      }
 
-  .header {
-    background: none;
-    height: auto;
+      .modal-contents {
+        padding: 0;
+      }
+    }
   }
 
   .close,
@@ -64,7 +68,7 @@
   .content {
     align-items: center;
     display: flex;
-    flex: 1;
+    flex: 1; 
     justify-content: center;
 
     .fade-in {
@@ -73,6 +77,12 @@
     }
 
     .step {
+      .subheading {
+        color: var(--blue-500);
+        margin: 0 auto;
+        text-align: center;
+      }
+
       h4 {
         margin: 0 0 1.5rem 0;
         text-align: center;
@@ -87,7 +97,7 @@
         align-items: center;
         display: flex;
         justify-content: space-between;
-        margin: 4rem 0 0 0;
+        margin: 8rem 0 0 0;
 
         .button {
           height: 2.5rem;
@@ -108,6 +118,10 @@
 
       &.step-type {
         max-width: 42rem;
+
+        h4 {
+          margin: 3rem 0 7rem 0;
+        }
 
         .site-types {
           align-items: flex-start;
@@ -162,20 +176,34 @@
       }
 
       &.step-details {
-        max-width: 25rem;
         width: 100%;
 
+        h4 {
+          margin: 3rem 0 1.5rem 0;
+        }
+
         form {
-          margin: 4rem 0 0 0;
+          margin: 4rem auto 0 auto;
+        }
+
+        .container {
+          max-width: 25rem;
         }
       }
 
       &.step-invite {
-        max-width: 27.5rem;
         width: 100%;
 
+        h4 {
+          margin: 3rem 0 1.5rem 0;
+        }
+
         form {
-          margin: 4rem 0 0 0;
+          margin: 4rem auto 0 auto;
+        }
+
+        .container {
+          max-width: 27.5rem;
         }
 
         .input-group {
@@ -207,6 +235,53 @@
           .icon {
             color: var(--rose-500);
             font-size: var(--font-size-body-xxl);
+          }
+        }
+      }
+
+      &.step-privacy {
+        width: 100%;
+
+        .subheading {
+          font-weight: var(--font-weight-medium);
+          margin: 2rem 0 0 0;
+        }
+
+        h4 {
+          margin: .25rem 0 1.5rem 0;
+
+          & + p {
+            margin: 0 auto 1.5rem auto;
+            max-width: 25rem;
+            text-align: center;
+          }
+        }
+
+        .card {
+          background: var(--gray-50);
+          border: 1px solid var(--gray-150);
+          box-shadow: none;
+          display: grid;
+          grid-gap: 2rem;
+          grid-template-columns: 1fr 1fr;
+
+          .preview {
+            .label {
+              font-size: var(--font-size-body-sm);              
+            }
+          }
+
+          p {
+            align-items: center;
+            display: flex;
+            font-size: var(--font-size-body-sm);
+            margin: .75rem 0 0 0;
+
+            .icon {
+              color: var(--blue-500);
+              font-size: var(--font-size-body-lg);
+              margin: 0 .5rem 0 0;
+            }
           }
         }
       }

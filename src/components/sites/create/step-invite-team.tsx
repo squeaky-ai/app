@@ -8,6 +8,7 @@ import { Input } from 'components/input';
 import { Icon } from 'components/icon';
 import { Select, Option } from 'components/select';
 import { useToasts } from 'hooks/use-toasts';
+import { Container } from 'components/container';
 import { ADMIN, MEMBER, READ_ONLY } from 'data/teams/constants';
 import type { Site } from 'types/graphql';
 
@@ -18,7 +19,7 @@ interface Props {
 }
 
 const MemberSchema = Yup.object().shape({
-  email: Yup.string().required(),
+  email: Yup.string().email(), // We add three emails by default and they may ignore them
   role: Yup.string().oneOf([READ_ONLY.toString(), MEMBER.toString(), ADMIN.toString()], 'Please select a role'),
 });
 
@@ -44,7 +45,7 @@ export const StepInvite: FC<Props> = ({ site, handleForward, handleBack }) => {
         onSubmit={(values, { setSubmitting }) => {
           (async () => {
             try {
-              console.log(values.members);
+              console.log(site, values.members);
             } catch(error: any) {
               toasts.add({ type: 'error', body: 'There was an error inviting your team' });
             } finally {
@@ -89,48 +90,50 @@ export const StepInvite: FC<Props> = ({ site, handleForward, handleBack }) => {
 
           return (
             <form onSubmit={handleSubmit} className='fade-in'>
-              <div className='input-group'>
-                <div>
-                  <Label>Email address</Label>
+              <Container className='centered'>
+                <div className='input-group'>
+                  <div>
+                    <Label>Email address</Label>
+                  </div>
+                  <div>
+                    <Label>Role</Label>
+                  </div>
+                  <div />
                 </div>
-                <div>
-                  <Label>Role</Label>
-                </div>
-                <div />
-              </div>
 
-              {values.members.map((member, index) => (
-                <div className='input-group' key={`member-${index}`}>
-                  <div>
-                    <Input 
-                      type='email'
-                      name={`email-${index}`}
-                      value={member.email}
-                      onChange={handleInput(index)}
-                      onBlur={handleBlur}
-                      placeholder={placeholderEmails[index] || ''}
-                    />
+                {values.members.map((member, index) => (
+                  <div className='input-group' key={`member-${index}`}>
+                    <div>
+                      <Input 
+                        type='email'
+                        name={`email-${index}`}
+                        value={member.email}
+                        onChange={handleInput(index)}
+                        onBlur={handleBlur}
+                        placeholder={placeholderEmails[index] || ''}
+                      />
+                    </div>
+                    <div>
+                      <Select name={`role-${index}`} value={member.role} onChange={handleSelect(index)} onBlur={handleBlur}>
+                        <Option value={READ_ONLY}>Read-only</Option>
+                        <Option value={MEMBER}>User</Option>
+                        <Option value={ADMIN}>Admin</Option>
+                      </Select>
+                    </div>
+                    <div>
+                      {index !== 0 && (
+                        <Button type='button' className='remove' onClick={handleRemove(index)}>
+                          <Icon name='close-line' />
+                        </Button>
+                      )}
+                    </div>
                   </div>
-                  <div>
-                    <Select name={`role-${index}`} value={member.role} onChange={handleSelect(index)} onBlur={handleBlur}>
-                      <Option value={READ_ONLY}>Read-only</Option>
-                      <Option value={MEMBER}>User</Option>
-                      <Option value={ADMIN}>Admin</Option>
-                    </Select>
-                  </div>
-                  <div>
-                    {index !== 0 && (
-                      <Button type='button' className='remove' onClick={handleRemove(index)}>
-                        <Icon name='close-line' />
-                      </Button>
-                    )}
-                  </div>
-                </div>
-              ))}
+                ))}
 
-              <Button type='button' className='link' onClick={handleAdd}>
-                + <span>Add another</span>
-              </Button>
+                <Button type='button' className='link' onClick={handleAdd}>
+                  + <span>Add another</span>
+                </Button>
+              </Container>
 
               <div className='footer'>
                 <Button className='quaternary' type='button' onClick={handleBack}>

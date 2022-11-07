@@ -40,7 +40,9 @@ export const StepType: FC<Props> = ({ siteType, handleForward }) => (
           <li>Document and spreadsheet tools</li>
           <li>This app you&apos;re using now!</li>
         </ul>
-      </Button>
+      </Button> 
+
+      <div className='footer' />
     </div>
   </div>
 );

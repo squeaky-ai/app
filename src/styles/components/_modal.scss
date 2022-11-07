@@ -99,6 +99,12 @@
     }
   }
 
+  &.lg {
+    .modal-body {
+      width: 800px;
+    }
+  }
+
   &.scrollable {
     .modal-header,
     .modal-footer {
