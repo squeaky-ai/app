@@ -1,0 +1,225 @@
+.page.sites.create {
+  background: var(--white);
+
+  #main {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 4rem 2rem 5.5rem 2rem;
+  }
+
+  #app-sidebar {
+    display: none;
+  }
+
+  .header {
+    background: none;
+    height: auto;
+  }
+
+  .close,
+  .blank {
+    display: block;
+    font-size: var(--font-size-body-xxl);
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+
+  .steps {
+    display: flex; 
+
+    .indicator {
+      background: var(--gray-100);
+      border-radius: var(--border-radius-o);
+      height: 1rem;
+      width: 1rem;
+    }
+    
+    .seperator {
+      background: var(--gray-100);
+      height: 2px;
+      margin: 0 2px;
+      width: 1.25rem;
+    }
+
+    .step {
+      align-items: center;
+      display: flex;
+
+      &.selected {
+        .indicator {
+          background: var(--white);
+          border: 2px solid var(--blue-500);
+        }
+      }
+
+      &.filled {
+        .indicator {
+          background: var(--blue-500);
+        }
+      }
+    }
+  }
+
+  .content {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+
+    .fade-in {
+      animation: fade-in .3s ease-in forwards;
+      opacity: 0;
+    }
+
+    .step {
+      h4 {
+        margin: 0 0 1.5rem 0;
+        text-align: center;
+
+        & + p {
+          color: var(--gray-500);
+          text-align: center;
+        }
+      }
+
+      .footer {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        margin: 4rem 0 0 0;
+
+        .button {
+          height: 2.5rem;
+
+          &.primary, &.quaternary {
+            padding: .5rem 1rem;
+          }
+        }
+
+        div {
+          display: flex;
+
+          .button + .button {
+            margin-left: 1rem;
+          }
+        }
+      }
+
+      &.step-type {
+        max-width: 42rem;
+
+        .site-types {
+          align-items: flex-start;
+          display: grid;
+          grid-gap: 3rem;
+          grid-template-columns: repeat(2, 1fr);
+          margin: 4rem 0 0 0;
+
+          .button {
+            background: none;
+            border: 2px solid var(--gray-150);
+            border-radius: var(--border-radius-md);
+            cursor: pointer;
+            padding: 2.25rem 1.5rem 1.5rem 1.5rem;
+            text-align: left;
+
+            &.active,
+            &:hover {
+              border-color: var(--blue-500);
+            }
+          }
+
+          h5 {
+            margin: 1.5rem 0;
+            text-align: center;
+          }
+
+          .icon {
+            align-items: center;
+            color: var(--blue-500);
+            display: flex;
+            font-size: 2.5rem;
+            justify-content: center;
+            height: 2.5rem;
+            text-align: center;
+          }
+
+          p, li {
+            font-size: var(--font-size-body-sm);
+            font-weight: var(--font-weight-normal);
+          }
+
+          p {
+            margin: 0 0 1rem 0;
+          }
+
+          ul {
+            margin: 0;
+            padding: 0 0 0 1rem;
+          }
+        }
+      }
+
+      &.step-details {
+        max-width: 25rem;
+        width: 100%;
+
+        form {
+          margin: 4rem 0 0 0;
+        }
+      }
+
+      &.step-invite {
+        max-width: 27.5rem;
+        width: 100%;
+
+        form {
+          margin: 4rem 0 0 0;
+        }
+
+        .input-group {
+          align-items: center;
+          display: grid;
+          grid-gap: 1rem;
+          grid-template-columns: 1fr 8rem .75rem;
+          margin: 0 0 .75rem 0;
+        }
+
+        .input, .select {
+          margin: 0;
+        }
+
+        .link {
+          span {
+            text-decoration: underline;
+          }
+        }
+
+        .remove {
+          align-items: center;
+          background: none;
+          border: none;
+          display: flex;
+          margin: 0;
+          padding: 0;
+
+          .icon {
+            color: var(--rose-500);
+            font-size: var(--font-size-body-xxl);
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
