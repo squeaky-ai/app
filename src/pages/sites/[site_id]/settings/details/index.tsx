@@ -112,7 +112,7 @@ const SitesSettingsDetails: NextPage<ServerSideProps> = ({ user }) => {
                       type='text' 
                       onBlur={handleBlur}
                       onChange={handleChange}
-                      placeholder='e.g. My Webite'
+                      placeholder='e.g. My Website'
                       autoComplete='off'
                       value={values.name}
                       invalid={touched.name && !!errors.name}
