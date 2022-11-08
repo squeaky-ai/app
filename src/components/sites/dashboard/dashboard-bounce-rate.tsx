@@ -63,9 +63,9 @@ export const DashboardBounceRate: FC<Props> = ({ dashboard, period }) => {
                     key={count.dateKey}
                     dataKey='count'
                     fillOpacity={1}
-                    stroke='var(--blue-500)'
+                    stroke='var(--rose-500)'
                     strokeWidth={2}
-                    fill='var(--blue-50)'
+                    fill='var(--peach-200)'
                     type='monotone'
                   />
                 ))}
@@ -76,7 +76,7 @@ export const DashboardBounceRate: FC<Props> = ({ dashboard, period }) => {
           </DashboardChart>
           <div className='heading'>
             <h3>{dashboard.bounceRate.average}%</h3>
-            <Trend direction={dashboard.bounceRate.trend >= 0 ? 'up' : 'down'} value={`${dashboard.bounceRate.trend.toFixed(2)}%`} />
+            <Trend direction={dashboard.bounceRate.trend >= 0 ? 'down' : 'up'} value={`${dashboard.bounceRate.trend.toFixed(2)}%`} />
           </div>
           <Label>Highest bounce rates</Label>
           <TableWrapper>
