@@ -73,8 +73,7 @@ export const StepDetails: FC<Props> = ({ site, siteType, loading, handleForward,
                 return setErrors({ hostname: 'URL must be a valid hostname' });
               }
 
-              console.log('TODO', { siteType });
-              const newSite = await createSite(name, url); // TODO: Add type
+              const newSite = await createSite({ name, url, siteType });
               handleForward(newSite);
             } catch(error: any) {
               console.error(error);

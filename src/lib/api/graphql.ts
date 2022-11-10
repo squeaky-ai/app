@@ -73,6 +73,7 @@ import {
   UsersInvoiceCreateInput,
   UsersInvoice,
   UsersInvoiceDeleteInput,
+  SitesCreateInput,
 } from 'types/graphql';
 
 import {
@@ -247,10 +248,10 @@ export const getGqlString = (document: TypedDocumentNode): string => (
   document.loc?.source?.body
 );
 
-export const createSite = async (name: string, url: string): Promise<Site> => {
+export const createSite = async (input: SitesCreateInput): Promise<Site> => {
   const { data } = await client.mutate({
     mutation: CREATE_SITE_MUTATION,
-    variables: { input: { name, url } },
+    variables: { input },
   });
 
   const query = cache.readQuery<Query>({ query: GET_SITES_QUERY });

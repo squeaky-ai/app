@@ -76,4 +76,22 @@
       border-color: var(--rose-500);
     }
   }
+
+  &.check-radio {
+    .check {
+      height: 1.5rem;
+      width: 1.5rem;
+    }
+
+    input {  
+      &:checked + .check {
+        background: var(--blue-500);
+        border-color: var(--blue-500);
+  
+        i {
+          display: block;
+        }
+      }
+    }
+  }
 }

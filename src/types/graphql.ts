@@ -207,6 +207,7 @@ export type AdminSite = {
   referrers: Array<Scalars['String']>;
   routes: Array<Scalars['String']>;
   sentiment: Sentiment;
+  siteType: Scalars['Int'];
   superuserAccessEnabled: Scalars['Boolean'];
   tags: Array<Tag>;
   team: Array<Team>;
@@ -2522,6 +2523,7 @@ export type Site = {
   referrers: Array<Scalars['String']>;
   routes: Array<Scalars['String']>;
   sentiment: Sentiment;
+  siteType: Scalars['Int'];
   superuserAccessEnabled: Scalars['Boolean'];
   tags: Array<Tag>;
   team: Array<Team>;
@@ -2728,6 +2730,7 @@ export type SitesCreateInput = {
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: InputMaybe<Scalars['String']>;
   name: Scalars['String'];
+  siteType?: InputMaybe<Scalars['Int']>;
   url: Scalars['String'];
 };
 

@@ -70,11 +70,13 @@ export const CreateSite: FC<Props> = ({ children, className }) => {
                     return setErrors({ 'hostname': 'URL must be a valid hostname' });
                   }
 
-                  const site = await createSite(name, url);
+                  const site = await createSite({ name, url });
 
                   closeModal();
                   await router.push(`/sites/${site.id}/settings/details/tracking-code`);
                 } catch(error: any) {
+                  console.error(error);
+
                   if (/already registered/.test(error)) {
                     setErrors({ hostname: 'This site is already registered' });
                   } else {

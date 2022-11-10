@@ -6,6 +6,7 @@ import { StepType } from 'components/sites/create/step-type';
 import { StepDetails } from 'components/sites/create/step-details';
 import { StepInvite } from 'components/sites/create/step-invite-team';
 import { StepPrivacy } from 'components/sites/create/step-privacy';
+import { StepConsent } from 'components/sites/create/step-consent';
 import { Modal, ModalBody, ModalContents, ModalHeader } from 'components/modal';
 import { CreateSiteStep, SiteType } from 'types/sites';
 import { Icon } from 'components/icon';
@@ -25,33 +26,30 @@ const allSteps = [
 export const CreateModal: FC = () => {
   const ref = React.useRef<Modal>();
 
-  const [step, setStep] = React.useState<CreateSiteStep>(CreateSiteStep.Type);
-
   const [siteType, setSiteType] = React.useState<SiteType>(null);
-
+  const [step, setStep] = React.useState<CreateSiteStep>(CreateSiteStep.Type);
+ 
   const { site, getSite, loading } = useSiteCreate();
 
   const handleBack = () => {
-    const previousStep = allSteps[step -1];
+    const previousStep = allSteps[step - 1];
     if (previousStep !== undefined) setStep(previousStep);
+  };
+
+  const handleForward = () => {
+    const nextStep = allSteps[step + 1];
+    if (nextStep !== undefined) setStep(nextStep);
   };
 
   const handleType = (type: SiteType) => {
     setSiteType(type);
-    setStep(CreateSiteStep.Details);
+    handleForward();
+    // TODO: Update site if it exists
   };
 
   const handleDetails = async (site: Site) => {
     getSite({ variables: { siteId: site.id } });
-    setStep(CreateSiteStep.InviteTeam);
-  };
-
-  const handleInvite = () => {
-    setStep(CreateSiteStep.Privacy);
-  };
-
-  const handlePrivacy = () => {
-    setStep(CreateSiteStep.Consent);
+    handleForward();
   };
 
   const openModal = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -99,15 +97,22 @@ export const CreateModal: FC = () => {
               {step === CreateSiteStep.InviteTeam && (
                 <StepInvite 
                   site={site} 
-                  handleForward={handleInvite} 
+                  handleForward={handleForward} 
                   handleBack={handleBack} 
                 />
               )}
               {step === CreateSiteStep.Privacy && (
                 <StepPrivacy 
                   site={site} 
-                  handleForward={handlePrivacy} 
+                  handleForward={handleForward} 
                   handleBack={handleBack} 
+                />
+              )}
+              {step === CreateSiteStep.Consent && (
+                <StepConsent
+                site={site} 
+                handleForward={handleForward} 
+                handleBack={handleBack} 
                 />
               )}
             </div>

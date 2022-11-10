@@ -8,6 +8,7 @@ import { Input } from 'components/input';
 import { Icon } from 'components/icon';
 import { Select, Option } from 'components/select';
 import { useToasts } from 'hooks/use-toasts';
+import { teamInvite } from 'lib/api/graphql';
 import { Container } from 'components/container';
 import { ADMIN, MEMBER, READ_ONLY } from 'data/teams/constants';
 import type { Site } from 'types/graphql';
@@ -45,8 +46,18 @@ export const StepInvite: FC<Props> = ({ site, handleForward, handleBack }) => {
         onSubmit={(values, { setSubmitting }) => {
           (async () => {
             try {
-              console.log(site, values.members);
+              for (const member of values.members) {
+                if (member.email) {
+                  await teamInvite({ 
+                    siteId: site.id, 
+                    email: member.email, 
+                    role: Number(member.role),
+                  });
+                }
+              }
             } catch(error: any) {
+              console.error(error);
+
               toasts.add({ type: 'error', body: 'There was an error inviting your team' });
             } finally {
               setSubmitting(false);

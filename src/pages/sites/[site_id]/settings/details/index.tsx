@@ -84,6 +84,8 @@ const SitesSettingsDetails: NextPage<ServerSideProps> = ({ user }) => {
 
                     toast.add({ type: 'success', body: 'Your site changes have been successfully saved.' });
                   } catch(error: any) {
+                    console.error(error);
+
                     if (/already registered/.test(error)) {
                       setErrors({ hostname: 'This site is already registered' });
                     } else {
