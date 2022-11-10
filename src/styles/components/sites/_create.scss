@@ -87,7 +87,8 @@
         margin: 0 0 1.5rem 0;
         text-align: center;
 
-        & + p {
+        & + p,
+        & + p + p {
           color: var(--gray-500);
           text-align: center;
         }
@@ -355,6 +356,63 @@
 
             &:last-of-type {
               margin: 0;
+            }
+          }
+        }
+      }
+
+      &.step-tracking-code {
+        width: 100%;
+
+        h4 {
+          margin: 3rem 0 1.5rem 0;
+
+          & + p,
+          & + p + p {
+            margin: 0 auto 1.5rem auto;
+            max-width: 25rem;
+            text-align: center;
+          }
+        }
+
+        .install-options {
+          display: flex;
+          flex-direction: column;
+          margin: 7rem auto 0 auto;
+          max-width: 25rem;
+          width: 100%;
+
+          .install-option {
+            align-items: center;
+            background: var(--white);
+            border: 2px solid var(--gray-100);
+            border-radius: var(--border-radius-md);
+            display: flex;
+            margin: 0 0 1rem 0;
+            padding: 1.5rem 1rem;
+
+            span {
+              flex: 1;
+              text-align: left;
+            }
+
+            .icon {
+              color: var(--blue-500);
+              font-size: var(--font-size-body-xxl);
+              margin: 0 .75rem 0 0;
+
+              &:last-of-type {
+                color: var(--gray-300);
+                margin: 0 0 0 .75rem;
+              }
+            }
+
+            &:last-of-type {
+              margin: 0;
+            }
+
+            &:hover {
+              border-color: var(--blue-500);
             }
           }
         }

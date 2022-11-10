@@ -42,7 +42,7 @@ export const StepConsent: FC<Props> = ({ site, handleBack, handleForward }) => {
           layout: 'bottom_left',
           languages: ['en'],
           languagesDefault: 'en',
-          consentMethod: 'widget',
+          consentMethod: site.consent.consentMethod || 'widget',
         }}
         validationSchema={ConsentSchema}
         onSubmit={(values, { setSubmitting }) => {
@@ -73,7 +73,6 @@ export const StepConsent: FC<Props> = ({ site, handleBack, handleForward }) => {
           touched,
           values,
           errors,
-          dirty,
           isValid,
         }) => (
           <div className='site-anonymisation fade-in'>
@@ -148,7 +147,7 @@ export const StepConsent: FC<Props> = ({ site, handleBack, handleForward }) => {
               <Button className='quaternary' type='button' onClick={handleBack}>
                 Back
               </Button>
-              <Button className='primary' type='submit' onClick={handleForward} disabled={isSubmitting || !(dirty && isValid)}>
+              <Button className='primary' type='submit' onClick={handleForward} disabled={isSubmitting || !isValid}>
                 Next
               </Button>
             </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import { useRouter } from 'next/router';
 import { Button } from 'components/button';
 import { Steps } from 'components/sites/create/steps';
 import { StepType } from 'components/sites/create/step-type';
@@ -7,6 +8,7 @@ import { StepDetails } from 'components/sites/create/step-details';
 import { StepInvite } from 'components/sites/create/step-invite-team';
 import { StepPrivacy } from 'components/sites/create/step-privacy';
 import { StepConsent } from 'components/sites/create/step-consent';
+import { StepTrackingCode } from 'components/sites/create/step-tracking-code';
 import { Modal, ModalBody, ModalContents, ModalHeader } from 'components/modal';
 import { CreateSiteStep, SiteType } from 'types/sites';
 import { Icon } from 'components/icon';
@@ -25,6 +27,7 @@ const allSteps = [
 
 export const CreateModal: FC = () => {
   const ref = React.useRef<Modal>();
+  const router = useRouter();
 
   const [siteType, setSiteType] = React.useState<SiteType>(null);
   const [step, setStep] = React.useState<CreateSiteStep>(CreateSiteStep.Type);
@@ -36,9 +39,14 @@ export const CreateModal: FC = () => {
     if (previousStep !== undefined) setStep(previousStep);
   };
 
-  const handleForward = () => {
+  const handleForward = async () => {
     const nextStep = allSteps[step + 1];
     if (nextStep !== undefined) setStep(nextStep);
+  };
+
+  const handleSuccess = async () => {
+    closeModal();
+    await router.push(`/sites/${site.id}/dashboard`);
   };
 
   const handleType = (type: SiteType) => {
@@ -110,9 +118,17 @@ export const CreateModal: FC = () => {
               )}
               {step === CreateSiteStep.Consent && (
                 <StepConsent
-                site={site} 
-                handleForward={handleForward} 
-                handleBack={handleBack} 
+                  site={site} 
+                  handleForward={handleForward} 
+                  handleBack={handleBack} 
+                />
+              )}
+              {step === CreateSiteStep.TrackingCode && (
+                <StepTrackingCode
+                  site={site} 
+                  handleForward={handleForward} 
+                  handleBack={handleBack} 
+                  handleSuccess={handleSuccess}
                 />
               )}
             </div>
