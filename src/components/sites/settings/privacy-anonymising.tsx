@@ -19,6 +19,7 @@ export const PrivacyAnonymising: FC<Props> = ({ site }) => {
         formsEnabled: forms,
         textEnabled: text,
       });
+
       toasts.add({ type: 'success', body: 'Your preferences have been updated' });
     } catch(error) {
       console.error(error);

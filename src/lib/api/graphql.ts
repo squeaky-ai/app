@@ -73,6 +73,8 @@ import {
   UsersInvoiceCreateInput,
   UsersInvoice,
   UsersInvoiceDeleteInput,
+  SitesCreateInput,
+  SitesTrackingCodeInstructionsInput,
 } from 'types/graphql';
 
 import {
@@ -98,6 +100,7 @@ import {
   SUPERUSER_ACESSS_UPDATE,
   ADMIN_SITE_DELETE_MUTATION,
   ROUTES_UPDATE_MUTATION,
+  SEND_TRACKING_CODE_INSTRUCTIONS,
 } from 'data/sites/mutations';
 
 import {
@@ -247,18 +250,20 @@ export const getGqlString = (document: TypedDocumentNode): string => (
   document.loc?.source?.body
 );
 
-export const createSite = async (name: string, url: string): Promise<Site> => {
+export const createSite = async (input: SitesCreateInput): Promise<Site> => {
   const { data } = await client.mutate({
     mutation: CREATE_SITE_MUTATION,
-    variables: { input: { name, url } },
+    variables: { input },
   });
 
-  const { sites } = cache.readQuery<Query>({ query: GET_SITES_QUERY });
+  const query = cache.readQuery<Query>({ query: GET_SITES_QUERY });
 
-  cache.writeQuery({
-    query: GET_SITES_QUERY,
-    data: { sites: [...sites, data.siteCreate] }
-  });
+  if (query?.sites) {
+    cache.writeQuery({
+      query: GET_SITES_QUERY,
+      data: { sites: [...query.sites, data.siteCreate] }
+    });
+  }
 
   return data.siteCreate;
 };
@@ -295,6 +300,13 @@ export const verifySite = async (input: SitesVerifyInput): Promise<Site> => {
   });
 
   return data.siteVerify;
+};
+
+export const sendTrackingCodeInstructions = async (input: SitesTrackingCodeInstructionsInput): Promise<void> => {
+  await client.mutate({
+    mutation: SEND_TRACKING_CODE_INSTRUCTIONS,
+    variables: { input }
+  });
 };
 
 export const ipBlacklistCreate = async (input: SitesIpBlacklistCreateInput): Promise<Site> => {

@@ -78,6 +78,8 @@ export const CreateLead: FC<Props> = ({ partner, onClose }) => {
                   closeModal();
                   toasts.add({ type: 'success', body: 'Lead created successfully' });
                 } catch(error: any) {
+                  console.error(error);
+
                   if (/already registered/.test(error)) {
                     setErrors({ hostname: 'This url is already registered' });
                   } else {

@@ -58,6 +58,7 @@ export const UserPartnerCreate: FC<Props> = ({ user }) => {
                 closeModal();
               } catch(error: any) {
                 console.error(error);
+  
                 if (/already registered/.test(error)) {
                   setErrors({ slug: 'This slug is already registered' });
                 } else {

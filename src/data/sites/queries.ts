@@ -50,6 +50,31 @@ export const GET_SITE_QUERY = gql`
   }
 `;
 
+export const GET_SITE_QUERY_CREATE = gql`
+  query GetSiteCreate($siteId: ID!) {
+    site(siteId: $siteId) {
+      id
+      name
+      url
+      uuid
+      verifiedAt
+      magicErasureEnabled
+      anonymiseFormInputs
+      anonymiseText
+      consent {
+        id
+        name
+        consentMethod
+        layout
+        privacyPolicyUrl
+        languages
+        languagesDefault
+        translations(userLocale: "en")
+      }
+    }
+  }
+`;
+
 export const GET_SITE_BY_UUID_QUERY = gql`
   query GetSite($siteId: ID!) {
     siteByUuid(siteId: $siteId) {

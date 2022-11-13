@@ -17,6 +17,7 @@ import { Platform } from 'components/platform';
 import { SettingsTabs } from 'components/sites/settings/settings-tabs';
 import { MAX_DAYS_BEFORE_POTENTIAL_ISSUE } from 'data/sites/constants';
 import { useTrackingCode } from 'hooks/use-tracking-code';
+import { guideLinks } from 'data/sites/constants';
 import type { Site } from 'types/graphql';
 
 const SitesSettingsTrackingCode: NextPage<ServerSideProps> = ({ user }) => {
@@ -91,35 +92,35 @@ const SitesSettingsTrackingCode: NextPage<ServerSideProps> = ({ user }) => {
                     <Icon name='book-open-line' />
                     Installation Guides
                   </h4>
-                  <p>Need help getting set up? Visit our <Link href='https://squeaky.notion.site/Install-your-tracking-code-6ab27212bb5c434196f494ac43349b72#582b9522ff9a4f268dab90b0be05fbb5'><a target='_blank' rel='noreferrer' className='external-link'><span>Manual Installation Guide</span> <Icon name='external-link-line' /></a></Link>, or try one of the step-by-step platform guides in our help center:</p>
+                  <p>Need help getting set up? Visit our <Link href={guideLinks.manual}><a target='_blank' rel='noreferrer' className='external-link'><span>Manual Installation Guide</span> <Icon name='external-link-line' /></a></Link>, or try one of the step-by-step platform guides in our help center:</p>
 
                   <div className='platforms'>
-                    <Link href='https://squeaky.notion.site/Wordpress-571e94c409f94748a6c40f67b5d79543'>
+                    <Link href={guideLinks.wordpress}>
                       <a target='_blank' rel='noreferrer'>
                         <Platform platform='wordpress' height={48} width={48} alt='Wordpress Logo' />
                       </a>
                     </Link>
-                    <Link href='https://squeaky.notion.site/Shopify-63eef790b11f4ce59108c5f720ff21c5'>
+                    <Link href={guideLinks.shopify}>
                       <a target='_blank' rel='noreferrer'>
                         <Platform platform='shopify' height={48} width={48} alt='Shopify Logo' />
                       </a>
                     </Link>
-                    <Link href='https://squeaky.notion.site/Wix-9b6351ec3cdd48b3ae94f5f8b4f3b8db'>
+                    <Link href={guideLinks.wix}>
                       <a target='_blank' rel='noreferrer'>
                         <Platform platform='wix' height={48} width={48} alt='Wix Logo' />
                       </a>
                     </Link>
-                    <Link href='https://squeaky.notion.site/Webflow-ea17dbafc682462d9c5f53a62cc963f9'>
+                    <Link href={guideLinks.webflow}>
                       <a target='_blank' rel='noreferrer'>
                         <Platform platform='webflow' height={48} width={48} alt='Webflow Logo' />
                       </a>
                     </Link>
-                    <Link href='https://squeaky.notion.site/Magento-49302bba0c7a48d3aef93e38e8e79643'>
+                    <Link href={guideLinks.magento}>
                       <a target='_blank' rel='noreferrer'>
                         <Platform platform='magento' height={48} width={48} alt='Magento Logo' />
                       </a>
                     </Link>
-                    <Link href='https://squeaky.notion.site/Drupal-401bce8e455246019e9e429641979c53'>
+                    <Link href={guideLinks.drupal}>
                       <a target='_blank' rel='noreferrer'>
                         <Platform platform='drupal' height={48} width={48} alt='Drupal Logo' />
                       </a>

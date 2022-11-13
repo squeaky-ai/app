@@ -8,12 +8,16 @@ import { Main } from 'components/main';
 import { Illustration } from 'components/illustration';
 import { PageLoading } from 'components/sites/page-loading';
 import { Error } from 'components/error';
+import { CreateModal } from 'components/sites/create/create-modal';
 import { CreateSite } from 'components/sites/recordings/create-site';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useSites } from 'hooks/use-sites';
+import { useFeatureFlags } from 'hooks/use-feature-flags';
+import { FeatureFlag } from 'lib/feature-flags';
 
 const Sites: NextPage<ServerSideProps> = () => {
   const { loading, error, sites } = useSites();
+  const { featureFlagEnabled } = useFeatureFlags();
 
   if (error) {
     return <Error />;
@@ -47,7 +51,10 @@ const Sites: NextPage<ServerSideProps> = () => {
         <Main>
           <h4 className='title'>
             Sites
-            <CreateSite className='new-site'>+ Add New</CreateSite>
+            {featureFlagEnabled(FeatureFlag.NEW_SITE_CREATE)
+              ? <CreateModal />
+              : <CreateSite className='new-site'>+ Add New</CreateSite>
+            }
           </h4>
 
           <ul className='sites-list'>
