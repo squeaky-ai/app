@@ -12,7 +12,6 @@ import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { Label } from 'components/label';
 import { Input } from 'components/input';
 import { Button } from 'components/button';
-import { Option, Select } from 'components/select';
 import { updateSite } from 'lib/api/graphql';
 import { HOSTNAME_REGEX } from 'data/sites/constants';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
@@ -22,7 +21,6 @@ import { useToasts } from 'hooks/use-toasts';
 const DetailsSchema = Yup.object().shape({
   name: Yup.string().required('Site name is required'),
   hostname: Yup.string().matches(HOSTNAME_REGEX, 'URL must be a valid hostname').required('Site URL is required'),
-  protocol: Yup.string().oneOf(['http://', 'https://'], 'Please select a protocol')
 });
 
 const SitesSettingsDetails: NextPage<ServerSideProps> = ({ user }) => {
@@ -58,19 +56,19 @@ const SitesSettingsDetails: NextPage<ServerSideProps> = ({ user }) => {
             <h4>Site details</h4>
 
             <Formik
-              initialValues={{ name: site.name, protocol: `${site.url.split('://')[0]}://`, hostname: site.url.split('://')[1] }}
+              initialValues={{ name: site.name, hostname: site.url.split('://')[1] }}
               validationSchema={DetailsSchema}
               onSubmit={(values, { setSubmitting, setErrors, setFieldValue }) => {
                 (async () => {
                   try {
-                    const { name, protocol, hostname } = values;
+                    const { name, hostname } = values;
 
                     // Some people paste the whole url in with the protocol
                     // so we strip it and update the field
                     const host = hostname.replace(/^https?:\/\//, '');
                     setFieldValue('hostname', host);
 
-                    const url = `${protocol}${host}`;
+                    const url = `https://${host}`;
 
                     if (!validateUrl(url)) {
                       return setErrors({ 'hostname': 'URL must be a valid hostname' });
@@ -122,11 +120,12 @@ const SitesSettingsDetails: NextPage<ServerSideProps> = ({ user }) => {
                     <span className='validation'>{errors.name}</span>
 
                     <Label htmlFor='hostname'>Site URL</Label>
-                    <div className='select-input-group'>
-                      <Select name='protocol' onChange={handleChange} value={values.protocol} invalid={touched.protocol && !!errors.protocol}>
-                        <Option value='https://'>https://</Option>
-                        <Option value='http://'>http://</Option>
-                      </Select>
+                    <div className='thirds-input-group'>
+                      <Input
+                        readOnly
+                        disabled
+                        value='https://'
+                      />
                       <Input
                         name='hostname' 
                         type='text' 

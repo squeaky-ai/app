@@ -6,7 +6,6 @@ import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { Label } from 'components/label';
-import { Option, Select } from 'components/select';
 import { Input } from 'components/input';
 import { HOSTNAME_REGEX } from 'data/sites/constants';
 import { useToasts } from 'hooks/use-toasts';
@@ -20,7 +19,6 @@ interface Props {
 
 const CreateSchema = Yup.object().shape({
   hostname: Yup.string().matches(HOSTNAME_REGEX, 'URL must be a valid hostname').required('Site URL is required'),
-  protocol: Yup.string().oneOf(['http://', 'https://'], 'Please select a protocol')
 });
 
 const validateUrl = (urlString: string): boolean => {
@@ -55,19 +53,19 @@ export const CreateLead: FC<Props> = ({ partner, onClose }) => {
       <Modal ref={ref} onClose={onClose}>
         <ModalBody aria-labelledby='create-lead-title' aria-describedby='create-lead-description'>
           <Formik
-            initialValues={{ protocol: 'https://', hostname: '' }}
+            initialValues={{ hostname: '' }}
             validationSchema={CreateSchema}
             onSubmit={(values, { setSubmitting, setErrors, setFieldValue }) => {
               (async () => {
                 try {
-                  const { protocol, hostname } = values;
+                  const { hostname } = values;
 
                   // Some people paste the whole url in with the protocol
                   // so we strip it and update the field
                   const host = hostname.replace(/^https?:\/\//, '');
                   setFieldValue('hostname', host);
 
-                  const url = `${protocol}${host}`;
+                  const url = `https://${host}`;
 
                   if (!validateUrl(url)) {
                     return setErrors({ 'hostname': 'URL must be a valid hostname' });
@@ -112,11 +110,12 @@ export const CreateLead: FC<Props> = ({ partner, onClose }) => {
                 <ModalContents>
                   <p id='create-lead-description'>Please enter the URL of the site your are referring below. We will update the status once a site has been added with a matching URL.</p>
                   <Label htmlFor='hostname'>Site URL</Label>
-                  <div className='select-input-group'>
-                    <Select name='protocol' onChange={handleChange} value={values.protocol} invalid={touched.protocol && !!errors.protocol}>
-                      <Option value='https://'>https://</Option>
-                      <Option value='http://'>http://</Option>
-                    </Select>
+                  <div className='thirds-input-group'>
+                    <Input
+                      readOnly
+                      disabled
+                      value='https://'
+                    />
                     <Input
                       name='hostname' 
                       type='text' 

@@ -7,7 +7,6 @@ import { Icon } from 'components/icon';
 import { Label } from 'components/label';
 import { Input } from 'components/input';
 import { Button } from 'components/button';
-import { Option, Select } from 'components/select';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { createSite } from 'lib/api/graphql';
 import { HOSTNAME_REGEX } from 'data/sites/constants';
@@ -18,7 +17,6 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 const CreateSchema = Yup.object().shape({
   name: Yup.string().required('Site name is required'),
   hostname: Yup.string().matches(HOSTNAME_REGEX, 'URL must be a valid hostname').required('Site URL is required'),
-  protocol: Yup.string().oneOf(['http://', 'https://'], 'Please select a protocol')
 });
 
 export const CreateSite: FC<Props> = ({ children, className }) => {
@@ -52,19 +50,19 @@ export const CreateSite: FC<Props> = ({ children, className }) => {
       <Modal ref={ref}>
         <ModalBody aria-labelledby='create-site-title' aria-describedby='create-site-description'>
           <Formik
-            initialValues={{ name: '', protocol: 'https://', hostname: '' }}
+            initialValues={{ name: '', hostname: '' }}
             validationSchema={CreateSchema}
             onSubmit={(values, { setSubmitting, setErrors, setFieldValue }) => {
               (async () => {
                 try {
-                  const { name, protocol, hostname } = values;
+                  const { name, hostname } = values;
 
                   // Some people paste the whole url in with the protocol
                   // so we strip it and update the field
                   const host = hostname.replace(/^https?:\/\//, '');
                   setFieldValue('hostname', host);
 
-                  const url = `${protocol}${host}`;
+                  const url = `https://${host}`;
 
                   if (!validateUrl(url)) {
                     return setErrors({ 'hostname': 'URL must be a valid hostname' });
@@ -123,11 +121,12 @@ export const CreateSite: FC<Props> = ({ children, className }) => {
                   <span className='validation'>{errors.name}</span>
 
                   <Label htmlFor='hostname'>Site URL</Label>
-                  <div className='select-input-group'>
-                    <Select name='protocol' onChange={handleChange} value={values.protocol} invalid={touched.protocol && !!errors.protocol}>
-                      <Option value='https://'>https://</Option>
-                      <Option value='http://'>http://</Option>
-                    </Select>
+                  <div className='thirds-input-group'>
+                    <Input
+                      readOnly
+                      disabled
+                      value='https://'
+                    />
                     <Input
                       name='hostname' 
                       type='text' 

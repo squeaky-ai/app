@@ -60,23 +60,25 @@
   transition: background 5000s ease-in-out 0s;
 }
 
-.select-input-group {
+.thirds-input-group {
   display: grid;
   grid-gap: 0 1rem;
-  grid-template-areas: 'select input input'
-                       'validation validation validation';
-  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  grid-template-areas: 'first second'
+                       'validation validation';
+  grid-template-columns: 90px 1fr;
   grid-template-rows: 2rem;
   margin-bottom: 2rem;
 
-  .select {
-    grid-area: select;
-    margin: 0;
-  }
-
   .input {
-    grid-area: input;
-    margin: 0;
+    &:first-of-type {
+      grid-area: first;
+      margin: 0;
+    }
+
+    &:last-of-type {
+      grid-area: second;
+      margin: 0;
+    }
   }
 
   .validation {

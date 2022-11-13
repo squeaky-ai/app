@@ -58,7 +58,8 @@ export const StepConsent: FC<Props> = ({ site, handleBack, handleForward }) => {
                 languagesDefault: values.languagesDefault,
                 consentMethod: values.consentMethod,
                 privacyPolicyUrl: values.privacyPolicyUrl,
-              })
+              });
+              handleForward();
             } catch {
               toasts.add({ type: 'error', body: 'There was an issue updating the settings' });
             } finally {
@@ -142,17 +143,16 @@ export const StepConsent: FC<Props> = ({ site, handleBack, handleForward }) => {
                     Consent not required, or using a third-party consent management tool
                   </Radio>
                 </div>
+                <div className='footer'>
+                  <Button className='quaternary' type='button' onClick={handleBack}>
+                    Back
+                  </Button>
+                  <Button className='primary' type='submit' disabled={isSubmitting || !isValid}>
+                    Next
+                  </Button>
+                </div>
               </form>
             </Card>
-
-            <div className='footer'>
-              <Button className='quaternary' type='button' onClick={handleBack}>
-                Back
-              </Button>
-              <Button className='primary' type='submit' onClick={handleForward} disabled={isSubmitting || !isValid}>
-                Next
-              </Button>
-            </div>
           </div>
         )}
       </Formik>
