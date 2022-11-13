@@ -9,6 +9,7 @@ import { StepInvite } from 'components/sites/create/step-invite-team';
 import { StepPrivacy } from 'components/sites/create/step-privacy';
 import { StepConsent } from 'components/sites/create/step-consent';
 import { StepTrackingCode } from 'components/sites/create/step-tracking-code';
+import { StepConfirmation } from 'components/sites/create/step-confirmation';
 import { Modal, ModalBody, ModalContents, ModalHeader } from 'components/modal';
 import { CreateSiteStep, SiteType } from 'types/sites';
 import { Icon } from 'components/icon';
@@ -52,7 +53,6 @@ export const CreateModal: FC = () => {
   const handleType = (type: SiteType) => {
     setSiteType(type);
     handleForward();
-    // TODO: Update site if it exists
   };
 
   const handleDetails = async (site: Site) => {
@@ -89,6 +89,7 @@ export const CreateModal: FC = () => {
             <div className='content'>
               {step === CreateSiteStep.Type && (
                 <StepType 
+                  site={site}
                   siteType={siteType}
                   handleForward={handleType} 
                 />
@@ -129,6 +130,11 @@ export const CreateModal: FC = () => {
                   handleForward={handleForward} 
                   handleBack={handleBack} 
                   handleSuccess={handleSuccess}
+                />
+              )}
+              {step === CreateSiteStep.Confirmation && (
+                <StepConfirmation
+                  site={site}
                 />
               )}
             </div>

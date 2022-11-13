@@ -367,12 +367,21 @@
         h4 {
           margin: 3rem 0 1.5rem 0;
 
-          & + p,
-          & + p + p {
+          & + p {
             margin: 0 auto 1.5rem auto;
             max-width: 25rem;
             text-align: center;
+          } 
+
+          & + p + p {
+            margin: 0 auto 4rem auto;
+            max-width: 25rem;
+            text-align: center;
           }
+        }
+
+        .footer {
+          margin: 4rem 0 0 0;
         }
 
         .install-options {
@@ -414,6 +423,91 @@
             &:hover {
               border-color: var(--blue-500);
             }
+          }
+        }
+
+        .installation-guides {
+          display: grid;
+          grid-template-columns: 14.5rem minmax(0, 1fr);
+          margin: 5rem 0 1.5rem 0;
+
+          .guides {
+            flex-shrink: 0;
+            margin: 0 2rem 0 0;
+          }
+
+          .platforms {
+            display: flex;
+            flex-direction: column;
+
+            .icon {
+              color: var(--gray-blue-800);
+              height: 1.5rem;
+              font-size: 1.5rem;
+              width: 1.5rem;
+            }
+
+            a {
+              align-items: center;
+              display: flex;
+              margin: 0 0 .75rem 0;
+              text-decoration: none;
+
+              .name {
+                margin: 0 0 0 1rem;
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+
+        .send-instructions {
+          margin: 8rem auto 6rem auto;
+          max-width: 25rem;
+        }
+
+        .code.block {
+          background: var(--gray-50);
+          border: 1px solid var(--gray-150);
+          box-shadow: none;
+          overflow-x: auto;
+          scrollbar-width: none;
+
+          &::-webkit-scrollbar {
+            display: none;
+          }
+        }
+
+        .message {
+          p {
+            margin: 0 0 1rem 0;
+
+            .icon {
+              color: var(--blue-500);
+            }
+          }
+
+          .actions {
+            .button {
+              margin: 0 1rem .5rem 0;
+            }
+          }
+        }
+      }
+
+      &.step-confirmation {
+        padding: 12rem 0;
+
+        .verified {
+          text-align: center;
+
+          .icon {
+            color: var(--green-500);
+            font-size: 2.5rem;
+          }
+
+          h4 {
+            margin: 1.5rem 0 2rem 0;
           }
         }
       }

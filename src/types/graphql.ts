@@ -2876,6 +2876,7 @@ export type SitesUpdateInput = {
   clientMutationId?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
   siteId: Scalars['ID'];
+  siteType?: InputMaybe<Scalars['Int']>;
   url?: InputMaybe<Scalars['String']>;
 };
 

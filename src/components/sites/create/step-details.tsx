@@ -7,7 +7,7 @@ import { Input } from 'components/input';
 import { Button } from 'components/button';
 import { Option, Select } from 'components/select';
 import { HOSTNAME_REGEX } from 'data/sites/constants';
-import { createSite } from 'lib/api/graphql';
+import { createSite, updateSite } from 'lib/api/graphql';
 import { Container } from 'components/container';
 import { useToasts } from 'hooks/use-toasts';
 import { SiteType } from 'types/sites';
@@ -56,10 +56,6 @@ export const StepDetails: FC<Props> = ({ site, siteType, loading, handleForward,
         onSubmit={(values, { setSubmitting, setErrors, setFieldValue }) => {
           (async () => {
             try {
-              if (site) {
-                return handleForward(site);
-              }
-
               const { name, protocol, hostname } = values;
 
               // Some people paste the whole url in with the protocol
@@ -71,6 +67,11 @@ export const StepDetails: FC<Props> = ({ site, siteType, loading, handleForward,
 
               if (!validateUrl(url)) {
                 return setErrors({ hostname: 'URL must be a valid hostname' });
+              }
+
+              if (site) {
+                await updateSite({ siteId: site.id, url, name })
+                return handleForward(site);
               }
 
               const newSite = await createSite({ name, url, siteType });
