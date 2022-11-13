@@ -38,8 +38,9 @@ export const StepPrivacy: FC<Props> = ({ site, handleBack, handleForward }) => {
     <div className='step step-privacy'>
       <p className='subheading'>Put privacy first</p>
       <h4>Text and form anonymisation</h4>
-
-      <p>Protect the privacy of your visitors by anonymising the text captured during session recordings.</p>
+      <div className='details'>
+        <p>Protect the privacy of your visitors by anonymising the text captured during session recordings.</p>
+      </div>
 
       <div className='site-anonymisation fade-in'>
         <Card>

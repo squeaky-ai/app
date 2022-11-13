@@ -32,7 +32,11 @@ export const StepType: FC<Props> = ({ site, siteType, handleForward }) => {
 
   return (
     <div className='step step-type'>
+      <p className='subheading' />
       <h4>Choose your site type</h4>
+      <div className='details'>
+        <p />
+      </div>
 
       <div className='site-types fade-in'>
         <Button className={classnames({ active: siteType === SiteType.Website })} onClick={() => handleSetType(SiteType.Website)}>

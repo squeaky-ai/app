@@ -72,8 +72,12 @@ export const StepTrackingCode: FC<Props> = ({
     <div className='step step-tracking-code'>
       {selectedOption === null && ( 
         <>
+          <p className='subheading' />
           <h4>Install Squeaky on your site</h4>
-          <p>Please choose from the following options:</p>
+          <div className='details'>
+            <p>Please choose from the following options:</p>
+          </div>
+
           <div className='install-options fade-in'>
             <Button className='install-option' onClick={() => setSelectedOption(InstallOptions.MANUAL)}>
               <Icon name='code-s-slash-line' />
@@ -104,9 +108,13 @@ export const StepTrackingCode: FC<Props> = ({
 
       {selectedOption === InstallOptions.MANUAL && (
         <>
+          <p className='subheading' />
           <h4>Manual Installation</h4>
-          <p>Paste the code below into the <code className='code'>&lt;head&gt;</code> section of the HTML on every page you&apos;d like to track on your website.</p>
-          <p>This is the code that enables Squeaky to capture usage data on your site.</p>
+          <div className='details'>
+            <p>Paste the code below into the <code className='code'>&lt;head&gt;</code> section of the HTML on every page you&apos;d like to track on your website.</p>
+            <p>This is the code that enables Squeaky to capture usage data on your site.</p>
+          </div>
+
           <div className='fade-in'>
             <TrackingCode site={site} />
             {failed && (
@@ -129,8 +137,12 @@ export const StepTrackingCode: FC<Props> = ({
 
       {selectedOption === InstallOptions.GUIDE && (
         <>
+          <p className='subheading' />
           <h4>Use an installation guide</h4>
-          <p>Please choose from the following options:</p>
+          <div className='details'>
+            <p>Please choose from the following options:</p>
+          </div>
+
           <div className='fade-in'>
             <div className='installation-guides'>
               <div className='guides'>
@@ -203,8 +215,12 @@ export const StepTrackingCode: FC<Props> = ({
       )}
       {selectedOption === InstallOptions.DEVELOPER && (
         <>
+          <p className='subheading' />
           <h4>Send instructions to a developer</h4>
-          <p>If you&apos;d like to have someone else install Squeaky on your site, use the form below.</p>
+          <div className='details'>
+            <p>If you&apos;d like to have someone else install Squeaky on your site, use the form below.</p>
+          </div>
+
           <div className='fade-in'>
             <Formik
               initialValues={{ firstName: '', email: '' }}

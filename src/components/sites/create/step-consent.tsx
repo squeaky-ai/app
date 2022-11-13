@@ -33,8 +33,10 @@ export const StepConsent: FC<Props> = ({ site, handleBack, handleForward }) => {
     <div className='step step-consent'>
       <p className='subheading'>Put privacy first</p>
       <h4>Consent Method</h4>
+      <div className='details'>
+        <p>If you need to ask for consent prior to capturing data with Squeaky you can choose from the following options.</p>
+      </div>
 
-      <p>If you need to ask for consent prior to capturing data with Squeaky you can choose from the following options.</p>
       <Formik
         initialValues={{ 
           name: site.consent.name || site.name,

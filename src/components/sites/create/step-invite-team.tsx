@@ -37,8 +37,11 @@ export const StepInvite: FC<Props> = ({ site, handleForward, handleBack }) => {
 
   return (
     <div className='step step-invite'>
+      <p className='subheading' />
       <h4>Invite your team mates</h4>
-      <p>We&apos;ll sent them an email inviting them to join your site.</p>
+      <div className='details'>
+        <p>We&apos;ll sent them an email inviting them to join your site.</p>
+      </div>
 
       <Formik
         initialValues={{ members: [newMember, newMember, newMember] }}

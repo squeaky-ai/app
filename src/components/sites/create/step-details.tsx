@@ -47,8 +47,11 @@ export const StepDetails: FC<Props> = ({ site, siteType, loading, handleForward,
 
   return (
     <div className='step step-details'>
+      <p className='subheading' />
       <h4>Add your site details</h4>
-      <p>We&apos;ll use these details to generate your tracking code.</p>
+      <div className='details'>
+        <p>We&apos;ll use these details to generate your tracking code.</p>
+      </div>
 
       <Formik
         initialValues={{ name: site?.name || '', protocol: getSiteUrlParts(site)[0] || 'https://', hostname: getSiteUrlParts(site)[1] }}
