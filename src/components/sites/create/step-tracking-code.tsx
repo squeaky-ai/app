@@ -12,7 +12,7 @@ import { TrackingCode } from 'components/sites/settings/tracking-code';
 import { TrackingCodeFailure } from 'components/sites/create/tracking-code-failure';
 import { guideLinks } from 'data/sites/constants';
 import { useToasts } from 'hooks/use-toasts';
-import { verifySite } from 'lib/api/graphql';
+import { verifySite, sendTrackingCodeInstructions } from 'lib/api/graphql';
 import type { Site } from 'types/graphql';
 
 interface Props {
@@ -20,6 +20,7 @@ interface Props {
   handleBack: VoidFunction;
   handleForward: VoidFunction;
   handleSuccess: VoidFunction;
+  setSentInstruction: (sentInstructions: boolean) => void;
 }
 
 enum InstallOptions {
@@ -33,7 +34,13 @@ const SendInstructionsSchema = Yup.object().shape({
   email: Yup.string().email().required('Email address is required'),
 });
 
-export const StepTrackingCode: FC<Props> = ({ site, handleForward, handleBack, handleSuccess }) => {
+export const StepTrackingCode: FC<Props> = ({
+  site,
+  handleForward,
+  handleBack,
+  handleSuccess,
+  setSentInstruction,
+}) => {
   const toasts = useToasts();
 
   const [failed, setFailed] = React.useState<boolean>(false);
@@ -205,7 +212,13 @@ export const StepTrackingCode: FC<Props> = ({ site, handleForward, handleBack, h
               onSubmit={(values, { setSubmitting }) => {
                 (async () => {
                   try {
-                    console.log(values);
+                    await sendTrackingCodeInstructions({
+                      siteId: site.id,
+                      firstName: values.firstName,
+                      email:values.email,
+                    });
+                    handleForward();
+                    setSentInstruction(true);
                   } catch(error: any) {
                     console.error(error);
                     toasts.add({ type: 'error', body: 'There was an error sending the instructions' });

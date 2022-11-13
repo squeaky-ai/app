@@ -191,3 +191,11 @@ export const ROUTES_UPDATE_MUTATION = gql`
     }
   }
 `;
+
+export const SEND_TRACKING_CODE_INSTRUCTIONS = gql`
+  mutation($input: SitesTrackingCodeInstructionsInput!) {
+    trackingCodeInstructions(input: $input) {
+      message
+    }
+  }
+`;

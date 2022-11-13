@@ -74,6 +74,7 @@ import {
   UsersInvoice,
   UsersInvoiceDeleteInput,
   SitesCreateInput,
+  SitesTrackingCodeInstructionsInput,
 } from 'types/graphql';
 
 import {
@@ -99,6 +100,7 @@ import {
   SUPERUSER_ACESSS_UPDATE,
   ADMIN_SITE_DELETE_MUTATION,
   ROUTES_UPDATE_MUTATION,
+  SEND_TRACKING_CODE_INSTRUCTIONS,
 } from 'data/sites/mutations';
 
 import {
@@ -298,6 +300,13 @@ export const verifySite = async (input: SitesVerifyInput): Promise<Site> => {
   });
 
   return data.siteVerify;
+};
+
+export const sendTrackingCodeInstructions = async (input: SitesTrackingCodeInstructionsInput): Promise<void> => {
+  await client.mutate({
+    mutation: SEND_TRACKING_CODE_INSTRUCTIONS,
+    variables: { input }
+  });
 };
 
 export const ipBlacklistCreate = async (input: SitesIpBlacklistCreateInput): Promise<Site> => {

@@ -55,6 +55,7 @@ export const StepInvite: FC<Props> = ({ site, handleForward, handleBack }) => {
                   });
                 }
               }
+              handleForward();
             } catch(error: any) {
               console.error(error);
 

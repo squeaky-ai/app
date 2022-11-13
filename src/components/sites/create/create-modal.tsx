@@ -2,6 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import { useRouter } from 'next/router';
 import { Button } from 'components/button';
+import { Icon } from 'components/icon';
 import { Steps } from 'components/sites/create/steps';
 import { StepType } from 'components/sites/create/step-type';
 import { StepDetails } from 'components/sites/create/step-details';
@@ -12,7 +13,6 @@ import { StepTrackingCode } from 'components/sites/create/step-tracking-code';
 import { StepConfirmation } from 'components/sites/create/step-confirmation';
 import { Modal, ModalBody, ModalContents, ModalHeader } from 'components/modal';
 import { CreateSiteStep, SiteType } from 'types/sites';
-import { Icon } from 'components/icon';
 import { useSiteCreate } from 'hooks/use-site-create';
 import type { Site } from 'types/graphql';
 
@@ -31,6 +31,7 @@ export const CreateModal: FC = () => {
   const router = useRouter();
 
   const [siteType, setSiteType] = React.useState<SiteType>(null);
+  const [sentInstructions, setSentInstruction] = React.useState<boolean>(false);
   const [step, setStep] = React.useState<CreateSiteStep>(CreateSiteStep.Type);
  
   const { site, getSite, loading } = useSiteCreate();
@@ -40,7 +41,7 @@ export const CreateModal: FC = () => {
     if (previousStep !== undefined) setStep(previousStep);
   };
 
-  const handleForward = async () => {
+  const handleForward = () => {
     const nextStep = allSteps[step + 1];
     if (nextStep !== undefined) setStep(nextStep);
   };
@@ -130,11 +131,13 @@ export const CreateModal: FC = () => {
                   handleForward={handleForward} 
                   handleBack={handleBack} 
                   handleSuccess={handleSuccess}
+                  setSentInstruction={setSentInstruction}
                 />
               )}
               {step === CreateSiteStep.Confirmation && (
                 <StepConfirmation
                   site={site}
+                  sentInstructions={sentInstructions}
                 />
               )}
             </div>
