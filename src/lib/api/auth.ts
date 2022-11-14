@@ -20,12 +20,13 @@ export const session = async <T>(cookie: string): Promise<T> => {
     const { data } = await axios.post(`${publicRuntimeConfig.apiHost}/api/graphql`, { query: getGqlString(USER_QUERY) }, {
       headers: {
         'Accept': 'application/json',
-        'Cookie': cookie
-      }
+        'Cookie': cookie,
+      },
     });
 
     return data.data.user;
   } catch(error: any) {
+    console.log(error)
     console.error(error.code, error.response);
     return null;
   }

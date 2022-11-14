@@ -37,6 +37,7 @@ const SitesAnalyticsSiteTraffic: NextPage<ServerSideProps> = ({ user }) => {
             <Tabs site={site} tab='traffic' type='site' />
 
             <EmptyState
+              site={site}
               title='There are currently no analytics available'
               subtitle='Collecting Analytics Data'
               illustration='illustration-3'

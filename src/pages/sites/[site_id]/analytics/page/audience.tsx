@@ -70,6 +70,7 @@ const SitesAnalyticsPageAudience: NextPage<ServerSideProps> = ({ user }) => {
             <Tabs site={site} tab='audience' type='page' page={page} />
 
             <EmptyState
+              site={site}
               title='There are currently no analytics available'
               subtitle='Collecting Analytics Data'
               illustration='illustration-3'

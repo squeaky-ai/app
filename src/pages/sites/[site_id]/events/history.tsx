@@ -85,6 +85,7 @@ const SitesEventsHistory: NextPage<ServerSideProps> = ({ user }) => {
 
             {!loading && !hasIds && (
               <EmptyState
+                site={site}
                 title='There are currently no events configured.'
                 subtitle=''
                 snippet=''

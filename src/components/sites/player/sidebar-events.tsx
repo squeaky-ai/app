@@ -46,7 +46,8 @@ export const SidebarEvents: FC<Props> = ({ events, recording, state, replayer, d
         {interactionEvents.map((item, index) => (
           <li 
             className={classnames('icon', item.eventName, { hidden: !item.show })} 
-            key={`${item.timestampStart}_${index}`}>
+            key={`${item.timestampStart}_${index}`}
+          >
               <div className={item.eventName}>
                 <EventIcon type={item.eventName} />
                 <p className='title'>

@@ -31,6 +31,7 @@ const SitesDashboard: NextPage<ServerSideProps> = ({ user }) => {
             </h4>
 
             <EmptyState
+              site={site}
               title='There is currently no dashboard data'
               subtitle='Accessing The Dashboard'
               illustration='illustration-5'

@@ -83,7 +83,7 @@ const SitesErrorsError: NextPage<ServerSideProps> = ({ user }) => {
               <PageLoading />
             )}
 
-            {!loading && !details && (
+            {!loading && !details && site.recordingsCount > 0 && (
               <Container className='sm centered empty-state show'>
                 <div className='empty-state-contents'>
                   <Illustration illustration='illustration-18' height={240} width={320} alt='Illustration to represent the empty errors page' />

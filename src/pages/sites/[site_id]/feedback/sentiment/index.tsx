@@ -42,6 +42,7 @@ const SitesFeedbackSentiment: NextPage<ServerSideProps> = ({ user }) => {
             </h4>
 
             <EmptyState
+              site={site}
               title='Awaiting tracking code installation'
               subtitle='Collecting Visitor Feedback'
               illustration='illustration-9'

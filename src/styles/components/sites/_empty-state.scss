@@ -39,4 +39,18 @@
       text-align: center;
     }
   }
+
+  &.unverified {
+    p {
+      margin: 0 0 1rem 0;
+
+      &.empty-state-heading {
+        margin: 0 0 .75rem 0;
+      }
+    }
+
+    .button.primary {
+      display: inline-flex;
+    }
+  }
 }

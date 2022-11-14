@@ -6,7 +6,6 @@ import { Button } from 'components/button';
 import { PlayerSpeed } from 'components/sites/player/player-speed';
 import { PlayerSlider } from 'components/sites/player/player-slider';
 import { PlayerSliderLoading } from 'components/sites/player/player-slider-loading';
-import { PlayerIncomplete } from 'components/sites/player/player-incomplete';
 import { Spinner } from 'components/spinner';
 import { PlayerState, Action, PlayerStatus } from 'types/player';
 import type { Recording } from 'types/graphql';
@@ -76,11 +75,6 @@ export const PlayerControls: FC<Props> = ({ state, replayer, events, recording, 
 
   return (
     <>
-      <PlayerIncomplete 
-        show={state.incomplete} 
-        replayer={replayer}
-      />
-
       <Button className='control play-pause' onClick={handlePlayPause} disabled={!recording}>
         <PlayPauseIcon />
       </Button>

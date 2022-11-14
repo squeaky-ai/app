@@ -46,6 +46,7 @@ const SitesHeatmapsClickCounts: NextPage<ServerSideProps> = ({ user }) => {
             </div>
 
             <EmptyState 
+              site={site}
               title='There are currently no heatmaps available.'
               subtitle='Collecting Heatmap Data'
               illustration='illustration-8'

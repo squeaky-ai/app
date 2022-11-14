@@ -15,7 +15,6 @@ export interface PlayerState {
   playbackSpeed: number;
   activeTab: PlayerTab;
   skipInactivity: boolean;
-  incomplete: boolean;
   zoom: number;
   eventOptions: EventOptions[];
   eventVisibility: EventName[];

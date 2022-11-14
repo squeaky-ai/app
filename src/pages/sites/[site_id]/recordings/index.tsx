@@ -94,6 +94,7 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
             </div>
 
             <EmptyState
+              site={site}
               title='There are currently no recordings available'
               subtitle='Collecting Session Recordings'
               illustration='illustration-2'

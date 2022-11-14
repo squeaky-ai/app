@@ -6,14 +6,15 @@ import { Button } from 'components/button';
 interface Props {
   title: string;
   body: React.ReactNode;
+  icon?: string;
   videoName?: string;
 }
 
-export const EmptyStateHint: FC<Props> = ({ title, body, videoName }) => (
+export const EmptyStateHint: FC<Props> = ({ title, body, icon, videoName }) => (
   <div className='empty-state-hint'>
     <p className='empty-state-heading'>
       <span>
-        <Icon name='lightbulb-line' />
+        <Icon name={icon || 'lightbulb-line'} />
         <b>{title}</b>
       </span>
       {!!videoName && (

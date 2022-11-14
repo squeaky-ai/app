@@ -21,7 +21,6 @@ export class Player extends React.Component<Props> {
   public replayer: Replayer;
 
   private container: Element;
-  private originalConsoleWarn = console.warn;
 
   private observer = new ResizeObserver(debounce(() => {
     this.squidgeToFit();
@@ -40,7 +39,6 @@ export class Player extends React.Component<Props> {
 
     this.squidgeToFit();
     this.container = document.getElementById('player');
-    this.hijackConsoleWarn();
 
     // The recording might already be in the cache 
     // so kick things off right away
@@ -51,8 +49,6 @@ export class Player extends React.Component<Props> {
 
   public componentWillUnmount() {
     this.observer.disconnect();
-
-    this.unhijackConsoleWarn();
 
     this.replayer?.pause();
     this.replayer = null;
@@ -105,22 +101,6 @@ export class Player extends React.Component<Props> {
 
     this.props.dispatch({ type: 'zoom', value: constraint });
   };
-
-  private hijackConsoleWarn() {
-    // Spy on rrweb warning of elements being missing
-    // so we can tell the user that something is wrong
-    console.warn = (...args) => {
-      if (/Node with id .* not found/.test(args.toString())) {
-        this.props.dispatch({ type: 'incomplete', value: true });
-      }
-
-      this.originalConsoleWarn(args);
-    };
-  }
-
-  private unhijackConsoleWarn() {
-    console.warn = this.originalConsoleWarn;
-  }
 
   public render(): JSX.Element {
     return (

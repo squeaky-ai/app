@@ -62,6 +62,7 @@ const SitesErrors: NextPage<ServerSideProps> = ({ user }) => {
             </div>
 
             <EmptyState
+              site={site}
               title='There are currently no errors recorded'
               subtitle='Tracking Errors'
               illustration='illustration-17'
@@ -75,7 +76,7 @@ const SitesErrors: NextPage<ServerSideProps> = ({ user }) => {
               <PageLoading />
             )}
 
-            {!loading && !hasErrors && (
+            {!loading && !hasErrors && site.recordingsCount > 0 && (
               <Container className='sm centered empty-state show'>
                 <div className='empty-state-contents'>
                   <Illustration illustration='illustration-18' height={240} width={320} alt='Illustration to represent the empty errors page' />

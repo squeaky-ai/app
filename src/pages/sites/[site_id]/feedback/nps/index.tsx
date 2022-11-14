@@ -42,6 +42,7 @@ const SitesFeedbackNps: NextPage<ServerSideProps> = ({ user }) => {
             </h4>
 
             <EmptyState
+              site={site}
               title='Awaiting tracking code installation'
               subtitle='Collecting Session Recordings'
               illustration='illustration-9'

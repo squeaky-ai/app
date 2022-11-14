@@ -80,6 +80,7 @@ const SitesEvents: NextPage<ServerSideProps> = ({ user }) => {
             <Unlock site={site} />
 
             <EmptyState
+              site={site}
               title='There is currently no events data'
               subtitle='Accessing Events Data'
               illustration='illustration-17'
