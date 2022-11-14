@@ -42,3 +42,5 @@ export const Activity: FC<Props> = React.memo(({ max, duration, inactivity, enab
     </div>
   );
 }, areEqual);
+
+Activity.displayName = 'Activity';
