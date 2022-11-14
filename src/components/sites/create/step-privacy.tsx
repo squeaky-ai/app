@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import Image from 'next/image';
+import classnames from 'classnames';
 import { Card } from 'components/card';
 import { Button } from 'components/button';
 import { Label } from 'components/label';
@@ -79,15 +80,15 @@ export const StepPrivacy: FC<Props> = ({ site, handleBack, handleForward }) => {
           <div className='example'>
             <Label>Example</Label>
             <div className='preview'>
-              {site.anonymiseText && site.anonymiseFormInputs && (
-                <Image src={privacy1} width={352} height={240} alt='Illustration of high annonymous setting' priority />
-              )}
-              {!site.anonymiseText && site.anonymiseFormInputs && (
-                <Image src={privacy2} width={352} height={240} alt='Illustration of middle annonymous setting' priority />
-              )}
-              {!site.anonymiseText && !site.anonymiseFormInputs && (
-                <Image src={privacy3} width={352} height={240} alt='Illustration of least annonymous setting' priority />
-              )}
+              <div className={classnames('image', { show: site.anonymiseText && site.anonymiseFormInputs })}>
+                <Image src={privacy1} width={352} height={240} alt='Illustration of high annonymous setting' priority unoptimized />
+              </div>
+              <div className={classnames('image', { show: !site.anonymiseText && site.anonymiseFormInputs })}>
+                <Image src={privacy2} width={352} height={240} alt='Illustration of middle annonymous setting' priority unoptimized />
+              </div>
+              <div className={classnames('image', { show: !site.anonymiseText && !site.anonymiseFormInputs })}>
+                <Image src={privacy3} width={352} height={240} alt='Illustration of least annonymous setting' priority unoptimized />
+              </div>
             </div>
             <p><Icon name='check-line' /> Your site will always look normal to your visitors</p>
           </div>

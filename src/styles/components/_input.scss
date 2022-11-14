@@ -28,6 +28,7 @@
 
   &:disabled {
     background: var(--gray-50);
+    color: var(--gray-800);
   }
 
   &:focus {
@@ -83,7 +84,7 @@
 
   .validation {
     grid-area: validation;
-    padding-left: 8.5rem;
+    padding-left: 6.75rem;
   }
 }
 

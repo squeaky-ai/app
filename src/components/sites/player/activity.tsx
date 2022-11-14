@@ -9,7 +9,7 @@ interface Props {
   enabled: boolean;
 }
 
-export const Activity: FC<Props> = ({ max, duration, inactivity, enabled }) => {
+export const Activity: FC<Props> = ({ duration, inactivity, enabled }) => {
   const leftPositionFromDuration = (inactivityItem: number[]) => {
     const [left, right] = inactivityItem;
 
@@ -20,7 +20,7 @@ export const Activity: FC<Props> = ({ max, duration, inactivity, enabled }) => {
   };
 
   return (
-    <div className={classnames('activity', { hidden: !enabled})} style={{ width: `${max}%` }}>
+    <div className={classnames('activity', { hidden: !enabled })}>
       {inactivity.map((inactivity, index) => {
         const [left, right] = leftPositionFromDuration(inactivity);
 
