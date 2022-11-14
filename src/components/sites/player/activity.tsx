@@ -9,7 +9,11 @@ interface Props {
   enabled: boolean;
 }
 
-export const Activity: FC<Props> = ({ duration, inactivity, enabled }) => {
+const areEqual = (prevProps: Props, nextProps: Props): boolean => {
+  return prevProps.max === nextProps.max;
+};
+
+export const Activity: FC<Props> = React.memo(({ max, duration, inactivity, enabled }) => {
   const leftPositionFromDuration = (inactivityItem: number[]) => {
     const [left, right] = inactivityItem;
 
@@ -20,7 +24,10 @@ export const Activity: FC<Props> = ({ duration, inactivity, enabled }) => {
   };
 
   return (
-    <div className={classnames('activity', { hidden: !enabled })}>
+    <div 
+      className={classnames('activity', { hidden: !enabled })}
+      style={{ clipPath: `inset(0 ${100 - max}% 0 0)` }}
+    >
       {inactivity.map((inactivity, index) => {
         const [left, right] = leftPositionFromDuration(inactivity);
 
@@ -34,4 +41,4 @@ export const Activity: FC<Props> = ({ duration, inactivity, enabled }) => {
       })}
     </div>
   );
-};
+}, areEqual);
