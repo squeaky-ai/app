@@ -12,6 +12,7 @@ interface Props {
   // via the ref, but the modal can also be closed via the eventListeners
   // so the hook is there to cover all cases
   onClose?: VoidFunction;
+  onCloseConfirm?: VoidFunction;
 }
 
 interface State {
@@ -19,10 +20,13 @@ interface State {
 }
 
 export class Modal extends React.Component<Props, State> {
+  private ref: React.RefObject<HTMLDivElement>;
+
   public constructor(props: Props) {
     super(props);
 
     this.state = { show: false };
+    this.ref = React.createRef();
   }
 
   public componentDidMount() {
@@ -39,7 +43,11 @@ export class Modal extends React.Component<Props, State> {
     this.setState({ show: true });
   };
 
-  public hide = () => {
+  public hide = (ignoreConfirm = false) => {
+    if (this.props.onCloseConfirm && !ignoreConfirm) {
+      return this.props.onCloseConfirm();
+    }
+
     this.setState({ show: false });
     this.props.onClose && this.props.onClose();
   };
@@ -47,7 +55,7 @@ export class Modal extends React.Component<Props, State> {
   private handleClick = (event: MouseEvent) => {
     const element = event.target as Element;
 
-    if (element.classList.contains('modal')) {
+    if (element.isEqualNode(this.ref.current)) {
       this.hide();
     }
   };
@@ -62,7 +70,7 @@ export class Modal extends React.Component<Props, State> {
     return (
       <Portal>
         {this.state.show && (
-          <div className={classnames('modal', { scrollable: this.props.scrollable }, this.props.className)}>
+          <div ref={this.ref} className={classnames('modal', { scrollable: this.props.scrollable }, this.props.className)}>
             {this.props.children}
           </div>
         )}

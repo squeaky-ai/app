@@ -11,6 +11,7 @@ import { StepPrivacy } from 'components/sites/create/step-privacy';
 import { StepConsent } from 'components/sites/create/step-consent';
 import { StepTrackingCode } from 'components/sites/create/step-tracking-code';
 import { StepConfirmation } from 'components/sites/create/step-confirmation';
+import { CloseConfirmModal } from 'components/sites/create/close-confirm-modal';
 import { Modal, ModalBody, ModalContents, ModalHeader } from 'components/modal';
 import { CreateSiteStep, SiteType } from 'types/sites';
 import { useSiteCreate } from 'hooks/use-site-create';
@@ -33,6 +34,7 @@ export const CreateModal: FC = () => {
   const [siteType, setSiteType] = React.useState<SiteType>(null);
   const [sentInstructions, setSentInstruction] = React.useState<boolean>(false);
   const [step, setStep] = React.useState<CreateSiteStep>(CreateSiteStep.Type);
+  const [closeConfirmModalOpen, setCloseConfirmModalOpen] = React.useState<boolean>(false);
  
   const { site, getSite, loading } = useSiteCreate();
 
@@ -47,7 +49,7 @@ export const CreateModal: FC = () => {
   };
 
   const handleSuccess = async () => {
-    closeModal();
+    closeModal(true);
     await router.push(`/sites/${site.id}/dashboard`);
   };
 
@@ -63,12 +65,31 @@ export const CreateModal: FC = () => {
 
   const openModal = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-
     if (ref.current) ref.current.show();
   };
 
-  const closeModal = () => {
-    if (ref.current) ref.current.hide();
+  const closeModal = (ignoreConfirm = false) => {
+    if (ref.current) ref.current.hide(ignoreConfirm);
+  };
+
+  const handleConfirmClose = () => {
+    // There's no risk if they haven't created
+    // a site yet
+    site
+      ? setCloseConfirmModalOpen(true)
+      : closeModal(true);
+  };
+
+  const handleConfirmCloseCancel = () => {
+    setCloseConfirmModalOpen(false);
+  };
+
+  const handleConfirmCloseConfirm = () => {
+    if (ref.current) {
+      site
+        ? handleSuccess()
+        : closeModal(true);
+    }
   };
 
   return (
@@ -77,12 +98,12 @@ export const CreateModal: FC = () => {
         + Add New
       </Button>
 
-      <Modal ref={ref} className='lg site-create-modal'>
+      <Modal ref={ref} className='lg site-create-modal' onCloseConfirm={handleConfirmClose}>
         <ModalBody>
           <ModalHeader>
             <span className='blank' />
             <Steps steps={allSteps} step={step} />
-            <Button className='close' type='button' onClick={closeModal}>
+            <Button className='close' type='button' onClick={() => closeModal()}>
               <Icon name='close-line' />
             </Button>
           </ModalHeader>
@@ -144,6 +165,12 @@ export const CreateModal: FC = () => {
           </ModalContents>
         </ModalBody>
       </Modal>
+
+      <CloseConfirmModal 
+        open={closeConfirmModalOpen}
+        onCloseCancel={handleConfirmCloseCancel}
+        onCloseConfirm={handleConfirmCloseConfirm}
+      />
     </>
   );
 };
