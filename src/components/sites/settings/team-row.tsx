@@ -9,9 +9,10 @@ import { ResendInvitation } from 'components/sites/settings/resend-invitation';
 import { DeleteTeam } from 'components/sites/settings/delete-team';
 import { LeaveTeam } from 'components/sites/settings/leave-team';
 import { Button } from 'components/button';
+import { Checkbox } from 'components/checkbox';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { Row, Cell } from 'components/table';
-import { teamUpdate } from 'lib/api/graphql';
+import { teamUpdateRole, teamUpdate } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
 import type { User, Team } from 'types/graphql';
 import type { Site } from 'types/graphql';
@@ -53,9 +54,17 @@ export const TeamRow: FC<Props> = ({ user, site, team }) => {
     }
   };
 
+  const changeLinkedDataVisibilty = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    try {
+      await teamUpdate({ siteId: site.id, teamId: team.id, linkedDataVisible: event.target.checked });
+    } catch(error) {
+      toast.add({ type: 'error', body: 'There was an unexpected error when changing the visibility. Please try again.' });
+    }
+  };
+
   const changeRole = async () => {
     try {
-      await teamUpdate({ siteId: site.id, teamId: team.id, role });
+      await teamUpdateRole({ siteId: site.id, teamId: team.id, role });
       toast.add({ type: 'success', body: 'Role change complete' });
 
       // They can no longer view this page as they won't be authenticated
@@ -96,6 +105,11 @@ export const TeamRow: FC<Props> = ({ user, site, team }) => {
                 </Select>
               )
           }
+        </Cell>
+        <Cell>
+          <Checkbox checked={team.linkedDataVisible} onChange={changeLinkedDataVisibilty} disabled={userRole.role < team.role}>
+            Yes
+          </Checkbox>
         </Cell>
         <Cell className='options'>
           {invited && (

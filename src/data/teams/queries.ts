@@ -8,6 +8,7 @@ export const GET_TEAM_QUERY = gql`
         id
         role
         roleName
+        linkedDataVisible
         status
         user {
           id

@@ -47,6 +47,7 @@ const SiteSettingsTeam: NextPage<ServerSideProps> = ({ user }) => {
                 <Cell>Name</Cell>
                 <Cell>Email address</Cell>
                 <Cell>Role</Cell>
+                <Cell>Linked Data Visibility</Cell>
                 <Cell>Options</Cell>
               </Row>
               {team.members.map(t => (

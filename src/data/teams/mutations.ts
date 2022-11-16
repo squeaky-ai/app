@@ -68,9 +68,9 @@ export const TEAM_INVITE_RESEND_MUTATION = gql`
   }
 `;
 
-export const TEAM_UPDATE_MUTATION = gql`
-  mutation TeamUpdate($input: TeamUpdateInput!) {
-    teamUpdate(input: $input) {
+export const TEAM_UPDATE_ROLE_MUTATION = gql`
+  mutation TeamUpdateRole($input: TeamUpdateRoleInput!) {
+    teamUpdateRole(input: $input) {
       id
       role
       status
@@ -81,6 +81,15 @@ export const TEAM_UPDATE_MUTATION = gql`
         fullName
         email
       }
+    }
+  }
+`;
+
+export const TEAM_UPDATE_MUTATION = gql`
+  mutation TeamUpdate($input: TeamUpdateInput!) {
+    teamUpdate(input: $input) {
+      id
+      linkedDataVisible
     }
   }
 `;

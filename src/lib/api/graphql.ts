@@ -107,7 +107,8 @@ import {
   TeamInviteInput,
   TeamInviteCancelInput, 
   TeamInviteResendInput,
-  TeamUpdateInput, 
+  TeamUpdateRoleInput,
+  TeamUpdateInput,
   TeamInviteAcceptInput,
   TeamLeaveInput, 
   TeamDeleteInput,
@@ -122,6 +123,7 @@ import {
   TEAM_INVITE_CANCEL_MUTATION, 
   TEAM_INVITE_ACCEPT_MUTATION,
   TEAM_INVITE_RESEND_MUTATION,
+  TEAM_UPDATE_ROLE_MUTATION,
   TEAM_UPDATE_MUTATION,
   TEAM_LEAVE_MUTATION,
   TEAM_DELETE_MUTATION
@@ -474,6 +476,15 @@ export const userPassword = async (input: UsersPasswordInput): Promise<User> => 
 
   return data.userPassword;
 }
+
+export const teamUpdateRole = async (input: TeamUpdateRoleInput): Promise<Team> => {
+  const { data } = await client.mutate({
+    mutation: TEAM_UPDATE_ROLE_MUTATION,
+    variables: { input }
+  });
+
+  return data.teamUpdateRole;
+};
 
 export const teamUpdate = async (input: TeamUpdateInput): Promise<Team> => {
   const { data } = await client.mutate({
