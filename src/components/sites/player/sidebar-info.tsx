@@ -22,7 +22,7 @@ interface Props {
 }
 
 export const SidebarInfo: FC<Props> = ({ site, member, recording, setActiveTab }) => {
-  const linkedData = getLinkedData(recording.visitor);
+  const linkedData = getLinkedData(member, recording.visitor);
 
   return (
     <>

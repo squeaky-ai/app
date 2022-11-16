@@ -28,7 +28,7 @@ interface Props {
 export const VisitorsLargeItem: FC<Props> = ({ site, member, visitor, search, style }) => {
   const rowActionsRef = React.useRef<Dropdown>();
 
-  const linkedData = getLinkedData<ExternalAttributes>(visitor);
+  const linkedData = getLinkedData<ExternalAttributes>(member, visitor);
   const devices = groupVisitorDevices(visitor.devices);
   const browsers = groupVisitorBrowsers(visitor.devices);
   const countries = groupVisitorCountries(visitor.countries);

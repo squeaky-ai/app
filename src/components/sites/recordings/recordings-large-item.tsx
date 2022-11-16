@@ -34,7 +34,7 @@ interface Props {
 export const RecordingsLargeItem: FC<Props> = ({ site, recording, style, member, selected, setSelected }) => {
   const rowActionsRef = React.useRef<Dropdown>();
 
-  const linkedData = getLinkedData<ExternalAttributes>(recording.visitor);
+  const linkedData = getLinkedData<ExternalAttributes>(member, recording.visitor);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.target.checked

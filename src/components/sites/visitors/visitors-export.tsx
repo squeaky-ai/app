@@ -40,7 +40,7 @@ export const VisitorsExport: FC<Props> = ({ site, member, visitor }) => {
           ...response.npsFeedback.map(stripTypename),
           ...response.sentimentFeedback.map(stripTypename),
         ],
-        linkedData: getLinkedData(response),
+        linkedData: getLinkedData(member, response),
       }, null, 4);
 
       const blob = new Blob([visitorData], { type: 'application/json' });

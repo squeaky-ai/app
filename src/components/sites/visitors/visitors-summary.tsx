@@ -20,7 +20,7 @@ interface Props {
 }
 
 export const VisitorsSummary: FC<Props> = ({ site, member, visitor }) => {
-  const linkedData = getLinkedData(visitor);
+  const linkedData = getLinkedData(member, visitor);
   const devices = groupVisitorDevices(visitor.devices);
   const browsers = groupVisitorBrowsers(visitor.devices);
   const countries = groupVisitorCountries(visitor.countries);

@@ -1,9 +1,11 @@
 import { capitalize } from 'lodash';
-import type { Visitor, RecordingsDevice, RecordingsCountry } from 'types/graphql';
+import type { Visitor, RecordingsDevice, RecordingsCountry, Team } from 'types/graphql';
 
-export function getLinkedData<T>(visitor: Pick<Visitor, 'linkedData'>): T {
+export function getLinkedData<T>(member: Team, visitor: Pick<Visitor, 'linkedData'>): T {
   try {
-    return JSON.parse(visitor.linkedData);
+    return member.linkedDataVisible
+      ? JSON.parse(visitor.linkedData)
+      : null;
   } catch {
     return null;
   }
