@@ -292,9 +292,11 @@
           box-shadow: none;
           display: grid;
           grid-gap: 2rem;
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: 1fr 352px;
 
           .preview {
+            position: relative;
+
             .label {
               font-size: var(--font-size-body-sm);              
             }
@@ -304,6 +306,17 @@
 
               &.show {
                 display: block;
+              }
+
+              &.person {
+                display: block;
+                left: 0;
+                position: absolute;
+                top: 0;
+
+                img {
+                  mix-blend-mode: multiply;
+                }
               }
             }
           }

@@ -16,9 +16,10 @@ interface Props {
   handleForward: VoidFunction;
 }
 
-import privacy1 from '../../../../public/privacy/privacy-1.webp';
-import privacy2 from '../../../../public/privacy/privacy-2.webp';
-import privacy3 from '../../../../public/privacy/privacy-3.webp';
+import person from '../../../../public/privacy/person.jpg';
+import privacy1 from '../../../../public/privacy/privacy-1.svg';
+import privacy2 from '../../../../public/privacy/privacy-2.svg';
+import privacy3 from '../../../../public/privacy/privacy-3.svg';
 
 export const StepPrivacy: FC<Props> = ({ site, handleBack, handleForward }) => {
   const toggleAnonymiseFormInputsEnabled = async (text: boolean, forms: boolean) => {
@@ -88,6 +89,9 @@ export const StepPrivacy: FC<Props> = ({ site, handleBack, handleForward }) => {
               </div>
               <div className={classnames('image', { show: !site.anonymiseText && !site.anonymiseFormInputs })}>
                 <Image src={privacy3} width={352} height={240} alt='Illustration of least annonymous setting' priority unoptimized />
+              </div>
+              <div className='image person'>
+                <Image src={person} width={133} height={240} alt='Image of person indicating privacy' priority unoptimized />
               </div>
             </div>
             <p><Icon name='check-line' /> Your site will always look normal to your visitors</p>
