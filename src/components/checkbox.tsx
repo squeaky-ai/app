@@ -29,7 +29,7 @@ export const Checkbox: FC<Props> = ({ className, name, disabled, children, inval
           : <Icon name='check-line' />
         }
       </span>
-      <span>{children}</span>
+      <span className='checkbox-contents'>{children}</span>
     </Label>
   );
 };

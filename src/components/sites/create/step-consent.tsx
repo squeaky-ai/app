@@ -7,8 +7,10 @@ import { Label } from 'components/label';
 import { Input } from 'components/input';
 import { Radio } from 'components/radio';
 import { Button } from 'components/button';
+import { ConsentPreview } from 'components/sites/settings/consent-preview';
 import { consentUpdate } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
+import { SupportedLanguages } from 'types/translations';
 import type { Site } from 'types/graphql';
 
 interface Props {
@@ -29,6 +31,8 @@ const ConsentSchema = Yup.object().shape({
 export const StepConsent: FC<Props> = ({ site, handleBack, handleForward }) => {
   const toasts = useToasts();
 
+  console.log(site);
+
   return (
     <div className='step step-consent'>
       <p className='subheading'>Put privacy first</p>
@@ -41,7 +45,7 @@ export const StepConsent: FC<Props> = ({ site, handleBack, handleForward }) => {
         initialValues={{ 
           name: site.consent.name || site.name,
           privacyPolicyUrl: site.consent.privacyPolicyUrl || `${site.url}/privacy`,
-          layout: 'bottom_left',
+          layout: 'bottom_right',
           languages: ['en'],
           languagesDefault: 'en',
           consentMethod: site.consent.consentMethod || 'widget',
@@ -81,7 +85,7 @@ export const StepConsent: FC<Props> = ({ site, handleBack, handleForward }) => {
           <div className='site-anonymisation fade-in'>
             <Card>
               <form onSubmit={handleSubmit}>
-                <div className='radio-group'>
+                <div className='radio-group use-widget'>
                   <Radio
                     name='consentMethod'
                     value='widget'
@@ -90,7 +94,15 @@ export const StepConsent: FC<Props> = ({ site, handleBack, handleForward }) => {
                     className='check-radio'
                     checked={values.consentMethod === 'widget'}
                   >
-                    Use the Squeaky consent widget
+                    <span>Use the Squeaky consent widget</span>
+                    <ConsentPreview
+                      consent={{ ...site.consent, ...values }}
+                      storedConsent={site.consent}
+                      locale={SupportedLanguages.English}
+                      setLocale={() => ''}
+                      buttonIcon='eye-line'
+                      buttonClassName='link'
+                    />
                   </Radio>
                   {values.consentMethod === 'widget' && (
                     <div className='consent-details'>

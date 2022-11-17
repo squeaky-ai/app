@@ -347,6 +347,30 @@
           max-width: 30rem;
         }
 
+        .use-widget {
+          .radio-contents {
+            display: flex;
+            flex: 1;
+  
+            & > span {
+              flex: 1;
+            }
+          }
+        }
+
+        .preview {
+          align-items: center;
+          display: flex;
+
+          .icon {
+            margin: 0 .25rem 0 0;
+          }
+
+          .text {
+            text-decoration: underline;
+          }
+        }
+
         .consent-details {
           margin: 1rem 0 0 2rem;
 

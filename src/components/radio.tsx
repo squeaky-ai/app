@@ -22,7 +22,7 @@ export const Radio: FC<Props> = ({ className, name, children, invalid, checked, 
       <span className='check' role='radio' aria-checked={checked}>
         {checkIcon && checked && <Icon name={checkIcon} />}
       </span>
-      <span>{children}</span>
+      <span className='radio-contents'>{children}</span>
     </Label>
   );
 };

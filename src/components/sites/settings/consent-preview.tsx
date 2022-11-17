@@ -11,10 +11,19 @@ interface Props {
   consent: Consent;
   storedConsent: Consent;
   locale: SupportedLanguages;
+  buttonIcon?: string;
+  buttonClassName?: string;
   setLocale: (locale: SupportedLanguages) => void;
 }
 
-export const ConsentPreview: FC<Props> = ({ locale, storedConsent, consent, setLocale }) => {
+export const ConsentPreview: FC<Props> = ({
+  locale,
+  storedConsent,
+  consent,
+  buttonIcon,
+  buttonClassName,
+  setLocale 
+}) => {
   const [show, setShow] = React.useState<boolean>(false);
   const [expand, setExpand] = React.useState<boolean>(false);
 
@@ -29,9 +38,9 @@ export const ConsentPreview: FC<Props> = ({ locale, storedConsent, consent, setL
 
   return (
     <>
-      <Button type='button' className='secondary preview' onClick={toggleShow}>
-        <Icon name='search-line' />
-        {show ? 'Hide' : 'Preview'}
+      <Button type='button' className={classnames(buttonClassName || 'secondary', 'preview')} onClick={toggleShow}>
+        <Icon name={buttonIcon || 'search-line'} />
+        <span className='text'>{show ? 'Hide' : 'Preview'}</span>
       </Button>
 
       {show && (
