@@ -7,6 +7,7 @@ import { Label } from 'components/label';
 import { Input } from 'components/input';
 import { Icon } from 'components/icon';
 import { Select, Option } from 'components/select';
+import { TeamRoles } from 'components/sites/create/team-roles';
 import { useToasts } from 'hooks/use-toasts';
 import { teamInvite } from 'lib/api/graphql';
 import { Container } from 'components/container';
@@ -110,8 +111,9 @@ export const StepInvite: FC<Props> = ({ site, handleForward, handleBack }) => {
                   <div>
                     <Label>Email address</Label>
                   </div>
-                  <div>
+                  <div className='roles-label'>
                     <Label>Role</Label>
+                    <TeamRoles />
                   </div>
                   <div />
                 </div>

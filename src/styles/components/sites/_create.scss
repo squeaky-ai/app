@@ -230,6 +230,20 @@
           max-width: 27.5rem;
         }
 
+        .roles-label {
+          align-items: center;
+          display: flex;
+          margin: 0 0 .5rem 0;
+
+          .label {
+            margin: 0 .25rem 0 0;
+          }
+
+          .button {
+            height: 1.25rem;
+          }
+        }
+
         .input-group {
           align-items: center;
           display: grid;
@@ -492,6 +506,50 @@
   }
 }
 
+.modal.team-role-modal.scrollable {
+  .modal-body {
+    max-height: 47.5rem;
+
+    .modal-contents {
+      max-height: 36.5rem;
+    }
+  }
+
+  .roles {
+    h5 {
+      margin: 0 0 1rem 0;
+    }
+
+    p {
+      color: var(--gray-blue-700);
+      margin-bottom: .75rem;
+    }
+
+    ul {
+      margin: 0 0 1rem 0;
+      padding: 0;
+
+      li {
+        align-items: flex-start;
+        display: flex;
+        font-size: var(--font-size-body-sm);
+        line-height: var(--line-height-body-sm);
+        list-style: none;
+        margin: 0 0 .125rem 0;
+      }
+
+      .icon {
+        color: var(--blue-500);
+        font-size: var(--font-size-body);
+        margin: 0 .25rem 0 0;
+
+        &.negative {
+          color: var(--rose-500);
+        }
+      }
+    }
+  }
+}
 
 @keyframes fade-in {
   from {
