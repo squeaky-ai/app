@@ -73,7 +73,7 @@ export const Heatmaps: FC<Props> = ({ type, page, pages, period, setPage, setPer
         <div className='left'>
           <HeatmapsPages page={page} pages={pages} setPage={setPage} />
           {heatmaps.recording && (
-            <Tooltip portalClassName='suffle-recording-tooltip' button={<Icon name='shuffle-line' />} buttonClassName='quaternary shuffle-recording' buttonOnClick={excludeRecording}>
+            <Tooltip portalClassName='suffle-recording-tooltip' button={<><Icon name='shuffle-line' /> Shuffle Screenshot</>} buttonClassName='quaternary shuffle-recording' buttonOnClick={excludeRecording}>
               Squeaky shows you a random snapshot of your selected page from within the time period you have defined. If the snapshot is corrupted click the shuffle button and we&apos;ll find an alternative view of your page
             </Tooltip>
           )}
