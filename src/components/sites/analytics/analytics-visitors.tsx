@@ -6,7 +6,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tool
 import { Label } from 'components/label';
 import { Pill } from 'components/pill';
 import { Checkbox } from 'components/checkbox';
-import { ChartScale } from 'components/sites/analytics/chart-scale';
+import { ChartOptions } from 'components/sites/chart-options';
 import { formatLabel } from 'lib/charts';
 import { formatResultsForGroupType } from 'lib/charts-v2';
 import type { AnalyticsVisitor, AnalyticsVisitors as AnalyticsVisitorsType } from 'types/graphql';
@@ -68,7 +68,7 @@ export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
           <Checkbox checked={show.includes('all')} onChange={() => handleClick('all')} className='purple'>All</Checkbox>
           <Checkbox checked={show.includes('existing')} onChange={() => handleClick('existing')}>Existing</Checkbox>
           <Checkbox checked={show.includes('new')} onChange={() => handleClick('new')} className='rose'>New</Checkbox>
-          <ChartScale scale={scale} setScale={setScale} />
+          <ChartOptions scale={scale} setScale={setScale} />
         </div>
       </div>
       <div className='graph-wrapper'>

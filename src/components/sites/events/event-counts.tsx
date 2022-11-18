@@ -1,15 +1,17 @@
 import React from 'react';
 import type { FC } from 'react';
 import { ScaleType } from 'recharts/types/util/types';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, TooltipProps } from 'recharts';
+import { TooltipProps } from 'recharts';
 import { sum } from 'lodash';
 import { Card } from 'components/card';
 import { EventSwatch } from 'components/sites/events/event-swatch';
-import { ChartScale } from 'components/sites/analytics/chart-scale';
+import { ChartOptions } from 'components/sites/chart-options';
 import { sortEventsStats } from 'lib/events';
 import { formatLabel } from 'lib/charts';
 import { colors } from 'lib/colors';
 import { formatResultsForGroupType } from 'lib/charts-v2';
+import { Chart } from 'components/sites/chart';
+import type { ChartType } from 'types/charts';
 import type { EventStats } from 'hooks/use-event-stats';
 import type { EventStatsSort} from 'types/events';
 import type { TimePeriod } from 'types/common';
@@ -23,6 +25,7 @@ interface Props {
 
 export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
   const [scale, setScale] = React.useState<ScaleType>('auto');
+  const [chartType, setChartType] = React.useState<ChartType>('line');
 
   const totalCount = sum(eventStats.eventStats.map(s => s.count));
 
@@ -79,7 +82,12 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
           <h3>{totalCount}</h3>
         </div>
         <div className='actions'>
-          <ChartScale scale={scale} setScale={setScale} />
+          <ChartOptions
+            scale={scale} 
+            setScale={setScale} 
+            chartType={chartType}
+            setChartType={setChartType}
+          />
         </div>
       </div>
       <div className='key'>
@@ -91,26 +99,19 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
         ))}
       </div>
       <div className='graph-wrapper'>
-        <ResponsiveContainer>
-          <LineChart data={results} margin={{ top: 16, left: -30, right: 0, bottom: 16 }}>
-            <CartesianGrid strokeDasharray='3 3' vertical={false} />
-
-            <XAxis dataKey='dateKey' stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} />
-            <YAxis stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} domain={['auto', 'auto']} scale={scale} />
-
-            <Tooltip content={<CustomTooltip />} />
-
-            {sortedEventsStats.map((stat, index) => (
-              <Line 
-                key={stat.eventOrGroupId}
-                dataKey={`${stat.type}::${stat.eventOrGroupId}`}
-                fillOpacity={1}
-                stroke={colors[index]}
-                strokeWidth={2}
-              />
-            ))}
-          </LineChart>
-        </ResponsiveContainer>
+        <Chart
+          data={results}
+          tooltip={CustomTooltip}
+          scale={scale}
+          chartType={chartType}
+          items={sortedEventsStats.map((stat, index) => ({
+            dataKey: `${stat.type}::${stat.eventOrGroupId}`,
+            fillOpacity: 1,
+            stroke: colors[index],
+            strokeWidth: 2,
+            fill: colors[index],
+          }))}
+        />
       </div>
     </Card>
   );

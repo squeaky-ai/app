@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import { ScaleType } from 'recharts/types/util/types';
 import { Trend } from 'components/trend';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, TooltipProps } from 'recharts';
-import { ChartScale } from 'components/sites/analytics/chart-scale';
+import { ChartOptions } from 'components/sites/chart-options';
 import { formatLabel } from 'lib/charts';
 import { formatResultsForGroupType } from 'lib/charts-v2';
 import type { AnalyticsPageView, AnalyticsPageViews as AnalyticsPageViewsType } from 'types/graphql';
@@ -45,7 +45,7 @@ export const AnalyticsPageViews: FC<Props> = ({ pageViews, period }) => {
         </div>
 
         <div className='actions'>
-          <ChartScale scale={scale} setScale={setScale} />
+          <ChartOptions scale={scale} setScale={setScale} />
         </div>
       </div>
       <div className='graph-wrapper'>
