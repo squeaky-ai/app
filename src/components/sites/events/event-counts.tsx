@@ -1,6 +1,5 @@
 import React from 'react';
 import type { FC } from 'react';
-import { ScaleType } from 'recharts/types/util/types';
 import { TooltipProps } from 'recharts';
 import { sum } from 'lodash';
 import { Card } from 'components/card';
@@ -11,7 +10,7 @@ import { formatLabel } from 'lib/charts';
 import { colors } from 'lib/colors';
 import { formatResultsForGroupType } from 'lib/charts-v2';
 import { Chart } from 'components/sites/chart';
-import type { ChartType } from 'types/charts';
+import { useChartSettings } from 'hooks/use-chart-settings';
 import type { EventStats } from 'hooks/use-event-stats';
 import type { EventStatsSort} from 'types/events';
 import type { TimePeriod } from 'types/common';
@@ -24,8 +23,7 @@ interface Props {
 }
 
 export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
-  const [scale, setScale] = React.useState<ScaleType>('auto');
-  const [chartType, setChartType] = React.useState<ChartType>('line');
+  const { scale, setScale, type, setType } = useChartSettings('event-counts');
 
   const totalCount = sum(eventStats.eventStats.map(s => s.count));
 
@@ -84,9 +82,9 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
         <div className='actions'>
           <ChartOptions
             scale={scale} 
-            setScale={setScale} 
-            chartType={chartType}
-            setChartType={setChartType}
+            setScale={setScale}
+            chartType={type}
+            setChartType={setType}
           />
         </div>
       </div>
@@ -103,7 +101,7 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
           data={results}
           tooltip={CustomTooltip}
           scale={scale}
-          chartType={chartType}
+          chartType={type}
           items={sortedEventsStats.map(stat => ({ dataKey: `${stat.type}::${stat.eventOrGroupId}` }))}
         />
       </div>
