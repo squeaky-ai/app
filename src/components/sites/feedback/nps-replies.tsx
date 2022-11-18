@@ -1,7 +1,11 @@
 import React from 'react';
 import type { FC } from 'react';
-import { ResponsiveContainer, CartesianGrid, LineChart, Line, YAxis, XAxis, Tooltip, TooltipProps } from 'recharts';
+import { TooltipProps } from 'recharts';
+import { ScaleType } from 'recharts/types/util/types';
 import { formatChartData } from 'lib/charts';
+import { Chart } from 'components/sites/chart';
+import { useChartSettings } from 'hooks/use-chart-settings';
+import { doNotAllowZero } from 'lib/charts-v2';
 import type { FeedbackNpsReplies, FeedbackNpsReply } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 
@@ -16,19 +20,20 @@ interface NpsCounts {
   detractors: number;
 }
 
-const getNpsCounts = (replies: FeedbackNpsReply[]): NpsCounts => ({
-  promoters: replies.filter(r => r.score >= 9).length,
-  passives: replies.filter(r => [7, 8].includes(r.score)).length,
-  detractors: replies.filter(r => r.score <= 6).length,
+const getNpsCounts = (scale: ScaleType, replies: FeedbackNpsReply[]): NpsCounts => ({
+  promoters: doNotAllowZero(scale, replies.filter(r => r.score >= 9).length),
+  passives: doNotAllowZero(scale, replies.filter(r => [7, 8].includes(r.score)).length),
+  detractors: doNotAllowZero(scale, replies.filter(r => r.score <= 6).length),
 });
 
 export const NpsReplies: FC<Props> = ({ period, replies }) => {
+  const { scale, type } = useChartSettings('nps-replies');
   const { data } = formatChartData<FeedbackNpsReply>(period, replies.responses);
 
   const results = data.map(d => ({
-    date: d.key,
+    dateKey: d.key,
     count: d.data.length,
-    ...getNpsCounts(d.data),
+    ...getNpsCounts(scale, d.data),
   }));
 
   // The graph looks crap if there's only a handful 
@@ -42,41 +47,29 @@ export const NpsReplies: FC<Props> = ({ period, replies }) => {
     return (
       <div className='custom-tooltip'>
         <p>Outcome type</p>
-        <p className='promoters'>{payload[0].payload.promoters} Promoters</p>
-        <p className='passives'>{payload[0].payload.passives} Passives</p>
-        <p className='detractors'>{payload[0].payload.detractors} Detractors</p>
+        <p className='promoters'>{payload[0].payload.promoters || 0} Promoters</p>
+        <p className='passives'>{payload[0].payload.passives || 0} Passives</p>
+        <p className='detractors'>{payload[0].payload.detractors || 0} Detractors</p>
       </div>
     );
   };
 
   return (
     <div className='chart-wrapper'>
-      <ResponsiveContainer>
-        <LineChart data={results} height={150} margin={{ left: -35 }}>
-          <CartesianGrid strokeDasharray='3 3' vertical={false} />
-
-          <YAxis 
-            dataKey='count'
-            allowDecimals={false}
-            tickLine={false}
-            axisLine={false}
-            interval={max < 5 ? 0 : 'preserveEnd'}
-            fontSize={13}
-          />
-
-          <XAxis 
-            dataKey='date'
-            tickLine={false}
-            axisLine={false}
-            fontSize={13}
-            tickMargin={10}
-          />
-
-          <Tooltip content={<CustomTooltip />} />
-
-          <Line dataKey='count' fillOpacity={1} stroke='#4097E8' strokeWidth={2} />
-        </LineChart>
-      </ResponsiveContainer>
+      <Chart
+        data={results}
+        tooltip={CustomTooltip}
+        scale={scale}
+        chartType={type}
+        items={[{ dataKey: 'promoters' }, { dataKey: 'passives' }, { dataKey: 'detractors' }]}
+        yAxisProps={{
+          axisLine: false,
+          interval: max < 5 ? 0 : 'preserveEnd',
+        }}
+        xAxisProps={{
+          axisLine: false,
+        }}
+      />
     </div>
   );
 };

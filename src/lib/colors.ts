@@ -10,3 +10,9 @@ export const colors: Record<number, string> = {
   8: 'var(--mauve-400)',
   9: 'var(--gray-blue-300)',
 };
+
+export const adminColors: Record<number, string> = {
+  0: 'var(--rose-500)',
+  1: 'var(--mauve-500)',
+  2: 'var(--peach-500)',
+};

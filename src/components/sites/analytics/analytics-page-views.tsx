@@ -1,11 +1,13 @@
 import React from 'react';
 import type { FC } from 'react';
-import { ScaleType } from 'recharts/types/util/types';
 import { Trend } from 'components/trend';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, TooltipProps } from 'recharts';
+import { Chart } from 'components/sites/chart';
+import { TooltipProps } from 'recharts';
 import { ChartOptions } from 'components/sites/chart-options';
 import { formatLabel } from 'lib/charts';
 import { formatResultsForGroupType } from 'lib/charts-v2';
+import { useChartSettings } from 'hooks/use-chart-settings';
+import { doNotAllowZero } from 'lib/charts-v2';
 import type { AnalyticsPageView, AnalyticsPageViews as AnalyticsPageViewsType } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 
@@ -15,13 +17,11 @@ interface Props {
 }
 
 export const AnalyticsPageViews: FC<Props> = ({ pageViews, period }) => {
-  const [scale, setScale] = React.useState<ScaleType>('auto');
-
-  const doNotAllowZero = (num: number) => num === 0 && scale === 'log' ? null : num;
+  const { scale, type, setScale, setType } = useChartSettings('analytics-page-views');
 
   const results = formatResultsForGroupType<AnalyticsPageView>(pageViews, period, { count: 0 }).map(d => ({
     dateKey: d.dateKey,
-    totalCount: doNotAllowZero(d.count),
+    totalCount: doNotAllowZero(scale, d.count),
   }));
 
   const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload, label }) => {
@@ -30,7 +30,7 @@ export const AnalyticsPageViews: FC<Props> = ({ pageViews, period }) => {
     return (
       <div className='custom-tooltip'>
         <p className='date'>{formatLabel(period, label)}</p>
-        <p className='all'>{payload[0].payload.totalCount} All Page Views</p>
+        <p className='all'>{payload[0].payload.totalCount || 0} All Page Views</p>
       </div>
     );
   };
@@ -45,22 +45,22 @@ export const AnalyticsPageViews: FC<Props> = ({ pageViews, period }) => {
         </div>
 
         <div className='actions'>
-          <ChartOptions scale={scale} setScale={setScale} />
+          <ChartOptions
+            scale={scale} 
+            setScale={setScale} 
+            chartType={type}
+            setChartType={setType}
+          />
         </div>
       </div>
       <div className='graph-wrapper'>
-        <ResponsiveContainer>
-          <LineChart data={results} margin={{ top: 0, left: -8, right: 8, bottom: 8 }}>
-            <CartesianGrid strokeDasharray='3 3' vertical={false} />
-
-            <XAxis dataKey='dateKey' stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} fontSize={14} />
-            <YAxis stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} domain={['auto', 'auto']} fontSize={14} scale={scale} />
-
-            <Tooltip content={<CustomTooltip />} />
-  
-            <Line dataKey='totalCount' fillOpacity={1} stroke='#8249FB' strokeWidth={2} />
-          </LineChart>
-        </ResponsiveContainer>
+        <Chart
+          data={results}
+          tooltip={CustomTooltip}
+          scale={scale}
+          chartType={type}
+          items={[{ dataKey: 'totalCount' }]}
+        />
       </div>
     </div>
   );

@@ -1,8 +1,11 @@
 import React from 'react';
 import type { FC } from 'react';
-import { ResponsiveContainer, CartesianGrid, LineChart, Line, YAxis, XAxis, Tooltip, TooltipProps } from 'recharts';
+import { TooltipProps } from 'recharts';
 import { percentage } from 'lib/maths';
 import { formatChartData } from 'lib/charts';
+import { Chart } from 'components/sites/chart';
+import { useChartSettings } from 'hooks/use-chart-settings';
+import { doNotAllowZero } from 'lib/charts-v2';
 import type { FeedbackNpsScores, FeedbackNpsScore } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 
@@ -19,11 +22,12 @@ const getNps = (scores: FeedbackNpsScore[]) => {
 };
 
 export const NpsScore: FC<Props> = ({ period, scores }) => {
+  const { scale, type } = useChartSettings('nps-score');
   const { data } = formatChartData<FeedbackNpsScore>(period, scores.responses);
 
   const results = data.map(d => ({
-    date: d.key,
-    score: getNps(d.data),
+    dataKey: d.key,
+    score: doNotAllowZero(scale, getNps(d.data)),
   }));
 
   const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload }) => {
@@ -32,40 +36,28 @@ export const NpsScore: FC<Props> = ({ period, scores }) => {
     return (
       <div className='custom-tooltip'>
         <p>Score</p>
-        <p className='score'>{payload[0].payload.score}</p>
+        <p className='score'>{payload[0].payload.score || 0}</p>
       </div>
     );
   };
 
   return (
     <div className='chart-wrapper'>
-      <ResponsiveContainer>
-        <LineChart data={results} height={150} margin={{ left: -35 }}>
-          <CartesianGrid strokeDasharray='3 3' vertical={false} />
-        
-          <YAxis 
-            dataKey='score'
-            allowDecimals={false}
-            tickLine={false}
-            axisLine={false}
-            fontSize={13}
-            domain={[-100, 100]}
-            interval={0}
-          />
-
-          <XAxis 
-            dataKey='date'
-            tickLine={false}
-            axisLine={false}
-            fontSize={13}
-            tickMargin={10}
-          />
-
-          <Line dataKey='score' fillOpacity={1} stroke='#4097E8' strokeWidth={2} />
-
-          <Tooltip content={<CustomTooltip />} />
-        </LineChart>
-      </ResponsiveContainer>
+      <Chart
+        data={results}
+        tooltip={CustomTooltip}
+        scale={scale}
+        chartType={type}
+        items={[{ dataKey: 'score' }]}
+        yAxisProps={{
+          axisLine: false,
+          domain: [-100, 100],
+          interval: 0,
+        }}
+        xAxisProps={{
+          axisLine: false,
+        }}
+      />
     </div>
   );
 };

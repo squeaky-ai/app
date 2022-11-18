@@ -2,8 +2,12 @@ import React from 'react';
 import type { FC } from 'react';
 import { range } from 'lodash';
 import { format, subMonths } from 'date-fns';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, TooltipProps } from 'recharts';
+import { TooltipProps } from 'recharts';
+import { Chart } from 'components/sites/chart';
+import { ChartOptions } from 'components/sites/chart-options';
 import { formatShortNumbers } from 'lib/maths';
+import { useChartSettings } from 'hooks/use-chart-settings';
+import { doNotAllowZero } from 'lib/charts-v2';
 import type { AdminRecordingsStored } from 'types/graphql';
 
 interface Props {
@@ -11,6 +15,8 @@ interface Props {
 }
 
 export const RecordingsStored: FC<Props> = ({ recordingsStored }) => {
+  const { scale, type, setScale, setType } = useChartSettings('admin-recordings-stored');
+
   const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload, label }) => {
     if (!active || !payload?.length) return null;
 
@@ -19,12 +25,12 @@ export const RecordingsStored: FC<Props> = ({ recordingsStored }) => {
     return (
       <div className='custom-tooltip'>
         <p className='date'>{label}</p>
-        <p className='count all'>{count}</p>
+        <p className='count all'>{count || 0}</p>
       </div>
     );
   };
 
-  const data = ((): AdminRecordingsStored[] => {
+  const data = (() => {
     const now = new Date();
   
     const results = range(0, 11).map(month => {
@@ -35,8 +41,8 @@ export const RecordingsStored: FC<Props> = ({ recordingsStored }) => {
         .reduce((acc, r) => acc + r.count, 0);
 
       return {
-        count,
-        date: format(thisMonth, 'MMM yy'),
+        count: doNotAllowZero(scale, count),
+        dateKey: format(thisMonth, 'MMM yy'),
       }
     });
 
@@ -44,31 +50,29 @@ export const RecordingsStored: FC<Props> = ({ recordingsStored }) => {
   })();
 
   return (
-    <div className='chart-wrapper'>
-      <ResponsiveContainer>
-        <LineChart data={data} margin={{ top: 15, left: -30, right: 15, bottom: 0 }}>
-          <CartesianGrid strokeDasharray='3 3' vertical={false} />
-
-          <XAxis 
-            dataKey='date' 
-            stroke='var(--gray-500)' 
-            tickLine={false}
-            tickMargin={10}
-          />
-
-          <YAxis 
-            stroke='var(--gray-500)' 
-            tickLine={false} 
-            tickMargin={10}
-            allowDecimals={false}
-            tickFormatter={(x) => formatShortNumbers(x) || '0'}
-          />
-
-          <Tooltip content={<CustomTooltip />} />
-
-          <Line dataKey='count' fillOpacity={1} stroke='#A14259' strokeWidth={2} />
-        </LineChart>
-      </ResponsiveContainer>
-    </div>
+    <>
+      <div className='chart-heading'>
+        <h5>Recordings Stored</h5>
+        <ChartOptions
+          scale={scale} 
+          setScale={setScale} 
+          chartType={type}
+          setChartType={setType}
+        />
+      </div>
+      <div className='chart-wrapper'>
+        <Chart
+          admin
+          data={data}
+          tooltip={CustomTooltip}
+          scale={scale}
+          chartType={type}
+          items={[{ dataKey: 'count' }]}
+          yAxisProps={{
+            tickFormatter: (x) => formatShortNumbers(x) || '0',
+          }}
+        />
+      </div>
+    </>
   );
 };

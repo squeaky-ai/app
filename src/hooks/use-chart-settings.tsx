@@ -3,7 +3,16 @@ import { ScaleType } from 'recharts/types/util/types';
 import type { ChartType } from 'types/charts';
 
 type ChartSettingType =
-  'event-counts';
+  'admin-recordings-stored' |
+  'admin-users-growth' |
+  'admin-sites-growth' |
+  'analytics-visitors' |
+  'analytics-page-views' |
+  'error-counts' |
+  'event-counts' |
+  'nps-replies' |
+  'nps-score' |
+  'sentiment-ratings';
 
 interface State {
   type: ChartType;

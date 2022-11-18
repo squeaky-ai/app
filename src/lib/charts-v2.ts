@@ -1,5 +1,6 @@
 import { range } from 'lodash';
 import { subDays, getDayOfYear, getWeek, subWeeks, subMonths, format } from 'date-fns';
+import { ScaleType } from 'recharts/types/util/types';
 import { getAmPmForHour } from 'lib/charts';
 import { fromSlashyDate } from 'lib/dates';
 import type { TimePeriod } from 'types/common';
@@ -15,6 +16,10 @@ interface Item {
 }
 
 const padDateKey = (i: number, pad = 2) => i.toString().padStart(pad, '0');
+
+export const doNotAllowZero = (scale: ScaleType, num: number) => (
+  num === 0 && scale === 'log' ? null : num
+);
 
 const findMatchOrDefault = <T extends Item>(dateKey: string, label: string, items: T[], fallback: Omit<T, 'dateKey'>): T => {
   const match = items.find(i => i.dateKey === dateKey) || { ...fallback, dateKey };

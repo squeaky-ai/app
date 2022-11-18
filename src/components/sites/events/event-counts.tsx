@@ -8,7 +8,7 @@ import { ChartOptions } from 'components/sites/chart-options';
 import { sortEventsStats } from 'lib/events';
 import { formatLabel } from 'lib/charts';
 import { colors } from 'lib/colors';
-import { formatResultsForGroupType } from 'lib/charts-v2';
+import { formatResultsForGroupType, doNotAllowZero } from 'lib/charts-v2';
 import { Chart } from 'components/sites/chart';
 import { useChartSettings } from 'hooks/use-chart-settings';
 import type { EventStats } from 'hooks/use-event-stats';
@@ -23,11 +23,9 @@ interface Props {
 }
 
 export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
-  const { scale, setScale, type, setType } = useChartSettings('event-counts');
+  const { scale, type, setScale, setType } = useChartSettings('event-counts');
 
   const totalCount = sum(eventStats.eventStats.map(s => s.count));
-
-  const doNotAllowZero = (num: number) => num === 0 && scale === 'log' ? null : num;
 
   // To avoid hitting issues with GraphQL caching the datekey
   // is returned with the id when it is a metric count so it
@@ -45,11 +43,11 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
     const result: Record<string, string | number> = { dateKey: d.dateKey };
 
     // Set the defaults
-    metricKeys.forEach(key => { result[key] = doNotAllowZero(0) });
+    metricKeys.forEach(key => { result[key] = doNotAllowZero(scale, 0) });
 
     // Override this with metric keys we have values for
     d.metrics.forEach(metric => {
-      result[buildKeyFromMetric(metric)] = doNotAllowZero(metric.count);
+      result[buildKeyFromMetric(metric)] = doNotAllowZero(scale, metric.count);
     });
 
     return result;

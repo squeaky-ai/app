@@ -1,9 +1,12 @@
 import React from 'react';
 import type { FC } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, TooltipProps } from 'recharts';
+import { TooltipProps } from 'recharts';
 import { Card } from 'components/card';
 import { formatLabel } from 'lib/charts';
-import { formatResultsForGroupType } from 'lib/charts-v2';
+import { Chart } from 'components/sites/chart';
+import { ChartOptions } from 'components/sites/chart-options';
+import { formatResultsForGroupType, doNotAllowZero } from 'lib/charts-v2';
+import { useChartSettings } from 'hooks/use-chart-settings';
 import type { TimePeriod } from 'types/common';
 import type { ErrorsCounts, ErrorsCount } from 'types/graphql';
 
@@ -13,9 +16,11 @@ interface Props {
 }
 
 export const ErrorCounts: FC<Props> = ({ counts, period }) => {
+  const { scale, setScale, type, setType } = useChartSettings('error-counts');
+
   const results = formatResultsForGroupType<ErrorsCount>(counts, period, { count: 0 }).map(d => ({
     dateKey: d.dateKey,
-    count: d.count,
+    count: doNotAllowZero(scale, d.count),
   }));
 
   const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload, label }) => {
@@ -24,7 +29,7 @@ export const ErrorCounts: FC<Props> = ({ counts, period }) => {
     return (
       <div className='custom-tooltip'>
         <p className='date'>{formatLabel(period, label)}</p>
-        <p>{payload[0].payload.count} Errors</p>
+        <p>{payload[0].payload.count || 0} Errors</p>
       </div>
     );
   };
@@ -34,29 +39,24 @@ export const ErrorCounts: FC<Props> = ({ counts, period }) => {
       <div className='heading'>
         <div className='title'>
           <h5>All Errors</h5>
+          <div className='actions'>
+            <ChartOptions
+              scale={scale} 
+              setScale={setScale}
+              chartType={type}
+              setChartType={setType}
+            />
+          </div>
         </div>
       </div>
       <div className='graph-wrapper'>
-        <ResponsiveContainer>
-          <LineChart data={results} margin={{ top: 16, left: -16, right: 8, bottom: 8 }}>
-            <CartesianGrid strokeDasharray='3 3' vertical={false} />
-
-            <XAxis dataKey='dateKey' stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} />
-            <YAxis stroke='var(--gray-blue-800)' tickLine={false} tickMargin={10} domain={['auto', 'auto']} scale='auto' />
-
-            <Tooltip content={<CustomTooltip />} />
-
-            {counts.items.map(count => (
-              <Line 
-                key={count.dateKey}
-                dataKey='count'
-                fillOpacity={1}
-                stroke='var(--rose-500)'
-                strokeWidth={2}
-              />
-            ))}
-          </LineChart>
-        </ResponsiveContainer>
+        <Chart
+          data={results}
+          tooltip={CustomTooltip}
+          scale={scale}
+          chartType={type}
+          items={[{ dataKey: 'count' }]}
+        />
       </div>
     </Card>
   );

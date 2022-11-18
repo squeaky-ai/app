@@ -43,11 +43,10 @@ const AdminDashboard: NextPage<ServerSideProps> = () => {
           <div className='dashboard-grid'>
             <div className='grid-item total-users'>
               <Card>
-                <div className='numbered-title'>
-                  <h5>Total Users</h5>
-                  <h3>{admin.usersCount}</h3>
-                </div>
-                <UsersGrowth users={admin.usersStored} />
+                <UsersGrowth
+                  count={admin.usersCount}
+                  users={admin.usersStored} 
+                />
               </Card>
             </div>
 
@@ -135,7 +134,6 @@ const AdminDashboard: NextPage<ServerSideProps> = () => {
 
             <div className='grid-item recordings-stored'>
                <Card>
-                 <h5>Recordings Stored</h5>
                  <RecordingsStored recordingsStored={admin.recordingsStored} />
                </Card>
              </div>
