@@ -81,7 +81,7 @@ const ChartBar: FC<Omit<Props, 'chartType'>> = ({
   scale,
 }) => (
   <ResponsiveContainer>
-    <BarChart data={data} margin={{ top: 0, left: 0, right: 0, bottom: 0 }} barGap={0}>
+    <BarChart data={data} margin={{ top: 0, left: -16, right: 16, bottom: 0 }} barGap={2}>
       <CartesianGrid strokeDasharray='3 3' vertical={false} />
 
       <XAxis
@@ -110,7 +110,7 @@ const ChartBar: FC<Omit<Props, 'chartType'>> = ({
           strokeWidth={item.strokeWidth}
           fill={colors[index]}
           stackId={item.dataKey as string}
-          radius={[4, 4, 0, 0]}
+          radius={[2, 2, 0, 0]}
         />
       ))}
     </BarChart>
