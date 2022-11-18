@@ -4,10 +4,12 @@ import Head from 'next/head';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { Container } from 'components/container';
+import { Radio } from 'components/radio';
 import { Main } from 'components/main';
 import { Access } from 'components/sites/access';
 import { Page } from 'components/sites/page';
 import { OWNER, ADMIN } from 'data/teams/constants';
+import { Tooltip } from 'components/tooltip';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { Label } from 'components/label';
 import { Input } from 'components/input';
@@ -17,10 +19,13 @@ import { HOSTNAME_REGEX } from 'data/sites/constants';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { SettingsTabs } from 'components/sites/settings/settings-tabs';
 import { useToasts } from 'hooks/use-toasts';
+import { SiteType } from 'types/sites';
+import { Icon } from 'components/icon';
 
 const DetailsSchema = Yup.object().shape({
   name: Yup.string().required('Site name is required'),
   hostname: Yup.string().matches(HOSTNAME_REGEX, 'URL must be a valid hostname').required('Site URL is required'),
+  siteType: Yup.number().required('Site type is required'),
 });
 
 const SitesSettingsDetails: NextPage<ServerSideProps> = ({ user }) => {
@@ -56,12 +61,12 @@ const SitesSettingsDetails: NextPage<ServerSideProps> = ({ user }) => {
             <h4>Site details</h4>
 
             <Formik
-              initialValues={{ name: site.name, hostname: site.url.split('://')[1] }}
+              initialValues={{ name: site.name, hostname: site.url.split('://')[1], siteType: site.siteType }}
               validationSchema={DetailsSchema}
               onSubmit={(values, { setSubmitting, setErrors, setFieldValue }) => {
                 (async () => {
                   try {
-                    const { name, hostname } = values;
+                    const { name, hostname, siteType } = values;
 
                     // Some people paste the whole url in with the protocol
                     // so we strip it and update the field
@@ -74,7 +79,7 @@ const SitesSettingsDetails: NextPage<ServerSideProps> = ({ user }) => {
                       return setErrors({ 'hostname': 'URL must be a valid hostname' });
                     }
 
-                    await updateSite({ siteId: site.id, name, url });
+                    await updateSite({ siteId: site.id, name, url, siteType });
 
                     if (url !== site.url) {
                       toast.add({ type: 'error', body: 'Please note, your tracking code will need to be updated as you\'ve changed your URL.' });
@@ -101,6 +106,7 @@ const SitesSettingsDetails: NextPage<ServerSideProps> = ({ user }) => {
                 handleChange,
                 handleSubmit,
                 isSubmitting,
+                setFieldValue,
                 touched,
                 values,
               }) => (
@@ -137,6 +143,48 @@ const SitesSettingsDetails: NextPage<ServerSideProps> = ({ user }) => {
                         invalid={touched.hostname && !!errors.hostname}
                       />
                       <span className='validation'>{errors.hostname}</span>
+                    </div>
+
+                    <Label>Site Type</Label>
+                    <div className='radio-group'>
+                      <Radio
+                        name='siteType'
+                        value={SiteType.Website}
+                        onChange={() => setFieldValue('siteType', SiteType.Website)}
+                        checked={values.siteType === SiteType.Website}
+                      >
+                        Website
+                        <Tooltip button={<Icon name='information-line' />} portalClassName='site-type-tooltip'>
+                          <p>Websites are typically created for people wanting to source information, consume content, or make purchases.</p>
+                          <p><b>Examples include:</b></p>
+                          <ul>
+                            <li>Marketing and sales websites</li>
+                            <li>eCommerce stores</li>
+                            <li>News media</li>
+                            <li>Blogs</li>
+                            <li>Personal websites</li>
+                          </ul>
+                        </Tooltip>
+                      </Radio>
+                      <Radio
+                        name='siteType'
+                        value={SiteType.WebApp}
+                        onChange={() => setFieldValue('siteType', SiteType.WebApp)}
+                        checked={values.siteType === SiteType.WebApp}
+                      >
+                        Web app
+                        <Tooltip button={<Icon name='information-line' />} portalClassName='site-type-tooltip'>
+                          <p>Web apps are interactive sites that are similar to conventional software programs but accessible using your web browser.</p>
+                          <p>Examples include:</p>
+                          <ul>
+                            <li>Email clients</li>
+                            <li>Project management software</li>
+                            <li>Cloud storage systems</li>
+                            <li>Document and spreadsheet tools</li>
+                            <li>This app you&apos;re using now!</li>
+                          </ul>
+                        </Tooltip>
+                      </Radio>
                     </div>
 
                     <Button type='submit' disabled={isSubmitting} className='primary'>

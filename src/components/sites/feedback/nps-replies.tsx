@@ -61,7 +61,7 @@ export const NpsReplies: FC<Props> = ({ period, replies }) => {
         tooltip={CustomTooltip}
         scale={scale}
         chartType={type}
-        items={[{ dataKey: 'promoters' }, { dataKey: 'passives' }, { dataKey: 'detractors' }]}
+        items={[{ dataKey: 'count' }]}
         yAxisProps={{
           axisLine: false,
           interval: max < 5 ? 0 : 'preserveEnd',

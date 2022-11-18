@@ -159,9 +159,14 @@ export const StepConsent: FC<Props> = ({ site, handleBack, handleForward }) => {
                   <Button className='quaternary' type='button' onClick={handleBack}>
                     Back
                   </Button>
-                  <Button className='primary' type='submit' disabled={isSubmitting || !isValid}>
-                    Next
-                  </Button>
+                  <div> 
+                    <Button className='quaternary' type='button' onClick={handleForward}>
+                      I&apos;ll do this later
+                    </Button>
+                    <Button className='primary' type='submit' disabled={isSubmitting || !isValid}>
+                      Next
+                    </Button>
+                  </div>
                 </div>
               </form>
             </Card>

@@ -18,6 +18,7 @@ export const GET_SITE_QUERY = gql`
       name
       url
       verifiedAt
+      siteType
       uuid
       ownerName
       daysSinceLastRecording
