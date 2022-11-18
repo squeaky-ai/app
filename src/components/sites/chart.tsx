@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import { colors } from 'lib/colors';
 import { ScaleType } from 'recharts/types/util/types';
 import type { ChartType, ChartItemProps } from 'types/charts';
 
@@ -60,13 +61,13 @@ const ChartLine: FC<Omit<Props, 'chartType'>> = ({
 
       <Tooltip content={tooltip} />
 
-      {items.map(item => (
+      {items.map((item, index) => (
         <Line 
           key={item.dataKey as string}
           dataKey={item.dataKey}
           fillOpacity={1}
-          stroke={item.stroke}
-          strokeWidth={item.strokeWidth}
+          stroke={colors[index]}
+          strokeWidth={2}
         />
       ))}
     </LineChart>
@@ -80,7 +81,7 @@ const ChartBar: FC<Omit<Props, 'chartType'>> = ({
   scale,
 }) => (
   <ResponsiveContainer>
-    <BarChart data={data} margin={{ top: 0, left: 0, right: 0, bottom: 0 }}>
+    <BarChart data={data} margin={{ top: 0, left: 0, right: 0, bottom: 0 }} barGap={0}>
       <CartesianGrid strokeDasharray='3 3' vertical={false} />
 
       <XAxis
@@ -100,15 +101,16 @@ const ChartBar: FC<Omit<Props, 'chartType'>> = ({
 
       <Tooltip content={tooltip} />
 
-      {items.map(item => (
+      {items.map((item, index) => (
         <Bar 
           key={item.dataKey as string}
           dataKey={item.dataKey}
           fillOpacity={1}
-          stroke={item.stroke}
+          stroke={colors[index]}
           strokeWidth={item.strokeWidth}
-          fill={item.fill}
+          fill={colors[index]}
           stackId={item.dataKey as string}
+          radius={[4, 4, 0, 0]}
         />
       ))}
     </BarChart>

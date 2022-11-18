@@ -104,13 +104,7 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
           tooltip={CustomTooltip}
           scale={scale}
           chartType={chartType}
-          items={sortedEventsStats.map((stat, index) => ({
-            dataKey: `${stat.type}::${stat.eventOrGroupId}`,
-            fillOpacity: 1,
-            stroke: colors[index],
-            strokeWidth: 2,
-            fill: colors[index],
-          }))}
+          items={sortedEventsStats.map(stat => ({ dataKey: `${stat.type}::${stat.eventOrGroupId}` }))}
         />
       </div>
     </Card>
