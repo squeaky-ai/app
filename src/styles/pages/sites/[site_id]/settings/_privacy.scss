@@ -96,6 +96,52 @@
     }
   }
 
+  .privacy-anonymising {
+    display: grid;
+    grid-gap: 2rem;
+    grid-template-columns: 1fr 352px;
+
+    .preview {
+      position: relative;
+
+      .label {
+        font-size: var(--font-size-body-sm);              
+      }
+
+      .image {
+        display: none;
+
+        &.show {
+          display: block;
+        }
+
+        &.person {
+          display: block;
+          left: 0;
+          position: absolute;
+          top: 0;
+
+          img {
+            mix-blend-mode: multiply;
+          }
+        }
+      }
+    }
+
+    p {
+      align-items: center;
+      display: flex;
+      font-size: var(--font-size-body-sm);
+      margin: .75rem 0 0 0;
+
+      .icon {
+        color: var(--blue-500);
+        font-size: var(--font-size-body-lg);
+        margin: 0 .5rem 0 0;
+      }
+    }
+  }
+
   .consent {
     form {
       margin: 2rem 0 0 0;

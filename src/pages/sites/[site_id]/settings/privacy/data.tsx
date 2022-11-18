@@ -17,6 +17,7 @@ import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { magicErasureUpdate } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
 import type { Site } from 'types/graphql';
+import { Divider } from 'components/divider';
 
 const SitesSettingsPrivacyData: NextPage<ServerSideProps> = ({ user }) => {
   const toasts = useToasts();
@@ -51,11 +52,12 @@ const SitesSettingsPrivacyData: NextPage<ServerSideProps> = ({ user }) => {
 
             <Container className='md privacy-options'>
               <h4>Text &amp; Forms</h4>
-              <p>To help you provide privacy-friendly analytics we <b>anonymise all data that your site visitors input into forms by default</b>. you can optionally turn this off, or additionally choose to <b>anonymise all text captured across your site</b>.</p>
+              <p>To help you provide privacy-friendly analytics we <b>anonymise all text and form data on your site by default</b>. you can optionally turn this off, or choose to <b>only anonymise text captured in form inputs</b>. This has no impact on the appearance of your site for end-users, our script will simply avoid capturing the data you&apos;ve chosen to anonymise.</p>
+              <p>You can still use the Magic Erasure lower down the page, regardless of your text and forms settings.</p>
 
               <PrivacyAnonymising site={site} />
 
-              <p><b>Please note</b>: You can still use the Squeaky Magic Erasure below, regardless of your text and forms configuration.</p>
+              <Divider />
     
               <h4>All content</h4>
 

@@ -31,8 +31,6 @@ const ConsentSchema = Yup.object().shape({
 export const StepConsent: FC<Props> = ({ site, handleBack, handleForward }) => {
   const toasts = useToasts();
 
-  console.log(site);
-
   return (
     <div className='step step-consent'>
       <p className='subheading'>Put privacy first</p>
