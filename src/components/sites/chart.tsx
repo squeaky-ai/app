@@ -1,6 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
-import { colors, adminColors } from 'lib/colors';
+import { colorsPrimary, colorsPrimaryAdmin, colorsSecondary, colorsSecondaryAdmin } from 'lib/colors';
 import { ScaleType } from 'recharts/types/util/types';
 import type { ChartType, ChartItemProps } from 'types/charts';
 
@@ -16,7 +16,9 @@ import {
   Tooltip, 
   TooltipProps, 
   XAxisProps,
-  YAxisProps
+  YAxisProps,
+  AreaChart,
+  Area,
 } from 'recharts';
 
 interface Props {
@@ -36,15 +38,22 @@ export const Chart: FC<Props> = ({ chartType, ...props }) => {
       return <ChartBar {...props} />;
     case 'line':
       return <ChartLine {...props} />
+    case 'area':
+      return <ChartArea {...props} />;
   }
 };
 
-const getColor = (admin: boolean, index: number) => {
-  const palette = admin ? adminColors : colors;
+const getPrimaryColor = (admin: boolean, index: number) => {
+  const palette = admin ? colorsPrimaryAdmin : colorsPrimary;
   return palette[index];
 };
 
-const getStroke = (admin: boolean) => {
+const getSecondaryColor = (admin: boolean, index: number) => {
+  const palette = admin ? colorsSecondaryAdmin : colorsSecondary;
+  return palette[index];
+};
+
+const getLabelTextColor = (admin: boolean) => {
   return admin ? 'var(--gray-500)' : 'var(--gray-blue-800)';
 };
 
@@ -63,7 +72,7 @@ const ChartLine: FC<Omit<Props, 'chartType'>> = ({
 
       <XAxis
         dataKey='dateKey'
-        stroke={getStroke(admin)}
+        stroke={getLabelTextColor(admin)}
         tickLine={false}
         tickMargin={10} 
         allowDecimals={false}
@@ -72,7 +81,7 @@ const ChartLine: FC<Omit<Props, 'chartType'>> = ({
       />
 
       <YAxis
-        stroke={getStroke(admin)}
+        stroke={getLabelTextColor(admin)}
         tickLine={false}
         tickMargin={10}
         domain={['auto', 'auto']}
@@ -89,7 +98,7 @@ const ChartLine: FC<Omit<Props, 'chartType'>> = ({
           key={item.dataKey as string}
           dataKey={item.dataKey}
           fillOpacity={1}
-          stroke={getColor(admin, index)}
+          stroke={getPrimaryColor(admin, index)}
           strokeWidth={2}
           type='monotone'
         />
@@ -113,14 +122,14 @@ const ChartBar: FC<Omit<Props, 'chartType'>> = ({
 
       <XAxis
         dataKey='dateKey'
-        stroke={getStroke(admin)}
+        stroke={getLabelTextColor(admin)}
         tickLine={false}
         tickMargin={10} 
         {...xAxisProps}
       />
 
       <YAxis
-        stroke={getStroke(admin)}
+        stroke={getLabelTextColor(admin)}
         tickLine={false}
         tickMargin={10}
         domain={['auto', 'auto']}
@@ -135,13 +144,58 @@ const ChartBar: FC<Omit<Props, 'chartType'>> = ({
           key={item.dataKey as string}
           dataKey={item.dataKey}
           fillOpacity={1}
-          stroke={getColor(admin, index)}
+          stroke={getPrimaryColor(admin, index)}
           strokeWidth={item.strokeWidth}
-          fill={getColor(admin, index)}
+          fill={getPrimaryColor(admin, index)}
           stackId={item.dataKey as string}
           radius={[2, 2, 0, 0]}
         />
       ))}
     </BarChart>
+  </ResponsiveContainer>
+);
+
+const ChartArea: FC<Omit<Props, 'chartType'>> = ({
+  admin,
+  data,
+  tooltip,
+  items,
+  scale,
+  xAxisProps,
+  yAxisProps,
+}) => (
+  <ResponsiveContainer>
+    <AreaChart data={data} margin={{ top: 1, left: -16, right: 16, bottom: 1 }}>
+      <XAxis
+        dataKey='dateKey'
+        stroke={getLabelTextColor(admin)}
+        tickLine={false}
+        tickMargin={10} 
+        {...xAxisProps}
+      />
+
+      <YAxis
+        stroke={getLabelTextColor(admin)}
+        tickLine={false}
+        tickMargin={10}
+        domain={['auto', 'auto']}
+        scale={scale} 
+        {...yAxisProps}
+      />
+
+      <Tooltip content={tooltip} />
+
+      {items.map((item, index) => (
+        <Area
+          key={item.dataKey as string}
+          dataKey={item.dataKey}
+          fillOpacity={1}
+          stroke={getPrimaryColor(admin, index)}
+          fill={getSecondaryColor(admin, index)}
+          strokeWidth={2}
+          type='monotone'
+        />
+      ))}
+    </AreaChart>
   </ResponsiveContainer>
 );

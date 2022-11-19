@@ -7,7 +7,7 @@ import { EventSwatch } from 'components/sites/events/event-swatch';
 import { ChartOptions } from 'components/sites/chart-options';
 import { sortEventsStats } from 'lib/events';
 import { formatLabel } from 'lib/charts';
-import { colors } from 'lib/colors';
+import { colorsPrimary } from 'lib/colors';
 import { formatResultsForGroupType, doNotAllowZero } from 'lib/charts-v2';
 import { Chart } from 'components/sites/chart';
 import { useChartSettings } from 'hooks/use-chart-settings';
@@ -62,7 +62,7 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
       <div className='custom-tooltip'>
         <p className='date'>{formatLabel(period, label)}</p>
         {sortedEventsStats.map((stat, index) => (
-          <p key={stat.eventOrGroupId} style={{ color: colors[index] }}>
+          <p key={stat.eventOrGroupId} style={{ color: colorsPrimary[index] }}>
             {stat.name} {metrics[`${stat.type}::${stat.eventOrGroupId}`]}
           </p>
         ))}
