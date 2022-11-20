@@ -71,7 +71,7 @@ export const EventCreate: FC<Props> = ({ site, member, buttonText, buttonClassNa
             groupIds: [],
           }}
           validationSchema={EventCreateSchema}
-          onSubmit={(values, { setSubmitting }) => {
+          onSubmit={(values, { setSubmitting, setErrors }) => {
             (async () => {
               try {
                 await eventsCaptureCreate({
@@ -89,9 +89,14 @@ export const EventCreate: FC<Props> = ({ site, member, buttonText, buttonClassNa
                 })
                 toasts.add({ type: 'success', body: 'Event create successfully' });
                 closeModal();
-              } catch(error) {
+              } catch(error: any) {
                 console.error(error);
-                toasts.add({ type: 'error', body: 'Failed to create event' });
+  
+                if (/already been taken/.test(error)) {
+                  setErrors({ name: 'This name has already been taken' });
+                } else {
+                  toasts.add({ type: 'error', body: 'Failed to create event' });
+                }
               } finally {
                 setSubmitting(false);
               }
