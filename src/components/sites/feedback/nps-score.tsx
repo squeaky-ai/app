@@ -1,9 +1,9 @@
 import React from 'react';
 import type { FC } from 'react';
-import { TooltipProps } from 'recharts';
 import { percentage } from 'lib/maths';
 import { formatChartData } from 'lib/charts';
 import { Chart } from 'components/sites/chart';
+import { NpsScoreChartTooltip } from 'components/sites/feedback/nps-score-chart-tooltip';
 import { useChartSettings } from 'hooks/use-chart-settings';
 import { doNotAllowZero } from 'lib/charts-v2';
 import type { FeedbackNpsScores, FeedbackNpsScore } from 'types/graphql';
@@ -30,22 +30,11 @@ export const NpsScore: FC<Props> = ({ period, scores }) => {
     score: doNotAllowZero(scale, getNps(d.data)),
   }));
 
-  const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload }) => {
-    if (!active || !payload?.length) return null;
-  
-    return (
-      <div className='custom-tooltip'>
-        <p>Score</p>
-        <p className='score'>{payload[0].payload.score || 0}</p>
-      </div>
-    );
-  };
-
   return (
     <div className='chart-wrapper'>
       <Chart
         data={results}
-        tooltip={CustomTooltip}
+        tooltip={NpsScoreChartTooltip}
         scale={scale}
         chartType={type}
         items={[{ dataKey: 'score' }]}

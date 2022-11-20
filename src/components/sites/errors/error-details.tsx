@@ -4,7 +4,7 @@ import { ErrorTabs } from 'components/sites/errors/error-tabs';
 import { Card } from 'components/card';
 import { ErrorRecordings } from 'components/sites/errors/error-recordings';
 import { ErrorVisitors } from 'components/sites/errors/error-visitors';
-import { ErrorCounts } from 'components/sites/errors/counts';
+import { ErrorCounts } from 'components/sites/errors/error-counts';
 import { ErrorTab } from 'types/errors';
 import type { Column, TimePeriod } from 'types/common';
 import type { ErrorsDetails, ErrorsCounts, Site, Team } from 'types/graphql';

@@ -2,8 +2,8 @@ import React from 'react';
 import type { FC } from 'react';
 import { range } from 'lodash';
 import { format, subMonths } from 'date-fns';
-import { TooltipProps } from 'recharts';
 import { Chart } from 'components/sites/chart';
+import { RecordingsStoredChartTooltip } from 'components/admin/recordings-stored-chart-tooltip';
 import { ChartOptions } from 'components/sites/chart-options';
 import { formatShortNumbers } from 'lib/maths';
 import { useChartSettings } from 'hooks/use-chart-settings';
@@ -16,19 +16,6 @@ interface Props {
 
 export const RecordingsStored: FC<Props> = ({ recordingsStored }) => {
   const { scale, type, setScale, setType } = useChartSettings('admin-recordings-stored');
-
-  const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload, label }) => {
-    if (!active || !payload?.length) return null;
-
-    const { count } = payload[0].payload;
-  
-    return (
-      <div className='custom-tooltip'>
-        <p className='date'>{label}</p>
-        <p className='count all'>{count || 0}</p>
-      </div>
-    );
-  };
 
   const data = (() => {
     const now = new Date();
@@ -64,7 +51,7 @@ export const RecordingsStored: FC<Props> = ({ recordingsStored }) => {
         <Chart
           admin
           data={data}
-          tooltip={CustomTooltip}
+          tooltip={RecordingsStoredChartTooltip}
           scale={scale}
           chartType={type}
           items={[{ dataKey: 'count' }]}

@@ -1,10 +1,9 @@
 import React from 'react';
 import type { FC } from 'react';
-import { TooltipProps } from 'recharts';
 import { Card } from 'components/card';
-import { formatLabel } from 'lib/charts';
 import { Chart } from 'components/sites/chart';
 import { ChartOptions } from 'components/sites/chart-options';
+import { ErrorCountsChartTooltip } from 'components/sites/errors/error-counts-chart-tooltip';
 import { formatResultsForGroupType, doNotAllowZero } from 'lib/charts-v2';
 import { useChartSettings } from 'hooks/use-chart-settings';
 import type { TimePeriod } from 'types/common';
@@ -22,17 +21,6 @@ export const ErrorCounts: FC<Props> = ({ counts, period }) => {
     dateKey: d.dateKey,
     count: doNotAllowZero(scale, d.count),
   }));
-
-  const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload, label }) => {
-    if (!active || !payload?.length) return null;
-  
-    return (
-      <div className='custom-tooltip'>
-        <p className='date'>{formatLabel(period, label)}</p>
-        <p>{payload[0].payload.count || 0} Errors</p>
-      </div>
-    );
-  };
 
   return (
     <Card className='event-counts'>
@@ -52,7 +40,7 @@ export const ErrorCounts: FC<Props> = ({ counts, period }) => {
       <div className='graph-wrapper'>
         <Chart
           data={results}
-          tooltip={CustomTooltip}
+          tooltip={props => <ErrorCountsChartTooltip {...props} period={period} />}
           scale={scale}
           chartType={type}
           items={[{ dataKey: 'count' }]}

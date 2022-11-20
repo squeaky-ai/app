@@ -348,22 +348,6 @@
   padding: .5rem;
 }
 
-.custom-tooltip {
-  p {
-    &.blue {
-      color: var(--blue-500);
-    }
-
-    &.rose {
-      color: var(--rose-500);
-    }
-  }
-}
-
-.recharts-tooltip-wrapper {
-  outline: none;
-}
-
 .active-users-portal {
   padding: .5rem;
 }

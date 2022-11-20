@@ -880,32 +880,4 @@
     display: flex;
     justify-content: space-between;
   }
-
-  .custom-tooltip {
-    background: var(--gray-blue-800);
-    border-radius: var(--border-radius-md);
-    color: var(--gray-100);
-    padding: 1rem;
-
-    p {
-      align-items: center;
-      display: flex;
-      margin: 0 0 .5rem 0;
-
-      &:last-of-type {
-        margin-bottom: 0;
-      }
-
-      span {
-        color: var(--gray-200);
-        font-size: var(--font-size-body-sm);
-        line-height: var(--line-height-body-sm);
-        margin-left: .5rem;
-      }
-    }
-  }
-}
-
-.sentiment-comment-tooltip {
-  white-space: normal;
 }

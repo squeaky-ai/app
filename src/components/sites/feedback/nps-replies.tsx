@@ -1,9 +1,9 @@
 import React from 'react';
 import type { FC } from 'react';
-import { TooltipProps } from 'recharts';
 import { ScaleType } from 'recharts/types/util/types';
 import { formatChartData } from 'lib/charts';
 import { Chart } from 'components/sites/chart';
+import { NpsRepliesChartTooltip } from 'components/sites/feedback/nps-replies-chart-tooltip';
 import { useChartSettings } from 'hooks/use-chart-settings';
 import { doNotAllowZero } from 'lib/charts-v2';
 import type { FeedbackNpsReplies, FeedbackNpsReply } from 'types/graphql';
@@ -41,24 +41,11 @@ export const NpsReplies: FC<Props> = ({ period, replies }) => {
   // change the interval of the graph
   const max = Math.max(...results.map(d => d.count));
 
-  const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload }) => {
-    if (!active || !payload?.length) return null;
-  
-    return (
-      <div className='custom-tooltip'>
-        <p>Outcome type</p>
-        <p className='promoters'>{payload[0].payload.promoters || 0} Promoters</p>
-        <p className='passives'>{payload[0].payload.passives || 0} Passives</p>
-        <p className='detractors'>{payload[0].payload.detractors || 0} Detractors</p>
-      </div>
-    );
-  };
-
   return (
     <div className='chart-wrapper'>
       <Chart
         data={results}
-        tooltip={CustomTooltip}
+        tooltip={NpsRepliesChartTooltip}
         scale={scale}
         chartType={type}
         items={[{ dataKey: 'count' }]}

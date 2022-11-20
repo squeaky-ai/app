@@ -1,7 +1,8 @@
 import React from 'react';
 import type { FC } from 'react';
 import { min, max, orderBy } from 'lodash';
-import { ResponsiveContainer, Tooltip, TooltipProps, BarChart, Bar, XAxis } from 'recharts';
+import { AnalyticsScreenWidthsChartTooltip } from 'components/sites/analytics/analytics-screen-widths-chart-tooltip';
+import { ResponsiveContainer, Tooltip, BarChart, Bar, XAxis } from 'recharts';
 import { Icon } from 'components/icon';
 import { Card } from 'components/card';
 import type { AnalyticsDimension } from 'types/graphql';
@@ -11,17 +12,6 @@ interface Props {
 }
 
 export const AnalyticsScreenWidths: FC<Props> = ({ dimensions }) => {
-  const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload, label }) => {
-    if (!active || !payload?.length) return null;
-  
-    return (
-      <div className='custom-tooltip'>
-        <p className='width'>Width: {label}px</p>
-        <p className='total-visitors'>{payload[0].value} Total Visitors</p>
-      </div>
-    );
-  };
-
   const allWidths = dimensions.map(d => d.deviceX);
   const mostCommon = orderBy(dimensions, dimensions => dimensions.count, 'desc')[0]?.deviceX || 0;
 
@@ -41,7 +31,7 @@ export const AnalyticsScreenWidths: FC<Props> = ({ dimensions }) => {
               fill='#4097E8'
               barSize={4}
             />
-            <Tooltip cursor={false} content={<CustomTooltip />} />
+            <Tooltip cursor={false} content={AnalyticsScreenWidthsChartTooltip} />
           </BarChart>
         </ResponsiveContainer>
       </div>

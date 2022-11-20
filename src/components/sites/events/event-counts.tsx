@@ -1,13 +1,11 @@
 import React from 'react';
 import type { FC } from 'react';
-import { TooltipProps } from 'recharts';
 import { sum } from 'lodash';
 import { Card } from 'components/card';
 import { EventSwatch } from 'components/sites/events/event-swatch';
 import { ChartOptions } from 'components/sites/chart-options';
 import { sortEventsStats } from 'lib/events';
-import { formatLabel } from 'lib/charts';
-import { colorsPrimary } from 'lib/colors';
+import { EventCountsChartTooltip } from 'components/sites/events/event-counts-chart-tooltip';
 import { formatResultsForGroupType, doNotAllowZero } from 'lib/charts-v2';
 import { Chart } from 'components/sites/chart';
 import { useChartSettings } from 'hooks/use-chart-settings';
@@ -53,23 +51,6 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
     return result;
   });
 
-  const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload, label }) => {
-    if (!active || !payload?.length) return null;
-
-    const metrics = results.find(r => r.dateKey === label);
-  
-    return (
-      <div className='custom-tooltip'>
-        <p className='date'>{formatLabel(period, label)}</p>
-        {sortedEventsStats.map((stat, index) => (
-          <p key={stat.eventOrGroupId} style={{ color: colorsPrimary[index] }}>
-            {stat.name} {metrics[`${stat.type}::${stat.eventOrGroupId}`]}
-          </p>
-        ))}
-      </div>
-    );
-  };
-
   return (
     <Card className='event-counts'>
       <div className='heading'>
@@ -97,7 +78,7 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
       <div className='graph-wrapper'>
         <Chart
           data={results}
-          tooltip={CustomTooltip}
+          tooltip={props => <EventCountsChartTooltip {...props} period={period} results={results} eventStats={sortedEventsStats} />}
           scale={scale}
           chartType={type}
           items={sortedEventsStats.map(stat => ({ dataKey: `${stat.type}::${stat.eventOrGroupId}` }))}

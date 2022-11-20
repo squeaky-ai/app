@@ -2,9 +2,8 @@ import React from 'react';
 import type { FC } from 'react';
 import { Trend } from 'components/trend';
 import { Chart } from 'components/sites/chart';
-import { TooltipProps } from 'recharts';
 import { ChartOptions } from 'components/sites/chart-options';
-import { formatLabel } from 'lib/charts';
+import { AnalyticsPageViewsChartTooltip } from 'components/sites/analytics/analytics-page-views-chart-tooltip';
 import { formatResultsForGroupType } from 'lib/charts-v2';
 import { useChartSettings } from 'hooks/use-chart-settings';
 import { doNotAllowZero } from 'lib/charts-v2';
@@ -23,17 +22,6 @@ export const AnalyticsPageViews: FC<Props> = ({ pageViews, period }) => {
     dateKey: d.dateKey,
     totalCount: doNotAllowZero(scale, d.count),
   }));
-
-  const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload, label }) => {
-    if (!active || !payload?.length) return null;
-  
-    return (
-      <div className='custom-tooltip'>
-        <p className='date'>{formatLabel(period, label)}</p>
-        <p className='all'>{payload[0].payload.totalCount || 0} All Page Views</p>
-      </div>
-    );
-  };
 
   return (
     <div className='analytics-graph'>
@@ -56,7 +44,7 @@ export const AnalyticsPageViews: FC<Props> = ({ pageViews, period }) => {
       <div className='graph-wrapper'>
         <Chart
           data={results}
-          tooltip={CustomTooltip}
+          tooltip={props => <AnalyticsPageViewsChartTooltip {...props} period={period} />}
           scale={scale}
           chartType={type}
           items={[{ dataKey: 'totalCount' }]}

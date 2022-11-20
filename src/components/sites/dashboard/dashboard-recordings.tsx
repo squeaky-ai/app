@@ -1,11 +1,12 @@
 import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
-import { AreaChart, Area, ResponsiveContainer, Tooltip, TooltipProps } from 'recharts';
+import { AreaChart, Area, ResponsiveContainer, Tooltip } from 'recharts';
 import { Icon } from 'components/icon';
 import { Label } from 'components/label';
 import { Pill } from 'components/pill';
 import { TableWrapper, Table, Row, Cell } from 'components/table';
+import { DashboardRecordingsChartTooltip } from 'components/sites/dashboard/dashboard-recordings-chart-tooltip';
 import { DashboardChart } from 'components/sites/dashboard/dashboard-chart';
 import { toNiceDate, toTimeString } from 'lib/dates';
 import { formatResultsForGroupType } from 'lib/charts-v2';
@@ -21,19 +22,6 @@ interface Props {
 
 export const DashboardRecordings: FC<Props> = ({ site, dashboard, period }) => {
   const hasRecordings = dashboard.recordingsCount.total > 0;
-
-  const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload }) => {
-    if (!active || !payload?.length) return null;
-
-    const { count } = payload[0].payload;
-  
-    return (
-      <div className='custom-tooltip'>
-        <p className='date'>New Recordings</p>
-        <p className='count blue'>{count}</p>
-      </div>
-    );
-  };
 
   const results = formatResultsForGroupType<AnalyticsRecording>(dashboard.recordings, period, { count: 0 }).map(d => ({
     dateKey: d.dateKey,
@@ -73,7 +61,7 @@ export const DashboardRecordings: FC<Props> = ({ site, dashboard, period }) => {
                   />
                 ))}
 
-                <Tooltip content={<CustomTooltip />} />
+                <Tooltip content={DashboardRecordingsChartTooltip} />
               </AreaChart>
             </ResponsiveContainer>
           </DashboardChart>

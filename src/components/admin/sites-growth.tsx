@@ -7,8 +7,8 @@ import { Checkbox } from 'components/checkbox';
 import { useResize } from 'hooks/use-resize';
 import { DeviceWidths } from 'data/common/constants';
 import { Chart } from 'components/sites/chart';
+import { SitesGrowthChartTooltip } from 'components/admin/sites-growth-chart-tooltip';
 import { ChartOptions } from 'components/sites/chart-options';
-import { TooltipProps } from 'recharts';
 import { useChartSettings } from 'hooks/use-chart-settings';
 import { doNotAllowZero } from 'lib/charts-v2';
 import type { AdminSitesStored } from 'types/graphql';
@@ -59,21 +59,6 @@ export const SitesGrowth: FC<Props> = ({ count, sites }) => {
     return results.reverse();
   })();
 
-  const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload, label }) => {
-    if (!active || !payload?.length) return null;
-
-    const { allCount, verifiedCount, unverifiedCount } = payload[0].payload;
-  
-    return (
-      <div className='custom-tooltip'>
-        <p className='date'>{label}</p>
-        {show.includes('all') && <p className='count all'>{allCount || 0} All sites</p>}
-        {show.includes('verified') && <p className='count verified'>{verifiedCount || 0} Verified sites</p>}
-        {show.includes('unverified') && <p className='count unverified'>{unverifiedCount || 0} Unverified sites</p>}
-      </div>
-    );
-  };
-
   return (
     <>
       <div className='chart-heading'>
@@ -98,7 +83,7 @@ export const SitesGrowth: FC<Props> = ({ count, sites }) => {
         <Chart
           admin
           data={data}
-          tooltip={CustomTooltip}
+          tooltip={props => <SitesGrowthChartTooltip {...props} show={show} />}
           scale={scale}
           chartType={type}
           items={[{ dataKey: 'allCount' }, { dataKey: 'verifiedCount' }, { dataKey: 'unverifiedCount' }]}

@@ -2,10 +2,11 @@ import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
 import { sum } from 'lodash';
-import { AreaChart, Area, ResponsiveContainer, Tooltip, TooltipProps } from 'recharts';
+import { AreaChart, Area, ResponsiveContainer, Tooltip } from 'recharts';
 import { Icon } from 'components/icon';
 import { Label } from 'components/label';
 import { DashboardChart } from 'components/sites/dashboard/dashboard-chart';
+import { DashboardErrorsChartTooltip } from 'components/sites/dashboard/dashboard-errors-chart-tooltip';
 import { TableWrapper, Table, Row, Cell } from 'components/table';
 import { formatResultsForGroupType } from 'lib/charts-v2';
 import type { Site, ErrorsCount } from 'types/graphql';
@@ -22,19 +23,6 @@ interface Props {
 export const DashboardErrors: FC<Props> = ({ site, dashboard, period }) => {
   const hasErrors = dashboard.errors.length > 0;
   const totalErrors = sum(dashboard.errorsCounts.items.map(e => e.count));
-
-  const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload }) => {
-    if (!active || !payload?.length) return null;
-
-    const { count } = payload[0].payload;
-  
-    return (
-      <div className='custom-tooltip'>
-        <p className='date'>Errors</p>
-        <p className='count rose'>{count}</p>
-      </div>
-    );
-  };
 
   const results = formatResultsForGroupType<ErrorsCount>(dashboard.errorsCounts, period, { count: 0 }).map(d => ({
     dateKey: d.dateKey,
@@ -77,7 +65,7 @@ export const DashboardErrors: FC<Props> = ({ site, dashboard, period }) => {
                   />
                 ))}
 
-                <Tooltip content={<CustomTooltip />} />
+                <Tooltip content={DashboardErrorsChartTooltip} />
               </AreaChart>
             </ResponsiveContainer>
           </DashboardChart>

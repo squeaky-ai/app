@@ -1,12 +1,13 @@
 import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
-import { AreaChart, Area, ResponsiveContainer, Tooltip, TooltipProps } from 'recharts';
+import { AreaChart, Area, ResponsiveContainer, Tooltip } from 'recharts';
 import { Icon } from 'components/icon';
 import { Label } from 'components/label';
 import { Trend } from 'components/trend';
 import { TableWrapper, Table, Row, Cell } from 'components/table';
 import { DashboardNoData } from 'components/sites/dashboard/dashboard-no-data';
+import { DashboardPageViewsChartTooltip } from 'components/sites/dashboard/dashboard-page-views-chart-tooltip';
 import { toHoursMinutesAndSeconds } from 'lib/dates';
 import { FiltersRecordingsLink } from 'components/sites/filters/common/filters-recordings-link';
 import { FiltersVisitorsLink } from 'components/sites/filters/common/filters-visitors-link';
@@ -24,19 +25,6 @@ interface Props {
 
 export const DashboardPageViews: FC<Props> = ({ site, dashboard, period }) => {
   const hasPageViews = dashboard.pageViews.total > 0;
-
-  const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload }) => {
-    if (!active || !payload?.length) return null;
-
-    const { count } = payload[0].payload;
-  
-    return (
-      <div className='custom-tooltip'>
-        <p className='date'>Page Views</p>
-        <p className='count blue'>{count}</p>
-      </div>
-    );
-  };
 
   const results = formatResultsForGroupType<AnalyticsPageView>(dashboard.pageViews, period, { count: 0 }).map(d => ({
     dateKey: d.dateKey,
@@ -79,7 +67,7 @@ export const DashboardPageViews: FC<Props> = ({ site, dashboard, period }) => {
                   />
                 ))}
 
-                <Tooltip content={<CustomTooltip />} />
+                <Tooltip content={DashboardPageViewsChartTooltip} />
               </AreaChart>
             </ResponsiveContainer>
           </DashboardChart>

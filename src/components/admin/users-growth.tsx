@@ -5,9 +5,9 @@ import { format, subMonths } from 'date-fns';
 import { Chart } from 'components/sites/chart';
 import { ScaleType } from 'recharts/types/util/types';
 import { useResize } from 'hooks/use-resize';
+import { UsersGrowthChartTooltip } from 'components/admin/users-growth-chart-tooltip';
 import { ChartOptions } from 'components/sites/chart-options';
 import { DeviceWidths } from 'data/common/constants';
-import { TooltipProps } from 'recharts';
 import { useChartSettings } from 'hooks/use-chart-settings';
 import { doNotAllowZero } from 'lib/charts-v2';
 import type { AdminUsersStored } from 'types/graphql';
@@ -46,19 +46,6 @@ export const UsersGrowth: FC<Props> = ({ count, users }) => {
 
   const { width } = useResize();
 
-  const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload, label }) => {
-    if (!active || !payload?.length) return null;
-
-    const newUserCount = payload[0].payload.count || 0;
-  
-    return (
-      <div className='custom-tooltip'>
-        <p className='date'>{label}</p>
-        <p className='count'>{newUserCount} users</p>
-      </div>
-    );
-  };
-
   return (
     <>
       <div className='chart-heading'>
@@ -77,7 +64,7 @@ export const UsersGrowth: FC<Props> = ({ count, users }) => {
         <Chart
           admin
           data={data}
-          tooltip={CustomTooltip}
+          tooltip={UsersGrowthChartTooltip}
           scale={scale}
           chartType={type}
           items={[{ dataKey: 'count' }]}

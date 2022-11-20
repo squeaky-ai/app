@@ -1,13 +1,12 @@
 import React from 'react';
 import type { FC } from 'react';
 import { sum } from 'lodash';
-import { TooltipProps } from 'recharts';
 import { Label } from 'components/label';
 import { Chart } from 'components/sites/chart';
 import { Pill } from 'components/pill';
 import { Checkbox } from 'components/checkbox';
 import { ChartOptions } from 'components/sites/chart-options';
-import { formatLabel } from 'lib/charts';
+import { AnalyticsVisitorsChartTooltip } from 'components/sites/analytics/analytics-visitors-chart-tooltip';
 import { formatResultsForGroupType, doNotAllowZero } from 'lib/charts-v2';
 import { useChartSettings } from 'hooks/use-chart-settings';
 import type { AnalyticsVisitor, AnalyticsVisitors as AnalyticsVisitorsType } from 'types/graphql';
@@ -38,19 +37,6 @@ export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
     newCount: doNotAllowZero(scale, show.includes('new') ? d.newCount : 0),
   }));
 
-  const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload, label }) => {
-    if (!active || !payload?.length) return null;
-  
-    return (
-      <div className='custom-tooltip'>
-        <p className='date'>{formatLabel(period, label)}</p>
-        {show.includes('all') && <p className='all'>{payload[0].payload.allCount || 0} All Visitors</p>}
-        {show.includes('existing') && <p className='existing'>{payload[0].payload.existingCount || 0} Existing Visitors</p>}
-        {show.includes('new') && <p className='new'>{payload[0].payload.newCount || 0} New Visitors</p>}
-      </div>
-    );
-  };
-
   const totalCount = sum(visitors.items.map(d => d.allCount));
   const newCount = sum(visitors.items.map(d => d.newCount));
 
@@ -79,7 +65,7 @@ export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
       <div className='graph-wrapper'>
         <Chart
           data={results}
-          tooltip={CustomTooltip}
+          tooltip={props => <AnalyticsVisitorsChartTooltip {...props} show={show} period={period} />}
           scale={scale}
           chartType={type}
           items={[{ dataKey: 'allCount' }, { dataKey: 'existingCount' }, { dataKey: 'newCount' }]}

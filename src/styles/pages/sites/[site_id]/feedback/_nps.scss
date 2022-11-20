@@ -849,37 +849,6 @@
     justify-content: space-between;
   }
 
-  .custom-tooltip {
-    background: var(--gray-blue-800);
-    border-radius: var(--border-radius-md);
-    color: var(--gray-100);
-    padding: 1rem;
-
-    p {
-      margin: 0 0 .5rem 0;
-
-      &:last-of-type {
-        margin-bottom: 0;
-      }
-    }
-    
-    .score {
-      color: var(--blue-500);
-    }
-
-    .promoters {
-      color: var(--blue-500);
-    }
-
-    .passives {
-      color: var(--purple-500);
-    }
-
-    .detractors {
-      color: var(--rose-500);
-    }
-  }
-
   .hide-logo {
     margin: 2rem 0 0 0;
 

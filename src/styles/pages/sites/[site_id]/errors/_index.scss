@@ -58,23 +58,3 @@
     margin: 1.5rem 0 0 0;
   }
 }
-
-.custom-tooltip {
-  white-space: normal;
-
-  background: var(--gray-blue-800);
-  border-radius: var(--border-radius-md);
-  color: var(--gray-100);
-  padding: 1rem;
-
-  p {
-    align-items: center;
-    display: flex;
-    margin: 0 0 .5rem 0;
-
-    &:last-of-type {
-      color: var(--rose-500);
-      margin-bottom: 0;
-    }
-  }
-}

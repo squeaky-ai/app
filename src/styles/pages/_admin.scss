@@ -451,33 +451,4 @@
       }
     }
   }
-
-  .custom-tooltip {
-    background: var(--gray-blue-800);
-    border-radius: var(--border-radius-md);
-    color: var(--gray-100);
-    padding: 1rem;
-
-    p {
-      align-items: center;
-      display: flex;
-      margin: 0 0 .5rem 0;
-
-      &:last-of-type {
-        margin-bottom: 0;
-      }
-
-      &.all {
-        color: var(--rose-500);
-      }
-
-      &.verified {
-        color: var(--mauve-500);
-      }
-
-      &.unverified {
-        color: var(--peach-500);
-      }
-    }
-  }
 }

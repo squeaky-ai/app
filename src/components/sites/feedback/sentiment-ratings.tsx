@@ -2,10 +2,9 @@ import React from 'react';
 import type { FC } from 'react';
 import { average } from 'lib/maths';
 import { omit, groupBy } from 'lodash';
-import { TooltipProps } from 'recharts';
 import { ScaleType } from 'recharts/types/util/types';
 import { formatChartData } from 'lib/charts';
-import { Emoji } from 'components/emoji';
+import { SentimentRatingsChartTooltip } from 'components/sites/feedback/sentiment-ratings-chart-tooltip';
 import { BASE_PATH } from 'data/common/constants';
 import { Chart } from 'components/sites/chart';
 import { useChartSettings } from 'hooks/use-chart-settings';
@@ -58,26 +57,11 @@ export const SentimentRatings: FC<Props> = ({ period, ratings }) => {
     ...groupScoreCounts(scale, d.data),
   }));
 
-  const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload }) => {
-    if (!active || !payload?.length) return null;
-  
-    return (
-      <div className='custom-tooltip'>
-        <p>Ratings</p>
-        <p><Emoji height={16} width={16} emoji='emoji-5' /> <span>{payload[0].payload[4] || 0}</span></p>
-        <p><Emoji height={16} width={16} emoji='emoji-4' /> <span>{payload[0].payload[3] || 0}</span></p>
-        <p><Emoji height={16} width={16} emoji='emoji-3' /> <span>{payload[0].payload[2] || 0}</span></p>
-        <p><Emoji height={16} width={16} emoji='emoji-2' /> <span>{payload[0].payload[1] || 0}</span></p>
-        <p><Emoji height={16} width={16} emoji='emoji-1' /> <span>{payload[0].payload[0] || 0}</span></p>
-      </div>
-    );
-  };
-
   return (
     <div className='chart-wrapper'>
       <Chart
         data={results}
-        tooltip={CustomTooltip}
+        tooltip={SentimentRatingsChartTooltip}
         scale={scale}
         chartType={type}
         items={[{ dataKey: 'score' }]}

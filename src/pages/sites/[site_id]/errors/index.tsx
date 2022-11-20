@@ -12,7 +12,7 @@ import { Illustration } from 'components/illustration';
 import { PageLoading } from 'components/sites/page-loading';
 import { Unlock } from 'components/sites/unlock';
 import { ErrorsTable } from 'components/sites/errors/errors-table';
-import { ErrorCounts } from 'components/sites/errors/counts';
+import { ErrorCounts } from 'components/sites/errors/error-counts';
 import { Period } from 'components/sites/period/period';
 import { Pagination } from 'components/pagination';
 import { PageSize } from 'components/sites/page-size';

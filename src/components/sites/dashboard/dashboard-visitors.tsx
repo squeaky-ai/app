@@ -2,13 +2,14 @@ import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
 import { orderBy } from 'lodash';
-import { AreaChart, Area, ResponsiveContainer, Tooltip as ChartTooltip, TooltipProps } from 'recharts';
+import { AreaChart, Area, ResponsiveContainer, Tooltip as TooltipChart } from 'recharts';
 import { Icon } from 'components/icon';
 import { Pill } from 'components/pill';
 import { Tooltip } from 'components/tooltip';
 import { Label } from 'components/label';
 import { ActiveVisitors } from 'components/sites/active-visitors';
 import { DashboardChart } from 'components/sites/dashboard/dashboard-chart';
+import { DashboardVisitorsChartTooltip } from 'components/sites/dashboard/dashboard-visitors-chart-tooltip';
 import { TableWrapper, Table, Row, Cell } from 'components/table';
 import { toNiceDate } from 'lib/dates';
 import { formatResultsForGroupType } from 'lib/charts-v2';
@@ -24,19 +25,6 @@ interface Props {
 
 export const DashboardVisitors: FC<Props> = ({ site, dashboard, period }) => {
   const hasVisitors = dashboard.visitorsCount.total > 0;
-
-  const CustomTooltip: FC<TooltipProps<any, any>> = ({ active, payload }) => {
-    if (!active || !payload?.length) return null;
-
-    const { count } = payload[0].payload;
-  
-    return (
-      <div className='custom-tooltip'>
-        <p className='date'>New Visitors</p>
-        <p className='count blue'>{count}</p>
-      </div>
-    );
-  };
 
   const results = formatResultsForGroupType<Pick<AnalyticsVisitor, 'allCount' | 'dateKey'>>(dashboard.visitors, period, { allCount: 0 }).map(d => ({
     dateKey: d.dateKey,
@@ -84,7 +72,7 @@ export const DashboardVisitors: FC<Props> = ({ site, dashboard, period }) => {
                   />
                 ))}
 
-                <ChartTooltip content={<CustomTooltip />} />
+                <TooltipChart content={DashboardVisitorsChartTooltip} />
               </AreaChart>
             </ResponsiveContainer>
           </DashboardChart>
