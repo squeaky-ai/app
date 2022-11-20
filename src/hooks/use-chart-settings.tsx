@@ -33,7 +33,7 @@ export const useChartSettings = (name: ChartSettingType): ChartSettings => {
   const persist = (values: State) => {
     setState(values);
 
-    sessionStorage.setItem(`chart-settings::${name}`, JSON.stringify({ 
+    localStorage.setItem(`chart-settings::${name}`, JSON.stringify({ 
       ...state,
       ...values,
     }));
@@ -44,13 +44,15 @@ export const useChartSettings = (name: ChartSettingType): ChartSettings => {
   const handleScale = (scale: ScaleType) => persist({ ...state, scale });
 
   React.useEffect(() => {
-    const existing = sessionStorage.getItem(`chart-settings::${name}`);
+    const existing = localStorage.getItem(`chart-settings::${name}`);
 
     if (existing) {
       try {
         const values = JSON.parse(existing);
         setState(values);
-      } catch {}
+      } catch {
+        localStorage.removeItem(`chart-settings::${name}`);
+      }
     }
   }, []);
 

@@ -4,6 +4,7 @@ import { useEventGroups } from 'hooks/use-event-groups';
 import { EventGroup } from 'components/sites/events/event-group';
 import { PageLoading } from 'components/sites/page-loading';
 import { Error } from 'components/error';
+import { EventGroupsNoGroups } from 'components/sites/events/event-groups-no-groups';
 import type { EventSelected } from 'types/events';
 import type { Site, EventsCaptureSort, Team } from 'types/graphql';
 
@@ -37,7 +38,7 @@ export const EventGroups: FC<Props> = ({
   return (
     <div className='event-groups'>
       {groups.length === 0 && (
-        <p>No groups</p>
+        <EventGroupsNoGroups />
       )}
 
       {groups.map(group => (

@@ -14,7 +14,11 @@ export const AnalyticsPagesBounceRate: FC<Props> = ({ bounceRate }) => {
     <>
       <h5>Bounce Rate</h5>
       <h3>{average.toFixed(2)}%</h3>
-      <Trend direction={trend >= 0 ? 'up' : 'down'} value={`${trend.toFixed(2)}%`} />
+      <Trend 
+        inverse
+        direction={trend >= 0 ? 'down' : 'up'} 
+        value={`${trend.toFixed(2)}%`} 
+      />
     </>
   );
 };

@@ -47,6 +47,20 @@
     }
   }
 
+  .no-groups {
+    align-items: center;
+    display: flex;
+    height: calc(100vh - 11rem);
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem;
+    text-align: center;
+
+    h4 {
+      margin: 2rem 0 0 0;
+    }
+  }
+
   .getting-started {
     .card {
       box-shadow: none;

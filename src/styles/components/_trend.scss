@@ -26,4 +26,18 @@
   span {
     font-weight: var(--font-weight-medium);
   }
+
+  &.inverse {
+    &.up {
+      i {
+        color: var(--rose-500);
+      }
+    }
+  
+    &.down {
+      i {
+        color: var(--green-500);
+      }
+    }
+  }
 }
