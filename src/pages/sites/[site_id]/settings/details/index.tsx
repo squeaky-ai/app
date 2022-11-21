@@ -63,7 +63,7 @@ const SitesSettingsDetails: NextPage<ServerSideProps> = ({ user }) => {
             <Formik
               initialValues={{ name: site.name, hostname: site.url.split('://')[1], siteType: site.siteType }}
               validationSchema={DetailsSchema}
-              onSubmit={(values, { setSubmitting, setErrors, setFieldValue }) => {
+              onSubmit={(values, { setSubmitting, setErrors }) => {
                 (async () => {
                   try {
                     const { name, hostname, siteType } = values;
@@ -71,12 +71,15 @@ const SitesSettingsDetails: NextPage<ServerSideProps> = ({ user }) => {
                     // Some people paste the whole url in with the protocol
                     // so we strip it and update the field
                     const host = hostname.replace(/^https?:\/\//, '');
-                    setFieldValue('hostname', host);
 
                     const url = `https://${host}`;
 
+                    if (url.includes('localhost')) {
+                      return setErrors({ hostname: 'Localhost domains are not supported' });
+                    }
+
                     if (!validateUrl(url)) {
-                      return setErrors({ 'hostname': 'URL must be a valid hostname' });
+                      return setErrors({ hostname: 'URL must be a valid hostname' });
                     }
 
                     await updateSite({ siteId: site.id, name, url, siteType });
@@ -94,9 +97,9 @@ const SitesSettingsDetails: NextPage<ServerSideProps> = ({ user }) => {
                     } else {
                       toast.add({ type: 'error', body: 'There was an error updating your site' });
                     }
+                  } finally {
+                    setSubmitting(false);
                   }
-
-                  setSubmitting(false);
                 })();
               }}
             >

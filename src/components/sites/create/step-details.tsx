@@ -54,7 +54,7 @@ export const StepDetails: FC<Props> = ({ site, siteType, loading, handleForward,
       <Formik
         initialValues={{ name: site?.name || '', hostname: getSiteHostname(site) }}
         validationSchema={DetailsSchema}
-        onSubmit={(values, { setSubmitting, setErrors, setFieldValue }) => {
+        onSubmit={(values, { setSubmitting, setErrors }) => {
           (async () => {
             try {
               const { name, hostname } = values;
@@ -62,9 +62,12 @@ export const StepDetails: FC<Props> = ({ site, siteType, loading, handleForward,
               // Some people paste the whole url in with the protocol
               // so we strip it and update the field
               const host = hostname.replace(/^https?:\/\//, '');
-              setFieldValue('hostname', host);
 
               const url = `https://${host}`;
+
+              if (url.includes('localhost')) {
+                return setErrors({ hostname: 'Localhost domains are not supported' });
+              }
 
               if (!validateUrl(url)) {
                 return setErrors({ hostname: 'URL must be a valid hostname' });
