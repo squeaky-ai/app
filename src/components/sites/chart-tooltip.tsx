@@ -43,7 +43,7 @@ export const Label: FC<{ children: React.ReactNode}> = ({ children }) => (
 );
 
 export const Value: FC<{ children: React.ReactNode, color?: string }> = ({ children, color }) => (
-  <p className='value' style={{ color: color === 'var(--blue-500)' ? 'var(--blue-300)' : color }}>
+  <p className='value' style={{ color }}>
     {children}
   </p>
 );

@@ -1,6 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
-import { colorsPrimary, colorsPrimaryAdmin, colorsSecondary, colorsSecondaryAdmin } from 'lib/colors';
+import { colorsPrimary, colorsPrimaryAdmin } from 'lib/colors';
 import { ScaleType } from 'recharts/types/util/types';
 import type { ChartType, ChartItemProps } from 'types/charts';
 
@@ -45,11 +45,6 @@ export const Chart: FC<Props> = ({ chartType, ...props }) => {
 
 const getPrimaryColor = (admin: boolean, index: number) => {
   const palette = admin ? colorsPrimaryAdmin : colorsPrimary;
-  return palette[index];
-};
-
-const getSecondaryColor = (admin: boolean, index: number) => {
-  const palette = admin ? colorsSecondaryAdmin : colorsSecondary;
   return palette[index];
 };
 
@@ -166,6 +161,15 @@ const ChartArea: FC<Omit<Props, 'chartType'>> = ({
 }) => (
   <ResponsiveContainer>
     <AreaChart data={data} margin={{ top: 1, left: -16, right: 16, bottom: 1 }}>
+      <defs>
+        {items.map((_, index) => (
+          <linearGradient key={`gradient-${index}`} id={`gradient-${index}`} x1='0' y1='0' x2='0' y2='1'>
+            <stop offset='5%' stopColor={getPrimaryColor(admin, index)} stopOpacity={0.8} />
+            <stop offset='95%' stopColor='var(--white)' stopOpacity={0} />
+          </linearGradient>
+        ))}
+      </defs>
+
       <XAxis
         dataKey='dateKey'
         stroke={getLabelTextColor(admin)}
@@ -191,7 +195,7 @@ const ChartArea: FC<Omit<Props, 'chartType'>> = ({
           dataKey={item.dataKey}
           fillOpacity={1}
           stroke={getPrimaryColor(admin, index)}
-          fill={getSecondaryColor(admin, index)}
+          fill={`url(#gradient-${index})`}
           strokeWidth={2}
           type='monotone'
         />
