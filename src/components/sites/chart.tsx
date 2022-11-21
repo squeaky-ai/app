@@ -17,8 +17,6 @@ import {
   TooltipProps, 
   XAxisProps,
   YAxisProps,
-  AreaChart,
-  Area,
 } from 'recharts';
 
 interface Props {
@@ -37,9 +35,7 @@ export const Chart: FC<Props> = ({ chartType, ...props }) => {
     case 'bar':
       return <ChartBar {...props} />;
     case 'line':
-      return <ChartLine {...props} />
-    case 'area':
-      return <ChartArea {...props} />;
+      return <ChartLine {...props} />;
   }
 };
 
@@ -147,59 +143,5 @@ const ChartBar: FC<Omit<Props, 'chartType'>> = ({
         />
       ))}
     </BarChart>
-  </ResponsiveContainer>
-);
-
-const ChartArea: FC<Omit<Props, 'chartType'>> = ({
-  admin,
-  data,
-  tooltip,
-  items,
-  scale,
-  xAxisProps,
-  yAxisProps,
-}) => (
-  <ResponsiveContainer>
-    <AreaChart data={data} margin={{ top: 1, left: -16, right: 16, bottom: 1 }}>
-      <defs>
-        {items.map((_, index) => (
-          <linearGradient key={`gradient-${index}`} id={`gradient-${index}`} x1='0' y1='0' x2='0' y2='1'>
-            <stop offset='5%' stopColor={getPrimaryColor(admin, index)} stopOpacity={0.85} />
-            <stop offset='95%' stopColor={getPrimaryColor(admin, index)} stopOpacity={.15} />
-          </linearGradient>
-        ))}
-      </defs>
-
-      <XAxis
-        dataKey='dateKey'
-        stroke={getLabelTextColor(admin)}
-        tickLine={false}
-        tickMargin={10} 
-        {...xAxisProps}
-      />
-
-      <YAxis
-        stroke={getLabelTextColor(admin)}
-        tickLine={false}
-        tickMargin={10}
-        domain={['auto', 'auto']}
-        scale={scale} 
-        {...yAxisProps}
-      />
-
-      <Tooltip content={tooltip} />
-
-      {items.map((item, index) => (
-        <Area
-          key={item.dataKey as string}
-          dataKey={item.dataKey}
-          fillOpacity={1}
-          stroke={getPrimaryColor(admin, index)}
-          fill={`url(#gradient-${index})`}
-          strokeWidth={2}
-          type='monotone'
-        />
-      ))}
-    </AreaChart>
   </ResponsiveContainer>
 );

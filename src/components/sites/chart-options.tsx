@@ -45,9 +45,6 @@ export const ChartOptions: FC<Props> = ({
             <Radio name='chartType' checked={chartType === 'bar'} onChange={() => setChartType('bar')}>
               Bar
             </Radio>
-            <Radio name='chartType' checked={chartType === 'area'} onChange={() => setChartType('area')}>
-              Area
-            </Radio>
           </div>
         </>
       )}

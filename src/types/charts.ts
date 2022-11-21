@@ -1,9 +1,9 @@
-import { LineProps, BarProps, AreaProps } from 'recharts';
+import { LineProps, BarProps } from 'recharts';
 
-export type ChartType = 'bar' | 'line' | 'area';
+export type ChartType = 'bar' | 'line';
 
 export type ChartItemProps = Pick<
-  LineProps | BarProps | AreaProps,
+  LineProps | BarProps,
   'dataKey' |
   'stroke' |
   'fillOpacity' |
