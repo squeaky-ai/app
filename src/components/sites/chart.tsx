@@ -164,8 +164,8 @@ const ChartArea: FC<Omit<Props, 'chartType'>> = ({
       <defs>
         {items.map((_, index) => (
           <linearGradient key={`gradient-${index}`} id={`gradient-${index}`} x1='0' y1='0' x2='0' y2='1'>
-            <stop offset='5%' stopColor={getPrimaryColor(admin, index)} stopOpacity={0.8} />
-            <stop offset='95%' stopColor='var(--white)' stopOpacity={0} />
+            <stop offset='5%' stopColor={getPrimaryColor(admin, index)} stopOpacity={0.85} />
+            <stop offset='95%' stopColor={getPrimaryColor(admin, index)} stopOpacity={.15} />
           </linearGradient>
         ))}
       </defs>
