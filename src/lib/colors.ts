@@ -7,7 +7,7 @@ export const colorsPrimary = [
   'var(--mauve-500)',
   'var(--orange-500)',
   'var(--gray-blue-500)',
-  'var(--magenta-500)',
+  'var(--mauve-400)',
   'var(--gray-400)',
 ];
 
