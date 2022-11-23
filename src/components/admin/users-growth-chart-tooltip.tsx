@@ -8,7 +8,7 @@ export const UsersGrowthChartTooltip: FC<ChartTooltipProps> = (props) => (
     {({ label, data }) => (
       <>
         <Label>{label}</Label>
-        <Value color={colorsPrimaryAdmin[0]}>{data.newUserCount || 0} users</Value>
+        <Value color={colorsPrimaryAdmin[0]}>{data.count || 0} users</Value>
       </>
     )}
   </ChartTooltip>
