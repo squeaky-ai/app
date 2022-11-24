@@ -159,6 +159,31 @@
       margin: 1rem 0 0 1.5rem;
     }
 
+    .toggle-languages {
+      background: none;
+      border: none;
+      margin: 0 0 1rem 0;
+      padding: 0;
+
+      .icon {
+        font-size: var(--font-size-body-xl);
+      }
+
+      &.open {
+        .icon {
+          transform: rotate(180deg);
+        }
+      }
+    }
+
+    .language-options {
+      display: none;
+
+      &.open {
+        display: block;
+      }
+    }
+
     .languages {
       margin: 0 0 1.5rem 0;
   
@@ -177,6 +202,19 @@
             margin: 0 .25rem 0 0;
           }
         }
+      }
+    }
+
+    .consent-widget {
+      .container {
+        .input:last-of-type {
+          margin: 0 0 .5rem;
+        }
+      }
+
+      .guidance {
+        color: var(--gray-500);
+        font-size: var(--font-size-body-sm);
       }
     }
 

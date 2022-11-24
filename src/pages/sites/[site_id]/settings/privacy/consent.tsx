@@ -2,6 +2,7 @@ import React from 'react';
 import type { NextPage } from 'next';
 import * as Yup from 'yup';
 import Head from 'next/head';
+import classnames from 'classnames';
 import { uniq } from 'lodash';
 import { Formik } from 'formik';
 import { Main } from 'components/main';
@@ -9,6 +10,7 @@ import { Access } from 'components/sites/access';
 import { Page } from 'components/sites/page';
 import { Radio } from 'components/radio';
 import { Input } from 'components/input';
+import { Icon } from 'components/icon';
 import { Error } from 'components/error';
 import { Checkbox } from 'components/checkbox';
 import { Button } from 'components/button';
@@ -37,8 +39,12 @@ const ConsentSchema = Yup.object().shape({
 
 const SitesSettingsPrivacyConsent: NextPage<ServerSideProps> = ({ user }) => {
   const toasts = useToasts();
+  
+  const [showLanguages, setShowLanguages] = React.useState<boolean>(false);
 
   const { loading, error, consent, locale, setLocale } = useConsent();
+
+  const handleToggleShowLanguages = () => setShowLanguages(!showLanguages);
 
   if (error) {
     return <Error />;
@@ -70,9 +76,8 @@ const SitesSettingsPrivacyConsent: NextPage<ServerSideProps> = ({ user }) => {
               <Container className='md consent'>
                 <h4>Visitor Consent</h4>
 
-                <p>One of the great advantages of Squeaky is that <b>we&apos;re a privacy-first analytics solution</b>, we&apos;re cookieless, and we don&apos;t use IP to track your visitors, and we allow you to avoid capturing any senstive data if you so wish. This means that <b>in many cases you will not need to gain the consent of your visitors</b> using consent banners and pop-ups.</p>
-                <p>That said, <b>depending on the location and function of your business, along with the ways and types of data you collect from your visitors, you may need to ask for their consent prior to capturing data</b> with Squeaky. We provide a few options to support you in consent capture and we&apos;ve outlined them below.</p>
-                <p><b>Please note</b>: We always recommend our customers seek professional legal advice when determing the appropriate privacy, consent and compliance requirements for their business.</p>
+                <p>Squeaky is a <b>privacy-first analytics solution</b>. We don&apos;t use cookies or IP tracking, and we disable the capture of senstive data by default. This means that <b>typically you won&apos;t need to request visitor consent to use our tool</b> on your site, as you are never compromising their privacy.</p>
+                <p>The only time that you do need visitor consent is if you are using Squeaky to capture personal data (e.g. name, date of birth, email address, or postal address). If you are capturing personal data please read our <a href='/legal/gdpr' target='_blank'>GDPR</a> and <a href='/legal/ccpa' target='_blank'>CCPA</a> documentation to understand your obligations.</p>
 
                 <Formik
                   initialValues={{ 
@@ -147,7 +152,7 @@ const SitesSettingsPrivacyConsent: NextPage<ServerSideProps> = ({ user }) => {
                       </div>
 
                       {values.consentMethod === 'widget' && (
-                        <Card>
+                        <Card className='consent-widget'>
                           <p>To use the Squeaky consent widget, please configure the following options:</p>
                           <Container className='xxsm'>
                             <Label htmlFor='name'>Your company name</Label>
@@ -176,54 +181,9 @@ const SitesSettingsPrivacyConsent: NextPage<ServerSideProps> = ({ user }) => {
                             />
                             <span className='validation'>{errors.privacyPolicyUrl}</span>
                           </Container>
+                          <p className='guidance'><a href='/legal/gdpr' target='_blank'>Click here</a> for guidance on GDPR and CCPA compliance with Squeaky.</p>
 
-                          <Label>Consent languages</Label>
-                          <p>If you have visitors that are using a different primary language then you may wish to adjust the consent widget accordingly. Please check the boxes before for any languages you&apos;d like to include and we will show them these languages if they match the visitor&apos;s browser or device settings.</p>
-                        
-                          <div className='languages'>
-                            {Object.entries(countryNames).map(([locale, name]) => (
-                              <div className='row' key={locale}>
-                                <span className='name'>
-                                  <Checkbox
-                                    name='languages'
-                                    onChange={(event) => {
-                                      if (!event.target.checked && locale === values.languagesDefault) {
-                                        setFieldValue('languagesDefault', 'en');
-                                      }
-
-                                      handleChange(event);
-                                    }}
-                                    disabled={locale === 'en'}
-                                    value={locale}
-                                    checked={values.languages.includes(locale)}
-                                  >
-                                    {name}
-                                  </Checkbox>
-                                </span>
-                                <span>
-                                  {values.languagesDefault === locale
-                                    ? <i>Default</i>
-                                    : (
-                                        <Button
-                                          className='link'
-                                          onClick={() => {
-                                            setFieldValue('languages', uniq([...values.languages, locale]));
-                                            setFieldValue('languagesDefault', locale);
-                                          }}
-                                        >
-                                          Make default
-                                        </Button>
-                                      )
-                                  }
-                                </span>
-                              </div>
-                            ))}
-                          </div>
-
-                          <p>If you&apos;d like to request an additional language be added to our consent surveys then please contact us via email using <a href='mailto:hello@squeaky.ai'>hello@squeaky.ai</a>.</p>
-
-                          <Label htmlFor='layout'>Layout</Label>
-                          <p>Where would you like your consent widget to appear?</p>
+                          <Label htmlFor='layout'>Widget position</Label>
                           <div className='radio-group'>
                             <Radio
                               name='layout'
@@ -249,6 +209,54 @@ const SitesSettingsPrivacyConsent: NextPage<ServerSideProps> = ({ user }) => {
                             >
                               Center of the page
                             </Radio>
+                          </div>
+
+                          <Button type='button' className={classnames('label toggle-languages', { open: showLanguages })} onClick={handleToggleShowLanguages}>
+                            Consent languages
+                            <Icon name='arrow-drop-down-line' />
+                          </Button>
+                          <div className={classnames('language-options', { open: showLanguages })}>
+                            <p>Please check the boxes for any languages you&apos;d like to include and we will show your visitors the language that matches their browser or device settings. To request an additional language please contact us via email using <a href='mailto:hello@squeaky.ai'>hello@squeaky.ai</a>.</p>
+                        
+                            <div className='languages'>
+                              {Object.entries(countryNames).map(([locale, name]) => (
+                                <div className='row' key={locale}>
+                                  <span className='name'>
+                                    <Checkbox
+                                      name='languages'
+                                      onChange={(event) => {
+                                        if (!event.target.checked && locale === values.languagesDefault) {
+                                          setFieldValue('languagesDefault', 'en');
+                                        }
+
+                                        handleChange(event);
+                                      }}
+                                      disabled={locale === 'en'}
+                                      value={locale}
+                                      checked={values.languages.includes(locale)}
+                                    >
+                                      {name}
+                                    </Checkbox>
+                                  </span>
+                                  <span>
+                                    {values.languagesDefault === locale
+                                      ? <i>Default</i>
+                                      : (
+                                          <Button
+                                            className='link'
+                                            onClick={() => {
+                                              setFieldValue('languages', uniq([...values.languages, locale]));
+                                              setFieldValue('languagesDefault', locale);
+                                            }}
+                                          >
+                                            Make default
+                                          </Button>
+                                        )
+                                    }
+                                  </span>
+                                </div>
+                              ))}
+                            </div>
                           </div>
 
                           <ConsentPreview 
