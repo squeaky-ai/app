@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import classnames from 'classnames';
 import { useRouter } from 'next/router';
 import { Button } from 'components/button';
 import { Icon } from 'components/icon';
@@ -15,6 +16,10 @@ import { CreateSiteStep, SiteType } from 'types/sites';
 import { useSiteCreate } from 'hooks/use-site-create';
 import type { Site } from 'types/graphql';
 
+interface Props {
+  buttonClassName?: string;
+}
+
 const allSteps = [
   CreateSiteStep.Type,
   CreateSiteStep.Details,
@@ -23,7 +28,7 @@ const allSteps = [
   CreateSiteStep.Confirmation,
 ];
 
-export const CreateModal: FC = () => {
+export const CreateModal: FC<Props> = ({ buttonClassName }) => {
   const ref = React.useRef<Modal>();
   const router = useRouter();
 
@@ -90,7 +95,7 @@ export const CreateModal: FC = () => {
 
   return (
     <>
-      <Button className='link new-site' onClick={openModal}>
+      <Button className={classnames('new-site', buttonClassName || 'link')} onClick={openModal}>
         + Add New
       </Button>
 

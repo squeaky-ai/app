@@ -168,7 +168,7 @@ const SitesSettingsPrivacyConsent: NextPage<ServerSideProps> = ({ user }) => {
                             />
                             <span className='validation'>{errors.name}</span>
 
-                            <Label htmlFor='privacyPolicyUrl'>A link to you Privacy Policy</Label>
+                            <Label htmlFor='privacyPolicyUrl'>A link to your Privacy Policy</Label>
                             <Input 
                               type='text'
                               placeholder='e.g. https://acme.com/privacy'
@@ -216,7 +216,7 @@ const SitesSettingsPrivacyConsent: NextPage<ServerSideProps> = ({ user }) => {
                             <Icon name='arrow-drop-down-line' />
                           </Button>
                           <div className={classnames('language-options', { open: showLanguages })}>
-                            <p>Please check the boxes for any languages you&apos;d like to include and we will show your visitors the language that matches their browser or device settings. To request an additional language please contact us via email using <a href='mailto:hello@squeaky.ai'>hello@squeaky.ai</a>.</p>
+                            <p>Please check the boxes for any languages you&apos;d like to include and we will show your visitors the language that matches their browser or device settings. To request an additional language please email us via <a href='mailto:hello@squeaky.ai'>hello@squeaky.ai</a>.</p>
                         
                             <div className='languages'>
                               {Object.entries(countryNames).map(([locale, name]) => (
