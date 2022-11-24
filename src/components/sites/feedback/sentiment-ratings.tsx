@@ -52,7 +52,7 @@ export const SentimentRatings: FC<Props> = ({ period, ratings }) => {
   const { data } = formatChartData<FeedbackSentimentRating>(period, ratings);
 
   const results = data.map(d => ({
-    dataKey: d.key,
+    dateKey: d.key,
     score: doNotAllowZero(scale, avg(d.data.map(s => s.score))),
     ...groupScoreCounts(scale, d.data),
   }));
@@ -61,7 +61,7 @@ export const SentimentRatings: FC<Props> = ({ period, ratings }) => {
     <div className='chart-wrapper'>
       <Chart
         data={results}
-        tooltip={SentimentRatingsChartTooltip}
+        tooltip={props => <SentimentRatingsChartTooltip {...props} period={period} />}
         scale={scale}
         chartType={type}
         items={[{ dataKey: 'score' }]}

@@ -7,8 +7,6 @@ import { Steps } from 'components/sites/create/steps';
 import { StepType } from 'components/sites/create/step-type';
 import { StepDetails } from 'components/sites/create/step-details';
 import { StepInvite } from 'components/sites/create/step-invite-team';
-import { StepPrivacy } from 'components/sites/create/step-privacy';
-import { StepConsent } from 'components/sites/create/step-consent';
 import { StepTrackingCode } from 'components/sites/create/step-tracking-code';
 import { StepConfirmation } from 'components/sites/create/step-confirmation';
 import { CloseConfirmModal } from 'components/sites/create/close-confirm-modal';
@@ -21,8 +19,6 @@ const allSteps = [
   CreateSiteStep.Type,
   CreateSiteStep.Details,
   CreateSiteStep.InviteTeam,
-  CreateSiteStep.Privacy,
-  CreateSiteStep.Consent,
   CreateSiteStep.TrackingCode,
   CreateSiteStep.Confirmation,
 ];
@@ -127,20 +123,6 @@ export const CreateModal: FC = () => {
               )}
               {step === CreateSiteStep.InviteTeam && (
                 <StepInvite 
-                  site={site} 
-                  handleForward={handleForward} 
-                  handleBack={handleBack} 
-                />
-              )}
-              {step === CreateSiteStep.Privacy && (
-                <StepPrivacy 
-                  site={site} 
-                  handleForward={handleForward} 
-                  handleBack={handleBack} 
-                />
-              )}
-              {step === CreateSiteStep.Consent && (
-                <StepConsent
                   site={site} 
                   handleForward={handleForward} 
                   handleBack={handleBack} 

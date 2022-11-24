@@ -45,7 +45,7 @@ export const NpsReplies: FC<Props> = ({ period, replies }) => {
     <div className='chart-wrapper'>
       <Chart
         data={results}
-        tooltip={NpsRepliesChartTooltip}
+        tooltip={props => <NpsRepliesChartTooltip {...props} period={period} />}
         scale={scale}
         chartType={type}
         items={[{ dataKey: 'count' }]}

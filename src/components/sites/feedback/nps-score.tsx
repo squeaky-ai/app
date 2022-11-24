@@ -26,7 +26,7 @@ export const NpsScore: FC<Props> = ({ period, scores }) => {
   const { data } = formatChartData<FeedbackNpsScore>(period, scores.responses);
 
   const results = data.map(d => ({
-    dataKey: d.key,
+    dateKey: d.key,
     score: doNotAllowZero(scale, getNps(d.data)),
   }));
 
@@ -34,7 +34,7 @@ export const NpsScore: FC<Props> = ({ period, scores }) => {
     <div className='chart-wrapper'>
       <Chart
         data={results}
-        tooltip={NpsScoreChartTooltip}
+        tooltip={props => <NpsScoreChartTooltip {...props} period={period} />}
         scale={scale}
         chartType={type}
         items={[{ dataKey: 'score' }]}

@@ -104,6 +104,22 @@ const expandAbsoluteDateToRange = (date: AbsoluteTime): TimeRange => {
   }
 };
 
+export const getOrdinalEnding = (value: number): string => {
+  const rules = new Intl.PluralRules('en', { type: 'ordinal' });
+
+  const suffixes: Record<string, string> = {
+    one: 'st', 
+    two: 'nd', 
+    few: 'rd', 
+    other: 'th',
+  };
+
+  const category = rules.select(value);
+  const suffix = suffixes[category];
+
+  return (value + suffix);
+};
+
 export const getDateRange = (period: TimePeriod): TimeRange => {
   const now = new Date();
   const todaysDate = formatDateForGraphQL(now);
@@ -161,6 +177,25 @@ export const getDayByIndex = (index: number) => {
   };
 
   return get(days, index, '');
+};
+
+export const getMonthByIndex = (index: number) => {
+  const months = {
+    0: 'January',
+    1: 'February',
+    2: 'March',
+    3: 'April',
+    4: 'May',
+    5: 'June',
+    6: 'July',
+    7: 'August',
+    8: 'September',
+    9: 'October',
+    10: 'November',
+    11: 'December'
+  };
+
+  return get(months, index, '');
 };
 
 export const expandDay = (day: string) => {

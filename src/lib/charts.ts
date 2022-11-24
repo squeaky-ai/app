@@ -1,5 +1,5 @@
 import { range, minBy } from 'lodash';
-import { toSlashyDate } from 'lib/dates';
+import { toSlashyDate, getMonthByIndex, getOrdinalEnding } from 'lib/dates';
 import type { AbsoluteTime, TimePeriod } from 'types/common';
 
 import {
@@ -170,11 +170,32 @@ const getMonthlyResults = <T extends ChartInput>(input: T[], months: number): Da
   return { data: data.reverse() };
 };
 
+const formatHourLabel = (label: string) => {
+  return label.replace(/(am|pm)$/, '.00$1');
+};
+
+const formatDayLabel = (label: string) => {
+  const [day, month] = label.split('/');
+  return `${getOrdinalEnding(Number(day))} ${getMonthByIndex(Number(month) - 1)}`;
+};
+
+const formatMonthLabel = (label: string) => {
+  const [year, month] = label.split('/');
+  return `${getMonthByIndex(Number(month) - 1)} ${year}`;
+};
+
 export const formatLabel = (period: TimePeriod, label: string) => {
   switch(period) {
     case 'today':
     case 'yesterday':
-      return label.replace(/(am|pm)$/, '.00$1');
+      return formatHourLabel(label);
+    case 'past_seven_days':
+    case 'past_fourteen_days':
+    case 'past_thirty_days':
+      return formatDayLabel(label);
+    case 'past_six_months':
+    case 'past_year':
+      return formatMonthLabel(label);
     default:
       return label;
   }

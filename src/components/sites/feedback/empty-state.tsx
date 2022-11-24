@@ -53,7 +53,7 @@ export const EmptyState: FC<Props> = ({
             body={
               <>
                 <p>Please install your tracking code to start capturing data for your site.</p>
-                <Link href={`/sites/${site.id}/settings/tracking-code`}>
+                <Link href={`/sites/${site.id}/settings/details/tracking-code`}>
                   <a className='button primary'>Install Tracking Code</a>
                 </Link>
               </>
