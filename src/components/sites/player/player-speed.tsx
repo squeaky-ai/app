@@ -70,7 +70,7 @@ export const PlayerSpeed: FC<Props> = ({
       <Divider />
 
       <Checkbox checked={skipInactivity} onChange={handleSkipChange}>
-        Skip inactivity
+        Fast forward inactivity
       </Checkbox>
     </Dropdown>
   );
