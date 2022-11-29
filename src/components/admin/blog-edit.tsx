@@ -13,6 +13,7 @@ import { Image } from 'components/admin/image';
 import { TextArea } from 'components/textarea';
 import { Button } from 'components/button';
 import { Select, Option } from 'components/select';
+import { BlogDelete } from 'components/admin/blog-delete';
 import { exportBlogPost, getInitialValues } from 'lib/admin/blog';
 import type { BlogPost } from 'types/graphql';
 import type { BlogInput } from 'types/admin';
@@ -171,9 +172,15 @@ export const BlogEdit: FC<Props> = ({ post, images, onChange, refetchImages }) =
                 value={values.script}
               />
 
-              <Button className='primary submit' type='submit'>
-                {post ? 'Update Post' : 'Create Post'}
-              </Button>
+              <div className='actions'>
+                <Button className='primary submit' type='submit'>
+                  {post ? 'Update Post' : 'Create Post'}
+                </Button>
+                
+                {post && (
+                  <BlogDelete id={post.id} />
+                )}
+              </div>
             </form>
           </div>
         </Card>

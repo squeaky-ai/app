@@ -8,15 +8,16 @@ import { deleteBlogPost } from 'lib/api/graphql';
 
 interface Props {
   id: string;
+  onClose?: VoidFunction;
 }
 
-export const BlogDelete: FC<Props> = ({ id }) => {
+export const BlogDelete: FC<Props> = ({ id, onClose }) => {
   const ref = React.useRef<Modal>();
 
   const router = useRouter();
 
   const openModal = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
+    event.stopPropagation();
 
     if (ref.current) ref.current.show();
   };
@@ -39,7 +40,7 @@ export const BlogDelete: FC<Props> = ({ id }) => {
         Delete Post
       </Button>
 
-      <Modal ref={ref} className='sm'>
+      <Modal ref={ref} className='sm' onClose={onClose}>
         <ModalBody aria-labelledby='delete-post-title' aria-describedby='delete-post-description'>
           <ModalHeader>
             <p id='delete-post-title'><b>Delete Post</b></p>
