@@ -36,7 +36,7 @@ export const BlogDelete: FC<Props> = ({ id, onClose }) => {
 
   return (
     <>
-      <Button className='tertiary delete-post' onClick={openModal}>
+      <Button type='button' className='tertiary delete-post' onClick={openModal}>
         Delete Post
       </Button>
 
