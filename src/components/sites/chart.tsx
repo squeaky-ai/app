@@ -91,7 +91,6 @@ const ChartLine: FC<Omit<Props, 'chartType'>> = ({
           fillOpacity={1}
           stroke={getPrimaryColor(admin, index)}
           strokeWidth={2}
-          type='monotone'
         />
       ))}
     </LineChart>

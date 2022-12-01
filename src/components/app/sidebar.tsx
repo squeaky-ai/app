@@ -13,7 +13,6 @@ import { SidebarSupport } from 'components/app/sidebar-support';
 import { SidebarGroup } from 'components/app/sidebar-group';
 import { SidebarCollapse } from 'components/app/sidebar-collapse';
 import { useSidebar } from 'hooks/use-sidebar';
-import { Tag } from 'components/tag';
 import { Breakpoints } from 'data/common/constants';
 import { Preferences, Preference } from 'lib/preferences';
 import { OWNER, ADMIN } from 'data/teams/constants';
@@ -164,7 +163,7 @@ export const Sidebar: FC<Props> = ({ user }) => {
               <Link href={`/sites/${siteId}/events`}>
                 <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/events`) })} data-label='Events'>
                   <Icon className='sidebar-icon' name='flashlight-line' />
-                  <span>Events <Tag>BETA</Tag></span>
+                  <span>Events</span>
                 </a>
               </Link>
               <Link href={`/sites/${siteId}/errors`}>
