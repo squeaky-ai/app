@@ -18,10 +18,12 @@ type Names = Record<FeatureFlag, string>;
 
 export const allFeatureFlags: FeatureFlag[] = [
   FeatureFlag.CHEESE_LOADER,
+  FeatureFlag.VISITORS_WORLD_MAP,
 ];
 
 export const featureFlagNames: Names = {
   CHEESE_LOADER: 'Cheese Loader',
+  VISITORS_WORLD_MAP: 'Visitors World Map',
 };
 
 const options: State = [
@@ -30,6 +32,12 @@ const options: State = [
     value: false,
     superuser: false,
     description: 'Replace the standard spinner with a cheesy Squeaky one',
+  },
+  {
+    key: FeatureFlag.VISITORS_WORLD_MAP,
+    value: false,
+    superuser: true,
+    description: 'Show the visitors world map in analytics',
   },
 ];
 

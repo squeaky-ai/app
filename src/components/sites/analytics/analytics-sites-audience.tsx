@@ -9,9 +9,12 @@ import { AnalyticsCountries } from 'components/sites/analytics/analytics-countri
 import { AnalyticsReferrers } from 'components/sites/analytics/analytics-referrers';
 import { AnalyticsDevices } from 'components/sites/analytics/analytics-devices';
 import { AnalyticsScreenWidths } from 'components/sites/analytics/analytics-screen-widths';
+import { AnalyticsWorldMap } from 'components/sites/analytics/analytics-world-map';
 import { PageLoading } from 'components/sites/page-loading';
 import { useAnalyticsAudience } from 'hooks/use-analytics-audience';
 import { getDateRange } from 'lib/dates';
+import { FeatureFlag } from 'lib/feature-flags';
+import { useFeatureFlags } from 'hooks/use-feature-flags';
 import type { Site } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 
@@ -22,6 +25,8 @@ interface Props {
 
 export const AnalyticsSitesAudience: FC<Props> = ({ site, period }) => {
   const [referrersPage, setReferrersPage] = React.useState<number>(1);
+
+  const { featureFlagEnabled } = useFeatureFlags();
 
   const { analytics, error, loading } = useAnalyticsAudience({
     site,
@@ -79,6 +84,14 @@ export const AnalyticsSitesAudience: FC<Props> = ({ site, period }) => {
         <h4>Screen Widths</h4>
         <AnalyticsScreenWidths dimensions={analytics.dimensions} /> 
       </div>
+
+      {featureFlagEnabled(FeatureFlag.VISITORS_WORLD_MAP) && (
+        <div className='grid-item world-map'>
+          <Card>
+            <AnalyticsWorldMap countries={analytics.countries} />
+          </Card>
+        </div>
+      )}
     </div>
   );
 };
