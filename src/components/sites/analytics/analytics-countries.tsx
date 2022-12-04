@@ -6,6 +6,7 @@ import { Flag } from 'components/flag';
 import { Table, Row, Cell } from 'components/table';
 import { Pagination } from 'components/pagination';
 import type { AnalyticsCountry } from 'types/graphql';
+import { AnalyticsWorldMap } from './analytics-world-map';
 
 interface Props {
   countries: AnalyticsCountry[];
@@ -41,7 +42,7 @@ export const AnalyticsCountries: FC<Props> = ({ countries }) => {
           </Table>
         </div>
         <div className='map'>
-
+          <AnalyticsWorldMap countries={countries} />
         </div>
       </div>
 
