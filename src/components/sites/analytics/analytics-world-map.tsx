@@ -59,7 +59,7 @@ export const AnalyticsWorldMap: FC<Props> = ({ countries }) => {
   return (
     <div className='world-map' onMouseMove={handleMouseMove}>
       <div ref={tooltipRef} className={classnames('tooltip-menu', { show: hoveredCountry })}>
-        <b>{hoveredCountry?.name}</b> ({ hoveredCountry?.count })
+        <b>{hoveredCountry?.name}</b> ({ hoveredCountry?.count?.toLocaleString() })
       </div>
       <svg ref={ref} fill='#F2F2F2' stroke='#707070' strokeWidth='.2' viewBox='0 0 2000 857'>
         <g id='AF'>

@@ -41,7 +41,7 @@ const RenderItem: FC<RenderItemProps> = ({ page, type }) => {
     case 'page':
       return (
         <Button>
-          {page}
+          {page?.toLocaleString()}
         </Button>
       );
     default:
