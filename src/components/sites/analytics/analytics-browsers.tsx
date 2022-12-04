@@ -48,7 +48,7 @@ export const AnalyticsBrowsers: FC<Props> = ({
               {browser.browser}
             </Cell>
             <Cell>
-              <b>{browser.count}</b> {percentage(browsers.pagination.total, browser.count)}%
+              <b>{browser.count.toLocaleString()}</b> {percentage(browsers.pagination.total, browser.count)}%
             </Cell>
             <Cell className='filters-links'>
               <FiltersRecordingsLink 

@@ -16,7 +16,7 @@ interface Props {
 
 export const AnalyticsLanguages: FC<Props> = ({ languages }) => {
   const [page, setPage] = React.useState<number>(0);
-  const [sort, setSort] = React.useState<string>('visitors__asc');
+  const [sort, setSort] = React.useState<string>('visitors__desc');
 
   const limit = 10;
   const total = sum(languages.map(b => b.count));
@@ -51,7 +51,7 @@ export const AnalyticsLanguages: FC<Props> = ({ languages }) => {
                 {language.name}
               </Cell>
               <Cell>
-                <b>{language.count}</b> {percentage(total, language.count)}%
+                <b>{language.count.toLocaleString()}</b> {percentage(total, language.count)}%
               </Cell>
               <Cell className='filters-links'>
                 <FiltersRecordingsLink 
@@ -71,10 +71,10 @@ export const AnalyticsLanguages: FC<Props> = ({ languages }) => {
       
       {languages.length > limit && (
         <Pagination
-          currentPage={page}
+          currentPage={page + 1}
           pageSize={limit}
           total={languages.length}
-          setPage={setPage}
+          setPage={page => setPage(page - 1)}
           scrollToTop={false}
         />
       )}
