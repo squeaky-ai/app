@@ -9,13 +9,11 @@ import { AnalyticsCountries } from 'components/sites/analytics/analytics-countri
 import { AnalyticsReferrers } from 'components/sites/analytics/analytics-referrers';
 import { AnalyticsDevices } from 'components/sites/analytics/analytics-devices';
 import { AnalyticsScreenWidths } from 'components/sites/analytics/analytics-screen-widths';
-import { AnalyticsWorldMap } from 'components/sites/analytics/analytics-world-map';
 import { PageLoading } from 'components/sites/page-loading';
 import { useAnalyticsAudience } from 'hooks/use-analytics-audience';
 import { getDateRange } from 'lib/dates';
-import { FeatureFlag } from 'lib/feature-flags';
-import { useFeatureFlags } from 'hooks/use-feature-flags';
-import type { Site } from 'types/graphql';
+import { useSort } from 'hooks/use-sort';
+import { AnalyticsBrowsersSort, Site } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 
 interface Props {
@@ -24,13 +22,16 @@ interface Props {
 }
 
 export const AnalyticsSitesAudience: FC<Props> = ({ site, period }) => {
+  const [browsersPage, setBrowsersPage] = React.useState<number>(1);
   const [referrersPage, setReferrersPage] = React.useState<number>(1);
 
-  const { featureFlagEnabled } = useFeatureFlags();
+  const { sort: browsersSort, setSort: setBrowsersSort } = useSort<AnalyticsBrowsersSort>('analytics-browsers');
 
   const { analytics, error, loading } = useAnalyticsAudience({
     site,
     referrersPage,
+    browsersPage,
+    browsersSort,
     range: getDateRange(period),
   });
 
@@ -50,20 +51,8 @@ export const AnalyticsSitesAudience: FC<Props> = ({ site, period }) => {
     <div className='analytics-audience sites'>
       <div className='grid-item countries'>
         <Card>
-          <h4>Countries</h4>
           <AnalyticsCountries countries={analytics.countries} />
         </Card>
-      </div>
-
-      <div className='grid-item languages'>
-        <Card>
-          <h4>Language</h4>
-          <AnalyticsLanguages languages={analytics.languages} />
-        </Card>   
-      </div>
-
-      <div className='grid-item browsers'>
-        <AnalyticsBrowsers browsers={analytics.browsers} />
       </div>
 
       <div className='grid-item referrers'>
@@ -72,6 +61,22 @@ export const AnalyticsSitesAudience: FC<Props> = ({ site, period }) => {
           referrers={analytics.referrers} 
           page={referrersPage} 
           setPage={setReferrersPage}
+        />
+      </div>
+
+      <div className='grid-item languages'>
+        <h4>Language</h4>
+        <AnalyticsLanguages languages={analytics.languages} />
+      </div>
+
+      <div className='grid-item browsers'>
+        <h4>Browser</h4>
+        <AnalyticsBrowsers 
+          browsers={analytics.browsers} 
+          page={browsersPage}
+          setPage={setBrowsersPage}
+          sort={browsersSort}
+          setSort={setBrowsersSort}
         />
       </div>
 
@@ -84,14 +89,6 @@ export const AnalyticsSitesAudience: FC<Props> = ({ site, period }) => {
         <h4>Screen Widths</h4>
         <AnalyticsScreenWidths dimensions={analytics.dimensions} /> 
       </div>
-
-      {featureFlagEnabled(FeatureFlag.VISITORS_WORLD_MAP) && (
-        <div className='grid-item world-map'>
-          <Card>
-            <AnalyticsWorldMap countries={analytics.countries} />
-          </Card>
-        </div>
-      )}
     </div>
   );
 };

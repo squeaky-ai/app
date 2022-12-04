@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { GET_ANALYTICS_AUDIENCE_QUERY } from 'data/analytics/queries';
-import type { Site } from 'types/graphql';
+import type { AnalyticsBrowsersSort, Site } from 'types/graphql';
 import type { TimeRange } from 'types/common';
 import type { AnalyticsAudience } from 'types/analytics';
 
@@ -14,6 +14,8 @@ interface Props {
   site: Site;
   range: TimeRange;
   referrersPage: number;
+  browsersPage: number;
+  browsersSort: AnalyticsBrowsersSort;
 }
 
 export const useAnalyticsAudience = (props: Props): UseAnalytics => {

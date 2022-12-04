@@ -539,6 +539,7 @@ export type AnalyticsBouncesArgs = {
 export type AnalyticsBrowsersArgs = {
   page?: InputMaybe<Scalars['Int']>;
   size?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<AnalyticsBrowsersSort>;
 };
 
 
@@ -608,6 +609,13 @@ export type AnalyticsBrowsers = {
   items: Array<AnalyticsBrowser>;
   pagination: CommonPagination;
 };
+
+export enum AnalyticsBrowsersSort {
+  /** Least amount of browsers first */
+  CountAsc = 'count__asc',
+  /** Most amount of browsers first */
+  CountDesc = 'count__desc'
+}
 
 export type AnalyticsCountry = {
   __typename?: 'AnalyticsCountry';
@@ -724,6 +732,7 @@ export type AnalyticsPerPage = {
 export type AnalyticsPerPageBrowsersArgs = {
   page?: InputMaybe<Scalars['Int']>;
   size?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<AnalyticsBrowsersSort>;
 };
 
 
@@ -3310,6 +3319,7 @@ export type VisitorsExport = {
 };
 
 export type VisitorsFilters = {
+  browsers: Array<Scalars['String']>;
   firstVisited?: InputMaybe<FiltersDate>;
   languages: Array<Scalars['String']>;
   lastActivity?: InputMaybe<FiltersDate>;

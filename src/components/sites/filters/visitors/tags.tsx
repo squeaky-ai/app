@@ -10,6 +10,7 @@ import { TagsVisitedPages } from 'components/sites/filters/common/tags-visited-p
 import { TagsUnvisitedPages } from 'components/sites/filters/common/tags-unvisited-pages';
 import { TagsStarred } from 'components/sites/filters/common/tags-starred';
 import { TagsReferrers } from 'components/sites/filters/common/tags-referrers';
+import { TagsBrowsers } from 'components/sites/filters/common/tags-browsers';
 import type { VisitorsFilters } from 'types/visitors';
 import type { ValueOf } from 'types/common';
 
@@ -29,6 +30,7 @@ export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
   const hasUnvisitedPages = filters.unvisitedPages.length > 0;
   const hasReferrers = filters.referrers.length > 0;
   const hasStarred = filters.starred !== null;
+  const hasBrowsers = filters.browsers.length > 0;
 
   const hasFilters = (
     hasStatus ||
@@ -39,7 +41,8 @@ export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
     hasVisitedPages ||
     hasUnvisitedPages ||
     hasReferrers ||
-    hasStarred
+    hasStarred || 
+    hasBrowsers
   );
 
   if (!hasFilters) return null;
@@ -64,6 +67,10 @@ export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
 
       {hasLanguages && (
         <TagsLanguages filters={filters} updateFilters={updateFilters} />
+      )}
+
+      {hasBrowsers && (
+        <TagsBrowsers filters={filters} updateFilters={updateFilters} />
       )}
 
       {hasVisitedPages && (

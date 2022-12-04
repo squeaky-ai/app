@@ -8,6 +8,7 @@ import {
   EventsCaptureSort,
   AnalyticsPagesSort,
   EventsFeedSort,
+  AnalyticsBrowsersSort,
 } from 'types/graphql';
 
 type ComponentType = 
@@ -17,7 +18,8 @@ type ComponentType =
   'sentiment' |
   'events' |
   'analytics-pages' |
-  'events-feed';
+  'events-feed' |
+  'analytics-browsers';
 
 interface UseSort<T> {
   sort: T;
@@ -50,6 +52,8 @@ const getDefaultSort = (type: ComponentType) => {
       return AnalyticsPagesSort.ViewsDesc;
     case 'events-feed':
       return EventsFeedSort.TimestampDesc;
+    case 'analytics-browsers':
+      return AnalyticsBrowsersSort.CountDesc;
   }
 };
 

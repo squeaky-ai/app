@@ -9,6 +9,7 @@ export const FILTERS: VisitorsFilters = {
     count: null
   },
   languages: [],
+  browsers: [],
   visitedPages: [],
   unvisitedPages: [],
   referrers: [],

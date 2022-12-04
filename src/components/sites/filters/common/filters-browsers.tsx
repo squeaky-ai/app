@@ -7,13 +7,12 @@ import { gql, useQuery } from '@apollo/client';
 import { Button } from 'components/button';
 import { Checkbox } from 'components/checkbox';
 import { Spinner } from 'components/spinner';
-import type { Site, RecordingsFilters } from 'types/graphql';
-import type { ValueOf } from 'types/common';
+import type { Site } from 'types/graphql';
 
 interface Props {
-  value: RecordingsFilters['browsers'];
+  value: string[];
   onClose: VoidFunction;
-  onUpdate: (value: ValueOf<RecordingsFilters>) => void;
+  onUpdate: (value: string[]) => void;
 }
 
 const QUERY = gql`

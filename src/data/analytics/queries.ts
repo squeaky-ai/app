@@ -66,7 +66,7 @@ export const GET_ANALYTICS_TRAFFIC_QUERY = gql`
 `;
 
 export const GET_ANALYTICS_AUDIENCE_QUERY = gql`
-  query GetAnalytics($siteId: ID!, $fromDate: ISO8601Date!, $toDate: ISO8601Date!, $referrersPage: Int!) { 
+  query GetAnalytics($siteId: ID!, $fromDate: ISO8601Date!, $toDate: ISO8601Date!, $referrersPage: Int!, $browsersPage: Int!, $browsersSort: AnalyticsBrowsersSort!) { 
     site(siteId: $siteId) {
       id
       analytics(fromDate: $fromDate, toDate: $toDate) {
@@ -84,7 +84,7 @@ export const GET_ANALYTICS_AUDIENCE_QUERY = gql`
           deviceX
           count
         }
-        browsers(size: 10) {
+        browsers(size: 10, page: $browsersPage, sort: $browsersSort) {
           items {
             browser
             count
@@ -168,7 +168,7 @@ export const GET_ANALYTICS_PAGE_TRAFFIC_QUERY = gql`
 `;
 
 export const GET_ANALYTICS_PAGE_AUDIENCE_QUERY = gql`
-  query GetAnalytics($siteId: ID!, $fromDate: ISO8601Date!, $toDate: ISO8601Date!, $referrersPage: Int!, $page: String!) { 
+  query GetAnalytics($siteId: ID!, $fromDate: ISO8601Date!, $toDate: ISO8601Date!, $referrersPage: Int!, $page: String!, $browsersPage: Int!, $browsersSort: AnalyticsBrowsersSort!) { 
     site(siteId: $siteId) {
       id
       analytics(fromDate: $fromDate, toDate: $toDate) {
@@ -182,7 +182,7 @@ export const GET_ANALYTICS_PAGE_AUDIENCE_QUERY = gql`
             code
             count
           }
-          browsers(size: 10) {
+          browsers(size: 10, page: $browsersPage, sort: $browsersSort) {
             items {
               browser
               count

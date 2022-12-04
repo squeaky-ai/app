@@ -10,7 +10,7 @@ import { FiltersDuration } from 'components/sites/filters/recordings/filters-dur
 import { FiltersPage } from 'components/sites/filters/common/filters-page';
 import { FiltersPages } from 'components/sites/filters/common/filters-pages';
 import { FiltersDevice } from 'components/sites/filters/recordings/filters-device';
-import { FiltersBrowsers } from 'components/sites/filters/recordings/filters-browsers';
+import { FiltersBrowsers } from 'components/sites/filters/common/filters-browsers';
 import { FiltersViewport } from 'components/sites/filters/recordings/filters-viewport';
 import { FiltersLanguage } from 'components/sites/filters/common/filters-language';
 import { FiltersBookmarked } from 'components/sites/filters/recordings/filters-bookmarked';

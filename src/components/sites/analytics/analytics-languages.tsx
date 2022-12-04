@@ -2,7 +2,12 @@ import React from 'react';
 import type { FC } from 'react';
 import { sum } from 'lodash';
 import { percentage } from 'lib/maths';
-import { Button } from 'components/button';
+import { Card } from 'components/card';
+import { Table, Row, Cell } from 'components/table';
+import { FiltersVisitorsLink } from '../filters/common/filters-visitors-link';
+import { Sort } from 'components/sort';
+import { FiltersRecordingsLink } from 'components/sites/filters/common/filters-recordings-link';
+import { Pagination } from 'components/pagination';
 import type { AnalyticsLanguage } from 'types/graphql';
 
 interface Props {
@@ -10,30 +15,68 @@ interface Props {
 }
 
 export const AnalyticsLanguages: FC<Props> = ({ languages }) => {
-  const [showAll, setShowAll] = React.useState<boolean>(false);
+  const [page, setPage] = React.useState<number>(0);
+  const [sort, setSort] = React.useState<string>('visitors__asc');
 
-  const limit = 5;
+  const limit = 10;
   const total = sum(languages.map(b => b.count));
-  const results = showAll ? languages : languages.slice(0, limit);
+
+  const results = [...languages]
+    .slice(page * limit, page * limit + limit)
+    .sort((a, b) => sort === 'visitors__asc'
+      ? a.count - b.count
+      : b.count - a.count
+    );
 
   return (
     <>
-      <ul>
-        {results.map((language, index) => (
-          <li key={language.name}>
-            <h3>{index + 1}</h3>
-            <div className='details'>
-              <p>{language.name}</p>
-              <p className='count'>{percentage(total, language.count)}%</p>
-            </div>
-          </li>
-        ))}
-      </ul>
+      <Card>
+        <Table>
+          <Row head>
+            <Cell>Language</Cell>
+            <Cell>
+              Visitors
+              <Sort
+                name='visitors'
+                onAsc={() => setSort('visitors__asc')}
+                onDesc={() => setSort('visitors__desc')}
+                order={sort}
+              />
+            </Cell>
+            <Cell />
+          </Row>
+          {results.map(language => (
+            <Row key={language.name}>
+              <Cell>
+                {language.name}
+              </Cell>
+              <Cell>
+                <b>{language.count}</b> {percentage(total, language.count)}%
+              </Cell>
+              <Cell className='filters-links'>
+                <FiltersRecordingsLink 
+                  action={{ languages: [language.name] }}
+                  hint='View recordings that were in this language'
+                />
+
+                <FiltersVisitorsLink
+                  action={{ languages: [language.name] }}
+                  hint='View visitors that were in this language'
+                />
+              </Cell>
+            </Row>
+          ))}
+        </Table>
+      </Card>
       
       {languages.length > limit && (
-        <Button onClick={() => setShowAll(!showAll)} className='link show-all'>
-          Show {showAll ? 'Less' : 'All'}
-        </Button>
+        <Pagination
+          currentPage={page}
+          pageSize={limit}
+          total={languages.length}
+          setPage={setPage}
+          scrollToTop={false}
+        />
       )}
     </>
   );

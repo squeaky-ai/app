@@ -9,7 +9,7 @@ import { TagsExitUrl } from 'components/sites/filters/recordings/tags-exit-url';
 import { TagsVisitedPages } from 'components/sites/filters/common/tags-visited-pages';
 import { TagsUnvisitedPages } from 'components/sites/filters/common/tags-unvisited-pages';
 import { TagsDevices } from 'components/sites/filters/recordings/tags-devices';
-import { TagsBrowsers } from 'components/sites/filters/recordings/tags-browsers';
+import { TagsBrowsers } from 'components/sites/filters/common/tags-browsers';
 import { TagsLanguages } from 'components/sites/filters/common/tags-languages';
 import { TagsViewport } from 'components/sites/filters/recordings/tags-viewport';
 import { TagsBookmarked } from 'components/sites/filters/recordings/tags-bookmarked';

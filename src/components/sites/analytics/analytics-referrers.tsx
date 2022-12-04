@@ -50,12 +50,14 @@ export const AnalyticsReferrers: FC<Props> = ({ referrers, page, setPage }) => (
       })}
     </Table>
 
-    <Pagination
-      pageSize={10}
-      currentPage={page}
-      total={referrers.pagination.total}
-      setPage={setPage}
-      scrollToTop={false}
-    />
+    {referrers.items.length > referrers.pagination.pageSize && (
+      <Pagination
+        pageSize={10}
+        currentPage={page}
+        total={referrers.pagination.total}
+        setPage={setPage}
+        scrollToTop={false}
+      />
+    )}
   </>
 );

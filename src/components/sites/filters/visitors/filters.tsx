@@ -12,6 +12,7 @@ import { FiltersRecordings } from 'components/sites/filters/visitors/filters-rec
 import { FiltersPages } from 'components/sites/filters/common/filters-pages';
 import { FiltersReferrers } from 'components/sites/filters/recordings/filters-referrers';
 import { FiltersStarred } from 'components/sites/filters/common/filters-starred';
+import { FiltersBrowsers } from 'components/sites/filters/common/filters-browsers';
 import type { VisitorsFilters } from 'types/visitors';
 import type { TimePeriod, ValueOf } from 'types/common';
 
@@ -33,6 +34,7 @@ enum FilterType {
   Language,
   Referrer,
   Starred,
+  Browser,
 }
 
 export const Filters: FC<Props> = ({ period, filters, updateFilters }) => {
@@ -73,6 +75,10 @@ export const Filters: FC<Props> = ({ period, filters, updateFilters }) => {
         <Button onClick={() => handleFilterChange(FilterType.Language)} className={classnames({ open: openFilter === FilterType.Language})}>
           <Icon name='arrow-drop-left-line' />
           Language
+        </Button>
+        <Button onClick={() => handleFilterChange(FilterType.Browser)} className={classnames({ open: openFilter === FilterType.Browser})}>
+          <Icon name='arrow-drop-left-line' />
+          Browser
         </Button>
         <Button onClick={() => handleFilterChange(FilterType.VisitedPages)} className={classnames({ open: openFilter === FilterType.VisitedPages})}>
           <Icon name='arrow-drop-left-line' />
@@ -120,6 +126,12 @@ export const Filters: FC<Props> = ({ period, filters, updateFilters }) => {
             <>
               <Label>Language</Label>
               <FiltersLanguage value={filters.languages} onUpdate={handleUpdate('languages')}  onClose={handleFilterClose} />
+            </>
+          )}
+          {openFilter === FilterType.Browser && (
+            <>
+              <Label>Browser</Label>
+              <FiltersBrowsers value={filters.browsers} onUpdate={handleUpdate('browsers')}  onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.VisitedPages && (

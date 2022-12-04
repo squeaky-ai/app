@@ -5,47 +5,87 @@ export interface AnalyticsColor {
 
 export const ANALYTICS_COLOURS: AnalyticsColor[] = [
   {
-    background: '#F2F2F2',
-    percentage: 0
+    background: '#F7F7F7',
+    percentage: 0,
   },
   {
-    background: '#c9ddef',
-    percentage: 10
+    background: '#F2F6FA',
+    percentage: 5,
   },
   {
-    background: '#b2cee8',
-    percentage: 20
+    background: '#E5EDF4',
+    percentage: 10,
   },
   {
-    background: '#a7c7e5',
-    percentage: 30
+    background: '#D9E4EF',
+    percentage: 15,
+  },
+  { 
+    background: '#CCDCEA',
+    percentage: 20,
   },
   {
-    background: '#8db7dd',
-    percentage: 40
+    background: '#BFD3E5',
+    percentage: 25,
   },
   {
-    background: '#77a8d6',
-    percentage: 50
+    background: '#B3CADF',
+    percentage: 30,
   },
   {
-    background: '#639dd3',
-    percentage: 60
+    background: '#A6C1DA',
+    percentage: 35,
   },
   {
-    background: '#5391cc',
-    percentage: 70
+    background: '#99B8D5 ',
+    percentage: 40,
   },
   {
-    background: '#4186c6',
-    percentage: 80
+    background: '#8CAFD0',
+    percentage: 45,
   },
   {
-    background: '#1f73c1',
+    background: '#80A6CA',
+    percentage: 50,
+  },
+  {
+    background: '#739EC5',
+    percentage: 55,
+  },
+  {
+    background: '#6695C0',
+    percentage: 60,
+  },
+  {
+    background: '#6695C0',
+    percentage: 65,
+  },
+  {
+    background: '#598CBB',
+    percentage: 70,
+  },
+  {
+    background: '#4C83B5',
+    percentage: 75,
+  },
+  {
+    background: '#407AB0',
+    percentage: 80,
+  },
+  {
+    background: '#3371AB',
+    percentage: 85,
+  },
+  {
+    background: '#2668A6',
     percentage: 90
   },
   {
-    background: '#0768C1',
+    background: '#1A5FA0',
+    percentage: 95,
+  },
+  {
+    background: '#0D569B',
     percentage: 100
   },
 ];

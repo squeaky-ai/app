@@ -54,22 +54,21 @@
   .analytics-audience {
     display: grid;
     grid-gap: 2rem;
-    grid-template-areas: 'countries languages browsers'
-                         'referrers referrers referrers'
-                         'devices screen-widths screen-widths'
-                         'world-map world-map world-map';
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-areas: 'countries countries countries countries countries countries'
+                         'referrers referrers referrers referrers referrers referrers'
+                         'languages languages languages browsers browsers browsers'
+                         'devices devices screen-widths screen-widths screen-widths screen-widths';
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     grid-template-rows: auto;
 
     @include breakpoint-md {
       grid-gap: 1.5rem;
       grid-template-areas: 'countries'
+                           'referrers'
                            'languages'
                            'browsers'
-                           'referrers'
                            'devices'
-                           'sceen-widths'
-                           'world-map';
+                           'sceen-widths';
       grid-template-columns: 100%;
     }
 
@@ -98,52 +97,35 @@
 
         .card {
           flex: 0;
+          padding: 0;
+        }
 
-          ul {
-            margin: 0;
-            padding: 0;
-  
-            li {
-              align-items: center;
-              display: flex;
-              list-style: none;
-              height: 3rem;
-              margin: 0 0 .5rem 0;
-  
-              &:last-of-type {
-                margin-bottom: 0;
-              }
-          
-              .contents {
-                flex: 1;
-                margin-left: 1.5rem;
-              }
-          
-              .percentage {
-                background: var(--purple-500);
-                border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
-                height: .5rem;
-                margin: 0 0 .5rem 0;
-              }
-          
-              p {
-                color: var(--gray-500);
-                font-size: var(--font-size-body-sm);
-                line-height: var(--line-height-body-sm);
-                margin: 0;
-          
-                b {
-                  color: var(--gray-blue-800);
-                }
-              }
-            }
+        .browser {
+          margin: 0 .5rem 0 0;
+          vertical-align: middle;
+        }
+
+        .filters-links {
+          align-items: flex-end;
+          display: flex;
+
+          .button {
+            height: 1rem;
+            text-align: right;
           }
         }
 
-        .show-all {
-          margin-top: 1.5rem;
-          text-align: left;
-          text-decoration: underline;
+        .table {
+          box-shadow: none;
+
+          .row {
+            grid-template-columns: 2fr 1fr 100px;
+            height: 2.5rem;
+          }
+        }
+
+        .rc-pagination {
+          margin: 1.5rem 0 0 0;
         }
       }
 
@@ -155,7 +137,7 @@
         }
 
         .table .row {
-          grid-template-columns: 1fr 200px 100px;
+          grid-template-columns: 2fr 1fr 100px;
 
           @include breakpoint-md {
             align-items: flex-start;
@@ -193,47 +175,34 @@
 
       &.languages {
         grid-area: languages;
+        padding: 0;
 
         .card {
           flex: 0;
+          padding: 0;
         }
 
-        ul {
-          margin: 0;
-          padding: 0;
+        .filters-links {
+          align-items: flex-end;
+          display: flex;
 
-          li {
-            align-items: center;
-            display: flex;
-            list-style: none;
-            margin: 0 0 .5rem 0;
-
-            &:last-of-type {
-              margin-bottom: 0;
-            }
-
-            h3 {
-              color: var(--purple-500);
-              margin: 0 1.5rem 0 0;
-              width: 2rem;
-            }
-
-            p {
-              font-weight: var(--font-weight-medium);
-              margin: 0;
-
-              &.count {
-                color: var(--gray-500);
-                font-weight: var(--font-weight-normal);
-              }
-            }
+          .button {
+            height: 1rem;
+            text-align: right;
           }
         }
 
-        .show-all {
-          margin-top: 1.5rem;
-          text-align: left;
-          text-decoration: underline;
+        .table {
+          box-shadow: none;
+
+          .row {
+            grid-template-columns: 2fr 1fr 100px;
+            height: 2.5rem;
+          }
+        }
+
+        .rc-pagination {
+          margin: 1.5rem 0 0 0;
         }
       }
 
@@ -282,6 +251,8 @@
 
 
       &.countries {
+        grid-area: countries;
+
         .card {
           flex: 0;
         }
@@ -411,6 +382,7 @@
 
       &.world-map {
         grid-area: world-map;
+        position: relative;
 
         svg {
           width: 100%;

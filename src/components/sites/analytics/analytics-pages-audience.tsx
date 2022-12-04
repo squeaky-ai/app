@@ -11,7 +11,8 @@ import { AnalyticsDevices } from 'components/sites/analytics/analytics-devices';
 import { AnalyticsScreenWidths } from 'components/sites/analytics/analytics-screen-widths';
 import { AnalyticsReferrers } from 'components/sites/analytics/analytics-referrers';
 import { useAnalyticsPageAudience } from 'hooks/use-analytics-page-audience';
-import type { Site } from 'types/graphql';
+import { useSort } from 'hooks/use-sort';
+import type { AnalyticsBrowsersSort, Site } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 
 interface Props {
@@ -21,12 +22,17 @@ interface Props {
 }
 
 export const AnalyticsPagesAudience: FC<Props> = ({ site, page, period }) => {
+  const [browsersPage, setBrowsersPage] = React.useState<number>(1);
   const [referrersPage, setReferrersPage] = React.useState<number>(1);
+
+  const { sort: browsersSort, setSort: setBrowsersSort } = useSort<AnalyticsBrowsersSort>('analytics-browsers');
 
   const { analytics, error, loading } = useAnalyticsPageAudience({
     page,
     site,
     referrersPage,
+    browsersPage,
+    browsersSort,
     range: getDateRange(period),
   });
 
@@ -42,20 +48,8 @@ export const AnalyticsPagesAudience: FC<Props> = ({ site, page, period }) => {
     <div className='analytics-audience pages'>
       <div className='grid-item countries'>
         <Card>
-          <h4>Countries</h4>
           <AnalyticsCountries countries={analytics.countries} />
         </Card>
-      </div>
-
-      <div className='grid-item languages'>
-        <Card>
-          <h4>Language</h4>
-          <AnalyticsLanguages languages={analytics.languages} />
-        </Card>   
-      </div>
-
-      <div className='grid-item browsers'>
-        <AnalyticsBrowsers browsers={analytics.browsers} />
       </div>
 
       <div className='grid-item referrers'>
@@ -64,6 +58,22 @@ export const AnalyticsPagesAudience: FC<Props> = ({ site, page, period }) => {
           referrers={analytics.referrers} 
           page={referrersPage} 
           setPage={setReferrersPage}
+        />
+      </div>
+
+      <div className='grid-item languages'>
+        <h4>Language</h4>
+        <AnalyticsLanguages languages={analytics.languages} />
+      </div>
+
+      <div className='grid-item browsers'>
+        <h4>Browser</h4>
+        <AnalyticsBrowsers 
+          browsers={analytics.browsers} 
+          page={browsersPage}
+          setPage={setBrowsersPage}
+          sort={browsersSort}
+          setSort={setBrowsersSort}
         />
       </div>
 
