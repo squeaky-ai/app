@@ -5,8 +5,8 @@ import { percentage } from 'lib/maths';
 import { Flag } from 'components/flag';
 import { Table, Row, Cell } from 'components/table';
 import { Pagination } from 'components/pagination';
+import { AnalyticsWorldMap } from 'components/sites/analytics/analytics-world-map';
 import type { AnalyticsCountry } from 'types/graphql';
-import { AnalyticsWorldMap } from './analytics-world-map';
 
 interface Props {
   countries: AnalyticsCountry[];

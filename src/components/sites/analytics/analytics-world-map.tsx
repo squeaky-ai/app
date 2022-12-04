@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import classnames from 'classnames';
 import { percentage } from 'lib/maths';
 import { ANALYTICS_COLOURS } from 'data/analytics/constants';
 import type { AnalyticsCountry } from 'types/graphql';
@@ -10,6 +11,9 @@ interface Props {
 
 export const AnalyticsWorldMap: FC<Props> = ({ countries }) => {
   const ref = React.useRef<SVGSVGElement>(null);
+  const tooltipRef = React.useRef<HTMLDivElement>(null);
+
+  const [hoveredCountry, setHoveredCountry] = React.useState<AnalyticsCountry>(null);
 
   const maxCount = Math.max(...countries.map(c => c.count));
 
@@ -17,6 +21,22 @@ export const AnalyticsWorldMap: FC<Props> = ({ countries }) => {
     const percent = percentage(maxCount, count);
     const potentials = ANALYTICS_COLOURS.filter(c => percent >= c.percentage);
     return potentials[potentials.length - 1];
+  };
+
+  const handleMouseOver = (event: MouseEvent) => {
+    const code = (event.currentTarget as SVGGElement)?.id;
+    const country = countries.find(c => c.code === code);
+
+    setHoveredCountry(country || null);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredCountry(null);
+  };
+
+  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
+    tooltipRef.current.style.left = `${event.clientX + 16}px`;
+    tooltipRef.current.style.top = `${event.clientY + 16}px`;
   };
 
   React.useEffect(() => {
@@ -28,13 +48,19 @@ export const AnalyticsWorldMap: FC<Props> = ({ countries }) => {
           element.querySelectorAll('path').forEach(path => {
             path.style.fill = getBackgroundColor(country.count).background;
           });
+
+          element.addEventListener('mouseover', handleMouseOver);
+          element.addEventListener('mouseleave', handleMouseLeave);
         }
       });
     }
   }, []);
 
   return (
-    <div className='world-map'>
+    <div className='world-map' onMouseMove={handleMouseMove}>
+      <div ref={tooltipRef} className={classnames('tooltip-menu', { show: hoveredCountry })}>
+        <b>{hoveredCountry?.name}</b> ({ hoveredCountry?.count })
+      </div>
       <svg ref={ref} fill='#F2F2F2' stroke='#707070' strokeWidth='.2' viewBox='0 0 2000 857'>
         <g id='AF'>
           <path d='M1383 261.6l1.5 1.8-2.9 0.8-2.4 1.1-5.9 0.8-5.3 1.3-2.4 2.8 1.9 2.7 1.4 3.2-2 2.7 0.8 2.5-0.9 2.3-5.2-0.2 3.1 4.2-3.1 1.7-1.4 3.8 1.1 3.9-1.8 1.8-2.1-0.6-4 0.9-0.2 1.7-4.1 0-2.3 3.7 0.8 5.4-6.6 2.7-3.9-0.6-0.9 1.4-3.4-0.8-5.3 1-9.6-3.3 3.9-5.8-1.1-4.1-4.3-1.1-1.2-4.1-2.7-5.1 1.6-3.5-2.5-1 0.5-4.7 0.6-8 5.9 2.5 3.9-0.9 0.4-2.9 4-0.9 2.6-2-0.2-5.1 4.2-1.3 0.3-2.2 2.9 1.7 1.6 0.2 3 0 4.3 1.4 1.8 0.7 3.4-2 2.1 1.2 0.9-2.9 3.2 0.1 0.6-0.9-0.2-2.6 1.7-2.2 3.3 1.4-0.1 2 1.7 0.3 0.9 5.4 2.7 2.1 1.5-1.4 2.2-0.6 2.5-2.9 3.8 0.5 5.4 0z' />

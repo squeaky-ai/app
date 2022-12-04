@@ -265,6 +265,26 @@
           display: grid;
           grid-template-columns: 1fr 2fr;
 
+          .world-map {
+            grid-area: world-map;
+            position: relative;
+    
+            svg {
+              width: 100%;
+            }
+
+            .tooltip-menu {
+              display: none;
+              left: 0;
+              position: fixed;
+              top: 0;
+
+              &.show {
+                display: block;
+              }
+            }
+          }
+
           .row {
             grid-template-columns: 2fr 1fr;
             height: 2.5rem;
@@ -367,15 +387,6 @@
               text-align: center;
             }
           }
-        }
-      }
-
-      &.world-map {
-        grid-area: world-map;
-        position: relative;
-
-        svg {
-          width: 100%;
         }
       }
 
