@@ -2,8 +2,9 @@ import React from 'react';
 import type { FC } from 'react';
 import { sum } from 'lodash';
 import { percentage } from 'lib/maths';
-import { Button } from 'components/button';
 import { Flag } from 'components/flag';
+import { Table, Row, Cell } from 'components/table';
+import { Pagination } from 'components/pagination';
 import type { AnalyticsCountry } from 'types/graphql';
 
 interface Props {
@@ -11,32 +12,47 @@ interface Props {
 }
 
 export const AnalyticsCountries: FC<Props> = ({ countries }) => {
-  const [showAll, setShowAll] = React.useState<boolean>(false);
+  const [page, setPage] = React.useState<number>(0);
 
-  const limit = 5;
+  const limit = 10;
   const total = sum(countries.map(b => b.count));
-  const results = showAll ? countries : countries.slice(0, limit);
+
+  const results = [...countries]
+    .slice(page * limit, page * limit + limit)
+    .sort((a, b) =>  b.count - a.count);
 
   return (
     <>
-      <ul>
-        {results.map(country => (
-          <li key={country.name}>
-            <div className='flag-wrapper'>
-              <Flag code={country.code} />
-            </div>
-            <div className='details'>
-              <p>{country.name}</p>
-              <p className='count'>{percentage(total, country.count)}%</p>
-            </div>
-          </li>
-        ))}
-      </ul>
-      
+      <h5>Country</h5>
+      <div className='country-map'>
+        <div className='list'>
+          <Table>
+            {results.map(country => (
+              <Row key={country.name}>
+                <Cell>
+                  <Flag code={country.code} />
+                  {country.name}
+                </Cell>
+                <Cell>
+                  {percentage(total, country.count)}%
+                </Cell>
+              </Row>
+            ))}
+          </Table>
+        </div>
+        <div className='map'>
+
+        </div>
+      </div>
+
       {countries.length > limit && (
-        <Button onClick={() => setShowAll(!showAll)} className='link show-all'>
-          Show {showAll ? 'Less' : 'All'}
-        </Button>
+        <Pagination
+          currentPage={page + 1}
+          pageSize={limit}
+          total={countries.length}
+          setPage={page => setPage(page - 1)}
+          scrollToTop={false}
+        />
       )}
     </>
   );

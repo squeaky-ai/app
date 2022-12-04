@@ -4,9 +4,9 @@ import { sum } from 'lodash';
 import { percentage } from 'lib/maths';
 import { Card } from 'components/card';
 import { Table, Row, Cell } from 'components/table';
-import { FiltersVisitorsLink } from '../filters/common/filters-visitors-link';
-import { Sort } from 'components/sort';
+import { FiltersVisitorsLink } from 'components/sites/filters/common/filters-visitors-link';
 import { FiltersRecordingsLink } from 'components/sites/filters/common/filters-recordings-link';
+import { Sort } from 'components/sort';
 import { Pagination } from 'components/pagination';
 import type { AnalyticsLanguage } from 'types/graphql';
 
