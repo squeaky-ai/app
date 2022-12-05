@@ -19,9 +19,17 @@ export const AnalyticsVisitsAt: FC<Props> = ({ visitsAt }) => {
   const [scale, setScale] = React.useState<ScaleType>('auto');
 
   const getScaledValue = (number: number) => {
-    return scale === 'log' && number !== 0
-      ? Math.log(number)
-      : number;
+    if (number === 0) return number;
+    if (scale !== 'log') return number;
+    if (maxCount === 0) return number;
+
+    const logMin = minCount ? Math.log(minCount) : 0;
+    const logMax = maxCount ? Math.log(maxCount) : 0;
+
+    const logRange = logMax - logMin;
+    const logStep = logRange / 4;
+
+    return Math.exp(logMin + number * logStep);
   };
 
   const getHourAndDayForIndex = (index: number) => {
@@ -49,10 +57,8 @@ export const AnalyticsVisitsAt: FC<Props> = ({ visitsAt }) => {
 
   const orderedDayAndHourCounts = range(25 * 8).map(i => getCountForIndex(i));
 
-  const maxCount = (() => {
-    const max = Math.max(...Object.values(orderedDayAndHourCounts));
-    return getScaledValue(max);
-  })();
+  const minCount = Math.min(...Object.values(orderedDayAndHourCounts));
+  const maxCount = Math.max(...Object.values(orderedDayAndHourCounts));
 
   return (
     <>
