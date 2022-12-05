@@ -5,7 +5,7 @@ import { range } from 'lodash';
 import { Icon } from 'components/icon';
 import { ChartOptions } from 'components/sites/chart-options';
 import { percentage } from 'lib/maths';
-import { getAmPmForHour } from 'lib/charts';
+import { getAmPmForHour, getLogarithmicValue } from 'lib/charts';
 import { getDayByIndex } from 'lib/dates';
 import { ANALYTICS_COLOURS } from 'data/analytics/constants';
 import { AnalyticsVisitAt } from 'types/graphql';
@@ -17,20 +17,6 @@ interface Props {
 
 export const AnalyticsVisitsAt: FC<Props> = ({ visitsAt }) => {
   const [scale, setScale] = React.useState<ScaleType>('auto');
-
-  const getScaledValue = (number: number) => {
-    if (number === 0) return number;
-    if (scale !== 'log') return number;
-    if (maxCount === 0) return number;
-
-    const logMin = minCount ? Math.log(minCount) : 0;
-    const logMax = maxCount ? Math.log(maxCount) : 0;
-
-    const logRange = logMax - logMin;
-    const logStep = logRange / 4;
-
-    return Math.exp(logMin + number * logStep);
-  };
 
   const getHourAndDayForIndex = (index: number) => {
     const hour = index % 25;
@@ -48,7 +34,12 @@ export const AnalyticsVisitsAt: FC<Props> = ({ visitsAt }) => {
   };
 
   const getBackgroundColor = (count: number) => {
-    const value = getScaledValue(count);
+    const value = getLogarithmicValue(
+      scale,
+      count,
+      minCount,
+      maxCount,
+    );
     const percent = percentage(maxCount, value);
 
     const potentials = ANALYTICS_COLOURS.filter(c => percent >= c.percentage);

@@ -2,23 +2,34 @@ import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
 import { percentage } from 'lib/maths';
+import { getLogarithmicValue } from 'lib/charts';
 import { ANALYTICS_COLOURS } from 'data/analytics/constants';
 import type { AnalyticsCountry } from 'types/graphql';
+import type { ScaleType } from 'recharts/types/util/types';
 
 interface Props {
+  scale: ScaleType;
   countries: AnalyticsCountry[];
 }
 
-export const AnalyticsWorldMap: FC<Props> = ({ countries }) => {
+export const AnalyticsWorldMap: FC<Props> = ({ scale, countries }) => {
   const ref = React.useRef<SVGSVGElement>(null);
   const tooltipRef = React.useRef<HTMLDivElement>(null);
 
   const [hoveredCountry, setHoveredCountry] = React.useState<AnalyticsCountry>(null);
 
+  const minCount = Math.min(...countries.map(c => c.count));
   const maxCount = Math.max(...countries.map(c => c.count));
 
   const getBackgroundColor = (count: number) => {
-    const percent = percentage(maxCount, count);
+    const value = getLogarithmicValue(
+      scale,
+      count,
+      minCount,
+      maxCount
+    );
+
+    const percent = percentage(maxCount, value);
     const potentials = ANALYTICS_COLOURS.filter(c => percent >= c.percentage);
     return potentials[potentials.length - 1];
   };

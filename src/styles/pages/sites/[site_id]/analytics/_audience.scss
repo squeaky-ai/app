@@ -253,6 +253,17 @@
       &.countries {
         grid-area: countries;
 
+        .chart-heading {
+          align-items: center;
+          display: flex;
+          justify-content: space-between;
+          margin: 0 0 1.5rem 0;
+
+          h5 {
+            margin: 0;
+          }
+        }
+
         .card {
           flex: 0;
         }
