@@ -13,7 +13,13 @@ interface Props {
   countries: AnalyticsCountry[];
 }
 
-export const AnalyticsWorldMap: FC<Props> = ({ scale, countries }) => {
+const areEqual = (prevProps: Props, nextProps: Props): boolean => {
+  // Don't re-render this chungus if there's no need
+  return prevProps.scale === nextProps.scale &&
+    prevProps.countries.length === nextProps.countries.length;
+};
+
+export const AnalyticsWorldMap: FC<Props> = React.memo(({ scale, countries }) => {
   const ref = React.useRef<SVGSVGElement>(null);
   const tooltipRef = React.useRef<HTMLDivElement>(null);
 
@@ -985,4 +991,6 @@ export const AnalyticsWorldMap: FC<Props> = ({ scale, countries }) => {
       </svg>
     </div>
   );
-};
+}, areEqual);
+
+AnalyticsWorldMap.displayName = 'AnalyticsWorldMap';

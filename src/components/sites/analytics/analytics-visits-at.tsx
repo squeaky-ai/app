@@ -15,7 +15,11 @@ interface Props {
   visitsAt: AnalyticsVisitAt[];
 }
 
-export const AnalyticsVisitsAt: FC<Props> = ({ visitsAt }) => {
+const areEqual = (prevProps: Props, nextProps: Props): boolean => {
+  return prevProps.visitsAt.length === nextProps.visitsAt.length;
+};
+
+export const AnalyticsVisitsAt: FC<Props> = React.memo(({ visitsAt }) => {
   const [scale, setScale] = React.useState<ScaleType>('auto');
 
   const getHourAndDayForIndex = (index: number) => {
@@ -95,4 +99,6 @@ export const AnalyticsVisitsAt: FC<Props> = ({ visitsAt }) => {
       </div>
     </>
   );
-};
+}, areEqual);
+
+AnalyticsVisitsAt.displayName = 'AnalyticsVisitsAt';
