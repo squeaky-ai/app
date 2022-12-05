@@ -10,7 +10,6 @@ import { AnalyticsTimeAverages } from 'components/sites/analytics/analytics-time
 import { AnalyticsPageViews } from 'components/sites/analytics/analytics-page-views';
 import { AnalyticsPages } from 'components/sites/analytics/analytics-pages';
 import { Error } from 'components/error';
-import { Icon } from 'components/icon';
 import { NoResults } from 'components/sites/no-results';
 import { PageLoading } from 'components/sites/page-loading';
 import { useAnalyticsTraffic } from 'hooks/use-analytics-traffic';
@@ -85,7 +84,6 @@ export const AnalyticsSitesTraffic: FC<Props> = ({ site, period }) => {
 
         <div className='grid-item time-of-day'>
           <Card>
-            <h5><Icon name='group-line' /> Visitors by time of day</h5>
             <AnalyticsVisitsAt visitsAt={analytics.visitsAt} />
           </Card>
         </div>

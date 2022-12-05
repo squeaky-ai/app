@@ -114,6 +114,17 @@
       &.time-of-day {
         grid-area: time-of-day;
 
+        .chart-heading {
+          align-items: center;
+          display: flex;
+          justify-content: space-between;
+          margin: 0 0 1.5rem 0;
+
+          h5 {
+            margin: 0;
+          }
+        }
+
         .visits-at {
           display: grid;
           flex: 0;

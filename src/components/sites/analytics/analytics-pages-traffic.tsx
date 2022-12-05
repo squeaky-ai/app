@@ -1,6 +1,5 @@
 import React from 'react';
 import type { FC } from 'react';
-import { Icon } from 'components/icon';
 import { Card } from 'components/card';
 import { PageLoading } from 'components/sites/page-loading';
 import { Error } from 'components/error';
@@ -71,7 +70,6 @@ export const AnalyticsPagesTraffic: FC<Props> = ({ site, page, period }) => {
 
       <div className='grid-item time-of-day'>
         <Card>
-          <h5><Icon name='group-line' /> Visitors by time of day</h5>
           <AnalyticsVisitsAt visitsAt={analytics.visitsAt} />
         </Card>
       </div>
