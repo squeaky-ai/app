@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
+import { debounce } from 'lodash';
 import { percentage } from 'lib/maths';
 import { getLogarithmicValue } from 'lib/charts';
 import { ANALYTICS_COLOURS } from 'data/analytics/constants';
@@ -45,10 +46,10 @@ export const AnalyticsWorldMap: FC<Props> = ({ scale, countries }) => {
     setHoveredCountry(null);
   };
 
-  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = debounce((event: React.MouseEvent<HTMLDivElement>) => {
     tooltipRef.current.style.left = `${event.clientX + 16}px`;
     tooltipRef.current.style.top = `${event.clientY + 16}px`;
-  };
+  }, 10);
 
   React.useEffect(() => {
     if (ref.current) {
@@ -65,7 +66,7 @@ export const AnalyticsWorldMap: FC<Props> = ({ scale, countries }) => {
         }
       });
     }
-  }, []);
+  }, [scale]);
 
   return (
     <div className='world-map' onMouseMove={handleMouseMove}>
