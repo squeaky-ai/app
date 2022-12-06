@@ -29,7 +29,7 @@ export const AnalyticsPageViews: FC<Props> = ({ pageViews, period }) => {
         <div className='title'>
           <h5>Page Views</h5>
           <h3>{pageViews.total.toLocaleString()}</h3>
-          <Trend direction={pageViews.trend >= 0 ? 'up' : 'down'} value={pageViews.trend.toFixed(2)} />
+          <Trend direction={pageViews.trend >= 0 ? 'up' : 'down'} value={pageViews.trend.toLocaleString()} />
         </div>
 
         <div className='actions'>

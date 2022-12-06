@@ -8,7 +8,7 @@ export const RecordingsStoredChartTooltip: FC<ChartTooltipProps> = (props) => (
     {({ label, data }) => (
       <>
         <Label>{label}</Label>
-        <Value color={colorsPrimaryAdmin[0]}>{data.count || 0}</Value>
+        <Value color={colorsPrimaryAdmin[0]}>{(data.count || 0).toLocaleString()}</Value>
       </>
     )}
   </ChartTooltip>

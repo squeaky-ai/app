@@ -8,7 +8,7 @@ export const DashboardRecordingsChartTooltip: FC<ChartTooltipProps> = (props) =>
     {({ data }) => (
       <>
         <Label>New Recordings</Label>
-        <Value color={colorsPrimary[0]}>{data.count}</Value>
+        <Value color={colorsPrimary[0]}>{(data.count || 0).toLocaleString()}</Value>
       </>
     )}
   </ChartTooltip>

@@ -7,7 +7,7 @@ export const DashboardErrorsChartTooltip: FC<ChartTooltipProps> = (props) => (
     {({ data }) => (
       <>
         <Label>Errors</Label>
-        <Value color='var(--rose-500)'>{data.count}</Value>
+        <Value color='var(--rose-500)'>{(data.count || 0).toLocaleString()}</Value>
       </>
     )}
   </ChartTooltip>

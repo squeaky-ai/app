@@ -97,7 +97,7 @@ export const AnalyticsVisitsAt: FC<Props> = React.memo(({ visitsAt }) => {
               key={index} 
               className='visit' 
               style={{ background: getBackgroundColor(count).background }}
-              data-label={`${getDayByIndex(day)} ${getAmPmForHour(hour)}-${getAmPmForHour(hour === 24 ? 1 : hour + 1)} ${count} Vistors`}
+              data-label={`${getDayByIndex(day)} ${getAmPmForHour(hour)}-${getAmPmForHour(hour === 24 ? 1 : hour + 1)} ${count.toLocaleString()} Vistors`}
             />
           );
         })}

@@ -16,13 +16,13 @@ export const AnalyticsVisitorsChartTooltip: FC<ChartTooltipProps & Props> = (pro
       <>
         <Label>{formatLabel(props.period, label)}</Label>
         {props.show.includes('all') && (
-          <Value color={colorsPrimary[0]}>{data.allCount || 0} All Visitors</Value>
+          <Value color={colorsPrimary[0]}>{(data.allCount || 0).toLocaleString()} All Visitors</Value>
         )}
         {props.show.includes('existing') && (
-          <Value color={colorsPrimary[1]}>{data.existingCount || 0} Existing Visitors</Value>
+          <Value color={colorsPrimary[1]}>{(data.existingCount || 0).toLocaleString()} Existing Visitors</Value>
         )}
         {props.show.includes('new') && (
-          <Value color={colorsPrimary[2]}>{data.newCount || 0} New Visitors</Value>
+          <Value color={colorsPrimary[2]}>{(data.newCount || 0).toLocaleString()} New Visitors</Value>
         )}
       </>
     )}

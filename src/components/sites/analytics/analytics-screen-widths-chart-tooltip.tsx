@@ -8,7 +8,7 @@ export const AnalyticsScreenWidthsChartTooltip: FC<ChartTooltipProps> = (props) 
     {({ label, data }) => (
       <>
         <Label>Width: {label}px</Label>
-        <Value color={colorsPrimary[0]}>{data.count || 0} Total Visitors</Value>
+        <Value color={colorsPrimary[0]}>{(data.count || 0).toLocaleString()} Total Visitors</Value>
       </>
     )}
   </ChartTooltip>
