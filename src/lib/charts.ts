@@ -230,11 +230,10 @@ export const getLogarithmicValue = (
   if (scale !== 'log') return value;
   if (maxCount === 0) return value;
 
-  const logMin = minCount ? Math.log(minCount) : 0;
-  const logMax = maxCount ? Math.log(maxCount) : 0;
+  const logMin = minCount ? Math.log10(minCount) : 0;
+  const logMax = maxCount ? Math.log10(maxCount) : 0;
 
   const logRange = logMax - logMin;
-  const logStep = logRange / 4;
-
-  return Math.exp(logMin + value * logStep);
+  
+  return (Math.log10(value) - logMin) / logRange;
 };
