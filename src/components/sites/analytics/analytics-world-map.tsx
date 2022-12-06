@@ -25,7 +25,7 @@ export const AnalyticsWorldMap: FC<Props> = React.memo(({ scale, countries }) =>
 
   const [hoveredCountry, setHoveredCountry] = React.useState<AnalyticsCountry>(null);
 
-  const logarithmicScale = scaleLog(countries.map(c => c.count));
+  const logarithmicScale = scaleLog();
 
   const maxCount = Math.max(...countries.map(c => c.count));
 

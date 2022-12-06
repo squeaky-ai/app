@@ -23,7 +23,7 @@ const areEqual = (prevProps: Props, nextProps: Props): boolean => {
 export const AnalyticsVisitsAt: FC<Props> = React.memo(({ visitsAt }) => {
   const [scale, setScale] = React.useState<ScaleType>('auto');
 
-  const logarithmicScale = scaleLog(visitsAt.map(v => v.count));
+  const logarithmicScale = scaleLog();
 
   const getHourAndDayForIndex = (index: number) => {
     const hour = index % 25;
@@ -46,19 +46,13 @@ export const AnalyticsVisitsAt: FC<Props> = React.memo(({ visitsAt }) => {
     const value = logarithmicScale(count) || 0;
     const maxLogCount = logarithmicScale(maxCount) || 0;
 
-    console.log({
-      count,
-      value,
-      maxLogCount,
-    });
+    console.log('!!', { count, value, maxLogCount });
 
     return percentage(maxLogCount, value);
   };
 
   const getBackgroundColor = (count: number) => {
     const percent = getLogarithmicPercentage(count);
-
-    console.log(percent);
 
     const potentials = ANALYTICS_COLOURS.filter(c => percent >= c.percentage);
     return potentials[potentials.length - 1];
