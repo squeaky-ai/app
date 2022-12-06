@@ -56,8 +56,7 @@ export const AnalyticsWorldMap: FC<Props> = React.memo(({ scale, countries }) =>
   };
 
   const handleMouseMove = debounce((event: React.MouseEvent<HTMLDivElement>) => {
-    tooltipRef.current.style.left = `${event.clientX + 16}px`;
-    tooltipRef.current.style.top = `${event.clientY + 16}px`;
+    tooltipRef.current.style.transform = `translate(${event.clientX + 16}px, ${event.clientY + 16}px)`;
   }, 10);
 
   React.useEffect(() => {

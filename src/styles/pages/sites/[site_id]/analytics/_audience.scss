@@ -289,7 +289,7 @@
               left: 0;
               position: fixed;
               top: 0;
-              transition: left, top .1s ease-in-out;
+              transition: transform .3s ease-in-out;
 
               &.show {
                 display: block;
