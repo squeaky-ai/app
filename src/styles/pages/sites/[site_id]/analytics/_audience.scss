@@ -138,6 +138,7 @@
 
         .table .row {
           grid-template-columns: 2fr 1fr 100px;
+          height: 2.5rem;
 
           @include breakpoint-md {
             align-items: flex-start;
@@ -273,6 +274,7 @@
         }
 
         .country-map {
+          align-items: center;
           display: grid;
           grid-template-columns: 1fr 2fr;
 

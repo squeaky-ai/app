@@ -56,7 +56,7 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
       <div className='heading'>
         <div className='title'>
           <h5>Events Triggered</h5>
-          <h3>{totalCount}</h3>
+          <h3>{totalCount.toLocaleString()}</h3>
         </div>
         <div className='actions'>
           <ChartOptions

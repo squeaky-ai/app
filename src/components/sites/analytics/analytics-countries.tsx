@@ -49,6 +49,15 @@ export const AnalyticsCountries: FC<Props> = ({ countries }) => {
               </Row>
             ))}
           </Table>
+          {countries.length > limit && (
+            <Pagination
+              currentPage={page + 1}
+              pageSize={limit}
+              total={countries.length}
+              setPage={page => setPage(page - 1)}
+              scrollToTop={false}
+            />
+          )}
         </div>
         <div className='map'>
           <AnalyticsWorldMap 
@@ -57,16 +66,6 @@ export const AnalyticsCountries: FC<Props> = ({ countries }) => {
           />
         </div>
       </div>
-
-      {countries.length > limit && (
-        <Pagination
-          currentPage={page + 1}
-          pageSize={limit}
-          total={countries.length}
-          setPage={page => setPage(page - 1)}
-          scrollToTop={false}
-        />
-      )}
     </>
   );
 };

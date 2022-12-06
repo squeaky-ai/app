@@ -56,7 +56,7 @@ export const EventStatsTable: FC<Props> = ({ sort, eventStats, setSort }) => (
             <EventStatsTag type={stat.type} />
           </Cell>
           <Cell>
-            {stat.count}
+            {stat.count.toLocaleString()}
           </Cell>
         </Row>
       ))}
