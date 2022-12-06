@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import { omit } from 'lodash';
 import { colorsPrimary, colorsPrimaryAdmin } from 'lib/colors';
 import { ScaleType } from 'recharts/types/util/types';
 import type { ChartType, ChartItemProps } from 'types/charts';
@@ -46,6 +47,18 @@ const getPrimaryColor = (admin: boolean, index: number) => {
 
 const getLabelTextColor = (admin: boolean) => {
   return admin ? 'var(--gray-500)' : 'var(--gray-blue-800)';
+};
+
+const getAxisProps = (props: any) => omit(props, [
+  'tickFormatter',
+  'verticalAnchor',
+  'visibleTicksCount',
+]);
+
+const getFormattedTickLabel = (value: any) => {
+  return typeof value === 'number'
+    ? value.toLocaleString()
+    : value;
 };
 
 const ChartLine: FC<Omit<Props, 'chartType'>> = ({
@@ -114,6 +127,7 @@ const ChartBar: FC<Omit<Props, 'chartType'>> = ({
         dataKey='dateKey'
         stroke={getLabelTextColor(admin)}
         tickLine={false}
+        allowDecimals={false}
         tickMargin={10} 
         {...xAxisProps}
       />
@@ -122,7 +136,13 @@ const ChartBar: FC<Omit<Props, 'chartType'>> = ({
         stroke={getLabelTextColor(admin)}
         tickLine={false}
         tickMargin={10}
-        domain={['auto', 'auto']}
+        domain={[1, 'auto']}
+        allowDecimals={false}
+        tick={props => (
+          <text {...getAxisProps(props)}>
+            {getFormattedTickLabel(props.payload.value)}
+          </text>
+        )}
         scale={scale} 
         {...yAxisProps}
       />
@@ -137,10 +157,10 @@ const ChartBar: FC<Omit<Props, 'chartType'>> = ({
           stroke={getPrimaryColor(admin, index)}
           strokeWidth={item.strokeWidth}
           fill={getPrimaryColor(admin, index)}
-          stackId={item.dataKey as string}
           radius={[2, 2, 0, 0]}
         />
       ))}
     </BarChart>
   </ResponsiveContainer>
 );
+
