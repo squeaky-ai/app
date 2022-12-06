@@ -2,10 +2,11 @@ import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
 import { range } from 'lodash';
+import { scaleLog } from 'd3-scale';
 import { Icon } from 'components/icon';
 import { ChartOptions } from 'components/sites/chart-options';
 import { percentage } from 'lib/maths';
-import { getAmPmForHour, getLogarithmicValue } from 'lib/charts';
+import { getAmPmForHour } from 'lib/charts';
 import { getDayByIndex } from 'lib/dates';
 import { ANALYTICS_COLOURS } from 'data/analytics/constants';
 import { AnalyticsVisitAt } from 'types/graphql';
@@ -22,6 +23,8 @@ const areEqual = (prevProps: Props, nextProps: Props): boolean => {
 export const AnalyticsVisitsAt: FC<Props> = React.memo(({ visitsAt }) => {
   const [scale, setScale] = React.useState<ScaleType>('auto');
 
+  const logarithmicScale = scaleLog(visitsAt.map(v => v.count));
+
   const getHourAndDayForIndex = (index: number) => {
     const hour = index % 25;
     const day = Math.ceil((index + 1) / 25) - 1;
@@ -37,14 +40,17 @@ export const AnalyticsVisitsAt: FC<Props> = React.memo(({ visitsAt }) => {
     return match?.count || 0;
   };
 
+  const getLogarithmicPercentage = (count: number) => {
+    if (scale !== 'log') return percentage(maxCount, count);
+
+    const value = logarithmicScale(count) || 0;
+    const maxLogCount = logarithmicScale(maxCount) || 0;
+
+    return percentage(maxLogCount, value);
+  };
+
   const getBackgroundColor = (count: number) => {
-    const value = getLogarithmicValue(
-      scale,
-      count,
-      minCount,
-      maxCount,
-    );
-    const percent = percentage(maxCount, value);
+    const percent = getLogarithmicPercentage(count);
 
     const potentials = ANALYTICS_COLOURS.filter(c => percent >= c.percentage);
     return potentials[potentials.length - 1];
@@ -52,7 +58,6 @@ export const AnalyticsVisitsAt: FC<Props> = React.memo(({ visitsAt }) => {
 
   const orderedDayAndHourCounts = range(25 * 8).map(i => getCountForIndex(i));
 
-  const minCount = Math.min(...Object.values(orderedDayAndHourCounts));
   const maxCount = Math.max(...Object.values(orderedDayAndHourCounts));
 
   return (

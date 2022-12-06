@@ -1,7 +1,6 @@
 import { range, minBy } from 'lodash';
 import { toSlashyDate, getMonthByIndex, getOrdinalEnding } from 'lib/dates';
 import type { AbsoluteTime, TimePeriod } from 'types/common';
-import type { ScaleType } from 'recharts/types/util/types';
 
 import {
   getHours,
@@ -218,22 +217,4 @@ export const formatChartData = <T extends ChartInput>(period: TimePeriod, input:
   }
 
   return getMonthlyResults(input, duration);
-};
-
-export const getLogarithmicValue = (
-  scale: ScaleType, 
-  value: number,
-  minCount: number,
-  maxCount: number,
-) => {
-  if (value === 0) return value;
-  if (scale !== 'log') return value;
-  if (maxCount === 0) return value;
-
-  const logMin = minCount ? Math.log10(minCount) : 0;
-  const logMax = maxCount ? Math.log10(maxCount) : 0;
-
-  const logRange = logMax - logMin;
-  
-  return (Math.log10(value) - logMin) / logRange;
 };

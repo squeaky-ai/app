@@ -1,9 +1,9 @@
 import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
+import { scaleLog } from 'd3-scale';
 import { debounce } from 'lodash';
 import { percentage } from 'lib/maths';
-import { getLogarithmicValue } from 'lib/charts';
 import { ANALYTICS_COLOURS } from 'data/analytics/constants';
 import type { AnalyticsCountry } from 'types/graphql';
 import type { ScaleType } from 'recharts/types/util/types';
@@ -25,18 +25,21 @@ export const AnalyticsWorldMap: FC<Props> = React.memo(({ scale, countries }) =>
 
   const [hoveredCountry, setHoveredCountry] = React.useState<AnalyticsCountry>(null);
 
-  const minCount = Math.min(...countries.map(c => c.count));
+  const logarithmicScale = scaleLog(countries.map(c => c.count));
+
   const maxCount = Math.max(...countries.map(c => c.count));
 
-  const getBackgroundColor = (count: number) => {
-    const value = getLogarithmicValue(
-      scale,
-      count,
-      minCount,
-      maxCount
-    );
+  const getLogarithmicPercentage = (count: number) => {
+    if (scale !== 'log') return percentage(maxCount, count);
 
-    const percent = percentage(maxCount, value);
+    const value = logarithmicScale(count) || 0;
+    const maxLogCount = logarithmicScale(maxCount) || 0;
+
+    return percentage(maxLogCount, value);
+  };
+
+  const getBackgroundColor = (count: number) => {
+    const percent = getLogarithmicPercentage(count);
     const potentials = ANALYTICS_COLOURS.filter(c => percent >= c.percentage);
     return potentials[potentials.length - 1];
   };
