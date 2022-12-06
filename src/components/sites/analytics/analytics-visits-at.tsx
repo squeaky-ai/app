@@ -46,11 +46,19 @@ export const AnalyticsVisitsAt: FC<Props> = React.memo(({ visitsAt }) => {
     const value = logarithmicScale(count) || 0;
     const maxLogCount = logarithmicScale(maxCount) || 0;
 
+    console.log({
+      count,
+      value,
+      maxLogCount,
+    });
+
     return percentage(maxLogCount, value);
   };
 
   const getBackgroundColor = (count: number) => {
     const percent = getLogarithmicPercentage(count);
+
+    console.log(percent);
 
     const potentials = ANALYTICS_COLOURS.filter(c => percent >= c.percentage);
     return potentials[potentials.length - 1];
