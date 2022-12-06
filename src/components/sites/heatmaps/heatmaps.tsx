@@ -85,15 +85,15 @@ export const Heatmaps: FC<Props> = ({ type, page, pages, period, setPage, setPer
           <ButtonGroup>
             <Button className={classnames(device === HeatmapsDevice.Desktop ? 'primary' : 'blank')} onClick={() => setDevice(HeatmapsDevice.Desktop)}>
               <Icon name='computer-line' />
-              {heatmaps.counts.desktop}
+              {heatmaps.counts.desktop.toLocaleString()}
             </Button>
             <Button className={classnames(device === HeatmapsDevice.Tablet ? 'primary' : 'blank')} onClick={() => setDevice(HeatmapsDevice.Tablet)}>
               <Icon name='tablet-line' />
-              {heatmaps.counts.tablet}
+              {heatmaps.counts.tablet.toLocaleString()}
             </Button>
             <Button className={classnames(device === HeatmapsDevice.Mobile ? 'primary' : 'blank')} onClick={() => setDevice(HeatmapsDevice.Mobile)}>
               <Icon name='smartphone-line' />
-              {heatmaps.counts.mobile}
+              {heatmaps.counts.mobile.toLocaleString()}
             </Button>
           </ButtonGroup>
 
