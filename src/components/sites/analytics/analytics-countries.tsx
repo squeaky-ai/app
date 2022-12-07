@@ -7,8 +7,8 @@ import { Table, Row, Cell } from 'components/table';
 import { ChartOptions } from 'components/sites/chart-options';
 import { Pagination } from 'components/pagination';
 import { AnalyticsWorldMap } from 'components/sites/analytics/analytics-world-map';
+import { useChartSettings } from 'hooks/use-chart-settings';
 import type { AnalyticsCountry } from 'types/graphql';
-import type { ScaleType } from 'recharts/types/util/types';
 
 interface Props {
   countries: AnalyticsCountry[];
@@ -16,7 +16,8 @@ interface Props {
 
 export const AnalyticsCountries: FC<Props> = ({ countries }) => {
   const [page, setPage] = React.useState<number>(0);
-  const [scale, setScale] = React.useState<ScaleType>('auto');
+
+  const { scale, setScale } = useChartSettings('analytics-countries');
 
   const limit = 10;
   const total = sum(countries.map(b => b.count));

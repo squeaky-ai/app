@@ -9,8 +9,8 @@ import { percentage } from 'lib/maths';
 import { getAmPmForHour } from 'lib/charts';
 import { getDayByIndex } from 'lib/dates';
 import { ANALYTICS_COLOURS } from 'data/analytics/constants';
+import { useChartSettings } from 'hooks/use-chart-settings';
 import { AnalyticsVisitAt } from 'types/graphql';
-import type { ScaleType } from 'recharts/types/util/types';
 
 interface Props {
   visitsAt: AnalyticsVisitAt[];
@@ -21,7 +21,7 @@ const areEqual = (prevProps: Props, nextProps: Props): boolean => {
 };
 
 export const AnalyticsVisitsAt: FC<Props> = React.memo(({ visitsAt }) => {
-  const [scale, setScale] = React.useState<ScaleType>('auto');
+  const { scale, setScale } = useChartSettings('analytics-visits-at');
 
   const logarithmicScale = scaleLog();
 

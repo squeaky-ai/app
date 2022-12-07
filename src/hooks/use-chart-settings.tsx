@@ -6,8 +6,10 @@ type ChartSettingType =
   'admin-recordings-stored' |
   'admin-users-growth' |
   'admin-sites-growth' |
+  'analytics-countries' |
   'analytics-visitors' |
   'analytics-page-views' |
+  'analytics-visits-at' |
   'error-counts' |
   'event-counts' |
   'nps-replies' |
@@ -24,11 +26,27 @@ interface ChartSettings extends State {
   setScale: (scalle: ScaleType) => void;
 }
 
+const getDefaultSettings = (name: ChartSettingType): State => {
+  switch(name) {
+    case 'analytics-countries':
+    case 'analytics-visits-at':
+      return { scale: 'log', type: null };
+    case 'event-counts':
+      return { scale: 'auto', type: 'bar' };
+    case 'admin-recordings-stored':
+    case 'admin-sites-growth':
+    case 'admin-users-growth':
+    case 'analytics-page-views':
+    case 'analytics-visitors':
+    case 'error-counts':
+      return { scale: 'auto', type: 'line' };
+    default:
+      return { scale: 'auto', type: 'line' };
+  }
+};
+
 export const useChartSettings = (name: ChartSettingType): ChartSettings => {
-  const [state, setState] = React.useState<State>({
-    type: 'line',
-    scale: 'auto',
-  });
+  const [state, setState] = React.useState<State>(getDefaultSettings(name));
 
   const persist = (values: State) => {
     setState(values);
