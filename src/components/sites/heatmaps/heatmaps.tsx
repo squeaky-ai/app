@@ -19,8 +19,7 @@ import { HeatmapsDisplays } from 'components/sites/heatmaps/heatmaps-displays';
 import { useHeatmaps } from 'hooks/use-heatmaps';
 import { useHeatmapsItems } from 'hooks/use-heatmaps-items';
 import { getDateRange } from 'lib/dates';
-import { HeatmapsType } from 'types/heatmaps';
-import { HeatmapsDevice, SitesPage } from 'types/graphql';
+import { HeatmapsType, HeatmapsDevice, SitesPage } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 import type { HeatmapClickTarget } from 'types/heatmaps';
 
@@ -42,9 +41,12 @@ export const Heatmaps: FC<Props> = ({ type, page, pages, period, setPage, setPer
   const { loading, heatmaps } = useHeatmaps({ 
     page, 
     device, 
+    type,
     excludeRecordingIds,
     range: getDateRange(period),
   });
+
+  console.log(heatmaps);
 
   const { clickCounts, clickPositions, cursors, scrolls } = useHeatmapsItems({
     type,

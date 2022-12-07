@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import getConfig from 'next/config';
 import { useRouter } from 'next/router';
-import { HeatmapsType } from 'types/heatmaps';
+import { HeatmapsType } from 'types/graphql';
 import type { TimeRange } from 'types/common';
 import type { HeatmapsClickCount, HeatmapsClickPosition, HeatmapsScroll, HeatmapsCursor } from 'types/heatmaps';
 import type { HeatmapsDevice } from 'types/graphql';

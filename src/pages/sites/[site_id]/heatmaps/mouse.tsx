@@ -13,7 +13,7 @@ import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { usePages } from 'hooks/use-pages';
 import { usePeriod } from 'hooks/use-period';
 import { getDateRange } from 'lib/dates';
-import { HeatmapsType } from 'types/heatmaps';
+import { HeatmapsType } from 'types/graphql';
 
 const SitesHeatmapsMouse: NextPage<ServerSideProps> = ({ user }) => {
   const [page, setPage] = React.useState<string>(null);

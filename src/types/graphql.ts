@@ -295,6 +295,7 @@ export type AdminSiteHeatmapsArgs = {
   fromDate: Scalars['ISO8601Date'];
   page: Scalars['String'];
   toDate: Scalars['ISO8601Date'];
+  type: HeatmapsType;
 };
 
 
@@ -1551,6 +1552,7 @@ export type FiltersViewport = {
 export type Heatmaps = {
   __typename?: 'Heatmaps';
   counts: HeatmapsCounts;
+  items: Scalars['String'];
   recording?: Maybe<Recording>;
 };
 
@@ -1568,6 +1570,17 @@ export enum HeatmapsDevice {
   Mobile = 'Mobile',
   /** Show tablet */
   Tablet = 'Tablet'
+}
+
+export enum HeatmapsType {
+  /** Show click counts */
+  ClickCount = 'ClickCount',
+  /** Show click positions */
+  ClickPosition = 'ClickPosition',
+  /** Show mouse positions */
+  Cursor = 'Cursor',
+  /** Show scrolls */
+  Scroll = 'Scroll'
 }
 
 export type Mutation = {
@@ -2632,6 +2645,7 @@ export type SiteHeatmapsArgs = {
   fromDate: Scalars['ISO8601Date'];
   page: Scalars['String'];
   toDate: Scalars['ISO8601Date'];
+  type: HeatmapsType;
 };
 
 

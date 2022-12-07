@@ -6,8 +6,8 @@ import { ScrollIndicator } from 'components/sites/scroll-indicator';
 import { DeviceWidths } from 'data/common/constants';
 import { showClickCountsMaps, showClickGradientMaps, showScrollMaps, showCursorMaps, iframeStyles, getElements } from 'lib/heatmaps';
 import { parseRecordingEvents } from 'lib/events';
-import { Heatmaps, HeatmapsDevice } from 'types/graphql';
-import type { HeatmapsType, HeatmapClickTarget, HeatmapsClickPosition, HeatmapsScroll, HeatmapsCursor, HeatmapsClickCount } from 'types/heatmaps';
+import { HeatmapsDevice, HeatmapsType } from 'types/graphql';
+import type { Heatmaps, HeatmapClickTarget, HeatmapsClickPosition, HeatmapsScroll, HeatmapsCursor, HeatmapsClickCount } from 'types/heatmaps';
 
 interface Props {
   type: HeatmapsType;

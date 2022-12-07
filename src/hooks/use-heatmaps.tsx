@@ -2,7 +2,8 @@ import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_HEATMAPS_QUERY } from 'data/heatmaps/queries';
 import type { TimeRange } from 'types/common';
-import type { Site, Heatmaps, HeatmapsDevice } from 'types/graphql';
+import type { Heatmaps } from 'types/heatmaps';
+import type { Site, Heatmaps as HeatmapsWithStringItems, HeatmapsDevice, HeatmapsType } from 'types/graphql';
 
 interface UseHeatmaps {
   loading: boolean;
@@ -12,6 +13,7 @@ interface UseHeatmaps {
 
 interface Props {
   device: HeatmapsDevice;
+  type: HeatmapsType;
   page: string;
   range: TimeRange;
   excludeRecordingIds: string[];
@@ -20,10 +22,18 @@ interface Props {
 function getVariablesForProps(siteId: string, props: Props) {
   return {
     siteId,
+    type: props.type,
     device: props.device,
     page: props.page,
     excludeRecordingIds: props.excludeRecordingIds,
     ...props.range,
+  }
+}
+
+function parseJsonResponse(heatmaps: HeatmapsWithStringItems): Heatmaps {
+  return {
+    ...heatmaps,
+    items: JSON.parse(heatmaps.items),
   }
 }
 
@@ -42,11 +52,12 @@ export const useHeatmaps = (props: Props): UseHeatmaps => {
       mobile: 0,
     },
     recording: null,
+    items: [],
   };
 
   return {
     loading,
     error: !!error,
-    heatmaps: { ...defaults, ...data?.site?.heatmaps },
+    heatmaps: data?.site?.heatmaps ? parseJsonResponse(data.site.heatmaps) : defaults,
   };
 };

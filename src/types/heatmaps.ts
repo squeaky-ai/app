@@ -1,11 +1,6 @@
-export type HeatmapClickTarget = 'all' | 'anchors';
+import type { Heatmaps as HeatmapsWithStringItems } from 'types/graphql';
 
-export enum HeatmapsType {
-  ClickCount = 'ClickCount',
-  ClickPosition = 'ClickPosition',
-  Cursor = 'Cursor',
-  Scroll = 'Scroll'
-}
+export type HeatmapClickTarget = 'all' | 'anchors';
 
 export type HeatmapsClickCount = {
   count: number;
@@ -27,3 +22,9 @@ export type HeatmapsCursor = {
 export type HeatmapsScroll = {
   y: number;
 };
+
+export type HeatmapsItem = HeatmapsClickCount | HeatmapsClickPosition | HeatmapsCursor | HeatmapsScroll;
+
+export interface Heatmaps extends Omit<HeatmapsWithStringItems, 'items'> {
+  items: HeatmapsItem[];
+}
