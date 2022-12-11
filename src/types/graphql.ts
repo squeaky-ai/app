@@ -198,6 +198,8 @@ export type AdminSite = {
   pageUrls: Array<Scalars['String']>;
   pages: Array<SitesPage>;
   plan?: Maybe<SitesPlan>;
+  provider?: Maybe<Scalars['String']>;
+  providerUuid?: Maybe<Scalars['String']>;
   recording?: Maybe<Recording>;
   recordingCounts: AdminSiteRecordingsCounts;
   recordingLatest?: Maybe<Recording>;
@@ -448,6 +450,7 @@ export type AdminUser = {
   lastActivityAt?: Maybe<Scalars['ISO8601DateTime']>;
   lastName?: Maybe<Scalars['String']>;
   partner?: Maybe<UsersPartner>;
+  provider?: Maybe<Scalars['String']>;
   sites: Array<Site>;
   superuser: Scalars['Boolean'];
   updatedAt?: Maybe<Scalars['ISO8601DateTime']>;
@@ -2549,6 +2552,8 @@ export type Site = {
   pageUrls: Array<Scalars['String']>;
   pages: Array<SitesPage>;
   plan?: Maybe<SitesPlan>;
+  provider?: Maybe<Scalars['String']>;
+  providerUuid?: Maybe<Scalars['String']>;
   recording?: Maybe<Recording>;
   recordingLatest?: Maybe<Recording>;
   recordings: Recordings;
@@ -3134,6 +3139,7 @@ export type User = {
   lastActivityAt?: Maybe<Scalars['ISO8601DateTime']>;
   lastName?: Maybe<Scalars['String']>;
   partner?: Maybe<UsersPartner>;
+  provider?: Maybe<Scalars['String']>;
   superuser: Scalars['Boolean'];
   updatedAt?: Maybe<Scalars['ISO8601DateTime']>;
 };

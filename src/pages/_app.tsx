@@ -5,7 +5,7 @@ import { ApolloProvider } from '@apollo/client';
 import { client } from 'lib/api/graphql';
 import { ToastProvider } from 'components/toast';
 import { HistoryProvider } from 'components/history';
-import { SidebarProvider } from 'components/sidebar';
+import { PageProvider } from 'components/page-provider';
 import { Page } from 'components/page';
 import type { User } from 'types/graphql';
 
@@ -15,11 +15,11 @@ const App: FC<AppProps<{ user: User }>> = ({ Component, pageProps }) => (
   <ApolloProvider client={client}>
     <ToastProvider>
       <HistoryProvider>
-        <SidebarProvider>
+        <PageProvider>
           <Page user={pageProps.user}>
             <Component {...pageProps} />
           </Page>
-        </SidebarProvider>
+        </PageProvider>
       </HistoryProvider>
     </ToastProvider>
   </ApolloProvider>

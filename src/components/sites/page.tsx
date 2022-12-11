@@ -4,7 +4,7 @@ import { useSite } from 'hooks/use-site';
 import { NotFound } from 'components/sites/not-found';
 import { Unauthorized } from 'components/sites/unauthorized';
 import { ErrorBoundary } from 'components/sites/error-boundary';
-import { useSidebar } from 'hooks/use-sidebar';
+import { usePageContext } from 'hooks/use-page-context';
 import { Error } from 'components/error';
 import type { User, Team } from 'types/graphql';
 import type { Site } from 'types/graphql';
@@ -28,7 +28,7 @@ export const getTeamMember = (site: Site, user: User): Team | null => {
 
 export const Page: FC<Props> = ({ children, user, scope }) => {
   const { loading, error, site } = useSite();
-  const { setSidebar } = useSidebar();
+  const { setPageState } = usePageContext();
 
   const member = getTeamMember(site, user);
   const authorized = user.superuser 
@@ -41,9 +41,10 @@ export const Page: FC<Props> = ({ children, user, scope }) => {
       // selector inside of the sidebar and fetch the data once it's
       // there, but Apollo doesn't have a way of reading directly from
       // the cache and being notified of changes.
-      setSidebar({ 
+      setPageState({ 
         role: member?.role, 
-        validBilling: !site.plan.invalid 
+        validBilling: !site.plan.invalid,
+        embedded: user.provider !== null,
       });
     }
   }, [site]);

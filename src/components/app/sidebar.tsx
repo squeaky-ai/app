@@ -12,7 +12,7 @@ import { Logo } from 'components/logo';
 import { SidebarSupport } from 'components/app/sidebar-support';
 import { SidebarGroup } from 'components/app/sidebar-group';
 import { SidebarCollapse } from 'components/app/sidebar-collapse';
-import { useSidebar } from 'hooks/use-sidebar';
+import { usePageContext } from 'hooks/use-page-context';
 import { Breakpoints } from 'data/common/constants';
 import { Preferences, Preference } from 'lib/preferences';
 import { OWNER, ADMIN } from 'data/teams/constants';
@@ -32,7 +32,7 @@ export const Sidebar: FC<Props> = ({ user }) => {
   const [expanded, setExpanded] = React.useState<string[]>([]);
   const [position, setPosition] = React.useState<'left' | 'right'>('left');
 
-  const { sidebar } = useSidebar();
+  const { pageState } = usePageContext();
 
   const path = router.asPath;
   const pathname = router.pathname;
@@ -247,7 +247,7 @@ export const Sidebar: FC<Props> = ({ user }) => {
                 </Link>
               </SidebarNested>
             </SidebarGroup>
-            {[OWNER, ADMIN].includes(sidebar.role) && (
+            {[OWNER, ADMIN].includes(pageState.role) && (
               <SidebarGroup name='Settings'>
                 <Link href={`/sites/${siteId}/settings/details`}>
                   <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/settings/details`) })} data-label='Site'>
@@ -267,12 +267,12 @@ export const Sidebar: FC<Props> = ({ user }) => {
                     <span>Privacy</span>
                   </a>
                 </Link>
-                {sidebar.role === OWNER && (
+                {pageState.role === OWNER && (
                   <Link href={`/sites/${siteId}/settings/subscription`}>
                     <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/settings/subscription`) })} data-label='Subscription'>
                       <Icon className='sidebar-icon' name='bank-card-2-line' />
                       <span>Subscription</span>
-                      {!sidebar.validBilling && (
+                      {!pageState.validBilling && (
                         <Icon name='error-warning-fill' className='warning' />
                       )}
                     </a>
