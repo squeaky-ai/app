@@ -70,12 +70,12 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
               <menu>
                 {site.recordingsCount > 0 && (
                   <>
-                    <Period period={period} onChange={setPeriod} />
                     <Search
                       search={search}
                       onSearch={setSearch}
                       placeholder='Search ID&apos;s and linked data...'
                     />
+                    <Period period={period} onChange={setPeriod} />
                     <div className='menu-item columns'>
                       <VisitorsColumns 
                         columns={columns}
