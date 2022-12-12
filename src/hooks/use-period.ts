@@ -10,7 +10,8 @@ type ComponentType =
   'sentiment' |
   'journeys' |
   'event-history' |
-  'errors';
+  'errors' |
+  'visitors';
 
 interface UsePeriod {
   period: TimePeriod;
@@ -34,6 +35,7 @@ const getDefaultFilters = (type: ComponentType) => {
     case 'journeys':
     case 'event-history':
     case 'errors':
+    case 'visitors':
       return 'past_fourteen_days'; 
     case 'nps':
     case 'sentiment':

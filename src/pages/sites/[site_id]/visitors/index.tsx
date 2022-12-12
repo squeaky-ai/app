@@ -11,6 +11,7 @@ import { VisitorsColumns } from 'components/sites/visitors/visitors-columns';
 import { Filters } from 'components/sites/filters/visitors/filters';
 import { Unlock } from 'components/sites/unlock';
 import { Tags } from 'components/sites/filters/visitors/tags';
+import { Period } from 'components/sites/period/period';
 import { Search } from 'components/search';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { FILTERS } from 'data/visitors/constants';
@@ -18,6 +19,7 @@ import { useFilters } from 'hooks/use-filters';
 import { useSort } from 'hooks/use-sort';
 import { VisitorsSort } from 'types/graphql';
 import { useColumns } from 'hooks/use-columns';
+import { usePeriod } from 'hooks/use-period';
 import type { VisitorsFilters } from 'types/visitors';
 import type { ValueOf } from 'types/common';
 
@@ -25,6 +27,8 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
   const [page, setPage] = React.useState<number>(1);
   const [size, setSize] = React.useState<number>(25);
   const [search, setSearch] = React.useState<string>('');
+
+  const { period, setPeriod } = usePeriod('visitors');
 
   const { sort, setSort } = useSort<VisitorsSort>('visitors');
   const { filters, setFilters } = useFilters<VisitorsFilters>('visitors');
@@ -66,6 +70,7 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
               <menu>
                 {site.recordingsCount > 0 && (
                   <>
+                    <Period period={period} onChange={setPeriod} />
                     <Search
                       search={search}
                       onSearch={setSearch}
@@ -78,7 +83,7 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
                       />
                     </div>
                     <Filters
-                      period='past_year' // Visitors have no concept of time periods, so the last year should be fine
+                      period={period}
                       filters={filters}
                       updateFilters={updateFilters}
                     />
@@ -115,6 +120,7 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
                   size={size}
                   sort={sort}
                   page={page}
+                  period={period}
                   setSize={handlePageSize}
                   setSort={handleSort}
                   setPage={setPage}

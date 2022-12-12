@@ -5,6 +5,7 @@ import { VisitorsSort } from 'types/graphql';
 import { getDateRange } from 'lib/dates';
 import type { Site, Visitors, VisitorsFilters as Filters } from 'types/graphql';
 import type { VisitorsFilters } from 'types/visitors';
+import type { TimeRange } from 'types/common';
 
 interface Props {
   page: number;
@@ -12,6 +13,7 @@ interface Props {
   sort?: VisitorsSort;
   search?: string;
   filters?: VisitorsFilters;
+  range: TimeRange;
 }
 
 interface UseVisitors {
@@ -26,7 +28,7 @@ const formatVisitorsFilters = (filters: VisitorsFilters): Filters => ({
   lastActivity: filters.lastActivity ? getDateRange(filters.lastActivity) : null,
 });
 
-export const useVisitors = ({ page, size, sort, search, filters }: Props): UseVisitors => {
+export const useVisitors = ({ page, size, sort, search, filters, range }: Props): UseVisitors => {
   const router = useRouter();
 
   const { data, loading, error } = useQuery<{ site: Site }>(GET_VISITORS_QUERY, {
@@ -37,6 +39,7 @@ export const useVisitors = ({ page, size, sort, search, filters }: Props): UseVi
       sort,
       search,
       filters: formatVisitorsFilters(filters),
+      ...range,
     }
   });
 

@@ -10,7 +10,7 @@ interface Props {
   size?: number;
   sort?: RecordingsSort;
   filters?: RecordingsFilters;
-  range: TimeRange
+  range: TimeRange;
 }
 
 interface UseRecordings {

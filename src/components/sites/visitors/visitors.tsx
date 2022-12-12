@@ -12,9 +12,10 @@ import { Error } from 'components/error';
 import { Preference } from 'lib/preferences';
 import { NoResults } from 'components/sites/no-results';
 import { useResize } from 'hooks/use-resize';
+import { getDateRange } from 'lib/dates';
 import { Team, VisitorsSort } from 'types/graphql';
 import type { Site } from 'types/graphql';
-import type { Column } from 'types/common';
+import type { Column, TimePeriod } from 'types/common';
 import type { VisitorsFilters } from 'types/visitors';
 
 interface Props {
@@ -25,6 +26,7 @@ interface Props {
   page: number;
   size: number;
   sort: VisitorsSort;
+  period: TimePeriod;
   filters: VisitorsFilters;
   setPage: (page: number) => void;
   setSize: (size: number) => void;
@@ -40,6 +42,7 @@ export const Visitors: FC<Props> = ({
   page,
   size,
   sort,
+  period,
   setPage,
   setSize,
   setSort,
@@ -50,6 +53,7 @@ export const Visitors: FC<Props> = ({
     size,
     search,
     filters,
+    range: getDateRange(period),
   });
 
   const { mobile } = useResize();
