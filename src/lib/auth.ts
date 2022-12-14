@@ -15,8 +15,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const url = resolvedUrl.split('?')[0];
 
-  const user = cookies.session ? await session<User>(headers.cookie) : null;
+  const { body: user, status } = cookies.session ? await session<User>(headers.cookie) : null;
   const isAdminOnlyPage = url.startsWith('/__admin');
+
+  // Special case for when the the API is down
+  if (status === 500) {
+    throw new Error('API is unhappy and sent a 500');
+  }
 
   // If the user doesn't exist and they're trying to access
   // a logged in page then we should redirect them to the 
@@ -30,6 +35,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
+  // We don't want to really expose that this page exists so
+  // just redirect away
   if (isAdminOnlyPage && !user?.superuser) {
     return {
       redirect: {
@@ -48,10 +55,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         destination: '/users/new',
         permanent: false,
       },
-    }
+    };
   }
 
   return {
-    props: { user }
+    props: { user },
   };
 };
