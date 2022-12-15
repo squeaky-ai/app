@@ -59,6 +59,7 @@ export const SitesTableRow: FC<Props> = ({ site, activeVisitors, style }) => {
         }
       </Cell>
       <Cell>{site.team.length}</Cell>
+      <Cell>{site.provider || '-'}</Cell>
       <Cell>{toNiceDate(site.createdAt)}</Cell>
       <Cell>{activeVisitors}</Cell>
       <Cell>

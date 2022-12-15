@@ -63,6 +63,10 @@ export const User: FC<Props> = ({ user }) => (
         }
       </span>
     </p>
+    <p>
+      <b>Provider</b>
+      <span>{user.provider || '-'}</span>
+    </p>
     {user.partner && (
       <>
         <p>

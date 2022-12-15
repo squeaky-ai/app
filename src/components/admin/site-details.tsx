@@ -73,6 +73,10 @@ export const SiteDetails: FC<Props> = ({ activeVisitors, site, isEnterprise }) =
             }
           </span>
         </div>
+        <div className='row'>
+          <span>Provider</span>
+          <span>{site.provider || '-'}</span>
+        </div>
       </Card>
 
       <Card>

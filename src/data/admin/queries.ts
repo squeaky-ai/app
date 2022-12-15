@@ -53,6 +53,7 @@ export const GET_ADMIN_SITE_QUERY = gql`
         verifiedAt
         superuserAccessEnabled
         ingestEnabled
+        provider
         plan {
           tier
           name
@@ -151,6 +152,7 @@ export const GET_ADMIN_USERS_QUERY = gql`
           email
           superuser
           createdAt
+          provider
           lastActivityAt
           visitor {
             id
@@ -186,6 +188,7 @@ export const GET_ADMIN_SITES_QUERY = gql`
           uuid
           url
           ownerName
+          provider
           verifiedAt
           superuserAccessEnabled
           plan {
@@ -235,6 +238,7 @@ export const GET_ADMIN_SITES_BUNDLES_QUERY = gql`
           url
           ownerName
           verifiedAt
+          provider
           superuserAccessEnabled
           plan {
             tier
@@ -268,6 +272,7 @@ export const GET_ADMIN_USER_QUERY = gql`
         superuser
         createdAt
         lastActivityAt
+        provider
         visitor {
           id
           visitorId
@@ -330,6 +335,7 @@ export const GET_ADMIN_USERS_PARTNERS_QUERY = gql`
         email
         superuser
         createdAt
+        provider
         lastActivityAt
         visitor {
           id

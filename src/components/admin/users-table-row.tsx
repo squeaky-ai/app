@@ -63,6 +63,7 @@ export const UsersTableRow: FC<Props> = ({ user, style }) => {
       </Cell>
       <Cell>{toNiceDate(user.createdAt)}</Cell>
       <Cell>{user.lastActivityAt ? toNiceDate(user.lastActivityAt) : '-'}</Cell>
+      <Cell>{user.provider || '-'}</Cell>
       <Cell>
         <Dropdown portal button={<Icon name='more-2-fill' />} buttonClassName='options' ref={rowActionsRef}>
           <UsersDelete 

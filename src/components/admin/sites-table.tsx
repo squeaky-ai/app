@@ -56,6 +56,7 @@ export const SitesTable: FC<Props> = ({ sites, activeVisitors, columns, sort, se
             <Cell>Plan Exceeded</Cell>
             <Cell>Tracking Code Status</Cell>
             <Cell>Team Count</Cell>
+            <Cell>Provider</Cell>
             <Cell>
               Created At
               <Sort 

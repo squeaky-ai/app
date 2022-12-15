@@ -67,6 +67,7 @@ export const UsersTable: FC<Props> = ({ users, columns, sort, setSort }) => {
                 onDesc={() => setSort(AdminUserSort.LastActivityAtDesc)} 
               />
             </Cell>
+            <Cell>Provider</Cell>
             <Cell />
           </Row>
           {users.map(user => (

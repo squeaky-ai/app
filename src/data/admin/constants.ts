@@ -50,10 +50,16 @@ export const USER_COLUMNS: Column[] = [
     position: 8,
   },
   {
+    label: 'Provider',
+    width: '1fr',
+    disabled: false,
+    position: 9,
+  },
+  {
     label: 'Options',
     width: '64px',
     disabled: false,
-    position: 9,
+    position: 10,
   },
 ];
 
@@ -107,28 +113,34 @@ export const SITE_COLUMNS: Column[] = [
     position: 8,
   },
   {
-    label: 'Created At',
+    label: 'Provider',
     width: '1fr',
     disabled: false,
     position: 9,
   },
   {
-    label: 'Active Visitors',
+    label: 'Created At',
     width: '1fr',
     disabled: false,
     position: 10,
   },
   {
-    label: 'Superuser Access',
+    label: 'Active Visitors',
     width: '1fr',
     disabled: false,
     position: 11,
   },
   {
+    label: 'Superuser Access',
+    width: '1fr',
+    disabled: false,
+    position: 12,
+  },
+  {
     label: 'Options',
     width: '64px',
     disabled: false,
-    position: 12,
+    position: 13,
   },
 ];
 
@@ -141,6 +153,7 @@ export const DEFAULT_USER_COLUMNS = USER_COLUMNS.filter(c => [
   'Sites',
   'Created At',
   'Last Activity At',
+  'Provider',
   'Options',
 ].includes(c.label));
 
@@ -153,6 +166,7 @@ export const DEFAULT_SITE_COLUMNS = SITE_COLUMNS.filter(c => [
   'Plan Exceeded',
   'Tracking Code',
   'Team Count',
+  'Provider',
   'Created At',
   'Active Visitors',
   'Superuser Access',

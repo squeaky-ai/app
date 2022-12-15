@@ -93,8 +93,8 @@ export const Sidebar: FC<Props> = ({ user }) => {
 
     setDefaultActive('feedback', '/sites/[site_id]/feedback');
     setDefaultActive('settings', '/sites/[site_id]/settings');
-    setDefaultActive('analytics', '/sites/[site_id]/analytics');
     setDefaultActive('heatmaps', '/sites/[site_id]/heatmaps');
+    setDefaultActive('analytics', '/sites/[site_id]/analytics');
   }, [path]);
 
   React.useEffect(() => {
