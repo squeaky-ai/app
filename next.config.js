@@ -22,6 +22,7 @@ module.exports = {
   basePath: BASE_PATH,
   assetPrefix: ASSET_PREFIX,
   publicRuntimeConfig: {
+    dev: IS_DEV,
     apiHost: API_HOST_NAME,
     webHost: WEB_HOST_NAME,
     basePath: BASE_PATH,

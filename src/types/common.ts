@@ -29,3 +29,16 @@ export type TimeRange = {
 }
 
 export type TimePeriod = RelativeTime | AbsoluteTime;
+
+declare global {
+  interface Window {
+    squeaky: Squeaky;
+  }
+}
+
+type ExternalAttributes = Record<string, string | number>;
+
+interface Squeaky {
+  identify: (id: string, input: ExternalAttributes) => void;
+  addEvent: (name: string, input: ExternalAttributes) => void;
+}
