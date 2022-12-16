@@ -18,10 +18,8 @@ export const Error: FC<Props> = ({ title, action, className }) => (
       <h2>{title || 'Internal Server Error'}</h2>
       <p>Something has gone wrong on our side, sorry!</p>
       {action || (
-         <Link href='/sites'>
-          <a className='button primary'>
-            Back to sites
-          </a>
+         <Link href='/sites' className='button primary'>
+          Back to sites
         </Link>
       )}
     </Container>

@@ -13,31 +13,23 @@ export const PrivacyTabs: FC<Props> = ({ site, page }) => (
   <div className='privacy-tabs'>
     <ul className='tab-header' role='navigation' aria-label='Site privacy navigation'>
       <li className='tab'>
-        <Link href={`/sites/${site.id}/settings/privacy/data`}>
-          <a className={classnames('button tab-button', { active: page === 'data' })}>
-            Data Capture
-          </a>
+        <Link href={`/sites/${site.id}/settings/privacy/data`}  className={classnames('button tab-button', { active: page === 'data' })}>
+          Data Capture
         </Link>
       </li>
       <li className='tab'>
-        <Link href={`/sites/${site.id}/settings/privacy/consent`}>
-          <a className={classnames('button tab-button', { active: page === 'consent' })}>
-            Consent
-          </a>
+        <Link href={`/sites/${site.id}/settings/privacy/consent`} className={classnames('button tab-button', { active: page === 'consent' })}>
+          Consent
         </Link>
       </li>
       <li className='tab'>
-        <Link href={`/sites/${site.id}/settings/privacy/customer-support`}>
-          <a className={classnames('button tab-button', { active: page === 'customer-support' })}>
-            Customer Support
-          </a>
+        <Link href={`/sites/${site.id}/settings/privacy/customer-support`} className={classnames('button tab-button', { active: page === 'customer-support' })}>
+          Customer Support
         </Link>
       </li>
       <li className='tab'>
-        <Link href={`/sites/${site.id}/settings/privacy/dpa`}>
-          <a className={classnames('button tab-button', { active: page === 'dpa' })}>
-            DPA
-          </a>
+        <Link href={`/sites/${site.id}/settings/privacy/dpa`} className={classnames('button tab-button', { active: page === 'dpa' })}>
+          DPA
         </Link>
       </li>
     </ul>

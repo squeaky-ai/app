@@ -28,7 +28,7 @@ export const UserPartnerInvoiceRow: FC<Props> = ({ invoice }) => {
       <Cell>
         <Icon name='file-line' className='file' />
         <Link href={invoice.invoiceUrl}>
-          <a>{invoice.filename}</a>
+          {invoice.filename}
         </Link>
       </Cell>
       <Cell>

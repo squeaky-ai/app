@@ -1,6 +1,5 @@
 import React from 'react';
 import type { NextPage } from 'next';
-import Link from 'next/link';
 import Head from 'next/head';
 import { Main } from 'components/main';
 import { Label } from 'components/label';
@@ -69,9 +68,9 @@ const SitesSettingsIp: NextPage<ServerSideProps> = ({ user }) => {
 
               <Label className='section'>
                 <span>IP Address</span>
-                <Link href='https://www.iplocation.net/find-ip-address'>
-                  <a target='_blank' rel='noreferrer' className='external-link'><span>Find Your IP Address</span> <Icon name='external-link-line' /></a>
-                </Link>
+                <a href='https://www.iplocation.net/find-ip-address' target='_blank' rel='noreferrer' className='external-link'>
+                  <span>Find Your IP Address</span> <Icon name='external-link-line' />
+                </a>
               </Label>
 
               <p>Squeaky does not track your visitors IP addresses, but we can help by making sure that the script on your website rejects users based on their IP address without the data ever being passed to Squeaky.</p>

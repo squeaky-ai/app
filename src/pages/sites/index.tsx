@@ -50,12 +50,10 @@ const Sites: NextPage<ServerSideProps> = () => {
             {sites.map(site => (
               <li key={site.id}>
                 <Link href={`/sites/${site.id}/dashboard`}>
-                  <a>
-                    <Avatar site={site} />
-                    <p className='name'><b>{site.name}</b></p>
-                    <p className='url'>{site.url}</p>
-                    <p className='owner'>Owner: {site.ownerName}</p>
-                  </a>
+                  <Avatar site={site} />
+                  <p className='name'><b>{site.name}</b></p>
+                  <p className='url'>{site.url}</p>
+                  <p className='owner'>Owner: {site.ownerName}</p>
                 </Link>
               </li>
             ))}

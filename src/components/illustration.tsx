@@ -43,8 +43,9 @@ export type IllustrationType =
   'illustration-18';
 
 
-interface Props extends Omit<ImageProps, 'src'> {
+interface Props extends Omit<ImageProps, 'src' | 'alt'> {
   illustration: IllustrationType;
+  alt?: string;
 }
 
 const getIllustrationSrc = (illustration: IllustrationType) => {

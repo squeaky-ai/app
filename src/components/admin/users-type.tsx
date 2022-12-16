@@ -12,16 +12,12 @@ export const UsersType: FC = () => {
 
   return (
     <ButtonGroup className='users-types'>
-      <Link href='/__admin/users'>
-        <a className={classnames('button', !parnered ? 'primary' : 'blank')}>
-          All
-        </a>
+      <Link href='/__admin/users' className={classnames('button', !parnered ? 'primary' : 'blank')}>
+        All
       </Link>
 
-      <Link href='/__admin/users/partners'>
-        <a className={classnames('button', parnered ? 'primary' : 'blank')}>
-          Partners
-        </a>
+      <Link href='/__admin/users/partners' className={classnames('button', parnered ? 'primary' : 'blank')}>
+        Partners
       </Link>
     </ButtonGroup>
   );

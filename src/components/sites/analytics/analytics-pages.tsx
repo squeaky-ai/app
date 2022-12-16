@@ -69,7 +69,7 @@ export const AnalyticsPages: FC<Props> = ({ site, pages, page, sort, setPage, se
             <Tooltip
               button={
                 <Link href={`/sites/${site.id}/analytics/page/traffic?url=${encodeURIComponent(page.url)}`}>
-                  <a>{page.url}</a>
+                  {page.url}
                 </Link>
               }
               fluid

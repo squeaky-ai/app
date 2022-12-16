@@ -39,8 +39,8 @@ const SitesSettingsDelete: NextPage<ServerSideProps> = ({ user }) => (
             <p><b>You can delete your site at any time:</b></p>
             <ul className='delete-list'>
               <li>The site will be deleted immediately for all users.</li>
-              <li>Deleting your site will not delete your Squeaky user account. To delete you account please visit the <Link href='/users/account'><a>account settings page</a></Link>.</li>
-              <li>Site deletion is irreversable. If you have an active subscription you can downgrade to a free plan in the <Link href={`/sites/${site.id}/subscription`}><a>subscription tab</a></Link>.</li>
+              <li>Deleting your site will not delete your Squeaky user account. To delete you account please visit the <Link href='/users/account'>account settings page</Link>.</li>
+              <li>Site deletion is irreversable. If you have an active subscription you can downgrade to a free plan in the <Link href={`/sites/${site.id}/subscription`}>subscription tab</Link>.</li>
             </ul>
             <DeleteSite site={site} />
           </Container>

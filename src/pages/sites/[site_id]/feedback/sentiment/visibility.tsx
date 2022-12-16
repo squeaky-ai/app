@@ -51,7 +51,7 @@ const SitesFeedbackSentimentVisibility: NextPage<ServerSideProps> = ({ user }) =
                   title='Collecting Session Recordings'
                   body={
                     <>
-                      <p>New to Squeaky? Once you have <Link href={`/sites/${site.id}/settings/details/tracking-code`}><a>installed your tracking code</a></Link> this page will enable you to configure how you wish to collect user feedback, and let you review all incoming feedback in one place.</p>
+                      <p>New to Squeaky? Once you have <Link href={`/sites/${site.id}/settings/details/tracking-code`}>installed your tracking code</Link> this page will enable you to configure how you wish to collect user feedback, and let you review all incoming feedback in one place.</p>
                     </>
                   }
                 />

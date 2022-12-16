@@ -27,20 +27,20 @@ export const BreadCrumbs: FC<Props> = ({ site, items }) => {
       {!pageState.embedded && (
         <>
           <Link href='/sites'>
-            <a>All Sites</a>
+            All Sites
           </Link>
           <span>/</span>
         </>
       )}
       {isDashboard
         ? <p>{site.name}</p>
-        : <Link href={`/sites/${site.id}/dashboard`}><a>{site.name}</a></Link>
+        : <Link href={`/sites/${site.id}/dashboard`}>{site.name}</Link>
       }
       <span>/</span>
       {items.map((item, index) => (
         <React.Fragment key={item.name}>
           {item.href
-            ? <Link href={item.href}><a>{item.name}</a></Link>
+            ? <Link href={item.href}>{item.name}</Link>
             : <p>{item.name}</p>
           }
 

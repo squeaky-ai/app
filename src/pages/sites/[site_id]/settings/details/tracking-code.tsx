@@ -1,6 +1,5 @@
 import React from 'react';
 import type { NextPage } from 'next';
-import Link from 'next/link';
 import Head from 'next/head';
 import { Message } from 'components/message';
 import { Container } from 'components/container';
@@ -92,39 +91,27 @@ const SitesSettingsTrackingCode: NextPage<ServerSideProps> = ({ user }) => {
                     <Icon name='book-open-line' />
                     Installation Guides
                   </h4>
-                  <p>Need help getting set up? Visit our <Link href={guideLinks.manual}><a target='_blank' rel='noreferrer' className='external-link'><span>Manual Installation Guide</span> <Icon name='external-link-line' /></a></Link>, or try one of the step-by-step platform guides in our help center:</p>
+                  <p>Need help getting set up? Visit our <a href={guideLinks.manual} target='_blank' rel='noreferrer' className='external-link'><span>Manual Installation Guide</span> <Icon name='external-link-line' /></a>, or try one of the step-by-step platform guides in our help center:</p>
 
                   <div className='platforms'>
-                    <Link href={guideLinks.wordpress}>
-                      <a target='_blank' rel='noreferrer'>
-                        <Platform platform='wordpress' height={48} width={48} alt='Wordpress Logo' />
-                      </a>
-                    </Link>
-                    <Link href={guideLinks.shopify}>
-                      <a target='_blank' rel='noreferrer'>
-                        <Platform platform='shopify' height={48} width={48} alt='Shopify Logo' />
-                      </a>
-                    </Link>
-                    <Link href={guideLinks.wix}>
-                      <a target='_blank' rel='noreferrer'>
-                        <Platform platform='wix' height={48} width={48} alt='Wix Logo' />
-                      </a>
-                    </Link>
-                    <Link href={guideLinks.webflow}>
-                      <a target='_blank' rel='noreferrer'>
-                        <Platform platform='webflow' height={48} width={48} alt='Webflow Logo' />
-                      </a>
-                    </Link>
-                    <Link href={guideLinks.magento}>
-                      <a target='_blank' rel='noreferrer'>
-                        <Platform platform='magento' height={48} width={48} alt='Magento Logo' />
-                      </a>
-                    </Link>
-                    <Link href={guideLinks.drupal}>
-                      <a target='_blank' rel='noreferrer'>
-                        <Platform platform='drupal' height={48} width={48} alt='Drupal Logo' />
-                      </a>
-                    </Link>
+                    <a href={guideLinks.wordpress} target='_blank' rel='noreferrer'>
+                      <Platform platform='wordpress' height={48} width={48} alt='Wordpress Logo' />
+                    </a>
+                    <a href={guideLinks.shopify} target='_blank' rel='noreferrer'>
+                      <Platform platform='shopify' height={48} width={48} alt='Shopify Logo' />
+                    </a>
+                    <a href={guideLinks.wix} target='_blank' rel='noreferrer'>
+                      <Platform platform='wix' height={48} width={48} alt='Wix Logo' />
+                    </a>
+                    <a href={guideLinks.webflow} target='_blank' rel='noreferrer'>
+                      <Platform platform='webflow' height={48} width={48} alt='Webflow Logo' />
+                    </a>
+                    <a href={guideLinks.magento} target='_blank' rel='noreferrer'>
+                      <Platform platform='magento' height={48} width={48} alt='Magento Logo' />
+                    </a>
+                    <a href={guideLinks.drupal} target='_blank' rel='noreferrer'>
+                      <Platform platform='drupal' height={48} width={48} alt='Drupal Logo' />
+                    </a>
                   </div>
                 </div>
               )}

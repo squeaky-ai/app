@@ -15,10 +15,8 @@ export const NotFound: FC<Props> = ({ className }) => (
       <Illustration illustration='illustration-10' height={256} width={256} alt='Page not found' />
       <h2>404</h2>
       <p>The page you are looking for cannot be found.</p>
-      <Link href='/sites'>
-        <a className='button primary'>
-          Back to sites
-        </a>
+      <Link href='/sites' className='button primary'>
+        Back to sites
       </Link>
     </Container>
   </div>

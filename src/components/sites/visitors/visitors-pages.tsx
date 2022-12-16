@@ -50,9 +50,7 @@ export const VisitorPages: FC<Props> = ({ site, visitor, page, sort, setPage, se
           <Row key={item.pageView}>
             <Cell>
               <Link href={`/sites/${site.id}/analytics/page/traffic?url=${encodeURIComponent(item.pageView)}`}>
-                <a>
-                  {item.pageView}
-                </a>
+                {item.pageView}
               </Link>
             </Cell>
             <Cell><b>{item.pageViewCount}</b></Cell>

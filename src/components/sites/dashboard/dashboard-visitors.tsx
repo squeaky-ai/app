@@ -37,7 +37,7 @@ export const DashboardVisitors: FC<Props> = ({ site, dashboard, period }) => {
         <h5>
           <Icon name='group-line' />
           <Link href={`/sites/${site.id}/visitors`}>
-            <a>Visitors</a>
+            Visitors
           </Link>
         </h5>
         <Tooltip portalClassName='active-users-portal' button={
@@ -89,7 +89,7 @@ export const DashboardVisitors: FC<Props> = ({ site, dashboard, period }) => {
                   <Cell>
                     <Icon name='user-line' />
                     <Link href={`/sites/${site.id}/visitors/${visitor.id}`}>
-                      <a>{visitor.visitorId}</a>
+                      {visitor.visitorId}
                     </Link>
                   </Cell>
                   <Cell>{visitor.recordingCount.total} sessions</Cell>
@@ -105,7 +105,7 @@ export const DashboardVisitors: FC<Props> = ({ site, dashboard, period }) => {
                   <Cell>
                     <Icon name='user-line' />
                     <Link href={`/sites/${site.id}/visitors/${visitor.id}`}>
-                      <a>{visitor.visitorId}</a>
+                      {visitor.visitorId}
                     </Link>
                   </Cell>
                   <Cell>{toNiceDate(visitor.createdAt)}</Cell>

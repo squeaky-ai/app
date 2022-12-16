@@ -14,9 +14,7 @@ export const SidebarNestedLink: FC<Props> = ({
   active,
   name,
 }) => (
-  <Link href={href}>
-    <a className={classnames('button', { active })} data-label={name}>
-      {name}
-    </a>
+  <Link href={href} className={classnames('button', { active })} data-label={name}>
+    {name}
   </Link>
 );

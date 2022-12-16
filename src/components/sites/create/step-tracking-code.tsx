@@ -1,6 +1,5 @@
 import React from 'react';
 import type { FC } from 'react';
-import Link from 'next/link';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { Button } from 'components/button';
@@ -148,48 +147,34 @@ export const StepTrackingCode: FC<Props> = ({
               <div className='guides'>
                 <Label>Guides</Label>
                 <div className='platforms'>
-                  <Link href={guideLinks.manual}>
-                    <a target='_blank' rel='noreferrer'>
-                      <Icon name='code-s-slash-line' />
-                      <span className='name'>Manual installation</span>
-                    </a>
-                  </Link>
-                  <Link href={guideLinks.wordpress}>
-                    <a target='_blank' rel='noreferrer'>
-                      <Platform platform='wordpress' height={24} width={24} alt='Wordpress Logo' />
-                      <span className='name'>Wordpress</span>
-                    </a>
-                  </Link>
-                  <Link href={guideLinks.shopify}>
-                    <a target='_blank' rel='noreferrer'>
-                      <Platform platform='shopify' height={24} width={24} alt='Shopify Logo' />
-                      <span className='name'>Shopify</span>
-                    </a>
-                  </Link>
-                  <Link href={guideLinks.wix}>
-                    <a target='_blank' rel='noreferrer'>
-                      <Platform platform='wix' height={24} width={24} alt='Wix Logo' />
-                      <span className='name'>Wix</span>
-                    </a>
-                  </Link>
-                  <Link href={guideLinks.webflow}>
-                    <a target='_blank' rel='noreferrer'>
-                      <Platform platform='webflow' height={24} width={24} alt='Webflow Logo' />
-                      <span className='name'>Webflow</span>
-                    </a>
-                  </Link>
-                  <Link href={guideLinks.magento}>
-                    <a target='_blank' rel='noreferrer'>
-                      <Platform platform='magento' height={24} width={24} alt='Magento Logo' />
-                      <span className='name'>Magento</span>
-                    </a>
-                  </Link>
-                  <Link href={guideLinks.drupal}>
-                    <a target='_blank' rel='noreferrer'>
-                      <Platform platform='drupal' height={24} width={24} alt='Drupal Logo' />
-                      <span className='name'>Drupal</span>
-                    </a>
-                  </Link>
+                  <a href={guideLinks.manual} target='_blank' rel='noreferrer'>
+                    <Icon name='code-s-slash-line' />
+                    <span className='name'>Manual installation</span>
+                  </a>
+                  <a href={guideLinks.wordpress} target='_blank' rel='noreferrer'>
+                    <Platform platform='wordpress' height={24} width={24} alt='Wordpress Logo' />
+                    <span className='name'>Wordpress</span>
+                  </a>
+                  <a href={guideLinks.shopify} target='_blank' rel='noreferrer'>
+                    <Platform platform='shopify' height={24} width={24} alt='Shopify Logo' />
+                    <span className='name'>Shopify</span>
+                  </a>
+                  <a href={guideLinks.wix} target='_blank' rel='noreferrer'>
+                    <Platform platform='wix' height={24} width={24} alt='Wix Logo' />
+                    <span className='name'>Wix</span>
+                  </a>
+                  <a href={guideLinks.webflow} target='_blank' rel='noreferrer'>
+                    <Platform platform='webflow' height={24} width={24} alt='Webflow Logo' />
+                    <span className='name'>Webflow</span>
+                  </a>
+                  <a href={guideLinks.magento} target='_blank' rel='noreferrer'>
+                    <Platform platform='magento' height={24} width={24} alt='Magento Logo' />
+                    <span className='name'>Magento</span>
+                  </a>
+                  <a href={guideLinks.drupal} target='_blank' rel='noreferrer'>
+                    <Platform platform='drupal' height={24} width={24} alt='Drupal Logo' />
+                    <span className='name'>Drupal</span>
+                  </a>
                 </div>
               </div>
               <div>

@@ -34,7 +34,7 @@ export const DashboardRecordings: FC<Props> = ({ site, dashboard, period }) => {
         <h5>
           <Icon name='group-line' />
           <Link href={`/sites/${site.id}/recordings`}>
-            <a>Recordings</a>
+            Recordings
           </Link>
         </h5>
       </div>
@@ -78,7 +78,7 @@ export const DashboardRecordings: FC<Props> = ({ site, dashboard, period }) => {
                   <Cell>
                     <Icon name='play-mini-fill' />
                     <Link href={`/sites/${site.id}/recordings/${recording.id}`}>
-                      <a>{recording.sessionId}</a>
+                      {recording.sessionId}
                     </Link>
                   </Cell>
                   <Cell>{toNiceDate(recording.disconnectedAt)}</Cell>
@@ -94,7 +94,7 @@ export const DashboardRecordings: FC<Props> = ({ site, dashboard, period }) => {
                   <Cell>
                     <Icon name='play-mini-fill' />
                     <Link href={`/sites/${site.id}/recordings/${recording.id}`}>
-                      <a>{recording.sessionId}</a>
+                      {recording.sessionId}
                     </Link>
                   </Cell>
                   <Cell>{toTimeString(recording.duration)}</Cell>

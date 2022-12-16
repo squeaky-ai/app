@@ -26,10 +26,8 @@ export const EventCreateCustom: FC = () => (
         <>
           <p>To learn more about configuring custom events in Squeaky, including implementation examples, please visit our help center.</p>
           <div className='action'>
-            <Link href='#'>
-              <a className='button primary'>
+            <Link href='#' className='button primary'>
               View Documentation
-              </a>
             </Link>
           </div>
         </>

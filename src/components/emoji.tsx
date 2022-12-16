@@ -16,8 +16,9 @@ export type EmojiType =
   'emoji-4' |
   'emoji-5';
 
-interface Props extends Omit<ImageProps, 'src'> {
+interface Props extends Omit<ImageProps, 'src' | 'alt'> {
   emoji: EmojiType;
+  alt?: string;
 }
 
 const getEmojiSrc = (emoji: EmojiType) => {

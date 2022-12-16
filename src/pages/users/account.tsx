@@ -122,8 +122,8 @@ const UsersAccount: NextPage<ServerSideProps> = ({ user }) => {
 
         <Divider />
 
-        <Link href='/users/delete'>
-          <a className='delete-account'>Delete account</a>
+        <Link href='/users/delete' className='delete-account'>
+          Delete account
         </Link>
       </Main>
     </>

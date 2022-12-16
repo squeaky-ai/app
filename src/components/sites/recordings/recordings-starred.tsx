@@ -46,9 +46,7 @@ export const RecordingStarred: FC<Props> = ({ link, site, member, recording }) =
       </Tooltip>
       {link && (
         <Link href={`/sites/${site.id}/recordings/${recording.id}`}>
-          <a>
-            {recording.sessionId}
-          </a>
+          {recording.sessionId}
         </Link>
       )}
       {!link && <span>{recording.sessionId}</span>}

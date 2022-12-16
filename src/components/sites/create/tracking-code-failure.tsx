@@ -19,12 +19,10 @@ export const TrackingCodeFailure: FC<Props> = ({ site, loading, handleClick }) =
       <div>
         <p><b>We were unable to verify your installation</b></p>
         <p>If you&apos;re confident you&apos;ve completed the step above correctly, please proceed to your site and we&apos;ll email you when your first recording arrives, this can takes up to 30 minutes.</p>
-        <p>If you&apos;re unsure, visit our <Link href='https://squeaky.notion.site/Install-your-tracking-code-6ab27212bb5c434196f494ac43349b72'><a target='_blank' rel='noreferrer' className='external-link'><span>troubleshooting page</span> <Icon name='external-link-line' /></a></Link> and try to verify your installation again. </p>
+        <p>If you&apos;re unsure, visit our <a href='https://squeaky.notion.site/Install-your-tracking-code-6ab27212bb5c434196f494ac43349b72' target='_blank' rel='noreferrer' className='external-link'><span>troubleshooting page</span> <Icon name='external-link-line' /></a> and try to verify your installation again. </p>
         <div className='actions'>
-          <Link href={`/sites/${site.id}/dashboard`}>
-            <a className='button primary'>
-              Go To Site
-            </a>
+          <Link href={`/sites/${site.id}/dashboard`} className='button primary'>
+            Go To Site
           </Link>
           <Button type='button' className='secondary' onClick={handleClick}>
             {loading 

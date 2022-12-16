@@ -15,26 +15,20 @@ export const SentimentTabs: FC<Props> = ({ siteId, member, page }) => (
   <div className='sentiment-tabs'>
     <ul className='tab-header' role='navigation' aria-label='Sentiment navigation'>
       <li className='tab'>
-        <Link href={`/sites/${siteId}/feedback/sentiment`}>
-          <a className={classnames('button tab-button', { active: page === 'feedback' })}>
-            Feedback
-          </a>
+        <Link href={`/sites/${siteId}/feedback/sentiment`} className={classnames('button tab-button', { active: page === 'feedback' })}>
+          Feedback
         </Link>
       </li>
       {[OWNER, ADMIN, SUPER_USER].includes(member?.role) && (
         <>
           <li className='tab'>
-            <Link href={`/sites/${siteId}/feedback/sentiment/appearance`}>
-              <a className={classnames('button tab-button', { active: page === 'appearance' })}>
-                Appearance
-              </a>
+            <Link href={`/sites/${siteId}/feedback/sentiment/appearance`} className={classnames('button tab-button', { active: page === 'appearance' })}>
+              Appearance
             </Link>
           </li>
           <li className='tab'>
-            <Link href={`/sites/${siteId}/feedback/sentiment/visibility`}>
-              <a className={classnames('button tab-button', { active: page === 'visibility' })}>
-                Visibility
-              </a>
+            <Link href={`/sites/${siteId}/feedback/sentiment/visibility`} className={classnames('button tab-button', { active: page === 'visibility' })}>
+              Visibility
             </Link>
           </li>
         </>

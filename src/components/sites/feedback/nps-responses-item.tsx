@@ -36,17 +36,13 @@ export const NpsResponsesItem: FC<Props> = ({ member, response, style }) => {
       </Cell>
       <Cell>
         <Link href={`/sites/${router.query.site_id}/visitors/${response.visitor.id}`}>
-          <a>
-            {response.visitor.visitorId}
-          </a>
+          {response.visitor.visitorId}
         </Link>
       </Cell>
       <Cell>
         <Icon name='play-fill play' />
         <Link href={`/sites/${router.query.site_id}/recordings/${response.recordingId}`}>
-          <a>
-            {response.sessionId}
-          </a>
+          {response.sessionId}
         </Link>
       </Cell>
       <Cell>

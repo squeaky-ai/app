@@ -27,7 +27,7 @@ export const User: FC<Props> = ({ user }) => (
       <b>Visitor ID</b>
       <span>
         {user.visitor 
-          ? <Link href={`/sites/${publicRuntimeConfig.squeakySiteId}/visitors/${user.visitor.id}`}><a>{user.visitor.visitorId}</a></Link>
+          ? <Link href={`/sites/${publicRuntimeConfig.squeakySiteId}/visitors/${user.visitor.id}`}>{user.visitor.visitorId}</Link>
           : '-'
         }
       </span>
@@ -37,8 +37,8 @@ export const User: FC<Props> = ({ user }) => (
       <span>
         {user.sites.map((site, index) => (
           <React.Fragment key={site.id}>
-            <Link href={`/sites/${site.id}/dashboard`}>
-              <a target='_blank'>{site.name}</a>
+            <Link href={`/sites/${site.id}/dashboard`} target='_blank'>
+              {site.name}
             </Link>
             {index === user.sites.length -1 ? '' : ', '}
           </React.Fragment>

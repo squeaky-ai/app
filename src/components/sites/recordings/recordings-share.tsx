@@ -80,8 +80,8 @@ export const RecordingsShare: FC<Props> = ({ button, site, member, recordingId, 
                   )}
 
                   {canShare && (
-                    <Link href={`/sites/${site.id}/settings/team`}>
-                      <a className='team-members'>{memberShareText}</a>
+                    <Link href={`/sites/${site.id}/settings/team`} className='team-members'>
+                      {memberShareText}
                     </Link>
                   )}
                 </>

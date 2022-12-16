@@ -11,31 +11,23 @@ export const Tabs: FC<Props> = ({ page }) => (
   <div className='user-tabs'>
     <ul className='tab-header' role='navigation' aria-label='Account navigation'>
       <li className='tab'>
-        <Link href='/users/account'>
-          <a className={classnames('button tab-button', { active: page === 'account' })}>
-            Account
-          </a>
+        <Link href='/users/account' className={classnames('button tab-button', { active: page === 'account' })}>
+          Account
         </Link>
       </li>
       <li className='tab'>
-        <Link href='/users/password'>
-          <a className={classnames('button tab-button', { active: page === 'password' })}>
-            Password
-          </a>
+        <Link href='/users/password' className={classnames('button tab-button', { active: page === 'password' })}>
+          Password
         </Link>
       </li>
       <li className='tab'>
-        <Link href='/users/preferences'>
-          <a className={classnames('button tab-button', { active: page === 'preferences' })}>
-            Preferences
-          </a>
+        <Link href='/users/preferences' className={classnames('button tab-button', { active: page === 'preferences' })}>
+          Preferences
         </Link>
       </li>
       <li className='tab'>
-        <Link href='/users/feature-flags'>
-          <a className={classnames('button tab-button', { active: page === 'feature-flags' })}>
-            Feature Flags
-          </a>
+        <Link href='/users/feature-flags' className={classnames('button tab-button', { active: page === 'feature-flags' })}>
+          Feature Flags
         </Link>
       </li>
     </ul>

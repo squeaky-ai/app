@@ -34,9 +34,9 @@ export const SiteSubscription: FC<Props> = ({ site, isEnterprise, hasBilling }) 
             Subscription
           </h5>
           {hasBilling && (
-            <a className='button stripe-link external-link' href={`https://dashboard.stripe.com/test/customers/${site.billing.customerId}`} target='_blank' rel='noreferrer'>
+            <Link className='button stripe-link external-link' href={`https://dashboard.stripe.com/test/customers/${site.billing.customerId}`} target='_blank' rel='noreferrer'>
               <Icon name='external-link-line' /> <span>Stripe</span>
-            </a>
+            </Link>
           )}
         </div>
 
@@ -158,9 +158,9 @@ export const SiteSubscription: FC<Props> = ({ site, isEnterprise, hasBilling }) 
         {site.billing?.transactions?.map(transaction => (
           <div className='row' key={transaction.id}>
             <span>
-              <a href={transaction.invoiceWebUrl} target='_blank' rel='noreferrer'>
+              <Link href={transaction.invoiceWebUrl} target='_blank' rel='noreferrer'>
                 {toddMMYYY(new Date(transaction.periodStartAt))}
-              </a>
+              </Link>
             </span>
             <span>
               <Pill className='secondary'>Paid</Pill>
@@ -180,7 +180,7 @@ export const SiteSubscription: FC<Props> = ({ site, isEnterprise, hasBilling }) 
             {bundledSites.map((site, index) => (
               <React.Fragment key={site.id}>
                 <Link href={`/__admin/sites/${site.id}`}>
-                  <a>{site.name}</a>
+                  {site.name}
                 </Link>
                 {index === (bundledSites.length - 1) ? '' : ', '}
               </React.Fragment>
