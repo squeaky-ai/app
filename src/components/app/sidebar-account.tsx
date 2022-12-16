@@ -6,12 +6,20 @@ import { Icon } from 'components/icon';
 
 interface Props {
   path: string;
+  visible: boolean;
 }
 
-export const SidebarAccount: FC<Props> = ({ path }) => (
-  <Link href='/users/account'>
-    <a className={classnames('link', { active: path.startsWith('/users') })} data-label='Account'>
-      <Icon name='account-circle-line' />
-    </a>
-  </Link>
-);
+export const SidebarAccount: FC<Props> = ({ 
+  path,
+  visible,
+}) => {
+  if (!visible) return null;
+
+  return (
+    <Link href='/users/account'>
+      <a className={classnames('link', { active: path.startsWith('/users') })} data-label='Account'>
+        <Icon name='account-circle-line' />
+      </a>
+    </Link>
+  );
+};

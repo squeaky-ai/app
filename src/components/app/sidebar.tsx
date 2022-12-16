@@ -1,14 +1,15 @@
 import React from 'react';
 import type { FC } from 'react';
-import Link from 'next/link';
 import classnames from 'classnames';
 import { uniq, without } from 'lodash';
 import { useRouter } from 'next/router';
 import { Icon } from 'components/icon';
 import { Button } from 'components/button';
+import { SidebarLogo } from 'components/app/sidebar-logo';
 import { SidebarAccount } from 'components/app/sidebar-account';
 import { SidebarNested } from 'components/app/sidebar-nested';
-import { Logo } from 'components/logo';
+import { SidebarNestedLink } from 'components/app/sidebar-nested-link';
+import { SidebarLink } from 'components/app/sidebar-link';
 import { SidebarSupport } from 'components/app/sidebar-support';
 import { SidebarGroup } from 'components/app/sidebar-group';
 import { SidebarCollapse } from 'components/app/sidebar-collapse';
@@ -112,68 +113,67 @@ export const Sidebar: FC<Props> = ({ user }) => {
 
   return (
     <aside ref={ref} id='app-sidebar' className={classnames({ open })}>
-      <Link href='/sites'>
-        <a className='logo large'>
-          <Logo logo='main' alt='Logo' height={24} width={78} />
-        </a>
-      </Link>
-      <Link href='/sites'>
-        <a className='logo small'>
-          <Logo logo='small' alt='Logo' height={24} width={18} />
-        </a>
-      </Link>
+      <SidebarLogo 
+        siteId={siteId}
+        embedded={pageState.embedded}
+      />
       <menu className={position}>
         <div className='slider'>
           <div className='nav left'>
-            <Link href='/sites'>
-              <a className={classnames('link', { active: path.startsWith('/sites') })} data-label='All Sites'>
-                <Icon className='sidebar-icon' name='window-line' />
-                <span>All Sites</span>
-              </a>
-            </Link>
-            {!!user?.partner && (
-              <Link href='/partners'>
-                <a className={classnames('link', { active: path.startsWith('/partners') })} data-label='Partner Program'>
-                  <Icon className='sidebar-icon' name='user-star-line' />
-                  <span>Partner Program</span>
-                </a>
-              </Link>
-            )}
+            <SidebarLink
+              visibile
+              href='/sites'
+              active={path.startsWith('/sites')}
+              icon='window-line'
+              name='All Sites'
+            />
+            <SidebarLink
+              visibile={!!user?.partner}
+              href='/partners'
+              active={path.startsWith('/partners')}
+              icon='user-star-line'
+              name='Partner Program'
+            />
           </div>
           <div className='nav right'>
-            <Link href={`/sites/${siteId}/dashboard`}>
-              <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/dashboard`) })} data-label='Dashboard'>
-                <Icon className='sidebar-icon' name='dashboard-3-line' />
-                <span>Dashboard</span>
-              </a>
-            </Link>
-            <SidebarGroup name='Data Capture'>
-              <Link href={`/sites/${siteId}/visitors`}>
-                <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/visitors`) })} data-label='Visitors'>
-                  <Icon className='sidebar-icon' name='group-line' />
-                  <span>Visitors</span>
-                </a>
-              </Link>
-              <Link href={`/sites/${siteId}/recordings`}>
-                <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/recordings`) })} data-label='Recordings'>
-                  <Icon className='sidebar-icon' name='vidicon-line' />
-                  <span>Recordings</span>
-                </a>
-              </Link>
-              <Link href={`/sites/${siteId}/events`}>
-                <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/events`) })} data-label='Events'>
-                  <Icon className='sidebar-icon' name='flashlight-line' />
-                  <span>Events</span>
-                </a>
-              </Link>
-              <Link href={`/sites/${siteId}/errors`}>
-                <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/errors`) })} data-label='Errors'>
-                  <Icon className='sidebar-icon' name='code-s-slash-line' />
-                  <span>Errors</span>
-                </a>
-              </Link>
+            <SidebarLink
+              visibile
+              href={`/sites/${siteId}/dashboard`}
+              active={path.startsWith(`/sites/${siteId}/dashboard`)}
+              icon='dashboard-3-line'
+              name='Dashboard'
+            />
+            <SidebarGroup name='Data Capture' visible>
+              <SidebarLink
+                visibile
+                href={`/sites/${siteId}/visitors`}
+                active={path.startsWith(`/sites/${siteId}/visitors`)}
+                icon='group-line'
+                name='Visitors'
+              />
+              <SidebarLink
+                visibile
+                href={`/sites/${siteId}/recordings`}
+                active={path.startsWith(`/sites/${siteId}/recordings`)}
+                icon='vidicon-line'
+                name='Recordings'
+              />
+              <SidebarLink
+                visibile
+                href={`/sites/${siteId}/events`}
+                active={path.startsWith(`/sites/${siteId}/events`)}
+                icon='flashlight-line'
+                name='Events'
+              />
+              <SidebarLink
+                visibile
+                href={`/sites/${siteId}/errors`}
+                active={path.startsWith(`/sites/${siteId}/errors`)}
+                icon='code-s-slash-line'
+                name='Errors'
+              />
             </SidebarGroup>
-            <SidebarGroup name='Analysis'>
+            <SidebarGroup name='Analysis' visible>
               <SidebarNested
                 name='Analytics'
                 icon='line-chart-line'
@@ -181,23 +181,24 @@ export const Sidebar: FC<Props> = ({ user }) => {
                 expand={() => expand('analytics')}
                 expanded={expanded.includes('analytics')}
               >
-                <Link href={`/sites/${siteId}/analytics/site/traffic`}>
-                  <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/analytics/site`) })} data-label='Site'>
-                    Site
-                  </a>
-                </Link>
-                <Link href={`/sites/${siteId}/analytics/page/traffic`}>
-                  <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/analytics/page`) })} data-label='Page'>
-                    Page
-                  </a>
-                </Link>
+                <SidebarNestedLink
+                  href={`/sites/${siteId}/analytics/site/traffic`}
+                  active={path.startsWith(`/sites/${siteId}/analytics/site`)}
+                  name='Site'
+                />
+                <SidebarNestedLink
+                  href={`/sites/${siteId}/analytics/page/traffic`}
+                  active={path.startsWith(`/sites/${siteId}/analytics/page`)}
+                  name='Page'
+                />
               </SidebarNested>
-              <Link href={`/sites/${siteId}/journeys`}>
-                <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/journeys`) })} data-label='Journeys'>
-                  <Icon className='sidebar-icon' name='guide-line' />
-                  <span>Journeys</span>
-                </a>
-              </Link>
+              <SidebarLink
+                visibile
+                href={`/sites/${siteId}/journeys`}
+                active={path.startsWith(`/sites/${siteId}/journeys`)}
+                icon='guide-line'
+                name='Journeys'
+              />
               <SidebarNested
                 name='Heatmaps'
                 icon='fire-line'
@@ -205,29 +206,29 @@ export const Sidebar: FC<Props> = ({ user }) => {
                 expand={() => expand('heatmaps')}
                 expanded={expanded.includes('heatmaps')}
               >
-                <Link href={`/sites/${siteId}/heatmaps/click-positions`}>
-                  <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/heatmaps/click-positions`) })} data-label='Clicks'>
-                    Clicks
-                  </a>
-                </Link>
-                <Link href={`/sites/${siteId}/heatmaps/click-counts`}>
-                  <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/heatmaps/click-counts`) })} data-label='Clicks counts'>
-                    Click counts
-                  </a>
-                </Link>
-                <Link href={`/sites/${siteId}/heatmaps/mouse`}>
-                  <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/heatmaps/mouse`) })} data-label='Mouse'>
-                    Mouse
-                  </a>
-                </Link>
-                <Link href={`/sites/${siteId}/heatmaps/scroll`}>
-                  <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/heatmaps/scroll`) })} data-label='Scroll'>
-                    Scroll
-                  </a>
-                </Link>
+                <SidebarNestedLink
+                  href={`/sites/${siteId}/heatmaps/click-positions`}
+                  active={path.startsWith(`/sites/${siteId}/heatmaps/click-positions`)}
+                  name='Clicks'
+                />
+                <SidebarNestedLink
+                  href={`/sites/${siteId}/heatmaps/click-counts`}
+                  active={path.startsWith(`/sites/${siteId}/heatmaps/click-counts`)}
+                  name='Click counts'
+                />
+                <SidebarNestedLink
+                  href={`/sites/${siteId}/heatmaps/mouse`}
+                  active={path.startsWith(`/sites/${siteId}/heatmaps/mouse`)}
+                  name='Mouse'
+                />
+                <SidebarNestedLink
+                  href={`/sites/${siteId}/heatmaps/scroll`}
+                  active={path.startsWith(`/sites/${siteId}/heatmaps/scroll`)}
+                  name='Scroll'
+                />
               </SidebarNested>
             </SidebarGroup>
-            <SidebarGroup name='Engagement'>
+            <SidebarGroup name='Engagement' visible>
               <SidebarNested
                 name='Feedback'
                 icon='user-voice-line'
@@ -235,51 +236,49 @@ export const Sidebar: FC<Props> = ({ user }) => {
                 expand={() => expand('feedback')}
                 expanded={expanded.includes('feedback')}
               >
-                <Link href={`/sites/${siteId}/feedback/nps`}>
-                  <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/feedback/nps`) })}>
-                    NPS®
-                  </a>
-                </Link>
-                <Link href={`/sites/${siteId}/feedback/sentiment`}>
-                  <a className={classnames('button', { active: path.startsWith(`/sites/${siteId}/feedback/sentiment`) })}>
-                    Sentiment
-                  </a>
-                </Link>
+                <SidebarNestedLink
+                  href={`/sites/${siteId}/feedback/nps`}
+                  active={path.startsWith(`/sites/${siteId}/feedback/nps`)}
+                  name='NPS®'
+                />
+                <SidebarNestedLink
+                  href={`/sites/${siteId}/feedback/sentiment`}
+                  active={path.startsWith(`/sites/${siteId}/feedback/sentiment`)}
+                  name='Sentiment'
+                />
               </SidebarNested>
             </SidebarGroup>
-            {[OWNER, ADMIN].includes(pageState.role) && (
-              <SidebarGroup name='Settings'>
-                <Link href={`/sites/${siteId}/settings/details`}>
-                  <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/settings/details`) })} data-label='Site'>
-                    <Icon className='sidebar-icon' name='window-line' />
-                    <span>Site</span>
-                  </a>
-                </Link>
-                <Link href={`/sites/${siteId}/settings/team`}>
-                  <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/settings/team`) })} data-label='Team'>
-                    <Icon className='sidebar-icon' name='group-line' />
-                    <span>Team</span>
-                  </a>
-                </Link>
-                <Link href={`/sites/${siteId}/settings/privacy/data`}>
-                  <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/settings/privacy`) })} data-label='Privacy'>
-                    <Icon className='sidebar-icon' name='ghost-line' />
-                    <span>Privacy</span>
-                  </a>
-                </Link>
-                {pageState.role === OWNER && (
-                  <Link href={`/sites/${siteId}/settings/subscription`}>
-                    <a className={classnames('link', { active: path.startsWith(`/sites/${siteId}/settings/subscription`) })} data-label='Subscription'>
-                      <Icon className='sidebar-icon' name='bank-card-2-line' />
-                      <span>Subscription</span>
-                      {!pageState.validBilling && (
-                        <Icon name='error-warning-fill' className='warning' />
-                      )}
-                    </a>
-                  </Link>
-                )}
-              </SidebarGroup>
-            )}
+            <SidebarGroup name='Settings' visible={[OWNER, ADMIN].includes(pageState.role)}>
+              <SidebarLink
+                visibile
+                href={`/sites/${siteId}/settings/details`}
+                active={path.startsWith(`/sites/${siteId}/settings/details`)}
+                icon='window-line'
+                name='Site'
+              />
+              <SidebarLink
+                visibile={!pageState.embedded}
+                href={`/sites/${siteId}/settings/team`}
+                active={path.startsWith(`/sites/${siteId}/settings/team`)}
+                icon='group-line'
+                name='Team'
+              />
+              <SidebarLink
+                visibile
+                href={`/sites/${siteId}/settings/privacy/data`}
+                active={path.startsWith(`/sites/${siteId}/settings/privacy/data`)}
+                icon='ghost-line'
+                name='Privacy'
+              />
+              <SidebarLink
+                visibile={pageState.role === OWNER && !pageState.embedded}
+                href={`/sites/${siteId}/settings/subscription`}
+                active={path.startsWith(`/sites/${siteId}/settings/subscription`)}
+                icon='bank-card-2-line'
+                name='Subscription'
+                warning={!pageState.validBilling}
+              />
+            </SidebarGroup>
           </div>
         </div>
       </menu>
@@ -291,13 +290,19 @@ export const Sidebar: FC<Props> = ({ user }) => {
         <a href='mailto:hello@squeaky.ai'>hello@squeaky.ai</a>
       </div>
       <footer>
-        <SidebarAccount path={path} />
+        <SidebarAccount 
+          path={path}
+          visible={!pageState.embedded}
+        />
         <SidebarSupport 
           collapse={() => collapse('support')}
           expand={() => expand('support')}
           expanded={expanded.includes('support')}
         />
-        <SidebarCollapse open={open} toggleOpen={toggleOpen} />
+        <SidebarCollapse 
+          open={open} 
+          toggleOpen={toggleOpen} 
+        />
       </footer>
     </aside>
   );

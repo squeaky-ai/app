@@ -8,10 +8,11 @@ import { Preferences, Preference } from 'lib/preferences';
 
 interface Props {
   name: string;
+  visible: boolean;
   children: React.ReactNode;
 }
 
-export const SidebarGroup: FC<Props> = ({ name, children }) => {
+export const SidebarGroup: FC<Props> = ({ name, visible, children }) => {
   const [open, setOpen] = React.useState(true);
 
   const toggleOpen = () => {
@@ -34,8 +35,10 @@ export const SidebarGroup: FC<Props> = ({ name, children }) => {
     }
   }, []);
 
+  if (!visible) return null;
+
   return (
-    <div className={classnames('group', { open })}>
+    <div className={classnames('group', { open, visible })}>
       <Divider>
         <Button onClick={toggleOpen}>{name}</Button>
       </Divider>
