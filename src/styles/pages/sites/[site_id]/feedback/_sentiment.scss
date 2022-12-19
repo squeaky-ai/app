@@ -388,6 +388,27 @@
     }
   }
 
+  .languages {
+    margin: 0 0 1.5rem 0;
+
+    .row {
+      display: grid;
+      font-size: var(--font-size-body);
+      line-height: var(--line-height-body);
+      grid-template-columns: 14rem 1fr;
+      margin: 0 0 .5rem 0;
+
+      span {
+        align-items: center;
+        display: flex;
+
+        .checkbox {
+          margin: 0 .25rem 0 0;
+        }
+      }
+    }
+  }
+
   .sentiment-settings {
     h4 { 
       margin: 3rem 0 1rem 0;

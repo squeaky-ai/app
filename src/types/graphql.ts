@@ -1309,6 +1309,8 @@ export type Feedback = {
   sentimentEnabled?: Maybe<Scalars['Boolean']>;
   sentimentExcludedPages: Array<Scalars['String']>;
   sentimentHideLogo: Scalars['Boolean'];
+  sentimentLanguages: Array<Scalars['String']>;
+  sentimentLanguagesDefault?: Maybe<Scalars['String']>;
   sentimentLayout?: Maybe<Scalars['String']>;
   sentimentSchedule?: Maybe<Scalars['String']>;
 };
@@ -1482,6 +1484,8 @@ export type FeedbackUpdateInput = {
   sentimentEnabled?: InputMaybe<Scalars['Boolean']>;
   sentimentExcludedPages?: InputMaybe<Array<Scalars['String']>>;
   sentimentHideLogo?: InputMaybe<Scalars['Boolean']>;
+  sentimentLanguages?: InputMaybe<Array<Scalars['String']>>;
+  sentimentLanguagesDefault?: InputMaybe<Scalars['String']>;
   sentimentLayout?: InputMaybe<Scalars['String']>;
   sentimentSchedule?: InputMaybe<Scalars['String']>;
   siteId: Scalars['ID'];

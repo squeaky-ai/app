@@ -37,6 +37,8 @@ export const useFeedback = (): UseFeedback => {
     sentimentDevices: ['desktop', 'tablet'],
     sentimentHideLogo: false,
     sentimentSchedule: 'always',
+    sentimentLanguages: ['en'],
+    sentimentLanguagesDefault: 'en',
   };
 
   return {

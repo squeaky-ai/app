@@ -24,6 +24,8 @@ export const GET_FEEDBACK_QUERY = gql`
         sentimentDevices
         sentimentHideLogo
         sentimentSchedule
+        sentimentLanguages
+        sentimentLanguagesDefault
       }
     }
   }

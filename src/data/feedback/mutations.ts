@@ -10,6 +10,8 @@ export const FEEDBACK_UPDATE_MUTATION = gql`
       npsFollowUpEnabled
       npsContactConsentEnabled
       npsLayout
+      npsLanguages
+      npsLanguagesDefault
       npsHideLogo
       sentimentEnabled
       sentimentAccentColor
@@ -17,6 +19,8 @@ export const FEEDBACK_UPDATE_MUTATION = gql`
       sentimentLayout
       sentimentHideLogo
       sentimentSchedule
+      sentimentLanguages
+      sentimentLanguagesDefault
     }
   }
 `;

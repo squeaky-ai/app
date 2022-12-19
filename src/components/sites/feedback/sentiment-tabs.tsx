@@ -8,7 +8,7 @@ import type { Team } from 'types/graphql';
 interface Props {
   siteId: string;
   member?: Team;
-  page: 'feedback' | 'appearance' | 'visibility';
+  page: 'feedback' | 'appearance' | 'visibility' | 'form';
 }
 
 export const SentimentTabs: FC<Props> = ({ siteId, member, page }) => (
@@ -29,6 +29,11 @@ export const SentimentTabs: FC<Props> = ({ siteId, member, page }) => (
           <li className='tab'>
             <Link href={`/sites/${siteId}/feedback/sentiment/visibility`} className={classnames('button tab-button', { active: page === 'visibility' })}>
               Visibility
+            </Link>
+          </li>
+          <li className='tab'>
+            <Link href={`/sites/${siteId}/feedback/sentiment/form`} className={classnames('button tab-button', { active: page === 'form' })}>
+              Form Options
             </Link>
           </li>
         </>
