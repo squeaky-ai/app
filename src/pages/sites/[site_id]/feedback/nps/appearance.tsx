@@ -16,7 +16,7 @@ import { NpsStatus } from 'components/sites/feedback/nps-status';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
 const SitesFeedbackNpsAppearance: NextPage<ServerSideProps> = ({ user }) => {
-  const { loading, error, feedback, locale, setLocale } = useFeedback();
+  const { loading, error, feedback } = useFeedback();
 
   if (error) {
     return <Error />;
@@ -59,7 +59,7 @@ const SitesFeedbackNpsAppearance: NextPage<ServerSideProps> = ({ user }) => {
             {!!site.verifiedAt && !loading && (
               <>
                 <NpsTabs siteId={site.id} member={member} page='appearance' />
-                <NpsAppearance site={site} feedback={feedback} locale={locale} setLocale={setLocale} />
+                <NpsAppearance site={site} feedback={feedback} />
               </>
             )}
           </Main>

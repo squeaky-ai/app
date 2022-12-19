@@ -21,7 +21,6 @@ export const useConsent = (): UseConsent => {
   const { loading, error, data } = useQuery(GET_CONSENT_QUERY, {
     variables: {
       siteId: router.query.site_id as string,
-      locale: locale || 'en',
     }
   });
 
@@ -31,7 +30,6 @@ export const useConsent = (): UseConsent => {
     consentMethod: 'disabled',
     layout: 'bottom_left',
     privacyPolicyUrl: '',
-    translations: '{}',
     languages: ['en'],
     languagesDefault: 'en',
   };

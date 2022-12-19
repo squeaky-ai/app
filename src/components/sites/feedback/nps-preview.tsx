@@ -1,71 +1,71 @@
 import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
-import { range } from 'lodash';
+import getConfig from 'next/config';
 import { Icon } from 'components/icon';
 import { Button } from 'components/button';
-import { Label } from 'components/label';
-import { TextArea } from 'components/textarea';
-import { Logo } from 'components/logo';
-import { Radio } from 'components/radio';
-import { Input } from 'components/input';
-import { Select, Option } from 'components/select';
-import type { Feedback } from 'types/graphql';
-import type { SupportedLanguages } from 'types/translations';
+import { parseMessage } from 'lib/messages';
+import type { Feedback, Site } from 'types/graphql';
+
+const { publicRuntimeConfig } = getConfig();
 
 interface Props {
-  locale: SupportedLanguages;
+  site: Site;
   feedback: Feedback;
-  storedFeedback: Feedback;
-  setLocale: (locale: SupportedLanguages) => void;
 }
 
-export const NpsPreview: FC<Props> = ({ locale, feedback, storedFeedback, setLocale }) => {
+export const NpsPreview: FC<Props> = ({ 
+  site,
+  feedback,
+}) => {
   const ref = React.useRef<HTMLDivElement>(null);
-  const [page, setPage] = React.useState<number>(1);
   const [show, setShow] = React.useState<boolean>(false);
-  const [contact, setContact] = React.useState<boolean>(false);
 
-  const translations = JSON.parse(feedback.npsTranslations);
+  const themeOverride = encodeURIComponent(JSON.stringify(feedback));
 
   const toggleShow = () => {
-    setPage(0);
     setShow(!show);
   };
 
-  const handleRatingChange = () => {
-    if (page !== 0) return;
+  const handleStepChange = (step: number, height: number) => {
+    const form = document.getElementById('squeaky__nps_form');
 
-    setPage(feedback.npsFollowUpEnabled ? 1 : 2);
+    if (!form) return;
+
+    form.style.height = `${height}px`;
+
+    form.classList.forEach(c => { if (c.startsWith('step-')) form.classList.remove(c) });
+    form.classList.add(`step-${step}`);
   };
 
-  const handleNextPage = () => {
-    if (page === 1 && !feedback.npsContactConsentEnabled) {
-      return setPage(2);
+  const handleMessage = (event: MessageEvent) => {
+    const message = parseMessage(event.data);
+
+    if (message.key === '__squeaky_close_nps') {
+      toggleShow();
     }
 
-    if (page === 1 && !contact) {
-      return setPage(2);
+    if (message.key === '__squeaky_submit_nps') {
+      toggleShow();
     }
 
-    setPage(page + 1);
+    if (message.key === '__squeaky_set_step_nps') {
+      handleStepChange(message.value.step, message.value.height);
+    }
   };
 
-  const handleClose = () => {
-    setShow(false);
-    setPage(0);
-    setContact(false);
-  };
-
-  const onLocaleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setLocale(event.target.value as SupportedLanguages);
+  const handleLoad = () => {
+    const spinner = document.getElementById('spinner');
+    if (spinner) spinner.style.display = 'none';
   };
 
   React.useEffect(() => {
-    if (ref.current) {
-      ref.current.setAttribute('style', `--nps-accent-color:${feedback.npsAccentColor};`);
-    }
-  });
+    window.addEventListener('message', handleMessage);
+
+    return () => {
+      window.removeEventListener('message', handleMessage, true);
+    };
+  }, []);
 
   return (
     <>
@@ -75,102 +75,30 @@ export const NpsPreview: FC<Props> = ({ locale, feedback, storedFeedback, setLoc
       </Button>
 
       {show && (
-        <div ref={ref} className={classnames('nps-preview', { boxed: feedback.npsLayout === 'boxed' })}>
-          <div className='nps-wrapper'>
-            {feedback.npsLanguages.length > 1 && (
-              <div className='locale'>
-                <Icon name='translate' className='translation-icon' />
-                <Select value={locale || feedback.npsLanguagesDefault} onChange={onLocaleChange}>
-                  {feedback.npsLanguages.map(npsLanguage => (
-                    <Option key={npsLanguage} value={npsLanguage}>
-                      {npsLanguage}
-                    </Option>
-                  ))}
-                </Select>
+        <div ref={ref} id='squeaky__nps_form' className={classnames(feedback.npsLayout)}>
+          <div className='squeaky__nps_wrapper' key={themeOverride}>
+            <iframe 
+              id='squeaky__nps_frame'
+              scrolling='no'
+              src={`${publicRuntimeConfig.webHost}/feedback/nps?site_id=${site.uuid}&demo=true&theme_overrides=${themeOverride}`}
+              onLoad={handleLoad}
+            />
+
+            <button id='squeaky__nps_close' type='button' style={{ background: feedback.npsAccentColor }} onClick={toggleShow}>
+              <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='16' height='16'>
+                <path fill='none' d='M0 0h24v24H0z' />
+                <path fill='#ffffff' d='M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z' />
+              </svg>
+            </button>
+
+            <div id='spinner'>
+              <div className='icon'>
+                <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='32' height='32'>
+                  <path fill='none' d='M0 0h24v24H0z' />
+                  <path fill='#0074E0' d='M18.364 5.636L16.95 7.05A7 7 0 1 0 19 12h2a9 9 0 1 1-2.636-6.364z' />
+                </svg>
               </div>
-            )}
-
-            <Button type='button' className='close' onClick={toggleShow}>
-              <Icon name='close-line' />
-            </Button>
-
-            {page < 2 && (
-              <div className={`page-${page}`}>
-                <p className='heading'>
-                  {/** A hack so we don't need to refetch translations */}
-                  {storedFeedback.npsPhrase === feedback.npsPhrase
-                    ? translations.how_likely_to_recommend
-                    : translations.how_likely_to_recommend.replace(storedFeedback.npsPhrase, feedback.npsPhrase) 
-                  }
-                </p>
-
-                <div className='labels'>
-                  <span>{translations.not_likely}</span>
-                  <span>{translations.extremely_likely}</span>
-                </div>
-
-                <div className='options'>
-                  {range(0, 11).map(i => (
-                    <Label key={i} onClick={handleRatingChange}>
-                      <input type='radio' name='rating' value={i} />
-                      <span className='rating'>{i}</span>
-                    </Label>
-                  ))}
-                </div>
-
-                <div className='reason'>
-                  <Label>{translations.what_is_the_main_reason}</Label>
-                  <TextArea placeholder={translations.please_type} />
-                </div>
-                
-                {feedback.npsContactConsentEnabled && (
-                  <div className='respond'>
-                    <Label>{translations.would_you_like_to_hear}</Label>
-                    <div className='radio-group'>
-                      <Radio name='contact' checked={contact} onChange={() => setContact(true)}>
-                      {translations.yes}
-                      </Radio>
-                      <Radio name='contact' checked={!contact} onChange={() => setContact(false)}>
-                        {translations.no}
-                      </Radio>
-                    </div>
-                  </div>
-                )}
-
-                {contact && (
-                  <div className='email'>
-                    <Label>{translations.email_address}</Label>
-                    <Input 
-                      placeholder='e.g. jess@squeaky.ai'
-                      autoComplete='email'
-                    />
-                  </div>
-                )}
-
-                <div className='footer'>
-                  <p className={classnames({ hide: feedback.npsHideLogo })}>
-                    {translations.powered_by}
-                    <span className='logo'>
-                      <Logo logo='dark' height={20} width={64} />
-                    </span>
-                  </p>
-                  <Button type='button' className='primary' onClick={handleNextPage}>
-                    {translations.submit}
-                  </Button>
-                </div>
-              </div>
-            )}
-
-            {page === 2 && (
-              <div className='page-2'>
-                <Icon name='checkbox-circle-line' />
-                <h4>{translations.feedback_sent}</h4>
-                <p>{translations.thanks_for_sharing}</p>
-                <Button type='button' className='secondary' onClick={handleClose}>
-                  {translations.close}
-                </Button>
-              </div>
-            )}
+            </div>
           </div>
         </div>
       )}

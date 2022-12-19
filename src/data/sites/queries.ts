@@ -71,7 +71,6 @@ export const GET_SITE_QUERY_CREATE = gql`
         privacyPolicyUrl
         languages
         languagesDefault
-        translations(userLocale: "en")
       }
     }
   }

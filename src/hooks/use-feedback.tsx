@@ -21,8 +21,7 @@ export const useFeedback = (): UseFeedback => {
   const { loading, error, data } = useQuery(GET_FEEDBACK_QUERY, {
     variables: {
       siteId: router.query.site_id as string,
-      locale: locale || 'en',
-    }
+    },
   });
 
   const fallback: Feedback = {
@@ -36,7 +35,6 @@ export const useFeedback = (): UseFeedback => {
     npsLanguages: ['en'],
     npsLanguagesDefault: 'en',
     npsExcludedPages: [],
-    npsTranslations: '{}',
     npsHideLogo: false,
     sentimentEnabled: false,
     sentimentAccentColor: null,

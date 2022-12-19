@@ -13,13 +13,10 @@ import { useToasts } from 'hooks/use-toasts';
 import { NpsPreview } from 'components/sites/feedback/nps-preview';
 import type { Feedback, FeedbackUpdateInput, SitesPage } from 'types/graphql';
 import type { Site } from 'types/graphql';
-import type { SupportedLanguages } from 'types/translations';
 
 interface Props {
   site: Site;
-  locale: SupportedLanguages;
   feedback: Feedback;
-  setLocale: (locale: SupportedLanguages) => void;
 }
 
 const NpsSchema = Yup.object().shape({
@@ -27,7 +24,7 @@ const NpsSchema = Yup.object().shape({
   npsExcludedPages: Yup.array(),
 });
 
-export const NpsScheduling: FC<Props> = ({ site, locale, feedback, setLocale }) => {
+export const NpsScheduling: FC<Props> = ({ site, feedback }) => {
   const toasts = useToasts();
 
   const onUpdate = async (input: Partial<FeedbackUpdateInput>): Promise<void> => {
@@ -137,10 +134,8 @@ export const NpsScheduling: FC<Props> = ({ site, locale, feedback, setLocale }) 
                 </div>
                 <div className='right'>
                   <NpsPreview 
+                    site={site}
                     feedback={{ ...feedback, ...values }}
-                    storedFeedback={feedback}
-                    locale={locale}
-                    setLocale={setLocale}
                   />
                 </div>
               </div>

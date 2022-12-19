@@ -15,13 +15,10 @@ import { HEX_REGEX } from 'data/common/constants';
 import { useToasts } from 'hooks/use-toasts';
 import type { Feedback, FeedbackUpdateInput } from 'types/graphql';
 import type { Site } from 'types/graphql';
-import type { SupportedLanguages } from 'types/translations';
 
 interface Props {
   site: Site;
-  locale: SupportedLanguages;
   feedback: Feedback;
-  setLocale: (locale: SupportedLanguages) => void;
 }
 
 const DEFAULT_COLORS = ['#0768C1', '#F96155', '#8249FB', '#001A39'];
@@ -32,7 +29,7 @@ const NpsSchema = Yup.object().shape({
   npsHideLogo: Yup.boolean(),
 });
 
-export const NpsAppearance: FC<Props> = ({ site, locale, feedback, setLocale }) => {
+export const NpsAppearance: FC<Props> = ({ site, feedback }) => {
   const toasts = useToasts();
 
   const isPaying = (site.plan?.tier || 0) > 0;
@@ -207,10 +204,8 @@ export const NpsAppearance: FC<Props> = ({ site, locale, feedback, setLocale }) 
                 </div>
                 <div className='right'>
                   <NpsPreview 
+                    site={site}
                     feedback={{ ...feedback, ...values }}
-                    storedFeedback={feedback}
-                    locale={locale}
-                    setLocale={setLocale}
                   />
                 </div>
               </div>

@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const GET_CONSENT_QUERY = gql`
-  query GetConsent($siteId: ID!, $locale: String!) { 
+  query GetConsent($siteId: ID!) { 
     site(siteId: $siteId) {
       id
       consent {
@@ -12,7 +12,6 @@ export const GET_CONSENT_QUERY = gql`
         privacyPolicyUrl
         languages
         languagesDefault
-        translations(userLocale: $locale)
       }
     }
   }

@@ -16,7 +16,7 @@ import { useFeedback } from 'hooks/use-feedback';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 
 const SitesFeedbackNpsForm: NextPage<ServerSideProps> = ({ user }) => {
-  const { loading, error, feedback, locale, setLocale } = useFeedback();
+  const { loading, error, feedback } = useFeedback();
 
   if (error) {
     return <Error />;
@@ -59,7 +59,7 @@ const SitesFeedbackNpsForm: NextPage<ServerSideProps> = ({ user }) => {
             {!!site.verifiedAt && !loading && (
               <>
                 <NpsTabs siteId={site.id} member={member} page='form' />
-                <NpsForm site={site} feedback={feedback} locale={locale} setLocale={setLocale} />
+                <NpsForm site={site} feedback={feedback} />
               </>
             )}
           </Main>
