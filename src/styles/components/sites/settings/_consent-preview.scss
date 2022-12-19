@@ -1,99 +1,25 @@
-.consent-preview {
-  background: var(--white);
-  border-radius: var(--border-radius-md);
-  box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.1);
+#squeaky__consent_form {
+  background: #ffffff;
+  border-radius: .5rem;
+  box-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
   margin: 1.5rem;
+  min-height: 20rem;
   max-width: 30rem;
-  padding: 2rem;
+  overflow: hidden;
   position: fixed;
   width: 100%;
-
-  h5 {
-    margin: 0 0 1.5rem 0;
-    padding: 0 3.5rem 0 0;
-  }
-
-  .link {
-    align-items: center;
-    color: var(--gray-blue-800);
-    display: flex;
-    font-weight: var(--font-weight-medium);
-    
-    .icon {
-      color: var(--gray-500);
-      font-size: var(--font-size-body-xxl);
-    }
-  }
-
-  ul {
-    margin: 0;
-    padding: 1rem 0 0 1rem;
-
-    li {
-      font-size: var(--font-size-body-sm);
-    }
-  }
-
-  .actions {
-    margin: 1.5rem 0 0 0;
-
-    .button {
-      margin: 0 .75rem 0 0;
-    }
-  }
-
-  .locale {
-    align-items: center;
-    display: flex;
-    height: 1rem;
-    margin: 0;
-    position: absolute;
-    right: 2rem;
-    top: 2rem;
-
-    .translation-icon {
-      color: var(--gray-300);
-      font-size: 12px;
-      margin: 0 .125rem 0 0;
-    }
-
-    .select {
-      align-self: center;
-      border: none;
-      display: flex;
-      height: auto;
-      margin: 0;
-
-      select {
-        font-size: 12px;
-        font-weight: var(--font-weight-medium);
-        height: auto;
-        line-height: 16px;
-        margin: 0;
-        padding: 0;        
-        text-transform: uppercase;
-      }
-
-      i {
-        font-size: 1rem;
-        height: 1rem;
-        line-height: 1rem;
-        position: static;
-        width: 1rem;
-      }
-    }
-  }
+  z-index: 9999;
 
   &.bottom_left {
-    bottom: 2rem;
+    bottom: 0;
     left: 0;
-    z-index: 5;
   }
 
   &.bottom_right {
-    bottom: 2rem;
+    bottom: 0;
     right: 0;
-    z-index: 5;
   }
 
   &.center {
@@ -101,4 +27,15 @@
     top: 50%;
     transform: translate(-50%, -50%);
   }
+
+  @media screen and (max-width: 540px) {
+    max-width: calc(100% - 3rem);
+  }
+}
+
+#squeaky__consent_frame {
+  border: none;
+  flex: 1;
+  height: 100%;
+  width: 100%;
 }

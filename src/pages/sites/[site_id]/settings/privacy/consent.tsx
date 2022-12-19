@@ -42,7 +42,7 @@ const SitesSettingsPrivacyConsent: NextPage<ServerSideProps> = ({ user }) => {
   
   const [showLanguages, setShowLanguages] = React.useState<boolean>(false);
 
-  const { loading, error, consent, locale, setLocale } = useConsent();
+  const { loading, error, consent } = useConsent();
 
   const handleToggleShowLanguages = () => setShowLanguages(!showLanguages);
 
@@ -259,11 +259,9 @@ const SitesSettingsPrivacyConsent: NextPage<ServerSideProps> = ({ user }) => {
                             </div>
                           </div>
 
-                          <ConsentPreview 
+                          <ConsentPreview
+                            site={site}
                             consent={{ ...consent, ...values }}
-                            storedConsent={consent}
-                            locale={locale}
-                            setLocale={setLocale}
                           />
                         </Card>
                       )}

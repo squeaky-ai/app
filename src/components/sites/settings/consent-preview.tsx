@@ -1,40 +1,70 @@
 import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
+import getConfig from 'next/config';
 import { Icon } from 'components/icon';
-import { Select, Option } from 'components/select';
 import { Button } from 'components/button';
-import type { Consent } from 'types/graphql';
-import type { SupportedLanguages } from 'types/translations';
+import { parseMessage } from 'lib/messages';
+import type { Consent, Site } from 'types/graphql';
+
+const { publicRuntimeConfig } = getConfig();
 
 interface Props {
+  site: Site;
   consent: Consent;
-  storedConsent: Consent;
-  locale: SupportedLanguages;
   buttonIcon?: string;
   buttonClassName?: string;
-  setLocale: (locale: SupportedLanguages) => void;
 }
 
 export const ConsentPreview: FC<Props> = ({
-  locale,
-  storedConsent,
+  site,
   consent,
   buttonIcon,
   buttonClassName,
-  setLocale 
 }) => {
   const [show, setShow] = React.useState<boolean>(false);
-  const [expand, setExpand] = React.useState<boolean>(false);
 
   const toggleShow = () => setShow(!show);
-  const toggleExpand = () => setExpand(!expand);
 
-  const translations = JSON.parse(consent.translations);
+  const themeOverride = encodeURIComponent(JSON.stringify(consent));
 
-  const onLocaleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setLocale(event.target.value as SupportedLanguages);
+  const handleSetHeight = (height: number) => {
+    const form = document.getElementById('squeaky__consent_form');
+
+    if (!form) return;
+
+    form.style.height = `${height}px`;
   };
+
+  const handleMessage = (event: MessageEvent) => {
+    const message = parseMessage(event.data);
+
+    if (message.key === '__squeaky_accept_consent') {
+      toggleShow();
+    }
+
+    if (message.key === '__squeaky_reject_consent') {
+      toggleShow();
+    }
+
+    if (message.key === '__squeaky_set_height_consent') {
+      handleSetHeight(message.value.height);
+    }
+  };
+
+  const handleLoad = () => {
+    const spinner = document.getElementById('spinner');
+    if (spinner) spinner.style.display = 'none';
+  };
+
+  React.useEffect(() => {
+    window.addEventListener('message', handleMessage);
+
+    return () => {
+      window.removeEventListener('message', handleMessage, true);
+    };
+  }, []);
+
 
   return (
     <>
@@ -44,54 +74,22 @@ export const ConsentPreview: FC<Props> = ({
       </Button>
 
       {show && (
-        <div className={classnames('consent-preview', consent.layout)}>
-          <h5>{translations.privacy_friendly_analytics}</h5>
-
-          <p>
-            {/** A hack so we don't need to refetch translations */}
-            {storedConsent.name === consent.name
-              ? translations.we_use_squeaky
-              : translations.we_use_squeaky.replace(storedConsent.name, consent.name) 
-            }
-          </p>
-          <p dangerouslySetInnerHTML={{ __html: translations.set_consent_preferemces }}></p>
-
-          {consent.languages.length > 1 && (
-            <div className='locale'>
-              <Icon name='translate' className='translation-icon' />
-              <Select value={locale || consent.languagesDefault} onChange={onLocaleChange}>
-                {consent.languages.map(languages => (
-                  <Option key={languages} value={languages}>
-                    {languages}
-                  </Option>
-                ))}
-              </Select>
+        <div id='squeaky__consent_form' key={themeOverride} className={classnames(consent.layout)}>
+          <div id='spinner'>
+            <div className='icon'>
+              <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='32' height='32'>
+                <path fill='none' d='M0 0h24v24H0z' />
+                <path fill='#0074E0' d='M18.364 5.636L16.95 7.05A7 7 0 1 0 19 12h2a9 9 0 1 1-2.636-6.364z' />
+              </svg>
             </div>
-          )}
-
-          <Button type='button' className={classnames('link', { expand })} onClick={toggleExpand}>
-            {translations.what_makes_squeaky_different}
-            <Icon name='arrow-drop-down-line' />
-          </Button>
-
-          {expand && (
-            <ul>
-              <li>{translations.no_cookies}</li>
-              <li>{translations.never_sold}</li>
-              <li>{translations.data_capture_features}</li>
-              <li>{translations.visitors_are_anonymous}</li>
-              <li>{translations.data_in_eu}</li>
-            </ul>
-          )}
-
-          <div className='actions'>
-            <Button className='primary' onClick={toggleShow}>
-              {translations.accept}
-            </Button>
-            <Button className='secondary' onClick={toggleShow}>
-              {translations.reject}
-            </Button>
           </div>
+
+          <iframe
+            id='squeaky__consent_frame'
+            scrolling='no'
+            src={`${publicRuntimeConfig.webHost}/feedback/consent?site_id=?${site.uuid}&themeOverride=${themeOverride}`}
+            onLoad={handleLoad}
+          />
         </div>
       )}
     </>
