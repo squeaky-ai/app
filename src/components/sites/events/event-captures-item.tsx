@@ -50,7 +50,7 @@ export const EventCapturesItem: FC<Props> = ({
       </Cell>
       <Cell>
         <Link href={`/sites/${site.id}/events/history?captureId=${event.id}`}>
-          <a>{event.name}</a>
+          {event.name}
         </Link>
       </Cell>
       <Cell>

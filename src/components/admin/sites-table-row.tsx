@@ -25,13 +25,13 @@ export const SitesTableRow: FC<Props> = ({ site, activeVisitors, style }) => {
   return (
     <Row style={style}>
       <Cell>
-        <Link href={`/sites/${site.id}/dashboard`}>
-          <a target='_blank'>{site.id}</a>
+        <Link href={`/sites/${site.id}/dashboard`} target='_blank'>
+          {site.id}
         </Link>
       </Cell>
       <Cell>
         <Link href={`/__admin/sites/${site.id}`}>
-          <a>{site.name}</a>
+          {site.name}
         </Link>
         {site.bundled && (
           <span className='bundled'>

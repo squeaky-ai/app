@@ -11,6 +11,7 @@ interface Props {
   icon: string;
   name: string;
   warning?: boolean;
+  external?: boolean;
 }
 
 export const SidebarLink: FC<Props> = ({
@@ -20,16 +21,16 @@ export const SidebarLink: FC<Props> = ({
   icon,
   name,
   warning,
+  external,
 }) => {
   if (!visibile) return null;
 
   return (
-    <Link href={href}>
-      <a className={classnames('link', { active })} data-label={name}>
-        <Icon className='sidebar-icon' name={icon} />
-        <span>{name}</span>
-        {warning && <Icon name='error-warning-fill' className='warning' />}
-      </a>
+    <Link href={href} className={classnames('link', { active })} data-label={name}>
+      <Icon className='sidebar-icon' name={icon} />
+      <span>{name}</span>
+      {warning && <Icon name='error-warning-fill' className='warning' />}
+      {external && <Icon name='external-link-line' className='external' />}
     </Link>
   );
 };

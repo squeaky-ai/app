@@ -217,7 +217,7 @@ export const SentimentAppearance: FC<Props> = ({ site, locale, feedback, setLoca
                   >
                     Hide &apos;Powered by Squeaky&apos; badge
                   </Checkbox>
-                  {!isPaying && (<Link href={`/sites/${site.id}/settings/subscription`}><a>Upgrade to enable</a></Link>)}
+                  {!isPaying && (<Link href={`/sites/${site.id}/settings/subscription`}>Upgrade to enable</Link>)}
                 </div>
               </div>
 

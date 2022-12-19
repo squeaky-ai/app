@@ -118,7 +118,7 @@ export const BillingEnterprise: FC<Props> = ({ billing }) => {
 
                 <p className='heading'>SLA</p>
                 <p>Support type: {billing.plan.support.join(', ')}</p>
-                <p>Response time: {getResponseTimeText(billing.plan.responseTimeHours)} (<Link href='#'><a>business hours</a></Link>)</p>
+                <p>Response time: {getResponseTimeText(billing.plan.responseTimeHours)} (<Link href='#'>business hours</Link>)</p>
 
                 <p className='heading'>Data retention</p>
                 <p>

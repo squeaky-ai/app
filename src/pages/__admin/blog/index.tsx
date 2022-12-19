@@ -26,8 +26,8 @@ const AdminBlog: NextPage<ServerSideProps> = () => {
           <div className='search'>
             <h4 className='title'>
               Blog
-              <Link href='/__admin/blog/create'>
-                <a className='button link'>+ New Post</a>
+              <Link href='/__admin/blog/create' className='button link'>
+                + New Post
               </Link>
             </h4>
           </div>

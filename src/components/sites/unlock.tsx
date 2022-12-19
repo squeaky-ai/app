@@ -21,9 +21,9 @@ export const Unlock: FC<Props> = ({ site }) => {
   return (
     <div className='unlock'>
       <Icon name='error-warning-line' />
-      <p>You&apos;ve reached your monthly recording limit of <b>{limit}</b> recordings. <Link href={`/sites/${site.id}/settings/subscription`}><a>Upgrade</a></Link> to continue capturing data from your site.</p>
-      <Link href={`/sites/${site.id}/settings/subscription`}>
-        <a className='button'>Upgrade Now</a>
+      <p>You&apos;ve reached your monthly recording limit of <b>{limit}</b> recordings. <Link href={`/sites/${site.id}/settings/subscription`}>Upgrade</Link> to continue capturing data from your site.</p>
+      <Link href={`/sites/${site.id}/settings/subscription`} className='button'>
+        Upgrade Now
       </Link>
     </div>
   );

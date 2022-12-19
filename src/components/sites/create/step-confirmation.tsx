@@ -22,10 +22,8 @@ export const StepConfirmation: FC<Props> = ({
           : 'Your site has been verified'
         }
       </h4>
-      <Link href={`/sites/${site.id}/dashboard`}>
-        <a className='button primary'>
-          Go To Site
-        </a>
+      <Link href={`/sites/${site.id}/dashboard`} className='button primary'>
+        Go To Site
       </Link>
     </div>
   </div>

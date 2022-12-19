@@ -48,7 +48,7 @@ export const VisitorsStarred: FC<Props> = ({ site, member, search, link, highlig
         {visitor.starred ? 'Starred' : 'Not starred'}
       </Tooltip>
       {link
-        ? <Link href={`/sites/${router.query.site_id}/visitors/${visitor.id}`}><a>{visitorId}</a></Link>
+        ? <Link href={`/sites/${router.query.site_id}/visitors/${visitor.id}`}>{visitorId}</Link>
         : visitorId
       }
     </>

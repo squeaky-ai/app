@@ -17,7 +17,7 @@ export const ErrorsTableRow: FC<Props> = ({ site, error }) => (
     <Cell>{error.message}</Cell>
     <Cell>
       <Link href={`/sites/${site.id}/errors/${error.id}`}>
-        <a>{error.errorCount.toLocaleString()}</a>
+        {error.errorCount.toLocaleString()}
       </Link>
     </Cell>
     <Cell>{error.recordingCount.toLocaleString()}</Cell>

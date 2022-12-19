@@ -1,6 +1,5 @@
 import React from 'react';
 import type { FC } from 'react';
-import Link from 'next/link';
 import { Cell, Row } from 'components/table';
 import { Icon } from 'components/icon';
 import { Pill } from 'components/pill';
@@ -27,9 +26,9 @@ export const PartnerInvoicesRow: FC<Props> = ({ invoice }) => {
     <Row key={invoice.id}>
       <Cell>
         <Icon name='file-line' className='file' />
-        <Link href={invoice.invoiceUrl}>
-          <a>{invoice.filename}</a>
-        </Link>
+        <a href={invoice.invoiceUrl}>
+          {invoice.filename}
+        </a>
       </Cell>
       <Cell>
         {invoice.status === INVOICE_PENDING

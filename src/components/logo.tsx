@@ -9,8 +9,9 @@ import logoSmall from '../../public/logo-small.svg';
 
 type Logo = 'main' | 'small' | 'dark';
 
-interface Props extends Omit<ImageProps, 'src'> {
+interface Props extends Omit<ImageProps, 'src' | 'alt'> {
   logo: Logo;
+  alt?: string;
 }
 
 const getLogoSrc = (logo: Logo) => {

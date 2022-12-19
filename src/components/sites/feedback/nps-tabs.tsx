@@ -15,42 +15,32 @@ export const NpsTabs: FC<Props> = ({ siteId, member, page }) => (
   <div className='nps-tabs'>
     <ul className='tab-header' role='navigation' aria-label='NPS navigation'>
       <li className='tab'>
-        <Link href={`/sites/${siteId}/feedback/nps`}>
-          <a className={classnames('button tab-button', { active: page === 'feedback' })}>
-            Feedback
-          </a>
+        <Link href={`/sites/${siteId}/feedback/nps`} className={classnames('button tab-button', { active: page === 'feedback' })}>
+          Feedback
         </Link>
       </li>
       {[OWNER, ADMIN, SUPER_USER].includes(member?.role) && (
         <>
           <li className='tab'>
-            <Link href={`/sites/${siteId}/feedback/nps/appearance`}>
-              <a className={classnames('button tab-button', { active: page === 'appearance' })}>
-                Appearance
-              </a>
+            <Link href={`/sites/${siteId}/feedback/nps/appearance`} className={classnames('button tab-button', { active: page === 'appearance' })}>
+              Appearance
             </Link>
           </li>
           <li className='tab'>
-            <Link href={`/sites/${siteId}/feedback/nps/scheduling`}>
-              <a className={classnames('button tab-button', { active: page === 'scheduling' })}>
-                Scheduling &amp; Visibility
-              </a>
+            <Link href={`/sites/${siteId}/feedback/nps/scheduling`} className={classnames('button tab-button', { active: page === 'scheduling' })}>
+              Scheduling &amp; Visibility
             </Link>
           </li>
           <li className='tab'>
-            <Link href={`/sites/${siteId}/feedback/nps/form`}>
-              <a className={classnames('button tab-button', { active: page === 'form' })}>
-                Form options
-              </a>
+            <Link href={`/sites/${siteId}/feedback/nps/form`} className={classnames('button tab-button', { active: page === 'form' })}>
+              Form options
             </Link>
           </li>
         </>
       )}
       <li className='tab'>
-        <Link href={`/sites/${siteId}/feedback/nps/guide`}>
-          <a className={classnames('button tab-button', { active: page === 'guide' })}>
-            Guide
-          </a>
+        <Link href={`/sites/${siteId}/feedback/nps/guide`} className={classnames('button tab-button', { active: page === 'guide' })}>
+          Guide
         </Link>
       </li>
     </ul>

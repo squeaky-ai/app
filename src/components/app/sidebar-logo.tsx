@@ -15,15 +15,11 @@ export const SidebarLogo: FC<Props> = ({ siteId, embedded }) => {
 
   return (
     <>
-      <Link href={url}>
-        <a className='logo large'>
-          <Logo logo='main' alt='Logo' height={24} width={78} />
-        </a>
+      <Link href={url} className='logo large'>
+        <Logo logo='main' alt='Logo' height={24} width={78} />
       </Link>
-      <Link href={url}>
-        <a className='logo small'>
-          <Logo logo='small' alt='Logo' height={24} width={18} />
-        </a>
+      <Link href={url} className='logo small'>
+        <Logo logo='small' alt='Logo' height={24} width={18} />
       </Link>
     </>
   );

@@ -20,17 +20,13 @@ export const Tabs: FC<Props> = ({ site, tab, type, page }) => {
     <div className='analytics-tabs'>
       <ul className='tab-header' role='navigation' aria-label='Analytics navigation'>
         <li className='tab'>
-          <Link href={`/sites/${site.id}/analytics/${type}/traffic${url}`}>
-            <a className={classnames('button tab-button', { active: tab === 'traffic' })}>
-              Traffic
-            </a>
+          <Link href={`/sites/${site.id}/analytics/${type}/traffic${url}`} className={classnames('button tab-button', { active: tab === 'traffic' })}>
+            Traffic
           </Link>
         </li>
         <li className='tab'>
-          <Link href={`/sites/${site.id}/analytics/${type}/audience${url}`}>
-            <a className={classnames('button tab-button', { active: tab === 'audience' })}>
-              Audience
-            </a>
+          <Link href={`/sites/${site.id}/analytics/${type}/audience${url}`} className={classnames('button tab-button', { active: tab === 'audience' })}>
+            Audience
           </Link>
         </li>
       </ul>

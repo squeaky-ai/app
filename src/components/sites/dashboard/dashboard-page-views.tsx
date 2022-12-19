@@ -37,7 +37,7 @@ export const DashboardPageViews: FC<Props> = ({ site, dashboard, period }) => {
         <h5>
           <Icon name='pages-line' />
           <Link href={`/sites/${site.id}/analytics/site/traffic`}>
-            <a>Page Views</a>
+            Page Views
           </Link>
         </h5>
         {hasPageViews && (
@@ -86,7 +86,7 @@ export const DashboardPageViews: FC<Props> = ({ site, dashboard, period }) => {
                 <Row key={page.url}>
                   <Cell>
                     <Link href={`/sites/${site.id}/analytics/page/traffic?url=${encodeURIComponent(page.url)}`}>
-                      <a>{page.url}</a>
+                      {page.url}
                     </Link>
                   </Cell>
                   <Cell>

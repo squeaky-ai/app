@@ -14,13 +14,13 @@ interface Props {
 export const BreadCrumbs: FC<Props> = ({ items }) => (
   <div className='breadcrumbs'>
     <Link href='/sites'>
-      <a>Squeaky App</a>
+      Squeaky App
     </Link>
     <span>/</span>
     {items.map((item, index) => (
       <React.Fragment key={item.name}>
         {item.href
-          ? <Link href={item.href}><a>{item.name}</a></Link>
+          ? <Link href={item.href}>{item.name}</Link>
           : <p>{item.name}</p>
         }
 

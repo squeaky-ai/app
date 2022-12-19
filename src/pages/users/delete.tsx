@@ -16,8 +16,8 @@ const UsersDelete: NextPage<ServerSideProps> = () => (
     <Main>
       <h4 className='title'>Delete Account</h4>
 
-      <Link href='/users/account'>
-        <a className='back-to-account'>&lt; <span>Back to Account Settings</span></a>
+      <Link href='/users/account' className='back-to-account'>
+        &lt; <span>Back to Account Settings</span>
       </Link>
 
       <Container className='md'>

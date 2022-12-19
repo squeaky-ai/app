@@ -16,10 +16,8 @@ export const SidebarAccount: FC<Props> = ({
   if (!visible) return null;
 
   return (
-    <Link href='/users/account'>
-      <a className={classnames('link', { active: path.startsWith('/users') })} data-label='Account'>
-        <Icon name='account-circle-line' />
-      </a>
+    <Link href='/users/account' className={classnames('link', { active: path.startsWith('/users') })} data-label='Account'>
+      <Icon name='account-circle-line' />
     </Link>
   );
 };

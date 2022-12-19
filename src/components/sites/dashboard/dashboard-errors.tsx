@@ -35,7 +35,7 @@ export const DashboardErrors: FC<Props> = ({ site, dashboard, period }) => {
         <h5>
           <Icon name='error-warning-line' />
           <Link href={`/sites/${site.id}/errors`}>
-            <a>Errors</a>
+            Errors
           </Link>
         </h5>
         {hasErrors && (
@@ -81,7 +81,7 @@ export const DashboardErrors: FC<Props> = ({ site, dashboard, period }) => {
                   <Cell>{error.message}</Cell>
                   <Cell>
                     <Link href={`/sites/${site.id}/errors/${error.id}`}>
-                      <a>{error.errorCount}</a>
+                      {error.errorCount}
                     </Link>
                   </Cell>
                 </Row>

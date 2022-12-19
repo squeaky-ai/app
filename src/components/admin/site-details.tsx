@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import Link from 'next/link';
 import { Icon } from 'components/icon';
 import { Pill } from 'components/pill';
 import { SiteIngestEnabled } from 'components/admin/site-ingest-enabled';
@@ -44,7 +45,7 @@ export const SiteDetails: FC<Props> = ({ activeVisitors, site, isEnterprise }) =
         <div className='row'>
           <span>Site URL</span>
           <span>
-            <a href={site.url} target='_blank' rel='noreferrer'>{site.url}</a>
+            <Link href={site.url} target='_blank' rel='noreferrer'>{site.url}</Link>
           </span>
         </div>
         <div className='row'>

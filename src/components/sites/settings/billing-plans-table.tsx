@@ -1,6 +1,5 @@
 import React from 'react';
 import type { FC } from 'react';
-import Link from 'next/link';
 import { Button } from 'components/button';
 import { Icon } from 'components/icon';
 import { Container } from 'components/container';
@@ -54,7 +53,7 @@ export const BillingPlansTable: FC<Props> = ({ site, billing, hasBilling, showPl
     <>
       <div className='currencies'>
         <Container className='md'>
-          <p>All plans come with access to our entire range of customer experience products, including analytics, recordings, feedback and heatmap data. To learn more about our full array of features, <Link href='/features'><a target='_blank'>see here</a></Link>.</p>
+          <p>All plans come with access to our entire range of customer experience products, including analytics, recordings, feedback and heatmap data. To learn more about our full array of features, <a href='/features' target='_blank'>see here</a>.</p>
         </Container>
 
         {!hasTransactions && (

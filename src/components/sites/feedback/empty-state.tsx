@@ -39,7 +39,7 @@ export const EmptyState: FC<Props> = ({
             videoName={videoName}
             body={
               <>
-                <p>New to Squeaky? Once you have <Link href={`/sites/${router.query.site_id}/settings/details/tracking-code`}><a>installed your tracking code</a></Link> this page will enable you to configure how you wish to collect user feedback, and let you review all incoming feedback in one place.</p>
+                <p>New to Squeaky? Once you have <Link href={`/sites/${router.query.site_id}/settings/details/tracking-code`}>installed your tracking code</Link> this page will enable you to configure how you wish to collect user feedback, and let you review all incoming feedback in one place.</p>
               </>
             }
           />
@@ -53,8 +53,8 @@ export const EmptyState: FC<Props> = ({
             body={
               <>
                 <p>Please install your tracking code to start capturing data for your site.</p>
-                <Link href={`/sites/${site.id}/settings/details/tracking-code`}>
-                  <a className='button primary'>Install Tracking Code</a>
+                <Link href={`/sites/${site.id}/settings/details/tracking-code`} className='button primary'>
+                  Install Tracking Code
                 </Link>
               </>
             }

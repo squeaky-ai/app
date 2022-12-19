@@ -8,6 +8,7 @@ import { Button } from 'components/button';
 import { Logo } from 'components/logo';
 import { Divider } from 'components/divider';
 import { SidebarCollapse } from 'components/app/sidebar-collapse';
+import { SidebarLink } from 'components/app/sidebar-link';
 import { Breakpoints } from 'data/common/constants';
 import { useResize } from 'hooks/use-resize';
 
@@ -33,15 +34,11 @@ export const Sidebar: FC = () => {
 
   return (
     <aside id='app-sidebar' className={classnames({ open })}>
-      <Link href='/sites'>
-        <a className='logo large'>
-          <Logo logo='main' alt='Logo' height={24} width={78} />
-        </a>
+      <Link href='/sites' className='logo large'>
+        <Logo logo='main' alt='Logo' height={24} width={78} />
       </Link>
-      <Link href='/sites'>
-        <a className='logo small'>
-          <Logo logo='small' alt='Logo' height={24} width={18} />
-        </a>
+      <Link href='/sites' className='logo small'>
+        <Logo logo='small' alt='Logo' height={24} width={18} />
       </Link>
       <span className='admin-indicator'>
         ADMIN
@@ -49,38 +46,45 @@ export const Sidebar: FC = () => {
       <menu className='left'>
         <div className='slider'>
           <div className='nav left'>
-            <Link href='/__admin/dashboard'>
-              <a className={classnames('link', { active: router.asPath.startsWith('/__admin/dashboard') })} data-label='Dashboard'>
-                <Icon name='dashboard-3-line' />
-                <span>Dashboard</span>
-              </a>
-            </Link>
+            <SidebarLink
+              visibile
+              href='/__admin/dashboard'
+              active={router.asPath.startsWith('/__admin/dashboard')}
+              icon='dashboard-3-line'
+              name='Dashboard'
+            />
             <Divider />
-            <Link href='/__admin/users'>
-              <a className={classnames('link', { active: router.asPath.startsWith('/__admin/users') })} data-label='Users'>
-                <Icon name='group-line' />
-                <span>Users</span>
-              </a>
-            </Link>
-            <Link href='/__admin/sites'>
-              <a className={classnames('link', { active: router.asPath.startsWith('/__admin/sites') })} data-label='Sites'>
-                <Icon name='window-line' />
-                <span>Sites</span>
-              </a>
-            </Link>
+            <SidebarLink
+              visibile
+              href='/__admin/users'
+              active={router.asPath.startsWith('/__admin/users')}
+              icon='group-line'
+              name='Users'
+            />
+            <SidebarLink
+              visibile
+              href='/__admin/sites'
+              active={router.asPath.startsWith('/__admin/sites')}
+              icon='window-line'
+              name='Sites'
+            />
             <Divider />
-            <Link href='/__admin/blog'>
-              <a className={classnames('link', { active: router.asPath.startsWith('/__admin/blog') })} data-label='Blog'>
-                <Icon name='book-open-line' />
-                <span>Blog</span>
-              </a>
-            </Link>
+            <SidebarLink
+              visibile
+              href='/__admin/blog'
+              active={router.asPath.startsWith('/__admin/blog')}
+              icon='book-open-line'
+              name='Blog'
+            />
             <Divider />
-            <a target='_blank' href='/api/sidekiq' className='link' data-label='Sidekiq'>
-              <Icon name='line-chart-line' />
-              <span>Sidekiq</span>
-              <Icon name='external-link-line' className='external' />
-            </a>
+            <SidebarLink
+              visibile
+              href='/api/sidekiq'
+              active={false}
+              icon='line-chart-line'
+              name='Sidekiq'
+              external
+            />
           </div>
         </div>
       </menu>

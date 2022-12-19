@@ -25,7 +25,7 @@ export const BlogPostRow: FC<Props> = ({ post }) => {
       <Cell>{post.id}</Cell>
       <Cell>
         <Link href={`/__admin/blog${post.slug}`}>
-          <a>{post.title}</a>
+          {post.title}
         </Link>
       </Cell>
       <Cell>{post.category}</Cell>

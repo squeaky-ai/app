@@ -12,16 +12,12 @@ export const SitesType: FC = () => {
 
   return (
     <ButtonGroup className='site-types'>
-      <Link href='/__admin/sites'>
-        <a className={classnames('button', !bundled ? 'primary' : 'blank')}>
-          All
-        </a>
+      <Link href='/__admin/sites' className={classnames('button', !bundled ? 'primary' : 'blank')}>
+        All
       </Link>
 
-      <Link href='/__admin/sites/bundles'>
-        <a className={classnames('button', bundled ? 'primary' : 'blank')}>
-          Bundled
-        </a>
+      <Link href='/__admin/sites/bundles' className={classnames('button', bundled ? 'primary' : 'blank')}>
+        Bundled
       </Link>
     </ButtonGroup>
   );

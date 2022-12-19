@@ -29,7 +29,7 @@ export const UsersTableRow: FC<Props> = ({ user, style }) => {
       <Cell>{user.id}</Cell>
       <Cell>
         <Link href={`/__admin/users/${user.id}`}>
-          <a>{user.fullName || '-'}</a>
+          {user.fullName || '-'}
         </Link>
         {!!user.partner && (
           <span className='partnered'>
@@ -40,7 +40,7 @@ export const UsersTableRow: FC<Props> = ({ user, style }) => {
       <Cell>{user.email}</Cell>
       <Cell>
         {user.visitor 
-          ? <Link href={`/sites/${publicRuntimeConfig.squeakySiteId}/visitors/${user.visitor.id}`}><a>{user.visitor.visitorId}</a></Link>
+          ? <Link href={`/sites/${publicRuntimeConfig.squeakySiteId}/visitors/${user.visitor.id}`}>{user.visitor.visitorId}</Link>
           : '-'
         }
       </Cell>
@@ -53,8 +53,8 @@ export const UsersTableRow: FC<Props> = ({ user, style }) => {
       <Cell>
         {user.sites.map((site, index) => (
           <React.Fragment key={site.id}>
-            <Link href={`/sites/${site.id}/dashboard`}>
-              <a target='_blank'>{site.name}</a>
+            <Link href={`/sites/${site.id}/dashboard`} target='_blank'>
+              {site.name}
             </Link>
             {index === user.sites.length -1 ? '' : ', '}
           </React.Fragment>

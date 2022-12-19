@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import Link from 'next/link';
 import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { Container } from 'components/container';
@@ -44,9 +45,9 @@ export const DeleteAccount: FC = () => {
             <Illustration illustration='illustration-14' height={256} width={256} alt='Illustraion to represent that the account has been deleted' />
             <h2>Account Deleted</h2>
             <p>We&apos;re sorry to see you go, but thanks so much for taking the time to use Squeaky. If you have any feedback please let us know:</p>
-            <a href='/contact-us' className='button primary'>
+            <Link href='/contact-us' className='button primary'>
               Contact Us
-            </a>
+            </Link>
           </Container>
         </div>
       )}
