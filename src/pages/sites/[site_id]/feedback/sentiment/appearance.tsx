@@ -18,7 +18,7 @@ import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useFeedback } from 'hooks/use-feedback';
 
 const SitesFeedbackSentimentAppearance: NextPage<ServerSideProps> = ({ user }) => {
-  const { loading, error, feedback, locale, setLocale } = useFeedback();
+  const { loading, error, feedback } = useFeedback();
 
   if (error) {
     return <Error />;
@@ -66,7 +66,7 @@ const SitesFeedbackSentimentAppearance: NextPage<ServerSideProps> = ({ user }) =
             {!!site.verifiedAt && !loading && (
               <>
                 <SentimentTabs siteId={site.id} member={member} page='appearance' />
-                <SentimentAppearance site={site} feedback={feedback} locale={locale} setLocale={setLocale} />
+                <SentimentAppearance site={site} feedback={feedback} />
               </>
             )}
           </Main>

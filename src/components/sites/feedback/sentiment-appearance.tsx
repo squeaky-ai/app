@@ -15,13 +15,10 @@ import { useToasts } from 'hooks/use-toasts';
 import { feedbackUpdate } from 'lib/api/graphql';
 import type { Feedback, FeedbackUpdateInput } from 'types/graphql';
 import type { Site } from 'types/graphql';
-import type { SupportedLanguages } from 'types/translations';
 
 interface Props {
   site: Site;
-  locale: SupportedLanguages;
   feedback: Feedback;
-  setLocale: (locale: SupportedLanguages) => void;
 }
 
 const DEFAULT_COLORS = ['#0768C1', '#F96155', '#8249FB', '#001A39'];
@@ -33,7 +30,7 @@ const SentimentSchema = Yup.object().shape({
   sentimentSchedule: Yup.string().oneOf(['always', 'custom'], 'Please select frequency'),
 });
 
-export const SentimentAppearance: FC<Props> = ({ site, locale, feedback, setLocale }) => {
+export const SentimentAppearance: FC<Props> = ({ site, feedback }) => {
   const toasts = useToasts();
 
   const isPaying = (site.plan?.tier || 0) > 0;
@@ -248,9 +245,8 @@ export const SentimentAppearance: FC<Props> = ({ site, locale, feedback, setLoca
                 </div>
                 <div className='right'>
                   <SentimentPreview
+                    site={site}
                     feedback={{ ...feedback, ...values }}
-                    locale={locale}
-                    setLocale={setLocale}
                   />
                 </div>
               </div>

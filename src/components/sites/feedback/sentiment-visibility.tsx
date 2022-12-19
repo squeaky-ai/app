@@ -12,13 +12,10 @@ import { SentimentPreview } from 'components/sites/feedback/sentiment-preview';
 import { useToasts } from 'hooks/use-toasts';
 import type { Feedback, FeedbackUpdateInput, SitesPage } from 'types/graphql';
 import type { Site } from 'types/graphql';
-import type { SupportedLanguages } from 'types/translations';
 
 interface Props {
   site: Site;
-  locale: SupportedLanguages;
   feedback: Feedback;
-  setLocale: (locale: SupportedLanguages) => void;
 }
 
 const SentimentSchema = Yup.object().shape({
@@ -26,7 +23,7 @@ const SentimentSchema = Yup.object().shape({
   sentimentDevices: Yup.array(),
 });
 
-export const SentimentVisibility: FC<Props> = ({ site, locale, feedback, setLocale }) => {
+export const SentimentVisibility: FC<Props> = ({ site, feedback }) => {
   const toasts = useToasts();
 
   const onUpdate = async (input: Partial<FeedbackUpdateInput>): Promise<void> => {
@@ -134,9 +131,8 @@ export const SentimentVisibility: FC<Props> = ({ site, locale, feedback, setLoca
                 </div>
                 <div className='right'>
                   <SentimentPreview
+                    site={site}
                     feedback={{ ...feedback, ...values }}
-                    locale={locale}
-                    setLocale={setLocale}
                   />
                 </div>
               </div>
