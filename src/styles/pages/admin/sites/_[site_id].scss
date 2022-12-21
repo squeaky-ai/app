@@ -189,13 +189,13 @@
     }
   }
 
-  .enterprise-settings {
+  .plan-settings {
     .checkbox-group {
       display: flex;
       margin: 0 0 1.5rem 0;
 
       .checkbox {
-        margin: 0 1.5rem 0 0;
+        margin: 0 1.5rem .5rem 0;
 
         &:hover .check {
           border-color: var(--mauve-700);

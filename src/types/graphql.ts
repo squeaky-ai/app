@@ -403,6 +403,7 @@ export type AdminSitePlanUpdateInput = {
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: InputMaybe<Scalars['String']>;
   dataStorageMonths?: InputMaybe<Scalars['Int']>;
+  featuresEnabled?: InputMaybe<Array<Scalars['String']>>;
   maxMonthlyRecordings?: InputMaybe<Scalars['Int']>;
   notes?: InputMaybe<Scalars['String']>;
   privateInstanceEnabled?: InputMaybe<Scalars['Boolean']>;
@@ -410,6 +411,7 @@ export type AdminSitePlanUpdateInput = {
   siteId: Scalars['ID'];
   ssoEnabled?: InputMaybe<Scalars['Boolean']>;
   support?: InputMaybe<Array<Scalars['String']>>;
+  teamMemberLimit?: InputMaybe<Scalars['Int']>;
 };
 
 export type AdminSiteRecordingsCounts = {
@@ -2215,12 +2217,14 @@ export enum PathPosition {
 export type Plan = {
   __typename?: 'Plan';
   dataStorageMonths?: Maybe<Scalars['Int']>;
+  featuresEnabled: Array<Scalars['String']>;
   id: Scalars['ID'];
   maxMonthlyRecordings?: Maybe<Scalars['Int']>;
   name: Scalars['String'];
   pricing?: Maybe<Array<PlanPrice>>;
   responseTimeHours?: Maybe<Scalars['Int']>;
   support?: Maybe<Array<Scalars['String']>>;
+  teamMemberLimit?: Maybe<Scalars['Int']>;
 };
 
 export type PlanPrice = {
@@ -2236,8 +2240,6 @@ export type Query = {
   admin: Admin;
   blogPost?: Maybe<BlogPost>;
   blogPosts?: Maybe<BlogPosts>;
-  consent?: Maybe<Consent>;
-  feedback?: Maybe<Feedback>;
   partner?: Maybe<Scalars['String']>;
   plans: Array<Plan>;
   site?: Maybe<Site>;
@@ -2258,16 +2260,6 @@ export type QueryBlogPostArgs = {
 export type QueryBlogPostsArgs = {
   category?: InputMaybe<Scalars['String']>;
   tags?: InputMaybe<Array<Scalars['String']>>;
-};
-
-
-export type QueryConsentArgs = {
-  siteId: Scalars['String'];
-};
-
-
-export type QueryFeedbackArgs = {
-  siteId: Scalars['String'];
 };
 
 
@@ -2734,10 +2726,13 @@ export type SiteSessionSettings = {
   __typename?: 'SiteSessionSettings';
   anonymiseFormInputs: Scalars['Boolean'];
   anonymiseText: Scalars['Boolean'];
+  consent?: Maybe<Consent>;
   cssSelectorBlacklist: Array<Scalars['String']>;
+  feedback?: Maybe<Feedback>;
   ingestEnabled: Scalars['Boolean'];
   invalidOrExceededPlan: Scalars['Boolean'];
   ipBlacklist: Array<SitesIpBlacklist>;
+  magicErasureEnabled: Scalars['Boolean'];
   name: Scalars['String'];
   url: Scalars['String'];
   uuid: Scalars['String'];
@@ -2865,6 +2860,7 @@ export type SitesPlan = {
   auditTrailEnabled: Scalars['Boolean'];
   dataStorageMonths: Scalars['Int'];
   exceeded: Scalars['Boolean'];
+  featuresEnabled: Array<Scalars['String']>;
   invalid: Scalars['Boolean'];
   maxMonthlyRecordings: Scalars['Int'];
   name: Scalars['String'];
@@ -2873,6 +2869,7 @@ export type SitesPlan = {
   responseTimeHours: Scalars['Int'];
   ssoEnabled: Scalars['Boolean'];
   support?: Maybe<Array<Scalars['String']>>;
+  teamMemberLimit?: Maybe<Scalars['Int']>;
   tier: Scalars['Int'];
 };
 

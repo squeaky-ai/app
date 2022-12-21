@@ -177,6 +177,7 @@ export const SiteSubscription: FC<Props> = ({ site, isEnterprise, hasBilling }) 
         <div className='row'>
           <span>Sites</span>
           <span>
+            {bundledSites.length === 0 && '-'}
             {bundledSites.map((site, index) => (
               <React.Fragment key={site.id}>
                 <Link href={`/__admin/sites/${site.id}`}>

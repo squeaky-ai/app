@@ -52,7 +52,6 @@ const AdminSite: NextPage<ServerSideProps> = () => {
               <SiteDetails 
                 site={admin.site}
                 activeVisitors={admin.activeVisitors}
-                isEnterprise={isEnterprise}
               />
 
               <SiteSubscription 

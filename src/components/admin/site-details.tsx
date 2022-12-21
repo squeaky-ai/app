@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Icon } from 'components/icon';
 import { Pill } from 'components/pill';
 import { SiteIngestEnabled } from 'components/admin/site-ingest-enabled';
-import { SiteEnterpriseSettings } from 'components/admin/site-enterprise-settings';
+import { SitePlanSettings } from 'components/admin/site-plan-settings';
 import { Row, Table, Cell } from 'components/table';
 import { Card } from 'components/card';
 import { toNiceDate } from 'lib/dates';
@@ -13,10 +13,9 @@ import type { ActiveVisitorCount, AdminSite } from 'types/graphql';
 interface Props {
   site: AdminSite;
   activeVisitors: ActiveVisitorCount[];
-  isEnterprise: boolean;
 }
 
-export const SiteDetails: FC<Props> = ({ activeVisitors, site, isEnterprise }) => {
+export const SiteDetails: FC<Props> = ({ activeVisitors, site }) => {
   const activeVisitorsCount = activeVisitors.find(a => a.siteId === site.uuid)?.count || 0;
 
   return (
@@ -109,15 +108,13 @@ export const SiteDetails: FC<Props> = ({ activeVisitors, site, isEnterprise }) =
         </div>
       </Card>
 
-      {isEnterprise && (
-        <Card>
-          <h5>
-            <Icon name='building-line' />
-            Enterprise Settings
-          </h5>
-          <SiteEnterpriseSettings site={site} />
-        </Card>
-      )}
+      <Card>
+        <h5>
+          <Icon name='settings-3-line' />
+          Settings
+        </h5>
+        <SitePlanSettings site={site} />
+      </Card>
     </div>
   );
 };

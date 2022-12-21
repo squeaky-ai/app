@@ -67,6 +67,8 @@ export const GET_ADMIN_SITE_QUERY = gql`
           responseTimeHours
           dataStorageMonths
           notes
+          teamMemberLimit
+          featuresEnabled
         }
         billing {
           customerId

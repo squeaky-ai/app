@@ -32,6 +32,8 @@ export const usePlan = (props: Props): UsePlan => {
     ssoEnabled: false,
     notes: '',
     support: [],
+    featuresEnabled: [],
+    teamMemberLimit: null,
   };
 
   return {
