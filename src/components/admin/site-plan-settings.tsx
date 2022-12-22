@@ -11,7 +11,7 @@ import { TextArea } from 'components/textarea';
 import { Button } from 'components/button';
 import { useToasts } from 'hooks/use-toasts';
 import { adminSitePlanUpdate } from 'lib/api/graphql';
-import type { AdminSite } from 'types/graphql';
+import type { AdminSite, PlanFeature } from 'types/graphql';
 
 interface Props {
   site: AdminSite;
@@ -63,7 +63,7 @@ export const SitePlanSettings: FC<Props> = ({ site }) => {
                 privateInstanceEnabled: values.privateInstanceEnabled,
                 notes: values.notes,
                 teamMemberLimit: values.teamMemberLimit,
-                featuresEnabled: values.featuresEnabled,
+                featuresEnabled: values.featuresEnabled as PlanFeature[],
               });
               toasts.add({ type: 'success', body: 'Plan settings updated' });
             } catch(error) {

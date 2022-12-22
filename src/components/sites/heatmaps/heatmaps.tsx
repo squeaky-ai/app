@@ -46,8 +46,6 @@ export const Heatmaps: FC<Props> = ({ type, page, pages, period, setPage, setPer
     range: getDateRange(period),
   });
 
-  console.log(heatmaps);
-
   const { clickCounts, clickPositions, cursors, scrolls } = useHeatmapsItems({
     type,
     page,

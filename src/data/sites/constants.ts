@@ -1,3 +1,5 @@
+import type { PlanFeature } from 'types/graphql';
+
 // Should match
 // - www.google.com
 // - google.com
@@ -22,4 +24,60 @@ export const guideLinks = {
   webflow: 'https://squeaky.notion.site/Webflow-ea17dbafc682462d9c5f53a62cc963f9',
   magento: 'https://squeaky.notion.site/Magento-49302bba0c7a48d3aef93e38e8e79643',
   drupal: 'https://squeaky.notion.site/Drupal-401bce8e455246019e9e429641979c53',
+};
+
+export const mapFeatureToRoutes: Record<PlanFeature, string[]> = {
+  dashboard: [
+    '/sites/[site_id]/dashboard',
+  ],
+  error_tracking: [
+    '/sites/[site_id]/errors',
+    '/sites/[site_id]/errors/[error_id]',
+  ],
+  event_tracking: [
+    '/sites/[site_id]/events',
+    '/sites/[site_id]/events/history',
+  ],
+  heatmaps_click_counts: [
+    '/sites/[site_id]/heatmaps/click-counts',
+  ],
+  heatmaps_click_positions: [
+    '/sites/[site_id]/heatmaps/click-positions',
+  ],
+  heatmaps_mouse: [
+    '/sites/[site_id]/heatmaps/mouse',
+  ],
+  heatmaps_scroll: [
+    '/sites/[site_id]/heatmaps/scroll',
+  ],
+  journeys: [
+    '/sites/[site_id]/journeys',
+  ],
+  nps: [
+    '/sites/[site_id]/feedback/nps',
+    '/sites/[site_id]/feedback/apperance',
+    '/sites/[site_id]/feedback/scheduling',
+    '/sites/[site_id]/feedback/form',
+    '/sites/[site_id]/feedback/guide',
+  ],
+  page_analytics: [
+    '/sites/[site_id]/analytics/page/traffic',
+    '/sites/[site_id]/analytics/page/audience',
+  ],
+  recordings: [
+    '/sites/[site_id]/recordings/[recording_id]',
+  ],
+  sentiment: [
+    '/sites/[site_id]/feedback/sentiment',
+    '/sites/[site_id]/feedback/sentiment/apperance',
+    '/sites/[site_id]/feedback/sentiment/visibility',
+    '/sites/[site_id]/feedback/sentiment/form',
+  ],
+  site_analytics: [
+    '/sites/[site_id]/analytics/site/traffic',
+    '/sites/[site_id]/analytics/site/audience',
+  ],
+  visitors: [
+    '/sites/[site_id]/visitors/[visitor_id]',
+  ],
 };

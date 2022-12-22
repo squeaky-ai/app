@@ -1028,7 +1028,6 @@ export const referralDelete = async (input: UsersReferralDeleteInput): Promise<v
     variables: { input },
     update(cache) {
       const normalizedId = cache.identify({ id: input.id, __typename: 'UsersReferral' });
-      console.log(normalizedId);
       cache.evict({ id: normalizedId });
       cache.gc();
     }
@@ -1043,7 +1042,6 @@ export const adminReferralDelete = async (input: AdminReferralDeleteInput): Prom
     variables: { input },
     update(cache) {
       const normalizedId = cache.identify({ id: input.id, __typename: 'UsersReferral' });
-      console.log(normalizedId);
       cache.evict({ id: normalizedId });
       cache.gc();
     }
@@ -1138,7 +1136,6 @@ export const invoiceDelete = async (input: UsersInvoiceDeleteInput): Promise<voi
     variables: { input },
     update(cache) {
       const normalizedId = cache.identify({ id: input.id, __typename: 'UsersInvoice' });
-      console.log(normalizedId);
       cache.evict({ id: normalizedId });
       cache.gc();
     }

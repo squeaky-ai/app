@@ -31,6 +31,7 @@ export const GET_SITE_QUERY = gql`
         tier
         name
         invalid
+        featuresEnabled
       }
       team {
         id

@@ -403,7 +403,7 @@ export type AdminSitePlanUpdateInput = {
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: InputMaybe<Scalars['String']>;
   dataStorageMonths?: InputMaybe<Scalars['Int']>;
-  featuresEnabled?: InputMaybe<Array<Scalars['String']>>;
+  featuresEnabled?: InputMaybe<Array<PlanFeature>>;
   maxMonthlyRecordings?: InputMaybe<Scalars['Int']>;
   notes?: InputMaybe<Scalars['String']>;
   privateInstanceEnabled?: InputMaybe<Scalars['Boolean']>;
@@ -2217,7 +2217,7 @@ export enum PathPosition {
 export type Plan = {
   __typename?: 'Plan';
   dataStorageMonths?: Maybe<Scalars['Int']>;
-  featuresEnabled: Array<Scalars['String']>;
+  featuresEnabled: Array<PlanFeature>;
   id: Scalars['ID'];
   maxMonthlyRecordings?: Maybe<Scalars['Int']>;
   name: Scalars['String'];
@@ -2226,6 +2226,23 @@ export type Plan = {
   support?: Maybe<Array<Scalars['String']>>;
   teamMemberLimit?: Maybe<Scalars['Int']>;
 };
+
+export enum PlanFeature {
+  Dashboard = 'dashboard',
+  ErrorTracking = 'error_tracking',
+  EventTracking = 'event_tracking',
+  HeatmapsClickCounts = 'heatmaps_click_counts',
+  HeatmapsClickPositions = 'heatmaps_click_positions',
+  HeatmapsMouse = 'heatmaps_mouse',
+  HeatmapsScroll = 'heatmaps_scroll',
+  Journeys = 'journeys',
+  Nps = 'nps',
+  PageAnalytics = 'page_analytics',
+  Recordings = 'recordings',
+  Sentiment = 'sentiment',
+  SiteAnalytics = 'site_analytics',
+  Visitors = 'visitors'
+}
 
 export type PlanPrice = {
   __typename?: 'PlanPrice';

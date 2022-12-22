@@ -1,12 +1,15 @@
 import React from 'react';
 import type { FC, ReactElement } from 'react';
+import { useRouter } from 'next/router';
 import { useSite } from 'hooks/use-site';
 import { NotFound } from 'components/sites/not-found';
 import { Unauthorized } from 'components/sites/unauthorized';
+import { UpgradeRequired } from 'components/sites/upgrade-required';
 import { ErrorBoundary } from 'components/sites/error-boundary';
 import { usePageContext } from 'hooks/use-page-context';
 import { Error } from 'components/error';
-import type { User, Team } from 'types/graphql';
+import { mapFeatureToRoutes } from 'data/sites/constants';
+import type { User, Team, PlanFeature } from 'types/graphql';
 import type { Site } from 'types/graphql';
 
 interface Children {
@@ -26,11 +29,27 @@ export const getTeamMember = (site: Site, user: User): Team | null => {
   return site.team.find(team => team.user.id.toString() === user.id.toString());
 };
 
+const featureIsEnabledForPath = (site: Site, path: string): boolean => {
+  const featureForPath = Object
+    .entries(mapFeatureToRoutes)
+    .find(([_, paths]) => paths.includes(path))?.[0] as PlanFeature | undefined;
+
+  // If the path has no feature then assume it is
+  // supposed to be shown
+  return site?.plan && featureForPath
+    ? site.plan.featuresEnabled.includes(featureForPath)
+    : true;
+}
+
 export const Page: FC<Props> = ({ children, user, scope }) => {
+  const router = useRouter();
+
   const { loading, error, site } = useSite();
   const { setPageState } = usePageContext();
 
   const member = getTeamMember(site, user);
+  const featureEnabled = featureIsEnabledForPath(site, router.pathname);
+
   const authorized = user.superuser 
     ? true 
     : scope.length ? scope.includes(member?.role) : true;
@@ -49,23 +68,29 @@ export const Page: FC<Props> = ({ children, user, scope }) => {
     }
   }, [site]);
 
+  if (loading) {
+    return null;
+  }
+
+  if (error) {
+    return <Error className='site-page-error' />;
+  }
+
+  if (!site) {
+    return <NotFound className='site-page-error' />;
+  }
+
+  if (!authorized) {
+    return <Unauthorized />;
+  }
+
+  if (!featureEnabled) {
+    return <UpgradeRequired site={site} />;
+  }
+
   return (
-    <>
-      {error && (
-        <Error className='site-page-error' />
-      )}
-
-      {!loading && !site && !error && (
-        <NotFound className='site-page-error' />
-      )}
-
-      {site && !authorized && (
-        <Unauthorized />
-      )}
-
-      <ErrorBoundary>
-        {site && authorized && children({ site, member })}
-      </ErrorBoundary>
-    </>
+    <ErrorBoundary>
+      {children({ site, member })}
+    </ErrorBoundary>
   );
 };
