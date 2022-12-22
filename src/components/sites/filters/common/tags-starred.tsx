@@ -19,10 +19,10 @@ export const TagsStarred: FC<Props> = ({ filters, updateFilters }) => {
   };
 
   return (
-    <>
+    <div className='tag-group'>
       <Label>Starred</Label>
 
       <Tag className='secondary' handleDelete={onDeleteTag}>{filters.starred ? 'Yes' : 'No'}</Tag>
-    </>
+    </div>
   );
 };

@@ -19,7 +19,7 @@ export const TagsReferrers: FC<Props> = ({ filters, updateFilters }) => {
   };
 
   return (
-    <>
+    <div className='tag-group'>
       <Label>Traffic source</Label>
 
       {filters.referrers.map(d => (
@@ -27,6 +27,6 @@ export const TagsReferrers: FC<Props> = ({ filters, updateFilters }) => {
           {d === 'none' ? 'Direct (none)' : d}
         </Tag>
       ))}
-    </>
+    </div>
   );
 };

@@ -16,10 +16,10 @@ export const TagsExitUrl: FC<Props> = ({ filters, updateFilters }) => {
   };
 
   return (
-    <>
+    <div className='tag-group'>
       <Label>Exit URL</Label>
 
       <Tag className='secondary' handleDelete={onDeleteTag}>{filters.exitUrl}</Tag>
-    </>
+    </div>
   );
 };

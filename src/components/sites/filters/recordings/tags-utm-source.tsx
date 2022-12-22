@@ -16,10 +16,10 @@ export const TagsUtmSource: FC<Props> = ({ filters, updateFilters }) => {
   };
 
   return (
-    <>
+    <div className='tag-group'>
       <Label>UTM Source</Label>
 
       <Tag className='secondary' handleDelete={onDeleteTag}>{filters.utmSource}</Tag>
-    </>
+    </div>
   );
 };

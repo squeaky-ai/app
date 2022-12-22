@@ -16,10 +16,10 @@ export const TagsUtmMedium: FC<Props> = ({ filters, updateFilters }) => {
   };
 
   return (
-    <>
+    <div className='tag-group'>
       <Label>UTM Medium</Label>
 
       <Tag className='secondary' handleDelete={onDeleteTag}>{filters.utmMedium}</Tag>
-    </>
+    </div>
   );
 };

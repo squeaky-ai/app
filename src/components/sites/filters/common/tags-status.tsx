@@ -20,10 +20,10 @@ export const TagsStatus: FC<Props> = ({ filters, updateFilters }) => {
   };
 
   return (
-    <>
+    <div className='tag-group'>
       <Label>Status</Label>
 
       <Tag className='secondary' handleDelete={onDeleteTag}>{filters.status}</Tag>
-    </>
+    </div>
   );
 };

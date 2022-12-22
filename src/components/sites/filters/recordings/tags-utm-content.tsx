@@ -16,10 +16,10 @@ export const TagsUtmContent: FC<Props> = ({ filters, updateFilters }) => {
   };
 
   return (
-    <>
+    <div className='tag-group'>
       <Label>UTM Content</Label>
 
       <Tag className='secondary' handleDelete={onDeleteTag}>{filters.utmContent}</Tag>
-    </>
+    </div>
   );
 };

@@ -19,12 +19,12 @@ export const TagsLanguages: FC<Props> = ({ filters, updateFilters }) => {
   };
 
   return (
-    <>
+    <div className='tag-group'>
       <Label>Languages</Label>
 
       {filters.languages.map(l => (
         <Tag key={l} className='secondary' handleDelete={() => onDeleteTag(l)}>{l}</Tag>
       ))}
-    </>
+    </div>
   );
 };

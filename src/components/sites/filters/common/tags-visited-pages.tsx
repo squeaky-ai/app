@@ -19,12 +19,12 @@ export const TagsVisitedPages: FC<Props> = ({ filters, updateFilters }) => {
   };
 
   return (
-    <>
+    <div className='tag-group'>
       <Label>Visited pages</Label>
 
       {filters.visitedPages.map(v => (
         <Tag key={v} className='secondary' handleDelete={() => onDeleteTag(v)}>{v}</Tag>
       ))}
-    </>
+    </div>
   );
 };

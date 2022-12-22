@@ -20,7 +20,7 @@ export const TagsDuration: FC<Props> = ({ filters, updateFilters }) => {
   };
 
   return (
-    <>
+    <div className='tag-group'>
       <Label>Duration</Label>
     
       {filters.duration.rangeType === 'Between' && (
@@ -34,6 +34,6 @@ export const TagsDuration: FC<Props> = ({ filters, updateFilters }) => {
           <span>From</span> {formatTimeString(filters.duration.fromDuration)}
         </Tag>
       )}
-    </>
+    </div>
   );
 };

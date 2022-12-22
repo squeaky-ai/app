@@ -27,7 +27,7 @@ export const TagsDate: FC<Props> = ({ name, filters, updateFilters }) => {
   const relativePeriod = TIME_PERIODS.find(p => p.key === value);
 
   return (
-    <>
+    <div className='tag-group'>
       <Label>{label}</Label>
 
       {relativePeriod && (
@@ -53,6 +53,6 @@ export const TagsDate: FC<Props> = ({ name, filters, updateFilters }) => {
           <span>Between</span> {value.betweenFromDate} and {value.betweenToDate}
         </Tag>
       )}
-    </>
+    </div>
   );
 };

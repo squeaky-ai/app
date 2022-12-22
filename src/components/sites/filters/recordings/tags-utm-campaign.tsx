@@ -16,10 +16,10 @@ export const TagsUtmCampaign: FC<Props> = ({ filters, updateFilters }) => {
   };
 
   return (
-    <>
+    <div className='tag-group'>
       <Label>UTM Campaign</Label>
 
       <Tag className='secondary' handleDelete={onDeleteTag}>{filters.utmCampaign}</Tag>
-    </>
+    </div>
   );
 };

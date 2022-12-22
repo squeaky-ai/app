@@ -16,10 +16,10 @@ export const TagsBookmarked: FC<Props> = ({ filters, updateFilters }) => {
   };
 
   return (
-    <>
+    <div className='tag-group'>
       <Label>Bookmarked</Label>
 
       <Tag className='secondary' handleDelete={onDeleteTag}>{filters.bookmarked ? 'Yes' : 'No'}</Tag>
-    </>
+    </div>
   );
 };

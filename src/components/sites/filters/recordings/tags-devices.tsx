@@ -16,12 +16,12 @@ export const TagsDevices: FC<Props> = ({ filters, updateFilters }) => {
   };
 
   return (
-    <>
+    <div className='tag-group'>
       <Label>Devices</Label>
 
       {filters.devices.map(d => (
         <Tag key={d} className='secondary' handleDelete={() => onDeleteTag(d)}>{d}</Tag>
       ))}
-    </>
+    </div>
   );
 };

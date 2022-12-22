@@ -16,10 +16,10 @@ export const TagsStartUrl: FC<Props> = ({ filters, updateFilters }) => {
   };
 
   return (
-    <>
+    <div className='tag-group'>
       <Label>Start URL</Label>
 
       <Tag className='secondary' handleDelete={onDeleteTag}>{filters.startUrl}</Tag>
-    </>
+    </div>
   );
 };

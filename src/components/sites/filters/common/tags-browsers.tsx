@@ -19,12 +19,12 @@ export const TagsBrowsers: FC<Props> = ({ filters, updateFilters }) => {
   };
 
   return (
-    <>
+    <div className='tag-group'>
       <Label>Browser</Label>
 
       {filters.browsers.map(b => (
         <Tag key={b} className='secondary' handleDelete={() => onDeleteTag(b)}>{b}</Tag>
       ))}
-    </>
+    </div>
   );
 };

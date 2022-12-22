@@ -21,7 +21,7 @@ export const TagsTags: FC<Props> = ({ filters, updateFilters }) => {
   const getTagName = (id: number) => tags.find(t => t.id === id.toString())?.name || id;
 
   return (
-    <>
+    <div className='tag-group'>
       <Label>Tags</Label>
 
       {filters.tags.map(d => (
@@ -29,6 +29,6 @@ export const TagsTags: FC<Props> = ({ filters, updateFilters }) => {
           {getTagName(d)}
         </Tag>
       ))}
-    </>
+    </div>
   );
 };

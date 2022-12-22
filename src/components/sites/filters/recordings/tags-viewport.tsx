@@ -20,7 +20,7 @@ export const TagsViewport: FC<Props> = ({ filters, updateFilters }) => {
   };
 
   return (
-    <>
+    <div className='tag-group'>
       <Label>Viewport</Label>
 
       {(filters.viewport.minWidth || filters.viewport.maxWidth) && (
@@ -34,6 +34,6 @@ export const TagsViewport: FC<Props> = ({ filters, updateFilters }) => {
           <span>Height</span> {filters.viewport.minHeight || 'Any'} - {filters.viewport.maxHeight || 'Any'} pixels
         </Tag>
       )}
-    </>
+    </div>
   );
 };
