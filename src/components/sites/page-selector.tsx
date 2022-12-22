@@ -140,7 +140,7 @@ const ClickItem: FC<{
     }}
     buttonClassName='item'
     buttonOnClick={() => handleClick(page)}
-    fluid
+    portalClassName='page-selector-tooltip'
   >
     {page.url}
   </Tooltip>
@@ -162,7 +162,7 @@ const SingleItem: FC<{
     buttonProps={{ 
       type: 'button',
     }}
-    fluid
+    portalClassName='page-selector-tooltip'
   >
     {page.url}
   </Tooltip>
@@ -184,7 +184,7 @@ const MultiItem: FC<{
     buttonProps={{ 
       type: 'button',
     }}
-    fluid
+    portalClassName='page-selector-tooltip'
   >
     {page.url}
   </Tooltip>
