@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import classnames from 'classnames';
 import { Label } from 'components/label';
 import { Select, Option } from 'components/select';
-import { Button } from 'components/button';
+import { Tooltip } from 'components/tooltip';
 import { Radio } from 'components/radio';
 import { Checkbox } from 'components/checkbox';
 import { Search } from 'components/search';
@@ -128,10 +128,22 @@ const ClickItem: FC<{
   page: SitesPage,
   handleClick: (page: SitesPage) => void,
 }> = ({ page, handleClick }) => (
-  <Button className='item' onClick={() => handleClick(page)}>
-    <span className='url'>{page.url}</span>
-    <span className='count'>{page.count.toLocaleString()}</span>
-  </Button>
+  <Tooltip
+    button={
+      <>
+        <span className='url'>{page.url}</span>
+        <span className='count'>{page.count.toLocaleString()}</span>
+      </>
+    }
+    buttonProps={{ 
+      type: 'button',
+    }}
+    buttonClassName='item'
+    buttonOnClick={() => handleClick(page)}
+    fluid
+  >
+    {page.url}
+  </Tooltip>
 );
 
 const SingleItem: FC<{
@@ -140,10 +152,20 @@ const SingleItem: FC<{
   selected: boolean,
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
 }> = ({ name, page, selected, handleChange }) => (
-  <Radio className='item' checked={selected} name={name} value={page.url} onChange={handleChange}>
-    <span className='url'>{page.url}</span>
-    <span className='count'>{page.count.toLocaleString()}</span>
-  </Radio>
+  <Tooltip
+    button={
+      <Radio className='item' checked={selected} name={name} value={page.url} onChange={handleChange}>
+        <span className='url'>{page.url}</span>
+        <span className='count'>{page.count.toLocaleString()}</span>
+      </Radio>
+    }
+    buttonProps={{ 
+      type: 'button',
+    }}
+    fluid
+  >
+    {page.url}
+  </Tooltip>
 );
 
 const MultiItem: FC<{
@@ -152,8 +174,18 @@ const MultiItem: FC<{
   selected: boolean,
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
 }> = ({ name, page, selected, handleChange }) => (
-  <Checkbox className='item' checked={selected} name={name} value={page.url} onChange={handleChange}>
-    <span className='url'>{page.url}</span>
-    <span className='count'>{page.count.toLocaleString()}</span>
-  </Checkbox>
+  <Tooltip
+    button={
+      <Checkbox className='item' checked={selected} name={name} value={page.url} onChange={handleChange}>
+        <span className='url'>{page.url}</span>
+        <span className='count'>{page.count.toLocaleString()}</span>
+      </Checkbox>
+    }
+    buttonProps={{ 
+      type: 'button',
+    }}
+    fluid
+  >
+    {page.url}
+  </Tooltip>
 );

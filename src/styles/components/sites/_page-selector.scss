@@ -85,6 +85,14 @@
       }
     }
 
+    .tooltip {
+      display: flex;
+
+      & > .button {
+        width: 100%;
+      }
+    }
+
     .item {
       margin: 0 1rem .5rem 1rem;
 

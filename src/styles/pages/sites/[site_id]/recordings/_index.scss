@@ -104,11 +104,6 @@
         }
       }
 
-      .tooltip {
-        cursor: default;
-        opacity: .25;
-      }
-
       .columns {
         .dropdown-menu {
           width: 230px;
@@ -198,6 +193,11 @@
 
         @include breakpoint-md {
           display: none;
+        }
+
+        .tooltip {
+          cursor: default;
+          opacity: .25;
         }
     
         .dropdown {
