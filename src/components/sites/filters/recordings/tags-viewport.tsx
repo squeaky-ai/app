@@ -25,13 +25,13 @@ export const TagsViewport: FC<Props> = ({ filters, updateFilters }) => {
 
       {(filters.viewport.minWidth || filters.viewport.maxWidth) && (
         <Tag className='secondary' handleDelete={onDeleteWidthTag}>
-          <span>Width</span> {filters.viewport.minWidth || 'any'} - {filters.viewport.maxWidth || 'any'} pixels
+          <span>Width</span> {filters.viewport.minWidth || 'Any'} - {filters.viewport.maxWidth || 'Any'} pixels
         </Tag>
       )}
 
       {(filters.viewport.minHeight || filters.viewport.maxHeight) && (
         <Tag className='secondary' handleDelete={onDeleteHeightTag}>
-          <span>Height</span> {filters.viewport.minHeight || 'any'} - {filters.viewport.maxHeight || 'any'} pixels
+          <span>Height</span> {filters.viewport.minHeight || 'Any'} - {filters.viewport.maxHeight || 'Any'} pixels
         </Tag>
       )}
     </>

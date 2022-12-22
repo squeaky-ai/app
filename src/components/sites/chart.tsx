@@ -55,10 +55,26 @@ const getAxisProps = (props: any) => omit(props, [
   'visibleTicksCount',
 ]);
 
-const getFormattedTickLabel = (value: any) => {
+const getFormattedTickLabelYAxis = (value: any) => {
   return typeof value === 'number'
     ? value.toLocaleString()
     : value;
+};
+
+const getFormattedTickLabelXAxis = (value: any) => {
+  if (typeof value !== 'number') {
+    return value;
+  }
+
+  if (value > 999 && value < 1000000){
+    return (value / 1000).toFixed(1) + 'K';
+  }
+  
+  if (value > 1000000){
+    return (value / 1000000).toFixed(1) + 'M';
+  }
+  
+  return value;
 };
 
 const ChartLine: FC<Omit<Props, 'chartType'>> = ({
@@ -128,7 +144,12 @@ const ChartBar: FC<Omit<Props, 'chartType'>> = ({
         stroke={getLabelTextColor(admin)}
         tickLine={false}
         allowDecimals={false}
-        tickMargin={10} 
+        tickMargin={10}
+        tick={props => (
+          <text {...getAxisProps(props)}>
+            {getFormattedTickLabelXAxis(props.payload.value)}
+          </text>
+        )}
         {...xAxisProps}
       />
 
@@ -140,7 +161,7 @@ const ChartBar: FC<Omit<Props, 'chartType'>> = ({
         allowDecimals={false}
         tick={props => (
           <text {...getAxisProps(props)}>
-            {getFormattedTickLabel(props.payload.value)}
+            {getFormattedTickLabelYAxis(props.payload.value)}
           </text>
         )}
         scale={scale} 
