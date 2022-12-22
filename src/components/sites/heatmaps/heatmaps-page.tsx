@@ -15,10 +15,6 @@ interface Props {
   clickTarget: HeatmapClickTarget;
   page: string;
   heatmaps: Heatmaps;
-  clicksCounts: HeatmapsClickCount[];
-  clickPositions: HeatmapsClickPosition[];
-  scrolls: HeatmapsScroll[];
-  cursors: HeatmapsCursor[];
 }
 
 let replayer: Replayer;
@@ -29,10 +25,6 @@ export const HeatmapsPage: FC<Props> = ({
   page,
   clickTarget,
   heatmaps,
-  clicksCounts,
-  clickPositions,
-  scrolls,
-  cursors,
 }) => {
   const ref = React.useRef<HTMLDivElement>(null);
   const [scale, setScale] = React.useState<number>(1);
@@ -111,10 +103,10 @@ export const HeatmapsPage: FC<Props> = ({
     doc.body.style.cssText += 'pointer-events: none; user-select: none;';
     doc.head.innerHTML += iframeStyles;
 
-    if (type === 'ClickCount') showClickCountsMaps(doc, clicksCounts, clickTarget);
-    if (type === 'ClickPosition') showClickGradientMaps(doc, clickPositions);
-    if (type === 'Scroll') showScrollMaps(doc, scrolls, scale);
-    if (type === 'Cursor') showCursorMaps(doc, cursors as HeatmapsCursor[]);
+    if (type === 'ClickCount') showClickCountsMaps(doc, heatmaps.items as HeatmapsClickCount[], clickTarget);
+    if (type === 'ClickPosition') showClickGradientMaps(doc, heatmaps.items as HeatmapsClickPosition[]);
+    if (type === 'Scroll') showScrollMaps(doc, heatmaps.items as HeatmapsScroll[], scale);
+    if (type === 'Cursor') showCursorMaps(doc, heatmaps.items as HeatmapsCursor[]);
 
     // Now that stuff isn't going to jump the spinner can be removed
     setLoading(false);
@@ -162,7 +154,7 @@ export const HeatmapsPage: FC<Props> = ({
   React.useEffect(() => {
     draw();
     shrink();
-  }, [type, heatmaps.counts, clicksCounts, clickPositions, scrolls, cursors, clickTarget]);
+  }, [type, heatmaps.counts, heatmaps.items]);
 
   React.useEffect(() => {
     return () => {

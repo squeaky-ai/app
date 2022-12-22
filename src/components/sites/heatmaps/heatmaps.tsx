@@ -17,7 +17,6 @@ import { HeatmapsPages } from 'components/sites/heatmaps/heatmaps-pages';
 import { HeatmapsPage } from 'components/sites/heatmaps/heatmaps-page';
 import { HeatmapsDisplays } from 'components/sites/heatmaps/heatmaps-displays';
 import { useHeatmaps } from 'hooks/use-heatmaps';
-import { useHeatmapsItems } from 'hooks/use-heatmaps-items';
 import { getDateRange } from 'lib/dates';
 import { HeatmapsType, HeatmapsDevice, SitesPage } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
@@ -43,13 +42,6 @@ export const Heatmaps: FC<Props> = ({ type, page, pages, period, setPage, setPer
     device, 
     type,
     excludeRecordingIds,
-    range: getDateRange(period),
-  });
-
-  const { clickCounts, clickPositions, cursors, scrolls } = useHeatmapsItems({
-    type,
-    page,
-    device,
     range: getDateRange(period),
   });
 
@@ -114,15 +106,11 @@ export const Heatmaps: FC<Props> = ({ type, page, pages, period, setPage, setPer
               clickTarget={clickTarget}
               page={page}
               heatmaps={heatmaps}
-              clicksCounts={clickCounts}
-              clickPositions={clickPositions}
-              cursors={cursors}
-              scrolls={scrolls}
             />
           </Card>
           {type === HeatmapsType.ClickCount && (
             <HeatmapsClicks 
-              items={clickCounts}
+              heatmaps={heatmaps}
               selected={selected} 
               clickTarget={clickTarget}
               setSelected={setSelected} 
@@ -130,7 +118,7 @@ export const Heatmaps: FC<Props> = ({ type, page, pages, period, setPage, setPer
           )}
 
           {type === HeatmapsType.Scroll && (
-            <HeatmapsScrolls items={scrolls} />
+            <HeatmapsScrolls heatmaps={heatmaps} />
           )}
         </>
       )}

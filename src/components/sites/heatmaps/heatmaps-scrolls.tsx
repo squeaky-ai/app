@@ -3,26 +3,26 @@ import type { FC } from 'react';
 import { Icon } from 'components/icon';
 import { Card } from 'components/card';
 import { getScrollMapData } from 'lib/heatmaps';
-import type { HeatmapsScroll } from 'types/heatmaps';
+import type { Heatmaps, HeatmapsScroll } from 'types/heatmaps';
 
 interface Props {
-  items: HeatmapsScroll[];
+  heatmaps: Heatmaps;
 }
 
-export const HeatmapsScrolls: FC<Props> = ({ items }) => {
-  const scrollMap = getScrollMapData(items).slice(1);
+export const HeatmapsScrolls: FC<Props> = ({ heatmaps }) => {
+  const scrollMap = getScrollMapData(heatmaps.items as HeatmapsScroll[]).slice(1);
 
   return (
     <Card className='data'>
       <div className='scrolls-table'>
-        {items.length === 0 && (
+        {heatmaps.items.length === 0 && (
           <div className='empty'>
             <Icon name='time-line' />
             <p>No data available</p>
           </div>
         )}
 
-        {items.length > 0 && (
+        {heatmaps.items.length > 0 && (
           <>
             <div className='head row'>
               <p>% scrolled</p>
