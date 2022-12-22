@@ -61,11 +61,11 @@ const getFormattedTickLabel = (value: any) => {
   }
 
   if (value > 999 && value < 1000000){
-    return (value / 1000).toFixed(1) + 'K';
+    return (value / 1000).toFixed(1).replace(/.0$/, '') + 'K';
   }
   
   if (value > 1000000){
-    return (value / 1000000).toFixed(1) + 'M';
+    return (value / 1000000).toFixed(1).replace(/.0$/, '') + 'M';
   }
   
   return value;

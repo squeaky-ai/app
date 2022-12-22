@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import classnames from 'classnames';
 import { sum } from 'lodash';
 import { percentage } from 'lib/maths';
 import { Flag } from 'components/flag';
@@ -35,7 +36,7 @@ export const AnalyticsCountries: FC<Props> = ({ countries }) => {
           setScale={setScale}
         />
       </div>
-      <div className='country-map'>
+      <div className={classnames('country-map', { paginated: countries.length > limit })}>
         <div className='list'>
           <Table>
             {results.map(country => (

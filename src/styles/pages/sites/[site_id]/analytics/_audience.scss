@@ -274,9 +274,13 @@
         }
 
         .country-map {
-          align-items: center;
+          align-items: flex-start;
           display: grid;
           grid-template-columns: 1fr 2fr;
+
+          &.paginated {
+            align-items: center;
+          }
 
           .world-map {
             grid-area: world-map;
