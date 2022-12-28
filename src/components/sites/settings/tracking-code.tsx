@@ -40,7 +40,7 @@ export const TrackingCode: FC<Props> = ({ site }) => {
 {`<!-- Squeaky Tracking Code for ${site.url} -->
 <script>
   (function(s,q,u,e,a,k,y){
-    s._sqSettings={site_id:'2918cf0f-42aa-499d-a4da-d362bd1011ed'};
+    s._sqSettings={site_id:'${site.uuid}'};
     e=q.getElementsByTagName('head')[0];
     a=q.createElement('script');
     a.src=u+s._sqSettings.site_id;
