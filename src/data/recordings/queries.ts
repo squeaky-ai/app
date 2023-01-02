@@ -58,7 +58,7 @@ export const GET_RECORDINGS_QUERY = gql`
 `;
 
 export const GET_RECORDING_QUERY = gql`
-  query GetRecording($siteId: ID!, $recordingId: ID!, $eventPage: Int) { 
+  query GetRecording($siteId: ID!, $recordingId: ID!, $eventPage: Int, $excludeRecordingIds: [ID!]) { 
     site(siteId: $siteId) {
       id
       name
@@ -99,6 +99,19 @@ export const GET_RECORDING_QUERY = gql`
           lastActivityAt
           recordingCount {
             total
+          }
+          recordings(page: 0, size: 5, sort: connected_at__desc, excludeRecordingIds: $excludeRecordingIds) {
+            items {
+              id
+              sessionId
+              duration
+              disconnectedAt
+            }
+            pagination {
+              pageSize
+              total
+              sort
+            }
           }
         }
         pages {

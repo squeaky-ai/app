@@ -1,9 +1,11 @@
 import React from 'react';
 import type { FC } from 'react';
+import Link from 'next/link';
+import classnames from 'classnames';
 import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { PlayerTab } from 'data/sites/enums';
-import { toNiceDate, toTimeString } from 'lib/dates';
+import { toNiceDate, toTimeString, toShortDate } from 'lib/dates';
 import { Tooltip } from 'components/tooltip';
 import { Browser } from 'components/browser';
 import { Device } from 'components/device';
@@ -22,7 +24,18 @@ interface Props {
 }
 
 export const SidebarInfo: FC<Props> = ({ site, member, recording, setActiveTab }) => {
+  const [showRecordings, setShowRecordings] = React.useState<boolean>(false);
+
   const linkedData = getLinkedData(member, recording.visitor);
+
+  const toggleShowRecordings = () => setShowRecordings(!showRecordings);
+
+  const recordingsCount = recording.visitor.recordings.pagination.total;
+
+  const moreRecordingsCount = (
+    recordingsCount -
+    recording.visitor.recordings.pagination.pageSize
+  );
 
   return (
     <>
@@ -44,8 +57,43 @@ export const SidebarInfo: FC<Props> = ({ site, member, recording, setActiveTab }
         </div>
         <div className='row'>
           <dt>Recordings</dt>
-          <dd>{recording.visitor.recordingCount.total}</dd>
+          <dd>
+            {recordingsCount > 1 && (
+              <Button className={classnames('link toggle-recordings', { open: showRecordings })} onClick={toggleShowRecordings}>
+                <span>{recordingsCount}</span>
+                <Icon name='arrow-drop-down-line' />
+              </Button>
+            )}
+            {recordingsCount <= 1 && (
+              <>{recordingsCount}</>
+            )}
+          </dd>
         </div>
+        {showRecordings && moreRecordingsCount > 0 && (
+          <div className='row recordings'>
+            {recording.visitor.recordings.items.map(rec => (
+              <div className='recording-row' key={rec.id}>
+                <div>
+                  <Icon name='play-mini-fill' />
+                  <span>
+                    <Link href={`/sites/${site.id}/recordings/${rec.id}`}>
+                      {rec.sessionId}
+                    </Link>
+                  </span>
+                </div>
+                <div>
+                  {toShortDate(rec.disconnectedAt)}
+                </div>
+                <div>
+                  {toTimeString(rec.duration)}
+                </div>
+              </div>
+            ))}
+            <Link className='see-more' href={`/sites/${site.id}/visitors/${recording.visitor.id}`}>
+              See {moreRecordingsCount} more
+            </Link>
+          </div>
+        )}
       </dl>
       <div className='attributes'>
         {!linkedData && (

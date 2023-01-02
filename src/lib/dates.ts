@@ -78,6 +78,13 @@ export const toNiceDate = (timestamp: string) => {
   return format(date, 'E, d LLL yyyy HH:mm');
 };
 
+export const toShortDate = (timestamp: string) => {
+  if (!timestamp) return 'Unknown';
+
+  const date = new Date(timestamp);
+  return format(date, 'LLL d');
+};
+
 export const formatDateForGraphQL = (date: Date) => format(date, 'yyyy-MM-dd');
 
 const expandAbsoluteDateToRange = (date: AbsoluteTime): TimeRange => {

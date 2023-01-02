@@ -124,6 +124,30 @@
     }
   }
 
+  .toggle-recordings {
+    align-items: center;
+    display: inline-flex;
+    font-size: var(--font-size-body-sm);
+    height: 1rem;
+    line-height: var(--line-height-body-sm);
+
+    span {
+      text-decoration: underline;
+    }
+
+    .icon {
+      display: inline-block;
+      font-size: var(--font-size-body);
+      margin: 0 0 0 .125rem;
+    }
+
+    &.open {
+      .icon {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
   .recording-starred {
     line-height: 1;
     margin-right: .15rem;
@@ -140,6 +164,44 @@
       display: flex;
       justify-content: space-between;
       padding: 0 0 .75rem 0;
+
+      &.recordings {
+        display: flex;
+        flex-direction: column;
+
+        .recording-row {
+          align-items: center;
+          display: flex;
+          margin: 0 0 .5rem 0;
+
+          div {
+            align-items: center;
+            display: flex;
+            flex-shrink: 0;
+            margin: 0 0 0 .5rem;
+
+            &:first-of-type {
+              flex: 1;
+              margin: 0;
+            }
+
+            &:last-of-type {
+              justify-content: flex-end;
+              width: 3rem;
+            }
+          }
+
+          .icon {
+            color: var(--blue-500);
+            font-size: var(--font-size-body);
+            margin: 0 .25rem 0 0;
+          }
+        }
+
+        .see-more {
+          margin: .5rem 0 0 0;
+        }
+      }
     }
 
     dt {
