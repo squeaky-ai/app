@@ -65,7 +65,7 @@ export const SidebarInfo: FC<Props> = ({ site, member, recording, setActiveTab }
               </Button>
             )}
             {recordingsCount <= 1 && (
-              <>{recordingsCount}</>
+              <>1</>
             )}
           </dd>
         </div>
