@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import { Icon } from 'components/icon';
+import { toHyphenedDate } from 'lib/dates';
 import { TIME_PERIODS } from 'data/common/constants';
 import type { TimePeriod, RelativeTime } from 'types/common';
 
@@ -22,12 +23,12 @@ export const PeriodLabel: FC<Props> = ({ period }) => {
   const { fromType, fromDate, betweenFromDate, betweenToDate } = period;
 
   if (fromType === 'Before') {
-    return <span>{`Before ${fromDate}`}</span>;
+    return <span>{`Before ${toHyphenedDate(fromDate)}`}</span>;
   }
 
   if (fromType === 'After') {
-    return <span>{`After ${fromDate}`}</span>;
+    return <span>{`After ${toHyphenedDate(fromDate)}`}</span>;
   }
 
-  return <span>{betweenFromDate} <Icon name='arrow-right-line' /> {betweenToDate}</span>;
+  return <span>{toHyphenedDate(betweenFromDate)} <Icon name='arrow-right-line' /> {toHyphenedDate(betweenToDate)}</span>;
 };

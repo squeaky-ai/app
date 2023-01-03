@@ -12,6 +12,12 @@
       }
     }
 
+    .period {
+      .dropdown-menu {
+        transform: translate(0, 0);
+      }
+    }
+
     .add-groups,
     .add-events {
       position: relative;

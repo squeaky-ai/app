@@ -86,7 +86,6 @@ export const Absolute: FC<Props> = ({ period, errors, onChange }) => {
       {['Before', 'After', ''].includes(getValue('fromType')) && (
         <div className='row single-date'>
           <DatePicker
-            type='text' 
             onChange={handleFromDateChange}
             value={getValue('fromDate')}
             disabled={!absoluteTime}
@@ -98,14 +97,12 @@ export const Absolute: FC<Props> = ({ period, errors, onChange }) => {
       {getValue('fromType') === 'Between' && (
         <div className='row multi-date'>
           <DatePicker 
-            type='text' 
             onChange={handleBetweenFromDateChange}
             value={getValue('betweenFromDate')}
             invalid={!!getError('betweenFromDate')}
           />
           <p>and</p>
           <DatePicker 
-            type='text' 
             onChange={handleBetweenToDateChange}
             value={getValue('betweenToDate')}
             invalid={!!getError('betweenToDate')}

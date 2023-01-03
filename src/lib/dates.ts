@@ -93,7 +93,7 @@ const expandAbsoluteDateToRange = (date: AbsoluteTime): TimeRange => {
 
   if (date.fromType === 'After') {
     return {
-      fromDate: toSlashyDate(date.fromDate),
+      fromDate: date.fromDate,
       toDate: todaysDate,
     };
   }
@@ -101,13 +101,13 @@ const expandAbsoluteDateToRange = (date: AbsoluteTime): TimeRange => {
   if (date.fromType === 'Before') {
     return {
       fromDate: '2021-01-01',
-      toDate: toSlashyDate(date.fromDate),
+      toDate: date.fromDate,
     };
   }
 
   return {
-    fromDate: toSlashyDate(date.betweenFromDate),
-    toDate: toSlashyDate(date.betweenToDate),
+    fromDate: date.betweenFromDate,
+    toDate: date.betweenToDate,
   }
 };
 

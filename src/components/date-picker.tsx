@@ -12,6 +12,8 @@ export const DatePicker: FC<Props> = (props) => (
     <Input 
       placeholder='DD/MM/YYYY' 
       autoComplete='off'
+      type='date'
+      autoFocus
       {...props} 
     />
     <Icon name='calendar-line' />

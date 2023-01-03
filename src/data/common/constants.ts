@@ -8,8 +8,6 @@ export const BASE_PATH = publicRuntimeConfig.basePath;
 
 export const MM_SS_REGEX = /\d\d:\d\d/;
 
-export const DD_MM_YYYY_REGEX = /\d\d\/\d\d\/\d\d\d\d/;
-
 export const YYYY_MM_DD_REGEX = /\d\d\d\d-\d\d-\d\d/;
 
 export const HH_MM_REGEX = /\d\d:\d\d/;

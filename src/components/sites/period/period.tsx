@@ -8,7 +8,7 @@ import { PeriodLabel } from 'components/sites/period/period-label';
 import { Button } from 'components/button';
 import { Relative } from 'components/sites/period/relative';
 import { Absolute } from 'components/sites/period/absolute';
-import { DD_MM_YYYY_REGEX, TIME_PERIODS } from 'data/common/constants';
+import { YYYY_MM_DD_REGEX, TIME_PERIODS } from 'data/common/constants';
 import type { TimePeriod } from 'types/common';
 
 interface Props {
@@ -16,7 +16,7 @@ interface Props {
   onChange: (period: TimePeriod) => void;
 }
 
-const DateStringSchema = Yup.string().matches(DD_MM_YYYY_REGEX, 'Date must be formatted as dd/mm/yyyy');
+const DateStringSchema = Yup.string().matches(YYYY_MM_DD_REGEX, 'Date must be formatted as yyyy/mm/dd');
 
 const AbsoluteSchema = Yup.object().shape({
   fromType: Yup.string().oneOf(['Before', 'After', 'Between']),

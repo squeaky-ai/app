@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import { Label } from 'components/label';
 import { Tag } from 'components/tag';
 import { FILTERS } from 'data/visitors/constants';
+import { toHyphenedDate } from 'lib/dates';
 import { TIME_PERIODS } from 'data/common/constants';
 import type { ValueOf } from 'types/common';
 import type { VisitorsFilters } from 'types/visitors';
@@ -38,19 +39,19 @@ export const TagsDate: FC<Props> = ({ name, filters, updateFilters }) => {
 
       {!isRealtivePeriod && value.fromType === 'Before' && (
         <Tag className='secondary' handleDelete={onDeleteTag}>
-          <span>Before</span> {value.fromDate}
+          <span>Before</span> {toHyphenedDate(value.fromDate)}
         </Tag>
       )}
 
       {!isRealtivePeriod && value.fromType === 'After' && (
         <Tag className='secondary' handleDelete={onDeleteTag}>
-          <span>After</span> {value.fromDate}
+          <span>After</span> {toHyphenedDate(value.fromDate)}
         </Tag>
       )}
 
       {!isRealtivePeriod && value.fromType === 'Between' && (
         <Tag className='secondary' handleDelete={onDeleteTag}>
-          <span>Between</span> {value.betweenFromDate} and {value.betweenToDate}
+          <span>Between</span> {toHyphenedDate(value.betweenFromDate)} and {toHyphenedDate(value.betweenToDate)}
         </Tag>
       )}
     </div>
