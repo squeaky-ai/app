@@ -37,7 +37,7 @@ export const fromTimeString = (timeString: string) => {
 
 export const getDateFromTimestamp = (date: string) => new Date(Number(date));
 
-export const fromSlashyDate = (slashyDate: string) => parse(slashyDate, 'dd/MM/yyyy', new Date());
+export const fromHyphenedDate = (slashyDate: string) => parse(slashyDate, 'yyyy-MM-dd', new Date());
 
 export const toSlashyDate = (s: string) => s ? s.split('/').reverse().join('-') : null;
 

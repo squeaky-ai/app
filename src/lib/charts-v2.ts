@@ -2,7 +2,7 @@ import { range } from 'lodash';
 import { subDays, getDayOfYear, getWeek, subWeeks, subMonths, format } from 'date-fns';
 import { ScaleType } from 'recharts/types/util/types';
 import { getAmPmForHour } from 'lib/charts';
-import { fromSlashyDate } from 'lib/dates';
+import { fromHyphenedDate } from 'lib/dates';
 import type { TimePeriod } from 'types/common';
 
 interface Result<T> {
@@ -38,7 +38,7 @@ const getEndDateForPeriod = (period: TimePeriod): Date => {
     return now;
   }
 
-  return fromSlashyDate(period.fromDate || period.betweenToDate);
+  return fromHyphenedDate(period.fromDate || period.betweenToDate);
 };
 
 export const formatResultsForGroupType = <T extends Item>(results: Result<T>, period: TimePeriod, fallback: Omit<T, 'dateKey'>): T[] => {
