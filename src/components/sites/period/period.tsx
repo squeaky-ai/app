@@ -20,9 +20,21 @@ const DateStringSchema = Yup.string().matches(YYYY_MM_DD_REGEX, 'Date must be fo
 
 const AbsoluteSchema = Yup.object().shape({
   fromType: Yup.string().oneOf(['Before', 'After', 'Between']),
-  fromDate: DateStringSchema,
-  betweenFromDate: DateStringSchema,
-  betweenToDate: DateStringSchema,
+  fromDate: DateStringSchema
+    .when('fromType', {
+      is: (value: string) => ['Before', 'After'].includes(value),
+      then: DateStringSchema.required(),
+    }),
+  betweenFromDate: DateStringSchema
+    .when('fromType', {
+      is: 'Between',
+      then: DateStringSchema.required(),
+    }),
+  betweenToDate: DateStringSchema
+    .when('fromType', {
+      is: 'Between',
+      then: DateStringSchema.required(),
+    }),
 });
 
 const DateSchema = Yup.object().shape({

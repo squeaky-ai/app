@@ -251,7 +251,7 @@ export const Sidebar: FC<Props> = ({ user }) => {
             <SidebarGroup name='Settings' visible={[OWNER, ADMIN].includes(pageState.role)}>
               <SidebarLink
                 visibile
-                href={`/sites/${siteId}/settings/details`}
+                href={`/sites/${siteId}/settings/details${pageState.embedded ? '/tags' : ''}`}
                 active={path.startsWith(`/sites/${siteId}/settings/details`)}
                 icon='window-line'
                 name='Site'
