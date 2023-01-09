@@ -1,7 +1,5 @@
 import React from 'react';
 import type { FC } from 'react';
-import { Button } from 'components/button';
-import { Icon } from 'components/icon';
 import { Container } from 'components/container';
 import { Select, Option } from 'components/select';
 import { BillingPlansTableSmall } from 'components/sites/settings/billing-plans-table-small';
@@ -9,6 +7,7 @@ import { BillingPlansTableLarge } from 'components/sites/settings/billing-plans-
 import { Interval, getUsefulCurrency } from 'lib/currency';
 import { Currency, Site } from 'types/graphql';
 import type { Billing } from 'types/billing';
+import { buildPlanData } from 'data/billing/constants';
 
 
 interface Props {
@@ -22,7 +21,7 @@ export const BillingPlansTable: FC<Props> = ({ site, billing, hasBilling, showPl
   const [currency, setCurrency] = React.useState<Currency>(getUsefulCurrency());
   const [interval, setInterval] = React.useState<Interval>(Interval.MONTHLY);
 
-  const planIndex = billing.plans.findIndex(plan => plan.id === site.plan.planId);
+  const planData = buildPlanData(billing.plans, billing.plan);
 
   // If they have transactions we do two things:
   // a) we set the currency to the currency that they have in their billing
@@ -77,31 +76,21 @@ export const BillingPlansTable: FC<Props> = ({ site, billing, hasBilling, showPl
 
       <BillingPlansTableSmall
         site={site}
-        billing={billing}
-        planIndex={planIndex}
         currency={currency}
         interval={interval}
         hasBilling={hasBilling}
+        planData={planData}
         showPlanChangeMessage={showPlanChangeMessage}
       />
 
       <BillingPlansTableLarge 
         site={site}
-        billing={billing}
-        planIndex={planIndex}
         currency={currency}
         interval={interval}
         hasBilling={hasBilling}
+        planData={planData}
         showPlanChangeMessage={showPlanChangeMessage}
       />
- 
-      <div className='enterprise'>
-        <Icon name='building-line' />
-        <p>If you have <b>more than 200k visits per month</b>, or you&apos;re looking to <b>learn more about our Enterprise features</b>, like SSO, Audit Trails, Enterprise SLA&apos;s etc, the please get in touch.</p>
-        <Button className='primary'>
-          Discuss Enterprise Plans
-        </Button>
-      </div>
     </>
   );
 };

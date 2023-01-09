@@ -151,6 +151,7 @@ export const GET_BILLING_QUERY = gql`
         name
         exceeded
         free
+        deprecated
         enterprise
         invalid
         support
@@ -191,6 +192,7 @@ export const GET_BILLING_QUERY = gql`
           invoicePdfUrl
           interval
           plan {
+            id
             name
           }
           periodStartAt
@@ -204,7 +206,11 @@ export const GET_BILLING_QUERY = gql`
     plans {
       id
       name
+      free
+      deprecated
+      enterprise
       maxMonthlyRecordings
+      featuresEnabled
       pricing {
         id
         currency

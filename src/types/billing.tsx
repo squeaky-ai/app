@@ -5,3 +5,14 @@ export interface Billing {
   plan: SitesPlan;
   plans: Plan[];
 }
+
+export interface PlanData {
+  name: string;
+  plan: Plan;
+  show: boolean;
+  current: boolean;
+  usage: string[];
+  includesCapabilitiesFrom: string | null,
+  capabilities: string[],
+  options: string[],
+}
