@@ -34,7 +34,7 @@ const getIntervalName = (interval: string) => {
 export const BillingTable: FC<Props> = ({ site, billing, hasBilling }) => {
   const router = useRouter();
 
-  const plan = billing.plans.find(plan => Number(plan.id) === site.plan.tier);
+  const plan = billing.plans.find(plan => plan.id === site.plan.planId);
 
   const latestTransaction = last(billing.billing?.transactions);
 

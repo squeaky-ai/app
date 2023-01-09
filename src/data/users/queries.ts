@@ -62,7 +62,9 @@ export const GET_PARTNER_QUERY = gql`
             name
             verifiedAt
             plan {
-              tier
+              planId
+              free
+              enterprise
               name
             }
           }

@@ -33,7 +33,7 @@ const SentimentSchema = Yup.object().shape({
 export const SentimentAppearance: FC<Props> = ({ site, feedback }) => {
   const toasts = useToasts();
 
-  const isPaying = (site.plan?.tier || 0) > 0;
+  const isPaying = !site.plan.free || false
 
   const onUpdate = async (input: Partial<FeedbackUpdateInput>): Promise<void> => {
     await feedbackUpdate({

@@ -32,7 +32,7 @@ const NpsSchema = Yup.object().shape({
 export const NpsAppearance: FC<Props> = ({ site, feedback }) => {
   const toasts = useToasts();
 
-  const isPaying = (site.plan?.tier || 0) > 0;
+  const isPaying = !site.plan.free || false
 
   const onUpdate = async (input: Partial<FeedbackUpdateInput>): Promise<void> => {
     await feedbackUpdate({

@@ -20,11 +20,11 @@ export function buildReferrersColumns(referrals: UsersReferral[]): Referrals {
       acc.inactive.push(referral);
       return acc;
     }
-    if (referral.site.plan.tier === 0) {
+    if (referral.site.plan.free) {
       acc.free.push(referral);
       return acc;
     }
-    if (referral.site.plan.tier > 0) {
+    if (!referral.site.plan.free) {
       acc.paid.push(referral);
       return acc;
     }

@@ -22,7 +22,7 @@ export const BillingPlansTable: FC<Props> = ({ site, billing, hasBilling, showPl
   const [currency, setCurrency] = React.useState<Currency>(getUsefulCurrency());
   const [interval, setInterval] = React.useState<Interval>(Interval.MONTHLY);
 
-  const planIndex = billing.plans.findIndex(plan => Number(plan.id) === site.plan.tier);
+  const planIndex = billing.plans.findIndex(plan => plan.id === site.plan.planId);
 
   // If they have transactions we do two things:
   // a) we set the currency to the currency that they have in their billing

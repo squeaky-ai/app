@@ -53,72 +53,74 @@ export const Billing: FC<Props> = ({ site }) => {
 
   // This is for people who we've hacked onto multi 
   // account billing by changing the tier manually
-  const hasPlanOverride = billing.plan?.tier > 0 && !billing.billing;
+  const hasPlanOverride = !billing.plan?.free && !billing.billing;
 
-  const isEnterprise = site.plan?.tier >= 5;
+  const isEnterprise = site.plan?.enterprise;
+
+  if (loading) {
+    return <Spinner />;
+  }
+
+  if (hasPlanOverride) {
+    return (
+      <Container className='md'>
+        <Message
+          type='info'
+          message={<p>This site is currently part of a subscription bundle with other sites. If you&apos;d like to make changes to your plan please visit the parent site or get in touch via <a href='mailto:hello@squeaky.ai'>hello@squeaky.ai</a>.</p>}
+        />
+      </Container>
+    );
+  }
 
   return (
     <>
-      {loading && <Spinner />}
-
-      {!loading && hasPlanOverride && (
-        <Container className='md'>
+      <div className='billing'>
+        {site.plan.invalid && (
           <Message
-            type='info'
-            message={<p>This site is currently part of a subscription bundle with other sites. If you&apos;d like to make changes to your plan please visit the parent site or get in touch via <a href='mailto:hello@squeaky.ai'>hello@squeaky.ai</a>.</p>}
+            type='error'
+            message={<p><b>Attention</b>: We had trouble processing your subscription using your chosen payment method. You&apos;ve been temporarily placed on the free plan. To restore your subscription and unlock your missing data, please update your payment details.</p>}
+            button={<BillingPortalButton site={site} message='Manage billing' buttonClassName='primary' />}
           />
-        </Container>
-      )}
+        )}
 
-      {!loading && !hasPlanOverride && (
-        <div className='billing'>
-          {site.plan.invalid && (
-            <Message
-              type='error'
-              message={<p><b>Attention</b>: We had trouble processing your subscription using your chosen payment method. You&apos;ve been temporarily placed on the free plan. To restore your subscription and unlock your missing data, please update your payment details.</p>}
-              button={<BillingPortalButton site={site} message='Manage billing' buttonClassName='primary' />}
-            />
-          )}
-
-          <Tabs
-            tabs={[
-              {
-                name: 'Plans',
-                page: 'plans',
-                body: (
-                  isEnterprise
-                    ? (
-                      <BillingEnterprise 
-                        site={site}
-                        billing={billing} 
-                        hasBilling={hasBilling}
-                      />
-                    )
-                    : (
-                      <BillingPlansTable 
-                        site={site}
-                        billing={billing} 
-                        hasBilling={hasBilling}
-                        showPlanChangeMessage={showPlanChangeMessage}
-                      />
-                    )
-                )
-              },
-              {
-                name: 'Billing',
-                page: 'billing',
-                body: (
-                  <BillingTable 
-                    site={site}
-                    billing={billing} 
-                    hasBilling={hasBilling}
-                  />
-                )
-              }
-            ]}
-          />
-        </div>
-      )}
+        <Tabs
+          tabs={[
+            {
+              name: 'Plans',
+              page: 'plans',
+              body: (
+                isEnterprise
+                  ? (
+                    <BillingEnterprise 
+                      site={site}
+                      billing={billing} 
+                      hasBilling={hasBilling}
+                    />
+                  )
+                  : (
+                    <BillingPlansTable 
+                      site={site}
+                      billing={billing} 
+                      hasBilling={hasBilling}
+                      showPlanChangeMessage={showPlanChangeMessage}
+                    />
+                  )
+              )
+            },
+            {
+              name: 'Billing',
+              page: 'billing',
+              body: (
+                <BillingTable 
+                  site={site}
+                  billing={billing} 
+                  hasBilling={hasBilling}
+                />
+              )
+            }
+          ]}
+        />
+      </div>
 
       <PlanChanged ref={ref} />
     </>

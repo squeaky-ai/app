@@ -20,8 +20,12 @@ export const usePlan = (props: Props): UsePlan => {
   });
 
   const fallback: SitesPlan = {
+    id: '',
     name: 'Free',
-    tier: 0,
+    planId: '',
+    deprecated: false,
+    free: true,
+    enterprise: false,
     exceeded: false,
     invalid: false,
     maxMonthlyRecordings: 500,

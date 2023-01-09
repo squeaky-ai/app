@@ -129,7 +129,9 @@ export const ADMIN_SITE_PLAN_UPDATE_MUTATION = gql`
     adminSitePlanUpdate(input: $input) {
       id
       plan {
-        tier
+        planId
+        free
+        enterprise
         name
         exceeded
         invalid

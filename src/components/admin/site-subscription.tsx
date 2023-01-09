@@ -40,7 +40,7 @@ export const SiteSubscription: FC<Props> = ({ site, isEnterprise, hasBilling }) 
           )}
         </div>
 
-        {site.plan?.tier > 0 && !hasBilling && (
+        {site.plan.free && !hasBilling && (
           <Message
             type='warning'
             message='This site has been manually placed on a paid tier'

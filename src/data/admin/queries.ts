@@ -55,7 +55,9 @@ export const GET_ADMIN_SITE_QUERY = gql`
         ingestEnabled
         provider
         plan {
-          tier
+          planId
+          free
+          enterprise
           name
           exceeded
           invalid
@@ -194,7 +196,7 @@ export const GET_ADMIN_SITES_QUERY = gql`
           verifiedAt
           superuserAccessEnabled
           plan {
-            tier
+            planId
             name
             exceeded
             invalid
@@ -243,7 +245,7 @@ export const GET_ADMIN_SITES_BUNDLES_QUERY = gql`
           provider
           superuserAccessEnabled
           plan {
-            tier
+            planId
             name
             exceeded
             invalid
@@ -296,7 +298,7 @@ export const GET_ADMIN_USER_QUERY = gql`
               name
               verifiedAt
               plan {
-                tier
+                planId
                 name
               }
             }

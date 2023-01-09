@@ -28,7 +28,9 @@ export const GET_SITE_QUERY = gql`
       anonymiseText
       superuserAccessEnabled
       plan {
-        tier
+        planId
+        free
+        enterprise
         name
         invalid
         featuresEnabled
@@ -91,7 +93,7 @@ export const GET_SITE_BY_UUID_QUERY = gql`
       magicErasureEnabled
       cssSelectorBlacklist
       plan {
-        tier
+        planId
         name
         invalid
       }
@@ -119,7 +121,7 @@ export const GET_PLAN_QUERY = gql`
     site(siteId: $siteId) {
       id
       plan {
-        tier
+        planId
         name
         exceeded
         invalid
@@ -145,9 +147,11 @@ export const GET_BILLING_QUERY = gql`
     site(siteId: $siteId) {
       id
       plan {
-        tier
+        planId
         name
         exceeded
+        free
+        enterprise
         invalid
         support
         maxMonthlyRecordings

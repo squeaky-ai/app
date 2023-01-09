@@ -23,7 +23,9 @@ const MUTATION = gql`
       id
       plan {
         name
-        tier
+        free
+        enterprise
+        planId
       }
     }
   }
