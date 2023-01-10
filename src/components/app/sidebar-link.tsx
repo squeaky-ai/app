@@ -26,7 +26,7 @@ export const SidebarLink: FC<Props> = ({
   if (!visibile) return null;
 
   return (
-    <Link href={href} className={classnames('link', { active })} data-label={name}>
+    <Link href={href} className={classnames('link', { active })} data-label={name} target={external ? '_blank' : undefined}>
       <Icon className='sidebar-icon' name={icon} />
       <span>{name}</span>
       {warning && <Icon name='error-warning-fill' className='warning' />}

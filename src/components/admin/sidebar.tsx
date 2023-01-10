@@ -2,6 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
 import classnames from 'classnames';
+import getConfig from 'next/config';
 import { useRouter } from 'next/router';
 import { Icon } from 'components/icon';
 import { Button } from 'components/button';
@@ -11,6 +12,8 @@ import { SidebarCollapse } from 'components/app/sidebar-collapse';
 import { SidebarLink } from 'components/app/sidebar-link';
 import { Breakpoints } from 'data/common/constants';
 import { useResize } from 'hooks/use-resize';
+
+const { publicRuntimeConfig } = getConfig();
 
 export const Sidebar: FC = () => {
   const resize = useResize();
@@ -79,7 +82,7 @@ export const Sidebar: FC = () => {
             <Divider />
             <SidebarLink
               visibile
-              href='/api/sidekiq'
+              href={`${publicRuntimeConfig.webHost}/api/sidekiq`}
               active={false}
               icon='line-chart-line'
               name='Sidekiq'
