@@ -28,6 +28,7 @@ const PlanSchema = Yup.object().shape({
   notes: Yup.string(),
   teamMemberLimit: Yup.number().nullable(),
   featuresEnabled: Yup.array(Yup.string()),
+  siteLimit: Yup.number().nullable(),
 });
 
 export const SitePlanSettings: FC<Props> = ({ site }) => {
@@ -47,6 +48,7 @@ export const SitePlanSettings: FC<Props> = ({ site }) => {
           notes: site.plan.notes || '',
           teamMemberLimit: site.plan.teamMemberLimit,
           featuresEnabled: site.plan.featuresEnabled,
+          siteLimit: site.plan.siteLimit,
         }}
         validationSchema={PlanSchema}
         onSubmit={(values, { setSubmitting }) => {
@@ -64,6 +66,7 @@ export const SitePlanSettings: FC<Props> = ({ site }) => {
                 notes: values.notes,
                 teamMemberLimit: values.teamMemberLimit,
                 featuresEnabled: values.featuresEnabled as PlanFeature[],
+                siteLimit: values.siteLimit,
               });
               toasts.add({ type: 'success', body: 'Plan settings updated' });
             } catch(error) {
@@ -108,6 +111,16 @@ export const SitePlanSettings: FC<Props> = ({ site }) => {
                   1
                 </Radio>
                 <Radio name='teamMemberLimit' value='null' onChange={() => setFieldValue('teamMemberLimit', null)} checked={values.teamMemberLimit === null}>
+                  Unlimited
+                </Radio>
+              </div>
+
+              <Label>Site limit</Label>
+              <div className='radio-group'>
+                <Radio name='siteLimit' value='1' onChange={() => setFieldValue('siteLimit', 1)} checked={values.siteLimit === 1}>
+                  1
+                </Radio>
+                <Radio name='siteLimit' value='null' onChange={() => setFieldValue('siteLimit', null)} checked={values.siteLimit === null}>
                   Unlimited
                 </Radio>
               </div>

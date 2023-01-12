@@ -106,6 +106,7 @@ export const BillingPlansTableLarge: FC<Props> = ({
           <p className='category'>Usage</p>
           <p className='small'>Custom visits per month</p>
           <p className='small'>Unlimited team members</p>
+          <p className='small'>Unlimited websites</p>
           <p className='small'>Custom data retention</p>
           <p className='category'>Capabilities</p>
           <p className='includes small'>All features, plus the following upgrades and extras:</p>

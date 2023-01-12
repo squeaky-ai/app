@@ -220,6 +220,8 @@ export const GET_BILLING_QUERY = gql`
       dataStorageMonths
       support
       responseTimeHours
+      teamMemberLimit
+      siteLimit
     }
   }
 `;

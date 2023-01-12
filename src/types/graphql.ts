@@ -409,6 +409,7 @@ export type AdminSitePlanUpdateInput = {
   privateInstanceEnabled?: InputMaybe<Scalars['Boolean']>;
   responseTimeHours?: InputMaybe<Scalars['Int']>;
   siteId: Scalars['ID'];
+  siteLimit?: InputMaybe<Scalars['Int']>;
   ssoEnabled?: InputMaybe<Scalars['Boolean']>;
   support?: InputMaybe<Array<Scalars['String']>>;
   teamMemberLimit?: InputMaybe<Scalars['Int']>;
@@ -2226,6 +2227,7 @@ export type Plan = {
   name: Scalars['String'];
   pricing?: Maybe<Array<PlanPrice>>;
   responseTimeHours?: Maybe<Scalars['Int']>;
+  siteLimit?: Maybe<Scalars['Int']>;
   support?: Maybe<Array<Scalars['String']>>;
   teamMemberLimit?: Maybe<Scalars['Int']>;
 };
@@ -2892,6 +2894,7 @@ export type SitesPlan = {
   planId: Scalars['String'];
   privateInstanceEnabled: Scalars['Boolean'];
   responseTimeHours: Scalars['Int'];
+  siteLimit?: Maybe<Scalars['Int']>;
   ssoEnabled: Scalars['Boolean'];
   support?: Maybe<Array<Scalars['String']>>;
   teamMemberLimit?: Maybe<Scalars['Int']>;

@@ -5,9 +5,9 @@ import { Select, Option } from 'components/select';
 import { BillingPlansTableSmall } from 'components/sites/settings/billing-plans-table-small';
 import { BillingPlansTableLarge } from 'components/sites/settings/billing-plans-table-large';
 import { Interval, getUsefulCurrency } from 'lib/currency';
+import { buildPlanData } from 'data/billing/constants';
 import { Currency, Site } from 'types/graphql';
 import type { Billing } from 'types/billing';
-import { buildPlanData } from 'data/billing/constants';
 
 
 interface Props {

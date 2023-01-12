@@ -18,6 +18,8 @@ export const buildPlanData = (plans: Plan[], plan: SitesPlan): PlanData[] => {
   const plusPlan = getPlanByPlanId(Plans.Plus);
   const businessPlan = getPlanByPlanId(Plans.Business);
 
+  const pluralise = (count: number) => `${count === 1 ? '' : 's'}`;
+
   return [
     {
       name: 'Free',
@@ -26,7 +28,8 @@ export const buildPlanData = (plans: Plan[], plan: SitesPlan): PlanData[] => {
       current: plan.planId === Plans.Free,
       usage: [
         `${freePlan.maxMonthlyRecordings.toLocaleString()} visits per month`,
-        `${freePlan.teamMemberLimit} team member`,
+        `${freePlan.teamMemberLimit} team member${pluralise(freePlan.teamMemberLimit)}`,
+        `${freePlan.siteLimit} website${pluralise(freePlan.siteLimit)}`,
         `${freePlan.dataStorageMonths} month data retention`,
       ],
       includesCapabilitiesFrom: null,
@@ -46,7 +49,8 @@ export const buildPlanData = (plans: Plan[], plan: SitesPlan): PlanData[] => {
       current: plan.planId === Plans.Starter,
       usage: [
         `${starterPlan.maxMonthlyRecordings.toLocaleString()} visits per month`,
-        `${starterPlan.teamMemberLimit || 'Unlimited'} team member`,
+        `${starterPlan.teamMemberLimit || 'Unlimited'} team member${pluralise(starterPlan.teamMemberLimit)}`,
+        `${starterPlan.siteLimit} website${pluralise(starterPlan.siteLimit)}`,
         `${starterPlan.dataStorageMonths} month data retention`,
       ],
       includesCapabilitiesFrom: 'Free',
@@ -63,7 +67,8 @@ export const buildPlanData = (plans: Plan[], plan: SitesPlan): PlanData[] => {
       current: plan.planId === Plans.Light,
       usage: [
         `${lightPlan.maxMonthlyRecordings.toLocaleString()} visits per month`,
-        `${lightPlan.teamMemberLimit || 'Unlimited'} team members`,
+        `${lightPlan.teamMemberLimit || 'Unlimited'} team member${pluralise(lightPlan.teamMemberLimit)}`,
+        `${lightPlan.siteLimit || 'Unlimited'} website${pluralise(lightPlan.siteLimit)}`,
         `${lightPlan.dataStorageMonths} month data retention`,
       ],
       includesCapabilitiesFrom: null,
@@ -77,7 +82,8 @@ export const buildPlanData = (plans: Plan[], plan: SitesPlan): PlanData[] => {
       current: plan.planId === Plans.Plus,
       usage: [
         `${plusPlan.maxMonthlyRecordings.toLocaleString()} visits per month`,
-        `${plusPlan.teamMemberLimit || 'Unlimited'} team members`,
+        `${plusPlan.teamMemberLimit || 'Unlimited'} team member${pluralise(plusPlan.teamMemberLimit)}`,
+        `${plusPlan.siteLimit || 'Unlimited'} website${pluralise(plusPlan.siteLimit)}`,
         `${plusPlan.dataStorageMonths} month data retention`,
       ],
       includesCapabilitiesFrom: null,
@@ -91,7 +97,8 @@ export const buildPlanData = (plans: Plan[], plan: SitesPlan): PlanData[] => {
       current: plan.planId === Plans.Business,
       usage: [
         `${businessPlan.maxMonthlyRecordings.toLocaleString()} visits per month`,
-        `${businessPlan.teamMemberLimit || 'Unlimited'} team members`,
+        `${businessPlan.teamMemberLimit || 'Unlimited'} team member${pluralise(businessPlan.teamMemberLimit)}`,
+        `${businessPlan.siteLimit || 'Unlimited'} website${pluralise(businessPlan.siteLimit)}`,
         `${businessPlan.dataStorageMonths} month data retention`,
       ],
       includesCapabilitiesFrom: 'Starter',

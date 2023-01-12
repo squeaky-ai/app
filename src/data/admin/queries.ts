@@ -71,6 +71,7 @@ export const GET_ADMIN_SITE_QUERY = gql`
           notes
           teamMemberLimit
           featuresEnabled
+          siteLimit
         }
         billing {
           customerId
