@@ -8,6 +8,7 @@ import { Input } from 'components/input';
 import { Button } from 'components/button';
 import { Select, Option } from 'components/select';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
+import { Unlock } from 'components/sites/team/unlock';
 import { teamInvite } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
 import { ADMIN, MEMBER, READ_ONLY } from 'data/teams/constants';
@@ -26,6 +27,10 @@ export const InviteTeam: FC<Props> = ({ site }) => {
   const toast = useToasts();
   const ref = React.useRef<Modal>();
 
+  const disabled = site.plan.teamMemberLimit === null
+    ? false
+    : site.team.length >= site.plan.teamMemberLimit;
+
   const openModal = () => {
     if (ref.current) ref.current.show();
   };
@@ -36,9 +41,13 @@ export const InviteTeam: FC<Props> = ({ site }) => {
 
   return (
     <>
-      <Button className='primary invite-member' onClick={openModal}>
+      <Button disabled={disabled} className='primary invite-member' onClick={openModal}>
         Invite New Member
       </Button>
+
+      {disabled && (
+        <Unlock site={site} />
+      )}
 
       <Modal ref={ref}>
         <ModalBody aria-labelledby='invite-team-title'>
