@@ -202,4 +202,5 @@ export const FILTERS: RecordingsFilters = {
   utmMedium: null,
   utmSource: null,
   utmTerm: null,
+  visitorType: null,
 };

@@ -1549,6 +1549,13 @@ export type FiltersViewport = {
   minWidth?: InputMaybe<Scalars['Int']>;
 };
 
+export enum FiltersVisitorType {
+  /** Show results where the visitor was returning */
+  Existing = 'Existing',
+  /** Show results where the visitor was new */
+  New = 'New'
+}
+
 export type Heatmaps = {
   __typename?: 'Heatmaps';
   counts: HeatmapsCounts;
@@ -2440,6 +2447,7 @@ export type RecordingsFilters = {
   utmTerm?: InputMaybe<Scalars['String']>;
   viewport: FiltersViewport;
   visitedPages: Array<Scalars['String']>;
+  visitorType?: InputMaybe<FiltersVisitorType>;
 };
 
 export type RecordingsHighlights = {
