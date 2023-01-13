@@ -409,7 +409,6 @@ export type AdminSitePlanUpdateInput = {
   privateInstanceEnabled?: InputMaybe<Scalars['Boolean']>;
   responseTimeHours?: InputMaybe<Scalars['Int']>;
   siteId: Scalars['ID'];
-  siteLimit?: InputMaybe<Scalars['Int']>;
   ssoEnabled?: InputMaybe<Scalars['Boolean']>;
   support?: InputMaybe<Array<Scalars['String']>>;
   teamMemberLimit?: InputMaybe<Scalars['Int']>;
