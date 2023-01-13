@@ -221,7 +221,6 @@ export const GET_BILLING_QUERY = gql`
       support
       responseTimeHours
       teamMemberLimit
-      siteLimit
     }
   }
 `;

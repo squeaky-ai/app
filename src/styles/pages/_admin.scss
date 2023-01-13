@@ -31,6 +31,17 @@
       }
     }
   }
+
+  .checkbox {
+    &:hover .check {
+      border-color: var(--mauve-700);
+    }
+
+    input:checked + .check {
+      background: var(--mauve-700);
+      border-color: var(--mauve-700);
+    }
+  }
   
   .admin-indicator {
     color: var(--peach-200);
