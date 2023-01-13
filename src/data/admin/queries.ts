@@ -301,6 +301,7 @@ export const GET_ADMIN_USER_QUERY = gql`
               plan {
                 planId
                 name
+                free
               }
             }
           }
