@@ -303,4 +303,17 @@
       }
     }
   }
+
+  .filters-visitor-type {
+    width: 200px;
+
+    .row {
+      align-items: flex-start;
+      flex-direction: column;
+
+      .radio:not(:last-of-type) {
+        margin-bottom: .5rem;
+      }
+    }
+  }
 }

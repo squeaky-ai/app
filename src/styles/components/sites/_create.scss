@@ -219,64 +219,6 @@
         }
       }
 
-      &.step-invite {
-        width: 100%;
-
-        form {
-          margin: 4rem auto 0 auto;
-        }
-
-        .container {
-          max-width: 27.5rem;
-        }
-
-        .roles-label {
-          align-items: center;
-          display: flex;
-          margin: 0 0 .5rem 0;
-
-          .label {
-            margin: 0 .25rem 0 0;
-          }
-
-          .button {
-            height: 1.25rem;
-          }
-        }
-
-        .input-group {
-          align-items: center;
-          display: grid;
-          grid-gap: 1rem;
-          grid-template-columns: 1fr 8rem .75rem;
-          margin: 0 0 .75rem 0;
-        }
-
-        .input, .select {
-          margin: 0;
-        }
-
-        .link {
-          span {
-            text-decoration: underline;
-          }
-        }
-
-        .remove {
-          align-items: center;
-          background: none;
-          border: none;
-          display: flex;
-          margin: 0;
-          padding: 0;
-
-          .icon {
-            color: var(--rose-500);
-            font-size: var(--font-size-body-xxl);
-          }
-        }
-      }
-
       &.step-tracking-code {
         width: 100%;
 

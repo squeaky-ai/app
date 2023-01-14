@@ -34,6 +34,7 @@ export const GET_SITE_QUERY = gql`
         name
         invalid
         featuresEnabled
+        teamMemberLimit
       }
       team {
         id
@@ -151,6 +152,7 @@ export const GET_BILLING_QUERY = gql`
         name
         exceeded
         free
+        deprecated
         enterprise
         invalid
         support
@@ -161,6 +163,12 @@ export const GET_BILLING_QUERY = gql`
         responseTimeHours
         dataStorageMonths
         notes
+        pricing {
+          id
+          currency
+          amount
+          interval
+        }
       }
       billing {
         customerId
@@ -191,6 +199,7 @@ export const GET_BILLING_QUERY = gql`
           invoicePdfUrl
           interval
           plan {
+            id
             name
           }
           periodStartAt
@@ -201,19 +210,35 @@ export const GET_BILLING_QUERY = gql`
         }
       }
     }
-    plans {
+    plans(siteId: $siteId) {
       id
       name
-      maxMonthlyRecordings
-      pricing {
+      description
+      plan {
         id
-        currency
-        amount
-        interval
+        name
+        free
+        deprecated
+        enterprise
+        maxMonthlyRecordings
+        featuresEnabled
+        pricing {
+          id
+          currency
+          amount
+          interval
+        }
+        dataStorageMonths
+        support
+        responseTimeHours
+        teamMemberLimit
       }
-      dataStorageMonths
-      support
-      responseTimeHours
+      show
+      current
+      usage
+      includesCapabilitiesFrom
+      capabilities
+      options
     }
   }
 `;

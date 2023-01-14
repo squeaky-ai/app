@@ -18,6 +18,7 @@ import { FiltersReferrers } from 'components/sites/filters/recordings/filters-re
 import { FiltersUtm } from  'components/sites/filters/recordings/filters-utm';
 import { FiltersTags } from 'components/sites/filters/recordings/filters-tags';
 import { FiltersStarred } from 'components/sites/filters/common/filters-starred';
+import { FiltersVisitorType } from 'components/sites/filters/recordings/filters-visitor-type';
 import type { RecordingsFilters } from 'types/graphql';
 import type { TimePeriod, ValueOf } from 'types/common';
 
@@ -42,7 +43,8 @@ enum FilterType {
   Bookmarked,
   Starred,
   Language,
-  Utm
+  Utm,
+  VisitorType
 }
 
 export const Filters: FC<Props> = ({ period, filters, updateFilters }) => {
@@ -123,6 +125,10 @@ export const Filters: FC<Props> = ({ period, filters, updateFilters }) => {
         <Button onClick={() => handleFilterChange(FilterType.Utm)} className={classnames({ open: openFilter === FilterType.Utm })}>
           <Icon name='arrow-drop-left-line' />
           UTM
+        </Button>
+        <Button onClick={() => handleFilterChange(FilterType.VisitorType)} className={classnames({ open: openFilter === FilterType.VisitorType })}>
+          <Icon name='arrow-drop-left-line' />
+          Visitor type
         </Button>
 
         <div className={classnames('popout filters', { open: openFilter !== null, 'has-sub-menu': [FilterType.Utm].includes(openFilter) })}>
@@ -208,7 +214,14 @@ export const Filters: FC<Props> = ({ period, filters, updateFilters }) => {
           )}
           {openFilter === FilterType.Utm && (
             <>
+              <Label>UTM</Label>
               <FiltersUtm filters={filters} onUpdate={handleUpdate} onClose={handleFilterClose} />
+            </>
+          )}
+          {openFilter === FilterType.VisitorType && (
+            <>
+              <Label>Visitor type</Label>
+              <FiltersVisitorType value={filters.visitorType} onUpdate={handleUpdate('visitorType')} onClose={handleFilterClose} />
             </>
           )}
         </div>

@@ -7,7 +7,6 @@ import { Icon } from 'components/icon';
 import { Steps } from 'components/sites/create/steps';
 import { StepType } from 'components/sites/create/step-type';
 import { StepDetails } from 'components/sites/create/step-details';
-import { StepInvite } from 'components/sites/create/step-invite-team';
 import { StepTrackingCode } from 'components/sites/create/step-tracking-code';
 import { StepConfirmation } from 'components/sites/create/step-confirmation';
 import { CloseConfirmModal } from 'components/sites/create/close-confirm-modal';
@@ -23,7 +22,6 @@ interface Props {
 const allSteps = [
   CreateSiteStep.Type,
   CreateSiteStep.Details,
-  CreateSiteStep.InviteTeam,
   CreateSiteStep.TrackingCode,
   CreateSiteStep.Confirmation,
 ];
@@ -124,13 +122,6 @@ export const CreateModal: FC<Props> = ({ buttonClassName }) => {
                   loading={loading}
                   handleForward={handleDetails}
                   handleBack={handleBack}
-                />
-              )}
-              {step === CreateSiteStep.InviteTeam && (
-                <StepInvite 
-                  site={site} 
-                  handleForward={handleForward} 
-                  handleBack={handleBack} 
                 />
               )}
               {step === CreateSiteStep.TrackingCode && (

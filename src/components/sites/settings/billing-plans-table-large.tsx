@@ -1,133 +1,107 @@
 import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
-import { Icon } from 'components/icon';
 import { Tag } from 'components/tag';
+import { Card } from 'components/card';
 import { Checkout } from 'components/sites/settings/checkout';
+import { getPricingForCurrencyAndInterval, Interval } from 'lib/currency';
 import { CURRENCY_SYMBOLS } from 'data/common/constants';
-import { Interval, getPricingForCurrencyAndInterval } from 'lib/currency';
-import { Currency, Site } from 'types/graphql';
-import type { Billing } from 'types/billing';
+import { Currency, DecoratedPlan, Site } from 'types/graphql';
 
 interface Props {
   site: Site;
-  billing: Billing;
-  planIndex: number;
   currency: Currency;
   interval: Interval;
   hasBilling: boolean;
+  plans: DecoratedPlan[];
   showPlanChangeMessage: (name: string) => void;
 }
 
 export const BillingPlansTableLarge: FC<Props> = ({ 
-  site, 
-  billing, 
-  planIndex, 
+  site,
   currency,
   interval,
   hasBilling,
+  plans,
   showPlanChangeMessage,
-}) => (
-  <div className='plan-table-large'>
-    <div className='col y-labels'>
-      <div className='cell head blank'></div>
-      <div className='cell'>
-        <b>Visits per month</b>
-      </div>
-      <div className='cell'>
-        <b>Team members</b>
-      </div>
-      <div className='cell'>
-        <b>Recordings</b>
-      </div>
-      <div className='cell'>
-        <b>Visitor profiles</b>
-      </div>
-      <div className='cell'>
-        <b>Analytics</b>
-      </div>
-      <div className='cell'>
-        <b>Feedback</b>
-      </div>
-      <div className='cell'>
-        <b>Heatmaps</b>
-      </div>
-      <div className='cell'>
-        <b>Data storage</b>
-      </div>
-      <div className='cell'>
-        <b>Support type</b>
-      </div>
-      <div className='cell'>
-        <b>Response times</b>
-      </div>
-    </div>
-    {billing.plans.slice(0, 4).map((plan, index) => {
-      const isCurrent = index === planIndex;
-      const isDowngrade = index < planIndex;
+}) => {
+  const planIndex = plans.findIndex(plan => plan.current);
 
-      return (
-        <div className={classnames('col', { current: isCurrent })} key={plan.name}>
-          <div className='cell head'>
-            <p>
-              <b>
-                {plan.name}
-                {interval === Interval.YEARLY && (
-                  <Tag>20% OFF</Tag>
-                )}
-              </b>
-            </p>
-            <p className='pricing'>
-              <b>{CURRENCY_SYMBOLS[currency]}{getPricingForCurrencyAndInterval(plan, currency, interval)}</b> per {interval}
-            </p>
-            <Checkout 
+  const isDowngrade = (index: number) => index < planIndex;
+
+  return (
+    <div className='plan-table plan-table-large'>
+      {plans.map((data, index) => (
+        <Card className={classnames('col', data.name.toLowerCase(), { current: data.current, show: data.show, deprecated: data.plan?.deprecated })} key={data.name}>
+          <h5 className='plan-name'>
+            <b>{data.name}</b>
+            {interval === Interval.YEARLY && (
+              <Tag className='discount'>20% OFF</Tag>
+            )}
+            {data.plan?.deprecated && (
+              <Tag className='legacy'>LEGACY</Tag>
+            )}
+          </h5>
+          <p className='pricing'>
+            {data?.plan
+              ? <><b>{CURRENCY_SYMBOLS[currency]}{getPricingForCurrencyAndInterval(data.plan, currency, interval)}</b> / {interval}</>
+              : <b>Let&apos;s talk</b>
+            }
+          </p>
+          {data?.plan && (
+            <Checkout
               site={site}
-              plan={plan}
+              plan={data.plan}
               currency={currency}
-              isCurrent={isCurrent} 
-              isDowngrade={isDowngrade}
+              isCurrent={data.current} 
+              isDowngrade={isDowngrade(index)}
               isFirstTimeCheckout={!hasBilling}
               showPlanChangeMessage={showPlanChangeMessage}
             />
+          )}
+          {!data.plan && (
+            <a href='/contact-us' className='button primary' target='_blank'>
+              Book a call
+            </a>
+          )}
+          <div className='features'>
+            {data.usage.length > 0 && (
+              <>
+                <p className='category'>Usage</p>
+                {data.usage.map(u => (
+                  <p className='small' key={u}>{u}</p>
+                ))}
+              </>
+            )}
+            {data.capabilities.length > 0 && (
+              <>
+                <p className='category'>Capabilities</p>
+                {data.includesCapabilitiesFrom && (
+                  <p className='small includes'>
+                    Everything in {data.includesCapabilitiesFrom}, plus the following upgrades and extras:
+                  </p>
+                )}
+                {data.capabilities.map(c => (
+                  <p className='small' key={c}>{c}</p>
+                ))}
+              </>
+            )}
+            {data.options.length > 0 && (
+              <>
+                <p className='category'>Options</p>
+                {data.options.map(o => (
+                  <p className='small' key={o}>{o}</p>
+                ))}
+              </>
+            )}
           </div>
-          <div className='cell'>
-            Up to <b>{plan.maxMonthlyRecordings.toLocaleString()}</b>
+          <div className='deprecation-notice'>
+            <p className='small'>
+              You are currently on a legacy pricing plan. We will honour your plan in perpetuity, until you choose to change plan or your payment details expire.
+            </p>
           </div>
-          <div className='cell'>
-            Unlimited
-          </div>
-          <div className='cell'>
-            <Icon name='check-line' />
-          </div>
-          <div className='cell'>
-            <Icon name='check-line' />
-          </div>
-          <div className='cell'>
-            <Icon name='check-line' />
-          </div>
-          <div className='cell'>
-            <Icon name='check-line' />
-          </div>
-          <div className='cell'>
-            <Icon name='check-line' />
-          </div>
-          <div className='cell'>
-            {plan.dataStorageMonths >= 12 
-              ? `${plan.dataStorageMonths / 12} year` 
-              : `${plan.dataStorageMonths} months`
-            }
-          </div>
-          <div className='cell'>
-            {plan.support.join(' & ')}
-          </div>
-          <div className='cell'>
-            {plan.responseTimeHours > 24
-              ? <>Max. <b>{plan.responseTimeHours / 24} days</b></>
-              : <>Max. <b>{plan.responseTimeHours} hours</b></>
-            }
-          </div>
-        </div>
-      )
-    })}
-  </div>
-);
+        </Card>
+      ))}
+    </div>
+  );
+};

@@ -1,9 +1,8 @@
 export enum CreateSiteStep {
   Type = 0,
   Details = 1,
-  InviteTeam = 2,
-  TrackingCode = 3,
-  Confirmation = 4,
+  TrackingCode = 2,
+  Confirmation = 3,
 }
 
 // TODO: Should be in gql

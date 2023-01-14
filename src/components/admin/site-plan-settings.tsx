@@ -103,13 +103,19 @@ export const SitePlanSettings: FC<Props> = ({ site }) => {
               <span className='validation'>{errors.maxMonthlyRecordings}</span>
 
               <Label>Team members</Label>
-              <div className='radio-group'>
-                <Radio name='teamMemberLimit' value='1' onChange={() => setFieldValue('teamMemberLimit', 1)} checked={values.teamMemberLimit === 1}>
-                  1
-                </Radio>
-                <Radio name='teamMemberLimit' value='null' onChange={() => setFieldValue('teamMemberLimit', null)} checked={values.teamMemberLimit === null}>
+              <div className='input-group or'>
+                <Input
+                  name='teamMemberLimit'
+                  type='number' 
+                  autoComplete='off'
+                  value={values.teamMemberLimit || ''} 
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                />
+                <span>or</span>
+                <Checkbox name='teamMemberLimit' value='null' onChange={() => setFieldValue('teamMemberLimit', null)} checked={values.teamMemberLimit === null}>
                   Unlimited
-                </Radio>
+                </Checkbox>
               </div>
 
               <Label htmlFor='dataStorageMonths'>Data retention</Label>

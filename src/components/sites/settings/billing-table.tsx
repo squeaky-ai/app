@@ -34,16 +34,11 @@ const getIntervalName = (interval: string) => {
 export const BillingTable: FC<Props> = ({ site, billing, hasBilling }) => {
   const router = useRouter();
 
-  const plan = billing.plans.find(plan => plan.id === site.plan.planId);
-
   const latestTransaction = last(billing.billing?.transactions);
 
   const currency = latestTransaction?.currency;
   const interval = latestTransaction?.interval;
-
-  const pricing = plan.pricing
-    ? plan.pricing.find(p => p.currency === currency)
-    : null;
+  const pricing = billing.plan.pricing.find(p => p.currency === currency);
 
   const onBackToPlansTab = () => router.push(router.asPath.split('?')[0]);
 
@@ -63,7 +58,7 @@ export const BillingTable: FC<Props> = ({ site, billing, hasBilling }) => {
             <Row className='head'>
               <Cell><b>Plan</b></Cell>
               <Cell>
-                {plan.name} Plan
+                {billing.plan.name} Plan
                 {pricing?.amount ? `, ${CURRENCY_SYMBOLS[currency]}${(pricing.amount)}` : ''}
                 </Cell>
               <Cell>
