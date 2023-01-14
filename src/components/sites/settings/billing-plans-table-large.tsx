@@ -6,15 +6,14 @@ import { Card } from 'components/card';
 import { Checkout } from 'components/sites/settings/checkout';
 import { getPricingForCurrencyAndInterval, Interval } from 'lib/currency';
 import { CURRENCY_SYMBOLS } from 'data/common/constants';
-import { Currency, Site } from 'types/graphql';
-import type { PlanData } from 'types/billing';
+import { Currency, DecoratedPlan, Site } from 'types/graphql';
 
 interface Props {
   site: Site;
   currency: Currency;
   interval: Interval;
   hasBilling: boolean;
-  planData: PlanData[];
+  plans: DecoratedPlan[];
   showPlanChangeMessage: (name: string) => void;
 }
 
@@ -23,38 +22,48 @@ export const BillingPlansTableLarge: FC<Props> = ({
   currency,
   interval,
   hasBilling,
-  planData,
+  plans,
   showPlanChangeMessage,
 }) => {
-  const planIndex = planData.findIndex(plan => plan.current);
+  const planIndex = plans.findIndex(plan => plan.current);
 
   const isDowngrade = (index: number) => index < planIndex;
 
   return (
     <div className='plan-table plan-table-large'>
-      {planData.map((data, index) => (
-        <Card className={classnames('col', { current: data.current, show: data.show, deprecated: data.plan.deprecated })} key={data.plan.name}>
+      {plans.map((data, index) => (
+        <Card className={classnames('col', data.name.toLowerCase(), { current: data.current, show: data.show, deprecated: data.plan?.deprecated })} key={data.name}>
           <h5 className='plan-name'>
-            <b>{data.plan.name}</b>
+            <b>{data.name}</b>
             {interval === Interval.YEARLY && (
               <Tag className='discount'>20% OFF</Tag>
             )}
-            {data.plan.deprecated && (
+            {data.plan?.deprecated && (
               <Tag className='legacy'>LEGACY</Tag>
             )}
           </h5>
           <p className='pricing'>
-            <b>{CURRENCY_SYMBOLS[currency]}{getPricingForCurrencyAndInterval(data.plan, currency, interval)}</b> / {interval}
+            {data?.plan
+              ? <><b>{CURRENCY_SYMBOLS[currency]}{getPricingForCurrencyAndInterval(data.plan, currency, interval)}</b> / {interval}</>
+              : <b>Let&apos;s talk</b>
+            }
           </p>
-          <Checkout
-            site={site}
-            plan={data.plan}
-            currency={currency}
-            isCurrent={data.current} 
-            isDowngrade={isDowngrade(index)}
-            isFirstTimeCheckout={!hasBilling}
-            showPlanChangeMessage={showPlanChangeMessage}
-          />
+          {data?.plan && (
+            <Checkout
+              site={site}
+              plan={data.plan}
+              currency={currency}
+              isCurrent={data.current} 
+              isDowngrade={isDowngrade(index)}
+              isFirstTimeCheckout={!hasBilling}
+              showPlanChangeMessage={showPlanChangeMessage}
+            />
+          )}
+          {!data.plan && (
+            <a href='/contact-us' className='button primary' target='_blank'>
+              Book a call
+            </a>
+          )}
           <div className='features'>
             {data.usage.length > 0 && (
               <>
@@ -93,32 +102,6 @@ export const BillingPlansTableLarge: FC<Props> = ({
           </div>
         </Card>
       ))}
-
-      <Card className='col show enterprise'>
-        <h5 className='plan-name'>
-          <b>Enterprise</b>
-        </h5>
-        <p className='pricing'><b>Let's talk</b></p>
-        <a href='/contact-us' className='button primary' target='_blank'>
-          Book a call
-        </a>
-        <div className='features'>
-          <p className='category'>Usage</p>
-          <p className='small'>Custom visits per month</p>
-          <p className='small'>Unlimited team members</p>
-          <p className='small'>Unlimited websites</p>
-          <p className='small'>Custom data retention</p>
-          <p className='category'>Capabilities</p>
-          <p className='includes small'>All features, plus the following upgrades and extras:</p>
-          <p className='small'>Custom surveys <span>(Unlimited)</span></p>
-          <p className='small'>Segments <span>(Unlimited)</span></p>
-          <p className='category'>Options</p>
-          <p className='small'>Single Sign-On (SSO)</p>
-          <p className='small'>Audit Trail</p>
-          <p className='small'>Private Instance</p>
-          <p className='small'>Enterprise SLA&apos;s</p>
-        </div>
-      </Card>
     </div>
   );
 };

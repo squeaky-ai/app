@@ -1010,6 +1010,20 @@ export enum Currency {
   Usd = 'USD'
 }
 
+export type DecoratedPlan = {
+  __typename?: 'DecoratedPlan';
+  capabilities: Array<Scalars['String']>;
+  current: Scalars['Boolean'];
+  description?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  includesCapabilitiesFrom?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+  options: Array<Scalars['String']>;
+  plan?: Maybe<Plan>;
+  show: Scalars['Boolean'];
+  usage: Array<Scalars['String']>;
+};
+
 export type Errors = {
   __typename?: 'Errors';
   items: Array<ErrorsItem>;
@@ -2269,7 +2283,7 @@ export type Query = {
   blogPost?: Maybe<BlogPost>;
   blogPosts?: Maybe<BlogPosts>;
   partner?: Maybe<Scalars['String']>;
-  plans: Array<Plan>;
+  plans: Array<DecoratedPlan>;
   site?: Maybe<Site>;
   siteByUuid?: Maybe<Site>;
   siteSessionSettings?: Maybe<SiteSessionSettings>;
@@ -2293,6 +2307,11 @@ export type QueryBlogPostsArgs = {
 
 export type QueryPartnerArgs = {
   slug: Scalars['String'];
+};
+
+
+export type QueryPlansArgs = {
+  siteId?: InputMaybe<Scalars['ID']>;
 };
 
 
@@ -2899,6 +2918,7 @@ export type SitesPlan = {
   name: Scalars['String'];
   notes?: Maybe<Scalars['String']>;
   planId: Scalars['String'];
+  pricing?: Maybe<Array<PlanPrice>>;
   privateInstanceEnabled: Scalars['Boolean'];
   responseTimeHours: Scalars['Int'];
   siteLimit?: Maybe<Scalars['Int']>;

@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_BILLING_QUERY } from 'data/sites/queries';
 import type { Billing } from 'types/billing';
-import type { Plan, Site } from 'types/graphql';
+import type { DecoratedPlan, Site } from 'types/graphql';
 
 interface UseBilling {
   loading: boolean;
@@ -13,7 +13,7 @@ interface UseBilling {
 export const useBilling = (): UseBilling => {
   const router = useRouter();
 
-  const { data, loading, error } = useQuery<{ site: Site, plans: Plan[] }>(GET_BILLING_QUERY, {
+  const { data, loading, error } = useQuery<{ site: Site, plans: DecoratedPlan[] }>(GET_BILLING_QUERY, {
     variables: { 
       siteId: router.query.site_id as string,
     }

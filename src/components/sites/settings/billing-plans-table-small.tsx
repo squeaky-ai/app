@@ -6,15 +6,14 @@ import { Tag } from 'components/tag';
 import { Checkout } from 'components/sites/settings/checkout';
 import { CURRENCY_SYMBOLS } from 'data/common/constants';
 import { Interval, getPricingForCurrencyAndInterval } from 'lib/currency';
-import { Currency, Site } from 'types/graphql';
-import type { PlanData } from 'types/billing';
+import { Currency, DecoratedPlan, Site } from 'types/graphql';
 
 interface Props {
   site: Site;
   currency: Currency;
   interval: Interval;
   hasBilling: boolean;
-  planData: PlanData[];
+  plans: DecoratedPlan[];
   showPlanChangeMessage: (name: string) => void;
 }
 
@@ -23,12 +22,12 @@ export const BillingPlansTableSmall: FC<Props> = ({
   currency,
   interval,
   hasBilling,
-  planData,
+  plans,
   showPlanChangeMessage,
 }) => {
   const [open, setOpen] = React.useState<string[]>([]);
 
-  const planIndex = planData.findIndex(plan => plan.current);
+  const planIndex = plans.findIndex(plan => plan.current);
 
   const toggleOpen = (name: string) => {
     setOpen(
@@ -40,34 +39,44 @@ export const BillingPlansTableSmall: FC<Props> = ({
 
   return (
     <div className='plan-table plan-table-small'>
-      {planData.map((data, index) => {
+      {plans.map((data, index) => {
         const isOpen = open.includes(data.name);
         const isDowngrade = index < planIndex;
 
         return (
-          <div className={classnames('plan-row', { open: isOpen, show: data.show, current: data.current })} key={data.plan.id}>
-            <div role='button' className='button' onClick={() => toggleOpen(data.plan.name)}>
+          <div className={classnames('plan-row', data.name.toLowerCase(), { open: isOpen, show: data.show, current: data.current })} key={data.name}>
+            <div role='button' className='button' onClick={() => toggleOpen(data.name)}>
               <div className='details'>
-                <b>{data.plan.name}</b>
+                <b>{data.name}</b>
                 {interval === Interval.YEARLY && (
                   <Tag className='discount'>20% OFF</Tag>
                 )}
-                {data.plan.deprecated && (
+                {data.plan?.deprecated && (
                   <Tag className='legacy'>LEGACY</Tag>
                 )}
                 <p className='pricing'>
-                  <b>{CURRENCY_SYMBOLS[currency]}{getPricingForCurrencyAndInterval(data.plan, currency, interval)}</b> per {interval}
+                  {data?.plan
+                    ? <><b>{CURRENCY_SYMBOLS[currency]}{getPricingForCurrencyAndInterval(data.plan, currency, interval)}</b> / {interval}</>
+                    : <b>Let&apos;s talk</b>
+                  }
                 </p>
               </div>
-              <Checkout 
-                site={site}
-                plan={data.plan}
-                currency={currency}
-                isCurrent={data.current} 
-                isDowngrade={isDowngrade}
-                isFirstTimeCheckout={!hasBilling}
-                showPlanChangeMessage={showPlanChangeMessage}
-              />
+              {data?.plan && (
+                <Checkout 
+                  site={site}
+                  plan={data.plan}
+                  currency={currency}
+                  isCurrent={data.current} 
+                  isDowngrade={isDowngrade}
+                  isFirstTimeCheckout={!hasBilling}
+                  showPlanChangeMessage={showPlanChangeMessage}
+                />
+              )}
+              {!data.plan && (
+                <a href='/contact-us' className='button primary' target='_blank'>
+                  Book a call
+                </a>
+              )}
               <Icon className='arrow' name='arrow-down-s-line' />
             </div>
             {isOpen && (
@@ -113,39 +122,6 @@ export const BillingPlansTableSmall: FC<Props> = ({
           </div>
         );
       })}
-
-      <div className={classnames('plan-row show', { open: open.includes('enterprise') })}>
-        <div role='button' className='button' onClick={() => toggleOpen('enterprise')}>
-          <div className='details'>
-            <b>Enterprise</b>
-            <p className='pricing'>
-              <b>Let's Talk</b>
-            </p>
-          </div>
-          <a href='/contact-us' className='button primary' target='_blank'>
-            Book a call
-          </a>
-          <Icon className='arrow' name='arrow-down-s-line' />
-        </div>
-        {open.includes('enterprise') && (
-          <div className='body'>
-            <p className='category'>Usage</p>
-            <p className='small'>Custom visits per month</p>
-            <p className='small'>Unlimited team members</p>
-            <p className='small'>Unlimited websites</p>
-            <p className='small'>Custom data retention</p>
-            <p className='category'>Capabilities</p>
-            <p className='includes small'>All features, plus the following upgrades and extras:</p>
-            <p className='small'>Custom surveys <span>(Unlimited)</span></p>
-            <p className='small'>Segments <span>(Unlimited)</span></p>
-            <p className='category'>Options</p>
-            <p className='small'>Single Sign-On (SSO)</p>
-            <p className='small'>Audit Trail</p>
-            <p className='small'>Private Instance</p>
-            <p className='small'>Enterprise SLA&apos;s</p>
-          </div>
-        )}
-      </div>
     </div>
   );
 };

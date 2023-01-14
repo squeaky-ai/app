@@ -1,9 +1,9 @@
-import type { Plan, SitesPlan, SiteBilling } from 'types/graphql';
+import type { Plan, SitesPlan, SiteBilling, DecoratedPlan } from 'types/graphql';
 
 export interface Billing {
   billing: SiteBilling;
   plan: SitesPlan;
-  plans: Plan[];
+  plans: DecoratedPlan[];
 }
 
 export interface PlanData {

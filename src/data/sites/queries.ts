@@ -163,6 +163,12 @@ export const GET_BILLING_QUERY = gql`
         responseTimeHours
         dataStorageMonths
         notes
+        pricing {
+          id
+          currency
+          amount
+          interval
+        }
       }
       billing {
         customerId
@@ -204,24 +210,35 @@ export const GET_BILLING_QUERY = gql`
         }
       }
     }
-    plans {
+    plans(siteId: $siteId) {
       id
       name
-      free
-      deprecated
-      enterprise
-      maxMonthlyRecordings
-      featuresEnabled
-      pricing {
+      description
+      plan {
         id
-        currency
-        amount
-        interval
+        name
+        free
+        deprecated
+        enterprise
+        maxMonthlyRecordings
+        featuresEnabled
+        pricing {
+          id
+          currency
+          amount
+          interval
+        }
+        dataStorageMonths
+        support
+        responseTimeHours
+        teamMemberLimit
       }
-      dataStorageMonths
-      support
-      responseTimeHours
-      teamMemberLimit
+      show
+      current
+      usage
+      includesCapabilitiesFrom
+      capabilities
+      options
     }
   }
 `;

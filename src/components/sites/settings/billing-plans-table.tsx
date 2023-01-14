@@ -5,7 +5,6 @@ import { Select, Option } from 'components/select';
 import { BillingPlansTableSmall } from 'components/sites/settings/billing-plans-table-small';
 import { BillingPlansTableLarge } from 'components/sites/settings/billing-plans-table-large';
 import { Interval, getUsefulCurrency } from 'lib/currency';
-import { buildPlanData } from 'data/billing/constants';
 import { Currency, Site } from 'types/graphql';
 import type { Billing } from 'types/billing';
 
@@ -20,8 +19,6 @@ interface Props {
 export const BillingPlansTable: FC<Props> = ({ site, billing, hasBilling, showPlanChangeMessage }) => {
   const [currency, setCurrency] = React.useState<Currency>(getUsefulCurrency());
   const [interval, setInterval] = React.useState<Interval>(Interval.MONTHLY);
-
-  const planData = buildPlanData(billing.plans, billing.plan);
 
   // If they have transactions we do two things:
   // a) we set the currency to the currency that they have in their billing
@@ -79,7 +76,7 @@ export const BillingPlansTable: FC<Props> = ({ site, billing, hasBilling, showPl
         currency={currency}
         interval={interval}
         hasBilling={hasBilling}
-        planData={planData}
+        plans={billing.plans}
         showPlanChangeMessage={showPlanChangeMessage}
       />
 
@@ -88,7 +85,7 @@ export const BillingPlansTable: FC<Props> = ({ site, billing, hasBilling, showPl
         currency={currency}
         interval={interval}
         hasBilling={hasBilling}
-        planData={planData}
+        plans={billing.plans}
         showPlanChangeMessage={showPlanChangeMessage}
       />
     </>
