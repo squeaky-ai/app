@@ -2,9 +2,9 @@ import { last } from 'lodash';
 import { EventType, IncrementalSource, MouseInteractions } from 'rrweb';
 import { ErrorEvent, CustomEvents } from 'types/event';
 import { EventStatsSort } from 'types/events';
+import { EventsStat, PlanFeature, RecordingsEvent } from 'types/graphql';
 import type { PlayerState } from 'types/player';
 import type { Event, Events, EventName, SessionEvent, InteractionEventItem } from 'types/event';
-import { EventsStat, PlanFeature, RecordingsEvent } from 'types/graphql';
 
 export const isPageViewEvent = (
   event: SessionEvent
@@ -126,7 +126,7 @@ export const sortEventsStats = (
 export const getInteractionEvents = (
   events: Events,
   state: PlayerState,
-  featuresEnabled: string[],
+  featuresEnabled: PlanFeature[],
   inactivity?: number[][],
 ): { interactionEvents: InteractionEventItem[], startedAt: number } => {
   const startedAt = events[0]?.timestamp || 0;

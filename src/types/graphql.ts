@@ -2910,7 +2910,7 @@ export type SitesPlan = {
   deprecated: Scalars['Boolean'];
   enterprise: Scalars['Boolean'];
   exceeded: Scalars['Boolean'];
-  featuresEnabled: Array<Scalars['String']>;
+  featuresEnabled: Array<PlanFeature>;
   free: Scalars['Boolean'];
   id: Scalars['ID'];
   invalid: Scalars['Boolean'];

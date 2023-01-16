@@ -11,7 +11,7 @@ import { TextArea } from 'components/textarea';
 import { Button } from 'components/button';
 import { useToasts } from 'hooks/use-toasts';
 import { adminSitePlanUpdate } from 'lib/api/graphql';
-import type { AdminSite, PlanFeature } from 'types/graphql';
+import { AdminSite, PlanFeature } from 'types/graphql';
 
 interface Props {
   site: AdminSite;
@@ -130,50 +130,50 @@ export const SitePlanSettings: FC<Props> = ({ site }) => {
               <Label>Features</Label>
               <div className='checkbox-group'>
                 <div>
-                  <Checkbox name='featuresEnabled' value='dashboard' onChange={handleChange} checked={values.featuresEnabled.includes('dashboard')}>
+                  <Checkbox name='featuresEnabled' value={PlanFeature.Dashboard} onChange={handleChange} checked={values.featuresEnabled.includes(PlanFeature.Dashboard)}>
                     Dashboard
                   </Checkbox>
-                  <Checkbox name='featuresEnabled' value='visitors' onChange={handleChange} checked={values.featuresEnabled.includes('visitors')}>
+                  <Checkbox name='featuresEnabled' value={PlanFeature.Visitors} onChange={handleChange} checked={values.featuresEnabled.includes(PlanFeature.Visitors)}>
                     Visitors
                   </Checkbox>
-                  <Checkbox name='featuresEnabled' value='recordings' onChange={handleChange} checked={values.featuresEnabled.includes('recordings')}>
+                  <Checkbox name='featuresEnabled' value={PlanFeature.Recordings} onChange={handleChange} checked={values.featuresEnabled.includes(PlanFeature.Recordings)}>
                     Recordings
                   </Checkbox>
-                  <Checkbox name='featuresEnabled' value='event_tracking' onChange={handleChange} checked={values.featuresEnabled.includes('event_tracking')}>
+                  <Checkbox name='featuresEnabled' value={PlanFeature.EventTracking} onChange={handleChange} checked={values.featuresEnabled.includes(PlanFeature.EventTracking)}>
                     Events
                   </Checkbox>
-                  <Checkbox name='featuresEnabled' value='error_tracking' onChange={handleChange} checked={values.featuresEnabled.includes('error_tracking')}>
+                  <Checkbox name='featuresEnabled' value={PlanFeature.ErrorTracking} onChange={handleChange} checked={values.featuresEnabled.includes(PlanFeature.ErrorTracking)}>
                     Errors
                   </Checkbox>
                 </div>
                 <div>
-                  <Checkbox name='featuresEnabled' value='site_analytics' onChange={handleChange} checked={values.featuresEnabled.includes('site_analytics')}>
+                  <Checkbox name='featuresEnabled' value={PlanFeature.SiteAnalytics} onChange={handleChange} checked={values.featuresEnabled.includes(PlanFeature.SiteAnalytics)}>
                     Site Analytics
                   </Checkbox>
-                  <Checkbox name='featuresEnabled' value='page_analytics' onChange={handleChange} checked={values.featuresEnabled.includes('page_analytics')}>
+                  <Checkbox name='featuresEnabled' value={PlanFeature.PageAnalytics} onChange={handleChange} checked={values.featuresEnabled.includes(PlanFeature.PageAnalytics)}>
                     Page Analytics
                   </Checkbox>
-                  <Checkbox name='featuresEnabled' value='journeys' onChange={handleChange} checked={values.featuresEnabled.includes('journeys')}>
+                  <Checkbox name='featuresEnabled' value={PlanFeature.Journeys} onChange={handleChange} checked={values.featuresEnabled.includes(PlanFeature.Journeys)}>
                     Journeys
                   </Checkbox>
-                  <Checkbox name='featuresEnabled' value='heatmaps_click_positions' onChange={handleChange} checked={values.featuresEnabled.includes('heatmaps_click_positions')}>
+                  <Checkbox name='featuresEnabled' value={PlanFeature.HeatmapsClickPositions} onChange={handleChange} checked={values.featuresEnabled.includes(PlanFeature.HeatmapsClickPositions)}>
                     Clickmaps
                   </Checkbox>
-                  <Checkbox name='featuresEnabled' value='heatmaps_click_counts' onChange={handleChange} checked={values.featuresEnabled.includes('heatmaps_click_counts')}>
+                  <Checkbox name='featuresEnabled' value={PlanFeature.HeatmapsClickCounts} onChange={handleChange} checked={values.featuresEnabled.includes(PlanFeature.HeatmapsClickCounts)}>
                     Click counts
                   </Checkbox>
-                  <Checkbox name='featuresEnabled' value='heatmaps_mouse' onChange={handleChange} checked={values.featuresEnabled.includes('heatmaps_mouse')}>
+                  <Checkbox name='featuresEnabled' value={PlanFeature.HeatmapsMouse} onChange={handleChange} checked={values.featuresEnabled.includes(PlanFeature.HeatmapsMouse)}>
                     Mouse
                   </Checkbox>
-                  <Checkbox name='featuresEnabled' value='heatmaps_scroll' onChange={handleChange} checked={values.featuresEnabled.includes('heatmaps_scroll')}>
+                  <Checkbox name='featuresEnabled' value={PlanFeature.HeatmapsScroll} onChange={handleChange} checked={values.featuresEnabled.includes(PlanFeature.HeatmapsScroll)}>
                     Scroll
                   </Checkbox>
                 </div>
                 <div>
-                  <Checkbox name='featuresEnabled' value='nps' onChange={handleChange} checked={values.featuresEnabled.includes('nps')}>
+                  <Checkbox name='featuresEnabled' value={PlanFeature.Nps} onChange={handleChange} checked={values.featuresEnabled.includes(PlanFeature.Nps)}>
                     NPS®
                   </Checkbox>
-                  <Checkbox name='featuresEnabled' value='sentiment' onChange={handleChange} checked={values.featuresEnabled.includes('sentiment')}>
+                  <Checkbox name='featuresEnabled' value={PlanFeature.Sentiment} onChange={handleChange} checked={values.featuresEnabled.includes(PlanFeature.Sentiment)}>
                     Sentiment
                   </Checkbox>
                 </div>

@@ -11,7 +11,7 @@ import { DashboardVisitors } from 'components/sites/dashboard/dashboard-visitors
 import { DashboardRecordings } from 'components/sites/dashboard/dashboard-recordings';
 import { DashboardErrors } from 'components/sites/dashboard/dashboard-errors';
 import { getDateRange } from 'lib/dates';
-import type { Site, Team } from 'types/graphql';
+import { PlanFeature, Site, Team } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 
 interface Props {
@@ -48,9 +48,11 @@ export const Dashboard: FC<Props> = ({ site, period }) => {
       <Card className='page-views'>
         <DashboardPageViews site={site} dashboard={dashboard} period={period} />
       </Card>
-      <Card className='errors'>
-        <DashboardErrors site={site} dashboard={dashboard} period={period} />
-      </Card>
+      {site.plan.featuresEnabled.includes(PlanFeature.ErrorTracking) && (
+        <Card className='errors'>
+          <DashboardErrors site={site} dashboard={dashboard} period={period} />
+        </Card>
+      )}
     </div>
   );
 };
