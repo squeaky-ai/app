@@ -11,10 +11,11 @@ import { getInteractionEvents } from 'lib/events';
 import { CustomEvents } from 'types/event';
 import type { Events, InteractionEventItem, ErrorEvent } from 'types/event';
 import type { PlayerState, Action } from 'types/player';
-import type { Recording } from 'types/graphql';
+import type { Recording, Site } from 'types/graphql';
 
 
 interface Props {
+  site: Site;
   events: Events;
   state: PlayerState;
   replayer: Replayer;
@@ -22,11 +23,19 @@ interface Props {
   dispatch: React.Dispatch<Action>;
 }
 
-export const SidebarEvents: FC<Props> = ({ events, recording, state, replayer, dispatch }) => {
+export const SidebarEvents: FC<Props> = ({ 
+  site,
+  events,
+  recording, 
+  state, 
+  replayer, 
+  dispatch,
+}) => {
   const { interactionEvents, startedAt } = getInteractionEvents(
     events,
     state, 
-    recording.inactivity
+    site.plan.featuresEnabled,
+    recording.inactivity,
   );
 
   const maxKnownEventTimestamp = last(events).timestamp;

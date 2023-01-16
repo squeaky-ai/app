@@ -11,7 +11,7 @@ interface Props {
 export const Unlock: FC<Props> = ({ site }) => (
   <div className='unlock'>
     <Icon name='error-warning-line' />
-    <p>The {site.plan.name} plan has a limit of <b>{site.plan.teamMemberLimit}</b> team members. <Link href={`/sites/${site.id}/settings/subscription`}>Upgrade</Link> to invite more.</p>
+    <p>The  plan has a limit of  team members. <Link href={`/sites/${site.id}/settings/subscription`}>Upgrade</Link> to expand your team.</p>
     <Link href={`/sites/${site.id}/settings/subscription`} className='button'>
       Upgrade Now
     </Link>

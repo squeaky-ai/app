@@ -4,7 +4,7 @@ import { ErrorEvent, CustomEvents } from 'types/event';
 import { EventStatsSort } from 'types/events';
 import type { PlayerState } from 'types/player';
 import type { Event, Events, EventName, SessionEvent, InteractionEventItem } from 'types/event';
-import type { EventsStat, RecordingsEvent } from 'types/graphql';
+import { EventsStat, PlanFeature, RecordingsEvent } from 'types/graphql';
 
 export const isPageViewEvent = (
   event: SessionEvent
@@ -126,6 +126,7 @@ export const sortEventsStats = (
 export const getInteractionEvents = (
   events: Events,
   state: PlayerState,
+  featuresEnabled: string[],
   inactivity?: number[][],
 ): { interactionEvents: InteractionEventItem[], startedAt: number } => {
   const startedAt = events[0]?.timestamp || 0;
@@ -134,6 +135,8 @@ export const getInteractionEvents = (
     const eventName = getEventName(item);
 
     if (eventName === 'unknown') return acc;
+    if (eventName === 'error' && !featuresEnabled.includes(PlanFeature.ErrorTracking)) return acc;
+    if (eventName === 'custom' && !featuresEnabled.includes(PlanFeature.EventTracking)) return acc;
 
     const event: InteractionEventItem = {
       eventName,

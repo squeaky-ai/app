@@ -2,15 +2,16 @@ import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
 import { clamp, debounce } from 'lodash';
+import { Button } from 'components/button';
 import { Activity } from 'components/sites/player/activity';
 import { Interaction } from 'components/sites/player/interaction';
 import { getInteractionEvents } from 'lib/events';
-import type { Recording } from 'types/graphql';
+import type { Recording, Site } from 'types/graphql';
 import type { Event } from 'types/event';
 import type { PlayerState } from 'types/player';
-import { Button } from 'components/button';
 
 interface Props {
+  site: Site,
   value: number;
   className?: string;
   events: Event[];
@@ -24,6 +25,7 @@ interface Props {
 }
 
 export const Slider: FC<Props> = ({
+  site,
   value,
   events,
   recording,
@@ -44,7 +46,11 @@ export const Slider: FC<Props> = ({
     currentPage: 0 
   };
 
-  const { interactionEvents } = getInteractionEvents(events, state);
+  const { interactionEvents } = getInteractionEvents(
+    events,
+    state,
+    site.plan.featuresEnabled,
+    );
   
   const offset = events[0]?.timestamp || 0;
   const progress = value;

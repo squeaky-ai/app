@@ -3,11 +3,12 @@ import { Replayer } from 'rrweb';
 import { Slider } from 'components/sites/player/slider';
 import { toTimeString } from 'lib/dates';
 import { Action, PlayerStatus } from 'types/player';
-import type { Recording } from 'types/graphql';
+import type { Recording, Site } from 'types/graphql';
 import type { Event } from 'types/event';
 import type { PlayerState } from 'types/player';
 
 interface Props {
+  site: Site;
   replayer: Replayer;
   status: PlayerStatus;
   playbackSpeed: number;
@@ -148,6 +149,7 @@ export class PlayerSlider extends React.Component<Props, State> {
     return (
       <>
         <Slider
+          site={this.props.site}
           value={this.state.value / this.durationInSeconds * 100}
           events={this.props.events}
           recording={this.props.recording}

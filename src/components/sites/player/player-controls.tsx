@@ -8,10 +8,11 @@ import { PlayerSlider } from 'components/sites/player/player-slider';
 import { PlayerSliderLoading } from 'components/sites/player/player-slider-loading';
 import { Spinner } from 'components/spinner';
 import { PlayerState, Action, PlayerStatus } from 'types/player';
-import type { Recording } from 'types/graphql';
+import type { Recording, Site } from 'types/graphql';
 import type { Event } from 'types/event';
 
 interface Props {
+  site: Site;
   state: PlayerState;
   replayer: Replayer;
   events: Event[];
@@ -19,7 +20,14 @@ interface Props {
   dispatch: React.Dispatch<Action>;
 }
 
-export const PlayerControls: FC<Props> = ({ state, replayer, events, recording, dispatch }) => {
+export const PlayerControls: FC<Props> = ({ 
+  site,
+  state,
+  replayer,
+  events,
+  recording,
+  dispatch,
+}) => {
   const handlePlayPause = () => {
     switch(state.status) {
       case PlayerStatus.FINISHED:
@@ -82,6 +90,7 @@ export const PlayerControls: FC<Props> = ({ state, replayer, events, recording, 
       {replayer && recording && (
         <PlayerSlider
           key={recording.id}
+          site={site}
           replayer={replayer}
           status={state.status}
           playbackSpeed={state.playbackSpeed}
