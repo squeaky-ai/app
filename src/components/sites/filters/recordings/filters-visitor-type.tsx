@@ -50,7 +50,7 @@ export const FiltersVisitorType: FC<Props> = ({ value, onClose, onUpdate }) => (
             value='Existing'
             checked={values.type === 'Existing'}
           >
-            Existing
+            Returning
           </Radio>
         </div>
 

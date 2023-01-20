@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import { Label } from 'components/label';
 import { Tag } from 'components/tag';
 import { FILTERS } from 'data/recordings/constants';
+import { FiltersVisitorType } from 'types/graphql';
 import type { ValueOf } from 'types/common';
 import type { RecordingsFilters } from 'types/graphql';
 
@@ -22,7 +23,12 @@ export const TagsVisitorType: FC<Props> = ({ filters, updateFilters }) => {
     <div className='tag-group'>
       <Label>Visitor type</Label>
 
-      <Tag className='secondary' handleDelete={onDeleteTag}>{filters.visitorType}</Tag>
+      <Tag className='secondary' handleDelete={onDeleteTag}>
+        {filters.visitorType === FiltersVisitorType.Existing
+          ? 'Returning'
+          : 'New'
+        }
+      </Tag>
     </div>
   );
 };

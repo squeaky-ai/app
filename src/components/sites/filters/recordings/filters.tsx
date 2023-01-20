@@ -30,6 +30,7 @@ interface Props {
 
 enum FilterType {
   Status,
+  VisitorType,
   Duration,
   Referrer,
   StartUrl,
@@ -44,7 +45,6 @@ enum FilterType {
   Starred,
   Language,
   Utm,
-  VisitorType
 }
 
 export const Filters: FC<Props> = ({ period, filters, updateFilters }) => {
@@ -69,6 +69,10 @@ export const Filters: FC<Props> = ({ period, filters, updateFilters }) => {
         <Button onClick={() => handleFilterChange(FilterType.Status)} className={classnames({ open: openFilter === FilterType.Status })}>
           <Icon name='arrow-drop-left-line' />
           Status
+        </Button>
+        <Button onClick={() => handleFilterChange(FilterType.VisitorType)} className={classnames({ open: openFilter === FilterType.VisitorType })}>
+          <Icon name='arrow-drop-left-line' />
+          Visitor type
         </Button>
         <Button onClick={() => handleFilterChange(FilterType.Duration)} className={classnames({ open: openFilter === FilterType.Duration })}>
           <Icon name='arrow-drop-left-line' />
@@ -126,16 +130,18 @@ export const Filters: FC<Props> = ({ period, filters, updateFilters }) => {
           <Icon name='arrow-drop-left-line' />
           UTM
         </Button>
-        <Button onClick={() => handleFilterChange(FilterType.VisitorType)} className={classnames({ open: openFilter === FilterType.VisitorType })}>
-          <Icon name='arrow-drop-left-line' />
-          Visitor type
-        </Button>
 
         <div className={classnames('popout filters', { open: openFilter !== null, 'has-sub-menu': [FilterType.Utm].includes(openFilter) })}>
           {openFilter === FilterType.Status && (
             <>
               <Label>Status</Label>
               <FiltersStatus value={filters.status} onUpdate={handleUpdate('status')} onClose={handleFilterClose} />
+            </>
+          )}
+           {openFilter === FilterType.VisitorType && (
+            <>
+              <Label>Visitor type</Label>
+              <FiltersVisitorType value={filters.visitorType} onUpdate={handleUpdate('visitorType')} onClose={handleFilterClose} />
             </>
           )}
           {openFilter === FilterType.Duration && (
@@ -216,12 +222,6 @@ export const Filters: FC<Props> = ({ period, filters, updateFilters }) => {
             <>
               <Label>UTM</Label>
               <FiltersUtm filters={filters} onUpdate={handleUpdate} onClose={handleFilterClose} />
-            </>
-          )}
-          {openFilter === FilterType.VisitorType && (
-            <>
-              <Label>Visitor type</Label>
-              <FiltersVisitorType value={filters.visitorType} onUpdate={handleUpdate('visitorType')} onClose={handleFilterClose} />
             </>
           )}
         </div>

@@ -18,6 +18,8 @@ import {
   TooltipProps, 
   XAxisProps,
   YAxisProps,
+  LineProps,
+  BarProps,
 } from 'recharts';
 
 interface Props {
@@ -29,6 +31,7 @@ interface Props {
   chartType: ChartType;
   xAxisProps?: XAxisProps;
   yAxisProps?: YAxisProps,
+  barLineProps?: Pick<LineProps | BarProps, 'stroke' | 'fill'>;
 }
 
 export const Chart: FC<Props> = ({ chartType, ...props }) => {
@@ -79,6 +82,7 @@ const ChartLine: FC<Omit<Props, 'chartType'>> = ({
   scale,
   xAxisProps,
   yAxisProps,
+  barLineProps,
 }) => (
   <ResponsiveContainer>
     <LineChart data={data} margin={{ top: 0, left: -16, right: 16, bottom: 0 }}>
@@ -119,6 +123,7 @@ const ChartLine: FC<Omit<Props, 'chartType'>> = ({
           fillOpacity={1}
           stroke={getPrimaryColor(admin, index)}
           strokeWidth={2}
+          {...barLineProps}
         />
       ))}
     </LineChart>
@@ -133,6 +138,7 @@ const ChartBar: FC<Omit<Props, 'chartType'>> = ({
   scale,
   xAxisProps,
   yAxisProps,
+  barLineProps,
 }) => (
   <ResponsiveContainer>
     <BarChart data={data} margin={{ top: 0, left: -16, right: 16, bottom: 0 }} barGap={2}>
@@ -173,6 +179,7 @@ const ChartBar: FC<Omit<Props, 'chartType'>> = ({
           strokeWidth={item.strokeWidth}
           fill={getPrimaryColor(admin, index)}
           radius={[2, 2, 0, 0]}
+          {...barLineProps}
         />
       ))}
     </BarChart>

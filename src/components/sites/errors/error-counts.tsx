@@ -44,6 +44,7 @@ export const ErrorCounts: FC<Props> = ({ counts, period }) => {
           scale={scale}
           chartType={type}
           items={[{ dataKey: 'count' }]}
+          barLineProps={{ stroke: 'var(--rose-500)', fill: 'var(--rose-500)' }}
         />
       </div>
     </Card>

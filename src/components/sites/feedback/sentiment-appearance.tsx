@@ -220,7 +220,7 @@ export const SentimentAppearance: FC<Props> = ({ site, feedback }) => {
 
               <h4 className='schedule'>Custom Trigger <i>(technical expertise required)</i></h4>
 
-              <p>By default you site will use the Squeaky &apos;Feedback&apos; tab to signpost your feedback widget to visitors of your site - you can click preview in the top right of this page to see what that looks like.</p>
+              <p>By default you site will use the Squeaky &apos;Feedback&apos; tab to signpost your feedback widget to visitors of your site - you can click preview in the bottom right of this page to see what that looks like.</p>
               <p>Some companies wish to hide the tab and only display the feedback pop-up when their own custom button is clicked. If you wish to do this, please check the box below and visit the <a target='_blank' href='/developers'>Developer Documentation</a> to learn how to configure a custom button.</p>
 
               <Checkbox
