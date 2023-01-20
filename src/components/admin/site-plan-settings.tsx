@@ -120,6 +120,8 @@ export const SitePlanSettings: FC<Props> = ({ site }) => {
 
               <Label htmlFor='dataStorageMonths'>Data retention</Label>
               <Select name='dataStorageMonths' value={values.dataStorageMonths} onChange={handleChange} invalid={touched.dataStorageMonths && !!errors.dataStorageMonths}>
+                <Option value='1'>1 month</Option>
+                <Option value='3'>3 months</Option>
                 <Option value='6'>6 months</Option>
                 <Option value='12'>12 months</Option>
                 <Option value='24'>24 months</Option>
@@ -196,7 +198,9 @@ export const SitePlanSettings: FC<Props> = ({ site }) => {
               <Select name='responseTimeHours' value={values.responseTimeHours} onChange={handleChange} invalid={touched.responseTimeHours && !!errors.responseTimeHours}>
                 <Option value='0'>Same day</Option>
                 <Option value='24'>24 hours</Option>
+                <Option value='72'>3 days</Option>
                 <Option value='168'>7 days</Option>
+                <Option value='336'>14 days</Option>
               </Select>
 
               <Label>SSO</Label>
