@@ -48,10 +48,10 @@ const SitesAnalyticsPageTraffic: NextPage<ServerSideProps> = ({ user }) => {
       <Page user={user} scope={[]}>
         {({ site }) => (
           <Main className={classnames({ empty: site.recordingsCount === 0 })}>
-            <BreadCrumbs site={site} items={[{ name: 'Analytics' }]} />
+            <BreadCrumbs site={site} items={[{ name: 'Page Analytics' }]} />
 
             <div className='heading'>
-              <h3 className='title'>Page Analytics</h3>
+              <h4 className='title'>Page Analytics</h4>
               {!loading && (
                 <menu>
                   <Label>Page</Label>

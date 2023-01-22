@@ -25,10 +25,10 @@ const SitesAnalyticsSiteTraffic: NextPage<ServerSideProps> = ({ user }) => {
       <Page user={user} scope={[]}>
         {({ site }) => (
           <Main className={classnames({ empty: site.recordingsCount === 0 })}>
-            <BreadCrumbs site={site} items={[{ name: 'Analytics' }]} />
+            <BreadCrumbs site={site} items={[{ name: 'Site Analytics' }]} />
 
             <div className='heading'>
-              <h4 className='title'>Analytics</h4>
+              <h4 className='title'>Site Analytics</h4>
               <Period period={period} onChange={setPeriod} />
             </div>
 
