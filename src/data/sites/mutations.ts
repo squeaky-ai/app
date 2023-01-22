@@ -201,3 +201,20 @@ export const SEND_TRACKING_CODE_INSTRUCTIONS = gql`
     }
   }
 `;
+
+export const ADMIN_SITE_TEAM_DELETE = gql`
+  mutation adminSiteTeamDelete($input: AdminSiteTeamDeleteInput!) {
+    adminSiteTeamDelete(input: $input) {
+      id
+    }
+  }
+`;
+
+export const ADMIN_SITE_TEAM_ROLE_UPDATE = gql`
+  mutation adminSiteTeamUpdateRole($input: AdminSiteTeamUpdateRoleInput!) {
+    adminSiteTeamUpdateRole(input: $input) {
+      id
+      role
+    }
+  }
+`;

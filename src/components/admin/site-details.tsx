@@ -5,6 +5,7 @@ import { Icon } from 'components/icon';
 import { Pill } from 'components/pill';
 import { SiteIngestEnabled } from 'components/admin/site-ingest-enabled';
 import { SitePlanSettings } from 'components/admin/site-plan-settings';
+import { SiteTeam } from 'components/admin/site-team';
 import { Row, Table, Cell } from 'components/table';
 import { Card } from 'components/card';
 import { toNiceDate } from 'lib/dates';
@@ -114,6 +115,14 @@ export const SiteDetails: FC<Props> = ({ activeVisitors, site }) => {
           Settings
         </h5>
         <SitePlanSettings site={site} />
+      </Card>
+
+      <Card>
+        <h5>
+          <Icon name='group-line' />
+          Team
+        </h5>
+        <SiteTeam site={site} />
       </Card>
     </div>
   );

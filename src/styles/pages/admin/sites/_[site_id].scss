@@ -143,6 +143,22 @@
       }
     }
 
+    .site-team {
+      .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 100px;
+        margin: 0;
+
+        a {
+          font-size: var(--font-size-body);
+        }
+
+        .select {
+          margin: 0;
+        }
+      }
+    }
+
     .subscription {
       .card {
         background: none;
@@ -271,5 +287,11 @@
         max-width: 320px;
       }
     }
+  }
+}
+
+.change-role-modal {
+  .warning-text {
+    color: var(--rose-500);
   }
 }

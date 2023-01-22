@@ -75,6 +75,8 @@ import {
   UsersInvoiceDeleteInput,
   SitesCreateInput,
   SitesTrackingCodeInstructionsInput,
+  AdminSiteTeamDeleteInput,
+  AdminSiteTeamUpdateRoleInput,
 } from 'types/graphql';
 
 import {
@@ -97,6 +99,8 @@ import {
   ADMIN_SITE_PLAN_UPDATE_MUTATION,
   ADMIN_SITE_ASSOCIATE_CUSTOMER_MUTATION,
   ADMIN_SITE_INGEST_UPDATE,
+  ADMIN_SITE_TEAM_DELETE,
+  ADMIN_SITE_TEAM_ROLE_UPDATE,
   SUPERUSER_ACESSS_UPDATE,
   ADMIN_SITE_DELETE_MUTATION,
   ROUTES_UPDATE_MUTATION,
@@ -868,6 +872,27 @@ export const adminSiteIngestUpdate = async (input: AdminSiteIngestUpdateInput): 
   });
 
   return data.adminSiteIngestUpdate;
+};
+
+export const adminSiteTeamDelete = async (input: AdminSiteTeamDeleteInput): Promise<void> => {
+  await client.mutate({
+    mutation: ADMIN_SITE_TEAM_DELETE,
+    variables: { input },
+    update(cache) {
+      const normalizedId = cache.identify({ id: input.id, __typename: 'Team' });
+      cache.evict({ id: normalizedId });
+      cache.gc();
+    }
+  })
+};
+
+export const adminSiteTeamUpdateRole = async (input: AdminSiteTeamUpdateRoleInput): Promise<Team> => {
+  const { data } = await client.mutate({
+    mutation: ADMIN_SITE_TEAM_ROLE_UPDATE,
+    variables: { input },
+  });
+
+  return data.adminSiteTeamRoleUpdate;
 };
 
 export const superuserAccessUpdate = async (input: SitesSuperuserAccessUpdateInput): Promise<Site> => {
