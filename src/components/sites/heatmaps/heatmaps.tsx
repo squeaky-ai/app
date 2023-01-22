@@ -123,7 +123,7 @@ export const Heatmaps: FC<Props> = ({ type, page, pages, period, setPage, setPer
         </>
       )}
       {!hasData && (
-        <Container className='sm centered empty-state show'>
+        <Container className='sm centered empty-state show content'>
           <div className='empty-state-contents'>
             <Illustration illustration='illustration-2' height={240} width={320} alt='Illustration to represent the empty recordings page' />
             <h4>There is no heatmap data available for your chosen page, period or device</h4>
