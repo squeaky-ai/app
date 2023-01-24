@@ -1,0 +1,17 @@
+.page.sites.api-key {
+  .input-group {
+    display: flex;
+    margin: 0 0 2rem 0;
+
+    .input {
+      margin: 0 1rem 0 0;
+    }
+
+    .button {
+      flex-shrink: 0;
+      margin: 0;
+      width: 12rem;
+    }
+  }
+}
+

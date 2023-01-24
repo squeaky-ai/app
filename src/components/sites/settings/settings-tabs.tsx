@@ -12,7 +12,7 @@ import type { Team } from 'types/graphql';
 interface Props {
   site: Site;
   member?: Team; 
-  page: 'details' | 'tracking-code' | 'tags' | 'screening' | 'delete';
+  page: 'details' | 'tracking-code' | 'tags' | 'screening' | 'api-key' | 'delete';
 }
 
 export const SettingsTabs: FC<Props> = ({ site, page, member }) => {
@@ -48,6 +48,11 @@ export const SettingsTabs: FC<Props> = ({ site, page, member }) => {
         <li className='tab'>
           <Link href={`/sites/${site.id}/settings/details/screening`} className={classnames('button tab-button', { active: page === 'screening' })}>
             Screening
+          </Link>
+        </li>
+        <li className='tab'>
+          <Link href={`/sites/${site.id}/settings/details/api-key`} className={classnames('button tab-button', { active: page === 'api-key' })}>
+            API Key
           </Link>
         </li>
         {member?.role === OWNER && !pageState.embedded && (

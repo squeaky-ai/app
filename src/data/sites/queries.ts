@@ -27,6 +27,7 @@ export const GET_SITE_QUERY = gql`
       anonymiseFormInputs
       anonymiseText
       superuserAccessEnabled
+      apiKey
       plan {
         planId
         free

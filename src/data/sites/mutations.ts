@@ -218,3 +218,12 @@ export const ADMIN_SITE_TEAM_ROLE_UPDATE = gql`
     }
   }
 `;
+
+export const SITE_API_KEY_CREATE = gql`
+  mutation apiKeyCreate($input: SitesApiKeyCreateInput!) {
+    apiKeyCreate(input: $input) {
+      id
+      apiKey
+    }
+  }
+`;

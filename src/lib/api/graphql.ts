@@ -77,6 +77,7 @@ import {
   SitesTrackingCodeInstructionsInput,
   AdminSiteTeamDeleteInput,
   AdminSiteTeamUpdateRoleInput,
+  SitesApiKeyCreateInput,
 } from 'types/graphql';
 
 import {
@@ -105,6 +106,7 @@ import {
   ADMIN_SITE_DELETE_MUTATION,
   ROUTES_UPDATE_MUTATION,
   SEND_TRACKING_CODE_INSTRUCTIONS,
+  SITE_API_KEY_CREATE,
 } from 'data/sites/mutations';
 
 import {
@@ -1167,4 +1169,13 @@ export const invoiceDelete = async (input: UsersInvoiceDeleteInput): Promise<voi
   });
 
   return null;
+};
+
+export const generateApiKey = async (input: SitesApiKeyCreateInput): Promise<Site> => {
+  const { data } = await client.mutate({
+    mutation: SITE_API_KEY_CREATE,
+    variables: { input },
+  });
+
+  return data.apiKeyCreate;
 };

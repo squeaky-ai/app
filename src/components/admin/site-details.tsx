@@ -78,6 +78,10 @@ export const SiteDetails: FC<Props> = ({ activeVisitors, site }) => {
           <span>Provider</span>
           <span>{site.provider || '-'}</span>
         </div>
+        <div className='row'>
+          <span>API Key</span>
+          <span>{site.apiKey || '-'}</span>
+        </div>
       </Card>
 
       <Card>

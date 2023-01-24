@@ -54,6 +54,7 @@ export const GET_ADMIN_SITE_QUERY = gql`
         superuserAccessEnabled
         ingestEnabled
         provider
+        apiKey
         plan {
           planId
           free
