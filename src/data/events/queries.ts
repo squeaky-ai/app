@@ -92,6 +92,8 @@ export const GET_EVENT_FEED_QUERY = gql`
           id
           eventName
           timestamp
+          source
+          data
           visitor {
             id
             visitorId

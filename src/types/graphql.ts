@@ -1315,9 +1315,11 @@ export enum EventsType {
 
 export type FeedCaptureItem = {
   __typename?: 'FeedCaptureItem';
+  data?: Maybe<Scalars['String']>;
   eventName: Scalars['String'];
   id: Scalars['ID'];
   recording: Recording;
+  source?: Maybe<Scalars['String']>;
   timestamp: Scalars['ISO8601DateTime'];
   visitor: Visitor;
 };

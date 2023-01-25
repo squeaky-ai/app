@@ -190,8 +190,22 @@
   .event-feed {
     .table {
       .row {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(6, 1fr);
         height: 3rem;
+
+        .event-data {
+          .tooltip {
+            display: inline-flex;
+            width: 100%;
+
+            .button {
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              width: 100%;
+            }
+          }
+        }
       }
     }
   }
@@ -214,5 +228,14 @@
     .empty-state-hint {
       display: none;
     }
+  }
+}
+
+.code.block.event-data-code {
+  background: none;
+  margin: 0;
+
+  code {
+    color: var(--white);
   }
 }

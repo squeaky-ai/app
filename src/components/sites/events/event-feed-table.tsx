@@ -8,6 +8,7 @@ import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
 import { RecordingStarred } from 'components/sites/recordings/recordings-starred';
 import { PageSize } from 'components/sites/page-size';
 import { Pagination } from 'components/pagination';
+import { EventData } from 'components/sites/events/event-data';
 import { useSort } from 'hooks/use-sort';
 import { useEventFeed } from 'hooks/use-event-feed';
 import { toNiceDate, getDateRange } from 'lib/dates';
@@ -62,6 +63,8 @@ export const EventFeedTable: FC<Props> = ({ site, member, groupIds, captureIds, 
               />
             </Cell>
             <Cell>Event Name</Cell>
+            <Cell>Source</Cell>
+            <Cell>Data</Cell>
             <Cell>Visitor ID</Cell>
             <Cell>Recording ID</Cell>
           </Row>
@@ -73,6 +76,8 @@ export const EventFeedTable: FC<Props> = ({ site, member, groupIds, captureIds, 
               <Cell>
                 {feed.eventName}
               </Cell>
+              <Cell>{feed.source?.toUpperCase() || 'WEB'}</Cell>
+              <Cell className='event-data'><EventData data={feed.data} /></Cell>
               <Cell>
                 <Link href={`/sites/${site.id}/visitors/${feed.visitor.id}`}>
                   <VisitorsStarred site={site} member={member} visitor={feed.visitor} />
