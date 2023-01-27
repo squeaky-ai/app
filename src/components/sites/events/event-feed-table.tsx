@@ -84,13 +84,15 @@ export const EventFeedTable: FC<Props> = ({ site, member, groupIds, captureIds, 
                 </Link>
               </Cell>
               <Cell>
-                <Link href={`/sites/${site.id}/recordings/${feed.recording.id}`}>
-                  <RecordingStarred 
-                    site={site}
-                    member={member}
-                    recording={feed.recording} 
-                  />
-                </Link>
+                {!feed.recording ? '-' : (
+                  <Link href={`/sites/${site.id}/recordings/${feed.recording.id}`}>
+                    <RecordingStarred 
+                      site={site}
+                      member={member}
+                      recording={feed.recording} 
+                    />
+                  </Link>
+                )}
               </Cell>
             </Row>
           ))}

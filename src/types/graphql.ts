@@ -1200,6 +1200,7 @@ export type EventsCaptureItem = {
   lastCountedAt?: Maybe<Scalars['ISO8601DateTime']>;
   name: Scalars['String'];
   rules: Array<EventsRule>;
+  source?: Maybe<Scalars['String']>;
   type: Scalars['Int'];
 };
 
@@ -1318,7 +1319,7 @@ export type FeedCaptureItem = {
   data?: Maybe<Scalars['String']>;
   eventName: Scalars['String'];
   id: Scalars['ID'];
-  recording: Recording;
+  recording?: Maybe<Recording>;
   source?: Maybe<Scalars['String']>;
   timestamp: Scalars['ISO8601DateTime'];
   visitor: Visitor;

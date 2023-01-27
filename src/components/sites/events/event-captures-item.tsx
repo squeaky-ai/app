@@ -62,6 +62,7 @@ export const EventCapturesItem: FC<Props> = ({
           : '-'
         }
       </Cell>
+      <Cell>{event.source?.toUpperCase() || 'WEB'}</Cell>
       <Cell>
         {event.lastCountedAt
           ? event.count.toLocaleString()

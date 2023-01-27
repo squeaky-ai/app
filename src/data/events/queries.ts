@@ -18,6 +18,7 @@ export const GET_EVENT_CAPTURES_QUERY = gql`
           count
           groupIds
           groupNames
+          source
           lastCountedAt
         }
         pagination {
@@ -50,6 +51,7 @@ export const GET_EVENT_GROUPS_QUERY = gql`
           count
           groupIds
           groupNames
+          source
           lastCountedAt
         }
       }

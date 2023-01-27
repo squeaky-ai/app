@@ -62,6 +62,7 @@ export const EventCaptures: FC<Props> = ({
             </Cell>
             <Cell>Event type</Cell>
             <Cell>Event groups</Cell>
+            <Cell>Source</Cell>
             <Cell>
               Events triggered
               <Sort name='count' order={sort} onAsc={() => setSort(EventsCaptureSort.CountAsc)} onDesc={() => setSort(EventsCaptureSort.CountDesc)} />
