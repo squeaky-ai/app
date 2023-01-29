@@ -7,6 +7,7 @@ import { Access } from 'components/sites/access';
 import { Page } from 'components/sites/page';
 import { Button } from 'components/button';
 import { Input } from 'components/input';
+import { GenerateApiKey } from 'components/sites/settings/generate-api-key';
 import { Icon } from 'components/icon';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { SettingsTabs } from 'components/sites/settings/settings-tabs';
@@ -77,11 +78,8 @@ const SiteSettingsApiKey: NextPage<ServerSideProps> = ({ user }) => {
                       {copying ? 'Copied!' : 'Copy to clipboard'}
                     </Button>
                   </div>
-                  
 
-                  <Button className='secondary' onClick={() => createApiKey(site.id)}>
-                    Generate New API Key
-                  </Button>
+                  <GenerateApiKey handleGenerate={() => createApiKey(site.id)} />
                 </>
               )}
 
