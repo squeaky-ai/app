@@ -1322,7 +1322,7 @@ export type FeedCaptureItem = {
   recording?: Maybe<Recording>;
   source?: Maybe<Scalars['String']>;
   timestamp: Scalars['ISO8601DateTime'];
-  visitor: Visitor;
+  visitor?: Maybe<Visitor>;
 };
 
 export type Feedback = {

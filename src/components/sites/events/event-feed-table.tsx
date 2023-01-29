@@ -79,9 +79,11 @@ export const EventFeedTable: FC<Props> = ({ site, member, groupIds, captureIds, 
               <Cell>{feed.source?.toUpperCase() || 'WEB'}</Cell>
               <Cell className='event-data'><EventData data={feed.data} /></Cell>
               <Cell>
-                <Link href={`/sites/${site.id}/visitors/${feed.visitor.id}`}>
-                  <VisitorsStarred site={site} member={member} visitor={feed.visitor} />
-                </Link>
+                {!feed.visitor ? '-' : (
+                  <Link href={`/sites/${site.id}/visitors/${feed.visitor.id}`}>
+                    <VisitorsStarred site={site} member={member} visitor={feed.visitor} />
+                  </Link>
+                )}
               </Cell>
               <Cell>
                 {!feed.recording ? '-' : (
