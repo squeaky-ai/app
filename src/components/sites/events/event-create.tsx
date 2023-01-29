@@ -215,9 +215,14 @@ export const EventCreate: FC<Props> = ({ site, member, buttonText, buttonClassNa
                     </>
                   )}
                   {values.eventType === EventsCaptureType.Custom && (
-                    <Button type='button' className='quaternary' onClick={() => setFieldValue('eventType', null)}>
-                      Back
-                    </Button>
+                    <>
+                      <a href='/developers' className='button primary'>
+                        View Documentation
+                      </a>
+                      <Button type='button' className='quaternary' onClick={() => setFieldValue('eventType', null)}>
+                        Back
+                      </Button>
+                    </>
                   )}
                 </ModalFooter>
               </ModalBody>
