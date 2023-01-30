@@ -1,15 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { GET_VISITOR_QUERY } from 'data/visitors/queries';
-import { RecordingsSort } from 'types/graphql';
-import type { Site, Visitor, VisitorsPagesSort } from 'types/graphql';
-
-interface Props {
-  recordingPage: number;
-  recordingSort: RecordingsSort;
-  pagesPage: number;
-  pagesSort: VisitorsPagesSort;
-}
+import type { Site, Visitor } from 'types/graphql';
 
 interface UseVisitor {
   loading: boolean;
@@ -17,15 +9,14 @@ interface UseVisitor {
   visitor: Visitor | null;
 }
 
-export const useVisitor = (props: Props): UseVisitor => {
+export const useVisitor = (): UseVisitor => {
   const router = useRouter();
 
   const { data, loading, error } = useQuery<{ site: Site }>(GET_VISITOR_QUERY, {
     variables: { 
       siteId: router.query.site_id as string,
       visitorId: router.query.visitor_id as string,
-      ...props
-    }
+    },
   });
 
   return {

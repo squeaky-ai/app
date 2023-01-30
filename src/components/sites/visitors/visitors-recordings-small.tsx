@@ -1,16 +1,16 @@
 import React from 'react';
 import type { FC } from 'react';
 import { RecordingSmallItem } from 'components/sites/recordings/recordings-small-item';
-import type { Site, Visitor } from 'types/graphql';
+import type { Recordings, Site } from 'types/graphql';
 
 interface Props {
   site: Site;
-  visitor: Visitor;
+  recordings: Recordings;
 }
 
-export const VisitorsRecordingsSmall: FC<Props> = ({ site, visitor }) => (
+export const VisitorsRecordingsSmall: FC<Props> = ({ site, recordings }) => (
   <div className='visitors-recordings-small'>
-    {visitor.recordings.items.map(recording => (
+    {recordings.items.map(recording => (
       <RecordingSmallItem 
         key={recording.id} 
         site={site} 

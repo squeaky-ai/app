@@ -8,13 +8,13 @@ import { Table, Row, Cell } from 'components/table';
 import { getColumnStyles } from 'lib/tables';
 import { Tooltip } from 'components/tooltip';
 import { Icon } from 'components/icon';
-import { RecordingsSort } from 'types/graphql';
+import { Recordings, RecordingsSort } from 'types/graphql';
 import { COLUMNS } from 'data/recordings/constants';
-import type { Visitor, Site, Team } from 'types/graphql';
+import type { Site, Team } from 'types/graphql';
 import type { Column } from 'types/common';
 
 interface Props {
-  visitor: Visitor;
+  recordings: Recordings;
   sort: RecordingsSort;
   site: Site;
   columns: Column[];
@@ -24,8 +24,8 @@ interface Props {
   setSelected: (selected: string[]) => void;
 }
 
-export const VisitorsRecordingsLarge: FC<Props> = ({ site, visitor, sort, columns, selected, member, setSelected, setSort }) => {
-  const { items } = visitor.recordings;
+export const VisitorsRecordingsLarge: FC<Props> = ({ site, recordings, sort, columns, selected, member, setSelected, setSort }) => {
+  const { items } = recordings;
 
   const { rowStyle, tableClassNames } = getColumnStyles(COLUMNS, columns);
 

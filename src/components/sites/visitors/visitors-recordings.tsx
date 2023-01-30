@@ -2,36 +2,70 @@ import React from 'react';
 import type { FC } from 'react';
 import { Pagination } from 'components/pagination';
 import { Illustration } from 'components/illustration';
+import { Spinner } from 'components/spinner';
 import { VisitorsRecordingsSmall } from 'components/sites/visitors/visitors-recordings-small';
 import { VisitorsRecordingsLarge } from 'components/sites/visitors/visitors-recordings-large';
+import { RecordingsColumns } from 'components/sites/recordings/recordings-columns';
+import { RecordingsBulkActions } from 'components/sites/recordings/recordings-bulk-actions';
+import { Error } from 'components/error';
 import { useResize } from 'hooks/use-resize';
+import { useColumns } from 'hooks/use-columns';
 import { RecordingsSort } from 'types/graphql';
-import type { Visitor, Site, Team } from 'types/graphql';
-import type { Column } from 'types/common';
+import { useVisitorRecordings } from 'hooks/use-visitor-recordings';
+import type { Site, Team } from 'types/graphql';
 
 interface Props {
-  visitor: Visitor;
-  sort: RecordingsSort;
-  page: number;
   site: Site;
-  columns: Column[];
-  selected: string[];
   member?: Team;
-  setPage: (value: number) => void;
-  setSort: (value: RecordingsSort) => void;
-  setSelected: (selected: string[]) => void;
 }
 
-export const VisitorsRecording: FC<Props> = ({ site, visitor, page, sort, columns, selected, member, setSelected, setPage, setSort }) => {
+export const VisitorsRecording: FC<Props> = ({ site, member }) => {
   const { mobile } = useResize();
 
-  const { items, pagination } = visitor.recordings;
+  const [selected, setSelected] = React.useState<string[]>([]);
+  const [page, setPage] = React.useState<number>(0);
+  const [sort, setSort] = React.useState<RecordingsSort>(RecordingsSort.ConnectedAtDesc);
+
+  const { loading, error, recordings } = useVisitorRecordings({
+    page,
+    sort,
+  });
+
+  const { columns, columnsReady, setColumns } = useColumns('recordings');
+
+  const { items, pagination } = recordings;
 
   const Component = mobile ? VisitorsRecordingsSmall : VisitorsRecordingsLarge;
 
+  if (loading) {
+    return <Spinner />;
+  }
+
+  if (error) {
+    return <Error />;
+  }
+
   return (
     <>
-      {items.length > 0 && (
+      <div className='recordings-header'>
+        <h4>Recordings</h4>
+        {items.length > 0 && columnsReady && (
+          <menu>
+            <RecordingsBulkActions
+              site={site}
+              member={member}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <RecordingsColumns 
+              columns={columns}
+              setColumns={setColumns}
+            />
+          </menu>
+        )}
+      </div>
+
+      {items.length > 0 && columnsReady && (
         <Component
           columns={columns}
           member={member}
@@ -40,7 +74,7 @@ export const VisitorsRecording: FC<Props> = ({ site, visitor, page, sort, column
           setSort={setSort}
           site={site}
           sort={sort}
-          visitor={visitor}
+          recordings={recordings}
         />
       )}
 

@@ -56,7 +56,7 @@ export const Tabs: FC<Props> = ({ tabs }) => {
       </ul>
       {tabs.map(tab => (
         <div key={tab.page} className={classnames('tab-body', { active: page.page === tab.page })}>
-          {tab.body}
+          {page.page === tab.page ? tab.body : null}
         </div>
       ))}
     </div>

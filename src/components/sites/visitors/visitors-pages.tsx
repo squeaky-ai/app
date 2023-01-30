@@ -2,26 +2,43 @@ import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
 import { Sort } from 'components/sort';
+import { Spinner } from 'components/spinner';
+import { Error } from 'components/error';
 import { Pagination } from 'components/pagination';
 import { Table, Row, Cell } from 'components/table';
 import { toTimeString } from 'lib/dates';
+import { useVisitorPages } from 'hooks/use-visitor-pages';
 import { Site, VisitorsPagesSort } from 'types/graphql';
-import type { Visitor } from 'types/graphql';
 
 interface Props {
   site: Site;
-  visitor: Visitor;
-  sort: VisitorsPagesSort;
-  page: number;
-  setPage: (value: number) => void;
-  setSort: (sort: VisitorsPagesSort) => void;
 }
 
-export const VisitorPages: FC<Props> = ({ site, visitor, page, sort, setPage, setSort }) => {
-  const { items, pagination } = visitor.pages;
+export const VisitorPages: FC<Props> = ({ site }) => {
+  const [page, setPage] = React.useState<number>(1);
+  const [sort, setSort] = React.useState<VisitorsPagesSort>(VisitorsPagesSort.ViewsCountDesc);
+
+  const { error, loading, pages } = useVisitorPages({
+    page,
+    sort,
+  });
+
+  const { items, pagination } = pages;
+
+  if (loading) {
+    return <Spinner />;
+  }
+
+  if (error) {
+    return <Error />;
+  }
 
   return (
     <>
+      <div className='recordings-header'>
+        <h4>Pages</h4>
+      </div>
+
       <Table className='visitor-pages-table'>
         <Row head>
           <Cell>

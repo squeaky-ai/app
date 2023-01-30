@@ -10,45 +10,24 @@ import { Pill } from 'components/pill';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { Unlock } from 'components/sites/unlock';
 import { VisitorsSummary } from 'components/sites/visitors/visitors-summary';
-import { VisitorsRecording } from 'components/sites/visitors/visitors-recordings';
-import { VisitorPages } from 'components/sites/visitors/visitors-pages';
-import { RecordingsColumns } from 'components/sites/recordings/recordings-columns';
-import { RecordingsBulkActions } from 'components/sites/recordings/recordings-bulk-actions';
 import { VisitorsExport } from 'components/sites/visitors/visitors-export';
 import { VisitorsDelete } from 'components/sites/visitors/visitors-delete';
+import { VisitorsTabs } from 'components/sites/visitors/visitors-tabs';
 import { Error } from 'components/error';
 import { NotFound } from 'components/sites/not-found';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useVisitor } from 'hooks/use-visitor';
-import { useColumns } from 'hooks/use-columns';
 import { toHoursMinutesAndSeconds } from 'lib/dates';
-import { VisitorsPagesSort, RecordingsSort } from 'types/graphql';
 import type { Site } from 'types/graphql';
 
 const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
   const router = useRouter();
 
-  const [selected, setSelected] = React.useState<string[]>([]);
-  const [pageviewPage, setPageviewPage] = React.useState<number>(1);
-  const [recordingPage, setRecordingPage] = React.useState<number>(0);
-  const [pageviewSort, setPageviewSort] = React.useState<VisitorsPagesSort>(VisitorsPagesSort.ViewsCountDesc);
-  const [recordingSort, setRecordingSort] = React.useState<RecordingsSort>(RecordingsSort.ConnectedAtDesc);
-
-
-  const { columns, columnsReady, setColumns } = useColumns('recordings');
-
-  const { visitor, error, loading } = useVisitor({ 
-    recordingPage,
-    recordingSort,
-    pagesPage: pageviewPage,
-    pagesSort: pageviewSort
-  });
+  const { visitor, error, loading } = useVisitor();
 
   const onVisitorDelete = async (site: Site) => {
     await router.push(`/sites/${site.id}/visitors`);
   };
-
-  const { site_id } = router.query;
 
   const toTwoDecimalPlaces = (value: number) => Number(value.toFixed(2));
 
@@ -77,7 +56,7 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
               site={site} 
               items={
                 [
-                  { name: 'Visitors', href: `/sites/${site_id}/visitors` }, 
+                  { name: 'Visitors', href: `/sites/${site.id}/visitors` }, 
                   { name: `ID: ${visitor.visitorId}` }
                 ]
               } 
@@ -109,68 +88,31 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
             <div className='stats'>
               <Card className='recordings'>
                 <h5>Recordings</h5>
-                <h2>
+                <h3>
                   {visitor.recordingCount?.total || 0}
                   <Pill type='tertiary'>{visitor.recordingCount.new} New</Pill>
-                </h2>
+                </h3>
               </Card>
               <Card className='page-views'>
                 <h5>Avg. Session Duration</h5>
-                <h2>{toHoursMinutesAndSeconds(visitor.averageSessionDuration || 0)}</h2>
+                <h3>{toHoursMinutesAndSeconds(visitor.averageSessionDuration || 0)}</h3>
               </Card>
               <Card className='session-duration'>
                 <h5>Page Views</h5>
-                <h2>
+                <h3>
                   {visitor.pageViewsCount.total}
                   <Pill type='secondary'>{visitor.pageViewsCount.unique} Unique</Pill>
-                </h2>
+                </h3>
               </Card>
               <Card className='per-session'>
                 <h5>Pages Per Session</h5>
-                <h2>{toTwoDecimalPlaces(visitor.pagesPerSession || 0)}</h2>
+                <h3>{toTwoDecimalPlaces(visitor.pagesPerSession || 0)}</h3>
               </Card>
             </div>
 
-            <div className='recordings-header'>
-              <h5>Recordings</h5>
-              {visitor.recordings.items.length > 0 && columnsReady && (
-                <menu>
-                  <RecordingsBulkActions
-                    site={site}
-                    member={member}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />
-                  <RecordingsColumns 
-                    columns={columns}
-                    setColumns={setColumns}
-                  />
-                </menu>
-              )}
-            </div>
-
-            <VisitorsRecording 
-              visitor={visitor} 
+            <VisitorsTabs
               site={site}
-              page={recordingPage} 
-              setPage={setRecordingPage}
-              sort={recordingSort}
-              setSort={setRecordingSort}
               member={member}
-              columns={columns}
-              selected={selected}
-              setSelected={setSelected}
-            />
-
-            <h5>Pages</h5>
-  
-            <VisitorPages 
-              site={site}
-              visitor={visitor} 
-              page={pageviewPage} 
-              setPage={setPageviewPage}
-              sort={pageviewSort}
-              setSort={setPageviewSort}
             />
           </Main>
         )}

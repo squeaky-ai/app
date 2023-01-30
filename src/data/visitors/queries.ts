@@ -44,7 +44,7 @@ export const GET_VISITORS_QUERY = gql`
 `;
 
 export const GET_VISITOR_QUERY = gql`
-  query GetVisitor($siteId: ID!, $visitorId: ID!, $recordingPage: Int, $recordingSort: RecordingsSort, $pagesPage: Int, $pagesSort: VisitorsPagesSort) {
+  query GetVisitor($siteId: ID!, $visitorId: ID!) {
     site(siteId: $siteId) {
       id
       name
@@ -79,7 +79,21 @@ export const GET_VISITOR_QUERY = gql`
         }
         starred
         linkedData
-        recordings(page: $recordingPage, size: 10, sort: $recordingSort) {
+        pagesPerSession
+        averageSessionDuration
+      }
+    }
+  }
+`;
+
+export const GET_VISITOR_RECORDINGS_QUERY = gql`
+  query GetVisitor($siteId: ID!, $visitorId: ID!, $page: Int, $sort: RecordingsSort) {
+    site(siteId: $siteId) {
+      id
+      name
+      visitor(visitorId: $visitorId) {
+        id
+        recordings(page: $page, size: 10, sort: $sort) {
           items {
             id
             language
@@ -124,7 +138,18 @@ export const GET_VISITOR_QUERY = gql`
             sort
           }
         }
-        pages(page: $pagesPage, size: 10, sort: $pagesSort) {
+      }
+    }
+  }
+`;
+
+export const GET_VISITOR_PAGES_QUERY = gql`
+  query GetVisitor($siteId: ID!, $visitorId: ID!, $page: Int, $sort: VisitorsPagesSort) {
+    site(siteId: $siteId) {
+      id
+      visitor(visitorId: $visitorId) {
+        id
+        pages(page: $page, size: 10, sort: $sort) {
           items {
             pageView
             pageViewCount
@@ -136,8 +161,6 @@ export const GET_VISITOR_QUERY = gql`
             sort
           }
         }
-        pagesPerSession
-        averageSessionDuration
       }
     }
   }
