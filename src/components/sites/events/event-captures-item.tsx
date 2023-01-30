@@ -10,6 +10,7 @@ import { EventTag } from 'components/sites/events/event-tag';
 import { EventCapturesEdit } from 'components/sites/events/event-captures-edit';
 import { EventCaptureDelete } from 'components/sites/events/event-capture-delete';
 import { EventsType, Team } from 'types/graphql';
+import { EventsCaptureType } from 'types/events';
 import type { EventSelected } from 'types/events';
 import type { Site, EventsCaptureItem } from 'types/graphql';
 
@@ -71,12 +72,14 @@ export const EventCapturesItem: FC<Props> = ({
       </Cell>
       <Cell>
         <Dropdown portal button={<Icon name='more-2-fill' />} buttonClassName='options' ref={rowActionsRef}>
-          <EventCapturesEdit
-            site={site} 
-            member={member}
-            event={event}
-            onClose={onRowActionClose}
-          />
+          {event.type !== EventsCaptureType.Custom && (
+            <EventCapturesEdit
+              site={site} 
+              member={member}
+              event={event}
+              onClose={onRowActionClose}
+            />
+          )}
           <EventCaptureDelete 
             site={site} 
             member={member}
