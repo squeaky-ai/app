@@ -187,6 +187,19 @@
     }
   }
 
+  .no-events {
+    background: var(--white);
+    border: 1px solid var(--gray-150);
+    border-radius: var(--border-radius-md);
+    margin: 2rem 0 0 0;
+    padding: 4rem;
+    text-align: center;
+
+    h5 {
+      margin: 2rem 0 0 0;
+    }
+  }
+
   .event-feed {
     .table {
       .row {

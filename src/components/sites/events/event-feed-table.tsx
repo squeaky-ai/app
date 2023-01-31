@@ -10,6 +10,7 @@ import { PageSize } from 'components/sites/page-size';
 import { Pagination } from 'components/pagination';
 import { EventData } from 'components/sites/events/event-data';
 import { useSort } from 'hooks/use-sort';
+import { Illustration } from 'components/illustration';
 import { useEventFeed } from 'hooks/use-event-feed';
 import { toNiceDate, getDateRange } from 'lib/dates';
 import { EventsFeedSort, Team } from 'types/graphql';
@@ -44,8 +45,12 @@ export const EventFeedTable: FC<Props> = ({ site, member, groupIds, captureIds, 
   }
 
   if (!loading && feed.items.length === 0) {
-    // TODO: Add empty state
-    return <p>No results</p>;
+    return (
+      <div className='no-events'>
+        <Illustration illustration='illustration-1' height={160} width={320} />
+        <h5>There are currently no events to show.</h5>
+      </div>
+    );
   }
 
   return (
