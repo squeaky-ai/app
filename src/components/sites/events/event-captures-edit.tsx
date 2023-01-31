@@ -106,7 +106,7 @@ export const EventCapturesEdit: FC<Props> = ({ site, member, event, onClose }) =
             <form onSubmit={handleSubmit}>
               <ModalBody aria-labelledby='edit-event-capture-title' aria-describedby='edit-event-capture-description'>
                 <ModalHeader>
-                  <p id='edit-event-capture-title'><b>Edit Event</b></p>
+                  <p id='edit-event-capture-title'><b>Edit {isCustomEvent ? 'Custom Event' : 'Event'}</b></p>
                   <Button type='button' onClick={closeModal}>
                     <Icon name='close-line' />
                   </Button>
