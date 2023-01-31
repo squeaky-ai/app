@@ -3380,6 +3380,7 @@ export type Visitor = {
   countries: Array<RecordingsCountry>;
   createdAt: Scalars['ISO8601DateTime'];
   devices: Array<RecordingsDevice>;
+  events: EventsFeed;
   export: VisitorsExport;
   firstViewedAt?: Maybe<Scalars['ISO8601DateTime']>;
   id: Scalars['ID'];
@@ -3394,6 +3395,13 @@ export type Visitor = {
   starred?: Maybe<Scalars['Boolean']>;
   viewed?: Maybe<Scalars['Boolean']>;
   visitorId: Scalars['String'];
+};
+
+
+export type VisitorEventsArgs = {
+  page?: InputMaybe<Scalars['Int']>;
+  size?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<EventsFeedSort>;
 };
 
 

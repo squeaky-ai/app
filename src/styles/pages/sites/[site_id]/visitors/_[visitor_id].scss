@@ -230,6 +230,50 @@
       .tab-body {
         padding-top: 0;
       }
+
+      .rc-pagination {
+        margin: 1.5rem 0 0 0;
+      }
+    }
+
+    .event-table.event-feed {
+      .table {
+        .row {
+          grid-template-columns: repeat(6, 1fr);
+          height: 3rem;
+
+          .event-tag {
+            margin: 0;
+          }
+
+          .recording-starred {
+            .icon {
+              color: var(--gray-blue-100);
+              margin: 0 .25rem 0 0;
+              vertical-align: middle;
+            }
+        
+            .active .icon {
+              color: var(--purple-500);
+            }
+          }
+  
+          .event-data {
+            .tooltip {
+              display: inline-flex;
+              width: 100%;
+  
+              .button {
+                overflow: hidden;
+                text-align: left;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
     }
 
     .summary {
@@ -439,7 +483,7 @@
       padding: 4rem;
       text-align: center;
 
-      h4 {
+      h5 {
         margin: 2rem 0 0 0;
       }
     }

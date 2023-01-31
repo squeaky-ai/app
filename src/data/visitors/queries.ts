@@ -189,3 +189,33 @@ export const GET_VISITOR_EXPORT_QUERY = gql`
     }
   }
 `;
+
+export const GET_VISITOR_EVENTS_QUERY = gql`
+  query GetVisitorEvents($siteId: ID!, $visitorId: ID!, $page: Int, $size: Int, $sort: EventsFeedSort) {
+    site(siteId: $siteId) {
+      id
+      visitor(visitorId: $visitorId) {
+        id
+        events(page: $page, size: $size, sort: $sort) {
+          items {
+            id
+            eventName
+            timestamp
+            source
+            data
+            recording {
+              id
+              sessionId
+              bookmarked
+            }
+          }
+          pagination {
+            pageSize
+            total
+            sort
+          }
+        }
+      }
+    }
+  }
+`;

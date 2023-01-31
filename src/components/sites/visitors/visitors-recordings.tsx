@@ -65,32 +65,34 @@ export const VisitorsRecording: FC<Props> = ({ site, member }) => {
         )}
       </div>
 
-      {items.length > 0 && columnsReady && (
-        <Component
-          columns={columns}
-          member={member}
-          selected={selected}
-          setSelected={setSelected}
-          setSort={setSort}
-          site={site}
-          sort={sort}
-          recordings={recordings}
-        />
-      )}
-
       {items.length === 0 && (
         <div className='no-visitor-recordings'>
-          <Illustration illustration='illustration-1' height={160} width={210} />
-          <h4>There are currently no recordings for this visitor.</h4>
+          <Illustration illustration='illustration-1' height={160} width={320} />
+          <h5>There are currently no recordings for this visitor.</h5>
         </div>
       )}
 
-      <Pagination 
-        currentPage={page} 
-        pageSize={pagination.pageSize}
-        total={pagination.total}
-        setPage={setPage}
-      />
+      {items.length > 0 && columnsReady && (
+        <>
+          <Component
+            columns={columns}
+            member={member}
+            selected={selected}
+            setSelected={setSelected}
+            setSort={setSort}
+            site={site}
+            sort={sort}
+            recordings={recordings}
+          />
+
+          <Pagination 
+            currentPage={page} 
+            pageSize={pagination.pageSize}
+            total={pagination.total}
+            setPage={setPage}
+          />
+        </>
+      )}
     </>
   );
 };
