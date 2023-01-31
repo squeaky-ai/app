@@ -9,6 +9,7 @@ export const GET_EVENT_CAPTURES_QUERY = gql`
         items {
           id
           name
+          nameAlias
           type
           rules {
             matcher

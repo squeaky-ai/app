@@ -1165,6 +1165,7 @@ export type EventCaptureUpdateInput = {
   eventId: Scalars['ID'];
   groupIds: Array<Scalars['Int']>;
   name: Scalars['String'];
+  nameAlias?: InputMaybe<Scalars['String']>;
   rules: Array<EventsRuleInput>;
   siteId: Scalars['ID'];
 };
@@ -1199,6 +1200,7 @@ export type EventsCaptureItem = {
   id: Scalars['ID'];
   lastCountedAt?: Maybe<Scalars['ISO8601DateTime']>;
   name: Scalars['String'];
+  nameAlias?: Maybe<Scalars['String']>;
   rules: Array<EventsRule>;
   source?: Maybe<Scalars['String']>;
   type: Scalars['Int'];

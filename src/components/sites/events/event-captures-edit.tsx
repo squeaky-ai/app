@@ -29,6 +29,7 @@ const EventCreateSchema = Yup.object().shape({
   matcher: Yup.string().required('Condition is required'),
   value: Yup.string().required('Condition is required'),
   name: Yup.string().required('Name is required'),
+  nameAlias: Yup.string(),
   groupIds: Yup.array(),
 });
 
@@ -46,6 +47,8 @@ export const EventCapturesEdit: FC<Props> = ({ site, member, event, onClose }) =
     if (ref.current) ref.current.hide();
   };
 
+  const isCustomEvent = event.type === EventsCaptureType.Custom;
+
   return (
     <>
       <Button onClick={openModal} unauthorized={[MEMBER, READ_ONLY, SUPER_USER].includes(member?.role)}>
@@ -59,6 +62,7 @@ export const EventCapturesEdit: FC<Props> = ({ site, member, event, onClose }) =
             matcher: event.rules[0].matcher,
             value: event.rules[0].value,
             name: event.name,
+            nameAlias: event.nameAlias || '',
             groupIds: event.groupIds,
           }}
           validationSchema={EventCreateSchema}
@@ -69,6 +73,7 @@ export const EventCapturesEdit: FC<Props> = ({ site, member, event, onClose }) =
                   eventId: event.id,
                   siteId: site.id,
                   name: values.name,
+                  nameAlias: values.nameAlias,
                   rules: [
                     {
                       condition: EventsCondition.Or,
@@ -107,45 +112,52 @@ export const EventCapturesEdit: FC<Props> = ({ site, member, event, onClose }) =
                   </Button>
                 </ModalHeader>
                 <ModalContents>
-                  <div className='input-group'>
-                    <div>
-                      <Label htmlFor='matcher'>Condition</Label>
-                      <Select name='matcher' onChange={handleChange} value={values.matcher}>
-                        <Option value={EventsMatch.Equals}>Is</Option>
-                        <Option value={EventsMatch.NotEquals}>Is not</Option>
-                        <Option value={EventsMatch.Contains}>Contains</Option>
-                        <Option value={EventsMatch.NotContains}>Doesn&apos;t contain</Option>
-                        <Option value={EventsMatch.StartsWith}>Starts with</Option>
-                      </Select>
-                    </div>
-                    <div>
-                      <Label htmlFor='value'>
-                        {values.eventType === EventsCaptureType.PageVisit && 'URL'}
-                        {values.eventType === EventsCaptureType.TextClick && 'Text string'}
-                        {values.eventType === EventsCaptureType.SelectorClick && 'CSS selector'}
-                        {values.eventType === EventsCaptureType.Error && 'Error message'}
-                        {values.eventType === EventsCaptureType.Custom && 'TODO'}
-                      </Label>
-                      <Input 
-                        name='value' 
-                        type='text' 
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        value={values.value}
-                        invalid={touched.value && !!errors.value}
-                        placeholder={
-                          (() => {
-                            if (values.eventType === EventsCaptureType.PageVisit) return 'e.g. https://example.com';
-                            if (values.eventType === EventsCaptureType.SelectorClick) return 'e.g., #elementID > DIV';
-                            return '';
-                          })()
-                        }
-                      />
-                      <span className='validation'>{errors.value}</span>
-                    </div>
-                  </div>
+                  {isCustomEvent && (
+                    <p>If you&apos;d like to define more user-friendly names for your events when you&apos;re viewing them within Squeaky, you can define an alias using the field below.</p>
+                  )}
+                  {!isCustomEvent && (
+                    <>
+                      <div className='input-group'>
+                        <div>
+                          <Label htmlFor='matcher'>Condition</Label>
+                          <Select name='matcher' onChange={handleChange} value={values.matcher}>
+                            <Option value={EventsMatch.Equals}>Is</Option>
+                            <Option value={EventsMatch.NotEquals}>Is not</Option>
+                            <Option value={EventsMatch.Contains}>Contains</Option>
+                            <Option value={EventsMatch.NotContains}>Doesn&apos;t contain</Option>
+                            <Option value={EventsMatch.StartsWith}>Starts with</Option>
+                          </Select>
+                        </div>
+                        <div>
+                          <Label htmlFor='value'>
+                            {values.eventType === EventsCaptureType.PageVisit && 'URL'}
+                            {values.eventType === EventsCaptureType.TextClick && 'Text string'}
+                            {values.eventType === EventsCaptureType.SelectorClick && 'CSS selector'}
+                            {values.eventType === EventsCaptureType.Error && 'Error message'}
+                            {values.eventType === EventsCaptureType.Custom && 'Custom Event'}
+                          </Label>
+                          <Input 
+                            name='value' 
+                            type='text' 
+                            onBlur={handleBlur}
+                            onChange={handleChange}
+                            value={values.value}
+                            invalid={touched.value && !!errors.value}
+                            placeholder={
+                              (() => {
+                                if (values.eventType === EventsCaptureType.PageVisit) return 'e.g. https://example.com';
+                                if (values.eventType === EventsCaptureType.SelectorClick) return 'e.g., #elementID > DIV';
+                                return '';
+                              })()
+                            }
+                          />
+                          <span className='validation'>{errors.value}</span>
+                        </div>
+                      </div>
 
-                  <Divider />
+                      <Divider />
+                    </>
+                  )}
 
                   <Label htmlFor='name'>Event name</Label>
                   <Input 
@@ -154,9 +166,25 @@ export const EventCapturesEdit: FC<Props> = ({ site, member, event, onClose }) =
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.name}
+                    disabled={isCustomEvent}
                     invalid={touched.name && !!errors.name}
                   />
                   <span className='validation'>{errors.name}</span>
+
+                  {isCustomEvent && (
+                    <>
+                      <Label htmlFor='name'>Alias</Label>
+                      <Input 
+                        name='nameAlias' 
+                        type='text'
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        value={values.nameAlias}
+                        invalid={touched.nameAlias && !!errors.nameAlias}
+                      />
+                      <span className='validation'>{errors.nameAlias}</span>
+                    </>
+                  )}
 
                   <Label htmlFor='groupIds'>Group(s)</Label>
                   <p>Create a new group or choose from your existing event groups. Each event can belong to multiple groups.</p>
