@@ -94,6 +94,9 @@ export const VisitorsSummary: FC<Props> = ({ site, member, visitor }) => {
                   </ul>
                 </Tooltip>
               )}
+              {devices.length === 0 && (
+                <>Unknown</>
+              )}
             </dd>
           </div>
           <div className='row'>
@@ -117,6 +120,9 @@ export const VisitorsSummary: FC<Props> = ({ site, member, visitor }) => {
                   </ul>
                 </Tooltip>
               )}
+              {browsers.length === 0 && (
+                <>Unknown</>
+              )}
             </dd>
           </div>
           <div className='row'>
@@ -138,6 +144,9 @@ export const VisitorsSummary: FC<Props> = ({ site, member, visitor }) => {
                     ))}
                   </ul>
                 </Tooltip>
+              )}
+              {countries.length === 0 && (
+                <>Unknown</>
               )}
             </dd>
           </div>

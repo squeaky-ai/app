@@ -104,6 +104,9 @@ export const VisitorsLargeItem: FC<Props> = ({ site, member, visitor, search, st
             </ul>
           </Tooltip>
         )}
+        {devices.length === 0 && (
+          <>Unknown</>
+        )}
       </Cell>
       <Cell>
         {browsers.length === 1 && (
@@ -123,6 +126,9 @@ export const VisitorsLargeItem: FC<Props> = ({ site, member, visitor, search, st
             </ul>
           </Tooltip>
         )}
+        {browsers.length === 0 && (
+          <>Unknown</>
+        )}
       </Cell>
       <Cell>
         {countries.length === 1 && (
@@ -141,6 +147,9 @@ export const VisitorsLargeItem: FC<Props> = ({ site, member, visitor, search, st
               ))}
             </ul>
           </Tooltip>
+        )}
+        {countries.length === 0 && (
+          <>Unknown</>
         )}
       </Cell>
       <Cell>
