@@ -18,11 +18,6 @@ export const VisitorsTabs: FC<Props> = ({ site, member }) => {
       page: 'recordings',
       body: <VisitorsRecording site={site} member={member} />,
     },
-    {
-      name: 'Pages',
-      page: 'pages',
-      body: <VisitorPages site={site} />,
-    },
   ];
 
   if (site.plan.featuresEnabled.includes(PlanFeature.ErrorTracking)) {
@@ -32,6 +27,12 @@ export const VisitorsTabs: FC<Props> = ({ site, member }) => {
       body: <VisitorsEvents site={site} member={member} />
     });
   }
+
+  tabs.push({
+    name: 'Pages',
+    page: 'pages',
+    body: <VisitorPages site={site} />,
+  });
 
   return <Tabs tabs={tabs} />;
 };
