@@ -1322,7 +1322,7 @@ export type FeedCaptureItem = {
   eventName: Scalars['String'];
   id: Scalars['ID'];
   recording?: Maybe<Recording>;
-  source?: Maybe<Scalars['String']>;
+  source?: Maybe<Source>;
   timestamp: Scalars['ISO8601DateTime'];
   visitor?: Maybe<Visitor>;
 };
@@ -3030,6 +3030,13 @@ export type SitesVerifyInput = {
   siteId: Scalars['ID'];
 };
 
+export enum Source {
+  /** Record was created using the public API */
+  Api = 'api',
+  /** Record was created using the session */
+  Web = 'web'
+}
+
 export type SubscriptionsCheckout = {
   __typename?: 'SubscriptionsCheckout';
   customerId: Scalars['String'];
@@ -3392,6 +3399,7 @@ export type Visitor = {
   pagesPerSession: Scalars['Float'];
   recordingCount?: Maybe<VisitorsRecordingCount>;
   recordings: Recordings;
+  source?: Maybe<Source>;
   starred?: Maybe<Scalars['Boolean']>;
   viewed?: Maybe<Scalars['Boolean']>;
   visitorId: Scalars['String'];

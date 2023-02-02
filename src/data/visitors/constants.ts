@@ -92,10 +92,16 @@ export const COLUMNS: Column[] = [
     position: 12,
   },
   {
+    label: 'Source',
+    width: '110px',
+    disabled: false,
+    position: 13,
+  },
+  {
     label: 'Options',
     width: '64px',
     disabled: false,
-    position: 13,
+    position: 14,
   },
 ];
 

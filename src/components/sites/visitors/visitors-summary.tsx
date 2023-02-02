@@ -150,6 +150,10 @@ export const VisitorsSummary: FC<Props> = ({ site, member, visitor }) => {
               )}
             </dd>
           </div>
+          <div className='row'>
+            <dt>Source</dt>
+            <dd>{visitor.source?.toUpperCase() || 'WEB'}</dd>
+          </div>
         </div>
       </div>
     </Card>

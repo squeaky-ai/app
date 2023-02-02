@@ -153,6 +153,9 @@ export const VisitorsLargeItem: FC<Props> = ({ site, member, visitor, search, st
         )}
       </Cell>
       <Cell>
+        {visitor.source?.toUpperCase() || 'WEB'}
+      </Cell>
+      <Cell>
         <Dropdown portal button={<Icon name='more-2-fill' />} buttonClassName='options' ref={rowActionsRef}>
           <VisitorsDelete 
             site={site} 

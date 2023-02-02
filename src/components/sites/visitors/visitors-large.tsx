@@ -101,6 +101,9 @@ export const VisitorsLarge: FC<Props> = ({
           <Cell>
             Country
           </Cell>
+          <Cell>
+            Source
+          </Cell>
           <Cell />
         </Row>
         {items.map(v => (

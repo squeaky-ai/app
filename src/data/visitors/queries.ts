@@ -16,6 +16,7 @@ export const GET_VISITORS_QUERY = gql`
           firstViewedAt
           lastActivityAt
           language
+          source
           devices {
             deviceType
             viewportX
@@ -59,6 +60,7 @@ export const GET_VISITOR_QUERY = gql`
         firstViewedAt
         lastActivityAt
         language
+        source
         devices {
           deviceType
           viewportX
