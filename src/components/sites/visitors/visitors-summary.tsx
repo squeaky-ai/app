@@ -61,95 +61,98 @@ export const VisitorsSummary: FC<Props> = ({ site, member, visitor }) => {
               )}
             </dd>
           </div>
-          <div className='row'>
-            <dt>First visited</dt>
-            <dd>{toNiceDate(visitor.firstViewedAt)}</dd>
-          </div>
-          <div className='row'>
-            <dt>Last activity</dt>
-            <dd>{toNiceDate(visitor.lastActivityAt)}</dd>
-          </div>
-          <div className='row'>
-            <dt>Language</dt>
-            <dd>{visitor.language}</dd>
-          </div>
-          <div className='row'>
-            <dt>Device(s)</dt>
-            <dd>
-              {devices.length === 1 && (
-                <>
-                  <Device deviceType={devices[0].deviceType} />
-                  {devices[0].deviceX} by {devices[0].deviceY} pixels
-                </>
-              )}
-              {devices.length > 1 && (
-                 <Tooltip positionX='right' button={devices.length}>
-                  <ul>
-                    {devices.map(device => (
-                      <li key={`${device.deviceX}_${device.deviceY}_${device.deviceType}`}>
-                        <Device deviceType={device.deviceType} />
-                        <span>{device.deviceX} x {device.deviceY}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </Tooltip>
-              )}
-              {devices.length === 0 && (
-                <>Unknown</>
-              )}
-            </dd>
-          </div>
-          <div className='row'>
-            <dt>Browser</dt>
-            <dd>
-              {browsers.length === 1 && (
-                <>
-                  <Browser name={browsers[0].browserName} height={16} width={16} />
-                  {browsers[0].browserDetails}
-                </>
-              )}
-              {browsers.length > 1 && (
-                <Tooltip positionX='right' button={browsers.length}>
-                  <ul>
-                    {browsers.map(device => (
-                      <li key={device.browserName}>
-                        <Browser name={device.browserName} height={16} width={16} />
-                        <span>{device.browserName}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </Tooltip>
-              )}
-              {browsers.length === 0 && (
-                <>Unknown</>
-              )}
-            </dd>
-          </div>
-          <div className='row'>
-            <dt>Country</dt>
-            <dd>
-              {countries.length === 1 && (
-                <Tooltip positionX='right' button={<Flag code={countries[0].code} />}>
-                  {countries[0].name}
-                </Tooltip>
-              )}
-              {countries.length > 1 && (
-                <Tooltip fluid positionX='right' button={countries.length} buttonClassName='link'>
-                  <ul>
-                    {countries.map(country => (
-                      <li key={country.code}>
-                        <Flag code={country.code} />
-                        <span>{country.name}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </Tooltip>
-              )}
-              {countries.length === 0 && (
-                <>Unknown</>
-              )}
-            </dd>
-          </div>
+          {visitor.firstViewedAt && (
+            <div className='row'>
+              <dt>First visited</dt>
+              <dd>{toNiceDate(visitor.firstViewedAt)}</dd>
+            </div>
+          )}
+          {visitor.lastActivityAt && (
+            <div className='row'>
+              <dt>Last activity</dt>
+              <dd>{toNiceDate(visitor.lastActivityAt)}</dd>
+            </div>
+          )}
+          {visitor.language && (
+            <div className='row'>
+              <dt>Language</dt>
+              <dd>{visitor.language}</dd>
+            </div>
+          )}
+          {devices.length > 0 && (
+            <div className='row'>
+              <dt>Device(s)</dt>
+              <dd>
+                {devices.length === 1 && (
+                  <>
+                    <Device deviceType={devices[0].deviceType} />
+                    {devices[0].deviceX} by {devices[0].deviceY} pixels
+                  </>
+                )}
+                {devices.length > 1 && (
+                  <Tooltip positionX='right' button={devices.length}>
+                    <ul>
+                      {devices.map(device => (
+                        <li key={`${device.deviceX}_${device.deviceY}_${device.deviceType}`}>
+                          <Device deviceType={device.deviceType} />
+                          <span>{device.deviceX} x {device.deviceY}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </Tooltip>
+                )}
+              </dd>
+            </div>
+          )}
+          {browsers.length > 0 && (
+            <div className='row'>
+              <dt>Browser</dt>
+              <dd>
+                {browsers.length === 1 && (
+                  <>
+                    <Browser name={browsers[0].browserName} height={16} width={16} />
+                    {browsers[0].browserDetails}
+                  </>
+                )}
+                {browsers.length > 1 && (
+                  <Tooltip positionX='right' button={browsers.length}>
+                    <ul>
+                      {browsers.map(device => (
+                        <li key={device.browserName}>
+                          <Browser name={device.browserName} height={16} width={16} />
+                          <span>{device.browserName}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </Tooltip>
+                )}
+              </dd>
+            </div>
+          )}
+          {countries.length > 0 &&(
+            <div className='row'>
+              <dt>Country</dt>
+              <dd>
+                {countries.length === 1 && (
+                  <Tooltip positionX='right' button={<Flag code={countries[0].code} />}>
+                    {countries[0].name}
+                  </Tooltip>
+                )}
+                {countries.length > 1 && (
+                  <Tooltip fluid positionX='right' button={countries.length} buttonClassName='link'>
+                    <ul>
+                      {countries.map(country => (
+                        <li key={country.code}>
+                          <Flag code={country.code} />
+                          <span>{country.name}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </Tooltip>
+                )}
+              </dd>
+            </div>
+          )}
           <div className='row'>
             <dt>Source</dt>
             <dd>{visitor.source?.toUpperCase() || 'WEB'}</dd>
