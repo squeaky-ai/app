@@ -9,6 +9,7 @@ import { ChartOptions } from 'components/sites/chart-options';
 import { AnalyticsVisitorsChartTooltip } from 'components/sites/analytics/analytics-visitors-chart-tooltip';
 import { formatResultsForGroupType, doNotAllowZero } from 'lib/charts-v2';
 import { useChartSettings } from 'hooks/use-chart-settings';
+import { useChartShow } from 'hooks/use-chart-show';
 import type { AnalyticsVisitor, AnalyticsVisitors as AnalyticsVisitorsType } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 
@@ -20,9 +21,8 @@ interface Props {
 const fallback = { allCount: 0, existingCount: 0, newCount: 0 };
 
 export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
+  const { show, setShow } = useChartShow('analytics-visitors');
   const { scale, type, setScale, setType } = useChartSettings('analytics-visitors');
-
-  const [show, setShow] = React.useState<string[]>(['all', 'existing', 'new']);
 
   const handleClick = (value: string) => {
     show.includes(value)

@@ -10,6 +10,7 @@ import { Chart } from 'components/sites/chart';
 import { SitesGrowthChartTooltip } from 'components/admin/sites-growth-chart-tooltip';
 import { ChartOptions } from 'components/sites/chart-options';
 import { useChartSettings } from 'hooks/use-chart-settings';
+import { useChartShow } from 'hooks/use-chart-show';
 import { doNotAllowZero } from 'lib/charts-v2';
 import type { AdminSitesStored } from 'types/graphql';
 
@@ -26,8 +27,8 @@ interface Total {
 }
 
 export const SitesGrowth: FC<Props> = ({ count, sites }) => {
+  const { show, setShow } = useChartShow('admin-sites-growth');
   const { scale, type, setScale, setType } = useChartSettings('admin-sites-growth');
-  const [show, setShow] = React.useState<string[]>(['all', 'verified', 'unverified']);
 
   const { width } = useResize();
 
