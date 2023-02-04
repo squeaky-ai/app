@@ -15,9 +15,9 @@ const getText = (type: EventsCaptureType): string | React.ReactNode => {
     case EventsCaptureType.PageVisit:
       return 'The page view event is triggered each time a visitor loads a particular page within your website or web app.';
     case EventsCaptureType.TextClick:
-      return 'The text click event is triggered when a visitors clicks on a button or link with a specific text string on your site.';
+      return 'The text click event is triggered when a visitor clicks on a button or link with a specific text string on your site.';
     case EventsCaptureType.SelectorClick:
-      return 'The CSS selector click event is triggered when a visitors clicks on a specific element on your site via a CSS selector.';
+      return 'The CSS selector click event is triggered when a visitor clicks on a specific element on your site via a CSS selector.';
     case EventsCaptureType.Error:
       return 'Javascript error events help you to track the prevelance of specific Javascript Errors we have recorded on your site.';
     case EventsCaptureType.Custom:

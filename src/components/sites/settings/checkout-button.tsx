@@ -53,7 +53,7 @@ export const CheckoutButton: FC<Props> = ({ site, plan, loading, currency, setLo
   };
 
   return (
-    <Button type='button' onClick={handleCheckout} className='primary icon-left' disabled={loading}>
+    <Button type='button' onClick={handleCheckout} className='primary checkout-button icon-left' disabled={loading}>
       <Icon name='lock-line' />
       {loading ? 'Loading...' : 'Proceed to checkout'}
     </Button>

@@ -149,3 +149,11 @@
     margin-bottom: .5rem;
   }  
 }
+
+.checkout-button {
+  &:hover {
+    .icon {
+      color: var(--white);
+    }
+  }
+}

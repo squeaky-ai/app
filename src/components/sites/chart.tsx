@@ -32,6 +32,7 @@ interface Props {
   xAxisProps?: XAxisProps;
   yAxisProps?: YAxisProps,
   barLineProps?: Pick<LineProps | BarProps, 'stroke' | 'fill'>;
+  palette?: string[];
 }
 
 export const Chart: FC<Props> = ({ chartType, ...props }) => {
@@ -43,8 +44,8 @@ export const Chart: FC<Props> = ({ chartType, ...props }) => {
   }
 };
 
-const getPrimaryColor = (admin: boolean, index: number) => {
-  const palette = admin ? colorsPrimaryAdmin : colorsPrimary;
+const getPrimaryColor = (admin: boolean, index: number, customPallet?: string[]) => {
+  const palette = customPallet || (admin ? colorsPrimaryAdmin : colorsPrimary);
   return palette[index];
 };
 
@@ -83,6 +84,7 @@ const ChartLine: FC<Omit<Props, 'chartType'>> = ({
   xAxisProps,
   yAxisProps,
   barLineProps,
+  palette,
 }) => (
   <ResponsiveContainer>
     <LineChart data={data} margin={{ top: 0, left: -16, right: 16, bottom: 0 }}>
@@ -121,7 +123,7 @@ const ChartLine: FC<Omit<Props, 'chartType'>> = ({
           key={item.dataKey as string}
           dataKey={item.dataKey}
           fillOpacity={1}
-          stroke={getPrimaryColor(admin, index)}
+          stroke={getPrimaryColor(admin, index, palette)}
           strokeWidth={2}
           {...barLineProps}
         />
@@ -139,6 +141,7 @@ const ChartBar: FC<Omit<Props, 'chartType'>> = ({
   xAxisProps,
   yAxisProps,
   barLineProps,
+  palette,
 }) => (
   <ResponsiveContainer>
     <BarChart data={data} margin={{ top: 0, left: -16, right: 16, bottom: 0 }} barGap={2}>
@@ -175,9 +178,9 @@ const ChartBar: FC<Omit<Props, 'chartType'>> = ({
           key={item.dataKey as string}
           dataKey={item.dataKey}
           fillOpacity={1}
-          stroke={getPrimaryColor(admin, index)}
+          stroke={getPrimaryColor(admin, index, palette)}
           strokeWidth={item.strokeWidth}
-          fill={getPrimaryColor(admin, index)}
+          fill={getPrimaryColor(admin, index, palette)}
           radius={[2, 2, 0, 0]}
           {...barLineProps}
         />
