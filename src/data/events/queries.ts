@@ -43,6 +43,7 @@ export const GET_EVENT_GROUPS_QUERY = gql`
         items {
           id
           name
+          nameAlias
           type
           rules {
             matcher
