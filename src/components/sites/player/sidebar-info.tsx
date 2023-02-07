@@ -69,7 +69,7 @@ export const SidebarInfo: FC<Props> = ({ site, member, recording, setActiveTab }
             )}
           </dd>
         </div>
-        {showRecordings && moreRecordingsCount > 0 && (
+        {showRecordings && (
           <div className='row recordings'>
             {recording.visitor.recordings.items.map(rec => (
               <div className='recording-row' key={rec.id}>
@@ -89,9 +89,11 @@ export const SidebarInfo: FC<Props> = ({ site, member, recording, setActiveTab }
                 </div>
               </div>
             ))}
-            <Link className='see-more' href={`/sites/${site.id}/visitors/${recording.visitor.id}`}>
-              See {moreRecordingsCount} more
-            </Link>
+            {moreRecordingsCount > 0 && (
+              <Link className='see-more' href={`/sites/${site.id}/visitors/${recording.visitor.id}`}>
+                See {moreRecordingsCount} more
+              </Link>
+            )}
           </div>
         )}
       </dl>
