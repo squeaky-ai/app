@@ -36,10 +36,10 @@ export const Pagination: FC<Props> = ({ currentPage, pageSize, total, setPage, s
         <p>{start} - {end} of {total}</p>
       </div>
       <div className='actions'>
-        <Button className='quaternary' onClick={() => handlePageChange(page - 1)} disabled={page === 0}>
+        <Button className='quaternary' onClick={() => handlePageChange(currentPage - 1)} disabled={page === 0}>
           <Icon name='arrow-left-s-line' />
         </Button>
-        <Button className='quaternary' onClick={() => handlePageChange(page + 1)} disabled={page >= Math.floor(total / pageSize)}>
+        <Button className='quaternary' onClick={() => handlePageChange(currentPage + 1)} disabled={page >= Math.floor(total / pageSize)}>
           <Icon name='arrow-right-s-line' />
         </Button>
       </div>
