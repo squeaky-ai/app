@@ -96,10 +96,7 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => {
             <EmptyState
               site={site}
               title='There are currently no recordings available'
-              subtitle='Collecting Session Recordings'
               illustration='illustration-2'
-              videoName='Recordings Intro'
-              snippet='If you have only recently installed or updated your tracking code it may take up to an hour before new session recordings are available in the recordings page.'
             />
 
             <Unlock site={site} />

@@ -82,10 +82,7 @@ const SitesEvents: NextPage<ServerSideProps> = ({ user }) => {
             <EmptyState
               site={site}
               title='There is currently no events data'
-              subtitle='Accessing Events Data'
               illustration='illustration-17'
-              videoName='Events Intro'
-              snippet='If you have only recently installed or updated your tracking code it may take up to an hour before any event data becomes available for you to manage.'
             />
 
             {loading && (

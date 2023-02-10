@@ -48,10 +48,7 @@ const SitesJourneys: NextPage<ServerSideProps> = ({ user }) => {
             <EmptyState
               site={site}
               title='There are currently no user journeys available.'
-              subtitle='Collecting Journey Data'
               illustration='illustration-16'
-              videoName='Journey Intro'
-              snippet='If you have only recently installed or updated your tracking code it may take up to an hour before journey data becomes available.'
             />
 
             {loading && (

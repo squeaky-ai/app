@@ -4,7 +4,7 @@ import Head from 'next/head';
 import classnames from 'classnames';
 import { Main } from 'components/main';
 import { Page } from 'components/sites/page';
-import { EmptyState } from 'components/sites/feedback/empty-state';
+import { EmptyState } from 'components/sites/empty-state';
 import { Unlock } from 'components/sites/unlock';
 import { PageLoading } from 'components/sites/page-loading';
 import { Error } from 'components/error';
@@ -45,9 +45,7 @@ const SitesFeedbackNpsForm: NextPage<ServerSideProps> = ({ user }) => {
             <EmptyState
               site={site}
               title='Awaiting tracking code installation'
-              subtitle='Collecting Session Recordings'
               illustration='illustration-9'
-              videoName='Feedback Intro'
             />
 
             <Unlock site={site} />

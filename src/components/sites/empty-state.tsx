@@ -1,32 +1,23 @@
-import React from 'react';
+import React from 'react'; 
 import type { FC } from 'react';
 import Link from 'next/link';
 import classnames from 'classnames';
 import { Container } from 'components/container';
 import { Illustration, IllustrationType } from 'components/illustration';
 import { EmptyStateHint } from 'components/sites/empty-state-hint';
-import { useRouter } from 'next/router';
 import type { Site } from 'types/graphql';
 
 interface Props {
   site: Site;
   title: string;
-  subtitle: string;
   illustration: IllustrationType;
-  snippet: string;
-  videoName?: string;
 }
 
 export const EmptyState: FC<Props> = ({
   site,
   title,
-  subtitle,
-  videoName,
-  snippet,
   illustration,
 }) => {
-  const router = useRouter();
-
   const isVerified = !!site.verifiedAt;
 
   return (
@@ -37,12 +28,10 @@ export const EmptyState: FC<Props> = ({
 
         {isVerified && (
           <EmptyStateHint
-            title={subtitle}
-            videoName={videoName}
+            title='Your data is on the way!'
             body={
               <>
-                <p>New to Squeaky? Please <Link href={`/sites/${router.query.site_id}/settings/details/tracking-code`}>install your tracking code</Link> to begin recording user sessions for your website or web app.</p>
-                <p>{snippet}</p>
+                <p>Your tracking code is verified and active, but it can take <b>30-60 minutes for your first recording to arrive</b>. We&apos;ll email you as soon as your recording arrives.</p>
               </>
             }
           />
@@ -52,7 +41,6 @@ export const EmptyState: FC<Props> = ({
           <EmptyStateHint
             title='Install your tracking code'
             icon='code-s-slash-line'
-            videoName={videoName}
             body={
               <>
                 <p>Please install your tracking code to start capturing data for your site.</p>

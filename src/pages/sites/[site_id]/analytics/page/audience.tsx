@@ -72,10 +72,7 @@ const SitesAnalyticsPageAudience: NextPage<ServerSideProps> = ({ user }) => {
             <EmptyState
               site={site}
               title='There are currently no analytics available'
-              subtitle='Collecting Analytics Data'
               illustration='illustration-3'
-              videoName='Analytics Intro'
-              snippet='If you have only recently installed or updated your tracking code it may take up to an hour before analytics data becomes available.'
             />
 
             {loading && (

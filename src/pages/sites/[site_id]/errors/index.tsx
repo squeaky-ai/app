@@ -64,10 +64,7 @@ const SitesErrors: NextPage<ServerSideProps> = ({ user }) => {
             <EmptyState
               site={site}
               title='There are currently no errors recorded'
-              subtitle='Tracking Errors'
               illustration='illustration-17'
-              videoName='Errors Intro'
-              snippet='If you have only recently installed or updated your tracking code it may take up to an hour before any event data becomes available for you to manage.'
             />
 
             <Unlock site={site} />

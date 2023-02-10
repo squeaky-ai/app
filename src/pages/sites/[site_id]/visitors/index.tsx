@@ -95,10 +95,7 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => {
             <EmptyState
               site={site}
               title='There are currently no visitor records'
-              subtitle='Creating Visitor Records'
               illustration='illustration-6'
-              videoName='Visitors Intro'
-              snippet='If you have only recently installed or updated your tracking code it may take up to an hour before user records become available.'
             />
 
             <Unlock site={site} />

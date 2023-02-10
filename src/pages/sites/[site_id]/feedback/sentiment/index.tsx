@@ -2,7 +2,7 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import classnames from 'classnames';
-import { EmptyState } from 'components/sites/feedback/empty-state';
+import { EmptyState } from 'components/sites/empty-state';
 import { Main } from 'components/main';
 import { Error } from 'components/error';
 import { Page } from 'components/sites/page';
@@ -44,9 +44,7 @@ const SitesFeedbackSentiment: NextPage<ServerSideProps> = ({ user }) => {
             <EmptyState
               site={site}
               title='Awaiting tracking code installation'
-              subtitle='Collecting Visitor Feedback'
               illustration='illustration-9'
-              videoName='Feedback Intro'
             />
 
             <Unlock site={site} />
