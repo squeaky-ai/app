@@ -18,10 +18,12 @@ type Names = Record<FeatureFlag, string>;
 
 export const allFeatureFlags: FeatureFlag[] = [
   FeatureFlag.CHEESE_LOADER,
+  FeatureFlag.SIMPLIFIED_PAGINATION,
 ];
 
 export const featureFlagNames: Names = {
   CHEESE_LOADER: 'Cheese Loader',
+  SIMPLIFIED_PAGINATION: 'Simplified Pagination',
 };
 
 const options: State = [
@@ -30,6 +32,12 @@ const options: State = [
     value: false,
     superuser: false,
     description: 'Replace the standard spinner with a cheesy Squeaky one',
+  },
+  {
+    key: FeatureFlag.SIMPLIFIED_PAGINATION,
+    value: false,
+    superuser: true,
+    description: 'Replace the old pagination with one from 2023',
   },
 ];
 
