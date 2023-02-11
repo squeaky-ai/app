@@ -68,8 +68,6 @@ export const JourneysGraph: FC<Props> = ({ site, depth, position, journeys, setP
     if (!hoveredPage) return false;
     // Everything before has to be dimmed
     if (hoveredPage.col > col) return true;
-    // Everything else on this column has to be dimmed
-    if (hoveredPage.col === col && hoveredPage.page !== page) return true;
     // This is the current column so it can't be dimmed
     if (hoveredPage.col === col && hoveredPage.page === page) return false;
 
