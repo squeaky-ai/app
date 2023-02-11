@@ -179,6 +179,7 @@ export const GET_BILLING_QUERY = gql`
         authType
         apiEndpoint
         providerAppUuid
+        sdkUrl
       }
       billing {
         customerId
