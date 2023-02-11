@@ -3,11 +3,12 @@ import type { FC } from 'react';
 import { range, countBy, sum } from 'lodash';
 import { JourneysPage } from 'components/sites/journeys/journeys-page';
 import { percentage } from 'lib/maths';
-import { PathPosition } from 'types/graphql';
+import { PathPosition, Site } from 'types/graphql';
 import type { PageStats, HoveredPage } from 'types/journeys';
 import type { AnalyticsUserPath } from 'types/graphql';
 
 interface Props {
+  site: Site;
   depth: number;
   position: PathPosition;
   journeys: AnalyticsUserPath[];
@@ -15,7 +16,7 @@ interface Props {
   setPosition: (position: PathPosition) => void;
 }
 
-export const JourneysGraph: FC<Props> = ({ depth, position, journeys, setPage, setPosition }) => {
+export const JourneysGraph: FC<Props> = ({ site, depth, position, journeys, setPage, setPosition }) => {
   const [hoveredPage, setHoveredPage] = React.useState<HoveredPage>(null);
 
   const maxDepth = Math.max(...journeys.map(j => j.path.length));
@@ -102,6 +103,7 @@ export const JourneysGraph: FC<Props> = ({ depth, position, journeys, setPage, s
                 key={page.path + col}
                 col={col}
                 page={page}
+                site={site}
                 exits={getExitForColAndPage(col, page.path)}
                 position={position}
                 setPage={setPage}

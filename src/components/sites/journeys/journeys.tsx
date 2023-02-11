@@ -98,6 +98,7 @@ export const Journeys: FC<Props> = ({ site, member, page, pages, period, setPage
 
           {journeys.length > 0 &&  (
             <JourneysGraph 
+              site={site}
               position={position}
               journeys={journeysWithRoutes} 
               depth={depth}

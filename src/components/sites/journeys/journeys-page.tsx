@@ -5,9 +5,9 @@ import { useRouter } from 'next/router';
 import { Icon } from 'components/icon';
 import { Pill } from 'components/pill';
 import { Tooltip } from 'components/tooltip';
-import { Button } from 'components/button';
+import { JourneyMenu } from 'components/sites/journeys/journeys-menu';
 import { useFilters } from 'hooks/use-filters';
-import { PathPosition } from 'types/graphql';
+import { PathPosition, Site } from 'types/graphql';
 import { FILTERS } from 'data/recordings/constants';
 import type { PageStats } from 'types/journeys';
 import type { RecordingsFilters } from 'types/graphql';
@@ -15,6 +15,7 @@ import type { RecordingsFilters } from 'types/graphql';
 interface Props {
   col: number;
   dim: boolean;
+  site: Site;
   page: PageStats;
   exits: number;
   position: PathPosition;
@@ -24,11 +25,10 @@ interface Props {
   handleMouseLeave: VoidFunction;
 }
 
-type Coords = [number, number];
-
 export const JourneysPage: FC<Props> = ({
   col, 
   dim,
+  site,
   page, 
   position,
   exits, 
@@ -43,14 +43,6 @@ export const JourneysPage: FC<Props> = ({
   const { setFilters } = useFilters<RecordingsFilters>('recordings');
 
   const [open, setOpen] = React.useState<boolean>(false);
-  const [clickedAt, setClickedAt] = React.useState<Coords>([0, 0]);
-
-  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    const { clientX, clientY } = event;
-
-    setClickedAt([clientX, clientY]);
-    setOpen(true);
-  };
 
   const handleClose = (event: MouseEvent) => {
     const element = event.target as Element;
@@ -96,7 +88,6 @@ export const JourneysPage: FC<Props> = ({
   return (
     <div 
       ref={ref} 
-      onClick={handleClick} 
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       className={classnames('page', { 'has-exit': exits > 0, dim })} 
@@ -112,32 +103,27 @@ export const JourneysPage: FC<Props> = ({
         }>
           {page.path}
         </Tooltip>
-        <p className='stats'>
-          {page.percentage}%
-        </p>
+        <JourneyMenu 
+          open={open}
+          site={site}
+          page={page}
+          setOpen={setOpen}
+          handleStartPage={handleStartPage}
+          handleEndPage={handleEndPage}
+          handleViewRecordings={handleViewRecordings}
+        />
       </div>
-      {exits > 0 && position !== PathPosition.End && (
-        <div className='row'>
+      <div className='row'>
+        <Pill className='stats'>
+          {page.percentage}%
+        </Pill>
+        {exits > 0 && position !== PathPosition.End && (
           <Pill className='drop-off'>
             <Icon name='arrow-right-down-line' />
             {exits}%
           </Pill>
-        </div>
-      )}
-
-      {open && (
-        <div className='page-actions dropdown-menu' style={{ left: clickedAt[0], top: clickedAt[1] }}>
-          <Button onClick={handleStartPage}>
-            Set as start page
-          </Button>
-          <Button onClick={handleEndPage}>
-            Set as end page
-          </Button>
-          <Button onClick={handleViewRecordings}>
-            View recordings
-          </Button>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
