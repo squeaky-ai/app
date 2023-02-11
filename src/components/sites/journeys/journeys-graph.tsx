@@ -87,6 +87,13 @@ export const JourneysGraph: FC<Props> = ({ site, depth, position, journeys, setP
     setHoveredPage(null);
   };
 
+  const getColumnTitle = (col: number) => {
+    if (col === 0 && position === PathPosition.Start) return 'Start';
+    if (col === 0 && position === PathPosition.End) return 'End';
+
+    return `Page ${col + 1}`;
+  };
+
   const columnCount = depth === -1 ? maxDepth : depth;
 
   return (
@@ -97,7 +104,9 @@ export const JourneysGraph: FC<Props> = ({ site, depth, position, journeys, setP
 
         return (
           <div className='col' key={col}>
-            <p className='heading'>Page {col + 1}</p>
+            <p className='heading'>
+              {getColumnTitle(col)}
+            </p>
             {pages.map(page => (
               <JourneysPage
                 key={page.path + col}

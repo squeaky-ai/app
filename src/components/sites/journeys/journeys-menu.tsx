@@ -54,5 +54,5 @@ export const JourneyMenu: FC<Props> = ({
         </div>
       )}
     </div>
-  )
+  );
 };
