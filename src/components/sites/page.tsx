@@ -63,7 +63,7 @@ export const Page: FC<Props> = ({ children, user, scope }) => {
       setPageState({ 
         role: member?.role, 
         validBilling: !site.plan.invalid,
-        embedded: user.provider !== null,
+        embedded: site.provider !== null,
       });
     }
   }, [site]);

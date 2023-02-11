@@ -20,6 +20,7 @@ export const GET_SITE_QUERY = gql`
       verifiedAt
       siteType
       uuid
+      provider
       ownerName
       daysSinceLastRecording
       recordingsCount
