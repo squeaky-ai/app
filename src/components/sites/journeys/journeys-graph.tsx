@@ -69,7 +69,8 @@ export const JourneysGraph: FC<Props> = ({ site, depth, position, journeys, setP
     // Everything before has to be dimmed
     if (hoveredPage.col > col) return true;
     // This is the current column so it can't be dimmed
-    if (hoveredPage.col === col && hoveredPage.page === page) return false;
+    // to allow people to pin multiple paths
+    if (hoveredPage.col === col) return false;
 
     const routes = journeys
       .filter(j => j.path[hoveredPage.col] === hoveredPage.page)
