@@ -18,20 +18,9 @@ export const BillingExternal: FC<Props> = ({ providerAuth }) => {
       type: 'upgradeApp',
       appId: providerAuth.providerAppUuid,
     };
-  
-    window._dAPI?.upgrade({ planData });
+
+    window.parent.postMessage(JSON.stringify(planData), '*');
   };
-
-  React.useEffect(() => {
-    const script = document.createElement('script');
-    script.id = 'duda-sdk';
-    script.src = providerAuth.sdkUrl;
-    document.body.appendChild(script);
-
-    return () => {
-      document.getElementById('duda-sdk')?.remove();
-    };
-  }, []);
 
   return (
     <div className='billing-external'>

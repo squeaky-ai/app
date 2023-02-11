@@ -1,11 +1,5 @@
 export type ValueOf<T> = T[keyof T];
 
-declare global {
-  interface Window {
-    _dAPI?: DudaApi;
-  }
-}
-
 export interface Column {
   label: string;
   width: string;
@@ -35,7 +29,3 @@ export type TimeRange = {
 }
 
 export type TimePeriod = RelativeTime | AbsoluteTime;
-
-export interface DudaApi {
-  upgrade(params: { planData: { appId: string, type: string } }): void;
-}
