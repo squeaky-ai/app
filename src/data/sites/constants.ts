@@ -25,6 +25,10 @@ export const guideLinks = {
   drupal: 'https://squeaky.notion.site/Drupal-401bce8e455246019e9e429641979c53',
 };
 
+export const providers = {
+  duda: 'duda',
+};
+
 export const mapFeatureToRoutes: Record<PlanFeature, string[]> = {
   dashboard: [
     '/sites/[site_id]/dashboard',

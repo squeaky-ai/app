@@ -271,7 +271,7 @@ export const Sidebar: FC<Props> = ({ user }) => {
                 name='Privacy'
               />
               <SidebarLink
-                visibile={pageState.role === OWNER && !pageState.embedded}
+                visibile={pageState.role === OWNER}
                 href={`/sites/${siteId}/settings/subscription`}
                 active={path.startsWith(`/sites/${siteId}/settings/subscription`)}
                 icon='bank-card-2-line'

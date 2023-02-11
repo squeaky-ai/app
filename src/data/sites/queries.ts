@@ -171,6 +171,14 @@ export const GET_BILLING_QUERY = gql`
           interval
         }
       }
+      providerAuth {
+        id
+        provider
+        providerUuid
+        authType
+        apiEndpoint
+        providerAppUuid
+      }
       billing {
         customerId
         status

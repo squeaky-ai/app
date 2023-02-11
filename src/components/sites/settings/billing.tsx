@@ -10,8 +10,10 @@ import { BillingPlansTable } from 'components/sites/settings/billing-plans-table
 import { BillingEnterprise } from 'components/sites/settings/billing-enterprise';
 import { PlanChanged } from 'components/sites/settings/plan-changed';
 import { BillingPortalButton } from 'components/sites/settings/billing-portal-button';
+import { BillingExternal } from 'components/sites/settings/billing-external';
 import { Message } from 'components/message';
 import { useToasts } from 'hooks/use-toasts';
+import { providers } from 'data/sites/constants';
 import type { Site } from 'types/graphql';
 
 interface Props {
@@ -59,6 +61,10 @@ export const Billing: FC<Props> = ({ site }) => {
 
   if (loading) {
     return <Spinner />;
+  }
+
+  if (site.provider === providers.duda) {
+    return <BillingExternal site={site} />;
   }
 
   if (hasPlanOverride) {

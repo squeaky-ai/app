@@ -1,7 +1,5 @@
 import React from 'react';
 import type { FC } from 'react';
-import { useFeatureFlags } from 'hooks/use-feature-flags';
-import { FeatureFlag } from 'lib/feature-flags';
 import { Label } from 'components/label';
 import { Select, Option } from 'components/select';
 
@@ -13,14 +11,12 @@ interface Props {
 }
 
 export const PageSize: FC<Props> = ({ show, value, sizes, onChange }) => {
-  const { featureFlagEnabled } = useFeatureFlags();
-
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const size = Number(event.target.value);
     onChange(size);
   };
 
-  if (!show || featureFlagEnabled(FeatureFlag.SIMPLIFIED_PAGINATION)) return null;
+  if (!show) return null;
 
   const values = sizes || [25, 50, 100, 250, 500];
 
