@@ -118,10 +118,12 @@ export const JourneysPage: FC<Props> = ({
           {page.percentage}%
         </Pill>
         {exits > 0 && position !== PathPosition.End && (
-          <Pill className='drop-off'>
-            <Icon name='arrow-right-down-line' />
-            {exits}%
-          </Pill>
+          <Tooltip fluid button={
+            <Pill className='drop-off'>
+              <Icon name='arrow-right-down-line' />
+              {exits}%
+            </Pill>
+          }>Drop-off rate from this page</Tooltip>
         )}
       </div>
     </div>
