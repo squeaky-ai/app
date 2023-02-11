@@ -64,7 +64,7 @@ export const Billing: FC<Props> = ({ site }) => {
   }
 
   if (site.provider === providers.duda) {
-    return <BillingExternal site={site} />;
+    return <BillingExternal providerAuth={billing.providerAuth} />;
   }
 
   if (hasPlanOverride) {

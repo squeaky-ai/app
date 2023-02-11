@@ -23,13 +23,14 @@ export const useBilling = (): UseBilling => {
     billing: null,
     plan: null,
     plans: [],
+    providerAuth: null,
   };
 
   return {
     loading,
     error: !!error,
     billing: data 
-      ? { billing: data.site.billing, plan: data.site.plan, plans: data.plans } 
+      ? { billing: data.site.billing, plan: data.site.plan, plans: data.plans, providerAuth: data.site.providerAuth } 
       : fallback
   };
 };
