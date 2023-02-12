@@ -16,6 +16,7 @@ import { Button } from 'components/button';
 interface Props {
   col: number;
   dim: boolean;
+  hide: boolean;
   site: Site;
   page: PageStats;
   exits: number;
@@ -31,6 +32,7 @@ interface Props {
 export const JourneysPage: FC<Props> = ({
   col, 
   dim,
+  hide,
   site,
   page, 
   position,
@@ -105,7 +107,7 @@ export const JourneysPage: FC<Props> = ({
       ref={ref} 
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={classnames('page', { 'has-exit': exits > 0, dim })} 
+      className={classnames('page', { 'has-exit': exits > 0, dim, hide })} 
       key={col + page.path} 
       style={{ height: `${page.percentage}%` }}
     >

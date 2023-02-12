@@ -74,9 +74,18 @@ export const JourneysGraph: FC<Props> = ({ site, depth, position, journeys, setP
     if (hoveredPage.col === col) return false;
 
     const routes = journeys
-      .filter(j => j.path[hoveredPage.col] === hoveredPage.page)
+      .filter(j => j.path[hoveredPage.col] === hoveredPage.page);
 
     return !routes.some(r => r.path[col] === page);
+  };
+
+  const hideUnpinnedPage = (col: number, page: string) => {
+    // Nothing is selected
+    if (pinnedPages.length === 0) return false;
+
+    console.log({ col, page, pinnedPages });
+
+    return false;
   };
 
   const handleMouseEnter = (col: number, page: string) => {
@@ -118,6 +127,7 @@ export const JourneysGraph: FC<Props> = ({ site, depth, position, journeys, setP
                 setPage={setPage}
                 setPosition={setPosition}
                 dim={dimPage(col, page.path)}
+                hide={hideUnpinnedPage(col, page.path)}
                 pinnedPages={pinnedPages}
                 setPinnedPages={setPinnedPages}
                 handleMouseEnter={() => handleMouseEnter(col, page.path)}
