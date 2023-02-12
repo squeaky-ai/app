@@ -163,12 +163,14 @@
           display: flex;
         }
 
-        .tooltip {
-          flex: 1;
-          line-height: 1rem;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
+        .page-path {
+          .tooltip {
+            flex: 1;
+            line-height: 1rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
         }
 
         .path {

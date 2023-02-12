@@ -126,7 +126,7 @@ export const JourneysPage: FC<Props> = ({
           <Icon name='pushpin-line' />
         </Button>
       )}
-      <div className='row'>
+      <div className='row page-path'>
         <Tooltip fluid buttonClassName='path' button={
           <>
             <Icon name='file-line' />
@@ -149,9 +149,11 @@ export const JourneysPage: FC<Props> = ({
         />
       </div>
       <div className='row'>
-        <Pill className='stats'>
-          {page.percentage}%
-        </Pill>
+        <Tooltip fluid button={
+          <Pill className='stats'>
+            {page.percentage}%
+          </Pill>
+        }>Percentage of journeys as page number {col + 1}</Tooltip>
         {exits > 0 && position !== PathPosition.End && (
           <Tooltip fluid button={
             <Pill className='drop-off'>
