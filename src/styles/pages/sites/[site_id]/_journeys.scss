@@ -140,6 +140,7 @@
         min-height: 6rem;
         padding: 1rem;
         position: relative;
+        transition: opacity .3s;
 
         &.dim {
           opacity: .35;
