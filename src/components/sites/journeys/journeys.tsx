@@ -8,7 +8,6 @@ import { NoResults } from 'components/sites/no-results';
 import { JourneysGraph } from 'components/sites/journeys/journeys-graph';
 import { Error } from 'components/error';
 import { PageLoading } from 'components/sites/page-loading';
-import { JourneysDepth } from 'components/sites/journeys/journeys-depth';
 import { PageRoutes } from 'components/sites/page-routes';
 import { useJourneys } from 'hooks/use-journeys';
 import { getDateRange } from 'lib/dates';
@@ -26,7 +25,6 @@ interface Props {
 }
 
 export const Journeys: FC<Props> = ({ site, member, page, pages, period, setPage, setPeriod }) => {
-  const [depth, setDepth] = React.useState<number>(5);
   const [position, setPosition] = React.useState<PathPosition>(PathPosition.Start);
 
   const { loading, error, journeys, routes } = useJourneys({
@@ -78,7 +76,6 @@ export const Journeys: FC<Props> = ({ site, member, page, pages, period, setPage
         <menu className='left'>
           <JourneysPosition position={position} setPosition={setPosition} />
           <JourneysPages page={page} pages={pages} setPage={setPage} />
-          <JourneysDepth depth={depth} setDepth={setDepth} />
         </menu>
         <menu className='right'>
           <PageRoutes site={site} member={member} routes={routes} />
@@ -101,7 +98,6 @@ export const Journeys: FC<Props> = ({ site, member, page, pages, period, setPage
               site={site}
               position={position}
               journeys={journeysWithRoutes} 
-              depth={depth}
               setPage={setPage}
               setPosition={setPosition}
             />

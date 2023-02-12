@@ -9,18 +9,17 @@ import type { AnalyticsUserPath } from 'types/graphql';
 
 interface Props {
   site: Site;
-  depth: number;
   position: PathPosition;
   journeys: AnalyticsUserPath[];
   setPage: (page: string) => void;
   setPosition: (position: PathPosition) => void;
 }
 
-export const JourneysGraph: FC<Props> = ({ site, depth, position, journeys, setPage, setPosition }) => {
+export const JourneysGraph: FC<Props> = ({ site, position, journeys, setPage, setPosition }) => {
   const [hoveredPage, setHoveredPage] = React.useState<FocussedPage>(null);
   const [pinnedPages, setPinnedPages] = React.useState<FocussedPage[]>([]);
 
-  const maxDepth = Math.max(...journeys.map(j => j.path.length));
+  const columnCount = Math.max(...journeys.map(j => j.path.length));
 
   const getTotalForCol = (col: number, includeEmpty: boolean) => {
     const pages = journeys.map(j => j.path[col]);
@@ -64,9 +63,9 @@ export const JourneysGraph: FC<Props> = ({ site, depth, position, journeys, setP
     return percentage(total, exits);
   };
 
-  const isInPathOfPage = (focussedPage: FocussedPage, col: number, page: string) => {
+  const pageAppearsInPinnedPath = (col: number, page: string) => {
     const routes = journeys
-      .filter(j => j.path[focussedPage.col] === focussedPage.page);
+      .filter(j => pinnedPages.every(p => j.path[p.col] === p.page ))
 
     return !routes.some(r => r.path[col] === page);
   };
@@ -81,7 +80,12 @@ export const JourneysGraph: FC<Props> = ({ site, depth, position, journeys, setP
     // This is the current column so it can't be dimmed
     if (hoveredPage.col === col && hoveredPage.page === page) return false;
 
-    return isInPathOfPage(hoveredPage, col, page);
+    // TODO: if there is a pinned page this has to be aware!
+
+    const routes = journeys
+      .filter(j => j.path[hoveredPage.col] === hoveredPage.page);
+
+    return !routes.some(r => r.path[col] === page);
   };
 
   const hideUnpinnedPage = (col: number, page: string) => {
@@ -96,11 +100,7 @@ export const JourneysGraph: FC<Props> = ({ site, depth, position, journeys, setP
     // that is not the pinned for that column
     if (firstPin.col === col && firstPin.page !== page) return true;
 
-    // This is the most drilled down version so all previous
-    // pins need to satisfy
-    const lastPin = [...pinnedPages].sort((a, b) => b.col - a.col)[0];
-
-    return isInPathOfPage(lastPin, col, page);
+    return pageAppearsInPinnedPath(col, page);
   };
 
   const handleMouseEnter = (col: number, page: string) => {
@@ -117,8 +117,6 @@ export const JourneysGraph: FC<Props> = ({ site, depth, position, journeys, setP
 
     return `Page ${col + 1}`;
   };
-
-  const columnCount = depth === -1 ? maxDepth : depth;
 
   return (
     <div className='journey-graph' style={{ gridTemplateColumns: `repeat(${columnCount}, 15rem)` }}>
