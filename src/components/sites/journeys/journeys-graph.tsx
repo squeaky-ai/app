@@ -64,28 +64,39 @@ export const JourneysGraph: FC<Props> = ({ site, depth, position, journeys, setP
     return percentage(total, exits);
   };
 
+  const isInPathOfPage = (focussedPage: FocussedPage, col: number, page: string) => {
+    const routes = journeys
+      .filter(j => j.path[focussedPage.col] === focussedPage.page);
+
+    return !routes.some(r => r.path[col] === page);
+  };
+
   const dimPage = (col: number, page: string) => {
     // Nothing is selected
     if (!hoveredPage) return false;
     // Everything before has to be dimmed
     if (hoveredPage.col > col) return true;
+    // Everything else on this column has to be dimmed
+    if (hoveredPage.col === col && hoveredPage.page !== page) return true;
     // This is the current column so it can't be dimmed
-    // to allow people to pin multiple paths
-    if (hoveredPage.col === col) return false;
+    if (hoveredPage.col === col && hoveredPage.page === page) return false;
 
-    const routes = journeys
-      .filter(j => j.path[hoveredPage.col] === hoveredPage.page);
-
-    return !routes.some(r => r.path[col] === page);
+    return isInPathOfPage(hoveredPage, col, page);
   };
 
   const hideUnpinnedPage = (col: number, page: string) => {
     // Nothing is selected
     if (pinnedPages.length === 0) return false;
+    // Anything before the first pinned columns should
+    // not be hidden or the entire column will be empty
+    if (Math.min(...pinnedPages.map(p => p.col)) >= col) return false;
 
-    console.log({ col, page, pinnedPages });
+    const pinnedPage = pinnedPages.find(p => p.col === col && p.page === page);
 
-    return false;
+    // This is the pinned page so can't be hidden
+    if (pinnedPage) return false;
+
+    return isInPathOfPage(pinnedPage, col, page);
   };
 
   const handleMouseEnter = (col: number, page: string) => {

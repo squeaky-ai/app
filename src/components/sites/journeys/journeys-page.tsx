@@ -53,6 +53,10 @@ export const JourneysPage: FC<Props> = ({
 
   const isPinned = !!pinnedPages.find(p => p.col === col && p.page === page.path);
 
+  const pinDisabled = pinnedPages.length && !isPinned
+    ? Math.min(...pinnedPages.map(p => p.col)) >= col
+    : false;
+
   const handleClose = (event: MouseEvent) => {
     const element = event.target as Element;
 
@@ -130,6 +134,7 @@ export const JourneysPage: FC<Props> = ({
           site={site}
           page={page}
           pinned={isPinned}
+          pinDisabled={pinDisabled}
           setOpen={setOpen}
           handleStartPage={handleStartPage}
           handleEndPage={handleEndPage}

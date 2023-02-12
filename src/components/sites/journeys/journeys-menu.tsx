@@ -13,6 +13,7 @@ interface Props {
   site: Site;
   page: PageStats;
   pinned: boolean;
+  pinDisabled: boolean;
   setOpen: (open: boolean) => void;
   handleStartPage: ClickFunction;
   handleEndPage: ClickFunction;
@@ -25,6 +26,7 @@ export const JourneyMenu: FC<Props> = ({
   site,
   page,
   pinned,
+  pinDisabled,
   setOpen,
   handleStartPage,
   handleEndPage,
@@ -43,7 +45,7 @@ export const JourneyMenu: FC<Props> = ({
 
       {open && (
         <div className='page-actions dropdown-menu'>
-          <Button onClick={togglePinned}>
+          <Button onClick={togglePinned} disabled={pinDisabled}>
             {pinned ? 'Unpin' : 'Pin'} page
           </Button>
           <Button onClick={handleStartPage}>
