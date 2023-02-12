@@ -15,7 +15,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const url = resolvedUrl.split('?')[0];
 
-  const { body: user, status } = cookies.session ? await session<User>(headers.cookie) : null;
+  const { body: user, status } = cookies.session
+    ? await session<User>(headers.cookie) 
+    : { body: null, status: null };
+
   const isAdminOnlyPage = url.startsWith('/__admin');
 
   // Special case for when the the API is down

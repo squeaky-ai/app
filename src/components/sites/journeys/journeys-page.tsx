@@ -5,13 +5,14 @@ import { useRouter } from 'next/router';
 import { Icon } from 'components/icon';
 import { Pill } from 'components/pill';
 import { Tooltip } from 'components/tooltip';
+import { Button } from 'components/button';
 import { JourneyMenu } from 'components/sites/journeys/journeys-menu';
 import { useFilters } from 'hooks/use-filters';
 import { PathPosition, Site } from 'types/graphql';
 import { FILTERS } from 'data/recordings/constants';
+import { getOrdinalEnding } from 'lib/dates';
 import type { PageStats, FocussedPage } from 'types/journeys';
 import type { RecordingsFilters } from 'types/graphql';
-import { Button } from 'components/button';
 
 interface Props {
   col: number;
@@ -153,7 +154,7 @@ export const JourneysPage: FC<Props> = ({
           <Pill className='stats'>
             {page.percentage}%
           </Pill>
-        }>Percentage of journeys as page number {col + 1}</Tooltip>
+        }>Percentage of journeys where {page.path} was the {getOrdinalEnding(col + 1)} page</Tooltip>
         {exits > 0 && position !== PathPosition.End && (
           <Tooltip fluid button={
             <Pill className='drop-off'>
