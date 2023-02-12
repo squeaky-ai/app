@@ -85,7 +85,7 @@
   }
 
   .journey-wrapper {
-    height: calc(100vh - 18rem);
+    height: calc(100vh - 14rem);
     margin: 2rem 0 0 0;
   }
 
@@ -135,6 +135,7 @@
         margin: 0 0 .25rem 0;
         min-height: 6rem;
         padding: 1rem;
+        position: relative;
 
         &.dim {
           opacity: .35;
@@ -186,6 +187,29 @@
           position: absolute;
           top: 1rem;
           transform: none;
+        }
+      }
+
+      .pin {
+        align-items: center;
+        background: var(--blue-500);
+        border: none;
+        border-radius: var(--border-radius-o);
+        display: flex;
+        height: 1.5rem;
+        justify-content: center;
+        position: absolute;
+        right: -.75rem;
+        top: -.75rem;
+        width: 1.5rem;
+
+        .icon {
+          color: var(--white);
+          font-size: var(--font-size-body);
+        }
+
+        &:hover {
+          background: var(--rose-500);
         }
       }
 

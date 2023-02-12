@@ -12,20 +12,24 @@ interface Props {
   open: boolean;
   site: Site;
   page: PageStats;
+  pinned: boolean;
   setOpen: (open: boolean) => void;
   handleStartPage: ClickFunction;
   handleEndPage: ClickFunction;
   handleViewRecordings: ClickFunction;
+  togglePinned: VoidFunction;
 }
 
 export const JourneyMenu: FC<Props> = ({
   open,
   site,
   page,
+  pinned,
   setOpen,
   handleStartPage,
   handleEndPage,
   handleViewRecordings,
+  togglePinned,
 }) => {
   const handleClick = () => {
     setOpen(!open);
@@ -39,6 +43,9 @@ export const JourneyMenu: FC<Props> = ({
 
       {open && (
         <div className='page-actions dropdown-menu'>
+          <Button onClick={togglePinned}>
+            {pinned ? 'Unpin' : 'Pin'} page
+          </Button>
           <Button onClick={handleStartPage}>
             Set as start page
           </Button>

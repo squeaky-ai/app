@@ -9,8 +9,9 @@ import { JourneyMenu } from 'components/sites/journeys/journeys-menu';
 import { useFilters } from 'hooks/use-filters';
 import { PathPosition, Site } from 'types/graphql';
 import { FILTERS } from 'data/recordings/constants';
-import type { PageStats } from 'types/journeys';
+import type { PageStats, FocussedPage } from 'types/journeys';
 import type { RecordingsFilters } from 'types/graphql';
+import { Button } from 'components/button';
 
 interface Props {
   col: number;
@@ -19,8 +20,10 @@ interface Props {
   page: PageStats;
   exits: number;
   position: PathPosition;
+  pinnedPages: FocussedPage[];
   setPage: (page: string) => void;
   setPosition: (position: PathPosition) => void;
+  setPinnedPages: (pages: FocussedPage[]) => void;
   handleMouseEnter: VoidFunction;
   handleMouseLeave: VoidFunction;
 }
@@ -32,8 +35,10 @@ export const JourneysPage: FC<Props> = ({
   page, 
   position,
   exits, 
+  pinnedPages,
   setPage, 
   setPosition,
+  setPinnedPages,
   handleMouseEnter,
   handleMouseLeave,
 }) => {
@@ -43,6 +48,8 @@ export const JourneysPage: FC<Props> = ({
   const { setFilters } = useFilters<RecordingsFilters>('recordings');
 
   const [open, setOpen] = React.useState<boolean>(false);
+
+  const isPinned = !!pinnedPages.find(p => p.col === col && p.page === page.path);
 
   const handleClose = (event: MouseEvent) => {
     const element = event.target as Element;
@@ -77,6 +84,14 @@ export const JourneysPage: FC<Props> = ({
     await router.push(`/sites/${router.query.site_id}/recordings`);
   };
 
+  const togglePinnedPage = () => {
+    setPinnedPages(
+      isPinned
+        ? pinnedPages.filter(p => p.col !== col && p.page !== page.path)
+        : [...pinnedPages, { col, page: page.path }]
+    );
+  };
+
   React.useEffect(() => {
     document.addEventListener('click', handleClose);
 
@@ -94,6 +109,11 @@ export const JourneysPage: FC<Props> = ({
       key={col + page.path} 
       style={{ height: `${page.percentage}%` }}
     >
+      {isPinned && (
+        <Button className='pin' onClick={togglePinnedPage}>
+          <Icon name='pushpin-line' />
+        </Button>
+      )}
       <div className='row'>
         <Tooltip fluid buttonClassName='path' button={
           <>
@@ -107,10 +127,12 @@ export const JourneysPage: FC<Props> = ({
           open={open}
           site={site}
           page={page}
+          pinned={isPinned}
           setOpen={setOpen}
           handleStartPage={handleStartPage}
           handleEndPage={handleEndPage}
           handleViewRecordings={handleViewRecordings}
+          togglePinned={togglePinnedPage}
         />
       </div>
       <div className='row'>

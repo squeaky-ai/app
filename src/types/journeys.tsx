@@ -4,7 +4,7 @@ export interface PageStats {
   percentage: number;
 }
 
-export interface HoveredPage {
+export interface FocussedPage {
   col: number;
   page: string;
 }

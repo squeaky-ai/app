@@ -4,7 +4,7 @@ import { range, countBy, sum } from 'lodash';
 import { JourneysPage } from 'components/sites/journeys/journeys-page';
 import { percentage } from 'lib/maths';
 import { PathPosition, Site } from 'types/graphql';
-import type { PageStats, HoveredPage } from 'types/journeys';
+import type { PageStats, FocussedPage } from 'types/journeys';
 import type { AnalyticsUserPath } from 'types/graphql';
 
 interface Props {
@@ -17,7 +17,8 @@ interface Props {
 }
 
 export const JourneysGraph: FC<Props> = ({ site, depth, position, journeys, setPage, setPosition }) => {
-  const [hoveredPage, setHoveredPage] = React.useState<HoveredPage>(null);
+  const [hoveredPage, setHoveredPage] = React.useState<FocussedPage>(null);
+  const [pinnedPages, setPinnedPages] = React.useState<FocussedPage[]>([]);
 
   const maxDepth = Math.max(...journeys.map(j => j.path.length));
 
@@ -117,6 +118,8 @@ export const JourneysGraph: FC<Props> = ({ site, depth, position, journeys, setP
                 setPage={setPage}
                 setPosition={setPosition}
                 dim={dimPage(col, page.path)}
+                pinnedPages={pinnedPages}
+                setPinnedPages={setPinnedPages}
                 handleMouseEnter={() => handleMouseEnter(col, page.path)}
                 handleMouseLeave={handleMouseLeave}
               />
