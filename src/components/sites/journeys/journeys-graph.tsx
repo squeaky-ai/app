@@ -87,15 +87,20 @@ export const JourneysGraph: FC<Props> = ({ site, depth, position, journeys, setP
   const hideUnpinnedPage = (col: number, page: string) => {
     // Nothing is selected
     if (pinnedPages.length === 0) return false;
+
+    const firstPin = [...pinnedPages].sort((a, b) => a.col - b.col)[0];
     // Anything before the first pinned columns should
     // not be hidden or the entire column will be empty
-    if (Math.min(...pinnedPages.map(p => p.col)) >= col) return false;
+    if (firstPin.col > col) return false;
+    // Only one pin per column is allowed so hide everything
+    // that is not the pinned for that column
+    if (firstPin.col === col && firstPin.page !== page) return true;
 
-    const pinnedPage = pinnedPages.find(p => p.col === col && p.page === page);
+    // This is the most drilled down version so all previous
+    // pins need to satisfy
+    const lastPin = [...pinnedPages].sort((a, b) => b.col - a.col)[0];
 
-    if (!pinnedPage) return false;
-
-    return isInPathOfPage(pinnedPage, col, page);
+    return isInPathOfPage(lastPin, col, page);
   };
 
   const handleMouseEnter = (col: number, page: string) => {

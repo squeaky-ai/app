@@ -91,11 +91,17 @@ export const JourneysPage: FC<Props> = ({
   };
 
   const togglePinnedPage = () => {
-    setPinnedPages(
-      isPinned
-        ? pinnedPages.filter(p => p.col !== col && p.page !== page.path)
-        : [...pinnedPages, { col, page: page.path }]
-    );
+    setOpen(false);
+
+    // Adding a new pin is easy
+    if (!isPinned) {
+      return setPinnedPages([...pinnedPages, { col, page: page.path }]);
+    }
+
+    // If there are pins in higher columns they 
+    // must all be unpinned
+    const index = pinnedPages.findIndex(p => p.col === col && p.page === page.path);
+    setPinnedPages(pinnedPages.slice(0, index));
   };
 
   React.useEffect(() => {
