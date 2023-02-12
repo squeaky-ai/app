@@ -93,8 +93,7 @@ export const JourneysGraph: FC<Props> = ({ site, depth, position, journeys, setP
 
     const pinnedPage = pinnedPages.find(p => p.col === col && p.page === page);
 
-    // This is the pinned page so can't be hidden
-    if (pinnedPage) return false;
+    if (!pinnedPage) return false;
 
     return isInPathOfPage(pinnedPage, col, page);
   };
