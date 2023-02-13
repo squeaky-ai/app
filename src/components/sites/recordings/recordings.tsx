@@ -1,51 +1,52 @@
 import React from 'react';
 import type { FC } from 'react';
 import { Error } from 'components/error';
+import { EmptyState } from 'components/sites/empty-state';
 import { NoResults } from 'components/sites/no-results';
 import { PageLoading } from 'components/sites/page-loading';
 import { Pagination } from 'components/pagination';
 import { PageSize } from 'components/sites/page-size';
+import { Filters } from 'components/sites/filters/recordings/filters';
+import { Tags } from 'components/sites/filters/recordings/tags';
+import { Period } from 'components/sites/period/period';
+import { Unlock } from 'components/sites/unlock';
+import { RecordingsColumns } from 'components/sites/recordings/recordings-columns';
+import { RecordingsBulkActions } from 'components/sites/recordings/recordings-bulk-actions';
 import { useRecordings } from 'hooks/use-recordings';
 import { RecordingsSmall } from 'components/sites/recordings/recordings-small';
 import { RecordingsLarge } from 'components/sites/recordings/recordings-large';
 import { getDateRange } from 'lib/dates';
 import { useResize } from 'hooks/use-resize';
+import { FILTERS } from 'data/recordings/constants';
+import { useFilters } from 'hooks/use-filters';
+import { usePeriod } from 'hooks/use-period';
 import { RecordingsSort } from 'types/graphql';
-import type { TimePeriod, Column } from 'types/common';
+import { useSort } from 'hooks/use-sort';
+import { useColumns } from 'hooks/use-columns';
 import type { Site, Team, RecordingsFilters } from 'types/graphql';
+import type { ValueOf } from 'types/common';
 
 interface Props {
   site: Site;
-  filters: RecordingsFilters;
-  period: TimePeriod;
-  columns: Column[];
   member?: Team;
-  page: number;
-  size: number;
-  sort: RecordingsSort;
-  selected: string[];
-  setSize: (size: number) => void;
-  setPage: (page: number) => void;
-  setSort: (sort: RecordingsSort) => void;
-  setSelected: (selected: string[]) => void;
 }
 
 export const Recordings: FC<Props> = ({ 
   site, 
-  filters, 
-  period,
-  columns, 
   member,
-  size,
-  page,
-  sort,
-  selected, 
-  setSize,
-  setPage,
-  setSort,
-  setSelected 
 }) => {
-  const { loading, error, recordings } = useRecordings({ 
+  const [selected, setSelected] = React.useState<string[]>([]);
+
+  const [page, setPage] = React.useState<number>(1);
+  const [size, setSize] = React.useState<number>(25);
+
+  const { period, setPeriod } = usePeriod('recordings');
+  const { sort, setSort } = useSort<RecordingsSort>('recordings');
+  const { filters, setFilters } = useFilters<RecordingsFilters>('recordings');
+  const { columns, columnsReady, setColumns } = useColumns('recordings');
+
+  const { loading, error, recordings } = useRecordings({
+    site,
     page, 
     sort,
     size,
@@ -55,6 +56,26 @@ export const Recordings: FC<Props> = ({
 
   const { mobile } = useResize();
 
+  const updateFilters = (key: keyof RecordingsFilters, value: ValueOf<RecordingsFilters>) => {
+    setPage(1);
+    setFilters({ ...filters, [key]: value });
+  };
+
+  const clearFilters = () => {
+    setPage(1);
+    setFilters(FILTERS);
+  };
+
+  const handlePageSize = (size: number) => {
+    setPage(1);
+    setSize(size);
+  };
+
+  const handleSort = (sort: RecordingsSort) => {
+    setPage(1);
+    setSort(sort);
+  };
+
   if (error) {
     return <Error />;
   }
@@ -63,38 +84,89 @@ export const Recordings: FC<Props> = ({
     return <PageLoading />;
   }
 
-  if (!recordings.items.length) {
-    return <NoResults illustration='illustration-13' title='There are no recordings matching your selected filters.' />;
-  }
-
   const RecordingsComponent = mobile ? RecordingsSmall : RecordingsLarge;
 
   return (
     <>
-      <RecordingsComponent
+      <div className='recordings-header'>
+        <h4 className='title'>
+          Recordings
+          {site.recordingsCount > 0 && (
+            <span>{recordings.pagination.total.toLocaleString()}</span>
+          )}
+        </h4>
+        <menu>
+          {site.recordingsCount > 0 && (
+            <>
+              <Period period={period} onChange={setPeriod} />
+              <RecordingsBulkActions
+                site={site}
+                member={member}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <div className='menu-item columns'>
+                <RecordingsColumns 
+                  columns={columns}
+                  setColumns={setColumns}
+                />
+              </div>
+              <Filters 
+                period={period}
+                filters={filters}
+                updateFilters={updateFilters}
+              />
+            </>
+          )}
+        </menu>
+      </div>
+
+      <EmptyState
         site={site}
-        recordings={recordings} 
-        columns={columns}
-        member={member}
-        selected={selected}
-        setSelected={setSelected}
-        setSort={setSort}
-        sort={sort}
+        title='There are currently no recordings available'
+        illustration='illustration-2'
       />
 
-      <div className='recordings-footer'>
-        <Pagination 
-          currentPage={page}
-          pageSize={recordings.pagination.pageSize}
-          total={recordings.pagination.total}
-          setPage={setPage}
-        />
-        <PageSize
-          value={recordings.pagination.pageSize} 
-          onChange={setSize}
-          show={recordings.pagination.total > 25}
-        />
-      </div>
+      <Unlock site={site} />
+
+      <Tags 
+        filters={filters} 
+        updateFilters={updateFilters} 
+        clearFilters={clearFilters} 
+      />
+
+      {recordings.items.length === 0 && (
+        <NoResults illustration='illustration-13' title='There are no recordings matching your selected filters.' />
+      )}
+
+      {columnsReady && recordings.items.length > 0 && (
+        <>
+          <RecordingsComponent
+            site={site}
+            recordings={recordings} 
+            columns={columns}
+            member={member}
+            selected={selected}
+            setSelected={setSelected}
+            setSort={handleSort}
+            sort={sort}
+          />
+
+          <div className='recordings-footer'>
+            <Pagination 
+              currentPage={page}
+              pageSize={recordings.pagination.pageSize}
+              total={recordings.pagination.total}
+              setPage={setPage}
+            />
+            <PageSize
+              value={recordings.pagination.pageSize} 
+              onChange={handlePageSize}
+              show={recordings.pagination.total > 25}
+            />
+          </div>
+        </>
+      )}
     </>
   );
 };

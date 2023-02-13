@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_RECORDINGS_QUERY } from 'data/recordings/queries';
 import { RecordingsSort } from 'types/graphql';
@@ -6,6 +5,7 @@ import type { TimeRange } from 'types/common';
 import type { Site, RecordingsFilters, Recordings } from 'types/graphql';
 
 interface Props {
+  site: Site;
   page: number;
   size?: number;
   sort?: RecordingsSort;
@@ -19,18 +19,17 @@ interface UseRecordings {
   recordings: Recordings;
 }
 
-export const useRecordings = ({ page, size, sort, filters, range }: Props): UseRecordings => {
-  const router = useRouter();
-
+export const useRecordings = ({ site, page, size, sort, filters, range }: Props): UseRecordings => {
   const { data, loading, error } = useQuery<{ site: Site }>(GET_RECORDINGS_QUERY, {
     variables: { 
-      siteId: router.query.site_id as string, 
+      siteId: site.id, 
       page, 
       size,
       sort,
       filters,
       ...range,
-    }
+    },
+    skip: site.recordingsCount === 0,
   });
 
   const fallback: Recordings = { 
