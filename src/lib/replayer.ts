@@ -69,7 +69,9 @@ export const initReplayer = ({ events, recording, dispatch }: InitArgs): Replaye
     }
   });
 
-  replayer.play();
+  if (document.hasFocus()) {
+    replayer.play();
+  }
 
   // Can't have users tabbing around in there!
   element.querySelector('iframe').setAttribute('tabindex', '-1');

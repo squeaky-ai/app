@@ -45,6 +45,8 @@ export class Player extends React.Component<Props> {
     if (this.props.recording) {
       this.init();
     }
+
+    window.addEventListener('blur', this.handleWindowBlur);
   }
 
   public componentWillUnmount() {
@@ -55,6 +57,8 @@ export class Player extends React.Component<Props> {
     // Clean up the contents of the div (this is not controlled
     // by react, it's injected by the player)
     document.querySelector('.replayer-wrapper')?.remove();
+
+    window.removeEventListener('blur', this.handleWindowBlur, true);
   }
 
   public componentDidUpdate(prevProps: Props) {
@@ -100,6 +104,10 @@ export class Player extends React.Component<Props> {
     );
 
     this.props.dispatch({ type: 'zoom', value: constraint });
+  };
+
+  private handleWindowBlur = (): void => {
+    this.replayer.pause();
   };
 
   public render(): JSX.Element {
