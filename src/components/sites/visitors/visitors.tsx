@@ -93,7 +93,7 @@ export const Visitors: FC<Props> = ({ site, member }) => {
         <h4 className='title'>
           Visitors
           {site.recordingsCount > 0 && (
-            <span>{visitors.pagination.total}</span>
+            <span>{visitors.pagination.total.toLocaleString()}</span>
           )}
         </h4>
         <menu>
