@@ -57,8 +57,8 @@ export const JourneysGraph: FC<Props> = ({ site, position, journeys, setPage, se
                 position={position}
                 setPage={setPage}
                 setPosition={setPosition}
-                dim={dimPage(journeys, hoveredPage, col, page.path)}
-                hide={hideUnpinnedPage(journeys, pinnedPages, col, page.path)}
+                dim={dimPage(journeys, hoveredPage, position, col, page.path)}
+                hide={hideUnpinnedPage(journeys, pinnedPages, position, col, page.path)}
                 pinnedPages={pinnedPages}
                 setPinnedPages={setPinnedPages}
                 handleMouseEnter={() => handleMouseEnter(col, page.path)}

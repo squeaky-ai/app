@@ -3,27 +3,34 @@ import { percentage } from 'lib/maths';
 import { AnalyticsUserPath, PathPosition } from 'types/graphql';
 import type { FocussedPage, PageStats } from 'types/journeys';
 
-const getTotalForCol = (
+const getPageGroups = (
   journeys: AnalyticsUserPath[],
   col: number,
-  includeEmpty: boolean
+  includeEmpty: boolean,
 ) => {
   const pages = journeys.map(j => j.path[col]);
   const groups = countBy(pages);
 
-  return sum(
-    Object
-      .entries(groups)
-      .filter(([key]) => includeEmpty ? true : key !== 'undefined')
-      .map(([, value]) => value)
-  );
+  return Object
+    .entries(groups)
+    .filter(([key]) => includeEmpty ? true : key !== 'undefined');
+};
+
+const getTotalForCol = (
+  journeys: AnalyticsUserPath[],
+  col: number,
+  includeEmpty: boolean,
+) => {
+  const groups = getPageGroups(journeys, col, includeEmpty);
+
+  return sum(groups.map(([, value]) => value));
 };
 
 const pageAppearsInPinnedPath = (
   journeys: AnalyticsUserPath[],
   pinnedPages: FocussedPage[],
   col: number,
-  page: string
+  page: string,
 ) => {
   const routes = journeys
     .filter(j => pinnedPages.every(p => j.path[p.col] === p.page ))
@@ -31,18 +38,14 @@ const pageAppearsInPinnedPath = (
   return !routes.some(r => r.path[col] === page);
 };
 
-
 export const getPagesForCol = (
   journeys: AnalyticsUserPath[],
-  col: number
+  col: number,
 ): PageStats[] => {
-  const pages = journeys.map(j => j.path[col]);
-  const groups = countBy(pages);
+  const groups = getPageGroups(journeys, col, false);
   const total = getTotalForCol(journeys, col, true);
 
-  return Object
-    .entries(groups)
-    .filter(([key]) => key !== 'undefined')
+  return groups
     .map(([key, value]) => ({
       path: key,
       count: value,
@@ -54,7 +57,7 @@ export const getPagesForCol = (
 export const getExitForColAndPage = (
   journeys: AnalyticsUserPath[],
   col: number,
-  page: string
+  page: string,
 ) => {
   const total = getTotalForCol(journeys, col, false);
 
@@ -72,13 +75,17 @@ export const getExitForColAndPage = (
 export const dimPage = (
   journeys: AnalyticsUserPath[],
   hoveredPage: FocussedPage,
+  position: PathPosition,
   col: number,
-  page: string
+  page: string,
 ) => {
   // Nothing is selected
   if (!hoveredPage) return false;
+
   // Everything before has to be dimmed
-  if (hoveredPage.col > col) return true;
+  if (position === PathPosition.Start && hoveredPage.col > col) return true;
+  if (position === PathPosition.End && hoveredPage.col < col) return true;
+
   // Everything else on this column has to be dimmed
   if (hoveredPage.col === col && hoveredPage.page !== page) return true;
   // This is the current column so it can't be dimmed
@@ -95,16 +102,23 @@ export const dimPage = (
 export const hideUnpinnedPage = (
   journeys: AnalyticsUserPath[],
   pinnedPages: FocussedPage[],
+  position: PathPosition,
   col: number,
-  page: string
+  page: string,
 ) => {
   // Nothing is selected
   if (pinnedPages.length === 0) return false;
 
-  const firstPin = [...pinnedPages].sort((a, b) => a.col - b.col)[0];
+  const firstPin = [...pinnedPages].sort((a, b) => position === PathPosition.Start
+    ? a.col - b.col
+    : b.col - a.col
+  )[0];
+
   // Anything before the first pinned columns should
   // not be hidden or the entire column will be empty
-  if (firstPin.col > col) return false;
+  if (position === PathPosition.Start && firstPin.col > col) return false;
+  if (position === PathPosition.End && firstPin.col < col) return false;
+
   // Only one pin per column is allowed so hide everything
   // that is not the pinned for that column
   if (firstPin.col === col && firstPin.page !== page) return true;
@@ -115,7 +129,7 @@ export const hideUnpinnedPage = (
 export const getColumnTitle = (
   col: number,
   columnCount: number,
-  position: PathPosition
+  position: PathPosition,
 ) => {
   if (col === 0 && position === PathPosition.Start) return 'Start';
   if (col === columnCount - 1 && position === PathPosition.End) return 'End';
