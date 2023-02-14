@@ -39,29 +39,33 @@ export const JourneysGraph: FC<Props> = ({ site, position, journeys, setPage, se
   return (
     <div className='journey-graph' style={{ gridTemplateColumns: `repeat(${columnCount}, 15rem)` }}>
       {range(0, columnCount).map(col => {
-        const pages = getPagesForCol(journeys, col);
+        const column = position === PathPosition.Start
+          ? col
+          : (columnCount - 1) - col;
+
+        const pages = getPagesForCol(journeys, column);
         const padder = 100 - sum(pages.map(p => p.percentage));
 
         return (
-          <div className='col' key={col}>
+          <div className='col' key={column}>
             <p className='heading'>
-              {getColumnTitle(col, columnCount, position)}
+              {getColumnTitle(column, position)}
             </p>
             {pages.map(page => (
               <JourneysPage
-                key={page.path + col}
-                col={col}
+                key={page.path + column}
+                col={column}
                 page={page}
                 site={site}
-                exits={getExitForColAndPage(journeys, col, page.path)}
+                exits={getExitForColAndPage(journeys, column, page.path)}
                 position={position}
                 setPage={setPage}
                 setPosition={setPosition}
-                dim={dimPage(journeys, hoveredPage, position, col, page.path)}
-                hide={hideUnpinnedPage(journeys, pinnedPages, position, col, page.path)}
+                dim={dimPage(journeys, hoveredPage, position, column, page.path)}
+                hide={hideUnpinnedPage(journeys, pinnedPages, position, column, page.path)}
                 pinnedPages={pinnedPages}
                 setPinnedPages={setPinnedPages}
-                handleMouseEnter={() => handleMouseEnter(col, page.path)}
+                handleMouseEnter={() => handleMouseEnter(column, page.path)}
                 handleMouseLeave={handleMouseLeave}
               />
             ))}

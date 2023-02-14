@@ -128,11 +128,15 @@ export const hideUnpinnedPage = (
 
 export const getColumnTitle = (
   col: number,
-  columnCount: number,
   position: PathPosition,
 ) => {
-  if (col === 0 && position === PathPosition.Start) return 'Start';
-  if (col === columnCount - 1 && position === PathPosition.End) return 'End';
+  if (position === PathPosition.Start) {
+    return col === 0
+      ? 'Start'
+      : `Page ${col}`;
+  }
 
-  return `Page ${col + 1}`;
+  return col === 0
+    ? 'End'
+    : `End - ${col}`;
 };
