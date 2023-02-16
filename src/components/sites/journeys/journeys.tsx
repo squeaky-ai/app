@@ -67,7 +67,7 @@ export const Journeys: FC<Props> = ({ site, member, page, pages, period, setPage
       return match || path;
     });
 
-    return { path };
+    return { path, referrer: journey.referrer };
   });
 
   return (

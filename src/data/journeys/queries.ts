@@ -8,6 +8,7 @@ export const GET_JOURNEYS_QUERY = gql`
       analytics(fromDate: $fromDate, toDate: $toDate) {
         userPaths(page: $page, position: $position) {
           path
+          referrer
         }
       }
     }

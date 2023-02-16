@@ -73,11 +73,16 @@
     margin: 2rem 0 0 0;
   }
 
-  .journey-graph {
-    display: grid;
+  .journeys-container {
+    display: flex;
     height: 100%;
-    grid-gap: .5rem;
-    overflow: auto;
+
+    .journey-graph {
+      display: grid;
+      height: 100%;
+      grid-gap: .5rem;
+      overflow: auto;
+    }
 
     .col {
       background: var(--gray-100);
@@ -236,6 +241,86 @@
 
       .padder {
         margin-top: -.5rem;
+      }
+
+      &.referrers {
+        border: 1px solid var(--gray-150);
+        margin: 0 .5rem 0 0;
+        position: relative;
+
+        .open {
+          background: none;
+          border: none;
+          color: var(--gray-300);
+          display: flex;
+          height: 1.5rem;
+          padding: 0;
+          width: 1.5rem;
+
+          .icon {
+            display: block;
+            font-size: var(--font-size-body-lg);
+
+            &:first-of-type {
+              transform: translateX(.125rem);
+            }
+
+            &:last-of-type {
+              transform: translateX(-.45rem);
+            }
+          }
+
+          &:hover {
+            color: var(--gray-500);
+          }
+        }
+
+        .close {
+          background: none;
+          border: none;
+          color: var(--gray-500);
+          display: none;
+          position: absolute;
+          right: .5rem;
+          top: .5rem;
+        }
+
+        .page {
+          display: none;
+        }
+
+        &.open {
+          width: 15rem;
+
+          .open {
+            display: none;
+          }
+
+          .close {
+            display: block;
+          }
+
+          .page {
+            display: block;
+
+            .direct {
+              i:not(.icon) {
+                color: var(--gray-500);
+                font-weight: var(--font-weight-normal);
+              }
+            }
+          }
+        }
+
+        &:not(.open) {
+          .heading {
+            left: -1.5rem;
+            position: absolute;
+            top: 50%;
+            transform: rotate(270deg) translateX(50%);
+            white-space: nowrap;
+          }
+        }
       }
     }
   }

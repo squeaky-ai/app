@@ -837,6 +837,7 @@ export type AnalyticsSessionsPerVisitor = {
 export type AnalyticsUserPath = {
   __typename?: 'AnalyticsUserPath';
   path: Array<Scalars['String']>;
+  referrer?: Maybe<Scalars['String']>;
 };
 
 export type AnalyticsVisitAt = {
