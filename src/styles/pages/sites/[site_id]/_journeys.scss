@@ -245,8 +245,10 @@
 
       &.referrers {
         border: 1px solid var(--gray-150);
+        height: 100%;
         margin: 0 .5rem 0 0;
         position: relative;
+        overflow-y: auto;
 
         .open {
           background: none;

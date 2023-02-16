@@ -17,12 +17,21 @@ export const JourneysReferrers: FC<Props> = ({ journeys }) => {
 
   const toggleOpen = () => setOpen(!open);
 
-  const referrers = uniq(journeys.map(j => j.referrer).filter(j => !!j));
+  const referrers = uniq(journeys.map(j => j.referrer));
 
   const getPercentageForReferrer = (referrer?: string) => percentage(
     journeys.length,
     journeys.filter(j => j.referrer === referrer).length
   );
+
+  const results = referrers
+    .map(referrer => ({
+      name: referrer || 'direct',
+      title: referrer || <>Direct <i>(None/Unknown)</i></>,
+      percentage: getPercentageForReferrer(referrer),
+      direct: !referrer,
+    }))
+    .sort((a, b) => Number(b.percentage) - Number(a.percentage));
 
   return (
     <div className={classnames('col referrers', { open })}>
@@ -36,30 +45,17 @@ export const JourneysReferrers: FC<Props> = ({ journeys }) => {
       <p className='heading'>
         Traffic Sources
       </p>
-      <div className='page'>
-        <div className='row page-path'>
-          <div className='path direct'>
-            <Icon name='global-line' />
-              Direct <i>(None/Unknown)</i>
-          </div>
-        </div>
-        <div className='row'>
-          <Pill className='stats'>
-            {getPercentageForReferrer(null)}%
-          </Pill>
-        </div>
-      </div>
-      {referrers.map(referrer => (
-        <div key={referrer} className='page'>
+      {results.map(r => (
+        <div key={r.name} className='page'>
           <div className='row page-path'>
-            <div className='path'>
+            <div className={classnames('path', { direct: r.direct })}>
               <Icon name='global-line' />
-              {referrer}
+              {r.title}
             </div>
           </div>
           <div className='row'>
             <Pill className='stats'>
-              {getPercentageForReferrer(referrer)}%
+              {r.percentage}%
             </Pill>
           </div>
         </div>
