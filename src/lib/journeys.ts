@@ -30,12 +30,27 @@ const pageAppearsInPinnedPath = (
   journeys: AnalyticsUserPath[],
   pinnedPages: FocussedPage[],
   col: number,
-  page: string,
+  page: PageStats,
 ) => {
   const routes = journeys
     .filter(j => pinnedPages.every(p => j.path[p.col] === p.page ))
 
-  return !routes.some(r => r.path[col] === page);
+  return !routes.some(r => r.path[col] === page.path);
+};
+
+const pageHasReferrer = (
+  journeys: AnalyticsUserPath[],
+  hoveredReferrer: string,
+  col: number,
+  page: PageStats,
+) => {
+  const referrer = hoveredReferrer === 'direct' ? null : hoveredReferrer;
+
+  const routes = journeys
+    .filter(j => j.path[col] === page.path)
+    .filter(j => j.referrer === referrer);
+
+  return routes.length === 0;
 };
 
 export const getPagesForCol = (
@@ -57,7 +72,7 @@ export const getPagesForCol = (
 export const getExitForColAndPage = (
   journeys: AnalyticsUserPath[],
   col: number,
-  page: string,
+  page: PageStats,
 ) => {
   const total = getTotalForCol(journeys, col, false);
 
@@ -65,7 +80,7 @@ export const getExitForColAndPage = (
   // people did not view anymore pages, as this means that they
   // dropped off here
   const exits = journeys
-    .filter(j => j.path[col] === page)
+    .filter(j => j.path[col] === page.path)
     .map(j => j.path[col + 1])
     .filter(j => j === undefined).length;
 
@@ -75,10 +90,19 @@ export const getExitForColAndPage = (
 export const dimPage = (
   journeys: AnalyticsUserPath[],
   hoveredPage: FocussedPage,
+  hoveredReferrer: string | null,
   position: PathPosition,
   col: number,
-  page: string,
+  page: PageStats,
 ) => {
+  if (!hoveredPage && hoveredReferrer) {
+    // Special case where people can highlight the
+    // traffic source without hovering over any
+    // pages. This has to come first as it is the only
+    // way to dim something without a hoveredPage
+    return pageHasReferrer(journeys, hoveredReferrer, col, page);
+  };
+
   // Nothing is selected
   if (!hoveredPage) return false;
 
@@ -87,16 +111,17 @@ export const dimPage = (
   if (position === PathPosition.End && hoveredPage.col < col) return true;
 
   // Everything else on this column has to be dimmed
-  if (hoveredPage.col === col && hoveredPage.page !== page) return true;
+  if (hoveredPage.col === col && hoveredPage.page !== page.path) return true;
   // This is the current column so it can't be dimmed
-  if (hoveredPage.col === col && hoveredPage.page === page) return false;
+  if (hoveredPage.col === col && hoveredPage.page === page.path) return false;
 
   // TODO: if there is a pinned page this has to be aware!
 
   const routes = journeys
+    .filter(j => j.path[col] === page.path)
     .filter(j => j.path[hoveredPage.col] === hoveredPage.page);
 
-  return !routes.some(r => r.path[col] === page);
+  return routes.length === 0;
 };
 
 export const hideUnpinnedPage = (
@@ -104,7 +129,7 @@ export const hideUnpinnedPage = (
   pinnedPages: FocussedPage[],
   position: PathPosition,
   col: number,
-  page: string,
+  page: PageStats,
 ) => {
   // Nothing is selected
   if (pinnedPages.length === 0) return false;
@@ -121,7 +146,7 @@ export const hideUnpinnedPage = (
 
   // Only one pin per column is allowed so hide everything
   // that is not the pinned for that column
-  if (firstPin.col === col && firstPin.page !== page) return true;
+  if (firstPin.col === col && firstPin.page !== page.path) return true;
 
   return pageAppearsInPinnedPath(journeys, pinnedPages, col, page);
 };

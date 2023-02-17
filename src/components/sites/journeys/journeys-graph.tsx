@@ -4,7 +4,7 @@ import { range, sum } from 'lodash';
 import { JourneysPage } from 'components/sites/journeys/journeys-page';
 import { JourneysReferrers } from 'components/sites/journeys/journeys-referrers';
 import { PathPosition, Site } from 'types/graphql';
-import type { FocussedPage } from 'types/journeys';
+import type { FocussedPage, PageStats } from 'types/journeys';
 import type { AnalyticsUserPath } from 'types/graphql';
 
 import {
@@ -27,10 +27,12 @@ export const JourneysGraph: FC<Props> = ({ site, position, journeys, setPage, se
   const [hoveredPage, setHoveredPage] = React.useState<FocussedPage>(null);
   const [pinnedPages, setPinnedPages] = React.useState<FocussedPage[]>([]);
 
+  const [hoveredReferrer, setHoveredReferrer] = React.useState<string>(null);
+
   const columnCount = Math.max(...journeys.map(j => j.path.length));
 
-  const handleMouseEnter = (col: number, page: string) => {
-    setHoveredPage({ col, page });
+  const handleMouseEnter = (col: number, page: PageStats) => {
+    setHoveredPage({ col, page: page.path });
   };
 
   const handleMouseLeave = () => {
@@ -39,7 +41,11 @@ export const JourneysGraph: FC<Props> = ({ site, position, journeys, setPage, se
 
   return (
     <div className='journeys-container'>
-      <JourneysReferrers journeys={journeys} />
+      <JourneysReferrers
+        journeys={journeys}
+        hoveredReferrer={hoveredReferrer}
+        setHoveredReferrer={setHoveredReferrer}
+      />
 
       <div className='journey-graph' style={{ gridTemplateColumns: `repeat(${columnCount}, 15rem)` }}>
         {range(0, columnCount).map(col => {
@@ -61,15 +67,15 @@ export const JourneysGraph: FC<Props> = ({ site, position, journeys, setPage, se
                   col={column}
                   page={page}
                   site={site}
-                  exits={getExitForColAndPage(journeys, column, page.path)}
+                  exits={getExitForColAndPage(journeys, column, page)}
                   position={position}
                   setPage={setPage}
                   setPosition={setPosition}
-                  dim={dimPage(journeys, hoveredPage, position, column, page.path)}
-                  hide={hideUnpinnedPage(journeys, pinnedPages, position, column, page.path)}
+                  dim={dimPage(journeys, hoveredPage, hoveredReferrer, position, column, page)}
+                  hide={hideUnpinnedPage(journeys, pinnedPages, position, column, page)}
                   pinnedPages={pinnedPages}
                   setPinnedPages={setPinnedPages}
-                  handleMouseEnter={() => handleMouseEnter(column, page.path)}
+                  handleMouseEnter={() => handleMouseEnter(column, page)}
                   handleMouseLeave={handleMouseLeave}
                 />
               ))}

@@ -10,9 +10,15 @@ import type { AnalyticsUserPath } from 'types/graphql';
 
 interface Props {
   journeys: AnalyticsUserPath[];
+  hoveredReferrer: string | null;
+  setHoveredReferrer: (referrer: string | null) => void;
 }
 
-export const JourneysReferrers: FC<Props> = ({ journeys }) => {
+export const JourneysReferrers: FC<Props> = ({
+  journeys,
+  hoveredReferrer,
+  setHoveredReferrer,
+}) => {
   const [open, setOpen] = React.useState<boolean>(false);
 
   const toggleOpen = () => setOpen(!open);
@@ -23,6 +29,12 @@ export const JourneysReferrers: FC<Props> = ({ journeys }) => {
     journeys.length,
     journeys.filter(j => j.referrer === referrer).length
   );
+
+  const handleMouseEnter = (referrer: string) => () => setHoveredReferrer(referrer); 
+
+  const handleMouseLeave = () => setHoveredReferrer(null);
+
+  const isDimmed = (referrer: string) => hoveredReferrer && referrer !== hoveredReferrer;
 
   const results = referrers
     .map(referrer => ({
@@ -46,7 +58,12 @@ export const JourneysReferrers: FC<Props> = ({ journeys }) => {
         Traffic Sources
       </p>
       {results.map(r => (
-        <div key={r.name} className='page'>
+        <div
+          key={r.name}
+          onMouseEnter={handleMouseEnter(r.name)}
+          onMouseLeave={handleMouseLeave}
+          className={classnames('page', { dim: isDimmed(r.name) })}
+        >
           <div className='row page-path'>
             <div className={classnames('path', { direct: r.direct })}>
               <Icon name='global-line' />
