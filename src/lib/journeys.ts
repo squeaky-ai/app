@@ -33,9 +33,10 @@ const pageAppearsInPinnedPath = (
   page: PageStats,
 ) => {
   const routes = journeys
+    .filter(j => j.path[col] === page.path)
     .filter(j => pinnedPages.every(p => j.path[p.col] === p.page ))
 
-  return !routes.some(r => r.path[col] === page.path);
+  return routes.length === 0;
 };
 
 const pageHasReferrer = (
@@ -127,10 +128,19 @@ export const dimPage = (
 export const hideUnpinnedPage = (
   journeys: AnalyticsUserPath[],
   pinnedPages: FocussedPage[],
+  pineedReferrer: string | null,
   position: PathPosition,
   col: number,
   page: PageStats,
 ) => {
+  if (pinnedPages.length === 0 && pineedReferrer) {
+    // Special case where people can highlight the
+    // traffic source without hovering over any
+    // pages. This has to come first as it is the only
+    // way to dim something without a hoveredPage
+    return pageHasReferrer(journeys, pineedReferrer, col, page);
+  };
+
   // Nothing is selected
   if (pinnedPages.length === 0) return false;
 

@@ -24,9 +24,12 @@ interface Props {
 }
 
 export const JourneysGraph: FC<Props> = ({ site, position, journeys, setPage, setPosition }) => {
+  const [showReferrers, setShowReferrers] = React.useState<boolean>(false);
+
   const [hoveredPage, setHoveredPage] = React.useState<FocussedPage>(null);
   const [pinnedPages, setPinnedPages] = React.useState<FocussedPage[]>([]);
 
+  const [pinnedReferrer, setPinnedReferrer] = React.useState<string>(null);
   const [hoveredReferrer, setHoveredReferrer] = React.useState<string>(null);
 
   const columnCount = Math.max(...journeys.map(j => j.path.length));
@@ -39,51 +42,57 @@ export const JourneysGraph: FC<Props> = ({ site, position, journeys, setPage, se
     setHoveredPage(null);
   };
 
+  const gridTemplateColumns = showReferrers
+    ? `repeat(${columnCount + 1}, 15rem)`
+    : `3.125rem repeat(${columnCount + 1}, 15rem)`;
+
   return (
-    <div className='journeys-container'>
+    <div className='journey-graph' style={{ gridTemplateColumns }}>
       <JourneysReferrers
         journeys={journeys}
+        showReferrers={showReferrers}
+        pinnedReferrer={pinnedReferrer}
         hoveredReferrer={hoveredReferrer}
+        setPinnedReferrer={setPinnedReferrer}
         setHoveredReferrer={setHoveredReferrer}
+        setShowReferrers={setShowReferrers}
       />
+      
+      {range(0, columnCount).map(col => {
+        const column = position === PathPosition.Start
+          ? col
+          : (columnCount - 1) - col;
 
-      <div className='journey-graph' style={{ gridTemplateColumns: `repeat(${columnCount}, 15rem)` }}>
-        {range(0, columnCount).map(col => {
-          const column = position === PathPosition.Start
-            ? col
-            : (columnCount - 1) - col;
+        const pages = getPagesForCol(journeys, column);
+        const padder = 100 - sum(pages.map(p => p.percentage));
 
-          const pages = getPagesForCol(journeys, column);
-          const padder = 100 - sum(pages.map(p => p.percentage));
-
-          return (
-            <div className='col' key={column}>
-              <p className='heading'>
-                {getColumnTitle(column, position)}
-              </p>
-              {pages.map(page => (
-                <JourneysPage
-                  key={page.path + column}
-                  col={column}
-                  page={page}
-                  site={site}
-                  exits={getExitForColAndPage(journeys, column, page)}
-                  position={position}
-                  setPage={setPage}
-                  setPosition={setPosition}
-                  dim={dimPage(journeys, hoveredPage, hoveredReferrer, position, column, page)}
-                  hide={hideUnpinnedPage(journeys, pinnedPages, position, column, page)}
-                  pinnedPages={pinnedPages}
-                  setPinnedPages={setPinnedPages}
-                  handleMouseEnter={() => handleMouseEnter(column, page)}
-                  handleMouseLeave={handleMouseLeave}
-                />
-              ))}
-              <div className='padder' style={{ height: `${padder}%` }} />
-            </div>
-          );
-        })}
-      </div>
+        return (
+          <div className='col' key={column}>
+            <p className='heading'>
+              {getColumnTitle(column, position)}
+            </p>
+            {pages.map(page => (
+              <JourneysPage
+                key={page.path + column}
+                col={column}
+                page={page}
+                site={site}
+                exits={getExitForColAndPage(journeys, column, page)}
+                position={position}
+                setPage={setPage}
+                setPosition={setPosition}
+                dim={dimPage(journeys, hoveredPage, hoveredReferrer, position, column, page)}
+                hide={hideUnpinnedPage(journeys, pinnedPages, pinnedReferrer, position, column, page)}
+                pinnedPages={pinnedPages}
+                setPinnedPages={setPinnedPages}
+                handleMouseEnter={() => handleMouseEnter(column, page)}
+                handleMouseLeave={handleMouseLeave}
+              />
+            ))}
+            <div className='padder' style={{ height: `${padder}%` }} />
+          </div>
+        );
+      })}
     </div>
   );
 };
