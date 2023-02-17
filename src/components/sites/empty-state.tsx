@@ -13,6 +13,19 @@ interface Props {
   illustration: IllustrationType;
 }
 
+const getVerifiedBody = (provider: string) => {
+  switch(provider) {
+    case 'duda':
+      return (
+        <p>Your tracking code is will be installed the moment you next publish your site. After that <b>it can take 30-60 minutes for your first recording to arrive</b>, but we&apos;ll email you as soon as your recording arrives.</p>
+      );
+    default:
+      return (
+        <p>Your tracking code is verified and active, but it can take <b>30-60 minutes for your first recording to arrive</b>. We&apos;ll email you as soon as your recording arrives.</p>
+      );
+  }
+};
+
 export const EmptyState: FC<Props> = ({
   site,
   title,
@@ -29,11 +42,7 @@ export const EmptyState: FC<Props> = ({
         {isVerified && (
           <EmptyStateHint
             title='Your data is on the way!'
-            body={
-              <>
-                <p>Your tracking code is verified and active, but it can take <b>30-60 minutes for your first recording to arrive</b>. We&apos;ll email you as soon as your recording arrives.</p>
-              </>
-            }
+            body={getVerifiedBody(site.provider)}
           />
         )}
         
