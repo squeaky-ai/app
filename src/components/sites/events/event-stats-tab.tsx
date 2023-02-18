@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
+import { Card } from 'components/card';
 import { EventStatsTable } from 'components/sites/events/event-stats-table';
 import { EventStatsBreakdown } from 'components/sites/events/event-stats-breakdown';
 import { EventStatsSort } from 'types/events';
@@ -12,15 +13,15 @@ interface Props {
 }
 
 export const EventStatsTab: FC<Props> = ({ sort, eventStats, setSort }) => (
-  <div className='event-stats-tab'>
+  <Card className='event-stats-tab'>
+    <EventStatsBreakdown 
+      sort={sort}
+      eventStats={eventStats}
+    />
     <EventStatsTable 
       sort={sort}
       eventStats={eventStats}
       setSort={setSort}
     />
-    <EventStatsBreakdown 
-      sort={sort}
-      eventStats={eventStats}
-    />
-  </div>
+  </Card>
 );

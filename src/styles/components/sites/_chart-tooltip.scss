@@ -11,6 +11,10 @@
       margin-bottom: 0;
     }
   }
+
+  &.fluid {
+    white-space: nowrap;
+  }
 }
 
 .recharts-tooltip-wrapper {

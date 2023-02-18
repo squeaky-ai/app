@@ -101,12 +101,12 @@
   .event-stats-tab {
     display: grid;
     grid-gap: 2rem;
-    grid-template-columns: 1fr 23rem;
+    grid-template-columns: 10rem 1fr;
+    margin: 2rem 0 0 0;
   }
 
   .event-stats-breakdown {
-    height: 23rem;
-    margin: 2rem 0 0 0;
+    height: 10rem;
     position: relative;
 
     svg {
@@ -206,9 +206,9 @@
   }
 
   .event-table {
-    margin: 2rem 0;
-
     .table {
+      box-shadow: none;
+
       .row {
         grid-template-columns: repeat(3, 1fr);
         height: 3rem;
@@ -230,6 +230,8 @@
   }
 
   .event-feed {
+    margin: 2rem 0 0 0;
+
     .table {
       .row {
         grid-template-columns: repeat(6, 1fr);
