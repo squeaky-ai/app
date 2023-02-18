@@ -33,6 +33,7 @@ interface Props {
   yAxisProps?: YAxisProps,
   barLineProps?: Pick<LineProps | BarProps, 'stroke' | 'fill'>;
   palette?: string[];
+  stacked?: boolean;
 }
 
 export const Chart: FC<Props> = ({ chartType, ...props }) => {
@@ -41,6 +42,8 @@ export const Chart: FC<Props> = ({ chartType, ...props }) => {
       return <ChartBar {...props} />;
     case 'line':
       return <ChartLine {...props} />;
+    case 'stacked-bar':
+      return <ChartStackedBar {...props} />;
   }
 };
 
@@ -142,6 +145,7 @@ const ChartBar: FC<Omit<Props, 'chartType'>> = ({
   yAxisProps,
   barLineProps,
   palette,
+  stacked,
 }) => (
   <ResponsiveContainer>
     <BarChart data={data} margin={{ top: 0, left: -16, right: 16, bottom: 0 }} barGap={2}>
@@ -182,6 +186,7 @@ const ChartBar: FC<Omit<Props, 'chartType'>> = ({
           strokeWidth={item.strokeWidth}
           fill={getPrimaryColor(admin, index, palette)}
           radius={[2, 2, 0, 0]}
+          stackId={stacked ? 'stacked' : undefined}
           {...barLineProps}
         />
       ))}
@@ -189,3 +194,6 @@ const ChartBar: FC<Omit<Props, 'chartType'>> = ({
   </ResponsiveContainer>
 );
 
+const ChartStackedBar: FC<Omit<Props, 'chartType'>> = (props) => (
+  <ChartBar {...props} stacked />
+);

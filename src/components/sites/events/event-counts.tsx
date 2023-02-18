@@ -64,6 +64,7 @@ export const EventCounts: FC<Props> = ({ sort, eventStats, period }) => {
             setScale={setScale}
             chartType={type}
             setChartType={setType}
+            showChartTypes={['bar', 'line', 'stacked-bar']}
           />
         </div>
       </div>

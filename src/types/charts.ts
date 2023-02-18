@@ -1,6 +1,6 @@
 import { LineProps, BarProps } from 'recharts';
 
-export type ChartType = 'bar' | 'line';
+export type ChartType = 'bar' | 'line' | 'stacked-bar'
 
 export type ChartItemProps = Pick<
   LineProps | BarProps,

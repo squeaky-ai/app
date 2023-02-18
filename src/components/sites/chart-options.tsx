@@ -12,6 +12,7 @@ interface Props {
   setScale?: (scale: ScaleType) => void;
   chartType?: ChartType;
   setChartType?: (type: ChartType) => void;
+  showChartTypes?: ChartType[];
 }
 
 export const ChartOptions: FC<Props> = ({ 
@@ -19,6 +20,7 @@ export const ChartOptions: FC<Props> = ({
   setScale,
   chartType,
   setChartType,
+  showChartTypes = ['bar', 'line'],
 }) => (
   <div className='chart-options'>
     <Dropdown button={<Icon name='settings-3-line' />}>
@@ -39,12 +41,21 @@ export const ChartOptions: FC<Props> = ({
         <>
           <Label>Chart Type</Label>
           <div className='radio-group'>
-            <Radio name='chartType' checked={chartType === 'line'} onChange={() => setChartType('line')}>
-              Line
-            </Radio>
-            <Radio name='chartType' checked={chartType === 'bar'} onChange={() => setChartType('bar')}>
-              Bar
-            </Radio>
+            {showChartTypes.includes('line') && (
+              <Radio name='chartType' checked={chartType === 'line'} onChange={() => setChartType('line')}>
+                Line
+              </Radio>
+            )}
+            {showChartTypes.includes('bar') && (
+              <Radio name='chartType' checked={chartType === 'bar'} onChange={() => setChartType('bar')}>
+                Bar
+              </Radio>
+            )}
+            {showChartTypes.includes('stacked-bar') && (
+              <Radio name='chartType' checked={chartType === 'stacked-bar'} onChange={() => setChartType('stacked-bar')}>
+                Stacked Bar
+              </Radio>
+            )}
           </div>
         </>
       )}
