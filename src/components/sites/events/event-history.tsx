@@ -2,7 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import { EventHistoryTags } from 'components/sites/events/event-tags';
 import { EventCounts } from 'components/sites/events/event-counts';
-import { EventStatsTable } from 'components/sites/events/event-stats-table';
+import { EventStatsTab } from 'components/sites/events/event-stats-tab';
 import { EventFeedTable } from 'components/sites/events/event-feed-table';
 import { EventTabs, TabsType } from 'components/sites/events/event-tabs';
 import { EventStatsSort } from 'types/events';
@@ -53,7 +53,7 @@ export const EventHistory: FC<Props> =  ({
       <EventTabs active={activeTab} onChange={setActiveTab} />
       
       {activeTab === 'stats'
-        ? <EventStatsTable sort={sort} eventStats={eventStats.eventStats} setSort={setSort} />
+        ? <EventStatsTab sort={sort} eventStats={eventStats.eventStats} setSort={setSort} />
         : <EventFeedTable site={site} member={member} groupIds={groupIds} captureIds={captureIds} period={period} />
       }
     </div>
