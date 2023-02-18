@@ -16,12 +16,11 @@ type RenderActiveShapeProps = SectorProps & {
   midAngle: number;
   payload: { name: string, value: string };
   percent: number;
-  total: number;
 }
 
 const renderActiveShape = (props: RenderActiveShapeProps) => {
   const RADIAN = Math.PI / 180;
-  const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, fill, payload, percent, total } = props;
+  const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, fill, payload, percent } = props;
 
   const sin = Math.sin(-RADIAN * midAngle);
   const cos = Math.cos(-RADIAN * midAngle);
@@ -35,12 +34,6 @@ const renderActiveShape = (props: RenderActiveShapeProps) => {
 
   return (
     <g>
-      <text x={cx} y={cy - 10} dy={8} textAnchor='middle' fill='var(--gray-blue-800)' fontSize={14} fontWeight='bold'>
-        Total
-      </text>
-      <text x={cx} y={cy + 10} dy={8} textAnchor='middle' fill='var(--gray-blue-800)' fontSize={14}>
-        {total}
-      </text>
       <Sector
         cx={cx}
         cy={cy}
@@ -82,7 +75,7 @@ const renderActiveShape = (props: RenderActiveShapeProps) => {
 };
 
 export const EventStatsBreakdown: FC<Props> = ({ eventStats, sort }) => {
-  const [activeIndex, setActiveIndex] = React.useState<number>(0);
+  const [activeIndex, setActiveIndex] = React.useState<number>(null);
 
   const data = sortEventsStats(eventStats, sort).map(stat => ({
     name: stat.name,
@@ -97,7 +90,7 @@ export const EventStatsBreakdown: FC<Props> = ({ eventStats, sort }) => {
         <PieChart width={240} height={240}>
           <Pie
             activeIndex={activeIndex}
-            activeShape={(props) => renderActiveShape({...props, total })}
+            activeShape={renderActiveShape}
             cx='50%'
             cy='50%'
             data={data}
@@ -105,6 +98,7 @@ export const EventStatsBreakdown: FC<Props> = ({ eventStats, sort }) => {
             outerRadius={120}
             dataKey='value'
             onMouseEnter={(_, index) => setActiveIndex(index)}
+            onMouseLeave={() => setActiveIndex(null)}
           >
             {data.map((_, index) => (
               <Cell 
@@ -115,6 +109,10 @@ export const EventStatsBreakdown: FC<Props> = ({ eventStats, sort }) => {
           </Pie>
         </PieChart>
       </ResponsiveContainer>
+      <div className='total'>
+        <p><b>Total</b></p>
+        <p>{total}</p>
+      </div>
     </Card>
   );
 };
