@@ -1311,6 +1311,7 @@ export type EventsStat = {
   eventOrGroupId: Scalars['String'];
   name: Scalars['String'];
   type: EventsType;
+  uniqueTriggers: Scalars['Float'];
 };
 
 export enum EventsType {

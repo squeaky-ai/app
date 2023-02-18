@@ -45,6 +45,8 @@ export const EventStatsTable: FC<Props> = ({ sort, eventStats, setSort }) => (
             onDesc={() => setSort(EventStatsSort.CountDesc)} 
           />
         </Cell>
+        <Cell>Unique triggers</Cell>
+        <Cell>Avg. events per visitor</Cell>
       </Row>
       {sortEventsStats(eventStats, sort).map((stat, index) => (
         <Row key={stat.eventOrGroupId}>
@@ -58,9 +60,14 @@ export const EventStatsTable: FC<Props> = ({ sort, eventStats, setSort }) => (
           <Cell>
             {stat.count.toLocaleString()}
           </Cell>
+          <Cell>
+            {stat.uniqueTriggers}
+          </Cell>
+          <Cell>
+            {stat.averageEventsPerVisitor.toFixed(2)}
+          </Cell>
         </Row>
       ))}
     </Table>
   </div>
-  
 );
