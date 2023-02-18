@@ -66,6 +66,11 @@ export const PageSelector: FC<Props> = ({
       : selected === page.url;
   };
 
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.stopPropagation();
+    if (handleChange) handleChange(event);
+  };
+
   const results = [...pages]
     .sort((a, b) => {
       switch(sort) {
@@ -86,8 +91,16 @@ export const PageSelector: FC<Props> = ({
     const match = results.find(r => r.url === item.path);
 
     if (item.children.length > 0) {
+      // e.g.
+      // name = 'blog'
+      // path = 'blog/category/page'
+      // Find where it occurs, add the length to get
+      // the end of the relevant part
+      const index = item.path.indexOf(item.name);
+      const categoryPath = item.path.substring(0, index + item.name.length);
+
       return { 
-        url: `/${item.name}`,
+        url: categoryPath,
         count: match.count || 0,
       };
     }
@@ -114,7 +127,7 @@ export const PageSelector: FC<Props> = ({
             name={name}
             page={match}
             selected={isSelected(match)}
-            handleChange={handleChange}
+            handleChange={onChange}
             handleClick={handleClick}
           />
           {page.children.length > 0 && (
