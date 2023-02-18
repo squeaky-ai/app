@@ -20,6 +20,10 @@ export enum EventStatsSort {
   TypeDesc = 'type__desc',
   CountAsc = 'count__asc',
   CountDesc = 'count__desc',
+  UniqueTriggersAsc = 'unique_triggers__asc',
+  UniqueTriggersDesc = 'unique_triggers__desc',
+  AverageEventsPerVisitorAsc = 'average_events_per_visitor__asc',
+  AverageEventsPerVisitorDesc = 'average_events_per_visitor__desc',
 }
 
 export type EventSelected = {
