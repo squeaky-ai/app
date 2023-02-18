@@ -7,6 +7,7 @@ import { Tooltip } from 'components/tooltip';
 import { Radio } from 'components/radio';
 import { Checkbox } from 'components/checkbox';
 import { Search } from 'components/search';
+import { buildNestedPagesStructure, PageTreeItem } from 'lib/page';
 import type { SitesPage } from 'types/graphql';
 
 export type PageSelectorType = 'single' | 'multi' | 'click';
@@ -23,11 +24,21 @@ interface Props {
   handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
+interface ItemProps {
+  name?: string;
+  type: PageSelectorType;
+  page: SitesPage;
+  selected: boolean;
+  handleClick?: (page: SitesPage) => void;
+  handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
 enum Sort {
   AlphabeticalAsc = 'alphabetical__asc',
   AlphabeticalDesc = 'alphabetical__desc',
   CountAsc = 'count__asc',
   CountDesc = 'count__desc',
+  Nested = 'nested',
 }
 
 export const PageSelector: FC<Props> = ({
@@ -58,6 +69,7 @@ export const PageSelector: FC<Props> = ({
   const results = [...pages]
     .sort((a, b) => {
       switch(sort) {
+        case Sort.Nested:
         case Sort.AlphabeticalAsc:
           return a.url.localeCompare(b.url);
         case Sort.AlphabeticalDesc:
@@ -70,10 +82,51 @@ export const PageSelector: FC<Props> = ({
     })
     .filter(page => page.url.toLowerCase().includes(search.toLowerCase()));
 
+  const buildSitePageFromPath = (item: PageTreeItem): SitesPage => {
+    const match = results.find(r => r.url === item.path);
+
+    if (item.children.length > 0) {
+      return { 
+        url: `/${item.name}`,
+        count: match.count || 0,
+      };
+    }
+
+    return match;
+  };
+
+  const nestedPages = buildNestedPagesStructure(results);
+
   const onSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.target.checked
       ? setSelected(results)
       : setSelected([]);
+  };
+
+  const NestedItem: FC<{ page: PageTreeItem }> = ({ page }) => {
+    const match: SitesPage = buildSitePageFromPath(page);
+
+    return (
+      <ul key={page.name}>
+        <li>
+          <ItemFactory 
+            type={type}
+            name={name}
+            page={match}
+            selected={isSelected(match)}
+            handleChange={handleChange}
+            handleClick={handleClick}
+          />
+          {page.children.length > 0 && (
+            <ul>
+              {page.children.map(child => (
+                <NestedItem key={child.name} page={child} />
+              ))}
+            </ul>
+          )}
+        </li>
+      </ul>
+    );
   };
 
   return (
@@ -87,6 +140,7 @@ export const PageSelector: FC<Props> = ({
           <Option value={Sort.AlphabeticalDesc}>Alphabetical: Z-A</Option>
           <Option value={Sort.CountDesc}>Count: High to Low</Option>
           <Option value={Sort.CountAsc}>Count: Low to High</Option>
+          <Option value={Sort.Nested}>Nested</Option>
         </Select>
       </div>
       <Search 
@@ -112,17 +166,42 @@ export const PageSelector: FC<Props> = ({
           </li>
         )}
 
-        {results.map(result => (
-          <li key={result.url}>
-            {type === 'click' && <ClickItem page={result} handleClick={handleClick} />}
-            {type === 'single' && <SingleItem name={name || 'page'} page={result} selected={isSelected(result)} handleChange={handleChange} />}
-            {type === 'multi' && <MultiItem name={name || 'pages'} page={result} selected={isSelected(result)} handleChange={handleChange} />}
-          </li>
-        ))}
+        {sort === Sort.Nested && (
+          <>
+            {nestedPages.map(page => (
+              <NestedItem key={page.name} page={page} />
+            ))}
+          </>
+        )}
+
+        {sort !== Sort.Nested && (
+          <>
+            {results.map(result => (
+              <li key={result.url}>
+                <ItemFactory 
+                  type={type}
+                  name={name}
+                  page={result}
+                  selected={isSelected(result)}
+                  handleChange={handleChange}
+                  handleClick={handleClick}
+                />
+              </li>
+            ))}
+          </>
+        )}
       </ul>
     </div>
   );
 };
+
+const ItemFactory: FC<ItemProps> = ({ name, page, type, selected, handleChange, handleClick }) => (
+  <>
+    {type === 'click' && <ClickItem page={page} handleClick={handleClick} />}
+    {type === 'single' && <SingleItem name={name || 'page'} page={page} selected={selected} handleChange={handleChange} />}
+    {type === 'multi' && <MultiItem name={name || 'pages'} page={page} selected={selected} handleChange={handleChange} />}
+  </>
+);
 
 const ClickItem: FC<{ 
   page: SitesPage,

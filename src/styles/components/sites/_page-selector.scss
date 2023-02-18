@@ -40,6 +40,7 @@
         height: auto;
         line-height: var(--line-height-body-sm);
         padding: 0;
+        text-align: right;
       }
 
       .icon {
@@ -68,6 +69,15 @@
       display: none;
     }
 
+    ul {
+      margin: 0;
+      padding: 0;
+
+      ul {
+        padding: 0 0 0 .75rem;
+      }
+    }
+
     li {
       background: var(--white);
       list-style: none;
@@ -75,12 +85,11 @@
       padding: 0;
 
       &:last-of-type {
-        padding: 0 0 1rem 0;
         position: relative;
         z-index: 2;
 
         .item {
-          margin: 0 1rem;
+          margin: 0 1rem .25rem 1rem;
         }
       }
     }
@@ -157,7 +166,7 @@
       }
 
       li:last-of-type .item {
-        margin: 0;
+        margin: 0 0 .5rem 0;
       }
     }
   }
