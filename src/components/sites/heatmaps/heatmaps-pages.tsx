@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import { Button } from 'components/button';
 import { Label } from 'components/label';
 import { Icon } from 'components/icon';
-import { PageSelector } from 'components/sites/page-selector';
+import { PageSelector } from 'components/sites/page-selector/page-selector';
 import type { SitesPage } from 'types/graphql';
 
 interface Props {

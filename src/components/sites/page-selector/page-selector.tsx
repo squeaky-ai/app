@@ -3,14 +3,13 @@ import type { FC } from 'react';
 import classnames from 'classnames';
 import { Label } from 'components/label';
 import { Select, Option } from 'components/select';
-import { Tooltip } from 'components/tooltip';
-import { Radio } from 'components/radio';
+import { ItemFactory, PageSelectorType } from 'components/sites/page-selector/item-factory';
+import { TreeItem } from 'components/sites/page-selector/tree-item';
 import { Checkbox } from 'components/checkbox';
 import { Search } from 'components/search';
-import { buildNestedPagesStructure, PageTreeItem } from 'lib/page';
+import { buildNestedPagesStructure } from 'lib/page';
+import { Preferences, Preference } from 'lib/preferences';
 import type { SitesPage } from 'types/graphql';
-
-export type PageSelectorType = 'single' | 'multi' | 'click';
 
 interface Props {
   name?: string;
@@ -20,15 +19,6 @@ interface Props {
   compact?: boolean;
   selected: string | string[] | null;
   setSelected?: (pages: SitesPage[]) => void;
-  handleClick?: (page: SitesPage) => void;
-  handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
-interface ItemProps {
-  name?: string;
-  type: PageSelectorType;
-  page: SitesPage;
-  selected: boolean;
   handleClick?: (page: SitesPage) => void;
   handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -57,6 +47,7 @@ export const PageSelector: FC<Props> = ({
 
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value as Sort;
+    Preferences.setString(Preference.PAGE_SELECTOR_SORT, value);
     setSort(value);
   };
 
@@ -87,27 +78,6 @@ export const PageSelector: FC<Props> = ({
     })
     .filter(page => page.url.toLowerCase().includes(search.toLowerCase()));
 
-  const buildSitePageFromPath = (item: PageTreeItem): SitesPage => {
-    const match = results.find(r => r.url === item.path);
-
-    if (item.children.length > 0) {
-      // e.g.
-      // name = 'blog'
-      // path = 'blog/category/page'
-      // Find where it occurs, add the length to get
-      // the end of the relevant part
-      const index = item.path.indexOf(item.name);
-      const categoryPath = item.path.substring(0, index + item.name.length);
-
-      return { 
-        url: categoryPath,
-        count: match.count || 0,
-      };
-    }
-
-    return match;
-  };
-
   const nestedPages = buildNestedPagesStructure(results);
 
   const onSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -116,31 +86,13 @@ export const PageSelector: FC<Props> = ({
       : setSelected([]);
   };
 
-  const NestedItem: FC<{ page: PageTreeItem }> = ({ page }) => {
-    const match: SitesPage = buildSitePageFromPath(page);
+  React.useEffect(() => {
+    const preference = Preferences.getString(Preference.PAGE_SELECTOR_SORT);
 
-    return (
-      <ul key={page.name}>
-        <li>
-          <ItemFactory 
-            type={type}
-            name={name}
-            page={match}
-            selected={isSelected(match)}
-            handleChange={onChange}
-            handleClick={handleClick}
-          />
-          {page.children.length > 0 && (
-            <ul>
-              {page.children.map(child => (
-                <NestedItem key={child.name} page={child} />
-              ))}
-            </ul>
-          )}
-        </li>
-      </ul>
-    );
-  };
+    if (preference) {
+      setSort(preference as Sort);
+    }
+  }, []);
 
   return (
     <div className={classnames('page-selector', type, { compact, 'no-results': results.length === 0 })}>
@@ -182,7 +134,16 @@ export const PageSelector: FC<Props> = ({
         {sort === Sort.Nested && (
           <>
             {nestedPages.map(page => (
-              <NestedItem key={page.name} page={page} />
+              <TreeItem 
+                key={page.name}
+                type={type}
+                name={name}
+                page={page}
+                selected={selected}
+                pages={results}
+                handleChange={onChange}
+                handleClick={handleClick}
+              />
             ))}
           </>
         )}
@@ -207,77 +168,3 @@ export const PageSelector: FC<Props> = ({
     </div>
   );
 };
-
-const ItemFactory: FC<ItemProps> = ({ name, page, type, selected, handleChange, handleClick }) => (
-  <>
-    {type === 'click' && <ClickItem page={page} handleClick={handleClick} />}
-    {type === 'single' && <SingleItem name={name || 'page'} page={page} selected={selected} handleChange={handleChange} />}
-    {type === 'multi' && <MultiItem name={name || 'pages'} page={page} selected={selected} handleChange={handleChange} />}
-  </>
-);
-
-const ClickItem: FC<{ 
-  page: SitesPage,
-  handleClick: (page: SitesPage) => void,
-}> = ({ page, handleClick }) => (
-  <Tooltip
-    button={
-      <>
-        <span className='url'>{page.url}</span>
-        <span className='count'>{page.count.toLocaleString()}</span>
-      </>
-    }
-    buttonProps={{ 
-      type: 'button',
-    }}
-    buttonClassName='item'
-    buttonOnClick={() => handleClick(page)}
-    portalClassName='page-selector-tooltip'
-  >
-    {page.url}
-  </Tooltip>
-);
-
-const SingleItem: FC<{
-  name: string;
-  page: SitesPage,
-  selected: boolean,
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
-}> = ({ name, page, selected, handleChange }) => (
-  <Tooltip
-    button={
-      <Radio className='item' checked={selected} name={name} value={page.url} onChange={handleChange}>
-        <span className='url'>{page.url}</span>
-        <span className='count'>{page.count.toLocaleString()}</span>
-      </Radio>
-    }
-    buttonProps={{ 
-      type: 'button',
-    }}
-    portalClassName='page-selector-tooltip'
-  >
-    {page.url}
-  </Tooltip>
-);
-
-const MultiItem: FC<{
-  name: string; 
-  page: SitesPage,
-  selected: boolean,
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
-}> = ({ name, page, selected, handleChange }) => (
-  <Tooltip
-    button={
-      <Checkbox className='item' checked={selected} name={name} value={page.url} onChange={handleChange}>
-        <span className='url'>{page.url}</span>
-        <span className='count'>{page.count.toLocaleString()}</span>
-      </Checkbox>
-    }
-    buttonProps={{ 
-      type: 'button',
-    }}
-    portalClassName='page-selector-tooltip'
-  >
-    {page.url}
-  </Tooltip>
-);

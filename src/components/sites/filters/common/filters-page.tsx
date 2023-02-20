@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { Button } from 'components/button';
 import { Spinner } from 'components/spinner';
-import { PageSelector } from 'components/sites/page-selector';
+import { PageSelector } from 'components/sites/page-selector/page-selector';
 import { usePages } from 'hooks/use-pages';
 import type { TimePeriod } from 'types/common';
 import { getDateRange } from 'lib/dates';

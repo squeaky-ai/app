@@ -2,7 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import { Spinner } from 'components/spinner';
 import { usePages } from 'hooks/use-pages';
-import { PageSelector } from 'components/sites/page-selector';
+import { PageSelector } from 'components/sites/page-selector/page-selector';
 import { getDateRange } from 'lib/dates';
 import type { SitesPage } from 'types/graphql';
 
