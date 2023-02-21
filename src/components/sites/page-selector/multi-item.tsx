@@ -7,7 +7,7 @@ import type { SitesPage } from 'types/graphql';
 interface Props {
   name: string; 
   page: SitesPage;
-  selected: boolean;
+  selected: boolean | 'partial';
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -19,7 +19,14 @@ export const MultiItem: FC<Props> = ({
 }) => (
   <Tooltip
     button={
-      <Checkbox className='item' checked={selected} name={name} value={page.url} onChange={handleChange}>
+      <Checkbox
+        className='item'
+        checked={selected === true}
+        partial={selected === 'partial'}
+        name={name}
+        value={page.url}
+        onChange={handleChange}
+      >
         <span className='url'>{page.url}</span>
         <span className='count'>{page.count.toLocaleString()}</span>
       </Checkbox>

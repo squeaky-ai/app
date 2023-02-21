@@ -10,7 +10,7 @@ import { Container } from 'components/container';
 import { SentimentPages } from 'components/sites/feedback/sentiment-pages';
 import { SentimentPreview } from 'components/sites/feedback/sentiment-preview';
 import { useToasts } from 'hooks/use-toasts';
-import type { Feedback, FeedbackUpdateInput, SitesPage } from 'types/graphql';
+import type { Feedback, FeedbackUpdateInput } from 'types/graphql';
 import type { Site } from 'types/graphql';
 
 interface Props {
@@ -79,8 +79,8 @@ export const SentimentVisibility: FC<Props> = ({ site, feedback }) => {
               <SentimentPages 
                 value={values.sentimentExcludedPages}
                 onChange={handleChange}
-                setSelected={(pages: SitesPage[]) => {
-                  setFieldValue('sentimentExcludedPages', pages.map(p => p.url));
+                setSelected={(pages: string[]) => {
+                  setFieldValue('sentimentExcludedPages', pages);
                 }}
               />
 

@@ -7,7 +7,7 @@ import type { SitesPage } from 'types/graphql';
 interface Props {
   name: string;
   page: SitesPage;
-  selected: boolean;
+  selected: boolean | 'partial';
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -19,7 +19,7 @@ export const SingleItem: FC<Props> = ({
 }) => (
   <Tooltip
     button={
-      <Radio className='item' checked={selected} name={name} value={page.url} onChange={handleChange}>
+      <Radio className='item' checked={selected === true} name={name} value={page.url} onChange={handleChange}>
         <span className='url'>{page.url}</span>
         <span className='count'>{page.count.toLocaleString()}</span>
       </Radio>

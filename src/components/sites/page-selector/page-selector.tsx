@@ -3,12 +3,13 @@ import type { FC } from 'react';
 import classnames from 'classnames';
 import { Label } from 'components/label';
 import { Select, Option } from 'components/select';
-import { ItemFactory, PageSelectorType } from 'components/sites/page-selector/item-factory';
+import { ItemFactory } from 'components/sites/page-selector/item-factory';
 import { TreeItem } from 'components/sites/page-selector/tree-item';
 import { Checkbox } from 'components/checkbox';
 import { Search } from 'components/search';
-import { buildNestedPagesStructure } from 'lib/page';
+import { buildPagesTree, handleTreeUpdate } from 'lib/page';
 import { Preferences, Preference } from 'lib/preferences';
+import { Sort, PageSelectorType, PageTreeItem } from 'types/pages';
 import type { SitesPage } from 'types/graphql';
 
 interface Props {
@@ -18,17 +19,9 @@ interface Props {
   pages: SitesPage[];
   compact?: boolean;
   selected: string | string[] | null;
-  setSelected?: (pages: SitesPage[]) => void;
+  setSelected?: (pages: string[]) => void;
   handleClick?: (page: SitesPage) => void;
   handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
-enum Sort {
-  AlphabeticalAsc = 'alphabetical__asc',
-  AlphabeticalDesc = 'alphabetical__desc',
-  CountAsc = 'count__asc',
-  CountDesc = 'count__desc',
-  Nested = 'nested',
 }
 
 export const PageSelector: FC<Props> = ({
@@ -51,18 +44,21 @@ export const PageSelector: FC<Props> = ({
     setSort(value);
   };
 
-  const isSelected = (page: SitesPage): boolean => {
-    return Array.isArray(selected)
-      ? selected.includes(page.url)
-      : selected === page.url;
-  };
-
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation();
     if (handleChange) handleChange(event);
   };
 
-  const results = [...pages]
+  const handleMultiTreeChange = (item: PageTreeItem) => {
+    // This only applies to multi page, the single page
+    // should use the regular onChange handler
+    if (!Array.isArray(selected)) return;
+
+    // Out of sight, out of mind
+    setSelected(handleTreeUpdate(item, selected));
+  };
+
+  const results: SitesPage[] = [...pages]
     .sort((a, b) => {
       switch(sort) {
         case Sort.Nested:
@@ -76,13 +72,13 @@ export const PageSelector: FC<Props> = ({
           return b.count - a.count;
       }
     })
-    .filter(page => page.url.toLowerCase().includes(search.toLowerCase()));
+    .filter(page => page.url.toLowerCase().includes(search.toLowerCase()))
 
-  const nestedPages = buildNestedPagesStructure(results);
+  const pageTree = buildPagesTree(results);
 
   const onSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.target.checked
-      ? setSelected(results)
+      ? setSelected(results.map(r => r.url))
       : setSelected([]);
   };
 
@@ -133,16 +129,17 @@ export const PageSelector: FC<Props> = ({
 
         {sort === Sort.Nested && (
           <>
-            {nestedPages.map(page => (
+            {pageTree.map(page => (
               <TreeItem 
                 key={page.name}
                 type={type}
                 name={name}
                 page={page}
-                selected={selected}
                 pages={results}
-                handleChange={onChange}
+                selected={selected}
                 handleClick={handleClick}
+                handleChange={handleChange}
+                handleMultiTreeChange={handleMultiTreeChange}
               />
             ))}
           </>
@@ -156,8 +153,8 @@ export const PageSelector: FC<Props> = ({
                   type={type}
                   name={name}
                   page={result}
-                  selected={isSelected(result)}
-                  handleChange={handleChange}
+                  selected={selected}
+                  handleChange={onChange}
                   handleClick={handleClick}
                 />
               </li>

@@ -1,36 +1,30 @@
 import React from 'react';
 import type { FC } from 'react';
-import { ItemFactory, PageSelectorType } from 'components/sites/page-selector/item-factory';
-import type { PageTreeItem } from 'lib/page';
+import { ItemFactory } from 'components/sites/page-selector/item-factory';
+import type { PageSelectorType, PageTreeItem } from 'types/pages';
 import type { SitesPage } from 'types/graphql';
 
 interface Props {
   name: string;
   type: PageSelectorType;
   page: PageTreeItem;
-  selected: string | string[] | null;
   pages: SitesPage[];
+  selected: string | string[];
   handleClick?: (page: SitesPage) => void;
   handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleMultiTreeChange?: (item: PageTreeItem) => void;
 }
 
-const buildSitePageFromPath = (pages: SitesPage[], item: PageTreeItem): SitesPage => {
-  const match = pages.find(p => p.url === item.path);
-
-  if (item.children.length > 0) {
-    // e.g.
-    // name = 'blog'
-    // path = 'blog/category/page'
-    // Find where it occurs, add the length to get
-    // the end of the relevant part
-    const index = item.path.indexOf(item.name);
-    const categoryPath = item.path.substring(0, index + item.name.length);
-
-    return { 
-      url: categoryPath,
-      count: match.count || 0,
-    };
-  }
+const buildSitePageFromPath = (
+  pages: SitesPage[],
+  item: PageTreeItem,
+): SitesPage => {
+  // Get the matching page from the tree, or create a fake
+  // page with defaults
+  const match = pages.find(p => p.url === item.path) || { 
+    count: 0,
+    url: item.path
+  };
 
   return match;
 };
@@ -39,29 +33,26 @@ export const TreeItem: FC<Props> = ({
   name,
   type,
   page,
-  selected,
   pages,
+  selected,
   handleClick,
   handleChange,
+  handleMultiTreeChange,
 }) => {
   const match: SitesPage = buildSitePageFromPath(pages, page);
-
-  const isSelected = (page: SitesPage): boolean => {
-    return Array.isArray(selected)
-      ? selected.includes(page.url)
-      : selected === page.url;
-  };
 
   return (
     <ul key={page.name}>
       <li>
         <ItemFactory 
           type={type}
+          item={page}
           name={name}
           page={match}
-          selected={isSelected(match)}
-          handleChange={handleChange}
+          selected={selected}
           handleClick={handleClick}
+          handleChange={handleChange}
+          handleMultiTreeChange={handleMultiTreeChange}
         />
         {page.children.length > 0 && (
           <ul>
@@ -71,10 +62,11 @@ export const TreeItem: FC<Props> = ({
                 type={type}
                 name={name}
                 page={child} 
-                selected={selected}
                 pages={pages}
-                handleChange={handleChange}
+                selected={selected}
                 handleClick={handleClick}
+                handleChange={handleChange}
+                handleMultiTreeChange={handleMultiTreeChange}
               />
             ))}
           </ul>

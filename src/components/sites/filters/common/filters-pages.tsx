@@ -51,7 +51,7 @@ export const FiltersPages: FC<Props> = ({ label, value, period, onClose, onUpdat
             pages={pages}
             selected={values.pages}
             handleChange={handleChange}
-            setSelected={pages => setFieldValue('pages', pages.map(p => p.url))}
+            setSelected={pages => setFieldValue('pages', pages)}
           />
           <div className='actions'>
             <Button type='submit' disabled={isSubmitting} className='primary'>Apply</Button>

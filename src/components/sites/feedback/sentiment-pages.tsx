@@ -4,12 +4,11 @@ import { Spinner } from 'components/spinner';
 import { usePages } from 'hooks/use-pages';
 import { PageSelector } from 'components/sites/page-selector/page-selector';
 import { getDateRange } from 'lib/dates';
-import type { SitesPage } from 'types/graphql';
 
 interface Props {
   value: string[];
   onChange: (event: React.ChangeEvent) => void;
-  setSelected: (pages: SitesPage[]) => void;
+  setSelected: (pages: string[]) => void;
 }
 
 export const SentimentPages: FC<Props> = ({ value, onChange, setSelected }) => {

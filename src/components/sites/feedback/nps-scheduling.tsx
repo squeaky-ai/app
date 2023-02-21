@@ -11,7 +11,7 @@ import { Card } from 'components/card';
 import { NpsPages } from 'components/sites/feedback/nps-pages';
 import { useToasts } from 'hooks/use-toasts';
 import { NpsPreview } from 'components/sites/feedback/nps-preview';
-import type { Feedback, FeedbackUpdateInput, SitesPage } from 'types/graphql';
+import type { Feedback, FeedbackUpdateInput } from 'types/graphql';
 import type { Site } from 'types/graphql';
 
 interface Props {
@@ -116,8 +116,8 @@ export const NpsScheduling: FC<Props> = ({ site, feedback }) => {
                 <NpsPages 
                   value={values.npsExcludedPages}
                   onChange={handleChange}
-                  setSelected={(pages: SitesPage[]) => {
-                    setFieldValue('npsExcludedPages', pages.map(p => p.url));
+                  setSelected={(pages: string[]) => {
+                    setFieldValue('npsExcludedPages', pages);
                   }}
                 />
               </div>
