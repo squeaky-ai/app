@@ -22,11 +22,10 @@ const TimeStampSchema = Yup.string().matches(MM_SS_REGEX, 'Timestamp must be for
 const DurationSchema = Yup.object().shape({
   rangeType: Yup.string().oneOf(['From', 'Between']),
   fromType: Yup.string().oneOf(['GreaterThan', 'LessThan']),
-  fromDuration: TimeStampSchema.when('rangeType', { is: 'From', then: TimeStampSchema }),
-  betweenFromDuration: TimeStampSchema.when('rangeType', { is: 'Between', then: TimeStampSchema.required() }),
-  betweenToDuration: TimeStampSchema.when('rangeType', { is: 'Between', then: TimeStampSchema.required() }),
+  fromDuration: TimeStampSchema.when('rangeType', { is: 'From', then: () => TimeStampSchema }),
+  betweenFromDuration: TimeStampSchema.when('rangeType', { is: 'Between', then: () => TimeStampSchema.required() }),
+  betweenToDuration: TimeStampSchema.when('rangeType', { is: 'Between', then: () => TimeStampSchema.required() }),
 });
-
 
 export const FiltersDuration: FC<Props> = ({ value, onClose, onUpdate }) => {
   const formatAsTimeString = (value?: string) => {

@@ -23,17 +23,17 @@ const AbsoluteSchema = Yup.object().shape({
   fromDate: DateStringSchema
     .when('fromType', {
       is: (value: string) => ['Before', 'After'].includes(value),
-      then: DateStringSchema.required(),
+      then: () => DateStringSchema.required(),
     }),
   betweenFromDate: DateStringSchema
     .when('fromType', {
       is: 'Between',
-      then: DateStringSchema.required(),
+      then: () => DateStringSchema.required(),
     }),
   betweenToDate: DateStringSchema
     .when('fromType', {
       is: 'Between',
-      then: DateStringSchema.required(),
+      then: () => DateStringSchema.required(),
     }),
 });
 
