@@ -33,7 +33,7 @@
     "yup": "^1.0.0"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^3.2.0",
+    "@graphql-codegen/cli": "^2.16.1",
     "@graphql-codegen/typescript": "^3.0.1",
     "@types/lodash": "^4.14.191",
     "@types/react": "^18.0.28",
