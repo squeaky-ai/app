@@ -77,10 +77,10 @@ export const EventStatsTable: FC<Props> = ({ sort, eventStats, setSort }) => (
             {stat.count.toLocaleString()}
           </Cell>
           <Cell>
-            {stat.uniqueTriggers}
+            {stat.uniqueTriggers || '-'}
           </Cell>
           <Cell>
-            {stat.averageEventsPerVisitor.toFixed(2)}
+            {stat.averageEventsPerVisitor?.toFixed(2) || '-'}
           </Cell>
         </Row>
       ))}
