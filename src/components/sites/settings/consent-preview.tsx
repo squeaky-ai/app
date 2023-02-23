@@ -24,7 +24,7 @@ export const ConsentPreview: FC<Props> = ({
 }) => {
   const [show, setShow] = React.useState<boolean>(false);
 
-  const toggleShow = () => setShow(!show);
+  const toggleShow = () => setShow(s => !s);
 
   const themeOverride = encodeURIComponent(JSON.stringify(consent));
 
@@ -83,6 +83,13 @@ export const ConsentPreview: FC<Props> = ({
               </svg>
             </div>
           </div>
+
+          <button id='squeaky__consent_close' type='button' onClick={toggleShow}>
+            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='16' height='16'>
+              <path fill='none' d='M0 0h24v24H0z' />
+              <path fill='#ffffff' d='M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z' />
+            </svg>
+          </button>
 
           <iframe
             id='squeaky__consent_frame'

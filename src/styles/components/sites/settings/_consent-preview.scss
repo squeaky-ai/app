@@ -7,7 +7,6 @@
   margin: 1.5rem;
   min-height: 20rem;
   max-width: 30rem;
-  overflow: hidden;
   position: fixed;
   width: 100%;
   z-index: 9999;
@@ -33,9 +32,39 @@
   }
 }
 
+
+#squeaky__consent_close {
+  align-items: center;
+  appearance: none;
+  background: #0074E0;
+  border: none;
+  border-radius: 100% !important;
+  box-sizing: border-box;
+  color: var(--white);
+  display: flex;
+  font-family: sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  height: 2rem;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  right: -1rem;
+  top: -1rem;
+  width: 2rem;
+
+  &:hover {
+    cursor: pointer;
+    filter: brightness(85%);
+  }
+}
+
 #squeaky__consent_frame {
   border: none;
+  border-radius: .5rem;
   flex: 1;
   height: 100%;
+  overflow: hidden;
   width: 100%;
 }
