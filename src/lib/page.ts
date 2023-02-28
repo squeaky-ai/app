@@ -8,13 +8,14 @@ function insert(
 ) {
   let child = children.find(child => child.name === head);
 
+  const path = parentHead ? `${parentHead}/${head}` : `/${head}`;
+
   if (!child) {
-    const path = parentHead ? `/${parentHead}/${head}` : `/${head}`;
     child = { name: head, path, children: [] };
     children.push(child);
   }
 
-  if (tail.length > 0) insert(child.children, tail, head);
+  if (tail.length > 0) insert(child.children, tail, path);
 
   return children;
 }
