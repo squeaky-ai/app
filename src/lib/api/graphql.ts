@@ -78,6 +78,8 @@ import {
   AdminSiteTeamDeleteInput,
   AdminSiteTeamUpdateRoleInput,
   SitesApiKeyCreateInput,
+  SitesBundle,
+  AdminSiteBundlesCreateInput,
 } from 'types/graphql';
 
 import {
@@ -102,6 +104,7 @@ import {
   ADMIN_SITE_INGEST_UPDATE,
   ADMIN_SITE_TEAM_DELETE,
   ADMIN_SITE_TEAM_ROLE_UPDATE,
+  ADMIN_SITE_BUNDLE_CREATE,
   SUPERUSER_ACESSS_UPDATE,
   ADMIN_SITE_DELETE_MUTATION,
   ROUTES_UPDATE_MUTATION,
@@ -214,6 +217,7 @@ import {
   ADD_TO_GROUP_MUTATION,
   UPDATE_EVENT_CAPTURE_MUTATION,
 } from 'data/events/mutations';
+import { GET_ADMIN_SITES_BUNDLES_QUERY } from 'data/admin/queries';
 
 export const cache = new InMemoryCache({
   typePolicies: {
@@ -896,6 +900,18 @@ export const adminSiteTeamUpdateRole = async (input: AdminSiteTeamUpdateRoleInpu
 
   return data.adminSiteTeamRoleUpdate;
 };
+
+export const adminSiteBundleCreate = async (input: AdminSiteBundlesCreateInput): Promise<SitesBundle> => {
+  const { data } = await client.mutate({
+    mutation: ADMIN_SITE_BUNDLE_CREATE,
+    variables: { input },
+    refetchQueries: [
+      GET_ADMIN_SITES_BUNDLES_QUERY,
+    ]
+  });
+
+  return data.adminSiteBundlesCreate;
+}
 
 export const superuserAccessUpdate = async (input: SitesSuperuserAccessUpdateInput): Promise<Site> => {
   const { data } = await client.mutate({

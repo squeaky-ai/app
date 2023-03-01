@@ -219,6 +219,40 @@ export const ADMIN_SITE_TEAM_ROLE_UPDATE = gql`
   }
 `;
 
+export const ADMIN_SITE_BUNDLE_CREATE = gql`
+  mutation adminSiteBundlesCreate($input: AdminSiteBundlesCreateInput!) {
+    adminSiteBundlesCreate(input: $input) {
+      id
+      sites {
+        id
+        name
+        uuid
+        url
+        ownerName
+        verifiedAt
+        provider
+        superuserAccessEnabled
+        plan {
+          planId
+          name
+          exceeded
+          invalid
+          maxMonthlyRecordings
+        }
+        team {
+          id
+          role
+          user {
+            id
+          }
+        }
+        bundled
+        createdAt
+      }
+    }
+  }
+`;
+
 export const SITE_API_KEY_CREATE = gql`
   mutation apiKeyCreate($input: SitesApiKeyCreateInput!) {
     apiKeyCreate(input: $input) {

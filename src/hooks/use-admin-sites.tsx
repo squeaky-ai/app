@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { GET_ADMIN_SITES_QUERY } from 'data/admin/queries';
 import { AdminSiteSort } from 'types/graphql';
-import type { AdminSites, ActiveVisitorCount} from 'types/graphql';
+import type { AdminSites, ActiveVisitorCount } from 'types/graphql';
 
 interface Props {
   size: number;

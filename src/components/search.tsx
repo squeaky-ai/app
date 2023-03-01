@@ -6,10 +6,11 @@ import { Icon } from 'components/icon';
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   search: string;
+  placeholder?: string;
   onSearch: (value: string) => void;
 }
 
-export const Search: FC<Props> = ({ search, onSearch, ...rest }) => {
+export const Search: FC<Props> = ({ search, placeholder, onSearch, ...rest }) => {
   const [val, setVal] = React.useState<string>(search);
 
   const setValue = React.useCallback(debounce((value: string) => {
@@ -25,7 +26,7 @@ export const Search: FC<Props> = ({ search, onSearch, ...rest }) => {
     <div className='search-input'>
       <Input 
         type='search' 
-        placeholder='Search ...'
+        placeholder={placeholder || 'Search ...'}
         name='search'
         value={val}
         onChange={handleChange}

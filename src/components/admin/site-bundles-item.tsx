@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import { Button } from 'components/button';
 import { Icon } from 'components/icon';
 import { SitesTable } from 'components/admin/sites-table';
+import { SiteBundlesCreate } from 'components/admin/site-bundles-create';
 import type { Column } from 'types/common';
 import type { ActiveVisitorCount, AdminSiteSort, SitesBundle } from 'types/graphql';
 
@@ -28,11 +29,17 @@ export const SiteBundlesItem: FC<Props> = ({
 
   return (
     <div className={classnames('site-bundle', { open })}>
-      <Button className='heading' onClick={handleToggle}>
-        <Icon name={open ? 'subtract-line' : 'add-line'} />
-        <b>{bundle.name}</b>
-        <span>({bundle.plan.name} Plan)</span>
-      </Button>
+      <div className='heading'>
+        <Button onClick={handleToggle}>
+          <Icon name={open ? 'subtract-line' : 'add-line'} />
+          <b>{bundle.name}</b>
+          <span>({bundle.plan.name} Plan)</span>
+        </Button>
+
+        <div className='actions'>
+          <SiteBundlesCreate bundle={bundle} />
+        </div>
+      </div>
 
       <div className='items'>
         <SitesTable
