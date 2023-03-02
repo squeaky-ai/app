@@ -193,6 +193,16 @@ export const getInteractionEvents = (
     });
   });
 
+  // HACK: The inactivity is not precise enough and multiple
+  // can stack up against each other, better to just combine
+  // them so it doesn't look jank
+  results.forEach((result, index) => {
+    if (result.eventName === 'inactivity' && results[index - 1]?.eventName === 'inactivity') {
+      results[index - 1].timestampEnd = result.timestampEnd;
+      results.splice(index, 0);
+    }
+  });
+
   return {
     interactionEvents: results.sort((a, b) => a.timestampStart - b.timestampStart),
     startedAt,
