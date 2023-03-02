@@ -139,7 +139,7 @@ export const getInteractionEvents = (
 ): { interactionEvents: InteractionEventItem[], startedAt: number } => {
   const startedAt = events[0]?.timestamp || 0;
 
-  const results = events.reduce((acc, item) => {
+  let results = events.reduce((acc, item) => {
     const eventName = getEventName(item);
 
     if (eventName === 'unknown') return acc;
@@ -198,12 +198,13 @@ export const getInteractionEvents = (
   // HACK: The inactivity is not precise enough and multiple
   // can stack up against each other, better to just combine
   // them so it doesn't look jank
-  results.forEach((result, index) => {
-    if (result.eventName === 'inactivity' && results[index - 1]?.eventName === 'inactivity') {
-      results[index - 1].timestampEnd = result.timestampEnd;
-      results.splice(index, 0);
-    }
-  });
+  results = results.reduce((acc, result) => {
+    if (result.eventName === 'inactivity' && last(acc)?.eventName === 'inactivity') {
+      return [...acc.slice(0, -1), { ...last(acc), timestampEnd: result.timestampEnd }];
+    } 
+
+    return [...acc, result];
+  }, []);
 
   return {
     interactionEvents: results,

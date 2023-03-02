@@ -107,7 +107,7 @@ export class Player extends React.Component<Props> {
   };
 
   private handleWindowBlur = (): void => {
-    this.replayer.pause();
+    this.replayer?.pause();
   };
 
   public render(): JSX.Element {

@@ -39,12 +39,6 @@ export function handleTreeUpdate(
   item: PageTreeItem,
   selected: string[],
 ): string[] {
-  if (item.children.length === 0) {
-    return selected.includes(item.path)
-      ? selected.filter(s => s !== item.path)
-      : [...selected, item.path];
-  }
-
   const allChildren = getAndFlattenAllChildren(item);
 
   const allSelected = allChildren.every(a => selected.includes(a));
