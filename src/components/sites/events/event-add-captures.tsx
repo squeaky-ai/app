@@ -27,7 +27,7 @@ export const EventAddCaptures: FC<Props> = ({ eventStats, onClose, onUpdate }) =
   // with many events
   const { events, loading } = useEventCaptures({ 
     page: 0, 
-    size: 25, 
+    size: 50, 
     sort: EventsCaptureSort.NameAsc 
   });
 
