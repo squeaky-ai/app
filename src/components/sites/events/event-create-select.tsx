@@ -15,6 +15,7 @@ export const EventCreateSelect: FC<Props> = ({ setType }) => {
       <EventCard type={EventsCaptureType.PageVisit} onClick={() => setType(EventsCaptureType.PageVisit)} />
       <EventCard type={EventsCaptureType.TextClick} onClick={() => setType(EventsCaptureType.TextClick)} />
       <EventCard type={EventsCaptureType.SelectorClick} onClick={() => setType(EventsCaptureType.SelectorClick)} />
+      <EventCard type={EventsCaptureType.UtmParameters} onClick={() => setType(EventsCaptureType.UtmParameters)} />
       <EventCard type={EventsCaptureType.Error} onClick={() => setType(EventsCaptureType.Error)} />
 
       <p className='heading'><b>Custom</b></p>

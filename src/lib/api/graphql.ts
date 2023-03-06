@@ -988,6 +988,7 @@ export const eventsCaptureCreate = async (input: EventCaptureCreateInput): Promi
                 condition
                 matcher
                 value
+                field
               }
               groupNames
               count

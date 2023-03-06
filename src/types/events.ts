@@ -11,6 +11,7 @@ export enum EventsCaptureType {
   SelectorClick = 2,
   Error = 3,
   Custom = 4,
+  UtmParameters = 5,
 }
 
 export enum EventStatsSort {

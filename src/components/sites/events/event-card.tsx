@@ -18,6 +18,8 @@ const getText = (type: EventsCaptureType): string | React.ReactNode => {
       return 'The text click event is triggered when a visitor clicks on a button or link with a specific text string on your site.';
     case EventsCaptureType.SelectorClick:
       return 'The CSS selector click event is triggered when a visitor clicks on a specific element on your site via a CSS selector.';
+    case EventsCaptureType.UtmParameters:
+      return 'UTM Parameter events enable you to track the each time a specific parameter was present in the URL of a page your visitor loaded.';
     case EventsCaptureType.Error:
       return 'Javascript error events help you to track the prevelance of specific Javascript Errors we have recorded on your site.';
     case EventsCaptureType.Custom:

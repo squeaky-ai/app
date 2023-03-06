@@ -35,8 +35,14 @@ export enum Steps {
 const EventCreateSchema = Yup.object().shape({
   eventType: Yup.number().required('Event type is required'),
   matcher: Yup.string().required('Condition is required'),
-  value: Yup.string().required('Condition is required'),
+  value: Yup.string().required('Value is required'),
   name: Yup.string().required('Name is required'),
+  field: Yup
+    .string()
+    .when('eventType', {
+      is: (type: EventsCaptureType) => type === EventsCaptureType.UtmParameters,
+      then: () => Yup.string().required('Field is required'),
+    }),
   groupIds: Yup.array(),
 });
 
@@ -68,6 +74,7 @@ export const EventCreate: FC<Props> = ({ site, member, buttonText, buttonClassNa
             matcher: EventsMatch.Equals,
             value: '',
             name: '',
+            field: 'utm_campaign',
             groupIds: [],
           }}
           validationSchema={EventCreateSchema}
@@ -81,6 +88,8 @@ export const EventCreate: FC<Props> = ({ site, member, buttonText, buttonClassNa
                       condition: EventsCondition.Or,
                       matcher: values.matcher,
                       value: values.value,
+                      // Only set this for utm
+                      field: values.eventType === EventsCaptureType.UtmParameters ? values.field : undefined,
                     }
                   ],
                   siteId: site.id,
@@ -136,47 +145,86 @@ export const EventCreate: FC<Props> = ({ site, member, buttonText, buttonClassNa
                         <Option value={EventsCaptureType.PageVisit}>Page visit</Option>
                         <Option value={EventsCaptureType.TextClick}>Text click</Option>
                         <Option value={EventsCaptureType.SelectorClick}>CSS Selector click</Option>
+                        <Option value={EventsCaptureType.UtmParameters}>UTM Parameters</Option>
                         <Option value={EventsCaptureType.Error}>JavaScript error</Option>
                         <Option value={EventsCaptureType.Custom}>Custom event</Option>
                       </Select>
 
-                      <div className='input-group'>
-                        <div>
-                          <Label htmlFor='matcher'>Condition</Label>
-                          <Select name='matcher' onChange={handleChange} value={values.matcher}>
-                            <Option value={EventsMatch.Equals}>Is</Option>
-                            <Option value={EventsMatch.NotEquals}>Is not</Option>
-                            <Option value={EventsMatch.Contains}>Contains</Option>
-                            <Option value={EventsMatch.NotContains}>Doesn&apos;t contain</Option>
-                            <Option value={EventsMatch.StartsWith}>Starts with</Option>
-                          </Select>
+                      {values.eventType !== EventsCaptureType.UtmParameters && (
+                        <div className='input-group'>
+                          <div>
+                            <Label htmlFor='matcher'>Condition</Label>
+                            <Select name='matcher' onChange={handleChange} value={values.matcher}>
+                              <Option value={EventsMatch.Equals}>Is</Option>
+                              <Option value={EventsMatch.NotEquals}>Is not</Option>
+                              <Option value={EventsMatch.Contains}>Contains</Option>
+                              <Option value={EventsMatch.NotContains}>Doesn&apos;t contain</Option>
+                              <Option value={EventsMatch.StartsWith}>Starts with</Option>
+                            </Select>
+                          </div>
+                          <div>
+                            <Label htmlFor='value'>
+                              {values.eventType === EventsCaptureType.PageVisit && 'URL'}
+                              {values.eventType === EventsCaptureType.TextClick && 'Text string'}
+                              {values.eventType === EventsCaptureType.SelectorClick && 'CSS selector'}
+                              {values.eventType === EventsCaptureType.UtmParameters && 'UTM parameter'}
+                              {values.eventType === EventsCaptureType.Error && 'Error message'}
+                              {values.eventType === EventsCaptureType.Custom && 'TODO'}
+                            </Label>
+                            <Input 
+                              name='value' 
+                              type='text' 
+                              onBlur={handleBlur}
+                              onChange={handleChange}
+                              value={values.value}
+                              invalid={touched.value && !!errors.value}
+                              placeholder={
+                                (() => {
+                                  if (values.eventType === EventsCaptureType.PageVisit) return 'e.g. https://example.com';
+                                  if (values.eventType === EventsCaptureType.SelectorClick) return 'e.g., #elementID > DIV';
+                                  return '';
+                                })()
+                              }
+                            />
+                            <span className='validation'>{errors.value}</span>
+                          </div>
                         </div>
-                        <div>
-                          <Label htmlFor='value'>
-                            {values.eventType === EventsCaptureType.PageVisit && 'URL'}
-                            {values.eventType === EventsCaptureType.TextClick && 'Text string'}
-                            {values.eventType === EventsCaptureType.SelectorClick && 'CSS selector'}
-                            {values.eventType === EventsCaptureType.Error && 'Error message'}
-                            {values.eventType === EventsCaptureType.Custom && 'TODO'}
-                          </Label>
-                          <Input 
-                            name='value' 
-                            type='text' 
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                            value={values.value}
-                            invalid={touched.value && !!errors.value}
-                            placeholder={
-                              (() => {
-                                if (values.eventType === EventsCaptureType.PageVisit) return 'e.g. https://example.com';
-                                if (values.eventType === EventsCaptureType.SelectorClick) return 'e.g., #elementID > DIV';
-                                return '';
-                              })()
-                            }
-                          />
-                          <span className='validation'>{errors.value}</span>
+                      )}
+
+                      {values.eventType === EventsCaptureType.UtmParameters  && (
+                        <div className='input-group utm-parameters'>
+                          <div>
+                            <Label htmlFor='field'>Parameter type</Label>
+                            <Select name='field' onChange={handleChange} value={values.field} invalid={touched.field && !!errors.field}>
+                              <Option value='utm_source'>UTM Source</Option>
+                              <Option value='utm_campaign'>UTM Campaign</Option>
+                              <Option value='utm_term'>UTM Term</Option>
+                              <Option value='utm_content'>UTM Content</Option>
+                              <Option value='utm_medium'>UTM Medium</Option>
+                            </Select>
+                            <span className='validation'>{errors.field?.toString()}</span>
+                          </div>
+                          <div>
+                            <Label htmlFor='value'>Text string</Label>
+                            <div className='input-prefix'>
+                              <div className='prefix'>
+                                {values.field}=
+                              </div>
+                              <div>
+                                <Input 
+                                  name='value' 
+                                  type='text' 
+                                  onBlur={handleBlur}
+                                  onChange={handleChange}
+                                  value={values.value}
+                                  invalid={touched.value && !!errors.value}
+                                />
+                                <span className='validation'>{errors.value}</span>
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                      </div>
+                      )}
 
                       <Divider />
 

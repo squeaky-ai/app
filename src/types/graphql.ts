@@ -1302,12 +1302,14 @@ export enum EventsMatch {
 export type EventsRule = {
   __typename?: 'EventsRule';
   condition: EventsCondition;
+  field: Scalars['String'];
   matcher: EventsMatch;
   value: Scalars['String'];
 };
 
 export type EventsRuleInput = {
   condition: EventsCondition;
+  field?: InputMaybe<Scalars['String']>;
   matcher: EventsMatch;
   value: Scalars['String'];
 };
@@ -1645,7 +1647,7 @@ export type Mutation = {
   adminPartnerInvoiceUpdate?: Maybe<UsersInvoice>;
   adminReferralDelete?: Maybe<UsersReferral>;
   adminSiteAssociateCustomer?: Maybe<AdminSite>;
-  adminSiteBundleCreate?: Maybe<SitesBundle>;
+  adminSiteBundlesCreate?: Maybe<SitesBundle>;
   adminSiteDelete?: Maybe<AdminSite>;
   adminSiteIngestUpdate?: Maybe<AdminSite>;
   adminSitePlanUpdate?: Maybe<AdminSite>;
@@ -1771,7 +1773,7 @@ export type MutationAdminSiteAssociateCustomerArgs = {
 };
 
 
-export type MutationAdminSiteBundleCreateArgs = {
+export type MutationAdminSiteBundlesCreateArgs = {
   input: AdminSiteBundlesCreateInput;
 };
 

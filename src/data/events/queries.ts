@@ -15,6 +15,7 @@ export const GET_EVENT_CAPTURES_QUERY = gql`
             matcher
             condition
             value
+            field
           }
           count
           groupIds
@@ -49,6 +50,7 @@ export const GET_EVENT_GROUPS_QUERY = gql`
             matcher
             condition
             value
+            field
           }
           count
           groupIds

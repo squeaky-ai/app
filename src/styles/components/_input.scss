@@ -101,3 +101,32 @@
     padding-left: 2.25rem;
   }
 }
+
+.input-prefix {
+  align-items: flex-start;
+  display: flex;
+  position: relative;
+  
+  .prefix {
+    align-items: center;
+    background: var(--gray-100);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--border-radius-controls) 0 0 var(--border-radius-controls);
+    display: flex;
+    flex-shrink: 0;
+    font-size: var(--font-size-body);
+    height: 2rem;
+    margin: 0;
+    padding: 0 .5rem;
+    width: auto;
+
+    & + div {
+      flex: 1;
+    }
+  }
+
+  .input {
+    border-radius: 0 var(--border-radius-controls) var(--border-radius-controls) 0;
+    border-left-width: 0;
+  }
+}

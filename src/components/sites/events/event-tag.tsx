@@ -17,6 +17,8 @@ const getText = (type: EventsCaptureType) => {
       return 'Text Click';
     case EventsCaptureType.SelectorClick:
       return 'CSS Selector Click';
+    case EventsCaptureType.UtmParameters:
+      return 'UTM Parameters';
     case EventsCaptureType.Error:
       return 'JavaScript Error';
     case EventsCaptureType.Custom:
@@ -31,6 +33,8 @@ const getIcon = (type: EventsCaptureType) => {
     case EventsCaptureType.TextClick:
     case EventsCaptureType.SelectorClick:
       return 'cursor-line';
+    case EventsCaptureType.UtmParameters:
+      return 'equalizer-line';
     case EventsCaptureType.Error:
       return 'error-warning-line';
     case EventsCaptureType.Custom:
@@ -46,6 +50,8 @@ const getClassName = (type: EventsCaptureType) => {
       return 'text-click';
     case EventsCaptureType.SelectorClick:
       return 'css-selector';
+    case EventsCaptureType.UtmParameters:
+      return 'utm-parameters'
     case EventsCaptureType.Error:
       return 'error';
     case EventsCaptureType.Custom:

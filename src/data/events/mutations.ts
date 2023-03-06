@@ -34,6 +34,7 @@ export const CREATE_EVENT_CAPTURE_MUTATION = gql`
         condition
         matcher
         value
+        field
       }
       count
       lastCountedAt
@@ -70,6 +71,7 @@ export const UPDATE_EVENT_CAPTURE_MUTATION = gql`
         condition
         matcher
         value
+        field
       }
       count
       lastCountedAt

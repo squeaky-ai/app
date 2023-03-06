@@ -32,6 +32,14 @@
     }
   }
 
+  &.utm-parameters {
+    background: var(--mauve-50);
+
+    span, .icon {
+      color: var(--mauve-700);
+    }
+  }
+
   &.error {
     background: var(--magenta-50);
 
