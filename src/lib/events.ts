@@ -22,6 +22,10 @@ export const isErrorEvent = (
   event: SessionEvent
 ): event is ErrorEvent => (event.type as any) === CustomEvents.ERROR;
 
+export const isResizeEvent = (
+  event: SessionEvent
+) => event.type === EventType.IncrementalSnapshot && event.data.source === IncrementalSource.ViewportResize;
+
 export const isCustomEvent = (
   event: SessionEvent
 ): event is ErrorEvent => (event.type as any) === CustomEvents.CUSTOM_TRACK;
@@ -62,6 +66,10 @@ export function getEventName(event: SessionEvent): EventName {
     }
   }
 
+  if (isResizeEvent(event)) {
+    return 'resize';
+  }
+
   if (isErrorEvent(event)) {
     return 'error';
   }
@@ -97,6 +105,8 @@ export function getEventLabel(name: EventName): string {
       return 'Scroll';
     case 'touch':
       return 'Touch';
+    case 'resize':
+      return 'Viewport Resize';
     case 'unknown':
     default:
       return 'Uknown';

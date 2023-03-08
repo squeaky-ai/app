@@ -15,6 +15,7 @@ export type EventName =
   'error' |
   'custom' |
   'context' |
+  'resize' |
   'unknown' |
   'inactivity';
 

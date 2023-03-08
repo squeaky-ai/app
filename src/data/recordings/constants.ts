@@ -33,6 +33,10 @@ export const EVENTS: EventItem[] = [
     value: 'scroll',
   },
   {
+    name: 'Viewport Resize',
+    value: 'resize',
+  },
+  {
     name: 'Javascript Error',
     value: 'error',
   },
