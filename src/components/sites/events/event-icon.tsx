@@ -33,7 +33,7 @@ const getRemixIcon = (type: EventName): string => {
     case 'inactivity':
       return 'zzz-line';
     case 'resize':
-      return 'crop-line';
+      return 'aspect-ratio-line';
     default:
       return '';
   }
