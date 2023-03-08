@@ -107,7 +107,7 @@ export const getClickMapData = (items: HeatmapsClickCount[]): ClickMapData[] => 
   });
 };
 
-export const showClickCountsMaps = (doc: Document, items: HeatmapsClickCount[], clickTarget: HeatmapClickTarget) => {
+export const showClickCountsMaps = (doc: Document, items: HeatmapsClickCount[], clickTarget: HeatmapClickTarget, selected: string | null) => {
   const clickMapData = getClickMapData(items);
 
   items.forEach(item => {
@@ -158,6 +158,7 @@ export const showClickCountsMaps = (doc: Document, items: HeatmapsClickCount[], 
       position: absolute;
       right: 0;
       top: 0;
+      transform: scale(${item.selector === selected ? 2 : 1});
       transform-origin: center center;
     `;
 
@@ -187,9 +188,6 @@ export const showScrollMaps = (doc: Document, items: HeatmapsScroll[], scale: nu
   doc.body.appendChild(overlay);
 
   createScrollingScrollMarker(doc, scrollMapData, unscale);
-  createFixedScrollMarker(doc, scrollMapData, 25, unscale);
-  createFixedScrollMarker(doc, scrollMapData, 50, unscale);
-  createFixedScrollMarker(doc, scrollMapData, 75, unscale);
 };
 
 export const showCursorMaps = (doc: Document, items: HeatmapsCursor[]) => {
@@ -273,24 +271,6 @@ export const showClickGradientMaps = (doc: Document, items: HeatmapsClickPositio
   map.setData({ min: 0, max, data });
 };
 
-const createFixedScrollMarker = (doc: Document, scrollMapData: ScrollMapData[], percentage: number, scale: number) => {
-  const scroll = findLast(scrollMapData, s => s.percentThatMadeIt >= percentage);
-
-  if (!scroll) return;
-
-  const marker = doc.createElement('div');
-  marker.classList.add('__squeaky_fixed_percentage_marker');
-  marker.style.top = `${scroll.pixelsScrolled}px`;
-  marker.style.transform = `scale(${scale})`;
-
-  const text = doc.createElement('p');
-  text.innerText = `${percentage}%`;
-
-  marker.appendChild(text);
-
-  doc.body.appendChild(marker);
-};
-
 const createScrollingScrollMarker = (doc: Document, scrollMapData: ScrollMapData[], scale: number) => {
   const percentageMarker = doc.createElement('div');
   percentageMarker.id = '__squeaky_scrolling_percentage_marker';
@@ -364,40 +344,6 @@ export const iframeStyles = `
     }
 
     #__squeaky_scrolling_percentage_marker::after {
-      border: 2px dashed #001A39;
-      content: ' ';
-      display: block;
-      position: absolute;
-      width: 100%;
-    }
-
-    .__squeaky_fixed_percentage_marker {
-      align-items: center;
-      display: flex;
-      justify-content: flex-start;
-      left: 0;
-      position: absolute;
-      top: 0;
-      transform-origin: left top;
-      width: 100%;
-      z-index: 99999999;
-    }
-
-    .__squeaky_fixed_percentage_marker p {
-      background: #001125;
-      border-radius: .5rem;
-      color: white;
-      display: inline-block;
-      font-size: 13px;
-      font-family: Helvetica, sans-serif;
-      font-weight: 600;
-      line-height: 20px;
-      margin: 0 0 0 1.5rem;
-      padding: .5rem 1rem;
-      z-index: 1;
-    }
-
-    .__squeaky_fixed_percentage_marker::after {
       border: 2px dashed #001A39;
       content: ' ';
       display: block;

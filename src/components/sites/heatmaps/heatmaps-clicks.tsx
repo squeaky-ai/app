@@ -6,7 +6,7 @@ import { Tooltip } from 'components/tooltip';
 import { Pill } from 'components/pill';
 import { Card } from 'components/card';
 import { Sort } from 'components/sort';
-import { ClickMapData, getClickMapData, getElement, getElements, selectorIncludesClickable } from 'lib/heatmaps';
+import { ClickMapData, getClickMapData, getElement, selectorIncludesClickable } from 'lib/heatmaps';
 import type { HeatmapClickTarget, Heatmaps, HeatmapsClickCount } from 'types/heatmaps';
 
 interface Props {
@@ -51,16 +51,6 @@ export const HeatmapsClicks: FC<Props> = ({ heatmaps, selected, clickTarget, set
     const unselect = click.selector === selected;
 
     setSelected(unselect ? null : click.selector);
-    setScale('.__squeaky_click_tag', 1);
-
-    if (!unselect) setScale(`${click.selector} .__squeaky_click_tag`, 2);
-  };
-
-  const setScale = (selector: string, scale: number) => {
-    const doc = getIframeDocument();
-    const element = getElements(doc, selector);
-
-    element.forEach(elem => elem.style.transform = `scale(${scale})`);
   };
 
   return (

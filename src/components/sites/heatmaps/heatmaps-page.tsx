@@ -14,6 +14,7 @@ interface Props {
   device: HeatmapsDevice;
   clickTarget: HeatmapClickTarget;
   page: string;
+  selected: string | null;
   heatmaps: Heatmaps;
 }
 
@@ -24,6 +25,7 @@ export const HeatmapsPage: FC<Props> = ({
   device,
   page,
   clickTarget,
+  selected,
   heatmaps,
 }) => {
   const ref = React.useRef<HTMLDivElement>(null);
@@ -79,7 +81,6 @@ export const HeatmapsPage: FC<Props> = ({
     getElements(doc, '.__squeaky_cursor_overlay').forEach(d => d.remove());
     getElements(doc, '.__squeaky_outline').forEach(elem => elem.classList.remove('__squeaky_outline'));
     getElements(doc, '#__squeaky_scrolling_percentage_marker').forEach(d => d.remove());
-    getElements(doc, '.__squeaky_fixed_percentage_marker').forEach(d => d.remove());
   };
 
   const deviceWidth = (() => {
@@ -99,11 +100,10 @@ export const HeatmapsPage: FC<Props> = ({
     cleanup(doc);
 
     doc.documentElement.style.overflowY = 'auto';
-    doc.documentElement.scrollTo(0, 0);
     doc.body.style.cssText += 'pointer-events: none; user-select: none;';
     doc.head.innerHTML += iframeStyles;
 
-    if (type === 'ClickCount') showClickCountsMaps(doc, heatmaps.items as HeatmapsClickCount[], clickTarget);
+    if (type === 'ClickCount') showClickCountsMaps(doc, heatmaps.items as HeatmapsClickCount[], clickTarget, selected);
     if (type === 'ClickPosition') showClickGradientMaps(doc, heatmaps.items as HeatmapsClickPosition[]);
     if (type === 'Scroll') showScrollMaps(doc, heatmaps.items as HeatmapsScroll[], scale);
     if (type === 'Cursor') showCursorMaps(doc, heatmaps.items as HeatmapsCursor[]);

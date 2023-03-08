@@ -104,6 +104,7 @@ export const Heatmaps: FC<Props> = ({ type, page, pages, period, setPage, setPer
               type={type}
               device={device}
               clickTarget={clickTarget}
+              selected={selected} 
               page={page}
               heatmaps={heatmaps}
             />
