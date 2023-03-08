@@ -1,6 +1,5 @@
 import React from 'react';
 import type { FC } from 'react';
-import Link from 'next/link';
 import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import type { Site } from 'types/graphql';
@@ -57,9 +56,9 @@ export const JourneyMenu: FC<Props> = ({
           <Button onClick={handleViewRecordings}>
             View recordings
           </Button>
-          <Link className='button primary' href={`/sites/${site.id}/analytics/page/traffic?url=${encodeURIComponent(page.path)}`}>
+          <a className='button primary' target='_blank' rel='noreferrer' href={`${site.url}${page.path}`}>
             Go to page
-          </Link>
+          </a>
         </div>
       )}
     </div>
