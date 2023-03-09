@@ -1,25 +1,10 @@
 import heatmap from 'vendor/heatmap';
 import { range, orderBy, findLast, sumBy, countBy } from 'lodash';
 import { percentage } from 'lib/maths';
-import { HeatmapColor, HEATMAP_COLOURS } from 'data/heatmaps/constants';
+import { HEATMAP_COLOURS } from 'data/heatmaps/constants';
 import type { Heatmap } from 'vendor/heatmap';
 import type { HeatmapClickTarget } from 'types/heatmaps';
-import type { HeatmapsScroll, HeatmapsClickCount, HeatmapsClickPosition, HeatmapsCursor } from 'types/heatmaps';
-
-interface ScrollMapData {
-  increment: number;
-  pixelsScrolled: number;
-  percentThatMadeIt: number;
-  amountThatMadeIt: number;
-  color: HeatmapColor;
-}
-
-export interface ClickMapData {
-  selector: string;
-  color: HeatmapColor;
-  count: number;
-  percentage: number;
-}
+import type { HeatmapsScroll, HeatmapsClickCount, HeatmapsClickPosition, HeatmapsCursor, ScrollMapData, ClickMapData } from 'types/heatmaps';
 
 const createHeatmapsInstance = (container: HTMLElement): Heatmap<string, 'x', 'y'> => heatmap.create({
   container,
@@ -66,15 +51,15 @@ export const getScrollMapData = (items: HeatmapsScroll[]): ScrollMapData[] => {
     return potentials[potentials.length - 1];
   };
 
-  return range(0, 21).map(i => {
-    const pixelsScrolled = Math.floor(((i * 5) / 100) * max);
+  return range(0, 101).map(i => {
+    const pixelsScrolled = Math.floor((i / 100) * max);
     const amountThatMadeIt = items.filter(i => i.y >= pixelsScrolled).length;
     const percentThatMadeIt = percentage(total, amountThatMadeIt);
 
     const color = getColor(amountThatMadeIt);
 
     return {
-      increment: i * 5,
+      increment: i,
       pixelsScrolled,
       percentThatMadeIt,
       amountThatMadeIt,

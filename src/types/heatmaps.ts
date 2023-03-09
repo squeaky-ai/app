@@ -1,3 +1,4 @@
+import { HeatmapColor } from 'data/heatmaps/constants';
 import type { Heatmaps as HeatmapsWithStringItems } from 'types/graphql';
 
 export type HeatmapClickTarget = 'all' | 'anchors';
@@ -27,4 +28,19 @@ export type HeatmapsItem = HeatmapsClickCount | HeatmapsClickPosition | Heatmaps
 
 export interface Heatmaps extends Omit<HeatmapsWithStringItems, 'items'> {
   items: HeatmapsItem[];
+}
+
+export interface ScrollMapData {
+  increment: number;
+  pixelsScrolled: number;
+  percentThatMadeIt: number;
+  amountThatMadeIt: number;
+  color: HeatmapColor;
+}
+
+export interface ClickMapData {
+  selector: string;
+  color: HeatmapColor;
+  count: number;
+  percentage: number;
 }

@@ -6,8 +6,8 @@ import { Tooltip } from 'components/tooltip';
 import { Pill } from 'components/pill';
 import { Card } from 'components/card';
 import { Sort } from 'components/sort';
-import { ClickMapData, getClickMapData, getElement, selectorIncludesClickable } from 'lib/heatmaps';
-import type { HeatmapClickTarget, Heatmaps, HeatmapsClickCount } from 'types/heatmaps';
+import { getClickMapData, getElement, selectorIncludesClickable } from 'lib/heatmaps';
+import type { HeatmapClickTarget, Heatmaps, HeatmapsClickCount, ClickMapData } from 'types/heatmaps';
 
 interface Props {
   heatmaps: Heatmaps;

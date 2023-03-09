@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import { Icon } from 'components/icon';
 import { Card } from 'components/card';
 import { getScrollMapData } from 'lib/heatmaps';
-import type { Heatmaps, HeatmapsScroll } from 'types/heatmaps';
+import type { Heatmaps, HeatmapsScroll, ScrollMapData } from 'types/heatmaps';
 
 interface Props {
   heatmaps: Heatmaps;
@@ -11,6 +11,12 @@ interface Props {
 
 export const HeatmapsScrolls: FC<Props> = ({ heatmaps }) => {
   const scrollMap = getScrollMapData(heatmaps.items as HeatmapsScroll[]).slice(1);
+
+  // Only show every 5% step
+  const scrolls = scrollMap.reduce((acc, scroll, index) => {
+    if ((index + 1) % 5 === 0) acc.push(scroll);
+    return acc;
+  }, [] as ScrollMapData[]);
 
   return (
     <Card className='data'>
@@ -30,7 +36,7 @@ export const HeatmapsScrolls: FC<Props> = ({ heatmaps }) => {
               <p>Users</p>
             </div>
               <ul>
-                {scrollMap.map(map => (
+                {scrolls.map(map => (
                   <li key={map.increment} className='row'>
                     <p>{map.increment}%</p>
                     <p>{map.pixelsScrolled}px</p>
