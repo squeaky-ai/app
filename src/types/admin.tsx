@@ -15,6 +15,7 @@ export type BlogInput = {
   metaDescription: string;
   body: string;
   script: string;
+  coveringEnabled: boolean;
 }
 
 

@@ -16,6 +16,7 @@ export const ADMIN_BLOG_POST_CREATE_MUTATION = gql`
       metaDescription
       slug
       body
+      coveringEnabled
     }
   }
 `;
@@ -36,6 +37,7 @@ export const ADMIN_BLOG_POST_UPDATE_MUTATION = gql`
       metaDescription
       slug
       body
+      coveringEnabled
     }
   }
 `;

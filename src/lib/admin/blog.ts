@@ -46,6 +46,7 @@ export const exportBlogPost = (input: BlogInput): Omit<BlogPost, 'id' | 'created
   body: input.body,
   slug: getSlug(input),
   scripts: input.script.split(',').map(s => s.trim()).filter(s => !!s),
+  coveringEnabled: input.coveringEnabled,
 });
 
 export const uploadFile = async (
@@ -86,6 +87,7 @@ export const getInitialValues = (post: BlogPost): BlogInput => {
       metaDescription: '',
       body: '<p>Hello world</p>',
       script: '',
+      coveringEnabled: true,
     };
   };
 
@@ -99,5 +101,6 @@ export const getInitialValues = (post: BlogPost): BlogInput => {
     metaDescription: post.metaDescription,
     body: post.body,
     script: post.scripts.join(','),
+    coveringEnabled: post.coveringEnabled,
   }
 };

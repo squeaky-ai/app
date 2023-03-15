@@ -47,6 +47,7 @@ export const GET_BLOG_POST_QUERY = gql`
       slug
       body
       scripts
+      coveringEnabled
       createdAt
       updatedAt
     }

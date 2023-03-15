@@ -34,6 +34,7 @@ const BlogSchema = Yup.object().shape({
   metaImage: Yup.string().required('Meta image is required'),
   metaDescription: Yup.string().required('Meta description is required'),
   body: Yup.string().required('Body is required'),
+  coveringEnabled: Yup.boolean(),
   script: Yup.string(),
 });
 
@@ -121,6 +122,10 @@ export const BlogEdit: FC<Props> = ({ post, images, onChange, refetchImages }) =
 
               <Toggle checked={values.draft} name='draft' onChange={(event) => setFieldValue('draft', event.target.checked)}>
                 Draft
+              </Toggle>
+
+              <Toggle checked={values.coveringEnabled} name='coveringEnabled' onChange={(event) => setFieldValue('coveringEnabled', event.target.checked)}>
+                Show &quot;What we&apos;ll cover&quot;
               </Toggle>
 
               <Label htmlFor='metaImage'>Meta Image</Label>

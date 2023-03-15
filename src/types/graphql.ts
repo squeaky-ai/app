@@ -85,6 +85,7 @@ export type AdminBlogPostCreateInput = {
   category: Scalars['String'];
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: InputMaybe<Scalars['String']>;
+  coveringEnabled: Scalars['Boolean'];
   draft: Scalars['Boolean'];
   metaDescription: Scalars['String'];
   metaImage: Scalars['String'];
@@ -108,6 +109,7 @@ export type AdminBlogPostUpdateInput = {
   category?: InputMaybe<Scalars['String']>;
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: InputMaybe<Scalars['String']>;
+  coveringEnabled?: InputMaybe<Scalars['Boolean']>;
   draft?: InputMaybe<Scalars['Boolean']>;
   id: Scalars['ID'];
   metaDescription?: InputMaybe<Scalars['String']>;
@@ -933,6 +935,7 @@ export type BlogPost = {
   author: BlogAuthor;
   body: Scalars['String'];
   category: Scalars['String'];
+  coveringEnabled: Scalars['Boolean'];
   createdAt: Scalars['ISO8601DateTime'];
   draft: Scalars['Boolean'];
   id: Scalars['ID'];
@@ -1302,7 +1305,7 @@ export enum EventsMatch {
 export type EventsRule = {
   __typename?: 'EventsRule';
   condition: EventsCondition;
-  field: Scalars['String'];
+  field?: Maybe<Scalars['String']>;
   matcher: EventsMatch;
   value: Scalars['String'];
 };
