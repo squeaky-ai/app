@@ -197,7 +197,7 @@ export type AdminSite = {
   name: Scalars['String'];
   notes: Notes;
   nps: Nps;
-  ownerName: Scalars['String'];
+  ownerName?: Maybe<Scalars['String']>;
   pageUrls: Array<Scalars['String']>;
   pages: Array<SitesPage>;
   plan?: Maybe<SitesPlan>;
@@ -2644,7 +2644,7 @@ export type Site = {
   name: Scalars['String'];
   notes: Notes;
   nps: Nps;
-  ownerName: Scalars['String'];
+  ownerName?: Maybe<Scalars['String']>;
   pageUrls: Array<Scalars['String']>;
   pages: Array<SitesPage>;
   plan?: Maybe<SitesPlan>;

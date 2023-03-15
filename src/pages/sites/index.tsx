@@ -53,7 +53,7 @@ const Sites: NextPage<ServerSideProps> = () => {
                   <Avatar site={site} />
                   <p className='name'><b>{site.name}</b></p>
                   <p className='url'>{site.url}</p>
-                  <p className='owner'>Owner: {site.ownerName}</p>
+                  <p className='owner'>Owner: {site.ownerName || '-'}</p>
                 </Link>
               </li>
             ))}

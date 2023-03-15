@@ -40,7 +40,7 @@ export const SiteDetails: FC<Props> = ({ activeVisitors, site }) => {
         </div>
         <div className='row'>
           <span>Site Owner</span>
-          <span>{site.ownerName}</span>
+          <span>{site.ownerName || '-'}</span>
         </div>
         <div className='row'>
           <span>Site URL</span>

@@ -44,7 +44,7 @@ export const SitesTableRow: FC<Props> = ({ site, activeVisitors, style }) => {
           {site.url}
         </a>
       </Cell>
-      <Cell>{site.ownerName}</Cell>
+      <Cell>{site.ownerName || '-'}</Cell>
       <Cell>{site.plan.name}</Cell>
       <Cell>
         {site.plan.exceeded 
