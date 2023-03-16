@@ -58,18 +58,14 @@ export const JourneysGraph: FC<Props> = ({ site, position, journeys, setPage, se
         setShowReferrers={setShowReferrers}
       />
       
-      {range(0, columnCount).map(col => {
-        const column = position === PathPosition.Start
-          ? col
-          : (columnCount - 1) - col;
-
+      {range(0, columnCount).map(column => {
         const pages = getPagesForCol(journeys, column);
         const padder = 100 - sum(pages.map(p => p.percentage));
 
         return (
           <div className='col' key={column}>
             <p className='heading'>
-              {getColumnTitle(column, position)}
+              {getColumnTitle(column, columnCount, position)}
             </p>
             {pages.map(page => (
               <JourneysPage
