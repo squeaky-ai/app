@@ -18,6 +18,7 @@ import { eventsCaptureCreate } from 'lib/api/graphql';
 import { EventsCaptureType } from 'types/events';
 import { EventsCondition, EventsMatch, Team } from 'types/graphql';
 import { MEMBER, READ_ONLY, SUPER_USER } from 'data/teams/constants';
+import { VALID_EVENT_VALUE } from 'data/sites/constants';
 import type { Site } from 'types/graphql';
 
 interface Props {
@@ -35,7 +36,10 @@ export enum Steps {
 const EventCreateSchema = Yup.object().shape({
   eventType: Yup.number().required('Event type is required'),
   matcher: Yup.string().required('Condition is required'),
-  value: Yup.string().required('Value is required'),
+  value: Yup
+    .string()
+    .matches(VALID_EVENT_VALUE, 'Includes invalid characters')
+    .required('Value is required'),
   name: Yup.string().required('Name is required'),
   field: Yup
     .string()

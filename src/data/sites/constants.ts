@@ -15,6 +15,8 @@ export const TIMESTAMP_REGEX = /\d\d:\d\d/;
 
 export const IP_ADDRESS_REGES = /\d+\.\d+\.+\d+\.\d+/;
 
+export const VALID_EVENT_VALUE = /^((?!:nth).)*$/;
+
 export const guideLinks = {
   manual: 'https://squeaky.notion.site/Install-your-tracking-code-6ab27212bb5c434196f494ac43349b72#582b9522ff9a4f268dab90b0be05fbb5',
   wordpress: 'https://squeaky.notion.site/Wordpress-571e94c409f94748a6c40f67b5d79543',
