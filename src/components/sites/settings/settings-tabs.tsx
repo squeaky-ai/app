@@ -12,7 +12,7 @@ import type { Team } from 'types/graphql';
 interface Props {
   site: Site;
   member?: Team; 
-  page: 'details' | 'tracking-code' | 'tags' | 'screening' | 'api-key' | 'delete';
+  page: 'details' | 'tracking-code' | 'tags' | 'screening' | 'api-key' | 'delete' | 'data-export';
 }
 
 export const SettingsTabs: FC<Props> = ({ site, page, member }) => {
@@ -48,6 +48,11 @@ export const SettingsTabs: FC<Props> = ({ site, page, member }) => {
         <li className='tab'>
           <Link href={`/sites/${site.id}/settings/details/screening`} className={classnames('button tab-button', { active: page === 'screening' })}>
             Screening
+          </Link>
+        </li>
+        <li className='tab'>
+          <Link href={`/sites/${site.id}/settings/details/data-export`} className={classnames('button tab-button', { active: page === 'data-export' })}>
+            Data export
           </Link>
         </li>
         <li className='tab'>

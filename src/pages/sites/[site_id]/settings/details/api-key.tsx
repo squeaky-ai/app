@@ -58,10 +58,7 @@ const SiteSettingsApiKey: NextPage<ServerSideProps> = ({ user }) => {
 
             <SettingsTabs site={site} member={member} page='api-key' />
 
-            <h4>
-              API Key
-              <Access roles={[OWNER, ADMIN]} />
-            </h4>
+            <h4>API Key</h4>
 
             <Container className='md'>
               {site.apiKey && (

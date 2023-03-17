@@ -1,0 +1,106 @@
+.page.sites.data-export {
+  .subtitle {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 2rem 0;
+
+    h4 {
+      margin: 0;
+    }
+  }
+
+  .data-exports-table {
+    .row {
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    .export-type {
+      color: var(--blue-500);
+      font-size: var(--font-size-body);
+      vertical-align: middle;
+    }
+
+    .awaiting {
+      color: var(--gray-500);
+    }
+
+    .exporting {
+      align-items: center;
+      display: flex;
+    }
+
+    .scanning {
+      align-items: center;
+      display: inline-flex;
+      vertical-align: middle;
+    }
+
+    .options {
+      .button {
+        font-size: var(--font-size-body-sm);
+        margin: 0 0 0 1rem;
+        text-decoration: underline;
+
+        &:first-of-type {
+          margin: 0;
+        }
+      }
+    }
+
+    .spinner {
+      margin: 0 .25rem 0 0;
+
+      .icon {
+        font-size: var(--font-size-body-lg);
+        height: 1rem;
+        line-height: var(--line-height-body-lg);
+        margin: 0;
+        width: 1rem;
+      }
+
+      p {
+        display: none;
+      }
+    }
+  }
+}
+
+.export-csv-modal {
+  .select {
+    max-width: 15rem;
+  }
+
+  .date-range {
+    align-items: flex-end;
+    display: flex;
+
+    span {
+      margin: 0 .5rem .25rem .5rem;
+    }
+
+    .date-picker {
+      max-width: 9rem;
+    }
+  }
+
+  .data-included {
+    margin: 1.5rem 0 0 0;
+
+    ul {
+      display: grid;
+      grid-gap: 0 1rem;
+      grid-template-columns: 2fr 3fr;
+      margin: 0;
+      padding: 0;
+
+      li {
+        margin: 0 0 .125rem 1.25rem;
+
+        i {
+          color: var(--gray-300);
+        }
+      }
+    }
+  }
+}

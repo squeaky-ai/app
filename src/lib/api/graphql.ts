@@ -80,6 +80,8 @@ import {
   SitesApiKeyCreateInput,
   SitesBundle,
   AdminSiteBundlesCreateInput,
+  DataExportCreateInput,
+  DataExportDeleteInput,
 } from 'types/graphql';
 
 import {
@@ -110,6 +112,8 @@ import {
   ROUTES_UPDATE_MUTATION,
   SEND_TRACKING_CODE_INSTRUCTIONS,
   SITE_API_KEY_CREATE,
+  SITE_DATA_EXPORT_CREATE,
+  SITE_DATA_EXPORT_DELETE,
 } from 'data/sites/mutations';
 
 import {
@@ -1195,4 +1199,36 @@ export const generateApiKey = async (input: SitesApiKeyCreateInput): Promise<Sit
   });
 
   return data.apiKeyCreate;
+};
+
+export const createDataExport = async (input: DataExportCreateInput): Promise<Site> => {
+  const { data } = await client.mutate({
+    mutation: SITE_DATA_EXPORT_CREATE,
+    variables: { input },
+  });
+
+  cache.modify({
+    id: cache.identify({ id: input.siteId, __typename: 'Site' }),
+    fields: {
+      dataExports(existingDataExports = []) {
+        return [{ _ref: `DataExport:${data.id}` }, ...existingDataExports];
+      },
+    },
+  });
+
+  return data.dataExportCreate;
+};
+
+export const deleteDataExport = async (input: DataExportDeleteInput): Promise<void> => {
+  await client.mutate({
+    mutation: SITE_DATA_EXPORT_DELETE,
+    variables: { input },
+    update(cache) {
+      const normalizedId = cache.identify({ id: input.dataExportId, __typename: 'DataExport' });
+      cache.evict({ id: normalizedId });
+      cache.gc();
+    }
+  });
+
+  return null;
 };

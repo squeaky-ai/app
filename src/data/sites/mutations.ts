@@ -261,3 +261,24 @@ export const SITE_API_KEY_CREATE = gql`
     }
   }
 `;
+
+export const SITE_DATA_EXPORT_CREATE = gql`
+  mutation dataExportCreate($input: DataExportCreateInput!) {
+    dataExportCreate(input: $input) {
+      id
+      filename
+      exportType
+      exportedAt
+      startDate
+      endDate
+    }
+  }
+`;
+
+export const SITE_DATA_EXPORT_DELETE = gql`
+  mutation dataExportDelete($input: DataExportDeleteInput!) {
+    dataExportDelete(input: $input) {
+      id
+    }
+  }
+`;
