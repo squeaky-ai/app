@@ -69,7 +69,7 @@ export const SettingsDataExportModal: FC<Props> = ({ site }) => {
                   exportType: values.exportType,
                 });
 
-                toasts.add({ type: 'success', body: 'Data export creates successfully' });
+                toasts.add({ type: 'success', body: 'Data export created successfully' });
                 closeModal();
               } catch(error) {
                 console.error(error);
