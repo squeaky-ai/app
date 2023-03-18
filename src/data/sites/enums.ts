@@ -6,3 +6,8 @@ export enum PlayerTab {
   PAGES,
   FEEDBACK,
 }
+
+export enum DataExportTypes {
+  Visitors = 0,
+  Recordings = 1,
+}

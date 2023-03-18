@@ -87,6 +87,12 @@
     }
   }
 
+  &.sm-md {
+    .modal-body {
+      width: 480px;
+    }
+  }
+
   &.md {
     .modal-body {
       width: 560px;

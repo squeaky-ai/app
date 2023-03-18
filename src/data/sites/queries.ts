@@ -271,3 +271,19 @@ export const GET_ROUTES_QUERY = gql`
     }
   }
 `;
+
+export const GET_DATA_EXPORT_QUERY = gql`
+  query GetEventGroups($siteId: ID!) {
+    site(siteId: $siteId) {
+      id
+      dataExports {
+        id
+        filename
+        exportType
+        exportedAt
+        startDate
+        endDate
+      }
+    }
+  }
+`;

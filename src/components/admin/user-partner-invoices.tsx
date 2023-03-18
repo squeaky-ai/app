@@ -3,9 +3,9 @@ import type { FC } from 'react';
 import { Container } from 'components/container';
 import { TableWrapper, Table, Cell, Row } from 'components/table';
 import { Sort } from 'components/sort';
+import { UserPartnerInvoiceRow } from 'components/admin/user-partner-invoice-row';
 import { InvoicesSort } from 'types/admin';
 import type { AdminUser } from 'types/graphql';
-import { UserPartnerInvoiceRow } from 'components/admin/user-partner-invoice-row';
 
 interface Props {
   user: AdminUser;
