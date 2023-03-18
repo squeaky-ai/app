@@ -37,14 +37,10 @@
     }
 
     .options {
-      .button {
+      .link {
         font-size: var(--font-size-body-sm);
-        margin: 0 0 0 1rem;
+        margin: 0 1rem 0 0;
         text-decoration: underline;
-
-        &:first-of-type {
-          margin: 0;
-        }
       }
     }
 
