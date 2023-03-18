@@ -14,7 +14,7 @@ export const SettingsDataExportDownload: FC<Props> = ({ dataExport, site }) => {
   const downloadLink = `${publicRuntimeConfig.apiHost}/api/data_exports/${dataExport.id}?site_id=${site.id}`;
 
   return (
-    <a className='button link primary' target='_blank' href={downloadLink}>
+    <a className='button link primary' target='_blank' rel='noreferrer' href={downloadLink}>
       Download
     </a>
   );
