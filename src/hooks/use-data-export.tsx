@@ -16,7 +16,8 @@ export const useDataExport = (): UseDataExport => {
   const { data, loading, error } = useQuery<{ site: Site }>(GET_DATA_EXPORT_QUERY, {
     variables: {
       siteId: router.query.site_id as string,
-    }
+    },
+    pollInterval: 5000,
   });
 
   return {
