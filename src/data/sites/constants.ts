@@ -85,4 +85,7 @@ export const mapFeatureToRoutes: Record<PlanFeature, string[]> = {
   visitors: [
     '/sites/[site_id]/visitors/[visitor_id]',
   ],
+  data_export: [
+    '/sites/[site_id]/settings/details/data-export',
+  ],
 };

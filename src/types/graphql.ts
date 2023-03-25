@@ -2356,6 +2356,7 @@ export type Plan = {
 
 export enum PlanFeature {
   Dashboard = 'dashboard',
+  DataExport = 'data_export',
   ErrorTracking = 'error_tracking',
   EventTracking = 'event_tracking',
   HeatmapsClickCounts = 'heatmaps_click_counts',

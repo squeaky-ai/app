@@ -178,6 +178,9 @@ export const SitePlanSettings: FC<Props> = ({ site }) => {
                   <Checkbox name='featuresEnabled' value={PlanFeature.Sentiment} onChange={handleChange} checked={values.featuresEnabled.includes(PlanFeature.Sentiment)}>
                     Sentiment
                   </Checkbox>
+                  <Checkbox name='featuresEnabled' value={PlanFeature.DataExport} onChange={handleChange} checked={values.featuresEnabled.includes(PlanFeature.DataExport)}>
+                    Data export
+                  </Checkbox>
                 </div>
               </div>
 

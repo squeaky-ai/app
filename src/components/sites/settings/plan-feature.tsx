@@ -36,6 +36,8 @@ const formatFeature = (feature: PlanFeatures): string | React.ReactNode => {
       return 'Site analytics';
     case PlanFeatures.Visitors:
       return 'Visitors';
+    case PlanFeatures.DataExport:
+      return 'Data Export';
   }
 };
 

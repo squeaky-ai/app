@@ -50,7 +50,7 @@ export const Slider: FC<Props> = ({
     events,
     state,
     site.plan.featuresEnabled,
-    );
+  );
   
   const offset = events[0]?.timestamp || 0;
   const progress = value;
