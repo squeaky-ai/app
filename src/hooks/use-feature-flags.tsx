@@ -18,12 +18,10 @@ type Names = Record<FeatureFlag, string>;
 
 export const allFeatureFlags: FeatureFlag[] = [
   FeatureFlag.CHEESE_LOADER,
-  FeatureFlag.DATA_EXPORT,
 ];
 
 export const featureFlagNames: Names = {
   CHEESE_LOADER: 'Cheese Loader',
-  DATA_EXPORT: 'Data Export',
 };
 
 const options: State = [
@@ -33,12 +31,6 @@ const options: State = [
     superuser: false,
     description: 'Replace the standard spinner with a cheesy Squeaky one',
   },
-  {
-    key: FeatureFlag.DATA_EXPORT,
-    value: false,
-    superuser: true,
-    description: 'Add data export to the site settings',
-  }
 ];
 
 export const useFeatureFlags = (): UseFeatureFlags => {

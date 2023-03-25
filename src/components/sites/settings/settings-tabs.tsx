@@ -5,8 +5,6 @@ import classnames from 'classnames';
 import { Icon } from 'components/icon';
 import { OWNER } from 'data/teams/constants';
 import { usePageContext } from 'hooks/use-page-context';
-import { useFeatureFlags } from 'hooks/use-feature-flags';
-import { FeatureFlag } from 'lib/feature-flags';
 import { MAX_DAYS_BEFORE_POTENTIAL_ISSUE } from 'data/sites/constants';
 import type { Site } from 'types/graphql';
 import type { Team } from 'types/graphql';
@@ -19,8 +17,6 @@ interface Props {
 
 export const SettingsTabs: FC<Props> = ({ site, page, member }) => {
   const { pageState } = usePageContext();
-
-  const { featureFlagEnabled } = useFeatureFlags();
 
   return (
     <div className='site-tabs'>
@@ -54,13 +50,11 @@ export const SettingsTabs: FC<Props> = ({ site, page, member }) => {
             Screening
           </Link>
         </li>
-        {featureFlagEnabled(FeatureFlag.DATA_EXPORT) && (
-          <li className='tab'>
-            <Link href={`/sites/${site.id}/settings/details/data-export`} className={classnames('button tab-button', { active: page === 'data-export' })}>
-              Data export
-            </Link>
-          </li>
-        )}
+        <li className='tab'>
+          <Link href={`/sites/${site.id}/settings/details/data-export`} className={classnames('button tab-button', { active: page === 'data-export' })}>
+            Data export
+          </Link>
+        </li>
         <li className='tab'>
           <Link href={`/sites/${site.id}/settings/details/api-key`} className={classnames('button tab-button', { active: page === 'api-key' })}>
             API Key
