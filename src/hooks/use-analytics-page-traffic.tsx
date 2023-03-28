@@ -22,7 +22,8 @@ export const useAnalyticsPageTraffic = (props: Props): UseAnalyticsPageTraffic =
       siteId: props.site.id,
       ...props,
       ...props.range,
-    }
+    },
+    skip: !props.page,
   });
 
   const fallback: AnalyticsPageTraffic = {

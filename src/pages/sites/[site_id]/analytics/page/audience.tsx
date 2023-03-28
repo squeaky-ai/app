@@ -79,7 +79,7 @@ const SitesAnalyticsPageAudience: NextPage<ServerSideProps> = ({ user }) => {
               <PageLoading />
             )}
 
-            {site.recordingsCount > 0 && page && (
+            {site.recordingsCount > 0 && (
               <AnalyticsPagesAudience period={period} page={page} site={site} />
             )}
           </Main>

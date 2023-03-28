@@ -39,6 +39,7 @@ const SitesEventsHistory: NextPage<ServerSideProps> = ({ user }) => {
   }
 
   const hasIds = [...groupIds, ...captureIds].length > 0;
+  const hasEvents = eventStats.eventCounts.items.length > 0;
 
   return (
     <>
@@ -70,7 +71,7 @@ const SitesEventsHistory: NextPage<ServerSideProps> = ({ user }) => {
 
             {loading && <PageLoading />}
             
-            {!loading && hasIds && (
+            {!loading && hasIds && hasEvents && (
               <EventHistory 
                 site={site}
                 member={member}
@@ -87,6 +88,14 @@ const SitesEventsHistory: NextPage<ServerSideProps> = ({ user }) => {
               <EmptyState
                 site={site}
                 title='There are currently no events configured.'
+                illustration='illustration-2'
+              />
+            )}
+
+            {!loading && hasIds && !hasEvents && (
+              <EmptyState
+                site={site}
+                title='There are no events for the time period you&apos;ve selected.'
                 illustration='illustration-2'
               />
             )}

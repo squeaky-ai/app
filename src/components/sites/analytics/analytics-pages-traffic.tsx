@@ -11,6 +11,7 @@ import { AnalyticsVisitsAt } from 'components/sites/analytics/analytics-visits-a
 import { AnalyticsPageViews } from 'components/sites/analytics/analytics-page-views';
 import { AnalyticsTimeAverages } from 'components/sites/analytics/analytics-time-averages';
 import { useAnalyticsPageTraffic } from 'hooks/use-analytics-page-traffic';
+import { NoResults } from 'components/sites/no-results';
 import { getDateRange } from 'lib/dates';
 import type { Site } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
@@ -34,6 +35,10 @@ export const AnalyticsPagesTraffic: FC<Props> = ({ site, page, period }) => {
 
   if (error) {
     return <Error />
+  }
+
+  if (analytics.pageViews.items.length === 0) {
+    return <NoResults title='There is no analytics data available for your chosen period' illustration='illustration-2' />
   }
 
   return (

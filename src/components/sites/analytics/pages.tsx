@@ -42,7 +42,7 @@ export const Pages: FC<Props> = ({ page, pages, setPage }) => {
     <div className='analytics-pages'>
       <div ref={ref} className={classnames('page-dropdown', { open })}>
         <Button className='search-open' onClick={() => setOpen(!open)}>
-          {page}
+          {page || <span className='no-page-selected'>No page selected</span>}
           <Icon name='arrow-drop-down-line' />
         </Button>
 

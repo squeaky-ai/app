@@ -75,7 +75,7 @@ const SitesAnalyticsPageTraffic: NextPage<ServerSideProps> = ({ user }) => {
               <PageLoading />
             )}
 
-            {site.recordingsCount > 0 && page && (
+            {site.recordingsCount > 0 && (
               <AnalyticsPagesTraffic period={period} page={page} site={site} />
             )}
           </Main>

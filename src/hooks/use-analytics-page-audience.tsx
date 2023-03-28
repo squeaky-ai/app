@@ -25,7 +25,8 @@ export const useAnalyticsPageAudience = (props: Props): UseAnalyticsPageAudience
       siteId: props.site.id,
       ...props,
       ...props.range,
-    }
+    },
+    skip: !props.page,
   });
 
   const fallback: AnalyticsPageAudience = {

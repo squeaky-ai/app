@@ -137,10 +137,6 @@ export const Visitors: FC<Props> = ({ site, member }) => {
         message={<p>The columns using the <Icon name='link-m' /> link icon are used to display linked user data from your website or web app. To discover how you can link Squeaky visitor records directly with data of logged in users, <a href='/developers' target='_blank'>click here</a>.</p>}
       />
 
-      {!visitors.items.length && (
-        <NoResults illustration='illustration-13' title='There are no visitors matching your selected filters.' />
-      )}
-
       {site.recordingsCount > 0 && columnsReady && (
         <>
           <Tags 
@@ -173,6 +169,10 @@ export const Visitors: FC<Props> = ({ site, member }) => {
             />
           </div>
         </>
+      )}
+
+      {!visitors.items.length && (
+        <NoResults illustration='illustration-13' title='There are no visitors matching your selected filters.' />
       )}
     </>
   );

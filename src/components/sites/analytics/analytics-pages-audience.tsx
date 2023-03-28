@@ -11,6 +11,7 @@ import { AnalyticsDevices } from 'components/sites/analytics/analytics-devices';
 import { AnalyticsScreenWidths } from 'components/sites/analytics/analytics-screen-widths';
 import { AnalyticsReferrers } from 'components/sites/analytics/analytics-referrers';
 import { useAnalyticsPageAudience } from 'hooks/use-analytics-page-audience';
+import { NoResults } from 'components/sites/no-results';
 import { useSort } from 'hooks/use-sort';
 import type { AnalyticsBrowsersSort, Site } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
@@ -43,6 +44,12 @@ export const AnalyticsPagesAudience: FC<Props> = ({ site, page, period }) => {
   if (loading) {
     return <PageLoading />
   }
+
+  if (analytics.dimensions.length === 0) { // Weird guard but there's nothing else
+    return <NoResults title='There is no analytics data available for your chosen period' illustration='illustration-2' />
+  }
+
+  console.log(analytics);
 
   return (
     <div className='analytics-audience pages'>
