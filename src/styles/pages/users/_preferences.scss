@@ -1,4 +1,25 @@
 .page.users.preferences {
+  h4 {
+    margin: 0 0 1.5rem 0;
+  }
+
+  .timezones {
+    margin: 0 0 2rem 0;
+
+    i {
+      color: var(--gray-500);
+    }
+  }
+
+  .select-timezone {
+    align-items: flex-start;
+    max-width: 15rem;
+
+    .timezone {
+      margin: .5rem 0 0 0;
+    }
+  }
+
   .email-options {
     margin: 0;
     padding: 0;
@@ -22,6 +43,10 @@
         span {
           margin: 0;
         }
+      }
+
+      &:first-of-type {
+        padding-top: 0;
       }
     }
   }

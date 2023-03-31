@@ -1,5 +1,6 @@
 import { uniq } from 'lodash';
 import { ApolloClient, InMemoryCache, TypedDocumentNode, gql } from '@apollo/client';
+import { Preference, Preferences } from 'lib/preferences';
 
 import {
   Query,
@@ -221,7 +222,10 @@ import {
   ADD_TO_GROUP_MUTATION,
   UPDATE_EVENT_CAPTURE_MUTATION,
 } from 'data/events/mutations';
-import { GET_ADMIN_SITES_BUNDLES_QUERY } from 'data/admin/queries';
+
+import {
+  GET_ADMIN_SITES_BUNDLES_QUERY,
+} from 'data/admin/queries';
 
 export const cache = new InMemoryCache({
   typePolicies: {
@@ -260,6 +264,9 @@ export const client = new ApolloClient({
   cache,
   uri: '/api/graphql',
   ssrMode: typeof window === 'undefined',
+  headers: {
+    'x-squeaky-timezone': typeof window === 'undefined' ? 'UTC' : Preferences.getString(Preference.TIMEZONE) || 'UTC', 
+  },
 });
 
 export const getGqlString = (document: TypedDocumentNode): string => (
