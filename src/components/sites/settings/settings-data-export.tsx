@@ -8,7 +8,6 @@ import { SettingsDataExportDownload } from 'components/sites/settings/settings-d
 import { DataExportTypes } from 'data/sites/enums';
 import { Icon } from 'components/icon';
 import { Sort } from 'components/sort';
-import { toNiceDateWithoutTime } from 'lib/dates';
 import { Spinner } from 'components/spinner';
 import type { DataExport, Site } from 'types/graphql';
 
@@ -88,7 +87,7 @@ export const SettingsDataExport: FC<Props> = ({ site, dataExport }) => {
                   }
                 </Cell>
                 <Cell>
-                  {toNiceDateWithoutTime(dataExport.startDate)} - {toNiceDateWithoutTime(dataExport.endDate)}
+                  {dataExport.startDate.niceDate} - {dataExport.endDate.niceDate}
                 </Cell>
                 <Cell className='options'>
                   {dataExport.exportedAt && (

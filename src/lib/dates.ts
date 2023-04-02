@@ -66,13 +66,6 @@ export const daysBefore = (count = 7, from?: Date) => {
   });
 };
 
-export const toNiceDateWithoutTime = (timestamp: string) => {
-  if (!timestamp) return 'Unknown';
-
-  const date = new Date(timestamp);
-  return format(date, 'E, d LLL yyyy');
-};
-
 export const formatDateForGraphQL = (date: Date) => format(date, 'yyyy-MM-dd');
 
 const expandAbsoluteDateToRange = (date: AbsoluteTime): TimeRange => {

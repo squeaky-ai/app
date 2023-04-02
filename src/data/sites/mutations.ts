@@ -284,8 +284,14 @@ export const SITE_DATA_EXPORT_CREATE = gql`
         iso8601
         niceDateTime
       }
-      startDate
-      endDate
+      startDate {
+        iso8601
+        niceDate
+      }
+      endDate {
+        iso8601
+        niceDate
+      }
     }
   }
 `;
