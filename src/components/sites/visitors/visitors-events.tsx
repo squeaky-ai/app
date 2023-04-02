@@ -13,7 +13,6 @@ import { EventTag } from 'components/sites/events/event-tag';
 import { RecordingStarred } from 'components/sites/recordings/recordings-starred';
 import { EventsFeedSort } from 'types/graphql';
 import { EventsCaptureType } from 'types/events';
-import { toNiceDate } from 'lib/dates';
 import type { Site, Team } from 'types/graphql';
 
 
@@ -96,7 +95,7 @@ export const VisitorsEvents: FC<Props> = ({ site, member }) => {
                     )}
                   </Cell>
                   <Cell>
-                    {toNiceDate(feed.timestamp)}
+                    {feed.timestamp.niceDateTime}
                   </Cell>
                 </Row>
               ))}

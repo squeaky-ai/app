@@ -21,7 +21,10 @@ export const GET_EVENT_CAPTURES_QUERY = gql`
           groupIds
           groupNames
           source
-          lastCountedAt
+          lastCountedAt {
+            iso8601
+            niceDateTime
+          }
         }
         pagination {
           pageSize
@@ -56,7 +59,10 @@ export const GET_EVENT_GROUPS_QUERY = gql`
           groupIds
           groupNames
           source
-          lastCountedAt
+          lastCountedAt {
+            iso8601
+            niceDateTime
+          }
         }
       }
     }
@@ -99,7 +105,10 @@ export const GET_EVENT_FEED_QUERY = gql`
         items {
           id
           eventName
-          timestamp
+          timestamp {
+            iso8601
+            niceDateTime
+          }
           source
           data
           visitor {

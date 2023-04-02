@@ -13,8 +13,14 @@ export const GET_VISITORS_QUERY = gql`
           recordingCount {
             total
           }
-          firstViewedAt
-          lastActivityAt
+          firstViewedAt {
+            iso8601
+            niceDateTime
+          }
+          lastActivityAt {
+            iso8601
+            niceDateTime
+          }
           language
           source
           devices {
@@ -57,8 +63,14 @@ export const GET_VISITOR_QUERY = gql`
           total
           new
         }
-        firstViewedAt
-        lastActivityAt
+        firstViewedAt {
+          iso8601
+          niceDateTime
+        }
+        lastActivityAt {
+          iso8601
+          niceDateTime
+        }
         language
         source
         devices {
@@ -120,8 +132,14 @@ export const GET_VISITOR_RECORDINGS_QUERY = gql`
             countryCode
             countryName
             sessionId
-            connectedAt
-            disconnectedAt
+            connectedAt {
+              iso8601
+              niceDateTime
+            }
+            disconnectedAt {
+              iso8601
+              niceDateTime
+            }
             visitor {
               id
               visitorId
@@ -202,7 +220,10 @@ export const GET_VISITOR_EVENTS_QUERY = gql`
           items {
             id
             eventName
-            timestamp
+            timestamp {
+              iso8601
+              niceDateTime
+            }
             source
             data
             recording {

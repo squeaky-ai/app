@@ -8,7 +8,7 @@ import { SettingsDataExportDownload } from 'components/sites/settings/settings-d
 import { DataExportTypes } from 'data/sites/enums';
 import { Icon } from 'components/icon';
 import { Sort } from 'components/sort';
-import { toNiceDate, toNiceDateWithoutTime } from 'lib/dates';
+import { toNiceDateWithoutTime } from 'lib/dates';
 import { Spinner } from 'components/spinner';
 import type { DataExport, Site } from 'types/graphql';
 
@@ -29,9 +29,9 @@ export const SettingsDataExport: FC<Props> = ({ site, dataExport }) => {
     .sort((a, b) => {
       switch(sort) {
         case Order.ExportCreatedAsc:
-          return (a.exportedAt || 0) - (b.exportedAt || 0);
+          return new Date(a.exportedAt.iso8601 || 0).valueOf() - new Date(b.exportedAt.iso8601 || 0).valueOf();
         case Order.ExportCreatedDesc:
-          return (b.exportedAt || 0) - (a.exportedAt || 0);
+          return new Date(b.exportedAt.iso8601 || 0).valueOf() - new Date(a.exportedAt.iso8601|| 0).valueOf();
       }
     })
 
@@ -83,7 +83,7 @@ export const SettingsDataExport: FC<Props> = ({ site, dataExport }) => {
                 </Cell>
                 <Cell>
                   {dataExport.exportedAt
-                    ? toNiceDate(new Date(Number(dataExport.exportedAt)).toISOString())
+                    ? dataExport.exportedAt.niceDateTime
                     : <i className='awaiting'>Awaiting download...</i>
                   }
                 </Cell>

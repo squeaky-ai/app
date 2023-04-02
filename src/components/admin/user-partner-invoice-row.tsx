@@ -38,9 +38,9 @@ export const UserPartnerInvoiceRow: FC<Props> = ({ invoice }) => {
         }
       </Cell>
       <Cell>{CURRENCY_SYMBOLS[invoice.currency]}{toDecimalCurrency(invoice.amount)}</Cell>
-      <Cell>{invoice.issuedAt ? (toddMMYYY(new Date(invoice.issuedAt))) : '-'}</Cell>
-      <Cell>{invoice.dueAt ? (toddMMYYY(new Date(invoice.dueAt))) : '-'}</Cell>
-      <Cell>{invoice.paidAt ? (toddMMYYY(new Date(invoice.paidAt))) : '-'}</Cell>
+      <Cell>{invoice.issuedAt ? (toddMMYYY(new Date(invoice.issuedAt.iso8601))) : '-'}</Cell>
+      <Cell>{invoice.dueAt ? (toddMMYYY(new Date(invoice.dueAt.iso8601))) : '-'}</Cell>
+      <Cell>{invoice.paidAt ? (toddMMYYY(new Date(invoice.paidAt.iso8601))) : '-'}</Cell>
       <Cell>
         <Dropdown portal button={<Icon name='more-2-fill' />} buttonClassName='options' ref={rowActionsRef}>
           <UserPartnerInvoicesUpdate 

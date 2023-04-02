@@ -17,7 +17,10 @@ export const GET_SITE_QUERY = gql`
       id
       name
       url
-      verifiedAt
+      verifiedAt {
+        iso8601
+        niceDateTime
+      }
       siteType
       uuid
       provider
@@ -65,7 +68,10 @@ export const GET_SITE_QUERY_CREATE = gql`
       name
       url
       uuid
-      verifiedAt
+      verifiedAt {
+        iso8601
+        niceDateTime
+      }
       magicErasureEnabled
       anonymiseFormInputs
       anonymiseText
@@ -88,7 +94,10 @@ export const GET_SITE_BY_UUID_QUERY = gql`
       id
       name
       url
-      verifiedAt
+      verifiedAt {
+        iso8601
+        niceDateTime
+      }
       uuid
       ownerName
       daysSinceLastRecording
@@ -258,7 +267,10 @@ export const GET_VERIFIED_AT_QUERY = gql`
   query GetVerifiedAt($siteId: ID!) {
     site(siteId: $siteId) {
       id
-      verifiedAt
+      verifiedAt {
+        iso8601
+        niceDateTime
+      }
     }
   }
 `;
@@ -280,7 +292,10 @@ export const GET_DATA_EXPORT_QUERY = gql`
         id
         filename
         exportType
-        exportedAt
+        exportedAt {
+          iso8601
+          niceDateTime
+        }
         startDate
         endDate
       }

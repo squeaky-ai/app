@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import Link from 'next/link';
 import { Pill } from 'components/pill';
 import { Icon } from 'components/icon';
-import { toIsoDate, toTimeString, toHyphenedDate } from 'lib/dates';
+import { toTimeString, toHyphenedDate } from 'lib/dates';
 import type { Recording, Site } from 'types/graphql';
 
 interface Props {
@@ -23,7 +23,7 @@ export const RecordingSmallItem: FC<Props> = ({ site, recording }) => (
     <div className='details'>
       <p>
         <Icon name='calendar-line' />
-        {toHyphenedDate(toIsoDate(new Date(recording.connectedAt)))}
+        {toHyphenedDate(recording.connectedAt.iso8601)}
       </p>
       <p>
         <Icon name='pages-line' />

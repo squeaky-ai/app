@@ -11,7 +11,6 @@ import { ActiveVisitors } from 'components/sites/active-visitors';
 import { DashboardChart } from 'components/sites/dashboard/dashboard-chart';
 import { DashboardVisitorsChartTooltip } from 'components/sites/dashboard/dashboard-visitors-chart-tooltip';
 import { TableWrapper, Table, Row, Cell } from 'components/table';
-import { toNiceDate } from 'lib/dates';
 import { formatResultsForGroupType } from 'lib/charts-v2';
 import type { Site, AnalyticsVisitor } from 'types/graphql';
 import type { Dashboard } from 'types/dashboard';
@@ -108,7 +107,7 @@ export const DashboardVisitors: FC<Props> = ({ site, dashboard, period }) => {
                       {visitor.visitorId}
                     </Link>
                   </Cell>
-                  <Cell>{toNiceDate(visitor.createdAt)}</Cell>
+                  <Cell>{visitor.createdAt.niceDateTime}</Cell>
                 </Row>
               ))}
             </Table>

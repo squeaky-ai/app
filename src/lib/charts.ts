@@ -1,6 +1,7 @@
 import { range, minBy } from 'lodash';
 import { toSlashyDate, getMonthByIndex, getOrdinalEnding } from 'lib/dates';
 import type { AbsoluteTime, TimePeriod } from 'types/common';
+import type { CommonDates } from 'types/graphql';
 
 import {
   getHours,
@@ -17,7 +18,7 @@ import {
 type DateGroup = 'hourly' | 'daily' | 'weekly' | 'monthly';
 
 export interface ChartInput {
-  timestamp: string;
+  timestamp: CommonDates;
 }
 
 export interface ChartData<T extends ChartInput> {
@@ -69,7 +70,7 @@ const getDurationForAbsoluteDate = (period: AbsoluteTime, input: ChartInput[]): 
   // specified until the earliest date we have data
   // for
   if (period.fromType === 'Before') {
-    const from = new Date(minBy(input, i => new Date(i.timestamp).valueOf()).timestamp);
+    const from = new Date(minBy(input, i => new Date(i.timestamp.iso8601).valueOf()).timestamp.iso8601);
     const to = new Date(toSlashyDate(period.fromDate));
 
     return getDateGroupForRange(from, to);
@@ -108,7 +109,7 @@ const getDurationForPeriod = (period: TimePeriod, input: ChartInput[]): [DateGro
 // Yesterday, or single absolute today
 const getHourlyResults = <T extends ChartInput>(input: T[]): DataForPeriod<T> => {
   const data = range(0, 24).map(i => {
-    const values = input.filter(s => getHours(getDateFromTimestamp(s.timestamp)) === i);
+    const values = input.filter(s => getHours(getDateFromTimestamp(s.timestamp.iso8601)) === i);
 
     return {
       key: getAmPmForHour(i),
@@ -124,7 +125,7 @@ const getDailyResults = <T extends ChartInput>(input: T[], days: number): DataFo
 
   const data = range(0, days).map(i => {
     const date = subDays(now, i);
-    const values = input.filter(s => getDayOfYear(getDateFromTimestamp(s.timestamp)) === getDayOfYear(date));
+    const values = input.filter(s => getDayOfYear(getDateFromTimestamp(s.timestamp.iso8601)) === getDayOfYear(date));
 
     return {
       key: format(date, 'd/M'),
@@ -141,7 +142,7 @@ const getWeeklyResults = <T extends ChartInput>(input: T[], weeks: number): Data
 
   const data = range(0, weeks).map(i => {
     const date = subWeeks(now, i);
-    const values = input.filter(s => getWeek(getDateFromTimestamp(s.timestamp)) === getWeek(date));
+    const values = input.filter(s => getWeek(getDateFromTimestamp(s.timestamp.iso8601)) === getWeek(date));
 
     return {
       key: format(date, 'd/M'),
@@ -159,7 +160,7 @@ const getMonthlyResults = <T extends ChartInput>(input: T[], months: number): Da
     const date = subMonths(now, i);
 
     // Get all the values that fall on the certain day
-    const values = input.filter(s => getMonth(getDateFromTimestamp(s.timestamp)) === getMonth(date));
+    const values = input.filter(s => getMonth(getDateFromTimestamp(s.timestamp.iso8601)) === getMonth(date));
 
     return {
       key: format(date, 'MMM yyyy'),

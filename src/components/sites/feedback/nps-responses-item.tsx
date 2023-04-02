@@ -10,7 +10,6 @@ import { Browser } from 'components/browser';
 import { Tooltip } from 'components/tooltip';
 import { Dropdown } from 'components/dropdown';
 import { NpsResponsesDelete } from 'components/sites/feedback/nps-responses-delete';
-import { toNiceDate } from 'lib/dates';
 import type { FeedbackNpsResponseItem, Team } from 'types/graphql';
 
 interface Props {
@@ -46,7 +45,7 @@ export const NpsResponsesItem: FC<Props> = ({ member, response, style }) => {
         </Link>
       </Cell>
       <Cell>
-        {toNiceDate(response.timestamp)}
+        {response.timestamp.niceDateTime}
       </Cell>
       <Cell>
         {response.comment && (

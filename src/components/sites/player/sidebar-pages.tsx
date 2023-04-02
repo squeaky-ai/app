@@ -15,8 +15,8 @@ interface Props {
 export const SidebarPages: FC<Props> = ({ recording, replayer }) => {
   const [open, setOpen] = React.useState<string[]>([]);
 
-  const pages = sortBy(recording.pages, page => new Date(page.enteredAt).valueOf());
-  const offset = new Date(pages[0]?.enteredAt).valueOf() || 0;
+  const pages = sortBy(recording.pages, page => new Date(page.enteredAt.iso8601).valueOf());
+  const offset = new Date(pages[0]?.enteredAt.iso8601).valueOf() || 0;
   const groups = groupBy(pages, (page: Page) => page.url);
 
   const handleOpen = (path: string) => {
@@ -39,9 +39,9 @@ export const SidebarPages: FC<Props> = ({ recording, replayer }) => {
             <div className='timestamps'>
               {pages.map(page => (
                 <div key={page.id} className='event'>
-                  <EventTimestamp offset={offset} timestamp={new Date(page.enteredAt).valueOf()} replayer={replayer} />
+                  <EventTimestamp offset={offset} timestamp={new Date(page.enteredAt.iso8601).valueOf()} replayer={replayer} />
                   <Icon name='arrow-right-line' />
-                  <EventTimestamp offset={offset} timestamp={new Date(page.exitedAt).valueOf()} replayer={replayer} />
+                  <EventTimestamp offset={offset} timestamp={new Date(page.exitedAt.iso8601).valueOf()} replayer={replayer} />
                 </div>
               ))}
             </div>

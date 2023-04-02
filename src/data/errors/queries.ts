@@ -10,7 +10,10 @@ export const GET_ERRORS_QUERY = gql`
           message
           errorCount
           recordingCount
-          lastOccurance
+          lastOccurance {
+            iso8601
+            niceDateTime
+          }
         }
         pagination {
           pageSize
@@ -87,8 +90,14 @@ export const GET_ERRORS_DETAILS_RECORDINGS_QUERY = gql`
             countryCode
             countryName
             sessionId
-            connectedAt
-            disconnectedAt
+            connectedAt {
+              iso8601
+              niceDateTime
+            }
+            disconnectedAt {
+              iso8601
+              niceDateTime
+            }
             visitor {
               id
               visitorId
@@ -125,8 +134,14 @@ export const GET_ERRORS_DETAILS_VISITORS_QUERY = gql`
             recordingCount {
               total
             }
-            firstViewedAt
-            lastActivityAt
+            firstViewedAt {
+              iso8601
+              niceDateTime
+            }
+            lastActivityAt {
+              iso8601
+              niceDateTime
+            }
             language
             devices {
               deviceType

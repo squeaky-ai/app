@@ -12,7 +12,7 @@ import { EventData } from 'components/sites/events/event-data';
 import { useSort } from 'hooks/use-sort';
 import { Illustration } from 'components/illustration';
 import { useEventFeed } from 'hooks/use-event-feed';
-import { toNiceDate, getDateRange } from 'lib/dates';
+import { getDateRange } from 'lib/dates';
 import { EventsFeedSort, Team } from 'types/graphql';
 import type { Site } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
@@ -76,7 +76,7 @@ export const EventFeedTable: FC<Props> = ({ site, member, groupIds, captureIds, 
           {feed.items.map(feed => (
             <Row key={feed.id}>
               <Cell>
-                {toNiceDate(feed.timestamp)}
+                {feed.timestamp.niceDateTime}
               </Cell>
               <Cell>
                 {feed.eventName}

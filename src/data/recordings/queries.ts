@@ -30,8 +30,14 @@ export const GET_RECORDINGS_QUERY = gql`
           countryCode
           countryName
           sessionId
-          connectedAt
-          disconnectedAt
+          connectedAt {
+            iso8601
+            niceDateTime
+          }
+          disconnectedAt {
+            iso8601
+            niceDateTime
+          }
           inactivity
           activityDuration
           visitor {
@@ -86,8 +92,14 @@ export const GET_RECORDING_QUERY = gql`
         }
         countryCode
         countryName
-        connectedAt
-        disconnectedAt
+        connectedAt {
+          iso8601
+          niceDateTime
+        }
+        disconnectedAt {
+          iso8601
+          niceDateTime
+        }
         inactivity
         activityDuration
         visitor {
@@ -95,8 +107,14 @@ export const GET_RECORDING_QUERY = gql`
           visitorId
           starred
           linkedData
-          firstViewedAt
-          lastActivityAt
+          firstViewedAt {
+            iso8601
+            niceDateTime
+          }
+          lastActivityAt {
+            iso8601
+            niceDateTime
+          }
           recordingCount {
             total
           }
@@ -105,7 +123,10 @@ export const GET_RECORDING_QUERY = gql`
               id
               sessionId
               duration
-              disconnectedAt
+              disconnectedAt {
+                iso8601
+                niceDateTime
+              }
             }
             pagination {
               pageSize
@@ -117,8 +138,14 @@ export const GET_RECORDING_QUERY = gql`
         pages {
           id
           url
-          enteredAt
-          exitedAt
+          enteredAt {
+            iso8601
+            niceDateTime
+          }
+          exitedAt {
+            iso8601
+            niceDateTime
+          }
         }
         tags {
           id

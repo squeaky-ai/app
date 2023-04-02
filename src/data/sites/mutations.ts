@@ -17,7 +17,10 @@ export const UPDATE_SITE_MUTATION = gql`
       id
       name
       url
-      verifiedAt
+      verifiedAt {
+        iso8601
+        niceDateTime
+      }
     }
   }
 `;
@@ -34,7 +37,10 @@ export const VERIFY_SITE_MUTATION = gql`
   mutation SiteVerify($input: SitesVerifyInput!) {
     siteVerify(input: $input) {
       id
-      verifiedAt
+      verifiedAt {
+        iso8601
+        niceDateTime
+      }
     }
   }
 `;
@@ -229,7 +235,10 @@ export const ADMIN_SITE_BUNDLE_CREATE = gql`
         uuid
         url
         ownerName
-        verifiedAt
+        verifiedAt {
+          iso8601
+          niceDateTime
+        }
         provider
         superuserAccessEnabled
         plan {
@@ -247,7 +256,10 @@ export const ADMIN_SITE_BUNDLE_CREATE = gql`
           }
         }
         bundled
-        createdAt
+        createdAt {
+          iso8601
+          niceDateTime
+        }
       }
     }
   }
@@ -268,7 +280,10 @@ export const SITE_DATA_EXPORT_CREATE = gql`
       id
       filename
       exportType
-      exportedAt
+      exportedAt {
+        iso8601
+        niceDateTime
+      }
       startDate
       endDate
     }

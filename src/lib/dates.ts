@@ -66,30 +66,11 @@ export const daysBefore = (count = 7, from?: Date) => {
   });
 };
 
-export const toIsoDate = (date?: Date) => {
-  date ||= new Date();
-  return date.toISOString().split('T')[0];
-};
-
-export const toNiceDate = (timestamp: string) => {
-  if (!timestamp) return 'Unknown';
-
-  const date = new Date(timestamp);
-  return format(date, 'E, d LLL yyyy HH:mm');
-};
-
 export const toNiceDateWithoutTime = (timestamp: string) => {
   if (!timestamp) return 'Unknown';
 
   const date = new Date(timestamp);
   return format(date, 'E, d LLL yyyy');
-};
-
-export const toShortDate = (timestamp: string) => {
-  if (!timestamp) return 'Unknown';
-
-  const date = new Date(timestamp);
-  return format(date, 'LLL d');
 };
 
 export const formatDateForGraphQL = (date: Date) => format(date, 'yyyy-MM-dd');

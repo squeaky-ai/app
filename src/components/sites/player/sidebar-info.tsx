@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { PlayerTab } from 'data/sites/enums';
-import { toNiceDate, toTimeString, toShortDate } from 'lib/dates';
+import { toTimeString } from 'lib/dates';
 import { Tooltip } from 'components/tooltip';
 import { Browser } from 'components/browser';
 import { Device } from 'components/device';
@@ -49,11 +49,11 @@ export const SidebarInfo: FC<Props> = ({ site, member, recording, setActiveTab }
         </div>
         <div className='row'>
           <dt>First visited</dt>
-          <dd>{toNiceDate(recording.visitor.firstViewedAt)}</dd>
+          <dd>{recording.visitor.firstViewedAt.niceDateTime}</dd>
         </div>
         <div className='row'>
           <dt>Last activity</dt>
-          <dd>{toNiceDate(recording.visitor.lastActivityAt)}</dd>
+          <dd>{recording.visitor.lastActivityAt.niceDateTime}</dd>
         </div>
         <div className='row'>
           <dt>Recordings</dt>
@@ -82,7 +82,7 @@ export const SidebarInfo: FC<Props> = ({ site, member, recording, setActiveTab }
                   </span>
                 </div>
                 <div>
-                  {toShortDate(rec.disconnectedAt)}
+                  {rec.disconnectedAt.niceDateTime}
                 </div>
                 <div>
                   {toTimeString(rec.duration)}
@@ -130,7 +130,7 @@ export const SidebarInfo: FC<Props> = ({ site, member, recording, setActiveTab }
         </div>
         <div className='row'>
           <dt>Date</dt>
-          <dd>{toNiceDate(recording.connectedAt)}</dd>
+          <dd>{recording.connectedAt.niceDateTime}</dd>
         </div>
         <div className='row'>
           <dt>Duration</dt>

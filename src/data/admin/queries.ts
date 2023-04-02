@@ -50,7 +50,10 @@ export const GET_ADMIN_SITE_QUERY = gql`
         uuid
         url
         ownerName
-        verifiedAt
+        verifiedAt {
+          iso8601
+          niceDateTime
+        }
         superuserAccessEnabled
         ingestEnabled
         provider
@@ -132,7 +135,10 @@ export const GET_ADMIN_SITE_QUERY = gql`
           id
           name
         }
-        createdAt
+        createdAt  {
+          iso8601
+          niceDateTime
+        }
       }
       activeVisitors {
         siteId
@@ -159,9 +165,15 @@ export const GET_ADMIN_USERS_QUERY = gql`
           fullName
           email
           superuser
-          createdAt
+          createdAt {
+            iso8601
+            niceDateTime
+          }
           provider
-          lastActivityAt
+          lastActivityAt {
+            iso8601
+            niceDateTime
+          }
           visitor {
             id
             visitorId
@@ -197,7 +209,10 @@ export const GET_ADMIN_SITES_QUERY = gql`
           url
           ownerName
           provider
-          verifiedAt
+          verifiedAt {
+            iso8601
+            niceDateTime
+          }
           superuserAccessEnabled
           plan {
             planId
@@ -214,7 +229,10 @@ export const GET_ADMIN_SITES_QUERY = gql`
             }
           }
           bundled
-          createdAt
+          createdAt {
+            iso8601
+            niceDateTime
+          }
         }
         pagination {
           pageSize
@@ -245,7 +263,10 @@ export const GET_ADMIN_SITES_BUNDLES_QUERY = gql`
           uuid
           url
           ownerName
-          verifiedAt
+          verifiedAt {
+            iso8601
+            niceDateTime
+          }
           provider
           superuserAccessEnabled
           plan {
@@ -263,7 +284,10 @@ export const GET_ADMIN_SITES_BUNDLES_QUERY = gql`
             }
           }
           bundled
-          createdAt
+          createdAt {
+            iso8601
+            niceDateTime
+          }
         }
       }
     }
@@ -278,8 +302,14 @@ export const GET_ADMIN_USER_QUERY = gql`
         fullName
         email
         superuser
-        createdAt
-        lastActivityAt
+        createdAt {
+          iso8601
+          niceDateTime
+        }
+        lastActivityAt {
+          iso8601
+          niceDateTime
+        }
         provider
         visitor {
           id
@@ -300,7 +330,10 @@ export const GET_ADMIN_USER_QUERY = gql`
               id
               url
               name
-              verifiedAt
+              verifiedAt {
+                iso8601
+                niceDateTime
+              }
               plan {
                 planId
                 name
@@ -343,9 +376,15 @@ export const GET_ADMIN_USERS_PARTNERS_QUERY = gql`
         fullName
         email
         superuser
-        createdAt
+        createdAt {
+          iso8601
+          niceDateTime
+        }
         provider
-        lastActivityAt
+        lastActivityAt {
+          iso8601
+          niceDateTime
+        }
         visitor {
           id
           visitorId

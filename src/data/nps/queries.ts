@@ -33,7 +33,10 @@ export const GET_NPS_QUERY = gql`
             }
             sessionId
             recordingId
-            timestamp
+            timestamp {
+              iso8601
+              niceDateTime
+            }
           }
           pagination {
             pageSize
@@ -57,7 +60,10 @@ export const GET_NPS_QUERY = gql`
           trend
           responses {
             score
-            timestamp
+            timestamp {
+              iso8601
+              niceDateTime
+            }
           }
         }
         scores {
@@ -65,7 +71,10 @@ export const GET_NPS_QUERY = gql`
           score
           responses {
             score
-            timestamp
+            timestamp {
+              iso8601
+              niceDateTime
+            }
           }
         }
       }

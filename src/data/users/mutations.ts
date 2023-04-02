@@ -40,11 +40,20 @@ export const USER_CREATE_INVOICE_MUTATION = gql`
     userInvoiceCreate(input: $input) {
       id
       currency
-      dueAt
+      dueAt {
+        iso8601
+        niceDateTime
+      }
       filename
       invoiceUrl
-      issuedAt
-      paidAt
+      issuedAt {
+        iso8601
+        niceDateTime
+      }
+      paidAt {
+        iso8601
+        niceDateTime
+      }
       status
     }
   }

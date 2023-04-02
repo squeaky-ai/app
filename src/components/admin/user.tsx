@@ -3,7 +3,6 @@ import type { FC } from 'react';
 import Link from 'next/link';
 import getConfig from 'next/config';
 import { Card } from 'components/card';
-import { toNiceDate } from 'lib/dates';
 import { Pill } from 'components/pill';
 import type { AdminUser } from 'types/graphql';
 
@@ -48,11 +47,11 @@ export const User: FC<Props> = ({ user }) => (
     </p>
     <p>
       <b>Created at</b>
-      <span>{toNiceDate(user.createdAt)}</span>
+      <span>{user.createdAt.niceDateTime}</span>
     </p>
     <p>
       <b>Last activity at</b>
-      <span>{user.lastActivityAt ? toNiceDate(user.lastActivityAt) : '-'}</span>
+      <span>{user.lastActivityAt ? user.lastActivityAt.niceDateTime : '-'}</span>
     </p>
     <p>
       <b>Superuser</b>
