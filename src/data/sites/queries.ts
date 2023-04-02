@@ -296,8 +296,14 @@ export const GET_DATA_EXPORT_QUERY = gql`
           iso8601
           niceDateTime
         }
-        startDate
-        endDate
+        startDate {
+          iso8601
+          niceDate
+        }
+        endDate {
+          iso8601
+          niceDate
+        }
       }
     }
   }
