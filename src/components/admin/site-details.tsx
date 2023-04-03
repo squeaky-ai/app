@@ -8,7 +8,6 @@ import { SitePlanSettings } from 'components/admin/site-plan-settings';
 import { SiteTeam } from 'components/admin/site-team';
 import { Row, Table, Cell } from 'components/table';
 import { Card } from 'components/card';
-import { toNiceDate } from 'lib/dates';
 import type { ActiveVisitorCount, AdminSite } from 'types/graphql';
 
 interface Props {
@@ -36,7 +35,7 @@ export const SiteDetails: FC<Props> = ({ activeVisitors, site }) => {
         </div>
         <div className='row'>
           <span>Date Created</span>
-          <span>{toNiceDate(site.createdAt)}</span>
+          <span>{site.createdAt.niceDateTime}</span>
         </div>
         <div className='row'>
           <span>Site Owner</span>

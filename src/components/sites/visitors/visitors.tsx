@@ -77,6 +77,8 @@ export const Visitors: FC<Props> = ({ site, member }) => {
     setSort(sort);
   };
 
+  const hasRecordings = site.recordingsCount > 0;
+
   if (error) {
     return <Error />;
   }
@@ -92,12 +94,12 @@ export const Visitors: FC<Props> = ({ site, member }) => {
       <div className='visitors-header'>
         <h4 className='title'>
           Visitors
-          {site.recordingsCount > 0 && (
+          {hasRecordings && (
             <span>{visitors.pagination.total.toLocaleString()}</span>
           )}
         </h4>
         <menu>
-          {site.recordingsCount > 0 && (
+          {hasRecordings && (
             <>
               <Search
                 search={search}
@@ -129,15 +131,17 @@ export const Visitors: FC<Props> = ({ site, member }) => {
 
       <Unlock site={site} />
 
-      <DismissableMessage
-        preference={Preference.VISITORS_LINKED_DATA_HIDE}
-        type='info'
-        className='linked-data'
-        heading={<p><Icon name='link-m' /> Linked Data</p>}
-        message={<p>The columns using the <Icon name='link-m' /> link icon are used to display linked user data from your website or web app. To discover how you can link Squeaky visitor records directly with data of logged in users, <a href='/developers' target='_blank'>click here</a>.</p>}
-      />
+      {hasRecordings && (
+        <DismissableMessage
+          preference={Preference.VISITORS_LINKED_DATA_HIDE}
+          type='info'
+          className='linked-data'
+          heading={<p><Icon name='link-m' /> Linked Data</p>}
+          message={<p>The columns using the <Icon name='link-m' /> link icon are used to display linked user data from your website or web app. To discover how you can link Squeaky visitor records directly with data of logged in users, <a href='/developers' target='_blank'>click here</a>.</p>}
+        />
+      )}
 
-      {site.recordingsCount > 0 && columnsReady && (
+      {hasRecordings && columnsReady && (
         <>
           <Tags 
             filters={filters} 
@@ -171,7 +175,7 @@ export const Visitors: FC<Props> = ({ site, member }) => {
         </>
       )}
 
-      {!visitors.items.length && (
+      {!visitors.items.length && hasRecordings && (
         <NoResults illustration='illustration-13' title='There are no visitors matching your selected filters.' />
       )}
     </>

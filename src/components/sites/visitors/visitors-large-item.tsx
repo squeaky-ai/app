@@ -3,7 +3,6 @@ import type { FC } from 'react';
 import { Tooltip } from 'components/tooltip';
 import { Browser } from 'components/browser';
 import { Device } from 'components/device';
-import { toNiceDate } from 'lib/dates';
 import { Icon } from 'components/icon';
 import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
 import { VisitorsDelete } from 'components/sites/visitors/visitors-delete';
@@ -32,8 +31,6 @@ export const VisitorsLargeItem: FC<Props> = ({ site, member, visitor, search, st
   const devices = groupVisitorDevices(visitor.devices);
   const browsers = groupVisitorBrowsers(visitor.devices);
   const countries = groupVisitorCountries(visitor.countries);
-
-  const toTimeStringDate = (value: string) => toNiceDate(value);
 
   const onRowActionClose = () => {
     if (rowActionsRef.current) rowActionsRef.current.close();
@@ -75,10 +72,10 @@ export const VisitorsLargeItem: FC<Props> = ({ site, member, visitor, search, st
         {visitor.recordingCount?.total || 0}
       </Cell>
       <Cell>
-        {toTimeStringDate(visitor.firstViewedAt)}
+        {visitor.firstViewedAt?.niceDateTime || '-'}
       </Cell>
       <Cell>
-        {toTimeStringDate(visitor.lastActivityAt)}
+        {visitor.lastActivityAt?.niceDateTime || '-'}
       </Cell>
       <Cell>
         {visitor.language}

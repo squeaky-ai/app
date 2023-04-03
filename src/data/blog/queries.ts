@@ -20,8 +20,14 @@ export const GET_BLOG_POSTS_QUERY = gql`
         slug
         body
         scripts
-        createdAt
-        updatedAt
+        createdAt {
+          iso8601
+          niceDateTime
+        }
+        updatedAt {
+          iso8601
+          niceDateTime
+        }
       }
     }
   }
@@ -48,8 +54,14 @@ export const GET_BLOG_POST_QUERY = gql`
       body
       scripts
       coveringEnabled
-      createdAt
-      updatedAt
+      createdAt {
+        iso8601
+        niceDateTime
+      }
+      updatedAt {
+        iso8601
+        niceDateTime
+      }
     }
   }
 `;

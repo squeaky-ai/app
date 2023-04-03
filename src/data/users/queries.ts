@@ -60,7 +60,10 @@ export const GET_PARTNER_QUERY = gql`
             id
             url
             name
-            verifiedAt
+            verifiedAt {
+              iso8601
+              niceDateTime
+            }
             plan {
               planId
               free
@@ -76,9 +79,18 @@ export const GET_PARTNER_QUERY = gql`
           status
           amount
           currency
-          issuedAt
-          dueAt
-          paidAt
+          issuedAt {
+            iso8601
+            niceDateTime
+          }
+          dueAt {
+            iso8601
+            niceDateTime
+          }
+          paidAt {
+            iso8601
+            niceDateTime
+          }
         }
         allTimeCommission {
           id

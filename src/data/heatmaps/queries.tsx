@@ -16,8 +16,14 @@ export const GET_HEATMAPS_QUERY = gql`
             viewportX
             viewportY
           }
-          connectedAt
-          disconnectedAt
+          connectedAt {
+            iso8601
+            niceDateTime
+          }
+          disconnectedAt {
+            iso8601
+            niceDateTime
+          }
           visitor {
             id
             visitorId
@@ -26,8 +32,14 @@ export const GET_HEATMAPS_QUERY = gql`
           }
           pages {
             url
-            enteredAt
-            exitedAt
+            enteredAt {
+              iso8601
+              niceDateTime
+            }
+            exitedAt {
+              iso8601
+              niceDateTime
+            }
           }
           events(page: 1) {
             items {

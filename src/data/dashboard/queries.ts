@@ -91,7 +91,10 @@ export const GET_DASHBOARD_QUERY = gql`
         eventful {
           id
           sessionId
-          disconnectedAt
+          disconnectedAt  {
+            iso8601
+            niceDateTime
+          }
         }
         longest {
           id
@@ -110,7 +113,10 @@ export const GET_DASHBOARD_QUERY = gql`
         newest {
           id
           visitorId
-          createdAt
+          createdAt {
+            iso8601
+            niceDateTime
+          }
         }
       }
     }

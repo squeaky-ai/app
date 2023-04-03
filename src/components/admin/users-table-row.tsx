@@ -5,7 +5,6 @@ import getConfig from 'next/config';
 import { Icon } from 'components/icon';
 import { Cell, Row } from 'components/table';
 import { Pill } from 'components/pill';
-import { toNiceDate } from 'lib/dates';
 import { Dropdown } from 'components/dropdown';
 import { UsersDelete } from 'components/admin/users-delete';
 import type { AdminUser } from 'types/graphql';
@@ -61,8 +60,8 @@ export const UsersTableRow: FC<Props> = ({ user, style }) => {
         ))}
         {user.sites.length === 0 && '-'}
       </Cell>
-      <Cell>{toNiceDate(user.createdAt)}</Cell>
-      <Cell>{user.lastActivityAt ? toNiceDate(user.lastActivityAt) : '-'}</Cell>
+      <Cell>{user.createdAt.niceDateTime}</Cell>
+      <Cell>{user.lastActivityAt ? user.lastActivityAt.niceDateTime : '-'}</Cell>
       <Cell>{user.provider || '-'}</Cell>
       <Cell>
         <Dropdown portal button={<Icon name='more-2-fill' />} buttonClassName='options' ref={rowActionsRef}>

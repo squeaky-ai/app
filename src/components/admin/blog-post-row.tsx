@@ -6,7 +6,6 @@ import { Pill } from 'components/pill';
 import { Dropdown } from 'components/dropdown';
 import { Icon } from 'components/icon';
 import { BlogDelete } from 'components/admin/blog-delete';
-import { toNiceDate } from 'lib/dates';
 import type { BlogPost } from 'types/graphql';
 
 interface Props {
@@ -41,8 +40,8 @@ export const BlogPostRow: FC<Props> = ({ post }) => {
           : <Pill className='primary'>No</Pill>
         }
       </Cell>
-      <Cell>{toNiceDate(post.createdAt)}</Cell>
-      <Cell>{toNiceDate(post.updatedAt)}</Cell>
+      <Cell>{post.createdAt.niceDateTime}</Cell>
+      <Cell>{post.updatedAt.niceDateTime}</Cell>
       <Cell>
         <Dropdown portal button={<Icon name='more-2-fill' />} buttonClassName='options' ref={rowActionsRef}>
           <BlogDelete 

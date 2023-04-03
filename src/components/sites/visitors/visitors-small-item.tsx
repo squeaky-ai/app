@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import Link from 'next/link';
 import { Pill } from 'components/pill';
 import { Icon } from 'components/icon';
-import { toIsoDate, toHyphenedDate } from 'lib/dates';
+import { toHyphenedDate } from 'lib/dates';
 import type { Site, Visitor } from 'types/graphql';
 
 interface Props {
@@ -31,7 +31,7 @@ export const VisitorsSmallItem: FC<Props> = ({ site, visitor }) => (
       </p>
       <p>
         <Icon name='calendar-line' />
-        {toHyphenedDate(toIsoDate(new Date(visitor.lastActivityAt)))}
+        {toHyphenedDate(visitor.lastActivityAt.iso8601)}
       </p>
     </div>
   </Link>

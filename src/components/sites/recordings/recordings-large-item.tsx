@@ -15,7 +15,7 @@ import { RecordingsShare } from 'components/sites/recordings/recordings-share';
 import { RecordingDelete } from 'components/sites/recordings/recording-delete';
 import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
 import { Emoji, EmojiType } from 'components/emoji';
-import { toNiceDate, toTimeString } from 'lib/dates';
+import { toTimeString } from 'lib/dates';
 import { getLinkedData } from 'lib/visitors';
 import { npsColor } from 'lib/feedback';
 import { percentage } from 'lib/maths';
@@ -76,7 +76,7 @@ export const RecordingsLargeItem: FC<Props> = ({ site, recording, style, member,
         {linkedData?.email || '-'}
       </Cell>
       <Cell>
-        {toNiceDate(recording.connectedAt)}
+        {recording.connectedAt.niceDateTime}
       </Cell>
       <Cell>
         {toTimeString(recording.duration)}

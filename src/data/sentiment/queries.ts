@@ -31,7 +31,10 @@ export const GET_SENTIMENT_QUERY = gql`
             }
             sessionId
             recordingId
-            timestamp
+            timestamp {
+              iso8601
+              niceDateTime
+            }
           }
           pagination {
             pageSize
@@ -50,7 +53,10 @@ export const GET_SENTIMENT_QUERY = gql`
           trend
           responses {
             score
-            timestamp
+            timestamp {
+              iso8601
+              niceDateTime
+            }
           }
         }
       }

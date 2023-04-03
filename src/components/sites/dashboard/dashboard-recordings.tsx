@@ -8,7 +8,7 @@ import { Pill } from 'components/pill';
 import { TableWrapper, Table, Row, Cell } from 'components/table';
 import { DashboardRecordingsChartTooltip } from 'components/sites/dashboard/dashboard-recordings-chart-tooltip';
 import { DashboardChart } from 'components/sites/dashboard/dashboard-chart';
-import { toNiceDate, toTimeString } from 'lib/dates';
+import { toTimeString } from 'lib/dates';
 import { formatResultsForGroupType } from 'lib/charts-v2';
 import type { AnalyticsRecording, Site } from 'types/graphql';
 import type { Dashboard } from 'types/dashboard';
@@ -81,7 +81,7 @@ export const DashboardRecordings: FC<Props> = ({ site, dashboard, period }) => {
                       {recording.sessionId}
                     </Link>
                   </Cell>
-                  <Cell>{toNiceDate(recording.disconnectedAt)}</Cell>
+                <Cell>{recording.disconnectedAt.niceDateTime}</Cell>
                 </Row>
               ))}
             </Table>

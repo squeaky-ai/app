@@ -10,7 +10,6 @@ import { Tooltip } from 'components/tooltip';
 import { Dropdown } from 'components/dropdown';
 import { Emoji, EmojiType } from 'components/emoji';
 import { SentimentResponsesDelete } from 'components/sites/feedback/sentiment-responses-delete';
-import { toNiceDate } from 'lib/dates';
 import type { FeedbackSentimentResponseItem, Team } from 'types/graphql';
 
 interface Props {
@@ -48,7 +47,7 @@ export const SentimentResponsesItem: FC<Props> = ({ member, response, style }) =
         </Link>
       </Cell>
       <Cell>
-        {toNiceDate(response.timestamp)}
+        {response.timestamp.niceDateTime}
       </Cell>
       <Cell>
         {response.comment && (

@@ -37,7 +37,10 @@ export const CREATE_EVENT_CAPTURE_MUTATION = gql`
         field
       }
       count
-      lastCountedAt
+      lastCountedAt {
+        iso8601
+        niceDateTime
+      }
       groupNames
     }
   }
@@ -74,7 +77,10 @@ export const UPDATE_EVENT_CAPTURE_MUTATION = gql`
         field
       }
       count
-      lastCountedAt
+      lastCountedAt {
+        iso8601
+        niceDateTime
+      }
     }
   }
 `;

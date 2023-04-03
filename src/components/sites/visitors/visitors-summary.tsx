@@ -2,7 +2,6 @@ import React from 'react';
 import type { FC } from 'react';
 import { Icon } from 'components/icon';
 import { Card } from 'components/card';
-import { toNiceDate } from 'lib/dates';
 import { Device } from 'components/device';
 import { Tooltip } from 'components/tooltip';
 import { Browser } from 'components/browser';
@@ -64,13 +63,13 @@ export const VisitorsSummary: FC<Props> = ({ site, member, visitor }) => {
           {visitor.firstViewedAt && (
             <div className='row'>
               <dt>First visited</dt>
-              <dd>{toNiceDate(visitor.firstViewedAt)}</dd>
+              <dd>{visitor.firstViewedAt.niceDateTime}</dd>
             </div>
           )}
           {visitor.lastActivityAt && (
             <div className='row'>
               <dt>Last activity</dt>
-              <dd>{toNiceDate(visitor.lastActivityAt)}</dd>
+              <dd>{visitor.lastActivityAt.niceDateTime}</dd>
             </div>
           )}
           {visitor.language && (
