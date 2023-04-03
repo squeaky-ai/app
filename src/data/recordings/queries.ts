@@ -125,7 +125,7 @@ export const GET_RECORDING_QUERY = gql`
               duration
               disconnectedAt {
                 iso8601
-                niceDateTime
+                shortDate
               }
             }
             pagination {
