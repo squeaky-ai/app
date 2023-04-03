@@ -82,7 +82,7 @@ export const SidebarInfo: FC<Props> = ({ site, member, recording, setActiveTab }
                   </span>
                 </div>
                 <div>
-                  {rec.disconnectedAt.niceDateTime}
+                  {rec.disconnectedAt.shortDate}
                 </div>
                 <div>
                   {toTimeString(rec.duration)}

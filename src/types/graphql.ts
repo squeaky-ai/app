@@ -960,6 +960,7 @@ export type CommonDates = {
   iso8601: Scalars['String'];
   niceDate: Scalars['String'];
   niceDateTime: Scalars['String'];
+  shortDate: Scalars['String'];
 };
 
 export type CommonPagination = {
