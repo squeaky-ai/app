@@ -348,9 +348,18 @@ export const GET_ADMIN_USER_QUERY = gql`
             status
             amount
             currency
-            issuedAt
-            dueAt
-            paidAt
+            issuedAt {
+              iso8601
+              niceDateTime
+            }
+            dueAt {
+              iso8601
+              niceDateTime
+            }
+            paidAt {
+              iso8601
+              niceDateTime
+            }
           }
           allTimeCommission {
             id

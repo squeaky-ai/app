@@ -1181,11 +1181,20 @@ export const invoiceCreate = async (partnerId: string, input: UsersInvoiceCreate
             fragment NewUserInvoice on UserInvoice {
               id
               currency
-              dueAt
+              dueAt {
+                iso8601
+                niceDateTime
+              }
               filename
               invoiceUrl
-              issuedAt
-              paidAt
+              issuedAt {
+                iso8601
+                niceDateTime
+              }
+              paidAt {
+                iso8601
+                niceDateTime
+              }
               status
             }
           `
