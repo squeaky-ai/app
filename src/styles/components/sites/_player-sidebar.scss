@@ -516,6 +516,10 @@
 
           .tag {
             cursor: pointer;
+
+            span {
+              pointer-events: none;
+            }
           }
 
           &:last-of-type {

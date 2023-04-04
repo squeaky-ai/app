@@ -549,6 +549,15 @@ export const tagCreate = async (input: TagsCreateInput): Promise<Tag> => {
     id: cache.identify({ id: input.recordingId, __typename: 'Recording' }),
     fields: {
       tags(existingTagRefs = []) {
+        const exists = existingTagRefs.find((e: { __ref: string }) => {
+          const normalizedId = cache.identify({ id: data.tagCreate.id, __typename: 'Tag' });
+          return e.__ref === normalizedId;
+        });
+
+        if (exists) {
+          return [...existingTagRefs];
+        }
+
         const newTagRef = cache.writeFragment({
           data: data.tagCreate,
           fragment: gql`
@@ -571,11 +580,16 @@ export const tagRemove = async (input: TagsRemoveInput): Promise<null> => {
   const { data } = await client.mutate({
     mutation: REMOVE_TAG_MUTATION,
     variables: { input },
-    update(cache) {
-      const normalizedId = cache.identify({ id: input.tagId, __typename: 'Tag' });
-      cache.evict({ id: normalizedId });
-      cache.gc();
-    }
+  });
+
+  cache.modify({
+    id: cache.identify({ id: input.recordingId, __typename: 'Recording' }),
+    fields: {
+      tags(existing = []) {
+        const normalizedId = cache.identify({ id: input.tagId, __typename: 'Tag' });
+        return existing.filter((t: { __ref: string }) => t.__ref !== normalizedId);
+      },
+    },
   });
 
   return data.tagRemove;

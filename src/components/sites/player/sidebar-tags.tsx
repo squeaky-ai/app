@@ -49,13 +49,15 @@ export const SidebarTags: FC<Props> = ({ member, recording }) => {
             validationSchema={TagSchema}
             onSubmit={(values, { setValues }) => {
               (async () => {
+                // This gets fired if they hit enter and create a new tag
                 await tagCreate({
                   siteId,
                   recordingId: recording.id, 
-                  name: values.name
+                  name: values.name.trim(),
                 });
 
                 setValues({ name: '' });
+                setFocus(false);
               })();
             }}
           >
@@ -67,17 +69,21 @@ export const SidebarTags: FC<Props> = ({ member, recording }) => {
               values,
             }) => {
               const results = tags
-                .filter(t => t.name.toLowerCase().includes(values.name.toLowerCase()))
+                .filter(t => {
+                  const allRecordingTagNames = recording.tags.map(tag => tag.name.toLowerCase());
+                  return !allRecordingTagNames.includes(t.name.toLowerCase())
+                })
                 .sort((a, b) => a.name.localeCompare(b.name));
 
               const handleTagClick = async (event: React.MouseEvent<HTMLDivElement>) => {
                 event.preventDefault();
+
                 const element = event.target as HTMLElement;
 
                 await tagCreate({
                   siteId,
                   recordingId: recording.id, 
-                  name: element.innerText
+                  name: element.innerText.trim(),
                 });
 
                 setValues({ name: '' });
