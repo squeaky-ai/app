@@ -7,6 +7,7 @@ import { DeviceWidths } from 'data/common/constants';
 import { showClickCountsMaps, showClickGradientMaps, showScrollMaps, showCursorMaps, iframeStyles, getElements } from 'lib/heatmaps';
 import { parseRecordingEvents } from 'lib/events';
 import { HeatmapsDevice, HeatmapsType } from 'types/graphql';
+import { pageMatchesRoute } from 'lib/page';
 import type { Heatmaps, HeatmapClickTarget, HeatmapsClickPosition, HeatmapsScroll, HeatmapsCursor, HeatmapsClickCount } from 'types/heatmaps';
 
 interface Props {
@@ -48,10 +49,12 @@ export const HeatmapsPage: FC<Props> = ({
     // Find where exactly this page is in the list, and try and find
     // a timestamp that is just before the user navigates away. This
     // should ensure that we have the complete page
-    const timestamp = heatmaps.recording.pages.find(p => p.url === page)?.exitedAt;
-    const location = new Date(timestamp.iso8601).valueOf() - events[0].timestamp - 50;
+    const timestamp = heatmaps.recording.pages.find(p => pageMatchesRoute(p.url, page))?.exitedAt;
+
+    const location = new Date(timestamp?.iso8601).valueOf() - events[0].timestamp - 50;
 
     if (!timestamp) {
+      console.error('Failed to find timestamp of page in recording');
       return destroy();
     }
 

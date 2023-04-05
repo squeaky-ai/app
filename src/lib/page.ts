@@ -55,3 +55,18 @@ export function handleTreeUpdate(
   const toSelect = allChildren.filter(s => !selected.includes(s));
   return [...selected, ...toSelect];
 }
+
+export function pageMatchesRoute(page: string, route: string) {
+  if (!page || !route) return false;
+
+  const pageChunks = page.replace(/\/$/, '').split('/');
+  const routeChunks = route.split('/');
+
+  if (pageChunks.length !== routeChunks.length) return false;
+
+  return routeChunks.every((chunk, index) => {
+    return chunk.startsWith(':')
+      ? true
+      : chunk === routeChunks[index];
+  });
+}

@@ -21,6 +21,7 @@ import { getDateRange } from 'lib/dates';
 import { HeatmapsType, HeatmapsDevice, SitesPage } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 import type { HeatmapClickTarget } from 'types/heatmaps';
+import { Error } from 'components/error';
 
 interface Props {
   type: HeatmapsType;
@@ -35,9 +36,9 @@ export const Heatmaps: FC<Props> = ({ type, page, pages, period, setPage, setPer
   const [device, setDevice] = React.useState<HeatmapsDevice>(HeatmapsDevice.Desktop);
   const [clickTarget, setClickTarget] = React.useState<HeatmapClickTarget>('all');
   const [selected, setSelected] = React.useState<string>(null);
-  const [excludeRecordingIds, setExcludeRecordingIds] = React.useState<string[]>([]);
+  const [excludeRecordingIds, setExcludeRecordingIds] = React.useState<string[]>(['63', '64', '68', '75']);
 
-  const { loading, heatmaps } = useHeatmaps({ 
+  const { loading, error, heatmaps } = useHeatmaps({ 
     page, 
     device, 
     type,
@@ -54,6 +55,10 @@ export const Heatmaps: FC<Props> = ({ type, page, pages, period, setPage, setPer
 
   const hasData = !!heatmaps.recording;
   const hasHiddenSidebar = [HeatmapsType.ClickPosition, HeatmapsType.Cursor].includes(type);
+
+  if (error) {
+    return <Error />;
+  }
 
   if (loading) {
     return <PageLoading />;
