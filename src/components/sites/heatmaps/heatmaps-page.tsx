@@ -49,7 +49,11 @@ export const HeatmapsPage: FC<Props> = ({
     // Find where exactly this page is in the list, and try and find
     // a timestamp that is just before the user navigates away. This
     // should ensure that we have the complete page
-    const timestamp = heatmaps.recording.pages.find(p => pageMatchesRoute(p.url, page))?.exitedAt;
+    const timestamp = heatmaps.recording.pages.find(p => {
+      return page.includes(':')
+        ? pageMatchesRoute(p.url, page)
+        : p.url === page;
+    })?.exitedAt;
 
     const location = new Date(timestamp?.iso8601).valueOf() - events[0].timestamp - 50;
 
