@@ -1,6 +1,5 @@
 import React from 'react';
 import type { FC } from 'react';
-import { pullAt } from 'lodash';
 import { Period } from 'components/sites/period/period';
 import { JourneysPages } from 'components/sites/journeys/journeys-pages';
 import { JourneysPosition } from 'components/sites/journeys/journeys-position';
@@ -37,39 +36,6 @@ export const Journeys: FC<Props> = ({ site, member, page, pages, period, setPage
     return <Error />;
   }
 
-  const journeysWithRoutes = journeys.map(journey => {
-    const path = journey.path.map(path => {
-      const match = routes.find(r => {
-        const routeChunks = r.split('/');
-        // Trailing slashes are going to cause problems
-        const pathChunks = path.replace(/\/$/, '').split('/');
-
-        // They can't match if they're not the same length
-        if (routeChunks.length !== pathChunks.length) {
-          return false;
-        }
-
-        // Get the index at which the user has entered params
-        const parameterIndexes = routeChunks.reduce((acc, chunk, index) => {
-          if (chunk.startsWith(':')) acc.push(index);
-          return acc;
-        }, []);
-
-        // Remove all the values at these index so that we can
-        // compare what is left
-        pullAt(routeChunks, parameterIndexes);
-        pullAt(pathChunks, parameterIndexes)
-
-        return routeChunks.join('/') === pathChunks.join('/');
-      });
-
-      // If nothing is found then return the original path
-      return match || path;
-    });
-
-    return { path, referrer: journey.referrer };
-  });
-
   return (
     <div className='journeys'>
       <div className='controls'>
@@ -97,7 +63,7 @@ export const Journeys: FC<Props> = ({ site, member, page, pages, period, setPage
             <JourneysGraph 
               site={site}
               position={position}
-              journeys={journeysWithRoutes} 
+              journeys={journeys} 
               setPage={setPage}
               setPosition={setPosition}
             />
