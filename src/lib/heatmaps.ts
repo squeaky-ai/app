@@ -241,6 +241,7 @@ export const showClickGradientMaps = (doc: Document, items: HeatmapsClickPositio
 
   const heatmapContainer = document.createElement('div');
   heatmapContainer.style.cssText = `
+    min-height: 100vh;
     height: 100%;
     width: 100%;
   `;
