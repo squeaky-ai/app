@@ -109,7 +109,7 @@ export const NpsScheduling: FC<Props> = ({ site, feedback }) => {
               <div className={classnames('pages', { disabled: values.npsSchedule === 'custom' })}>
                 <h4>Pages</h4>
 
-                <p>If you are using the &quot;One-time&quot; or &quot;Once per month&quot; schedules then <b>your NPS survey banner could be displayed on any page</b> of your site, if you&quot;d like to prevent the survey from appearing on specific pages then you can check the boxes.</p>
+                <p>If you are using the &quot;One-time&quot; or &quot;Once per month&quot; schedules then <b>your NPS survey banner could be displayed on any page</b> of your site, if you&apos;d like to prevent the survey from appearing on specific pages then you can check the boxes.</p>
 
                 <p><b>Hide feedback widget on:</b></p>
 

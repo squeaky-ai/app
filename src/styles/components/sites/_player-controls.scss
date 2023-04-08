@@ -53,10 +53,14 @@
     flex-shrink: 0;
     height: 2rem;
     margin: 0 1rem;
+    padding: 0;
     width: 2rem;
 
     .icon {
       font-size: var(--font-size-body-xxl);
+      line-height: 2rem;
+      height: 2rem;
+      width: 2rem;
     }
 
     &:hover {
