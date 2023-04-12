@@ -59,7 +59,7 @@ export const SettingsTabs: FC<Props> = ({ site, page, member }) => {
         )}
         <li className='tab'>
           <Link href={`/sites/${site.id}/settings/details/url-structure`} className={classnames('button tab-button', { active: page === 'url-structure' })}>
-            URL Structure
+            URL structure
           </Link>
         </li>
         <li className='tab'>
