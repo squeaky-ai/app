@@ -44,6 +44,12 @@ module.exports = {
         destination: '/__admin/dashboard',
         permanent: true,
       },
+      {
+        source: '/app/developers',
+        destination: '/developers',
+        permanent: true,
+        basePath: false,
+      },
     ]
   },
 };
