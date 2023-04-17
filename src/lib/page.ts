@@ -60,7 +60,7 @@ export function pageMatchesRoute(page: string, route: string) {
   if (!page || !route) return false;
 
   const pageChunks = page.replace(/\/$/, '').split('/');
-  const routeChunks = route.split('/');
+  const routeChunks = route.replace(/\/$/, '').split('/');
 
   if (pageChunks.length !== routeChunks.length) return false;
 
