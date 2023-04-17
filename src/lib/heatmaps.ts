@@ -163,6 +163,7 @@ export const showScrollMaps = (doc: Document, items: HeatmapsScroll[], scale: nu
     background: linear-gradient(180deg, ${scrollMapData.map(s => `${s.color.background} ${s.increment}%`).join(', ')});
     height: ${doc.body.scrollHeight}px;
     left: 0;
+    min-height: 100vh;
     opacity: .7;
     position: absolute;
     top: 0;
@@ -184,6 +185,7 @@ export const showCursorMaps = (doc: Document, items: HeatmapsCursor[]) => {
     background: rgba(0, 70, 220, .15);
     height: ${doc.body.scrollHeight}px;
     left: 0;
+    min-height: 100vh;
     position: absolute;
     top: 0;
     width: 100%;
