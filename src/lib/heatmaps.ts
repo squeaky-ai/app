@@ -16,6 +16,21 @@ const createHeatmapsInstance = (container: HTMLElement): Heatmap<string, 'x', 'y
   },
 });
 
+const getTallestElementInDom = (doc: Document): number => {
+  let maxHeight = 0;
+
+  try {
+    doc.querySelectorAll('*').forEach((node) => { 
+      const { height } = node.getBoundingClientRect();
+      if (height > maxHeight) maxHeight = height;
+    }); 
+
+    return maxHeight;
+  } catch {
+    return maxHeight;
+  }
+};
+
 export const getElement = (doc: Document, selector: string) => {
   try {
     return doc.querySelector<HTMLElement>(selector);
@@ -161,7 +176,7 @@ export const showScrollMaps = (doc: Document, items: HeatmapsScroll[], scale: nu
   overlay.classList.add('__squeaky_scroll_overlay');
   overlay.style.cssText = `
     background: linear-gradient(180deg, ${scrollMapData.map(s => `${s.color.background} ${s.increment}%`).join(', ')});
-    height: ${doc.body.scrollHeight}px;
+    height: ${doc.body.scrollHeight || getTallestElementInDom(doc)}px;
     left: 0;
     min-height: 100vh;
     opacity: .7;
@@ -183,7 +198,7 @@ export const showCursorMaps = (doc: Document, items: HeatmapsCursor[]) => {
   overlay.classList.add('__squeaky_cursor_overlay');
   overlay.style.cssText = `
     background: rgba(0, 70, 220, .15);
-    height: ${doc.body.scrollHeight}px;
+    height: ${doc.body.scrollHeight || getTallestElementInDom(doc)}px;
     left: 0;
     min-height: 100vh;
     position: absolute;
@@ -233,7 +248,7 @@ export const showClickGradientMaps = (doc: Document, items: HeatmapsClickPositio
   overlay.classList.add('__squeaky_click_overlay');
   overlay.style.cssText = `
     background: rgba(0, 70, 220, .15);
-    height: ${doc.body.scrollHeight}px;
+    height: ${doc.body.scrollHeight || getTallestElementInDom(doc)}px;
     left: 0;
     position: absolute;
     top: 0;
