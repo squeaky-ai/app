@@ -14,7 +14,9 @@ import { Error } from 'components/error';
 import { Roles } from 'components/sites/team/roles';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { OWNER, ADMIN } from 'data/teams/constants';
+import { providers } from 'data/sites/constants';
 import { useTeam } from 'hooks/use-team';
+import { Message } from 'components/message';
 
 const SiteSettingsTeam: NextPage<ServerSideProps> = ({ user }) => {
   const { error, team } = useTeam();
@@ -40,6 +42,14 @@ const SiteSettingsTeam: NextPage<ServerSideProps> = ({ user }) => {
             </h4>
 
             <Container className='md'>
+              {site.provider === providers.duda && (
+                <Message
+                  type='warning'
+                  message={
+                    <p><b>Please note</b>: Due to limitations in the way that your content management system manages multi-user authentication, only the Squeaky site owner role can visit Squeaky from within the CMS. Any additional team members you add will be invited to access Squeaky directly through Squeaky&apos;s web application.</p>
+                  }
+                />
+              )}
               <p>This page allows you to view, invite and manage the roles of any team members associated with this site. Adding members is always free of charge, regardless of their role.</p>
             </Container>
 
