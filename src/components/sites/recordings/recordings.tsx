@@ -135,7 +135,7 @@ export const Recordings: FC<Props> = ({
         clearFilters={clearFilters} 
       />
 
-      {recordings.items.length === 0 && (
+      {recordings.items.length === 0 && site.recordingsCount !== 0 && (
         <NoResults illustration='illustration-13' title='There are no recordings matching your selected filters.' />
       )}
 
