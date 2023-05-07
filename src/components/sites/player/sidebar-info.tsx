@@ -58,13 +58,13 @@ export const SidebarInfo: FC<Props> = ({ site, member, recording, setActiveTab }
         <div className='row'>
           <dt>Recordings</dt>
           <dd>
-            {recordingsCount > 1 && (
+            {recordingsCount >= 1 && (
               <Button className={classnames('link toggle-recordings', { open: showRecordings })} onClick={toggleShowRecordings}>
                 <span>{recordingsCount}</span>
                 <Icon name='arrow-drop-down-line' />
               </Button>
             )}
-            {recordingsCount <= 1 && (
+            {recordingsCount < 1 && (
               <>1</>
             )}
           </dd>
