@@ -2,6 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import * as Yup from 'yup';
 import classnames from 'classnames';
+import Link from 'next/link';
 import { Formik } from 'formik';
 import { Icon } from 'components/icon';
 import { Button } from 'components/button';
@@ -19,6 +20,7 @@ import { EventsCaptureType } from 'types/events';
 import { EventsCondition, EventsMatch, Team } from 'types/graphql';
 import { MEMBER, READ_ONLY, SUPER_USER } from 'data/teams/constants';
 import { VALID_EVENT_VALUE } from 'data/sites/constants';
+import { Message } from 'components/message';
 import type { Site } from 'types/graphql';
 
 interface Props {
@@ -144,6 +146,14 @@ export const EventCreate: FC<Props> = ({ site, member, buttonText, buttonClassNa
 
                   {values.eventType !== null && values.eventType !== EventsCaptureType.Custom && (
                     <>
+                      {values.eventType === EventsCaptureType.TextClick && site.anonymiseText && (
+                        <Message 
+                          type='warning'
+                          message={
+                            <p>Your <Link href={`/sites/${site.id}/settings/privacy/data`}>privacy settings</Link> are currently configured to anonymise all text on your site, please choose an alternative anonymisation method to begin tracking Text Click events.</p>
+                          }
+                        />
+                      )}
                       <Label htmlFor='eventType'>Event type</Label>
                       <Select name='eventType' onChange={(event) => setFieldValue('eventType', Number(event.target.value))} value={values.eventType}>
                         <Option value={EventsCaptureType.PageVisit}>Page visit</Option>
@@ -195,7 +205,7 @@ export const EventCreate: FC<Props> = ({ site, member, buttonText, buttonClassNa
                         </div>
                       )}
 
-                      {values.eventType === EventsCaptureType.UtmParameters  && (
+                      {values.eventType === EventsCaptureType.UtmParameters && (
                         <div className='input-group utm-parameters'>
                           <div>
                             <Label htmlFor='field'>Parameter type</Label>
