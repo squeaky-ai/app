@@ -62,11 +62,13 @@ export const SettingsTabs: FC<Props> = ({ site, page, member }) => {
             URL structure
           </Link>
         </li>
-        <li className='tab'>
-          <Link href={`/sites/${site.id}/settings/details/api-key`} className={classnames('button tab-button', { active: page === 'api-key' })}>
-            API Key
-          </Link>
-        </li>
+        {site.plan.featuresEnabled.includes(PlanFeature.EventTracking) && (
+          <li className='tab'>
+            <Link href={`/sites/${site.id}/settings/details/api-key`} className={classnames('button tab-button', { active: page === 'api-key' })}>
+              API Key
+            </Link>
+          </li>
+        )}
         {member?.role === OWNER && !pageState.embedded && (
           <li className='tab'>
             <Link href={`/sites/${site.id}/settings/details/delete`} className={classnames('button tab-button', { active: page === 'delete' })}>
