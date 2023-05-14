@@ -411,3 +411,31 @@ export const GET_ADMIN_USERS_PARTNERS_QUERY = gql`
     }
   }
 `;
+
+export const GET_AD_TRACKING_QUERY = gql`
+  query GetAdTracking($utmContentIds: [String!]!) {
+    admin {
+      adTracking(utmContentIds: $utmContentIds) {
+        siteId
+        siteName
+        siteCreatedAt {
+          iso8601
+          niceDateTime
+        }
+        siteVerifiedAt {
+          iso8601
+          niceDateTime
+        }
+        sitePlanName
+        userId
+        userName
+        userCreatedAt {
+          iso8601
+          niceDateTime
+        }
+        visitorId
+        utmContent
+      }
+    }
+  }
+`;

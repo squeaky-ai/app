@@ -34,6 +34,7 @@ export const useAdminDashboard = (): UseAdminDashboard => {
     usersStored: [],
     sitesBundles: [],
     usersPartners: [],
+    adTracking: [],
   };
 
   return {

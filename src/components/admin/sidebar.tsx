@@ -82,6 +82,14 @@ export const Sidebar: FC = () => {
             <Divider />
             <SidebarLink
               visibile
+              href='/__admin/ad-tracking'
+              active={router.asPath.startsWith('/__admin/ad-tracking')}
+              icon='radar-line'
+              name='Ad Tracking'
+            />
+            <Divider />
+            <SidebarLink
+              visibile
               href={`${publicRuntimeConfig.webHost}/api/sidekiq`}
               active={false}
               icon='line-chart-line'
