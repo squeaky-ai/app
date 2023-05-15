@@ -413,28 +413,34 @@ export const GET_ADMIN_USERS_PARTNERS_QUERY = gql`
 `;
 
 export const GET_AD_TRACKING_QUERY = gql`
-  query GetAdTracking($utmContentIds: [String!]!) {
+  query GetAdTracking($utmContentIds: [String!]!, $page: Int!, $size: Int!) {
     admin {
-      adTracking(utmContentIds: $utmContentIds) {
-        siteId
-        siteName
-        siteCreatedAt {
-          iso8601
-          niceDateTime
+      adTracking(utmContentIds: $utmContentIds, page: $page, size: $size) {
+        items {
+          siteId
+          siteName
+          siteCreatedAt {
+            iso8601
+            niceDateTime
+          }
+          siteVerifiedAt {
+            iso8601
+            niceDateTime
+          }
+          sitePlanName
+          userId
+          userName
+          userCreatedAt {
+            iso8601
+            niceDateTime
+          }
+          visitorId
+          utmContent
         }
-        siteVerifiedAt {
-          iso8601
-          niceDateTime
+        pagination {
+          total
+          pageSize
         }
-        sitePlanName
-        userId
-        userName
-        userCreatedAt {
-          iso8601
-          niceDateTime
-        }
-        visitorId
-        utmContent
       }
     }
   }

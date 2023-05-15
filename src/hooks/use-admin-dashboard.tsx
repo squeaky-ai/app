@@ -34,7 +34,13 @@ export const useAdminDashboard = (): UseAdminDashboard => {
     usersStored: [],
     sitesBundles: [],
     usersPartners: [],
-    adTracking: [],
+    adTracking: {
+      items: [],
+      pagination: {
+        pageSize: 25,
+        total: 0,
+      }
+    },
   };
 
   return {

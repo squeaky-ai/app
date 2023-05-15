@@ -1,6 +1,13 @@
 .page.__admin.ad-tracking {
   .admin-header {
     margin: 0 0 2rem 0;
+
+    h4 {
+      span {
+        color: var(--mauve-700);
+        margin: 0 0 0 1rem;
+      }
+    }
   }
 
   .content-id-form {
