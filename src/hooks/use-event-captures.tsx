@@ -7,6 +7,7 @@ interface Props {
   page: number;
   size?: number;
   sort?: EventsCaptureSort;
+  search?: string;
 }
 
 interface UseEventCaptures {
@@ -15,7 +16,7 @@ interface UseEventCaptures {
   events: EventsCapture;
 }
 
-export const useEventCaptures = ({ page, size, sort }: Props): UseEventCaptures => {
+export const useEventCaptures = ({ page, size, sort, search }: Props): UseEventCaptures => {
   const router = useRouter();
 
   const { data, error, loading } = useQuery<{ site: Site }>(GET_EVENT_CAPTURES_QUERY, {
@@ -24,6 +25,7 @@ export const useEventCaptures = ({ page, size, sort }: Props): UseEventCaptures 
       page, 
       size,
       sort,
+      search,
     },
     pollInterval: 5000,
   });

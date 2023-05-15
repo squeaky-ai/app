@@ -1,11 +1,11 @@
 import { gql } from '@apollo/client';
 
 export const GET_EVENT_CAPTURES_QUERY = gql`
-  query GetEventCapture($siteId: ID!, $page: Int, $size: Int, $sort: EventsCaptureSort) {
+  query GetEventCapture($siteId: ID!, $page: Int, $size: Int, $sort: EventsCaptureSort, $search: String) {
     site(siteId: $siteId) {
       id
       name
-      eventCapture(page: $page, size: $size, sort: $sort) {
+      eventCapture(page: $page, size: $size, sort: $sort, search: $search) {
         items {
           id
           name

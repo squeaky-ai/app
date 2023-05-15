@@ -10,6 +10,7 @@ import { ButtonGroup } from 'components/button-group';
 import { EmptyState } from 'components/sites/empty-state';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { Error } from 'components/error';
+import { Search } from 'components/search';
 import { PageLoading } from 'components/sites/page-loading';
 import { GettingStarted } from 'components/sites/events/getting-started';
 import { EventCapturesBulkActions } from 'components/sites/events/event-captures-bulk-actions';
@@ -28,16 +29,20 @@ const SitesEvents: NextPage<ServerSideProps> = ({ user }) => {
   const [page, setPage] = React.useState<number>(1);
   const [size, setSize] = React.useState<number>(20);
   const [selected, setSelected] = React.useState<EventSelected[]>([]);
+  const [search, setSearch] = React.useState<string>('');
 
-const { sort, setSort } = useSort<EventsCaptureSort>('events');
+  const { sort, setSort } = useSort<EventsCaptureSort>('events');
 
-  const { events, error, loading } = useEventCaptures({ page, size, sort });
+  const { events, error, loading } = useEventCaptures({
+    page,
+    size,
+    sort,
+    search,
+  });
 
   if (error) {
     return <Error />;
   }
-
-  console.log(query);
   
   const tab = ['all', 'groups'].includes(query.events as EventsGroupType)
     ? query.events as EventsGroupType 
@@ -67,6 +72,11 @@ const { sort, setSort } = useSort<EventsCaptureSort>('events');
 
               {hasEvents && (
                 <menu>
+                  <Search
+                    search={search}
+                    onSearch={setSearch}
+                    placeholder='Search event name or group...'
+                  />
                   <EventCapturesBulkActions
                     site={site}
                     member={member}
