@@ -20,7 +20,7 @@ export const EventCompare: FC<Props> = ({ site, selected, buttonText, buttonDisa
     const search = new URLSearchParams();
     selected.forEach(s => search.append(`${s.type}Id`, s.id));
 
-    router.push(`/sites/${site.id}/events/history?${search.toString()}`);
+    router.push(`/sites/${site.id}/events/history/stats?${search.toString()}`);
 
     onCompleted?.();
   };

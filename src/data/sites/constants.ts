@@ -41,7 +41,7 @@ export const mapFeatureToRoutes: Record<PlanFeature, string[]> = {
   ],
   event_tracking: [
     '/sites/[site_id]/events',
-    '/sites/[site_id]/events/history',
+    '/sites/[site_id]/events/history/[history]',
   ],
   heatmaps_click_counts: [
     '/sites/[site_id]/heatmaps/click-counts',

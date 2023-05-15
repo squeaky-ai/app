@@ -8,7 +8,7 @@ import type { EventSelected } from 'types/events';
 import type { Site, EventsCapture } from 'types/graphql';
 
 interface Props {
-  type: EventsGroupType;
+  tab: EventsGroupType;
   site: Site;
   events: EventsCapture;
   member?: Team;
@@ -22,7 +22,7 @@ interface Props {
 }
 
 export const EventList: FC<Props> = ({
-  type,
+  tab,
   site,
   events,
   member,
@@ -34,7 +34,7 @@ export const EventList: FC<Props> = ({
   setSize,
   setSelected
 }) => {
-  return type === EventsGroupType.All
+  return tab === 'all'
     ? (
       <EventCaptures 
         site={site}

@@ -11,6 +11,7 @@ import type { Site, Team } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 
 interface Props {
+  tab: TabsType;
   site: Site;
   member?: Team;
   groupIds: string[];
@@ -22,6 +23,7 @@ interface Props {
 }
 
 export const EventHistory: FC<Props> =  ({ 
+  tab,
   site,
   member,
   groupIds, 
@@ -31,7 +33,6 @@ export const EventHistory: FC<Props> =  ({
   setGroupIds, 
   setCaptureIds 
 }) => {
-  const [activeTab, setActiveTab] = React.useState<TabsType>('stats');
   const [sort, setSort] = React.useState<EventStatsSort>(EventStatsSort.CountDesc);
 
   return (
@@ -50,9 +51,9 @@ export const EventHistory: FC<Props> =  ({
         period={period}
       />
 
-      <EventTabs active={activeTab} onChange={setActiveTab} />
+      <EventTabs site={site} active={tab} />
       
-      {activeTab === 'stats'
+      {tab === 'stats'
         ? <EventStatsTab sort={sort} eventStats={eventStats.eventStats} setSort={setSort} />
         : <EventFeedTable site={site} member={member} groupIds={groupIds} captureIds={captureIds} period={period} />
       }

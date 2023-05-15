@@ -1,10 +1,11 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
 import classnames from 'classnames';
+import { useRouter } from 'next/router';
 import { Main } from 'components/main';
 import { Page } from 'components/sites/page';
-import { Button } from 'components/button';
 import { ButtonGroup } from 'components/button-group';
 import { EmptyState } from 'components/sites/empty-state';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
@@ -22,18 +23,25 @@ import { EventsGroupType, EventSelected } from 'types/events';
 import { EventsCaptureSort } from 'types/graphql';
 
 const SitesEvents: NextPage<ServerSideProps> = ({ user }) => {
-  const [type, setType] = React.useState<EventsGroupType>(EventsGroupType.All);
+  const { query } = useRouter();
+
   const [page, setPage] = React.useState<number>(1);
   const [size, setSize] = React.useState<number>(20);
   const [selected, setSelected] = React.useState<EventSelected[]>([]);
 
-  const { sort, setSort } = useSort<EventsCaptureSort>('events');
+const { sort, setSort } = useSort<EventsCaptureSort>('events');
 
   const { events, error, loading } = useEventCaptures({ page, size, sort });
 
   if (error) {
     return <Error />;
   }
+
+  console.log(query);
+  
+  const tab = ['all', 'groups'].includes(query.events as EventsGroupType)
+    ? query.events as EventsGroupType 
+    : 'all';
 
   const hasEvents = events.items.length > 0;
 
@@ -66,12 +74,12 @@ const SitesEvents: NextPage<ServerSideProps> = ({ user }) => {
                     setSelected={setSelected}
                   />
                   <ButtonGroup>
-                    <Button className={classnames(type === EventsGroupType.All ? 'primary' : 'blank')} onClick={() => setType(EventsGroupType.All)}>
+                    <Link href={`/sites/${site.id}/events/all`} className={classnames('button', tab === 'all' ? 'primary' : 'blank')}>
                       All
-                    </Button>
-                    <Button className={classnames(type === EventsGroupType.Groups ? 'primary' : 'blank')} onClick={() => setType(EventsGroupType.Groups)}>
+                    </Link>
+                    <Link  href={`/sites/${site.id}/events/groups`} className={classnames('button', tab === 'groups' ? 'primary' : 'blank')}>
                       Groups
-                    </Button>
+                    </Link>
                   </ButtonGroup>
                 </menu>
               )}
@@ -93,7 +101,7 @@ const SitesEvents: NextPage<ServerSideProps> = ({ user }) => {
               events.items.length > 0
                 ? (
                   <EventList 
-                    type={type}
+                    tab={tab}
                     site={site}
                     events={events}
                     member={member}

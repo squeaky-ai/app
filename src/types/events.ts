@@ -1,9 +1,6 @@
 import type { EventsType } from 'types/graphql';
 
-export enum EventsGroupType {
-  All,
-  Groups,
-}
+export type EventsGroupType = 'all' | 'groups';
 
 export enum EventsCaptureType {
   PageVisit = 0,

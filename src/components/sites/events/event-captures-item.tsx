@@ -49,7 +49,7 @@ export const EventCapturesItem: FC<Props> = ({
         />
       </Cell>
       <Cell>
-        <Link href={`/sites/${site.id}/events/history?captureId=${event.id}`}>
+        <Link href={`/sites/${site.id}/events/history/stats?captureId=${event.id}`}>
           {event.nameAlias || event.name}
         </Link>
       </Cell>

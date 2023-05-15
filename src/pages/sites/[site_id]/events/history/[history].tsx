@@ -2,6 +2,7 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import classnames from 'classnames';
+import { useRouter } from 'next/router';
 import { Main } from 'components/main';
 import { Page } from 'components/sites/page';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
@@ -17,6 +18,7 @@ import { useEventStats } from 'hooks/use-event-stats';
 import { useEventIds } from 'hooks/use-event-ids';
 import { EmptyState } from 'components/sites/empty-state';
 import { EventAdd } from 'components/sites/events/event-add';
+import { TabsType } from 'components/sites/events/event-tabs';
 
 const SitesEventsHistory: NextPage<ServerSideProps> = ({ user }) => {
   const { period, setPeriod } = usePeriod('event-history');
@@ -27,6 +29,8 @@ const SitesEventsHistory: NextPage<ServerSideProps> = ({ user }) => {
     setGroupIds,
     setCaptureIds,
   } = useEventIds();
+
+  const { query } = useRouter();
 
   const { eventStats, error, loading } = useEventStats({ 
     groupIds,
@@ -41,6 +45,10 @@ const SitesEventsHistory: NextPage<ServerSideProps> = ({ user }) => {
   const hasIds = [...groupIds, ...captureIds].length > 0;
   const hasEvents = eventStats.eventCounts.items.length > 0;
 
+  const tab = ['stats', 'feed'].includes(query.history as TabsType)
+    ? query.history as TabsType 
+    : 'stats';
+
   return (
     <>
       <Head>
@@ -50,7 +58,7 @@ const SitesEventsHistory: NextPage<ServerSideProps> = ({ user }) => {
       <Page user={user} scope={[]}>
         {({ site, member }) => (
           <Main className={classnames({ empty: site.recordingsCount === 0 })}>
-            <BreadCrumbs site={site} items={[{ name: 'Events', href: `/sites/${site.id}/events` }, { name: 'Event History' }]} />
+            <BreadCrumbs site={site} items={[{ name: 'Events', href: `/sites/${site.id}/events/all` }, { name: 'Event History' }]} />
 
             <div className='events-header'>
               <h4 className='title'>
@@ -81,6 +89,7 @@ const SitesEventsHistory: NextPage<ServerSideProps> = ({ user }) => {
                 setGroupIds={setGroupIds}
                 setCaptureIds={setCaptureIds} 
                 period={period}
+                tab={tab}
               />
             )}
 

@@ -160,7 +160,7 @@ export const Sidebar: FC<Props> = ({ user }) => {
               />
               <SidebarLink
                 visibile
-                href={`/sites/${siteId}/events`}
+                href={`/sites/${siteId}/events/all`}
                 active={path.startsWith(`/sites/${siteId}/events`)}
                 icon='flashlight-line'
                 name='Events'
