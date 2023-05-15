@@ -296,6 +296,7 @@ export type AdminSiteErrorsCountsArgs = {
 
 
 export type AdminSiteEventCaptureArgs = {
+  filters?: InputMaybe<EventsCaptureFilters>;
   page?: InputMaybe<Scalars['Int']>;
   search?: InputMaybe<Scalars['String']>;
   size?: InputMaybe<Scalars['Int']>;
@@ -1274,6 +1275,11 @@ export type EventsCapture = {
   __typename?: 'EventsCapture';
   items: Array<EventsCaptureItem>;
   pagination: EventsCapturePagination;
+};
+
+export type EventsCaptureFilters = {
+  eventType?: InputMaybe<Array<Scalars['Int']>>;
+  source?: InputMaybe<Scalars['String']>;
 };
 
 export type EventsCaptureItem = {
@@ -2793,6 +2799,7 @@ export type SiteErrorsCountsArgs = {
 
 
 export type SiteEventCaptureArgs = {
+  filters?: InputMaybe<EventsCaptureFilters>;
   page?: InputMaybe<Scalars['Int']>;
   search?: InputMaybe<Scalars['String']>;
   size?: InputMaybe<Scalars['Int']>;

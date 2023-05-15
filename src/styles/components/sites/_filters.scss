@@ -316,4 +316,41 @@
       }
     }
   }
+
+  .filters-events-source {
+    .radio {
+      margin-bottom: .5rem;
+
+      span:not(.check) {
+        height: 1.25rem;
+      }
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .filters-event-types {
+    .event-types {
+      align-items: flex-start;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+
+      .checkbox {
+        align-items: center;
+        display: flex;
+        margin: 0 0 .5rem 0;
+
+        .tag {
+          margin: 0;
+        }
+
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
 }

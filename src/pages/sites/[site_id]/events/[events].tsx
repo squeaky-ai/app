@@ -19,9 +19,12 @@ import { EventList } from 'components/sites/events/event-list';
 import { Unlock } from 'components/sites/unlock';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useSort } from 'hooks/use-sort';
+import { useFilters } from 'hooks/use-filters';
+import { EventsFilters } from 'components/sites/filters/events/filters';
 import { useEventCaptures } from 'hooks/use-event-captures';
 import { EventsGroupType, EventSelected } from 'types/events';
-import { EventsCaptureSort } from 'types/graphql';
+import { EventsCaptureFilters, EventsCaptureSort } from 'types/graphql';
+import type { ValueOf } from 'types/common';
 
 const SitesEvents: NextPage<ServerSideProps> = ({ user }) => {
   const { query } = useRouter();
@@ -32,23 +35,30 @@ const SitesEvents: NextPage<ServerSideProps> = ({ user }) => {
   const [search, setSearch] = React.useState<string>('');
 
   const { sort, setSort } = useSort<EventsCaptureSort>('events');
+  const { filters, setFilters } = useFilters<EventsCaptureFilters>('events');
 
   const { events, error, loading } = useEventCaptures({
     page,
     size,
     sort,
     search,
+    filters,
   });
 
-  if (error) {
-    return <Error />;
-  }
+  const updateFilters = (key: keyof EventsCaptureFilters, value: ValueOf<EventsCaptureFilters>) => {
+    setPage(1);
+    setFilters({ ...filters, [key]: value });
+  };
   
   const tab = ['all', 'groups'].includes(query.events as EventsGroupType)
     ? query.events as EventsGroupType 
     : 'all';
 
   const hasEvents = events.items.length > 0;
+
+  if (error) {
+    return <Error />;
+  }
 
   return (
     <>
@@ -72,17 +82,25 @@ const SitesEvents: NextPage<ServerSideProps> = ({ user }) => {
 
               {hasEvents && (
                 <menu>
-                  <Search
-                    search={search}
-                    onSearch={setSearch}
-                    placeholder='Search event name or group...'
-                  />
+                  {tab === 'all' && (
+                    <Search
+                      search={search}
+                      onSearch={setSearch}
+                      placeholder='Search event name or group...'
+                    />
+                  )}
                   <EventCapturesBulkActions
                     site={site}
                     member={member}
                     selected={selected}
                     setSelected={setSelected}
                   />
+                  {tab === 'all' && (
+                    <EventsFilters 
+                      filters={filters}
+                      updateFilters={updateFilters}
+                    />
+                  )}
                   <ButtonGroup>
                     <Link href={`/sites/${site.id}/events/all`} className={classnames('button', tab === 'all' ? 'primary' : 'blank')}>
                       All

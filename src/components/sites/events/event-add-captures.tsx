@@ -28,7 +28,8 @@ export const EventAddCaptures: FC<Props> = ({ eventStats, onClose, onUpdate }) =
   const { events, loading } = useEventCaptures({ 
     page: 0, 
     size: 50, 
-    sort: EventsCaptureSort.NameAsc 
+    sort: EventsCaptureSort.NameAsc,
+    filters: { eventType: [], source: null },
   });
 
   const selected = eventStats.filter(s => s.type === EventsType.Capture).map(e => e.eventOrGroupId);

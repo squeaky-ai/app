@@ -7,10 +7,10 @@ import { useRouter } from 'next/router';
 import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { Logo } from 'components/logo';
-import { Divider } from 'components/divider';
 import { SidebarCollapse } from 'components/app/sidebar-collapse';
 import { SidebarLink } from 'components/app/sidebar-link';
 import { Breakpoints } from 'data/common/constants';
+import { SidebarGroup } from 'components/app/sidebar-group';
 import { useResize } from 'hooks/use-resize';
 
 const { publicRuntimeConfig } = getConfig();
@@ -56,46 +56,48 @@ export const Sidebar: FC = () => {
               icon='dashboard-3-line'
               name='Dashboard'
             />
-            <Divider />
-            <SidebarLink
-              visibile
-              href='/__admin/users'
-              active={router.asPath.startsWith('/__admin/users')}
-              icon='group-line'
-              name='Users'
-            />
-            <SidebarLink
-              visibile
-              href='/__admin/sites'
-              active={router.asPath.startsWith('/__admin/sites')}
-              icon='window-line'
-              name='Sites'
-            />
-            <Divider />
-            <SidebarLink
-              visibile
-              href='/__admin/blog'
-              active={router.asPath.startsWith('/__admin/blog')}
-              icon='book-open-line'
-              name='Blog'
-            />
-            <Divider />
-            <SidebarLink
-              visibile
-              href='/__admin/ad-tracking'
-              active={router.asPath.startsWith('/__admin/ad-tracking')}
-              icon='radar-line'
-              name='Ad Tracking'
-            />
-            <Divider />
-            <SidebarLink
-              visibile
-              href={`${publicRuntimeConfig.webHost}/api/sidekiq`}
-              active={false}
-              icon='line-chart-line'
-              name='Sidekiq'
-              external
-            />
+            <SidebarGroup name='CRM' visible>
+              <SidebarLink
+                visibile
+                href='/__admin/users'
+                active={router.asPath.startsWith('/__admin/users')}
+                icon='group-line'
+                name='Users'
+              />
+              <SidebarLink
+                visibile
+                href='/__admin/sites'
+                active={router.asPath.startsWith('/__admin/sites')}
+                icon='window-line'
+                name='Sites'
+              />
+            </SidebarGroup>
+            <SidebarGroup name='CMS' visible>
+              <SidebarLink
+                visibile
+                href='/__admin/blog'
+                active={router.asPath.startsWith('/__admin/blog')}
+                icon='book-open-line'
+                name='Blog'
+              />
+            </SidebarGroup>
+            <SidebarGroup name='Monitoring' visible>
+              <SidebarLink
+                visibile
+                href={`${publicRuntimeConfig.webHost}/api/sidekiq`}
+                active={false}
+                icon='line-chart-line'
+                name='Sidekiq'
+                external
+              />
+              <SidebarLink
+                visibile
+                href='/__admin/ad-tracking'
+                active={router.asPath.startsWith('/__admin/ad-tracking')}
+                icon='radar-line'
+                name='Ad Tracking'
+              />
+            </SidebarGroup>
           </div>
         </div>
       </menu>

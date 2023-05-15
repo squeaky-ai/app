@@ -64,6 +64,10 @@
       }
     }
 
+    .group {
+      background: transparent;
+    }
+
     .link {
       background: var(--mauve-900);
       color: var(--peach-100);
@@ -93,7 +97,15 @@
     }
 
     .divider {
-      background: var(--mauve-800);
+      .button {
+        color: var(--mauve-400);
+      }
+
+      &:hover {
+        .button {
+          background: var(--mauve-800);
+        }
+      }
     }
 
     footer {

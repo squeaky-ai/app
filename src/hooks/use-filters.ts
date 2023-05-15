@@ -3,8 +3,9 @@ import { FILTERS as VISITORS_FILTERS } from 'data/visitors/constants';
 import { FILTERS as RECORDINGS_FILTERS } from 'data/recordings/constants';
 import { FILTERS as NPS_FILTERS } from 'data/nps/constants'; 
 import { FILTERS as SENTIMENT_FILTERS } from 'data/sentiment/constants';
+import { FILTERS as EVENTS_FILTERS } from 'data/events/constants';
 
-type FiltersType = 'recordings' | 'visitors' | 'nps' | 'sentiment';
+type FiltersType = 'recordings' | 'visitors' | 'nps' | 'sentiment' | 'events';
 
 interface UseVisitor<T> {
   filters: T;
@@ -31,6 +32,8 @@ const getDefaultFilters = <T>(type: FiltersType): T => {
       return NPS_FILTERS as unknown as T;
     case 'sentiment':
       return SENTIMENT_FILTERS as unknown as T;
+    case 'events':
+      return EVENTS_FILTERS as unknown as T;
   }
 };
 

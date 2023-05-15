@@ -1,13 +1,14 @@
 import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { GET_EVENT_CAPTURES_QUERY } from 'data/events/queries';
-import type { Site, EventsCapture, EventsCaptureSort } from 'types/graphql';
+import type { Site, EventsCapture, EventsCaptureSort, EventsCaptureFilters } from 'types/graphql';
 
 interface Props {
   page: number;
   size?: number;
   sort?: EventsCaptureSort;
   search?: string;
+  filters: EventsCaptureFilters;
 }
 
 interface UseEventCaptures {
@@ -16,7 +17,7 @@ interface UseEventCaptures {
   events: EventsCapture;
 }
 
-export const useEventCaptures = ({ page, size, sort, search }: Props): UseEventCaptures => {
+export const useEventCaptures = ({ page, size, sort, search, filters }: Props): UseEventCaptures => {
   const router = useRouter();
 
   const { data, error, loading } = useQuery<{ site: Site }>(GET_EVENT_CAPTURES_QUERY, {
@@ -26,6 +27,7 @@ export const useEventCaptures = ({ page, size, sort, search }: Props): UseEventC
       size,
       sort,
       search,
+      filters,
     },
     pollInterval: 5000,
   });
