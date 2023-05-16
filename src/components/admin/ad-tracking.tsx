@@ -8,6 +8,7 @@ import { Container } from 'components/container';
 import { Input } from 'components/input';
 import { Period } from 'components/sites/period/period';
 import { Error } from 'components/error';
+import { Sort } from 'components/sort';
 import { Cell, Row, Table, TableWrapper } from 'components/table';
 import { useAdminAdTracking } from 'hooks/use-admin-ad-tracking';
 import { Pagination } from 'components/pagination';
@@ -15,6 +16,8 @@ import { PageSize } from 'components/sites/page-size';
 import { usePeriod } from 'hooks/use-period';
 import { getDateRange } from 'lib/dates';
 import { NoResults } from 'components/sites/no-results';
+import { AdminAdTrackingSort } from 'types/graphql';
+import { useSort } from 'hooks/use-sort';
 
 const { publicRuntimeConfig } = getConfig();
 
@@ -23,6 +26,7 @@ export const AdTracking: NextPage = () => {
   const [size, setSize] = React.useState<number>(25);
 
   const { period, setPeriod } = usePeriod('ad-tracking');
+  const { sort, setSort } = useSort<AdminAdTrackingSort>('ad-tracking');
 
   const [input, setInput] = React.useState<string>('');
   const [utmContentIds, setUtmContentIds] = React.useState<string[]>([]);
@@ -31,6 +35,7 @@ export const AdTracking: NextPage = () => {
     utmContentIds,
     size,
     page,
+    sort,
     range: getDateRange(period),
   });
 
@@ -106,6 +111,12 @@ export const AdTracking: NextPage = () => {
                     </Cell>
                     <Cell>
                       User Created At
+                      <Sort
+                        name='user_created_at' 
+                        order={sort} 
+                        onAsc={() => setSort(AdminAdTrackingSort.UserCreatedAtAsc)} 
+                        onDesc={() => setSort(AdminAdTrackingSort.UserCreatedAtDesc)} 
+                      />
                     </Cell>
                     <Cell>
                       Site ID
@@ -118,9 +129,21 @@ export const AdTracking: NextPage = () => {
                     </Cell>
                     <Cell>
                       Site Created At
+                      <Sort
+                        name='site_created_at' 
+                        order={sort} 
+                        onAsc={() => setSort(AdminAdTrackingSort.SiteCreatedAtAsc)} 
+                        onDesc={() => setSort(AdminAdTrackingSort.SiteCreatedAtDesc)} 
+                      />
                     </Cell>
                     <Cell>
                       Site Verified At
+                      <Sort
+                        name='site_verified_at' 
+                        order={sort} 
+                        onAsc={() => setSort(AdminAdTrackingSort.SiteVerifiedAtAsc)} 
+                        onDesc={() => setSort(AdminAdTrackingSort.SiteVerifiedAtDesc)} 
+                      />
                     </Cell>
                     <Cell>
                       UTM Content

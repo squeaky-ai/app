@@ -28,6 +28,13 @@
     }
   }
 
+  .ad-tracking-table {
+    .sort {
+      position: relative;
+      z-index: 1;
+    }
+  }
+
   .ad-tracking-table-footer {
     align-items: center;
     display: flex;
