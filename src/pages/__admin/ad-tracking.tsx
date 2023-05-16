@@ -165,10 +165,10 @@ const AdminAdTracking: NextPage<ServerSideProps> = () => {
                 {adTracking.pagination.total > 25 && (
                   <div className='ad-tracking-table-footer'>
                     <Pagination
-                      currentPage={page + 1}
+                      currentPage={page}
                       pageSize={size}
                       total={adTracking.pagination.total}
-                      setPage={page => setPage(page - 1)}
+                      setPage={setPage}
                       scrollToTop={false}
                     />
                     <PageSize
