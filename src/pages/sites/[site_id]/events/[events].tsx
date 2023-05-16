@@ -19,10 +19,12 @@ import { EventList } from 'components/sites/events/event-list';
 import { Unlock } from 'components/sites/unlock';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useSort } from 'hooks/use-sort';
+import { Tags } from 'components/sites/filters/events/tags';
 import { useFilters } from 'hooks/use-filters';
 import { EventsFilters } from 'components/sites/filters/events/filters';
 import { useEventCaptures } from 'hooks/use-event-captures';
 import { EventsGroupType, EventSelected } from 'types/events';
+import { FILTERS } from 'data/events/constants';
 import { EventsCaptureFilters, EventsCaptureSort } from 'types/graphql';
 import type { ValueOf } from 'types/common';
 
@@ -49,12 +51,18 @@ const SitesEvents: NextPage<ServerSideProps> = ({ user }) => {
     setPage(1);
     setFilters({ ...filters, [key]: value });
   };
+
+  const clearFilters = () => {
+    setPage(1);
+    setFilters(FILTERS);
+  };
   
   const tab = ['all', 'groups'].includes(query.events as EventsGroupType)
     ? query.events as EventsGroupType 
     : 'all';
 
   const hasEvents = events.items.length > 0;
+  const hasFilters = filters.source !== null || filters.eventType.length > 0 || !!search;
 
   if (error) {
     return <Error />;
@@ -80,7 +88,7 @@ const SitesEvents: NextPage<ServerSideProps> = ({ user }) => {
                 )}
               </h4>
 
-              {hasEvents && (
+              {(hasEvents || hasFilters) && (
                 <menu>
                   {tab === 'all' && (
                     <Search
@@ -126,23 +134,34 @@ const SitesEvents: NextPage<ServerSideProps> = ({ user }) => {
             )}
 
             {!loading && site.recordingsCount > 0 && (
-              events.items.length > 0
-                ? (
-                  <EventList 
-                    tab={tab}
-                    site={site}
-                    events={events}
-                    member={member}
-                    page={page}
-                    selected={selected}
-                    sort={sort}
-                    setPage={setPage}
-                    setSelected={setSelected}
-                    setSize={setSize}
-                    setSort={setSort}
-                  />
-                )
-                : <GettingStarted site={site} member={member} />
+              <>
+                {!hasEvents && !hasFilters && (
+                  <GettingStarted site={site} member={member} />
+                )}
+
+                {(hasEvents || hasFilters) && (
+                  <>
+                    <Tags 
+                      filters={filters} 
+                      updateFilters={updateFilters} 
+                      clearFilters={clearFilters} 
+                    />
+                    <EventList 
+                      tab={tab}
+                      site={site}
+                      events={events}
+                      member={member}
+                      page={page}
+                      selected={selected}
+                      sort={sort}
+                      setPage={setPage}
+                      setSelected={setSelected}
+                      setSize={setSize}
+                      setSort={setSort}
+                    />
+                  </>
+                )}
+              </>
             )}
           </Main>
         )}

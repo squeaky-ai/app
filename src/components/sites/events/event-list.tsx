@@ -6,6 +6,7 @@ import { EventsGroupType } from 'types/events';
 import { EventsCaptureSort, Team } from 'types/graphql';
 import type { EventSelected } from 'types/events';
 import type { Site, EventsCapture } from 'types/graphql';
+import { NoResults } from '../no-results';
 
 interface Props {
   tab: EventsGroupType;
@@ -34,6 +35,10 @@ export const EventList: FC<Props> = ({
   setSize,
   setSelected
 }) => {
+  if (events.items.length === 0) {
+    return <NoResults illustration='illustration-13' title='There are no events matching your selected filters.' />
+  }
+
   return tab === 'all'
     ? (
       <EventCaptures 

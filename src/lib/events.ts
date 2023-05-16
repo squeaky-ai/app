@@ -1,7 +1,7 @@
 import { last } from 'lodash';
 import { EventType, IncrementalSource, MouseInteractions } from 'rrweb';
 import { ErrorEvent, CustomEvents } from 'types/event';
-import { EventStatsSort } from 'types/events';
+import { EventStatsSort, EventsCaptureType } from 'types/events';
 import { EventsStat, PlanFeature, RecordingsEvent } from 'types/graphql';
 import type { PlayerState } from 'types/player';
 import type { Event, Events, EventName, SessionEvent, InteractionEventItem } from 'types/event';
@@ -220,4 +220,21 @@ export const getInteractionEvents = (
     interactionEvents: results,
     startedAt,
   };
+};
+
+export const getEventCaptureText = (type: EventsCaptureType) => {
+  switch(type) {
+    case EventsCaptureType.PageVisit:
+      return 'Page View';
+    case EventsCaptureType.TextClick:
+      return 'Text Click';
+    case EventsCaptureType.SelectorClick:
+      return 'CSS Selector Click';
+    case EventsCaptureType.UtmParameters:
+      return 'UTM Parameters';
+    case EventsCaptureType.Error:
+      return 'JavaScript Error';
+    case EventsCaptureType.Custom:
+      return 'Custom Event';
+  }
 };

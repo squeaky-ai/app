@@ -115,8 +115,55 @@
           }
         }
       }
+    }
+  }
 
-      
+  .filter-tags {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+
+    .label {
+      margin: 0 .5rem .5rem 0;
+    }
+
+    .tag-group {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 1rem .75rem 0;
+    }
+
+    .tag {
+      height: 2rem;
+
+      &.secondary {
+        background: var(--white);
+      }
+
+      span {
+        max-width: 12.5rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      span span {
+        color: var(--gray-500);
+        padding: 0;
+      }
+    }
+
+    .clear-filters {
+      align-items: center;
+      color: var(--rose-500);
+      display: flex;
+      height: 2rem;
+      margin: 0;
+
+      i {
+        font-size: var(--font-size-body-lg);
+      }
     }
   }
 

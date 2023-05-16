@@ -3,28 +3,12 @@ import type { FC } from 'react';
 import classnames from 'classnames';
 import { Icon } from 'components/icon';
 import { Tag } from 'components/tag'
+import { getEventCaptureText } from 'lib/events';
 import { EventsCaptureType } from 'types/events';
 
 interface Props {
   type: EventsCaptureType;
 }
-
-const getText = (type: EventsCaptureType) => {
-  switch(type) {
-    case EventsCaptureType.PageVisit:
-      return 'Page View';
-    case EventsCaptureType.TextClick:
-      return 'Text Click';
-    case EventsCaptureType.SelectorClick:
-      return 'CSS Selector Click';
-    case EventsCaptureType.UtmParameters:
-      return 'UTM Parameters';
-    case EventsCaptureType.Error:
-      return 'JavaScript Error';
-    case EventsCaptureType.Custom:
-      return 'Custom Event';
-  }
-};
 
 const getIcon = (type: EventsCaptureType) => {
   switch(type) {
@@ -62,6 +46,6 @@ const getClassName = (type: EventsCaptureType) => {
 export const EventTag: FC<Props> = ({ type }) => (
   <Tag className={classnames('event-tag', getClassName(type))}>
     <Icon name={getIcon(type)} />
-    {getText(type)}
+    {getEventCaptureText(type)}
   </Tag>
 );
