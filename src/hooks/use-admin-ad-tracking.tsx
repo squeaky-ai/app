@@ -1,11 +1,13 @@
 import { useQuery } from '@apollo/client';
 import { GET_AD_TRACKING_QUERY } from 'data/admin/queries';
+import { TimeRange } from 'types/common';
 import { Admin, AdminAdTracking } from 'types/graphql';
 
 interface Props {
   utmContentIds: string[];
   page: number;
   size?: number;
+  range: TimeRange;
 }
 
 interface UseAdminAdTracking {
@@ -20,6 +22,7 @@ export const useAdminAdTracking = (props: Props): UseAdminAdTracking => {
       utmContentIds: props.utmContentIds,
       size: props.size,
       page: props.page,
+      ...props.range,
     },
   });
 

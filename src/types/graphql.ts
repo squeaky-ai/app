@@ -47,8 +47,10 @@ export type Admin = {
 
 
 export type AdminAdTrackingArgs = {
+  fromDate: Scalars['ISO8601Date'];
   page?: InputMaybe<Scalars['Int']>;
   size?: InputMaybe<Scalars['Int']>;
+  toDate: Scalars['ISO8601Date'];
   utmContentIds?: Array<Scalars['String']>;
 };
 

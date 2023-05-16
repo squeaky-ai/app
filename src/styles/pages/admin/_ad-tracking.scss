@@ -1,5 +1,8 @@
 .page.__admin.ad-tracking {
   .admin-header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
     margin: 0 0 2rem 0;
 
     h4 {
@@ -8,6 +11,13 @@
         margin: 0 0 0 1rem;
       }
     }
+
+    menu {
+      align-items: center;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
   }
 
   .content-id-form {
@@ -15,16 +25,6 @@
 
     .input {
       margin: 0 1rem 0 0;
-      width: 200px;
-    }
-
-    .tag {
-      background: var(--mauve-700);
-      border-color: var(--mauve-800);
-
-      .button {
-        border-color: var(--mauve-800);
-      }
     }
   }
 
