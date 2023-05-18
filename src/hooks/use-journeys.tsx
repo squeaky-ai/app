@@ -10,6 +10,7 @@ interface UseJourneys {
   error: boolean;
   routes: string[];
   journeys: AnalyticsUserPath[];
+  refetch: VoidFunction,
 }
 
 interface Props {
@@ -21,7 +22,7 @@ interface Props {
 export const useJourneys = (props: Props): UseJourneys => {
   const router = useRouter();
 
-  const { data, loading, error } = useQuery<{ site: Site }>(GET_JOURNEYS_QUERY, {
+  const { data, loading, error, refetch } = useQuery<{ site: Site }>(GET_JOURNEYS_QUERY, {
     variables: {
       siteId: router.query.site_id as string,
       page: props.page,
@@ -36,5 +37,6 @@ export const useJourneys = (props: Props): UseJourneys => {
     error: !!error,
     routes: data ? data.site.routes : [],
     journeys: data ? data.site.analytics.userPaths : [],
+    refetch,
   };
 };

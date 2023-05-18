@@ -26,10 +26,10 @@ interface Props {
 export const Journeys: FC<Props> = ({ site, member, page, pages, period, setPage, setPeriod }) => {
   const [position, setPosition] = React.useState<PathPosition>(PathPosition.Start);
 
-  const { loading, error, journeys, routes } = useJourneys({
+  const { loading, error, journeys, routes, refetch } = useJourneys({
     page,
     position,
-    range: getDateRange(period) 
+    range: getDateRange(period),
   });
 
   if (error) {
@@ -44,7 +44,7 @@ export const Journeys: FC<Props> = ({ site, member, page, pages, period, setPage
           <JourneysPages page={page} pages={pages} setPage={setPage} />
         </menu>
         <menu className='right'>
-          <PageRoutes site={site} member={member} routes={routes} />
+          <PageRoutes site={site} member={member} routes={routes} onUpdate={refetch} />
           <Period period={period} onChange={setPeriod} />
         </menu>
       </div>

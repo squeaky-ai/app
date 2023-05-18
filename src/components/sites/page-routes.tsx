@@ -18,13 +18,14 @@ interface Props {
   button?: string;
   buttonClassName?: string;
   routes: string[];
+  onUpdate?: VoidFunction;
 }
 
 const PageRoutesSchema = Yup.object().shape({
   routes: Yup.array(),
 });
 
-export const PageRoutes: FC<Props> = ({ site, member, button, buttonClassName, routes }) => {
+export const PageRoutes: FC<Props> = ({ site, member, button, buttonClassName, routes, onUpdate }) => {
   const ref = React.useRef<Modal>();
   const [route, setRoute] = React.useState<string>('');
 
@@ -55,6 +56,7 @@ export const PageRoutes: FC<Props> = ({ site, member, button, buttonClassName, r
                 await routesUpdate({ siteId: site.id, routes: values.routes });
                 toasts.add({ type: 'success', body: 'URL structure updated' });
                 closeModal();
+                onUpdate?.();
               } catch(error) {
                 console.error(error);
                 toasts.add({ type: 'error', body: 'Failed to update URL structure' });
