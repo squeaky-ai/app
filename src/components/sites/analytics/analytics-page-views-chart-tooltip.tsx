@@ -14,7 +14,7 @@ export const AnalyticsPageViewsChartTooltip: FC<ChartTooltipProps & Props> = (pr
     {({ label, data }) => (
       <>
         <Label>{formatLabel(props.period, label)}</Label>
-        <Value color={colorsPrimary[0]}>{(data.totalCount || 0).toLocaleString()} All Page Views</Value>
+        <Value color={colorsPrimary[0]?.stroke}>{(data.totalCount || 0).toLocaleString()} All Page Views</Value>
       </>
     )}
   </ChartTooltip>

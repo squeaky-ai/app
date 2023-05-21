@@ -14,9 +14,9 @@ export const NpsRepliesChartTooltip: FC<ChartTooltipProps & Props> = (props) => 
     {({ label, data }) => (
       <>
         <Label>{formatLabel(props.period, label)}</Label>
-        <Value color={colorsPrimary[0]}>{data.promoters || 0} Promoters</Value>
-        <Value color={colorsPrimary[1]}>{data.passives || 0} Passives</Value>
-        <Value color={colorsPrimary[2]}>{data.detractors || 0} Detractors</Value>
+        <Value color={colorsPrimary[0]?.stroke}>{data.promoters || 0} Promoters</Value>
+        <Value color={colorsPrimary[1]?.stroke}>{data.passives || 0} Passives</Value>
+        <Value color={colorsPrimary[2]?.stroke}>{data.detractors || 0} Detractors</Value>
       </>
     )}
   </ChartTooltip>

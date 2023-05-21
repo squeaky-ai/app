@@ -1,7 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import { omit } from 'lodash';
-import { colorsPrimary, colorsPrimaryAdmin } from 'lib/colors';
+import { Color, colorsPrimary, colorsPrimaryAdmin, primaryColorOrder } from 'lib/colors';
 import { ScaleType } from 'recharts/types/util/types';
 import type { ChartType, ChartItemProps } from 'types/charts';
 
@@ -32,7 +32,7 @@ interface Props {
   xAxisProps?: XAxisProps;
   yAxisProps?: YAxisProps,
   barLineProps?: Pick<LineProps | BarProps, 'stroke' | 'fill'>;
-  palette?: string[];
+  palette?: Color[];
   stacked?: boolean;
 }
 
@@ -47,7 +47,7 @@ export const Chart: FC<Props> = ({ chartType, ...props }) => {
   }
 };
 
-const getPrimaryColor = (admin: boolean, index: number, customPallet?: string[]) => {
+const getPrimaryColor = (admin: boolean, index: number, customPallet?: Color[]) => {
   const palette = customPallet || (admin ? colorsPrimaryAdmin : colorsPrimary);
   return palette[index];
 };
@@ -78,6 +78,17 @@ const getFormattedTickLabel = (value: any) => {
   return value;
 };
 
+const patterns = () => (
+  <defs>
+    {primaryColorOrder.map(color => (
+      <pattern key={color} id={`${color}-pattern`} x='0' y='0' width='4' height='4' patternUnits='userSpaceOnUse'>
+        <path d="M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2" stroke={`var(--${color})`} strokeWidth={1} />
+      </pattern>
+    ))}
+  </defs>
+);
+
+
 const ChartLine: FC<Omit<Props, 'chartType'>> = ({
   admin,
   data,
@@ -92,6 +103,8 @@ const ChartLine: FC<Omit<Props, 'chartType'>> = ({
   <ResponsiveContainer>
     <LineChart data={data} margin={{ top: 0, left: -16, right: 16, bottom: 0 }}>
       <CartesianGrid strokeDasharray='3 3' vertical={false} />
+
+      {patterns()}
 
       <XAxis
         dataKey='dateKey'
@@ -126,7 +139,7 @@ const ChartLine: FC<Omit<Props, 'chartType'>> = ({
           key={item.dataKey as string}
           dataKey={item.dataKey}
           fillOpacity={1}
-          stroke={getPrimaryColor(admin, index, palette)}
+          stroke={getPrimaryColor(admin, index, palette)?.stroke}
           strokeWidth={2}
           {...barLineProps}
         />
@@ -150,6 +163,8 @@ const ChartBar: FC<Omit<Props, 'chartType'>> = ({
   <ResponsiveContainer>
     <BarChart data={data} margin={{ top: 0, left: -16, right: 16, bottom: 0 }} barGap={2}>
       <CartesianGrid strokeDasharray='3 3' vertical={false} />
+
+      {patterns()}
 
       <XAxis
         dataKey='dateKey'
@@ -182,9 +197,9 @@ const ChartBar: FC<Omit<Props, 'chartType'>> = ({
           key={item.dataKey as string}
           dataKey={item.dataKey}
           fillOpacity={1}
-          stroke={getPrimaryColor(admin, index, palette)}
+          stroke={getPrimaryColor(admin, index, palette)?.stroke}
           strokeWidth={item.strokeWidth}
-          fill={getPrimaryColor(admin, index, palette)}
+          fill={getPrimaryColor(admin, index, palette)?.fill}
           radius={[2, 2, 0, 0]}
           stackId={stacked ? 'stacked' : undefined}
           {...barLineProps}

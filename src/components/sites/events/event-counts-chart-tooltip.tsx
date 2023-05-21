@@ -21,7 +21,7 @@ export const EventCountsChartTooltip: FC<ChartTooltipProps & Props> = (props) =>
         <>
           <Label>{formatLabel(props.period, label)}</Label>
           {props.eventStats.map((stat, index) => (
-            <Value key={stat.eventOrGroupId} color={colorsPrimary[index]}>
+            <Value key={stat.eventOrGroupId} color={colorsPrimary[index]?.stroke}>
               {stat.name} {metrics[`${stat.type}::${stat.eventOrGroupId}`]?.toLocaleString()}
             </Value>
           ))}

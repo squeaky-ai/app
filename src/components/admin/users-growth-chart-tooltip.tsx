@@ -8,7 +8,7 @@ export const UsersGrowthChartTooltip: FC<ChartTooltipProps> = (props) => (
     {({ label, data }) => (
       <>
         <Label>{label}</Label>
-        <Value color={colorsPrimaryAdmin[0]}>{(data.count || 0).toLocaleString()} users</Value>
+        <Value color={colorsPrimaryAdmin[0]?.stroke}>{(data.count || 0).toLocaleString()} users</Value>
       </>
     )}
   </ChartTooltip>

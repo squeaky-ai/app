@@ -14,7 +14,7 @@ export const NpsScoreChartTooltip: FC<ChartTooltipProps & Props> = (props) => (
     {({ label, data }) => (
       <>
         <Label>{formatLabel(props.period, label)}</Label>
-        <Value color={colorsPrimary[0]}>{data.score || 0}</Value>
+        <Value color={colorsPrimary[0]?.stroke}>{data.score || 0}</Value>
       </>
     )}
   </ChartTooltip>

@@ -8,7 +8,7 @@ export const DashboardVisitorsChartTooltip: FC<ChartTooltipProps> = (props) => (
     {({ data }) => (
       <>
         <Label>New Visitors</Label>
-        <Value color={colorsPrimary[0]}>{(data.count || 0).toLocaleString()}</Value>
+        <Value color={colorsPrimary[0]?.stroke}>{(data.count || 0).toLocaleString()}</Value>
       </>
     )}
   </ChartTooltip>

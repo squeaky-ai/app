@@ -13,13 +13,13 @@ export const SitesGrowthChartTooltip: FC<ChartTooltipProps & Props> = (props) =>
       <>
         <Label>{label}</Label>
         {props.show.includes('all') && (
-          <Value color={colorsPrimaryAdmin[0]}>{data.allCount || 0} All sites</Value>
+          <Value color={colorsPrimaryAdmin[0]?.stroke}>{data.allCount || 0} All sites</Value>
         )}
         {props.show.includes('verified') && (
-          <Value color={colorsPrimaryAdmin[1]}>{data.verifiedCount || 0} Verified sites</Value>
+          <Value color={colorsPrimaryAdmin[1]?.stroke}>{data.verifiedCount || 0} Verified sites</Value>
         )}
         {props.show.includes('unverified') && (
-          <Value color={colorsPrimaryAdmin[2]}>{data.unverifiedCount || 0} Unverified sites</Value>
+          <Value color={colorsPrimaryAdmin[2]?.stroke}>{data.unverifiedCount || 0} Unverified sites</Value>
         )}
       </>
     )}

@@ -69,7 +69,23 @@ export const AnalyticsVisitors: FC<Props> = ({ visitors, period }) => {
           scale={scale}
           chartType={type}
           items={[{ dataKey: 'allCount' }, { dataKey: 'existingCount' }, { dataKey: 'newCount' }]}
-          palette={['var(--purple-500)', 'var(--blue-400)', 'var(--rose-500)']}
+          palette={[
+            {
+              fill: 'var(--purple-500)', 
+              stroke: 'var(--purple-500',
+              type: 'solid',
+            },
+            {
+              fill: 'var(--blue-400)',
+              stroke: 'var(--blue-400',
+              type: 'solid',
+             },
+             {
+              fill: 'var(--rose-500)',
+              stroke: 'var(--rose-500',
+              type: 'solid',
+             },
+          ]}
         />
       </div>
     </div>

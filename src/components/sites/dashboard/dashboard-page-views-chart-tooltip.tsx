@@ -8,7 +8,7 @@ export const DashboardPageViewsChartTooltip: FC<ChartTooltipProps> = (props) => 
     {({ data }) => (
       <>
         <Label>Page Views</Label>
-        <Value color={colorsPrimary[0]}>{(data.count || 0).toLocaleString()}</Value>
+        <Value color={colorsPrimary[0]?.stroke}>{(data.count || 0).toLocaleString()}</Value>
       </>
     )}
   </ChartTooltip>

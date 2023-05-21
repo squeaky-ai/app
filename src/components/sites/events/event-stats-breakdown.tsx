@@ -40,7 +40,7 @@ export const EventStatsBreakdown: FC<Props> = ({ eventStats, sort }) => {
             {data.map((_, index) => (
               <Cell 
                 key={`cell-${index}`}
-                fill={colorsPrimary[index]}
+                fill={colorsPrimary[index]?.fill}
               />
             ))}
           </Pie>
@@ -49,7 +49,7 @@ export const EventStatsBreakdown: FC<Props> = ({ eventStats, sort }) => {
               {() => (
                 <>
                   <Label>{data[activeIndex]?.name}</Label>
-                  <Value color={colorsPrimary[activeIndex]}>{(data[activeIndex]?.value || 0).toLocaleString()}</Value>
+                  <Value color={colorsPrimary[activeIndex]?.stroke}>{(data[activeIndex]?.value || 0).toLocaleString()}</Value>
                 </>
               )}
             </ChartTooltip>
