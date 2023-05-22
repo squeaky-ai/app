@@ -81,8 +81,15 @@ const getFormattedTickLabel = (value: any) => {
 const patterns = () => (
   <defs>
     {primaryColorOrder.map(color => (
-      <pattern key={color} id={`${color}-pattern`} x='0' y='0' width='4' height='4' patternUnits='userSpaceOnUse'>
+      <pattern key={`${color}-diagonal-hatched-pattern`} id={`${color}-diagonal-hatched-pattern`} x='0' y='0' width='4' height='4' patternUnits='userSpaceOnUse'>
         <path d="M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2" stroke={`var(--${color})`} strokeWidth={1} />
+      </pattern>
+    ))}
+
+    {primaryColorOrder.map(color => (
+      <pattern key={`${color}-dot-grid-pattern`} id={`${color}-dot-grid-pattern`} x='0' y='0' width='4' height='4' patternUnits='userSpaceOnUse'>
+        <rect width='2' height='2' x='0' y='0' stroke={`var(--${color})`} />
+        <rect width='2' height='2' x='2' y='2' stroke={`var(--${color})`} />
       </pattern>
     ))}
   </defs>

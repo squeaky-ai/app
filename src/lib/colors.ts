@@ -1,7 +1,7 @@
 export type Color = {
   fill: string;
   stroke: string;
-  type: 'solid' | 'diagonal-hatched',
+  type: 'solid' | 'diagonal-hatched' | 'dot-grid',
 }
 
 export const primaryColorOrder = [
@@ -27,9 +27,16 @@ export const colorsPrimary: Color[] = [
 
   // All the diagonal hatched colors
   ...primaryColorOrder.map((color): Color => ({
-    fill: `url(#${color}-pattern)`,
+    fill: `url(#${color}-diagonal-hatched-pattern)`,
     stroke: `var(--${color})`,
     type: 'diagonal-hatched',
+  })),
+  
+  // All the dot grid colors
+  ...primaryColorOrder.map((color): Color => ({
+    fill: `url(#${color}-dot-grid-pattern)`,
+    stroke: `var(--${color})`,
+    type: 'dot-grid',
   })),
 ];
 
