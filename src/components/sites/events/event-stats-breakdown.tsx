@@ -41,6 +41,7 @@ export const EventStatsBreakdown: FC<Props> = ({ eventStats, sort }) => {
               <Cell 
                 key={`cell-${index}`}
                 fill={colorsPrimary[index]?.fill}
+                stroke={colorsPrimary[index]?.stroke}
               />
             ))}
           </Pie>

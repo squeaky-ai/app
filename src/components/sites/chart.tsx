@@ -213,7 +213,7 @@ const ChartBar: FC<Omit<Props, 'chartType'>> = ({
           stroke={getPrimaryColor(admin, index, palette)?.stroke}
           strokeWidth={item.strokeWidth}
           fill={getPrimaryColor(admin, index, palette)?.fill}
-          radius={[2, 2, 0, 0]}
+          radius={index === 0 ? [2, 2, 0, 0] : [0, 0, 0, 0]}
           stackId={stacked ? 'stacked' : undefined}
           {...barLineProps}
         />
