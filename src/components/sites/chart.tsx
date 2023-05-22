@@ -78,6 +78,13 @@ const getFormattedTickLabel = (value: any) => {
   return value;
 };
 
+const isFirstInStack = (data: Props['data'], dataKey: string) => {
+  // All the items that will actually show on the chart
+  const values = data.filter(d => !!Object.values(d)[1]);
+  // The first in this list matches
+  return values[0].hasOwnProperty(dataKey);
+};
+
 const patterns = (
   <defs>
     {primaryColorOrder.map(color => (
@@ -213,7 +220,7 @@ const ChartBar: FC<Omit<Props, 'chartType'>> = ({
           stroke={getPrimaryColor(admin, index, palette)?.stroke}
           strokeWidth={item.strokeWidth}
           fill={getPrimaryColor(admin, index, palette)?.fill}
-          radius={index === 0 ? [2, 2, 0, 0] : [0, 0, 0, 0]}
+          radius={isFirstInStack(data, item.dataKey as string) ? [2, 2, 0, 0] : [0, 0, 0, 0]}
           stackId={stacked ? 'stacked' : undefined}
           {...barLineProps}
         />
