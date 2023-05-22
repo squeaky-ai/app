@@ -78,7 +78,7 @@ const getFormattedTickLabel = (value: any) => {
   return value;
 };
 
-const patterns = () => (
+const patterns = (
   <defs>
     {primaryColorOrder.map(color => (
       <pattern key={`${color}-diagonal-hatched-pattern`} id={`${color}-diagonal-hatched-pattern`} x='0' y='0' width='4' height='4' patternUnits='userSpaceOnUse'>
@@ -88,8 +88,14 @@ const patterns = () => (
 
     {primaryColorOrder.map(color => (
       <pattern key={`${color}-dot-grid-pattern`} id={`${color}-dot-grid-pattern`} x='0' y='0' width='4' height='4' patternUnits='userSpaceOnUse'>
-        <rect width='2' height='2' x='0' y='0' stroke={`var(--${color})`} />
-        <rect width='2' height='2' x='2' y='2' stroke={`var(--${color})`} />
+        <rect width='2' height='2' x='0' y='0' fill={`var(--${color})`} />
+        <rect width='2' height='2' x='2' y='2' fill={`var(--${color})`} />
+      </pattern>
+    ))}
+
+    {primaryColorOrder.map(color => (
+      <pattern key={`${color}-vertical-hatched-pattern`} id={`${color}-vertical-hatched-pattern`} x='0' y='0' width='4' height='4' patternUnits='userSpaceOnUse'>
+        <rect width='2' height='4' x='0' y='0' fill={`var(--${color})`} />
       </pattern>
     ))}
   </defs>
@@ -111,7 +117,7 @@ const ChartLine: FC<Omit<Props, 'chartType'>> = ({
     <LineChart data={data} margin={{ top: 0, left: -16, right: 16, bottom: 0 }}>
       <CartesianGrid strokeDasharray='3 3' vertical={false} />
 
-      {patterns()}
+      {patterns}
 
       <XAxis
         dataKey='dateKey'
@@ -171,7 +177,7 @@ const ChartBar: FC<Omit<Props, 'chartType'>> = ({
     <BarChart data={data} margin={{ top: 0, left: -16, right: 16, bottom: 0 }} barGap={2}>
       <CartesianGrid strokeDasharray='3 3' vertical={false} />
 
-      {patterns()}
+      {patterns}
 
       <XAxis
         dataKey='dateKey'
