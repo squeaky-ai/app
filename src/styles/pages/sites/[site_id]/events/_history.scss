@@ -44,6 +44,10 @@
           background: var(--gray-100);
         }
 
+        span {
+          flex: 1;
+        }
+
         i {
           color: var(--gray-blue-800);
           font-size: var(--font-size-body-xl);
@@ -60,7 +64,7 @@
       display: none;
       padding: 1rem;
       position: absolute;
-      right: 188px;
+      left: 188px;
       top: 0;
       width: 22.5rem;
 
@@ -84,6 +88,18 @@
       .sub-menu {
         box-shadow: none;
         position: static;
+      }
+
+      .checkbox-group {
+        max-height: 38rem;
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        .checkbox-contents {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
       }
     }
   }
@@ -155,6 +171,7 @@
       align-items: center;
       display: flex;
       flex-wrap: wrap;
+      margin: 0 0 1rem 0;
 
       .item {
         align-items: center;

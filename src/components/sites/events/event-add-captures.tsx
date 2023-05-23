@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import * as Yup from 'yup';
+import { uniqBy } from 'lodash';
 import { Formik } from 'formik';
 import { Button } from 'components/button';
 import { Search } from 'components/search';
@@ -34,7 +35,7 @@ export const EventAddCaptures: FC<Props> = ({ eventStats, onClose, onUpdate }) =
 
   const selected = eventStats.filter(s => s.type === EventsType.Capture).map(e => e.eventOrGroupId);
 
-  const results = events.items
+  const results = uniqBy(events.items, x => x.id)
     .filter(l => l.name.toLowerCase().includes(search.toLowerCase()))
     .sort((a, b) => a.name.length - b.name.length);
 

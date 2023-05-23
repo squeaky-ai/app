@@ -38,12 +38,12 @@ export const EventAdd: FC<Props> = ({ eventStats, setGroupIds, setCaptureIds }) 
       <div className='menu-item filters'>
         <Dropdown button='+ Add events' buttonClassName='link add-event' dropdown-menu='down'>
           <Button onClick={() => handleChange(EventsType.Capture)} className={classnames({ open: openFilter === EventsType.Capture })}>
-            <Icon name='arrow-drop-left-line' />
-            Event
+            <span>Event</span>
+            <Icon name='arrow-drop-right-line' />
           </Button>
           <Button onClick={() => handleChange(EventsType.Group)} className={classnames({ open: openFilter === EventsType.Group })}>
-            <Icon name='arrow-drop-left-line' />
-            Event Group
+            <span>Event Group</span>
+            <Icon name='arrow-drop-right-line' />
           </Button>
 
           <div className={classnames('popout filters', { open: openFilter !== null })}>
