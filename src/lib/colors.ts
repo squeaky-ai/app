@@ -50,7 +50,7 @@ export const colorsPrimary: Color[] = [
 export const colorsPrimaryAdmin: Color[] = [
   {
     fill: 'var(--rose-500)',
-    stroke: 'var(--rose-500))',
+    stroke: 'var(--rose-500)',
     type: 'solid',
   },
   {
