@@ -514,7 +514,7 @@ export type AdminSites = {
 export type AdminSitesProvider = {
   __typename?: 'AdminSitesProvider';
   count: Scalars['Int'];
-  name: Scalars['String'];
+  providerName: Scalars['String'];
 };
 
 export type AdminSitesStored = {

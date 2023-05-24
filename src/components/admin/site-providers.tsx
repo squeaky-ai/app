@@ -20,7 +20,7 @@ export const SiteProviders: FC<Props> = ({ providers }) => {
   const ref = React.useRef<HTMLDivElement>(null);
 
   const data = providers.map(provider => ({
-    name: provider.name,
+    name: provider.providerName,
     value: provider.count,
   }));
 
