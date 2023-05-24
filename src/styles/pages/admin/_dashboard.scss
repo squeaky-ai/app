@@ -7,9 +7,10 @@
                          'total-sites total-sites total-sites total-sites sites-verified sites-verified'
                          'total-sites total-sites total-sites total-sites sites-verified sites-verified'
                          'recordings recordings recordings visitors visitors visitors'
-                         'recordings-stored recordings-stored recordings-stored recordings-stored recordings-stored recordings-stored';
+                         'recordings-stored recordings-stored recordings-stored recordings-stored recordings-stored recordings-stored'
+                         'sites-providers sites-providers . . . .';
     grid-template-columns: repeat(6, minmax(0, 1fr));
-    grid-template-rows: 169px 169px 169px 169px 176px;
+    grid-template-rows: 169px 169px 169px 169px 176px 370px 370px;
     margin: 2rem 0 0 0;
 
     @include breakpoint-md {
@@ -20,7 +21,8 @@
                            'sites-verified'
                            'recordings'
                            'visitors'
-                           'recordings-stored';
+                           'recordings-stored'
+                           'sites-providers';
       grid-template-columns: minmax(0, 1fr);
       grid-template-rows: auto;
     }
@@ -113,46 +115,6 @@
 
       &.sites-verified {
         grid-area: sites-verified;
-
-        .pie-wrapper {
-          height: 16rem;
-          margin: 1.5rem 0 0 0;
-          position: relative;
-
-          .stats {
-            left: 50%;
-            position: absolute;
-            top: 50%;
-            transform: translate(-50%, -50%);
-
-            p {
-              margin: 0;
-              text-align: center;
-
-              &:not(.stat) {
-                font-weight: var(--font-weight-medium);
-              }
-            }
-
-            .stat {
-              b {
-                color: var(--peach-500);
-              }
-
-              i {
-                color: var(--gray-500);
-              }
-
-              &:not(:last-of-type) {
-                margin-bottom: 1rem;
-
-                b {
-                  color: var(--mauve-500);
-                }
-              }
-            }
-          }
-        }
       }
 
       &.recordings {
@@ -239,6 +201,10 @@
         grid-area: recordings-stored;
       }
 
+      &.sites-providers {
+        grid-area: sites-providers;
+      }
+
       .card {
         height: 100%;
         margin: 0;
@@ -260,6 +226,46 @@
 
         .chart-wrapper {
           margin: 1rem 0 0 0;
+        }
+      }
+
+      .pie-wrapper {
+        height: 16rem;
+        margin: 1.5rem 0 0 0;
+        position: relative;
+
+        .stats {
+          left: 50%;
+          position: absolute;
+          top: 50%;
+          transform: translate(-50%, -50%);
+
+          p {
+            margin: 0;
+            text-align: center;
+
+            &:not(.stat) {
+              font-weight: var(--font-weight-medium);
+            }
+          }
+
+          .stat {
+            b {
+              color: var(--peach-500);
+            }
+
+            i {
+              color: var(--gray-500);
+            }
+
+            &:not(:last-of-type) {
+              margin-bottom: 1rem;
+
+              b {
+                color: var(--mauve-500);
+              }
+            }
+          }
         }
       }
     }

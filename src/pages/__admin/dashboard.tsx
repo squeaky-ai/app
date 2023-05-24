@@ -11,6 +11,7 @@ import { UsersGrowth } from 'components/admin/users-growth';
 import { SitesGrowth } from 'components/admin/sites-growth';
 import { RecordingsStored } from 'components/admin/recordings-stored';
 import { VerifiedSites } from 'components/admin/verified-sites';
+import { SiteProviders } from 'components/admin/site-providers';
 import { useAdminDashboard } from 'hooks/use-admin-dashboard';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { PageLoading } from 'components/sites/page-loading';
@@ -133,11 +134,18 @@ const AdminDashboard: NextPage<ServerSideProps> = () => {
             </div>
 
             <div className='grid-item recordings-stored'>
-               <Card>
-                 <RecordingsStored recordingsStored={admin.recordingsStored} />
-               </Card>
-             </div>
-           </div>
+              <Card>
+                <RecordingsStored recordingsStored={admin.recordingsStored} />
+              </Card>
+            </div>
+
+            <div className='grid-item sites-providers'>
+              <Card>
+                <h5>Providers</h5>
+                <SiteProviders providers={admin.sitesProviders} />
+              </Card>
+            </div>
+          </div>
         )}
       </Main>
     </>

@@ -35,6 +35,7 @@ export type Admin = {
   sites: AdminSites;
   sitesBundles: Array<SitesBundle>;
   sitesCount: Scalars['Int'];
+  sitesProviders: Array<AdminSitesProvider>;
   sitesStored: Array<AdminSitesStored>;
   user?: Maybe<AdminUser>;
   users: AdminUsers;
@@ -508,6 +509,12 @@ export type AdminSites = {
   __typename?: 'AdminSites';
   items: Array<AdminSite>;
   pagination: AdminSitePagination;
+};
+
+export type AdminSitesProvider = {
+  __typename?: 'AdminSitesProvider';
+  count: Scalars['Int'];
+  name: Scalars['String'];
 };
 
 export type AdminSitesStored = {

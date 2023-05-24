@@ -31,6 +31,10 @@ export const GET_ADMIN_QUERY = gql`
         unverifiedCount
         date
       }
+      sitesProviders {
+        name
+        count
+      }
       usersStored {
         count
         date
