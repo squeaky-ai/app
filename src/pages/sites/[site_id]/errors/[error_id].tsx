@@ -51,7 +51,7 @@ const SitesErrorsError: NextPage<ServerSideProps> = ({ user }) => {
       <Page user={user} scope={[]}>
         {({ site, member }) => (
           <Main className={classnames({ empty: site.recordingsCount === 0 })}>
-            <BreadCrumbs site={site} items={[{ name: 'Errors', href: `/sites/${site.id}/errors` }, { name: 'Error Details' }]} />
+            <BreadCrumbs site={site} member={member} items={[{ name: 'Errors', href: `/sites/${site.id}/errors` }, { name: 'Error Details' }]} />
 
             <div className='errors-header'>
               <h4 className='title'>Error Details</h4>

@@ -4,6 +4,7 @@
   font-size: var(--font-size-body-sm);
   line-height: var(--line-height-body-sm);
   margin: 1.5rem 0;
+  position: relative;
 
   span {
     color: var(--gray-300);
@@ -26,5 +27,26 @@
 
   a, p, span {
     flex-shrink: 0;
+  }
+
+  .free-trial-timer {
+    align-items: center;
+    background: var(--blue-50);
+    border: 1px solid var(--blue-500);
+    border-radius: var(--border-radius-lg);
+    color: var(--gray-blue-800);
+    display: flex;
+    font-weight: var(--font-weight-medium);
+    padding: .35rem .75rem .35rem .5rem;
+    position: absolute;
+    right: 0;
+    text-decoration: none;
+    top: 0;
+
+    .icon {
+      color: var(--blue-500);
+      font-size: var(--font-size-body-lg);
+      margin: 0 .5rem 0 0;
+    }
   }
 }

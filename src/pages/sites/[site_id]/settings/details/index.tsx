@@ -49,7 +49,7 @@ const SitesSettingsDetails: NextPage<ServerSideProps> = ({ user }) => {
       <Page user={user} scope={[OWNER, ADMIN]}>
         {({ site, member }) => (
           <Main>
-            <BreadCrumbs site={site} items={[{ name: 'Settings' }, { name: 'Details' }]} />
+            <BreadCrumbs site={site} member={member} items={[{ name: 'Settings' }, { name: 'Details' }]} />
 
             <h4 className='title'>
               Site Settings

@@ -2,8 +2,9 @@ import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { FreeTrialTimer } from 'components/sites/free-trial-timer';
 import { usePageContext } from 'hooks/use-page-context';
-import type { Site } from 'types/graphql';
+import type { Site, Team } from 'types/graphql';
 
 interface Item {
   href?: string;
@@ -12,10 +13,11 @@ interface Item {
 
 interface Props {
   site: Site;
+  member: Team;
   items: Item[];
 }
 
-export const BreadCrumbs: FC<Props> = ({ site, items }) => {
+export const BreadCrumbs: FC<Props> = ({ site, member, items }) => {
   const router = useRouter();
 
   const { pageState } = usePageContext();
@@ -47,6 +49,8 @@ export const BreadCrumbs: FC<Props> = ({ site, items }) => {
           {index < items.length - 1 && <span>/</span>}
         </React.Fragment>
       ))}
+
+      <FreeTrialTimer site={site} member={member} />
     </div>
   );
 };

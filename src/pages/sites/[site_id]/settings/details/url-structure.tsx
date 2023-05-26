@@ -33,7 +33,7 @@ const SitesSettingsUrlStructure: NextPage<ServerSideProps> = ({ user }) => {
       <Page user={user} scope={[OWNER, ADMIN]}>
         {({ site, member }) => (
           <Main>
-            <BreadCrumbs site={site} items={[{ name: 'Settings', href: `/sites/${site.id}/settings/details` }, { name: 'URL Structure' }]} />
+            <BreadCrumbs site={site} member={member} items={[{ name: 'Settings', href: `/sites/${site.id}/settings/details` }, { name: 'URL Structure' }]} />
 
             <h4 className='title'>
               Site Settings

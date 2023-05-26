@@ -21,7 +21,7 @@ const SitesSettingsDelete: NextPage<ServerSideProps> = ({ user }) => (
     <Page user={user} scope={[OWNER]}>
       {({ site, member }) => (
         <Main>
-          <BreadCrumbs site={site} items={[{ name: 'Settings', href: `/sites/${site.id}/settings/details` }, { name: 'Site Deletion' }]} />
+          <BreadCrumbs site={site} member={member} items={[{ name: 'Settings', href: `/sites/${site.id}/settings/details` }, { name: 'Site Deletion' }]} />
 
           <h4 className='title'>
             Site Settings

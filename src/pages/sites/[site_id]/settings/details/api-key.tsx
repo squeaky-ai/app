@@ -49,7 +49,7 @@ const SiteSettingsApiKey: NextPage<ServerSideProps> = ({ user }) => {
       <Page user={user} scope={[OWNER, ADMIN]}>
         {({ site, member }) => (
           <Main>
-            <BreadCrumbs site={site} items={[{ name: 'API Key' }]} />
+            <BreadCrumbs site={site} member={member} items={[{ name: 'API Key' }]} />
 
             <h4 className='title'>
               Site Settings

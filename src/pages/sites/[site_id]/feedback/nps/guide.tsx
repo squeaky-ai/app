@@ -23,7 +23,7 @@ const SitesFeedbackNpsGuide: NextPage<ServerSideProps> = ({ user }) => (
     <Page user={user} scope={[]}>
       {({ site, member }) => (
         <Main className={classnames({ empty: !site.verifiedAt })}>
-          <BreadCrumbs site={site} items={[{ name: 'Feedback' }, { name: 'NPS Score®' }]} />
+          <BreadCrumbs site={site} member={member} items={[{ name: 'Feedback' }, { name: 'NPS Score®' }]} />
 
           <h4 className='title'>Net Promoter Score®</h4>
         

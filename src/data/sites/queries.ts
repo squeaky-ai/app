@@ -32,6 +32,9 @@ export const GET_SITE_QUERY = gql`
       anonymiseText
       superuserAccessEnabled
       apiKey
+      createdAt {
+        iso8601
+      }
       plan {
         planId
         free

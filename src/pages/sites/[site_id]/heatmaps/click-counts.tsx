@@ -37,9 +37,9 @@ const SitesHeatmapsClickCounts: NextPage<ServerSideProps> = ({ user }) => {
       </Head>
 
       <Page user={user} scope={[]}>
-        {({ site }) => (
+        {({ site, member }) => (
           <Main className={classnames({ empty: site.recordingsCount === 0 })}>
-            <BreadCrumbs site={site} items={[{ name: 'Heatmaps' }, { name: 'Click Counts' }]} />
+            <BreadCrumbs site={site} member={member} items={[{ name: 'Heatmaps' }, { name: 'Click Counts' }]} />
 
             <div className='heatmaps-heading'>
               <h4 className='title'>Click Counts</h4>

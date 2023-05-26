@@ -351,3 +351,73 @@
 .active-users-portal {
   padding: .5rem;
 }
+
+.free-trial-modal {
+  align-items: center;
+  background: var(--modal-background);
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 3;
+
+  .free-trial-body {
+    background-color: var(--gray-blue-700);
+    background-image: url('../../../../../public/plan-squiggles.svg');
+    background-repeat: repeat-y;
+    background-position: top right;
+    border: 2px solid var(--blue-500);
+    border-radius: var(--border-radius-lg);
+    display: flex;
+    max-width: 45rem;
+    padding: 2rem 2rem 3rem 2rem;
+    position: relative;
+    width: 100%;
+
+    h3 {
+      align-items: center;
+      color: var(--white);
+      display: flex;
+      margin: 0 0 1rem 0;
+
+      .star {
+        color: var(--blue-300);
+        margin: 0 1rem 0 0;
+      }
+    }
+
+    h4 {
+      color: var(--gray-blue-200);
+
+      b {
+        color: var(--white);
+      }
+    }
+
+    .content {
+      flex: 1;
+
+      p {
+        color: var(--white);
+        margin: 0;
+      }
+    }
+    
+    .close {
+      background: none;
+      border: none;
+      padding: 0;
+      position: absolute;
+      right: 3rem;
+      top: 3rem;
+
+      .icon {
+        color: var(--blue-300);
+        font-size: 2rem;
+      }
+    }
+  }
+}
