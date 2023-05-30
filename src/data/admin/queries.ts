@@ -223,6 +223,7 @@ export const GET_ADMIN_SITES_QUERY = gql`
             name
             exceeded
             invalid
+            free
             maxMonthlyRecordings
           }
           team {

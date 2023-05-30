@@ -119,28 +119,34 @@ export const SITE_COLUMNS: Column[] = [
     position: 9,
   },
   {
-    label: 'Created At',
+    label: 'Trial Status',
     width: '1fr',
     disabled: false,
     position: 10,
   },
   {
-    label: 'Active Visitors',
+    label: 'Created At',
     width: '1fr',
     disabled: false,
     position: 11,
   },
   {
-    label: 'Superuser Access',
+    label: 'Active Visitors',
     width: '1fr',
     disabled: false,
     position: 12,
   },
   {
+    label: 'Superuser Access',
+    width: '1fr',
+    disabled: false,
+    position: 13,
+  },
+  {
     label: 'Options',
     width: '64px',
     disabled: false,
-    position: 13,
+    position: 14,
   },
 ];
 
@@ -167,6 +173,7 @@ export const DEFAULT_SITE_COLUMNS = SITE_COLUMNS.filter(c => [
   'Tracking Code',
   'Team Count',
   'Provider',
+  'Trial Status',
   'Created At',
   'Active Visitors',
   'Superuser Access',

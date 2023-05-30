@@ -20,7 +20,7 @@ interface Props {
 }
 
 export const BillingPlansTable: FC<Props> = ({ site, member, billing, hasBilling, showPlanChangeMessage }) => {
-  const daysRemainingOnTrial = getRemainingTrialDays(site, member);
+  const daysRemainingOnTrial = getRemainingTrialDays(site, member.role);
 
   const [currency, setCurrency] = React.useState<Currency>(getUsefulCurrency());
   const [interval, setInterval] = React.useState<Interval>(Interval.MONTHLY);
