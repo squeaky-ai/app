@@ -2,21 +2,26 @@ import React from 'react';
 import type { FC } from 'react';
 import { Container } from 'components/container';
 import { Select, Option } from 'components/select';
+import { Icon } from 'components/icon';
 import { BillingPlansTableSmall } from 'components/sites/settings/billing-plans-table-small';
 import { BillingPlansTableLarge } from 'components/sites/settings/billing-plans-table-large';
 import { Interval, getUsefulCurrency } from 'lib/currency';
-import { Currency, Site } from 'types/graphql';
+import { getRemainingTrialDays } from 'lib/plan';
+import { Currency, Site, Team } from 'types/graphql';
 import type { Billing } from 'types/billing';
 
 
 interface Props {
   site: Site;
+  member: Team;
   billing: Billing;
   hasBilling: boolean;
   showPlanChangeMessage: (name: string) => void;
 }
 
-export const BillingPlansTable: FC<Props> = ({ site, billing, hasBilling, showPlanChangeMessage }) => {
+export const BillingPlansTable: FC<Props> = ({ site, member, billing, hasBilling, showPlanChangeMessage }) => {
+  const daysRemainingOnTrial = getRemainingTrialDays(site, member);
+
   const [currency, setCurrency] = React.useState<Currency>(getUsefulCurrency());
   const [interval, setInterval] = React.useState<Interval>(Interval.MONTHLY);
 
@@ -47,6 +52,20 @@ export const BillingPlansTable: FC<Props> = ({ site, billing, hasBilling, showPl
 
   return (
     <>
+      {daysRemainingOnTrial !== null && (
+        <Container className='lg'>
+          <div className='free-trial'>
+            <div className='content'>
+              <h4>
+                <Icon name='time-line' className='star' />
+                <span><b>{daysRemainingOnTrial} days</b> remaining of your <b>14-day</b> paid features trial.</span>
+              </h4>
+              <p>At the end of the trial you&apos;ll revert back to the free plan feature-set, unless you upgrade. You can choose a plan below at any time to maintain access to the features you need most.</p>
+            </div>
+          </div>
+        </Container>
+      )}
+
       <div className='currencies'>
         <Container className='md'>
           <p>All plans come with access to our entire range of customer experience products, including analytics, recordings, feedback and heatmap data. To learn more about our full array of features, <a href='/features' target='_blank'>see here</a>.</p>

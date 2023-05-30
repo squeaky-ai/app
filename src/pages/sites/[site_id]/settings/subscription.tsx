@@ -25,7 +25,7 @@ const SiteSettingsSubscription: NextPage<ServerSideProps> = ({ user }) => (
             <Access roles={[OWNER]} />
           </h4>
 
-          <Billing site={site} />
+          <Billing site={site} member={member} />
         </Main>
       )}
     </Page>

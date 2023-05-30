@@ -14,13 +14,14 @@ import { BillingExternal } from 'components/sites/settings/billing-external';
 import { Message } from 'components/message';
 import { useToasts } from 'hooks/use-toasts';
 import { providers } from 'data/sites/constants';
-import type { Site } from 'types/graphql';
+import type { Site, Team } from 'types/graphql';
 
 interface Props {
   site: Site;
+  member: Team;
 }
 
-export const Billing: FC<Props> = ({ site }) => {
+export const Billing: FC<Props> = ({ site, member }) => {
   const ref = React.useRef<PlanChanged>(null);
 
   const router = useRouter();
@@ -106,6 +107,7 @@ export const Billing: FC<Props> = ({ site }) => {
                   : (
                     <BillingPlansTable 
                       site={site}
+                      member={member}
                       billing={billing} 
                       hasBilling={hasBilling}
                       showPlanChangeMessage={showPlanChangeMessage}

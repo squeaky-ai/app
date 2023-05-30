@@ -291,6 +291,47 @@
     }
   }
 
+  .free-trial {
+    background-color: var(--gray-blue-700);
+    background-image: url('../../../../../../public/plan-squiggles.svg');
+    background-repeat: repeat-y;
+    background-position: top right;
+    border: 2px solid var(--blue-500);
+    border-radius: var(--border-radius-lg);
+    display: flex;
+    margin: 0 0 3rem 0;
+    padding: 2rem;
+    position: relative;
+    width: 100%;
+
+    h4 {
+      align-items: center;
+      color: var(--gray-blue-200);
+      display: flex;
+      margin: 0 0 1rem 0;
+
+      b {
+        color: var(--white);
+      }
+
+      .star {
+        color: var(--blue-300);
+        margin: 0 1rem 0 0;
+      }
+    }
+
+    .content {
+      flex: 1;
+
+      p {
+        color: var(--white);
+        margin: 0 0 0 2.5rem;
+        max-width: 45rem;
+      }
+    }
+
+  }
+
   .billing-table {
     .head {
       .cell {
