@@ -32,9 +32,9 @@ const SiteSettingsTeam: NextPage<ServerSideProps> = ({ user }) => {
       </Head>
 
       <Page user={user} scope={[OWNER, ADMIN]}>
-        {({ site }) => (
+        {({ site, member }) => (
           <Main>
-            <BreadCrumbs site={site} items={[{ name: 'Team' }]} />
+            <BreadCrumbs site={site} member={member} items={[{ name: 'Team' }]} />
 
             <h4 className='title'>
               Team

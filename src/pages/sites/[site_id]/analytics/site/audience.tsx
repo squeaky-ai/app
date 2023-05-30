@@ -23,9 +23,9 @@ const SitesAnalyticsSiteAudience: NextPage<ServerSideProps> = ({ user }) => {
       </Head>
 
       <Page user={user} scope={[]}>
-        {({ site }) => (
+        {({ site, member }) => (
           <Main className={classnames({ empty: site.recordingsCount === 0 })}>
-            <BreadCrumbs site={site} items={[{ name: 'Site Analytics' }]} />
+            <BreadCrumbs site={site} member={member} items={[{ name: 'Site Analytics' }]} />
 
             <div className='heading'>
               <h4 className='title'>Site Analytics</h4>

@@ -54,6 +54,7 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
           <Main className='visitor-view'>
             <BreadCrumbs 
               site={site} 
+              member={member}
               items={
                 [
                   { name: 'Visitors', href: `/sites/${site.id}/visitors` }, 

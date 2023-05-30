@@ -49,7 +49,7 @@ export const CreateModal: FC<Props> = ({ buttonClassName }) => {
 
   const handleSuccess = async () => {
     closeModal(true);
-    await router.push(`/sites/${site.id}/dashboard`);
+    await router.push(`/sites/${site.id}/dashboard?free_trial_began=1`);
   };
 
   const handleType = (type: SiteType) => {

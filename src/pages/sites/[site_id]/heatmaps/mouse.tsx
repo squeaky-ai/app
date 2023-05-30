@@ -37,9 +37,9 @@ const SitesHeatmapsMouse: NextPage<ServerSideProps> = ({ user }) => {
       </Head>
 
       <Page user={user} scope={[]}>
-        {({ site }) => (
+        {({ site, member }) => (
           <Main className={classnames({ empty: site.recordingsCount === 0 })}>
-            <BreadCrumbs site={site} items={[{ name: 'Heatmaps' }, { name: 'Mouse' }]} />
+            <BreadCrumbs site={site} member={member} items={[{ name: 'Heatmaps' }, { name: 'Mouse' }]} />
 
             <div className='heatmaps-heading'>
               <h4 className='title'>Mouse</h4>

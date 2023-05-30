@@ -30,7 +30,7 @@ const SitesFeedbackSentiment: NextPage<ServerSideProps> = ({ user }) => {
       <Page user={user} scope={[]}>
         {({ site, member }) => (
           <Main className={classnames({ empty: !site.verifiedAt })}>
-            <BreadCrumbs site={site} items={[{ name: 'Feedback' }, { name: 'Sentiment' }]} />
+            <BreadCrumbs site={site} member={member} items={[{ name: 'Feedback' }, { name: 'Sentiment' }]} />
 
             <h4 className='title'>
               Sentiment

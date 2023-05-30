@@ -58,7 +58,7 @@ const SitesEventsHistory: NextPage<ServerSideProps> = ({ user }) => {
       <Page user={user} scope={[]}>
         {({ site, member }) => (
           <Main className={classnames({ empty: site.recordingsCount === 0 })}>
-            <BreadCrumbs site={site} items={[{ name: 'Events', href: `/sites/${site.id}/events/all` }, { name: 'Event History' }]} />
+            <BreadCrumbs site={site} member={member} items={[{ name: 'Events', href: `/sites/${site.id}/events/all` }, { name: 'Event History' }]} />
 
             <div className='events-header'>
               <h4 className='title'>
