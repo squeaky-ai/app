@@ -549,6 +549,7 @@
   .billing-external {
     align-items: center;
     display: flex;
+    flex-direction: column;
     height: 100vh;
     justify-content: center;
     max-height: calc(100% - 26rem);
@@ -564,6 +565,18 @@
       h4 {
         justify-content: center;
         margin: 4rem 0 2rem 0;
+      }
+    }
+
+    .free-trial {
+      margin: 3rem 0 0 0;
+      h4 {
+        justify-content: flex-start;
+        margin: 0 0 1rem 0;
+      }
+
+      p {
+        text-align: left;
       }
     }
   }

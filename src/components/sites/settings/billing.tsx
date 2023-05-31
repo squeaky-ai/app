@@ -65,7 +65,13 @@ export const Billing: FC<Props> = ({ site, member }) => {
   }
 
   if (site.provider === providers.duda) {
-    return <BillingExternal providerAuth={billing.providerAuth} />;
+    return (
+      <BillingExternal
+        site={site}
+        member={member}
+        providerAuth={billing.providerAuth} 
+      />
+    );
   }
 
   if (hasPlanOverride) {

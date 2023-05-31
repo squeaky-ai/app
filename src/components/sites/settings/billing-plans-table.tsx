@@ -2,11 +2,10 @@ import React from 'react';
 import type { FC } from 'react';
 import { Container } from 'components/container';
 import { Select, Option } from 'components/select';
-import { Icon } from 'components/icon';
 import { BillingPlansTableSmall } from 'components/sites/settings/billing-plans-table-small';
 import { BillingPlansTableLarge } from 'components/sites/settings/billing-plans-table-large';
+import { BillingFreeTrial } from 'components/sites/settings/billing-free-trial';
 import { Interval, getUsefulCurrency } from 'lib/currency';
-import { getRemainingTrialDays } from 'lib/plan';
 import { Currency, Site, Team } from 'types/graphql';
 import type { Billing } from 'types/billing';
 
@@ -20,8 +19,6 @@ interface Props {
 }
 
 export const BillingPlansTable: FC<Props> = ({ site, member, billing, hasBilling, showPlanChangeMessage }) => {
-  const daysRemainingOnTrial = getRemainingTrialDays(site, member.role);
-
   const [currency, setCurrency] = React.useState<Currency>(getUsefulCurrency());
   const [interval, setInterval] = React.useState<Interval>(Interval.MONTHLY);
 
@@ -52,19 +49,7 @@ export const BillingPlansTable: FC<Props> = ({ site, member, billing, hasBilling
 
   return (
     <>
-      {daysRemainingOnTrial !== null && (
-        <Container className='lg'>
-          <div className='free-trial'>
-            <div className='content'>
-              <h4>
-                <Icon name='time-line' className='star' />
-                <span><b>{daysRemainingOnTrial} days</b> remaining of your <b>14-day</b> paid features trial.</span>
-              </h4>
-              <p>At the end of the trial you&apos;ll revert back to the free plan feature-set, unless you upgrade. You can choose a plan below at any time to maintain access to the features you need most.</p>
-            </div>
-          </div>
-        </Container>
-      )}
+      <BillingFreeTrial site={site} member={member} />
 
       <div className='currencies'>
         <Container className='md'>
