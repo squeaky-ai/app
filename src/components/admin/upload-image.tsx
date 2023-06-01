@@ -1,10 +1,9 @@
 import React from 'react';
 import type { FC } from 'react';
+import classnames from 'classnames';
 import { gql, useMutation } from '@apollo/client';
-import { Icon } from 'components/icon';
 import { Label } from 'components/label';
 import { Input } from 'components/input';
-import { Spinner } from 'components/spinner';
 import { uploadFile } from 'lib/admin/blog';
 import type { AdminBlogSignImage } from 'types/graphql';
 
@@ -40,13 +39,9 @@ export const UploadImage: FC<Props> = ({ refetchImages, onImageUpload }) => {
   };
 
   return (
-    <Label className='button image-container quaternary upload'>
+    <Label className={classnames('button upload-image', { loading })}>
       <Input type='file' accept='image/png, image/jpeg, image/jpg, image/webp' onChange={onUpload} />
-
-      {loading
-        ? <Spinner />
-        : <Icon name='image-line' />
-      }
+      {loading ? 'Uploading...' : '+ Add New'}
     </Label>
   );
 };

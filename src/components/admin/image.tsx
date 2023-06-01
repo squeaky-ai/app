@@ -51,7 +51,7 @@ export const Image: FC<Props> = ({ path, alt, refetchImages }) => {
           <img alt={alt} src={`https://cdn.squeaky.ai/${path}`} />
         </div>
         <Button className='delete-image' onClick={openModal}>
-          <Icon name='close-line' />
+          <Icon name='delete-bin-2-line' />
         </Button>
       </div>
 
