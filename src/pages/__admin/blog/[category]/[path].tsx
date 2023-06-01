@@ -6,6 +6,8 @@ import { Main } from 'components/main';
 import { useBlogPost } from 'hooks/use-blog-post';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { BlogEdit } from 'components/admin/blog-edit';
+import { Button } from 'components/button';
+import { Icon } from 'components/icon';
 import { BreadCrumbs } from 'components/admin/breadcrumbs';
 import { updateBlogPost } from 'lib/api/graphql';
 import { getAuthorKey } from 'lib/admin/blog';
@@ -27,6 +29,11 @@ const AdminBlogEdit: NextPage<ServerSideProps> = () => {
     }
   };
 
+  const handleToggleStatus = () => {
+    const { __typename, createdAt, updatedAt, ...rest } = post.blogPost;
+    handleUpdate({ ...rest, draft: !post.blogPost.draft });
+  };
+
   return (
     <>
       <Head>
@@ -38,6 +45,13 @@ const AdminBlogEdit: NextPage<ServerSideProps> = () => {
 
         <h4 className='title'>
           Edit Post
+
+          {post.blogPost && (
+            <Button type='button' className='icon publish-status' onClick={handleToggleStatus}>
+              <Icon name={post.blogPost.draft ? 'eye-off-line' : 'eye-line'} />
+              Status: <span>{post.blogPost.draft ? 'Unpublished' : 'Published'}</span>
+            </Button>
+          )}
         </h4>
 
         {loading && (

@@ -1,20 +1,25 @@
 .create-blog-post {
-  .grid {
+  margin: 2rem 0 0 0;
+
+  .grid { 
     .toggle {
       margin: 0 0 1.5rem 0;
     }
-  }
 
-  .input-group {
-    display: grid;
-    grid-gap: 2rem;
-    grid-template-columns: 1fr 1fr;
+    form {
+      display: grid;
+      grid-gap: 2rem;
+      grid-template-columns: 3fr 1fr;
+    }
   }
 
   .images {
     display: flex;
     flex-wrap: wrap;
     margin: 0 0 1.5rem 0;
+    max-height: 20rem;
+    overflow-x: hidden;
+    overflow-y: auto;
 
     .image-container {
       height: 6rem;
@@ -93,6 +98,27 @@
     }
   }
 
+  .left {
+    display: flex;
+    flex-direction: column;
+
+    .edit-body {
+      flex: 1;
+      margin: 0;
+    }
+  }
+
+  .right {
+    .radio-group {
+      display: flex;
+      margin: 0 0 1.5rem 0;
+
+      .radio {
+        margin: 0 1rem 0 0;
+      }
+    }
+  }
+
   .code {
     border: 1px solid var(--gray-200);
     height: 500px;
@@ -138,82 +164,6 @@
       font-weight: var(--font-weight-normal);
       line-height: var(--line-height-body-sm);
       margin: 0 0 0 .5rem;
-    }
-  }
-
-  .rich-text-wrapper {
-    border: none;
-    margin: 0 0 2rem 0;
-    position: relative;
-    z-index: 0;
-
-    .rich-text-toolbar {
-      border: none;
-      margin: 0 0 1rem 0;
-      padding: 0;
-
-      & > div {
-        margin: 0 1rem 0 0;
-
-        &:nth-of-type(2),
-        &:nth-of-type(5) {
-          display: none;
-        }
-
-        &:nth-of-type(6) {
-          span {
-            span {
-              border: 1px solid var(--gray-200);
-              border-radius: var(--border-radius-sm);
-              height: 2rem;
-            }
-          }
-        }
-
-        div:first-child > button {
-          border-top-left-radius: var(--border-radius-sm);
-          border-bottom-left-radius: var(--border-radius-sm);
-        }
-
-        div:last-child > button {
-          border-top-right-radius: var(--border-radius-sm);
-          border-bottom-right-radius: var(--border-radius-sm);
-        }
-
-        button {
-          background: none;
-          border-color: var(--gray-200);
-          border-style: solid;
-          height: 2rem;
-          width: 2rem;
-
-          &[class*="isActive"] {
-            background: var(--gray-200);
-          }
-        }
-      }
-    }
-
-    .upload {
-      align-items: center;
-      background: none;
-      border: 1px solid var(--gray-200);
-      border-radius: var(--border-radius-sm);
-      cursor: pointer;
-      display: inline-flex;
-      height: 2rem;
-      justify-content: center;
-      padding: 0;
-      width: 2rem;
-
-      .input {
-        display: none;
-      }
-
-      .icon {
-        font-size: var(--font-size-body);
-        font-weight: var(--font-weight-normal);
-      }
     }
   }
 }

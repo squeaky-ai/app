@@ -38,6 +38,39 @@
     }
   }
 
+  .title {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+
+    .publish-status {
+      align-items: center;
+      background: none;
+      border: none;
+      border-radius: var(--border-radius-md);
+      display: flex;
+      font-weight: var(--font-weight-medium);
+      height: 2rem;
+      margin-left: 0.5rem;
+      padding: 0 1rem;
+
+      &:hover {
+        background: var(--gray-100);
+      }
+
+      .icon {
+        color: var(--mauve-700);
+        font-size: var(--font-size-body-lg);
+        margin: 0 0.5rem 0 0;
+      }
+
+      span {
+        font-weight: var(--font-weight-normal);
+        margin: 0 0 0 .25rem;
+      }
+    }
+  }
+
   .edit-body {
     background: var(--gray-blue-800);
     color: var(--white);

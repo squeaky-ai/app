@@ -42,6 +42,24 @@
       border-color: var(--mauve-700);
     }
   }
+
+  .radio {
+    &:checked + .check {
+      border-color: var(--mauve-700);
+    }
+
+    &:hover {
+      .check {
+        border-color: var(--mauve-700);
+      }
+    }
+
+    input {  
+      &:checked + .check {
+        border-color: var(--mauve-700);
+      }
+    }
+  }
   
   .admin-indicator {
     color: var(--peach-200);
