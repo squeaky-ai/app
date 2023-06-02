@@ -9,7 +9,7 @@
     form {
       display: grid;
       grid-gap: 2rem;
-      grid-template-columns: 3fr 1fr;
+      grid-template-columns: 1fr 25rem;
     }
   }
 
@@ -72,7 +72,7 @@
           font-weight: var(--font-weight-normal);
           line-height: var(--line-height-body-sm);
           margin: 0;
-          max-width: 15rem;
+          max-width: 17rem;
           overflow: hidden;
           padding: 0;
           text-overflow: ellipsis;
@@ -85,6 +85,7 @@
           &.copy {
             margin: .25rem 0 0 0;
             position: relative;
+            text-align: left;
 
             .copy-to-clipboard {
               background: var(--white);
@@ -154,6 +155,33 @@
       text-align: center;
       text-decoration: underline;
       width: 100%;
+    }
+  }
+
+  .input-group.prefix {
+    align-items: center;
+    display: flex;
+    margin: 0 0 1.5rem 0;
+
+    p {
+      align-items: center;
+      background: var(--gray-100);
+      border: 1px solid var(--gray-200);
+      border-right-width: 0;
+      border-radius: var(--border-radius-controls) 0 0 var(--border-radius-controls);
+      display: flex;
+      height: 2rem;
+      margin: 0;
+      padding: 0.25rem 0.5rem;
+    }
+
+    div {
+      flex: 1;
+    }
+
+    .input {
+      border-radius: 0 var(--border-radius-controls) var(--border-radius-controls) 0;
+      margin: 0;
     }
   }
 

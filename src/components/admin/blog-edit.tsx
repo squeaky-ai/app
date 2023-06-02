@@ -54,7 +54,11 @@ export const BlogEdit: FC<Props> = ({ post, images, onChange, refetchImages }) =
         (async () => {
           setSubmitting(false);
           const update = exportBlogPost(values);
-          onChange({ ...update, id: post?.id });
+          onChange({ 
+            ...update, 
+            id: post?.id,
+            metaImage: `blog/${post.metaImage}`,
+          });
         })();
       }}
     >
@@ -150,17 +154,22 @@ export const BlogEdit: FC<Props> = ({ post, images, onChange, refetchImages }) =
                   <span className='validation'>{errors.metaDescription}</span>
 
                   <Label htmlFor='metaImage'>Meta image URL</Label>
-                  <Input 
-                    type='text' 
-                    name='metaImage' 
-                    autoComplete='off'
-                    placeholder='e.g. https://cdn.squeaky.ai/blog/site-traffic.webp'
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={values.metaImage}
-                    invalid={touched.metaImage && !!errors.metaImage}
-                  />
-                  <span className='validation'>{errors.metaImage}</span>
+                  <div className='input-group prefix'>
+                    <p>https://cdn.squeaky.ai/blog/</p>
+                    <div>
+                      <Input 
+                        type='text' 
+                        name='metaImage' 
+                        autoComplete='off'
+                        placeholder='e.g. site-traffic.webp'
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        value={last(values.metaImage.split('/'))}
+                        invalid={touched.metaImage && !!errors.metaImage}
+                      />
+                      <span className='validation'>{errors.metaImage}</span>
+                    </div>
+                  </div>
       
                   <Label htmlFor='coveringEnabled'>Show &quot;What we&apos;ll cover&quot;</Label>
                   <div className='radio-group'>
@@ -181,11 +190,13 @@ export const BlogEdit: FC<Props> = ({ post, images, onChange, refetchImages }) =
                       <div className='image-container' key={image}>
                         <Image path={image} refetchImages={refetchImages} alt='Meta image' />
                         <div className='content'>
-                          <p className='detail'><b>File name:</b> {last(image.split('/'))}</p>
-                          <Button className='detail copy' type='button' onClick={() => copyToClipboard(`https://cdn.squeaky.ai/${image}`)}>
-                            <b>URL:</b> https://cdn.squeaky.ai/{image}
+                          <Button className='detail copy' type='button' onClick={() => copyToClipboard(last(image.split('/')))}>
+                            <b>File name:</b> {last(image.split('/'))}
                             <Icon name='file-copy-line' className='copy-to-clipboard' />
                           </Button>
+                          <p className='detail'>
+                            <b>URL:</b> https://cdn.squeaky.ai/{image}
+                          </p>
                         </div>
                       </div>
                     ))}
