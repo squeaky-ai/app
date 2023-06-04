@@ -440,7 +440,10 @@ export const GET_AD_TRACKING_QUERY = gql`
             niceDateTime
           }
           visitorId
+          visitorVisitorId
           utmContent
+          gad
+          gclid
         }
         pagination {
           total

@@ -90,6 +90,8 @@ export type AdminAdTracking = {
 
 export type AdminAdTrackingItem = {
   __typename?: 'AdminAdTrackingItem';
+  gad?: Maybe<Scalars['String']>;
+  gclid?: Maybe<Scalars['String']>;
   siteCreatedAt?: Maybe<CommonDates>;
   siteId?: Maybe<Scalars['ID']>;
   siteName?: Maybe<Scalars['String']>;
@@ -99,7 +101,8 @@ export type AdminAdTrackingItem = {
   userId?: Maybe<Scalars['ID']>;
   userName?: Maybe<Scalars['String']>;
   utmContent: Scalars['String'];
-  visitorId: Scalars['String'];
+  visitorId: Scalars['ID'];
+  visitorVisitorId: Scalars['String'];
 };
 
 export type AdminAdTrackingPagination = {

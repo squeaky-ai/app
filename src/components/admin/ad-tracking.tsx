@@ -146,13 +146,19 @@ export const AdTracking: NextPage = () => {
                       />
                     </Cell>
                     <Cell>
+                      GAD
+                    </Cell>
+                    <Cell>
+                      GCLID
+                    </Cell>
+                    <Cell>
                       UTM Content
                     </Cell>
                   </Row>
                   {adTracking.items.map((a, index) => (
                     <Row key={`${a.visitorId}-${index}`}>
                       <Cell>
-                        <Link href={`/sites/${publicRuntimeConfig.squeakySiteId}/visitors/${a.visitorId}`}>{a.visitorId}</Link>
+                        <Link href={`/sites/${publicRuntimeConfig.squeakySiteId}/visitors/${a.visitorId}`}>{a.visitorVisitorId}</Link>
                       </Cell>
                       <Cell>
                         {a.userId
@@ -161,7 +167,7 @@ export const AdTracking: NextPage = () => {
                         }
                       </Cell>
                       <Cell>
-                        {a.userName || '-'}
+                        {!!a.userName ? a.userName : '-'}
                       </Cell>
                       <Cell>
                         {a.userCreatedAt?.niceDateTime || '-'}
@@ -185,7 +191,13 @@ export const AdTracking: NextPage = () => {
                         {a.siteVerifiedAt?.niceDateTime || '-'}
                       </Cell>
                       <Cell>
-                        {a.utmContent}
+                        {a.gad || '-'}
+                      </Cell>
+                      <Cell>
+                        {a.gclid || '-'}
+                      </Cell>
+                      <Cell>
+                        {a.utmContent || '-'}
                       </Cell>
                     </Row>
                   ))}

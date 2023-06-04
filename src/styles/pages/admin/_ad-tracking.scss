@@ -29,6 +29,10 @@
   }
 
   .ad-tracking-table {
+    .row {
+      grid-template-columns: repeat(12, 1fr);
+    }
+
     .sort {
       position: relative;
       z-index: 1;
