@@ -453,3 +453,11 @@ export const GET_AD_TRACKING_QUERY = gql`
     }
   }
 `;
+
+export const GET_AD_TRACKING_EXPORT_QUERY = gql`
+  query GetAdTracking($utmContentIds: [String!]!, $sort: AdminAdTrackingSort!, $fromDate: ISO8601Date!, $toDate: ISO8601Date!) {
+    admin {
+      adTrackingExport(utmContentIds: $utmContentIds, sort: $sort, fromDate: $fromDate, toDate: $toDate)
+    }
+  }
+`;

@@ -41,6 +41,7 @@ export const useAdminDashboard = (): UseAdminDashboard => {
         total: 0,
       }
     },
+    adTrackingExport: '',
     sitesProviders: [],
   };
 

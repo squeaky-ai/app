@@ -26,6 +26,7 @@ export type Admin = {
   activeMonthlyUsers: Scalars['Int'];
   activeVisitors: Array<ActiveVisitorCount>;
   adTracking: AdminAdTracking;
+  adTrackingExport: Scalars['String'];
   blogImages: Array<Scalars['String']>;
   recordingsCount: Scalars['Int'];
   recordingsProcessed: Scalars['Int'];
@@ -51,6 +52,14 @@ export type AdminAdTrackingArgs = {
   fromDate: Scalars['ISO8601Date'];
   page?: InputMaybe<Scalars['Int']>;
   size?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<AdminAdTrackingSort>;
+  toDate: Scalars['ISO8601Date'];
+  utmContentIds?: Array<Scalars['String']>;
+};
+
+
+export type AdminAdTrackingExportArgs = {
+  fromDate: Scalars['ISO8601Date'];
   sort?: InputMaybe<AdminAdTrackingSort>;
   toDate: Scalars['ISO8601Date'];
   utmContentIds?: Array<Scalars['String']>;
@@ -100,7 +109,7 @@ export type AdminAdTrackingItem = {
   userCreatedAt?: Maybe<CommonDates>;
   userId?: Maybe<Scalars['ID']>;
   userName?: Maybe<Scalars['String']>;
-  utmContent: Scalars['String'];
+  utmContent?: Maybe<Scalars['String']>;
   visitorId: Scalars['ID'];
   visitorVisitorId: Scalars['String'];
 };

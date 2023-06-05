@@ -16,6 +16,7 @@ import { PageSize } from 'components/sites/page-size';
 import { usePeriod } from 'hooks/use-period';
 import { getDateRange } from 'lib/dates';
 import { NoResults } from 'components/sites/no-results';
+import { AdTrackingExport } from 'components/admin/ad-tracking-export';
 import { AdminAdTrackingSort } from 'types/graphql';
 import { useSort } from 'hooks/use-sort';
 
@@ -71,6 +72,12 @@ export const AdTracking: NextPage = () => {
         </h4>
         <menu>
           <Period period={period} onChange={setPeriod} />
+          <AdTrackingExport
+            utmContentIds={utmContentIds}
+            sort={sort}
+            range={getDateRange(period)}
+            adTracking={adTracking}
+          />
         </menu>
       </div>
 
