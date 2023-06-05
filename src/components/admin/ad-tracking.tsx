@@ -66,7 +66,7 @@ export const AdTracking: NextPage = () => {
         <h4 className='title'>
           Ad Tracking
           {!loading && (
-            <span>{adTracking.pagination.total}</span>
+            <span>{adTracking.pagination.total.toLocaleString()}</span>
           )}
         </h4>
         <menu>
@@ -167,7 +167,7 @@ export const AdTracking: NextPage = () => {
                         }
                       </Cell>
                       <Cell>
-                        {!!a.userName ? a.userName : '-'}
+                        {!!a.userName?.trim() ? a.userName : '-'}
                       </Cell>
                       <Cell>
                         {a.userCreatedAt?.niceDateTime || '-'}
