@@ -111,6 +111,9 @@ export const AdTracking: NextPage = () => {
                       Visitor ID
                     </Cell>
                     <Cell>
+                      First Visited
+                    </Cell>
+                    <Cell>
                       User ID
                     </Cell>
                     <Cell>
@@ -166,6 +169,9 @@ export const AdTracking: NextPage = () => {
                     <Row key={`${a.visitorId}-${index}`}>
                       <Cell>
                         <Link href={`/sites/${publicRuntimeConfig.squeakySiteId}/visitors/${a.visitorId}`}>{a.visitorVisitorId}</Link>
+                      </Cell>
+                      <Cell>
+                        {a.visitorCreatedAt?.niceDateTime || '-'}
                       </Cell>
                       <Cell>
                         {a.userId

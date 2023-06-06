@@ -110,6 +110,7 @@ export type AdminAdTrackingItem = {
   userId?: Maybe<Scalars['ID']>;
   userName?: Maybe<Scalars['String']>;
   utmContent?: Maybe<Scalars['String']>;
+  visitorCreatedAt: CommonDates;
   visitorId: Scalars['ID'];
   visitorVisitorId: Scalars['String'];
 };

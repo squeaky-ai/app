@@ -441,6 +441,10 @@ export const GET_AD_TRACKING_QUERY = gql`
           }
           visitorId
           visitorVisitorId
+          visitorCreatedAt {
+            iso8601
+            niceDateTime
+          }
           utmContent
           gad
           gclid
