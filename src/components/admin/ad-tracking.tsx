@@ -2,6 +2,7 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Link from 'next/link';
 import getConfig from 'next/config';
+import classnames from 'classnames';
 import { PageLoading } from 'components/sites/page-loading';
 import { Button } from 'components/button';
 import { Container } from 'components/container';
@@ -11,6 +12,7 @@ import { Error } from 'components/error';
 import { Sort } from 'components/sort';
 import { Cell, Row, Table, TableWrapper } from 'components/table';
 import { useAdminAdTracking } from 'hooks/use-admin-ad-tracking';
+import { AdTrackingColumns } from 'components/admin/ad-tracking-columns';
 import { Pagination } from 'components/pagination';
 import { PageSize } from 'components/sites/page-size';
 import { usePeriod } from 'hooks/use-period';
@@ -19,6 +21,10 @@ import { NoResults } from 'components/sites/no-results';
 import { AdTrackingExport } from 'components/admin/ad-tracking-export';
 import { AdminAdTrackingSort } from 'types/graphql';
 import { useSort } from 'hooks/use-sort';
+import { toHoursMinutesAndSeconds } from 'lib/dates';
+import { useColumns } from 'hooks/use-columns';
+import { getColumnStyles } from 'lib/tables';
+import { AD_TRACKING_COLUMNS } from 'data/admin/constants';
 
 const { publicRuntimeConfig } = getConfig();
 
@@ -26,11 +32,15 @@ export const AdTracking: NextPage = () => {
   const [page, setPage] = React.useState<number>(1);
   const [size, setSize] = React.useState<number>(25);
 
+  const { columns, columnsReady, setColumns } = useColumns('admin-ad-tracking');
+
   const { period, setPeriod } = usePeriod('ad-tracking');
   const { sort, setSort } = useSort<AdminAdTrackingSort>('ad-tracking');
 
   const [input, setInput] = React.useState<string>('');
   const [utmContentIds, setUtmContentIds] = React.useState<string[]>([]);
+
+  const { rowStyle, tableClassNames } = getColumnStyles(AD_TRACKING_COLUMNS, columns);
 
   const { adTracking, error, loading } = useAdminAdTracking({
     utmContentIds,
@@ -72,6 +82,10 @@ export const AdTracking: NextPage = () => {
         </h4>
         <menu>
           <Period period={period} onChange={setPeriod} />
+          <AdTrackingColumns
+            columns={columns}
+            setColumns={setColumns}
+          />
           <AdTrackingExport
             utmContentIds={utmContentIds}
             sort={sort}
@@ -89,7 +103,7 @@ export const AdTracking: NextPage = () => {
         <NoResults title='There is no ad tracking for your chosen period' illustration='illustration-2' />
       )}
 
-      {!loading && hasResults && (
+      {!loading && hasResults && columnsReady && (
         <Container>
           <form className='content-id-form' onSubmit={handleSubmit}>
             <Input 
@@ -105,13 +119,16 @@ export const AdTracking: NextPage = () => {
           {adTracking.pagination.total > 0 && (
             <>
               <TableWrapper>
-                <Table className='ad-tracking-table'>
-                  <Row className='head'>
+                <Table className={classnames('ad-tracking-table', tableClassNames)}>
+                  <Row className='head' style={rowStyle}>
                     <Cell>
                       Visitor ID
                     </Cell>
                     <Cell>
                       First Visited
+                    </Cell>
+                    <Cell>
+                      Average Session Duration
                     </Cell>
                     <Cell>
                       User ID
@@ -166,12 +183,18 @@ export const AdTracking: NextPage = () => {
                     </Cell>
                   </Row>
                   {adTracking.items.map((a, index) => (
-                    <Row key={`${a.visitorId}-${index}`}>
+                    <Row key={`${a.visitorId}-${index}`} style={rowStyle}>
                       <Cell>
                         <Link href={`/sites/${publicRuntimeConfig.squeakySiteId}/visitors/${a.visitorId}`}>{a.visitorVisitorId}</Link>
                       </Cell>
                       <Cell>
                         {a.visitorCreatedAt?.niceDateTime || '-'}
+                      </Cell>
+                      <Cell>
+                        {a.activityDuration
+                          ? toHoursMinutesAndSeconds(a.activityDuration)
+                          : '-'
+                        }
                       </Cell>
                       <Cell>
                         {a.userId

@@ -99,6 +99,7 @@ export type AdminAdTracking = {
 
 export type AdminAdTrackingItem = {
   __typename?: 'AdminAdTrackingItem';
+  activityDuration?: Maybe<Scalars['Int']>;
   gad?: Maybe<Scalars['String']>;
   gclid?: Maybe<Scalars['String']>;
   siteCreatedAt?: Maybe<CommonDates>;

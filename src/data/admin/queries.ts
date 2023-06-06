@@ -448,6 +448,7 @@ export const GET_AD_TRACKING_QUERY = gql`
           utmContent
           gad
           gclid
+          activityDuration
         }
         pagination {
           total

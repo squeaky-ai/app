@@ -17,6 +17,14 @@
       display: flex;
       margin: 0;
       padding: 0;
+
+      .columns {
+        margin: 0 1rem 0 0;
+
+        .dropdown-menu {
+          width: 240px;
+        }
+      }
     }
   }
 
@@ -30,7 +38,7 @@
 
   .ad-tracking-table {
     .row {
-      grid-template-columns: repeat(13, 1fr);
+      grid-template-columns: repeat(14, 1fr);
     }
 
     .sort {

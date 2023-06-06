@@ -150,6 +150,93 @@ export const SITE_COLUMNS: Column[] = [
   },
 ];
 
+export const AD_TRACKING_COLUMNS: Column[] = [
+  {
+    label: 'Visitor ID',
+    width: '1fr',
+    disabled: false,
+    position: 1,
+  },
+  {
+    label: 'First Visited',
+    width: '1fr',
+    disabled: false,
+    position: 2,
+  },
+  {
+    label: 'Average Session Duration',
+    width: '1fr',
+    disabled: false,
+    position: 3,
+  },
+  {
+    label: 'User ID',
+    width: '1fr',
+    disabled: false,
+    position: 4,
+  },
+  {
+    label: 'User Name',
+    width: '1fr',
+    disabled: false,
+    position: 5,
+  },
+  {
+    label: 'User Created',
+    width: '1fr',
+    disabled: false,
+    position: 6,
+  },
+  {
+    label: 'Site ID',
+    width: '1fr',
+    disabled: false,
+    position: 7,
+  },
+  {
+    label: 'Site Name',
+    width: '1fr',
+    disabled: false,
+    position: 8,
+  },
+  {
+    label: 'Site Plan',
+    width: '1fr',
+    disabled: false,
+    position: 9,
+  },
+  {
+    label: 'Site Created',
+    width: '1fr',
+    disabled: false,
+    position: 10,
+  },
+  {
+    label: 'Site Verified',
+    width: '1fr',
+    disabled: false,
+    position: 11,
+  },
+  {
+    label: 'GAD',
+    width: '1fr',
+    disabled: false,
+    position: 12,
+  },
+  {
+    label: 'GCLID',
+    width: '1fr',
+    disabled: false,
+    position: 13,
+  },
+  {
+    label: 'UTM Content',
+    width: '1fr',
+    disabled: false,
+    position: 14,
+  },
+]
+
 export const DEFAULT_USER_COLUMNS = USER_COLUMNS.filter(c => [
   'ID', 
   'Name',
@@ -178,4 +265,21 @@ export const DEFAULT_SITE_COLUMNS = SITE_COLUMNS.filter(c => [
   'Active Visitors',
   'Superuser Access',
   'Options',
+].includes(c.label));
+
+export const DEFAULT_AD_TRACKING_COLUMNS = AD_TRACKING_COLUMNS.filter(c => [,
+  'Visitor ID',
+  'First Visited',
+  'Average Session Duration',
+  'User ID',
+  'User Name',
+  'User Created',
+  'Site ID',
+  'Site Name',
+  'Site Plan',
+  'Site Created',
+  'Site Verified',
+  'GAD',
+  'GCLID',
+  'UTM Content',
 ].includes(c.label));

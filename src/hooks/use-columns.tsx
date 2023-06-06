@@ -5,7 +5,7 @@ import { COLUMNS as VISITOR_COLUMNS, DEFAULT_COLUMNS as DEFAULT_VISITOR_COLUMNS 
 import { COLUMNS as RECORDINGS_COLUMNS, DEFAULT_COLUMNS as DEFAULT_RECORDINGS_COLUMNS } from 'data/recordings/constants';
 import { COLUMNS as NPS_COLUMNS, DEFAULT_COLUMNS as DEFAULT_NPS_COLUMNS } from 'data/nps/constants';
 import { COLUMNS as SENTIMENT_COLUMNS, DEFAULT_COLUMNS as DEFAULT_SENTIMENT_COLUMNS } from 'data/sentiment/constants';
-import { SITE_COLUMNS, USER_COLUMNS, DEFAULT_SITE_COLUMNS, DEFAULT_USER_COLUMNS } from 'data/admin/constants';
+import { SITE_COLUMNS, USER_COLUMNS, DEFAULT_SITE_COLUMNS, DEFAULT_USER_COLUMNS, DEFAULT_AD_TRACKING_COLUMNS, AD_TRACKING_COLUMNS } from 'data/admin/constants';
 import type { Column } from 'types/common'
 
 type ColumnType = 'visitors' |
@@ -13,7 +13,8 @@ type ColumnType = 'visitors' |
                   'sentiment' |
                   'nps' |
                   'admin-sites' |
-                  'admin-users';
+                  'admin-users' |
+                  'admin-ad-tracking'
 
 interface UseColumns {
   columns: Column[];
@@ -35,6 +36,8 @@ const getDefaultColumns = (type: ColumnType): Column[] => {
       return DEFAULT_SITE_COLUMNS;
     case 'admin-users':
       return DEFAULT_USER_COLUMNS;
+    case 'admin-ad-tracking':
+      return DEFAULT_AD_TRACKING_COLUMNS;
   }
 };
 
@@ -52,6 +55,8 @@ const getAllColumns = (type: ColumnType): Column[] => {
       return SITE_COLUMNS;
     case 'admin-users':
       return USER_COLUMNS;
+    case 'admin-ad-tracking':
+      return AD_TRACKING_COLUMNS;
   }
 };
 
@@ -69,6 +74,8 @@ const getPreference = (type: ColumnType): Preference => {
       return Preference.ADMIN_SITES_COLUMNS;
     case 'admin-users':
       return Preference.ADMIN_USERS_COLUMNS;
+    case 'admin-ad-tracking':
+      return Preference.ADMIN_AD_TRACKING_COLUMNS;
   }
 };
 
