@@ -433,6 +433,10 @@ export const GET_AD_TRACKING_QUERY = gql`
             niceDateTime
           }
           sitePlanName
+          sitePlanUpdatedAt {
+            iso8601
+            niceDateTime
+          }
           userId
           userName
           userCreatedAt {

@@ -125,7 +125,7 @@ export const AdTracking: NextPage = () => {
                       Visitor ID
                     </Cell>
                     <Cell>
-                      First Visited
+                      First Visited At
                     </Cell>
                     <Cell>
                       Average Session Duration
@@ -153,6 +153,9 @@ export const AdTracking: NextPage = () => {
                     </Cell>
                     <Cell>
                       Site Plan
+                    </Cell>
+                    <Cell>
+                      Site Plan Updated At
                     </Cell>
                     <Cell>
                       Site Created At
@@ -219,6 +222,9 @@ export const AdTracking: NextPage = () => {
                       </Cell>
                       <Cell>
                         {a.sitePlanName || '-'}
+                      </Cell>
+                      <Cell>
+                        {a.sitePlanUpdatedAt?.niceDateTime || '-'}
                       </Cell>
                       <Cell>
                         {a.siteCreatedAt?.niceDateTime || '-'}

@@ -106,6 +106,7 @@ export type AdminAdTrackingItem = {
   siteId?: Maybe<Scalars['ID']>;
   siteName?: Maybe<Scalars['String']>;
   sitePlanName?: Maybe<Scalars['String']>;
+  sitePlanUpdatedAt?: Maybe<CommonDates>;
   siteVerifiedAt?: Maybe<CommonDates>;
   userCreatedAt?: Maybe<CommonDates>;
   userId?: Maybe<Scalars['ID']>;
