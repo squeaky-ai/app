@@ -29,6 +29,12 @@ export const getTeamMember = (site: Site, user: User): Team | null => {
   return site.team.find(team => team.user.id.toString() === user.id.toString());
 };
 
+const hideForEmbeddedSites = [
+  '/sites/[site_id]/settings/details',
+  '/sites/[site_id]/settings/details/tracking-code',
+  '/sites/[site_id]/settings/details/delete',
+];
+
 const featureIsEnabledForPath = (site: Site, path: string): boolean => {
   const featureForPath = Object
     .entries(mapFeatureToRoutes)
@@ -49,6 +55,7 @@ export const Page: FC<Props> = ({ children, user, scope }) => {
 
   const member = getTeamMember(site, user);
   const featureEnabled = featureIsEnabledForPath(site, router.pathname);
+  const embedded = site.provider !== null;
 
   const authorized = user.superuser 
     ? true 
@@ -63,7 +70,7 @@ export const Page: FC<Props> = ({ children, user, scope }) => {
       setPageState({ 
         role: member?.role, 
         validBilling: !site.plan.invalid,
-        embedded: site.provider !== null,
+        embedded,
       });
     }
   }, [site]);
@@ -86,6 +93,10 @@ export const Page: FC<Props> = ({ children, user, scope }) => {
 
   if (!featureEnabled) {
     return <UpgradeRequired site={site} />;
+  }
+
+  if (embedded && hideForEmbeddedSites.includes(router.pathname)) {
+    return <NotFound className='site-page-error' />
   }
 
   return (
