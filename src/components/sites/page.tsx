@@ -55,7 +55,7 @@ export const Page: FC<Props> = ({ children, user, scope }) => {
 
   const member = getTeamMember(site, user);
   const featureEnabled = featureIsEnabledForPath(site, router.pathname);
-  const embedded = site.provider !== null;
+  const embedded = !!site?.provider;
 
   const authorized = user.superuser 
     ? true 
