@@ -18,7 +18,10 @@ export const FreeTrialTimer: FC<Props> = ({ site, member }) => {
   return (
     <Link className='free-trial-timer' href={`/sites/${site.id}/settings/subscription`}>
       <Icon name='time-line' />
-      {diff} day{diff === 1 ? '' : 's'} remaining
+      {diff === 0
+        ? 'Less than 24 hours remaining'
+        : <>{diff} day{diff === 1 ? '' : 's'} remaining</>
+      }
     </Link>
   );
 };

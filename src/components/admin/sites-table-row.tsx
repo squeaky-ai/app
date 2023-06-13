@@ -28,6 +28,10 @@ export const SitesTableRow: FC<Props> = ({ site, activeVisitors, style }) => {
       return 'No Trial'
     }
 
+    if (trialDaysRemaining === 0) {
+      return 'Less than 24 hours remaining';
+    }
+
     if (trialDaysRemaining) {
       return `${trialDaysRemaining} days remaining`;
     }
