@@ -10,7 +10,7 @@ import { Button } from 'components/button';
 import { Icon } from 'components/icon';
 import { BreadCrumbs } from 'components/admin/breadcrumbs';
 import { updateBlogPost } from 'lib/api/graphql';
-import { getAuthorKey } from 'lib/admin/blog';
+import { getAuthorKey } from 'lib/admin/common';
 import { useToasts } from 'hooks/use-toasts';
 import type { BlogPost } from 'types/graphql';
 

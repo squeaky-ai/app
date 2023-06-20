@@ -18,6 +18,14 @@ export type BlogInput = {
   coveringEnabled: boolean;
 }
 
+export type ChangelogInput = {
+  title: string;
+  author: 'chris' | 'lewis';
+  draft: boolean;
+  metaImage: string;
+  metaDescription: string;
+  body: string;
+}
 
 export type AdminDashboard = Omit<
   Admin,

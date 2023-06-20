@@ -83,6 +83,10 @@ import {
   AdminSiteBundlesCreateInput,
   DataExportCreateInput,
   DataExportDeleteInput,
+  AdminChangelogPostDeleteInput,
+  AdminChangelogPostCreateInput,
+  ChangelogPost,
+  AdminChangelogPostUpdateInput,
 } from 'types/graphql';
 
 import {
@@ -209,6 +213,12 @@ import {
   ADMIN_BLOG_POST_DELETE_MUTATION,
 } from 'data/blog/mutations';
 
+import {
+  ADMIN_CHANGELOG_POST_CREATE_MUTATION,
+  ADMIN_CHANGELOG_POST_DELETE_MUTATION,
+  ADMIN_CHANGELOG_POST_UPDATE_MUTATION,
+} from 'data/changelog/mutations';
+
 import { 
   GET_BLOG_POSTS_QUERY 
 } from 'data/blog/queries';
@@ -226,6 +236,7 @@ import {
 import {
   GET_ADMIN_SITES_BUNDLES_QUERY,
 } from 'data/admin/queries';
+import { GET_CHANGELOG_POSTS_QUERY } from 'data/changelog/queries';
 
 export const cache = new InMemoryCache({
   typePolicies: {
@@ -833,6 +844,24 @@ export const createBlogPost = async (input: AdminBlogPostCreateInput): Promise<B
   return data.adminBlogPostCreate;
 };
 
+export const createChangelogPost = async (input: AdminChangelogPostCreateInput): Promise<ChangelogPost> => {
+  const { data } = await client.mutate({
+    mutation: ADMIN_CHANGELOG_POST_CREATE_MUTATION,
+    variables: { input },
+  });
+
+  const { changelogPosts } = cache.readQuery<Query>({ query: GET_CHANGELOG_POSTS_QUERY });
+
+  cache.writeQuery({
+    query: GET_CHANGELOG_POSTS_QUERY,
+    data: {
+      changelogPosts: [data.adminChangelogPostCreate, ...changelogPosts],
+    }
+  });
+
+  return data.adminChangelogPostCreate;
+};
+
 export const updateBlogPost = async (input: AdminBlogPostUpdateInput): Promise<BlogPost> => {
   const { data } = await client.mutate({
     mutation: ADMIN_BLOG_POST_UPDATE_MUTATION,
@@ -842,12 +871,33 @@ export const updateBlogPost = async (input: AdminBlogPostUpdateInput): Promise<B
   return data.adminBlogPostUpdate;
 };
 
+export const updateChangelogPost = async (input: AdminChangelogPostUpdateInput): Promise<BlogPost> => {
+  const { data } = await client.mutate({
+    mutation: ADMIN_CHANGELOG_POST_UPDATE_MUTATION,
+    variables: { input },
+  });
+
+  return data.adminChangelogPostUpdate;
+};
+
 export const deleteBlogPost = async (input: AdminBlogPostDeleteInput): Promise<void> => {
   await client.mutate({
     mutation: ADMIN_BLOG_POST_DELETE_MUTATION,
     variables: { input },
     update(cache) {
       const normalizedId = cache.identify({ id: input.id, __typename: 'BlogPost' });
+      cache.evict({ id: normalizedId });
+      cache.gc();
+    }
+  });
+};
+
+export const deleteChangelogPost = async(input: AdminChangelogPostDeleteInput): Promise<void> => {
+  await client.mutate({
+    mutation: ADMIN_CHANGELOG_POST_DELETE_MUTATION,
+    variables: { input },
+    update(cache) {
+      const normalizedId = cache.identify({ id: input.id, __typename: 'ChangelogPost' });
       cache.evict({ id: normalizedId });
       cache.gc();
     }

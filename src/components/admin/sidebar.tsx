@@ -80,6 +80,13 @@ export const Sidebar: FC = () => {
                 icon='book-open-line'
                 name='Blog'
               />
+              <SidebarLink
+                visibile
+                href='/__admin/changelog'
+                active={router.asPath.startsWith('/__admin/changelog')}
+                icon='flag-line'
+                name='Changelog'
+              />
             </SidebarGroup>
             <SidebarGroup name='Monitoring' visible>
               <SidebarLink

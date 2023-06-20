@@ -9,6 +9,7 @@
 @import './variables';
 
 @import './components/admin/blog-edit';
+@import './components/admin/changelog-edit';
 @import './components/app/sidebar';
 @import './components/sites/events/event-card';
 @import './components/sites/events/event-create';
@@ -81,6 +82,7 @@
 @import './components/trend';
 
 @import './pages/admin/blog/index';
+@import './pages/admin/changelog/index';
 @import './pages/admin/sites/[site_id]';
 @import './pages/admin/sites/index';
 @import './pages/admin/ad-tracking';

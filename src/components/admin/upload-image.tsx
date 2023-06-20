@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import { gql, useMutation } from '@apollo/client';
 import { Label } from 'components/label';
 import { Input } from 'components/input';
-import { uploadFile } from 'lib/admin/blog';
+import { uploadFile } from 'lib/admin/common';
 import type { AdminBlogSignImage } from 'types/graphql';
 
 interface Props {

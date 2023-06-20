@@ -4,26 +4,26 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { PageLoading } from 'components/sites/page-loading';
 import { Main } from 'components/main';
-import { BlogEdit } from 'components/admin/blog-edit';
+import { ChangelogEdit } from 'components/admin/changelog-edit';
 import { BreadCrumbs } from 'components/admin/breadcrumbs';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { useAdminBlog } from 'hooks/use-admin-blog';
 import { useToasts } from 'hooks/use-toasts';
 import { getAuthorKey } from 'lib/admin/common';
-import { createBlogPost } from 'lib/api/graphql';
-import type { BlogPost } from 'types/graphql';
+import { createChangelogPost } from 'lib/api/graphql';
+import type { ChangelogPost } from 'types/graphql';
 
-const AdminBlogCreate: NextPage<ServerSideProps> = () => {
+const AdminChangelogCreate: NextPage<ServerSideProps> = () => {
   const toasts = useToasts();
   const router = useRouter();
 
   const { admin, loading, refetch } = useAdminBlog();
 
-  const handleCreate = async (post: Omit<BlogPost, 'id' | 'createdAt' | 'updatedAt'>) => {
+  const handleCreate = async (post: Omit<ChangelogPost, 'id' | 'createdAt' | 'updatedAt'>) => {
     try {
-      await createBlogPost({ ...post, author: getAuthorKey(post.author) });
+      await createChangelogPost({ ...post, author: getAuthorKey(post.author) });
       toasts.add({ type: 'success', body: 'Blog post created' });
-      await router.push('/__admin/blog');
+      await router.push('/__admin/changelog');
     } catch(error) {
       console.error(error);
       toasts.add({ type: 'error', body: 'Failed to create blog post' });
@@ -33,11 +33,11 @@ const AdminBlogCreate: NextPage<ServerSideProps> = () => {
   return (
     <>
       <Head>
-        <title>Squeaky | Admin | Create Blog Post</title>
+        <title>Squeaky | Admin | Create Changelog Post</title>
       </Head>
 
       <Main>
-        <BreadCrumbs items={[{ name: 'Admin', href: '/__admin/dashboard' }, { name: 'Blog', href: '/__admin/blog' }, { name: 'Create' }]} />
+        <BreadCrumbs items={[{ name: 'Admin', href: '/__admin/dashboard' }, { name: 'Changelog', href: '/__admin/changelog' }, { name: 'Create' }]} />
 
         <h4 className='title'>
           Create Post
@@ -48,7 +48,7 @@ const AdminBlogCreate: NextPage<ServerSideProps> = () => {
         )}
 
         {!loading && (
-          <BlogEdit
+          <ChangelogEdit
             images={admin.blogImages}
             refetchImages={refetch}
             onChange={handleCreate}
@@ -59,5 +59,5 @@ const AdminBlogCreate: NextPage<ServerSideProps> = () => {
   );
 };
 
-export default AdminBlogCreate;
+export default AdminChangelogCreate;
 export { getServerSideProps };
