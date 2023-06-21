@@ -20,7 +20,7 @@ export const SidebarSupport: FC<Props> = ({ user, expand, collapse, expanded }) 
   const { featureFlagEnabled } = useFeatureFlags();
 
   const [changelogLastViewedAt, setChangelogLastViewedAt] = React.useState<Date>(
-    user.changelogLastViewedAt ? new Date(user.changelogLastViewedAt.iso8601) : null
+    user?.changelogLastViewedAt ? new Date(user.changelogLastViewedAt.iso8601) : null
   );
 
   const changelogLength = featureFlagEnabled(FeatureFlag.CHANGELOG)
