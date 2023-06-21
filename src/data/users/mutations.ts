@@ -130,3 +130,14 @@ export const USER_REFERRAL_DELETE_MUTATION = gql`
     }
   }
 `;
+
+export const USER_CHANGELOG_VIEWED = gql`
+  mutation UserChangelogViewed($input: UserChangelogViewedInput!) {
+    usersChangelogViewed(input: $input) {
+      id
+      changelogLastViewedAt {
+        iso8601
+      }
+    }
+  }
+`;

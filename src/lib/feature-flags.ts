@@ -1,5 +1,6 @@
 export enum FeatureFlag {
   CHEESE_LOADER = 'CHEESE_LOADER',
+  CHANGELOG = 'CHANGELOG',
 }
 
 export class FeatureFlags {

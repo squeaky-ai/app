@@ -295,6 +295,7 @@ export const Sidebar: FC<Props> = ({ user }) => {
           visible={!pageState.embedded}
         />
         <SidebarSupport 
+          user={user}
           collapse={() => collapse('support')}
           expand={() => expand('support')}
           expanded={expanded.includes('support')}

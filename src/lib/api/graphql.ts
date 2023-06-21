@@ -164,6 +164,7 @@ import {
   ADMIN_USER_PARTNER_CREATE_MUTATION,
   ADMIN_PARTNER_INVOICE_UPDATE,
   USER_REFERRAL_DELETE_MUTATION,
+  USER_CHANGELOG_VIEWED,
 } from 'data/users/mutations';
 
 import { 
@@ -1311,4 +1312,13 @@ export const deleteDataExport = async (input: DataExportDeleteInput): Promise<vo
   });
 
   return null;
+};
+
+export const changelogViewed = async (): Promise<User> => {
+  const { data } = await client.mutate({
+    mutation: USER_CHANGELOG_VIEWED,
+    variables: { input: {} },
+  });
+
+  return data.usersChangelogViewed;
 };

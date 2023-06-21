@@ -15,6 +15,9 @@ export const USER_QUERY = gql`
         name
         slug
       }
+      changelogLastViewedAt {
+        iso8601
+      }
     }
   }
 `;

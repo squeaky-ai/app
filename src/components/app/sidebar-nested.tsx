@@ -11,6 +11,7 @@ interface Props {
   warning?: boolean;
   children: React.ReactNode;
   className?: string;
+  counter?: number;
   expand: VoidFunction;
   collapse: VoidFunction;
 }
@@ -23,6 +24,7 @@ export const SidebarNested: FC<Props> = ({
   collapse, 
   warning,
   className,
+  counter,
   children,
 }) => {
   const toggleExpanded = () => expanded 
@@ -30,6 +32,7 @@ export const SidebarNested: FC<Props> = ({
     : expand();
 
   const showWarning = !expanded && warning;
+  const showCounter = counter > 0;
 
   return (
     <div className={classnames('link nested', className, { open: expanded })} data-label={name}>
@@ -37,6 +40,9 @@ export const SidebarNested: FC<Props> = ({
         <Icon className='sidebar-icon' name={icon} />
         {showWarning && (
           <span className='warning closed' /> 
+        )}
+        {showCounter && (
+          <span className='counter'>{counter}</span>
         )}
         <span>
           {name}
