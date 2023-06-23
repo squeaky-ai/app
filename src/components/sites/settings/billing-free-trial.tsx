@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const BillingFreeTrial: FC<Props> = ({ site, member }) => {
-  const daysRemainingOnTrial = getRemainingTrialDays(site, member.role);
+  const daysRemainingOnTrial = getRemainingTrialDays(site, member?.role);
 
   if (daysRemainingOnTrial === null) {
     return null;

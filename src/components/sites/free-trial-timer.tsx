@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const FreeTrialTimer: FC<Props> = ({ site, member }) => {
-  const diff = getRemainingTrialDays(site, member.role);
+  const diff = getRemainingTrialDays(site, member?.role);
 
   if (diff === null) return null;
 

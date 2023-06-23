@@ -2,7 +2,7 @@ import { addDays, differenceInCalendarDays } from 'date-fns';
 import { OWNER } from 'data/teams/constants';
 import type { AdminSite, Site } from 'types/graphql';
 
-export const getRemainingTrialDays = (site: Site | AdminSite, role: number): number | null => {
+export const getRemainingTrialDays = (site: Site | AdminSite, role?: number): number | null => {
   // Only show to the owner
   if (role !== OWNER) return null;
   // Don't show if they've upgraded to a paid plan
