@@ -1,11 +1,14 @@
 import React from 'react';
 import type { FC } from 'react';
+import getConfig from 'next/config';
 import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
 import { ChangelogPost } from 'types/graphql';
 import { Pagination } from 'components/pagination';
 import { changelogViewed } from 'lib/api/graphql';
+
+const { publicRuntimeConfig } = getConfig();
 
 interface Props {
   disabled: boolean;
@@ -42,26 +45,33 @@ export const SidebarChangelog: FC<Props> = ({ disabled, posts, changelogLength, 
       </Button>
 
       {post && (
-        <Modal ref={ref} className='md changelog-modal'>
+        <Modal ref={ref} className='md changelog-modal scrollable'>
           <ModalBody aria-labelledby='view-changelog-title'>
             <ModalHeader>
               <p id='view-changelog-title'><b>Changelog</b></p>
-              <Button type='button' onClick={closeModal}>
-                <Icon name='close-line' />
-              </Button>
+              <div>
+                <a href={`${publicRuntimeConfig.webHost}/changelog${post.slug}`} rel='noreferrer' target='_blank' className='external-link'>
+                  <Icon name='external-link-line' /> <span>Full changelog</span>
+                </a>
+                <Button type='button' onClick={closeModal}>
+                  <Icon name='close-line' />
+                </Button>
+              </div>
             </ModalHeader>
             <ModalContents>
               <h1>{post.title}</h1>
               <div className='changelog-post' dangerouslySetInnerHTML={{ __html: post.body }} />
             </ModalContents>
-            <ModalFooter>
-              <Pagination 
-                currentPage={page}
-                pageSize={1}
-                setPage={setPage}
-                total={changelogLength}
-              />
-            </ModalFooter>
+            {posts.length > 1 && (
+              <ModalFooter>
+                <Pagination 
+                  currentPage={page}
+                  pageSize={1}
+                  setPage={setPage}
+                  total={changelogLength}
+                />
+              </ModalFooter>
+            )}
           </ModalBody>
         </Modal>
       )}

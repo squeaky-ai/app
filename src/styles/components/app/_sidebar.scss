@@ -722,6 +722,19 @@
 }
 
 .changelog-modal {
+  .modal-header {
+    div {
+      align-items: center;
+      display: flex;
+    }
+
+    .external-link {
+      font-size: 14px;
+      line-height: 16px; 
+      margin: 0 1rem 0 0;
+    }
+  }
+
   h1 {
     font-size: 1.5rem;
     font-weight: var(--font-weight-medium);
