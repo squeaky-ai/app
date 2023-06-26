@@ -4,8 +4,6 @@ import { SidebarNested } from 'components/app/sidebar-nested';
 import { Icon } from 'components/icon';
 import { SidebarChangelog } from 'components/app/sidebar-changelog';
 import { useChangelogPosts } from 'hooks/use-changelog-posts';
-import { useFeatureFlags } from 'hooks/use-feature-flags';
-import { FeatureFlag } from 'lib/feature-flags';
 import type { User } from 'types/graphql';
 
 interface Props {
@@ -17,17 +15,14 @@ interface Props {
 
 export const SidebarSupport: FC<Props> = ({ user, expand, collapse, expanded }) => {
   const { posts } = useChangelogPosts();
-  const { featureFlagEnabled } = useFeatureFlags();
 
   const [changelogLastViewedAt, setChangelogLastViewedAt] = React.useState<Date>(
     user?.changelogLastViewedAt ? new Date(user.changelogLastViewedAt.iso8601) : null
   );
 
-  const changelogLength = featureFlagEnabled(FeatureFlag.CHANGELOG)
-    ? changelogLastViewedAt
-      ? posts.filter(p => new Date(p.createdAt.iso8601) > changelogLastViewedAt).length
-      : posts.length
-    : 0;
+  const changelogLength = changelogLastViewedAt
+    ? posts.filter(p => new Date(p.createdAt.iso8601) > changelogLastViewedAt).length
+    : posts.length;
 
   return (
     <div className='sidebar-support'>
@@ -44,7 +39,7 @@ export const SidebarSupport: FC<Props> = ({ user, expand, collapse, expanded }) 
           <span>Help center</span> <Icon name='external-link-line' />
         </a>
         <SidebarChangelog 
-          disabled={posts.length === 0 || !featureFlagEnabled(FeatureFlag.CHANGELOG)}
+          disabled={posts.length === 0}
           changelogLength={changelogLength}
           posts={posts}
           setChangelogLastViewedAt={setChangelogLastViewedAt}

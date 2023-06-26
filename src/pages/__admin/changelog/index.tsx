@@ -6,6 +6,7 @@ import { Main } from 'components/main';
 import { TableWrapper, Table, Row, Cell } from 'components/table';
 import { PageLoading } from 'components/sites/page-loading';
 import { ChangelogPostRow } from 'components/admin/changelog-post-row';
+import { EmptyState } from 'components/admin/empty-state';
 import { useChangelogPosts } from 'hooks/use-changelog-posts';
 import { BreadCrumbs } from 'components/admin/breadcrumbs';
 import { ServerSideProps, getServerSideProps } from 'lib/auth';
@@ -37,7 +38,14 @@ const AdminChangelog: NextPage<ServerSideProps> = () => {
           <PageLoading />
         )}
 
-        {!loading && (
+        {!loading && posts.length === 0 && (
+          <EmptyState 
+            illustration='illustration-12' 
+            title='Where are the changes?!' 
+          />
+        )}
+
+        {!loading && posts.length > 0 && (
           <>
             <TableWrapper>
               <Table className='posts-table'>

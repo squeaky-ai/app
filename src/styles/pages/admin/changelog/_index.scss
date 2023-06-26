@@ -1,4 +1,8 @@
 .page.__admin.changelog {
+  .empty-state {
+    display: flex;
+  }
+
   .posts-header {
     align-items: center;
     display: flex;
