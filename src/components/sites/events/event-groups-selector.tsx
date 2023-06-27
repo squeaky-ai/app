@@ -75,7 +75,7 @@ export const EventGroupsSelector: FC<Props> = ({ ids, site, onChange }) => {
 
           <div className='create'>
             <p>Create:</p>
-            <Tag className='secondary' onClick={handleCreate}>
+            <Tag className='primary' onClick={handleCreate}>
               {value}
             </Tag>
           </div>

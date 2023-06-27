@@ -118,7 +118,7 @@ export const SidebarTags: FC<Props> = ({ member, recording }) => {
                     <ul>
                       {results.map(tag => (
                         <li key={tag.id}>
-                          <Tag className='secondary' onClick={handleTagClick}>
+                          <Tag className='primary' onClick={handleTagClick}>
                             {tag.name}
                           </Tag>
                         </li>
