@@ -87,6 +87,7 @@ export const RecordingsLarge: FC<Props> = ({
           <Cell>Browser</Cell>
           <Cell>NPS</Cell>
           <Cell>Sentiment</Cell>
+          <Cell>Rage click</Cell>
           <Cell />
         </Row>
         

@@ -157,10 +157,16 @@ export const COLUMNS: Column[] = [
     position: 18,
   },
   {
+    label: 'Rage click',
+    width: '100px',
+    disabled: false,
+    position: 19,
+  },
+  {
     label: 'Options',
     width: '64px',
     disabled: false,
-    position: 19,
+    position: 20,
   },
 ];
 

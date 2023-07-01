@@ -52,6 +52,7 @@ export const GET_RECORDINGS_QUERY = gql`
           sentiment {
             score
           }
+          rageClicked
         }
         pagination {
           pageSize

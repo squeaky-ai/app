@@ -2624,6 +2624,7 @@ export type Recording = {
   pageCount: Scalars['Int'];
   pageViews: Array<Scalars['String']>;
   pages: Array<Page>;
+  rageClicked: Scalars['Boolean'];
   referrer?: Maybe<Scalars['String']>;
   sentiment?: Maybe<FeedbackSentimentResponseItem>;
   sessionId: Scalars['String'];
