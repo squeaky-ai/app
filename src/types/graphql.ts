@@ -2718,6 +2718,7 @@ export type RecordingsFilters = {
   duration: FiltersDuration;
   exitUrl?: InputMaybe<Scalars['String']>;
   languages: Array<Scalars['String']>;
+  rageClicked?: InputMaybe<Scalars['Boolean']>;
   referrers: Array<Scalars['String']>;
   starred?: InputMaybe<Scalars['Boolean']>;
   startUrl?: InputMaybe<Scalars['String']>;

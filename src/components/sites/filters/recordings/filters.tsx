@@ -16,6 +16,7 @@ import { FiltersLanguage } from 'components/sites/filters/common/filters-languag
 import { FiltersBookmarked } from 'components/sites/filters/recordings/filters-bookmarked';
 import { FiltersReferrers } from 'components/sites/filters/recordings/filters-referrers';
 import { FiltersUtm } from  'components/sites/filters/recordings/filters-utm';
+import { FiltersRageClicked } from 'components/sites/filters/recordings/filters-rage-clicked';
 import { FiltersTags } from 'components/sites/filters/recordings/filters-tags';
 import { FiltersStarred } from 'components/sites/filters/common/filters-starred';
 import { FiltersVisitorType } from 'components/sites/filters/recordings/filters-visitor-type';
@@ -45,6 +46,7 @@ enum FilterType {
   Starred,
   Language,
   Utm,
+  RageClicked,
 }
 
 export const Filters: FC<Props> = ({ period, filters, updateFilters }) => {
@@ -129,6 +131,10 @@ export const Filters: FC<Props> = ({ period, filters, updateFilters }) => {
         <Button onClick={() => handleFilterChange(FilterType.Utm)} className={classnames({ open: openFilter === FilterType.Utm })}>
           <Icon name='arrow-drop-left-line' />
           UTM
+        </Button>
+        <Button onClick={() => handleFilterChange(FilterType.RageClicked)} className={classnames({ open: openFilter === FilterType.RageClicked })}>
+          <Icon name='arrow-drop-left-line' />
+          Rage clicks
         </Button>
 
         <div className={classnames('popout filters', { open: openFilter !== null, 'has-sub-menu': [FilterType.Utm].includes(openFilter) })}>
@@ -222,6 +228,12 @@ export const Filters: FC<Props> = ({ period, filters, updateFilters }) => {
             <>
               <Label>UTM</Label>
               <FiltersUtm filters={filters} onUpdate={handleUpdate} onClose={handleFilterClose} />
+            </>
+          )}
+          {openFilter === FilterType.RageClicked && (
+            <>
+              <Label>Contains Rage Click</Label>
+              <FiltersRageClicked value={filters.rageClicked} onUpdate={handleUpdate('rageClicked')} onClose={handleFilterClose} />
             </>
           )}
         </div>

@@ -213,4 +213,5 @@ export const FILTERS: RecordingsFilters = {
   utmSource: null,
   utmTerm: null,
   visitorType: null,
+  rageClicked: null,
 };

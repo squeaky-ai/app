@@ -21,6 +21,7 @@ import { TagsUtmContent } from 'components/sites/filters/recordings/tags-utm-con
 import { TagsUtmMedium } from 'components/sites/filters/recordings/tags-utm-medium';
 import { TagsUtmSource } from 'components/sites/filters/recordings/tags-utm-source';
 import { TagsUtmTerm } from 'components/sites/filters/recordings/tags-utm-term';
+import { TagsRageClicked } from 'components/sites/filters/recordings/tags-rage-clicked';
 import { TagsVisitorType } from 'components/sites/filters/recordings/tags-visitor-type';
 import type { RecordingsFilters } from 'types/graphql';
 import type { ValueOf } from 'types/common';
@@ -53,6 +54,7 @@ export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
   const hasUtmSource = filters.utmSource !== null;
   const hasUtmTerm = filters.utmTerm !== null;
   const hasVisitorType = filters.visitorType !== null;
+  const hasRageClicked = filters.rageClicked !== null;
 
   const hasFilters = (
     hasStatus ||
@@ -75,7 +77,8 @@ export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
     hasUtmSource ||
     hasUtmMedium ||
     hasUtmTerm ||
-    hasVisitorType
+    hasVisitorType ||
+    hasRageClicked
   );
 
   if (!hasFilters) return null;
@@ -160,6 +163,10 @@ export const Tags: FC<Props> = ({ filters, updateFilters, clearFilters }) => {
 
       {hasVisitorType && (
         <TagsVisitorType filters={filters} updateFilters={updateFilters} />
+      )}
+
+      {hasRageClicked && (
+        <TagsRageClicked filters={filters} updateFilters={updateFilters} />
       )}
 
       <Button className='link clear-filters' onClick={clearFilters}>
