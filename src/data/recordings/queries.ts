@@ -53,6 +53,7 @@ export const GET_RECORDINGS_QUERY = gql`
             score
           }
           rageClicked
+          uTurned
         }
         pagination {
           pageSize

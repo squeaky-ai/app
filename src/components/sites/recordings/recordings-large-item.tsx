@@ -15,6 +15,7 @@ import { RecordingsShare } from 'components/sites/recordings/recordings-share';
 import { RecordingDelete } from 'components/sites/recordings/recording-delete';
 import { VisitorsStarred } from 'components/sites/visitors/visitors-starred';
 import { RageClick } from 'components/custom-icons/rage-click';
+import { UTurn } from 'components/custom-icons/u-turn';
 import { Emoji, EmojiType } from 'components/emoji';
 import { toTimeString } from 'lib/dates';
 import { getLinkedData } from 'lib/visitors';
@@ -165,6 +166,13 @@ export const RecordingsLargeItem: FC<Props> = ({ site, recording, style, member,
         )}
 
         {!recording.rageClicked && '-'}
+      </Cell>
+      <Cell>
+        {!!recording.uTurned && (
+          <UTurn height={24} width={24} />
+        )}
+
+        {!recording.uTurned && '-'}
       </Cell>
       <Cell>
         <Dropdown portal button={<Icon name='more-2-fill' />} buttonClassName='options' ref={rowActionsRef}>

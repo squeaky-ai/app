@@ -163,10 +163,16 @@ export const COLUMNS: Column[] = [
     position: 19,
   },
   {
+    label: 'U-turn',
+    width: '100px',
+    disabled: false,
+    position: 20,
+  },
+  {
     label: 'Options',
     width: '64px',
     disabled: false,
-    position: 20,
+    position: 21,
   },
 ];
 
@@ -214,4 +220,5 @@ export const FILTERS: RecordingsFilters = {
   utmTerm: null,
   visitorType: null,
   rageClicked: null,
+  uTurned: null,
 };

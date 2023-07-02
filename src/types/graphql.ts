@@ -2632,6 +2632,7 @@ export type Recording = {
   startPage: Scalars['String'];
   tags: Array<Tag>;
   timezone?: Maybe<Scalars['String']>;
+  uTurned: Scalars['Boolean'];
   viewed: Scalars['Boolean'];
   visitor: Visitor;
 };
@@ -2724,6 +2725,7 @@ export type RecordingsFilters = {
   startUrl?: InputMaybe<Scalars['String']>;
   status?: InputMaybe<FiltersStatus>;
   tags: Array<Scalars['Int']>;
+  uTurned?: InputMaybe<Scalars['Boolean']>;
   unvisitedPages: Array<Scalars['String']>;
   utmCampaign?: InputMaybe<Scalars['String']>;
   utmContent?: InputMaybe<Scalars['String']>;

@@ -17,6 +17,7 @@ import { FiltersBookmarked } from 'components/sites/filters/recordings/filters-b
 import { FiltersReferrers } from 'components/sites/filters/recordings/filters-referrers';
 import { FiltersUtm } from  'components/sites/filters/recordings/filters-utm';
 import { FiltersRageClicked } from 'components/sites/filters/recordings/filters-rage-clicked';
+import { FiltersUTurned } from 'components/sites/filters/recordings/filters-u-turned';
 import { FiltersTags } from 'components/sites/filters/recordings/filters-tags';
 import { FiltersStarred } from 'components/sites/filters/common/filters-starred';
 import { FiltersVisitorType } from 'components/sites/filters/recordings/filters-visitor-type';
@@ -47,6 +48,7 @@ enum FilterType {
   Language,
   Utm,
   RageClicked,
+  UTurned,
 }
 
 export const Filters: FC<Props> = ({ period, filters, updateFilters }) => {
@@ -135,6 +137,10 @@ export const Filters: FC<Props> = ({ period, filters, updateFilters }) => {
         <Button onClick={() => handleFilterChange(FilterType.RageClicked)} className={classnames({ open: openFilter === FilterType.RageClicked })}>
           <Icon name='arrow-drop-left-line' />
           Rage clicks
+        </Button>
+        <Button onClick={() => handleFilterChange(FilterType.UTurned)} className={classnames({ open: openFilter === FilterType.UTurned })}>
+          <Icon name='arrow-drop-left-line' />
+          U-turns
         </Button>
 
         <div className={classnames('popout filters', { open: openFilter !== null, 'has-sub-menu': [FilterType.Utm].includes(openFilter) })}>
@@ -234,6 +240,12 @@ export const Filters: FC<Props> = ({ period, filters, updateFilters }) => {
             <>
               <Label>Contains Rage Click</Label>
               <FiltersRageClicked value={filters.rageClicked} onUpdate={handleUpdate('rageClicked')} onClose={handleFilterClose} />
+            </>
+          )}
+          {openFilter === FilterType.UTurned && (
+            <>
+              <Label>Contains U-Turn</Label>
+              <FiltersUTurned value={filters.uTurned} onUpdate={handleUpdate('uTurned')} onClose={handleFilterClose} />
             </>
           )}
         </div>
