@@ -79,7 +79,7 @@
     display: none;
   }
 
-  @for $i from 1 through 20 {
+  @for $i from 1 through 25 {
     &.hide-cell-#{$i} {
       .row {
         .cell:nth-of-type(#{$i}) {
