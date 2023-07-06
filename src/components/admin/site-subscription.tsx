@@ -34,7 +34,7 @@ export const SiteSubscription: FC<Props> = ({ site, isEnterprise, hasBilling }) 
             Subscription
           </h5>
           {hasBilling && (
-            <Link className='button stripe-link external-link' href={`https://dashboard.stripe.com/test/customers/${site.billing.customerId}`} target='_blank' rel='noreferrer'>
+            <Link className='button stripe-link external-link' href={`https://dashboard.stripe.com/customers/${site.billing.customerId}`} target='_blank' rel='noreferrer'>
               <Icon name='external-link-line' /> <span>Stripe</span>
             </Link>
           )}
