@@ -50,7 +50,7 @@ export const SidebarChangelog: FC<Props> = ({ disabled, posts, changelogLength, 
             <ModalHeader>
               <p id='view-changelog-title'><b>Changelog</b></p>
               <div>
-                <a href={`${publicRuntimeConfig.webHost}/changelog${post.slug}`} rel='noreferrer' target='_blank' className='external-link'>
+                <a href={`${publicRuntimeConfig.webHost}/changelog`} rel='noreferrer' target='_blank' className='external-link'>
                   <Icon name='external-link-line' /> <span>Full changelog</span>
                 </a>
                 <Button type='button' onClick={closeModal}>
