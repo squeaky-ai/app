@@ -68,7 +68,7 @@ export const SidebarChangelog: FC<Props> = ({ disabled, posts, changelogLength, 
                   currentPage={page}
                   pageSize={1}
                   setPage={setPage}
-                  total={changelogLength}
+                  total={posts.length}
                 />
               </ModalFooter>
             )}
