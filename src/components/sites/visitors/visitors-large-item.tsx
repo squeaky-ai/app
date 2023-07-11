@@ -12,6 +12,7 @@ import { Dropdown } from 'components/dropdown';
 import { Flag } from 'components/flag';
 import { Highlighter } from 'components/highlighter';
 import { getLinkedData, groupVisitorBrowsers, groupVisitorDevices, groupVisitorCountries } from 'lib/visitors';
+import { toTimeString } from 'lib/dates';
 import type { Site, Team } from 'types/graphql';
 import type { ExternalAttributes } from 'types/visitors';
 import type { Visitor } from 'types/graphql';
@@ -76,6 +77,12 @@ export const VisitorsLargeItem: FC<Props> = ({ site, member, visitor, search, st
       </Cell>
       <Cell>
         {visitor.lastActivityAt?.niceDateTime || '-'}
+      </Cell>
+      <Cell>
+        {visitor.averageRecordingDuration
+          ? toTimeString(visitor.averageRecordingDuration)
+          : '-'
+        }
       </Cell>
       <Cell>
         {visitor.language}

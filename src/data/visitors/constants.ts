@@ -68,40 +68,46 @@ export const COLUMNS: Column[] = [
     position: 8,
   },
   {
-    label: 'Language',
+    label: 'Avg. session duration',
     width: '1fr',
     disabled: false,
     position: 9,
   },
   {
-    label: 'Device & Viewport',
+    label: 'Language',
     width: '1fr',
     disabled: false,
     position: 10,
   },
   {
+    label: 'Device & Viewport',
+    width: '1fr',
+    disabled: false,
+    position: 11,
+  },
+  {
     label: 'Browser',
     width: '90px',
     disabled: false,
-    position: 11,
+    position: 12,
   },
   {
     label: 'Country',
     width: '110px',
     disabled: false,
-    position: 12,
+    position: 13,
   },
   {
     label: 'Source',
     width: '110px',
     disabled: false,
-    position: 13,
+    position: 14,
   },
   {
     label: 'Options',
     width: '64px',
     disabled: false,
-    position: 14,
+    position: 15,
   },
 ];
 
@@ -110,7 +116,8 @@ export const DEFAULT_COLUMNS = COLUMNS.filter(c => [
   'Visitor ID', 
   'Email',
   'Recordings', 
-  'Last activity', 
+  'Last activity',
+  'Avg. session duration',
   'Device & Viewport',
   'Options',
 ].includes(c.label));

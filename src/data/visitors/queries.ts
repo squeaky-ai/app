@@ -39,6 +39,7 @@ export const GET_VISITORS_QUERY = gql`
           }
           starred
           linkedData
+          averageRecordingDuration
         }
         pagination {
           pageSize

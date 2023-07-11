@@ -3635,6 +3635,7 @@ export type UsersUpdateInput = {
 
 export type Visitor = {
   __typename?: 'Visitor';
+  averageRecordingDuration?: Maybe<Scalars['BigInt']>;
   averageSessionDuration: Scalars['Int'];
   countries: Array<RecordingsCountry>;
   createdAt: CommonDates;
@@ -3771,6 +3772,10 @@ export type VisitorsRecordingCount = {
 };
 
 export enum VisitorsSort {
+  /** Lowest average session duration */
+  AverageRecordingDurationAsc = 'average_recording_duration__asc',
+  /** Highest average session duration */
+  AverageRecordingDurationDesc = 'average_recording_duration__desc',
   /** Least recently viewed */
   FirstViewedAtAsc = 'first_viewed_at__asc',
   /** Most recently viewed */

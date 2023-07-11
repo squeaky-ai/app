@@ -90,6 +90,15 @@ export const VisitorsLarge: FC<Props> = ({
             />
           </Cell>
           <Cell>
+            Avg. session duration
+            <Sort 
+              name='average_recording_duration' 
+              order={sort} 
+              onAsc={() => setSort(VisitorsSort.AverageRecordingDurationAsc)} 
+              onDesc={() => setSort(VisitorsSort.AverageRecordingDurationDesc)} 
+            />
+          </Cell>
+          <Cell>
             Language
           </Cell>
           <Cell>
