@@ -379,7 +379,8 @@
           text-decoration: underline;
         }
 
-        &.error {
+        &.error,
+        &.rage_click {
           background: var(--peach-100);
           border: 1px solid var(--rose-500);
           border-radius: var(--border-radius-md);

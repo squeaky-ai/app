@@ -5,7 +5,7 @@ import { clamp, debounce } from 'lodash';
 import { Button } from 'components/button';
 import { Activity } from 'components/sites/player/activity';
 import { Interaction } from 'components/sites/player/interaction';
-import { getInteractionEvents } from 'lib/events';
+import { getInteractionEvents } from 'lib/interaction-events';
 import type { Recording, Site } from 'types/graphql';
 import type { Event } from 'types/event';
 import type { PlayerState } from 'types/player';
@@ -47,6 +47,7 @@ export const Slider: FC<Props> = ({
   };
 
   const { interactionEvents } = getInteractionEvents(
+    recording,
     events,
     state,
     site.plan.featuresEnabled,

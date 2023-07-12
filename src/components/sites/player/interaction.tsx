@@ -13,9 +13,11 @@ interface Props {
 export const Interaction: FC<Props> = ({ interactionEvent, offset, duration }) => {
   const left = `${Math.round(((interactionEvent.timestampStart - offset) / duration) * 100)}%`;
 
+  const error = ['error', 'rage_click'].includes(interactionEvent.eventName);
+
   return (
     <div
-      className={classnames('event', { hidden: !interactionEvent.show, error: interactionEvent.eventName === 'error' })}
+      className={classnames('event', { hidden: !interactionEvent.show, error })}
       style={{ left }}
     >
       <EventIcon type={interactionEvent.eventName} />

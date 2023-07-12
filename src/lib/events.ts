@@ -1,10 +1,8 @@
-import { last } from 'lodash';
 import { EventType, IncrementalSource, MouseInteractions } from 'rrweb';
 import { ErrorEvent, CustomEvents } from 'types/event';
 import { EventStatsSort, EventsCaptureType } from 'types/events';
-import { EventsStat, PlanFeature, RecordingsEvent } from 'types/graphql';
-import type { PlayerState } from 'types/player';
-import type { Event, Events, EventName, SessionEvent, InteractionEventItem } from 'types/event';
+import { EventsStat, RecordingsEvent } from 'types/graphql';
+import type { Event, EventName, SessionEvent } from 'types/event';
 
 export const isPageViewEvent = (
   event: SessionEvent
@@ -107,6 +105,8 @@ export function getEventLabel(name: EventName): string {
       return 'Touch';
     case 'resize':
       return 'Viewport Resize';
+    case 'rage_click':
+      return 'Rage Click';
     case 'unknown':
     default:
       return 'Uknown';
@@ -140,87 +140,6 @@ export const sortEventsStats = (
       return b.averageEventsPerVisitor - a.averageEventsPerVisitor;
   }
 });
-
-export const getInteractionEvents = (
-  events: Events,
-  state: PlayerState,
-  featuresEnabled: PlanFeature[],
-  inactivity?: number[][],
-): { interactionEvents: InteractionEventItem[], startedAt: number } => {
-  const startedAt = events[0]?.timestamp || 0;
-
-  let results = events.reduce((acc, item) => {
-    const eventName = getEventName(item);
-
-    if (eventName === 'unknown') return acc;
-    if (eventName === 'error' && !featuresEnabled.includes(PlanFeature.ErrorTracking)) return acc;
-    if (eventName === 'custom' && !featuresEnabled.includes(PlanFeature.EventTracking)) return acc;
-
-    const event: InteractionEventItem = {
-      eventName,
-      id: item.id,
-      show: state.eventVisibility.includes(eventName),
-      timestampStart: item.timestamp,
-      timestampEnd: null,
-      label: getEventLabel(eventName),
-      info: null,
-    };
-
-    const data = item.data as any; // TODO
-
-    if (eventName === 'page_view') {
-      event.info = data.href;
-    }
-
-    if (['click', 'blur', 'focus', 'touch', 'context'].includes(eventName)) {
-      event.info = data.selector || 'Unknown';
-    }
-
-    if (eventName === 'error') {
-      event.info = data.message;
-    }
-
-    if (eventName === 'scroll') {
-      const prevEvent = last(acc);
-      if (prevEvent?.eventName === 'scroll') {
-        prevEvent.timestampEnd = item.timestamp;
-        return acc;
-      }
-    }
-
-    return [...acc, event]
-  }, [] as InteractionEventItem[]);
-
-  inactivity?.forEach((inactivity, index) => {
-    results.push({
-      id: `inactivity-${index}`,
-      eventName: 'inactivity',
-      label: 'Inactivity',
-      show: state.eventVisibility.includes('inactivity'),
-      timestampStart: startedAt + Number(inactivity[0]),
-      timestampEnd: startedAt + Number(inactivity[1]),
-      info: null,
-    });
-  });
-
-  results.sort((a, b) => a.timestampStart - b.timestampStart);
-
-  // HACK: The inactivity is not precise enough and multiple
-  // can stack up against each other, better to just combine
-  // them so it doesn't look jank
-  results = results.reduce((acc, result) => {
-    if (result.eventName === 'inactivity' && last(acc)?.eventName === 'inactivity') {
-      return [...acc.slice(0, -1), { ...last(acc), timestampEnd: result.timestampEnd }];
-    } 
-
-    return [...acc, result];
-  }, []);
-
-  return {
-    interactionEvents: results,
-    startedAt,
-  };
-};
 
 export const getEventCaptureText = (type: EventsCaptureType) => {
   switch(type) {

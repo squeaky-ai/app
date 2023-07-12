@@ -17,7 +17,8 @@ export type EventName =
   'context' |
   'resize' |
   'unknown' |
-  'inactivity';
+  'inactivity' |
+  'rage_click';
 
 export type EventOptions = 'compact';
 

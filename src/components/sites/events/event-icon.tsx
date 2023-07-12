@@ -10,6 +10,7 @@ import clickIcon from '../../../../public/icons/click.svg';
 import focusIcon from '../../../../public/icons/focus.svg';
 import hoverIcon from '../../../../public/icons/hover.svg';
 import touchIcon from '../../../../public/icons/touch.svg';
+import rageClickIcon from '../../../../public/icons/rage-click.svg';
 
 interface Props {
   type: EventName;
@@ -51,6 +52,8 @@ const getCustomSvg = (type: Omit<EventName, 'page_view' | 'error' | 'custom' | '
       return hoverIcon;
     case 'touch':
       return touchIcon;
+    case 'rage_click':
+      return rageClickIcon;
     default:
       throw new Error(`No image for event type ${type}`);
   }
