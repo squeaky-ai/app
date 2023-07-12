@@ -36,6 +36,7 @@ export const GET_RECORDINGS_QUERY = gql`
           }
           disconnectedAt {
             iso8601
+            shortDate
             niceDateTime
           }
           inactivity
@@ -100,6 +101,7 @@ export const GET_RECORDING_QUERY = gql`
         }
         disconnectedAt {
           iso8601
+          shortDate
           niceDateTime
         }
         inactivity
@@ -128,6 +130,7 @@ export const GET_RECORDING_QUERY = gql`
               disconnectedAt {
                 iso8601
                 shortDate
+                niceDateTime
               }
             }
             pagination {

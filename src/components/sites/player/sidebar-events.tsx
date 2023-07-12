@@ -7,7 +7,7 @@ import { EventIcon } from 'components/sites/events/event-icon';
 import { EventTimestamp } from 'components/sites/player/event-timestamp';
 import { SidebarErrorModal } from 'components/sites/player/sidebar-error-modal';
 import { SidebarEventsVisibility } from 'components/sites/player/sidebar-events-visibility';
-import { getInteractionEvents } from 'lib/events';
+import { getInteractionEvents } from 'lib/interaction-events';
 import { CustomEvents } from 'types/event';
 import type { Events, InteractionEventItem, ErrorEvent } from 'types/event';
 import type { PlayerState, Action } from 'types/player';
@@ -32,6 +32,7 @@ export const SidebarEvents: FC<Props> = ({
   dispatch,
 }) => {
   const { interactionEvents, startedAt } = getInteractionEvents(
+    recording,
     events,
     state, 
     site.plan.featuresEnabled,
