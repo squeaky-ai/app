@@ -129,23 +129,23 @@ class InteractionEvents {
   }
 
   // Replace any clicks that fall into the 'rage click'
-  // definition, which is 5 or more clicks within 750ms
+  // definition, which is 5 or more clicks within 1s
   private insertRageClicks(events: InteractionEventItem[]): InteractionEventItem[] {
-    const clicks = events.filter(e => e.eventName === 'click');
+    let clicks = events.filter(e => e.eventName === 'click');
 
     clicks.forEach(click => {
       const timestamp = click.timestampStart;
 
-      const rage = clicks.filter(c => {
-        const from = timestamp - 375;
-        const to   = timestamp + 375;
+      const from = timestamp;
+      const to   = timestamp + 1000;
 
-        return c.timestampStart >= from && c.timestampStart <= to;
-      });
+      const rage = clicks.filter(c => c.timestampStart >= from && c.timestampStart <= to);
 
       if (rage.length >= 5) {
         const rageClickIds = rage.map(r => r.id);
+
         events = events.filter(e => !rageClickIds.includes(e.id));
+        clicks = clicks.filter(e => !rageClickIds.includes(e.id));
 
         const timestampStart = timestamp;
         const timestampEnd = last(rage).timestampStart; // There's no end on clicks
