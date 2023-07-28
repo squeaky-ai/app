@@ -28,9 +28,9 @@ export const SettingsDataExport: FC<Props> = ({ site, dataExport }) => {
     .sort((a, b) => {
       switch(sort) {
         case Order.ExportCreatedAsc:
-          return new Date(a.exportedAt.iso8601 || 0).valueOf() - new Date(b.exportedAt.iso8601 || 0).valueOf();
+          return new Date(a.exportedAt?.iso8601 || 0).valueOf() - new Date(b.exportedAt?.iso8601 || 0).valueOf();
         case Order.ExportCreatedDesc:
-          return new Date(b.exportedAt.iso8601 || 0).valueOf() - new Date(a.exportedAt.iso8601|| 0).valueOf();
+          return new Date(b.exportedAt?.iso8601 || 0).valueOf() - new Date(a.exportedAt?.iso8601|| 0).valueOf();
       }
     })
 
