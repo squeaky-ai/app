@@ -17,7 +17,7 @@ class Document extends NextDocument {
         <Head>
           <meta name='description' content='Capture screen recordings and insightful data that help you see exactly how visitors are using your website or app.' />
           <meta name='keywords' content='Web, Analytics, Recordings, Visitors' />
-          <meta property='og:title' content='Squeaky.ai | Better Web Analytics' />
+          <meta property='og:title' content='Squeaky | The privacy friendly analytics platform' />
           <meta property='og:description' content='Capture screen recordings and insightful data that help you see exactly how visitors are using your website or app.' />
           <meta property='og:url' content={this.host} />
           <meta property='og:image' content={`${this.host}${BASE_PATH}/social-bg.png`} />
