@@ -22,7 +22,9 @@ import { useFilters } from 'hooks/use-filters';
 import { usePeriod } from 'hooks/use-period';
 import { RecordingsSort } from 'types/graphql';
 import { useSort } from 'hooks/use-sort';
+import { usePage } from 'hooks/use-page';
 import { useColumns } from 'hooks/use-columns';
+import { useSize } from 'hooks/use-size';
 import type { Site, Team, RecordingsFilters } from 'types/graphql';
 import type { ValueOf } from 'types/common';
 
@@ -37,9 +39,8 @@ export const Recordings: FC<Props> = ({
 }) => {
   const [selected, setSelected] = React.useState<string[]>([]);
 
-  const [page, setPage] = React.useState<number>(1);
-  const [size, setSize] = React.useState<number>(25);
-
+  const { page, setPage } = usePage('recordings');
+  const { size, setSize } = useSize('recordings');
   const { period, setPeriod } = usePeriod('recordings');
   const { sort, setSort } = useSort<RecordingsSort>('recordings');
   const { filters, setFilters } = useFilters<RecordingsFilters>('recordings');
