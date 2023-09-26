@@ -30,7 +30,7 @@ export const usePage = (type: ComponentType): UsePage => {
 
   const handlePageChange = (sort: number) => {
     setPage(sort);
-    sessionStorage.setItem(`sort::${type}`, sort.toString());
+    sessionStorage.setItem(`page::${type}`, sort.toString());
   };
 
   return { page, setPage: handlePageChange };
