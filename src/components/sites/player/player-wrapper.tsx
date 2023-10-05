@@ -26,14 +26,14 @@ interface Props {
   fetchMoreEvents: (eventPage: number) => Promise<Event[]>;
 }
 
-let nextPageTimer: NodeJS.Timer;
+let nextPageTimer: number;
 
 export const PlayerWrapper: FC<Props> = ({ user, state, recording, events, dispatch, fetchMoreEvents }) => {
   const router = useRouter();
   const ref = React.useRef<Player>(null);
 
   const processNextBatchOfEvents = (page: number): void => {
-    nextPageTimer = setTimeout(async () => {
+    nextPageTimer = window.setTimeout(async () => {
       const { totalPages } = recording.events.pagination;
 
       // All of them are loaded now
@@ -60,7 +60,7 @@ export const PlayerWrapper: FC<Props> = ({ user, state, recording, events, dispa
   React.useEffect(() => {
     return () => {
       // This could go on for a while and must be cancelled
-      clearTimeout(nextPageTimer);
+      window.clearTimeout(nextPageTimer);
       dispatch({ type: 'status', value: PlayerStatus.PLAYING });
     };
   }, [router.query.recording_id]);
