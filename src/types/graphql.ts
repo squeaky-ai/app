@@ -927,6 +927,7 @@ export type AnalyticsRecordingsCount = {
 export type AnalyticsReferrer = {
   __typename?: 'AnalyticsReferrer';
   count: Scalars['Int'];
+  duration: Scalars['BigInt'];
   percentage: Scalars['Float'];
   referrer?: Maybe<Scalars['String']>;
 };

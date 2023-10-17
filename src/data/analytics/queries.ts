@@ -111,6 +111,7 @@ export const GET_ANALYTICS_AUDIENCE_QUERY = gql`
         referrers(size: 10, page: $referrersPage) {
           items {
             referrer
+            duration
             count
             percentage
           }
@@ -204,6 +205,7 @@ export const GET_ANALYTICS_PAGE_AUDIENCE_QUERY = gql`
           referrers(size: 10, page: $referrersPage) {
             items {
               referrer
+              duration
               count
               percentage
             }

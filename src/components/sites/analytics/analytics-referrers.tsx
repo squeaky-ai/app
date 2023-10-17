@@ -5,6 +5,7 @@ import { Pagination } from 'components/pagination';
 import { Tooltip } from 'components/tooltip';
 import { FiltersVisitorsLink } from 'components/sites/filters/common/filters-visitors-link';
 import { FiltersRecordingsLink } from 'components/sites/filters/common/filters-recordings-link';
+import { toHoursMinutesAndSeconds } from 'lib/dates';
 import type { AnalyticsReferrers as AnalyticsReferrersType } from 'types/graphql';
 
 interface Props {
@@ -19,6 +20,7 @@ export const AnalyticsReferrers: FC<Props> = ({ referrers, page, setPage }) => (
       <Row head>
         <Cell>Page</Cell>
         <Cell>Number of visitors</Cell>
+        <Cell>Average session duration</Cell>
         <Cell />
       </Row>
       {referrers.items.map(referrer => {
@@ -34,6 +36,7 @@ export const AnalyticsReferrers: FC<Props> = ({ referrers, page, setPage }) => (
               </Tooltip>
             </Cell>
             <Cell><b>{referrer.count.toLocaleString()}</b> <span className='percentage'>({referrer.percentage.toFixed(2)}%)</span></Cell>
+            <Cell>{toHoursMinutesAndSeconds(Number(referrer.duration))}</Cell>
             <Cell className='filters-links'>
               <FiltersRecordingsLink 
                 action={{ referrers: [referrer.referrer === 'Direct' ? 'none' : referrer.referrer] }}

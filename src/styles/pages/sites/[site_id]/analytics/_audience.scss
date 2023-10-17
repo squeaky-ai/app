@@ -141,7 +141,7 @@
         }
 
         .table .row {
-          grid-template-columns: 2fr 1fr 100px;
+          grid-template-columns: 2fr 1fr 1fr 100px;
           height: 2.5rem;
 
           @include breakpoint-md {
