@@ -81,6 +81,10 @@ export const SiteDetails: FC<Props> = ({ activeVisitors, site }) => {
           <span>API Key</span>
           <span>{site.apiKey || '-'}</span>
         </div>
+        <div className='row'>
+          <span>UUID</span>
+          <span>{site.uuid || '-'}</span>
+        </div>
       </Card>
 
       <Card>
