@@ -36,7 +36,7 @@ export const User: FC<Props> = ({ user }) => (
       <span>
         {user.sites.map((site, index) => (
           <React.Fragment key={site.id}>
-            <Link href={`/sites/${site.id}/dashboard`} target='_blank'>
+            <Link href={`/__admin/sites/${site.id}`} target='_blank'>
               {site.name}
             </Link>
             {index === user.sites.length -1 ? '' : ', '}
