@@ -295,6 +295,7 @@ export const GET_ADMIN_SITES_BUNDLE_QUERY = gql`
             exceeded
             invalid
             maxMonthlyRecordings
+            currentMonthRecordingsCount
           }
           team {
             id
