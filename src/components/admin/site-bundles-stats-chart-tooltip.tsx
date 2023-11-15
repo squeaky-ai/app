@@ -36,7 +36,7 @@ export const SiteBundlesStatsChartTooltip: FC<ChartTooltipProps & Props> = (prop
         {mapKeysToSites(data, props.sites).map((result, index) => (
           <React.Fragment key={result.id}>
             <Label>{result.name}</Label>
-            <Value color={colorsPrimaryAdmin[index]?.stroke}>{(data.count || 0).toLocaleString()}</Value>
+            <Value color={colorsPrimaryAdmin[index]?.stroke}>{(result.count || 0).toLocaleString()}</Value>
           </React.Fragment>
         ))}
       </>
