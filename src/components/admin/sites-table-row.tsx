@@ -82,6 +82,8 @@ export const SitesTableRow: FC<Props> = ({ site, activeVisitors, style }) => {
       <Cell>{site.team.length}</Cell>
       <Cell>{site.provider || '-'}</Cell>
       <Cell>{trialStatus}</Cell>
+      <Cell>{site.plan.maxMonthlyRecordings.toLocaleString()}</Cell>
+      <Cell>{site.plan.currentMonthRecordingsCount.toLocaleString()}</Cell>
       <Cell>{site.createdAt.niceDateTime}</Cell>
       <Cell>{activeVisitors}</Cell>
       <Cell>

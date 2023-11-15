@@ -125,28 +125,40 @@ export const SITE_COLUMNS: Column[] = [
     position: 10,
   },
   {
-    label: 'Created At',
+    label: 'Maximum visits per month',
     width: '1fr',
     disabled: false,
     position: 11,
   },
   {
-    label: 'Active Visitors',
+    label: 'Current month visits',
     width: '1fr',
     disabled: false,
     position: 12,
   },
   {
-    label: 'Superuser Access',
+    label: 'Created At',
     width: '1fr',
     disabled: false,
     position: 13,
   },
   {
+    label: 'Active Visitors',
+    width: '1fr',
+    disabled: false,
+    position: 14,
+  },
+  {
+    label: 'Superuser Access',
+    width: '1fr',
+    disabled: false,
+    position: 15,
+  },
+  {
     label: 'Options',
     width: '64px',
     disabled: false,
-    position: 14,
+    position: 16,
   },
 ];
 
@@ -267,6 +279,8 @@ export const DEFAULT_SITE_COLUMNS = SITE_COLUMNS.filter(c => [
   'Team Count',
   'Provider',
   'Trial Status',
+  'Maximum visits per month',
+  'Current month visits',
   'Created At',
   'Active Visitors',
   'Superuser Access',

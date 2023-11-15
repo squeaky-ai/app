@@ -3211,11 +3211,13 @@ export type SitesPage = {
 export type SitesPlan = {
   __typename?: 'SitesPlan';
   auditTrailEnabled: Scalars['Boolean'];
+  currentMonthRecordingsCount: Scalars['Int'];
   dataStorageMonths: Scalars['Int'];
   deprecated: Scalars['Boolean'];
   enterprise: Scalars['Boolean'];
   exceeded: Scalars['Boolean'];
   featuresEnabled: Array<PlanFeature>;
+  fractionalUsage: Scalars['Int'];
   free: Scalars['Boolean'];
   id: Scalars['ID'];
   invalid: Scalars['Boolean'];

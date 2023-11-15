@@ -58,6 +58,8 @@ export const SitesTable: FC<Props> = ({ sites, activeVisitors, columns, sort, se
             <Cell>Team Count</Cell>
             <Cell>Provider</Cell>
             <Cell>Trial Status</Cell>
+            <Cell>Maximum visits per month</Cell>
+            <Cell>Current month visits</Cell>
             <Cell>
               Created At
               <Sort 

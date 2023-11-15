@@ -38,6 +38,8 @@ export const usePlan = (props: Props): UsePlan => {
     support: [],
     featuresEnabled: [],
     teamMemberLimit: null,
+    currentMonthRecordingsCount: 0,
+    fractionalUsage: 0,
   };
 
   return {
