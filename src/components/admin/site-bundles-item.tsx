@@ -3,8 +3,11 @@ import type { FC } from 'react';
 import classnames from 'classnames';
 import { Button } from 'components/button';
 import { Icon } from 'components/icon';
+import { Spinner } from 'components/spinner';
 import { SitesTable } from 'components/admin/sites-table';
+import { SiteBundlesStats } from 'components/admin/site-bundles-stats';
 import { SiteBundlesCreate } from 'components/admin/site-bundles-create';
+import { useAdminSitesBundle } from 'hooks/use-admin-site-bundle';
 import type { Column } from 'types/common';
 import type { ActiveVisitorCount, AdminSiteSort, SitesBundle } from 'types/graphql';
 
@@ -25,7 +28,19 @@ export const SiteBundlesItem: FC<Props> = ({
 }) => {
   const [open, setOpen] = React.useState<boolean>(false);
 
+  const {
+    bundle: detailedBundle,
+    loading,
+    getSiteBundle
+  } = useAdminSitesBundle({ bundleId: bundle.id });
+
   const handleToggle = () => setOpen(!open);
+
+  const isLoading = loading || !detailedBundle;
+
+  React.useEffect(() => {
+    if (open) getSiteBundle();
+  }, [open]);
 
   return (
     <div className={classnames('site-bundle', { open })}>
@@ -37,19 +52,37 @@ export const SiteBundlesItem: FC<Props> = ({
         </Button>
 
         <div className='actions'>
-          <SiteBundlesCreate bundle={bundle} />
+          {!isLoading && (
+            <SiteBundlesCreate bundle={detailedBundle} />
+          )}
         </div>
       </div>
 
-      <div className='items'>
-        <SitesTable
-          sites={bundle.sites}
-          sort={sort}
-          activeVisitors={activeVisitors}
-          columns={columns}
-          setSort={setSort}
-        />
-      </div>
+      {open && (
+        <>
+          {loading && (
+            <Spinner />
+          )}
+
+          {!isLoading && (
+            <>
+              <div className='items'>
+                <SiteBundlesStats bundle={detailedBundle} />
+              </div>
+
+              <div className='items'>
+                <SitesTable
+                  sites={detailedBundle.sites}
+                  sort={sort}
+                  activeVisitors={activeVisitors}
+                  columns={columns}
+                  setSort={setSort}
+                />
+              </div>
+            </>
+          )}
+        </>
+      )}
     </div>
   );
 };

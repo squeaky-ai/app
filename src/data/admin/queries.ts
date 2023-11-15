@@ -262,6 +262,20 @@ export const GET_ADMIN_SITES_BUNDLES_QUERY = gql`
         plan {
           name
         }
+      }
+    }
+  }
+`;
+
+export const GET_ADMIN_SITES_BUNDLE_QUERY = gql`
+  query GetAdminSiteBundleQueries($bundleId: ID!) {
+    admin {
+      sitesBundle(bundleId: $bundleId) {
+        id
+        name
+        plan {
+          name
+        }
         sites {
           id
           name
@@ -292,6 +306,17 @@ export const GET_ADMIN_SITES_BUNDLES_QUERY = gql`
           createdAt {
             iso8601
             niceDateTime
+          }
+        }
+        stats {
+          totalAll
+          deletedAll
+          totalCurrentMonth
+          deletedCurrentMonth
+          recordingCounts {
+            siteId
+            count
+            dateKey
           }
         }
       }

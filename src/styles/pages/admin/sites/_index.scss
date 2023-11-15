@@ -126,7 +126,52 @@
           display: flex;
         }
       }
+
+      .site-bundles-stats {
+        display: flex;
+
+        .left {
+          flex: 1;
+        }
+
+        .recording-counts {
+          width: 24rem;
+
+          .row {
+            display: grid;
+            grid-template-columns: 6rem 1fr 1fr;
+            margin: 0;
+  
+            .cell {
+              &:first-of-type {
+                font-weight: var(--font-weight-medium);
+                overflow: visible;
+                position: relative;
+                text-align: right;
+  
+                &:after {
+                  background: var(--gray-100);
+                  content: ' ';
+                  display: block;
+                  height: 3rem;
+                  position: absolute;
+                  right: 0;
+                  top: -1.5rem;
+                  width: 1px;
+                }
+              }
+            }
+  
+            &:last-of-type {
+              .cell:first-of-type::after {
+                height: 3.5rem;
+              }
+            }
+          }
+        }
+      }
     }
+    
   }
 
   &.bundles {

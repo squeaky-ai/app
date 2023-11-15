@@ -43,6 +43,7 @@ export const useAdminDashboard = (): UseAdminDashboard => {
     },
     adTrackingExport: '',
     sitesProviders: [],
+    sitesBundle: null,
   };
 
   return {
