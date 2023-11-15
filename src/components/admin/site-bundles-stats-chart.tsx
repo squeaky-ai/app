@@ -5,13 +5,15 @@ import { format, subMonths } from 'date-fns';
 import { useResize } from 'hooks/use-resize';
 import { DeviceWidths } from 'data/common/constants';
 import { Chart } from 'components/sites/chart';
-import type { AdminSiteBundleStatsRecordingCount } from 'types/graphql';
+import { SiteBundlesStatsChartTooltip } from 'components/admin/site-bundles-stats-chart-tooltip';
+import type { AdminSite, AdminSiteBundleStatsRecordingCount } from 'types/graphql';
 
 interface Props {
+  sites: AdminSite[];
   counts: AdminSiteBundleStatsRecordingCount[];
 }
 
-export const SiteBundlesStatsChart: FC<Props> = ({ counts }) => {
+export const SiteBundlesStatsChart: FC<Props> = ({ sites, counts }) => {
   const { width } = useResize();
 
   const data = (() => {
@@ -44,7 +46,7 @@ export const SiteBundlesStatsChart: FC<Props> = ({ counts }) => {
       <Chart
         admin
         data={data}
-        tooltip={null}
+        tooltip={props => <SiteBundlesStatsChartTooltip sites={sites} {...props} />}
         scale='auto'
         chartType='bar'
         items={items}

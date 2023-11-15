@@ -12,7 +12,7 @@ export const SiteBundlesStats: React.FC<Props> = ({ bundle }) => (
   <Card className='site-bundles-stats'>
     <div className='left'>
       <h5>Recordings</h5>
-      <SiteBundlesStatsChart counts={bundle.stats.recordingCounts} />
+      <SiteBundlesStatsChart sites={bundle.sites} counts={bundle.stats.recordingCounts} />
     </div>
     <div className='right recording-counts'>
       <Table>
