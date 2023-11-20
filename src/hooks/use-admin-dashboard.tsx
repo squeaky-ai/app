@@ -34,14 +34,6 @@ export const useAdminDashboard = (): UseAdminDashboard => {
     usersStored: [],
     sitesBundles: [],
     usersPartners: [],
-    adTracking: {
-      items: [],
-      pagination: {
-        pageSize: 25,
-        total: 0,
-      }
-    },
-    adTrackingExport: '',
     sitesProviders: [],
     sitesBundle: null,
   };

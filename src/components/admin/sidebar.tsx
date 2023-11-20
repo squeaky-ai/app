@@ -97,13 +97,6 @@ export const Sidebar: FC = () => {
                 name='Sidekiq'
                 external
               />
-              <SidebarLink
-                visibile
-                href='/__admin/ad-tracking'
-                active={router.asPath.startsWith('/__admin/ad-tracking')}
-                icon='radar-line'
-                name='Ad Tracking'
-              />
             </SidebarGroup>
           </div>
         </div>

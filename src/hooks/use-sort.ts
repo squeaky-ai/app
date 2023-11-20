@@ -9,7 +9,6 @@ import {
   AnalyticsPagesSort,
   EventsFeedSort,
   AnalyticsBrowsersSort,
-  AdminAdTrackingSort,
 } from 'types/graphql';
 
 type ComponentType = 
@@ -20,8 +19,7 @@ type ComponentType =
   'events' |
   'analytics-pages' |
   'events-feed' |
-  'analytics-browsers' |
-  'ad-tracking';
+  'analytics-browsers'
 
 interface UseSort<T> {
   sort: T;
@@ -56,8 +54,6 @@ const getDefaultSort = (type: ComponentType) => {
       return EventsFeedSort.TimestampDesc;
     case 'analytics-browsers':
       return AnalyticsBrowsersSort.CountDesc;
-    case 'ad-tracking':
-      return AdminAdTrackingSort.UserCreatedAtDesc;
   }
 };
 
