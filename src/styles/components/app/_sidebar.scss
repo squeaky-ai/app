@@ -6,12 +6,18 @@
   flex-direction: column;
   height: 100vh;
   left: 0;
+  overflow-y: auto;
   padding: 1.5rem .5rem;
   position: sticky;
+  scrollbar-width: none;
   top: 0;
   transition: width .3s ease-in-out;
   width: 52px;
   z-index: 1;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   @include breakpoint-md {
     border-bottom: 1px solid var(--gray-150);
