@@ -3566,6 +3566,7 @@ export type UsersPayment = {
   amount: Scalars['Float'];
   currency: Currency;
   id: Scalars['ID'];
+  siteId: Scalars['ID'];
 };
 
 export type UsersReferral = {

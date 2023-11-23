@@ -397,6 +397,7 @@ export const GET_ADMIN_USER_QUERY = gql`
             id
             amount
             currency
+            siteId
           }
           payOuts {
             id

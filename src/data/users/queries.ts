@@ -99,6 +99,7 @@ export const GET_PARTNER_QUERY = gql`
           id
           amount
           currency
+          siteId
         }
         payOuts {
           id
