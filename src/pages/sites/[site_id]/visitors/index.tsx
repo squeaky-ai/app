@@ -6,9 +6,9 @@ import { Main } from 'components/main';
 import { Page } from 'components/sites/page';
 import { Visitors } from 'components/sites/visitors/visitors';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 
-const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => (
+const SitesVisitors: NextPage<PageProps> = ({ user }) => (
   <>
     <Head>
       <title>Squeaky | Site Visitors</title>
@@ -26,4 +26,3 @@ const SitesVisitors: NextPage<ServerSideProps> = ({ user }) => (
 );
 
 export default SitesVisitors;
-export { getServerSideProps };

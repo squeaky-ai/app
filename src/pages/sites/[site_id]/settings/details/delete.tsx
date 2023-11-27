@@ -10,9 +10,9 @@ import { DeleteSite } from 'components/sites/settings/delete-site';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { SettingsTabs } from 'components/sites/settings/settings-tabs';
 import { OWNER } from 'data/teams/constants';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 
-const SitesSettingsDelete: NextPage<ServerSideProps> = ({ user }) => (
+const SitesSettingsDelete: NextPage<PageProps> = ({ user }) => (
   <>
     <Head>
       <title>Squeaky | Site Settings | Site Deletion</title>
@@ -51,4 +51,3 @@ const SitesSettingsDelete: NextPage<ServerSideProps> = ({ user }) => (
 );
 
 export default SitesSettingsDelete;
-export { getServerSideProps };

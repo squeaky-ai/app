@@ -6,14 +6,14 @@ import { PageLoading } from 'components/sites/page-loading';
 import { Main } from 'components/main';
 import { BlogEdit } from 'components/admin/blog-edit';
 import { BreadCrumbs } from 'components/admin/breadcrumbs';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 import { useAdminBlog } from 'hooks/use-admin-blog';
 import { useToasts } from 'hooks/use-toasts';
 import { getAuthorKey } from 'lib/admin/common';
 import { createBlogPost } from 'lib/api/graphql';
 import type { BlogPost } from 'types/graphql';
 
-const AdminBlogCreate: NextPage<ServerSideProps> = () => {
+const AdminBlogCreate: NextPage<PageProps> = () => {
   const toasts = useToasts();
   const router = useRouter();
 
@@ -60,4 +60,3 @@ const AdminBlogCreate: NextPage<ServerSideProps> = () => {
 };
 
 export default AdminBlogCreate;
-export { getServerSideProps };

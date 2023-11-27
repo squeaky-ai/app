@@ -17,12 +17,12 @@ import { Period } from 'components/sites/period/period';
 import { Pagination } from 'components/pagination';
 import { PageSize } from 'components/sites/page-size';
 import { usePeriod } from 'hooks/use-period';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 import { useErrors } from 'hooks/use-errors';
 import { getDateRange } from 'lib/dates';
 import { ErrorsSort } from 'types/graphql';
 
-const SitesErrors: NextPage<ServerSideProps> = ({ user }) => {
+const SitesErrors: NextPage<PageProps> = ({ user }) => {
   const [page, setPage] = React.useState<number>(1);
   const [size, setSize] = React.useState<number>(20);
   const [sort, setSort] = React.useState<ErrorsSort>(ErrorsSort.ErrorCountDesc);
@@ -118,4 +118,3 @@ const SitesErrors: NextPage<ServerSideProps> = ({ user }) => {
 };
 
 export default SitesErrors;
-export { getServerSideProps };

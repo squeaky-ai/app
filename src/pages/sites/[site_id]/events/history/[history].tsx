@@ -11,7 +11,7 @@ import { Error } from 'components/error';
 import { EventHistory } from 'components/sites/events/event-history';
 import { PageLoading } from 'components/sites/page-loading';
 import { Unlock } from 'components/sites/unlock';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 import { usePeriod } from 'hooks/use-period';
 import { getDateRange } from 'lib/dates';
 import { useEventStats } from 'hooks/use-event-stats';
@@ -20,7 +20,7 @@ import { EmptyState } from 'components/sites/empty-state';
 import { EventAdd } from 'components/sites/events/event-add';
 import { TabsType } from 'components/sites/events/event-tabs';
 
-const SitesEventsHistory: NextPage<ServerSideProps> = ({ user }) => {
+const SitesEventsHistory: NextPage<PageProps> = ({ user }) => {
   const { period, setPeriod } = usePeriod('event-history');
   
   const { 
@@ -116,4 +116,3 @@ const SitesEventsHistory: NextPage<ServerSideProps> = ({ user }) => {
 };
 
 export default SitesEventsHistory;
-export { getServerSideProps };

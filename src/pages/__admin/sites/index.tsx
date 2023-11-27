@@ -12,11 +12,11 @@ import { PageSize } from 'components/sites/page-size';
 import { PageLoading } from 'components/sites/page-loading';
 import { Pagination } from 'components/pagination';
 import { useAdminSites } from 'hooks/use-admin-sites';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 import { useColumns } from 'hooks/use-columns';
 import { AdminSiteSort } from 'types/graphql';
 
-const AdminSites: NextPage<ServerSideProps> = () => {
+const AdminSites: NextPage<PageProps> = () => {
   const [search, setSearch] = React.useState<string>('');
   const [page, setPage] = React.useState<number>(1);
   const [size, setSize] = React.useState<number>(25);
@@ -108,4 +108,3 @@ const AdminSites: NextPage<ServerSideProps> = () => {
 };
 
 export default AdminSites;
-export { getServerSideProps };

@@ -24,7 +24,7 @@ import { ConsentPreview } from 'components/sites/settings/consent-preview';
 import { OWNER, ADMIN } from 'data/teams/constants';
 import { useToasts } from 'hooks/use-toasts';
 import { countryNames } from 'types/translations';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 import { consentUpdate } from 'lib/api/graphql';
 import { useConsent } from 'hooks/use-consent';
 
@@ -37,7 +37,7 @@ const ConsentSchema = Yup.object().shape({
   languagesDefault: Yup.string().required('A default language is required'),
 });
 
-const SitesSettingsPrivacyConsent: NextPage<ServerSideProps> = ({ user }) => {
+const SitesSettingsPrivacyConsent: NextPage<PageProps> = ({ user }) => {
   const toasts = useToasts();
   
   const [showLanguages, setShowLanguages] = React.useState<boolean>(false);
@@ -288,4 +288,3 @@ const SitesSettingsPrivacyConsent: NextPage<ServerSideProps> = ({ user }) => {
 };
 
 export default SitesSettingsPrivacyConsent;
-export { getServerSideProps };

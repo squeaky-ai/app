@@ -7,13 +7,13 @@ import { Error } from 'components/error';
 import { PageLoading } from 'components/sites/page-loading';
 import { UsersColumns } from 'components/admin/users-columns';
 import { UsersType } from 'components/admin/users-type';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 import { useColumns } from 'hooks/use-columns';
 import { useAdminUsersPartners } from 'hooks/use-admin-users-partners';
 import { UsersTable } from 'components/admin/users-table';
 import { AdminUserSort } from 'types/graphql';
 
-const AdminUsersPartners: NextPage<ServerSideProps> = () => {
+const AdminUsersPartners: NextPage<PageProps> = () => {
   const { columns, setColumns, columnsReady } = useColumns('admin-users');
 
   const { users, loading, error } = useAdminUsersPartners();
@@ -64,4 +64,3 @@ const AdminUsersPartners: NextPage<ServerSideProps> = () => {
 };
 
 export default AdminUsersPartners;
-export { getServerSideProps };

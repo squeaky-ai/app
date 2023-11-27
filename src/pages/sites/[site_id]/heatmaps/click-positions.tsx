@@ -9,13 +9,13 @@ import { PageLoading } from 'components/sites/page-loading';
 import { Unlock } from 'components/sites/unlock';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { Heatmaps } from 'components/sites/heatmaps/heatmaps';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 import { usePages } from 'hooks/use-pages';
 import { usePeriod } from 'hooks/use-period';
 import { getDateRange } from 'lib/dates';
 import { HeatmapsType } from 'types/graphql';
 
-const SitesHeatmapsClickPositions: NextPage<ServerSideProps> = ({ user }) => {
+const SitesHeatmapsClickPositions: NextPage<PageProps> = ({ user }) => {
   const [page, setPage] = React.useState<string>(null);
 
   const { period, setPeriod } = usePeriod('heatmaps');
@@ -75,4 +75,3 @@ const SitesHeatmapsClickPositions: NextPage<ServerSideProps> = ({ user }) => {
 };
 
 export default SitesHeatmapsClickPositions;
-export { getServerSideProps };

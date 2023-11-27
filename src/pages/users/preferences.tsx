@@ -9,16 +9,16 @@ import { Option, Select } from 'components/select';
 import { Main } from 'components/main';
 import { Toggle } from 'components/toggle';
 import { Error } from 'components/error';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
 import { updateUserCommunication } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
 import { useCommunication } from 'hooks/use-communication';
 import { timezones } from 'data/users/constants';
 import { Preferences, Preference } from 'lib/preferences';
 import { UsersCommunication } from 'types/graphql';
+import { PageProps } from 'types/page';
 import { Radio } from 'components/radio';
 
-const UsersPreferences: NextPage<ServerSideProps> = () => {
+const UsersPreferences: NextPage<PageProps> = () => {
   const router = useRouter();
   const toasts = useToasts();
 
@@ -159,4 +159,3 @@ const UsersPreferences: NextPage<ServerSideProps> = () => {
 };
 
 export default UsersPreferences;
-export { getServerSideProps };

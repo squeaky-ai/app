@@ -15,12 +15,12 @@ import { VisitorsDelete } from 'components/sites/visitors/visitors-delete';
 import { VisitorsTabs } from 'components/sites/visitors/visitors-tabs';
 import { Error } from 'components/error';
 import { NotFound } from 'components/sites/not-found';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 import { useVisitor } from 'hooks/use-visitor';
 import { toHoursMinutesAndSeconds } from 'lib/dates';
 import type { Site } from 'types/graphql';
 
-const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
+const SitesVisitor: NextPage<PageProps> = ({ user }) => {
   const router = useRouter();
 
   const { visitor, error, loading } = useVisitor();
@@ -123,4 +123,3 @@ const SitesVisitor: NextPage<ServerSideProps> = ({ user }) => {
 };
 
 export default SitesVisitor;
-export { getServerSideProps };

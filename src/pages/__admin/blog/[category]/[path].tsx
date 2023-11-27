@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { PageLoading } from 'components/sites/page-loading';
 import { Main } from 'components/main';
 import { useBlogPost } from 'hooks/use-blog-post';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 import { BlogEdit } from 'components/admin/blog-edit';
 import { Button } from 'components/button';
 import { Icon } from 'components/icon';
@@ -14,7 +14,7 @@ import { getAuthorKey } from 'lib/admin/common';
 import { useToasts } from 'hooks/use-toasts';
 import type { BlogPost } from 'types/graphql';
 
-const AdminBlogEdit: NextPage<ServerSideProps> = () => {
+const AdminBlogEdit: NextPage<PageProps> = () => {
   const toasts = useToasts();
 
   const { post, loading, refetch } = useBlogPost();
@@ -78,4 +78,3 @@ const AdminBlogEdit: NextPage<ServerSideProps> = () => {
 };
 
 export default AdminBlogEdit;
-export { getServerSideProps };

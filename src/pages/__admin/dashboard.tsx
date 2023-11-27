@@ -13,10 +13,10 @@ import { RecordingsStored } from 'components/admin/recordings-stored';
 import { VerifiedSites } from 'components/admin/verified-sites';
 import { SiteProviders } from 'components/admin/site-providers';
 import { useAdminDashboard } from 'hooks/use-admin-dashboard';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 import { PageLoading } from 'components/sites/page-loading';
 
-const AdminDashboard: NextPage<ServerSideProps> = () => {
+const AdminDashboard: NextPage<PageProps> = () => {
   const { admin, loading, error } = useAdminDashboard();
 
   if (error) {
@@ -153,4 +153,3 @@ const AdminDashboard: NextPage<ServerSideProps> = () => {
 };
 
 export default AdminDashboard;
-export { getServerSideProps };

@@ -12,7 +12,7 @@ import { Input } from 'components/input';
 import { Button } from 'components/button';
 import { Main } from 'components/main';
 import { signout } from 'lib/api/auth';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 import { updateUser } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
 
@@ -21,7 +21,7 @@ const NewSchema = Yup.object().shape({
   lastName: Yup.string().required('Last name is required'),
 });
 
-const UsersNew: NextPage<ServerSideProps> = ({ user }) => {
+const UsersNew: NextPage<PageProps> = ({ user }) => {
   const router = useRouter();
   const toast = useToasts();
 
@@ -114,4 +114,3 @@ const UsersNew: NextPage<ServerSideProps> = ({ user }) => {
 };
 
 export default UsersNew;
-export { getServerSideProps };

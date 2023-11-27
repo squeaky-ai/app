@@ -11,9 +11,9 @@ import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { UrlStructure } from 'components/sites/settings/url-structure';
 import { SettingsTabs } from 'components/sites/settings/settings-tabs';
 import { ADMIN, OWNER } from 'data/teams/constants';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 
-const SitesSettingsUrlStructure: NextPage<ServerSideProps> = ({ user }) => {
+const SitesSettingsUrlStructure: NextPage<PageProps> = ({ user }) => {
   const { loading, error, routes } = useRoutes();
 
   if (loading) {
@@ -57,4 +57,3 @@ const SitesSettingsUrlStructure: NextPage<ServerSideProps> = ({ user }) => {
 };
 
 export default SitesSettingsUrlStructure;
-export { getServerSideProps };

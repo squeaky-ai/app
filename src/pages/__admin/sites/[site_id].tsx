@@ -9,9 +9,9 @@ import { BreadCrumbs } from 'components/admin/breadcrumbs';
 import { useAdminSite } from 'hooks/use-admin-site';
 import { SiteDetails } from 'components/admin/site-details';
 import { SiteSubscription } from 'components/admin/site-subscription';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 
-const AdminSite: NextPage<ServerSideProps> = () => {
+const AdminSite: NextPage<PageProps> = () => {
   const { admin, loading, error } = useAdminSite();
 
   if (error) {
@@ -68,4 +68,3 @@ const AdminSite: NextPage<ServerSideProps> = () => {
 };
 
 export default AdminSite;
-export { getServerSideProps };

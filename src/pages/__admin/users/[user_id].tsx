@@ -13,9 +13,9 @@ import { UserPartner } from 'components/admin/user-partner';
 import { UserPartnerCreate } from 'components/admin/user-partner-create';
 import { NotFound } from 'components/sites/not-found';
 import { useAdminUser } from 'hooks/use-admin-user';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 
-const AdminUser: NextPage<ServerSideProps> = () => {
+const AdminUser: NextPage<PageProps> = () => {
   const { user, loading, error } = useAdminUser();
 
   const fullName = user?.fullName || 'No one';
@@ -60,4 +60,3 @@ const AdminUser: NextPage<ServerSideProps> = () => {
 };
 
 export default AdminUser;
-export { getServerSideProps };

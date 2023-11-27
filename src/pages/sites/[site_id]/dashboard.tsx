@@ -11,9 +11,9 @@ import { Dashboard } from 'components/sites/dashboard';
 import { FreeTrialModal } from 'components/sites/free-trial-modal';
 import { Period } from 'components/sites/period/period';
 import { usePeriod } from 'hooks/use-period';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 
-const SitesDashboard: NextPage<ServerSideProps> = ({ user }) => {
+const SitesDashboard: NextPage<PageProps> = ({ user }) => {
   const ref = React.useRef<FreeTrialModal>(null);
 
   const router = useRouter();
@@ -68,4 +68,3 @@ const SitesDashboard: NextPage<ServerSideProps> = ({ user }) => {
 };
 
 export default SitesDashboard;
-export { getServerSideProps };

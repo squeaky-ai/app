@@ -9,7 +9,7 @@ import { Main } from 'components/main';
 import { Access } from 'components/sites/access';
 import { Page } from 'components/sites/page';
 import { OWNER, ADMIN } from 'data/teams/constants';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { Icon } from 'components/icon';
 import { Platform } from 'components/platform';
@@ -19,7 +19,7 @@ import { useTrackingCode } from 'hooks/use-tracking-code';
 import { guideLinks } from 'data/sites/constants';
 import type { Site } from 'types/graphql';
 
-const SitesSettingsTrackingCode: NextPage<ServerSideProps> = ({ user }) => {
+const SitesSettingsTrackingCode: NextPage<PageProps> = ({ user }) => {
   const { verifiedAt } = useTrackingCode();
 
   const hasPotentialIssue = (site: Site) => verifiedAt && site.daysSinceLastRecording >= MAX_DAYS_BEFORE_POTENTIAL_ISSUE;
@@ -124,4 +124,3 @@ const SitesSettingsTrackingCode: NextPage<ServerSideProps> = ({ user }) => {
 };
 
 export default SitesSettingsTrackingCode;
-export { getServerSideProps };

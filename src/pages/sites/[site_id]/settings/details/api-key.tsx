@@ -11,12 +11,12 @@ import { GenerateApiKey } from 'components/sites/settings/generate-api-key';
 import { Icon } from 'components/icon';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { SettingsTabs } from 'components/sites/settings/settings-tabs';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 import { OWNER, ADMIN } from 'data/teams/constants';
 import { useToasts } from 'hooks/use-toasts';
 import { generateApiKey } from 'lib/api/graphql';
 
-const SiteSettingsApiKey: NextPage<ServerSideProps> = ({ user }) => {
+const SiteSettingsApiKey: NextPage<PageProps> = ({ user }) => {
   const toasts = useToasts();
   const [copying, setCopying] = React.useState<boolean>(false);
 
@@ -97,4 +97,3 @@ const SiteSettingsApiKey: NextPage<ServerSideProps> = ({ user }) => {
 };
 
 export default SiteSettingsApiKey;
-export { getServerSideProps };

@@ -9,10 +9,10 @@ import { Button } from 'components/button';
 import { Error } from 'components/error'; 
 import { Spinner } from 'components/spinner';
 import { CssSelectors } from 'components/widget/css-selectors';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 import { useSiteByUuid } from 'hooks/use-site-by-uuid';
 
-const WidgetMagicErasure: NextPage<ServerSideProps> = () => {
+const WidgetMagicErasure: NextPage<PageProps> = () => {
   const [showDescription, setShowDescription] = React.useState<boolean>(true);
 
   const { site, loading, error } = useSiteByUuid();
@@ -67,4 +67,3 @@ const WidgetMagicErasure: NextPage<ServerSideProps> = () => {
 };
 
 export default WidgetMagicErasure;
-export { getServerSideProps };

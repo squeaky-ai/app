@@ -6,9 +6,9 @@ import { Main } from 'components/main';
 import { Recordings } from 'components/sites/recordings/recordings';
 import { Page } from 'components/sites/page';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 
-const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => (
+const SitesRecordings: NextPage<PageProps> = ({ user }) => (
   <>
     <Head>
       <title>Squeaky | Site Recordings</title>
@@ -26,4 +26,3 @@ const SitesRecordings: NextPage<ServerSideProps> = ({ user }) => (
 );
 
 export default SitesRecordings;
-export { getServerSideProps };

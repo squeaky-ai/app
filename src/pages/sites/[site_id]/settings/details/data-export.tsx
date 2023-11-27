@@ -12,9 +12,9 @@ import { SettingsTabs } from 'components/sites/settings/settings-tabs';
 import { SettingsDataExport } from 'components/sites/settings/settings-data-export';
 import { SettingsDataExportModal } from 'components/sites/settings/settings-data-export-modal';
 import { ADMIN, OWNER } from 'data/teams/constants';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 
-const SitesSettingsDataExport: NextPage<ServerSideProps> = ({ user }) => {
+const SitesSettingsDataExport: NextPage<PageProps> = ({ user }) => {
   const { loading, error, dataExport } = useDataExport();
 
   if (loading) {
@@ -61,4 +61,3 @@ const SitesSettingsDataExport: NextPage<ServerSideProps> = ({ user }) => {
 };
 
 export default SitesSettingsDataExport;
-export { getServerSideProps };

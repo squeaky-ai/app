@@ -8,10 +8,10 @@ import { Illustration } from 'components/illustration';
 import { PageLoading } from 'components/sites/page-loading';
 import { Error } from 'components/error';
 import { CreateModal } from 'components/sites/create/create-modal';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 import { useSites } from 'hooks/use-sites';
 
-const Sites: NextPage<ServerSideProps> = () => {
+const Sites: NextPage<PageProps> = () => {
   const { loading, error, sites } = useSites();
 
   if (error) {
@@ -65,4 +65,3 @@ const Sites: NextPage<ServerSideProps> = () => {
 };
 
 export default Sites;
-export { getServerSideProps };

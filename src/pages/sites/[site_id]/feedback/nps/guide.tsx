@@ -12,9 +12,9 @@ import { EmptyStateHint } from 'components/sites/empty-state-hint';
 import { NpsTabs } from 'components/sites/feedback/nps-tabs';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { Card } from 'components/card';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 
-const SitesFeedbackNpsGuide: NextPage<ServerSideProps> = ({ user }) => (
+const SitesFeedbackNpsGuide: NextPage<PageProps> = ({ user }) => (
   <>
     <Head>
       <title>Squeaky | Feedback | NPS | Guide</title>
@@ -104,4 +104,3 @@ const SitesFeedbackNpsGuide: NextPage<ServerSideProps> = ({ user }) => (
 );
 
 export default SitesFeedbackNpsGuide;
-export { getServerSideProps };

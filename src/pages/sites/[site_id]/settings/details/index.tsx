@@ -10,7 +10,7 @@ import { Access } from 'components/sites/access';
 import { Page } from 'components/sites/page';
 import { OWNER, ADMIN } from 'data/teams/constants';
 import { Tooltip } from 'components/tooltip';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 import { Label } from 'components/label';
 import { Input } from 'components/input';
 import { Button } from 'components/button';
@@ -28,7 +28,7 @@ const DetailsSchema = Yup.object().shape({
   siteType: Yup.number().required('Site type is required'),
 });
 
-const SitesSettingsDetails: NextPage<ServerSideProps> = ({ user }) => {
+const SitesSettingsDetails: NextPage<PageProps> = ({ user }) => {
   const toast = useToasts();
 
   const validateUrl = (urlString: string): boolean => {
@@ -205,4 +205,3 @@ const SitesSettingsDetails: NextPage<ServerSideProps> = ({ user }) => {
 };
 
 export default SitesSettingsDetails;
-export { getServerSideProps };

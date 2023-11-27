@@ -12,7 +12,7 @@ import { Button } from 'components/button';
 import { Divider } from 'components/divider';
 import { Main } from 'components/main';
 import { Tabs } from 'components/users/tabs';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 import { updateUser } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
 import { signout } from 'lib/api/auth';
@@ -23,7 +23,7 @@ const AccountSchema = Yup.object().shape({
   lastName: Yup.string().required('Last name is required'),
 });
 
-const UsersAccount: NextPage<ServerSideProps> = ({ user }) => {
+const UsersAccount: NextPage<PageProps> = ({ user }) => {
   const toast = useToasts();
 
   const handleSignOut = async () => {
@@ -131,4 +131,3 @@ const UsersAccount: NextPage<ServerSideProps> = ({ user }) => {
 };
 
 export default UsersAccount;
-export { getServerSideProps };
