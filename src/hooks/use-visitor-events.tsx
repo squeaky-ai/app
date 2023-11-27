@@ -25,6 +25,7 @@ export const useVisitorEvents = (props: Props): UseVisitorEvents => {
       visitorId: router.query.visitor_id as string,
       ...props,
     },
+    skip: !siteId,
   });
 
   const fallback: Visitor['events'] = {

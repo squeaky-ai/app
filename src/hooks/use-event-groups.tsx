@@ -15,7 +15,8 @@ export const useEventGroups = (): UseEventGroups => {
   const { data, error, loading } = useQuery<{ site: Site }>(GET_EVENT_GROUPS_QUERY, {
     variables: {
       siteId,
-    }
+    },
+    skip: !siteId,
   });
 
   return {

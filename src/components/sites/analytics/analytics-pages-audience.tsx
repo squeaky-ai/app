@@ -13,16 +13,15 @@ import { AnalyticsReferrers } from 'components/sites/analytics/analytics-referre
 import { useAnalyticsPageAudience } from 'hooks/use-analytics-page-audience';
 import { NoResults } from 'components/sites/no-results';
 import { useSort } from 'hooks/use-sort';
-import type { AnalyticsBrowsersSort, Site } from 'types/graphql';
+import type { AnalyticsBrowsersSort } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 
 interface Props {
-  site: Site;
   page: string;
   period: TimePeriod;
 }
 
-export const AnalyticsPagesAudience: FC<Props> = ({ site, page, period }) => {
+export const AnalyticsPagesAudience: FC<Props> = ({ page, period }) => {
   const [browsersPage, setBrowsersPage] = React.useState<number>(1);
   const [referrersPage, setReferrersPage] = React.useState<number>(1);
 
@@ -30,7 +29,6 @@ export const AnalyticsPagesAudience: FC<Props> = ({ site, page, period }) => {
 
   const { analytics, error, loading } = useAnalyticsPageAudience({
     page,
-    site,
     referrersPage,
     browsersPage,
     browsersSort,

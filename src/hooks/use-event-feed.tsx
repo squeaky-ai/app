@@ -27,7 +27,8 @@ export const useEventFeed = (props: Props): UseEventFeed => {
       siteId,
       ...props,
       ...props.range,
-    }
+    },
+    skip: !siteId,
   });
 
   const fallback: EventsFeed = {

@@ -16,7 +16,8 @@ export const useBilling = (): UseBilling => {
   const { data, loading, error } = useQuery<{ site: Site, plans: DecoratedPlan[] }>(GET_BILLING_QUERY, {
     variables: { 
       siteId,
-    }
+    },
+    skip: !siteId,
   });
 
   const fallback: Billing = {

@@ -24,7 +24,8 @@ export const useRecording = (id?: string): UseRecording => {
       recordingId: id || router.query.recording_id as string,
       eventPage: 1,
       excludeRecordingIds: [router.query.recording_id], // We don't want to show this in the sidebar
-    }
+    },
+    skip: !siteId,
   });
 
   const fetchMoreEvents = async (eventPage: number) => {

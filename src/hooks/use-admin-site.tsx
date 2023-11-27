@@ -17,7 +17,8 @@ export const useAdminSite = (): UseAdminSite => {
   const { loading, error, data } = useQuery(GET_ADMIN_SITE_QUERY, {
     variables: {
       siteId,
-    }
+    },
+    skip: !siteId,
   });
 
   const fallback: SiteAdmin = {

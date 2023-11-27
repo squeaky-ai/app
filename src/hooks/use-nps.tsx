@@ -31,7 +31,8 @@ export const useNps = ({ page, size, sort, filters, range }: Props): UseNps => {
       sort,
       filters,
       ...range,
-    }
+    },
+    skip: !siteId,
   });
 
   const fallback: Nps = {

@@ -29,7 +29,6 @@ export const AnalyticsSitesTraffic: FC<Props> = ({ site, period }) => {
   const { sort: pagesSort, setSort: setPagesSort } = useSort<AnalyticsPagesSort>('analytics-pages');
 
   const { analytics, error, loading } = useAnalyticsTraffic({
-    site,
     pagesPage,
     pagesSort,
     range: getDateRange(period),

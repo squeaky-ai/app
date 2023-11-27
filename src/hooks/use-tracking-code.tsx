@@ -16,6 +16,7 @@ export const useTrackingCode = (): UseSite => {
       siteId,
     },
     pollInterval: 5000,
+    skip: !siteId,
   });
 
   return {

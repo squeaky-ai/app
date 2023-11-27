@@ -30,6 +30,7 @@ export const useEventCaptures = ({ page, size, sort, search, filters }: Props): 
       filters,
     },
     pollInterval: 5000,
+    skip: !siteId,
   });
 
   const fallback: EventsCapture = {

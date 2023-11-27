@@ -3,6 +3,7 @@ import { GET_ANALYTICS_TRAFFIC_QUERY } from 'data/analytics/queries';
 import type { AnalyticsPagesSort, Site } from 'types/graphql';
 import type { TimeRange } from 'types/common';
 import type { AnalyticsTraffic } from 'types/analytics';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface UseAnalytics {
   loading: boolean;
@@ -11,16 +12,17 @@ interface UseAnalytics {
 }
 
 interface Props {
-  site: Site;
   range: TimeRange;
   pagesPage: number;
   pagesSort: AnalyticsPagesSort;
 }
 
 export const useAnalyticsTraffic = (props: Props): UseAnalytics => {
+  const siteId = useSiteId();
+
   const { data, loading, error } = useQuery<{ site: Site }>(GET_ANALYTICS_TRAFFIC_QUERY, {
     variables: {
-      siteId: props.site.id,
+      siteId,
       ...props,
       ...props.range,
     }

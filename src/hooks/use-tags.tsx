@@ -26,7 +26,8 @@ export const useTags = (): UseTags => {
   const { data, error, loading } = useQuery<{ site: Site }>(QUERY, {
     variables: {
       siteId,
-    }
+    },
+    skip: !siteId,
   });
 
   const tags = data ? data.site.tags : [];

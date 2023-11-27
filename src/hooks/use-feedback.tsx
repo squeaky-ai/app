@@ -16,6 +16,7 @@ export const useFeedback = (): UseFeedback => {
     variables: {
       siteId,
     },
+    skip: !siteId,
   });
 
   const fallback: Feedback = {

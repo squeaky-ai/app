@@ -29,7 +29,8 @@ export const useErrors = ({ page, size, sort, range }: Props): UseErrors => {
       size,
       sort,
       ...range,
-    }
+    },
+    skip: !siteId,
   });
 
   const errorsFallback: Errors = {

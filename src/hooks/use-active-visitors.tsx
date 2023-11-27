@@ -14,6 +14,7 @@ export const useActiveVisitors = (): UseActiveVisitors => {
   const { loading, error, data } = useQuery(GET_ACTIVE_USERS_QUERY, {
     variables: { siteId },
     pollInterval: 5000,
+    skip: !siteId,
   });
 
   return {

@@ -15,7 +15,8 @@ export const useSite = (): UseSite => {
   const { loading, error, data } = useQuery(GET_SITE_QUERY, {
     variables: {
       siteId,
-    }
+    },
+    skip: !siteId,
   });
 
   return {

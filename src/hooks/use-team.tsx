@@ -25,6 +25,7 @@ export const useTeam = (): UseSite => {
       siteId,
     },
     pollInterval: 5000,
+    skip: !siteId,
   });
 
   const fallback: Team = {

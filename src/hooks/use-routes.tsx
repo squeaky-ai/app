@@ -16,6 +16,7 @@ export const useRoutes = (): UseRoutes => {
     variables: {
       siteId,
     },
+    skip: !siteId,
   });
 
   return {

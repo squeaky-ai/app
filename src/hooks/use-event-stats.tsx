@@ -26,7 +26,8 @@ export const useEventStats = (props: Props): UseEventStats => {
       siteId,
       ...props,
       ...props.range,
-    }
+    },
+    skip: !siteId,
   });
 
   const fallback: EventStats = {

@@ -19,6 +19,7 @@ export const useVisitor = (): UseVisitor => {
       siteId,
       visitorId: router.query.visitor_id as string,
     },
+    skip: !siteId,
   });
 
   return {

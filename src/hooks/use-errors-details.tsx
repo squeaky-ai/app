@@ -25,7 +25,8 @@ export const useErrorsDetails = ({ id, range }: Props): UseErrorsDetails => {
       siteId,
       errorId: id,
       ...range,
-    }
+    },
+    skip: !siteId,
   });
 
   const countsFallack: ErrorsCounts = {

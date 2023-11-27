@@ -27,7 +27,7 @@ function getVariablesForProps(siteId: string, props: Props) {
     page: props.page,
     excludeRecordingIds: props.excludeRecordingIds,
     ...props.range,
-  }
+  };
 }
 
 function parseJsonResponse(heatmaps: HeatmapsWithStringItems): Heatmaps {
@@ -42,7 +42,7 @@ export const useHeatmaps = (props: Props): UseHeatmaps => {
 
   const { data, loading, error } = useQuery<{ site: Site }>(GET_HEATMAPS_QUERY, {
     variables: getVariablesForProps(siteId, props),
-    skip: !props.page,
+    skip: !props.page || !siteId,
   });
 
   const defaults: Heatmaps = {

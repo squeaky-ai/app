@@ -18,6 +18,7 @@ export const useDataExport = (): UseDataExport => {
       siteId,
     },
     pollInterval: 5000,
+    skip: !siteId,
   });
 
   return {

@@ -29,7 +29,7 @@ export const useJourneys = (props: Props): UseJourneys => {
       position: props.position,
       ...props.range,
     },
-    skip: !props.page,
+    skip: !props.page || !siteId,
   });
 
   return {

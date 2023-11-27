@@ -35,7 +35,8 @@ export const useErrorsDetailsRecordings = ({
       page,
       sort,
       ...range,
-    }
+    },
+    skip: !siteId,
   });
 
   const fallback: Recordings = {

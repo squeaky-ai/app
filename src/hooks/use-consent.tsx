@@ -15,7 +15,8 @@ export const useConsent = (): UseConsent => {
   const { loading, error, data } = useQuery(GET_CONSENT_QUERY, {
     variables: {
       siteId,
-    }
+    },
+    skip: !siteId,
   });
 
   const fallback: Consent = {

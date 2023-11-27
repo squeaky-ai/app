@@ -31,7 +31,8 @@ export const useSentiment = ({ page, size, sort, filters, range }: Props): UseSe
       sort,
       filters,
       ...range,
-    }
+    },
+    skip: !siteId,
   });
 
   const fallback: Sentiment = {

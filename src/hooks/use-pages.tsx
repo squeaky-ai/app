@@ -33,6 +33,7 @@ export const usePages = ({ range }: Props): UsePages => {
       siteId,
       ...range,
     },
+    skip: !siteId,
   });
 
   const pages = data ? data.site.pages : [];

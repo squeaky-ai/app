@@ -23,7 +23,8 @@ export const useReferrers = (): UseReferrers => {
   const { data, error, loading } = useQuery<{ site: Site }>(QUERY, {
     variables: {
       siteId,
-    }
+    },
+    skip: !siteId,
   });
 
   const referrers = data ? data.site.referrers : [];

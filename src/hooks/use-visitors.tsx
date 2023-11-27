@@ -39,7 +39,7 @@ export const useVisitors = ({ site, page, size, sort, search, filters, range }: 
       filters: formatVisitorsFilters(filters),
       ...range,
       skip: site.recordingsCount === 0,
-    }
+    },
   });
 
   const fallback: Visitors = { 

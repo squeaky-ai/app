@@ -35,7 +35,8 @@ export const useErrorsDetailsVisitors = ({
       page,
       sort,
       ...range,
-    }
+    },
+    skip: !siteId,
   });
 
   const fallback: Visitors = {

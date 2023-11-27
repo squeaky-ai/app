@@ -13,18 +13,15 @@ import { AnalyticsTimeAverages } from 'components/sites/analytics/analytics-time
 import { useAnalyticsPageTraffic } from 'hooks/use-analytics-page-traffic';
 import { NoResults } from 'components/sites/no-results';
 import { getDateRange } from 'lib/dates';
-import type { Site } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 
 interface Props {
-  site: Site;
   page: string;
   period: TimePeriod;
 }
 
-export const AnalyticsPagesTraffic: FC<Props> = ({ site, page, period }) => {
+export const AnalyticsPagesTraffic: FC<Props> = ({ page, period }) => {
   const { loading, error, analytics } = useAnalyticsPageTraffic({
-    site,
     range: getDateRange(period),
     page,
   });

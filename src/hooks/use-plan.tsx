@@ -1,10 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { GET_PLAN_QUERY } from 'data/sites/queries';
-import type { Site, SitesPlan } from 'types/graphql';
-
-interface Props {
-  site: Site;
-}
+import type { SitesPlan } from 'types/graphql';
+import { useSiteId } from './use-site-id';
 
 interface UsePlan {
   loading: boolean;
@@ -12,11 +9,14 @@ interface UsePlan {
   plan: SitesPlan;
 }
 
-export const usePlan = (props: Props): UsePlan => {
+export const usePlan = (): UsePlan => {
+  const siteId = useSiteId();
+
   const { loading, error, data } = useQuery(GET_PLAN_QUERY, {
     variables: {
-      siteId: props.site.id,
-    }
+      siteId,
+    },
+    skip: !siteId,
   });
 
   const fallback: SitesPlan = {
