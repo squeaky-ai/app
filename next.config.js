@@ -18,9 +18,16 @@ const API_HOST_NAME = API_HOST || 'http://localhost:3333';
 // production!
 const WEB_HOST_NAME = IS_DEV ? 'http://localhost:3333' : 'https://squeaky.ai';
 
+/**
+ * @type {import('next').NextConfig}
+ */
 module.exports = {
   basePath: BASE_PATH,
   assetPrefix: ASSET_PREFIX,
+  images: {
+    unoptimized: true,
+  },
+  output: 'export',
   publicRuntimeConfig: {
     dev: IS_DEV,
     apiHost: API_HOST_NAME,
@@ -28,28 +35,5 @@ module.exports = {
     basePath: BASE_PATH,
     squeakySiteId: 82,
   },
-  async rewrites() {
-    return IS_DEV ? [
-      {
-        source: '/api/:slug*',
-        destination: 'http://localhost:3333/api/:slug*',
-        basePath: false,
-      }
-    ] : [];
-  },
-  async redirects() {
-    return [
-      {
-        source: '/__admin',
-        destination: '/__admin/dashboard',
-        permanent: true,
-      },
-      {
-        source: '/app/developers',
-        destination: '/developers',
-        permanent: true,
-        basePath: false,
-      },
-    ]
-  },
+  trailingSlash: true,
 };

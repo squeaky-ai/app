@@ -2,6 +2,7 @@
 .next
 build
 node_modules
+out
 tsconfig.tsbuildinfo
 yarn-error.log
 .DS_Store
