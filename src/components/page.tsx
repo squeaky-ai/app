@@ -17,7 +17,7 @@ export const Page: FC<Props> = ({ children }) => {
 
   const { user, loading, redirect } = useAuth();
 
-  if (loading) {
+  if (loading || !router.isReady) {
     return <Spinner />;
   }
 
