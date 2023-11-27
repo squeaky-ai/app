@@ -1,8 +1,8 @@
-import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_ERRORS_DETAILS_VISITORS_QUERY } from 'data/errors/queries';
 import type { TimeRange } from 'types/common';
 import type { Site, Visitors, VisitorsSort } from 'types/graphql';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface UseErrorsDetailsVisitors {
   loading: boolean;
@@ -25,11 +25,11 @@ export const useErrorsDetailsVisitors = ({
   page,
   sort,
 }: Props): UseErrorsDetailsVisitors => {
-  const router = useRouter();
+  const siteId = useSiteId();
 
   const { data, loading, error } = useQuery<{ site: Site }>(GET_ERRORS_DETAILS_VISITORS_QUERY, {
     variables: {
-      siteId: router.query.site_id as string,
+      siteId,
       errorId: id,
       size,
       page,

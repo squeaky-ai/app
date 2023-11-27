@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { GET_VISITOR_EVENTS_QUERY } from 'data/visitors/queries';
 import { Visitor, Site, EventsFeedSort } from 'types/graphql';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface Props {
   page: number;
@@ -16,10 +17,11 @@ interface UseVisitorEvents {
 
 export const useVisitorEvents = (props: Props): UseVisitorEvents => {
   const router = useRouter();
+  const siteId = useSiteId();
 
   const { data, loading, error } = useQuery<{ site: Site }>(GET_VISITOR_EVENTS_QUERY, {
     variables: { 
-      siteId: router.query.site_id as string,
+      siteId,
       visitorId: router.query.visitor_id as string,
       ...props,
     },

@@ -1,9 +1,9 @@
-import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_DASHBOARD_QUERY } from 'data/dashboard/queries';
 import type { TimeRange } from 'types/common';
 import type { Site } from 'types/graphql';
 import type { Dashboard } from 'types/dashboard';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface Props {
   range: TimeRange;
@@ -16,11 +16,11 @@ interface UseDashboard {
 }
 
 export const useDashboard = (props: Props): UseDashboard => {
-  const router = useRouter();
+  const siteId = useSiteId();
 
   const { data, loading, error } = useQuery<{ site: Site }>(GET_DASHBOARD_QUERY, {
     variables: {
-      siteId: router.query.site_id as string,
+      siteId,
       ...props.range,
     }
   });

@@ -1,7 +1,7 @@
-import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_CONSENT_QUERY } from 'data/consent/queries';
 import type { Consent } from 'types/graphql';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface UseConsent {
   loading: boolean;
@@ -10,11 +10,11 @@ interface UseConsent {
 }
 
 export const useConsent = (): UseConsent => {
-  const router = useRouter();
+  const siteId = useSiteId();
 
   const { loading, error, data } = useQuery(GET_CONSENT_QUERY, {
     variables: {
-      siteId: router.query.site_id as string,
+      siteId,
     }
   });
 

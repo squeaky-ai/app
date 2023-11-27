@@ -1,6 +1,6 @@
-import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_ACTIVE_USERS_QUERY } from 'data/sites/queries';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface UseActiveVisitors {
   loading: boolean;
@@ -9,14 +9,10 @@ interface UseActiveVisitors {
 }
 
 export const useActiveVisitors = (): UseActiveVisitors => {
-  const router = useRouter();
-
-  const variables = {
-    siteId: router.query.site_id as string
-  };
+  const siteId = useSiteId();
 
   const { loading, error, data } = useQuery(GET_ACTIVE_USERS_QUERY, {
-    variables,
+    variables: { siteId },
     pollInterval: 5000,
   });
 

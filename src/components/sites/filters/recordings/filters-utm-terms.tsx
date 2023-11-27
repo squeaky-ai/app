@@ -2,7 +2,6 @@ import React from 'react';
 import type { FC } from 'react';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-import { useRouter } from 'next/router';
 import { gql, useQuery } from '@apollo/client';
 import { Button } from 'components/button';
 import { Icon } from 'components/icon';
@@ -10,6 +9,7 @@ import { Radio } from 'components/radio';
 import { Spinner } from 'components/spinner';
 import type { Site, RecordingsFilters } from 'types/graphql';
 import type { ValueOf } from 'types/common';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface Props {
   value: RecordingsFilters['utmTerm'];
@@ -31,11 +31,11 @@ const UtmTermsSchema = Yup.object().shape({
 });
 
 export const FiltersUtmTerms: FC<Props> = ({ value, onClose, onUpdate }) => {
-  const router = useRouter();
+  const siteId = useSiteId();
 
   const { data, loading } = useQuery<{ site: Site }>(QUERY, {
     variables: {
-      siteId: router.query.site_id as string
+      siteId,
     }
   });
 

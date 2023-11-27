@@ -1,7 +1,7 @@
-import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_ROUTES_QUERY } from 'data/sites/queries';
 import type { Site } from 'types/graphql';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface UseRoutes {
   loading: boolean;
@@ -10,11 +10,11 @@ interface UseRoutes {
 }
 
 export const useRoutes = (): UseRoutes => {
-  const router = useRouter();
+  const siteId = useSiteId();
 
   const { data, loading, error } = useQuery<{ site: Site }>(GET_ROUTES_QUERY, {
     variables: {
-      siteId: router.query.site_id as string,
+      siteId,
     },
   });
 

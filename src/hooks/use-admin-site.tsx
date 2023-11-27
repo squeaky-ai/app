@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client';
-import { useRouter } from 'next/router';
 import { GET_ADMIN_SITE_QUERY } from 'data/admin/queries';
 import type { Admin } from 'types/graphql';
+import { useSiteId } from 'hooks/use-site-id';
 
 type SiteAdmin = Pick<Admin, 'site' | 'activeVisitors'>;
 
@@ -12,11 +12,11 @@ interface UseAdminSite {
 }
 
 export const useAdminSite = (): UseAdminSite => {
-  const router = useRouter();
+  const siteId = useSiteId();
 
   const { loading, error, data } = useQuery(GET_ADMIN_SITE_QUERY, {
     variables: {
-      siteId: router.query.site_id as string,
+      siteId,
     }
   });
 

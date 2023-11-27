@@ -19,6 +19,7 @@ import { Preferences, Preference } from 'lib/preferences';
 import { OWNER, ADMIN } from 'data/teams/constants';
 import { useResize } from 'hooks/use-resize';
 import type { User } from 'types/graphql';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface Props {
   user: User;
@@ -28,6 +29,7 @@ export const Sidebar: FC<Props> = ({ user }) => {
   const ref = React.useRef<HTMLElement>(null);
   const resize = useResize();
   const router = useRouter();
+  const siteId = useSiteId();
 
   const [open, setOpen] = React.useState<boolean>(true);
   const [expanded, setExpanded] = React.useState<string[]>([]);
@@ -37,7 +39,6 @@ export const Sidebar: FC<Props> = ({ user }) => {
 
   const path = router.asPath;
   const pathname = router.pathname;
-  const siteId = router.query.site_id as string;
   const isMobile = () => window.innerWidth < Breakpoints.TABLET;
 
   const toggleOpen = () => {
@@ -84,7 +85,7 @@ export const Sidebar: FC<Props> = ({ user }) => {
   };
 
   React.useEffect(() => {
-    setPosition(path.startsWith('/sites/') ? 'right' : 'left');
+    setPosition(pathname.startsWith('/sites/') ? 'right' : 'left');
 
     if (isMobile()) {
       setOpen(false);

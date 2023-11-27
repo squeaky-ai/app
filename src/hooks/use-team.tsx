@@ -1,7 +1,7 @@
-import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_TEAM_QUERY } from 'data/teams/queries';
 import type { Team as TeamMember } from 'types/graphql';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface Team {
   members: TeamMember[];
@@ -18,11 +18,11 @@ const orderTeam = (team: TeamMember[]) => [...team].sort((a, b) => {
 });
 
 export const useTeam = (): UseSite => {
-  const router = useRouter();
+  const siteId = useSiteId();
 
   const { loading, error, data } = useQuery(GET_TEAM_QUERY, {
     variables: {
-      siteId: router.query.site_id as string
+      siteId,
     },
     pollInterval: 5000,
   });

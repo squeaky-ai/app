@@ -1,7 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
-import { useRouter } from 'next/router';
 import type { TimeRange } from 'types/common';
 import type { Site, SitesPage } from 'types/graphql';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface UsePages {
   loading: boolean;
@@ -26,11 +26,11 @@ const QUERY = gql`
 `;
 
 export const usePages = ({ range }: Props): UsePages => {
-  const router = useRouter();
+  const siteId = useSiteId();
 
   const { data, error, loading } = useQuery<{ site: Site }>(QUERY, {
     variables: {
-      siteId: router.query.site_id as string,
+      siteId,
       ...range,
     },
   });

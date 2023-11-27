@@ -1,9 +1,9 @@
-import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_SENTIMENT_QUERY } from 'data/sentiment/queries';
 import { FeedbackSentimentResponseSort } from 'types/graphql';
 import type { TimeRange } from 'types/common';
 import type { Site, Sentiment, FeedbackSentimentResponseFilters } from 'types/graphql';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface Props {
   page: number;
@@ -21,11 +21,11 @@ interface UseSentiment {
 }
 
 export const useSentiment = ({ page, size, sort, filters, range }: Props): UseSentiment => {
-  const router = useRouter();
+  const siteId = useSiteId();
 
   const { data, loading, error } = useQuery<{ site: Site }>(GET_SENTIMENT_QUERY, {
     variables: { 
-      siteId: router.query.site_id as string, 
+      siteId,
       page, 
       size,
       sort,

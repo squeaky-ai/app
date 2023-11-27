@@ -1,7 +1,6 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import { Main } from 'components/main';
 import { Access } from 'components/sites/access';
 import { Page } from 'components/sites/page';
@@ -16,11 +15,11 @@ import { SettingsTagsBulkActions } from 'components/sites/settings/settings-tags
 import { SettingsTabs } from 'components/sites/settings/settings-tabs';
 import { PageProps } from 'types/page';
 import { useTags } from 'hooks/use-tags';
+import { useSiteId } from 'hooks/use-site-id';
 
 
 const SitesSettingsTags: NextPage<PageProps> = ({ user }) => {
-  const router = useRouter();
-  const siteId = router.query.site_id as string;
+  const siteId = useSiteId();
   const [sort, setSort] = React.useState<string>('name__asc');
   const [selected, setSelected] = React.useState<string[]>([]);
 

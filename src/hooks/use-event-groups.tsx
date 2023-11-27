@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client';
-import { useRouter } from 'next/router';
 import { GET_EVENT_GROUPS_QUERY } from 'data/events/queries';
 import type { Site, EventsGroup } from 'types/graphql';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface UseEventGroups {
   loading: boolean;
@@ -10,11 +10,11 @@ interface UseEventGroups {
 }
 
 export const useEventGroups = (): UseEventGroups => {
-  const router = useRouter();
+  const siteId = useSiteId();
 
   const { data, error, loading } = useQuery<{ site: Site }>(GET_EVENT_GROUPS_QUERY, {
     variables: {
-      siteId: router.query.site_id as string,
+      siteId,
     }
   });
 

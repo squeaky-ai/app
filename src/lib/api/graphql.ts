@@ -1,3 +1,4 @@
+import getConfig from 'next/config';
 import { uniq } from 'lodash';
 import { ApolloClient, InMemoryCache, TypedDocumentNode, gql } from '@apollo/client';
 import { Preference, Preferences } from 'lib/preferences';
@@ -237,7 +238,12 @@ import {
 import {
   GET_ADMIN_SITES_BUNDLES_QUERY,
 } from 'data/admin/queries';
-import { GET_CHANGELOG_POSTS_QUERY } from 'data/changelog/queries';
+
+import {
+  GET_CHANGELOG_POSTS_QUERY
+} from 'data/changelog/queries';
+
+const { publicRuntimeConfig } = getConfig();
 
 export const cache = new InMemoryCache({
   typePolicies: {
@@ -274,11 +280,11 @@ export const cache = new InMemoryCache({
 
 export const client = new ApolloClient({
   cache,
-  uri: '/api/graphql',
-  ssrMode: typeof window === 'undefined',
+  uri: `${publicRuntimeConfig.apiHost}/api/graphql`,
   headers: {
     'x-squeaky-timezone': typeof window === 'undefined' ? 'UTC' : Preferences.getString(Preference.TIMEZONE) || 'UTC', 
   },
+  credentials: 'include',
 });
 
 export const getGqlString = (document: TypedDocumentNode): string => (

@@ -6,6 +6,7 @@ import { Icon } from 'components/icon'
 import { useFilters } from 'hooks/use-filters';
 import { FILTERS } from 'data/recordings/constants';
 import type { RecordingsFilters } from 'types/graphql';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface Props {
   hint: string;
@@ -14,12 +15,13 @@ interface Props {
 
 export const FiltersRecordingsLink: FC<Props> = ({ hint, action }) => {
   const router = useRouter();
+  const siteId = useSiteId();
 
   const { setFilters } = useFilters<RecordingsFilters>('recordings');
 
   const handleClick = async () => {
     setFilters({ ...FILTERS, ...action });
-    await router.push(`/sites/${router.query.site_id}/recordings`);
+    await router.push(`/sites/${siteId}/recordings`);
   };
 
   return (

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import getConfig from 'next/config';
 import type { AxiosError } from 'axios';
 
 type LoginInput = {
@@ -11,6 +12,8 @@ interface Response<T> {
   error?: any;
   status?: number;
 }
+
+const { publicRuntimeConfig } = getConfig();
 
 const handleSuccess = <T>(body: T): Response<T> => ({ body });
 
@@ -25,7 +28,7 @@ const handleFailure = (error: AxiosError): Response<null> => {
 
 export const login = async <T>(input: LoginInput): Promise<Response<T>> => {
   try {
-    const response = await axios.post('/api/auth/sign_in.json', { user: input });
+    const response = await axios.post(`${publicRuntimeConfig.apiHost}/api/auth/sign_in.json`, { user: input }, { withCredentials: true });
     return handleSuccess(response.data);
   } catch(error: any) {
     return handleFailure(error);
@@ -34,7 +37,7 @@ export const login = async <T>(input: LoginInput): Promise<Response<T>> => {
 
 export const signout = async (): Promise<Response<null>> => {
   try {
-    await axios.delete('/api/auth/sign_out.json');
+    await axios.delete(`${publicRuntimeConfig.apiHost}/api/auth/sign_out.json`, { withCredentials: true });
     return handleSuccess(null);
   } catch(error: any) {
     return handleFailure(error);

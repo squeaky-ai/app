@@ -1,8 +1,8 @@
 import { useQuery } from '@apollo/client';
-import { useRouter } from 'next/router';
 import { GET_EVENT_FEED_QUERY } from 'data/events/queries';
 import type { TimeRange } from 'types/common';
 import type { Site, EventsFeed, EventsFeedSort } from 'types/graphql';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface Props {
   groupIds: string[];
@@ -20,11 +20,11 @@ interface UseEventFeed {
 }
 
 export const useEventFeed = (props: Props): UseEventFeed => {
-  const router = useRouter();
+  const siteId = useSiteId();
 
   const { data, error, loading } = useQuery<{ site: Site }>(GET_EVENT_FEED_QUERY, {
     variables: {
-      siteId: router.query.site_id as string,
+      siteId,
       ...props,
       ...props.range,
     }

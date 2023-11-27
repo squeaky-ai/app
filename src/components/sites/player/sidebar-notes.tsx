@@ -5,7 +5,6 @@ import classnames from 'classnames';
 import * as Yup from 'yup';
 import { sortBy } from 'lodash';
 import { Formik } from 'formik';
-import { useRouter } from 'next/router';
 import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { Label } from 'components/label';
@@ -18,6 +17,7 @@ import { toTimeString, fromTimeString } from 'lib/dates';
 import { READ_ONLY, SUPER_USER } from 'data/teams/constants';
 import { noteDelete, noteCreate, noteUpdate } from 'lib/api/graphql';
 import type { Recording, Note as INote, Team } from 'types/graphql';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface Props {
   member?: Team;
@@ -31,10 +31,8 @@ const NoteSchema = Yup.object().shape({
 });
 
 export const SidebarNotes: FC<Props> = ({ member, recording, replayer }) => {
-  const router = useRouter();
   const ref = React.useRef<Modal>();
-
-  const siteId = router.query.site_id + '';
+  const siteId = useSiteId();
 
   const notes = sortBy(recording.notes || [], note => note.timestamp); 
 

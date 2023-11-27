@@ -6,6 +6,7 @@ import { Icon } from 'components/icon'
 import { useFilters } from 'hooks/use-filters';
 import { FILTERS } from 'data/visitors/constants';
 import type { VisitorsFilters } from 'types/visitors';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface Props {
   hint: string;
@@ -14,12 +15,13 @@ interface Props {
 
 export const FiltersVisitorsLink: FC<Props> = ({ hint, action }) => {
   const router = useRouter();
+  const siteId = useSiteId();
 
   const { setFilters } = useFilters<VisitorsFilters>('visitors');
 
   const handleClick = async () => {
     setFilters({ ...FILTERS, ...action });
-    await router.push(`/sites/${router.query.site_id}/visitors`);
+    await router.push(`/sites/${siteId}/visitors`);
   };
 
   return (
