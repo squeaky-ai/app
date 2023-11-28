@@ -10,17 +10,17 @@ interface UseRoutes {
 }
 
 export const useRoutes = (): UseRoutes => {
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { data, loading, error } = useQuery<{ site: Site }>(GET_ROUTES_QUERY, {
     variables: {
       siteId,
     },
-    skip: !siteId,
+    skip,
   });
 
   return {
-    loading,
+    loading: loading || skip,
     error: !!error,
     routes: data ? data.site.routes : [],
   };

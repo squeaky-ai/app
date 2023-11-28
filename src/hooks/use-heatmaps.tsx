@@ -38,11 +38,11 @@ function parseJsonResponse(heatmaps: HeatmapsWithStringItems): Heatmaps {
 }
 
 export const useHeatmaps = (props: Props): UseHeatmaps => {
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { data, loading, error } = useQuery<{ site: Site }>(GET_HEATMAPS_QUERY, {
     variables: getVariablesForProps(siteId, props),
-    skip: !props.page || !siteId,
+    skip: !props.page || skip
   });
 
   const defaults: Heatmaps = {
@@ -56,7 +56,7 @@ export const useHeatmaps = (props: Props): UseHeatmaps => {
   };
 
   return {
-    loading,
+    loading: loading || skip,
     error: !!error,
     heatmaps: data?.site?.heatmaps ? parseJsonResponse(data.site.heatmaps) : defaults,
   };

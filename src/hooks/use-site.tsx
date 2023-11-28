@@ -10,17 +10,17 @@ interface UseSite {
 }
 
 export const useSite = (): UseSite => {
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { loading, error, data } = useQuery(GET_SITE_QUERY, {
     variables: {
       siteId,
     },
-    skip: !siteId,
+    skip,
   });
 
   return {
-    loading,
+    loading: loading || skip, // This is a special case or we'll see the 404 page while the router loads
     error: !!error,
     site: data ? data.site : null
   };

@@ -20,7 +20,7 @@ interface Props {
 }
 
 export const useJourneys = (props: Props): UseJourneys => {
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { data, loading, error, refetch } = useQuery<{ site: Site }>(GET_JOURNEYS_QUERY, {
     variables: {
@@ -29,11 +29,11 @@ export const useJourneys = (props: Props): UseJourneys => {
       position: props.position,
       ...props.range,
     },
-    skip: !props.page || !siteId,
+    skip: !props.page || skip,
   });
 
   return {
-    loading,
+    loading: loading || skip,
     error: !!error,
     routes: data ? data.site.routes : [],
     journeys: data ? data.site.analytics.userPaths : [],

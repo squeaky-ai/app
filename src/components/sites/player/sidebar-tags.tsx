@@ -21,7 +21,7 @@ const TagSchema = Yup.object().shape({
 });
 
 export const SidebarTags: FC<Props> = ({ member, recording }) => {
-  const siteId = useSiteId();
+  const [siteId] = useSiteId();
   const ref = React.useRef<HTMLFormElement>(null);
   const [focus, setFocus] = React.useState<boolean>(false);
 

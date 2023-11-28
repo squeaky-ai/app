@@ -16,14 +16,14 @@ interface UseDashboard {
 }
 
 export const useDashboard = (props: Props): UseDashboard => {
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { data, loading, error } = useQuery<{ site: Site }>(GET_DASHBOARD_QUERY, {
     variables: {
       siteId,
       ...props.range,
     },
-    skip: !siteId,
+    skip,
   });
 
   const fallback: Dashboard = {
@@ -104,7 +104,7 @@ export const useDashboard = (props: Props): UseDashboard => {
   } : fallback;
 
   return {
-    loading,
+    loading: loading || skip,
     error: !!error,
     dashboard,
   };

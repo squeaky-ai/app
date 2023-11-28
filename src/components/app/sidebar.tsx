@@ -29,7 +29,7 @@ export const Sidebar: FC<Props> = ({ user }) => {
   const ref = React.useRef<HTMLElement>(null);
   const resize = useResize();
   const router = useRouter();
-  const siteId = useSiteId();
+  const [siteId] = useSiteId();
 
   const [open, setOpen] = React.useState<boolean>(true);
   const [expanded, setExpanded] = React.useState<string[]>([]);

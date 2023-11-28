@@ -18,10 +18,13 @@ interface UseChangelogPost {
 export const useChangelogPost = (): UseChangelogPost => {
   const router = useRouter();
 
+  const skip = !router.isReady;
+
   const { loading, error, data, refetch } = useQuery(GET_CHANGELOG_POST_QUERY, {
     variables: {
       slug: `/${router.query.path}`,
-    }
+    },
+    skip,
   });
 
   const fallback: AdminChangelogPost = {
@@ -32,7 +35,7 @@ export const useChangelogPost = (): UseChangelogPost => {
   };
 
   return {
-    loading,
+    loading: loading || skip,
     error: !!error,
     post: data || fallback,
     refetch,

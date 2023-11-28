@@ -10,16 +10,17 @@ interface UseSiteByUuid {
 }
 
 export const useSiteByUuid = (): UseSiteByUuid => {
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { loading, error, data } = useQuery(GET_SITE_BY_UUID_QUERY, {
     variables: {
       siteId,
-    }
+    },
+    skip,
   });
 
   return {
-    loading,
+    loading: loading || skip,
     error: !!error,
     site: data ? data.siteByUuid : null
   };

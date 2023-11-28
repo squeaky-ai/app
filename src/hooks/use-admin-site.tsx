@@ -12,13 +12,13 @@ interface UseAdminSite {
 }
 
 export const useAdminSite = (): UseAdminSite => {
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { loading, error, data } = useQuery(GET_ADMIN_SITE_QUERY, {
     variables: {
       siteId,
     },
-    skip: !siteId,
+    skip,
   });
 
   const fallback: SiteAdmin = {
@@ -27,7 +27,7 @@ export const useAdminSite = (): UseAdminSite => {
   };
 
   return {
-    loading, 
+    loading: loading || skip, 
     error: !!error,
     admin: data?.admin || fallback,
   };

@@ -31,12 +31,13 @@ const UtmTermsSchema = Yup.object().shape({
 });
 
 export const FiltersUtmTerms: FC<Props> = ({ value, onClose, onUpdate }) => {
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { data, loading } = useQuery<{ site: Site }>(QUERY, {
     variables: {
       siteId,
-    }
+    },
+    skip,
   });
 
   const utmTerms = data ? data.site.utmTerms : [];

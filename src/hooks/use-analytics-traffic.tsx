@@ -18,14 +18,15 @@ interface Props {
 }
 
 export const useAnalyticsTraffic = (props: Props): UseAnalytics => {
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { data, loading, error } = useQuery<{ site: Site }>(GET_ANALYTICS_TRAFFIC_QUERY, {
     variables: {
       siteId,
       ...props,
       ...props.range,
-    }
+    },
+    skip,
   });
 
   const fallback: AnalyticsTraffic = {
@@ -68,7 +69,7 @@ export const useAnalyticsTraffic = (props: Props): UseAnalytics => {
   };
 
   return { 
-    loading, 
+    loading: loading || skip, 
     error: !!error,
     analytics: data ? data.site.analytics : fallback,
   };

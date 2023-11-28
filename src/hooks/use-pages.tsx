@@ -26,20 +26,20 @@ const QUERY = gql`
 `;
 
 export const usePages = ({ range }: Props): UsePages => {
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { data, error, loading } = useQuery<{ site: Site }>(QUERY, {
     variables: {
       siteId,
       ...range,
     },
-    skip: !siteId,
+    skip,
   });
 
   const pages = data ? data.site.pages : [];
 
   return {
-    loading,
+    loading: loading || skip,
     error: !!error,
     pages,
   };

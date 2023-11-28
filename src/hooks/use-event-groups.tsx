@@ -10,17 +10,17 @@ interface UseEventGroups {
 }
 
 export const useEventGroups = (): UseEventGroups => {
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { data, error, loading } = useQuery<{ site: Site }>(GET_EVENT_GROUPS_QUERY, {
     variables: {
       siteId,
     },
-    skip: !siteId,
+    skip,
   });
 
   return {
-    loading,
+    loading: loading || skip,
     error: !!error,
     groups: data
       ? data.site.eventGroups

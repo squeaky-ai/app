@@ -31,12 +31,13 @@ const UtmSourceSchema = Yup.object().shape({
 });
 
 export const FiltersUtmSources: FC<Props> = ({ value, onClose, onUpdate }) => {
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { data, loading } = useQuery<{ site: Site }>(QUERY, {
     variables: {
       siteId,
-    }
+    },
+    skip,
   });
 
   const utmSources = data ? data.site.utmSources : [];

@@ -9,16 +9,16 @@ interface UseActiveVisitors {
 }
 
 export const useActiveVisitors = (): UseActiveVisitors => {
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { loading, error, data } = useQuery(GET_ACTIVE_USERS_QUERY, {
     variables: { siteId },
     pollInterval: 5000,
-    skip: !siteId,
+    skip,
   });
 
   return {
-    loading,
+    loading: loading || skip,
     error: !!error,
     activeVisitors: data ? data.site.activeUserCount : 0,
   };

@@ -10,13 +10,13 @@ interface UseFeedback {
 }
 
 export const useFeedback = (): UseFeedback => {
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { loading, error, data } = useQuery(GET_FEEDBACK_QUERY, {
     variables: {
       siteId,
     },
-    skip: !siteId,
+    skip,
   });
 
   const fallback: Feedback = {
@@ -43,7 +43,7 @@ export const useFeedback = (): UseFeedback => {
   };
 
   return {
-    loading,
+    loading: loading || skip,
     error: !!error,
     feedback: data?.site?.feedback || fallback,
   };

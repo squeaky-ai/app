@@ -11,18 +11,18 @@ interface UseDataExport {
 }
 
 export const useDataExport = (): UseDataExport => {
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { data, loading, error } = useQuery<{ site: Site }>(GET_DATA_EXPORT_QUERY, {
     variables: {
       siteId,
     },
     pollInterval: 5000,
-    skip: !siteId,
+    skip,
   });
 
   return {
-    loading,
+    loading: loading || skip,
     error: !!error,
     dataExport: data ? data.site.dataExports : [],
   };

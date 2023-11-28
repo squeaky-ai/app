@@ -20,7 +20,7 @@ interface UseEventFeed {
 }
 
 export const useEventFeed = (props: Props): UseEventFeed => {
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { data, error, loading } = useQuery<{ site: Site }>(GET_EVENT_FEED_QUERY, {
     variables: {
@@ -28,7 +28,7 @@ export const useEventFeed = (props: Props): UseEventFeed => {
       ...props,
       ...props.range,
     },
-    skip: !siteId,
+    skip,
   });
 
   const fallback: EventsFeed = {
@@ -41,7 +41,7 @@ export const useEventFeed = (props: Props): UseEventFeed => {
   }
 
   return {
-    loading,
+    loading: loading || skip,
     error: !!error,
     feed: data ? data.site.eventFeed : fallback,
   };

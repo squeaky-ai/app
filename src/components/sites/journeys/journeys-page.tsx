@@ -49,7 +49,7 @@ export const JourneysPage: FC<Props> = ({
   const ref = React.useRef<HTMLDivElement>(null);
   
   const router = useRouter();
-  const siteId = useSiteId();
+  const [siteId] = useSiteId();
   const { setFilters } = useFilters<RecordingsFilters>('recordings');
 
   const [open, setOpen] = React.useState<boolean>(false);

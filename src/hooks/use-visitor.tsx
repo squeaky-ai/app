@@ -11,7 +11,7 @@ interface UseVisitor {
 }
 
 export const useVisitor = (): UseVisitor => {
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
   const router = useRouter();
 
   const { data, loading, error } = useQuery<{ site: Site }>(GET_VISITOR_QUERY, {
@@ -19,11 +19,11 @@ export const useVisitor = (): UseVisitor => {
       siteId,
       visitorId: router.query.visitor_id as string,
     },
-    skip: !siteId,
+    skip,
   });
 
   return {
-    loading, 
+    loading: loading || skip, 
     error: !!error,
     visitor: data ? data.site.visitor : null,
   };

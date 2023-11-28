@@ -21,19 +21,19 @@ const QUERY = gql`
 `;
 
 export const useTags = (): UseTags => {
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { data, error, loading } = useQuery<{ site: Site }>(QUERY, {
     variables: {
       siteId,
     },
-    skip: !siteId,
+    skip,
   });
 
   const tags = data ? data.site.tags : [];
 
   return {
-    loading,
+    loading: loading || skip,
     error: !!error,
     tags: [...tags].sort((a, b) => a.name.localeCompare(b.name)),
   };

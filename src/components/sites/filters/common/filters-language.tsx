@@ -31,13 +31,14 @@ const LanguagesSchema = Yup.object().shape({
 });
 
 export const FiltersLanguage: FC<Props> = ({ value, onClose, onUpdate }) => {
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
   const [search, setSearch] = React.useState<string>('');
 
   const { data, loading } = useQuery<{ site: Site }>(QUERY, {
     variables: {
       siteId,
-    }
+    },
+    skip,
   });
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {

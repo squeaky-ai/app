@@ -19,7 +19,7 @@ interface UseEventStats {
 }
 
 export const useEventStats = (props: Props): UseEventStats => {
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { data, error, loading } = useQuery<{ site: Site }>(GET_EVENT_STATS_QUERY, {
     variables: {
@@ -27,7 +27,7 @@ export const useEventStats = (props: Props): UseEventStats => {
       ...props,
       ...props.range,
     },
-    skip: !siteId,
+    skip,
   });
 
   const fallback: EventStats = {
@@ -40,7 +40,7 @@ export const useEventStats = (props: Props): UseEventStats => {
   }
 
   return {
-    loading,
+    loading: loading || skip,
     error: !!error,
     eventStats: data ? data.site : fallback,
   };

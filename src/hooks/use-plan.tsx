@@ -10,13 +10,13 @@ interface UsePlan {
 }
 
 export const usePlan = (): UsePlan => {
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { loading, error, data } = useQuery(GET_PLAN_QUERY, {
     variables: {
       siteId,
     },
-    skip: !siteId,
+    skip,
   });
 
   const fallback: SitesPlan = {
@@ -43,7 +43,7 @@ export const usePlan = (): UsePlan => {
   };
 
   return {
-    loading,
+    loading: loading || skip,
     error: !!error,
     plan: data ? data.site.plan : fallback
   };

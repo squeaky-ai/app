@@ -19,7 +19,7 @@ interface Props {
 }
 
 export const NpsResponsesItem: FC<Props> = ({ member, response, style }) => {
-  const siteId = useSiteId();
+  const [siteId] = useSiteId();
   const rowActionsRef = React.useRef<Dropdown>();
 
   const onRowActionClose = () => {

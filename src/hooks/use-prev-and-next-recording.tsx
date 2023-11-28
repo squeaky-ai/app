@@ -20,7 +20,7 @@ interface UsePrevAndNextRecording {
 }
 
 export const usePrevAndNextRecording = (props: Props): UsePrevAndNextRecording => {
-  const siteId = useSiteId();
+  const [siteId] = useSiteId();
 
   const { page } = usePage('recordings');
   const { size } = useSize('recordings');

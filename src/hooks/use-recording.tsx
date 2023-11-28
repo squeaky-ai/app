@@ -16,7 +16,7 @@ interface UseRecording {
 
 export const useRecording = (id?: string): UseRecording => {
   const router = useRouter();
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { data, loading, error, fetchMore } = useQuery<{ site: Site }>(GET_RECORDING_QUERY, {
     variables: {
@@ -25,7 +25,7 @@ export const useRecording = (id?: string): UseRecording => {
       eventPage: 1,
       excludeRecordingIds: [router.query.recording_id], // We don't want to show this in the sidebar
     },
-    skip: !siteId,
+    skip,
   });
 
   const fetchMoreEvents = async (eventPage: number) => {
@@ -44,7 +44,7 @@ export const useRecording = (id?: string): UseRecording => {
   };
 
   return {
-    loading, 
+    loading: loading || skip, 
     error: !!error,
     recording: data 
       ? data.site.recording

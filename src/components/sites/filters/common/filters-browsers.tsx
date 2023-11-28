@@ -29,7 +29,7 @@ const BrowsersSchema = Yup.object().shape({
 });
 
 export const FiltersBrowsers: FC<Props> = ({ value, onClose, onUpdate }) => {
-  const siteId = useSiteId();
+  const [siteId] = useSiteId();
 
   const { data, loading } = useQuery<{ site: Site }>(QUERY, {
     variables: {

@@ -18,7 +18,7 @@ interface UseVisitorRecordings {
 
 export const useVisitorRecordings = (props: Props): UseVisitorRecordings => {
   const router = useRouter();
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { data, loading, error } = useQuery<{ site: Site }>(GET_VISITOR_RECORDINGS_QUERY, {
     variables: { 
@@ -26,7 +26,7 @@ export const useVisitorRecordings = (props: Props): UseVisitorRecordings => {
       visitorId: router.query.visitor_id as string,
       ...props,
     },
-    skip: !siteId,
+    skip,
   });
 
   const fallback: Visitor['recordings'] = {
@@ -39,7 +39,7 @@ export const useVisitorRecordings = (props: Props): UseVisitorRecordings => {
   }
 
   return {
-    loading, 
+    loading: loading || skip, 
     error: !!error,
     recordings: data?.site?.visitor?.recordings || fallback,
   };

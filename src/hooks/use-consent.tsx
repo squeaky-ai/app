@@ -10,13 +10,13 @@ interface UseConsent {
 }
 
 export const useConsent = (): UseConsent => {
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { loading, error, data } = useQuery(GET_CONSENT_QUERY, {
     variables: {
       siteId,
     },
-    skip: !siteId,
+    skip,
   });
 
   const fallback: Consent = {
@@ -30,7 +30,7 @@ export const useConsent = (): UseConsent => {
   };
 
   return {
-    loading,
+    loading: loading || skip,
     error: !!error,
     consent: data?.site?.consent || fallback,
   };

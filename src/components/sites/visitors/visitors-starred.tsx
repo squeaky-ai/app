@@ -21,7 +21,7 @@ interface Props {
 }
 
 export const VisitorsStarred: FC<Props> = ({ site, member, search, link, highlight, visitor }) => {
-  const siteId = useSiteId();
+  const [siteId] = useSiteId();
 
   const starVisitor = async () => {
     await visitorStarred({

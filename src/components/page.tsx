@@ -2,7 +2,6 @@ import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
 import { useRouter } from 'next/router';
-import { Spinner } from 'components/spinner';
 import { Sidebar as AppSidebar } from 'components/app/sidebar';
 import { Sidebar as AdminSidebar } from 'components/admin/sidebar';
 import { useAuth } from 'hooks/use-auth';
@@ -18,7 +17,8 @@ export const Page: FC<Props> = ({ children }) => {
   const { user, loading, redirect } = useAuth();
 
   if (loading || !router.isReady) {
-    return <Spinner />;
+    // This is quick, and we don't want spinner after spinner
+    return null;
   }
 
   if (redirect) {

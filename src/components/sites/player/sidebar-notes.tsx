@@ -32,7 +32,7 @@ const NoteSchema = Yup.object().shape({
 
 export const SidebarNotes: FC<Props> = ({ member, recording, replayer }) => {
   const ref = React.useRef<Modal>();
-  const siteId = useSiteId();
+  const [siteId] = useSiteId();
 
   const notes = sortBy(recording.notes || [], note => note.timestamp); 
 

@@ -18,7 +18,7 @@ interface UseEventCaptures {
 }
 
 export const useEventCaptures = ({ page, size, sort, search, filters }: Props): UseEventCaptures => {
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { data, error, loading } = useQuery<{ site: Site }>(GET_EVENT_CAPTURES_QUERY, {
     variables: {
@@ -30,7 +30,7 @@ export const useEventCaptures = ({ page, size, sort, search, filters }: Props): 
       filters,
     },
     pollInterval: 5000,
-    skip: !siteId,
+    skip,
   });
 
   const fallback: EventsCapture = {
@@ -43,7 +43,7 @@ export const useEventCaptures = ({ page, size, sort, search, filters }: Props): 
   };
 
   return {
-    loading,
+    loading: loading || skip,
     error: !!error,
     events: data
       ? data.site.eventCapture

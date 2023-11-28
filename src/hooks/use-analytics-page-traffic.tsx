@@ -17,7 +17,7 @@ interface Props {
 }
 
 export const useAnalyticsPageTraffic = (props: Props): UseAnalyticsPageTraffic => {
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { data, loading, error } = useQuery<{ site: Site }>(GET_ANALYTICS_PAGE_TRAFFIC_QUERY, {
     variables: {
@@ -25,7 +25,7 @@ export const useAnalyticsPageTraffic = (props: Props): UseAnalyticsPageTraffic =
       ...props,
       ...props.range,
     },
-    skip: !props.page || !siteId,
+    skip: !props.page || skip,
   });
 
   const fallback: AnalyticsPageTraffic = {
@@ -56,7 +56,7 @@ export const useAnalyticsPageTraffic = (props: Props): UseAnalyticsPageTraffic =
   };
 
   return { 
-    loading, 
+    loading: loading || skip, 
     error: !!error,
     analytics: data ? data.site.analytics.perPage : fallback,
   };

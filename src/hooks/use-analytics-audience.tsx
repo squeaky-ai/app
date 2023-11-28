@@ -19,7 +19,7 @@ interface Props {
 }
 
 export const useAnalyticsAudience = (props: Props): UseAnalytics => {
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { data, loading, error } = useQuery<{ site: Site }>(GET_ANALYTICS_AUDIENCE_QUERY, {
     variables: {
@@ -27,7 +27,7 @@ export const useAnalyticsAudience = (props: Props): UseAnalytics => {
       ...props,
       ...props.range,
     },
-    skip: !siteId,
+    skip,
   });
 
   const fallback: AnalyticsAudience = {
@@ -66,7 +66,7 @@ export const useAnalyticsAudience = (props: Props): UseAnalytics => {
   };
 
   return { 
-    loading, 
+    loading: loading || skip, 
     error: !!error,
     analytics: data ? data.site.analytics : fallback,
   };

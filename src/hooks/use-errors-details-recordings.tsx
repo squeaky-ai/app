@@ -25,7 +25,7 @@ export const useErrorsDetailsRecordings = ({
   page,
   sort,
 }: Props): UseErrorsDetailsRecordings => {
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { data, loading, error } = useQuery<{ site: Site }>(GET_ERRORS_DETAILS_RECORDINGS_QUERY, {
     variables: {
@@ -36,7 +36,7 @@ export const useErrorsDetailsRecordings = ({
       sort,
       ...range,
     },
-    skip: !siteId,
+    skip,
   });
 
   const fallback: Recordings = {
@@ -49,7 +49,7 @@ export const useErrorsDetailsRecordings = ({
   };
 
   return {
-    loading,
+    loading: loading || skip,
     error: !!error,
     recordings: data ? data.site.error.recordings : fallback,
   };

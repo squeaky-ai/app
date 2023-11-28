@@ -19,7 +19,7 @@ import { useSiteId } from 'hooks/use-site-id';
 
 
 const SitesSettingsTags: NextPage<PageProps> = ({ user }) => {
-  const siteId = useSiteId();
+  const [siteId] = useSiteId();
   const [sort, setSort] = React.useState<string>('name__asc');
   const [selected, setSelected] = React.useState<string[]>([]);
 

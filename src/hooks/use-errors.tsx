@@ -20,7 +20,7 @@ interface Props {
 }
 
 export const useErrors = ({ page, size, sort, range }: Props): UseErrors => {
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { data, loading, error } = useQuery<{ site: Site }>(GET_ERRORS_QUERY, {
     variables: {
@@ -30,7 +30,7 @@ export const useErrors = ({ page, size, sort, range }: Props): UseErrors => {
       sort,
       ...range,
     },
-    skip: !siteId,
+    skip,
   });
 
   const errorsFallback: Errors = {
@@ -49,7 +49,7 @@ export const useErrors = ({ page, size, sort, range }: Props): UseErrors => {
   };
 
   return {
-    loading,
+    loading: loading || skip,
     error: !!error,
     errors: data ? data.site.errors : errorsFallback,
     counts: data ? data.site.errorsCounts : countsFallack,

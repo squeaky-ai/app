@@ -17,7 +17,7 @@ interface Props {
 
 export const SentimentResponsesDelete: FC<Props> = ({ member, response, onClose }) => {
   const toasts = useToasts();
-  const siteId = useSiteId();
+  const [siteId] = useSiteId();
 
   const ref = React.useRef<Modal>();
 

@@ -18,10 +18,13 @@ interface UseBlogPost {
 export const useBlogPost = (): UseBlogPost => {
   const router = useRouter();
 
+  const skip = !router.isReady;
+
   const { loading, error, data, refetch } = useQuery(GET_BLOG_POST_QUERY, {
     variables: {
       slug: `/${router.query.category}/${router.query.path}`,
-    }
+    },
+    skip,
   });
 
   const fallback: AdminBlogPost = {
@@ -32,7 +35,7 @@ export const useBlogPost = (): UseBlogPost => {
   };
 
   return {
-    loading,
+    loading: loading || skip,
     error: !!error,
     post: data || fallback,
     refetch,

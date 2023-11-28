@@ -21,7 +21,7 @@ interface UseNps {
 }
 
 export const useNps = ({ page, size, sort, filters, range }: Props): UseNps => {
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { data, loading, error } = useQuery<{ site: Site }>(GET_NPS_QUERY, {
     variables: { 
@@ -32,7 +32,7 @@ export const useNps = ({ page, size, sort, filters, range }: Props): UseNps => {
       filters,
       ...range,
     },
-    skip: !siteId,
+    skip,
   });
 
   const fallback: Nps = {
@@ -66,7 +66,7 @@ export const useNps = ({ page, size, sort, filters, range }: Props): UseNps => {
   };
 
   return {
-    loading,
+    loading: loading || skip,
     error: !!error,
     nps: data ? data.site.nps : fallback,
   };

@@ -15,7 +15,7 @@ interface Props {
 
 export const FiltersVisitorsLink: FC<Props> = ({ hint, action }) => {
   const router = useRouter();
-  const siteId = useSiteId();
+  const [siteId] = useSiteId();
 
   const { setFilters } = useFilters<VisitorsFilters>('visitors');
 

@@ -18,7 +18,7 @@ interface Props {
 }
 
 export const useErrorsDetails = ({ id, range }: Props): UseErrorsDetails => {
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { data, loading, error } = useQuery<{ site: Site }>(GET_ERRORS_DETAILS_QUERY, {
     variables: {
@@ -26,7 +26,7 @@ export const useErrorsDetails = ({ id, range }: Props): UseErrorsDetails => {
       errorId: id,
       ...range,
     },
-    skip: !siteId,
+    skip,
   });
 
   const countsFallack: ErrorsCounts = {
@@ -36,7 +36,7 @@ export const useErrorsDetails = ({ id, range }: Props): UseErrorsDetails => {
   };
 
   return {
-    loading,
+    loading: loading || skip,
     error: !!error,
     details: data ? data.site.error.details : null,
     counts: data ? data.site.errorsCounts : countsFallack,

@@ -31,7 +31,7 @@ const UtmCampaignsSchema = Yup.object().shape({
 });
 
 export const FiltersUtmCampaigns: FC<Props> = ({ value, onClose, onUpdate }) => {
-  const siteId = useSiteId();
+  const [siteId] = useSiteId();
 
   const { data, loading } = useQuery<{ site: Site }>(QUERY, {
     variables: {

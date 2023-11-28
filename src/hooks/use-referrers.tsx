@@ -18,19 +18,19 @@ const QUERY = gql`
 `;
 
 export const useReferrers = (): UseReferrers => {
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { data, error, loading } = useQuery<{ site: Site }>(QUERY, {
     variables: {
       siteId,
     },
-    skip: !siteId,
+    skip,
   });
 
   const referrers = data ? data.site.referrers : [];
 
   return {
-    loading,
+    loading: loading || skip,
     error: !!error,
     referrers: [...referrers].sort((a, b) => a.localeCompare(b)),
   };

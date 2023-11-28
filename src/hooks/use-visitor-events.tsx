@@ -17,7 +17,7 @@ interface UseVisitorEvents {
 
 export const useVisitorEvents = (props: Props): UseVisitorEvents => {
   const router = useRouter();
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { data, loading, error } = useQuery<{ site: Site }>(GET_VISITOR_EVENTS_QUERY, {
     variables: { 
@@ -25,7 +25,7 @@ export const useVisitorEvents = (props: Props): UseVisitorEvents => {
       visitorId: router.query.visitor_id as string,
       ...props,
     },
-    skip: !siteId,
+    skip,
   });
 
   const fallback: Visitor['events'] = {
@@ -38,7 +38,7 @@ export const useVisitorEvents = (props: Props): UseVisitorEvents => {
   }
 
   return {
-    loading, 
+    loading: loading || skip, 
     error: !!error,
     events: data?.site?.visitor?.events || fallback,
   };

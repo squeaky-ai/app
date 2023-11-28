@@ -47,7 +47,7 @@ export const Billing: FC<Props> = ({ site, member }) => {
       toasts.add({ type: 'error', body: 'There was an issue setting up billing, please contact support' });
       removeQueryParams();
     }
-  }, []);
+  }, [router.isReady]);
 
   // It could either:
   // - not exist (they've never checked out)

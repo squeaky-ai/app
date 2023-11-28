@@ -17,7 +17,7 @@ interface UseVisitorPages {
 
 export const useVisitorPages = (props: Props): UseVisitorPages => {
   const router = useRouter();
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { data, loading, error } = useQuery<{ site: Site }>(GET_VISITOR_PAGES_QUERY, {
     variables: { 
@@ -25,7 +25,7 @@ export const useVisitorPages = (props: Props): UseVisitorPages => {
       visitorId: router.query.visitor_id as string,
       ...props,
     },
-    skip: !siteId,
+    skip,
   });
 
   const fallback: Visitor['pages'] = {
@@ -38,7 +38,7 @@ export const useVisitorPages = (props: Props): UseVisitorPages => {
   }
 
   return {
-    loading, 
+    loading: loading || skip, 
     error: !!error,
     pages: data?.site?.visitor?.pages || fallback,
   };

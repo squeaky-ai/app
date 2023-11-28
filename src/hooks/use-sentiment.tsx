@@ -21,7 +21,7 @@ interface UseSentiment {
 }
 
 export const useSentiment = ({ page, size, sort, filters, range }: Props): UseSentiment => {
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { data, loading, error } = useQuery<{ site: Site }>(GET_SENTIMENT_QUERY, {
     variables: { 
@@ -32,7 +32,7 @@ export const useSentiment = ({ page, size, sort, filters, range }: Props): UseSe
       filters,
       ...range,
     },
-    skip: !siteId,
+    skip,
   });
 
   const fallback: Sentiment = {
@@ -56,7 +56,7 @@ export const useSentiment = ({ page, size, sort, filters, range }: Props): UseSe
   };
 
   return {
-    loading,
+    loading: loading || skip,
     error: !!error,
     sentiment: data ? data.site.sentiment : fallback,
   };

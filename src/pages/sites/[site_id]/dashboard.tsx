@@ -29,7 +29,7 @@ const SitesDashboard: NextPage<PageProps> = ({ user }) => {
       ref.current.show();
       removeQueryParams();
     }
-  }, []);
+  }, [router.isReady]);
 
   return (
     <>

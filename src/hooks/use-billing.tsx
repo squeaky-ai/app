@@ -11,13 +11,13 @@ interface UseBilling {
 }
 
 export const useBilling = (): UseBilling => {
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { data, loading, error } = useQuery<{ site: Site, plans: DecoratedPlan[] }>(GET_BILLING_QUERY, {
     variables: { 
       siteId,
     },
-    skip: !siteId,
+    skip,
   });
 
   const fallback: Billing = {
@@ -28,7 +28,7 @@ export const useBilling = (): UseBilling => {
   };
 
   return {
-    loading,
+    loading: loading || skip,
     error: !!error,
     billing: data 
       ? { billing: data.site.billing, plan: data.site.plan, plans: data.plans, providerAuth: data.site.providerAuth } 

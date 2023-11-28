@@ -9,18 +9,18 @@ interface UseSite {
 }
 
 export const useTrackingCode = (): UseSite => {
-  const siteId = useSiteId();
+  const [siteId, skip] = useSiteId();
 
   const { loading, error, data } = useQuery(GET_VERIFIED_AT_QUERY, {
     variables: {
       siteId,
     },
     pollInterval: 5000,
-    skip: !siteId,
+    skip,
   });
 
   return {
-    loading,
+    loading: loading || skip,
     error: !!error,
     verifiedAt: data?.site?.verifiedAt || null,
   };
