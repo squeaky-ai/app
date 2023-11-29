@@ -89,7 +89,10 @@ export const SiteDetails: FC<Props> = ({ activeVisitors, site }) => {
           <div className='row'>
             <span>Publish History</span>
             <span>
-              {site.providerAuth.publishHistory.join(', ')}
+              {site.providerAuth.publishHistory.length === 0
+                ? '-'
+                : site.providerAuth.publishHistory.join(', ')
+              }
             </span>
           </div>
         )}
