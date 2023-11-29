@@ -3181,6 +3181,7 @@ export type SitesProviderAuth = {
   provider: Scalars['String'];
   providerAppUuid?: Maybe<Scalars['String']>;
   providerUuid: Scalars['String'];
+  publishHistory: Array<Scalars['String']>;
   sdkUrl?: Maybe<Scalars['String']>;
 };
 
@@ -3566,7 +3567,7 @@ export type UsersPayment = {
   amount: Scalars['Float'];
   currency: Currency;
   id: Scalars['ID'];
-  siteId: Scalars['ID'];
+  siteId?: Maybe<Scalars['ID']>;
 };
 
 export type UsersReferral = {

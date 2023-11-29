@@ -85,6 +85,14 @@ export const SiteDetails: FC<Props> = ({ activeVisitors, site }) => {
           <span>UUID</span>
           <span>{site.uuid || '-'}</span>
         </div>
+        {site.providerAuth && (
+          <div className='row'>
+            <span>Publish History</span>
+            <span>
+              {site.providerAuth.publishHistory.join(', ')}
+            </span>
+          </div>
+        )}
       </Card>
 
       <Card>

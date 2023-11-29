@@ -143,6 +143,9 @@ export const GET_ADMIN_SITE_QUERY = gql`
           iso8601
           niceDateTime
         }
+        providerAuth {
+          publishHistory
+        }
       }
       activeVisitors {
         siteId
