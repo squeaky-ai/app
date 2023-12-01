@@ -71,7 +71,7 @@ export const EventStatsTable: FC<Props> = ({ sort, eventStats, columns, setSort 
             />
           </Cell>
           <Cell>
-            Avg. session duration of triggered visitors
+            Avg. session duration of triggering visitors
             <Sort 
               name='average_session_duration' 
               order={sort} 
