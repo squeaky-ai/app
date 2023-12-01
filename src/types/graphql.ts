@@ -1443,11 +1443,12 @@ export type EventsStat = {
   __typename?: 'EventsStat';
   averageEventsPerVisitor: Scalars['Float'];
   averageSessionDuration: Scalars['Int'];
-  browsers: Array<Scalars['String']>;
+  browsers: Array<StringRecord>;
   count: Scalars['Int'];
   eventOrGroupId: Scalars['String'];
   name: Scalars['String'];
-  referrers: Array<Scalars['String']>;
+  recordingsCount: Scalars['Int'];
+  referrers: Array<StringRecord>;
   type: EventsType;
   uniqueTriggers: Scalars['Int'];
 };
@@ -3250,6 +3251,12 @@ export enum Source {
   /** Record was created using the session */
   Web = 'web'
 }
+
+export type StringRecord = {
+  __typename?: 'StringRecord';
+  key: Scalars['String'];
+  value: Scalars['String'];
+};
 
 export type SubscriptionsCheckout = {
   __typename?: 'SubscriptionsCheckout';

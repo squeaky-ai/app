@@ -3,14 +3,13 @@ import type { FC } from 'react';
 import classnames from 'classnames';
 import { Table, Row, Cell } from 'components/table';
 import { Sort } from 'components/sort';
-import { EventSwatch } from 'components/sites/events/event-swatch';
-import { EventStatsTag } from 'components/sites/events/event-stats-tag';
 import { sortEventsStats } from 'lib/events';
 import { EventStatsSort } from 'types/events';
 import type { EventsStat } from 'types/graphql';
 import { STATS_COLUMNS } from 'data/events/constants';
 import { getColumnStyles } from 'lib/tables';
 import { Column } from 'types/common';
+import { EventStatsTableRow } from 'components/sites/events/event-stats-table-row';
 
 interface Props {
   sort: EventStatsSort;
@@ -88,33 +87,12 @@ export const EventStatsTable: FC<Props> = ({ sort, eventStats, columns, setSort 
           </Cell>
         </Row>
         {sortEventsStats(eventStats, sort).map((stat, index) => (
-          <Row key={stat.eventOrGroupId} style={rowStyle}>
-            <Cell>
-              <EventSwatch index={index} />
-              {stat.name}
-            </Cell>
-            <Cell>
-              <EventStatsTag type={stat.type} />
-            </Cell>
-            <Cell>
-              {stat.count.toLocaleString()}
-            </Cell>
-            <Cell>
-              {stat.uniqueTriggers || '-'}
-            </Cell>
-            <Cell>
-              {stat.averageEventsPerVisitor?.toFixed(2) || '-'}
-            </Cell>
-            <Cell>
-              -
-            </Cell>
-            <Cell>
-              -
-            </Cell>
-            <Cell>
-              -
-            </Cell>
-          </Row>
+          <EventStatsTableRow
+            key={stat.eventOrGroupId}
+            stat={stat}
+            position={index}
+            rowStyle={rowStyle}
+          />
         ))}
       </Table>
     </div>

@@ -80,6 +80,16 @@ export const GET_EVENT_STATS_QUERY = gql`
         count
         averageEventsPerVisitor
         uniqueTriggers
+        averageSessionDuration
+        recordingsCount
+        browsers {
+          key
+          value
+        }
+        referrers {
+          key
+          value
+        }
       }
       eventCounts(captureIds: $captureIds, groupIds: $groupIds, fromDate: $fromDate, toDate: $toDate) {
         groupType
