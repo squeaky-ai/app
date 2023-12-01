@@ -5,13 +5,13 @@ export const STATS_COLUMNS: Column[] = [
   {
     label: 'Name',
     width: '1fr',
-    disabled: false,
+    disabled: true,
     position: 1,
   },
   {
     label: 'Type',
     width: '1fr',
-    disabled: false,
+    disabled: true,
     position: 2,
   },
   {
