@@ -2,6 +2,7 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
+import getConfig from 'next/config';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { Icon } from 'components/icon';
@@ -17,6 +18,8 @@ import { updateUser } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
 import { signout } from 'lib/api/auth';
 
+const { publicRuntimeConfig } = getConfig();
+
 const AccountSchema = Yup.object().shape({
   email: Yup.string().email('Please enter a valid email address').required('Email is required'),
   firstName: Yup.string().required('First name is required'),
@@ -28,7 +31,7 @@ const UsersAccount: NextPage<PageProps> = ({ user }) => {
 
   const handleSignOut = async () => {
     await signout();
-    location.href = '/';
+    location.href = publicRuntimeConfig.webHost;
   };
 
   return (

@@ -1,6 +1,7 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import getConfig from 'next/config';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { useRouter } from 'next/router';
@@ -16,6 +17,8 @@ import { PageProps } from 'types/page';
 import { updateUser } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
 
+const { publicRuntimeConfig } = getConfig();
+
 const NewSchema = Yup.object().shape({
   firstName: Yup.string().required('First name is required'),
   lastName: Yup.string().required('Last name is required'),
@@ -27,7 +30,7 @@ const UsersNew: NextPage<PageProps> = ({ user }) => {
 
   const handleSignOut = async () => {
     await signout();
-    location.href = '/';
+    location.href = publicRuntimeConfig.webHost;
   };
 
   return (
