@@ -138,6 +138,10 @@ export const sortEventsStats = (
       return a.averageEventsPerVisitor - b.averageEventsPerVisitor;
     case EventStatsSort.AverageEventsPerVisitorDesc:
       return b.averageEventsPerVisitor - a.averageEventsPerVisitor;
+    case EventStatsSort.AverageSessionDurationAsc:
+      return a.averageSessionDuration - b.averageSessionDuration;
+    case EventStatsSort.AverageSessionDurationDesc:
+      return b.averageSessionDuration - a.averageSessionDuration;
   }
 });
 

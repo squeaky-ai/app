@@ -37,7 +37,7 @@ export const useEventStats = (props: Props): UseEventStats => {
       items: []
     },
     eventStats: [],
-  }
+  };
 
   return {
     loading: loading || skip,

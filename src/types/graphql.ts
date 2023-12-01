@@ -1442,9 +1442,12 @@ export type EventsRuleInput = {
 export type EventsStat = {
   __typename?: 'EventsStat';
   averageEventsPerVisitor: Scalars['Float'];
+  averageSessionDuration: Scalars['Int'];
+  browsers: Array<Scalars['String']>;
   count: Scalars['Int'];
   eventOrGroupId: Scalars['String'];
   name: Scalars['String'];
+  referrers: Array<Scalars['String']>;
   type: EventsType;
   uniqueTriggers: Scalars['Int'];
 };
