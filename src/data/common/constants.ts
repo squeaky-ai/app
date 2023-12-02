@@ -1,10 +1,5 @@
-import getConfig from 'next/config';
 import { Currency } from 'types/graphql';
 import type { RelativeTime } from 'types/common';
-
-const { publicRuntimeConfig } = getConfig();
-
-export const BASE_PATH = publicRuntimeConfig.basePath;
 
 export const MM_SS_REGEX = /\d\d:\d\d/;
 

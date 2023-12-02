@@ -2,7 +2,6 @@ import React from 'react';
 import type { FC } from 'react';
 import classnames from 'classnames';
 import * as Yup from 'yup';
-import { useRouter } from 'next/router';
 import { Formik } from 'formik';
 import { Input } from 'components/input';
 import { Tag } from 'components/tag';
@@ -10,6 +9,7 @@ import { useTags } from 'hooks/use-tags';
 import { READ_ONLY, SUPER_USER } from 'data/teams/constants';
 import { tagCreate, tagRemove } from 'lib/api/graphql';
 import type { Recording, Tag as ITag, Team } from 'types/graphql';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface Props {
   member?: Team;
@@ -21,14 +21,11 @@ const TagSchema = Yup.object().shape({
 });
 
 export const SidebarTags: FC<Props> = ({ member, recording }) => {
+  const [siteId] = useSiteId();
   const ref = React.useRef<HTMLFormElement>(null);
-
-  const router = useRouter();
   const [focus, setFocus] = React.useState<boolean>(false);
 
   const { tags } = useTags();
-
-  const siteId = router.query.site_id + '';
 
   const handleTagRemove = async (tag: ITag) => {
     await tagRemove({ 

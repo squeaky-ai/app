@@ -4,6 +4,7 @@ import { GET_RECORDING_QUERY, GET_RECORDING_EVENTS_QUERY } from 'data/recordings
 import { parseRecordingEvents } from 'lib/events';
 import type { Event } from 'types/event';
 import type { Site, Recording } from 'types/graphql';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface UseRecording {
   loading: boolean;
@@ -15,14 +16,16 @@ interface UseRecording {
 
 export const useRecording = (id?: string): UseRecording => {
   const router = useRouter();
+  const [siteId, skip] = useSiteId();
 
   const { data, loading, error, fetchMore } = useQuery<{ site: Site }>(GET_RECORDING_QUERY, {
     variables: {
-      siteId: router.query.site_id as string,
+      siteId,
       recordingId: id || router.query.recording_id as string,
       eventPage: 1,
       excludeRecordingIds: [router.query.recording_id], // We don't want to show this in the sidebar
-    }
+    },
+    skip,
   });
 
   const fetchMoreEvents = async (eventPage: number) => {
@@ -31,7 +34,7 @@ export const useRecording = (id?: string): UseRecording => {
     const { data } = await fetchMore({ 
       query: GET_RECORDING_EVENTS_QUERY,
       variables: {
-        siteId: router.query.site_id as string,
+        siteId,
         recordingId: router.query.recording_id as string,
         eventPage,
       }
@@ -41,7 +44,7 @@ export const useRecording = (id?: string): UseRecording => {
   };
 
   return {
-    loading, 
+    loading: loading || skip, 
     error: !!error,
     recording: data 
       ? data.site.recording

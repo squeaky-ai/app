@@ -13,9 +13,9 @@ import { Error } from 'components/error';
 import { NpsAppearance } from 'components/sites/feedback/nps-appearance';
 import { useFeedback } from 'hooks/use-feedback';
 import { NpsStatus } from 'components/sites/feedback/nps-status';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 
-const SitesFeedbackNpsAppearance: NextPage<ServerSideProps> = ({ user }) => {
+const SitesFeedbackNpsAppearance: NextPage<PageProps> = ({ user }) => {
   const { loading, error, feedback } = useFeedback();
 
   if (error) {
@@ -68,4 +68,3 @@ const SitesFeedbackNpsAppearance: NextPage<ServerSideProps> = ({ user }) => {
 };
 
 export default SitesFeedbackNpsAppearance;
-export { getServerSideProps };

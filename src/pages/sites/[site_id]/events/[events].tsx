@@ -17,7 +17,7 @@ import { EventCapturesBulkActions } from 'components/sites/events/event-captures
 import { EventCreate } from 'components/sites/events/event-create';
 import { EventList } from 'components/sites/events/event-list';
 import { Unlock } from 'components/sites/unlock';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 import { useSort } from 'hooks/use-sort';
 import { Tags } from 'components/sites/filters/events/tags';
 import { useFilters } from 'hooks/use-filters';
@@ -28,7 +28,7 @@ import { FILTERS } from 'data/events/constants';
 import { EventsCaptureFilters, EventsCaptureSort } from 'types/graphql';
 import type { ValueOf } from 'types/common';
 
-const SitesEvents: NextPage<ServerSideProps> = ({ user }) => {
+const SitesEvents: NextPage<PageProps> = ({ user }) => {
   const { query } = useRouter();
 
   const [page, setPage] = React.useState<number>(1);
@@ -171,4 +171,3 @@ const SitesEvents: NextPage<ServerSideProps> = ({ user }) => {
 };
 
 export default SitesEvents;
-export { getServerSideProps };

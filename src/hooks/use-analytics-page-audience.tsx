@@ -3,6 +3,7 @@ import { GET_ANALYTICS_PAGE_AUDIENCE_QUERY } from 'data/analytics/queries';
 import type { AnalyticsBrowsersSort, Site } from 'types/graphql';
 import type { TimeRange } from 'types/common';
 import type { AnalyticsPageAudience } from 'types/analytics';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface UseAnalyticsPageAudience {
   loading: boolean;
@@ -11,7 +12,6 @@ interface UseAnalyticsPageAudience {
 }
 
 interface Props {
-  site: Site;
   range: TimeRange;
   page: string;
   referrersPage: number;
@@ -20,13 +20,15 @@ interface Props {
 }
 
 export const useAnalyticsPageAudience = (props: Props): UseAnalyticsPageAudience => {
+  const [siteId, skip] = useSiteId();
+
   const { data, loading, error } = useQuery<{ site: Site }>(GET_ANALYTICS_PAGE_AUDIENCE_QUERY, {
     variables: {
-      siteId: props.site.id,
+      siteId,
       ...props,
       ...props.range,
     },
-    skip: !props.page,
+    skip: !props.page || skip,
   });
 
   const fallback: AnalyticsPageAudience = {
@@ -60,7 +62,7 @@ export const useAnalyticsPageAudience = (props: Props): UseAnalyticsPageAudience
   };
 
   return { 
-    loading, 
+    loading: loading || skip, 
     error: !!error,
     analytics: data ? data.site.analytics.perPage : fallback,
   };

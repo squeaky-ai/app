@@ -17,10 +17,10 @@ import { SettingsScreeningDomainCreate } from 'components/sites/settings/setting
 import { SettingsScreeningEmailCreate } from 'components/sites/settings/settings-screening-email-create';
 import { OWNER, ADMIN } from 'data/teams/constants';
 import { domainBlacklistDelete, ipBlacklistDelete } from 'lib/api/graphql';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 import { useToasts } from 'hooks/use-toasts';
 
-const SitesSettingsIp: NextPage<ServerSideProps> = ({ user }) => {
+const SitesSettingsIp: NextPage<PageProps> = ({ user }) => {
   const toasts = useToasts();
 
   const deleteIp = async (siteId: string, value: string) => {
@@ -140,4 +140,3 @@ const SitesSettingsIp: NextPage<ServerSideProps> = ({ user }) => {
 };
 
 export default SitesSettingsIp;
-export { getServerSideProps };

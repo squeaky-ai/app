@@ -2,7 +2,6 @@ import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
 import classnames from 'classnames';
-import { useRouter } from 'next/router';
 import { Icon } from 'components/icon';
 import { Tooltip } from 'components/tooltip';
 import { visitorStarred } from 'lib/api/graphql';
@@ -10,6 +9,7 @@ import { Highlighter } from 'components/highlighter';
 import { READ_ONLY, SUPER_USER } from 'data/teams/constants';
 import type { Team, Visitor } from 'types/graphql';
 import type { Site } from 'types/graphql';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface Props {
   site: Site;
@@ -21,7 +21,7 @@ interface Props {
 }
 
 export const VisitorsStarred: FC<Props> = ({ site, member, search, link, highlight, visitor }) => {
-  const router = useRouter();
+  const [siteId] = useSiteId();
 
   const starVisitor = async () => {
     await visitorStarred({
@@ -48,7 +48,7 @@ export const VisitorsStarred: FC<Props> = ({ site, member, search, link, highlig
         {visitor.starred ? 'Starred' : 'Not starred'}
       </Tooltip>
       {link
-        ? <Link href={`/sites/${router.query.site_id}/visitors/${visitor.id}`}>{visitorId}</Link>
+        ? <Link href={`/sites/${siteId}/visitors/${visitor.id}`}>{visitorId}</Link>
         : visitorId
       }
     </>

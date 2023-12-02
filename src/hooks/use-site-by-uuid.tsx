@@ -1,7 +1,7 @@
-import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_SITE_BY_UUID_QUERY } from 'data/sites/queries';
 import type { Site } from 'types/graphql';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface UseSiteByUuid {
   loading: boolean;
@@ -10,16 +10,17 @@ interface UseSiteByUuid {
 }
 
 export const useSiteByUuid = (): UseSiteByUuid => {
-  const router = useRouter();
+  const [siteId, skip] = useSiteId();
 
   const { loading, error, data } = useQuery(GET_SITE_BY_UUID_QUERY, {
     variables: {
-      siteId: router.query.site_id as string
-    }
+      siteId,
+    },
+    skip,
   });
 
   return {
-    loading,
+    loading: loading || skip,
     error: !!error,
     site: data ? data.siteByUuid : null
   };

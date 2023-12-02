@@ -1,7 +1,7 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 import { NotFound } from 'components/sites/not-found';
 import { Error } from 'components/error';
 import { PlayerWrapper } from 'components/sites/player/player-wrapper';
@@ -27,7 +27,7 @@ const initialState: PlayerState = {
   eventOptions: [],
 };
 
-const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
+const SitesRecording: NextPage<PageProps> = ({ user }) => {
   const [state, dispatch] = React.useReducer(reducer, initialState);
 
   const { recording, events, error, loading, fetchMoreEvents } = useRecording();
@@ -81,4 +81,3 @@ const SitesRecording: NextPage<ServerSideProps> = ({ user }) => {
 };
 
 export default SitesRecording;
-export { getServerSideProps };

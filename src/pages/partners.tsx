@@ -2,10 +2,10 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { Unauthorized } from 'components/sites/unauthorized';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 import { Partner } from 'components/partners/partner';
 
-const Partners: NextPage<ServerSideProps> = ({ user }) => {
+const Partners: NextPage<PageProps> = ({ user }) => {
   const isPartner = !!user?.partner;
 
   return (
@@ -26,4 +26,3 @@ const Partners: NextPage<ServerSideProps> = ({ user }) => {
 };
 
 export default Partners;
-export { getServerSideProps };

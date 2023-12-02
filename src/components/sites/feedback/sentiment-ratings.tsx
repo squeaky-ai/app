@@ -5,7 +5,6 @@ import { omit, groupBy } from 'lodash';
 import { ScaleType } from 'recharts/types/util/types';
 import { formatChartData } from 'lib/charts';
 import { SentimentRatingsChartTooltip } from 'components/sites/feedback/sentiment-ratings-chart-tooltip';
-import { BASE_PATH } from 'data/common/constants';
 import { Chart } from 'components/sites/chart';
 import { useChartSettings } from 'hooks/use-chart-settings';
 import { doNotAllowZero } from 'lib/charts-v2';
@@ -71,7 +70,7 @@ export const SentimentRatings: FC<Props> = ({ period, ratings }) => {
           tick: props => ( 
             <image 
               {...getAxisProps(props)} 
-              href={`${BASE_PATH}/emojis/emoji-${props.payload.value + 1}.svg`}
+              href={`/emojis/emoji-${props.payload.value + 1}.svg`}
               height={24} 
               width={24} 
               transform={

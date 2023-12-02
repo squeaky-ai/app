@@ -12,14 +12,17 @@ interface UseAdminUser {
 export const useAdminUser = (): UseAdminUser => {
   const router = useRouter();
 
+  const skip = !router.isReady;
+
   const { loading, error, data } = useQuery(GET_ADMIN_USER_QUERY, {
     variables: {
       userId: router.query.user_id as string,
-    }
+    },
+    skip,
   });
 
   return {
-    loading, 
+    loading: loading || skip, 
     error: !!error,
     user: data?.admin?.user || null,
   };

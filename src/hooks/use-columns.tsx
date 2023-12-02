@@ -6,12 +6,14 @@ import { COLUMNS as RECORDINGS_COLUMNS, DEFAULT_COLUMNS as DEFAULT_RECORDINGS_CO
 import { COLUMNS as NPS_COLUMNS, DEFAULT_COLUMNS as DEFAULT_NPS_COLUMNS } from 'data/nps/constants';
 import { COLUMNS as SENTIMENT_COLUMNS, DEFAULT_COLUMNS as DEFAULT_SENTIMENT_COLUMNS } from 'data/sentiment/constants';
 import { SITE_COLUMNS, USER_COLUMNS, DEFAULT_SITE_COLUMNS, DEFAULT_USER_COLUMNS } from 'data/admin/constants';
+import { COLUMNS as EVENT_STATS_COLUMNS, DEFAULT_COLUMNS as DEFAULT_EVENT_STATS_COLUMNS } from 'data/nps/constants';
 import type { Column } from 'types/common'
 
 type ColumnType = 'visitors' |
                   'recordings' |
                   'sentiment' |
                   'nps' |
+                  'event-stats' |
                   'admin-sites' |
                   'admin-users';
 
@@ -35,6 +37,8 @@ const getDefaultColumns = (type: ColumnType): Column[] => {
       return DEFAULT_SITE_COLUMNS;
     case 'admin-users':
       return DEFAULT_USER_COLUMNS;
+    case 'event-stats':
+      return DEFAULT_EVENT_STATS_COLUMNS;
   }
 };
 
@@ -52,6 +56,8 @@ const getAllColumns = (type: ColumnType): Column[] => {
       return SITE_COLUMNS;
     case 'admin-users':
       return USER_COLUMNS;
+    case 'event-stats':
+      return EVENT_STATS_COLUMNS;
   }
 };
 
@@ -69,6 +75,8 @@ const getPreference = (type: ColumnType): Preference => {
       return Preference.ADMIN_SITES_COLUMNS;
     case 'admin-users':
       return Preference.ADMIN_USERS_COLUMNS;
+    case 'event-stats':
+      return Preference.EVENT_STATS_COLUMNS;
   }
 };
 

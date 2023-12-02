@@ -2,7 +2,6 @@ import React from 'react';
 import type { FC } from 'react';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-import { useRouter } from 'next/router';
 import { gql, useQuery } from '@apollo/client';
 import { Icon } from 'components/icon';
 import { Button } from 'components/button';
@@ -10,6 +9,7 @@ import { Input } from 'components/input';
 import { Spinner } from 'components/spinner';
 import { Checkbox } from 'components/checkbox';
 import type { Site } from 'types/graphql';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface Props {
   value: string[];
@@ -31,13 +31,14 @@ const LanguagesSchema = Yup.object().shape({
 });
 
 export const FiltersLanguage: FC<Props> = ({ value, onClose, onUpdate }) => {
-  const router = useRouter();
+  const [siteId, skip] = useSiteId();
   const [search, setSearch] = React.useState<string>('');
 
   const { data, loading } = useQuery<{ site: Site }>(QUERY, {
     variables: {
-      siteId: router.query.site_id as string
-    }
+      siteId,
+    },
+    skip,
   });
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {

@@ -13,22 +13,20 @@ import { PageLoading } from 'components/sites/page-loading';
 import { useAnalyticsAudience } from 'hooks/use-analytics-audience';
 import { getDateRange } from 'lib/dates';
 import { useSort } from 'hooks/use-sort';
-import { AnalyticsBrowsersSort, Site } from 'types/graphql';
+import { AnalyticsBrowsersSort } from 'types/graphql';
 import type { TimePeriod } from 'types/common';
 
 interface Props {
-  site: Site;
   period: TimePeriod;
 }
 
-export const AnalyticsSitesAudience: FC<Props> = ({ site, period }) => {
+export const AnalyticsSitesAudience: FC<Props> = ({ period }) => {
   const [browsersPage, setBrowsersPage] = React.useState<number>(1);
   const [referrersPage, setReferrersPage] = React.useState<number>(1);
 
   const { sort: browsersSort, setSort: setBrowsersSort } = useSort<AnalyticsBrowsersSort>('analytics-browsers');
 
   const { analytics, error, loading } = useAnalyticsAudience({
-    site,
     referrersPage,
     browsersPage,
     browsersSort,

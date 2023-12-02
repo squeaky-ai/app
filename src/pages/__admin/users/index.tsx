@@ -12,11 +12,11 @@ import { Pagination } from 'components/pagination';
 import { Search } from 'components/search';
 import { UsersType } from 'components/admin/users-type';
 import { useAdminUsers } from 'hooks/use-admin-users';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 import { useColumns } from 'hooks/use-columns';
 import { AdminUserSort } from 'types/graphql';
 
-const AdminUsers: NextPage<ServerSideProps> = () => {
+const AdminUsers: NextPage<PageProps> = () => {
   const [search, setSearch] = React.useState<string>('');
   const [page, setPage] = React.useState<number>(1);
   const [size, setSize] = React.useState<number>(25);
@@ -108,4 +108,3 @@ const AdminUsers: NextPage<ServerSideProps> = () => {
 };
 
 export default AdminUsers;
-export { getServerSideProps };

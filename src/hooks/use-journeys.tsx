@@ -1,9 +1,9 @@
-import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_JOURNEYS_QUERY } from 'data/journeys/queries';
 import { PathPosition } from 'types/graphql';
 import type { TimeRange } from 'types/common';
 import type { Site, AnalyticsUserPath } from 'types/graphql';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface UseJourneys {
   loading: boolean;
@@ -20,20 +20,20 @@ interface Props {
 }
 
 export const useJourneys = (props: Props): UseJourneys => {
-  const router = useRouter();
+  const [siteId, skip] = useSiteId();
 
   const { data, loading, error, refetch } = useQuery<{ site: Site }>(GET_JOURNEYS_QUERY, {
     variables: {
-      siteId: router.query.site_id as string,
+      siteId,
       page: props.page,
       position: props.position,
       ...props.range,
     },
-    skip: !props.page,
+    skip: !props.page || skip,
   });
 
   return {
-    loading,
+    loading: loading || skip,
     error: !!error,
     routes: data ? data.site.routes : [],
     journeys: data ? data.site.analytics.userPaths : [],

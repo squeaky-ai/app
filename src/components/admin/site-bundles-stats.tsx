@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card } from 'components/card';
 import { Row, Table, Cell } from 'components/table';
-import { SiteBundlesStatsChart } from './site-bundles-stats-chart';
+import { SiteBundlesStatsChart } from 'components/admin/site-bundles-stats-chart';
 import { SitesBundle } from 'types/graphql';
 
 interface Props {

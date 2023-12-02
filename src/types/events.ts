@@ -22,6 +22,8 @@ export enum EventStatsSort {
   UniqueTriggersDesc = 'unique_triggers__desc',
   AverageEventsPerVisitorAsc = 'average_events_per_visitor__asc',
   AverageEventsPerVisitorDesc = 'average_events_per_visitor__desc',
+  AverageSessionDurationAsc = 'average_session_duration__asc',
+  AverageSessionDurationDesc = 'average_session_duration__desc',
 }
 
 export type EventSelected = {

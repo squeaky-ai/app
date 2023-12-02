@@ -4,12 +4,12 @@ import Head from 'next/head';
 import { Container } from 'components/container';
 import { Tabs } from 'components/users/tabs';
 import { Main } from 'components/main';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 import { Toggle } from 'components/toggle';
 import { FeatureFlag } from 'lib/feature-flags';
 import { useFeatureFlags, featureFlagNames } from 'hooks/use-feature-flags';
 
-const UsersFeatureFlags: NextPage<ServerSideProps> = ({ user }) => {
+const UsersFeatureFlags: NextPage<PageProps> = ({ user }) => {
   const { featureFlags, updateFeatureFlag } = useFeatureFlags();
 
   const handleChange = (key: FeatureFlag) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,4 +54,3 @@ const UsersFeatureFlags: NextPage<ServerSideProps> = ({ user }) => {
 };
 
 export default UsersFeatureFlags;
-export { getServerSideProps };

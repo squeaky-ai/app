@@ -2,6 +2,7 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
+import getConfig from 'next/config';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { Icon } from 'components/icon';
@@ -12,10 +13,12 @@ import { Button } from 'components/button';
 import { Divider } from 'components/divider';
 import { Main } from 'components/main';
 import { Tabs } from 'components/users/tabs';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 import { updateUser } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
 import { signout } from 'lib/api/auth';
+
+const { publicRuntimeConfig } = getConfig();
 
 const AccountSchema = Yup.object().shape({
   email: Yup.string().email('Please enter a valid email address').required('Email is required'),
@@ -23,12 +26,12 @@ const AccountSchema = Yup.object().shape({
   lastName: Yup.string().required('Last name is required'),
 });
 
-const UsersAccount: NextPage<ServerSideProps> = ({ user }) => {
+const UsersAccount: NextPage<PageProps> = ({ user }) => {
   const toast = useToasts();
 
   const handleSignOut = async () => {
     await signout();
-    location.href = '/';
+    location.href = publicRuntimeConfig.webHost;
   };
 
   return (
@@ -131,4 +134,3 @@ const UsersAccount: NextPage<ServerSideProps> = ({ user }) => {
 };
 
 export default UsersAccount;
-export { getServerSideProps };

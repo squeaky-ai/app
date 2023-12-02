@@ -13,13 +13,13 @@ import { Logo } from 'components/logo';
 import { Checkbox } from 'components/checkbox';
 import { OWNER, ADMIN } from 'data/teams/constants';
 import { PrivacyAnonymising } from 'components/sites/settings/privacy-anonymising';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 import { magicErasureUpdate } from 'lib/api/graphql';
 import { useToasts } from 'hooks/use-toasts';
 import type { Site } from 'types/graphql';
 import { Divider } from 'components/divider';
 
-const SitesSettingsPrivacyData: NextPage<ServerSideProps> = ({ user }) => {
+const SitesSettingsPrivacyData: NextPage<PageProps> = ({ user }) => {
   const toasts = useToasts();
 
   const toggleMagicErasureEnabled = (site: Site) => async () => {
@@ -112,4 +112,3 @@ const SitesSettingsPrivacyData: NextPage<ServerSideProps> = ({ user }) => {
 };
 
 export default SitesSettingsPrivacyData;
-export { getServerSideProps };

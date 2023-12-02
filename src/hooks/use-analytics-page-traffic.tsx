@@ -3,6 +3,7 @@ import { GET_ANALYTICS_PAGE_TRAFFIC_QUERY } from 'data/analytics/queries';
 import type { Site } from 'types/graphql';
 import type { TimeRange } from 'types/common';
 import type { AnalyticsPageTraffic } from 'types/analytics';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface UseAnalyticsPageTraffic {
   loading: boolean;
@@ -11,19 +12,20 @@ interface UseAnalyticsPageTraffic {
 }
 
 interface Props {
-  site: Site;
   range: TimeRange;
   page: string;
 }
 
 export const useAnalyticsPageTraffic = (props: Props): UseAnalyticsPageTraffic => {
+  const [siteId, skip] = useSiteId();
+
   const { data, loading, error } = useQuery<{ site: Site }>(GET_ANALYTICS_PAGE_TRAFFIC_QUERY, {
     variables: {
-      siteId: props.site.id,
+      siteId,
       ...props,
       ...props.range,
     },
-    skip: !props.page,
+    skip: !props.page || skip,
   });
 
   const fallback: AnalyticsPageTraffic = {
@@ -54,7 +56,7 @@ export const useAnalyticsPageTraffic = (props: Props): UseAnalyticsPageTraffic =
   };
 
   return { 
-    loading, 
+    loading: loading || skip, 
     error: !!error,
     analytics: data ? data.site.analytics.perPage : fallback,
   };

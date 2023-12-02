@@ -11,10 +11,10 @@ import { SentimentTabs } from 'components/sites/feedback/sentiment-tabs';
 import { SentimentStatus } from 'components/sites/feedback/sentiment-status';
 import { Sentiment } from 'components/sites/feedback/sentiment';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 import { useFeedback } from 'hooks/use-feedback';
 
-const SitesFeedbackSentiment: NextPage<ServerSideProps> = ({ user }) => {
+const SitesFeedbackSentiment: NextPage<PageProps> = ({ user }) => {
   const { loading, error, feedback } = useFeedback();
 
   if (error) {
@@ -63,4 +63,3 @@ const SitesFeedbackSentiment: NextPage<ServerSideProps> = ({ user }) => {
 }
 
 export default SitesFeedbackSentiment;
-export { getServerSideProps };

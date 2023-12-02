@@ -1,9 +1,9 @@
-import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_ERRORS_QUERY } from 'data/errors/queries';
 import { ErrorsSort } from 'types/graphql';
 import type { TimeRange } from 'types/common';
 import type { Site, Errors, ErrorsCounts } from 'types/graphql';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface UseErrors {
   loading: boolean;
@@ -20,16 +20,17 @@ interface Props {
 }
 
 export const useErrors = ({ page, size, sort, range }: Props): UseErrors => {
-  const router = useRouter();
+  const [siteId, skip] = useSiteId();
 
   const { data, loading, error } = useQuery<{ site: Site }>(GET_ERRORS_QUERY, {
     variables: {
-      siteId: router.query.site_id as string,
+      siteId,
       page,
       size,
       sort,
       ...range,
-    }
+    },
+    skip,
   });
 
   const errorsFallback: Errors = {
@@ -48,7 +49,7 @@ export const useErrors = ({ page, size, sort, range }: Props): UseErrors => {
   };
 
   return {
-    loading,
+    loading: loading || skip,
     error: !!error,
     errors: data ? data.site.errors : errorsFallback,
     counts: data ? data.site.errorsCounts : countsFallack,

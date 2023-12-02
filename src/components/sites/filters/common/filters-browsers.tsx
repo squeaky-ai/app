@@ -2,12 +2,12 @@ import React from 'react';
 import type { FC } from 'react';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-import { useRouter } from 'next/router';
 import { gql, useQuery } from '@apollo/client';
 import { Button } from 'components/button';
 import { Checkbox } from 'components/checkbox';
 import { Spinner } from 'components/spinner';
 import type { Site } from 'types/graphql';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface Props {
   value: string[];
@@ -29,11 +29,11 @@ const BrowsersSchema = Yup.object().shape({
 });
 
 export const FiltersBrowsers: FC<Props> = ({ value, onClose, onUpdate }) => {
-  const router = useRouter();
+  const [siteId] = useSiteId();
 
   const { data, loading } = useQuery<{ site: Site }>(QUERY, {
     variables: {
-      siteId: router.query.site_id as string
+      siteId,
     }
   });
 

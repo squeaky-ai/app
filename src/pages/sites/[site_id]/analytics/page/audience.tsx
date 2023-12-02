@@ -14,12 +14,12 @@ import { Label } from 'components/label';
 import { Tabs } from 'components/sites/analytics/tabs';
 import { Pages } from 'components/sites/analytics/pages';
 import { AnalyticsPagesAudience } from 'components/sites/analytics/analytics-pages-audience';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 import { usePeriod } from 'hooks/use-period';
 import { usePages } from 'hooks/use-pages';
 import { getDateRange } from 'lib/dates';
 
-const SitesAnalyticsPageAudience: NextPage<ServerSideProps> = ({ user }) => {
+const SitesAnalyticsPageAudience: NextPage<PageProps> = ({ user }) => {
   const { query } = useRouter();
 
   const { period, setPeriod } = usePeriod('analytics');
@@ -80,7 +80,7 @@ const SitesAnalyticsPageAudience: NextPage<ServerSideProps> = ({ user }) => {
             )}
 
             {site.recordingsCount > 0 && (
-              <AnalyticsPagesAudience period={period} page={page} site={site} />
+              <AnalyticsPagesAudience period={period} page={page} />
             )}
           </Main>
         )}
@@ -90,4 +90,3 @@ const SitesAnalyticsPageAudience: NextPage<ServerSideProps> = ({ user }) => {
 };
 
 export default SitesAnalyticsPageAudience;
-export { getServerSideProps };

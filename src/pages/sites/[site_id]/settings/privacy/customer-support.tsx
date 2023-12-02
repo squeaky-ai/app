@@ -11,9 +11,9 @@ import { PrivacyTabs } from 'components/sites/settings/privacy-tabs';
 import { OWNER, ADMIN } from 'data/teams/constants';
 import { useToasts } from 'hooks/use-toasts';
 import { superuserAccessUpdate } from 'lib/api/graphql';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 
-const SitesSettingsPrivacyCustomerSupport: NextPage<ServerSideProps> = ({ user }) => {
+const SitesSettingsPrivacyCustomerSupport: NextPage<PageProps> = ({ user }) => {
   const toasts = useToasts();
 
   const handleToggle = async (id: string, event: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,4 +61,3 @@ const SitesSettingsPrivacyCustomerSupport: NextPage<ServerSideProps> = ({ user }
 };
 
 export default SitesSettingsPrivacyCustomerSupport;
-export { getServerSideProps };

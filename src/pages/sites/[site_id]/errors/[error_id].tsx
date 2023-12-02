@@ -16,14 +16,14 @@ import { Illustration } from 'components/illustration';
 import { RecordingsBulkActions } from 'components/sites/recordings/recordings-bulk-actions';
 import { usePeriod } from 'hooks/use-period';
 import { Unlock } from 'components/sites/unlock';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 import { useRouter } from 'next/router';
 import { useErrorsDetails } from 'hooks/use-errors-details';
 import { getDateRange } from 'lib/dates';
 import { useColumns } from 'hooks/use-columns';
 import { ErrorTab } from 'types/errors';
 
-const SitesErrorsError: NextPage<ServerSideProps> = ({ user }) => {
+const SitesErrorsError: NextPage<PageProps> = ({ user }) => {
   const [tab, setTab] = React.useState<ErrorTab>(ErrorTab.DETAILS);
   const [recordingsSelected, setRecordingsSelected] = React.useState<string[]>([]);
 
@@ -117,4 +117,3 @@ const SitesErrorsError: NextPage<ServerSideProps> = ({ user }) => {
 };
 
 export default SitesErrorsError;
-export { getServerSideProps };

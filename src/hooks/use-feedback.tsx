@@ -1,7 +1,7 @@
-import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_FEEDBACK_QUERY } from 'data/feedback/queries';
 import type { Feedback } from 'types/graphql';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface UseFeedback {
   loading: boolean;
@@ -10,12 +10,13 @@ interface UseFeedback {
 }
 
 export const useFeedback = (): UseFeedback => {
-  const router = useRouter();
+  const [siteId, skip] = useSiteId();
 
   const { loading, error, data } = useQuery(GET_FEEDBACK_QUERY, {
     variables: {
-      siteId: router.query.site_id as string,
+      siteId,
     },
+    skip,
   });
 
   const fallback: Feedback = {
@@ -42,7 +43,7 @@ export const useFeedback = (): UseFeedback => {
   };
 
   return {
-    loading,
+    loading: loading || skip,
     error: !!error,
     feedback: data?.site?.feedback || fallback,
   };

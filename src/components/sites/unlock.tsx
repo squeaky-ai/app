@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const Unlock: FC<Props> = ({ site }) => {
-  const { plan } = usePlan({ site });
+  const { plan } = usePlan();
 
   if (!plan.exceeded) {
     return null;

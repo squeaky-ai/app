@@ -2,7 +2,6 @@ import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
 import classnames from 'classnames';
-import { useRouter } from 'next/router';
 import { Icon } from 'components/icon';
 import { Row, Cell } from 'components/table';
 import { Device } from 'components/device';
@@ -11,6 +10,7 @@ import { Tooltip } from 'components/tooltip';
 import { Dropdown } from 'components/dropdown';
 import { NpsResponsesDelete } from 'components/sites/feedback/nps-responses-delete';
 import type { FeedbackNpsResponseItem, Team } from 'types/graphql';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface Props {
   member?: Team;
@@ -19,7 +19,7 @@ interface Props {
 }
 
 export const NpsResponsesItem: FC<Props> = ({ member, response, style }) => {
-  const router = useRouter();
+  const [siteId] = useSiteId();
   const rowActionsRef = React.useRef<Dropdown>();
 
   const onRowActionClose = () => {
@@ -34,13 +34,13 @@ export const NpsResponsesItem: FC<Props> = ({ member, response, style }) => {
         </h4>
       </Cell>
       <Cell>
-        <Link href={`/sites/${router.query.site_id}/visitors/${response.visitor.id}`}>
+        <Link href={`/sites/${siteId}/visitors/${response.visitor.id}`}>
           {response.visitor.visitorId}
         </Link>
       </Cell>
       <Cell>
         <Icon name='play-fill play' />
-        <Link href={`/sites/${router.query.site_id}/recordings/${response.recordingId}`}>
+        <Link href={`/sites/${siteId}/recordings/${response.recordingId}`}>
           {response.sessionId}
         </Link>
       </Cell>

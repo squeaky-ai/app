@@ -7,9 +7,9 @@ import { Page } from 'components/sites/page';
 import { OWNER } from 'data/teams/constants';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { Billing } from 'components/sites/settings/billing';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 
-const SiteSettingsSubscription: NextPage<ServerSideProps> = ({ user }) => (
+const SiteSettingsSubscription: NextPage<PageProps> = ({ user }) => (
   <>
     <Head>
       <title>Squeaky | Site Settings | Subscription</title>
@@ -33,4 +33,3 @@ const SiteSettingsSubscription: NextPage<ServerSideProps> = ({ user }) => (
 );
 
 export default SiteSettingsSubscription;
-export { getServerSideProps };

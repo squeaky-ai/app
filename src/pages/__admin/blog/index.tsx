@@ -8,9 +8,9 @@ import { PageLoading } from 'components/sites/page-loading';
 import { BlogPostRow } from 'components/admin/blog-post-row';
 import { useBlogPosts } from 'hooks/use-blog-posts';
 import { BreadCrumbs } from 'components/admin/breadcrumbs';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 
-const AdminBlog: NextPage<ServerSideProps> = () => {
+const AdminBlog: NextPage<PageProps> = () => {
   const { posts, loading } = useBlogPosts();
 
   return (
@@ -65,4 +65,3 @@ const AdminBlog: NextPage<ServerSideProps> = () => {
 };
 
 export default AdminBlog;
-export { getServerSideProps };

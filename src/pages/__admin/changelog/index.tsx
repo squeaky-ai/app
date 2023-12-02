@@ -9,9 +9,9 @@ import { ChangelogPostRow } from 'components/admin/changelog-post-row';
 import { EmptyState } from 'components/admin/empty-state';
 import { useChangelogPosts } from 'hooks/use-changelog-posts';
 import { BreadCrumbs } from 'components/admin/breadcrumbs';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 
-const AdminChangelog: NextPage<ServerSideProps> = () => {
+const AdminChangelog: NextPage<PageProps> = () => {
   const { posts, loading } = useChangelogPosts();
 
   return (
@@ -71,4 +71,3 @@ const AdminChangelog: NextPage<ServerSideProps> = () => {
 };
 
 export default AdminChangelog;
-export { getServerSideProps };

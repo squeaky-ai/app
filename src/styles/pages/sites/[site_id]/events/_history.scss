@@ -118,7 +118,91 @@
     display: grid;
     grid-gap: 2rem;
     grid-template-columns: 10rem 1fr;
-    margin: 2rem 0 0 0;
+    margin: 1rem 0 0 0;
+  }
+
+  .event-stats-table-header {
+    display: flex;
+    justify-content: flex-end;
+    margin: 1rem 0 0 0;
+
+    .dropdown {
+      & > .button {
+        background: none;
+        border: none;
+        border-radius: var(--border-radius-md);
+        height: 2rem;
+        margin-left: .5rem;
+        padding: 0 1rem;
+
+        &:hover {
+          background: var(--gray-100);
+        }
+
+        i {
+          position: static;
+
+          &:not(.arrow) {
+            color: var(--blue-500);
+            font-size: var(--font-size-body-lg);
+            margin-right: .5rem;
+          }
+        }
+      }
+    }
+
+    .menu-item {
+      position: relative;
+
+      @include breakpoint-md {
+        display: none;
+      }
+
+      .dropdown-menu {
+        left: auto;
+        right: 0;
+        top: 3rem;
+        transform: none;
+        width: 350px;
+      }
+
+      .filters-columns {
+        padding: .5rem;
+
+        .checkbox {
+          margin-bottom: .5rem;
+
+          &:last-of-type {
+            margin-bottom: 0;
+          }
+        }
+      }
+
+      .popout {
+        background: var(--white);
+        border-radius: var(--border-radius-md);
+        box-shadow: var(--box-shadow-sm);
+        display: none;
+        padding: 1rem;
+        position: absolute;
+        right: 220px;
+        top: 0;
+
+        &.open {
+          display: block;
+        }
+
+        .actions {
+          display: flex;
+          margin-top: 0;
+
+          .button {
+            margin-left: 0;
+            margin-right: 1rem;
+          }
+        }
+      }
+    }
   }
 
   .event-stats-breakdown {
@@ -233,6 +317,10 @@
       .row {
         grid-template-columns: repeat(5, 1fr);
         height: 3rem;
+
+        .browser {
+          margin: 0 .25rem 0 0;
+        }
       }
     }
   }
@@ -303,5 +391,32 @@
 
   code {
     color: var(--white);
+  }
+}
+
+.event-stats-tooltip {
+  p {
+    align-items: center;
+    color: var(--gray-200);
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 .25rem 0;
+
+    span:first-of-type {
+      margin: 0 1rem 0 0;
+    }
+
+    b {
+      color: var(--white);
+      margin: 0 0 .5rem 0;
+    }
+
+    &:last-of-type {
+      margin: 0;
+    }
+  }
+
+  &.referrers {
+    width: 500px;
   }
 }

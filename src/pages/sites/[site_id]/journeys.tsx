@@ -11,10 +11,10 @@ import { Journeys } from 'components/sites/journeys/journeys';
 import { PageLoading } from 'components/sites/page-loading';
 import { usePeriod } from 'hooks/use-period';
 import { usePages } from 'hooks/use-pages';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 import { getDateRange } from 'lib/dates';
 
-const SitesJourneys: NextPage<ServerSideProps> = ({ user }) => {
+const SitesJourneys: NextPage<PageProps> = ({ user }) => {
   const [page, setPage] = React.useState<string>(null);
   const { period, setPeriod } = usePeriod('journeys');
 
@@ -74,5 +74,3 @@ const SitesJourneys: NextPage<ServerSideProps> = ({ user }) => {
 };
 
 export default SitesJourneys;
-export { getServerSideProps };
-

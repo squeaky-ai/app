@@ -12,13 +12,13 @@ import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { Table, Row, Cell } from 'components/table';
 import { Error } from 'components/error';
 import { Roles } from 'components/sites/team/roles';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 import { OWNER, ADMIN } from 'data/teams/constants';
 import { providers } from 'data/sites/constants';
 import { useTeam } from 'hooks/use-team';
 import { Message } from 'components/message';
 
-const SiteSettingsTeam: NextPage<ServerSideProps> = ({ user }) => {
+const SiteSettingsTeam: NextPage<PageProps> = ({ user }) => {
   const { error, team } = useTeam();
 
   if (error) {
@@ -83,4 +83,3 @@ const SiteSettingsTeam: NextPage<ServerSideProps> = ({ user }) => {
 };
 
 export default SiteSettingsTeam;
-export { getServerSideProps };

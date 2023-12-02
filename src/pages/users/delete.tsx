@@ -5,9 +5,9 @@ import Link from 'next/link';
 import { Container } from 'components/container';
 import { Main } from 'components/main';
 import { DeleteAccount } from 'components/users/delete-account';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 
-const UsersDelete: NextPage<ServerSideProps> = () => (
+const UsersDelete: NextPage<PageProps> = () => (
   <>
     <Head>
       <title>Squeaky | User - Delete</title>
@@ -36,4 +36,3 @@ const UsersDelete: NextPage<ServerSideProps> = () => (
 );
 
 export default UsersDelete;
-export { getServerSideProps };

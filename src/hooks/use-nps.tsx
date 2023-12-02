@@ -1,9 +1,9 @@
-import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_NPS_QUERY } from 'data/nps/queries';
 import { FeedbackNpsResponseSort } from 'types/graphql';
 import type { TimeRange } from 'types/common';
 import type { FeedbackNpsResponseFilters, Site, Nps } from 'types/graphql';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface Props {
   page: number;
@@ -21,17 +21,18 @@ interface UseNps {
 }
 
 export const useNps = ({ page, size, sort, filters, range }: Props): UseNps => {
-  const router = useRouter();
+  const [siteId, skip] = useSiteId();
 
   const { data, loading, error } = useQuery<{ site: Site }>(GET_NPS_QUERY, {
     variables: { 
-      siteId: router.query.site_id as string, 
+      siteId,
       page, 
       size,
       sort,
       filters,
       ...range,
-    }
+    },
+    skip,
   });
 
   const fallback: Nps = {
@@ -65,7 +66,7 @@ export const useNps = ({ page, size, sort, filters, range }: Props): UseNps => {
   };
 
   return {
-    loading,
+    loading: loading || skip,
     error: !!error,
     nps: data ? data.site.nps : fallback,
   };

@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { PageLoading } from 'components/sites/page-loading';
 import { Main } from 'components/main';
 import { useChangelogPost } from 'hooks/use-changelog-post';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 import { ChangelogEdit } from 'components/admin/changelog-edit';
 import { Button } from 'components/button';
 import { Icon } from 'components/icon';
@@ -14,7 +14,7 @@ import { getAuthorKey } from 'lib/admin/common';
 import { useToasts } from 'hooks/use-toasts';
 import type { ChangelogPost } from 'types/graphql';
 
-const AdminChangelogEdit: NextPage<ServerSideProps> = () => {
+const AdminChangelogEdit: NextPage<PageProps> = () => {
   const toasts = useToasts();
 
   const { post, loading, refetch } = useChangelogPost();
@@ -78,4 +78,3 @@ const AdminChangelogEdit: NextPage<ServerSideProps> = () => {
 };
 
 export default AdminChangelogEdit;
-export { getServerSideProps };

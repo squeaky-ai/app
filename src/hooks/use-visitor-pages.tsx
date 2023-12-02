@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { GET_VISITOR_PAGES_QUERY } from 'data/visitors/queries';
 import { Visitor, Site, VisitorsPagesSort } from 'types/graphql';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface Props {
   page: number;
@@ -16,13 +17,15 @@ interface UseVisitorPages {
 
 export const useVisitorPages = (props: Props): UseVisitorPages => {
   const router = useRouter();
+  const [siteId, skip] = useSiteId();
 
   const { data, loading, error } = useQuery<{ site: Site }>(GET_VISITOR_PAGES_QUERY, {
     variables: { 
-      siteId: router.query.site_id as string,
+      siteId,
       visitorId: router.query.visitor_id as string,
       ...props,
     },
+    skip,
   });
 
   const fallback: Visitor['pages'] = {
@@ -35,7 +38,7 @@ export const useVisitorPages = (props: Props): UseVisitorPages => {
   }
 
   return {
-    loading, 
+    loading: loading || skip, 
     error: !!error,
     pages: data?.site?.visitor?.pages || fallback,
   };

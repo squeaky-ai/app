@@ -13,9 +13,9 @@ import { NpsTabs } from 'components/sites/feedback/nps-tabs';
 import { NpsScheduling } from 'components/sites/feedback/nps-scheduling';
 import { useFeedback } from 'hooks/use-feedback';
 import { NpsStatus } from 'components/sites/feedback/nps-status';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 
-const SitesFeedbackNpsScheduling: NextPage<ServerSideProps> = ({ user }) => {
+const SitesFeedbackNpsScheduling: NextPage<PageProps> = ({ user }) => {
   const { loading, error, feedback } = useFeedback();
 
   if (error) {
@@ -68,4 +68,3 @@ const SitesFeedbackNpsScheduling: NextPage<ServerSideProps> = ({ user }) => {
 };
 
 export default SitesFeedbackNpsScheduling;
-export { getServerSideProps };

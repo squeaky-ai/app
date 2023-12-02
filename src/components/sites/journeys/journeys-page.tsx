@@ -13,6 +13,7 @@ import { FILTERS } from 'data/recordings/constants';
 import { getOrdinalEnding } from 'lib/dates';
 import type { PageStats, FocussedPage } from 'types/journeys';
 import type { RecordingsFilters } from 'types/graphql';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface Props {
   col: number;
@@ -48,6 +49,7 @@ export const JourneysPage: FC<Props> = ({
   const ref = React.useRef<HTMLDivElement>(null);
   
   const router = useRouter();
+  const [siteId] = useSiteId();
   const { setFilters } = useFilters<RecordingsFilters>('recordings');
 
   const [open, setOpen] = React.useState<boolean>(false);
@@ -88,7 +90,7 @@ export const JourneysPage: FC<Props> = ({
     setOpen(false);
 
     setFilters({ ...FILTERS, visitedPages: [page.path] });
-    await router.push(`/sites/${router.query.site_id}/recordings`);
+    await router.push(`/sites/${siteId}/recordings`);
   };
 
   const togglePinnedPage = () => {

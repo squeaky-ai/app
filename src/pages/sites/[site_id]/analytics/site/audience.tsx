@@ -11,9 +11,9 @@ import { Period } from 'components/sites/period/period';
 import { usePeriod } from 'hooks/use-period';
 import { Tabs } from 'components/sites/analytics/tabs';
 import { AnalyticsSitesAudience } from 'components/sites/analytics/analytics-sites-audience';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 
-const SitesAnalyticsSiteAudience: NextPage<ServerSideProps> = ({ user }) => {
+const SitesAnalyticsSiteAudience: NextPage<PageProps> = ({ user }) => {
   const { period, setPeriod } = usePeriod('analytics');
   
   return (
@@ -43,7 +43,7 @@ const SitesAnalyticsSiteAudience: NextPage<ServerSideProps> = ({ user }) => {
             />
 
             {site.recordingsCount > 0 && (
-              <AnalyticsSitesAudience period={period} site={site} />
+              <AnalyticsSitesAudience period={period} />
             )}
           </Main>
         )}
@@ -53,4 +53,3 @@ const SitesAnalyticsSiteAudience: NextPage<ServerSideProps> = ({ user }) => {
 };
 
 export default SitesAnalyticsSiteAudience;
-export { getServerSideProps };

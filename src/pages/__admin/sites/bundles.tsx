@@ -8,12 +8,12 @@ import { SiteBundlesItem } from 'components/admin/site-bundles-item';
 import { SitesColumns } from 'components/admin/sites-columns';
 import { SitesType } from 'components/admin/sites-type';
 import { PageLoading } from 'components/sites/page-loading';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 import { useAdminSitesBundles } from 'hooks/use-admin-sites-bundles';
 import { useColumns } from 'hooks/use-columns';
 import { AdminSiteSort } from 'types/graphql';
 
-const AdminSitesBundles: NextPage<ServerSideProps> = () => {
+const AdminSitesBundles: NextPage<PageProps> = () => {
   const [sort, setSort] = React.useState<AdminSiteSort>(AdminSiteSort.CreatedAtDesc);
 
   const { columns, columnsReady, setColumns } = useColumns('admin-sites');
@@ -75,4 +75,3 @@ const AdminSitesBundles: NextPage<ServerSideProps> = () => {
 };
 
 export default AdminSitesBundles;
-export { getServerSideProps };

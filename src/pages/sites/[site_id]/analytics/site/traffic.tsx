@@ -11,9 +11,9 @@ import { Period } from 'components/sites/period/period';
 import { usePeriod } from 'hooks/use-period';
 import { Tabs } from 'components/sites/analytics/tabs';
 import { AnalyticsSitesTraffic } from 'components/sites/analytics/analytics-sites-traffic';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 
-const SitesAnalyticsSiteTraffic: NextPage<ServerSideProps> = ({ user }) => {
+const SitesAnalyticsSiteTraffic: NextPage<PageProps> = ({ user }) => {
   const { period, setPeriod } = usePeriod('analytics');
   
   return (
@@ -53,4 +53,3 @@ const SitesAnalyticsSiteTraffic: NextPage<ServerSideProps> = ({ user }) => {
 };
 
 export default SitesAnalyticsSiteTraffic;
-export { getServerSideProps };

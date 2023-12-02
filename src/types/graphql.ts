@@ -1442,9 +1442,13 @@ export type EventsRuleInput = {
 export type EventsStat = {
   __typename?: 'EventsStat';
   averageEventsPerVisitor: Scalars['Float'];
+  averageSessionDuration: Scalars['Int'];
+  browsers: Array<StringRecord>;
   count: Scalars['Int'];
   eventOrGroupId: Scalars['String'];
   name: Scalars['String'];
+  recordingsCount: Scalars['Int'];
+  referrers: Array<StringRecord>;
   type: EventsType;
   uniqueTriggers: Scalars['Int'];
 };
@@ -3181,6 +3185,7 @@ export type SitesProviderAuth = {
   provider: Scalars['String'];
   providerAppUuid?: Maybe<Scalars['String']>;
   providerUuid: Scalars['String'];
+  publishHistory: Array<Scalars['String']>;
   sdkUrl?: Maybe<Scalars['String']>;
 };
 
@@ -3246,6 +3251,12 @@ export enum Source {
   /** Record was created using the session */
   Web = 'web'
 }
+
+export type StringRecord = {
+  __typename?: 'StringRecord';
+  key: Scalars['String'];
+  value: Scalars['String'];
+};
 
 export type SubscriptionsCheckout = {
   __typename?: 'SubscriptionsCheckout';
@@ -3566,7 +3577,7 @@ export type UsersPayment = {
   amount: Scalars['Float'];
   currency: Currency;
   id: Scalars['ID'];
-  siteId: Scalars['ID'];
+  siteId?: Maybe<Scalars['ID']>;
 };
 
 export type UsersReferral = {

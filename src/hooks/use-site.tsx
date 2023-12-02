@@ -1,7 +1,7 @@
-import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_SITE_QUERY } from 'data/sites/queries';
 import type { Site } from 'types/graphql';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface UseSite {
   loading: boolean;
@@ -10,16 +10,17 @@ interface UseSite {
 }
 
 export const useSite = (): UseSite => {
-  const router = useRouter();
+  const [siteId, skip] = useSiteId();
 
   const { loading, error, data } = useQuery(GET_SITE_QUERY, {
     variables: {
-      siteId: router.query.site_id as string
-    }
+      siteId,
+    },
+    skip,
   });
 
   return {
-    loading,
+    loading: loading || skip, // This is a special case or we'll see the 404 page while the router loads
     error: !!error,
     site: data ? data.site : null
   };

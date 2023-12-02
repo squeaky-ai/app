@@ -1,6 +1,6 @@
 import { gql, useQuery } from '@apollo/client';
-import { useRouter } from 'next/router';
 import type { Site } from 'types/graphql';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface UseReferrers {
   loading: boolean;
@@ -18,18 +18,19 @@ const QUERY = gql`
 `;
 
 export const useReferrers = (): UseReferrers => {
-  const router = useRouter();
+  const [siteId, skip] = useSiteId();
 
   const { data, error, loading } = useQuery<{ site: Site }>(QUERY, {
     variables: {
-      siteId: router.query.site_id as string
-    }
+      siteId,
+    },
+    skip,
   });
 
   const referrers = data ? data.site.referrers : [];
 
   return {
-    loading,
+    loading: loading || skip,
     error: !!error,
     referrers: [...referrers].sort((a, b) => a.localeCompare(b)),
   };

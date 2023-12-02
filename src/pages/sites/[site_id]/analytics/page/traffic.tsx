@@ -15,11 +15,11 @@ import { usePeriod } from 'hooks/use-period';
 import { Tabs } from 'components/sites/analytics/tabs';
 import { Pages } from 'components/sites/analytics/pages';
 import { AnalyticsPagesTraffic } from 'components/sites/analytics/analytics-pages-traffic';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 import { usePages } from 'hooks/use-pages';
 import { getDateRange } from 'lib/dates';
 
-const SitesAnalyticsPageTraffic: NextPage<ServerSideProps> = ({ user }) => {
+const SitesAnalyticsPageTraffic: NextPage<PageProps> = ({ user }) => {
   const { query } = useRouter();
 
   const { period, setPeriod } = usePeriod('analytics');
@@ -76,7 +76,7 @@ const SitesAnalyticsPageTraffic: NextPage<ServerSideProps> = ({ user }) => {
             )}
 
             {site.recordingsCount > 0 && (
-              <AnalyticsPagesTraffic period={period} page={page} site={site} />
+              <AnalyticsPagesTraffic period={period} page={page} />
             )}
           </Main>
         )}
@@ -86,4 +86,3 @@ const SitesAnalyticsPageTraffic: NextPage<ServerSideProps> = ({ user }) => {
 };
 
 export default SitesAnalyticsPageTraffic;
-export { getServerSideProps };

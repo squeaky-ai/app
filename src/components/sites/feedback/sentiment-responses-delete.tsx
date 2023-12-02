@@ -1,6 +1,5 @@
 import React from 'react';
 import type { FC } from 'react';
-import { useRouter } from 'next/router';
 import { Icon } from 'components/icon';
 import { Button } from 'components/button';
 import { Modal, ModalBody, ModalHeader, ModalContents, ModalFooter } from 'components/modal';
@@ -8,6 +7,7 @@ import { useToasts } from 'hooks/use-toasts';
 import { sentimentDelete } from 'lib/api/graphql';
 import { MEMBER, READ_ONLY, SUPER_USER } from 'data/teams/constants';
 import type { FeedbackSentimentResponseItem, Team } from 'types/graphql';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface Props {
   member?: Team;
@@ -17,7 +17,7 @@ interface Props {
 
 export const SentimentResponsesDelete: FC<Props> = ({ member, response, onClose }) => {
   const toasts = useToasts();
-  const router = useRouter();
+  const [siteId] = useSiteId();
 
   const ref = React.useRef<Modal>();
 
@@ -33,7 +33,7 @@ export const SentimentResponsesDelete: FC<Props> = ({ member, response, onClose 
 
   const deleteResponse = async () => {
     try {
-      await sentimentDelete({ sentimentId: response.id, siteId: router.query.site_id as string });
+      await sentimentDelete({ sentimentId: response.id, siteId });
       closeModal();
       toasts.add({ type: 'success', body: 'Response deleted' });
     } catch {

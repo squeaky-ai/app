@@ -1,9 +1,9 @@
-import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_HEATMAPS_QUERY } from 'data/heatmaps/queries';
 import type { TimeRange } from 'types/common';
 import type { Heatmaps } from 'types/heatmaps';
 import type { Site, Heatmaps as HeatmapsWithStringItems, HeatmapsDevice, HeatmapsType } from 'types/graphql';
+import { useSiteId } from 'hooks/use-site-id';
 
 interface UseHeatmaps {
   loading: boolean;
@@ -27,7 +27,7 @@ function getVariablesForProps(siteId: string, props: Props) {
     page: props.page,
     excludeRecordingIds: props.excludeRecordingIds,
     ...props.range,
-  }
+  };
 }
 
 function parseJsonResponse(heatmaps: HeatmapsWithStringItems): Heatmaps {
@@ -38,11 +38,11 @@ function parseJsonResponse(heatmaps: HeatmapsWithStringItems): Heatmaps {
 }
 
 export const useHeatmaps = (props: Props): UseHeatmaps => {
-  const router = useRouter();
+  const [siteId, skip] = useSiteId();
 
   const { data, loading, error } = useQuery<{ site: Site }>(GET_HEATMAPS_QUERY, {
-    variables: getVariablesForProps(router.query.site_id as string, props),
-    skip: !props.page,
+    variables: getVariablesForProps(siteId, props),
+    skip: !props.page || skip
   });
 
   const defaults: Heatmaps = {
@@ -56,7 +56,7 @@ export const useHeatmaps = (props: Props): UseHeatmaps => {
   };
 
   return {
-    loading,
+    loading: loading || skip,
     error: !!error,
     heatmaps: data?.site?.heatmaps ? parseJsonResponse(data.site.heatmaps) : defaults,
   };

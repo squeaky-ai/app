@@ -8,9 +8,9 @@ import { Container } from 'components/container';
 import { BreadCrumbs } from 'components/sites/breadcrumbs';
 import { PrivacyTabs } from 'components/sites/settings/privacy-tabs';
 import { OWNER, ADMIN } from 'data/teams/constants';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 
-const SitesSettingsPrivacyDpa: NextPage<ServerSideProps> = ({ user }) => {
+const SitesSettingsPrivacyDpa: NextPage<PageProps> = ({ user }) => {
   return (
     <>
       <Head>
@@ -47,4 +47,3 @@ const SitesSettingsPrivacyDpa: NextPage<ServerSideProps> = ({ user }) => {
 };
 
 export default SitesSettingsPrivacyDpa;
-export { getServerSideProps };

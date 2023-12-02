@@ -13,9 +13,9 @@ import { SentimentTabs } from 'components/sites/feedback/sentiment-tabs';
 import { SentimentForm } from 'components/sites/feedback/sentiment-form';
 import { SentimentStatus } from 'components/sites/feedback/sentiment-status';
 import { useFeedback } from 'hooks/use-feedback';
-import { ServerSideProps, getServerSideProps } from 'lib/auth';
+import { PageProps } from 'types/page';
 
-const SitesFeedbackNpsForm: NextPage<ServerSideProps> = ({ user }) => {
+const SitesFeedbackNpsForm: NextPage<PageProps> = ({ user }) => {
   const { loading, error, feedback } = useFeedback();
 
   if (error) {
@@ -68,4 +68,3 @@ const SitesFeedbackNpsForm: NextPage<ServerSideProps> = ({ user }) => {
 };
 
 export default SitesFeedbackNpsForm;
-export { getServerSideProps };

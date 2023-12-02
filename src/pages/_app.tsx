@@ -18,8 +18,8 @@ const App: FC<AppProps<{ user: User }>> = ({ Component, pageProps }) => (
       <ToastProvider>
         <HistoryProvider>
           <PageProvider>
-            <Page user={pageProps.user}>
-              <Component {...pageProps} />
+            <Page>
+              {(user) => <Component {...pageProps} user={user} />}
             </Page>
           </PageProvider>
         </HistoryProvider>
