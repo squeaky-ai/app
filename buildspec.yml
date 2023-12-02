@@ -1,5 +1,9 @@
 version: 0.2
 
+env:
+  variables:
+    NODE_ENV: production
+
 phases:
   install:
     runtime-versions:
@@ -9,7 +13,7 @@ phases:
     commands:
       - npm install -g yarn
       - yarn install --ignore-engines
-      - NODE_ENV=production yarn build
+      - yarn build
       - aws s3 sync ./out s3://app.squeaky.ai --delete
       - aws cloudfront create-invalidation --distribution-id E2WZLVX1DF65XE --paths "/*"
 
