@@ -3,29 +3,14 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      docker: 19
-
-  pre_build:
-    commands:
-      - docker login -u squeakyai -p "${SQUEAKY_DOCKER_PASSWORD}"
-      - $(aws ecr get-login --no-include-email)
+      nodejs: 18
 
   build:
     commands:
-      # Build and push the docker image
-      - docker build --platform linux/arm64 -t app:latest .
-      - docker tag app:latest "${AWS_ACCOUNT_ID}.dkr.ecr.eu-west-1.amazonaws.com/app:latest"
-      - docker push "${AWS_ACCOUNT_ID}.dkr.ecr.eu-west-1.amazonaws.com/app:latest"
-      # Extract the .next directory and publish it to S3
-      - CID=$(docker create app)
-      - docker cp ${CID}:/app/.next/static /tmp/
-      - docker rm ${CID}
-      - aws s3 sync /tmp/static s3://cdn.squeaky.ai/app/_next/static --delete
-
-  post_build:
-    commands:
-      - aws ecs update-service --cluster squeaky-prod --service app --force-new-deployment
-      - aws ecs wait services-stable --cluster squeaky-prod --services app
+      yarn install
+      yarn build
+      aws s3 sync ./out s3://app.squeaky.ai --delete
+      aws cloudfront create-invalidation --distribution-id E2WZLVX1DF65XE --paths "/*"
 
 cache:
   paths:
