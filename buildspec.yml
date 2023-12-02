@@ -8,7 +8,7 @@ phases:
   build:
     commands:
       - npm install -g yarn
-      - yarn install
+      - yarn install --ignore-engines
       - yarn build
       - aws s3 sync ./out s3://app.squeaky.ai --delete
       - aws cloudfront create-invalidation --distribution-id E2WZLVX1DF65XE --paths "/*"
