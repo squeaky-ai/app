@@ -9,7 +9,7 @@ const Index: NextPage<PageProps> = () => {
 
   React.useEffect(() => {
     if (router.isReady) {
-      router.replace('/__admin/dashboard');
+      router.replace(router.asPath.replace('/app/', '/'));
     }
   }, [router.isReady]);
 

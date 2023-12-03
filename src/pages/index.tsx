@@ -7,7 +7,11 @@ import { Spinner } from 'components/spinner';
 const Index: NextPage<PageProps> = () => {
   const router = useRouter();
 
-  router.push('/sites');
+  React.useEffect(() => {
+    if (router.isReady) {
+      router.replace('/sites');
+    }
+  }, [router.isReady]);
 
   return <Spinner />;
 };
