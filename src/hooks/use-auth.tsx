@@ -56,11 +56,11 @@ export const useAuth = (): UseAuth => {
   // A bunch of the site expects the users first and last
   // name to exist so we should trap them here until they've
   // filled it out
-  if ((!data.user?.firstName || !data.user?.lastName) && router.asPath !== '/users/new') {
+  if ((!data.user?.firstName || !data.user?.lastName) && router.asPath !== '/users/new/') {
     return {
       user: data.user,
       loading: false,
-      redirect: `${publicRuntimeConfig.appHost}/users/new`,
+      redirect: `${publicRuntimeConfig.appHost}/users/new/`,
     };
   }
 
