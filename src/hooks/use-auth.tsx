@@ -60,7 +60,7 @@ export const useAuth = (): UseAuth => {
     return {
       user: data.user,
       loading: false,
-      redirect: `${publicRuntimeConfig.webHost}/users/new`,
+      redirect: `${publicRuntimeConfig.appHost}/users/new`,
     };
   }
 
