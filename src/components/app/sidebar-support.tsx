@@ -2,28 +2,14 @@ import React from 'react';
 import type { FC } from 'react';
 import { SidebarNested } from 'components/app/sidebar-nested';
 import { Icon } from 'components/icon';
-import { SidebarChangelog } from 'components/app/sidebar-changelog';
-import { useChangelogPosts } from 'hooks/use-changelog-posts';
-import type { User } from 'types/graphql';
 
 interface Props {
-  user: User;
   expanded: boolean;
   expand: VoidFunction;
   collapse: VoidFunction;
 }
 
-export const SidebarSupport: FC<Props> = ({ user, expand, collapse, expanded }) => {
-  const { posts } = useChangelogPosts();
-
-  const [changelogLastViewedAt, setChangelogLastViewedAt] = React.useState<Date>(
-    user?.changelogLastViewedAt ? new Date(user.changelogLastViewedAt.iso8601) : null
-  );
-
-  const changelogLength = changelogLastViewedAt
-    ? posts.filter(p => new Date(p.createdAt.iso8601) > changelogLastViewedAt).length
-    : posts.length;
-
+export const SidebarSupport: FC<Props> = ({ expand, collapse, expanded }) => {
   return (
     <div className='sidebar-support'>
       <SidebarNested
@@ -33,17 +19,10 @@ export const SidebarSupport: FC<Props> = ({ user, expand, collapse, expanded }) 
         expand={expand}
         expanded={expanded}
         className='nested-support'
-        counter={changelogLength}
       >
         <a className='button external-link' href='https://squeaky.notion.site/Squeaky-Help-Centre-fc049a1822b94b7a8df362811c534d4b' target='_blank' rel='noreferrer'>
           <span>Help center</span> <Icon name='external-link-line' />
         </a>
-        <SidebarChangelog 
-          disabled={posts.length === 0}
-          changelogLength={changelogLength}
-          posts={posts}
-          setChangelogLastViewedAt={setChangelogLastViewedAt}
-        />
         <a className='button' href='/legal/terms-of-service' target='_blank'>
           Terms of service
         </a>
