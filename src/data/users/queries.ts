@@ -10,6 +10,7 @@ export const USER_QUERY = gql`
       email
       superuser
       provider
+      currentProvider
       partner {
         id
         name

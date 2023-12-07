@@ -540,6 +540,7 @@ export type AdminUser = {
   changelogLastViewedAt?: Maybe<CommonDates>;
   communication?: Maybe<UsersCommunication>;
   createdAt: CommonDates;
+  currentProvider?: Maybe<Scalars['String']>;
   email: Scalars['String'];
   firstName?: Maybe<Scalars['String']>;
   fullName?: Maybe<Scalars['String']>;
@@ -3455,6 +3456,7 @@ export type User = {
   changelogLastViewedAt?: Maybe<CommonDates>;
   communication?: Maybe<UsersCommunication>;
   createdAt: CommonDates;
+  currentProvider?: Maybe<Scalars['String']>;
   email: Scalars['String'];
   firstName?: Maybe<Scalars['String']>;
   fullName?: Maybe<Scalars['String']>;
