@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import { Container } from 'components/container';
 import { Illustration, IllustrationType } from 'components/illustration';
 import { EmptyStateHint } from 'components/sites/empty-state-hint';
+import { providers } from 'data/sites/constants';
 import type { Site } from 'types/graphql';
 
 interface Props {
@@ -15,7 +16,7 @@ interface Props {
 
 const getVerifiedBody = (provider: string) => {
   switch(provider) {
-    case 'duda':
+    case providers.duda:
       return (
         <p>Your tracking code is will be installed the moment you next publish your site. After that <b>it can take 30-60 minutes for your first recording to arrive</b>, but we&apos;ll email you as soon as your recording arrives.</p>
       );
