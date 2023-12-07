@@ -53,11 +53,9 @@ export const Page: FC<Props> = ({ children, user, scope }) => {
   const { loading, error, site } = useSite();
   const { setPageState } = usePageContext();
 
-  console.log(user.provider);
-
   const member = getTeamMember(site, user);
   const featureEnabled = featureIsEnabledForPath(site, router.pathname);
-  const embedded = !!site?.provider;
+  const embedded = !!user.currentProvider;
 
   const authorized = user.superuser 
     ? true 
