@@ -91,7 +91,7 @@ const SitesVisitor: NextPage<PageProps> = ({ user }) => {
                 <h5>Recordings</h5>
                 <h3>
                   {visitor.recordingCount?.total || 0}
-                  <Pill type='tertiary'>{visitor.recordingCount.new} New</Pill>
+                  <Pill type='tertiary'>{visitor.recordingCount?.new || 0} New</Pill>
                 </h3>
               </Card>
               <Card className='page-views'>

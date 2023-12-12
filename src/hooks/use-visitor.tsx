@@ -25,6 +25,6 @@ export const useVisitor = (): UseVisitor => {
   return {
     loading: loading || skip, 
     error: !!error,
-    visitor: data ? data.site.visitor : null,
+    visitor: data ? data.site?.visitor : null,
   };
 };
