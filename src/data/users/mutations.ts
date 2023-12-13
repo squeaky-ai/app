@@ -35,38 +35,6 @@ export const USER_CREATE_REFERRAL_MUTATION = gql`
   }
 `;
 
-export const USER_CREATE_INVOICE_MUTATION = gql`
-  mutation UserCreateInvoice($input: UsersInvoiceCreateInput!) {
-    userInvoiceCreate(input: $input) {
-      id
-      currency
-      dueAt {
-        iso8601
-        niceDateTime
-      }
-      filename
-      invoiceUrl
-      issuedAt {
-        iso8601
-        niceDateTime
-      }
-      paidAt {
-        iso8601
-        niceDateTime
-      }
-      status
-    }
-  }
-`;
-
-export const USER_DELETE_INVOICE_MUTATION = gql`
-  mutation UserDeleteInvoice($input: UsersInvoiceDeleteInput!) {
-    userInvoiceDelete(input: $input) {
-      id
-    }
-  }
-`;
-
 export const UPDATE_USER_COMMUNICATION = gql`
   mutation UserCommunication($input: UsersCommunicationInput!) {
     userCommunication(input: $input) {
@@ -110,15 +78,6 @@ export const ADMIN_USER_PARTNER_CREATE_MUTATION = gql`
         name
         slug
       }
-    }
-  }
-`;
-
-export const ADMIN_PARTNER_INVOICE_UPDATE = gql`
-  mutation AdminPartnerInvoiceUpdate($input: AdminPartnerInvoiceUpdateInput!) {
-    adminPartnerInvoiceUpdate(input: $input) {
-      id
-      status
     }
   }
 `;

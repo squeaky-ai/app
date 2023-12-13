@@ -5,14 +5,8 @@ import { CreateLead } from 'components/partners/create-lead';
 import { Error } from 'components/error';
 import { PartnerReferreredSite } from 'components/partners/partner-referrered-site';
 import { PageLoading } from 'components/sites/page-loading';
-import { Card } from 'components/card';
-import { PartnerInvoices } from 'components/partners/partner-invoices';
 import { usePartner } from 'hooks/use-partner';
 import { buildReferrersColumns } from 'lib/users';
-import { toDecimalCurrency } from 'lib/currency';
-import { CreateInvoice } from 'components/partners/create-invoice';
-import { getAllTimeCommission, getAvailablePayout, getHistoricalPayouts } from 'lib/comisssion';
-import { Currency } from 'types/graphql';
 
 export const Partner: FC = () => {
   const { partner, loading, error } = usePartner();
@@ -51,46 +45,8 @@ export const Partner: FC = () => {
         </div>
       </div>
 
-      <h5>Revenue &amp; Commission</h5>
-
-      <div className='revenue'>
-        <Card>
-          <h5>Available to pay out</h5>
-          <p>Funds can be invoiced for at any time. The available payout represents all historical/completed months that have been paid for by the respective site.</p>
-          <div className='stats mauve'>
-          <h3>€{toDecimalCurrency(getAvailablePayout(partner, Currency.Eur))}</h3>
-          <h3>${toDecimalCurrency(getAvailablePayout(partner, Currency.Usd))}</h3>
-          <h3>£{toDecimalCurrency(getAvailablePayout(partner, Currency.Gbp))}</h3>
-          </div>
-        </Card>
-        <Card>
-          <h5>Historical pay outs</h5>
-          <p>Funds that have been paid out following a received invoices.</p>
-          <div className='stats'>
-          <h3>€{(toDecimalCurrency(getHistoricalPayouts(partner, Currency.Eur)))}</h3>
-          <h3>${(toDecimalCurrency(getHistoricalPayouts(partner, Currency.Usd)))}</h3>
-          <h3>£{(toDecimalCurrency(getHistoricalPayouts(partner, Currency.Gbp)))}</h3>
-          </div>
-        </Card>
-        <Card>
-          <h5>All time commission</h5>
-          <p>Shows all commision booked since the partnership commenced.</p>
-          <div className='stats'>
-          <h3>€{toDecimalCurrency(getAllTimeCommission(partner, Currency.Eur))}</h3>
-          <h3>${toDecimalCurrency(getAllTimeCommission(partner, Currency.Usd))}</h3>
-          <h3>£{toDecimalCurrency(getAllTimeCommission(partner, Currency.Gbp))}</h3>
-          </div>
-        </Card>
-      </div>
-
-      <div className='invoices'>
-        <h5>
-          Invoices
-          <CreateInvoice partner={partner} />
-        </h5>
-
-        <PartnerInvoices partner={partner} />
-      </div>
+      <h5>Invoices</h5>
+      <p>Please send invoices to <a href='mailto:hello@squeaky.ai'>hello@squeaky.ai</a></p>
     </Main>
   );
 };

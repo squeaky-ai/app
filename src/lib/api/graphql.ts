@@ -71,10 +71,6 @@ import {
   UsersReferral,
   UsersReferralDeleteInput,
   AdminUserPartnerCreateInput,
-  AdminPartnerInvoiceUpdateInput,
-  UsersInvoiceCreateInput,
-  UsersInvoice,
-  UsersInvoiceDeleteInput,
   SitesCreateInput,
   SitesTrackingCodeInstructionsInput,
   AdminSiteTeamDeleteInput,
@@ -154,12 +150,9 @@ import {
   USER_PASSWORD_MUTATION,
   UPDATE_USER_COMMUNICATION,
   USER_CREATE_REFERRAL_MUTATION,
-  USER_CREATE_INVOICE_MUTATION,
-  USER_DELETE_INVOICE_MUTATION,
   ADMIN_USER_DELETE_MUTATION,
   ADMIN_REFERRAL_DELETE_MUTATION,
   ADMIN_USER_PARTNER_CREATE_MUTATION,
-  ADMIN_PARTNER_INVOICE_UPDATE,
   USER_REFERRAL_DELETE_MUTATION,
 } from 'data/users/mutations';
 
@@ -1131,15 +1124,6 @@ export const adminPartnerCreate = async (input: AdminUserPartnerCreateInput): Pr
   return null;
 };
 
-export const adminPartnerInvoiceUpdate = async (input: AdminPartnerInvoiceUpdateInput): Promise<void> => {
-  await client.mutate({
-    mutation: ADMIN_PARTNER_INVOICE_UPDATE,
-    variables: { input },
-  });
-
-  return null;
-};
-
 export const referralCreate = async (partnerId: string, input: UsersReferralCreateInput): Promise<UsersReferral> => {
   const { data } = await client.mutate({
     mutation: USER_CREATE_REFERRAL_MUTATION,
@@ -1166,63 +1150,6 @@ export const referralCreate = async (partnerId: string, input: UsersReferralCrea
   });
 
   return data.userReferralCreate;
-};
-
-export const invoiceCreate = async (partnerId: string, input: UsersInvoiceCreateInput): Promise<UsersInvoice> => {
-  const { data } = await client.mutate({
-    mutation: USER_CREATE_INVOICE_MUTATION,
-    variables: { input },
-  });
-
-  cache.modify({
-    id: cache.identify({ id: partnerId, __typename: 'UsersPartner' }),
-    fields: {
-      invoices(existingRefs = []) {
-        const newRef = cache.writeFragment({
-          data: data.userInvoiceCreate,
-          fragment: gql`
-            fragment NewUserInvoice on UserInvoice {
-              id
-              currency
-              dueAt {
-                iso8601
-                niceDateTime
-              }
-              filename
-              invoiceUrl
-              issuedAt {
-                iso8601
-                niceDateTime
-              }
-              paidAt {
-                iso8601
-                niceDateTime
-              }
-              status
-            }
-          `
-        });     
-
-        return [...existingRefs, newRef];
-      },
-    },
-  });
-
-  return data.userInvoiceCreate;
-};
-
-export const invoiceDelete = async (input: UsersInvoiceDeleteInput): Promise<void> => {
-  await client.mutate({
-    mutation: USER_DELETE_INVOICE_MUTATION,
-    variables: { input },
-    update(cache) {
-      const normalizedId = cache.identify({ id: input.id, __typename: 'UsersInvoice' });
-      cache.evict({ id: normalizedId });
-      cache.gc();
-    }
-  });
-
-  return null;
 };
 
 export const generateApiKey = async (input: SitesApiKeyCreateInput): Promise<Site> => {

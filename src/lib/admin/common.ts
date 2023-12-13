@@ -1,11 +1,7 @@
-import { ChangelogInput, BlogInput } from 'types/admin';
-import { ChangelogPost, BlogPost } from 'types/graphql';
+import { BlogInput } from 'types/admin';
+import { BlogPost } from 'types/graphql';
 
-type Post = ChangelogPost | BlogPost;
-
-type Input = ChangelogInput | BlogInput;
-
-export const getAuthorByKey = (author: Input['author']) => {
+export const getAuthorByKey = (author: BlogInput['author']) => {
   switch(author) {
     case 'lewis':
       return {
@@ -20,7 +16,7 @@ export const getAuthorByKey = (author: Input['author']) => {
   }
 };
 
-export const getAuthorKey = (author: Post['author']): Input['author'] => {
+export const getAuthorKey = (author: BlogPost['author']): BlogInput['author'] => {
   switch(author.name) {
     case 'Lewis Monteith':
       return 'lewis';

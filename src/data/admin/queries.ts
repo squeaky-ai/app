@@ -376,37 +376,6 @@ export const GET_ADMIN_USER_QUERY = gql`
               }
             }
           }
-          invoices {
-            id
-            filename
-            invoiceUrl
-            status
-            amount
-            currency
-            issuedAt {
-              iso8601
-              niceDateTime
-            }
-            dueAt {
-              iso8601
-              niceDateTime
-            }
-            paidAt {
-              iso8601
-              niceDateTime
-            }
-          }
-          allTimeCommission {
-            id
-            amount
-            currency
-            siteId
-          }
-          payOuts {
-            id
-            amount
-            currency
-          }
         }
       }
     }
