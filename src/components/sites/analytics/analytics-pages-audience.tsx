@@ -47,8 +47,6 @@ export const AnalyticsPagesAudience: FC<Props> = ({ page, period }) => {
     return <NoResults title='There is no analytics data available for your chosen period' illustration='illustration-2' />
   }
 
-  console.log(analytics);
-
   return (
     <div className='analytics-audience pages'>
       <div className='grid-item countries'>

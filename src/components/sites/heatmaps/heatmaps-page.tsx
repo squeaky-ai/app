@@ -55,8 +55,6 @@ export const HeatmapsPage: FC<Props> = ({
         : p.url === page;
     })?.exitedAt;
 
-    console.log({ page, pages: heatmaps.recording.pages, timestamp });
-
     const location = new Date(timestamp?.iso8601).valueOf() - events[0].timestamp - 50;
 
     if (!timestamp) {

@@ -34,8 +34,6 @@ export const JourneyReferrersPage: FC<Props> = ({
 
   const hidden = pinnedReferrer && pinnedReferrer !== referrer.name;
 
-  console.log(hidden);
-
   return (
     <div
       onMouseEnter={handleMouseEnter(referrer.name)}

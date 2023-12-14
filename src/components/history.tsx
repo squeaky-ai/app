@@ -22,7 +22,6 @@ export const HistoryProvider: FC<{ children: React.ReactNode }> = ({ children })
 
   React.useEffect(() => {
     if (router.isReady && history[history.length - 1]?.path !== router.pathname) {
-      console.log(router.asPath, router.pathname);
       setHistory([...history, { path: router.asPath, route: router.pathname }]);
     }
   }, [router.pathname, router.isReady]);
