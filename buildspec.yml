@@ -3,7 +3,6 @@ version: 0.2
 env:
   variables:
     NODE_ENV: production
-    API_HOST: https://squeaky.ai
 
 phases:
   install:
