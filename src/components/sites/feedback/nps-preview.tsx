@@ -80,7 +80,7 @@ export const NpsPreview: FC<Props> = ({
             <iframe 
               id='squeaky__nps_frame'
               scrolling='no'
-              src={`${publicRuntimeConfig.webHost}/feedback/nps?site_id=${site.uuid}&demo=true&theme_overrides=${themeOverride}`}
+              src={`${publicRuntimeConfig.webHost}/feedback/nps/?site_id=${site.uuid}&demo=true&theme_overrides=${themeOverride}`}
               onLoad={handleLoad}
             />
 

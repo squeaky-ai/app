@@ -56,7 +56,7 @@ export const SentimentPreview: FC<Props> = ({ site, feedback }) => {
             <iframe 
               id='squeaky__sentiment_frame'
               scrolling='no'
-              src={`${publicRuntimeConfig.webHost}/feedback/sentiment?site_id=${site.uuid}&demo=true&theme_overrides=${themeOverride}`}
+              src={`${publicRuntimeConfig.webHost}/feedback/sentiment/?site_id=${site.uuid}&demo=true&theme_overrides=${themeOverride}`}
               onLoad={handleLoad}
             />
 
