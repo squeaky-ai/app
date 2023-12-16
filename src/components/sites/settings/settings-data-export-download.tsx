@@ -11,7 +11,7 @@ interface Props {
 const { publicRuntimeConfig } = getConfig();
 
 export const SettingsDataExportDownload: FC<Props> = ({ dataExport, site }) => {
-  const downloadLink = `${publicRuntimeConfig.apiHost}/api/data_exports/${dataExport.id}?site_id=${site.id}`;
+  const downloadLink = `${publicRuntimeConfig.apiHost}/data_exports/${dataExport.id}?site_id=${site.id}`;
 
   return (
     <a className='button link primary' target='_blank' rel='noreferrer' href={downloadLink}>

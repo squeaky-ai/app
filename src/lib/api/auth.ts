@@ -28,7 +28,7 @@ const handleFailure = (error: AxiosError): Response<null> => {
 
 export const login = async <T>(input: LoginInput): Promise<Response<T>> => {
   try {
-    const response = await axios.post(`${publicRuntimeConfig.apiHost}/api/auth/sign_in.json`, { user: input }, { withCredentials: true });
+    const response = await axios.post(`${publicRuntimeConfig.apiHost}/auth/sign_in.json`, { user: input }, { withCredentials: true });
     return handleSuccess(response.data);
   } catch(error: any) {
     return handleFailure(error);
@@ -37,7 +37,7 @@ export const login = async <T>(input: LoginInput): Promise<Response<T>> => {
 
 export const signout = async (): Promise<Response<null>> => {
   try {
-    await axios.delete(`${publicRuntimeConfig.apiHost}/api/auth/sign_out.json`, { withCredentials: true });
+    await axios.delete(`${publicRuntimeConfig.apiHost}/auth/sign_out.json`, { withCredentials: true });
     return handleSuccess(null);
   } catch(error: any) {
     return handleFailure(error);

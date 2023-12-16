@@ -258,7 +258,7 @@ export const cache = new InMemoryCache({
 
 export const client = new ApolloClient({
   cache,
-  uri: `${publicRuntimeConfig.apiHost}/api/graphql`,
+  uri: `${publicRuntimeConfig.apiHost}/graphql`,
   headers: {
     'x-squeaky-timezone': typeof window === 'undefined' ? 'UTC' : Preferences.getString(Preference.TIMEZONE) || 'UTC', 
   },
