@@ -84,7 +84,7 @@ export const Sidebar: FC = () => {
             <SidebarGroup name='Monitoring' visible>
               <SidebarLink
                 visibile
-                href={`${publicRuntimeConfig.apiHost}/api/sidekiq`}
+                href={`${publicRuntimeConfig.apiHost}/sidekiq`}
                 active={false}
                 icon='line-chart-line'
                 name='Sidekiq'
