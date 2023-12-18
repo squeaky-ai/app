@@ -70,6 +70,7 @@ export const mapFeatureToRoutes: Record<PlanFeature, string[]> = {
     '/sites/[site_id]/analytics/page/audience',
   ],
   recordings: [
+    '/sites/[site_id]/recordings',
     '/sites/[site_id]/recordings/[recording_id]',
   ],
   sentiment: [
