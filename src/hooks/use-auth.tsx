@@ -39,7 +39,7 @@ export const useAuth = (): UseAuth => {
     return {
       user: null,
       loading: false,
-      redirect: `${publicRuntimeConfig.webHost}/auth/login`,
+      redirect: `${publicRuntimeConfig.webHost}/auth/login/`,
     };
   }
 
@@ -49,7 +49,7 @@ export const useAuth = (): UseAuth => {
     return {
       user: data.user,
       loading: false,
-      redirect: `${publicRuntimeConfig.webHost}/auth/login`,
+      redirect: `${publicRuntimeConfig.webHost}/auth/login/`,
     }; 
   }
 

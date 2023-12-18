@@ -94,7 +94,7 @@ export const ConsentPreview: FC<Props> = ({
           <iframe
             id='squeaky__consent_frame'
             scrolling='no'
-            src={`${publicRuntimeConfig.webHost}/feedback/consent?site_id=?${site.uuid}&themeOverride=${themeOverride}`}
+            src={`${publicRuntimeConfig.webHost}/feedback/consent/?site_id=?${site.uuid}&themeOverride=${themeOverride}`}
             onLoad={handleLoad}
           />
         </div>
