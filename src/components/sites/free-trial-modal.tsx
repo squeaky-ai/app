@@ -63,7 +63,7 @@ export class FreeTrialModal extends React.Component<Props, State> {
                     <Icon name='star-line' className='star' />
                     Great news!
                   </h3>
-                  <h4>We&apos;re providing you with a <b>14-day</b> free trial of our most advanced features, and 1000 extra recordings.</h4>
+                  <h4>We&apos;re providing you with a <b>14-day</b> free trial of our most advanced features, and you can capture up to 5000 visits to your website during the trial.</h4>
                   <p>This is your chance to experience the full power of Squeaky&apos;s analytics suite, and when your trial ends you&apos;ll simply revert back to the free plan. If you&apos;re excited about maintaining access to the paid features you can upgrade at any time!</p>
                 </div>
 
