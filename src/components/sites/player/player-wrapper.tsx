@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 import { Page } from 'components/sites/page';
 import { Player } from 'components/sites/player/player';
 import { Header } from 'components/header';
-import { Spinner } from 'components/spinner';
 import { PlayerActions } from 'components/sites/player/player-actions';
 import { PlayerClose } from 'components/sites/player/player-close';
 import { PlayerDetails } from 'components/sites/player/player-details';
@@ -16,6 +15,7 @@ import { PlayerState, PlayerStatus } from 'types/player';
 import type { User, Recording } from 'types/graphql';
 import type { Action } from 'types/player';
 import type { Event } from 'types/event';
+import { NotFound } from '../not-found';
 
 interface Props {
   user: User;
@@ -31,6 +31,8 @@ let nextPageTimer: number;
 export const PlayerWrapper: FC<Props> = ({ user, state, recording, events, dispatch, fetchMoreEvents }) => {
   const router = useRouter();
   const ref = React.useRef<Player>(null);
+
+  const hasRecording = !!recording && events.length > 0;
 
   const processNextBatchOfEvents = (page: number): void => {
     nextPageTimer = window.setTimeout(async () => {
@@ -88,20 +90,18 @@ export const PlayerWrapper: FC<Props> = ({ user, state, recording, events, dispa
       <Page user={user} scope={[]}>
         {({ site, member }) => (
           <>
-            <Header className='site-header'>
-              <PlayerActions site={site} member={member} recording={recording} />
-              <PlayerDetails recording={recording} />
-              <PlayerClose site={site} />
-            </Header>
-
-            {!recording && (
-              <main id='player'>
-                <Spinner />
-              </main>
+            {!hasRecording && (
+              <NotFound />
             )}
-            
-            {!!recording && (
+
+            {hasRecording && (
               <>
+                <Header className='site-header'>
+                  <PlayerActions site={site} member={member} recording={recording} />
+                  <PlayerDetails recording={recording} />
+                  <PlayerClose site={site} />
+                </Header>
+        
                 <PlayerSidebar 
                   state={state}
                   site={site}

@@ -2,7 +2,7 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { PageProps } from 'types/page';
-import { NotFound } from 'components/sites/not-found';
+import { Spinner } from 'components/spinner';
 import { Error } from 'components/error';
 import { PlayerWrapper } from 'components/sites/player/player-wrapper';
 import { useRecording } from 'hooks/use-recording';
@@ -54,12 +54,8 @@ const SitesRecording: NextPage<PageProps> = ({ user }) => {
     return <Error />;
   }
 
-  if (!loading && !recording) {
-    return <NotFound />;
-  }
-
-  if (!loading && !events.length) {
-    return <NotFound />;
+  if (loading) {
+    return <Spinner />;
   }
 
   return (
