@@ -103,7 +103,7 @@ export const SiteDetails: FC<Props> = ({ activeVisitors, site }) => {
           <div className='title'>
             <h5>
               <Icon name='vidicon-line' />
-              Recordings
+              Sessions
             </h5>
             <SiteIngestEnabled site={site} />
           </div>
@@ -122,6 +122,11 @@ export const SiteDetails: FC<Props> = ({ activeVisitors, site }) => {
               <Cell>Deleted</Cell>
               <Cell>{site.recordingCounts.deletedAll.toLocaleString()}</Cell>
               <Cell>{site.recordingCounts.deletedCurrentMonth.toLocaleString()}</Cell>
+            </Row>
+            <Row>
+              <Cell>Analytics only</Cell>
+              <Cell>-</Cell>
+              <Cell>-</Cell>
             </Row>
           </Table>
         </div>

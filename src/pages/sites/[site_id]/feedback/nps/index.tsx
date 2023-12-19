@@ -52,7 +52,7 @@ const SitesFeedbackNps: NextPage<PageProps> = ({ user }) => {
             {!!site.verifiedAt && (
               <>
                 <NpsTabs siteId={site.id} member={member} page='feedback' />
-                <Nps member={member} />
+                <Nps site={site} member={member} />
               </>
             )}
           </Main>

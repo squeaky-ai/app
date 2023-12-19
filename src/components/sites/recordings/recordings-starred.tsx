@@ -7,7 +7,7 @@ import { Tooltip } from 'components/tooltip';
 import { useToasts } from 'hooks/use-toasts';
 import { recordingBookmarked } from 'lib/api/graphql';
 import { READ_ONLY, SUPER_USER } from 'data/teams/constants';
-import type { Recording, Site, Team } from 'types/graphql';
+import { PlanFeature, type Recording, type Site, type Team } from 'types/graphql';
 
 interface Props {
   link?: boolean;
@@ -30,6 +30,14 @@ export const RecordingStarred: FC<Props> = ({ link, site, member, recording }) =
       toasts.add({ type: 'error', body: 'There was an error bookmarking your recording. Please try again.' });
     }
   };
+
+  if (!site.plan.featuresEnabled.includes(PlanFeature.Recordings)) {
+    return (
+      <span className='upgrade-plan'>
+        <i>No Recording</i> <Link href={`/sites/${site.id}/settings/subscription`}>Upgrade</Link>
+      </span>
+    );
+  }
 
   return (
     <>

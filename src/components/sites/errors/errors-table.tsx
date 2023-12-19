@@ -28,7 +28,7 @@ export const ErrorsTable: FC<Props> = ({ site, errors, sort, setSort }) => (
           />
         </Cell>
         <Cell>
-          Recordings impacted
+          Sessions impacted
           <Sort 
             name='recording_count' 
             order={sort} 

@@ -19,7 +19,7 @@ export const ErrorTabs: FC<Props> = ({ tab, setTab }) => (
       </li>
       <li className='tab'>
         <Button className={classnames('tab-button', { active: tab === ErrorTab.RECORDINGS })} onClick={() => setTab(ErrorTab.RECORDINGS)}>
-          Recordings
+          Sessions
         </Button>
       </li>
       <li className='tab'>

@@ -17,14 +17,15 @@ import { useSort } from 'hooks/use-sort';
 import { useFilters } from 'hooks/use-filters';
 import { usePeriod } from 'hooks/use-period';
 import { useColumns } from 'hooks/use-columns';
-import { FeedbackSentimentResponseSort, FeedbackSentimentResponseFilters, Team } from 'types/graphql';
+import { FeedbackSentimentResponseSort, FeedbackSentimentResponseFilters, Team, Site } from 'types/graphql';
 import type { ValueOf } from 'types/common';
 
 interface Props {
+  site: Site;
   member?: Team;
 }
 
-export const Sentiment: FC<Props> = ({ member }) => {
+export const Sentiment: FC<Props> = ({ site, member }) => {
   const [page, setPage] = React.useState<number>(1);
   const [size, setSize] = React.useState<number>(10);
 
@@ -104,6 +105,7 @@ export const Sentiment: FC<Props> = ({ member }) => {
 
       {columnsReady && (
         <SentimentResponses
+          site={site}
           member={member}
           page={page}
           sort={sort}

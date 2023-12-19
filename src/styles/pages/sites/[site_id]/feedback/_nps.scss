@@ -778,6 +778,13 @@
         }
       }
 
+      .upgrade-plan {
+        i {
+          color: var(--gray-500);
+          margin: 0 .25rem 0 0;
+        }
+      }
+
       .tooltip {
         display: inline-block;
 

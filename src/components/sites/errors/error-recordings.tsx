@@ -62,7 +62,7 @@ export const ErrorRecordings: FC<Props> = ({
       {recordings.items.length === 0 && (
         <div className='no-error-recordings'>
           <Illustration illustration='illustration-1' height={160} width={210} />
-          <h4>There are no recordings for this error.</h4>
+          <h4>There are no sessions for this error.</h4>
         </div>
       )}
 

@@ -19,14 +19,15 @@ import { usePeriod } from 'hooks/use-period';
 import { useSort } from 'hooks/use-sort';
 import { useColumns } from 'hooks/use-columns';
 import { useFilters } from 'hooks/use-filters';
-import { FeedbackNpsResponseFilters, FeedbackNpsResponseSort, Team } from 'types/graphql';
+import { FeedbackNpsResponseFilters, FeedbackNpsResponseSort, Site, Team } from 'types/graphql';
 import type { ValueOf } from 'types/common';
 
 interface Props {
+  site: Site;
   member?: Team;
 }
 
-export const Nps: FC<Props> = ({ member }) => {
+export const Nps: FC<Props> = ({ site, member }) => {
   const [page, setPage] = React.useState<number>(1);
   const [size, setSize] = React.useState<number>(10);
 
@@ -167,7 +168,8 @@ export const Nps: FC<Props> = ({ member }) => {
       </h4>
 
       {columnsReady && (
-        <NpsResponses 
+        <NpsResponses
+          site={site}
           member={member}
           page={page}
           sort={sort}

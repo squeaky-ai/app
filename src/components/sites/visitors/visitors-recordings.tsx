@@ -48,7 +48,7 @@ export const VisitorsRecording: FC<Props> = ({ site, member }) => {
   return (
     <>
       <div className='recordings-header'>
-        <h4>Recordings</h4>
+        <h4>Sessions</h4>
         {items.length > 0 && columnsReady && (
           <menu>
             <RecordingsBulkActions

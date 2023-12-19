@@ -62,7 +62,7 @@ export const RecordingsLargeItem: FC<Props> = ({ site, recording, style, member,
           : <Pill type='tertiary'>New</Pill>
         }
       </Cell>
-      <Cell className='primary'>
+      <Cell>
         <RecordingStarred site={site} member={member} recording={recording} link />
       </Cell>
       <Cell>

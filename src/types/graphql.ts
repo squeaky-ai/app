@@ -2911,6 +2911,7 @@ export type SiteSessionSettings = {
   ipBlacklist: Array<SitesIpBlacklist>;
   magicErasureEnabled: Scalars['Boolean'];
   name: Scalars['String'];
+  recordingsEnabled: Scalars['Boolean'];
   url: Scalars['String'];
   uuid: Scalars['String'];
 };

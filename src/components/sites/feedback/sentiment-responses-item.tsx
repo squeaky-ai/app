@@ -9,16 +9,17 @@ import { Tooltip } from 'components/tooltip';
 import { Dropdown } from 'components/dropdown';
 import { Emoji, EmojiType } from 'components/emoji';
 import { SentimentResponsesDelete } from 'components/sites/feedback/sentiment-responses-delete';
-import type { FeedbackSentimentResponseItem, Team } from 'types/graphql';
+import { PlanFeature, type FeedbackSentimentResponseItem, type Site, type Team } from 'types/graphql';
 import { useSiteId } from 'hooks/use-site-id';
 
 interface Props {
+  site: Site;
   member?: Team;
   response: FeedbackSentimentResponseItem;
   style?: React.CSSProperties;
 }
 
-export const SentimentResponsesItem: FC<Props> = ({ member, response, style }) => {
+export const SentimentResponsesItem: FC<Props> = ({ site, member, response, style }) => {
   const [siteId] = useSiteId();
   const rowActionsRef = React.useRef<Dropdown>();
 
@@ -41,10 +42,22 @@ export const SentimentResponsesItem: FC<Props> = ({ member, response, style }) =
         </Link>
       </Cell>
       <Cell>
-        <Icon name='play-fill play' />
-        <Link href={`/sites/${siteId}/recordings/${response.recordingId}`}>
-          {response.sessionId}
-        </Link>
+        {site.plan.featuresEnabled.includes(PlanFeature.Recordings) && (
+          <>
+            <Icon name='play-fill play' />
+            <Link href={`/sites/${siteId}/recordings/${response.recordingId}`}>
+              {response.sessionId}
+            </Link>
+          </>
+        )}
+
+        {!site.plan.featuresEnabled.includes(PlanFeature.Recordings) && (
+          <>
+            <span className='upgrade-plan'>
+              <i>No Recording</i> <Link href={`/sites/${site.id}/settings/subscription`}>Upgrade</Link>
+            </span>
+          </>
+        )}
       </Cell>
       <Cell>
         {response.timestamp.niceDateTime}

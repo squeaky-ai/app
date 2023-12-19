@@ -14,7 +14,7 @@ interface Props {
 export const VisitorsTabs: FC<Props> = ({ site, member }) => {
   const tabs = [
     {
-      name: 'Recordings',
+      name: 'Sessions',
       page: 'recordings',
       body: <VisitorsRecording site={site} member={member} />,
     },

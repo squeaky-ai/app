@@ -62,7 +62,7 @@ export const Filters: FC<Props> = ({ period, filters, updateFilters }) => {
         </Button>
         <Button onClick={() => handleFilterChange(FilterType.Recordings)} className={classnames({ open: openFilter === FilterType.Recordings})}>
           <Icon name='arrow-drop-left-line' />
-          Recordings
+          Sessions
         </Button>
         <Button onClick={() => handleFilterChange(FilterType.FirstVisited)} className={classnames({ open: openFilter === FilterType.FirstVisited})}>
           <Icon name='arrow-drop-left-line' />
@@ -106,7 +106,7 @@ export const Filters: FC<Props> = ({ period, filters, updateFilters }) => {
           )}
           {openFilter === FilterType.Recordings && (
             <>
-              <Label>Recordings</Label>
+              <Label>Sessions</Label>
               <FiltersRecordings value={filters.recordings} onUpdate={handleUpdate('recordings')} onClose={handleFilterClose} />
             </>
           )}

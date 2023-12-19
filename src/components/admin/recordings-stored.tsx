@@ -39,7 +39,7 @@ export const RecordingsStored: FC<Props> = ({ recordingsStored }) => {
   return (
     <>
       <div className='chart-heading'>
-        <h5>Recordings Stored</h5>
+        <h5>Sessions Stored</h5>
         <ChartOptions
           scale={scale} 
           setScale={setScale} 

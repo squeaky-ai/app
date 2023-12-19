@@ -52,7 +52,7 @@ const SitesFeedbackSentiment: NextPage<PageProps> = ({ user }) => {
             {!!site.verifiedAt && (
               <>
                 <SentimentTabs siteId={site.id} member={member} page='feedback' />
-                <Sentiment member={member} />
+                <Sentiment site={site} member={member} />
               </>
             )}
           </Main>

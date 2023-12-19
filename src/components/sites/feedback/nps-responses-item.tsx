@@ -9,16 +9,17 @@ import { Browser } from 'components/browser';
 import { Tooltip } from 'components/tooltip';
 import { Dropdown } from 'components/dropdown';
 import { NpsResponsesDelete } from 'components/sites/feedback/nps-responses-delete';
-import type { FeedbackNpsResponseItem, Team } from 'types/graphql';
+import { PlanFeature, type FeedbackNpsResponseItem, type Team, Site } from 'types/graphql';
 import { useSiteId } from 'hooks/use-site-id';
 
 interface Props {
+  site: Site;
   member?: Team;
   response: FeedbackNpsResponseItem;
   style?: React.CSSProperties;
 }
 
-export const NpsResponsesItem: FC<Props> = ({ member, response, style }) => {
+export const NpsResponsesItem: FC<Props> = ({ site, member, response, style }) => {
   const [siteId] = useSiteId();
   const rowActionsRef = React.useRef<Dropdown>();
 
@@ -39,10 +40,22 @@ export const NpsResponsesItem: FC<Props> = ({ member, response, style }) => {
         </Link>
       </Cell>
       <Cell>
-        <Icon name='play-fill play' />
-        <Link href={`/sites/${siteId}/recordings/${response.recordingId}`}>
-          {response.sessionId}
-        </Link>
+        {site.plan.featuresEnabled.includes(PlanFeature.Recordings) && (
+          <>
+            <Icon name='play-fill play' />
+            <Link href={`/sites/${siteId}/recordings/${response.recordingId}`}>
+              {response.sessionId}
+            </Link>
+          </>
+        )}
+
+        {!site.plan.featuresEnabled.includes(PlanFeature.Recordings) && (
+          <>
+            <span className='upgrade-plan'>
+              <i>No Recording</i> <Link href={`/sites/${site.id}/settings/subscription`}>Upgrade</Link>
+            </span>
+          </>
+        )}
       </Cell>
       <Cell>
         {response.timestamp.niceDateTime}

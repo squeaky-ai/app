@@ -11,10 +11,11 @@ import { SentimentResponsesItem } from 'components/sites/feedback/sentiment-resp
 import { COLUMNS } from 'data/sentiment/constants';
 import { getColumnStyles } from 'lib/tables';
 import { FeedbackSentimentResponseSort, Team } from 'types/graphql';
-import type { FeedbackSentimentResponse } from 'types/graphql';
+import type { FeedbackSentimentResponse, Site } from 'types/graphql';
 import type { Column } from 'types/common';
 
 interface Props {
+  site: Site;
   member?: Team;
   page: number;
   sort: FeedbackSentimentResponseSort;
@@ -27,6 +28,7 @@ interface Props {
 }
 
 export const SentimentResponses: FC<Props> = ({ 
+  site,
   member, 
   page, 
   sort, 
@@ -82,7 +84,12 @@ export const SentimentResponses: FC<Props> = ({
               <Cell />
             </Row>
             {items.map(i => (
-              <SentimentResponsesItem key={i.id} response={i} style={rowStyle} member={member} />
+              <SentimentResponsesItem 
+                key={i.id}
+                site={site}
+                response={i}
+                style={rowStyle} member={member} 
+              />
             ))}
           </Table>
           <div className='sentiment-responses-footer'>
