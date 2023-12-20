@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import Link from 'next/link';
+import { last } from 'lodash';
 import { Icon } from 'components/icon';
 import { Pill } from 'components/pill';
 import { SiteIngestEnabled } from 'components/admin/site-ingest-enabled';
@@ -86,15 +87,17 @@ export const SiteDetails: FC<Props> = ({ activeVisitors, site }) => {
           <span>{site.uuid || '-'}</span>
         </div>
         {site.providerAuth && (
-          <div className='row'>
-            <span>Publish History</span>
-            <span>
-              {site.providerAuth.publishHistory.length === 0
-                ? '-'
-                : site.providerAuth.publishHistory.join(', ')
-              }
-            </span>
-          </div>
+          <>
+            <div className='row'>
+              <span>Last Published At</span>
+              <span>
+                {site.providerAuth.publishHistory.length === 0
+                  ? '-'
+                  : last(site.providerAuth.publishHistory)
+                }
+              </span>
+            </div>
+          </>
         )}
       </Card>
 
