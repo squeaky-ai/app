@@ -258,7 +258,7 @@ export const Sidebar: FC<Props> = ({ user }) => {
                 name='Site'
               />
               <SidebarLink
-                visibile
+                visibile={!pageState.embedded}
                 href={`/sites/${siteId}/settings/team`}
                 active={path.startsWith(`/sites/${siteId}/settings/team`)}
                 icon='group-line'
