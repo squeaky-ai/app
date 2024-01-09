@@ -346,6 +346,7 @@ export const GET_ADMIN_USER_QUERY = gql`
           niceDateTime
         }
         provider
+        providerCommsEmail
         visitor {
           id
           visitorId

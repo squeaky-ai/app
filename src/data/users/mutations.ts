@@ -61,6 +61,15 @@ export const ADMIN_USER_DELETE_MUTATION = gql`
   }
 `;
 
+export const ADMIN_USER_UPDATE_MUTATION = gql`
+  mutation AdminUserUpdate($input: AdminUserUpdateInput!) {
+    adminUserUpdate(input: $input) {
+      id
+      providerCommsEmail
+    }
+  }
+`;
+
 export const ADMIN_REFERRAL_DELETE_MUTATION = gql`
   mutation AdminReferralDelete($input: AdminReferralDeleteInput!) {
     adminReferralDelete(input: $input) {

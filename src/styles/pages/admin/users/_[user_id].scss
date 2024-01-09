@@ -27,6 +27,23 @@
   }
 
   .user-details {
+    h5 {
+      align-items: center;
+      display: flex;
+      margin: 0 0 2rem 0;
+
+      .icon {
+        color: var(--mauve-700);
+        font-size: var(--font-size-body-xxl);
+        font-weight: var(--font-weight-normal);
+        margin: 0 .5rem 0 0;
+      }
+
+      &:nth-of-type(2) {
+        margin: 2rem 0 2rem 0;
+      }
+    }
+
     p {
       align-items: center;
       display: flex;
@@ -36,6 +53,20 @@
       &:last-of-type {
         margin: 0;
       }
+    }
+
+    &.settings {
+
+      .label {
+        margin: 0;
+
+        & + .small {
+          color: var(--gray-500);
+          display: block;
+          font-size: .75rem;
+          margin: 0 0 .5rem 0;
+        }
+      }       
     }
   }
 

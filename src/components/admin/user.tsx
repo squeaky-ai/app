@@ -4,6 +4,7 @@ import Link from 'next/link';
 import getConfig from 'next/config';
 import { Card } from 'components/card';
 import { Pill } from 'components/pill';
+import { Icon } from 'components/icon';
 import type { AdminUser } from 'types/graphql';
 
 interface Props {
@@ -13,7 +14,11 @@ interface Props {
 const { publicRuntimeConfig } = getConfig();
 
 export const User: FC<Props> = ({ user }) => (
-  <Card className='user-details'>
+  <Card className='user-details details'>
+    <h5>
+      <Icon name='user-line' />
+      User Details
+    </h5>
     <p>
       <b>Name</b>
       <span>{user.fullName}</span>

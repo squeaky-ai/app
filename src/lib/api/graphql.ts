@@ -80,6 +80,7 @@ import {
   AdminSiteBundlesCreateInput,
   DataExportCreateInput,
   DataExportDeleteInput,
+  AdminUserUpdateInput,
 } from 'types/graphql';
 
 import {
@@ -151,6 +152,7 @@ import {
   UPDATE_USER_COMMUNICATION,
   USER_CREATE_REFERRAL_MUTATION,
   ADMIN_USER_DELETE_MUTATION,
+  ADMIN_USER_UPDATE_MUTATION,
   ADMIN_REFERRAL_DELETE_MUTATION,
   ADMIN_USER_PARTNER_CREATE_MUTATION,
   USER_REFERRAL_DELETE_MUTATION,
@@ -859,6 +861,13 @@ export const adminUserDelete = async (input: AdminUserDeleteInput): Promise<void
       cache.evict({ id: normalizedId });
       cache.gc();
     }
+  });
+};
+
+export const adminUserUpdate = async (input: AdminUserUpdateInput): Promise<void> => {
+  await client.mutate({
+    mutation: ADMIN_USER_UPDATE_MUTATION,
+    variables: { input },
   });
 };
 

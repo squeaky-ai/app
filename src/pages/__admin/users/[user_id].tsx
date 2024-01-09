@@ -12,6 +12,7 @@ import { PageLoading } from 'components/sites/page-loading';
 import { UserPartner } from 'components/admin/user-partner';
 import { UserPartnerCreate } from 'components/admin/user-partner-create';
 import { NotFound } from 'components/sites/not-found';
+import { UserSettings } from 'components/admin/user-settings';
 import { useAdminUser } from 'hooks/use-admin-user';
 import { PageProps } from 'types/page';
 
@@ -51,6 +52,7 @@ const AdminUser: NextPage<PageProps> = () => {
         {!loading && user && (
           <>
             <User user={user} />
+            <UserSettings user={user} />
             {isPartner && <UserPartner user={user} />}
           </>
         )}
